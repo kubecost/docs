@@ -1,4 +1,4 @@
-## [Issue: no persistent volumes available for this claim and/or no storage class is set](#pv-issue)
+## Issue: no persistent volumes available for this claim and/or no storage class is set
 
 Your clusters needs a default storage class for the Kubecost and Prometheus persistent volumes to be successfully attached.
 
@@ -23,7 +23,7 @@ If you don’t see a name, you need to add a storage class. For help doing this,
 * Azure: https://kubernetes.io/docs/concepts/storage/storage-classes/#azure-disk
 
 
-## [Issue: unable to establish a port-forward connection](#connection-issue)
+## Issue: unable to establish a port-forward connection
 
 First, check the status of pods in the target namespace:
 
@@ -45,7 +45,9 @@ kubecost-prometheus-pushgateway-6f4f8bbfd9-k5r47         1/1     Running   0    
 kubecost-prometheus-server-6fb8f99bb7-4tjwn              2/2     Running   0          5m
 </pre>
 
-If any pod is not Running other than cost-analyzer-checks, you can use the following command to find errors in the recent event log:
+If the cost-analyzer or prometheus-server __pods are missing__, we recommend reinstalling with Helm with high verbosity enabled. 
+
+If any __pod is not Running__ other than cost-analyzer-checks, you can use the following command to find errors in the recent event log:
 
 `kubectl describe pods <pod-name> -n kubecost`
 
