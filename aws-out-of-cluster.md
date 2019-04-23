@@ -13,6 +13,9 @@ The following guide provides the steps required to accomplish this.
 ## Step 4: Export data to Athena
 [https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/athena.html](https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/athena.html)
 
+[https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/setting-up-athena.html#use-athena-cf](https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/setting-up-athena.html#use-athena-cf)
+
+
 ## Step 5: Give Kubecost access to Athena table
 
 You’ll either need to 1) create an access key with the following IAM permission or 2) create the instance that Kubecost runs on with the following IAM permission. 
