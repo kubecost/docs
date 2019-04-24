@@ -11,8 +11,6 @@ The following guide provides the steps required to accomplish this.
 [https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/activate-built-in-tags.html](https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/activate-built-in-tags.html)
 
 ## Step 4: Export data to Athena
-[https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/athena.html](https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/athena.html)
-
 [https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/setting-up-athena.html#use-athena-cf](https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/setting-up-athena.html#use-athena-cf)
 
 
