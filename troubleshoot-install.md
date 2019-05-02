@@ -50,7 +50,7 @@ kubecost-prometheus-pushgateway-6f4f8bbfd9-k5r47         1/1     Running   0    
 kubecost-prometheus-server-6fb8f99bb7-4tjwn              2/2     Running   0          5m
 </pre>
 
-If the cost-analyzer or prometheus-server __pods are missing__, we recommend reinstalling with Helm with high verbosity enabled. 
+If the cost-analyzer or prometheus-server __pods are missing__, we recommend reinstalling with Helm using `--debug` which enables verbose output. 
 
 If any __pod is not Running__ other than cost-analyzer-checks, you can use the following command to find errors in the recent event log:
 
