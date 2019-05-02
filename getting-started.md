@@ -15,7 +15,7 @@ Using your existing Grafana & Prometheus installation is supported in our paid o
 
 The following definition provides an example Ingress with basic auth.
 
-Note: on GCP, you will need to update the `kubecost-cost-analyzer` to become a `NodePort` instead of a `ClusterIP`
+Note: on GCP, you will need to update the `kubecost-cost-analyzer` service to become a `NodePort` instead of a `ClusterIP` type service.
 
 ```
 apiVersion: v1
