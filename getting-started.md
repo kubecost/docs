@@ -1,6 +1,6 @@
 # Getting Started
 
-In this guide, we’ll walk you through how to get started on Kubecost after completing the [installation steps](http://kubecost.com/install). We provide commonly used product configurations and recommended next steps for using the product. 
+This page provides commonly used product configurations and recommended next steps for Kubecost once [installation](http://kubecost.com/install) is completed. 
 
 __Configuration__  
 [Using an existing Prometheus or Grafana installation](#custom-prom)  
