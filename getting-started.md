@@ -49,4 +49,4 @@ spec:
 
 To receive more accurate Spot pricing data, visit Settings in the Kubecost frontend to configure a [data feed](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-data-feeds.html) for AWS Spot instances. This enables the Kubecost product to have actual Spot node prices vs user-provided estimates.
 
-![AWS Spot info](https://github.com/kubecost/docs/blob/master/spot-settings.png)
+![AWS Spot info](/spot-settings.png)
