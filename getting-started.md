@@ -9,7 +9,7 @@ __Configuration__
 
 ## <a name="custom-prom"></a>Custom Prometheus & Grafana
 
-Using your existing Grafana & Prometheus installation is supported in our paid offering today. This is not currently included in our free tier because of several nuances required in completed this integration successfully. Please contact us (team@kubecost.com) if you want to learn more!
+Using your existing Grafana & Prometheus installation is supported in our paid offering today. This is not currently included in our free tier because of several nuances required in completing this integration successfully. Please contact us (team@kubecost.com) if you want to learn more!
 
 ## <a name="basic-auth"></a>Basic auth Ingress example 
 
