@@ -1,6 +1,6 @@
 # Getting Started
 
-This page provides commonly used product configurations and recommended next steps for Kubecost once [installation](http://kubecost.com/install) is completed. 
+This page provides commonly used product configurations and recommended next steps once Kubecost has been [installed](http://kubecost.com/install). 
 
 __Configuration__  
 [Using an existing Prometheus or Grafana installation](#custom-prom)  
