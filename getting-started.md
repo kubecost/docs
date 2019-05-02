@@ -1,6 +1,6 @@
 # Getting Started
 
-A guide for Day 1 on Kubecost, including product configuration and recommended next steps. 
+In this guide, we’ll walk you through how to get started on Kubecost after completing the [installation steps](http://kubecost.com/install). We provide commonly used product configurations and recommended next steps for using the product. 
 
 __Configuration__  
 [Using an existing Prometheus or Grafana installation](#custom-prom)  
@@ -9,7 +9,7 @@ __Configuration__
 
 ## <a name="custom-prom"></a>Custom Prometheus & Grafana
 
-Using your existing Grafana & Prometheus installation is supported with our paid offering. This is not currently included in our free tier because of the nuances required in completed this integration successfully. Please contact us (team@kubecost.com) if we can help you get this configured!
+Using your existing Grafana & Prometheus installation is supported in our paid offering today. This is not currently included in our free tier because of several nuances required in completed this integration successfully. Please contact us (team@kubecost.com) if you want to learn more!
 
 ## <a name="basic-auth"></a>Basic auth Ingress example 
 
