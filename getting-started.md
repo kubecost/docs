@@ -5,7 +5,8 @@ In this guide, we’ll walk you through how to get started on Kubecost after com
 __Configuration__  
 [Using an existing Prometheus or Grafana installation](#custom-prom)  
 [Creating an Ingress with basic auth](#basic-auth)  
-[Spot Instance Configuration (AWS only)](#spot-nodes)
+[Spot Instance Configuration (AWS only)](#spot-nodes)  
+[Allocating out of cluster costs](#out-of-cluster)
 
 ## <a name="custom-prom"></a>Custom Prometheus & Grafana
 
@@ -50,3 +51,8 @@ spec:
 For more accurate Spot pricing data, visit Settings in the Kubecost frontend to configure a [data feed](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-data-feeds.html) for AWS Spot instances. This enables the Kubecost product to have actual Spot node prices vs user-provided estimates.
 
 ![AWS Spot info](/spot-settings.png)
+
+
+## <a name="out-of-cluster"></a>Allocating out of cluster costs
+
+[AWS] Provide your bucket congifuration info in `/bucketconfig.html` which is available from the Cost Allocation page. This information includes S3 bucket name, Athena table name, Athena table region, and Athena database name. View [this page](/aws-out-of-cluster.md) for more information on completing this.
