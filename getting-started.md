@@ -45,7 +45,7 @@ spec:
     servicePort: 9090
 ``` 
 
-## <a name="spot-nodes">Spot Instance Configuration (AWS only) 
+## <a name="spot-nodes"></a>Spot Instance Configuration (AWS only) 
 
 To receive more accurate Spot pricing data, visit Settings in the Kubecost frontend to configure a [data feed](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-data-feeds.html) for AWS Spot instances. This enables the Kubecost product to have actual Spot node prices vs user-provided estimates.
 
