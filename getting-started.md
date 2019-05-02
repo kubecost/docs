@@ -55,4 +55,4 @@ For more accurate Spot pricing data, visit Settings in the Kubecost frontend to 
 
 ## <a name="out-of-cluster"></a>Allocating out of cluster costs
 
-[AWS] Provide your bucket congifuration info in `/bucketconfig.html` which is available from the Cost Allocation page. This information includes S3 bucket name, Athena table name, Athena table region, and Athena database name. View [this page](/aws-out-of-cluster.md) for more information on completing this.
+[AWS] Provide your bucket congifuration info in `/bucketconfig.html` which is available from the Cost Allocation page. This information includes S3 bucket name, Athena table name, Athena table region, and Athena database name. View [this page](/aws-out-of-cluster.md) for more information on completing this process.
