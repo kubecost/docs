@@ -1,4 +1,4 @@
-## Issue: no persistent volumes available for this claim and/or no storage class is set
+## Issue: no persistent volumes available for this claim and/or no storage class is set <a href="persistent-volume"></a>
 
 Your clusters needs a default storage class for the Kubecost and Prometheus persistent volumes to be successfully attached.
 
@@ -23,7 +23,7 @@ If you don’t see a name, you need to add a storage class. For help doing this,
 * Azure: https://kubernetes.io/docs/concepts/storage/storage-classes/#azure-disk
 
 
-## Issue: unable to establish a port-forward connection
+## Issue: unable to establish a port-forward connection <a href="port-forward"></a>
 
 First, check the status of pods in the target namespace:
 
@@ -52,3 +52,15 @@ If any __pod is not Running__ other than cost-analyzer-checks, you can use the f
 `kubectl describe pod <pod-name> -n kubecost`
 
 Should you encounter an unexpected error, please reach out for help on  [Slack](https://join.slack.com/t/kubecost/shared_invite/enQtNTA2MjQ1NDUyODE5LTg0MzYyMDIzN2E4M2M5OTE3NjdmODJlNzBjZGY1NjQ3MThlODVjMGY3NWZlNjQ5NjIwNDc2NGU3MWNiM2E5Mjc) or via email at [team@kubecost.com](team@kubecost.com). 
+
+
+## Issue: FailedScheduling kubecost-prometheus-node-exporter <a href="node-exporter"></a>
+
+If one has an existing `node-exporter` daemonset, the Kubecost Helm chart may timeout due to a conflict. You can disable the installation of `node-exporter` by passing the following parameters to the Helm install.
+
+```
+helm install kubecost/cost-analyzer --debug --wait --namespace kubecost --name kubecost \
+    --set kubecostToken="<INSERT_YOUR_TOKEN>" \
+    --set prometheus.nodeExporter.enabled=false \
+    --set prometheus.serviceAccounts.nodeExporter.create=false
+ ```
