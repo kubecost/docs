@@ -1,10 +1,10 @@
 # Custom Prometheus
 
-Integrating with an existing Prometheus installation can be nuanced. We recommend getting in touch (team@kubecost.com) for assistance.   
+Integrating Kubecost with an existing Prometheus installation can be nuanced. We recommend getting in touch (team@kubecost.com) for assistance.   
 
 __Required Steps__
 
-1. Edit values.yaml
+1. Copy and edit [values.yaml](https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/values.yaml). Update the `promtheus.fqdn` variable to match your local Prometheus service address and set the `prometheus.enabled` flag to false
 2. Scrape cost-model `/metrics` endpoint
 3. Deploy kubecost recording rules 
 
