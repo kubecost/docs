@@ -24,8 +24,8 @@ If you see a name but no (default) next to it, run
 
 If you don’t see a name, you need to add a storage class. For help doing this, see the following guides:
 
-* AWS: https://docs.aws.amazon.com/eks/latest/userguide/storage-classes.html
-* Azure: https://kubernetes.io/docs/concepts/storage/storage-classes/#azure-disk
+* AWS: [https://docs.aws.amazon.com/eks/latest/userguide/storage-classes.html](https://docs.aws.amazon.com/eks/latest/userguide/storage-classes.html)
+* Azure: [https://kubernetes.io/docs/concepts/storage/storage-classes/#azure-disk](https://kubernetes.io/docs/concepts/storage/storage-classes/#azure-disk)
 
 
 ## <a name="port-forward"></a>Issue: unable to establish a port-forward connection
