@@ -124,7 +124,7 @@ We recommend [kiam](https://github.com/uswitch/kiam) as a solution for adding IA
 
 ## Step 6: Tag your resources
 
-To allocate the resources to a kubernetes concept, use the following tag naming scheme:
+To allocate the resources to a Kubernetes concept, use the following tag naming scheme:
 
 <pre>
 Namespace:  "kubernetes_namespace" : &lt;namespace>
@@ -136,4 +136,4 @@ Container:  "kubernetes_container":  &lt;container>
 
 ## Steps 7: Add AWS configuration details in the Kubecost product
 
-Visit the Kubecost Cost Allocation page to provide region, Athena database, Athena table, and bucket name.
+Visit the Kubecost Settings page to provide service key, bucket name, and Athena information.
