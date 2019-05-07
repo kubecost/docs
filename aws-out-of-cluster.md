@@ -1,5 +1,6 @@
-Kubecost provides the ability to allocate out of clusters costs, e.g. RDS instances and S3 buckets, back to Kubernetes concepts like namespace and deployment. 
-The following guide provides the steps required to accomplish this.
+Kubecost provides the ability to allocate out of clusters costs, e.g. RDS instances and S3 buckets, back to Kubernetes concepts like namespace and deployment. All billing data remains on your cluster when using this functionality and is not shared externally.  
+
+The following guide provides the steps required for allocating out of cluster costs.
 
 ## Step 1: Create an S3 bucket
 [https://docs.aws.amazon.com/AmazonS3/latest/user-guide/create-bucket.html](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/create-bucket.html)
