@@ -9,9 +9,10 @@ https://cloud.google.com/billing/docs/how-to/export-data-bigquery
 ## Step 2:  Visit Kubecost setup page and provide configuration info
 
 In Kubecost, vist the Cost Allocation page and select "Add Key".
-On this page, you will see instructions for providing a service key, project ID, and a Big Query table name.
+On this page, you will see instructions for providing a service key, project ID, and the Big Query dataset that you have chosen to export data to.
 
 [SCREENSHOT TO COME]
+
 
 ## Step 3: Label cloud assets
 
