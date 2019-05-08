@@ -25,6 +25,7 @@ Learn more [here](https://cloud.google.com/compute/docs/labeling-resources) on G
 <pre>
 Namespace:  "kubernetes_namespace" : &lt;namespace>
 Deployment: "kubernetes_deployment": &lt;deployment>
+Label:      "kubernetes_label_NAME": &lt;label>
 Pod:        "kubernetes_pod":        &lt;pod>
 Daemonset:  "kubernetes_daemonset":  &lt;daemonset>
 Container:  "kubernetes_container":  &lt;container>
