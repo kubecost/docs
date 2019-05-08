@@ -27,7 +27,7 @@ metadata:
   creationTimestamp: "2019-04-26T23:36:47Z"
   name: kubecost-auth
   namespace: kubecost
-  type: Opaque
+type: Opaque
 ---
 apiVersion: extensions/v1beta1
 kind: Ingress
