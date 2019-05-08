@@ -183,6 +183,8 @@ Daemonset:  "kubernetes_daemonset":  &lt;daemonset>
 Container:  "kubernetes_container":  &lt;container>
 </pre>
 
+More on AWS tagging [here](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html).
+
 ## Step 7: Add AWS configuration details in the Kubecost product
 
 Visit the Kubecost Settings page to provide service key, bucket name, and Athena information.
