@@ -11,7 +11,7 @@ The following guide provides the steps required for allocating out of cluster co
 In Kubecost, vist the Cost Allocation page and select "Add Key".
 On this page, you will see instructions for providing a service key, project ID, and the BigQuery dataset that you have chosen to export data to.
 
-[SCREENSHOT TO COME]
+![GCP out of cluster](/gcp-out-of-cluster-config.png)
 
 
 ## Step 3: Label cloud assets
