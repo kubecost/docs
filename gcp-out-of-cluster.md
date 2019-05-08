@@ -16,7 +16,7 @@ On this page, you will see instructions for providing a service key, project ID,
 ## Step 3: Label cloud assets
 
 You can now label assets with the following schema to allocate costs back to their appropriate Kubernetes owner. 
-Learn more [here](https://cloud.google.com/resource-manager/docs/creating-managing-labels#using_console) on GCP labeling.
+Learn more [here](https://cloud.google.com/compute/docs/labeling-resources) on GCP labeling.
 
 <pre>
 Namespace:  "kubernetes_namespace" : &lt;namespace>
