@@ -4,7 +4,7 @@ The following guide provides the steps required for allocating out of cluster co
 
 ## Step 1: Enable billing data export
 
-https://cloud.google.com/billing/docs/how-to/export-data-bigquery
+[https://cloud.google.com/billing/docs/how-to/export-data-bigquery](https://cloud.google.com/billing/docs/how-to/export-data-bigquery)
 
 ## Step 2:  Visit Kubecost setup page and provide configuration info
 
