@@ -24,7 +24,6 @@ data:
   auth: YWRtaW46JGFwcjEkZ2tJenJxU2ckMWx3RUpFN1lFcTlzR0FNN1VtR1djMAo= # default is admin:admin -- to be replaced
 kind: Secret
 metadata:
-  creationTimestamp: "2019-04-26T23:36:47Z"
   name: kubecost-auth
   namespace: kubecost
 type: Opaque
