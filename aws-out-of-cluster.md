@@ -15,9 +15,9 @@ The following guide provides the steps required for allocating out of cluster co
 [https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/setting-up-athena.html#use-athena-cf](https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/setting-up-athena.html#use-athena-cf)
 
 
-## Step 5: Give Kubecost access to Athena table
+## Step 5: Give Kubecost access
 
-You’ll either need to 1) create an access key with the following IAM permission or 2) create the instance that Kubecost runs on with the following IAM permission. 
+To access billing data in Athena tables and to enable other Kubecost functionality you have two options: 1) create an access key with the following IAM permissions or 2) create the instance that Kubecost runs on with these IAM permissions. 
 We recommend [kiam](https://github.com/uswitch/kiam) as a solution for adding IAM credentials to the instance.
 
 ```
@@ -119,6 +119,55 @@ We recommend [kiam](https://github.com/uswitch/kiam) as a solution for adding IA
       ]
     }
   ]
+}
+```
+
+```
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": "ec2:Describe*",
+            "Resource": "*"
+        },
+        {
+            "Effect": "Allow",
+            "Action": "elasticloadbalancing:Describe*",
+            "Resource": "*"
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "cloudwatch:ListMetrics",
+                "cloudwatch:GetMetricStatistics",
+                "cloudwatch:Describe*"
+            ],
+            "Resource": "*"
+        },
+        {
+            "Effect": "Allow",
+            "Action": "autoscaling:Describe*",
+            "Resource": "*"
+        }
+    ]
+}
+```
+
+
+```
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "s3:Get*",
+                "s3:List*"
+            ],
+            "Resource": "*"
+        }
+    ]
 }
 ```
 
