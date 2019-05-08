@@ -183,6 +183,6 @@ Daemonset:  "kubernetes_daemonset":  &lt;daemonset>
 Container:  "kubernetes_container":  &lt;container>
 </pre>
 
-## Steps 7: Add AWS configuration details in the Kubecost product
+## Step 7: Add AWS configuration details in the Kubecost product
 
 Visit the Kubecost Settings page to provide service key, bucket name, and Athena information.
