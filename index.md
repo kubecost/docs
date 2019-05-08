@@ -10,3 +10,5 @@ __Allocating out of cluster costs__
 * [GCP instructions](/gcp-out-of-cluster.md)
 
 [AWS Spot feed integration](/getting-started.md#spot-nodes)
+
+Contact us (team@kubecost.com) with any questions!
