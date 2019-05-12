@@ -8,8 +8,8 @@ __Configuration__
 [Spot Instance Configuration (AWS only)](#spot-nodes)  
 [Allocating out of cluster costs](#out-of-cluster)
 
-__Initial Actions__
-Measure cluster cost efficiency (#cluster-efficiency)
+__Initial Actions__  
+[Measure cluster cost efficiency](#cluster-efficiency)
 
 ## <a name="custom-prom"></a>Custom Prometheus & Grafana
 
