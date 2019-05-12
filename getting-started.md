@@ -8,6 +8,9 @@ __Configuration__
 [Spot Instance Configuration (AWS only)](#spot-nodes)  
 [Allocating out of cluster costs](#out-of-cluster)
 
+__Initial Actions__
+Measure cluster cost efficiency (#cluster-efficiency)
+
 ## <a name="custom-prom"></a>Custom Prometheus & Grafana
 
 Using your existing Grafana & Prometheus installation is supported in our paid offering today. This is not currently included in our free tier because of several nuances required in completing this integration successfully. Please contact us (team@kubecost.com) if you want to learn more!
@@ -57,3 +60,19 @@ For more accurate Spot pricing data, visit Settings in the Kubecost frontend to 
 [AWS] Provide your congifuration info in Settings. The information needs includes S3 bucket name, Athena table name, Athena table region, and Athena database name. View [this page](/aws-out-of-cluster.md) for more information on completing this process.
 
 [GCP] Provide configuration info by selecting "Add key" from the Cost Allocation Page. View [this page](/gcp-out-of-cluster.md) for more information on completing this process.
+
+
+## <a name="cluster-efficiency"></a>Measuring cluster cost efficiency
+
+For teams interested in reducing their Kubernetes costs, we typically recommend they start by understanding how efficient they are at resources today. This can be answered by understanding how much idle resources (e.g. compute, memory, etc) cost as a percentage of your overall spend. This overall figure represents the impact of many infrastructure and application-level decision, i.e. machine type selection, bin packing efficiency, and more. The Kubecost product (Cluster Overview page) provides a view into this data for an initial assessment of resource efficiency and the cost of waste. 
+
+![Cluster Costs](/cluster-efficiency.png)
+<div style="text-align:center;"><img src="/cluster-efficiency.png" /></div>
+
+With an overall understanding of idle spend you now have a better sense for where to focus efforts for efficiency gains. Each component of this metric can now be finely tuned for your product and business. Most teams we’ve seen end up targeting utilization in the following ranges:
+
+* CPU: 50%-65%
+* Memory: 45%-60%
+* Storage: 65%-80%
+
+Target figures are highly dependent on the distribution of your resource usage (e.g. P99 vs median), and the impact of high utilization on your core product/business metrics, and more. While too low resource utilization is wasteful, too high utilization can lead to latency increases, reliability issues, and other negative behavior.
