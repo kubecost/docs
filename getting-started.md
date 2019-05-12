@@ -66,7 +66,6 @@ For more accurate Spot pricing data, visit Settings in the Kubecost frontend to 
 
 For teams interested in reducing their Kubernetes costs, we typically recommend they start by understanding how efficient they are at resources today. This can be answered by understanding how much idle resources (e.g. compute, memory, etc) cost as a percentage of your overall spend. This overall figure represents the impact of many infrastructure and application-level decision, i.e. machine type selection, bin packing efficiency, and more. The Kubecost product (Cluster Overview page) provides a view into this data for an initial assessment of resource efficiency and the cost of waste. 
 
-![Cluster Costs](/cluster-efficiency.png)
 <div style="text-align:center;"><img src="/cluster-efficiency.png" /></div>
 
 With an overall understanding of idle spend you now have a better sense for where to focus efforts for efficiency gains. Each component of this metric can now be finely tuned for your product and business. Most teams we’ve seen end up targeting utilization in the following ranges:
