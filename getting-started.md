@@ -68,10 +68,10 @@ For teams interested in reducing their Kubernetes costs, we have seen it be bene
 
 <div style="text-align:center;"><img src="/cluster-efficiency.png" /></div>
 
-With an overall understanding of idle spend you now have a better sense for where to focus efforts for efficiency gains. Each component of this metric can now be finely tuned for your product and business. Most teams we’ve seen end up targeting utilization in the following ranges:
+With an overall understanding of idle spend you will have a better sense for where to focus efforts for efficiency gains. Each resource type can now be tuned for your product and business. Most teams we’ve seen end up targeting utilization in the following ranges:
 
 * CPU: 50%-65%
 * Memory: 45%-60%
 * Storage: 65%-80%
 
-Target figures are highly dependent on the distribution of your resource usage (e.g. P99 vs median), and the impact of high utilization on your core product/business metrics, and more. While too low resource utilization is wasteful, too high utilization can lead to latency increases, reliability issues, and other negative behavior.
+Target figures are highly dependent on the predictability and distribution of your resource usage (e.g. P99 vs median), the impact of high utilization on your core product/business metrics, and more. While too low resource utilization is wasteful, too high utilization can lead to latency increases, reliability issues, and other negative behavior.
