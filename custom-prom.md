@@ -4,7 +4,7 @@ Integrating Kubecost with an existing Prometheus installation can be nuanced. We
 
 __Required Steps__
 
-1. Copy and edit [values.yaml](https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/values.yaml). Update the `promtheus.fqdn` variable to match your local Prometheus service address and set the `prometheus.enabled` flag to false
+1. During the helm install process, copy and edit [values.yaml](https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/values.yaml). Then update the `promtheus.fqdn` variable to match your local Prometheus service address and set the `prometheus.enabled` flag to `false`.
 2. Scrape cost-model `/metrics` endpoint -- needed for accurate historical pricing data. Details [here](https://github.com/kubecost/cost-model/blob/master/PROMETHEUS.md#configuration).
 3. Deploy kubecost [recording rules](https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/values.yaml#L56) -- optional but recommended for medium and larger clusters
 
