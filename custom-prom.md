@@ -11,7 +11,7 @@ __Required Steps__
 __Troubleshooting__
 
 * Wrong FQDN -- run `curl <url>/api/v1/status/config` from a pod in the cluster and confirm that the prometheus config is returned
-* Prometheus Throttling
-* Version dependancies (node-exporter, kube-state-metrics, cadvisor)
+* Prometheus Throttling -- ensure Prometheus isn't being CPU throttled due to a low resource request.
+* Dependancy versions (node-exporter - v0.16, kube-state-metrics - v1.3, cadvisor)
 * Missing scrape configs
 * Recording rules are inaccurate
