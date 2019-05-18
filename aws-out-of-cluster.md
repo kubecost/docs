@@ -3,14 +3,14 @@ Kubecost provides the ability to allocate out of cluster costs, e.g. RDS instanc
 The following guide provides the steps required for allocating out of cluster costs. In a multi-account organization, all of the following steps will need to be completed in the payer account.
 
 ## Step 1: Create an S3 bucket
-This bucket will be used to store AWS cost and utilization data.
+This bucket will be used to store AWS cost and usage data.
 
 [Instructions for creating an S3 Bucket to be used for Cost and Usage data](https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/setting-up-athena.html#create-athena-bucket)
 
 ## Step 2: Create an AWS Cost and Usage Report
 When creating the Cost and Usage Report, configure the report to be delivered to the bucket created in step #1. When following the instructions for this step, choose `Athena` as the data integration option so that reports are created in parquet format.
 
-[Instructions for creating a Cost and Utilization Report](https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/setting-up-athena.html#create-athena-cur)
+[Instructions for creating a Cost and Usage Report](https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/setting-up-athena.html#create-athena-cur)
 
 ## Step 3: Enable User-Defined Cost Allocation Tags
 Kubecost utilizes AWS tagging to allocate the costs of AWS resources outside of the Kubernetes cluster to specific Kubernetes concepts, such as namespaces, pods, etc. These costs are then shown in a unified dashboard within the Kubecost interface.
