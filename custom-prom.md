@@ -18,6 +18,6 @@ Common issues include the following:
 * Missing scrape configs
 * Recording rules are inaccurate
 
-You can visit Settings in Kubecost to see basic diagnostic information in missing/available metrics:
+You can visit Settings in Kubecost to see basic diagnostic information on missing/available metrics:
 
 ![Prometheus status diagnostic](/prom-status.png)
