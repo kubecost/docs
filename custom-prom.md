@@ -10,8 +10,14 @@ __Required Steps__
 
 __Troubleshooting__
 
+Common issues include the following: 
+
 * Wrong FQDN -- run `curl <url>/api/v1/status/config` from a pod in the cluster and confirm that the prometheus config is returned
-* Prometheus Throttling -- ensure Prometheus isn't being CPU throttled due to a low resource request.
+* Prometheus throttling -- ensure Prometheus isn't being CPU throttled due to a low resource request.
 * Dependancy versions (node-exporter - v0.16, kube-state-metrics - v1.3, cadvisor)
 * Missing scrape configs
 * Recording rules are inaccurate
+
+You can visit Settings in Kubecost to see basic diagnostic information in missing/available metrics:
+
+![Prometheus status diagnostic](/prom-status.png)
