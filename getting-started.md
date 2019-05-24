@@ -1,8 +1,9 @@
 # Getting Started
 
-This page provides commonly used product configurations and recommended next steps once the Enterprise Kubecost product has been [installed](http://kubecost.com/install). 
+This page provides commonly used product configurations and recommended next steps once the commercial Kubecost product has been [installed](http://kubecost.com/install). 
 
-__Configuration__  
+__Configuration__ 
+[Storage configuration](#storage-config)
 [Using an existing Prometheus or Grafana installation](#custom-prom)  
 [Creating an Ingress with basic auth](#basic-auth)  
 [Spot Instance Configuration (AWS only)](#spot-nodes)  
@@ -11,9 +12,13 @@ __Configuration__
 __Initial Actions__  
 [Measure cluster cost efficiency](#cluster-efficiency)
 
+## <a name="storage-config"></a>Storage configuration
+
+The default Kubecost installation comes with a 32Gb persistent volume and 15-day retention period. This is enough space to retain data for ~300 pods, depending on node and container count. See the Kubecost Helm chart [configuration options](https://github.com/kubecost/cost-analyzer-helm-chart) on how to change both retention period and storage size. 
+
 ## <a name="custom-prom"></a>Custom Prometheus & Grafana
 
-Using your existing Grafana & Prometheus installation is supported in our paid offering today. This is not currently included in our free tier because of several nuances required in completing this integration successfully. Please contact us (team@kubecost.com) if you want to learn more!
+Using your existing Grafana & Prometheus installation is supported in our paid offering today. You can see basic setup instructions [here](/custom-prom.md). In our free product, we provide best efforts support for this intergation because of nuances required in completing this integration successfully. It's actively support in our paid product. Please contact us (team@kubecost.com) if you want to learn more or if you think we can help!
 
 ## <a name="basic-auth"></a>Basic auth Ingress example 
 
