@@ -2,8 +2,8 @@
 
 This page provides commonly used product configurations and recommended next steps once the commercial Kubecost product has been [installed](http://kubecost.com/install). 
 
-__Configuration__ 
-[Storage configuration](#storage-config)
+__Configuration__  
+[Storage configuration](#storage-config)   
 [Using an existing Prometheus or Grafana installation](#custom-prom)  
 [Creating an Ingress with basic auth](#basic-auth)  
 [Spot Instance Configuration (AWS only)](#spot-nodes)  
