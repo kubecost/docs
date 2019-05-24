@@ -8,7 +8,7 @@ __Required Steps__
 2. Scrape cost-model `/metrics` endpoint -- needed for accurate historical pricing data. Details [here](https://github.com/kubecost/cost-model/blob/master/PROMETHEUS.md#configuration).
 
 <a name="recording-rules"></a>__Recording Rules__  
-Kubecost uses Prometheus [recording rules](https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/values.yaml#L56) to help improve product performance. These are optional but recommended additions for medium and large-sized clusters using their own Prometheus installation.
+Kubecost uses Prometheus [recording rules](https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/values.yaml#L62) to help improve product performance. These are optional but recommended additions for medium and large-sized clusters using their own Prometheus installation.
 
 __Troubleshooting__
 
