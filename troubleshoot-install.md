@@ -85,8 +85,10 @@ First, point your browser to the `/api` endpoint on your target URL. For example
 If you are unable to successfully retrieve your config file from this endpoint, we recommend the following:
 
 1. Check your connection to this host
-2. View the status of all Prometheus and Kubecost pods to see if any pods are experience errors or are in a Pending state. When performing the default Kubecost install we recommend inspecting this with `kubectl get pods -n kubecost`. All pods should be either Running or Completed.
-3. View pod logs if any pod is not in the Running or Completed state.
+2. View the status of all Prometheus and Kubecost pods to see if any pods are experiencing errors or are in a Pending state. When performing the default Kubecost install we recommend inspecting this with `kubectl get pods -n kubecost`. All pods should be either Running or Completed.
+3. View relevent pod logs if any pod is not in the Running or Completed state.
 
 If your cluster address has changed, you can visit Settings in the Kubecost product to update or you can also add a new cluster. 
+
+Please contact us at team@kubecost.com or on Slack at any point.
 
