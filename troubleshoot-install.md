@@ -1,6 +1,7 @@
 [No persistent volumes available...](#persistent-volume)    
 [Unable to establish a port-forward connection](#port-forward)  
-[FailedScheduling node-exporter](#node-exporter)
+[FailedScheduling node-exporter](#node-exporter)   
+[No clusters found](#no-cluster)
 
 
 ## <a name="persistent-volume"></a>Issue: no persistent volumes available for this claim and/or no storage class is set 
@@ -71,7 +72,7 @@ helm install kubecost/cost-analyzer --debug --wait --namespace kubecost --name k
  ```
 
 
-## <a name="no-cluster"></a>Issue: unable to connect to your cluster
+## <a name="no-cluster"></a>Issue: Unable to connect to a cluster
 
 You may encounter the following screen if the Kubecost frontend is unabled to connect with a live Kubecost server.
 
