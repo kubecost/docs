@@ -5,7 +5,7 @@ Integrating Kubecost with an existing Prometheus installation can be nuanced. We
 __Required Steps__
 
 1. During the helm install process, copy [values.yaml](https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/values.yaml). Then update the `promtheus.fqdn` variable to match your local Prometheus service address and set the `prometheus.enabled` flag to `false`.
-2. <a name="scrape-configs"></a>Scrape cost-model `/metrics` endpoint. These metrics are needed for accurate historical pricing data. Here is an example scrape config:
+2. <a name="scrape-configs"></a>Have your Prometheus scrape the cost-model `/metrics` endpoint. These metrics are needed for accurate historical pricing data. Here is an example scrape config:
 
 ```
 - job_name: kubecost
