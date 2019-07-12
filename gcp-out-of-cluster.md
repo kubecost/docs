@@ -17,7 +17,7 @@ On this page, you will see instructions for providing a service key, project ID,
 ![GCP out of cluster](/gcp-out-of-cluster-config.png)
 
 
-<a name="bq-name"></a>**BigQuery dataset** requires a BigQuery dataset prefix (e.g. billing_data) in addition to the BigQuery table name. A full example is `billing_data:gcp_billing_export_v1_018AIF_74KD1D_534A2`.
+<a name="bq-name"></a>**BigQuery dataset** requires a BigQuery dataset prefix (e.g. billing_data) in addition to the BigQuery table name. A full example is `billing_data.gcp_billing_export_v1_018AIF_74KD1D_534A2`.
 
 ## Step 3: Label cloud assets
 
