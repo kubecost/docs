@@ -1,11 +1,15 @@
 # Custom Prometheus
 
-Integrating Kubecost with an existing Prometheus installation can be nuanced. We recommend getting in touch (team@kubecost.com) for assistance. We also recommend first installing Kubecost with a bundled Prometheus ([instructions](http://kubecost.com/install)) as a dry run before integration with your own Prometheus.  
+Integrating Kubecost with an existing Prometheus installation can be nuanced. We recommend first installing Kubecost with a bundled Prometheus ([instructions](http://kubecost.com/install)) as a dry run before integration with your own Prometheus. We also recommend getting in touch (team@kubecost.com) for assistance. 
 
 __Required Steps__
 
-1. During the helm install process, copy [values.yaml](https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/values.yaml). Then update the `promtheus.fqdn` variable to match your local Prometheus service address and set the `prometheus.enabled` flag to `false`.
-2. <a name="scrape-configs"></a>Have your Prometheus scrape the cost-model `/metrics` endpoint. These metrics are needed for accurate historical pricing data. Here is an example scrape config:
+1. During the helm install process, copy [values.yaml](https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/values.yaml). Then update the following parameters:
+  
+   `promtheus.fqdn` to match your local Prometheus with this format `http://<prometheus-server-service-name>.<prometheus-server-namespace>.svc.cluster.local`  
+   `prometheus.enabled` set to `false`  
+
+2. <a name="scrape-configs"></a>Have your Prometheus scrape the cost-model `/metrics` endpoint. These metrics are needed for reporting accurate pricing data. Here is an example scrape config:
 
 ```
 - job_name: kubecost
@@ -21,6 +25,12 @@ __Required Steps__
         port: 9003
 ```  
 
+This config needs to be added under `extraScrapeConfigs` in Prometheus configuration. [Example](https://github.com/kubecost/cost-analyzer-helm-chart/blob/0758d5df54d8963390ca506ad6e58c597b666ef8/cost-analyzer/values.yaml#L74)
+
+You can confirm that this job is successfully running with the Targets view in Prometheus. 
+
+![Prometheus Targets](/prom-targets.png)
+
 <a name="recording-rules"></a>__Recording Rules__  
 Kubecost uses Prometheus [recording rules](https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/values.yaml#L62) to help improve product performance. These are optional but recommended additions for medium and large-sized clusters using their own Prometheus installation.
 
@@ -34,10 +44,8 @@ Common issues include the following:
 
 * Dependancy versions (node-exporter - v0.16, kube-state-metrics - v1.3, cadvisor)
 
-* Missing scrape configs
+* Missing scrape configs -- visit Prometheus Target page (screenshot above)
 
-* Recording rules are inaccurate
-
-You can visit Settings in Kubecost to see basic diagnostic information on missing/available metrics:
+You can visit Settings in Kubecost to see basic diagnostic information on available metrics:
 
 ![Prometheus status diagnostic](/prom-status.png)
