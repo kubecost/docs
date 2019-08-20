@@ -15,7 +15,7 @@ The designated time window for measuring costs.
 Filter resouces by namespace to more closely investigate a rise in spend or key cost drivers at different aggregations, e.g. Deployments or Pods. 
 
 ### 5. Allocate Idle Cost
-Allocating idle costs will proportionately assign total cluster costs to indvidial resources.
+Allocating idle costs proportionately assigns total cluster costs to indvidial resources. For example, if your cluster is only 50% utilized, applying idle costs will increase the cost of each pod/namespace by 2x.
 
 ### 6. Chart selection
 Toggle to the bar chart view to see aggregated costs over the selected window, or the time series view to see cost changes over time.
