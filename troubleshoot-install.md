@@ -1,7 +1,8 @@
 [No persistent volumes available...](#persistent-volume)    
 [Unable to establish a port-forward connection](#port-forward)  
 [FailedScheduling node-exporter](#node-exporter)   
-[No clusters found](#no-cluster)
+[No clusters found](#no-cluster)  
+[Pods running but app won't load](#app-wont-load)
   
   
 ## <a name="persistent-volume"></a>Issue: no persistent volumes available for this claim and/or no storage class is set 
@@ -95,3 +96,16 @@ If your cluster address has changed, you can visit Settings in the Kubecost prod
 
 Please contact us at team@kubecost.com or on Slack at any point.
 
+
+## <a name="app-wont-load"></a>Issue: Unable to load app
+
+When all Kubecost pods are running and you can connect / port-forward to the kubecost-cost-analyzer pod but none of the app's UI will load, we recommend testing the following. 
+
+1. Connect directly to a backend service with the following command: 
+`kubectl port-forward --namespace kubecost service/kubecost-cost-analyzer 9001`
+2. Ensure that `http://localhost:9001` returns the prometheus YAML file
+
+If this is true, you are likely to be hitting a CoreDNS routing isssue. We recommend using local routing as a solution: 
+
+1. Go to https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/templates/cost-analyzer-frontend-config-map-template.yaml#L13 
+2. Replace {{ $serviceName }}.{{ .Release.Namespace }} with “localhost”
