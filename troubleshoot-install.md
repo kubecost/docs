@@ -99,7 +99,7 @@ Please contact us at team@kubecost.com or on Slack at any point.
 
 ## <a name="app-wont-load"></a>Issue: Unable to load app
 
-When all Kubecost pods are running and you can connect / port-forward to the kubecost-cost-analyzer pod but none of the app's UI will load, we recommend testing the following. 
+If all Kubecost pods are running and you can connect / port-forward to the kubecost-cost-analyzer pod but none of the app's UI will load, we recommend testing the following: 
 
 1. Connect directly to a backend service with the following command: 
 `kubectl port-forward --namespace kubecost service/kubecost-cost-analyzer 9001`
@@ -107,5 +107,5 @@ When all Kubecost pods are running and you can connect / port-forward to the kub
 
 If this is true, you are likely to be hitting a CoreDNS routing isssue. We recommend using local routing as a solution: 
 
-1. Go to https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/templates/cost-analyzer-frontend-config-map-template.yaml#L13 
+1. Go to <https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/templates/cost-analyzer-frontend-config-map-template.yaml#L13>
 2. Replace {{ $serviceName }}.{{ .Release.Namespace }} with “localhost”
