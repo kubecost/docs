@@ -108,4 +108,4 @@ If all Kubecost pods are running and you can connect / port-forward to the kubec
 If this is true, you are likely to be hitting a CoreDNS routing isssue. We recommend using local routing as a solution: 
 
 1. Go to <https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/templates/cost-analyzer-frontend-config-map-template.yaml#L13>
-2. Replace `{{ $serviceName }}.{{ .Release.Namespace }}` with “localhost”
+2. Replace ```{{ $serviceName }}.{{ .Release.Namespace }}``` with ```localhost```
