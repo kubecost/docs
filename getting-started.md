@@ -9,8 +9,9 @@ __Configuration__
 [Spot Instance Configuration (AWS only)](#spot-nodes)  
 [Allocating out of cluster costs](#out-of-cluster)
 
-__Initial Actions__  
-[Measure cluster cost efficiency](#cluster-efficiency)
+__Next Steps__  
+[Measure cluster cost efficiency](#cluster-efficiency)  
+[Cost monitoring best practices](http://blog.kubecost.com/blog/cost-monitoring/)
 
 ## <a name="storage-config"></a>Storage configuration
 
