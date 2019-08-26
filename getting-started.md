@@ -5,6 +5,7 @@ This page provides commonly used product configurations and recommended next ste
 __Configuration__  
 [Storage configuration](#storage-config)   
 [Using an existing Prometheus or Grafana installation](#custom-prom)  
+[Using an existing node exporter installation](#node-exporter)  
 [Creating an Ingress with basic auth](#basic-auth)  
 [Spot Instance Configuration (AWS only)](#spot-nodes)  
 [Allocating out of cluster costs](#out-of-cluster)
@@ -20,6 +21,10 @@ The default Kubecost installation comes with a 32Gb persistent volume and 15-day
 ## <a name="custom-prom"></a>Custom Prometheus & Grafana
 
 Using your existing Grafana & Prometheus installation is supported in our paid offering today. You can see basic setup instructions [here](/custom-prom.md). In our free product, we provide best efforts support for this integration because of nuances required in completing this integration successfully. It's actively support in our paid product. Please contact us (team@kubecost.com) if you want to learn more or if you think we can help!
+
+## <a name="node-exporter"></a>Using an existing node exporter 
+
+You can use an existing node exporter DaemonSet, instead of installing another, by toggling the Kubecost helm chart config options (`prometheus.nodeExporter.enabled` and `prometheus.serviceAccounts.nodeExporter.create`) shown [here](https://github.com/kubecost/cost-analyzer-helm-chart). Note: to do this successfully your existing node exporter must be configured to explore metrics on it's default endpoint.
 
 ## <a name="basic-auth"></a>Basic auth Ingress example 
 
