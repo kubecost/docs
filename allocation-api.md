@@ -1,10 +1,13 @@
-Use the following API to get cost, resource allocation, and utilization data. This API is available at:
+Use the following API to obtain cost, resource allocation, and utilization data. This API is available at:
 
 `http://<kubecost-address>/model/costDataModel`
 
 Here's an example use:
 
 `http://localhost:9090/model/costDataModel?timeWindow=7d&offset=7d`
+
+`timeWindow` dictates the window for measuring cost, usage, etc. Supported units are d, h, and m.  
+`offset` shifts timeWindow backwards relative to the current time. Supported units are d, h, and m.
 
 You should receive a list of JSON elements in this format:
 
