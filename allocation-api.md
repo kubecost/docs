@@ -4,7 +4,7 @@ Use the following API to get cost, resource allocation, and utilization data. Th
 
 Here's an example use:
 
-`http://localhost:9090/model/costDataModel?timeWindow=7d`
+`http://localhost:9090/model/costDataModel?timeWindow=7d&offset=7d`
 
 You should receive a list of JSON elements in this format:
 
