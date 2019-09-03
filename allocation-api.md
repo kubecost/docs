@@ -10,8 +10,6 @@ You should receive a list of JSON elements in this format:
 
 ```
 {
-  name: "cost-model", 
-  podName: "cost-model-59cbdbf49c-rbr2t",…}
   cpuallocated: [{timestamp: 1567531940, value: 0.01}]
   cpureq: [{timestamp: 1567531940, value: 0.01}]
   cpuused: [{timestamp: 1567531940, value: 0.006}]
