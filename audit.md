@@ -28,6 +28,7 @@ We've created this guide to help you spot check costs and ensure they are calcul
 
 6. **Confirm consistency with monthly Allocation view.** Visit the Allocation tab in the Kubecost product. Filter by `default ` namespace. Select `monthly run rate` by `pod` view then view the time series chart to confirm the values in the previous step are consistent. 
 
+![Timeseries graph](images/audit-graph.png)
 
 **Reminder:** Remember to apply any sustained use or other discounts.
 
