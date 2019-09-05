@@ -30,8 +30,4 @@ We've created this guide to help you spot check costs and ensure they are calcul
 
 ![Timeseries graph](images/audit-graph.png)
 
-**Reminder:** Remember to apply any sustained use or other discounts.
-
-## container_cpu_allocation{namespace="default"} missing scrapes
-## allocation starts at lower value? 
-## node metrics can be cached 
+**Reminder:** Don't forget to apply any sustained use or other discounts.
