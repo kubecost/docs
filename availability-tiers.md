@@ -6,7 +6,7 @@ Today our product supports the following tiers:
 Tier | Priority | Default
 --------- | ----------- | -------
 `Highly Available` or `Critical` | 0 | If true, recommendations and health scores heavily prioritize availability. This is the default tier if none is supplied. 
-`Production` | 1 | Intended for production jobs that are not necessarily mission critic
-`Staging` or `Dev` | 2 | Meant for experimental or development resources. Here redundancy or available is not a priority. 
+`Production` | 1 | Intended for production jobs that are not necessarily mission critical.
+`Staging` or `Dev` | 2 | Meant for experimental or development resources. Redundancy or availability is not a high priority. 
 
 Have questions or feedback? Contact us at <team@kubecost.com>.
