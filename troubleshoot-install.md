@@ -84,7 +84,9 @@ You may encounter the following screen if the Kubecost frontend is unabled to co
 
 Recommended troubleshooting steps are as follows:
 
-First, point your browser to the `/api` endpoint on your target URL. For example, visit `http://localhost:9090/api/` in the scenario shown above. You should expect to see a Prometheus config file at this endpoint.  
+Start by reviewing messages in your browswer's developer console. Any meaningful errors or warnings may indicate an unexpted response from the Kubecost server. 
+
+Next, point your browser to the `/api` endpoint on your target URL. For example, visit `http://localhost:9090/api/` in the scenario shown above. You should expect to see a Prometheus config file at this endpoint. If your cluster address has changed, you can visit Settings in the Kubecost product to update or you can also add a new cluster.  
 
 If you are unable to successfully retrieve your config file from this endpoint, we recommend the following:
 
@@ -92,7 +94,7 @@ If you are unable to successfully retrieve your config file from this endpoint, 
 2. View the status of all Prometheus and Kubecost pods to see if any pods are experiencing errors or are in a Pending state. When performing the default Kubecost install we recommend inspecting this with `kubectl get pods -n kubecost`. All pods should be either Running or Completed.
 3. View relevent pod logs if any pod is not in the Running or Completed state.
 
-If your cluster address has changed, you can visit Settings in the Kubecost product to update or you can also add a new cluster. 
+If you are able retrieve your config file from this endpoint, we recommend reviewing logs from the cost-analyzer pod to identify any errors.
 
 Please contact us at team@kubecost.com or on Slack at any point.
 
