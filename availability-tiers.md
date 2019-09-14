@@ -1,4 +1,4 @@
-The notion of Availability Tiers impact both recommendations and health ratings in the Kubecost oroduct. For example, production jobs receive higher resource request recommendations than dev workload.   
+Availability Tiers impact capacity recommendations, health ratings and more in the Kubecost product. As an example, production jobs receive higher resource request recommendations than dev workloads. Another example is health scores for high availability workloads are heavily penalized for not having multiple replicas availabile. 
 
 Today our product supports the following tiers:
 
