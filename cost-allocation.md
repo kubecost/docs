@@ -6,7 +6,7 @@ The Cost Allocation page allows you to quickly see spend across all Kubernetes c
 View either cumulative costs measured over the selected time window, or run rate (e.g. hourly, daily, monthly) based on the average resources allocated.  
 
 ### 2. Aggregation 
-Aggregate cost by namespace, deployment, service and other native Kubernetes concepts. You can also view cost by other meaningful aggregations like Team, Department, or Product. These aggregations are based on Kubernetes labels or annotations, which can be configured in Settings. Resources without a label/annotation will be shown as Not Assigned.  
+Aggregate cost by namespace, deployment, service and other native Kubernetes concepts. You can also view cost by other meaningful aggregations like Team, Department, or Product. These aggregations are based on Kubernetes labels or annotations, from both the pod and namespace-level, with labels at the pod-level being favored over the namespace label when both are present. The label name used for these concepts can be configured in Settings. Resources without a label/annotation will be shown as Not Assigned.  
 
 ### 3. Time window
 The designated time window for measuring costs. 
