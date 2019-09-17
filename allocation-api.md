@@ -31,3 +31,11 @@ You should receive a list of JSON elements in this format:
   services: ["cost-model"]
 }  
 ```
+  
+Optional request parameters include the following:  
+
+Field | Description 
+--------- | ----------- 
+`filterFields` | Blacklist of fields to be filtered from response. For example, appending `&filterFields=cpuused,cpureq,ramreq,ramused` will remove request and usage data.
+`namespace` | Filter results by namespace. For example, appending `&namespace=kubecost` only returns data for the `kubecost` namespace
+
