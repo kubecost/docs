@@ -1,6 +1,8 @@
-To view data from multipe clusters simultaneously, cluster federation must be enabled. 
+To view data from multipe clusters simultaneously, Kubecost cluster federation must be enabled. 
 This documents walks though the necessary steps for enabling this feature.
 
+
+Note: this feature today requires an Enterprise license.
 
 # For the master cluster
 
