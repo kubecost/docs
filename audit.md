@@ -12,21 +12,21 @@ We've created this guide to help you spot check costs and ensure they are calcul
     * `container_cpu_allocation{namespace="default"}`
     * `container_memory_allocation_bytes{namespace="default"}`
 
-4. **Verify monthly node prices.** Ensure these are consistent with cloud provider prices or custom prices provided:
+4. **Verify monthly node prices.** Ensure these are consistent with bills from cloud provider or from advertised rates:
 
     * `node_cpu_hourly_cost * 730`
     * `node_ram_hourly_cost * 730`
     * `node_total_hourly_cost * 730`
     * `kube_node_status_capacity_cpu_cores * on(node) group_left() node_cpu_hourly_cost * 730 + kube_node_status_capacity_memory_bytes * on(node) group_left() node_ram_hourly_cost * 730 / 1024 / 1024 / 1024`
     
-    **Note:** Prometheus values do not account for sustained use or other discounts applied in Settings.
+    **Note:** Prometheus values do not account for sustained use, custom prices, or other discounts applied in Settings.
 
-5. **Calculate total resource costs.** Calculate the previously audited allocation by the previously audited price. 
+5. **Calculate total resource costs.** Multiply the previously audited allocation by the previously audited price. 
 
     * `container_cpu_allocation{namespace="default"} * on(instance) group_left() node_cpu_hourly_cost * 730`
     * `container_memory_allocation_bytes{namespace="default"} / 1024 / 1024 / 1024  * on(instance) group_left() node_ram_hourly_cost * 730`
 
-6. **Confirm consistency with monthly Allocation view.** Visit the Allocation tab in the Kubecost product. Filter by `default ` namespace. Select `monthly run rate` by `pod` view then view the time series chart to confirm the values in the previous step are consistent. 
+6. **Confirm consistency with monthly Allocation view.** Visit the Allocation tab in the Kubecost product. Filter by `default ` namespace. Select `monthly run rate` by `pod` then view the time series chart to confirm the values in the previous step are consistent. 
 
 ![Timeseries graph](images/audit-graph.png)
 
