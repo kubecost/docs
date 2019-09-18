@@ -1,5 +1,5 @@
 To view data from multipe clusters simultaneously, Kubecost cluster federation must be enabled. 
-This documents walks though the necessary steps for enabling this feature.
+This documents walks through the necessary steps for enabling this feature.
 
 
 Note: this feature today requires an Enterprise license.
@@ -10,8 +10,8 @@ Note: this feature today requires an Enterprise license.
 2. Ensure `remoteWrite.postgres.installLocal` is set to `true` in values.yaml 
 3. Provide a unique identifier for your cluster in `prometheus.server.global.exernal_labels.cluster_id`
 4. Create a service definition to make Postgres accessible by your other clusters. Below is a sample service definition. 
-Warning: this service defition may expose your database externally with just basic auth protecting. 
-Be sure the follow the guideline of your organiztion. 
+Warning: this specific service defition may expose your database externally with just basic auth protecting. 
+Be sure the follow the necessary guidelines of your organiztion. 
 
 ```
 apiVersion: v1
