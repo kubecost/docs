@@ -4,7 +4,7 @@ This functionality also powers the Enterprise multi-cluster view, where data acr
 To enable long-term storage, complete the following:
 
 1. **Helm chart configuration** -- in [values.yaml](https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/values.yaml) set the following attribute 
-to true `remoteWrite.postgres.enabled`
+to true `remoteWrite.postgres.enabled`. The default backing disk is `200gb` but this can also be directly configured in values.yaml. 
  
 2. **Verify successful install** -- Deploy or upgrade via install instructions at <http://kubecost.com/install>, passing this updated values.yaml file, and verify pods with the prefix `kubecost-cost-analyzer-adapter`
 and `kubecost-cost-analyzer-postgres` are Running.
