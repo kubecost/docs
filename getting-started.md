@@ -65,6 +65,8 @@ For more accurate Spot pricing data, visit Settings in the Kubecost frontend to 
 
 ![AWS Spot info](/spot-settings.png)
 
+**Necessary Steps**
+
 1. Enable the [AWS Spot Instance data feed](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-data-feeds.html).
 2. Provide the required S3 bucket information in Settings (example shown above).
 3. Create and attach an IAM role account which can be used to read this bucket. Here's an example policy:
@@ -87,9 +89,9 @@ For more accurate Spot pricing data, visit Settings in the Kubecost frontend to 
 
 ## <a name="out-of-cluster"></a>Allocating out of cluster costs
 
-[AWS] Provide your congifuration info in Settings. The information needs includes S3 bucket name, Athena table name, Athena table region, and Athena database name. View [this page](/aws-out-of-cluster.md) for more information on completing this process.
+**[AWS]** Provide your congifuration info in Settings. The information needs includes S3 bucket name, Athena table name, Athena table region, and Athena database name. View [this page](/aws-out-of-cluster.md) for more information on completing this process.
 
-[GCP] Provide configuration info by selecting "Add key" from the Cost Allocation Page. View [this page](/gcp-out-of-cluster.md) for more information on completing this process.
+**[GCP]** Provide configuration info by selecting "Add key" from the Cost Allocation Page. View [this page](/gcp-out-of-cluster.md) for more information on completing this process.
 
 
 ## <a name="cluster-efficiency"></a>Measuring cluster cost efficiency
