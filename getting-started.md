@@ -65,6 +65,23 @@ For more accurate Spot pricing data, visit Settings in the Kubecost frontend to 
 
 ![AWS Spot info](/spot-settings.png)
 
+After adding the S3 bucket information in Settings, create an IAM role account which can be used to read this bucket. Here's an example policy:
+
+```
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "s3:Get*",
+                "s3:List*"
+            ],
+            "Resource": "*"
+        }
+    ]
+}
+```
 
 ## <a name="out-of-cluster"></a>Allocating out of cluster costs
 
