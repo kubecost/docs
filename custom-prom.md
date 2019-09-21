@@ -34,7 +34,7 @@ You can confirm that this job is successfully running with the Targets view in P
 ![Prometheus Targets](/prom-targets.png)
 
 <a name="recording-rules"></a>__Recording Rules__  
-Kubecost uses Prometheus [recording rules](https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/values.yaml#L62) to help improve product performance. These are optional but recommended additions for medium and large-sized clusters using their own Prometheus installation.
+Kubecost uses Prometheus [recording rules](https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/values.yaml#L145) to enable certain product features and to help improve product performance. These are recommended additions, especially for medium and large-sized clusters using their own Prometheus installation.
 
 <a name="troubleshoot"></a>__Troubleshooting__
 
