@@ -1,4 +1,5 @@
 # Installing Kubecost
+<br/>
 
 * The best way to install and operate the Kubecost product is via the Helm chart install instructions available at [kubecost.com/install](http://kubecost.com/install). This chart contains all the required components to get started, and can scale to large deployments. It also provides the most flexibility for managing Kubecost and its dependencies. 
 
