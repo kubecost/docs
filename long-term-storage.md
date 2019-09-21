@@ -15,4 +15,4 @@ and `kubecost-cost-analyzer-postgres` are Running.
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Here's an example use: `http://localhost:9090/model/costDataModelRangeLarge`
 
-Note: this feature today requires an Enterprise license. 
+**Note:** this feature today requires an Enterprise license. 
