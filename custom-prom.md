@@ -33,10 +33,12 @@ You can confirm that this job is successfully running with the Targets view in P
 
 ![Prometheus Targets](/prom-targets.png)
 
-<a name="recording-rules"></a>__Recording Rules__  
+<a name="recording-rules"></a>
+__Recording Rules__  
+<br/>
 Kubecost uses Prometheus [recording rules](https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/values.yaml#L145) to enable certain product features and to help improve product performance. These are recommended additions, especially for medium and large-sized clusters using their own Prometheus installation.
 
-<a name="troubleshoot"></a>__Troubleshooting__
+<a name="troubleshoot"></a>__Troubleshooting Issues__
 
 Common issues include the following: 
 
@@ -48,6 +50,6 @@ Common issues include the following:
 
 * Missing scrape configs -- visit Prometheus Target page (screenshot above)
 
-You can visit Settings in Kubecost to see basic diagnostic information on available metrics:
+You can visit Settings in Kubecost to see basic diagnostic information on these Prometheus metrics:
 
 ![Prometheus status diagnostic](/prom-status.png)
