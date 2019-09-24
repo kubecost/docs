@@ -22,7 +22,7 @@ __Required Steps__
       scheme: http
       dns_sd_configs:
       - names:
-        - kubecost-cost-analyzer
+        - kubecost-cost-analyzer.<kubecost-namespace>
         type: 'A'
         port: 9003
 ```  
