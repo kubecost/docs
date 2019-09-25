@@ -1,2 +1,5 @@
 theme: jekyll-theme-slate
 title: Kubecost docs
+
+# Google Analytics
+google_analytics: UA-129422090-2
