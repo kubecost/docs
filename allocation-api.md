@@ -52,15 +52,15 @@ The aggregated cost model API retrieves data similiar to the Kubecost Allocation
 
 `http://<kubecost-address>/model/aggregatedCostModel`
 
-Here's an example use:
+Here are example uses:
 
-`http://localhost:9090/model/aggregatedCostModel?timeWindow=1d&aggregation=namespace`
-`http://localhost:9090/model/aggregatedCostModel?timeWindow=1d&aggregation=label&aggregationSubField=product`
+`http://localhost:9090/model/aggregatedCostModel?window=1d&aggregation=namespace`  
+`http://localhost:9090/model/aggregatedCostModel?window=1d&aggregation=label&aggregationSubField=product`
 
 API parameters include the following:
 
-* `timeWindow` dictates the applicable window for measuring cost metrics. Supported units are d, h, and m.  
-* `offset` (optional) shifts timeWindow backwards from current time. Supported units are d, h, and m.  
+* `window` dictates the applicable window for measuring cost metrics. Supported units are d, h, and m.  
+* `offset` (optional) shifts window backwards from current time. Supported units are d, h, and m.  
 * `aggregation` is the field used to consolidate cost model data. Supported types are namespace, deployment, service, and labels.  
 * `aggregationSubField` used for aggregation types that require sub fields, e.g. `label=product`
 
