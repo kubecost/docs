@@ -55,12 +55,13 @@ The aggregated cost model API retrieves data similiar to the Kubecost Allocation
 Here's an example use:
 
 `http://localhost:9090/model/aggregatedCostModel?timeWindow=1d&aggregation=namespace`
+`http://localhost:9090/model/aggregatedCostModel?timeWindow=1d&aggregation=label&aggregationSubField=product`
 
 API parameters include the following:
 
 * `timeWindow` dictates the applicable window for measuring cost metrics. Supported units are d, h, and m.  
 * `offset` (optional) shifts timeWindow backwards from current time. Supported units are d, h, and m.  
-* `aggregation` is the field used to consolidate cost model data. Supported types are namespace, deployment, service, label, and pod.  
+* `aggregation` is the field used to consolidate cost model data. Supported types are namespace, deployment, service, and labels.  
 * `aggregationSubField` used for aggregation types that require sub fields, e.g. `label=product`
 
 This API returns a set of JSON objects in this format:
