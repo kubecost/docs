@@ -12,7 +12,7 @@ Here's an example use:
 
 API parameters include the following:
 
-* `timeWindow` dictates the applicable window for measuring cost, usage, etc. Supported units are d, h, and m.  
+* `timeWindow` dictates the applicable window for measuring cost metrics. Supported units are d, h, and m.  
 * `offset` shifts timeWindow backwards relative to the current time. Supported units are d, h, and m.
 
 This API returns a set of JSON elements in this format:
