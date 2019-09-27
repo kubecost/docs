@@ -58,7 +58,7 @@ Here's an example use:
 
 API parameters include the following:
 
-* `timeWindow` dictates the applicable window for measuring cost, usage, etc. Supported units are d, h, and m.  
+* `timeWindow` dictates the applicable window for measuring cost metrics. Supported units are d, h, and m.  
 * `offset` (optional) shifts timeWindow backwards relative to the current time. Supported units are d, h, and m.  
 * `aggregation` is the field used to consolidate cost model data. Supported types are namespace, deployment, service, label, and pod.  
 * `aggregationSubField` used for aggregation type that required sub fields, e.g. `label=product`
