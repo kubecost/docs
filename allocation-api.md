@@ -1,4 +1,8 @@
-Use the following API to obtain cost, resource allocation, and utilization data. This API is available at:
+Kubecost exposes multiple APIs to obtain cost, resource allocation, and utilization data. Below is documentation on two options: the cost model API and aggregated cost model API.  
+
+# Cost model API
+
+The full cost model API exposes pricing model inputs at the individual container/workload level and is available at:
 
 `http://<kubecost-address>/model/costDataModel`
 
@@ -6,10 +10,12 @@ Here's an example use:
 
 `http://localhost:9090/model/costDataModel?timeWindow=7d&offset=7d`
 
-`timeWindow` dictates the window for measuring cost, usage, etc. Supported units are d, h, and m.  
-`offset` shifts timeWindow backwards relative to the current time. Supported units are d, h, and m.
+API parameters include the following:
 
-You should receive a list of JSON elements in this format:
+* `timeWindow` dictates the applicable window for measuring cost, usage, etc. Supported units are d, h, and m.  
+* `offset` shifts timeWindow backwards relative to the current time. Supported units are d, h, and m.
+
+This API returns a set of JSON elements in this format:
 
 ```
 {
@@ -39,3 +45,39 @@ Field | Description
 `filterFields` | Blacklist of fields to be filtered from response. For example, appending `&filterFields=cpuused,cpureq,ramreq,ramused` will remove request and usage data.
 `namespace` | Filter results by namespace. For example, appending `&namespace=kubecost` only returns data for the `kubecost` namespace
 
+
+# Aggregated cost model API
+
+The aggregated cost model API retrieves data similiar to the Kubecost Allocation frontend view and is available at:
+
+`http://<kubecost-address>/model/aggregatedCostModel`
+
+Here's an example use:
+
+`http://localhost:9090/model/aggregatedCostModel?timeWindow=1d&aggregation=namespace`
+
+API parameters include the following:
+
+* `timeWindow` dictates the applicable window for measuring cost, usage, etc. Supported units are d, h, and m.  
+* `offset` (optional) shifts timeWindow backwards relative to the current time. Supported units are d, h, and m.  
+* `aggregation` is the field used to consolidate cost model data. Supported types are namespace, deployment, service, label, and pod.  
+* `aggregationSubField` used for aggregation type that required sub fields, e.g. `label=product`
+
+This API returns a set of JSON objects in this format:
+
+```
+{
+  aggregator: "namespace"
+  aggregatorSubField: ""
+  cluster: "cluster-1"
+  cpuCost: 100.031611
+  environment: "default"
+  gpuCost: 0
+  networkCost: 0
+  pvCost: 10.000000
+  ramCost: 70.000529625
+  totalCost: 180.032140625
+}  
+```
+
+Have questions? Email us at <team@kubecost.com>.
