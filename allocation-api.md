@@ -62,14 +62,14 @@ API parameters include the following:
 * `window` dictates the applicable window for measuring cost metrics. Supported units are d, h, and m.  
 * `offset` (optional) shifts window backwards from current time. Supported units are d, h, and m.  
 * `aggregation` is the field used to consolidate cost model data. Supported types are namespace, deployment, service, and labels.  
-* `aggregationSubfield` used for aggregation types that require sub fields, e.g. aggregation type equals `label` and then the value of the label (aggregationSubfield) equals `app`
+* `aggregationSubfield` used for aggregation types that require sub fields, e.g. aggregation type equals `label` and the value of the label (aggregationSubfield) equals `app`
 
 This API returns a set of JSON objects in this format:
 
 ```
 {
-  aggregator: "namespace"
-  aggregatorSubfield: ""
+  aggregation: "namespace"
+  aggregationSubfield: ""
   cluster: "cluster-1"
   cpuCost: 100.031611       
   environment: "default"    // value of aggregation field
