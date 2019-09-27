@@ -55,21 +55,21 @@ The aggregated cost model API retrieves data similiar to the Kubecost Allocation
 Here are example uses:
 
 * `http://localhost:9090/model/aggregatedCostModel?window=1d&aggregation=namespace`  
-* `http://localhost:9090/model/aggregatedCostModel?window=1d&aggregation=label&aggregationSubField=product`
+* `http://localhost:9090/model/aggregatedCostModel?window=1d&aggregation=label&aggregationSubfield=product`
 
 API parameters include the following:
 
 * `window` dictates the applicable window for measuring cost metrics. Supported units are d, h, and m.  
 * `offset` (optional) shifts window backwards from current time. Supported units are d, h, and m.  
 * `aggregation` is the field used to consolidate cost model data. Supported types are namespace, deployment, service, and labels.  
-* `aggregationSubField` used for aggregation types that require sub fields, e.g. aggregation type equals `label` and then the value of the label (aggregationSubField) equals `app`
+* `aggregationSubfield` used for aggregation types that require sub fields, e.g. aggregation type equals `label` and then the value of the label (aggregationSubfield) equals `app`
 
 This API returns a set of JSON objects in this format:
 
 ```
 {
   aggregator: "namespace"
-  aggregatorSubField: ""
+  aggregatorSubfield: ""
   cluster: "cluster-1"
   cpuCost: 100.031611       
   environment: "default"    // value of aggregation field
