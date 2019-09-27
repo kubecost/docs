@@ -2,7 +2,7 @@ To view data from multipe clusters simultaneously, Kubecost cluster federation m
 This documents walks through the necessary steps for enabling this feature.
 
 
-Note: this feature today requires an Enterprise license.
+**Note:** this feature today requires an Enterprise license.
 
 # For the master cluster
 
