@@ -6,11 +6,13 @@ When this feature is enabled, Kubecost gathers network traffic metrics in combin
 
  ### Enabling Network Costs
 
-To enable this feature, set the following in values.yaml during [Helm installation](http://kubecost.com/install):
+To enable this feature, set the following parameter in values.yaml during [Helm installation](http://kubecost.com/install):
  ```
  networkCosts.enabled=true
  ```
- You can view a list of common Kubecost config options [here](https://github.com/kubecost/cost-analyzer-helm-chart#config-options).
+ You can view a list of common Kubecost chart config options [here](https://github.com/kubecost/cost-analyzer-helm-chart#config-options). 
+ 
+ **Note:** network cost allocation is disabled by default.
 
 ### Kubernetes Network Traffic Metrics
 
@@ -22,7 +24,7 @@ The primary source of network metrics come from a daemonset pod hosted on each o
 
 These specific classifications are important because they correlate with network costing models for popular cloud providers. 
 
-### Feature Limitations
+### Feature Verifications
 
 To verify this feature is functioning properly, you can complete the following steps.
 
