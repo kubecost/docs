@@ -4,7 +4,7 @@ This document summarizes Kubecost network cost allocation, how to enable it, and
 
 When this feature is enabled, Kubecost gathers network traffic metrics in combination with provider specific network costs to provide insight on network data sources as well as the aggregate costs of transfers. 
 
- ### Enabling Network Costs
+### Enabling Network Costs
 
 To enable this feature, set the following parameter in values.yaml during [Helm installation](http://kubecost.com/install):
  ```
