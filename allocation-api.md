@@ -82,6 +82,7 @@ This API returns a set of JSON objects in this format:
   networkCost: 0
   pvCost: 10.000000
   ramCost: 70.000529625
+  sharedCost: 0             // value of costs allocated via sharedNamespaces or sharedLabelNames
   totalCost: 180.032140625
 }  
 ```
