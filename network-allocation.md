@@ -24,7 +24,7 @@ The primary source of network metrics come from a daemonset pod hosted on each o
 
 These specific classifications are important because they correlate with network costing models for popular cloud providers. 
 
-### Feature Verifications
+### Feature Validation
 
 To verify this feature is functioning properly, you can complete the following steps.
 
