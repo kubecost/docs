@@ -50,7 +50,7 @@ config:
       "client_x509_cert_url": ""
     }
 ```
-
+**Note:** given that this is yaml, it requires this specific indention. 
 
 Step 2: **Create object store secret**   
 
