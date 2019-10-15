@@ -54,7 +54,7 @@ config:
 
 Step 2: **Create object store secret**   
 
-The one step prior to installation is to create a secret with the yaml file generated in the previous step:
+The final step prior to installation is to create a secret with the yaml file generated in the previous step:
 ```
 $ kubectl create secret generic kubecost-thanos -n kubecost --from-file=./object-store.yaml
 ```
