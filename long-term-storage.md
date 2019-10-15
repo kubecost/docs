@@ -65,27 +65,29 @@ The Thanos subchart includes `thanos-bucket`, `thanos-query`, `thanos-store`,  `
 
 These values can be adjusted under the `thanos` block in `values-thanos.yaml` - Available options can be observed here: [thanos/values.yaml](https://github.com/kubecost/cost-analyzer-helm-chart/blob/add-thanos/cost-analyzer/charts/thanos/values.yaml)
 
-It's *important* to note that when running `helm install`, you must provide the base `values.yaml` followed by the override `values-thanos.yaml`. For example:
+It's *important* to note that when running `helm install`, you must provide the base `values.yaml` followed by the override [values-thanos.yaml](https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/values-thanos.yaml). For example:
 
 ```
-$ helm install ./cost-analyzer \
+$ helm install kubecost/cost-analyzer \
     --name kubecost \
     --namespace kubecost \
-    -f ./cost-analyzer/values.yaml \
-    -f ./cost-analyzer/values-thanos.yaml
+    -f values.yaml \
+    -f values-thanos.yaml
 ```
 
-You should now have Thanos enabled!
+Your deployment should now have Thanos enabled!
 
 **Verify Installation**  
 In order to verify a correct installation, start by ensuring all pods are running without issue. Next, use port forwarding to connect to the `thanos-query-http` endpoint:
 ```
 $ kubectl port-forward svc/kubecost-thanos-query-http 8080:10902 --namespace kubecost
 ```
-Then navigate to http://localhost:8080 in your browser. This page should look very similar to the prometheus console. 
+Then navigate to http://localhost:8080 in your browser. This page should look very similar to the prometheus console.
+
 ![image](https://user-images.githubusercontent.com/334480/66616984-1076e480-eba1-11e9-8dd2-7c20541ad0b1.png)
 
 If you navigate to the *Stores* using the top navigation bar, you should be able to see the status of both the `thanos-store` and `thanos-sidecar` which accompanied prometheus server:
+
 ![image](https://user-images.githubusercontent.com/334480/66617048-58960700-eba1-11e9-9f68-d007fcb11410.png)
 
 Also note that the sidecar should identify with the unique `cluster_id` provided in your values.yaml in the previous step. Default value is `cluster-one`.
