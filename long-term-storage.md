@@ -78,11 +78,17 @@ $ helm install kubecost/cost-analyzer \
 Your deployment should now have Thanos enabled!
 
 **Verify Installation**  
-In order to verify a correct installation, start by ensuring all pods are running without issue. Next, use port forwarding to connect to the `thanos-query-http` endpoint:
+In order to verify a correct installation, start by ensuring all pods are running without issue. If the pods mentioned above are not running successfully, then view pod logs for more detail. A common error is as follows, which means you do not have the correct access to the supplied bucket: 
+
+```
+thanos-svc-account@project-227514.iam.gserviceaccount.com does not have storage.objects.list access to thanos-bucket., forbidden"
+```
+
+Assuming pods are running, use port forwarding to connect to the `thanos-query-http` endpoint:
 ```
 $ kubectl port-forward svc/kubecost-thanos-query-http 8080:10902 --namespace kubecost
 ```
-Then navigate to http://localhost:8080 in your browser. This page should look very similar to the prometheus console.
+Then navigate to http://localhost:8080 in your browser. This page should look very similar to the Prometheus console.
 
 ![image](https://user-images.githubusercontent.com/334480/66616984-1076e480-eba1-11e9-8dd2-7c20541ad0b1.png)
 
@@ -92,6 +98,6 @@ If you navigate to the *Stores* using the top navigation bar, you should be able
 
 Also note that the sidecar should identify with the unique `cluster_id` provided in your values.yaml in the previous step. Default value is `cluster-one`.
 
-The retention period for when data is moved into the object storage is currently *2h* - This configuration is based on Thanos suggested values. So it will be at least 2 hours before data is stored in the provided bucket. 
+The default retention period for when data is moved into the object storage is currently *2h* - This configuration is based on Thanos suggested values. So it will be at least 2 hours before data is stored in the provided bucket. 
 
 Instead of waiting *2h* to ensure that thanos was configured correctly, the default log level for the thanos workloads is `debug` (it's very light logging even on debug). You can get logs for the `thanos-sidecar`, which is part of the `prometheus-server` container, and `thanos-store`. The logs should give you a clear indication whether or not there was a problem consuming the secret and what the issue is. 
