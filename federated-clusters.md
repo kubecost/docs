@@ -62,11 +62,9 @@ You should see data with both `cluster_id` values in this response.
 1. Follow steps [here](long-term-storage.md#option-b-out-of-cluster-storage-thanos) to enable Thanos durable storage on a Master cluster.
 
 2. Complete the process in Step 1 for each additional cluster by reusing your existing storage bucket and access credentials. Note: it is not necessary to deploy another instance of `thanos-compact` or `thanos-bucket` in each additional cluster. These are optional, but they can easily be disabled in [thanos/values.yaml](https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/charts/thanos/values.yaml) or by passing these parameters directly via helm install or upgrade as follows: 
-
 ```
 --set thanos.compact.enabled=false --set thanos.bucket.enabled=false
 ```
-
 3. Ensure you provide a unique identifier for `prometheus.server.global.exernal_labels.cluster_id` to have additional clusters be visible in the Kubecost product, e.g. `cluster-two`.
 
 4. Follow the same verification steps available [here](long-term-storage.md#verify-thanos).
