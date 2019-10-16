@@ -68,6 +68,7 @@ API parameters include the following:
 * `sharedNamespaces` (optional) provide a comma separated list of namespaces (e.g. kube-system) to be allocated to other tenants.
 * `sharedLabelNames` (optional) provide a comma separated list of kubernetes labels (e.g. app) to be allocated to other tenants. Must provide corresponding set of label values in `sharedLabelValues`.
 * `sharedLabelValues` (optional) label value (e.g. prometheus) associated with `sharedLabelNames` parameter. 
+* `disableCache` this API caches recently fetched data by default. Set this variable to `false` to avoid cache entirely. 
 
 This API returns a set of JSON objects in this format:
 
