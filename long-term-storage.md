@@ -77,6 +77,7 @@ $ helm install kubecost/cost-analyzer \
 
 Your deployment should now have Thanos enabled!
 
+<a name="verify-thanos"></a>
 **Verify Installation**  
 In order to verify a correct installation, start by ensuring all pods are running without issue. If the pods mentioned above are not running successfully, then view pod logs for more detail. A common error is as follows, which means you do not have the correct access to the supplied bucket: 
 
