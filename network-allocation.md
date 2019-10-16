@@ -35,6 +35,6 @@ To verify this feature is functioning properly, you can complete the following s
 ### Feature Limitations
  
 * Today this feature is supported on Unix-based images with conntrack
-* Actively tested against GCP and AWS to date
+* Actively tested against GCP and AWS to date, Azure coming soon
  
  
