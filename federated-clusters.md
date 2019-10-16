@@ -69,4 +69,4 @@ You should see data with both `cluster_id` values in this response.
 
 3. Ensure you provide a unique identifier for `prometheus.server.global.exernal_labels.cluster_id` to have additional clusters be visible in the Kubecost product, e.g. `cluster-two`.
 
-4. Follow the same verification steps available [here](long-term-storage.md#option-b-out-of-cluster-storage-thanos).
+4. Follow the same verification steps available [here](long-term-storage.md#verify-thanos).
