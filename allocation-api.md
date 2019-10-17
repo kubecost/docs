@@ -75,7 +75,7 @@ This API returns a set of JSON objects in this format:
 ```
 {
   aggregation: "namespace"
-  aggregationSubfield: ""
+  subfields: ""             // value(s) of aggregationSubfield parameter
   cluster: "cluster-1"
   cpuCost: 100.031611       
   environment: "default"    // value of aggregation field
