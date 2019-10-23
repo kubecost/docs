@@ -65,7 +65,7 @@ API parameters include the following:
 * `aggregation` is the field used to consolidate cost model data. Supported types are cluster, namespace, deployment, service, and label.  
 * `aggregationSubfield` used for aggregation types that require sub fields, e.g. aggregation type equals `label` and the value of the label (aggregationSubfield) equals `app`.
 * `allocateIdle` (optional) when set to `true` applies the cost of all idle compute resources to tenants, default `false`.
-* `sharedNamespaces` (optional) provide a comma separated list of namespaces (e.g. kube-system) to be allocated to other tenants.
+* `sharedNamespaces` (optional) provide a comma separated list of namespaces (e.g. kube-system) to be allocated to other tenants. These resources are evenly allocated to other tenants as `sharedCost`.
 * `sharedLabelNames` (optional) provide a comma separated list of kubernetes labels (e.g. app) to be allocated to other tenants. Must provide corresponding set of label values in `sharedLabelValues`.
 * `sharedLabelValues` (optional) label value (e.g. prometheus) associated with `sharedLabelNames` parameter. 
 * `disableCache` this API caches recently fetched data by default. Set this variable to `false` to avoid cache entirely. 
