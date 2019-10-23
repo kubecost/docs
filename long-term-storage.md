@@ -52,6 +52,10 @@ config:
 ```
 **Note:** given that this is yaml, it requires this specific indention. 
 
+__AWS/S3__
+
+Testing in progress. Details coming soon.
+
 Step 2: **Create object store secret**   
 
 The final step prior to installation is to create a secret with the yaml file generated in the previous step:
