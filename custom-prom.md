@@ -1,6 +1,8 @@
 # Custom Prometheus
 
-Integrating Kubecost with an existing Prometheus installation can be nuanced. We recommend first installing Kubecost with a bundled Prometheus ([instructions](http://kubecost.com/install)) as a dry run before integration with your own Prometheus. We also recommend getting in touch (team@kubecost.com) for assistance. 
+Integrating Kubecost with an existing Prometheus installation can be nuanced. We recommend first installing Kubecost with a bundled Prometheus ([instructions](http://kubecost.com/install)) as a dry run before integrating with your own Prometheus. We also recommend getting in touch (team@kubecost.com) for assistance. 
+
+**Note:** integrating with an existing Prometheus is officially supported under all Kubecost commerical plans. 
 
 __Required Steps__
 
@@ -46,7 +48,7 @@ Common issues include the following:
 
 * Prometheus throttling -- ensure Prometheus isn't being CPU throttled due to a low resource request.
 
-* Dependancy versions (node-exporter - v0.16, kube-state-metrics - v1.3, cadvisor)
+* Required dependancy versions (node-exporter - v0.16, kube-state-metrics - v1.3, cadvisor)
 
 * Missing scrape configs -- visit Prometheus Target page (screenshot above)
 
