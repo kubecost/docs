@@ -189,3 +189,5 @@ More on AWS tagging [here](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/U
 ## Step 7: Add AWS Credentials and Athena configuration details in the Kubecost product
 
 Visit the Kubecost Settings page to provide the AWS access credentials and Athena information.
+
+**Note:** you must include the protocol for your S3 bucket name, e.g. s3://aws-athena-query-results-5303329856255-us-east-1
