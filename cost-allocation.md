@@ -1,4 +1,4 @@
-The Cost Allocation page allows you to quickly see spend across all Kubernetes concepts. This article describes how you can control the data displayed in this view. 
+The Cost Allocation page allows you to quickly see spend across all Kubernetes concepts, e.g. namespace and service. It allows for allocating cost to organizational concepts like team, product/project, or department. This article helps you understand the metrics presented and describes how you can control the data displayed in this view. 
 
 ![Cost allocation view](cost-allocation.png)
 
