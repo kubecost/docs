@@ -1,26 +1,28 @@
 # Getting Started
 
-This page provides commonly used product configurations and recommended next steps once the commercial Kubecost product has been [installed](http://kubecost.com/install). 
+Welcome to Kubecost! This page provides commonly used product configurations and feature overviews to help get you up and running after the Kubecost product has been [installed](http://kubecost.com/install). 
 
 __Configuration__  
-[Storage configuration](#storage-config)   
+[Configuring metric storage](#storage-config)   
 [Using an existing Prometheus or Grafana installation](#custom-prom)  
 [Using an existing node exporter installation](#node-exporter)  
 [Creating an Ingress with basic auth](#basic-auth)  
-[Spot Instance Configuration (AWS only)](#spot-nodes)  
+[Adding a spot instance configuration (AWS only)](#spot-nodes)  
 [Allocating out of cluster costs](#out-of-cluster)
 
 __Next Steps__  
 [Measure cluster cost efficiency](#cluster-efficiency)  
-[Cost monitoring best practices](http://blog.kubecost.com/blog/cost-monitoring/)
+[Cost monitoring best practices](http://blog.kubecost.com/blog/cost-monitoring/)   
+[Understanding cost allocation metrics](/cost-allocation.md)
+<br/><br/>
 
 ## <a name="storage-config"></a>Storage configuration
 
-The default Kubecost installation comes with a 32Gb persistent volume and 15-day retention period for Prometheus metrics. This is enough space to retain data for ~300 pods, depending on node and container count. See the Kubecost Helm chart [configuration options](https://github.com/kubecost/cost-analyzer-helm-chart) on how to change both retention period and storage size. 
+The default Kubecost installation comes with a 32Gb persistent volume and 15-day retention period for Prometheus metrics. This is enough space to retain data for ~300 pods, depending on your exact node and container count. See the Kubecost Helm chart [configuration options](https://github.com/kubecost/cost-analyzer-helm-chart) to adjust both retention period and storage size. 
 
 ## <a name="custom-prom"></a>Custom Prometheus & Grafana
 
-Using your existing Grafana & Prometheus installation is supported in our paid offering today. You can see basic setup instructions [here](/custom-prom.md). In our free product, we provide best efforts support for this integration because of nuances required in completing this integration successfully. It's actively support in our paid product. Please contact us (team@kubecost.com) if you want to learn more or if you think we can help!
+Using your existing Grafana & Prometheus installation is officially supported in our paid products today. You can see basic setup instructions [here](/custom-prom.md). In our free product, we provide best efforts support for this integration because of nuances required in completing this integration successfully. Please contact us (team@kubecost.com) if you want to learn more or if you think we can help!
 
 ## <a name="node-exporter"></a>Using an existing node exporter 
 
