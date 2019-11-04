@@ -60,8 +60,8 @@ Here are example uses:
 
 API parameters include the following:
 
-* `window` dictates the applicable window for measuring cost metrics. Supported units are d, h, and m.  
-* `offset` (optional) shifts window backwards from current time. Supported units are d, h, and m.  
+* `window` dictates the applicable window for measuring cost metrics. Supported units are d, h, m, and s.  
+* `offset` (optional) shifts window backwards from current time. Supported units are d, h, m, and s.  
 * `aggregation` is the field used to consolidate cost model data. Supported types are cluster, namespace, deployment, service, and label.  
 * `aggregationSubfield` used for aggregation types that require sub fields, e.g. aggregation type equals `label` and the value of the label (aggregationSubfield) equals `app`.
 * `allocateIdle` (optional) when set to `true` applies the cost of all idle compute resources to tenants, default `false`.
