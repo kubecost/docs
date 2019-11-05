@@ -1,4 +1,4 @@
-### Creating an IAM policy
+### Creating a Thanos IAM policy
 In order to create an AWS IAM policy for use with Thanos:
 
 1.  Navigate to the AWS console and select `IAM`.
