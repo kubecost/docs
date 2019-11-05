@@ -1,11 +1,13 @@
 ### Creating an IAM policy
 In order to create an AWS IAM policy for use with Thanos:
 
-#### Navigate to the AWS console menu and select `...`.
+1.  Navigate to the AWS console and select `IAM`.
 
+2. Select Policies in the Navigation menu and choose `Create Policy`
 
+3. Add the following JSON in the policy editor
 
-**Note:** make sure to replace <your-bucket-name> with the name of the bucket from step
+&nbsp;&nbsp;&nbsp;&nbsp;**Note:** make sure to replace `<your-bucket-name>` with the name of your newly created S3 bucket
 
 ```
 {
@@ -31,6 +33,15 @@ In order to create an AWS IAM policy for use with Thanos:
 }
 ```
 
+4. Select Review policy and name this policy, e.g. `kc-thanos-store-policy`
+
+5. Navigate to Users in IAM control panel, and select Add user
+
+6. Provide a User name (e.g. `kubecost-thanos-service-account`)z and select `Programmatic access`
+
+7. Select Attach existing policies directly, search for the policy name provided in step 4, and then create user. 
+
+8. Capture your Access Key ID and secret in the view below:
 
 
 
