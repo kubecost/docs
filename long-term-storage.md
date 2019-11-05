@@ -54,11 +54,11 @@ config:
 
 __AWS/S3__
 
-Start by creating a new S3 bucket with all public access blocked. No other bucket configuration changes should be required. The following example uses a bucket named `kc-thanos-store`. See region to endpoint mappings here: <https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region>
+Start by creating a new S3 bucket with all public access blocked. No other bucket configuration changes should be required. The following example uses a bucket named `kc-thanos-store`. 
 
 Next, add an IAM policy to access this bucket ([instructions](/aws-service-account-thanos.md)).
 
-Now create a yaml file named `object-store.yaml` with contents similar to the following:
+Now create a yaml file named `object-store.yaml` with contents similar to the following example. See region to endpoint mappings here: <https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region>
 
 ```
 type: S3
