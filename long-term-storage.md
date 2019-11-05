@@ -58,7 +58,7 @@ Start by creating a new S3 bucket. The following example uses a bucket named `kc
 
 Next, add an IAM policy to access this bucket ([instructions](/aws-service-account-thanos.md)).
 
-Now create a yaml file named `object-store.yaml` with contents similar to the following:
+Now create a yaml file named `object-store.yaml` with contents similar to the following example. **Note:** make sure to replace <your-bucket-name> with the name of the S3 bucket you have created. 
 
 ```
 type: S3
