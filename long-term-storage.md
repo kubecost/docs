@@ -54,7 +54,34 @@ config:
 
 __AWS/S3__
 
-Testing in progress. Details coming soon.
+Start by creating a new S3 bucket. The following example uses a bucket named `kc-thanos-store`. See region to endpoint mappings here: https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region
+
+Next, add an IAM policy to access this bucket ([instructions](/aws-service-account-thanos.md)).
+
+Now create a yaml file named `object-store.yaml` with contents similar to the following:
+
+```
+type: S3
+config:
+  bucket: "kc-thanos-store"
+  endpoint: "s3.amazonaws.com"
+  region: "us-east-1"
+  access_key: "AKIAXW6UVLRRTDSCCU4D"
+  insecure: false
+  signature_version2: false
+  encrypt_sse: false
+  secret_key: "<your-secret-key>"
+  put_user_metadata: {}
+  http_config:
+    idle_conn_timeout: 90s
+    response_header_timeout: 2m
+    insecure_skip_verify: false
+  trace:
+    enable: true
+  part_size: 134217728
+```
+
+**Note:** given that this is yaml, it requires this specific indention. 
 
 Step 2: **Create object store secret**   
 
