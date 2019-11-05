@@ -54,7 +54,7 @@ config:
 
 __AWS/S3__
 
-Start by creating a new S3 bucket. The following example uses a bucket named `kc-thanos-store`. See region to endpoint mappings here: https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region
+Start by creating a new S3 bucket with all public access blocked. No other bucket configuration changes should be required. The following example uses a bucket named `kc-thanos-store`. See region to endpoint mappings here: https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region
 
 Next, add an IAM policy to access this bucket ([instructions](/aws-service-account-thanos.md)).
 
