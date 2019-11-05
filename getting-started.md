@@ -89,6 +89,17 @@ For more accurate Spot pricing data, visit Settings in the Kubecost frontend to 
 }
 ```
 
+**Spot Verification**
+
+View logs from the `cost-model` container in the `kubecost-cost-analyzer` pod to confirm there are no Spot data feed access errors. You should also see a confirmation log statement like this: 
+
+```
+I1104 00:21:02.905327       1 awsprovider.go:1397] Found spot info {Timestamp:2019-11-03 20:35:48 UTC UsageType:USE2-SpotUsage:t2.micro Operation:RunInstances:SV050 InstanceID:i-05487b228492b1a54 MyBidID:sir-9s4rvgbj MyMaxPrice:0.010 USD MarketPrice:0.004 USD Charge:0.004 USD Version:1}
+I1104 00:21:02.922372       1 awsprovider.go:1376] Spot feed version is "#Version: 1.0"
+```
+
+The Charge figures in logs should be reflected in your `node_total_hourly_cost` metrics in Prometheus. 
+
 ## <a name="out-of-cluster"></a>Allocating out of cluster costs
 
 **[AWS]** Provide your congifuration info in Settings. The information needs includes S3 bucket name, Athena table name, Athena table region, and Athena database name. View [this page](/aws-out-of-cluster.md) for more information on completing this process.
