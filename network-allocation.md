@@ -16,13 +16,19 @@ To enable this feature, set the following parameter in values.yaml during [Helm 
 
 ### Kubernetes Network Traffic Metrics
 
-The primary source of network metrics come from a daemonset pod hosted on each of the nodes in a cluster. Each daemonset pod uses `hostNetwork: true` such that it can leverage the underlying node kernel module `conntrack`. Network traffic data is gathered and the destination of any outbound networking is labeled as:
+The primary source of network metrics come from a daemonset pod hosted on each of the nodes in a cluster. Each daemonset pod uses `hostNetwork: true` such that it can leverage an underlying kernel module to capture network data. Network traffic data is gathered and the destination of any outbound networking is labeled as:
 
  * Internet Egress: Network target destination was not identified within the cluster. 
  * Cross Region Egress: Network target destination was identified, but not in the same provider region.
  * Cross Zone Egress: Network target destination was identified, and was part of the same region but not the same zone.
 
-These specific classifications are important because they correlate with network costing models for popular cloud providers. 
+These classifications are important because they correlate with network costing models for most cloud providers. To see more detail on these metric classifications, you can view pod logs with the following command:
+
+```
+kubectl logs kubecost-network-costs-<pod-identifier> -n kubecost
+```
+
+This will show you top source and destination IP addresses and bytes transfered on the node where this pod is running. 
 
 ### Feature Validation
 
