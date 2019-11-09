@@ -108,7 +108,7 @@ $ helm install kubecost/cost-analyzer \
 
 Your deployment should now have Thanos enabled!
 
-> Note: the `thanos-store` is by default configured to request 2 Gb in memory. 
+> Note: the `thanos-store` pod is by default configured to request 2 Gb in memory. 
 
 <a name="verify-thanos"></a>
 **Verify Installation**  
