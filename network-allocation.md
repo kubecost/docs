@@ -1,4 +1,4 @@
-# Network Cost Allocation
+# Network Traffic Cost Allocation
 
 This document summarizes Kubecost network cost allocation, how to enable it, and what it provides. 
 
