@@ -18,7 +18,7 @@ __Next Steps__
 
 ## <a name="storage-config"></a>Storage configuration
 
-The default Kubecost installation comes with a 32Gb persistent volume and 15-day retention period for Prometheus metrics. This is enough space to retain data for ~300 pods, depending on your exact node and container count. See the Kubecost Helm chart [configuration options](https://github.com/kubecost/cost-analyzer-helm-chart) to adjust both retention period and storage size. 
+The default Kubecost installation comes with a 32Gb persistent volume and 15-day retention period for Prometheus metrics. This is enough space to retain data for ~300 pods, depending on your exact node and container count. See the Kubecost Helm chart [configuration options](https://github.com/kubecost/cost-analyzer-helm-chart) to adjust both retention period and storage size. **Note:** we do not recommend retaining greater than 30 days of data in Prometheus. For long-term data retention, contact us (team@kubecost.com) about using Kubecost with durable storage enabled. 
 
 ## <a name="custom-prom"></a>Custom Prometheus & Grafana
 
