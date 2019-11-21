@@ -40,6 +40,40 @@ __Recording Rules__
 <br/>
 Kubecost uses Prometheus [recording rules](https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/values.yaml#L145) to enable certain product features and to help improve product performance. These are recommended additions, especially for medium and large-sized clusters using their own Prometheus installation.
 
+
+<a name="remote-write"></a>
+__Remote Write__
+<br/>
+Kubecost stores the Prometheus Data in the Postgres Database, so the Remote Write Configs must be configured like in this example:
+
+```
+  serverFiles:
+    prometheus.yml:
+        remote_write:
+          - url: "http://pgprometheus-adapter:9201/write"
+            write_relabel_configs:
+              - source_labels: [__name__]
+                regex: 'container_.*_allocation|container_.*_allocation_bytes|.*_hourly_cost|kube_pod_container_resource_requests_memory_bytes|container_memory_working_set_bytes|kube_pod_container_resource_requests_cpu_cores|kube_pod_container_resource_requests|pod_pvc_allocation|kube_namespace_labels|kube_pod_labels'
+                action: keep
+            queue_config:
+              max_samples_per_send: 1000
+```
+
+<a name="cluster-id"></a>
+__Cluster Id__
+<br/>
+The ClusterId for Remote Write must be set in Prometheus:
+
+```
+  server:
+    global:
+      external_labels:
+        cluster_id: <yourCluster> # Each cluster should have a unique ID
+```
+
+
+
+ 
 <a name="troubleshoot"></a>__Troubleshooting Issues__
 
 Common issues include the following: 
