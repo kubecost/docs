@@ -34,9 +34,9 @@ This will show you top source and destination IP addresses and bytes transfered 
 
 To verify this feature is functioning properly, you can complete the following steps.
 
-1. Confirm the `kubecost-network-costs` pods are Running
-2. Ensure `kubecost-networking` target is Up in your Prometheus
-3. Verify Network Costs are available in your Allocation view 
+1. Confirm the `kubecost-network-costs` pods are Running. If these pods are not in a Running state, _kubectl describe_ them and/or view their logs for errors. 
+2. Ensure `kubecost-networking` target is Up in your Prometheus Targets list. View any visible errors if this target is not Up. 
+3. Verify Network Costs are available in your Kubecost Allocation view. View your browser's Developer Console on this page for any access/permissions errors if costs are not shown. 
 
 ### Feature Limitations
  
