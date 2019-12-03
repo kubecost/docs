@@ -70,6 +70,15 @@ API parameters include the following:
 * `sharedLabelValues` (optional) label value (e.g. prometheus) associated with `sharedLabelNames` parameter. 
 * `disableCache` this API caches recently fetched data by default. Set this variable to `false` to avoid cache entirely. 
 
+<a name="filter-params"></a>  
+Optional filter parameters include the following:  
+
+Filter | Description 
+--------- | ----------- 
+`cluster` | Filter results by cluster ID. For example, appending `&cluster=cluster-one` will restrict data only to the `cluster-one` cluster. Note: cluster ID is generated from `cluster_id` provided during installation. 
+`namespace` | Filter results by namespace. For example, appending `&namespace=kubecost` only returns data for the `kubecost` namespace.
+`labels` | Filter results by label. For example, appending `&labels=app%3Dcost-analyzer` only returns data for pods with label `app=cost-analyzer`. CSV list of label values supported. Note that parameters must be url encoded. 
+
 This API returns a set of JSON objects in this format:
 
 ```
