@@ -3,7 +3,8 @@
 Welcome to Kubecost! This page provides commonly used product configurations and feature overviews to help get you up and running after the Kubecost product has been [installed](http://kubecost.com/install). 
 
 __Configuration__  
-[Configuring metric storage](#storage-config)   
+[Configuring metric storage](#storage-config)  
+[Setting Requests & Limits](#requests-limits)  
 [Using an existing Prometheus or Grafana installation](#custom-prom)  
 [Using an existing node exporter installation](#node-exporter)  
 [Creating an Ingress with basic auth](#basic-auth)  
@@ -24,9 +25,13 @@ The default Kubecost installation comes with a 32Gb persistent volume and 15-day
 
 Using your existing Grafana & Prometheus installation is officially supported in our paid products today. You can see basic setup instructions [here](/custom-prom.md). In our free product, we provide best efforts support for this integration because of nuances required in completing this integration successfully. Please contact us (team@kubecost.com) if you want to learn more or if you think we can help!
 
+## <a name="requests-limits"></a>Setting Requests & Limits
+
+It's recommended that users set and/or update requests and limits before taking Kubecost into production. This can be done in the Kubecost helm [values.yaml](https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/values.yaml). The exact recommended values for these parameters depends on the size of your cluster, availability requirements, and usage of the Kubecost product. Recommended values can be found within Kubecost itself on the Kubecost namespace page. More info on these recommendations is available [here](http://blog.kubecost.com/blog/requests-and-limits/). 
+
 ## <a name="node-exporter"></a>Using an existing node exporter 
 
-You can use an existing node exporter DaemonSet, instead of installing another, by toggling the Kubecost helm chart config options (`prometheus.nodeExporter.enabled` and `prometheus.serviceAccounts.nodeExporter.create`) shown [here](https://github.com/kubecost/cost-analyzer-helm-chart). Note: to do this successfully your existing node exporter must be configured to explore metrics on it's default endpoint.
+You can use an existing node exporter DaemonSet, instead of installing another, by toggling the Kubecost helm chart config options (`prometheus.nodeExporter.enabled` and `prometheus.serviceAccounts.nodeExporter.create`) shown [here](https://github.com/kubecost/cost-analyzer-helm-chart). Note: to do this successfully your existing node exporter must be configured to export metrics on the default endpoint/port.
 
 ## <a name="basic-auth"></a>Basic auth Ingress example 
 
