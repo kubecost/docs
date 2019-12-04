@@ -4,3 +4,10 @@ Technical support for Kubecost is provided via the following channels:
 * Github issue request [here](https://github.com/kubecost/cost-analyzer-helm-chart/issues/new/choose)
 * Email -- team@kubecost.com
 * Video and phone on request 
+  
+  
+  
+  
+  
+  
+  
