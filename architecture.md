@@ -11,7 +11,7 @@ Below are the major components to the Kubecost helm chart:
     b. Kube-state-metrics -- provides Kubernetes requests and other core metrics  
     c. Pushgateway -- ability to push new metrics to Prometheus  
     d. Alertmanager -- used for custom alerts  
-    e. Prometheus-node-exporter -- provides node-level utilization metrics  
+    e. Prometheus-node-exporter -- provides node-level utilization metrics for right-sizing recommendations  
 5. **Network costs** -- optional daemonset for collecting network metrics
 
 Today, the core Kubecost product can be run with just components 2, 4a, 4b, 4e. 
