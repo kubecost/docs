@@ -48,7 +48,7 @@ Field | Description
 
 # Aggregated cost model API
 
-The aggregated cost model API retrieves data similiar to the Kubecost Allocation frontend view and is available at:
+The aggregated cost model API retrieves data similiar to the Kubecost Allocation frontend view (e.g. cost by namespace, label, deployment and more) and is available at the following endpoint:
 
 `http://<kubecost-address>/model/aggregatedCostModel`
 
