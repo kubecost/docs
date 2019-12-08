@@ -21,8 +21,8 @@ You can stay up to date with Kubecost by joining us on [Slack](https://join.slac
 &nbsp;&nbsp;[Understanding cost allocation](/cost-allocation.md)  
 
 ## Product Configuration
-* [Allocating out of cluster costs (AWS)](/aws-out-of-cluster.md)
-* [Allocating out of cluster costs (GCP)](/gcp-out-of-cluster.md)
-* [AWS Spot feed integration](/getting-started.md#spot-nodes)
+&nbsp;&nbsp; [Allocating out of cluster costs (AWS)](/aws-out-of-cluster.md)
+&nbsp;&nbsp; [Allocating out of cluster costs (GCP)](/gcp-out-of-cluster.md)
+&nbsp;&nbsp; [AWS Spot feed integration](/getting-started.md#spot-nodes)
 
 Contact us (<team@kubecost.com>) with any questions!
