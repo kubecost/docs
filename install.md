@@ -1,7 +1,7 @@
 # Installing Kubecost
 <br/>
 
-* The best way to install and operate the Kubecost product is via the Helm chart install instructions available at [kubecost.com/install](http://kubecost.com/install). This chart contains all the required components to get started, and can scale to large deployments. It also provides the most flexibility for managing Kubecost and its dependencies. 
+* The recommended path to install and operate Kubecost is via the Helm chart install instructions available at [kubecost.com/install](http://kubecost.com/install). This chart contains all the required components to get started, and can scale to large deployments. It also provides the most flexibility for configuring Kubecost and its dependencies. 
 
 * Alternatively, you can install via [flat manifest](https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/README.md#manifest), but this install path provides less flexiblity for managing your deployment and has several product limitations.
   
