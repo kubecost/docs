@@ -14,16 +14,13 @@ Check out our [Installation options](/install) to start monitoring and managing 
 
 You can stay up to date with Kubecost by joining us on [Slack](https://join.slack.com/t/kubecost/shared_invite/enQtNTA2MjQ1NDUyODE5LWFjYzIzNWE4MDkzMmUyZGU4NjkwMzMyMjIyM2E0NGNmYjExZjBiNjk1YzY5ZDI0ZTNhZDg4NjlkMGRkYzFlZTU) and following releases on [Github](https://github.com/kubecost/cost-analyzer-helm-chart/releases).
 
-__Onboarding__
+## Getting Started
 
 &nbsp;&nbsp;[Troubleshooting installation](/troubleshoot-install.md)  
-&nbsp;&nbsp;[Getting started](/getting-started.md)
-
-__Product Overview__
-
+&nbsp;&nbsp;[Getting started](/getting-started.md)  
 &nbsp;&nbsp;[Understanding cost allocation](/cost-allocation.md)  
 
-__Product Configuration__
+## Product Configuration
 * [Allocating out of cluster costs (AWS)](/aws-out-of-cluster.md)
 * [Allocating out of cluster costs (GCP)](/gcp-out-of-cluster.md)
 * [AWS Spot feed integration](/getting-started.md#spot-nodes)
