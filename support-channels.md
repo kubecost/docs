@@ -1,4 +1,4 @@
-## Getting Support
+# Getting Support
 
 General support for Kubecost is provided via the following channels:
 
