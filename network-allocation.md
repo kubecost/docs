@@ -12,7 +12,7 @@ To enable this feature, set the following parameter in values.yaml during [Helm 
  ```
  You can view a list of common Kubecost chart config options [here](https://github.com/kubecost/cost-analyzer-helm-chart#config-options). 
  
- **Note:** network cost allocation is disabled by default.
+ **Note:** network cost, disabled by default, run as a privileged pod to access the relevent networking kernal module on the host. 
 
 ### Kubernetes Network Traffic Metrics
 
