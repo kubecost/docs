@@ -1,9 +1,7 @@
 ## Core architecture overview
 
-![Architecture Overview](images/arch.png)
-
 Below are the major components to the Kubecost helm chart:
-
+  
 1. **Kubecost Cost-Analyzer Pod**  
     a. Frontend that runs Nginx -- handles routing to Prometheus/Grafana   
     b. Kubecost server -- backend for API calls  
@@ -19,3 +17,8 @@ Below are the major components to the Kubecost helm chart:
 5. **Grafana** -- supporting dashboards 
 
 Today, the core Kubecost product can be run with just components 1, 3a, 3b, 3c. 
+
+See core components on this diagram:
+
+![Architecture Overview](images/arch.png)
+
