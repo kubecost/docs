@@ -45,6 +45,7 @@ To verify this feature is functioning properly, you can complete the following s
 ### Feature Limitations
  
 * Today this feature is supported on Unix-based images with conntrack
-* Actively tested against GCP and AWS to date, with Azure in progress
+* Actively tested against GCP, AWS, and Azure to date
+* Daemonsets have shared IP addresses on certain clusters
  
  
