@@ -48,9 +48,11 @@ Common issues include the following:
 
 * Prometheus throttling -- ensure Prometheus isn't being CPU throttled due to a low resource request.
 
-* Required dependancy versions (node-exporter - v0.16, kube-state-metrics - v1.3, cadvisor)
+* Required dependancy versions (node-exporter - v0.16, kube-state-metrics - v1.6, cadvisor)
 
 * Missing scrape configs -- visit Prometheus Target page (screenshot above)
+
+* Data incorrectly is a single namespace -- make sure that [honor_labels](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#scrape_config) is enabled 
 
 You can visit Settings in Kubecost to see basic diagnostic information on these Prometheus metrics:
 
