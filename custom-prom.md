@@ -4,7 +4,16 @@ Integrating Kubecost with an existing Prometheus installation can be nuanced. We
 
 **Note:** integrating with an existing Prometheus is officially supported under all Kubecost paid plans. 
 
-__Required Steps__
+<a name="dep-versions"></a>
+__Requirements__ 
+
+Kubecost requires the following dependency versions:
+
+  - node-exporter - v0.16 (May 18)
+  - kube-state-metrics - v1.6.0 (May 19)
+  - cadvisor - kubelet v1.11.0  (May 18)
+
+__Implementation Steps__
 
 1. Copy [values.yaml](https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/values.yaml) and update the following parameters:
   
@@ -48,10 +57,7 @@ Common issues include the following:
 
 * Prometheus throttling -- ensure Prometheus isn't being CPU throttled due to a low resource request.
 
-* <a name="dep-versions"></a>Kubecost requires the following dependency versions:
-  - node-exporter - v0.16 (May 18)
-  - kube-state-metrics - v1.6.0 (May 19)
-  - cadvisor - kubelet v1.11.0  (May 18)
+* Wrong dependency version -- see section above about Requirements
 
 * Missing scrape configs -- visit Prometheus Target page (screenshot above)
 
