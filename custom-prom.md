@@ -48,7 +48,7 @@ Common issues include the following:
 
 * Prometheus throttling -- ensure Prometheus isn't being CPU throttled due to a low resource request.
 
-* <a name="dep-versions"></a>Kubecost requires the following dependancy versions:
+* <a name="dep-versions"></a>Kubecost requires the following dependency versions:
   - node-exporter - v0.16 (May 18)
   - kube-state-metrics - v1.6.0 (May 19)
   - cadvisor - kubelet v1.11.0  (May 18)
