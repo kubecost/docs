@@ -48,7 +48,10 @@ Common issues include the following:
 
 * Prometheus throttling -- ensure Prometheus isn't being CPU throttled due to a low resource request.
 
-* Required dependancy versions (node-exporter - v0.16, kube-state-metrics - v1.6, cadvisor)
+* Required dependancy versions <a name="dep-versions"></a>  
+  - node-exporter - v0.16   
+  - kube-state-metrics - v1.6.0  
+  - cadvisor - kubelet v1.11.0  
 
 * Missing scrape configs -- visit Prometheus Target page (screenshot above)
 
