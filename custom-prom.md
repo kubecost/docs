@@ -17,8 +17,8 @@ __Implementation Steps__
 
 1. Copy [values.yaml](https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/values.yaml) and update the following parameters:
   
-   `promtheus.fqdn` to match your local Prometheus with this format `http://<prometheus-server-service-name>.<prometheus-server-namespace>.svc.cluster.local`  
-   `prometheus.enabled` set to `false`  
+   - `promtheus.fqdn` to match your local Prometheus with this format `http://<prometheus-server-service-name>.<prometheus-server-namespace>.svc.cluster.local`  
+   - `prometheus.enabled` set to `false`  
   
    Pass this updated file to the Kubecost helm install command with `--values values.yaml` 
 
