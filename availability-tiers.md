@@ -9,4 +9,6 @@ Tier | Priority | Default
 `Production` | 1 | Intended for production jobs that are not necessarily mission critical.
 `Staging` or `Dev` | 2 | Meant for experimental or development resources. Redundancy or availability is not a high priority. 
 
+To apply a namespace tier, add a `tier` namespace label to reflect the desired value. 
+
 Have questions or feedback? Contact us at <team@kubecost.com>.
