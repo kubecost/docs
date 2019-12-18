@@ -23,7 +23,9 @@ The default Kubecost installation comes with a 32Gb persistent volume and 15-day
 
 ## <a name="custom-prom"></a>Custom Prometheus & Grafana
 
-Using your existing Grafana & Prometheus installation is officially supported in our paid products today. You can see basic setup instructions [here](/custom-prom.md). In our free product, we provide best efforts support for this integration because of nuances required in completing this integration successfully. Please contact us (team@kubecost.com) if you want to learn more or if you think we can help!
+The Kubecost Prometheus deployment is used as both as source & sink for cost & capacity metrics. It's optimized to not interfere with other observability products and by default only contains metrics that are useful to the Kubecost product. 
+
+While we generally recommend using the bundled Prometheus & Grafana, using your existing Grafana & Prometheus installation is supported in our paid products today. You can see basic setup instructions [here](/custom-prom.md). In our free product, we only provide best efforts support for this integration because of nuances required in completing this integration successfully. Please contact us (team@kubecost.com) if you want to learn more or if you think we can help!
 
 ## <a name="requests-limits"></a>Setting Requests & Limits
 
