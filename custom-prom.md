@@ -83,6 +83,7 @@ Using an existing Grafana deployment can be accomplished with either of the foll
 global:
   grafana:
     enabled: false
+    domainName: cost-analyzer-grafana.default.svc.cluster.local #example grafana fqdn
 grafana:
   sidecar:
     dashboards:
