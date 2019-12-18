@@ -25,6 +25,7 @@ You can now label assets with the following schema to allocate costs back to the
 Learn more [here](https://cloud.google.com/compute/docs/labeling-resources) on GCP labeling.
 
 <pre>
+Cluster:    "kubernetes_cluster" :   &lt;clusterID>
 Namespace:  "kubernetes_namespace" : &lt;namespace>
 Deployment: "kubernetes_deployment": &lt;deployment>
 Label:      "kubernetes_label_NAME": &lt;label>
