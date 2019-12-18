@@ -175,12 +175,13 @@ To allocate AWS resources to a Kubernetes concept, use the following tag naming 
 
 | Kubernetes Concept 	| AWS Tag Key         	| AWS Tag Value 	|
 |--------------------	|---------------------	|---------------	|
-| Namespace          	| kubernetes_namespace	| &lt;namespace name>	|
-| Deployment         	| kubernetes_deployment	| &lt;deployment name>|
-| Label              	| kubernetes_label_NAME*| &lt;label value>    |
-| Pod                	| kubernetes_pod	      | &lt;pod name>       |
-| DaemonSet          	| kubernetes_daemonset	| &lt;daemonset name> |
-| Container          	| kubernetes_container	| &lt;container name> |
+| Cluster           	| kubernetes_cluster	| &lt;cluster-name>	|
+| Namespace          	| kubernetes_namespace	| &lt;namespace-name> |
+| Deployment         	| kubernetes_deployment	| &lt;deployment-name>|
+| Label              	| kubernetes_label_NAME*| &lt;label-value>    |
+| DaemonSet          	| kubernetes_daemonset	| &lt;daemonset-name> |
+| Pod                	| kubernetes_pod	      | &lt;pod-name>     |
+| Container          	| kubernetes_container	| &lt;container-name> |
 
 *\*In the `kubernetes_label_NAME` tag key, the `NAME` portion should appear exactly as the tag appears inside of Kubernetes. For example, for the tag `app.kubernetes.io/name`, this tag key would appear as `kubernetes_label_app.kubernetes.io/name`.*
 
