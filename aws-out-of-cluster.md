@@ -196,3 +196,4 @@ Visit the Kubecost Settings page to provide the AWS access credentials and Athen
 ## Having issues?
 
 * You may need to upgrade your AWS Glue if you are running an old version https://docs.aws.amazon.com/athena/latest/ug/glue-upgrade.html
+* Visit the Allocation view in the Kubecost product. If external costs are not shown, open your browser's Developer Tools > Console to see any reported errors. 
