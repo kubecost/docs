@@ -75,7 +75,7 @@ You can also optionally disable `thanos.store` and `thanos.query` with thanos/va
 ```
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-If done, each secondary cluster will only have access to its own metrics but will still write its metrics to the bucket.   
+Clusters with store + query disabled will only have access to their own metrics but will still write to the global bucket.   
 
 3. Ensure you provide a unique identifier for `prometheus.server.global.exernal_labels.cluster_id` to have additional clusters be visible in the Kubecost product, e.g. `cluster-two`.
 
