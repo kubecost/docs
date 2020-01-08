@@ -52,6 +52,8 @@ config:
 ```
 **Note:** given that this is yaml, it requires this specific indention. 
 
+**Warning:** do not apply a retention policy to your Thanos bucket, as it will prevent Thanos compaction from completing.
+
 __AWS/S3__
 
 Start by creating a new S3 bucket with all public access blocked. No other bucket configuration changes should be required. The following example uses a bucket named `kc-thanos-store`. 
