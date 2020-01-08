@@ -7,7 +7,7 @@ __Configuration__
 [Setting Requests & Limits](#requests-limits)  
 [Using an existing Prometheus or Grafana installation](#custom-prom)  
 [Using an existing node exporter installation](#node-exporter)  
-[Creating an Ingress with basic auth](#basic-auth)  
+[Exposing Kubecost with an Ingress](#basic-auth)  
 [Adding a spot instance configuration (AWS only)](#spot-nodes)  
 [Allocating out of cluster costs](#out-of-cluster)
 
@@ -37,7 +37,7 @@ You can use an existing node exporter DaemonSet, instead of installing another, 
 
 ## <a name="basic-auth"></a>Basic auth Ingress example 
 
-The following definition provides an example Ingress with basic auth.
+Enabling external access to the Kubecost product simply requires exposing access to port 9090 on the `kubecost-cost-analyzer` pod. This can be accomplished with a number of approaches, including Ingress or Service definitions. The following definition provides an example Ingress with basic auth.
 
 Note: on GCP, you will need to update the `kubecost-cost-analyzer` service to become a `NodePort` instead of a `ClusterIP` type service.
 
