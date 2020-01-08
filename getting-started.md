@@ -35,7 +35,7 @@ It's recommended that users set and/or update requests and limits before taking 
 
 You can use an existing node exporter DaemonSet, instead of installing another, by toggling the Kubecost helm chart config options (`prometheus.nodeExporter.enabled` and `prometheus.serviceAccounts.nodeExporter.create`) shown [here](https://github.com/kubecost/cost-analyzer-helm-chart). Note: to do this successfully your existing node exporter must be configured to export metrics on the default endpoint/port.
 
-## <a name="basic-auth"></a>Basic auth Ingress example 
+## <a name="basic-auth"></a>Kubecost Ingress example 
 
 Enabling external access to the Kubecost product simply requires exposing access to port 9090 on the `kubecost-cost-analyzer` pod. This can be accomplished with a number of approaches, including Ingress or Service definitions. The following definition provides an example Ingress with basic auth.
 
