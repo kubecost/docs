@@ -97,4 +97,11 @@ This API returns a set of JSON objects in this format:
 }  
 ```
 
+## Caching Overview 
+
+Kubecost implements a two-layer caching system for cost allocation metrics. The unaggregated cost model (Layer 1 cache) is pre-cached for commonly used time windows, e.g. 1,2,7 and 30 days. This data is refreshed every ~5 minutes for shorter time windows and up to every 1 hour for long windows, e.g. 30 days. Aggregated cost data (Layer 2 cache) is pre-cached for commonly used aggregatedCostModel API requests, e.g. costs by namespace over the last 7 days. Returning cached data from Layer 1 typically takes < 500ms and Layer 2 < 100ms, not including data transfer times. 
+
+When a custom cost model request misses both layers of the Kubecost cache then this request remains in the cache for ~10 minutes. On larger clusters, these requests can take longer periods, e.g. > 10 seconds. 
+
+
 Have questions? Email us at <team@kubecost.com>.
