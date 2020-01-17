@@ -61,6 +61,18 @@ Common issues include the following:
 
 * Missing scrape configs -- visit Prometheus Target page (screenshot above)
 
+* On recent versions of the **Prometheus Operator**, cadvisor `instance` labels do not match internal Kubernetes node names. The solution is to add the following block into your cadvisor scrape config.
+
+```
+  metric_relabel_configs:
+  - source_labels: [node]
+    separator: ;
+    regex: (.*)
+    target_label: instance
+    replacement: $1
+    action: replace
+```
+
 * Data incorrectly is a single namespace -- make sure that [honor_labels](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#scrape_config) is enabled 
 
 You can visit Settings in Kubecost to see basic diagnostic information on these Prometheus metrics:
