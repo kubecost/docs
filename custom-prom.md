@@ -61,7 +61,7 @@ Common issues include the following:
 
 * Missing scrape configs -- visit Prometheus Target page (screenshot above)
 
-* On recent versions of the **Prometheus Operator**, cadvisor `instance` labels do not match internal Kubernetes node names. The solution is to add the following block into your cadvisor scrape config.
+* On recent versions of the **Prometheus Operator**, cadvisor `instance` labels do not match internal Kubernetes node names. The solution is to add the following block into your kubelet/cadvisor scrape config.
 
 ```
   metric_relabel_configs:
