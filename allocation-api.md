@@ -68,7 +68,7 @@ API parameters include the following:
 * `sharedNamespaces` (optional) provide a comma separated list of namespaces (e.g. kube-system) to be allocated to other tenants. These resources are evenly allocated to other tenants as `sharedCost`.
 * `sharedLabelNames` (optional) provide a comma separated list of kubernetes labels (e.g. app) to be allocated to other tenants. Must provide corresponding set of label values in `sharedLabelValues`.
 * `sharedLabelValues` (optional) label value (e.g. prometheus) associated with `sharedLabelNames` parameter. 
-* `sharedSplit` (optional) Shared costs are split evenly across tenants unless `weighted` is passed. When allocating shared costs on a weighted bases, these expenses distributed based on the resource costs of the individual pods the particular aggregation, e.g. namespace.
+* `sharedSplit` (optional) Shared costs are split evenly across tenants unless `weighted` is passed for this request parameter. When allocating shared costs on a weighted basis, these expenses are distributed based on the resource costs of the individual pods in the particular aggregation, e.g. namespace.
 * `disableCache` this API caches recently fetched data by default. Set this variable to `false` to avoid cache entirely. 
 
 <a name="filter-params"></a>  
