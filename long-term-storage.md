@@ -20,7 +20,7 @@ and `kubecost-cost-analyzer-postgres` are Running.
 
 ## Option B: Out of cluster storage (Thanos)
 
-Thanos-based durable storage provides long-term storage written directly to a user-controlled bucket (e.g. S3 or GCS bucket) and can be enabled with the following steps:
+Thanos-based durable storage provides long-term metric retention directly in a user-controlled bucket (e.g. S3 or GCS bucket) and can be enabled with the following steps:
 
 Step 1: **Create object store yaml file** 
 
