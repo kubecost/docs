@@ -29,7 +29,11 @@ While we generally recommend using the bundled Prometheus & Grafana, using your 
 
 ## <a name="requests-limits"></a>Setting Requests & Limits
 
-It's recommended that users set and/or update requests and limits before taking Kubecost into production. This can be done in the Kubecost helm [values.yaml](https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/values.yaml) for Kubecost modules + subcharts. The exact recommended values for these parameters depends on the size of your cluster, availability requirements, and usage of the Kubecost product. Suggested values for each container can be found within Kubecost itself on the namespace page. More info on these recommendations is available [here](http://blog.kubecost.com/blog/requests-and-limits/). 
+It's recommended that users set and/or update resource requests and limits before taking Kubecost into production at scale. These inputs can be configured in the Kubecost [values.yaml](https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/values.yaml) for Kubecost modules + subcharts. 
+
+Exact recommended values for these parameters depends on the size of your cluster, availability requirements, and usage of the Kubecost product. Suggested values for each container can be found within Kubecost itself on the namespace page. More info on these recommendations is available [here](http://blog.kubecost.com/blog/requests-and-limits/). 
+
+In practice, we recommend running Kubecost for up to 7 days on a production cluster and then tuning resource requests/limits based on resource consumption. Reach out any time to team@kubecost.com if we can help give further guidance.
 
 ## <a name="node-exporter"></a>Using an existing node exporter 
 
