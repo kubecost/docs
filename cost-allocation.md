@@ -1,6 +1,6 @@
 # Kubernetes Cost Allocation
 
-Kubecost provides a view that allows you to quickly see allocated spend across all native Kubernetes concepts, e.g. namespace and service. It also allows for allocating cost to organizational concepts like team, product/project, department, or environment. This article explains the metrics presented and describes how you can control the data displayed in this view. 
+The Kubecost Allocation view allows you to quickly see allocated spend across all native Kubernetes concepts, e.g. namespace and service. It also allows for allocating cost to organizational concepts like team, product/project, department, or environment. This document explains the metrics presented and describes how you can control the data displayed in this view. 
 
 ![Cost allocation view](cost-allocation.png)
 
