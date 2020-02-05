@@ -23,7 +23,7 @@ The designated time window for measuring costs. Results for 1d, 2d, 7d, and 30d 
 Filter resouces by namespace, clusterId, and Kubernetes label to more closely investigate a rise in spend or key cost drivers at different aggregations, e.g. Deployments or Pods.
 
 ### 5. Allocate Idle Cost
-Allocating idle costs proportionately assigns total cluster costs, including slack resources, to tenants. As an example, if your cluster is only 25% utilized, applying idle costs will increase the cost of each pod/namespace by 4x.
+Allocating idle costs proportionately distributes slack or idle _cluster costs_ to tenants. As an example, if your cluster is only 25% utilized, as measured by the max of resource usage and requests, applying idle costs would increase the cost of each pod/namespace/deployment by 4x.
 
 ### 6. Chart selection
 Toggle to the bar chart view to see aggregated costs over the selected window, or the time series view to see cost changes over time.
