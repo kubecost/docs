@@ -25,7 +25,7 @@ The default Kubecost installation comes with a 32Gb persistent volume and 15-day
 
 The Kubecost Prometheus deployment is used as both as source and sink for cost & capacity metrics. It's optimized to not interfere with other observability instrimentation and by default only contains metrics that are useful to the Kubecost product. This amounts to retaining 70-90% less metrics than a standard Prometheus deployment. 
 
-We generally recommend teams use the bundled Prometheus & Grafana but reuse their existing kube-state-metrics and node-exporter deployments. This setup allows for the easiest installatio process, easiest on-going maintenance, minimal duplication of metrics, and more flexible metric retention.
+For the best experience, we generally recommend teams use the bundled `prometheus-server` & `grafana` but reuse their existing `kube-state-metrics` and `node-exporter` deployments if they already exist. This setup allows for the easiest installation process, easiest on-going maintenance, minimal duplication of metrics, and more flexible metric retention.
 
 That being said, we do support using an existing Grafana & Prometheus installation in our paid products today. You can see basic setup instructions [here](/custom-prom.md). In our free product, we only provide best efforts support for this integration because of nuances required in completing this integration successfully. Please contact us (team@kubecost.com) if you want to learn more or if you think we can help!
 
