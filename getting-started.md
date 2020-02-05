@@ -21,11 +21,13 @@ __Next Steps__
 
 The default Kubecost installation comes with a 32Gb persistent volume and 15-day retention period for Prometheus metrics. This is enough space to retain data for ~300 pods, depending on your exact node and container count. See the Kubecost Helm chart [configuration options](https://github.com/kubecost/cost-analyzer-helm-chart) to adjust both retention period and storage size. **Note:** we do not recommend retaining greater than 30 days of data in Prometheus. For long-term data retention, contact us (team@kubecost.com) about using Kubecost with durable storage enabled. 
 
-## <a name="custom-prom"></a>Custom Prometheus & Grafana
+## <a name="custom-prom"></a>Bring your own Prometheus or Grafana
 
-The Kubecost Prometheus deployment is used as both as source & sink for cost & capacity metrics. It's optimized to not interfere with other observability products and by default only contains metrics that are useful to the Kubecost product. 
+The Kubecost Prometheus deployment is used as both as source and sink for cost & capacity metrics. It's optimized to not interfere with other observability instrimentation and by default only contains metrics that are useful to the Kubecost product. This amounts to retaining 70-90% less metrics than a standard Prometheus deployment. 
 
-While we generally recommend using the bundled Prometheus & Grafana, using your existing Grafana & Prometheus installation is supported in our paid products today. You can see basic setup instructions [here](/custom-prom.md). In our free product, we only provide best efforts support for this integration because of nuances required in completing this integration successfully. Please contact us (team@kubecost.com) if you want to learn more or if you think we can help!
+We generally recommend teams use the bundled Prometheus & Grafana but reuse their existing kube-state-metrics and node-exporter deployments. This setup allows for the easiest installatio process, easiest on-going maintenance, minimal duplication of metrics, and more flexible metric retention.
+
+That being said, we do support using an existing Grafana & Prometheus installation in our paid products today. You can see basic setup instructions [here](/custom-prom.md). In our free product, we only provide best efforts support for this integration because of nuances required in completing this integration successfully. Please contact us (team@kubecost.com) if you want to learn more or if you think we can help!
 
 ## <a name="requests-limits"></a>Setting Requests & Limits
 
