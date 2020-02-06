@@ -1,36 +1,36 @@
-[No persistent volumes available...](#persistent-volume)    
+[No persistent volumes available...](#persistent-volume)  
 [Unable to establish a port-forward connection](#port-forward)  
-[FailedScheduling node-exporter](#node-exporter)   
+[FailedScheduling node-exporter](#node-exporter)  
 [No clusters found](#no-cluster)  
-[Pods running but app won't load](#app-wont-load)
-  
-  
-## <a name="persistent-volume"></a>Issue: no persistent volumes available for this claim and/or no storage class is set 
+[Pods running but app won't load](#app-wont-load)  
 
-Your clusters needs a default storage class for the Kubecost and Prometheus persistent volumes to be successfully attached.
+
+## <a name="persistent-volume"></a>Issue: no persistent volumes available for this claim and/or no storage class is set
+
+Your clusters need a default storage class for the Kubecost and Prometheus persistent volumes to be successfully attached.
 
 To check if a storage class exists, you can run
 
 ```kubectl get storageclass```
 
-You should see a storageclass name with (default) next to it as in this example. 
+You should see a storageclass name with (default) next to it as in this example.
 
 <pre>
-NAME                PROVISIONER           AGE 
+NAME                PROVISIONER           AGE
 standard (default)  kubernetes.io/gce-pd  10d
 </pre>
 
-If you see a name but no (default) next to it, run 
+If you see a name but no (default) next to it, run
 
 ```kubectl patch storageclass <name> -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'```
 
 If you don’t see a name, you need to add a storage class. For help doing this, see the following guides:
 
-* AWS: [https://docs.aws.amazon.com/eks/latest/userguide/storage-classes.html](https://docs.aws.amazon.com/eks/latest/userguide/storage-classes.html)
-* Azure: [https://kubernetes.io/docs/concepts/storage/storage-classes/#azure-disk](https://kubernetes.io/docs/concepts/storage/storage-classes/#azure-disk)
-  
-  
-  
+* AWS: [https://docs.aws.amazon.com/eks/latest/userguide/storage-classes.html](https://docs.aws.amazon.com/eks/latest/userguide/storage-classes.html)  
+* Azure: [https://kubernetes.io/docs/concepts/storage/storage-classes/#azure-disk](https://kubernetes.io/docs/concepts/storage/storage-classes/#azure-disk)  
+
+
+
 ## <a name="port-forward"></a>Issue: unable to establish a port-forward connection
 
 First, check the status of pods in the target namespace:
@@ -53,16 +53,16 @@ kubecost-prometheus-pushgateway-6f4f8bbfd9-k5r47         1/1     Running   0    
 kubecost-prometheus-server-6fb8f99bb7-4tjwn              2/2     Running   0          5m
 </pre>
 
-If the cost-analyzer or prometheus-server __pods are missing__, we recommend reinstalling with Helm using `--debug` which enables verbose output. 
+If the cost-analyzer or prometheus-server __pods are missing__, we recommend reinstalling with Helm using `--debug` which enables verbose output.
 
 If any __pod is not Running__ other than cost-analyzer-checks, you can use the following command to find errors in the recent event log:
 
 `kubectl describe pod <pod-name> -n kubecost`
 
-Should you encounter an unexpected error, please reach out for help on  [Slack](https://join.slack.com/t/kubecost/shared_invite/enQtNTA2MjQ1NDUyODE5LWFjYzIzNWE4MDkzMmUyZGU4NjkwMzMyMjIyM2E0NGNmYjExZjBiNjk1YzY5ZDI0ZTNhZDg4NjlkMGRkYzFlZTU) or via email at [team@kubecost.com](team@kubecost.com). 
-  
-  
-  
+Should you encounter an unexpected error, please reach out for help on  [Slack](https://join.slack.com/t/kubecost/shared_invite/enQtNTA2MjQ1NDUyODE5LWFjYzIzNWE4MDkzMmUyZGU4NjkwMzMyMjIyM2E0NGNmYjExZjBiNjk1YzY5ZDI0ZTNhZDg4NjlkMGRkYzFlZTU) or via email at [team@kubecost.com](team@kubecost.com).  
+
+
+
 ## <a name="node-exporter"></a>Issue: FailedScheduling kubecost-prometheus-node-exporter
 
 If one has an existing `node-exporter` daemonset, the Kubecost Helm chart may timeout due to a conflict. You can disable the installation of `node-exporter` by passing the following parameters to the Helm install.
@@ -72,42 +72,42 @@ helm install kubecost/cost-analyzer --debug --wait --namespace kubecost --name k
     --set kubecostToken="<INSERT_YOUR_TOKEN>" \
     --set prometheus.nodeExporter.enabled=false \
     --set prometheus.serviceAccounts.nodeExporter.create=false
- ```
-  
-  
-  
+ ```  
+
+
+
 ## <a name="no-cluster"></a>Issue: Unable to connect to a cluster
 
-You may encounter the following screen if the Kubecost frontend is unabled to connect with a live Kubecost server.
+You may encounter the following screen if the Kubecost frontend is unable to connect with a live Kubecost server.
 
 ![No clusters found](images/no-cluster.png)
 
 Recommended troubleshooting steps are as follows:
 
-Start by reviewing messages in your browswer's developer console. Any meaningful errors or warnings may indicate an unexpted response from the Kubecost server. 
+Start by reviewing messages in your browser's developer console. Any meaningful errors or warnings may indicate an unexpected response from the Kubecost server.
 
 Next, point your browser to the `/api` endpoint on your target URL. For example, visit `http://localhost:9090/api/` in the scenario shown above. You should expect to see a Prometheus config file at this endpoint. If your cluster address has changed, you can visit Settings in the Kubecost product to update or you can also add a new cluster.  
 
 If you are unable to successfully retrieve your config file from this endpoint, we recommend the following:
 
-1. Check your connection to this host
-2. View the status of all Prometheus and Kubecost pods to see if any pods are experiencing errors or are in a Pending state. When performing the default Kubecost install we recommend inspecting this with `kubectl get pods -n kubecost`. All pods should be either Running or Completed.
-3. View relevent pod logs if any pod is not in the Running or Completed state.
+1. Check your connection to this host  
+2. View the status of all Prometheus and Kubecost pods to see if any pods are experiencing errors or are in a Pending state. When performing the default Kubecost install we recommend inspecting this with `kubectl get pods -n kubecost`. All pods should be either Running or Completed.  
+3. View relevant pod logs if any pod is not in the Running or Completed state.  
 
-If you are able retrieve your config file from this endpoint, we recommend reviewing logs from the cost-analyzer pod to identify any errors.
+If you are able to retrieve your config file from this endpoint, we recommend reviewing logs from the cost-analyzer pod to identify any errors.
 
 Please contact us at team@kubecost.com or on Slack at any point.
 
 
 ## <a name="app-wont-load"></a>Issue: Unable to load app
 
-If all Kubecost pods are running and you can connect / port-forward to the kubecost-cost-analyzer pod but none of the app's UI will load, we recommend testing the following: 
+If all Kubecost pods are running and you can connect / port-forward to the kubecost-cost-analyzer pod but none of the app's UI will load, we recommend testing the following:
 
-1. Connect directly to a backend service with the following command: 
+1. Connect directly to a backend service with the following command:
 `kubectl port-forward --namespace kubecost service/kubecost-cost-analyzer 9001`
 2. Ensure that `http://localhost:9001` returns the prometheus YAML file
 
-If this is true, you are likely to be hitting a CoreDNS routing isssue. We recommend using local routing as a solution: 
+If this is true, you are likely to be hitting a CoreDNS routing issue. We recommend using local routing as a solution:
 
 1. Go to <https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/templates/cost-analyzer-frontend-config-map-template.yaml#L13>
 2. Replace ```{% raw %}{{ $serviceName }}.{{ .Release.Namespace }}{% endraw %}``` with ```localhost```

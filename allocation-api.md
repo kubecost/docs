@@ -1,4 +1,4 @@
-Kubecost exposes multiple APIs to obtain cost, resource allocation, and utilization data. Below is documentation on two options: the cost model API and aggregated cost model API.  
+Kubecost exposes multiple APIs to obtain cost, resource allocation, and utilization data. Below is documentation on two options: the cost model API and aggregated cost model API.
 
 # Cost model API
 
@@ -35,27 +35,27 @@ This API returns a set of JSON elements in this format:
   ramreq: [{timestamp: 1567531940, value: 55000000}]
   ramused: [{timestamp: 1567531940, value: 19463457.32}]
   services: ["cost-model"]
-}  
+}
 ```
 <a name="optional-params"></a>  
 Optional request parameters include the following:  
 
-Field | Description 
---------- | ----------- 
+Field | Description
+--------- | -----------
 `filterFields` | Blacklist of fields to be filtered from response. For example, appending `&filterFields=cpuused,cpureq,ramreq,ramused` will remove request and usage data.
 `namespace` | Filter results by namespace. For example, appending `&namespace=kubecost` only returns data for the `kubecost` namespace
 
 
 # Aggregated cost model API
 
-The aggregated cost model API retrieves data similiar to the Kubecost Allocation frontend view (e.g. cost by namespace, label, deployment and more) and is available at the following endpoint:
+The aggregated cost model API retrieves data similar to the Kubecost Allocation frontend view (e.g. cost by namespace, label, deployment and more) and is available at the following endpoint:
 
 `http://<kubecost-address>/model/aggregatedCostModel`
 
 Here are example uses:
 
 * `http://localhost:9090/model/aggregatedCostModel?window=1d&aggregation=namespace`  
-* `http://localhost:9090/model/aggregatedCostModel?window=1d&aggregation=label&aggregationSubfield=product`
+* `http://localhost:9090/model/aggregatedCostModel?window=1d&aggregation=label&aggregationSubfield=product`  
 * `http://localhost:9090/model/aggregatedCostModel?window=1d&aggregation=namespace&sharedNamespaces=kube-system`
 
 API parameters include the following:
@@ -63,22 +63,22 @@ API parameters include the following:
 * `window` dictates the applicable window for measuring cost metrics. Supported units are d, h, m, and s.  
 * `offset` (optional) shifts window backwards from current time. Supported units are d, h, m, and s.  
 * `aggregation` is the field used to consolidate cost model data. Supported types are cluster, namespace, deployment, service, and label.  
-* `aggregationSubfield` used for aggregation types that require sub fields, e.g. aggregation type equals `label` and the value of the label (aggregationSubfield) equals `app`.
-* `allocateIdle` (optional) when set to `true` applies the cost of all idle compute resources to tenants, default `false`.
-* `sharedNamespaces` (optional) provide a comma separated list of namespaces (e.g. kube-system) to be allocated to other tenants. These resources are evenly allocated to other tenants as `sharedCost`.
-* `sharedLabelNames` (optional) provide a comma separated list of kubernetes labels (e.g. app) to be allocated to other tenants. Must provide corresponding set of label values in `sharedLabelValues`.
-* `sharedLabelValues` (optional) label value (e.g. prometheus) associated with `sharedLabelNames` parameter. 
-* `sharedSplit` (optional) Shared costs are split evenly across tenants unless `weighted` is passed for this request parameter. When allocating shared costs on a weighted basis, these expenses are distributed based on the resource costs of the individual pods in the particular aggregation, e.g. namespace.
-* `disableCache` this API caches recently fetched data by default. Set this variable to `false` to avoid cache entirely. 
+* `aggregationSubfield` used for aggregation types that require sub fields, e.g. aggregation type equals `label` and the value of the label (aggregationSubfield) equals `app`.  
+* `allocateIdle` (optional) when set to `true` applies the cost of all idle compute resources to tenants, default `false`.  
+* `sharedNamespaces` (optional) provide a comma-separated list of namespaces (e.g. kube-system) to be allocated to other tenants. These resources are evenly allocated to other tenants as `sharedCost`.  
+* `sharedLabelNames` (optional) provide a comma-separated list of kubernetes labels (e.g. app) to be allocated to other tenants. Must provide the corresponding set of label values in `sharedLabelValues`.  
+* `sharedLabelValues` (optional) label value (e.g. prometheus) associated with `sharedLabelNames` parameter.  
+* `sharedSplit` (optional) Shared costs are split evenly across tenants unless `weighted` is passed for this request parameter. When allocating shared costs on a weighted basis, these expenses are distributed based on the resource costs of the individual pods in the particular aggregation, e.g. namespace.  
+* `disableCache` this API caches recently fetched data by default. Set this variable to `false` to avoid cache entirely.  
 
 <a name="filter-params"></a>  
-Optional filter parameters include the following:  
+Optional filter parameters include the following:   
 
-Filter | Description 
---------- | ----------- 
-`cluster` | Filter results by cluster ID. For example, appending `&cluster=cluster-one` will restrict data only to the `cluster-one` cluster. Note: cluster ID is generated from `cluster_id` provided during installation. 
+Filter | Description
+--------- | -----------
+`cluster` | Filter results by cluster ID. For example, appending `&cluster=cluster-one` will restrict data only to the `cluster-one` cluster. Note: cluster ID is generated from `cluster_id` provided during installation.
 `namespace` | Filter results by namespace. For example, appending `&namespace=kubecost` only returns data for the `kubecost` namespace.
-`labels` | Filter results by label. For example, appending `&labels=app%3Dcost-analyzer` only returns data for pods with label `app=cost-analyzer`. CSV list of label values supported. Note that parameters must be url encoded. 
+`labels` | Filter results by label. For example, appending `&labels=app%3Dcost-analyzer` only returns data for pods with label `app=cost-analyzer`. CSV list of label values supported. Note that parameters must be url encoded.
 
 This API returns a set of JSON objects in this format:
 
@@ -87,7 +87,7 @@ This API returns a set of JSON objects in this format:
   aggregation: "namespace"
   subfields: ""             // value(s) of aggregationSubfield parameter
   cluster: "cluster-1"
-  cpuCost: 100.031611       
+  cpuCost: 100.031611
   environment: "default"    // value of aggregation field
   gpuCost: 0
   networkCost: 0
@@ -95,14 +95,14 @@ This API returns a set of JSON objects in this format:
   ramCost: 70.000529625
   sharedCost: 0             // value of costs allocated via sharedNamespaces or sharedLabelNames
   totalCost: 180.032140625
-}  
+}
 ```
 
-### Caching Overview 
+### Caching Overview
 
-Kubecost implements a two-layer caching system for cost allocation metrics. The unaggregated cost model (Layer 1 cache) is pre-cached for commonly used time windows, e.g. 1,2,7 and 30 days. This data is refreshed every ~5 minutes for shorter time windows and up to every 1 hour for long windows, e.g. 30 days. Aggregated cost data (Layer 2 cache) is pre-cached for commonly used aggregatedCostModel API requests, e.g. costs by namespace over the last 7 days. Returning cached data from Layer 1 typically takes < 500ms and Layer 2 < 100ms, not including data transfer times. 
+Kubecost implements a two-layer caching system for cost allocation metrics. The unaggregated cost model (Layer 1 cache) is pre-cached for commonly used time windows, e.g. 1,2,7 and 30 days. This data is refreshed every ~5 minutes for shorter time windows and up to every 1 hour for long windows, e.g. 30 days. Aggregated cost data (Layer 2 cache) is pre-cached for commonly used aggregatedCostModel API requests, e.g. costs by namespace over the last 7 days. Returning cached data from Layer 1 typically takes < 500ms and Layer 2 < 100ms, not including data transfer times.
 
-When a custom cost model request misses both layers of the Kubecost cache then this request remains in the cache for ~10 minutes. On larger clusters, requests that miss both caching layers can take longer periods, e.g. > 10 seconds. 
+When a custom cost model request misses both layers of the Kubecost cache then this request remains in the cache for ~10 minutes. On larger clusters, requests that miss both caching layers can take longer periods, e.g. > 10 seconds.
 
 
 Have questions? Email us at <team@kubecost.com>.
