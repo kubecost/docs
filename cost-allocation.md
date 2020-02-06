@@ -4,7 +4,7 @@ The Kubecost Allocation view allows you to quickly see allocated spend across al
 
 ![Cost allocation view](cost-allocation.png)
 
-### 1. Cost metrics
+### 1. Cost metrics  
 View either cumulative costs measured over the selected time window or run rate (e.g. hourly, daily, monthly) based on the resources allocated. Costs allocations are based on the following:
 
 1) resources allocated, i.e. max of requests and usage
@@ -13,22 +13,22 @@ View either cumulative costs measured over the selected time window or run rate 
 
 For more information, refer to this [FAQ](https://github.com/kubecost/cost-model#frequently-asked-questions) on how each of these inputs is determined based on your environment.
 
-### 2. Aggregation
+### 2. Aggregation  
 Aggregate cost by namespace, deployment, service and other native Kubernetes concepts. Costs are also visible by other meaningful organizational concepts, e.g. Team, Department, or Product. These aggregations are based on Kubernetes labels or annotations, referenced at both the pod and namespace-level, with labels at the pod-level being favored over the namespace label when both are present. The label name used for these concepts can be configured in Settings. Resources without a label/annotation will be shown as _unassigned_.
 
-### 3. Time window
+### 3. Time window  
 The designated time window for measuring costs. Results for 1d, 2d, 7d, and 30d queries are cached by default.
 
-### 4. Filter
+### 4. Filter  
 Filter resources by namespace, clusterId, and Kubernetes label to more closely investigate a rise in spend or key cost drivers at different aggregations, e.g. Deployments or Pods.
 
-### 5. Allocate Idle Cost
+### 5. Allocate Idle Cost  
 Allocating idle costs proportionately assigns total cluster costs, including slack resources, to tenants. As an example, if your cluster is only 25% utilized, applying idle costs will increase the cost of each pod/namespace by 4x.
 
-### 6. Chart selection
+### 6. Chart selection  
 Toggle to the bar chart view to see aggregated costs over the selected window, or the time series view to see cost changes over time.
 
-### 7. Additional options
+### 7. Additional options  
 View other options to export cost data to CSV or view help documentation.
 
 ### Cost metrics

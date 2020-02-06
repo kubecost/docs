@@ -1,8 +1,8 @@
-[No persistent volumes available...](#persistent-volume)
-[Unable to establish a port-forward connection](#port-forward)
-[FailedScheduling node-exporter](#node-exporter)
-[No clusters found](#no-cluster)
-[Pods running but app won't load](#app-wont-load)
+[No persistent volumes available...](#persistent-volume)  
+[Unable to establish a port-forward connection](#port-forward)  
+[FailedScheduling node-exporter](#node-exporter)  
+[No clusters found](#no-cluster)  
+[Pods running but app won't load](#app-wont-load)  
 
 
 ## <a name="persistent-volume"></a>Issue: no persistent volumes available for this claim and/or no storage class is set
@@ -26,8 +26,8 @@ If you see a name but no (default) next to it, run
 
 If you don’t see a name, you need to add a storage class. For help doing this, see the following guides:
 
-* AWS: [https://docs.aws.amazon.com/eks/latest/userguide/storage-classes.html](https://docs.aws.amazon.com/eks/latest/userguide/storage-classes.html)
-* Azure: [https://kubernetes.io/docs/concepts/storage/storage-classes/#azure-disk](https://kubernetes.io/docs/concepts/storage/storage-classes/#azure-disk)
+* AWS: [https://docs.aws.amazon.com/eks/latest/userguide/storage-classes.html](https://docs.aws.amazon.com/eks/latest/userguide/storage-classes.html)  
+* Azure: [https://kubernetes.io/docs/concepts/storage/storage-classes/#azure-disk](https://kubernetes.io/docs/concepts/storage/storage-classes/#azure-disk)  
 
 
 
@@ -59,7 +59,7 @@ If any __pod is not Running__ other than cost-analyzer-checks, you can use the f
 
 `kubectl describe pod <pod-name> -n kubecost`
 
-Should you encounter an unexpected error, please reach out for help on  [Slack](https://join.slack.com/t/kubecost/shared_invite/enQtNTA2MjQ1NDUyODE5LWFjYzIzNWE4MDkzMmUyZGU4NjkwMzMyMjIyM2E0NGNmYjExZjBiNjk1YzY5ZDI0ZTNhZDg4NjlkMGRkYzFlZTU) or via email at [team@kubecost.com](team@kubecost.com).
+Should you encounter an unexpected error, please reach out for help on  [Slack](https://join.slack.com/t/kubecost/shared_invite/enQtNTA2MjQ1NDUyODE5LWFjYzIzNWE4MDkzMmUyZGU4NjkwMzMyMjIyM2E0NGNmYjExZjBiNjk1YzY5ZDI0ZTNhZDg4NjlkMGRkYzFlZTU) or via email at [team@kubecost.com](team@kubecost.com).  
 
 
 
@@ -72,7 +72,7 @@ helm install kubecost/cost-analyzer --debug --wait --namespace kubecost --name k
     --set kubecostToken="<INSERT_YOUR_TOKEN>" \
     --set prometheus.nodeExporter.enabled=false \
     --set prometheus.serviceAccounts.nodeExporter.create=false
- ```
+ ```  
 
 
 
@@ -86,13 +86,13 @@ Recommended troubleshooting steps are as follows:
 
 Start by reviewing messages in your browser's developer console. Any meaningful errors or warnings may indicate an unexpected response from the Kubecost server.
 
-Next, point your browser to the `/api` endpoint on your target URL. For example, visit `http://localhost:9090/api/` in the scenario shown above. You should expect to see a Prometheus config file at this endpoint. If your cluster address has changed, you can visit Settings in the Kubecost product to update or you can also add a new cluster.
+Next, point your browser to the `/api` endpoint on your target URL. For example, visit `http://localhost:9090/api/` in the scenario shown above. You should expect to see a Prometheus config file at this endpoint. If your cluster address has changed, you can visit Settings in the Kubecost product to update or you can also add a new cluster.  
 
 If you are unable to successfully retrieve your config file from this endpoint, we recommend the following:
 
-1. Check your connection to this host
-2. View the status of all Prometheus and Kubecost pods to see if any pods are experiencing errors or are in a Pending state. When performing the default Kubecost install we recommend inspecting this with `kubectl get pods -n kubecost`. All pods should be either Running or Completed.
-3. View relevant pod logs if any pod is not in the Running or Completed state.
+1. Check your connection to this host  
+2. View the status of all Prometheus and Kubecost pods to see if any pods are experiencing errors or are in a Pending state. When performing the default Kubecost install we recommend inspecting this with `kubectl get pods -n kubecost`. All pods should be either Running or Completed.  
+3. View relevant pod logs if any pod is not in the Running or Completed state.  
 
 If you are able to retrieve your config file from this endpoint, we recommend reviewing logs from the cost-analyzer pod to identify any errors.
 

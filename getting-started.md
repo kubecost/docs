@@ -2,19 +2,19 @@
 
 Welcome to Kubecost! This page provides commonly used product configurations and feature overviews to help get you up and running after the Kubecost product has been [installed](http://kubecost.com/install).
 
-__Configuration__
-[Configuring metric storage](#storage-config)
-[Setting Requests & Limits](#requests-limits)
-[Using an existing Prometheus or Grafana installation](#custom-prom)
-[Using an existing node exporter installation](#node-exporter)
-[Exposing Kubecost with an Ingress](#basic-auth)
-[Adding a spot instance configuration (AWS only)](#spot-nodes)
-[Allocating out of cluster costs](#out-of-cluster)
+__Configuration__  
+[Configuring metric storage](#storage-config)  
+[Setting Requests & Limits](#requests-limits)  
+[Using an existing Prometheus or Grafana installation](#custom-prom)  
+[Using an existing node exporter installation](#node-exporter)  
+[Exposing Kubecost with an Ingress](#basic-auth)  
+[Adding a spot instance configuration (AWS only)](#spot-nodes)  
+[Allocating out of cluster costs](#out-of-cluster)  
 
-__Next Steps__
-[Measure cluster cost efficiency](#cluster-efficiency)
-[Cost monitoring best practices](http://blog.kubecost.com/blog/cost-monitoring/)
-[Understanding cost allocation metrics](/cost-allocation.md)
+__Next Steps__  
+[Measure cluster cost efficiency](#cluster-efficiency)  
+[Cost monitoring best practices](http://blog.kubecost.com/blog/cost-monitoring/)  
+[Understanding cost allocation metrics](/cost-allocation.md)  
 <br/><br/>
 
 ## <a name="storage-config"></a>Storage configuration
@@ -82,9 +82,9 @@ For more accurate Spot pricing data, visit Settings in the Kubecost frontend to 
 
 **Necessary Steps**
 
-1. Enable the [AWS Spot Instance data feed](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-data-feeds.html).
-2. Provide the required S3 bucket information in Settings (example shown above).
-3. Create and attach an IAM role account which can be used to read this bucket. Here's an example policy:
+1. Enable the [AWS Spot Instance data feed](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-data-feeds.html).  
+2. Provide the required S3 bucket information in Settings (example shown above).  
+3. Create and attach an IAM role account which can be used to read this bucket. Here's an example policy:  
 
 ```
 {

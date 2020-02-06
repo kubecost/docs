@@ -15,10 +15,10 @@ Kubecost requires the following dependency versions:
 
 __Implementation Steps__
 
-1. Copy [values.yaml](https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/values.yaml) and update the following parameters:
+1. Copy [values.yaml](https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/values.yaml) and update the following parameters:  
 
-   - `promtheus.fqdn` to match your local Prometheus with this format `http://<prometheus-server-service-name>.<prometheus-server-namespace>.svc.cluster.local`
-   - `prometheus.enabled` set to `false`
+   - `prometheus.fqdn` to match your local Prometheus with this format `  http://<prometheus-server-service-name>.<prometheus-server-namespace>.svc.cluster.local`
+   - `prometheus.enabled` set to `false`  
 
    Pass this updated file to the Kubecost helm install command with `--values values.yaml`
 
@@ -36,7 +36,7 @@ __Implementation Steps__
         - kubecost-cost-analyzer.<namespace-of-your-kubecost>
         type: 'A'
         port: 9003
-```
+```  
 
 This config needs to be added under `extraScrapeConfigs` in Prometheus configuration. [Example](https://github.com/kubecost/cost-analyzer-helm-chart/blob/0758d5df54d8963390ca506ad6e58c597b666ef8/cost-analyzer/values.yaml#L74)
 
@@ -45,7 +45,7 @@ You can confirm that this job is successfully running with the Targets view in P
 ![Prometheus Targets](/prom-targets.png)
 
 <a name="recording-rules"></a>
-__Recording Rules__
+__Recording Rules__  
 <br/>
 Kubecost uses [Prometheus recording rules](https://prometheus.io/docs/prometheus/latest/configuration/recording_rules/) to enable certain product features and to help improve product performance. These are recommended additions, especially for medium and large-sized clusters using their own Prometheus installation. You can find our recording rules under _rules_ in this [values.yaml file](https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/values.yaml#L169).
 
@@ -94,5 +94,5 @@ grafana:
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;For Option 2, ensure that the following flags are set in your Operator deployment:
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1. sidecar.dashboards.enabled = true
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2. sidecar.dashboards.searchNamespace isn't restrictive, use `ALL` if Kubecost runs in another ns
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1. sidecar.dashboards.enabled = true  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2. sidecar.dashboards.searchNamespace isn't restrictive, use `ALL` if Kubecost runs in another ns  

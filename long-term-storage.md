@@ -2,26 +2,26 @@ To enable 90+ days of data retention in Kubecost, we recommend deploying with du
 
 **Note:** This feature today requires an Enterprise license.
 
-## Option A: In cluster storage (Postgres)
+## Option A: In cluster storage (Postgres)  
 
 To enable Postgres-based long-term storage, complete the following:
 
-1. **Helm chart configuration** -- in [values.yaml](https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/values.yaml) set the `remoteWrite.postgres.enabled` attribute to true. The default backing disk is `200gb` but this can also be directly configured in values.yaml.
+1. **Helm chart configuration** -- in [values.yaml](https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/values.yaml) set the `remoteWrite.postgres.enabled` attribute to true. The default backing disk is `200gb` but this can also be directly configured in values.yaml.  
 
 2. **Verify successful install** -- Deploy or upgrade via install instructions at <http://kubecost.com/install>, passing this updated values.yaml file, and verify pods with the prefix `kubecost-cost-analyzer-adapter`
-and `kubecost-cost-analyzer-postgres` are Running.
+and `kubecost-cost-analyzer-postgres` are Running.  
 
-3. **Confirm data is available**
+3. **Confirm data is available**  
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Vist this endpoint `http://<kubecost-address>/model/costDataModelRangeLarge`
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Here's an example use: `http://localhost:9090/model/costDataModelRangeLarge`
 
-## Option B: Out of the cluster storage (Thanos)
+## Option B: Out of the cluster storage (Thanos)  
 
 Thanos-based durable storage provides long-term metric retention directly in a user-controlled bucket (e.g. S3 or GCS bucket) and can be enabled with the following steps:
 
-Step 1: **Create object-store yaml file**
+Step 1: **Create object-store yaml file**  
 
 This step creates a yaml file that contains your durable storage target (e.g. GCS, S3, etc.) configuration and access credentials. The details of this file are documented thoroughly in Thanos documentation: https://thanos.io/storage.md/
 
@@ -84,14 +84,14 @@ config:
 
 **Note:** given that this is yaml, it requires this specific indention.
 
-Step 2: **Create object-store secret**
+Step 2: **Create object-store secret**  
 
 The final step prior to installation is to create a secret with the yaml file generated in the previous step:
 ```
 $ kubectl create secret generic kubecost-thanos -n kubecost --from-file=./object-store.yaml
 ```
 
-Step 3: **Deploying Kubecost with Thanos**
+Step 3: **Deploying Kubecost with Thanos**  
 
 The Thanos subchart includes `thanos-bucket`, `thanos-query`, `thanos-store`,  `thanos-compact`, and service discovery for `thanos-sidecar`. These components are recommended when deploying Thanos on multiple clusters.
 

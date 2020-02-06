@@ -12,7 +12,7 @@ Here's an example use:
 
 API parameters include the following:
 
-* `timeWindow` dictates the applicable window for measuring cost metrics. Supported units are d, h, and m.
+* `timeWindow` dictates the applicable window for measuring cost metrics. Supported units are d, h, and m.  
 * `offset` shifts timeWindow backwards relative to the current time. Supported units are d, h, and m.
 
 This API returns a set of JSON elements in this format:
@@ -37,8 +37,8 @@ This API returns a set of JSON elements in this format:
   services: ["cost-model"]
 }
 ```
-<a name="optional-params"></a>
-Optional request parameters include the following:
+<a name="optional-params"></a>  
+Optional request parameters include the following:  
 
 Field | Description
 --------- | -----------
@@ -54,25 +54,25 @@ The aggregated cost model API retrieves data similar to the Kubecost Allocation 
 
 Here are example uses:
 
-* `http://localhost:9090/model/aggregatedCostModel?window=1d&aggregation=namespace`
-* `http://localhost:9090/model/aggregatedCostModel?window=1d&aggregation=label&aggregationSubfield=product`
+* `http://localhost:9090/model/aggregatedCostModel?window=1d&aggregation=namespace`  
+* `http://localhost:9090/model/aggregatedCostModel?window=1d&aggregation=label&aggregationSubfield=product`  
 * `http://localhost:9090/model/aggregatedCostModel?window=1d&aggregation=namespace&sharedNamespaces=kube-system`
 
 API parameters include the following:
 
-* `window` dictates the applicable window for measuring cost metrics. Supported units are d, h, m, and s.
-* `offset` (optional) shifts window backwards from current time. Supported units are d, h, m, and s.
-* `aggregation` is the field used to consolidate cost model data. Supported types are cluster, namespace, deployment, service, and label.
-* `aggregationSubfield` used for aggregation types that require sub fields, e.g. aggregation type equals `label` and the value of the label (aggregationSubfield) equals `app`.
-* `allocateIdle` (optional) when set to `true` applies the cost of all idle compute resources to tenants, default `false`.
-* `sharedNamespaces` (optional) provide a comma-separated list of namespaces (e.g. kube-system) to be allocated to other tenants. These resources are evenly allocated to other tenants as `sharedCost`.
-* `sharedLabelNames` (optional) provide a comma-separated list of kubernetes labels (e.g. app) to be allocated to other tenants. Must provide the corresponding set of label values in `sharedLabelValues`.
-* `sharedLabelValues` (optional) label value (e.g. prometheus) associated with `sharedLabelNames` parameter.
-* `sharedSplit` (optional) Shared costs are split evenly across tenants unless `weighted` is passed for this request parameter. When allocating shared costs on a weighted basis, these expenses are distributed based on the resource costs of the individual pods in the particular aggregation, e.g. namespace.
-* `disableCache` this API caches recently fetched data by default. Set this variable to `false` to avoid cache entirely.
+* `window` dictates the applicable window for measuring cost metrics. Supported units are d, h, m, and s.  
+* `offset` (optional) shifts window backwards from current time. Supported units are d, h, m, and s.  
+* `aggregation` is the field used to consolidate cost model data. Supported types are cluster, namespace, deployment, service, and label.  
+* `aggregationSubfield` used for aggregation types that require sub fields, e.g. aggregation type equals `label` and the value of the label (aggregationSubfield) equals `app`.  
+* `allocateIdle` (optional) when set to `true` applies the cost of all idle compute resources to tenants, default `false`.  
+* `sharedNamespaces` (optional) provide a comma-separated list of namespaces (e.g. kube-system) to be allocated to other tenants. These resources are evenly allocated to other tenants as `sharedCost`.  
+* `sharedLabelNames` (optional) provide a comma-separated list of kubernetes labels (e.g. app) to be allocated to other tenants. Must provide the corresponding set of label values in `sharedLabelValues`.  
+* `sharedLabelValues` (optional) label value (e.g. prometheus) associated with `sharedLabelNames` parameter.  
+* `sharedSplit` (optional) Shared costs are split evenly across tenants unless `weighted` is passed for this request parameter. When allocating shared costs on a weighted basis, these expenses are distributed based on the resource costs of the individual pods in the particular aggregation, e.g. namespace.  
+* `disableCache` this API caches recently fetched data by default. Set this variable to `false` to avoid cache entirely.  
 
-<a name="filter-params"></a>
-Optional filter parameters include the following:
+<a name="filter-params"></a>  
+Optional filter parameters include the following:   
 
 Filter | Description
 --------- | -----------
