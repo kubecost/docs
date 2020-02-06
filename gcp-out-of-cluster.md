@@ -8,7 +8,7 @@ The following guide provides the steps required for allocating out of cluster co
 
 ## Step 2:  Visit Kubecost setup page and provide configuration info
 
-In Kubecost, vist the Cost Allocation page and select "Add Key".
+In Kubecost, visit the Cost Allocation page and select "Add Key".
 
 ![Add key](/add-key.png)
 
@@ -21,10 +21,11 @@ On this page, you will see instructions for providing a service key, project ID,
 
 ## Step 3: Label cloud assets
 
-You can now label assets with the following schema to allocate costs back to their appropriate Kubernetes owner. 
+You can now label assets with the following schema to allocate costs back to their appropriate Kubernetes owner.
 Learn more [here](https://cloud.google.com/compute/docs/labeling-resources) on GCP labeling.
 
 <pre>
+Cluster:    "kubernetes_cluster" :   &lt;clusterID>
 Namespace:  "kubernetes_namespace" : &lt;namespace>
 Deployment: "kubernetes_deployment": &lt;deployment>
 Label:      "kubernetes_label_NAME": &lt;label>
