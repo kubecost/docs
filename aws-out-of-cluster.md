@@ -33,7 +33,7 @@ To access billing data in Athena tables, and to enable other Kubecost functional
 *We recommend [kiam](https://github.com/uswitch/kiam) as a solution for adding IAM credentials directly to the Kubecost pod(s).*
 
 ### Cost and Usage Permissions Policy
-The below policy is designed to provide Kubecost least-priviledge access to AWS Cost and Usage data.
+The below policy is designed to provide Kubecost least-privilege access to AWS Cost and Usage data.
 
 Validate the following resource names in the below IAM policy before applying to your account:
 * `"Sid": "ReadAccessToAthenaCurDataViaGlue"`: Validate the `database` and `table` ARNs listed. If you used the AWS managed deployment, as described in Step #4, this should already be set correctly. If you set up the Cost and Usage report to Athena flow manually, you may need to adjust this value.
@@ -196,4 +196,4 @@ Visit the Kubecost Settings page to provide the AWS access credentials and Athen
 ## Having issues?
 
 * You may need to upgrade your AWS Glue if you are running an old version https://docs.aws.amazon.com/athena/latest/ug/glue-upgrade.html
-* Visit the Allocation view in the Kubecost product. If external costs are not shown, open your browser's Developer Tools > Console to see any reported errors. 
+* Visit the Allocation view in the Kubecost product. If external costs are not shown, open your browser's Developer Tools > Console to see any reported errors.

@@ -39,7 +39,7 @@ In order to create an AWS IAM policy for use with Thanos:
 
 &nbsp;&nbsp;6.&nbsp;Provide a User name (e.g. `kubecost-thanos-service-account`) and select `Programmatic access`
 
-&nbsp;&nbsp;7.&nbsp;Select Attach existing policies directly, search for the policy name provided in step 4, and then create user. 
+&nbsp;&nbsp;7.&nbsp;Select Attach existing policies directly, search for the policy name provided in step 4, and then create the user.
 
 ![image](/attach-existing.png)
 
