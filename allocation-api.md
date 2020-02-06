@@ -63,7 +63,7 @@ API parameters include the following:
 * `window` dictates the applicable window for measuring cost metrics. Supported units are d, h, m, and s.  
 * `offset` (optional) shifts window backwards from current time. Supported units are d, h, m, and s.  
 * `aggregation` is the field used to consolidate cost model data. Supported types are cluster, namespace, deployment, service, and label.  
-* `aggregationSubfield` used for aggregation types that require sub fields, e.g. aggregation type equals `label` and the value of the label (aggregationSubfield) equals `app`.  
+* `aggregationSubfield` used for aggregation types that require sub fields, e.g. aggregation type equals `label` and the value of the label (aggregationSubfield) equals `app`. Comma seperated list of values supported.
 * `allocateIdle` (optional) when set to `true` applies the cost of all idle compute resources to tenants, default `false`.  
 * `sharedNamespaces` (optional) provide a comma-separated list of namespaces (e.g. kube-system) to be allocated to other tenants. These resources are evenly allocated to other tenants as `sharedCost`.  
 * `sharedLabelNames` (optional) provide a comma-separated list of kubernetes labels (e.g. app) to be allocated to other tenants. Must provide the corresponding set of label values in `sharedLabelValues`.  
