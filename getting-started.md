@@ -4,7 +4,8 @@ Welcome to Kubecost! This page provides commonly used product configurations and
 
 __Configuration__  
 [Configuring metric storage](#storage-config)  
-[Setting Requests & Limits](#requests-limits)  
+[Setting requests & limits](#requests-limits)  
+[Product configuration at install-time](#install-configs)  
 [Using an existing Prometheus or Grafana installation](#custom-prom)  
 [Using an existing node exporter installation](#node-exporter)  
 [Exposing Kubecost with an Ingress](#basic-auth)  
@@ -36,6 +37,10 @@ It's recommended that users set and/or update resource requests and limits befor
 Exact recommended values for these parameters depend on the size of your cluster, availability requirements, and usage of the Kubecost product. Suggested values for each container can be found within Kubecost itself on the namespace page. More info on these recommendations is available [here](http://blog.kubecost.com/blog/requests-and-limits/).
 
 In practice, we recommend running Kubecost for up to 7 days on a production cluster and then tuning resource requests/limits based on resource consumption. Reach out any time to team@kubecost.com if we can help give further guidance.
+
+## <a name="install-configs"></a>Product configuration at install-time
+
+Kubecost has a number of product configuration options that you can specify at install time in order to minimize the number of settings changes required within product UI. These values can be configured under the `kubecostProductConfigs` in our [values.yaml](https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/values.yaml#L263). These parameters are passed to a configmap that Kubecost detects and writes to its /var/configs.
 
 ## <a name="node-exporter"></a>Using an existing node exporter
 
