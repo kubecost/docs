@@ -1,4 +1,10 @@
-Auditing the cost of workloads can be complex in dynamic Kubernetes environments.
+Auditing the cost of workloads can be complex in dynamic Kubernetes environments. For this reason, this resource provides an overview on multiple approaches for inspecting the underlying inputs to our cost Allocation metrics. 
+
+## Audit tool
+
+You can visit the `/audit` page to review the inputs to cpu cost, memory cost, and node-level costs. This tool displays the cost input data by *container* and compares metrics to the aggregatedCostModel API used in the Allocation view. Default window is 1 day. Idle and shared costs are not included as part of this view.
+
+## Manual spot check
 We've created this guide to help you spot check costs and ensure they are calculated as expected.
 
 1. **Identify a pod or namespace to audit.** In this example, we will audit the `default` namespace.  
@@ -30,4 +36,4 @@ We've created this guide to help you spot check costs and ensure they are calcul
 
 ![Timeseries graph](images/audit-graph.png)
 
-**Reminder:** Don't forget to apply any sustained use or other discounts.
+**Reminder:** Don't forget to apply any sustained use or other discounts during a manual spot check.
