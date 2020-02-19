@@ -48,7 +48,7 @@ You can use an existing node exporter DaemonSet by setting the `prometheus.nodeE
 
 ## <a name="basic-auth"></a>Kubecost Ingress example
 
-Enabling external access to the Kubecost product simply requires exposing access to port 9090 on the `kubecost-cost-analyzer` pod. This can be accomplished with a number of approaches, including Ingress or Service definitions. The following definition provides an example of Ingress with basic auth.
+Enabling external access to the Kubecost product simply requires exposing access to port 9090 on the `kubecost-cost-analyzer` pod. This can be accomplished with a number of approaches, including Ingress or Service definitions. The following definition provides an example of Ingress with basic auth. Here is [another example](https://kubernetes.github.io/ingress-nginx/examples/auth/basic/) of using basic auth with an Ingress. 
 
 Note: on GCP, you will need to update the `kubecost-cost-analyzer` service to become a `NodePort` instead of a `ClusterIP` type service.
 
