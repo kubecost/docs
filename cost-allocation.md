@@ -14,7 +14,16 @@ View either cumulative costs measured over the selected time window or run rate 
 For more information, refer to this [FAQ](https://github.com/kubecost/cost-model#frequently-asked-questions) on how each of these inputs is determined based on your environment.
 
 ### 2. Aggregation  
-Aggregate cost by namespace, deployment, service and other native Kubernetes concepts. Costs are also visible by other meaningful organizational concepts, e.g. Team, Department, or Product. These aggregations are based on Kubernetes labels or annotations, referenced at both the pod and namespace-level, with labels at the pod-level being favored over the namespace label when both are present. The label name used for these concepts can be configured in Settings. Workloads without the relevent label/annotation will be shown as `_unallocated_`.
+Aggregate cost by namespace, deployment, service and other native Kubernetes concepts. 
+
+Costs aggregations are also visible by other meaningful organizational concepts, e.g. Team, Department, or Product. These aggregations are based on Kubernetes labels or annotations, referenced at both the pod and namespace-level, with labels at the pod-level being favored over the namespace label when both are present. The label name used for these concepts can be configured in Settings. Workloads without the relevent label/annotation will be shown as `_unallocated_`.
+
+To find what pods are not part of the relevant label set... you can explore variations of the following kubectl commands:  
+
+```
+kubectl get pods -l 'app notin (prometheus, cost-analyzer, ...)' --all-namespaces
+kubectl get pods --show-labels -n <TARGET_NAMESPACE>
+```
 
 ### 3. Time window  
 The designated time window for measuring costs. Results for 1d, 2d, 7d, and 30d queries are cached by default.
