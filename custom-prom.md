@@ -49,7 +49,8 @@ __Recording Rules__
 <br/>
 Kubecost uses [Prometheus recording rules](https://prometheus.io/docs/prometheus/latest/configuration/recording_rules/) to enable certain product features and to help improve product performance. These are recommended additions, especially for medium and large-sized clusters using their own Prometheus installation. You can find our recording rules under _rules_ in this [values.yaml file](https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/values.yaml#L169).
 
-<a name="troubleshoot"></a>__Troubleshooting Issues__
+<a name="troubleshoot"></a>
+## Troubleshooting Issues
 
 Common issues include the following:
 
