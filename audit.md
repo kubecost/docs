@@ -2,18 +2,18 @@ Auditing the cost of workloads can be complex in dynamic Kubernetes environments
 
 ## Audit tool
 
-You can visit the `/audit` page to review the inputs to cpu cost, memory cost, and node-level costs. This tool displays the cost input data by *container* and compares metrics to the aggregatedCostModel API used in the Allocation view. Default window is 1 day. Idle and shared costs are not included as part of this view.
+You can visit the `/audit` page to review the inputs to cpu cost, memory cost, and node-level costs. This tool displays the cost input data by *container* and compares metrics to the aggregatedCostModel API used in the Allocation view. Default window is 1 day. Note that idle and shared costs are not included as part of this view. 
 
 ## Manual spot check
-We've created this guide to help you spot check costs and ensure they are calculated as expected.
+We've created this guide to help you spot check costs and ensure they are costs are calculated as expected.
 
 1. **Identify a pod or namespace to audit.** In this example, we will audit the `default` namespace.  
-2. **Open Prometheus console.** We recommend going directly to the underlying data in Prometheus for an audit. Complete the following steps to view the console for our bundled Prometheus:  
+2. **Open Prometheus console.** We recommend going directly to the underlying data in Prometheus for a manual audit. Complete the following steps to view the console for our bundled Prometheus:  
 
     * Execute `kubectl port-forward --namespace kubecost service/kubecost-prometheus-server 9003:80`
     * Point your browser to <http://localhost:9003>
 
-3. **Verify raw allocation metrics.** Run the following queries and then visit the Prometheus graph tab. Note that allocations are the max of resource requests and usage. Ensure these values are consistent with Kubernetes API and/or cAdvisor metrics.  
+3. **Verify raw allocation metrics.** Run the following queries and then visit the Prometheus graph tab. Note that allocations are the max of resource requests and usage. Ensure these values are consistent with Kubernetes API and/or cAdvisor metrics. Using a Grafana dashboard or Prometheus console graph can be a useful way to view underlying request and usage metrics.  
 
     * `container_cpu_allocation{namespace="default"}`
     * `container_memory_allocation_bytes{namespace="default"}`
