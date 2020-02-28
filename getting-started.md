@@ -11,6 +11,7 @@ __Configuration__
 [Exposing Kubecost with an Ingress](#basic-auth)  
 [Adding a spot instance configuration (AWS only)](#spot-nodes)  
 [Allocating out of cluster costs](#out-of-cluster)  
+[Deploying Kubecost without persistent volumes](#no-pvs)
 
 __Next Steps__  
 [Measure cluster cost efficiency](#cluster-efficiency)  
@@ -124,6 +125,16 @@ The Charge figures in logs should be reflected in your `node_total_hourly_cost`
 
 **[GCP]** Provide configuration info by selecting "Add key" from the Cost Allocation Page. View [this page](/gcp-out-of-cluster.md) for more information on completing this process.
 
+## <a name="no-pvs"></a>Deploying Kubecost without persistent volumes
+
+You may optionally pass the following Helm flags to install Kubecost and its bundled dependancies without any Persistent Volumes. Note any time the Prometheus server pod is restarted then all historical billing data will be lost, unless Thanos or other long-term storage is enabled in the Kubecost product.  
+
+```
+--set prometheus.alertmanager.persistentVolume.enabled=false 
+--set prometheus.pushgateway.persistentVolume.enabled=false 
+--set prometheus.server.persistentVolume.enabled=false
+--set persistentVolume.enabled=false 
+```
 
 ## <a name="cluster-efficiency"></a>Measuring cluster cost efficiency
 
