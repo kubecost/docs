@@ -5,11 +5,16 @@ The Kubecost Allocation view allows you to quickly see allocated spend across al
 ![Cost allocation view](cost-allocation.png)
 
 ### 1. Cost metrics  
-View either cumulative costs measured over the selected time window or run rate (e.g. hourly, daily, monthly) based on the resources allocated. Costs allocations are based on the following:
+View either cumulative or run rate costs measured over the selected time window based on the resources allocated. 
 
-1) resources allocated, i.e. max of requests and usage
-2) the cost of each resource
-3) the amount of time resources were provisioned
+* Cumulative -- historical spend measured
+* Rate metrics -- hourly, daily, or monthly "run rate" cost, also used for projected cost figures
+
+Costs allocations are based on the following:
+
+1) resources allocated, i.e. max of resource requests and usage  
+2) the cost of each resource  
+3) the amount of time resources were provisioned  
 
 For more information, refer to this [FAQ](https://github.com/kubecost/cost-model#frequently-asked-questions) on how each of these inputs is determined based on your environment.
 
