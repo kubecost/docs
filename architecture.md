@@ -3,7 +3,7 @@
 Below are the major components to the Kubecost helm chart, excluding certain Enterprise components such a durable storage:
 
 1. **Kubecost Cost-Analyzer Pod**  
-    a. Frontend that runs Nginx -- handles routing to Prometheus/Grafana  
+    a. Frontend -- runs Nginx and handles routing to Kubecost backend + Prometheus/Grafana  
     b. Kubecost server -- backend for API calls  
     c. Cost-model -- provides cost allocation calculations and metrics, both reads and writes to Prometheus  
 2. **Cost-Analyzer Jobs** -- used for recurring product alerts & email updates  
