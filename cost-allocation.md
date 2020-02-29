@@ -4,7 +4,7 @@ The Kubecost Allocation view allows you to quickly see allocated spend across al
 
 ![Cost allocation view](cost-allocation.png)
 
-### 1. Cost metrics  
+### 1. Displayed metrics  
 View either cumulative or run rate costs measured over the selected time window based on the resources allocated. 
 
 * Cumulative -- historical spend measured
