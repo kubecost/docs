@@ -34,13 +34,17 @@ This will show you top source and destination IP addresses and bytes transferred
 
 For addresses that are outside of your cluster but inside your VPC, Kubecost supports IP or CIDR block whitelisting. This feature can be configured in your [values.yaml](https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/values.yaml) under `networkCosts.config`. Any address within the whitelist will be considered in region and in zone traffic.
 
-### Feature Validation
+### Troubleshooting
 
-To verify this feature is functioning properly, you can complete the following steps.
+To verify this feature is functioning properly, you can complete the following steps:
 
 1. Confirm the `kubecost-network-costs` pods are Running. If these pods are not in a Running state, _kubectl describe_ them and/or view their logs for errors.  
-2. Ensure `kubecost-networking` target is Up in your Prometheus Targets list. View any visible errors if this target is not Up.  
+2. Ensure `kubecost-networking` target is Up in your Prometheus Targets list. View any visible errors if this target is not Up. You can further verify data is being scrapped by the presence of the `kubecost_pod_network_egress_bytes_total` metric in Prometheus. 
 3. Verify Network Costs are available in your Kubecost Allocation view. View your browser's Developer Console on this page for any access/permissions errors if costs are not shown.  
+
+Common issues:
+
+* Failed to locate network pods -- Error message displayed when the Kubecost app is unable to locate the network pods, which we search for by a label that includes our release name. In particular, we depend on the label `app=<release-name>-network-costs` to locate the pods. If the app has a blank release name this issue may happen. 
 
 ### Feature Limitations
 
