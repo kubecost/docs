@@ -11,6 +11,7 @@ __Configuration__
 [Exposing Kubecost with an Ingress](#basic-auth)  
 [Adding a spot instance configuration (AWS only)](#spot-nodes)  
 [Allocating out of cluster costs](#out-of-cluster)  
+[Refectling Reserved Instance or Committed Use Pricing](#ri-committed-discount)  
 [Deploying Kubecost without persistent volumes](#no-pvs)
 
 __Next Steps__  
@@ -124,6 +125,10 @@ The Charge figures in logs should be reflected in your `node_total_hourly_cost`
 **[AWS]** Provide your configuration info in Settings. The information needs to include the S3 bucket name, the Athena table name, the Athena table region, and the Athena database name. View [this page](/aws-out-of-cluster.md) for more information on completing this process.
 
 **[GCP]** Provide configuration info by selecting "Add key" from the Cost Allocation Page. View [this page](/gcp-out-of-cluster.md) for more information on completing this process.
+
+## <a name="ri-committed-discount"></a>Accurately tracking Reserved Instance or committed use discounts
+
+Paid versions of the Kubecost product reflect Reserved Instance (AWS), committed use (GCP), and custom-negotiated discounts into asset pricing. This allows for accurate allocation of costs to individual teams, apps, etc. Enabling this feature simply requires adding role access to cloud provider billing data and does not egress any data to external services. Contact us (team@kubecost.com) if you're interested in more information.
 
 ## <a name="no-pvs"></a>Deploying Kubecost without persistent volumes
 
