@@ -46,6 +46,8 @@ Common issues:
 
 * Failed to locate network pods -- Error message displayed when the Kubecost app is unable to locate the network pods, which we search for by a label that includes our release name. In particular, we depend on the label `app=<release-name>-network-costs` to locate the pods. If the app has a blank release name this issue may happen. 
 
+* Resource usage is a function of unique src and dest IP/port combinations. Most deployments use a small fraction of a CPU and it is also ok to have this pod CPU throttled moderately.
+
 ### Feature Limitations
 
 * Today this feature is supported on Unix-based images with conntrack  
