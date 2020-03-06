@@ -112,7 +112,7 @@ Your deployment should now have Thanos enabled!
 > Note: the `thanos-store` pod is by default configured to request 2 Gb in memory.
 
 <a name="verify-thanos"></a>
-**Verify Installation**
+**Verify Installation**  
 In order to verify a correct installation, start by ensuring all pods are running without issue. If the pods mentioned above are not running successfully, then view pod logs for more detail. A common error is as follows, which means you do not have the correct access to the supplied bucket:
 
 ```
