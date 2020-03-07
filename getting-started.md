@@ -46,7 +46,7 @@ Kubecost has a number of product configuration options that you can specify at i
 
 ## <a name="node-exporter"></a>Using an existing node exporter
 
-You can use an existing node exporter DaemonSet by setting the `prometheus.nodeExporter.enabled` and `prometheus.serviceAccounts.nodeExporter.create` Kubecost helm chart config options to `false` More configs options shown [here](https://github.com/kubecost/cost-analyzer-helm-chart). Note: this requires your existing node exporter to be configured to export metrics on the default endpoint/port.
+You can use an existing node exporter DaemonSet by setting the `prometheus.nodeExporter.enabled` and `prometheus.serviceAccounts.nodeExporter.create` Kubecost helm chart config options to `false`. More configs options shown [here](https://github.com/kubecost/cost-analyzer-helm-chart). Note: this requires your existing node exporter to be configured to export metrics on the default port.
 
 ## <a name="basic-auth"></a>Kubecost Ingress example
 
