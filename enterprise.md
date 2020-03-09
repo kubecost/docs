@@ -14,7 +14,7 @@ An unlimited number of clusters supported.
 Retain data for years with various durable storage options. Provides record keeping on spend, allocation, and efficiency metrics with simple backup & restore functionality.
 
 ### Access control with SSO/SAML  
-Finely manage read and/or admin access by individual users or user groups. 
+Finely manage read and/or admin access by individual users or user groups. [Learn more](https://github.com/kubecost/docs/blob/master/user-management.md)
 
 ### Advanced integrations  
 Connect internal alerting, monitoring, and BI solutions to Kubecost metrics and reporting.
