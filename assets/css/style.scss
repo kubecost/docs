@@ -21,6 +21,7 @@ aside#sidebar {background: transparent url(../images/sidebar-bg.jpg) 202px 0 no-
 #main_content_wrap { background: #fff; padding-bottom: 50px;}
 #main-content { float: right; }
 #main-content h1 {font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji;}
+#main-content h1:before { content: "" }
 #main-content h3 {font-family: Helvetica,Arial,sans-serif}
 #main-content h3:before { margin-left: -1em; content: "//"; }
 #project_tagline{font-size: 22px; padding-bottom: 0px; margin-top: 0px;}
