@@ -3,7 +3,7 @@
 Staging builds for the Kubecost helm chart are produced daily before moving to production. 
 To deploy one of these builds, complete the following steps: 
 
-### 1. Add Staging Repo
+### 1. Add [Staging Repo](https://github.com/kubecost/staging-repo)
 
 ```
 helm repo add kubecost-staging https://kubecost.github.io/staging-repo/
