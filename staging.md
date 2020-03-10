@@ -18,7 +18,7 @@ kubectl create namespace kubecost-staging
 ### 3. Helm install 
 
 ```
-helm install kubecost-staging kubecost/cost-analyzer --namespace kubecost-staging
+helm install kubecost-staging kubecost-staging/cost-analyzer --namespace kubecost-staging
 ```
 
 ### 4. Connect to build
