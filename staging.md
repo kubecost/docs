@@ -28,3 +28,7 @@ kubectl port-forward --namespace kubecost-staging deployment/kubecost-staging-co
 ```
 
 You can now visit <http://localhost:9090> to view the Kubecost frontend.
+
+<br/>  
+
+This chart can be uninstalled with `helm uninstall kubecost-staging -n kubecost-staging`
