@@ -1,4 +1,4 @@
-Auditing the cost of workloads can be complex in dynamic Kubernetes environments. For this reason, this resource provides an overview on multiple approaches for inspecting the underlying inputs to our cost Allocation metrics. 
+Auditing the cost of workloads can be complex in dynamic Kubernetes environments. For this reason, this resource provides an overview on two approaches for inspecting the underlying inputs to cost Allocation metrics. 
 
 ## Audit tool
 
@@ -11,7 +11,7 @@ If differences are found between the independant inputs and the model itself, se
 Differences between these independant inputs and the cost model are expected to arise if the `cost-model` /metrics endpoint has not been consistently scraped over the measured time window. Other unexpected differences can be reported to <team@kubecost.com>
 
 ## Manual spot check
-We've created this guide to help you spot check costs and ensure they are costs are calculated as expected.
+We've created this guide to help you spot check cost metrics directly in Prometheus and ensure they are calculated as expected.
 
 1. **Identify a pod or namespace to audit.** In this example, we will audit the `default` namespace.  
 2. **Open Prometheus console.** We recommend going directly to the underlying data in Prometheus for a manual audit. Complete the following steps to view the console for our bundled Prometheus:  
