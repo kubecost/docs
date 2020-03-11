@@ -2,7 +2,13 @@ Auditing the cost of workloads can be complex in dynamic Kubernetes environments
 
 ## Audit tool
 
-You can visit the `/audit` page to review the inputs to cpu cost, memory cost, and node-level costs. This tool displays the cost input data by *container* and compares metrics to the aggregatedCostModel API used in the Allocation view. Default window is 1 day. Note that idle and shared costs are not included as part of this view. 
+Visit the `/audit` page on the Kubecost frontend to review inputs to cpu, memory, storage, and node-level costs calculations on the Allocation view. This tool displays cost input data by *container* and compares the product of these metrics to the aggregatedCostModel API which is the backing API for the Allocation view. The default time window measured is 1 day. Note that idle and shared costs are not included as part of this view. 
+
+![Audit screenshot](/cpu-audit-table.png)
+
+If differences are found between the independant inputs and the model itself, select the container name to view its associated Grafana dashboard. This will allow the verification of A) the time this container was running and B) amount of resource allocated [learn more](https://github.com/kubecost/cost-model/blob/develop/README.md#how-do-you-allocate-a-specific-amount-of-ramcpu-to-an-individual-pod-or-container). Viewing node costs at the bottom of this page will enable the verificaion of C) cost of allocated resources. 
+
+Differences between these independant inputs and the cost model are expected to arise if the `cost-model` /metrics endpoint has not been consistently scraped over the measured time window. Other unexpected differences can be reported to <team@kubecost.com>
 
 ## Manual spot check
 We've created this guide to help you spot check costs and ensure they are costs are calculated as expected.
