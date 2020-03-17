@@ -21,3 +21,10 @@ Today, the core Kubecost product can be run with just components 1, 3a, 3b, 3c.
 See an overview of core components in this diagram:
 
 ![Architecture Overview](images/arch.png)
+
+
+# Enterprise architecture overview
+
+The most common implementation of durable storage in the Kubecost application application is with [Thanos](https://thanos.io/). Below is a high-level reference for required components. More information on each Thanos component can be found [here](https://thanos.io/quick-tutorial.md/#components).
+
+![Thanos Overview](images/thanos-architecture.png)
