@@ -42,7 +42,7 @@ In practice, we recommend running Kubecost for up to 7 days on a production clus
 
 ## <a name="install-configs"></a>Product configuration at install-time
 
-Kubecost has a number of product configuration options that you can specify at install time in order to minimize the number of settings changes required within product UI. These values can be configured under `kubecostProductConfigs` in our [values.yaml](https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/values.yaml#L268). These parameters are passed to a configmap that Kubecost detects and writes to its /var/configs.
+Kubecost has a number of product configuration options that you can specify at install time in order to minimize the number of settings changes required within product UI. This makes it simple to redeploy Kubecost. These values can be configured under `kubecostProductConfigs` in our [values.yaml](https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/values.yaml#L280). These parameters are passed to a configmap that Kubecost detects and writes to its /var/configs.
 
 ## <a name="node-exporter"></a>Using an existing node exporter
 
