@@ -6,7 +6,7 @@ Below are the major components to the Kubecost helm chart, excluding certain Ent
     a. Frontend -- runs Nginx and handles routing to Kubecost backend + Prometheus/Grafana  
     b. Kubecost server -- backend for API calls  
     c. Cost-model -- provides cost allocation calculations and metrics, both reads and writes to Prometheus  
-2. **Cost-Analyzer Jobs** -- used for recurring product alerts & email updates  
+2. **Cost-Analyzer Checks Jobs** -- used for recurring product alerts & email updates  
 3. **Prometheus**  
     a. Prometheus server -- time-series data store for cost & health metrics  
     b. Kube-state-metrics -- provides Kubernetes API metrics, e.g. resource requests  
