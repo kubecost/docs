@@ -13,4 +13,5 @@ Below are the steps for adding an additional cluster on the **Kubecost Business*
 
 ## Add at install-time
 
-After following Steps #1 and #2 above, provide a list of cluster names/endpoints in [values.yaml](https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/values.yaml#L279) during Helm install or upgrade. 
+After following Steps #1 and #2 above, provide a list of cluster names/endpoints under `kubecostProductConfigs.clusters`
+in [values.yaml](https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/values.yaml) during Helm install or upgrade. 
