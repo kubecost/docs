@@ -48,11 +48,11 @@ Kubecost has a number of product configuration options that you can specify at i
 
 You can use an existing node exporter DaemonSet by setting the `prometheus.nodeExporter.enabled` and `prometheus.serviceAccounts.nodeExporter.create` Kubecost helm chart config options to `false`. More configs options shown [here](https://github.com/kubecost/cost-analyzer-helm-chart). Note: this requires your existing node exporter to be configured to export metrics on the default port.
 
-## <a name="basic-auth"></a>Kubecost Ingress example
+## <a name="basic-auth"></a>Kubecost Ingress examples
 
-Enabling external access to the Kubecost product simply requires exposing access to port 9090 on the `kubecost-cost-analyzer` pod. This can be accomplished with a number of approaches, including Ingress or Service definitions. The following definition provides an example of Ingress with basic auth. Here is [another example](https://kubernetes.github.io/ingress-nginx/examples/auth/basic/) of using basic auth with an Ingress. 
+Enabling external access to the Kubecost product simply requires exposing access to port 9090 on the `kubecost-cost-analyzer` pod. This can be accomplished with a number of approaches, including Ingress or Service definitions. The following example definitions use the NGINX [Ingress Contoller]. 
 
-Note: on GCP, you will need to update the `kubecost-cost-analyzer` service to become a `NodePort` instead of a `ClusterIP` type service.
+First is an example of using basic auth with an Ingress. Here is [another example](https://kubernetes.github.io/ingress-nginx/examples/auth/basic/).
 
 ```
 apiVersion: v1
@@ -79,6 +79,28 @@ spec:
   backend:
     serviceName: kubecost-cost-analyzer
     servicePort: 9090
+```
+
+Here’s an Ingress example for using non-root paths:
+
+```
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: kubecost-ingress
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/enable-cors: "true"
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+spec:
+  rules:
+  - host: test.kubecost.io
+    http:
+      paths:
+      - path: /kubecost(/|$)(.*)
+        backend:
+          serviceName: kubecost-frontend
+          servicePort: 9090
 ```
 
 ## <a name="spot-nodes"></a>Spot Instance Configuration (AWS only)
