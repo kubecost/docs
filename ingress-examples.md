@@ -33,7 +33,7 @@ spec:
     servicePort: 9090
 ```
 
-## Non-root path
+## Non-root path example
 
 ```
 apiVersion: networking.k8s.io/v1beta1
