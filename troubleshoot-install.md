@@ -111,3 +111,9 @@ If this is true, you are likely to be hitting a CoreDNS routing issue. We recomm
 
 1. Go to <https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/templates/cost-analyzer-frontend-config-map-template.yaml#L13>
 2. Replace ```{% raw %}{{ $serviceName }}.{{ .Release.Namespace }}{% endraw %}``` with ```localhost```
+
+## <a name="app-wont-load"></a>Question: Why do I need to grant `cluster-admin` privileges?
+
+The core Kubecost product needs read-only permissions.
+
+Many teams deploy helm Tiller with cluster-admin privileges to install and manage applications across different namespaces. More information on managing these permissions at https://v2.helm.sh/docs/rbac/
