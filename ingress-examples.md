@@ -72,10 +72,10 @@ metadata:
       rewrite ^(/kubecost)$ $1/ permanent;
 spec:
   rules:
-  - host: kubecost.nikovacevic.io
+  - host: demo.kubecost.io
     http:
       paths:
-      # serve kubecost from kubecost.nikovacevic.io/kubecost/
+      # serve kubecost from demo.kubecost.io/kubecost/
       - path: /kubecost(/|$)(.*)
         backend:
           serviceName: kubecost-frontend
