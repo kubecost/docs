@@ -50,58 +50,9 @@ You can use an existing node exporter DaemonSet by setting the `prometheus.nodeE
 
 ## <a name="basic-auth"></a>Kubecost Ingress examples
 
-Enabling external access to the Kubecost product simply requires exposing access to port 9090 on the `kubecost-cost-analyzer` pod. This can be accomplished with a number of approaches, including Ingress or Service definitions. The following example definitions use the NGINX [Ingress Contoller]. 
+Enabling external access to the Kubecost product simply requires exposing access to port 9090 on the `kubecost-cost-analyzer` pod. This can be accomplished with a number of approaches, including Ingress or Service definitions. View [example Ingress definitions](https://github.com/kubecost/docs/blob/master/ingress-examples.md) for a number of approaches for accomplishing this.  
 
-First is an example of using basic auth with an Ingress. Here is [another example](https://kubernetes.github.io/ingress-nginx/examples/auth/basic/).
-
-```
-apiVersion: v1
-data:
-  auth: YWRtaW46JGFwcjEkZ2tJenJxU2ckMWx3RUpFN1lFcTlzR0FNN1VtR1djMAo= # default is admin:admin -- to be replaced
-kind: Secret
-metadata:
-  name: kubecost-auth
-  namespace: kubecost
-type: Opaque
----
-apiVersion: extensions/v1beta1
-kind: Ingress
-metadata:
-  name: kubecost-ingress
-  namespace: kubecost
-  labels:
-    app: kubecost
-  annotations:
-     nginx.ingress.kubernetes.io/auth-type: basic
-     nginx.ingress.kubernetes.io/auth-secret: kubecost-auth
-     nginx.ingress.kubernetes.io/auth-realm: "Authentication Required - ok"
-spec:
-  backend:
-    serviceName: kubecost-cost-analyzer
-    servicePort: 9090
-```
-
-Here’s an Ingress example for using non-root paths:
-
-```
-apiVersion: networking.k8s.io/v1beta1
-kind: Ingress
-metadata:
-  name: kubecost-ingress
-  annotations:
-    kubernetes.io/ingress.class: nginx
-    nginx.ingress.kubernetes.io/enable-cors: "true"
-    nginx.ingress.kubernetes.io/rewrite-target: /$2
-spec:
-  rules:
-  - host: test.kubecost.io
-    http:
-      paths:
-      - path: /kubecost(/|$)(.*)
-        backend:
-          serviceName: kubecost-frontend
-          servicePort: 9090
-```
+Also, the default [values.yaml](https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/values.yaml) has a stock Ingress that can be used.
 
 ## <a name="spot-nodes"></a>Spot Instance Configuration (AWS only)
 
