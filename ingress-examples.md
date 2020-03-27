@@ -33,29 +33,7 @@ spec:
     servicePort: 9090
 ```
 
-## Non-root path example:
-
-```
-apiVersion: networking.k8s.io/v1beta1
-kind: Ingress
-metadata:
-  name: kubecost-ingress
-  annotations:
-    kubernetes.io/ingress.class: nginx
-    nginx.ingress.kubernetes.io/enable-cors: "true"
-    nginx.ingress.kubernetes.io/rewrite-target: /$2
-spec:
-  rules:
-  - host: test.kubecost.io
-    http:
-      paths:
-      - path: /kubecost(/|$)(.*)
-        backend:
-          serviceName: kubecost-frontend
-          servicePort: 9090
-```
-
-## Non-root path without trailing slash example:
+## Non-root path
 
 ```
 apiVersion: networking.k8s.io/v1beta1
