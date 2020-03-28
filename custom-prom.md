@@ -74,6 +74,16 @@ Common issues include the following:
     action: replace
 ```
 
+* For clusters running k8s v1.16+, the following relabel config creates the `container_name` label expected on cadvisor metrics:
+
+```
+        metric_relabel_configs:
+          - source_labels: [ container ]
+            target_label: container_name
+            regex: (.+)
+            action: replace
+```
+
 * Data incorrectly is a single namespace -- make sure that [honor_labels](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#scrape_config) is enabled
 
 
