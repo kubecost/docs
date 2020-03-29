@@ -82,6 +82,10 @@ Common issues include the following:
     target_label: container_name
     regex: (.+)
     action: replace
+  - source_labels: [ pod ]
+    target_label: pod_name
+    regex: (.+)
+    action: replace
 ```
 
 * Data incorrectly is a single namespace -- make sure that [honor_labels](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#scrape_config) is enabled
