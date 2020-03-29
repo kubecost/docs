@@ -63,6 +63,18 @@ Kubecost uses `container_name` and `pod_name` labels on cadvisor metrics. For cl
     action: replace
 ```
 
+On recent versions of **Prometheus Operator**, cadvisor `instance` labels do not match internal Kubernetes node names. This causes usage data to not be registered correctly in Kubecost. The solution is to add the following block into your kubelet/cadvisor scrape config.
+
+```
+  metric_relabel_configs:
+  - source_labels: [node]
+    separator: ;
+    regex: (.*)
+    target_label: instance
+    replacement: $1
+    action: replace
+```
+
 <a name="troubleshoot"></a>
 ## Troubleshooting Issues
 
@@ -76,20 +88,7 @@ Common issues include the following:
 
 * Missing scrape configs -- visit Prometheus Target page (screenshot above)
 
-* On recent versions of the **Prometheus Operator**, cadvisor `instance` labels do not match internal Kubernetes node names. The solution is to add the following block into your kubelet/cadvisor scrape config.
-
-```
-  metric_relabel_configs:
-  - source_labels: [node]
-    separator: ;
-    regex: (.*)
-    target_label: instance
-    replacement: $1
-    action: replace
-```
-
 * Data incorrectly is a single namespace -- make sure that [honor_labels](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#scrape_config) is enabled
-
 
 You can visit Settings in Kubecost to see basic diagnostic information on these Prometheus metrics:
 
