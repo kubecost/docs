@@ -5,7 +5,7 @@ Integrating Kubecost with an existing Prometheus installation can be nuanced. We
 **Note:** integrating with an existing Prometheus is only supported under Kubecost paid plans.
 
 <a name="dep-versions"></a>
-__Requirements__
+### Requirements
 
 Kubecost requires the following dependency versions:
 
@@ -13,7 +13,7 @@ Kubecost requires the following dependency versions:
   - kube-state-metrics - v1.6.0 (May 19)
   - cAdvisor - kubelet v1.11.0  (May 18)
 
-__Implementation Steps__
+### Implementation Steps
 
 1. Copy [values.yaml](https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/values.yaml) and update the following parameters:  
 
@@ -45,9 +45,23 @@ You can confirm that this job is successfully running with the Targets view in P
 ![Prometheus Targets](/prom-targets.png)
 
 <a name="recording-rules"></a>
-__Recording Rules__  
-<br/>
+### Recording Rules  
 Kubecost uses [Prometheus recording rules](https://prometheus.io/docs/prometheus/latest/configuration/recording_rules/) to enable certain product features and to help improve product performance. These are recommended additions, especially for medium and large-sized clusters using their own Prometheus installation. You can find our recording rules under _prometheus.server.serverFiles.rules_ in this [values.yaml](https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/values.yaml) file.
+
+### Cadvisor metric labels. 
+Kubecost uses a set of expected cadvisor metric labels. For clusters running k8s v1.16+, the following relabel config creates the `container_name` and `pod_name` label expected on cadvisor metrics:
+
+```
+  metric_relabel_configs:
+  - source_labels: [ container ]
+    target_label: container_name
+    regex: (.+)
+    action: replace
+  - source_labels: [ pod ]
+    target_label: pod_name
+    regex: (.+)
+    action: replace
+```
 
 <a name="troubleshoot"></a>
 ## Troubleshooting Issues
@@ -71,20 +85,6 @@ Common issues include the following:
     regex: (.*)
     target_label: instance
     replacement: $1
-    action: replace
-```
-
-* For clusters running k8s v1.16+, the following relabel config creates the `container_name` label expected on cadvisor metrics:
-
-```
-  metric_relabel_configs:
-  - source_labels: [ container ]
-    target_label: container_name
-    regex: (.+)
-    action: replace
-  - source_labels: [ pod ]
-    target_label: pod_name
-    regex: (.+)
     action: replace
 ```
 
