@@ -49,7 +49,7 @@ You can confirm that this job is successfully running with the Targets view in P
 Kubecost uses [Prometheus recording rules](https://prometheus.io/docs/prometheus/latest/configuration/recording_rules/) to enable certain product features and to help improve product performance. These are recommended additions, especially for medium and large-sized clusters using their own Prometheus installation. You can find our recording rules under _prometheus.server.serverFiles.rules_ in this [values.yaml](https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/values.yaml) file.
 
 ### Cadvisor metric labels 
-Kubecost uses `container_name` and `pod_name` labels on cadvisor metrics. For clusters running k8s v1.16+, the following relabel config creates the expected labels on cadvisor metrics:
+Kubecost uses `container_name` and `pod_name` labels on cadvisor metrics. For clusters running **k8s v1.16+**, the following relabel config creates the expected labels on cadvisor metrics:
 
 ```
   metric_relabel_configs:
