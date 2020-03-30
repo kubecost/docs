@@ -19,11 +19,11 @@ You can stay up to date with Kubecost by joining us on [Slack](https://join.slac
 &nbsp;[Troubleshooting installation](/troubleshoot-install.md)  
 &nbsp;[Configuring Kubecost](/getting-started.md)  
 &nbsp;[Understanding cost allocation](/cost-allocation.md)  
-&nbsp;[Cost monitoring best practices](/cost-allocation.md)
+&nbsp;[Cost monitoring best practices](http://blog.kubecost.com/blog/cost-monitoring/)  
 
 ## Advanced Configuration
 &nbsp;[Allocating out of cluster costs (AWS)](/aws-out-of-cluster.md)  
 &nbsp;[Allocating out of cluster costs (GCP)](/gcp-out-of-cluster.md)  
-&nbsp;[AWS Spot feed integration](http://blog.kubecost.com/blog/cost-monitoring/)  
+&nbsp;[AWS Spot feed integration](/getting-started.md#spot-nodes)  
 
 Contact us via email (<team@kubecost.com>) or join us on [Slack](https://join.slack.com/t/kubecost/shared_invite/enQtNTA2MjQ1NDUyODE5LWFjYzIzNWE4MDkzMmUyZGU4NjkwMzMyMjIyM2E0NGNmYjExZjBiNjk1YzY5ZDI0ZTNhZDg4NjlkMGRkYzFlZTU) if you have questions!
