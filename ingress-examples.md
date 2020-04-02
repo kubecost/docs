@@ -33,6 +33,8 @@ spec:
     servicePort: 9090
 ```
 
+Here is a [second basic auth example](https://kubernetes.github.io/ingress-nginx/examples/auth/basic/) that uses a Kubernetes Secret. 
+
 ## Non-root path example
 
 ```
