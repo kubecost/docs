@@ -1,5 +1,5 @@
 Kubecost supports the ability to view cost and health data across multiple Kubernetes clusters and cloud providers.
-Below are the steps for adding an additional cluster on the **Kubecost Business** tier.
+Below are the steps for adding an additional cluster on the **Kubecost Business & Enterprise** tier.
 
 ## Add from frontend
 
