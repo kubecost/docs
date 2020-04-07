@@ -17,7 +17,7 @@ and `kubecost-cost-analyzer-postgres` are Running.
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Here's an example use: `http://localhost:9090/model/costDataModelRangeLarge`
 
-## Option B: Out of the cluster storage (Thanos)  
+## Option B: Out of cluster storage (Thanos)  
 
 Thanos-based durable storage provides long-term metric retention directly in a user-controlled bucket (e.g. S3 or GCS bucket) and can be enabled with the following steps:
 
