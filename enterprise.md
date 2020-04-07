@@ -20,7 +20,7 @@ Finely manage read and/or admin access by individual users or user groups. [Lear
 Connect internal alerting, monitoring, and BI solutions to Kubecost metrics and reporting.
 
 ### Enterprise Support   
-Dedicated SRE support with private Slack channel and video calls.
+Dedicated SRE support via private Slack channel and video calls. Expert technical support and guidance based on your specific goals.
 
 <br/>  
 
