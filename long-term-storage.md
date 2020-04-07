@@ -27,9 +27,9 @@ This step creates a yaml file that contains your durable storage target (e.g. GC
 
 __Google Cloud Storage__
 
-Start by creating a new Google Cloud Storage bucket, the following example uses a bucket named `thanos-bucket`. Next, download a service account JSON file from Google's service account manager ([instructions](/google-service-account-thanos.md)).
+Start by [creating a new Google Cloud Storage bucket](https://cloud.google.com/storage/docs/creating-buckets). The following example uses a bucket named `thanos-bucket`. Next, download a service account JSON file from Google's service account manager ([steps](/google-service-account-thanos.md)).
 
-Now create a yaml file named `object-store.yaml` with contents similar to the following:
+Now create a yaml file named `object-store.yaml` in the following format, using your bucket name and service account details:
 
 ```yaml
 type: GCS
@@ -57,7 +57,7 @@ __AWS/S3__
 
 Start by creating a new S3 bucket with all public access blocked. No other bucket configuration changes should be required. The following example uses a bucket named `kc-thanos-store`.
 
-Next, add an IAM policy to access this bucket ([instructions](/aws-service-account-thanos.md)).
+Next, add an IAM policy to access this bucket ([steps](/aws-service-account-thanos.md)).
 
 Now create a yaml file named `object-store.yaml` with contents similar to the following example. See region to endpoint mappings here: <https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region>
 
