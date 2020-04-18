@@ -72,7 +72,8 @@ config:
   signature_version2: false
   encrypt_sse: false
   secret_key: "<your-secret-key>"
-  put_user_metadata: {}
+  put_user_metadata:
+      "X-Amz-Acl": "bucket-owner-full-control"
   http_config:
     idle_conn_timeout: 90s
     response_header_timeout: 2m
