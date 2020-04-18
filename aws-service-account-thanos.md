@@ -20,7 +20,8 @@ In order to create an AWS IAM policy for use with Thanos:
                 "s3:ListBucket",
                 "s3:GetObject",
                 "s3:DeleteObject",
-                "s3:PutObject"
+                "s3:PutObject",
+                "s3:PutObjectAcl"
             ],
             "Resource": [
                 "arn:aws:s3:::<your-bucket-name>/*",
