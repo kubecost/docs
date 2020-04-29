@@ -1,6 +1,6 @@
 Kubecost provides the ability to allocate out of cluster costs, e.g. RDS instances and S3 buckets, back to Kubernetes concepts like namespace and deployment. All billing data remains on your cluster when using this functionality and is not shared externally.
 
-The following guide provides the steps required for allocating out of cluster costs. In a multi-account organization, all of the following steps will need to be completed in the payer account.
+The following guide provides the steps required for allocating out of cluster costs. The steps in this guide also enable accurate [Reserved Instance price allocation](http://docs.kubecost.com/getting-started#ri-committed-discount). In a multi-account organization, all of the following steps will need to be completed in the payer account.
 
 ## Step 1: Create an S3 bucket
 This bucket will be used to store AWS cost and usage data.
