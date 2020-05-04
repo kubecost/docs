@@ -76,7 +76,7 @@ For more accurate Spot pricing data, visit Settings in the Kubecost frontend to 
                 "s3:Get*",
                 "s3:List*"
             ],
-            "Resource": "*"
+            "Resource": "<your-spot-bucket-from-step-1>"
         }
     ]
 }
