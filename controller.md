@@ -7,13 +7,13 @@ This document show you how to enable this funtionality.
 ### GKE
 
 The following command performs the required steps to set up a service account.
-[More info](https://github.com/kubecost/cluster-turndown/scripts/README.md) 
+[More info](https://github.com/kubecost/cluster-turndown/blob/master/scripts/README.md) 
     
 ```bash
 /bin/bash -c "$(curl -fsSL https://github.com/kubecost/cluster-turndown/releases/latest/download/gke-create-service-key.sh)" -- <Project ID> <Service Account Name> <Namespace> cluster-controller-service-key
 ```
 
-To use [this setup script](https://github.com/kubecost/cluster-turndown/scripts/gke-create-service-key.sh) supply the following required parameters:
+To use [this setup script](https://github.com/kubecost/cluster-turndown/blob/master/scripts/gke-create-service-key.sh) supply the following required parameters:
 
 * **Project ID**: The GCP project identifier you can find via: `gcloud config get-value project`
 * **Service Account Name**: The desired service account name to create. 
