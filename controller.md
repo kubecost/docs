@@ -1,12 +1,12 @@
 # Cluster Controller
-Kubecost cluster controller enables write actions like automated cluster scaledown and 1-click cluster resize. 
+Kubecost cluster controller enables actions like automated cluster scaledown and 1-click cluster resize. 
 This document show you how to enable this funtionality. 
 
 ## Setup
 
 ### GKE
 
-The following command performs the required steps to set up a service account.
+The following command performs the steps required to set up a service account.
 [More info](https://github.com/kubecost/cluster-turndown/blob/master/scripts/README.md) 
     
 ```bash
@@ -16,8 +16,8 @@ The following command performs the required steps to set up a service account.
 To use [this setup script](https://github.com/kubecost/cluster-turndown/blob/master/scripts/gke-create-service-key.sh) supply the following required parameters:
 
 * **Project ID**: The GCP project identifier you can find via: `gcloud config get-value project`
-* **Service Account Name**: The desired service account name to create. 
-* **Namespace**: This should be the namespace which Kubecost will be installed. 
+* **Service Account Name**: The desired service account name to create, e.g. `kubecost-controller`
+* **Namespace**: This should be the namespace which Kubecost will be installed, e.g `kubecost`
 * **Secret Name**: This should always be set to `cluster-controller-service-key`, which is the secret name mounted by the Kubecost helm chart.
 
 ### EKS
