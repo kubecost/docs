@@ -31,16 +31,10 @@ Create a new User with **AutoScalingFullAccess** permissions. Create a new file,
 }
 ```
 
-Then run the following to create the turndown namespace:
-
-```bash
-$ kubectl apply -f artifacts/turndown-namespace.yaml
-```
-
 Then run the following to create the secret:
 
 ```bash
-$ kubectl create secret generic cluster-turndown-service-key -n turndown --from-file=service-key.json
+$ kubectl create secret generic cluster-controller-service-key -n <NAMESPACE> --from-file=service-key.json
 ```
 
 ---
