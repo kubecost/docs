@@ -84,17 +84,22 @@ This API returns a set of JSON objects in this format:
 
 ```
 {
-  aggregation: "namespace"
-  subfields: ""             // value(s) of aggregationSubfield parameter
-  cluster: "cluster-1"
-  cpuCost: 100.031611
-  environment: "default"    // value of aggregation field
+  aggregation: "namespace"  // value of aggregation type parameter
+  cpuAllocationAverage: 0.01  // average number of cores allocated over time window, max(request,usage)
+  cpuCost: 0.053106479999999914  // total cost of CPU allocated
+  cpuEfficiency: 0.04691666279537965
+  efficiency: 0.147697667157696  // efficiency of both CPU and RAM provisioned
+  environment: "ingress-nginx"  // instance of aggregation 
+  gpuAllocationAverage: 0
   gpuCost: 0
   networkCost: 0
-  pvCost: 10.000000
-  ramCost: 70.000529625
-  sharedCost: 0             // value of costs allocated via sharedNamespaces or sharedLabelNames
-  totalCost: 180.032140625
+  pvAllocationAverage: 0  // average GB allocated, based on amount provisioned
+  pvCost: 0
+  ramAllocationAverage: 0.08806329303317599  // average number of RAM GB allocated over time window, max(request,usage)
+  ramCost: 0.006268486099370322  // total cost of RAM allocated
+  ramEfficiency: 1.00
+  sharedCost: 0  // value of costs allocated via sharedOverhead, sharedNamespaces, or sharedLabelNames
+  totalCost: 0.059374966099370236  // sum of all costs
 }
 ```
 
