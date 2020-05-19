@@ -80,7 +80,14 @@ On recent versions of **Prometheus Operator**, cadvisor `instance` labels do not
 
 Common issues include the following:
 
-* Wrong Prometheus FQDN: evidenced by the following pod error message `No valid prometheus config file at  ...`. We recommend running `curl <your_prometheus_url>/api/v1/status/config` from a pod in the cluster to confirm that your [Prometheus config](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#configuration-file) is returned. If not, this is an indication that an incorrect Prometheus Url has been provided. If a config file is returned, then the Kubecost pod likely has its access restricted by a cluster policy, service mesh, etc.
+* Wrong Prometheus FQDN: evidenced by the following pod error message `No valid prometheus config file at  ...` and the init pods hanging. We recommend running `curl <your_prometheus_url>/api/v1/status/config` from a pod in the cluster to confirm that your [Prometheus config](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#configuration-file) is returned. Here is an example, but this needs to be updated based on your Prometheus address:
+
+```
+kubectl exec kubecost-cost-analyzer-db55d88f6-fr6kc -c cost-analyzer-frontend -n kubecost \
+-- curl http://kubecost-prometheus-server.kubecost/api/v1/status/config
+```
+
+If the config file is not returned, this is an indication that an incorrect Prometheus address has been provided. If a config file is returned from one pod in the cluster but not the Kubecost pod, then the Kubecost pod likely has its access restricted by a network policy, service mesh, etc.
 
 * Prometheus throttling -- ensure Prometheus isn't being CPU throttled due to a low resource request.
 
