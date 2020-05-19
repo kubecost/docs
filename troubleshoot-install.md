@@ -86,18 +86,15 @@ Recommended troubleshooting steps are as follows:
 
 Start by reviewing messages in your browser's developer console. Any meaningful errors or warnings may indicate an unexpected response from the Kubecost server.
 
-Next, point your browser to the `/api` endpoint on your target URL. For example, visit `http://localhost:9090/api/` in the scenario shown above. You should expect to see a Prometheus config file at this endpoint. If your cluster address has changed, you can visit Settings in the Kubecost product to update or you can also add a new cluster.  
+Next, point your browser to the `/api` endpoint on your target URL. For example, visit `http://localhost:9090/api/` in the scenario shown above. You should expect to see a Prometheus config file at this endpoint. If your cluster address has changed, you can visit Settings in the Kubecost product to update or you can also [add a new](/multi-cluster.md) cluster.  
 
-If you are unable to successfully retrieve your config file from this endpoint, we recommend the following:
+If you are unable to successfully retrieve your config file from this /api endpoint, we recommend the following:
 
-1. Check your connection to this host  
-2. View the status of all Prometheus and Kubecost pods to see if any pods are experiencing errors or are in a Pending state. When performing the default Kubecost install we recommend inspecting this with `kubectl get pods -n kubecost`. All pods should be either Running or Completed.  
-3. View relevant pod logs if any pod is not in the Running or Completed state.  
+1. Check your network connection to this host
+2. View the status of all Prometheus and Kubecost pods in this cluster's deployment to determine if any container are not in a `Ready` or `Completed` state. When performing the default Kubecost install this can be completed with `kubectl get pods -n kubecost`. All pods should be either Running or Completed. You can run `kubectl describe` on any pods not currently in this state.
+3. Finally, view pod logs for any pod that is not in the Running or Completed state to find a specific error message.
 
-If you are able to retrieve your config file from this endpoint, we recommend reviewing logs from the cost-analyzer pod to identify any errors.
-
-Please contact us at team@kubecost.com or on Slack at any point.
-
+Please contact us at team@kubecost.com or on [Slack](https://join.slack.com/t/kubecost/shared_invite/enQtNTA2MjQ1NDUyODE5LWFjYzIzNWE4MDkzMmUyZGU4NjkwMzMyMjIyM2E0NGNmYjExZjBiNjk1YzY5ZDI0ZTNhZDg4NjlkMGRkYzFlZTU) at any point with questions.
 
 ## <a name="app-wont-load"></a>Issue: Unable to load app
 
