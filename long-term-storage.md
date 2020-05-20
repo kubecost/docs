@@ -1,6 +1,6 @@
 To enable 90+ days of data retention in Kubecost, we recommend deploying with durable storage enabled. We provide two options for doing this: 1) in your cluster and 2) out of the cluster. This functionality also powers the Enterprise multi-cluster view, where data across clusters can be viewed in aggregate, as well as simple backup & restore capabilities.
 
-**Note:** This feature today requires an Enterprise license.
+**Note:** This feature requires an [Enterprise license](https://kubecost.com/pricing). 
 
 ## Option A: In cluster storage (Postgres)  
 
@@ -17,17 +17,19 @@ and `kubecost-cost-analyzer-postgres` are Running.
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Here's an example use: `http://localhost:9090/model/costDataModelRangeLarge`
 
-## Option B: Out of cluster storage (Thanos)  
+## Option B: Out of cluster storage (Thanos)
 
 Thanos-based durable storage provides long-term metric retention directly in a user-controlled bucket (e.g. S3 or GCS bucket) and can be enabled with the following steps:
 
-Step 1: **Create object-store yaml file**  
+### Step 1: Create object-store yaml file
 
 This step creates a yaml file that contains your durable storage target (e.g. GCS, S3, etc.) configuration and access credentials. The details of this file are documented thoroughly in Thanos documentation: https://thanos.io/storage.md/
 
-__Google Cloud Storage__
+#### Google Cloud Storage
 
-Start by [creating a new Google Cloud Storage bucket](https://cloud.google.com/storage/docs/creating-buckets). The following example uses a bucket named `thanos-bucket`. Next, download a service account JSON file from Google's service account manager ([steps](/google-service-account-thanos.md)).
+Start by [creating a new Google Cloud Storage bucket](https://cloud.google.com/storage/docs/creating-buckets). The following example uses a bucket named `thanos-bucket`. Do not apply a retention policy to your Thanos bucket, as it will prevent Thanos compaction from completing.
+
+Next, download a service account JSON file from Google's service account manager ([steps](/google-service-account-thanos.md)).
 
 Now create a yaml file named `object-store.yaml` in the following format, using your bucket name and service account details:
 
@@ -49,11 +51,9 @@ config:
       "client_x509_cert_url": ""
     }
 ```
-**Note:** given that this is yaml, it requires this specific indention.
+> Note: given that this is yaml, it requires this specific indention
 
-**Warning:** do not apply a retention policy to your Thanos bucket, as it will prevent Thanos compaction from completing.
-
-__AWS/S3__
+#### AWS/S3
 
 Start by creating a new S3 bucket with all public access blocked. No other bucket configuration changes should be required. The following example uses a bucket named `kc-thanos-store`.
 
@@ -61,7 +61,7 @@ Next, add an IAM policy to access this bucket ([steps](/aws-service-account-than
 
 Now create a yaml file named `object-store.yaml` with contents similar to the following example. See region to endpoint mappings here: <https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region>
 
-```
+```yaml
 type: S3
 config:
   bucket: "kc-thanos-store"
@@ -82,17 +82,16 @@ config:
     enable: true
   part_size: 134217728
 ```
+> Note: given that this is yaml, it requires this specific indention
 
-**Note:** given that this is yaml, it requires this specific indention.
-
-Step 2: **Create object-store secret**  
+### Step 2: Create object-store secret
 
 The final step prior to installation is to create a secret with the yaml file generated in the previous step:
 ```
 $ kubectl create secret generic kubecost-thanos -n kubecost --from-file=./object-store.yaml
 ```
 
-Step 3: **Deploying Kubecost with Thanos**  
+### Step 3: Deploying Kubecost with Thanos
 
 The Thanos subchart includes `thanos-bucket`, `thanos-query`, `thanos-store`,  `thanos-compact`, and service discovery for `thanos-sidecar`. These components are recommended when deploying Thanos on multiple clusters.
 
@@ -109,6 +108,8 @@ $ helm install kubecost/cost-analyzer \
 ```
 
 Your deployment should now have Thanos enabled!
+
+> Note: if you delete a previous install of kubecost, do this before creating the secret in step 2
 
 > Note: the `thanos-store` pod is by default configured to request 2 Gb in memory.
 
