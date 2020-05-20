@@ -109,7 +109,7 @@ $ helm install kubecost/cost-analyzer \
 
 Your deployment should now have Thanos enabled!
 
-> Note: if you delete a previous install of kubecost, do this before creating the secret in step 2
+> Note: if you need to delete a previous install of kubecost, do this before creating the secret in step 2
 
 > Note: the `thanos-store` pod is by default configured to request 2 Gb in memory.
 
