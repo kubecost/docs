@@ -60,7 +60,11 @@ Here are example uses:
 
 API parameters include the following:
 
-* `window` dictates the applicable window for measuring cost metrics. Supported units are d, h, m, and s.  
+* `window` dictates the applicable window for measuring cost metrics. Current support options:
+    - "15m", "24h", "7d", "48h", etc.
+    - "today", "yesterday", "week", "month", "lastweek", "lastmonth"
+    - "1586822400,1586908800", etc. (start and end unix timestamps)
+    - "2020-04-01T00:00:00Z,2020-04-03T00:00:00Z", etc. (start and end UTC RFC3339 pairs)
 * `offset` (optional) shifts window backwards from current time. Supported units are d, h, m, and s.  
 * `aggregation` is the field used to consolidate cost model data. Supported types are cluster, namespace, deployment, service, and label.  
 * `aggregationSubfield` used for aggregation types that require sub fields, e.g. aggregation type equals `label` and the value of the label (aggregationSubfield) equals `app`. Comma seperated list of values supported.
