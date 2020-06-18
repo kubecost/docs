@@ -30,9 +30,13 @@ kubectl logs kubecost-network-costs-<pod-identifier> -n kubecost
 
 This will show you top source and destination IP addresses and bytes transferred on the node where this pod is running.
 
-### Whitelisting internal addresses
+### Overriding traffic classification
 
-For addresses that are outside of your cluster but inside your VPC, Kubecost supports IP or CIDR block whitelisting. This feature can be configured in your [values.yaml](https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/values.yaml) under `networkCosts.config`. Any address within the whitelist will be considered in region and in zone traffic.
+For traffic routed to addresses outside of your cluster but inside your VPC, Kubecost supports IP or CIDR block classification. This feature can be configured in your [values.yaml](https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/values.yaml#L256-L277) under `networkCosts.config`. Classifications are defined as follows:
+
+* in-zone - a list of addresses/ranges that will be classified as in-zone, which is free for most providers. 
+* in-region - a list of addresses/ranges that will be classified as the same region between source and destinations but different zones.
+* cross-region -- a list of addresses/ranges that will be classified as different region from the source regions
 
 ### Troubleshooting
 
