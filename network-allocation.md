@@ -30,11 +30,11 @@ kubectl logs kubecost-network-costs-<pod-identifier> -n kubecost
 
 This will show you top source and destination IP addresses and bytes transferred on the node where this pod is running.
 
-### Overriding traffic classification
+### Overriding traffic classifications
 
-For traffic routed to addresses outside of your cluster but inside your VPC, Kubecost supports IP or CIDR block classification. This feature can be configured in your [values.yaml](https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/values.yaml#L256-L277) under `networkCosts.config`. Classifications are defined as follows:
+For traffic routed to addresses outside of your cluster but inside your VPC, Kubecost supports the ability to directly classifify network traffic to a particular IP address or CIDR block. This feature can be configured in your [values.yaml](https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/values.yaml#L256-L277) under `networkCosts.config`. Classifications are defined as follows:
 
-* in-zone - a list of addresses/ranges that will be classified as in-zone, which is free for most providers. 
+* in-zone - a list of destination addresses/ranges that will be classified as an in-zone traffic, which is free for most providers. 
 * in-region - a list of addresses/ranges that will be classified as the same region between source and destinations but different zones.
 * cross-region -- a list of addresses/ranges that will be classified as different region from the source regions
 
