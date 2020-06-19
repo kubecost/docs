@@ -73,7 +73,8 @@ API parameters include the following:
 * `sharedLabelNames` (optional) provide a comma-separated list of kubernetes labels (e.g. app) to be allocated to other tenants. Must provide the corresponding set of label values in `sharedLabelValues`.  
 * `sharedLabelValues` (optional) label value (e.g. prometheus) associated with `sharedLabelNames` parameter.  
 * `sharedSplit` (optional) Shared costs are split evenly across tenants unless `weighted` is passed for this request parameter. When allocating shared costs on a weighted basis, these costs are distributed based on the percentage of in-cluster resource costs of the individual pods in the particular aggregation, e.g. namespace.  
-* `disableCache` this API caches recently fetched data by default. Set this variable to `false` to avoid cache entirely.  
+* `disableCache` this API caches recently fetched data by default. Set this variable to `false` to avoid cache entirely.
+* `etl` setting this variable to `true` forces a request to be served by the ETL piepline. More info on this feature in the Caching Overview section below. 
 
 <a name="filter-params"></a>  
 Optional filter parameters include the following:   
@@ -109,9 +110,10 @@ This API returns a set of JSON objects in this format:
 
 ### Caching Overview
 
-Kubecost implements a two-layer caching system for cost allocation metrics. The unaggregated cost model (Layer 1 cache) is pre-cached for commonly used time windows, e.g. 1,2,7 and 30 days. This data is refreshed every ~5 minutes for shorter time windows and up to every 1 hour for long windows, e.g. 30 days. Aggregated cost data (Layer 2 cache) is pre-cached for commonly used aggregatedCostModel API requests, e.g. costs by namespace over the last 7 days. Returning cached data from Layer 1 typically takes < 500ms and Layer 2 < 100ms, not including data transfer times.
+Kubecost implements a two-layer caching system for cost allocation metrics. The unaggregated cost model is pre-cached for commonly used time windows, 1 and 2 days by default. This data is refreshed every ~5 minutes. 
 
-When a custom cost model request misses both layers of the Kubecost cache then this request remains in the cache for ~10 minutes. On larger clusters, requests that miss both caching layers can take longer periods, e.g. > 10 seconds.
+Longer time windows, 90 days by default, are part of an ETL pipeline that stores cost by day for each workload. This pipeline is also updated approximately ~5 mins. On update, only the latest day is rebuilt to reduce load on the underlying data store. Currently this ETL pipeline is stored in memory and is built any time the pod restarts.
 
+Returning cached data from either caching layer typically takes < 300ms on medium-sized clusters.
 
 Have questions? Email us at <team@kubecost.com>.
