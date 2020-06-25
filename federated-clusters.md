@@ -77,6 +77,6 @@ You can also optionally disable `thanos.store` and `thanos.query` with thanos/va
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 Clusters with store/query disabled will only have access to their metrics but will still write to the global bucket.
 
-3. Ensure you provide a unique identifier for `prometheus.server.global.exernal_labels.cluster_id` to have additional clusters be visible in the Kubecost product, e.g. `cluster-two`.  
+3. Ensure you provide a unique identifier for `prometheus.server.global.external_labels.cluster_id` to have additional clusters be visible in the Kubecost product, e.g. `cluster-two`.  
 
 4. Follow the same verification steps available [here](long-term-storage.md#verify-thanos).  
