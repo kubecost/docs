@@ -8,7 +8,7 @@ In this guide, you'll find everything you need to set up Kubecost for your team.
 
 ## Quick Installation
 
-Check out our [Installation options](/install) to start monitoring and managing your spend in minutes.
+Check out our [Installation options](/install.md) to start monitoring and managing your spend in minutes.
 
 ## Staying in the loop
 
