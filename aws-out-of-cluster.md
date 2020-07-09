@@ -183,7 +183,10 @@ To allocate AWS resources to a Kubernetes concept, use the following tag naming 
 | Pod                	| kubernetes_pod	      | &lt;pod-name>     |
 | Container          	| kubernetes_container	| &lt;container-name> |
 
+
 *\*In the `kubernetes_label_NAME` tag key, the `NAME` portion should appear exactly as the tag appears inside of Kubernetes. For example, for the tag `app.kubernetes.io/name`, this tag key would appear as `kubernetes_label_app.kubernetes.io/name`.*
+
+To use an alternative or existing AWS tag schema, you may supply these in your [values.yaml](https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/values.yaml#L403-L414).
 
 More on AWS tagging [here](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html).
 
