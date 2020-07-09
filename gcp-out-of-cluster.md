@@ -33,3 +33,5 @@ Pod:        "kubernetes_pod":        &lt;pod>
 Daemonset:  "kubernetes_daemonset":  &lt;daemonset>
 Container:  "kubernetes_container":  &lt;container>
 </pre>
+
+To use an alternative or existing label schema for GCP cloud assets, you may supply these in your [values.yaml](https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/values.yaml#L403-L414).
