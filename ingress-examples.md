@@ -60,6 +60,6 @@ spec:
       # serve kubecost from demo.kubecost.io/kubecost/
       - path: /kubecost(/|$)(.*)
         backend:
-          serviceName: kubecost-frontend
+          serviceName: kubecost-cost-analyzer # should be configured if another helm name or service address is used 
           servicePort: 9090
 ```
