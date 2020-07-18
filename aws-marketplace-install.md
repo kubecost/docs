@@ -1,6 +1,6 @@
 ## Step 1. Create an IAM policy
 
-[More info on how to create a new policy](https://docs.aws.amazon.com/IAM/latest/UserGuide/tutorial_managed-policies.html)
+[More info on how to create a new policy](https://docs.aws.amazon.com/IAM/latest/UserGuide/tutorial_managed-policies.html#step1-create-policy)
 
 ```
 {
@@ -19,9 +19,9 @@
 
 ## Step 2. Deploy Kubecost with attached IAM role
 
-Access Helm install steps are available at [kubecost.com/install](kubecost.com/install). 
+Access Helm install steps available at [kubecost.com/install](kubecost.com/install). 
 
-Supply the following parameters to your helm install command to attach your IAM role ([more info](https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html)) via annotation set as .Values.awstore.annotations and deploy Kubecost with AWS Marketplace images. 
+Supply the following parameters to your _helm install_ command to attach your IAM role ([more info](https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html)) via annotation set as .Values.awstore.annotations and deploy Kubecost with AWS Marketplace images. 
 
 > Note that you need to supply your AWS account ID and IAM role name in the parameter below. 
 
