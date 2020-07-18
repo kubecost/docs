@@ -1,4 +1,6 @@
-## Step 1. Create an IAM role
+## Step 1. Create an IAM policy
+
+[More info on how to create a new policy](https://docs.aws.amazon.com/IAM/latest/UserGuide/tutorial_managed-policies.html)
 
 ```
 {
