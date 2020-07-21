@@ -118,6 +118,7 @@ global:
   grafana:
     enabled: false
     domainName: cost-analyzer-grafana.default #example where format is <service-name>.<namespace>
+    proxy: false
 grafana:
   sidecar:
     dashboards:
