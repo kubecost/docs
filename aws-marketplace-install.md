@@ -27,7 +27,7 @@ Supply the following parameters to your _helm install_ command to attach your IA
 
 ```
 --set awstore.annotations="eks.amazonaws.com/role-arn: arn:aws:iam::YOUR_AWS_ACCOUNT_ID:role/YOUR_IAM_ROLE_NAME" \
---set kubecostModel.image=117940112483.dkr.ecr.us-east-1.amazonaws.com/ef3b1962-d859-427a-b88c-7d91cc1aa233/cg-2124175658/gcr.io/kubecost1/cost-model \
+--set kubecostModel.image=117940112483.dkr.ecr.us-east-1.amazonaws.com/8cc31d15-33f6-49fe-8d6c-e9c0366cefa0/cg-2124175658/gcr.io/kubecost1/cost-model \
 --set kubecostFrontend.image=117940112483.dkr.ecr.us-east-1.amazonaws.com/8cc31d15-33f6-49fe-8d6c-e9c0366cefa0/cg-2124175658/gcr.io/kubecost1/frontend \
 --set kubecost.image=117940112483.dkr.ecr.us-east-1.amazonaws.com/8cc31d15-33f6-49fe-8d6c-e9c0366cefa0/cg-2124175658/gcr.io/kubecost1/server \
 --set kubecostChecks.enabled=false \
@@ -35,5 +35,4 @@ Supply the following parameters to your _helm install_ command to attach your IA
 --set prometheus.nodeExporter.enabled=false \
 --set imageVersion="1.57.0-latest" \
 --set global.grafana.enabled=false \
---set global.grafana.proxy=false \
 ```
