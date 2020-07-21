@@ -35,4 +35,5 @@ Supply the following parameters to your _helm install_ command to attach your IA
 --set prometheus.nodeExporter.enabled=false \
 --set imageVersion="1.57.0-latest" \
 --set global.grafana.enabled=false \
+--set global.grafana.proxy=false \
 ```
