@@ -42,5 +42,5 @@ Supply the following parameters to your _helm install_ command
 --set imageVersion="1.57.0-latest" \
 --set global.grafana.enabled=false \
 --set global.grafana.proxy=false \
--f awsstore-valyes.yaml
+-f awsstore-values.yaml
 ```
