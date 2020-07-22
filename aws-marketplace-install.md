@@ -27,7 +27,7 @@ Create a file awsstore-values.yaml of the following format. Note that you need t
 awsstore:
   annotations:
     eks.amazonaws.com/role-arn: arn:aws:iam::YOUR_AWS_ACCOUNT_ID:role/YOUR_IAM_ROLE_NAME
-  imageNameAndVersion: gcr.io/kubecost1/awsstore:latest
+  imageNameAndVersion: 117940112483.dkr.ecr.us-east-1.amazonaws.com/8cc31d15-33f6-49fe-8d6c-e9c0366cefa0/cg-2124175658/gcr.io/kubecost1/awsstore:1.57.0-latest
 ```
 
 Supply the following parameters to your _helm install_ command 
