@@ -1,3 +1,7 @@
+This document provides the steps for installing the Kubecost Enterprise product from the AWS marketplace. [More info on different tiers.](https://kubecost.com/pricing)
+
+Please contact us at team@kubecost.com with any questions and we'd be happy to help!
+
 ## Step 1. Create an IAM policy
 
 [More info on how to create a new policy](https://docs.aws.amazon.com/IAM/latest/UserGuide/tutorial_managed-policies.html#step1-create-policy)
