@@ -71,16 +71,20 @@ For more accurate Spot pricing data, visit Settings in the Kubecost frontend to 
     "Version": "2012-10-17",
     "Statement": [
         {
+            "Sid": "VisualEditor0",
             "Effect": "Allow",
             "Action": [
-                "s3:Get*",
-                "s3:List*"
+                "s3:ListAllMyBuckets",
+                "s3:ListBucket",
+                "s3:HeadBucket",
+                "s3:HeadObject",
+                "s3:List*",
+                "s3:Get*"
             ],
-            "Resource": "<your-spot-bucket-from-step-1>"
+            "Resource": "*"
         }
     ]
-}
-```
+}```
 
 **Spot Verification**
 
