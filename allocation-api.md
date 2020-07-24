@@ -112,7 +112,7 @@ This API returns a set of JSON objects in this format:
 
 Kubecost implements a two-layer caching system for cost allocation metrics. The unaggregated cost model is pre-cached for commonly used time windows, 1 and 2 days by default. This data is refreshed every ~5 minutes. 
 
-Longer time windows, 90 days by default, are part of an ETL pipeline that stores cost by day for each workload. This pipeline is also updated approximately ~5 mins. On update, only the latest day is rebuilt to reduce load on the underlying data store. Currently this ETL pipeline is stored in memory and is built any time the pod restarts.
+Longer time windows, 120 days by default, are part of an ETL pipeline that stores cost by day for each workload. This pipeline is updated approximately ~10 mins. On update, only the latest day is rebuilt to reduce load on the underlying data store. Currently this ETL pipeline is stored in memory and is built any time the pod restarts. ETL is built with daily granularity for UI improved performance. Daily aggregations default to `UTC` but timezones can be configured with the `utcOffset` within [values](https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/values.yaml#L102). 
 
 Returning cached data from either caching layer typically takes < 300ms on medium-sized clusters.
 
