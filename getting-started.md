@@ -84,7 +84,8 @@ For more accurate Spot pricing data, visit Settings in the Kubecost frontend to 
             "Resource": "*"
         }
     ]
-}```
+}
+```
 
 **Spot Verification**
 
