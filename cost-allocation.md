@@ -34,7 +34,9 @@ kubectl get pods --show-labels -n <TARGET_NAMESPACE>
 The designated time window for measuring costs. Results for 1d, 2d, 7d, and 30d queries are cached by default.
 
 ### 4. Filter  
-Filter resources by namespace, clusterId, and Kubernetes label to more closely investigate a rise in spend or key cost drivers at different aggregations, e.g. Deployments or Pods. When a filter is applied, only resources with this matching value will be shown. These filters are also applied to external out-of-cluster asset tags.  
+Filter resources by namespace, clusterId, and Kubernetes label to more closely investigate a rise in spend or key cost drivers at different aggregations, e.g. Deployments or Pods. When a filter is applied, only resources with this matching value will be shown. These filters are also applied to external out-of-cluster asset tags.
+
+Comma-seperated lists are supported to filter by multple categories, e.g. namespace filter equals `kube-system,kubecost`
    
 ### 5. Allocate Idle Cost  
 Allocating idle costs proportionately distributes slack or idle _cluster costs_ to tenants. As an example, if your cluster is only 25% utilized, as measured by the max of resource usage and requests, applying idle costs would increase the cost of each pod/namespace/deployment by 4x. This feature can be enabled by default in Settings.
