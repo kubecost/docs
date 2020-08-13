@@ -21,7 +21,7 @@ For more information, refer to this [FAQ](https://github.com/kubecost/cost-model
 ### 2. Aggregation  
 Aggregate cost by namespace, deployment, service and other native Kubernetes concepts. 
 
-Costs aggregations are also visible by other meaningful organizational concepts, e.g. Team, Department, or Product. These aggregations are based on Kubernetes labels or annotations, referenced at both the pod and namespace-level, with labels at the pod-level being favored over the namespace label when both are present. The label name used for these concepts can be configured in Settings. Workloads without the relevent label/annotation will be shown as `_unallocated_`.
+Costs aggregations are also visible by other meaningful organizational concepts, e.g. Team, Department, and Product. These aggregations are based on Kubernetes labels or annotations, referenced at both the pod and namespace-level, with labels at the pod-level being favored over the namespace label when both are present. The Kubernetes label name used for these concepts can be configured in Settings or in [values.yaml](https://github.com/kubecost/cost-analyzer-helm-chart/blob/19908983ed7c8d4ff1d3e62d98537a39ab61bbab/cost-analyzer/values.yaml#L427-L445) after setting `kubecostProductConfigs.labelMappingConfigs.enabled` to true. Workloads without the relevent label/annotation will be shown as `_unallocated_`.
 
 To find what pods are not part of the relevant label set... you can explore variations of the following kubectl commands:  
 
