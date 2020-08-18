@@ -34,4 +34,4 @@ Daemonset:  "kubernetes_daemonset":  &lt;daemonset>
 Container:  "kubernetes_container":  &lt;container>
 </pre>
 
-To use an alternative or existing label schema for GCP cloud assets, you may supply these in your [values.yaml](https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/values.yaml) under the "kubecostProductConfigs.labelMappingConfigs.<aggregation>_external_label" 
+To use an alternative or existing label schema for GCP cloud assets, you may supply these in your [values.yaml](https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/values.yaml) under the "kubecostProductConfigs.labelMappingConfigs.\<aggregation\>\_external_label" 
