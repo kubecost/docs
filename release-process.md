@@ -9,6 +9,7 @@ A Kubecost Release is a snapshot of the source, build output, artifacts, and oth
 * Production releases are always generated from the Master branch.  
 * In each production release, we update each image version plus our helm chart version in lock step. 
 * Historically we average one patch release between minor releases.
+* You can target an older release of the Kubecost pod by setting `imageVersion` to the desired value, e.g. ` prod-1.63.1`
 
 ## Staging releases
 
