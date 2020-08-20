@@ -9,14 +9,16 @@ Kubecost’s SSO/SAML support makes it easy to manage application access and wor
 
 <br/><br/>
 
-SAML troubleshooting
+## SAML troubleshooting
 
-Disable SAML and confirm that the cost-analzyer pod starts. 
-If that is successful, but when SAML is added the pod is crashing or never enters the ready state, it is likely that there is panic loading or parsing SAML data. You should be able to pull the logs by fetching logs for the previous pod:
+Disable SAML and confirm that the cost-analzyer pod starts. If that is successful, but the pod crashes or never enters the ready state when SAML is enabled, it is likely that there is panic loading or parsing SAML data. You should be able to pull the logs by fetching logs for the previous pod:
 
+```
 kubectl logs -n kubecost <pod-name> --previous
+```
 
 If you’re supplying the SAML from the address of an Identity Provider Server: curl the saml metadata endpoint from within the kubecost pod and ensure that a valid XML EntityDescriptor is being returned and downloaded. The response should be in this format:
+
 ```
 kubectl exec kubecost-cost-analyzer-84fb785f55-2ssgj -c cost-analyzer-frontend -n kubecost -it -- /bin/sh
 curl https://dev-elu2z98r.auth0.com/samlp/metadata/c6nY4M37rBP0qSO1IYIqBPPyIPxLS8v2
@@ -45,4 +47,5 @@ curl https://dev-elu2z98r.auth0.com/samlp/metadata/c6nY4M37rBP0qSO1IYIqBPPyIPxLS
   </IDPSSODescriptor>
 </EntityDescriptor>
 ```
+
 Common errors are this URL 404-ing or returning HTML. Contact your SAML admin to find the URL on your identity provider that serves the raw XML file.
