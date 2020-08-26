@@ -16,7 +16,9 @@ http://<your-kubecost-address>/model/assets
 Here are example uses:
 
 * http://localhost:9090/model/assets?window=today
-* http://localhost:9090/model/assets?window=7d&aggregate=&accumulate=false
+* http://localhost:9090/model/assets?window=7d
+* http://localhost:9090/model/assets?window=7d&aggregate=type
+* http://localhost:9090/model/assets?window=7d&aggregate=type&accumulate=true
 
 API parameters include the following:
 
