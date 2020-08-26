@@ -35,22 +35,22 @@ This API returns a set of JSON objects in this format:
 
 ```
   {
-  cluster: "cluster-one"  // parent cluster for asset
-  cpuCores: 2  // number of CPUs, given this is a node asset type
-  cpuCost: 0.047416 // cumulative cost of CPU measured over time window
-  discount: 0.3 // discount applied to asset cost
-  end: "2020-08-21T00:00:00+0000" // end of measured time window
-  gpuCost: 0
-  key: "cluster-one/node/gke-niko-n1-standard-2-wljla-8df8e58a-hfy7"
-  name: "gke-niko-n1-standard-2-wljla-8df8e58a-hfy7"
-  nodeType: "n1-standard-2"
-  preemptible: 0
-  providerID: "gke-niko-n1-standard-2-wljla-8df8e58a-hfy7"
-  ramBytes: 7840256000
-  ramCost: 0.023203
-  start: "2020-08-20T00:00:00+0000"
-  adjustment: 0.0023 // amount added to totalCost during reconciliation with cloud provider data
-  totalCost: 0.049434 // total asset cost after applied discount 
-  type: "node" // e.g. node, disk, cluster management fee, etc
+    cluster: "cluster-one"  // parent cluster for asset
+    cpuCores: 2  // number of CPUs, given this is a node asset type
+    cpuCost: 0.047416 // cumulative cost of CPU measured over time window
+    discount: 0.3 // discount applied to asset cost
+    end: "2020-08-21T00:00:00+0000" // end of measured time window
+    gpuCost: 0
+    key: "cluster-one/node/gke-niko-n1-standard-2-wljla-8df8e58a-hfy7"
+    name: "gke-niko-n1-standard-2-wljla-8df8e58a-hfy7"
+    nodeType: "n1-standard-2"
+    preemptible: 0
+    providerID: "gke-niko-n1-standard-2-wljla-8df8e58a-hfy7"
+    ramBytes: 7840256000
+    ramCost: 0.023203
+    start: "2020-08-20T00:00:00+0000"
+    adjustment: 0.0023 // amount added to totalCost during reconciliation with cloud provider data
+    totalCost: 0.049434 // total asset cost after applied discount 
+    type: "node" // e.g. node, disk, cluster management fee, etc
 }
 ```
