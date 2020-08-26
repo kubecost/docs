@@ -10,7 +10,7 @@ The cluster assets API retrieves the backing cost data broken down by individual
 The API is available at the following endpoint:
 
 ```
-http://<your-kubecost-address>/model/asset
+http://<your-kubecost-address>/model/assets
 ```
 
 Here are example uses:
