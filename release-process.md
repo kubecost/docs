@@ -18,5 +18,5 @@ A Kubecost Release is a snapshot of the source, build output, artifacts, and oth
 
 ## Getting notified when a release is created
 
-* You can watch Releases Only ([more info](https://docs.github.com/en/github/managing-subscriptions-and-notifications-on-github/viewing-your-subscriptions)) for this helm chart repo.
+* You can watch Releases Only ([more info](https://docs.github.com/en/github/managing-subscriptions-and-notifications-on-github/viewing-your-subscriptions)) for this [helm chart repo](https://github.com/kubecost/cost-analyzer-helm-chart).
 Or join our Slack workspace - https://kubecost.slack.com
