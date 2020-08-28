@@ -46,7 +46,7 @@ Filter resources by namespace, clusterId, and Kubernetes label to more closely i
 Comma-seperated lists are supported to filter by multple categories, e.g. namespace filter equals `kube-system,kubecost`
    
 ### 5. Allocate Idle Cost  
-Allocating idle costs proportionately distributes slack or idle _cluster costs_ to tenants. As an example, if your cluster is only 25% utilized, as measured by the max of resource usage and requests, applying idle costs would increase the cost of each pod/namespace/deployment by 4x. This feature can be enabled by default in Settings.
+Allocating idle costs proportionately distributes slack or idle _cluster costs_ to tenants. Specifically, this relates to resources that are provisioned but not being used or requests by a tenant. As an example, if your cluster is only 25% utilized, as measured by the max of resource usage and requests, applying idle costs would proportionately increase the cost of each pod/namespace/deployment by 4x. This feature can be enabled by default in Settings.
 
 ### 6. Chart selection  
 Toggle to the bar chart view to see aggregated costs over the selected window, or the time series view to see cost changes over time.
