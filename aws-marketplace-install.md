@@ -23,7 +23,7 @@ Please contact us at team@kubecost.com with any questions and we'd be happy to h
 
 ## Step 2. Deploy Kubecost with attached IAM role
 
-Access Helm install steps available at [kubecost.com/install](kubecost.com/install). 
+Access Helm install steps available at [kubecost.com/install](http://kubecost.com/install). 
 
 Create a file awsstore-values.yaml of the following format. Note that you need to supply your AWS account ID and an IAM role that supports service accounts in the annotations field below.  ([more info](https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html)) via annotation set as .Values.awstore.annotations and deploy Kubecost with AWS Marketplace images. 
 
