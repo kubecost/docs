@@ -10,7 +10,7 @@ To enable this feature, set the following parameter in values.yaml during [Helm 
  ```
  networkCosts.enabled=true
  ```
- You can view a list of common Kubecost chart config options [here](https://github.com/kubecost/cost-analyzer-helm-chart#config-options).
+ You can view a list of common config options [here](https://github.com/kubecost/cost-analyzer-helm-chart/blob/ab384e2eb027e74b2c3e61a7e1733ffa1718170e/cost-analyzer/values.yaml#L276).
 
  **Note:** network cost, disabled by default, run as a privileged pod to access the relevant networking kernel module on the host.
 
