@@ -29,7 +29,7 @@ If you don’t see a name, you need to add a storage class. For help doing this,
 * AWS: [https://docs.aws.amazon.com/eks/latest/userguide/storage-classes.html](https://docs.aws.amazon.com/eks/latest/userguide/storage-classes.html)  
 * Azure: [https://kubernetes.io/docs/concepts/storage/storage-classes/#azure-disk](https://kubernetes.io/docs/concepts/storage/storage-classes/#azure-disk)  
 
-
+Alternatively, you can [deploy Kubecost without persistent storage](https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/values.yaml#L148).
 
 ## <a name="port-forward"></a>Issue: unable to establish a port-forward connection
 
