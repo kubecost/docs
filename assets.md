@@ -3,6 +3,8 @@ It’s used to identify spend drivers over time and to audit Allocation data.
 
 ![Kubecost Assets view](images/assets-screenshot.png)
 
+This view is available at `<your-kubecost-address>/assets.html` as of release v1.64.0
+
 # Assets API
 
 The cluster assets API retrieves the backing cost data broken down by individual assets in your cluster but also provides various aggregations of this data.
