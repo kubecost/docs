@@ -1,5 +1,7 @@
 # Custom Prometheus
 
+
+
 Integrating Kubecost with an existing Prometheus installation can be nuanced. We recommend first installing Kubecost with a bundled Prometheus ([instructions](http://kubecost.com/install)) as a dry run before integrating with an external Prometheus deployment. We also recommend getting in touch (team@kubecost.com) for assistance.
 
 **Note:** integrating with an existing Prometheus is only officially supported under Kubecost paid plans.
@@ -47,6 +49,8 @@ You can confirm that this job is successfully running with the Targets view in P
 <a name="recording-rules"></a>
 ### Recording Rules  
 Kubecost uses [Prometheus recording rules](https://prometheus.io/docs/prometheus/latest/configuration/recording_rules/) to enable certain product features and to help improve product performance. These are recommended additions, especially for medium and large-sized clusters using their own Prometheus installation. You can find the current set of recording rules used in the `rules` block under `prometheus.server.serverFiles` in this [values.yaml](https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/values.yaml) file.
+
+> Note: Kubecost recording rules were most recently updated in v1.65.0
 
 ### Cadvisor metric labels 
 Kubecost uses `container_name` and `pod_name` labels on cadvisor metrics. For clusters running **k8s v1.16+**, the following relabel config creates the expected labels on cadvisor metrics:
