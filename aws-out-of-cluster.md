@@ -1,6 +1,6 @@
-Kubecost provides the ability to allocate out of cluster costs, e.g. RDS instances and S3 buckets, back to Kubernetes concepts like namespace and deployment. All billing data remains on your cluster when using this functionality and is not shared externally.
+Integrating Kubecost with your AWS data provides the ability to allocate out of cluster costs, e.g. RDS instances and S3 buckets, back to Kubernetes concepts like namespace and deployment as well as reconcile in cluster assets back to your billing data. The latter is especially helpful when teams are using Reserved Instances, Savings Plans, or Enterprise Discounts. All billing data remains on your cluster when using this functionality and is not shared externally.
 
-The following guide provides the steps required for allocating out of cluster costs. The steps in this guide also enable accurate [Reserved Instance price allocation](http://docs.kubecost.com/getting-started#ri-committed-discount). In a multi-account organization, all of the following steps will need to be completed in the payer account.
+The following guide provides the steps required for enabling out of cluster costs allocation and accurate pricing, e.g. [Reserved Instance price allocation](http://docs.kubecost.com/getting-started#ri-committed-discount). In a multi-account organization, all of the following steps will need to be completed in the payer account.
 
 ## Step 1: Create an S3 bucket
 This bucket will be used to store AWS cost and usage data.
@@ -171,7 +171,7 @@ As Kubecost integrates with additional AWS services, additional read access may 
 
 ## Step 6: Tag your resources
 
-To allocate AWS resources to a Kubernetes concept, use the following tag naming scheme:
+To allocate external AWS resources to a Kubernetes concept, use the following tag naming scheme:
 
 | Kubernetes Concept 	| AWS Tag Key         	| AWS Tag Value 	|
 |--------------------	|---------------------	|---------------	|
