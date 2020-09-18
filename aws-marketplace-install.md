@@ -22,7 +22,7 @@ Please contact us at team@kubecost.com with any questions and we'd be happy to h
 ```
 
 ## Step 2. Create an IAM role with the appropriate trust relationships
-We recommend doing this via eksctl. More detail and how to set up the appropriate trust relationships is available ([here](https://docs.aws.amazon.com/eks/latest/userguide/create-service-account-iam-policy-and-role.html)
+We recommend doing this via eksctl. More detail and how to set up the appropriate trust relationships is available [here](https://docs.aws.amazon.com/eks/latest/userguide/create-service-account-iam-policy-and-role.html).
 ```
 eksctl create iamserviceaccount \
     --name service_account_name \
