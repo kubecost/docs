@@ -108,6 +108,10 @@ The Charge figures in logs should be reflected in your `node_total_hourly_cost`
 
 Paid versions of the Kubecost product reflect Reserved Instance (AWS), committed use (GCP), and custom-negotiated discounts into asset pricing. This allows for accurate allocation of costs to individual teams, apps, etc. Enabling this feature simply requires adding role access to cloud provider billing data and does not egress any data to external services. Contact us (team@kubecost.com) if you're interested in more information.
 
+#### AWS Reserved Instance Details:
+RI data requires access to an athena table the master payer account containing the Cost and Usage Report (CUR). Data for new RIs may be delayed until the instance data is available in the CUR. Once data is available, kubecost will reflect the price shown in the [reservation/EffectiveCost]( http://docs.kubecost.com/getting-started#ri-committed-discount)
+
+
 ## <a name="no-pvs"></a>Deploying Kubecost without persistent volumes
 
 You may optionally pass the following Helm flags to install Kubecost and its bundled dependancies without any Persistent Volumes. Note any time the Prometheus server pod is restarted then all historical billing data will be lost, unless Thanos or other long-term storage is enabled in the Kubecost product.  
