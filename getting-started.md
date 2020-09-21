@@ -109,7 +109,7 @@ The Charge figures in logs should be reflected in your `node_total_hourly_cost`
 Paid versions of the Kubecost product reflect Reserved Instance (AWS), committed use (GCP), and custom-negotiated discounts into asset pricing. This allows for accurate allocation of costs to individual teams, apps, etc. Enabling this feature simply requires adding role access to cloud provider billing data and does not egress any data to external services. Contact us (team@kubecost.com) if you're interested in more information.
 
 #### AWS Reserved Instance Details:
-RI data requires access to an athena table the master payer account containing the Cost and Usage Report (CUR). Data for new RIs may be delayed until the instance data is available in the CUR. Once data is available, kubecost will reflect the price shown in the [reservation/EffectiveCost]( http://docs.kubecost.com/getting-started#ri-committed-discount)
+Accurately tracking AWS Reserved Instance prices requires access to an Athena table containing the Cost and Usage Report (CUR). Data for new RIs may be delayed until the instance data is available in the CUR. Once data is available, Kubecost will reflect the price shown in the [reservation/EffectiveCost]( http://docs.kubecost.com/getting-started#ri-committed-discount) field. Kubecost will also reconcile daily spend with cost figures available in the CUR. 
 
 
 ## <a name="no-pvs"></a>Deploying Kubecost without persistent volumes
