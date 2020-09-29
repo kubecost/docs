@@ -9,26 +9,8 @@ To deploy one of these builds, complete the following steps:
 helm repo add kubecost-staging https://kubecost.github.io/staging-repo/
 ```
 
-### 2. Create new namespace (only required on helm 3)
+### 2. Upgrade kubecost to use staging repo 
 
 ```
-kubectl create namespace kubecost-staging
+ helm upgrade kubecost kubecoststagingrepo/cost-analyzer -n kubecost
 ```
-
-### 3. Helm install 
-
-```
-helm install kubecost-staging kubecost-staging/cost-analyzer --namespace kubecost-staging
-```
-
-### 4. Connect to build
-
-```
-kubectl port-forward --namespace kubecost-staging deployment/kubecost-staging-cost-analyzer 9090
-```
-
-You can now visit <http://localhost:9090> to view the Kubecost frontend.
-
-<br/>  
-
-This chart can be uninstalled with `helm uninstall kubecost-staging -n kubecost-staging`
