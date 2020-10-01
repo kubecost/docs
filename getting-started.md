@@ -30,8 +30,7 @@ To determine the appropriate disk size, you can use this formulate to approximat
 needed_disk_space = retention_time_minutes * ingested_samples_per_minutes * bytes_per_sample
 ```
 
-On average, Prometheus uses only around 1-2 bytes per sample. So ingesting 100k samples per minute and retaining for 15 days would need around 40gb. It's recommended to add another 20-30% capacity for headroom and WAL. More info on disk sizing [here](https://prometheus.io/docs/prometheus/latest/storage/#operational-aspects).
-
+Where ingested samples can be measured as the average over a recent period, e.g. `sum(avg_over_time(scrape_samples_post_metric_relabeling[24h]))`. On average, Prometheus uses around 1.5-2 bytes per sample. So ingesting 100k samples per minute and retaining for 15 days would demand around 40gb. It's recommended to add another 20-30% capacity for headroom and WAL. More info on disk sizing [here](https://prometheus.io/docs/prometheus/latest/storage/#operational-aspects).
 
 **Note:** We do not recommend retaining greater than 30 days of data in Prometheus for larger clusters. For long-term data retention, contact us (team@kubecost.com) about Kubecost with durable storage enabled.
 
