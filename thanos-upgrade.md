@@ -1,4 +1,4 @@
-If you're upgrading to kubecost 1.67.0 from kubecost < 1.67.0 and using thanos, and using AWS s3 as your backing storage for thanos, you'll need to make a small change to your thanos secret in order to bump the thanos version to 0.15.0 before you upgrade kubecost.
+Kubecost 1.67.0 uses Thanos 0.15.0. If you're upgrading to kubecost 1.67.0 from kubecost < 1.67.0 and using thanos, and using AWS s3 as your backing storage for thanos, you'll need to make a small change to your thanos secret in order to bump the thanos version to 0.15.0 before you upgrade kubecost.
 Thanos 0.15.0 has over 10x performance improvements, so this is well worth the effort.
 
 Your values-thanos.yaml needs to be updated to the new defaults: https://github.com/kubecost/cost-analyzer-helm-chart/commit/752b584a520f2ff089517341ab2eca2664980dab#diff-b5f07a55b9483e6b0fc339c7a03fa08b .
