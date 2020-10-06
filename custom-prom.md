@@ -79,6 +79,23 @@ On recent versions of **Prometheus Operator**, cadvisor `instance` labels do not
     action: replace
 ```
 
+### Node exporter metric labels
+Note that this is optional for efficiency metrics: https://github.com/kubecost/cost-model/issues/556 for a description of what will be missing if this step is skipped.
+
+You'll need to add the following relabel config to the job that scrapes the node exporter daemonet.
+
+```
+  - job_name: 'kubernetes-service-endpoints'
+
+    kubernetes_sd_configs:
+      - role: endpoints
+
+    relabel_configs:
+      - source_labels: [__meta_kubernetes_service_name]
+        action: replace
+        target_label: kubernetes_name
+```
+
 <a name="troubleshoot"></a>
 ## Troubleshooting Issues
 
