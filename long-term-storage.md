@@ -70,7 +70,6 @@ config:
   access_key: "AKIAXW6UVLRRTDSCCU4D"
   insecure: false
   signature_version2: false
-  encrypt_sse: false
   secret_key: "<your-secret-key>"
   put_user_metadata:
       "X-Amz-Acl": "bucket-owner-full-control"
