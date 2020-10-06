@@ -15,7 +15,7 @@ config:
   access_key: ${your_access_key}
   insecure: false
   signature_version2: false
-  #encrypt_sse: false <--- comment this line out
+  #encrypt_sse: false <--- THIS LINE NEEDS TO BE DELETED
   secret_key: ${your_secret_here}
   put_user_metadata:
       "X-Amz-Acl": "bucket-owner-full-control"
