@@ -91,9 +91,9 @@ You'll need to add the following relabel config to the job that scrapes the node
       - role: endpoints
 
     relabel_configs:
-      - source_labels: [__meta_kubernetes_service_name]
+      - source_labels: [__meta_kubernetes_pod_node_name]
         action: replace
-        target_label: kubernetes_name
+        target_label: kubernetes_node
 ```
 
 <a name="troubleshoot"></a>
