@@ -9,7 +9,7 @@ Kubecost now supports persisting its cache of data to disk. This dramatically re
     * If you can safely delete your configs and re-add them on another PV, it is suggested you delete the old PV and run kubecost with a 32GB disk
     * If you cannot safely delete your configs and re-add them on another PV
       * If you are not on a regional cluster you can store data on a second disk by setting persistentVolume.dbPVEnabled=true in values.yaml
-      * If you are on a regional cluster, you will need to provision this disk using a topology-aware storage class (more info). You can set this disk’s storage class by setting persistentVolume.dbStorageClass= your-topology-aware-storage-class-name
+      * If you are on a regional cluster, you will need to provision this disk using a topology-aware storage class (more info). You can set this disk’s storage class by setting persistentVolume.dbStorageClass = your-topology-aware-storage-class-name
 
 
 
