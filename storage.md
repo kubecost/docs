@@ -3,7 +3,7 @@
 #### Persisting data to disk cache
 Kubecost now supports persisting its cache of data to disk. This dramatically reduces the load on startup against your Prometheus/Thanos installations on pod restart/redeploy.
 
-* If you are creating a fresh installation of kubecost:
+* If you are creating a new installation of kubecost:
   * It is recommended that you back kubecost with a 32GB disk. Set persistentVolume.storage.size = “32Gi”
 * If you are upgrading
   * If you are storing your configs on a PV and your provisioner supports volume expansion:
