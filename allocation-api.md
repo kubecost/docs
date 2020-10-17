@@ -66,7 +66,7 @@ API parameters include the following:
     - "1586822400,1586908800", etc. (start and end unix timestamps)
     - "2020-04-01T00:00:00Z,2020-04-03T00:00:00Z", etc. (start and end UTC RFC3339 pairs)
 * `offset` (optional) shifts window backwards from current time. Supported units are d, h, m, and s.  
-* `aggregation` is the field used to consolidate cost model data. Supported types are cluster, namespace, deployment, service, and label.  
+* `aggregation` is the field used to consolidate cost model data. Supported types are cluster, namespace, controller, deployment, service, label, pod and container.  
 * `aggregationSubfield` used for aggregation types that require sub fields, e.g. aggregation type equals `label` and the value of the label (aggregationSubfield) equals `app`. Comma seperated list of values supported.
 * `allocateIdle` (optional) when set to `true` applies the cost of all idle compute resources to tenants, default `false`.  
 * `sharedNamespaces` (optional) provide a comma-separated list of namespaces (e.g. kube-system) to be allocated to other tenants. These resources are evenly allocated to other tenants as `sharedCost`.  
