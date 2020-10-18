@@ -10,7 +10,6 @@ We recommend that you back Kubecost with at least a 32GiB disk. Set `persistentV
 
   * If your provisioner does supports volume expansion, we recommend that you resize to a 32GB disk by setting `persistentVolume.storage.size = “32Gi”`
   * If your provisioner does not support volume expansion:
-  * If you are storing your configs on a PV and your provisioner does not support volume expansion:
     * If you can safely delete the PV storing your configs and configure them on a new PV:
       * We suggest you delete the old PV, then run Kubecost with a 32GB disk by setting persistentVolume.storage.size = “32Gi”
     * If you cannot safely delete the PV storing your configs and configure them on a new PV:
