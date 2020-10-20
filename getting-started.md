@@ -34,6 +34,8 @@ Where ingested samples can be measured as the average over a recent period, e.g.
 
 **Note:** We do not recommend retaining greater than 30 days of data in Prometheus for larger clusters. For long-term data retention, contact us (team@kubecost.com) about Kubecost with durable storage enabled.
 
+[More info on Kubecost Storage](/storage.md)
+
 ## <a name="custom-prom"></a>Bring your own Prometheus or Grafana
 
 The Kubecost Prometheus deployment is used as both as a source and a sink for cost & capacity metrics. It's optimized to not interfere with other observability instrumentation and by default only contains metrics that are useful to the Kubecost product. This amounts to retaining 70-90% fewer metrics than a standard Prometheus deployment.
