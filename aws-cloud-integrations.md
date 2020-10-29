@@ -213,232 +213,86 @@ On each sub account running kubecost, attach both of the following policies to t
                   }
                ]
 	}
-	```
-
-
-
-
-        *   On the masterpayer account:
-
-            {
-
-
+```
+On the masterpayer account, attach this policy to a role:
+```
+	{
                "Version": "2012-10-17",
-
-
                "Statement": [
-
-
                   {
-
-
                      "Sid": "AthenaAccess",
-
-
                      "Effect": "Allow",
-
-
                      "Action": [
-
-
                         "athena:*"
-
-
                      ],
-
-
                      "Resource": [
-
-
                         "*"
-
-
                      ]
-
-
-                  },
-
-
-                  {
-
-
+	},
+	{
                      "Sid": "ReadAccessToAthenaCurDataViaGlue",
-
-
                      "Effect": "Allow",
-
-
                      "Action": [
-
-
                         "glue:GetDatabase*",
-
-
                         "glue:GetTable*",
-
-
                         "glue:GetPartition*",
-
-
                         "glue:GetUserDefinedFunction",
-
-
                         "glue:BatchGetPartition"
-
-
                      ],
-
-
                      "Resource": [
-
-
                         "arn:aws:glue:*:*:catalog",
-
-
                         "arn:aws:glue:*:*:database/athenacurcfn*",
-
-
                         "arn:aws:glue:*:*:table/athenacurcfn*/*"
-
-
                      ]
-
-
                   },
-
-
                   {
-
-
                      "Sid": "AthenaQueryResultsOutput",
-
-
                      "Effect": "Allow",
-
-
                      "Action": [
-
-
-                        "s3:GetBucketLocation",
-
-
+                        "s3:GetBucketLocation"
                         "s3:GetObject",
-
-
                         "s3:ListBucket",
-
-
                         "s3:ListBucketMultipartUploads",
-
-
                         "s3:ListMultipartUploadParts",
-
-
                         "s3:AbortMultipartUpload",
-
-
                         "s3:CreateBucket",
-
-
-                        "s3:PutObject"
-
-
+                        "s3:PutObject,
                      ],
-
-
                      "Resource": [
-
-
                         "arn:aws:s3:::aws-athena-query-results-*"
-
-
                      ]
-
-
                   },
-
-
                   {
-
-
                      "Sid": "S3ReadAccessToAwsBillingData",
-
-
                      "Effect": "Allow",
-
-
                      "Action": [
-
-
                         "s3:Get*",
-
-
                         "s3:List*"
-
-
                      ],
-
-
                      "Resource": [
-
-
                         "arn:aws:s3:::${AthenaCURBucket}*"
-
-
                      ]
-
-
                   }
-
-
                ]
-
-
-            }
-
-
-			Attach this policy to a role, with the following trust relationship:
-
-			{
-
-
+	}
+```
+You will then need to add the following trust statement to the role the policy is attached to:
+```
+	{
                "Version": "2012-10-17",
-
-
                "Statement": [
-
-
                   {
-
-
                      "Effect": "Allow",
-
-
                      "Principal": {
-
-
                         "AWS": `'arn:aws:iam::${KubecostClusterID}:root'`
-
-
                      },
-
-
                      "Action": [
-
-
                         "sts:AssumeRole"
-
-
                      ]
-
-
                   }
-
-
                ]
-
-
             }
+```
 
 </details>
 
