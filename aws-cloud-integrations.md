@@ -5,22 +5,22 @@ Cost and Usage Report integration via Athena: Kubecost integrates with the cost 
 Spot Instance Feed Integration: Kubecost integrates with your spot data feed to pull spot data information, as the CUR is often many hours behind.
 
 
-## Setting up the CUR:
+# Setting up the CUR:
 
 [https://docs.aws.amazon.com/cur/latest/userguide/cur-ate-setup.html#create-athena-cur](https://docs.aws.amazon.com/cur/latest/userguide/cur-ate-setup.html#create-athena-cur)
 
 Note the name of the bucket you create to place the CUR
 
 
-## Setting up the Spot Data feed:
+# Setting up the Spot Data feed:
 
 [https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-data-feeds.html](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-data-feeds.html)
 
 Note the name of the bucket you create to place the spot data feed
 
 
-## Setting up IAM permissions:
-### Via Cloudformation: 
+# Setting up IAM permissions:
+## Via Cloudformation: 
 Kubecost offers a set of cloudformation templates to help set your IAM roles up. If you’re new to provisioning IAM roles, we suggest downloading our templates and using the cloudformation wizard to set these up: [https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cfn-console-create-stack.html](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cfn-console-create-stack.html) . 
 Download template files from the URLs provided below and upload them as the stack template in the Creating a stack > Selecting a stack template step.
 
@@ -85,7 +85,7 @@ Download template files from the URLs provided below and upload them as the stac
             *   KubecostClusterID: An account that kubecost is running on that requires access to the Athena CUR
 </details>
 
-### Manually: Kubecost requires the following policies:
+## Manually
 <details>
 	<summary>My kubernetes clusters run in the same account as the master payer account</summary>
 
@@ -298,53 +298,59 @@ You will then need to add the following trust statement to the role the policy i
 
 
 # Attaching IAM permissions to Kubecost:
+Now that the policies have been created, we will need to attach those policies to Kubecost. We support the following methods:
 
-*   Now that the policies have been created, we will need to attach those policies to Kubecost. We support the following methods:
-*   Via Service Key
-    *   Navigate to https://console.aws.amazon.com/iam Access Management > Users and select Security Credentials > Create Access Key. Note the **Access key ID **and **Secret access key**
-    *   Via kubernetes secret
-        *   Create a secret from helm values
-            *   Set `.Values.kubecostProductConfigs.awsServiceKeyName `to<code> <strong>Access key ID</strong></code>
-            *   Set <code>.Values.kubecostProductConfigs.awsServiceKeyPassword </code>to <strong>Secret access key</strong>
-            *   Note that this will leave your secrets unencrypted in values.yaml. Use an existing secret as in the next step to avoid this.
-        *   Use an existing secret 
-            *    Create a json file named <em>service-key.json</em> of the following format
+<details>
+	<summary>Via Service Key And Kubernetes Secret</summary>
 
+* Navigate to https://console.aws.amazon.com/iam Access Management > Users . Find the Kubecost User and select Security Credentials > Create Access Key. Note the Access key ID and Secret access key. You'll use it to either Create a secret from helm values or Create and use an existing secret.
+
+	<details>
+		<summary>Create a secret from helm values</summary>
+
+	* Set `.Values.kubecostProductConfigs.awsServiceKeyName `to<code> <strong>Access key ID</strong></code>
+	*   Set <code>.Values.kubecostProductConfigs.awsServiceKeyPassword </code>to <strong>Secret access key</strong>
+	*   Note that this will leave your secrets unencrypted in values.yaml. Use an existing secret as in the next step to avoid this.
+
+	</details>
+
+	<details>
+		<summary> Create and use an existing secret </summary>
+	If you commit your helm values to source control, you may want to create a secret in a different way and import that secret to kubecost.
+	* Create a json file named <em>service-key.json</em> of the following format
+		```
                 {
-
-
-                	"`aws_access_key_id": &lt;ACCESS_KEY_ID>,`
-
-
-                ```
+                	"`aws_access_key_id": <ACCESS_KEY_ID>,`
                 	"aws_secret_access_key": <ACCESS_KEY_SECRET>
-                ```
-
-
-
                 }
-
-
-                Create a secret from file in the namespace kubecost is deployed in:
-
-
-                ```
+		```
+	* Create a secret from file in the namespace kubecost is deployed in:
+        	```
                 kubectl create secret generic <name> --from-file=service-key.json --namespace <kubecost>
-                ```
+        	```
+	* Set .Values.kubecostProductConfigs.serviceKeySecretName to the name of this secet. Note also that .Values.kubecostProductConfigs.awsServiceKeyName and .Values.kubecostProductConfigs.awsServiceKeyPassword should be unset if adding the service key from values this way.
 
+	</details>
 
+</details>
 
-                Add the &lt;name> of the secret above to serviceKeySecretName in [values.yaml](https://github.com/kubecost/cost-analyzer-helm-chart/blob/1fb9c5a3b341767570a62f14cca249a62671f6fc/cost-analyzer/values.yaml#L460) . Note also that [awsServiceKeyName](https://github.com/kubecost/cost-analyzer-helm-chart/blob/1fb9c5a3b341767570a62f14cca249a62671f6fc/cost-analyzer/values.yaml#L416) should be unset if adding the service key from values this way.
+<details>
+	<summary>Via service key and kubecost frontend</summary>
+	
+* Navigate to https://console.aws.amazon.com/iam Access Management > Users . Find the Kubecost User and select Security Credentials > Create Access Key. Note the Access key ID and Secret access key.
+*   You can add the Access key ID and Secret access key on /settings.html  > External Cloud Cost Configuration (AWS) > Update  and setting Service key name to **Access key ID** and Service key secret to **Secret access key**
 
-    *   Via kubecost frontend
-        *   You can add the Access key ID and Secret access key on /settings.html  > External Cloud Cost Configuration (AWS) > Update  and setting Service key name to **Access key ID** and Service key secret to **Secret access key**
-*   Via Pod Annotation on EKS
-    *   Enable IAM roles.
-        *   [https://docs.aws.amazon.com/eks/latest/userguide/enable-iam-roles-for-service-accounts.html](https://docs.aws.amazon.com/eks/latest/userguide/enable-iam-roles-for-service-accounts.html)
-    *   you define the IAM role to associate with a service account in your cluster by adding the following annotation to the service account
-        *   [https://docs.aws.amazon.com/eks/latest/userguide/specify-service-account-role.html](https://docs.aws.amazon.com/eks/latest/userguide/specify-service-account-role.html)
-    *   This annotation can be added to the kubecost service account by setting `.Values.serviceAccount.annotations ` in the helm chart to `eks.amazonaws.com/role-arn: arn:aws:iam::&lt;AWS_ACCOUNT_ID>:role/&lt;IAM_ROLE_NAME>`
+</details>
 
+<details>
+	<summary>Via Pod Annotation on EKS</summary>
+	
+* Enable IAM roles.
+	*   [https://docs.aws.amazon.com/eks/latest/userguide/enable-iam-roles-for-service-accounts.html](https://docs.aws.amazon.com/eks/latest/userguide/enable-iam-roles-for-service-accounts.html)
+	*   you can define the IAM role to associate with a service account in your cluster by adding the annotation described in the docs below to kubecost's service account [https://docs.aws.amazon.com/eks/latest/userguide/specify-service-account-role.html](https://docs.aws.amazon.com/eks/latest/userguide/specify-service-account-role.html)
+    *   This annotation can be added to the kubecost service account by setting `.Values.serviceAccount.annotations ` in the helm chart to `eks.amazonaws.com/role-arn: arn:aws:iam::<AWS_ACCOUNT_ID>:role/<IAM_ROLE_NAME>`
+
+</details>
 
 # Configuring the CUR in Kubecost:
 
