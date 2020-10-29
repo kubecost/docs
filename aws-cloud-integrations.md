@@ -28,7 +28,7 @@ Download template files from the URLs provided below and upload them as the stac
   <summary> My kubernetes clusters all run in the same account as the master payer account.</summary>
   
 
-  * Download this file: [https://raw.githubusercontent.com/kubecost/cloudformation/master/kubecost-masterpayer-account-permissions.yaml](https://raw.githubusercontent.com/kubecost/cloudformation/master/kubecost-masterpayer-account-permissions.yaml)
+  * Download this file: [https://raw.githubusercontent.com/kubecost/cloudformation/master/kubecost-single-account-permissions.yaml](https://raw.githubusercontent.com/kubecost/cloudformation/master/kubecost-single-account-permissions.yaml)
   
   * Navigate to https://console.aws.amazon.com/cloudformation
   
@@ -62,342 +62,159 @@ Download template files from the URLs provided below and upload them as the stac
 <details>
   <summary>Your kubernetes clusters run in different accounts from the masterpayer account</summary>
   
-    *   On each sub account running kubecost
-        *   Follow the same steps to create a cloudformation stack as above, but with the following as your yaml file instead: [https://raw.githubusercontent.com/kubecost/cloudformation/master/kubecost-sub-account-permissions.yaml](https://raw.githubusercontent.com/kubecost/cloudformation/master/kubecost-sub-account-permissions.yaml) , and with these parameters:
-            *   MasterPayerAccountID: The account ID of the master payer account where the CUR has been created
-            *   SpotDataFeedBucketName: The bucket where the spot data feed is sent from the “Setting up the Spot Data feed” step
-    *   On the masterpayer account
+  * On each sub account running kubecost
+	* Download this file: [https://raw.githubusercontent.com/kubecost/cloudformation/master/kubecost-sub-account-permissions.yaml](https://raw.githubusercontent.com/kubecost/cloudformation/master/kubecost-sub-account-permissions.yaml)
+  	* Navigate to https://console.aws.amazon.com/cloudformation
+ 	* Choose **Create New Stack** if you have never used AWS CloudFormation before. Otherwise, choose **Create Stack**.
+  	* Under **Prepare template**, choose **Template is ready**.
+  	* Under **Template source**, choose **Upload a template file**.
+  	* Select **Choose file**.
+  	* Choose the downloaded .yaml template, and then choose **Open**.
+  	* Choose **Next**.
+  	* For **Stack name**, enter a name for your template 
+  	* Set the following parameters:
+		* MasterPayerAccountID: The account ID of the master payer account where the CUR has been created
+		* SpotDataFeedBucketName: The bucket where the spot data feed is sent from the “Setting up the Spot Data feed” step
+  	* Choose **Next**.
+  	* Choose **Next**
+  	* At the bottom of the page, select **I acknowledge that AWS CloudFormation might create IAM resources.** 
+  	* Choose **Create Stack**
+  * On the masterpayer account
         *   Follow the same steps to create a cloudformation stack as above, but with the following as your yaml file instead: [https://raw.githubusercontent.com/kubecost/cloudformation/master/kubecost-masterpayer-account-permissions.yaml](https://raw.githubusercontent.com/kubecost/cloudformation/master/kubecost-masterpayer-account-permissions.yaml) , and with these parameters:
             *   AthenaCURBucket: The bucket where the CUR is set from the “Setting up the CUR” step
             *   KubecostClusterID: An account that kubecost is running on that requires access to the Athena CUR
 </details>
-*   Manually: Kubecost requires the following policies:
-    *   Your kubernetes clusters run in the same account as the master payer account:
 
+### Manually: Kubecost requires the following policies:
+<details>
+	<summary>My kubernetes clusters run in the same account as the master payer account</summary>
+
+Attach both of the following policies to the same role or user. Use a user if you intend to integrate via servicekey, and a role if via IAM annotation (See more below under Via Pod Annotation by EKS)
+
+```
         {
-
-
            "Version": "2012-10-17",
-
-
            "Statement": [
-
-
               {
-
-
                  "Sid": "SpotDataAccess",
-
-
                  "Effect": "Allow",
-
-
                  "Action": [
-
-
                     "s3:ListAllMyBuckets",
-
-
                     "s3:ListBucket",
-
-
                     "s3:HeadBucket",
-
-
                     "s3:HeadObject",
-
-
                     "s3:List*",
-
-
                     "s3:Get*"
-
-
                  ],
-
-
                  "Resource": "arn:aws:s3:::${SpotDataFeedBucketName}*"
-
-
               }
-
-
            ]
-
-
         }
-
-
         {
-
-
            "Version": "2012-10-17",
-
-
            "Statement": [
-
-
               {
-
-
                  "Sid": "AthenaAccess",
-
-
                  "Effect": "Allow",
-
-
                  "Action": [
-
-
                     "athena:*"
-
-
                  ],
-
-
                  "Resource": [
-
-
                     "*"
-
-
                  ]
-
-
               },
-
-
               {
-
-
                  "Sid": "ReadAccessToAthenaCurDataViaGlue",
-
-
                  "Effect": "Allow",
-
-
                  "Action": [
-
-
                     "glue:GetDatabase*",
-
-
                     "glue:GetTable*",
-
-
                     "glue:GetPartition*",
-
-
                     "glue:GetUserDefinedFunction",
-
-
                     "glue:BatchGetPartition"
-
-
                  ],
-
-
                  "Resource": [
-
-
                     "arn:aws:glue:*:*:catalog",
-
-
                     "arn:aws:glue:*:*:database/athenacurcfn*",
-
-
                     "arn:aws:glue:*:*:table/athenacurcfn*/*"
-
-
                  ]
-
-
               },
-
-
               {
-
-
                  "Sid": "AthenaQueryResultsOutput",
-
-
                  "Effect": "Allow",
-
-
                  "Action": [
-
-
                     "s3:GetBucketLocation",
-
-
                     "s3:GetObject",
-
-
                     "s3:ListBucket",
-
-
                     "s3:ListBucketMultipartUploads",
-
-
                     "s3:ListMultipartUploadParts",
-
-
                     "s3:AbortMultipartUpload",
-
-
                     "s3:CreateBucket",
-
-
                     "s3:PutObject"
-
-
                  ],
-
-
                  "Resource": [
-
-
                     "arn:aws:s3:::aws-athena-query-results-*"
-
-
                  ]
-
-
               },
-
-
+	   
+	      
               {
-
-
                  "Sid": "S3ReadAccessToAwsBillingData",
-
-
                  "Effect": "Allow",
-
-
                  "Action": [
-
-
                     "s3:Get*",
-
-
                     "s3:List*"
-
-
                  ],
-
-
                  "Resource": [
-
-
                     "arn:aws:s3:::${AthenaCURBucket}*"
-
-
                  ]
-
-
               }
-
-
            ]
-
-
         }
+```
+
+</details>
 
 
-        Attach both of those policies to the same role or user. Use a user if you intend to integrate via servicekey, and a role if via IAM annotation (See more below under Via Pod Annotation by EKS)
+<details>
+	<summary>My kubernetes clusters run in different accounts</summary>
 
-    *   Your kubernetes clusters run in different accounts:
-        *   On each sub account running kubecost:
-
-			{
+On each sub account running kubecost, attach both of the following policies to the same role or user. Use a user if you intend to integrate via servicekey, and a role if via IAM annotation (See more below under Via Pod Annotation by EKS)
 
 
+```
+	{
                "Version": "2012-10-17",
-
-
                "Statement": [
-
-
                   {
-
-
                      "Sid": "AssumeRoleInMasterPayer",
-
-
                      "Effect": "Allow",
-
-
                      "Action": "sts:AssumeRole",
-
-
                      "Resource": "arn:aws:iam::${MasterPayerAccountID}:role/KubecostRole-${This-account’s-id}"
-
-
                   }
-
-
                ]
+	}
 
-
-            }
-
-
-            {
-
-
+	{
                "Version": "2012-10-17",
-
-
                "Statement": [
-
-
                   {
-
-
                      "Sid": "SpotDataAccess",
-
-
                      "Effect": "Allow",
-
-
                      "Action": [
-
-
                         "s3:ListAllMyBuckets",
-
-
                         "s3:ListBucket",
-
-
                         "s3:HeadBucket",
-
-
                         "s3:HeadObject",
-
-
                         "s3:List*",
-
-
                         "s3:Get*"
-
-
                      ],
-
-
-                 	        "Resource": "arn:aws:s3:::${SpotDataFeedBucketName}*"
-
-
+                     "Resource": "arn:aws:s3:::${SpotDataFeedBucketName}*"
                   }
-
-
                ]
+	}
+	```
 
-
-            }
-
-
-        Attach both of those policies to the same role or user. Use a user if you intend to integrate via servicekey, and a role if via IAM annotation (See more below under Via Pod Annotation by EKS)
 
 
 
@@ -623,10 +440,10 @@ Download template files from the URLs provided below and upload them as the stac
 
             }
 
+</details>
+
 
 # Attaching IAM permissions to Kubecost:
-
-
 
 *   Now that the policies have been created, we will need to attach those policies to Kubecost. We support the following methods:
 *   Via Service Key
