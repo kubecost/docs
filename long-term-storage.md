@@ -81,8 +81,9 @@ config:
     enable: true
   part_size: 134217728
 ```
+**Note:** given that this is yaml, it requires this specific indention.
 
-Instead of a service key, you can also attach the policy to then thanos pods service accounts. `object-store.yaml` then looks like this, without the secret_key and access_key field
+Instead of using a service key, you can alternatively attach the policy to the Thanos pods service accounts. Your `object-store.yaml` should follow the format below when using this option, which does not contain the secret_key and access_key field.
 
 ```
 type: S3
@@ -111,8 +112,6 @@ You can define the IAM role to associate with a service account in your cluster 
 Once that annotation has been created and set, you'll need to attach it to the prometheus pod, the thanos compact pod, and the thanos store pod. 
 For prometheus, set .Values.prometheus.serviceAccounts.server.create to false, and .Values.prometheus.serviceAccounts.server.name to the name of your created service account 
 For thanos set `.Values.thanos.compact.serviceAccount`, and `.Values.thanos.store.serviceAccount` to the name of your created service account.
-
-**Note:** given that this is yaml, it requires this specific indention.
 
 __Azure__
 
