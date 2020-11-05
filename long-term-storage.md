@@ -82,6 +82,36 @@ config:
   part_size: 134217728
 ```
 
+Instead of a service key, you can also attach the policy to then thanos pods service accounts. `object-store.yaml` then looks like this, without the secret_key and access_key field
+
+```
+type: S3
+config:
+  bucket: "kc-thanos-store"
+  endpoint: "s3.amazonaws.com"
+  region: "us-east-1"
+  insecure: false
+  signature_version2: false
+  put_user_metadata:
+      "X-Amz-Acl": "bucket-owner-full-control"
+  http_config:
+    idle_conn_timeout: 90s
+    response_header_timeout: 2m
+    insecure_skip_verify: false
+  trace:
+    enable: true
+  part_size: 134217728
+```
+
+Then, follow the guide at [https://docs.aws.amazon.com/eks/latest/userguide/enable-iam-roles-for-service-accounts.html](https://docs.aws.amazon.com/eks/latest/userguide/enable-iam-roles-for-service-accounts.html) to enable attaching IAM roles to pods.
+
+You can define the IAM role to associate with a service account in your cluster by creating a service account in the same namespace as kubecost and adding an annotation to it of the form `eks.amazonaws.com/role-arn: arn:aws:iam::<AWS_ACCOUNT_ID>:role/<IAM_ROLE_NAME>`
+ as described here: [https://docs.aws.amazon.com/eks/latest/userguide/specify-service-account-role.html](https://docs.aws.amazon.com/eks/latest/userguide/specify-service-account-role.html)
+
+Once that annotation has been created and set, you'll need to attach it to the prometheus pod, the thanos compact pod, and the thanos store pod. 
+For prometheus, set .Values.prometheus.serviceAccounts.server.create to false, and .Values.prometheus.serviceAccounts.server.name to the name of your created service account 
+For thanos set `.Values.thanos.compact.serviceAccount`, and `.Values.thanos.store.serviceAccount` to the name of your created service account.
+
 **Note:** given that this is yaml, it requires this specific indention.
 
 __Azure__
