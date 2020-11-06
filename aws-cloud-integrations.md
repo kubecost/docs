@@ -12,13 +12,6 @@ Spot Instance Feed Integration: Kubecost integrates with your spot data feed to 
 Note the name of the bucket you create to place the CUR
 
 
-# Setting up the Spot Data feed:
-
-[https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-data-feeds.html](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-data-feeds.html)
-
-Note the name of the bucket you create to place the spot data feed
-
-
 # Setting up IAM permissions:
 ## Via Cloudformation: 
 Kubecost offers a set of cloudformation templates to help set your IAM roles up. If you’re new to provisioning IAM roles, we suggest downloading our templates and using the cloudformation wizard to set these up: [https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cfn-console-create-stack.html](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cfn-console-create-stack.html) . 
@@ -48,7 +41,7 @@ Download template files from the URLs provided below and upload them as the stac
   
   * Set the following parameters:
         *   AthenaCURBucket: The bucket where the CUR is sent from the “Setting up the CUR” step
-        *   SpotDataFeedBucketName: The bucket where the spot data feed is sent from the “Setting up the Spot Data feed” step
+        *   SpotDataFeedBucketName: Optional. The bucket where the spot data feed is sent from the “Setting up the Spot Data feed” step (see below)
   
   * Choose **Next**.
   
@@ -74,7 +67,7 @@ Download template files from the URLs provided below and upload them as the stac
   	* For **Stack name**, enter a name for your template 
   	* Set the following parameters:
 		* MasterPayerAccountID: The account ID of the master payer account where the CUR has been created
-		* SpotDataFeedBucketName: The bucket where the spot data feed is sent from the “Setting up the Spot Data feed” step
+		* Name: The bucket where the spot data feed is sent from the “Setting up the Spot Data feed” step
   	* Choose **Next**.
   	* Choose **Next**
   	* At the bottom of the page, select **I acknowledge that AWS CloudFormation might create IAM resources.** 
@@ -89,27 +82,9 @@ Download template files from the URLs provided below and upload them as the stac
 <details>
 	<summary>My kubernetes clusters run in the same account as the master payer account</summary>
 
-Attach both of the following policies to the same role or user. Use a user if you intend to integrate via servicekey, and a role if via IAM annotation (See more below under Via Pod Annotation by EKS)
+Attach both of the following policies to the same role or user. Use a user if you intend to integrate via servicekey, and a role if via IAM annotation (See more below under Via Pod Annotation by EKS). The SpotDataAccess policy statment is optional if the spot data feed is configured (see “Setting up the Spot Data feed” step below)
 
 ```
-        {
-           "Version": "2012-10-17",
-           "Statement": [
-              {
-                 "Sid": "SpotDataAccess",
-                 "Effect": "Allow",
-                 "Action": [
-                    "s3:ListAllMyBuckets",
-                    "s3:ListBucket",
-                    "s3:HeadBucket",
-                    "s3:HeadObject",
-                    "s3:List*",
-                    "s3:Get*"
-                 ],
-                 "Resource": "arn:aws:s3:::${SpotDataFeedBucketName}*"
-              }
-           ]
-        }
         {
            "Version": "2012-10-17",
            "Statement": [
@@ -171,6 +146,24 @@ Attach both of the following policies to the same role or user. Use a user if yo
               }
            ]
         }
+	{
+           "Version": "2012-10-17",
+           "Statement": [
+              {
+                 "Sid": "SpotDataAccess",
+                 "Effect": "Allow",
+                 "Action": [
+                    "s3:ListAllMyBuckets",
+                    "s3:ListBucket",
+                    "s3:HeadBucket",
+                    "s3:HeadObject",
+                    "s3:List*",
+                    "s3:Get*"
+                 ],
+                 "Resource": "arn:aws:s3:::${SpotDataFeedBucketName}*"
+              }
+           ]
+        }
 ```
 
 </details>
@@ -179,7 +172,7 @@ Attach both of the following policies to the same role or user. Use a user if yo
 <details>
 	<summary>My kubernetes clusters run in different accounts</summary>
 
-On each sub account running kubecost, attach both of the following policies to the same role or user. Use a user if you intend to integrate via servicekey, and a role if via IAM annotation (See more below under Via Pod Annotation by EKS)
+On each sub account running kubecost, attach both of the following policies to the same role or user. Use a user if you intend to integrate via servicekey, and a role if via IAM annotation (See more below under Via Pod Annotation by EKS). The SpotDataAccess policy statment is optional if the spot data feed is configured (see “Setting up the Spot Data feed” step below)
 
 
 ```
@@ -373,10 +366,17 @@ Now that the policies have been created, we will need to attach those policies t
 *   [Activating User-Defined Cost Allocation Tags - AWS Billing and Cost Management](https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/activating-tags.html)
 *   Use existing tags:
 
+# Setting up the Spot Data feed:
+
+Spot data from the CUR can be delayed up to do days. Kubecost will reconcile your spot prices with existing data as they become available (usually 1-2 days), but more accurate pricing can be pulled roughly hourly by integrating directly with the AWS spot feed.
+
+[https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-data-feeds.html](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-data-feeds.html)
+
+Note the name of the bucket you create to place the spot data feed
 
 ## Configuring the Spot Data Feed in Kubecost:
 
-	These values can either be set from the kubecost frontend or via .Values.kubecostProductConfigs in the helm chart. Note that if you set any kubecostProductConfigs from the helm chart, all changes via the frontend will be deleted on pod restart
+These values can either be set from the kubecost frontend or via .Values.kubecostProductConfigs in the helm chart. Note that if you set any kubecostProductConfigs from the helm chart, all changes via the frontend will be deleted on pod restart
 
  awsSpotDataRegion: region of your spot data bucket
 
