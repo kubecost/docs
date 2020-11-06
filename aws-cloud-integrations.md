@@ -364,7 +364,7 @@ Now that the policies have been created, we will need to attach those policies t
 
 
 *   [Activating User-Defined Cost Allocation Tags - AWS Billing and Cost Management](https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/activating-tags.html)
-*   Use existing tags:
+*   See Step 6 here for more information on how to supply tags or use existing tags: http://docs.kubecost.com/aws-out-of-cluster.html
 
 # Setting up the Spot Data feed:
 
