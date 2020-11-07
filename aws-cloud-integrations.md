@@ -6,7 +6,7 @@ Kubecost pulls asset prices from the public AWS pricing API by default. To have 
 
 [https://docs.aws.amazon.com/cur/latest/userguide/cur-ate-setup.html#create-athena-cur](https://docs.aws.amazon.com/cur/latest/userguide/cur-ate-setup.html#create-athena-cur)
 
-Note the name of the bucket you create for CUR data. This will be used in following steps.
+> Note the name of the bucket you create for CUR data. This will be used in following steps.
 
 ## Step 2: Setting up IAM permissions
 
@@ -15,7 +15,7 @@ Kubecost offers a set of cloudformation templates to help set your IAM roles up.
 Download template files from the URLs provided below and upload them as the stack template in the Creating a stack > Selecting a stack template step.
 
 <details>
-  <summary> My kubernetes clusters all run in the same account as the master payer account.</summary>
+  <summary>My kubernetes clusters all run in the same account as the master payer account.</summary>
   
 
   * Download this file: [https://raw.githubusercontent.com/kubecost/cloudformation/master/kubecost-single-account-permissions.yaml](https://raw.githubusercontent.com/kubecost/cloudformation/master/kubecost-single-account-permissions.yaml)
@@ -50,7 +50,7 @@ Download template files from the URLs provided below and upload them as the stac
 </details>
 
 <details>
-  <summary>Your kubernetes clusters run in different accounts from the masterpayer account</summary>
+  <summary>My kubernetes clusters run in different accounts from the master payer account</summary>
   
   * On each sub account running kubecost
 	* Download this file: [https://raw.githubusercontent.com/kubecost/cloudformation/master/kubecost-sub-account-permissions.yaml](https://raw.githubusercontent.com/kubecost/cloudformation/master/kubecost-sub-account-permissions.yaml)
@@ -69,7 +69,7 @@ Download template files from the URLs provided below and upload them as the stac
   	* Choose **Next**
   	* At the bottom of the page, select **I acknowledge that AWS CloudFormation might create IAM resources.** 
   	* Choose **Create Stack**
-  * On the masterpayer account
+  * On the master payer account
         *   Follow the same steps to create a cloudformation stack as above, but with the following as your yaml file instead: [https://raw.githubusercontent.com/kubecost/cloudformation/master/kubecost-masterpayer-account-permissions.yaml](https://raw.githubusercontent.com/kubecost/cloudformation/master/kubecost-masterpayer-account-permissions.yaml) , and with these parameters:
             *   AthenaCURBucket: The bucket where the CUR is set from the “Setting up the CUR” step
             *   KubecostClusterID: An account that kubecost is running on that requires access to the Athena CUR
@@ -344,22 +344,21 @@ Now that the policies have been created, we will need to attach those policies t
 
 ## Step 4: Provide CUR config values to Kubecost
 
-These values can either be set from the kubecost frontend or via .Values.kubecostProductConfigs in the helm chart. Note that if you set any kubecostProductConfigs from the helm chart, all changes via the frontend will be deleted on pod restart
+These values can either be set from the kubecost frontend or via .Values.kubecostProductConfigs in the helm chart. Note that if you set any kubecostProductConfigs from the helm chart, all changes via the frontend will be overridden on pod restart.
 
+*    `athenaProjectID` e.g. "530337586277" # The AWS AccountID where the Athena CUR is. 
+*    `athenaBucketName` A result bucket you’ve created that kubecost has permission to access, of the form aws-athena-query-results-&lt;your-bucket-name>
+*    `athenaRegion` The aws region athena is running in
+*    `athenaDatabase` the name of the database created by the CUR setup
+*    `athenaTable` the name of the table created by the CUR setup
 
-
-*    athenaProjectID: "530337586277" # The AWS AccountID where the Athena CUR is. 
-*    athenaBucketName: A result bucket you’ve created that kubecost has permission to access, of the form aws-athena-query-results-&lt;your-bucket-name>
-*    athenaRegion: The aws region athena is running in
-*    athenaDatabase: the name of the database created by the CUR setup
-*    athenaTable: the name of the table created by the CUR setup
-*   If you are using a multi-account setup, you will also need to set `.Values.kubecostProductConfigs.masterPayerARN `To the arn of the role in the masterpayer account. (something like arn:aws:iam::530337586275:role/KubecostRole),
+*   If you are using a multi-account setup, you will also need to set `.Values.kubecostProductConfigs.masterPayerARN `To the arn of the role in the masterpayer account, e.g. `arn:aws:iam::530337586275:role/KubecostRole`.
 
 
 ## Step 5: Relating out-of-cluster-costs to k8s resources via tags:
 
 *   [Activating User-Defined Cost Allocation Tags - AWS Billing and Cost Management](https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/activating-tags.html)
-*   See Step 6 here for more information on how to supply tags or use existing tags: http://docs.kubecost.com/aws-out-of-cluster.html
+*   See [Step 6 here](http://docs.kubecost.com/aws-out-of-cluster.html) for more information on how to supply tags or use existing tags.
 
 # Setting up the Spot Data feed:
 
@@ -367,7 +366,7 @@ Spot data from the CUR can be delayed up to do days. Kubecost will reconcile you
 
 [https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-data-feeds.html](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-data-feeds.html)
 
-Note the name of the bucket you create to place the spot data feed
+> Note the name of the bucket you create for spot data. This will be used in the following step.
 
 ## Configuring the Spot Data Feed in Kubecost:
 
