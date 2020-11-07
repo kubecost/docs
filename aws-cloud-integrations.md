@@ -362,7 +362,7 @@ These values can either be set from the kubecost frontend or via .Values.kubecos
 
 # Setting up the Spot Data feed:
 
-Spot data from the CUR can be delayed up to do days. Kubecost will reconcile your spot prices with existing data as they become available (usually 1-2 days), but more accurate pricing can be pulled roughly hourly by integrating directly with the AWS spot feed.
+Kubecost will reconcile your spot prices with CUR billing reports as they become available (usually 1-2 days), but pricing data can be pulled hourly by integrating directly with the AWS spot feed.
 
 [https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-data-feeds.html](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-data-feeds.html)
 
