@@ -1,19 +1,16 @@
-By default, Kubecost finds your prices by using the public AWS pricing API. To pull more accurate pricing information from AWS, two integrations with your account are required:
+Kubecost pulls asset prices from the public AWS pricing API by default. To have accurate pricing information from AWS, you can integrate directly with your account. This integration will properly account for Enterprise Discount Programs, Reserved Instance usage, Savings Plans, spot usage and more. This resource describes the required steps for achieving this. 
 
-Cost and Usage Report integration via Athena: Kubecost integrates with the cost and usage report via Athena. From this, kubecost reads Reserved Instance pricing, Savings Plan pricing, exact network costs, Enterprise discounts, and tagged out-of-cluster-costs.
+# Cost and Usage Report Integration
 
-Spot Instance Feed Integration: Kubecost integrates with your spot data feed to pull spot data information, as the CUR is often many hours behind.
-
-
-# Setting up the CUR:
+## Step 1: Setting up the CUR
 
 [https://docs.aws.amazon.com/cur/latest/userguide/cur-ate-setup.html#create-athena-cur](https://docs.aws.amazon.com/cur/latest/userguide/cur-ate-setup.html#create-athena-cur)
 
-Note the name of the bucket you create to place the CUR
+Note the name of the bucket you create for CUR data. This will be used in following steps.
 
+## Step 2: Setting up IAM permissions
 
-# Setting up IAM permissions:
-## Via Cloudformation: 
+### Add via Cloudformation: 
 Kubecost offers a set of cloudformation templates to help set your IAM roles up. If you’re new to provisioning IAM roles, we suggest downloading our templates and using the cloudformation wizard to set these up: [https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cfn-console-create-stack.html](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cfn-console-create-stack.html) . 
 Download template files from the URLs provided below and upload them as the stack template in the Creating a stack > Selecting a stack template step.
 
@@ -78,7 +75,7 @@ Download template files from the URLs provided below and upload them as the stac
             *   KubecostClusterID: An account that kubecost is running on that requires access to the Athena CUR
 </details>
 
-## Manually
+### Add manually
 <details>
 	<summary>My kubernetes clusters run in the same account as the master payer account</summary>
 
@@ -290,7 +287,7 @@ You will then need to add the following trust statement to the role the policy i
 </details>
 
 
-# Attaching IAM permissions to Kubecost:
+## Step 3: Attaching IAM permissions to Kubecost
 Now that the policies have been created, we will need to attach those policies to Kubecost. We support the following methods:
 
 <details>
@@ -345,7 +342,7 @@ Now that the policies have been created, we will need to attach those policies t
 
 </details>
 
-# Configuring the CUR in Kubecost:
+## Step 4: Provide CUR config values to Kubecost
 
 These values can either be set from the kubecost frontend or via .Values.kubecostProductConfigs in the helm chart. Note that if you set any kubecostProductConfigs from the helm chart, all changes via the frontend will be deleted on pod restart
 
@@ -359,9 +356,7 @@ These values can either be set from the kubecost frontend or via .Values.kubecos
 *   If you are using a multi-account setup, you will also need to set `.Values.kubecostProductConfigs.masterPayerARN `To the arn of the role in the masterpayer account. (something like arn:aws:iam::530337586275:role/KubecostRole),
 
 
-## Relating out-of-cluster-costs to k8s resources via tags:
-
-
+## Step 5: Relating out-of-cluster-costs to k8s resources via tags:
 
 *   [Activating User-Defined Cost Allocation Tags - AWS Billing and Cost Management](https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/activating-tags.html)
 *   See Step 6 here for more information on how to supply tags or use existing tags: http://docs.kubecost.com/aws-out-of-cluster.html
@@ -378,8 +373,8 @@ Note the name of the bucket you create to place the spot data feed
 
 These values can either be set from the kubecost frontend or via .Values.kubecostProductConfigs in the helm chart. Note that if you set any kubecostProductConfigs from the helm chart, all changes via the frontend will be deleted on pod restart
 
- awsSpotDataRegion: region of your spot data bucket
+ `awsSpotDataRegion` region of your spot data bucket
 
- awsSpotDataBucket: the configured bucket for the spot data feed
+ `awsSpotDataBucket` the configured bucket for the spot data feed
 
- awsSpotDataPrefix: optional configured prefix for your spot data feed bucket
+ `awsSpotDataPrefix` optional configured prefix for your spot data feed bucket
