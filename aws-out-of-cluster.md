@@ -1,6 +1,6 @@
-Integrating Kubecost with your AWS data provides the ability to allocate out of cluster costs, e.g. RDS instances and S3 buckets, back to Kubernetes concepts like namespace and deployment.
+Once you've set up an AWS cost and usage report (CUR), you can begin allocating out of cluster AWS costs , e.g. RDS instances and S3 buckets, back to Kubernetes concepts like namespace and deployment.
 
-The following guide provides the steps required for enabling out of cluster costs allocation. In a multi-account organization, all of the following steps will need to be completed in the payer account.
+The following guide provides the steps required for enabling out of cluster costs allocation, once Kubecost has been [integrated with the CUR](https://github.com/kubecost/docs/blob/master/aws-cloud-integrations.md). Not that in a multi-account organization, all of the following steps will need to be completed in the payer account.
 
 
 ## Step 1: Enable User-Defined Cost Allocation Tags
