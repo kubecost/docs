@@ -77,7 +77,7 @@ Download template files from the URLs provided below and upload them as the stac
 
 ### Add manually
 <details>
-	<summary>My kubernetes clusters run in the same account as the master payer account</summary>
+	<summary>My Kubernetes clusters run in the same account as the master payer account</summary>
 
 Attach both of the following policies to the same role or user. Use a user if you intend to integrate via servicekey, and a role if via IAM annotation (See more below under Via Pod Annotation by EKS). The SpotDataAccess policy statment is optional if the spot data feed is configured (see “Setting up the Spot Data feed” step below)
 
@@ -167,7 +167,7 @@ Attach both of the following policies to the same role or user. Use a user if yo
 
 
 <details>
-	<summary>My kubernetes clusters run in different accounts</summary>
+	<summary>My Kubernetes clusters run in different accounts</summary>
 
 On each sub account running kubecost, attach both of the following policies to the same role or user. Use a user if you intend to integrate via servicekey, and a role if via IAM annotation (See more below under Via Pod Annotation by EKS). The SpotDataAccess policy statment is optional if the spot data feed is configured (see “Setting up the Spot Data feed” step below)
 
@@ -291,7 +291,7 @@ You will then need to add the following trust statement to the role the policy i
 Now that the policies have been created, we will need to attach those policies to Kubecost. We support the following methods:
 
 <details>
-	<summary>Via Service Key And Kubernetes Secret</summary>
+	<summary>Attach via Service Key And Kubernetes Secret</summary>
 
 * Navigate to https://console.aws.amazon.com/iam Access Management > Users . Find the Kubecost User and select Security Credentials > Create Access Key. Note the Access key ID and Secret access key. You'll use it to either Create a secret from helm values or Create and use an existing secret.
 
@@ -325,7 +325,7 @@ Now that the policies have been created, we will need to attach those policies t
 </details>
 
 <details>
-	<summary>Via service key and kubecost frontend</summary>
+	<summary>Attach via Service Key on Kubecost frontend</summary>
 	
 * Navigate to https://console.aws.amazon.com/iam Access Management > Users . Find the Kubecost User and select Security Credentials > Create Access Key. Note the Access key ID and Secret access key.
 *   You can add the Access key ID and Secret access key on /settings.html  > External Cloud Cost Configuration (AWS) > Update  and setting Service key name to **Access key ID** and Service key secret to **Secret access key**
@@ -333,7 +333,7 @@ Now that the policies have been created, we will need to attach those policies t
 </details>
 
 <details>
-	<summary>Via Pod Annotation on EKS</summary>
+	<summary>Attach via Pod Annotation on EKS</summary>
 	
 * Enable IAM roles.
 	*   [https://docs.aws.amazon.com/eks/latest/userguide/enable-iam-roles-for-service-accounts.html](https://docs.aws.amazon.com/eks/latest/userguide/enable-iam-roles-for-service-accounts.html)
@@ -355,20 +355,20 @@ These values can either be set from the kubecost frontend or via .Values.kubecos
 *   If you are using a multi-account setup, you will also need to set `.Values.kubecostProductConfigs.masterPayerARN `To the arn of the role in the masterpayer account, e.g. `arn:aws:iam::530337586275:role/KubecostRole`.
 
 
-## Step 5: Relating out-of-cluster-costs to k8s resources via tags:
+## Want to relate out-of-cluster costs to k8s resources via tags?
 
 *   [Activating User-Defined Cost Allocation Tags - AWS Billing and Cost Management](https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/activating-tags.html)
 *   See [Step 6 here](http://docs.kubecost.com/aws-out-of-cluster.html) for more information on how to supply tags or use existing tags.
 
-# Setting up the Spot Data feed:
+# Spot Data feed integration
 
-Kubecost will reconcile your spot prices with CUR billing reports as they become available (usually 1-2 days), but pricing data can be pulled hourly by integrating directly with the AWS spot feed.
+Kubecost will reconcile your spot prices with CUR billing reports as they become available (usually 1-2 days), but pricing data can be pulled hourly by integrating directly with the AWS spot feed. To enable, follow these steps:
 
 [https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-data-feeds.html](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-data-feeds.html)
 
 > Note the name of the bucket you create for spot data. This will be used in the following step.
 
-## Configuring the Spot Data Feed in Kubecost:
+## Configuring the Spot Data Feed in Kubecost
 
 These values can either be set from the kubecost frontend or via .Values.kubecostProductConfigs in the helm chart. Note that if you set any kubecostProductConfigs from the helm chart, all changes via the frontend will be deleted on pod restart
 
