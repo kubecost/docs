@@ -37,8 +37,8 @@ Download template files from the URLs provided below and upload them as the stac
   * For **Stack name**, enter a name for your template 
   
   * Set the following parameters:
-        *   AthenaCURBucket: The bucket where the CUR is sent from the “Setting up the CUR” step
-        *   SpotDataFeedBucketName: Optional. The bucket where the spot data feed is sent from the “Setting up the Spot Data feed” step (see below)
+  	*   AthenaCURBucket: The bucket where the CUR is sent from the “Setting up the CUR” step
+	*   SpotDataFeedBucketName: Optional. The bucket where the spot data feed is sent from the “Setting up the Spot Data feed” step (see below)
   
   * Choose **Next**.
   
@@ -64,15 +64,15 @@ Download template files from the URLs provided below and upload them as the stac
   	* For **Stack name**, enter a name for your template 
   	* Set the following parameters:
 		* MasterPayerAccountID: The account ID of the master payer account where the CUR has been created
-		* Name: The bucket where the spot data feed is sent from the “Setting up the Spot Data feed” step
+		* SpotDataFeedBucketName: The bucket where the spot data feed is sent from the “Setting up the Spot Data feed” step
   	* Choose **Next**.
   	* Choose **Next**
   	* At the bottom of the page, select **I acknowledge that AWS CloudFormation might create IAM resources.** 
   	* Choose **Create Stack**
   * On the master payer account
-        *   Follow the same steps to create a cloudformation stack as above, but with the following as your yaml file instead: [https://raw.githubusercontent.com/kubecost/cloudformation/master/kubecost-masterpayer-account-permissions.yaml](https://raw.githubusercontent.com/kubecost/cloudformation/master/kubecost-masterpayer-account-permissions.yaml) , and with these parameters:
-            *   AthenaCURBucket: The bucket where the CUR is set from the “Setting up the CUR” step
-            *   KubecostClusterID: An account that kubecost is running on that requires access to the Athena CUR
+  	*   Follow the same steps to create a cloudformation stack as above, but with the following as your yaml file instead: [https://raw.githubusercontent.com/kubecost/cloudformation/master/kubecost-masterpayer-account-permissions.yaml](https://raw.githubusercontent.com/kubecost/cloudformation/master/kubecost-masterpayer-account-permissions.yaml) , and with these parameters:
+		*   AthenaCURBucket: The bucket where the CUR is set from the “Setting up the CUR” step
+		*   KubecostClusterID: An account that kubecost is running on that requires access to the Athena CUR
 </details>
 
 ### Add manually
@@ -298,7 +298,7 @@ Now that the policies have been created, we will need to attach those policies t
 	<details>
 		<summary>Create a secret from helm values</summary>
 
-	* Set `.Values.kubecostProductConfigs.awsServiceKeyName `to<code> <strong>Access key ID</strong></code>
+	* Set `.Values.kubecostProductConfigs.awsServiceKeyName `to <code> <strong>Access key ID</strong></code>
 	*   Set <code>.Values.kubecostProductConfigs.awsServiceKeyPassword </code>to <strong>Secret access key</strong>
 	*   Note that this will leave your secrets unencrypted in values.yaml. Use an existing secret as in the next step to avoid this.
 
@@ -306,6 +306,7 @@ Now that the policies have been created, we will need to attach those policies t
 
 	<details>
 		<summary> Create and use an existing secret </summary>
+
 	If you commit your helm values to source control, you may want to create a secret in a different way and import that secret to kubecost.
 	* Create a json file named <em>service-key.json</em> of the following format
 		```
