@@ -96,7 +96,7 @@ You can see this information directly in the Kubecost Diagnostics page (screensh
 
 If the necessary scrape target is not added to your Prometheus, then refer to this resource to learn how to add a new job under your Prometheus `scrape_configs` block. 
 
-#### Step 4. No recent Prometheus scrape errors
+### Step 4. No recent Prometheus scrape errors
 
 You can see information on recent Prometheus scrape errors directly in the Kubecost Diagnostics page when present or by visiting your Prometheus console and then Status > Targets in the top navigation bar. 
 
