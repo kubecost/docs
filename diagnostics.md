@@ -23,9 +23,9 @@ If this diagnostic test is failing, view [How to Troubleshoot Missing Metrics](#
 
 Node exporter metrics are used for the following features:
 
-##### Reserved Instance Recommendations in Savings
-The compute 'breakdowns' on Overview (system vs idle vs user). The Compute bar on the 'Resource Recommendations' block would appear as a single solid colored line.
-Various Kubecost Grafana dashboards
+* Reserved Instance Recommendations in Savings
+* The compute 'breakdowns' on Overview (system vs idle vs user). The Compute bar on the 'Resource Recommendations' block would appear as a single solid colored line.
+* Various Kubecost Grafana dashboards
 
 These metrics are not used in the core Assets and Allocation and therefore can be considered optional. v0.16 (May 18)
 
