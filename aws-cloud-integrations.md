@@ -204,7 +204,7 @@ On each sub account running kubecost, attach both of the following policies to t
                ]
 	}
 ```
-On the masterpayer account, attach this policy to a role:
+On the masterpayer account, attach this policy to a role (replace `${AthenaCURBucket}` variable):
 ```
 	{
                "Version": "2012-10-17",
@@ -239,14 +239,14 @@ On the masterpayer account, attach this policy to a role:
                      "Sid": "AthenaQueryResultsOutput",
                      "Effect": "Allow",
                      "Action": [
-                        "s3:GetBucketLocation"
+                        "s3:GetBucketLocation",
                         "s3:GetObject",
                         "s3:ListBucket",
                         "s3:ListBucketMultipartUploads",
                         "s3:ListMultipartUploadParts",
                         "s3:AbortMultipartUpload",
                         "s3:CreateBucket",
-                        "s3:PutObject,
+                        "s3:PutObject"
                      ],
                      "Resource": [
                         "arn:aws:s3:::aws-athena-query-results-*"
@@ -266,7 +266,7 @@ On the masterpayer account, attach this policy to a role:
                ]
 	}
 ```
-You will then need to add the following trust statement to the role the policy is attached to:
+You will then need to add the following trust statement to the role the policy is attached to (replace `${KubecostClusterID}` variable):
 ```
 	{
                "Version": "2012-10-17",
@@ -274,7 +274,7 @@ You will then need to add the following trust statement to the role the policy i
                   {
                      "Effect": "Allow",
                      "Principal": {
-                        "AWS": `'arn:aws:iam::${KubecostClusterID}:root'`
+                        "AWS": "arn:aws:iam::${KubecostClusterID}:root"
                      },
                      "Action": [
                         "sts:AssumeRole"
