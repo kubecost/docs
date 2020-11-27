@@ -348,10 +348,14 @@ Now that the policies have been created, we will need to attach those policies t
 These values can either be set from the kubecost frontend or via .Values.kubecostProductConfigs in the helm chart. Note that if you set any kubecostProductConfigs from the helm chart, all changes via the frontend will be overridden on pod restart.
 
 *    `athenaProjectID` e.g. "530337586277" # The AWS AccountID where the Athena CUR is. 
-*    `athenaBucketName` A result bucket you’ve created that kubecost has permission to access, of the form aws-athena-query-results-&lt;your-bucket-name>
+*    `athenaBucketName` An S3 bucket to store Athena query results that you’ve created that kubecost has permission to access
+    * The name of the bucket should match `aws-athena-query-results-&lt;your-bucket-name&gt;`, so the IAM roles defined above will automatically allow access to it
+    * The bucket can have a Canned ACL of `Private` or other permissions as you see fit.
 *    `athenaRegion` The aws region athena is running in
 *    `athenaDatabase` the name of the database created by the CUR setup
+    * The athena database name is available as the value (physical id) of `AWSCURDatabase` in the CloudFormation stack created above (in [Step 1: Setting up the CUR](#Step-1:-Setting-up-the-CUR))
 *    `athenaTable` the name of the table created by the CUR setup
+    * The table name is typically the database name with the leading `athenacurcfn_` removed (but is not available as a CloudFormation stack resource)
 
 *   If you are using a multi-account setup, you will also need to set `.Values.kubecostProductConfigs.masterPayerARN `To the arn of the role in the masterpayer account, e.g. `arn:aws:iam::530337586275:role/KubecostRole`.
 
