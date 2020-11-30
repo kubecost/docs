@@ -9,11 +9,11 @@ Kubecost currently supports four different types of alerts:
 
  1.  Recurring update, weekly (all namespaces)
 
-	- Sends an email to the configured global email(s) reporting cluster spend across all namespaces, broken down by namespace
+	 - Sends an email to the configured global email(s) reporting cluster spend across all namespaces, broken down by namespace
 
  2.  Recurring update, weekly by namespace
     
-	- Sends an email to the configured owner contact email, defaulting to global emails if not provided, reporting individual namespace spend, identified by `filter`
+	 - Sends an email to the configured owner contact email, defaulting to global emails if not provided, reporting individual namespace spend, identified by `filter`
 
  3.  Daily budget alert by cluster
 
