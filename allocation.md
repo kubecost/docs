@@ -21,6 +21,10 @@ API parameters include the following:
 * `aggregate` is used to consolidate cost model data. Supported types are cluster, namespace, deployment, controller, service, and label.
 * `accumulate` when set to false this endpoint returns daily time series data vs cumulative data. Default value is false.
 * `shareIdle` (optional) when set to true applies the cost of all idle compute resources to tenants, default false.
+* `shareCost` (optional) a fixed external monthly amount to be split between tenants, e.g. `1000`
+* `shareNamespaces`(optional) a CSV list of Kubernetes namespaces whose costs should be shared, e.g. `kubecost`
+* `shareLabels`(optional) a CSV list of Kubernetes labels whose costs should be shared, e.g. `app:prometheus`
+* `shareSplit` to be used with shareCost, shareNamespaces, or shareLabels. Supported options: `weighted` (to share proportionate to tenant cost) and `even` (to share cost uniformly)
 
 This API returns a set of JSON objects in this format:
 
