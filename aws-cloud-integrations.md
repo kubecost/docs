@@ -359,6 +359,22 @@ These values can either be set from the kubecost frontend or via .Values.kubecos
 
 *   If you are using a multi-account setup, you will also need to set `.Values.kubecostProductConfigs.masterPayerARN `To the arn of the role in the masterpayer account, e.g. `arn:aws:iam::530337586275:role/KubecostRole`.
 
+## Troubleshooting
+
+Once you've integrated with the CUR, you can visit /diagnostics.html in kubecost to determine if kubecost has been successfully integrated with your CUR. If any problems are detected, you will see a yellow warning sign under the cloud provider permissions status header: 
+<img width="1792" alt="Screen Shot 2020-12-06 at 9 37 40 PM" src="https://user-images.githubusercontent.com/453512/101316930-587bb080-3812-11eb-8bbc-694a894314d8.png">
+
+You can check pod logs for authentication errors by running 
+`kubectl get pods -n <namespace>`
+`kubectl logs <kubecost-pod-name> -n <namespace> -c cost-model`
+
+If you do not see any authentication errors, log in to your AWS console and visit the Athena dashboard. You should be able to find the CUR. Ensure that the databse with the CUR matches the athenaTable entered in step 4-- it likely has a prefix with athenacurfn_ :
+<img width="1792" alt="Screen Shot 2020-12-06 at 9 43 31 PM" src="https://user-images.githubusercontent.com/453512/101319459-e6f23100-3816-11eb-8d96-1ab977cb50bd.png">
+
+You can also check query history to see if any queries are failing:
+<img width="1792" alt="Screen Shot 2020-12-06 at 9 43 50 PM" src="https://user-images.githubusercontent.com/453512/101319633-24ef5500-3817-11eb-9f87-55a903428936.png">
+
+
 
 ## Want to relate out-of-cluster costs to k8s resources via tags?
 
