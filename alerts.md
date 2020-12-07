@@ -2,20 +2,18 @@
 
 ### Summary
 
-Kubecost alerts allow teams to receive updates on real time Kubernetes spend. They are configurable via the Kubecost UI, and now via Helm values. This resource gives an overview of how to configure Kubecost email and Slack alerts using `cost-analyzer-helm-chart/cost-analyzer/values.yaml`.
+Kubecost alerts allow teams to receive updates on real-time Kubernetes spend. They are configurable via the Kubecost UI, and now via Helm values. This resource gives an overview of how to configure Kubecost email and Slack alerts using [Kubecost helm chart values](https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/values.yaml).
   
 
 Kubecost currently supports four different types of alerts:
 
- 1.  Recurring update, weekly (all namespaces)
-
+ 1. Recurring update, weekly (all namespaces)
 	 - Sends an email to the configured global email(s) reporting cluster spend across all namespaces, broken down by namespace
 
- 2.  Recurring update, weekly by namespace
-    
+ 2. Recurring update, weekly by namespace
 	 - Sends an email to the configured owner contact email, defaulting to global emails if not provided, reporting individual namespace spend, identified by `filter`
 
- 3.  Daily budget alert by cluster
+ 3. Daily budget alert by cluster
 
 	 - Sends an email and Slack alert to global email(s) and Slack webhook (if configured), reporting daily total cluster spend
 
@@ -25,27 +23,19 @@ Kubecost currently supports four different types of alerts:
   
 The alert settings, under `notifications.alertConfigs`, accept four global fields and a list of individual alerts to configure:
 
--   `enabled` — tells Kubecost whether or not to continue and read alerts configured via `values.yaml`
+* `enabled` determines whether Kubecost will read alerts configured via `values.yaml`, default set to `false`     
+* `frontendUrl` optional, your cost analyzer front end URL used for alert linkbacks (applies to all alerts)
+* `slackWebhookUrl` optional, a Slack webhook used for daily cluster and namespace budget alerts, enabled by default if provided
+* `globalAlertEmails` a list of emails for alerts
     
--   `frontendUrl` — optional, your cost analyzer front end URL used for alert linkbacks (all alerts)
-    
--   `slackWebhookUrl` — optional, a Slack webhook used for daily cluster and namespace budget alerts, enabled by default if provided
-    
--   `globalAlertEmails` — a list of emails for alerts
-    
--   `alerts`
+The follow fields apply to each item under the `alerts` block:
 
-	-   `type` — supported: budget, recurringUpdate
-	    
-	-   `threshold` — required for budget alerts, optional for recurring update alerts
-	    
-	-   `window` — time window the alert covers, supports `1d`, `daily`, `7d`, and `weekly` settings depending on the type of alert described above
-	    
-	-   `aggregation` — aggregation parameter, supports namespace or cluster
-	    
-	-   `filter` — aggregation value to filter on. Given the available aggregation parameters, it is the namespace name, cluster name, or `’*’` (when using the namespace aggregation parameter) to signify inclusion of all namespaces
-	    
-	-   `ownerContact` — optional list of owner contact emails for namespace alerts, default to global emails if missing
+* `type` supported: budget, recurringUpdate	    
+* `threshold` required for budget alerts, optional for recurring update alerts	    
+* `window` time window the alert covers, supports `1d`, `daily`, `7d`, and `weekly` settings depending on the type of alert described above
+* `aggregation` aggregation parameter, supports namespace or cluster	    
+* `filter` aggregation value to filter on. Given the available aggregation parameters, it is the namespace name, cluster name, or `’*’` (when using the namespace aggregation parameter) to signify inclusion of all namespaces	    
+* `ownerContact` optional list of owner contact emails for namespace alerts, default to global emails if missing
 
 ### Example Helm values.yaml
 
