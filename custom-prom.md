@@ -67,6 +67,8 @@ Kubecost uses `container_name` and `pod_name` labels on cadvisor metrics. For cl
     action: replace
 ```
 
+Note that this does not override the source label-- it creates a new label called "pod_name" and copies the value of pod into it.
+
 On recent versions of **Prometheus Operator**, cadvisor `instance` labels do not match internal Kubernetes node names. This causes usage data to not be registered correctly in Kubecost. The solution is to add the following block into your kubelet/cadvisor scrape config.
 
 ```
@@ -78,6 +80,8 @@ On recent versions of **Prometheus Operator**, cadvisor `instance` labels do not
     replacement: $1
     action: replace
 ```
+
+Note that this does override the instance label This is the desired behavior, as the instance label before override represents an internal ip of 10.X.X.X that is not useful for identifying the node or for aggregation.
 
 ### Node exporter metric labels
 Note that this is optional for efficiency metrics: https://github.com/kubecost/cost-model/issues/556 for a description of what will be missing if this step is skipped.
@@ -95,6 +99,8 @@ You'll need to add the following relabel config to the job that scrapes the node
         action: replace
         target_label: kubernetes_node
 ```
+
+Note that this does not override the source label-- it creates a new label called "kubernetes_node" and copies the value of pod into it.
 
 <a name="troubleshoot"></a>
 ## Troubleshooting Issues
