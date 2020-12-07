@@ -54,33 +54,33 @@ notifications:
 		- additionalRecipient@example.com
 		alerts:
 			# Daily namespace budget alert on namespace `kubecost`
-		  - type: budget  # supported: budget, recurringUpdate
+		- type: budget  # supported: budget, recurringUpdate
 			threshold: 50  # optional, required for budget alerts
 			window: daily  # or 1d
 			aggregation: namespace
 			filter: kubecost
 			ownerContact: # optional, overrides globalAlertEmails default
-		  - owner@example.com
-		  - owner2@example.com
+			- owner@example.com
+			- owner2@example.com
 			# Daily cluster budget alert (clusterCosts alert) on cluster `cluster-one`
-		  - type: budget
+		- type: budget
 			threshold: 200.8  # optional, required for budget alerts
 			window: daily  # or 1d
 			aggregation: cluster
 			filter: cluster-one
 			# Recurring weekly update (weeklyUpdate alert)
-		  - type: recurringUpdate
+		- type: recurringUpdate
 			window: weekly  # or 7d
 			aggregation: namespace
 			filter: '*'
 			# Recurring weekly namespace update on kubecost namespace
-		  - type: recurringUpdate
+		- type: recurringUpdate
 			window: weekly  # or 7d
 			aggregation: namespace
 			filter: kubecost
 			ownerContact: # ownerContact(s) should be the same for the same namespace, otherwise the last namespace alert overwrites
-		  - owner@example.com
-		  - owner2@example.com
+			- owner@example.com
+			- owner2@example.com
 ```
 
 ### Troubleshooting
