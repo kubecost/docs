@@ -21,6 +21,8 @@ Kubecost currently supports four different types of alerts:
 
 	 - Sends an email and Slack alert to the configured owner contact, defaulting to global emails if not provided, reporting daily total namespace spend, identified by `filter`
   
+### Alerts Parameters  
+  
 The alert settings, under `notifications.alertConfigs`, accept four global fields and a list of individual alerts to configure:
 
 * `enabled` determines whether Kubecost will read alerts configured via `values.yaml`, default set to `false`     
@@ -82,6 +84,8 @@ notifications:
 ```
 
 ### Troubleshooting
+
+Review these steps to verify alerts are being passed to the Kubecost application correctly:
 
 -   Ensure that the Helm values are successfully read into the configmap
 -   Check that the `global.notifications.alertConfigs.enabled` field is set to `true`
