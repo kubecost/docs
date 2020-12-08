@@ -335,11 +335,12 @@ Now that the policies have been created, we will need to attach those policies t
 
 <details>
 	<summary>Attach via Pod Annotation on EKS</summary>
-	*   First, create an OIDC provider for your cluster with these [steps](https://docs.aws.amazon.com/eks/latest/userguide/enable-iam-roles-for-service-accounts.html)
-	*   Next, create a Role with these [steps](https://docs.aws.amazon.com/eks/latest/userguide/create-service-account-iam-policy-and-role.html). 
-		*   When asked to attach policies, you'll want to attach the policies created above in Step 2
-		*   When asked for "namespace" and "serviceaccountname" use the namespace kubecost is installed in and the name of the serviceaccount attached to the cost-analyzer pod. You can find that name by running kubectl get pods kubecost-cost-analyzer-69689769b8-lf6nq -n <kubecost-namespace> -o yaml | grep serviceAccount
-	* Then, you need to add an annotation to that service account as described in these [docs](https://docs.aws.amazon.com/eks/latest/userguide/specify-service-account-role.html). This annotation can be added to the kubecost service account by setting `.Values.serviceAccount.annotations ` in the helm chart to `eks.amazonaws.com/role-arn: arn:aws:iam::<AWS_ACCOUNT_ID>:role/<IAM_ROLE_NAME>`
+
+*   First, create an OIDC provider for your cluster with these [steps](https://docs.aws.amazon.com/eks/latest/userguide/enable-iam-roles-for-service-accounts.html)
+*   Next, create a Role with these [steps](https://docs.aws.amazon.com/eks/latest/userguide/create-service-account-iam-policy-and-role.html). 
+	*   When asked to attach policies, you'll want to attach the policies created above in Step 2
+	*   When asked for "namespace" and "serviceaccountname" use the namespace kubecost is installed in and the name of the serviceaccount attached to the cost-analyzer pod. You can find that name by running `kubectl get pods kubecost-cost-analyzer-69689769b8-lf6nq -n <kubecost-namespace> -o yaml | grep serviceAccount`
+* Then, you need to add an annotation to that service account as described in these [docs](https://docs.aws.amazon.com/eks/latest/userguide/specify-service-account-role.html). This annotation can be added to the kubecost service account by setting `.Values.serviceAccount.annotations ` in the helm chart to `eks.amazonaws.com/role-arn: arn:aws:iam::<AWS_ACCOUNT_ID>:role/<IAM_ROLE_NAME>`
 
 </details>
 
