@@ -335,8 +335,6 @@ Now that the policies have been created, we will need to attach those policies t
 
 <details>
 	<summary>Attach via Pod Annotation on EKS</summary>
-	
-* Enable IAM roles for service accounts
 	*   First, create an OIDC provider for your cluster with these [steps](https://docs.aws.amazon.com/eks/latest/userguide/enable-iam-roles-for-service-accounts.html)
 	*   Next, create a Role with these [steps](https://docs.aws.amazon.com/eks/latest/userguide/create-service-account-iam-policy-and-role.html). 
 		*   When asked to attach policies, you'll want to attach the policies created above in Step 2
