@@ -21,9 +21,9 @@ For more information, refer to this [FAQ](https://github.com/kubecost/cost-model
 ### 2. Aggregation  
 Aggregate cost by namespace, deployment, service and other native Kubernetes concepts. 
 
-Costs aggregations are also visible by other meaningful organizational concepts, e.g. Team, Department, and Product. These aggregations are based on Kubernetes labels or annotations, referenced at both the pod and namespace-level, with labels at the pod-level being favored over the namespace label when both are present. The Kubernetes label name used for these concepts can be configured in Settings or in [values.yaml](https://github.com/kubecost/cost-analyzer-helm-chart/blob/19908983ed7c8d4ff1d3e62d98537a39ab61bbab/cost-analyzer/values.yaml#L427-L445) after setting `kubecostProductConfigs.labelMappingConfigs.enabled` to true. Workloads without the relevent label/annotation will be shown as `_unallocated_`.
+Costs aggregations are also visible by other meaningful organizational concepts, e.g. Team, Department, and Product. These aggregations are based on Kubernetes labels or annotations, referenced at both the pod and namespace-level, with labels at the pod-level being favored over the namespace label when both are present. The Kubernetes label name used for these concepts can be configured in Settings or in [values.yaml](https://github.com/kubecost/cost-analyzer-helm-chart/blob/19908983ed7c8d4ff1d3e62d98537a39ab61bbab/cost-analyzer/values.yaml#L427-L445) after setting `kubecostProductConfigs.labelMappingConfigs.enabled` to true. Workloads without the relevent label/annotation will be shown as `__unallocated__`.
 
-To find what pods are not part of the relevant label set... you can explore variations of the following kubectl commands:  
+To find what pods are not part of the relevant label set... you can either apply an `__unallocated__` label filter in this allocation view or explore variations of the following kubectl commands:  
 
 ```
 kubectl get pods -l 'app notin (prometheus, cost-analyzer, ...)' --all-namespaces
@@ -40,7 +40,7 @@ Filter resources by namespace, clusterId, and Kubernetes label to more closely i
 |--------------------	|---------------------	|
 | Namespace        	|  Limit results to workloads in a set of namespaces. |
 | ClusterID        	|  Limit results to workloads in a set of clusters with matching IDs. Note: clusterID is passed in _values_ at install-time. |
-| Label        	   |  Limit results to workloads with matching Kubernetes labels. Namespace labels are applied to all of its workloads. |
+| Label        	   |  Limit results to workloads with matching Kubernetes labels. Namespace labels are applied to all of its workloads. Supports filtering by `__unallocated__` field as well|
 | Pod Prefix        	|  Limit results to workloads that begin with this string. |
 
 Comma-seperated lists are supported to filter by multple categories, e.g. namespace filter equals `kube-system,kubecost`
@@ -66,4 +66,5 @@ Cost allocation metrics are available for both in-cluster and out-of-cluster res
 | Network Cost        	| The cost of network traffic based on internet egress, cross-zone egress, and other billed transfer. Note: these costs must be enabled. [Learn more](http://docs.kubecost.com/network-allocation)|
 | PV Cost        	| The cost of persistent storage volumes claimed by this object. Prices are based on cloud billing prices or custom pricing sheets for on-prem deployments. |
 | GPU Cost        	| The cost of GPUs requested by this object, as measured by [resource limits](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/). Prices are based on cloud billing prices or custom pricing sheets for on-prem deployments. |
+| Shared Cost        	| The cost of shared resources allocated to this tenant. This field covers shared overhead, shared namespaces, and shared labels. |
 | External Cost        	| The cost of out-of-cluster resources allocated to this object. For example, S3 buckets allocated to a particular Kubernetes deployment. Prices are based on cloud billing data and require a key. This feature is currently available for AWS ([learn more](http://docs.kubecost.com/aws-out-of-cluster.html)) and GCP ([learn more](http://docs.kubecost.com/gcp-out-of-cluster.html)). |
