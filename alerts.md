@@ -30,7 +30,7 @@ The alert settings, under `notifications.alertConfigs`, accept four global field
 * `slackWebhookUrl` optional, a Slack webhook used for daily cluster and namespace budget alerts, enabled by default if provided
 * `globalAlertEmails` a list of emails for alerts
     
-The follow fields apply to each item under the `alerts` block:
+The following fields apply to each item under the `alerts` block:
 
 * `type` supported: budget, recurringUpdate	    
 * `threshold` required for budget alerts, optional for recurring update alerts	    
@@ -50,37 +50,37 @@ notifications:
 		frontendUrl: http://localhost:9090  # optional, used for linkbacks
 		slackWebhookUrl: https://hooks.slack.com/services/T00000000/B00000000/XXXXXXXXXXXXXXXXXXXXXXXX  # optional, used for Slack alerts
 		globalAlertEmails:
-		- recipient@example.com
-		- additionalRecipient@example.com
+			- recipient@example.com
+			- additionalRecipient@example.com
 		alerts:
-			# Daily namespace budget alert on namespace `kubecost`
-		- type: budget  # supported: budget, recurringUpdate
-			threshold: 50  # optional, required for budget alerts
-			window: daily  # or 1d
-			aggregation: namespace
-			filter: kubecost
-			ownerContact: # optional, overrides globalAlertEmails default
-			- owner@example.com
-			- owner2@example.com
-			# Daily cluster budget alert (clusterCosts alert) on cluster `cluster-one`
-		- type: budget
-			threshold: 200.8  # optional, required for budget alerts
-			window: daily  # or 1d
-			aggregation: cluster
-			filter: cluster-one
-			# Recurring weekly update (weeklyUpdate alert)
-		- type: recurringUpdate
-			window: weekly  # or 7d
-			aggregation: namespace
-			filter: '*'
-			# Recurring weekly namespace update on kubecost namespace
-		- type: recurringUpdate
-			window: weekly  # or 7d
-			aggregation: namespace
-			filter: kubecost
-			ownerContact: # ownerContact(s) should be the same for the same namespace, otherwise the last namespace alert overwrites
-			- owner@example.com
-			- owner2@example.com
+				# Daily namespace budget alert on namespace `kubecost`
+			- type: budget  # supported: budget, recurringUpdate
+				threshold: 50  # optional, required for budget alerts
+				window: daily  # or 1d
+				aggregation: namespace
+				filter: kubecost
+				ownerContact: # optional, overrides globalAlertEmails default
+					- owner@example.com
+					- owner2@example.com
+				# Daily cluster budget alert (clusterCosts alert) on cluster `cluster-one`
+			- type: budget
+				threshold: 200.8  # optional, required for budget alerts
+				window: daily  # or 1d
+				aggregation: cluster
+				filter: cluster-one
+				# Recurring weekly update (weeklyUpdate alert)
+			- type: recurringUpdate
+				window: weekly  # or 7d
+				aggregation: namespace
+				filter: '*'
+				# Recurring weekly namespace update on kubecost namespace
+			- type: recurringUpdate
+				window: weekly  # or 7d
+				aggregation: namespace
+				filter: kubecost
+				ownerContact: # ownerContact(s) should be the same for the same namespace, otherwise the last namespace alert overwrites
+					- owner@example.com
+					- owner2@example.com
 ```
 
 ### Troubleshooting
