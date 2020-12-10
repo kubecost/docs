@@ -46,7 +46,7 @@ The following fields apply to each item under the `alerts` block:
 ```
 notifications:
 	alertConfigs:
-		enabled: false  # the example values below are never read unless enabled is set to true
+		enabled: true  # the example values below are never read unless enabled is set to true
 		frontendUrl: http://localhost:9090  # optional, used for linkbacks
 		slackWebhookUrl: https://hooks.slack.com/services/T00000000/B00000000/XXXXXXXXXXXXXXXXXXXXXXXX  # optional, used for Slack alerts
 		globalAlertEmails:
