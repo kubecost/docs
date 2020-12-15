@@ -57,6 +57,31 @@ This API returns a set of JSON objects in this format:
 }
 ```
 
+Optional filter parameters take the format of `&<filter>=<value>` appended to the assets URL query and include the following:
+Filter | Description
+--------- | -----------
+`filterAccounts` | Filter results by Cloud account. *Requires cloud configuration.*
+`filterCategories` | Filter results by asset category. Examples include `Network`, `Management`, `Compute`, `Storage`, or `Other`.
+`filterClusters` | Filter results by cluster ID. Note: cluster ID is generated from `cluster_id` provided during installation.
+`filterLabels` | Filter results by cloud label or cloud tag. For example, appending `&labels=deployment:kubecost-cost-analyzer` only returns assets with label `deployment=kubecost-cost-analyzer`. CSV list of label values supported. Note that subparameter `:` symbols are required to denote `<labelKey>:<labelValue>` pairs.
+`filterNames` | Filter results by asset name.
+`filterProjects` | Filter results by cloud project ID. *Requires cloud configuration.*
+`filterProviders` | Filter results by provider. For example, appending `&filterProviders=GCP` only returns assets belonging to provider `GCP`. *Requires cloud configuration.*
+`filterProviderIDs` | Filter results by provider ID individual to each cloud asset. For examples, go to the Assets page, select Breakdown by Item, and see the Provider ID column. *Requires cloud configuration.*
+`filterServices` | Filter results by service. Examples include `Cloud Storage`, `Kubernetes`, `BigQuery`.
+`filterTypes` | Filter results by asset type. Examples include `Cloud`, `ClusterManagement`, `Node`, `LoadBalancer`, and `Disk`.
+
+Note:
+ - Some filters require cloud configuration, which can be set at `<your-kubecost-address>/keyinstructions.html`
+ - Multiple filter selections evaluate as ANDs. Each filter selection accepts comma-separated values that evaluate as ORs.
+    - For example, including both `filterClusters=cluster-one` and `filterNames=name1,name2` logically evaluates as `(cluster == cluster-one) && (name == name1 || name == name2)`
+ - All filters are case-sensitive except for `filterTypes`
+ - All filters accept wildcard filters denoted by a URL-encoded `*` suffix, except for `filterTypes` and the label key in `filterLabels`
+    - For example, `filterProviderIDs=gke%2A` will return all assets with a `gke` string prefix in its Provider ID.
+    - For example, `filterLabels=deployment%3Dkube%2A` will return all assets with `deployment` label value containing a `kube` prefix.
+ - Invalid filters return no assets.
+
+
 # Cloud cost reconciliation
 
 After granting Kubecost permission to access cloud billing data, Kubecost adjusts its asset prices once cloud billing data becomes available, e.g. AWS Cost and Usage Report and the spot data feed. Until this data is available from cloud provider, Kubecost uses data from public cloud APIs to determine cost, or alternatively custom pricing sheets. This allows teams to have highly accurate estimates of asset prices in real-time and then become even more precise once cloud billing data becomes available, which is often 1-2 hours for spot nodes and up to a day for reserved instances/savings plans. 
