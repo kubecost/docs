@@ -7,7 +7,7 @@ The Kubecost Allocation view allows you to quickly see allocated spend across al
 ### 1. Displayed metrics  
 View either cumulative or run rate costs measured over the selected time window based on the resources allocated. 
 
-* Cumulative Costs -- represents the actual/historical spend captured by Kubecost agent
+* Cumulative Costs -- represents the actual/historical spend captured by the Kubecost agent over the selected time window
 * Rate metrics -- hourly, daily, or monthly "run rate" cost, also used for projected cost figures, based on samples in the selected time window 
 
 Costs allocations are based on the following:
