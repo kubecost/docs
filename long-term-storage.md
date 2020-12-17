@@ -206,7 +206,7 @@ You can quickly test if this is the issue by running
  and adding 
  `- --store=kubecost-thanos-store-grpc.kubecost:10901` to the container args. This will cause a query restart and you can visit /stores again to see if the store has been added.
 
-If it has, you'll want to use these addresses instead of DNS more permanently by setting
+If it has, you'll want to use these addresses instead of DNS more permanently by setting .Values.thanos.query.stores in values-thanos.yaml
 <pre>
 ```
 ...
