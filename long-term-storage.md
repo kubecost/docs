@@ -183,6 +183,9 @@ The default retention period for when data is moved into the object storage is c
 
 Instead of waiting *2h* to ensure that thanos was configured correctly, the default log level for the thanos workloads is `debug` (it's very light logging even on debug). You can get logs for the `thanos-sidecar`, which is part of the `prometheus-server` pod, and `thanos-store`. The logs should give you a clear indication of whether or not there was a problem consuming the secret and what the issue is. For more on Thanos architecture, view [this resource](https://github.com/thanos-io/thanos/blob/master/docs/design.md).
 
+### Troubleshooting
+
+#### Cluster not writing data to thanos bucket
 If a cluster is not successfully writing data to the bucket, we recommend reviewing `thanos-sidecar` logs with the following command:
 
 ```
@@ -195,3 +198,44 @@ Logs in the following format are evidence of a successful bucket write:
 level=debug ts=2019-12-20T20:38:32.288251067Z caller=objstore.go:91 msg="uploaded file" from=/data/thanos/upload/01KL5YG9CQYZ81G9BZMTM3GJFH/meta.json dst=debug/metas/01KL5YG9CQYZ81G9BZMTM3GJFH.json bucket=kc-thanos
 
 ```
+
+#### Stores not listed at the /stores endpoint
+If thanos-query can't connect to both the sidecar and the store, you may want to directly specify the store GRPC service address instead of using DNS discovery (the default).
+You can quickly test if this is the issue by running          
+ `kubectl edit deployment kubecost-thanos-query -n kubecost`
+ and adding 
+ `- --store=kubecost-thanos-store-grpc.kubecost:10901` to the container args. This will cause a query restart and you can visit /stores again to see if the store has been added.
+
+If it has, you'll want to use these addresses instead of DNS more permanently by setting
+<pre>
+```
+...
+thanos:
+  store:
+    enabled: true
+    grpcSeriesMaxConcurrency: 20
+    blockSyncConcurrency: 20
+    extraEnv:
+      - name: GOGC
+        value: "100"
+    resources: 
+      requests:
+        memory: "2.5Gi"
+  query: 
+    enabled: true
+    timeout: 3m
+    # Maximum number of queries processed concurrently by query node.
+    maxConcurrent: 8
+    # Maximum number of select requests made concurrently per a query.
+    maxConcurrentSelect: 2
+    resources:
+      requests:
+        memory: "2.5Gi"
+    autoDownsampling: false
+    extraEnv:
+      - name: GOGC
+        value: "100"
+    <b>stores:</b>
+      <b>- "kubecost-thanos-store-grpc.kubecost:10901"</b>
+```
+</pre>
