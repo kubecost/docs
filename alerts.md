@@ -85,10 +85,11 @@ notifications:
 
 ### Troubleshooting
 
-Review these steps to verify alerts are being passed to the Kubecost application correctly:
+Review these steps to verify alerts are being passed to the Kubecost application correctly.
 
--   Ensure that the Helm values are successfully read into the configmap
--   Check that the `global.notifications.alertConfigs.enabled` field is set to `true`
+First, ensure that the Helm values are successfully read into the configmap:
+
+-   Confirm that the `global.notifications.alertConfigs.enabled` field is set to `true`
 -   Run `helm template ./cost-analyzer -n kubecost > test-alert-config.yaml`
 -   Open `test-alert-config.yaml`
 -   Find the section starting with `# Source: cost-analyzer/templates/cost-analyzer-alerts-configmap.yaml`
@@ -111,4 +112,7 @@ data:
 ```
 
 -   Ensure that the json string is successfully mapped to the appropriate configs
--   Navigate to your Kubecost UI `/notify.html` as well as the respective `namespace.html?name=<namespace-name>` pages to see that the configured alerts are enabled, budgets are set, and email(s) are set.
+
+Next, confirm that Kubecost product has received configuration data:
+
+- Navigate to your Kubecost UI `/notify.html` as well as the respective `namespace.html?name=<namespace-name>` pages to see that the configured alerts are enabled, budgets are set, and email(s) are set.
