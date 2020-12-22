@@ -41,6 +41,13 @@ The recording rules used by Kubecost are added via our helm installer [values.ya
 
 If the recording rule diagnostic fails, use the configuration from our helm chart's [values.yaml](https://github.com/kubecost/cost-analyzer-helm-chart/blob/d01434f0489e110beb1bd727310f60c0b15744ec/cost-analyzer/values.yaml#L257-L298) to create them.
 
+You can verify diagnostics have been added to prometheus by portforwarding into prometheus and visiting /rules
+e.g: `kubectl port-forward -n kubecost service/kubecost-prometheus-server -n kubecost 9003:80`
+
+You should see the following:
+![screencapture-localhost-9003-rules-2020-12-22-14_48_23](https://user-images.githubusercontent.com/453512/102940664-aecd2e00-4465-11eb-9407-8484aed6a5eb.png)
+
+
 ### Expected kube-state-metrics version found
 
 Kubecost requests `kube-state-metrics >= v1.6.0`. This version check is completed with verifying the existence of the `kube_persistentvolume_capacity_bytes` metric. If this diagnostic test is failing, we recommend you:
