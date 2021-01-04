@@ -89,22 +89,22 @@ This API returns a set of JSON objects in this format:
 
 ```
 {
-  aggregation: "namespace"  // value of aggregation type parameter
-  cpuAllocationAverage: 0.01  // average number of cores allocated over time window, max(request,usage)
-  cpuCost: 0.053106479999999914  // total cost of CPU allocated
-  cpuEfficiency: 0.04691666279537965
-  efficiency: 0.147697667157696  // efficiency of both CPU and RAM provisioned
-  environment: "ingress-nginx"  // instance of aggregation 
-  gpuAllocationAverage: 0
-  gpuCost: 0
-  networkCost: 0
-  pvAllocationAverage: 0  // average GB allocated, based on amount provisioned
-  pvCost: 0
-  ramAllocationAverage: 0.08806329303317599  // average number of RAM GB allocated over time window, max(request,usage)
-  ramCost: 0.006268486099370322  // total cost of RAM allocated
-  ramEfficiency: 1.00
-  sharedCost: 0  // value of costs allocated via sharedOverhead, sharedNamespaces, or sharedLabelNames
-  totalCost: 0.059374966099370236  // sum of all costs
+  aggregation: "namespace"        // value of aggregation type parameter
+  cpuAllocationAverage: 0.01      // average number of cores allocated over time window, max(request,usage)
+  cpuCost: 0.053106479            // total cost of CPU allocated
+  cpuEfficiency: 0.0469166        // ratio of cost-weighted CPUs being utilized
+  efficiency: 0.1476976           // efficiency of both CPU and RAM provisioned
+  environment: "ingress-nginx"    // instance of aggregation 
+  gpuAllocationAverage: 0         // average number of cores allocated over time window, based on request
+  gpuCost: 0                      // total cost of GPU allocated
+  networkCost: 0                  // cost of network egress
+  pvAllocationAverage: 0          // average GB allocated, based on amount provisioned
+  pvCost: 0                       // total cost of persistent volumes allocated
+  ramAllocationAverage: 0.0880    // average number of RAM GB allocated over time window, max(request,usage)
+  ramCost: 0.006268486            // total cost of RAM allocated
+  ramEfficiency: 1.00             // ratio of cost-weighted RAM being utilized
+  sharedCost: 0                   // value of costs allocated via sharedOverhead, sharedNamespaces, or sharedLabelNames
+  totalCost: 0.059374966          // sum of all costs
 }
 ```
 
