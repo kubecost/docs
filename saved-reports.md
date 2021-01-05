@@ -2,7 +2,7 @@
 
 ### Summary
 
-Kubecost supports configuring saved report parameters through [`values.yaml`](https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/values.yaml), allowing users to configure multiple saved custom reports on start up in addition to configuration through the UI. This reference outlines the process of configuring saved reports through `values.yaml` and provides documentation on the required parameters.
+Kubecost supports configuring saved report parameters through [`values.yaml`](https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/values.yaml), allowing users to configure multiple saved custom reports on start up in addition to configuration through the UI. This reference outlines the process of configuring saved reports through a values file and provides documentation on the required and optional parameters.
   
 ### Saved Report Parameters  
   
@@ -13,23 +13,23 @@ The saved report settings, under `global.savedReports`, accept two parameters:
     
 The following fields apply to each map item under the `reports` key:
 
-* `title` -- title of your custom report; any non-empty string is accepted
-* `window` -- the time window the allocation report covers, supports:
-	* `today`
-	* `yesterday`
-	* `week` -- Week-to-date
-	* `month` -- Month-to-date
-	* `<N>d` -- last **N+1** days (e.g., `29d` spans the last 30 days)
-	* `<start-date>,<end-date>` -- **custom window**, consisting of  two comma-separated ISO 8601 date strings:
+* `title` the title/name of your custom report; any non-empty string is accepted
+* `window` the time window the allocation report covers, the following values are supported:
+	- `today`
+	- `yesterday`
+	- `week` week-to-date
+	- `month` month-to-date
+	- `<N>d` last **N+1** days (e.g., `29d` spans the last 30 days)
+	- `<start-date>,<end-date>` -- **custom window**, consisting of  two comma-separated ISO 8601 date strings:
 		* `<start-date>` -- `<YYYY-MM-DD>T00:00:00Z`, start date in UTC; time of day is **rounded down** to the nearest day
 		* `<end-date>` -- `<YYYY-MM-DD>T23:59:59Z`, end date in UTC; time of day is **rounded up** to the nearest day
 		* Example custom window that spans *2020-11-11* to *2020-12-10*:
 			* `2020-11-11T00:00:00Z,2020-12-09T23:59:59Z`
 			* Note that `2020-12-09` rounds up cover the window up until *2020-12-10*, meaning that the parameter above is semantically equivalent to `2020-11-11T12:58:21Z,2020-12-09T00:30:24Z` in the Allocation API
 
-* `aggregateBy` -- aggregation parameter -- equivalent to *Breakdown* in the Kubecost UI, supports `cluster`, `node`, `namespace`, `controllerKind`, `controller`, `service`, `department`, `environment`, `owner`, and `product`
-* `idle` -- idle costs, supports `hide`, `share`, and `separate`
-* `accumulate` -- determines whether or not to sum Allocation costs across the entire window -- equivalent to *Resolution* in the UI, supports `true` (Entire window resolution) and `false` (Daily resolution)
+* `aggregateBy` the desired aggregation parameter -- equivalent to *Breakdown* in the Kubecost UI, supports `cluster`, `node`, `namespace`, `controllerKind`, `controller`, `service`, `department`, `environment`, `owner`, and `product`
+* `idle` idle cost allocation, supports `hide`, `share`, and `separate`
+* `accumulate` determines whether or not to sum Allocation costs across the entire window -- equivalent to *Resolution* in the UI, supports `true` (Entire window resolution) and `false` (Daily resolution)
 * `filters` -- a list of maps consisting of a property and value
 	* `property` -- supports `cluster`, `node`, `namespace`, and `label`
 	* `value` -- property value(s) to filter on, supports wildcard filtering with a `*` suffix
