@@ -82,13 +82,15 @@ The following fields apply to each map item under the `reports` key:
 
 Review these steps to verify that saved reports are being passed to the Kubecost application correctly:
 
--   Ensure that the Helm values are successfully read into the configmap
--   Check that `global.savedReports.enabled` is set to `true`
+1. Confirm that `global.savedReports.enabled` is set to `true`
+
+2. Ensure that the Helm values are successfully read into the configmap
+
 -   Run `helm template ./cost-analyzer -n kubecost > test-saved-reports-config.yaml`
 -   Open `test-saved-reports-config`
 -   Find the section starting with `# Source: cost-analyzer/templates/cost-analyzer-saved-reports-configmap.yaml`
--   Ensure that the Helm values are successfully read into the configmap under the `data` field.
--   Example:
+-   Ensure that the Helm values are successfully read into the configmap under the `data` field. Example below.
+
 ```
 # Source: cost-analyzer/templates/cost-analyzer-saved-reports-configmap.yaml
 apiVersion: v1
@@ -106,5 +108,6 @@ data:
   saved-reports.json: '[{"accumulate":false,"aggregateBy":"namespace","filters":[{"property":"cluster","value":"cluster-one,cluster*"},{"property":"namespace","value":"kubecost"}],"idle":"separate","title":"Example Saved Report 0","window":"today"},{"accumulate":false,"aggregateBy":"controllerKind","filters":[{"property":"label","value":"app:cost*,environment:kube*"},{"property":"namespace","value":"kubecost"}],"idle":"share","title":"Example Saved Report 1","window":"month"},{"accumulate":true,"aggregateBy":"service","filters":[],"idle":"hide","title":"Example Saved Report 2","window":"2020-11-11T00:00:00Z,2020-12-09T23:59:59Z"}]'# Source: cost-analyzer/templates/cost-analyzer-alerts-configmap.yaml
 ```
 
--   Ensure that the json string is successfully mapped to the appropriate configs
--   Navigate to `<front-end-url>/model/reports` and ensure that the configured report parameters have been set
+3. Ensure that the json string is successfully mapped to the appropriate configs
+
+-   Navigate to `<front-end-url>/model/reports` and ensure that the configured report parameters have been set by selecting the "Open saved reports" button in the upper right hand corner of the report card.
