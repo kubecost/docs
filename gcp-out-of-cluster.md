@@ -19,6 +19,8 @@ On this page, you will see instructions for providing a service key, project ID,
 
 <a name="bq-name"></a>**BigQuery dataset** requires a BigQuery dataset prefix (e.g. billing_data) in addition to the BigQuery table name. A full example is `billing_data.gcp_billing_export_v1_018AIF_74KD1D_534A2`.
 
+These config values can alternatively be provided via a [values file](https://github.com/kubecost/cost-analyzer-helm-chart/blob/c10e9475b51612d36da8f04618174a98cc62f8fd/cost-analyzer/values.yaml#L572-L574).
+
 ## Step 3: Label cloud assets
 
 You can now label assets with the following schema to allocate costs back to their appropriate Kubernetes owner.
