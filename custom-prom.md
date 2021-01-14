@@ -7,13 +7,13 @@ Integrating Kubecost with an existing Prometheus installation can be nuanced. We
 **Note:** integrating with an existing Prometheus is only officially supported under Kubecost paid plans.
 
 <a name="dep-versions"></a>
-### Requirements
+### Dependency Requirements
 
-Kubecost requires the following dependency versions:
-
-  - node-exporter - v0.16 (May 18)
+Kubecost requires the following minimum versions:
+ 
   - kube-state-metrics - v1.6.0 (May 19)
   - cAdvisor - kubelet v1.11.0  (May 18)
+  - node-exporter - v0.16 (May 18) [Optional Dependency]
 
 ### Implementation Steps
 
