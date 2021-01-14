@@ -16,7 +16,7 @@ As of v1.72.0, Kubecost supports three types of alerts:
 
  3. Spend Change -- sends an email and Slack alert reporting increases in average hourly spend beyond a threshold relative to baseline average hourly spend, where baseline window is a timespan prior to the current window
   
-## Configuring Alerts in Helm 
+## Configuring Alerts in Helm
 
 *Note: `values.yaml` is a source of truth. Alerts set through `values.yaml` will continually overwrite any manual alert settings set through the Kubecost UI.* 
 
@@ -132,6 +132,31 @@ Required parameters:
 			  aggregation: namespace
 			  filter: kubecost, default # accepts csv
 ```
+
+## Alerts Scheduler
+
+All times in UTC.
+
+The back end scheduler runs if `alertConfigs.enabled` is set to `true`, and alerts at regular times of day. Alert send times are determined by parsing the supplied `window` parameter. If `alertConfigs.enabled` is `false`, alerts are still configurable via the Kubecost UI Notifications tab, and will send alerts through the front end cron job scheduler.
+
+Alert diagnostics with next and last scheduled run times are only available for alerts configured via Helm, and are viewed via `<your-kubecost-url>/model/getCustomAlertDiagnostics`.
+
+Supported: `weekly` and `daily` special cases, `<N>d`, `<M>h` (1 ≤ N ≤ 7, 1 ≤ M ≤ 24)
+Currently Unsupported: time zone adjustments, windows greater than `7d`, windows less than `1h`
+
+### Scheduler Behavior
+
+An `<N>d` alert sends at 00:00 UTC N day(s) from now, i.e., N days from now rounded down to midnight. 
+
+For example, a `5d` alert scheduled on Monday will send on Saturday at 00:00, and subsequently the next Thursday at 00:00
+
+An `<N>h` alert sends at the earliest time of day after now that is a multiple of N.
+
+For example, a `6h` alert scheduled at any time between 12pm and 6pm will send next at 6pm and subsequently at 12am the next day.
+
+If 24 is not divisible by the hourly window, schedule at next multiple of `<N>h` after now, starting from current day at 00:00.
+
+For example, a `7h` alert scheduled at 22:00 checks 00:00, 7:00, 14:00, and 21:00, before arriving at a next send time of 4:00 tomorrow.
 
 ## Troubleshooting
 
