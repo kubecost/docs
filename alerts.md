@@ -2,42 +2,64 @@
 
 ### Summary
 
-Kubecost alerts allow teams to receive updates on real-time Kubernetes spend. They are configurable via the Kubecost UI, and now via Helm values. This resource gives an overview of how to configure Kubecost email and Slack alerts using [Kubecost helm chart values](https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/values.yaml).
+Kubecost alerts allow teams to receive updates on real-time Kubernetes spend. They are configurable via Helm values. This resource gives an overview of how to configure Kubecost email and Slack alerts using [Kubecost helm chart values](https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/values.yaml).
   
 
-Kubecost currently supports four different types of alerts:
+As of v1.72.0, Kubecost supports three types of alerts:
 
- 1. Recurring update, weekly (all namespaces)
-	 - Sends an email to the configured global email(s) reporting cluster spend across all namespaces, broken down by namespace
+ 1. Recurring update
+   
+   - Weekly (all namespaces) -- sends an email and Slack alert reporting cluster spend across all namespaces, with costs broken down by namespace
+     - Required parameters:
+       - `type: recurringUpdate`
+       - `aggregation: namespace`
+       - `filter: '*'`
+       - `window: 7d`
+   - Weekly (by namespace) -- sends an email and Slack alert reporting individual namespace spend, identified by `filter`
+     - Required parameters:
+       - `type: recurringUpdate`
+       - `aggregation: namespace`
+       - `filter: <value>` -- configurable, accepts a single namespace name (comma separated values unsupported)
+       - `window: 7d`
 
- 2. Recurring update, weekly by namespace
-	 - Sends an email to the configured owner contact email, defaulting to global emails if not provided, reporting individual namespace spend, identified by `filter`
+ 2. Budget -- sends an email and Slack alert reporting spend
+     - Required parameters:
+       - `type: budget`
+       - `threshold: <amount>` -- configurable, cost threshold in configured currency units
+       - `aggregation: <agg-parameter>` -- configurable, accepts all aggregations supported by the [aggregated cost model API](https://github.com/kubecost/docs/blob/2ea9021e8530369d53184ea5382b2e4c080bb426/allocation-api.md#aggregated-cost-model-api)
+       - `filter: <value>` -- configurable, accepts a single filter value
+       - `window: <N>d` or `<M>h` -- configurable, (1 ≤ N ≤ 7, 1 ≤ M ≤ 24)
 
- 3. Daily budget alert by cluster
-
-	 - Sends an email and Slack alert to global email(s) and Slack webhook (if configured), reporting daily total cluster spend
-
- 4. Daily budget alert by namespace
-
-	 - Sends an email and Slack alert to the configured owner contact, defaulting to global emails if not provided, reporting daily total namespace spend, identified by `filter`
+ 3. Spend Change -- sends an email and Slack alert reporting deviations in cost
+     - Required parameters:
+       - `type: spendChange`
+       - `relativeThreshold: <N>` -- configurable, N ≥ -1
+       - `aggregation: <agg-value>` -- configurable
+       - `filter: <value` -- configurable, accepts a single filter value
+       - `window: <N>d` or `<M>h` -- configurable, (1 ≤ N ≤ 7, 1 ≤ M ≤ 24)
+       - `baselineWindow: <N>d` -- configurable, N ≥ 1
   
-### Alerts Parameters  
+### Configuring Alerts in Helm  
   
-The alert settings, under `notifications.alertConfigs`, accept four global fields and a list of individual alerts to configure:
+The alert settings, under `global.notifications.alertConfigs`, accept four global fields and a list of individual alerts to configure:
 
-* `enabled` determines whether Kubecost will read alerts configured via `values.yaml`, default set to `false`     
-* `frontendUrl` optional, your cost analyzer front end URL used for alert linkbacks (applies to all alerts)
-* `slackWebhookUrl` optional, a Slack webhook used for daily cluster and namespace budget alerts, enabled by default if provided
-* `globalAlertEmails` a list of emails for alerts
+* `enabled` determines whether Kubecost will schedule alerts, default set to `false`     
+* `frontendUrl` optional, your cost analyzer front end URL used for alert linkbacks
+* `globalSlackWebhookUrl` optional, a global Slack webhook used for alerts, enabled by default if provided
+* `globalAlertEmails` a global list of emails for alerts
     
 The following fields apply to each item under the `alerts` block:
 
-* `type` supported: budget, recurringUpdate	    
-* `threshold` required for budget alerts, optional for recurring update alerts	    
+* `type` supported: `recurringUpdate`, `budget`, `spendChange`
+* `threshold` required for budget alerts
+* `relativeThreshold` required for spendChange alerts, the relative amount spend must exceed the baseline spend by in order to trigger
 * `window` time window the alert covers, supports `1d`, `daily`, `7d`, and `weekly` settings depending on the type of alert described above
+* `baselineWindow` required for spendChange alerts, the baseline window from which baseline average hourly cost is calculated
 * `aggregation` aggregation parameter, supports namespace or cluster	    
-* `filter` aggregation value to filter on. Given the available aggregation parameters, it is the namespace name, cluster name, or `’*’` (when using the namespace aggregation parameter) to signify inclusion of all namespaces	    
-* `ownerContact` optional list of owner contact emails for namespace alerts, default to global emails if missing
+* `filter` aggregation value to filter on
+  * special character `*` signifies all namespaces for recurringUpdate
+* `ownerContact` optional list of alert-level owner contact emails, default to `globalAlertEmails` if missing
+* `slackWebhookUrl` optional alert-level Slack webhook, default to `globalSlackWebhookUrl` if missing
 
 ### Example Helm values.yaml
 
@@ -81,6 +103,12 @@ notifications:
 				ownerContact: # ownerContact(s) should be the same for the same namespace, otherwise the last namespace alert overwrites
 					- owner@example.com
 					- owner2@example.com
+			- type: spendChange  # change relative to moving avg
+			  relativeThreshold: 0.20  # Proportional change relative to baseline. Must be greater than -1 (can be negative).
+			  window: 1d                # accepts ‘d’, ‘h’
+			  baselineWindow: 30d       # previous window, offset by window
+			  aggregation: namespace
+			  filter: kubecost, default # accepts csv
 ```
 
 ### Troubleshooting
@@ -115,4 +143,4 @@ data:
 
 Next, confirm that Kubecost product has received configuration data:
 
-- Navigate to your Kubecost UI `/notify.html` as well as the respective `namespace.html?name=<namespace-name>` pages to see that the configured alerts are enabled, budgets are set, and email(s) are set.
+- Visit `<your-kubecost-url>/model/getCustomAlertDiagnostics` to view next and last runs for alerting
