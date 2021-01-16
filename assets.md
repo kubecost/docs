@@ -1,5 +1,5 @@
 The Kubecost Assets view shows Kubernetes cluster costs broken down by the individual backing assets in your cluster (e.g. cost by node, disk, and other assets). 
-It’s used to identify spend drivers over time and to audit Allocation data. 
+It’s used to identify spend drivers over time and to audit Allocation data. This view can also optionally show out of cluster assets by service, tag/label, etc.
 
 ![Kubecost Assets view](images/assets-screenshot.png)
 
@@ -7,7 +7,7 @@ This view is available at `<your-kubecost-address>/assets.html` as of release v1
 
 # Assets API
 
-The cluster assets API retrieves the backing cost data broken down by individual assets in your cluster but also provides various aggregations of this data.
+The assets API retrieves backing cost data broken down by individual assets in your cluster but also provides various aggregations of this data.
 
 The API is available at the following endpoint:
 
