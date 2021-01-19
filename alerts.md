@@ -191,4 +191,17 @@ data:
 
 Next, confirm that Kubecost product has received configuration data:
 
-- Visit `<your-kubecost-url>/model/getCustomAlertDiagnostics` to view configuration settings as well as next and last scheduled run times for individual alerts
+- Go to `<your-kubecost-url>/notifications.html` in the Kubecost UI to view configured email and Slack settings, weekly updates, namespace updates, cluster budget, and namespace budget alerts.
+
+Additionally, confirm that the alerts scheduler has properly parsed and scheduled a next run for each custom alert by visiting `<your-kubecost-url>/model/getCustomAlertDiagnostics` to view individual alert parameters as well as next and last scheduled run times for individual alerts.
+
+- Confirm that `nextRun` has been updated from "0001-01-01T00:00:00Z"
+- Settings that do not appear in the Notifications page (for example, `spendChange` alerts), but are visible from the `/model/getCustomAlertDiagnostics` endpoint are scheduled to send.
+
+If `nextRun` fails to update, or alerts are not sending at the `nextRun` time, check pod logs by running `kubectl logs $(kubectl get pods -n kubecost | awk '{print $1}' | grep "^kubecost-cost-analyzer.\{16\}") -n kubecost -c cost-model > kubecost-logs.txt`
+
+- Common causes of misconfiguration include the following:
+	- Not setting `.Values.global.notifications.alertConfigs.enabled` to `true` -- Kubecost will not read the resulting configmap
+	- unsupported csv filters -- `spendChange` alerts accept `filter` as comma-separated values; other alert types do not.
+	- unsupported alert type -- all alert type names are in camelCase -- check spelling and capitalization for all alert parameters
+	- unsupported aggregation parameters -- see the [aggregated cost model API](https://github.com/kubecost/docs/blob/2ea9021e8530369d53184ea5382b2e4c080bb426/allocation-api.md#aggregated-cost-model-api) for details
