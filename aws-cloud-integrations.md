@@ -406,7 +406,7 @@ You can also check query history to see if any queries are failing:
 ## Want to relate out-of-cluster costs to k8s resources via tags?
 
 *   [Activating User-Defined Cost Allocation Tags - AWS Billing and Cost Management](https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/activating-tags.html)
-*   See [Step 6 here](http://docs.kubecost.com/aws-out-of-cluster.html) for more information on how to supply tags or use existing tags.
+*   See [Step 2 here](http://docs.kubecost.com/aws-out-of-cluster.html) for more information on how to supply tags or use existing tags.
 
 # Spot Data feed integration
 
