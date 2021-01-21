@@ -30,24 +30,24 @@ This API returns a set of JSON objects in this format:
 
 ```
 {
-  cpuCoreHours: 0.05
-  cpuCost: 0.083
-  cpuEfficiency: .87
-  end: "2020-09-14T00:00:00+01:00"
-  gpuCost: 0
-  gpuHours: 0
-  minutes: 1440
-  name: "data-science"    // value of aggregator 
-  networkCost: 0
-  properties: {cluster: "cluster-one"}
-  pvByteHours: 0
-  pvCost: 0
-  ramByteHours: 123684420.26
-  ramCost: 0.023
-  ramEfficiency: .56
+  cpuCoreHours: 0.05                     // cumulative hours of CPU cores consumed
+  cpuCost: 0.083                         // total cost of CPU allocated
+  cpuEfficiency: .87                     // percentage of CPU requested that is utilized, weighted by cost
+  end: "2020-09-14T00:00:00+01:00"       // end of window
+  gpuCost: 0                             // total cost of GPU allocated 
+  gpuHours: 0                            // cumulative hours of GPU consumed, in # of GPUs
+  minutes: 1440                          // cumulative count of minutes running
+  name: "data-science"                   // value of aggregator 
+  networkCost: 0                         // measured cost of network egress
+  properties: {cluster: "cluster-one"}   // meta-data for this aggregation
+  pvByteHours: 100                       // cumulative hours of disk consumed, in bytes
+  pvCost: .70                            // total cost of persistent volume allocated
+  ramByteHours: 123684420.26             // cumulative hours of RAM consumed, in bytes
+  ramCost: 0.023                         // total cost of RAM allocated
+  ramEfficiency: .56                     // percentage of RAM requested that is utilized, weighted by cost
   sharedCost: 0
-  start: "2020-09-13T00:00:00+01:00"
-  totalCost: 0.024
-  totalEfficiency: .72
+  start: "2020-09-13T00:00:00+01:00"     // beginning of window
+  totalCost: 0.024                       // sum of all costs
+  totalEfficiency: .72                   // percentage of RAM + CPU equested that is utilized, weighted by cost
 }
 ```
