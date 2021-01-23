@@ -1,7 +1,6 @@
 # Cost Allocation API
 
-The cost allocation API is an internal API that provides workload allocation data from the daily [Kubecost ETL pipeline](https://github.com/kubecost/docs/blob/master/allocation-api.md#caching-overview) and powers the Kubecost Reports view. 
-Given the internal status it is subject to change. The endpoint is available at the following address:
+The cost allocation API provides workload allocation data from the daily [Kubecost ETL pipeline](https://github.com/kubecost/docs/blob/master/allocation-api.md#caching-overview) and powers the Kubecost Reports view. Workloads can be aggregated by any Kubernetes concept, e.g. namespace, label, controller, service, pod, etc. The endpoint is available at the following address:
 
 `http://<kubecost-address>/model/allocation`
 
