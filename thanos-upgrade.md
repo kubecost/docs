@@ -8,6 +8,7 @@ This is simplified if you're using our default values-thanos.yaml -- that has th
 
 However, for the thanos secret you're using, the "encrypt-sse" line needs to be removed. Everything else should stay the same. For example:
 ```
+type: S3
 config:
   bucket: ${bucket_name}
   endpoint: "s3.amazonaws.com"
