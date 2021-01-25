@@ -6,15 +6,8 @@ The following guide provides the steps required for enabling out of cluster cost
 
 [Follow our guide for cloud integrations](https://github.com/kubecost/docs/blob/master/aws-cloud-integrations.md)
 
-## Step 2: Enable User-Defined Cost Allocation Tags
+## Step 2: Tag your resources
 Kubecost utilizes AWS tagging to allocate the costs of AWS resources outside of the Kubernetes cluster to specific Kubernetes concepts, such as namespaces, pods, etc. These costs are then shown in a unified dashboard within the Kubecost interface.
-
-In order to make the custom Kubecost AWS tags appear on the cost and usage reports, and therefore in Kubecost, individual cost allocation tags must be enabled. Details on which tags to enable can be found in Step #6 of this doc.
-
-[Instructions for enabling user-defined cost allocation tags](https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/activating-tags.html)
-
-
-## Step 3: Tag your resources
 
 To allocate external AWS resources to a Kubernetes concept, use the following tag naming scheme:
 
@@ -35,6 +28,14 @@ To use an alternative or existing AWS tag schema, you may supply these in your [
 
 
 More on AWS tagging [here](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html).
+
+Tags may take several hours to show up in the **Cost Allocations Tags** section described in the next step.
+
+## Step 3: Enable User-Defined Cost Allocation Tags
+
+In order to make the custom Kubecost AWS tags appear on the cost and usage reports, and therefore in Kubecost, individual cost allocation tags must be enabled. Details on which tags to enable can be found in Step #2 of this doc.
+
+Instructions for enabling user-defined cost allocation tags [here](https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/activating-tags.html)
 
 ## Having issues?
 

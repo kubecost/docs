@@ -3,12 +3,38 @@ Kubecost pulls asset prices from the public AWS pricing API by default. To have 
 # Cost and Usage Report Integration
 
 ## Step 1: Setting up the CUR
+Follow these steps to set up a Cost and Usage Report. Be sure to enable Resource Ids and Athena integration when creating the CUR.
+[https://docs.aws.amazon.com/cur/latest/userguide/cur-create.html](https://docs.aws.amazon.com/cur/latest/userguide/cur-create.html)
+
+> Note the name of the bucket you create for CUR data. This will be used in following step. 
+
+> If you believe you have the correct permissions, but cannot access the Billing and Cost Management page, have the owner of your organization's root account follow these instructions [https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/control-access-billing.html](https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/control-access-billing.html#ControllingAccessWebsite-Activate)
+
+This step should take AWS several hours to complete, wait until it is finished before continuing to the next step
+
+## Step 2: Setting up Athena
 
 [https://docs.aws.amazon.com/cur/latest/userguide/cur-ate-setup.html#create-athena-cur](https://docs.aws.amazon.com/cur/latest/userguide/cur-ate-setup.html#create-athena-cur)
 
-> Note the name of the bucket you create for CUR data. This will be used in following steps.
+> Click the next **Next Topic** link for step-by-step instructions on setting up Athena through cloud formation
 
-## Step 2: Setting up IAM permissions
+Once Athena is set up with the CUR, you will need to create a new S3 bucket for Athena query results.
+
+* Navigate to https://console.aws.amazon.com/s3
+
+* Click **Create Bucket**
+
+* Use the same region as was used for the CUR bucket and pick a name that follows the format `aws-athena-query-results-*`
+
+* Click **Create Bucket**
+
+* Navigate to https://console.aws.amazon.com/athena
+
+* Click **Settings**
+
+* Set **Query result location** to the S3 bucket you just created
+
+## Step 3: Setting up IAM permissions
 
 ### Add via Cloudformation: 
 Kubecost offers a set of cloudformation templates to help set your IAM roles up. If you’re new to provisioning IAM roles, we suggest downloading our templates and using the cloudformation wizard to set these up: [https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cfn-console-create-stack.html](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cfn-console-create-stack.html) . 
@@ -22,7 +48,7 @@ Download template files from the URLs provided below and upload them as the stac
   
   * Navigate to https://console.aws.amazon.com/cloudformation
   
-  * Choose **Create New Stack** if you have never used AWS CloudFormation before. Otherwise, choose **Create Stack**.
+  * Click **Create New Stack** if you have never used AWS CloudFormation before. Otherwise, click **Create Stack**. and select **With new resource (standard)**
   
   * Under **Prepare template**, choose **Template is ready**.
   
@@ -287,7 +313,7 @@ You will then need to add the following trust statement to the role the policy i
 </details>
 
 
-## Step 3: Attaching IAM permissions to Kubecost
+## Step 4: Attaching IAM permissions to Kubecost
 Now that the policies have been created, we will need to attach those policies to Kubecost. We support the following methods:
 
 <details>
@@ -344,21 +370,21 @@ Now that the policies have been created, we will need to attach those policies t
 
 </details>
 
-## Step 4: Provide CUR config values to Kubecost
+## Step 5: Provide CUR config values to Kubecost
 
 These values can either be set from the kubecost frontend or via .Values.kubecostProductConfigs in the helm chart. Note that if you set any kubecostProductConfigs from the helm chart, all changes via the frontend will be overridden on pod restart.
 
-*    `athenaProjectID` e.g. "530337586277" # The AWS AccountID where the Athena CUR is. 
-*    `athenaBucketName` An S3 bucket to store Athena query results that you’ve created that kubecost has permission to access
-    * The name of the bucket should match `aws-athena-query-results-&lt;your-bucket-name&gt;`, so the IAM roles defined above will automatically allow access to it
+* `athenaProjectID` e.g. "530337586277" # The AWS AccountID where the Athena CUR is. 
+* `athenaBucketName` An S3 bucket to store Athena query results that you’ve created that kubecost has permission to access
+    * The name of the bucket should match `s3://aws-athena-query-results-*`, so the IAM roles defined above will automatically allow access to it
     * The bucket can have a Canned ACL of `Private` or other permissions as you see fit.
-*    `athenaRegion` The aws region athena is running in
-*    `athenaDatabase` the name of the database created by the CUR setup
-    * The athena database name is available as the value (physical id) of `AWSCURDatabase` in the CloudFormation stack created above (in [Step 1: Setting up the CUR](#Step-1:-Setting-up-the-CUR))
-*    `athenaTable` the name of the table created by the CUR setup
-    * The table name is typically the database name with the leading `athenacurcfn_` removed (but is not available as a CloudFormation stack resource)
+* `athenaRegion` The aws region athena is running in
+* `athenaDatabase` the name of the database created by the CUR setup
+    * The athena database name is available as the value (physical id) of `AWSCURDatabase` in the CloudFormation stack created above (in [Step 2: Setting up the CUR](#Step-2:-Setting-up-Athena))
+* `athenaTable` the name of the table created by the CUR setup
+  * The table name is typically the database name with the leading `athenacurcfn_` removed (but is not available as a CloudFormation stack resource)
 
-*   If you are using a multi-account setup, you will also need to set `.Values.kubecostProductConfigs.masterPayerARN `To the arn of the role in the masterpayer account, e.g. `arn:aws:iam::530337586275:role/KubecostRole`.
+* If you are using a multi-account setup, you will also need to set `.Values.kubecostProductConfigs.masterPayerARN `To the arn of the role in the masterpayer account, e.g. `arn:aws:iam::530337586275:role/KubecostRole`.
 
 ## Troubleshooting
 
@@ -380,7 +406,7 @@ You can also check query history to see if any queries are failing:
 ## Want to relate out-of-cluster costs to k8s resources via tags?
 
 *   [Activating User-Defined Cost Allocation Tags - AWS Billing and Cost Management](https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/activating-tags.html)
-*   See [Step 6 here](http://docs.kubecost.com/aws-out-of-cluster.html) for more information on how to supply tags or use existing tags.
+*   See [Step 2 here](http://docs.kubecost.com/aws-out-of-cluster.html) for more information on how to supply tags or use existing tags.
 
 # Spot Data feed integration
 
