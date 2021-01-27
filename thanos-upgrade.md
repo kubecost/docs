@@ -6,7 +6,10 @@ The PR bumps the image version, adds the [query-frontend](https://thanos.io/tip/
 
 This is simplified if you're using our default values-thanos.yaml -- that has the new configs already.
 
-However, for the thanos secret you're using, the "encrypt-sse" line needs to be removed. Everything else should stay the same. For example:
+**However, for the thanos secret you're using, the "encrypt-sse" line needs to be removed. Everything else should stay the same.**
+
+For example, view this sample config:
+
 ```
 type: S3
 config:
