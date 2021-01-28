@@ -7,14 +7,13 @@ Kubecost alerts allow teams to receive updates on real-time Kubernetes spend. Th
 
 As of v1.72.0, Kubecost supports three types of alerts:
 
- 1. Recurring update
-   
-   - Weekly (all namespaces) -- sends an email and Slack alert reporting cluster spend across all namespaces, with costs broken down by namespace
-   - Weekly (by namespace) -- sends an email and Slack alert reporting individual namespace spend, identified by `filter`
+ 1. [Recurring update](#type-recurring-update) - sends an email and/or Slack alert with cluster spend across all or a set of namespaces, with costs broken down by namespace
 
- 2. Budget -- sends an email and Slack alert reporting spend by aggregation and filter value
+ 2. [Budget](#type-budget) -- sends an email and Slack alert reporting spend by aggregation and filter value
 
- 3. Spend Change -- sends an email and Slack alert reporting increases in average hourly spend beyond a threshold relative to baseline average hourly spend, where baseline window is a timespan prior to the current window
+ 3. [Spend Change](#type-spend-change) -- sends an email and Slack alert reporting increases in average hourly spend beyond a threshold relative to baseline average hourly spend, where baseline window is a timespan prior to the current window
+ 
+ 4. [Health Diagnostic]() -- used for production monitoring for the health of Kubecost itself
   
 ## Configuring Alerts in Helm
 
@@ -132,6 +131,16 @@ Required parameters:
 			  aggregation: namespace
 			  filter: kubecost, default # accepts csv
 ```
+
+#### Type: Health Diagnostic
+
+Enabling diagnostic alerts in Kubecost sends a Slack message (email coming soon) when an event impacts product uptime. This feature can be enabled in seconds from the from a values file. The events are detected:
+
+* Prometheus is unreachable
+* Kubecost metrics missing over last 5 minutes
+* More coming soon.
+
+To enable, provide a `globalSlackWebhookUrl` value and set this [flag](https://github.com/kubecost/cost-analyzer-helm-chart/blob/31dc60d2c539720f2b2a72c8e22b2f6b866580bd/cost-analyzer/values.yaml#L31) to `true`
 
 ## Alerts Scheduler
 
