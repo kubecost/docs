@@ -5,15 +5,15 @@
 Kubecost alerts allow teams to receive updates on real-time Kubernetes spend. They are configurable via the Kubecost UI or via Helm values. This resource gives an overview of how to configure Kubecost email and Slack alerts using [Kubecost helm chart values](https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/values.yaml).
   
 
-As of v1.72.0, Kubecost supports three types of alerts:
+As of v1.72.0, Kubecost supports four types of notifications:
 
  1. [Recurring update](#type-recurring-update) - sends an email and/or Slack alert with cluster spend across all or a set of namespaces, with costs broken down by namespace
 
- 2. [Budget](#type-budget) -- sends an email and Slack alert reporting spend by aggregation and filter value
+ 2. [Budget](#type-budget) -- sends an email and/or Slack alert when spend crosses a defined threshold
 
- 3. [Spend Change](#type-spend-change) -- sends an email and Slack alert reporting increases in average hourly spend beyond a threshold relative to baseline average hourly spend, where baseline window is a timespan prior to the current window
+ 3. [Spend Change](#type-spend-change) -- sends an email and/or Slack alert reporting unexpected spend increases relative to moving averages
  
- 4. [Health Diagnostic]() -- used for production monitoring for the health of Kubecost itself
+ 4. [Health Diagnostic](#type-health-diagnostic) -- used for production monitoring for the health of Kubecost itself
   
 ## Configuring Alerts in Helm
 
