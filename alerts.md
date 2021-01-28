@@ -134,7 +134,7 @@ Required parameters:
 
 #### Type: Health Diagnostic
 
-Enabling diagnostic alerts in Kubecost sends a Slack message (email coming soon) when an event impacts product uptime. This feature can be enabled in seconds from the from a values file. The events are detected:
+Enabling diagnostic alerts in Kubecost sends a Slack message (email coming soon) when an event impacts product uptime. This feature can be enabled in seconds from a values file. The following health events are detected:
 
 * Prometheus is unreachable
 * Kubecost metrics missing over last 5 minutes
