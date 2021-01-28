@@ -1,0 +1,21 @@
+# AWS Node Price Reconciliation Methodology
+
+Kubecost is capable of accurately grouping the costs of compute resources over a given timeframe with a specified duration step size. To achieve this, Kubecost uses Athena queries to gather data points with differing price models and filters out those that are not relevant. The result of this process is a resource id or provider id of a resource associated with a cost.
+
+## Athena Queries
+
+The reconciliation process makes two queries to Athena, one to gather resources that are paid for on the on-demand model and one query for resources on the reservation model. The on-demand query includes resources that are given at a discounted rate other than those provided by the reservation model. Both queries will include the column `line_item_resource_id` which is the resource id or provider id of the resource.
+
+#### On-Demand Query
+This query is grouped by 6 columns `line_item_usage_start_date`, `line_item_usage_end_date`, `line_item_resource_id`, `line_item_line_item_type`, `line_item_usage_type` and `line_item_product_code`. The columns `line_item_unblended_cost` and `savings_plan_savings_plan_effective_cost` are summed on this grouping. Finally the query filters out rows that are not within a given date range, have a missing `line_item_resource_id` and have a `line_item_product_code` not equal to "AmazonEC2"
+
+#### Reservation Query
+The reservation query is grouped on 5 columns `line_item_usage_start_date`, `line_item_usage_end_date`, `reservation_reservation_a_r_n`, `line_item_resource_id` and `line_item_product_code`. The query is summed on the `reservation_effective_cost` and filtered by the date window and for missing values in the `reservation_reservation_a_r_n` column.
+
+## Processing Query results
+
+The on-demand Query is categorized into different resource types: compute, network, storage and other. Network is identified by the presence of the "byte" in the line_item_usage_type. Compute and storage are identified by the presence of "i-" and "vol-" prefixes in `line_item_resource_id` respectively. Non compute values are removed from the results. Out of the two costs aggregated by this query the correct one to use is determined by the `line_item_line_item_type`, if it has a value of "SavingsPlanCoveredUsage" then the `savings_plan_savings_plan_effective_cost` is used as the cost if not then the `line_item_unblended_cost` is used.
+
+In the reservation query all of the results are of the compute category and there is only the `reservation_effective_cost` to use as cost
+
+These results are then merged into one set, with the provider id used to associate the cost with other information about the resource.
