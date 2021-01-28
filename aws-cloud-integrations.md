@@ -10,7 +10,7 @@ Follow these steps to set up a Cost and Usage Report. Be sure to enable Resource
 
 > If you believe you have the correct permissions, but cannot access the Billing and Cost Management page, have the owner of your organization's root account follow these instructions [https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/control-access-billing.html](https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/control-access-billing.html#ControllingAccessWebsite-Activate)
 
-This step should take AWS several hours to complete, wait until it is finished before continuing to the next step
+AWS may take several hours to publish data, wait until this is complete before continuing to the next step
 
 ## Step 2: Setting up Athena
 
@@ -20,19 +20,13 @@ This step should take AWS several hours to complete, wait until it is finished b
 
 Once Athena is set up with the CUR, you will need to create a new S3 bucket for Athena query results.
 
-* Navigate to https://console.aws.amazon.com/s3
-
-* Click **Create Bucket**
-
-* Use the same region as was used for the CUR bucket and pick a name that follows the format `aws-athena-query-results-*`
-
-* Click **Create Bucket**
-
-* Navigate to https://console.aws.amazon.com/athena
-
-* Click **Settings**
-
-* Set **Query result location** to the S3 bucket you just created
+ 1. Navigate to https://console.aws.amazon.com/s3
+ 2. Select **Create Bucket**
+ 3. Be sure to use the same region as was used for the CUR bucket and pick a name that follows the format `aws-athena-query-results-*`
+ 4. Select **Create Bucket**
+ 5. Navigate to https://console.aws.amazon.com/athena
+ 6. Click **Settings**
+ 7. Set **Query result location** to the S3 bucket you just created
 
 ## Step 3: Setting up IAM permissions
 
