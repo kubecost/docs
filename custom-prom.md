@@ -106,6 +106,8 @@ Note that this does not override the source label-- it creates a new label calle
 <a name="troubleshoot"></a>
 ## Troubleshooting Issues
 
+Visiting `<your-kubecost-endpoint>/diagnostics.html` provides diagnostics info on this integration. [More details](/diagnostics.md)
+
 Common issues include the following:
 
 * Wrong Prometheus FQDN: evidenced by the following pod error message `No valid prometheus config file at  ...` and the init pods hanging. We recommend running `curl <your_prometheus_url>/api/v1/status/config` from a pod in the cluster to confirm that your [Prometheus config](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#configuration-file) is returned. Here is an example, but this needs to be updated based on your Prometheus address:
