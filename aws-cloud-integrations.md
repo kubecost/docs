@@ -419,3 +419,7 @@ These values can either be set from the kubecost frontend or via .Values.kubecos
  `awsSpotDataBucket` the configured bucket for the spot data feed
 
  `awsSpotDataPrefix` optional configured prefix for your spot data feed bucket
+ 
+ `spotLabel` optional kubernetes node label name designating whether a node is a spot node. Used to provide pricing estimates until exact spot data becomes available from the CUR
+ 
+ `spotLabelValue` optional kubernetes node label value designating a spot node. Used to provide pricing estimates until exact spot data becomes available from the CUR. For example, if your spot nodes carry a label `lifecycle:spot`, then the spotLabel would be "lifecycle" and the spotLabelValue would be "spot"
