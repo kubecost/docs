@@ -25,6 +25,6 @@ See an overview of core components in this diagram:
 
 # Enterprise architecture overview
 
-The most common implementation of durable storage in the Kubecost application application is with [Thanos](https://thanos.io/). Below is a high-level reference for required components. More information on each Thanos component can be found [here](https://thanos.io/quick-tutorial.md/#components).
+The most common implementation of durable storage in the Kubecost application application is with [Thanos](https://thanos.io/). Below is a high-level reference for required components. More information on each Thanos component can be found [here](https://thanos.io/tip/components/).
 
 ![Thanos Overview](images/thanos-architecture.png)
