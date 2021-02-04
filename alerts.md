@@ -84,6 +84,8 @@ Required parameters (by individual namespace):
 
 #### Type: Budget
 
+Define spend budgets and alert on budget overruns.
+
 Required parameters:
 
 - `type: budget`
@@ -110,6 +112,8 @@ Required parameters:
 ```
 
 #### Type: Spend Change
+
+Detect unexpected spend increases/decreases relative to historical moving averages.
 
 Required parameters:
 
