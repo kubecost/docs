@@ -1,14 +1,15 @@
-# Creating a Thanos IAM policy
-
+### Creating a Thanos IAM policy
 In order to create an AWS IAM policy for use with Thanos:
 
-1. Navigate to the AWS console and select `IAM`.
+1.  Navigate to the AWS console and select `IAM`.
+
 2. Select Policies in the Navigation menu and choose `Create Policy`
+
 3. Add the following JSON in the policy editor
 
-    **Note:** make sure to replace `<your-bucket-name>` with the name of your newly created S3 bucket
+&nbsp;&nbsp;&nbsp;&nbsp;**Note:** make sure to replace `<your-bucket-name>` with the name of your newly created S3 bucket
 
-```text
+```
 {
     "Version": "2012-10-17",
     "Statement": [
@@ -31,19 +32,19 @@ In order to create an AWS IAM policy for use with Thanos:
 }
 ```
 
-  4. Select Review policy and name this policy, e.g. `kc-thanos-store-policy`
+&nbsp;&nbsp;4.&nbsp;Select Review policy and name this policy, e.g. `kc-thanos-store-policy`
 
-  5. Navigate to Users in IAM control panel, and select Add user
+&nbsp;&nbsp;5.&nbsp;Navigate to Users in IAM control panel, and select Add user
 
-  6. Provide a User name \(e.g. `kubecost-thanos-service-account`\) and select `Programmatic access`
+&nbsp;&nbsp;6.&nbsp;Provide a User name (e.g. `kubecost-thanos-service-account`) and select `Programmatic access`
 
-  7. Select Attach existing policies directly, search for the policy name provided in step 4, and then create the user.
+&nbsp;&nbsp;7.&nbsp;Select Attach existing policies directly, search for the policy name provided in step 4, and then create the user.
 
-![image](.gitbook/assets/attach-existing.png)
+![image](/attach-existing.png)
 
-   8. Capture your Access Key ID and secret in the view below:
+&nbsp;&nbsp;&nbsp;8.&nbsp;Capture your Access Key ID and secret in the view below:
 
-![image](.gitbook/assets/key-created.png)
+![image](/key-created.png)
 
-If you don’t want to use a service account, IAM credentials retrieved from an instance profile are also supported. You must get both access key and secret key from the same method \(i.e. both from service or instance profile\). More info on retrieving credentials [here](https://thanos.io/storage.md/#credentials).
-
+If you don’t want to use a service account, IAM credentials retrieved from an instance profile are also supported.
+You must get both access key and secret key from the same method (i.e. both from service or instance profile). More info on retrieving credentials [here](https://thanos.io/storage.md/#credentials).

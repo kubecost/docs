@@ -1,8 +1,6 @@
-# allocation-api
-
 Kubecost exposes multiple APIs to obtain cost, resource allocation, and utilization data. Below is documentation on two options: the cost model API and aggregated cost model API.
 
-## Cost model API
+# Cost model API
 
 The full cost model API exposes pricing model inputs at the individual container/workload level and is available at:
 
@@ -19,7 +17,7 @@ API parameters include the following:
 
 This API returns a set of JSON elements in this format:
 
-```text
+```
 {
   cpuallocated: [{timestamp: 1567531940, value: 0.01}]
   cpureq: [{timestamp: 1567531940, value: 0.01}]
@@ -39,18 +37,18 @@ This API returns a set of JSON elements in this format:
   services: ["cost-model"]
 }
 ```
+<a name="optional-params"></a>  
+Optional request parameters include the following:  
 
-  
-Optional request parameters include the following:
+Field | Description
+--------- | -----------
+`filterFields` | Blacklist of fields to be filtered from response. For example, appending `&filterFields=cpuused,cpureq,ramreq,ramused` will remove request and usage data.
+`namespace` | Filter results by namespace. For example, appending `&namespace=kubecost` only returns data for the `kubecost` namespace
 
-| Field | Description |
-| :--- | :--- |
-| `filterFields` | Blacklist of fields to be filtered from response. For example, appending `&filterFields=cpuused,cpureq,ramreq,ramused` will remove request and usage data. |
-| `namespace` | Filter results by namespace. For example, appending `&namespace=kubecost` only returns data for the `kubecost` namespace |
 
-## Aggregated cost model API
+# Aggregated cost model API
 
-The aggregated cost model API retrieves data similar to the Kubecost Allocation frontend view \(e.g. cost by namespace, label, deployment and more\) and is available at the following endpoint:
+The aggregated cost model API retrieves data similar to the Kubecost Allocation frontend view (e.g. cost by namespace, label, deployment and more) and is available at the following endpoint:
 
 `http://<kubecost-address>/model/aggregatedCostModel`
 
@@ -63,33 +61,33 @@ Here are example uses:
 API parameters include the following:
 
 * `window` dictates the applicable window for measuring cost metrics. Current support options:
-  * "15m", "24h", "7d", "48h", etc.
-  * "today", "yesterday", "week", "month", "lastweek", "lastmonth"
-  * "1586822400,1586908800", etc. \(start and end unix timestamps\)
-  * "2020-04-01T00:00:00Z,2020-04-03T00:00:00Z", etc. \(start and end UTC RFC3339 pairs\)
-* `offset` \(optional\) shifts window backwards from current time. Supported units are d, h, m, and s.  
+    - "15m", "24h", "7d", "48h", etc.
+    - "today", "yesterday", "week", "month", "lastweek", "lastmonth"
+    - "1586822400,1586908800", etc. (start and end unix timestamps)
+    - "2020-04-01T00:00:00Z,2020-04-03T00:00:00Z", etc. (start and end UTC RFC3339 pairs)
+* `offset` (optional) shifts window backwards from current time. Supported units are d, h, m, and s.  
 * `aggregation` is the field used to consolidate cost model data. Supported types are cluster, namespace, controller, deployment, service, label, pod and container.  
-* `aggregationSubfield` used for aggregation types that require sub fields, e.g. aggregation type equals `label` and the value of the label \(aggregationSubfield\) equals `app`. Comma seperated list of values supported.
-* `allocateIdle` \(optional\) when set to `true` applies the cost of all idle compute resources to tenants, default `false`.  
-* `sharedNamespaces` \(optional\) provide a comma-separated list of namespaces \(e.g. kube-system\) to be allocated to other tenants. These resources are evenly allocated to other tenants as `sharedCost`.  
-* `sharedLabelNames` \(optional\) provide a comma-separated list of kubernetes labels \(e.g. app\) to be allocated to other tenants. Must provide the corresponding set of label values in `sharedLabelValues`.  
-* `sharedLabelValues` \(optional\) label value \(e.g. prometheus\) associated with `sharedLabelNames` parameter.  
-* `sharedSplit` \(optional\) Shared costs are split evenly across tenants unless `weighted` is passed for this request parameter. When allocating shared costs on a weighted basis, these costs are distributed based on the percentage of in-cluster resource costs of the individual pods in the particular aggregation, e.g. namespace.  
+* `aggregationSubfield` used for aggregation types that require sub fields, e.g. aggregation type equals `label` and the value of the label (aggregationSubfield) equals `app`. Comma seperated list of values supported.
+* `allocateIdle` (optional) when set to `true` applies the cost of all idle compute resources to tenants, default `false`.  
+* `sharedNamespaces` (optional) provide a comma-separated list of namespaces (e.g. kube-system) to be allocated to other tenants. These resources are evenly allocated to other tenants as `sharedCost`.  
+* `sharedLabelNames` (optional) provide a comma-separated list of kubernetes labels (e.g. app) to be allocated to other tenants. Must provide the corresponding set of label values in `sharedLabelValues`.  
+* `sharedLabelValues` (optional) label value (e.g. prometheus) associated with `sharedLabelNames` parameter.  
+* `sharedSplit` (optional) Shared costs are split evenly across tenants unless `weighted` is passed for this request parameter. When allocating shared costs on a weighted basis, these costs are distributed based on the percentage of in-cluster resource costs of the individual pods in the particular aggregation, e.g. namespace.  
 * `disableCache` this API caches recently fetched data by default. Set this variable to `false` to avoid cache entirely.
 * `etl` setting this variable to `true` forces a request to be served by the ETL piepline. More info on this feature in the Caching Overview section below. 
 
-  
-Optional filter parameters include the following:
+<a name="filter-params"></a>  
+Optional filter parameters include the following:   
 
-| Filter | Description |
-| :--- | :--- |
-| `cluster` | Filter results by cluster ID. For example, appending `&cluster=cluster-one` will restrict data only to the `cluster-one` cluster. Note: cluster ID is generated from `cluster_id` provided during installation. |
-| `namespace` | Filter results by namespace. For example, appending `&namespace=kubecost` only returns data for the `kubecost` namespace. |
-| `labels` | Filter results by label. For example, appending `&labels=app%3Dcost-analyzer` only returns data for pods with label `app=cost-analyzer`. CSV list of label values supported. Note that parameters must be url encoded. |
+Filter | Description
+--------- | -----------
+`cluster` | Filter results by cluster ID. For example, appending `&cluster=cluster-one` will restrict data only to the `cluster-one` cluster. Note: cluster ID is generated from `cluster_id` provided during installation.
+`namespace` | Filter results by namespace. For example, appending `&namespace=kubecost` only returns data for the `kubecost` namespace.
+`labels` | Filter results by label. For example, appending `&labels=app%3Dcost-analyzer` only returns data for pods with label `app=cost-analyzer`. CSV list of label values supported. Note that parameters must be url encoded.
 
 This API returns a set of JSON objects in this format:
 
-```text
+```
 {
   aggregation: "namespace"        // value of aggregation type parameter
   cpuAllocationAverage: 0.01      // average number of cores allocated over time window, max(request,usage)
@@ -112,13 +110,12 @@ This API returns a set of JSON objects in this format:
 
 ### Caching Overview
 
-Kubecost implements a two-layer caching system for cost allocation metrics.
+Kubecost implements a two-layer caching system for cost allocation metrics. 
 
-First, the unaggregated cost model is pre-cached for commonly used time windows, 1 and 2 days by default. This data is refreshed every ~5 minutes.
+First, the unaggregated cost model is pre-cached for commonly used time windows, 1 and 2 days by default. This data is refreshed every ~5 minutes. 
 
-Longer time windows, 120 days by default, are part of an ETL pipeline that stores cost by day for each workload. This pipeline is updated approximately ~10 mins. On update, only the latest day is rebuilt to reduce load on the underlying data store. Currently this ETL pipeline is stored in memory and is built any time the pod restarts. ETL is built with daily granularity for UI improved performance. Daily aggregations default to `UTC` but timezones can be configured with the `utcOffset` within [values](https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/values.yaml#L102).
+Longer time windows, 120 days by default, are part of an ETL pipeline that stores cost by day for each workload. This pipeline is updated approximately ~10 mins. On update, only the latest day is rebuilt to reduce load on the underlying data store. Currently this ETL pipeline is stored in memory and is built any time the pod restarts. ETL is built with daily granularity for UI improved performance. Daily aggregations default to `UTC` but timezones can be configured with the `utcOffset` within [values](https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/values.yaml#L102). 
 
-Returning cached data from either caching layer typically takes &lt; 300ms on medium-sized clusters.
+Returning cached data from either caching layer typically takes < 300ms on medium-sized clusters.
 
-Have questions? Email us at [team@kubecost.com](mailto:team@kubecost.com).
-
+Have questions? Email us at <team@kubecost.com>.

@@ -6,28 +6,28 @@ The cost allocation API provides workload allocation data from the daily [Kubeco
 
 Here are example uses:
 
-* [http://localhost:9090/model/allocation?window=today](http://localhost:9090/model/allocation?window=today)
-* [http://localhost:9090/model/allocation?window=7d&aggregate=namespace&shareIdle=false](http://localhost:9090/model/allocation?window=7d&aggregate=namespace&shareIdle=false)
-* [http://localhost:9090/model/allocation?window=week&aggregate=cluster,namespace](http://localhost:9090/model/allocation?window=week&aggregate=cluster,namespace) 
+* http://localhost:9090/model/allocation?window=today
+* http://localhost:9090/model/allocation?window=7d&aggregate=namespace&shareIdle=false
+* http://localhost:9090/model/allocation?window=week&aggregate=cluster,namespace 
 
 API parameters include the following:
 
 * `window` dictates the applicable window for measuring historical asset cost. Currently supported options are as follows:
   * "15m", "24h", "7d", "48h", etc. 
   * "today", "yesterday", "week", "month", "lastweek", "lastmonth"
-  * "1586822400,1586908800", etc. \(start and end unix timestamps\)
-  * "2020-04-01T00:00:00Z,2020-04-03T00:00:00Z", etc. \(start and end UTC RFC3339 pairs\)
+  * "1586822400,1586908800", etc. (start and end unix timestamps)
+  * "2020-04-01T00:00:00Z,2020-04-03T00:00:00Z", etc. (start and end UTC RFC3339 pairs)
 * `aggregate` is used to consolidate cost model data. Supported types are cluster, namespace, deployment, controller, service, and label.
 * `accumulate` when set to false this endpoint returns daily time series data vs cumulative data. Default value is false.
-* `shareIdle` \(optional\) when set to true applies the cost of all idle compute resources to tenants, default false.
-* `shareCost` \(optional\) a fixed external monthly amount to be split between tenants, e.g. `1000`
-* `shareNamespaces`\(optional\) a CSV list of Kubernetes namespaces whose costs should be shared, e.g. `kubecost`
-* `shareLabels`\(optional\) a CSV list of Kubernetes labels whose costs should be shared, e.g. `app:prometheus`
-* `shareSplit` to be used with shareCost, shareNamespaces, or shareLabels. Supported options: `weighted` \(to share proportionate to tenant cost\) and `even` \(to share cost uniformly\)
+* `shareIdle` (optional) when set to true applies the cost of all idle compute resources to tenants, default false.
+* `shareCost` (optional) a fixed external monthly amount to be split between tenants, e.g. `1000`
+* `shareNamespaces`(optional) a CSV list of Kubernetes namespaces whose costs should be shared, e.g. `kubecost`
+* `shareLabels`(optional) a CSV list of Kubernetes labels whose costs should be shared, e.g. `app:prometheus`
+* `shareSplit` to be used with shareCost, shareNamespaces, or shareLabels. Supported options: `weighted` (to share proportionate to tenant cost) and `even` (to share cost uniformly)
 
 This API returns a set of JSON objects in this format:
 
-```text
+```
 {
   cpuCoreHours: 0.05                     // cumulative hours of CPU cores consumed
   cpuCost: 0.083                         // total cost of CPU allocated
@@ -50,4 +50,3 @@ This API returns a set of JSON objects in this format:
   totalEfficiency: .72                   // percentage of RAM + CPU equested that is utilized, weighted by cost
 }
 ```
-

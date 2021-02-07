@@ -4,35 +4,33 @@ This document summarizes Kubecost network cost allocation, how to enable it, and
 
 When this feature is enabled, Kubecost gathers network traffic metrics in combination with provider-specific network costs to provide insight on network data sources as well as the aggregate costs of transfers.
 
-## Enabling Network Costs
+### Enabling Network Costs
 
 To enable this feature, set the following parameter in values.yaml during [Helm installation](http://kubecost.com/install):
-
-```text
+ ```
  networkCosts.enabled=true
-```
+ ```
+ You can view a list of common config options [here](https://github.com/kubecost/cost-analyzer-helm-chart/blob/ab384e2eb027e74b2c3e61a7e1733ffa1718170e/cost-analyzer/values.yaml#L276).
 
-You can view a list of common config options [here](https://github.com/kubecost/cost-analyzer-helm-chart/blob/ab384e2eb027e74b2c3e61a7e1733ffa1718170e/cost-analyzer/values.yaml#L276).
+ **Note:** network cost, disabled by default, run as a privileged pod to access the relevant networking kernel module on the host.
 
-**Note:** network cost, disabled by default, run as a privileged pod to access the relevant networking kernel module on the host.
-
-## Kubernetes Network Traffic Metrics
+### Kubernetes Network Traffic Metrics
 
 The primary source of network metrics come from a daemonset pod hosted on each of the nodes in a cluster. Each daemonset pod uses `hostNetwork: true` such that it can leverage an underlying kernel module to capture network data. Network traffic data is gathered and the destination of any outbound networking is labeled as:
 
-* Internet Egress: Network target destination was not identified within the cluster.  
-* Cross Region Egress: Network target destination was identified, but not in the same provider region.  
-* Cross Zone Egress: Network target destination was identified, and was part of the same region but not the same zone.  
+ * Internet Egress: Network target destination was not identified within the cluster.  
+ * Cross Region Egress: Network target destination was identified, but not in the same provider region.  
+ * Cross Zone Egress: Network target destination was identified, and was part of the same region but not the same zone.  
 
 These classifications are important because they correlate with network costing models for most cloud providers. To see more detail on these metric classifications, you can view pod logs with the following command:
 
-```text
+```
 kubectl logs kubecost-network-costs-<pod-identifier> -n kubecost
 ```
 
 This will show you top source and destination IP addresses and bytes transferred on the node where this pod is running.
 
-## Overriding traffic classifications
+### Overriding traffic classifications
 
 For traffic routed to addresses outside of your cluster but inside your VPC, Kubecost supports the ability to directly classifify network traffic to a particular IP address or CIDR block. This feature can be configured in your [values.yaml](https://github.com/kubecost/cost-analyzer-helm-chart/blob/ab384e2eb027e74b2c3e61a7e1733ffa1718170e/cost-analyzer/values.yaml#L288-L322) under `networkCosts.config`. Classifications are defined as follows:
 
@@ -40,7 +38,7 @@ For traffic routed to addresses outside of your cluster but inside your VPC, Kub
 * in-region - a list of addresses/ranges that will be classified as the same region between source and destinations but different zones.
 * cross-region -- a list of addresses/ranges that will be classified as different region from the source regions
 
-## Troubleshooting
+### Troubleshooting
 
 To verify this feature is functioning properly, you can complete the following steps:
 
@@ -50,12 +48,12 @@ To verify this feature is functioning properly, you can complete the following s
 
 Common issues:
 
-* Failed to locate network pods -- Error message displayed when the Kubecost app is unable to locate the network pods, which we search for by a label that includes our release name. In particular, we depend on the label `app=<release-name>-network-costs` to locate the pods. If the app has a blank release name this issue may happen.
+* Failed to locate network pods -- Error message displayed when the Kubecost app is unable to locate the network pods, which we search for by a label that includes our release name. In particular, we depend on the label `app=<release-name>-network-costs` to locate the pods. If the app has a blank release name this issue may happen. 
+
 * Resource usage is a function of unique src and dest IP/port combinations. Most deployments use a small fraction of a CPU and it is also ok to have this pod CPU throttled moderately.
 
-## Feature Limitations
+### Feature Limitations
 
 * Today this feature is supported on Unix-based images with conntrack  
 * Actively tested against GCP, AWS, and Azure to date  
 * Daemonsets have shared IP addresses on certain clusters  
-

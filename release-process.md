@@ -2,7 +2,7 @@
 
 A Kubecost Release is a snapshot of the source, build output, artifacts, and other metadata associated with a tagged version of code.
 
-## Production releases
+## Production releases 
 
 * Production releases are scheduled for the 2nd and 4th Tuesday of every month.
 * Patch releases are pushed as needed between scheduled releases.
@@ -10,7 +10,7 @@ A Kubecost Release is a snapshot of the source, build output, artifacts, and oth
 * Production releases are always generated from Master branches.  
 * In each production release, we update each image version plus our helm chart version in lock step. 
 * Historically we average one patch release between minor releases.
-* You can target an older release of the Kubecost pod by setting `imageVersion` to the desired value, e.g. `prod-1.63.1`
+* You can target an older release of the Kubecost pod by setting `imageVersion` to the desired value, e.g. ` prod-1.63.1`
 
 ## Staging releases
 
@@ -19,7 +19,5 @@ A Kubecost Release is a snapshot of the source, build output, artifacts, and oth
 
 ## Getting notified when a release is created
 
-* You can watch Releases Only \([more info](https://docs.github.com/en/github/managing-subscriptions-and-notifications-on-github/viewing-your-subscriptions)\) for this [helm chart repo](https://github.com/kubecost/cost-analyzer-helm-chart).
-
-  Or join our Slack workspace - [https://kubecost.slack.com](https://kubecost.slack.com)
-
+* You can watch Releases Only ([more info](https://docs.github.com/en/github/managing-subscriptions-and-notifications-on-github/viewing-your-subscriptions)) for this [helm chart repo](https://github.com/kubecost/cost-analyzer-helm-chart).
+Or join our Slack workspace - https://kubecost.slack.com

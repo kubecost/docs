@@ -1,5 +1,3 @@
-# namespace-contacts
-
 Use the following API to set a namespace owner, contact info and enable/disable email alerts. This API is available at:
 
 `http://<kubecost-address>/api/setNamespaceAttributes`
@@ -10,7 +8,7 @@ Here's an example address:
 
 You should pass a POST variable in this format:
 
-```text
+```
 namespaces: {
   kubecost: {
     ownerLabel: "Ajay Tripathy", 
@@ -20,5 +18,4 @@ namespaces: {
 }
 ```
 
-Expected response: this API should return a 200 response code with JSON string representation of the object passed.
-
+Expected response: this API should return a 200 response code with JSON string representation of the object passed.   
