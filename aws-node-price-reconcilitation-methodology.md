@@ -8,32 +8,23 @@ The reconciliation process makes two queries to Athena, one to gather resources 
 
 The Queries make use of the folloing columns from Athena:
 
-- `line_item_usage_start_date` The beginning timestamp of the line item usage. Used to filter resource usage within a date range and to aggregate on usage window.
+* `line_item_usage_start_date` The beginning timestamp of the line item usage. Used to filter resource usage within a date range and to aggregate on usage window.
+* `line_item_usage_end_date` The ending timestamp of the line item usage. Used to filter resource usage within a date range and to aggregate on usage window.
+* `line_item_resource_id` An id, also called the provider id, given to line items that are instantiated resources.
+* `line_item_line_item_type` The type of a line item, used to determine if the resource usage is covered by a savings plan and has a discounted price.
+* `line_item_usage_type` What is being used in a line item, for the purposes of a compute resource this, is the type of VM and where it is running
+* `line_item_product_code` The service that a line item is from. Used to filter out items not from EC2.
+* `reservation_reservation_a_r_n` Amazon Resource Name for reservation of line item, the presense of this value is used to identify a resource as being part of a reservation plan.
+* `line_item_unblended_cost` The undiscounted cost of a resource.
+* `savings_plan_savings_plan_effective_cost` The cost of a resource discounted by a savings plan
+* `reservation_effective_cost` The cost of a resource discounted by a reservation
 
-- `line_item_usage_end_date` The ending timestamp of the line item usage. Used to filter resource usage within a date range and to aggregate on usage window.
+### On-Demand/Savings Plan Query
 
-- `line_item_resource_id` An id, also called the provider id, given to line items that are instantiated resources.
-
-- `line_item_line_item_type` The type of a line item, used to determine if the resource usage is covered by a savings plan and has a discounted price.
-
-- `line_item_usage_type` What is being used in a line item, for the purposes of a compute resource this, is the type of VM and where it is running
-
-- `line_item_product_code` The service that a line item is from. Used to filter out items not from EC2.
-
-- `reservation_reservation_a_r_n` Amazon Resource Name for reservation of line item, the presense of this value is used to identify a resource as being part of a reservation plan.
-
-- `line_item_unblended_cost` The undiscounted cost of a resource.
-
-- `savings_plan_savings_plan_effective_cost` The cost of a resource discounted by a savings plan
-
-- `reservation_effective_cost` The cost of a resource discounted by a reservation
-
-
-
-#### On-Demand/Savings Plan Query
 This query is grouped by six columns: `line_item_usage_start_date`, `line_item_usage_end_date`, `line_item_resource_id`, `line_item_line_item_type`, `line_item_usage_type` and `line_item_product_code`. The columns `line_item_unblended_cost` and `savings_plan_savings_plan_effective_cost` are summed on this grouping. Finally the query filters out rows that are not within a given date range, have a missing `line_item_resource_id` and have a `line_item_product_code` not equal to "AmazonEC2". The grouping has three important aspects, the timeframe of the line items, the resource as defined by the resource id and the usage type, which is later used to determine the proper cost of the resources as it was used. This means that line items are grouped according to the resource, the time frame of the usage, and the rate at which the usage was charged.
 
-#### Reservation Query
+### Reservation Query
+
 The reservation query is grouped on five columns: `line_item_usage_start_date`, `line_item_usage_end_date`, `reservation_reservation_a_r_n`, `line_item_resource_id` and `line_item_product_code`. The query is summed on the `reservation_effective_cost` and filtered by the date window, for missing `reservation_reservation_a_r_n` values and also removes line items with `line_item_product_code` not equal to "AmazonEC2". This grouping is affectively on resource id by timeframe removing all non-reservation line items
 
 ## Processing Query results
@@ -43,3 +34,4 @@ The on-demand Query is categorized into different resource types: compute, netwo
 In the reservation query all of the results are of the compute category and there is only the `reservation_effective_cost` to use as cost
 
 These results are then merged into one set, with the provider id used to associate the cost with other information about the resource.
+

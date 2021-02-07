@@ -1,3 +1,5 @@
+# gcp-out-of-cluster
+
 Kubecost provides the ability to allocate out of clusters costs, e.g. Cloud SQL instances and Cloud Storage buckets, back to Kubernetes concepts like namespace and deployment. All data remains on your cluster when using this functionality and is not shared externally.
 
 The following guide provides the steps required for allocating out of cluster costs.
@@ -10,30 +12,30 @@ The following guide provides the steps required for allocating out of cluster co
 
 In Kubecost, visit the Cost Allocation page and select "Add Key".
 
-![Add key](/add-key.png)
+![Add key](.gitbook/assets/add-key.png)
 
 On this page, you will see instructions for providing a service key, project ID, and the BigQuery dataset that you have chosen to export data to.
 
-![GCP out of cluster](/gcp-out-of-cluster-config.png)
+![GCP out of cluster](.gitbook/assets/gcp-out-of-cluster-config.png)
 
-
-<a name="bq-name"></a>**BigQuery dataset** requires a BigQuery dataset prefix (e.g. billing_data) in addition to the BigQuery table name. A full example is `billing_data.gcp_billing_export_v1_018AIF_74KD1D_534A2`.
+**BigQuery dataset** requires a BigQuery dataset prefix \(e.g. billing\_data\) in addition to the BigQuery table name. A full example is `billing_data.gcp_billing_export_v1_018AIF_74KD1D_534A2`.
 
 These config values can alternatively be provided via a [values file](https://github.com/kubecost/cost-analyzer-helm-chart/blob/c10e9475b51612d36da8f04618174a98cc62f8fd/cost-analyzer/values.yaml#L572-L574).
 
 ## Step 3: Label cloud assets
 
-You can now label assets with the following schema to allocate costs back to their appropriate Kubernetes owner.
-Learn more [here](https://cloud.google.com/compute/docs/labeling-resources#adding_or_updating_labels_to_existing_resources) on updating GCP asset labels.
+You can now label assets with the following schema to allocate costs back to their appropriate Kubernetes owner. Learn more [here](https://cloud.google.com/compute/docs/labeling-resources#adding_or_updating_labels_to_existing_resources) on updating GCP asset labels.
 
-<pre>
-Cluster:    "kubernetes_cluster" :   &lt;clusterID>
-Namespace:  "kubernetes_namespace" : &lt;namespace>
-Deployment: "kubernetes_deployment": &lt;deployment>
-Label:      "kubernetes_label_NAME": &lt;label>
-Pod:        "kubernetes_pod":        &lt;pod>
-Daemonset:  "kubernetes_daemonset":  &lt;daemonset>
-Container:  "kubernetes_container":  &lt;container>
-</pre>
+```text
 
-To use an alternative or existing label schema for GCP cloud assets, you may supply these in your [values.yaml](https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/values.yaml) under the "kubecostProductConfigs.labelMappingConfigs.\<aggregation\>\_external_label" 
+Cluster:    "kubernetes_cluster" :   <clusterID>
+Namespace:  "kubernetes_namespace" : <namespace>
+Deployment: "kubernetes_deployment": <deployment>
+Label:      "kubernetes_label_NAME": <label>
+Pod:        "kubernetes_pod":        <pod>
+Daemonset:  "kubernetes_daemonset":  <daemonset>
+Container:  "kubernetes_container":  <container>
+```
+
+To use an alternative or existing label schema for GCP cloud assets, you may supply these in your [values.yaml](https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/values.yaml) under the "kubecostProductConfigs.labelMappingConfigs.\\_external\_label"
+
