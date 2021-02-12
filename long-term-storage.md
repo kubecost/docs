@@ -21,122 +21,24 @@ and `kubecost-cost-analyzer-postgres` are Running.
 
 Thanos-based durable storage provides long-term metric retention directly in a user-controlled bucket (e.g. S3 or GCS bucket) and can be enabled with the following steps:
 
-Step 1: **Create object-store yaml file**  
+**Step 1:** *Create object-store yaml file*  
 
-This step creates a yaml file that contains your durable storage target (e.g. GCS, S3, etc.) configuration and access credentials. The details of this file are documented thoroughly in Thanos documentation: https://thanos.io/tip/thanos/storage.md/
+This step creates a yaml file that contains your durable storage target (e.g. GCS, S3, etc.) configuration and access credentials. 
+The details of this file are documented thoroughly in [Thanos documentation](https://thanos.io/tip/thanos/storage.md/).
 
-__Google Cloud Storage__
+Use the appropriate guide for your cloud provider:
+* [Google Cloud Storage](long-term-storage-gcp.md)
+* [AWS/S3](long-term-storage-aws.md)
+* [Azure](long-term-storage-azure.md)
 
-Start by [creating a new Google Cloud Storage bucket](https://cloud.google.com/storage/docs/creating-buckets). The following example uses a bucket named `thanos-bucket`. Next, download a service account JSON file from Google's service account manager ([steps](/google-service-account-thanos.md)).
-
-Now create a yaml file named `object-store.yaml` in the following format, using your bucket name and service account details:
-
-```yaml
-type: GCS
-config:
-  bucket: "thanos-bucket"
-  service_account: |-
-    {
-      "type": "service_account",
-      "project_id": "...",
-      "private_key_id": "...",
-      "private_key": "...",
-      "client_email": "...",
-      "client_id": "...",
-      "auth_uri": "https://accounts.google.com/o/oauth2/auth",
-      "token_uri": "https://oauth2.googleapis.com/token",
-      "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
-      "client_x509_cert_url": ""
-    }
-```
-**Note:** given that this is yaml, it requires this specific indention.
-
-**Warning:** do not apply a retention policy to your Thanos bucket, as it will prevent Thanos compaction from completing.
-
-__AWS/S3__
-
-Start by creating a new S3 bucket with all public access blocked. No other bucket configuration changes should be required. The following example uses a bucket named `kc-thanos-store`.
-
-Next, add an IAM policy to access this bucket ([steps](/aws-service-account-thanos.md)).
-
-Now create a yaml file named `object-store.yaml` with contents similar to the following example. See region to endpoint mappings here: <https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region>
-
-```
-type: S3
-config:
-  bucket: "kc-thanos-store"
-  endpoint: "s3.amazonaws.com"
-  region: "us-east-1"
-  access_key: "AKIAXW6UVLRRTDSCCU4D"
-  insecure: false
-  signature_version2: false
-  secret_key: "<your-secret-key>"
-  put_user_metadata:
-      "X-Amz-Acl": "bucket-owner-full-control"
-  http_config:
-    idle_conn_timeout: 90s
-    response_header_timeout: 2m
-    insecure_skip_verify: false
-  trace:
-    enable: true
-  part_size: 134217728
-```
-**Note:** given that this is yaml, it requires this specific indention.
-
-Instead of using a service key, you can alternatively attach the policy to the Thanos pods service accounts. Your `object-store.yaml` should follow the format below when using this option, which does not contain the secret_key and access_key field.
-
-```
-type: S3
-config:
-  bucket: "kc-thanos-store"
-  endpoint: "s3.amazonaws.com"
-  region: "us-east-1"
-  insecure: false
-  signature_version2: false
-  put_user_metadata:
-      "X-Amz-Acl": "bucket-owner-full-control"
-  http_config:
-    idle_conn_timeout: 90s
-    response_header_timeout: 2m
-    insecure_skip_verify: false
-  trace:
-    enable: true
-  part_size: 134217728
-```
-
-Then, follow the guide at [https://docs.aws.amazon.com/eks/latest/userguide/enable-iam-roles-for-service-accounts.html](https://docs.aws.amazon.com/eks/latest/userguide/enable-iam-roles-for-service-accounts.html) to enable attaching IAM roles to pods.
-
-You can define the IAM role to associate with a service account in your cluster by creating a service account in the same namespace as kubecost and adding an annotation to it of the form `eks.amazonaws.com/role-arn: arn:aws:iam::<AWS_ACCOUNT_ID>:role/<IAM_ROLE_NAME>`
- as described here: [https://docs.aws.amazon.com/eks/latest/userguide/specify-service-account-role.html](https://docs.aws.amazon.com/eks/latest/userguide/specify-service-account-role.html)
-
-Once that annotation has been created and set, you'll need to attach it to the prometheus pod, the thanos compact pod, and the thanos store pod. 
-For prometheus, set .Values.prometheus.serviceAccounts.server.create to false, and .Values.prometheus.serviceAccounts.server.name to the name of your created service account 
-For thanos set `.Values.thanos.compact.serviceAccount`, and `.Values.thanos.store.serviceAccount` to the name of your created service account.
-
-__Azure__
-
-To use Azure Storage as Thanos object store, you need to precreate a storage account from Azure portal or using Azure CLI. Follow the instructions from Azure Storage Documentation: https://docs.microsoft.com/en-us/azure/storage/common/storage-quickstart-create-account
-
-Now create a yaml file named `object-store.yaml` with the following format:
-
-```
-type: AZURE
-config:
-  storage_account: ""
-  storage_account_key: ""
-  container: ""
-  endpoint: ""
-  max_retries: 0
-```
-
-Step 2: **Create object-store secret**  
+**Step 2:** *Create object-store secret*  
 
 The final step prior to installation is to create a secret with the yaml file generated in the previous step:
 ```
 $ kubectl create secret generic kubecost-thanos -n kubecost --from-file=./object-store.yaml
 ```
 
-Step 3: **Deploying Kubecost with Thanos**  
+**Step 3:** *Deploying Kubecost with Thanos*  
 
 The Thanos subchart includes `thanos-bucket`, `thanos-query`, `thanos-store`,  `thanos-compact`, and service discovery for `thanos-sidecar`. These components are recommended when deploying Thanos on multiple clusters.
 
