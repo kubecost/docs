@@ -23,7 +23,7 @@ Thanos-based durable storage provides long-term metric retention directly in a u
 
 **Step 1:** *Create object-store yaml file*  
 
-This step creates a yaml file that contains your durable storage target (e.g. GCS, S3, etc.) configuration and access credentials. 
+This step creates the object-store.yaml file that contains your durable storage target (e.g. GCS, S3, etc.) configuration and access credentials. 
 The details of this file are documented thoroughly in [Thanos documentation](https://thanos.io/tip/thanos/storage.md/).
 
 Use the appropriate guide for your cloud provider:
