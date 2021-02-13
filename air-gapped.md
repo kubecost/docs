@@ -25,6 +25,7 @@ for prod-x.xx.x. [Latest releases can be found here](https://github.com/kubecost
 * prom/node-exporter:v0.18.1
 * prom/alertmanager:v0.20.0
 * grafana/grafana:7.1.1
+* jimmidyson/configmap-reload:v0.3.0
 * kiwigrid/k8s-sidecar:0.1.144 (can be optional if not using Grafana sidecar)
 
 *Thanos - Enterprise/Durable Storage*
