@@ -1,9 +1,13 @@
 # Installing Kubecost
 <br/>
 
-* The recommended path to install and operate Kubecost is via the Helm chart install instructions available at [kubecost.com/install](http://kubecost.com/install). This chart contains all the required components to get started and can scale to large clusters. It also provides the most flexibility for configuring Kubecost and its dependencies.
+We strongly recommend using the Kubecost helm chart to install and operate Kubecost. This chart is available at the [Kubecost Install page](http://kubecost.com/install) for free. This install method contains all the required components to get started, provides access to all Kubecost features, and can scale to large clusters. It also provides the most flexibility for configuring Kubecost and its dependencies.
 
-* Alternatively, you can install via [flat manifest](https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/README.md#manifest), but this install path provides less flexibility for managing your deployment and has several product limitations.
+Alternative options:
+
+* You can run [helm template](https://helm.sh/docs/helm/helm_template/) against the [Kubecost helm chart](https://github.com/kubecost/cost-analyzer-helm-chart) to generate local YAML output. This requires extra effort when compared to directly installing the helm chart but is more flexible than deploying static YAML.
+
+* You can install via [flat manifest](https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/README.md#manifest). This install path provides less flexibility for managing your deployment and has several product limitations, e.g. Thanos not easily enabled.
 
 * Lastly, you can deploy the open-source cost model engine directly as a pod. This install path provides a subset of Kubecost functionality and is available [here](https://github.com/kubecost/cost-model/blob/master/deploying-as-a-pod.md). Specifically, this install path deploys the underlying cost allocation model without UI or enterprise functionality, e.g. SAML support. 
 
