@@ -12,7 +12,7 @@ __/costDataModelRange__
 Time-series version of /costDataModel API. Does not include ETL caching layer and therefore optimal for small to medium-sized clusters.
 
 
-## Commercial APIs (available in all versions, including our Free version)
+## Other APIs (available in Free tier)
 
 __[/aggregatedCostModel](https://github.com/kubecost/docs/blob/2ea9021e8530369d53184ea5382b2e4c080bb426/allocation-api.md#aggregated-cost-model-api)__
 
