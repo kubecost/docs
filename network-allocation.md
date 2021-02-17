@@ -11,8 +11,10 @@ To enable this feature, set the following parameter in values.yaml during [Helm 
  networkCosts.enabled=true
  ```
  You can view a list of common config options [here](https://github.com/kubecost/cost-analyzer-helm-chart/blob/ab384e2eb027e74b2c3e61a7e1733ffa1718170e/cost-analyzer/values.yaml#L276).
+ 
+ To estimate the resources required to run Kubecost network cost,  you can view our [benchmarking metrics](https://docs.google.com/document/d/10b-Ew78R90UOaZ5gXQUjU5GWZXBIy8H11RK5bbCd2EM/edit).
 
- **Note:** network cost, disabled by default, run as a privileged pod to access the relevant networking kernel module on the host.
+ > **Note:** network cost, which are disabled by default, run as a privileged pod to access the relevant networking kernel module on the host machine.
 
 ### Kubernetes Network Traffic Metrics
 
