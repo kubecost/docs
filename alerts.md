@@ -204,7 +204,7 @@ data:
 
 Next, confirm that Kubecost product has received configuration data:
 
-- Go to `<your-kubecost-url>/notifications.html` in the Kubecost UI to view configured email and Slack settings, weekly updates, namespace updates, cluster budget, and namespace budget alerts.
+- Go to `<your-kubecost-url>/notify.html` in the Kubecost UI to view configured email and Slack settings, weekly updates, namespace updates, cluster budget, and namespace budget alerts.
 
 Additionally, confirm that the alerts scheduler has properly parsed and scheduled a next run for each custom alert by visiting `<your-kubecost-url>/model/getCustomAlertDiagnostics` to view individual alert parameters as well as next and last scheduled run times for individual alerts.
 
