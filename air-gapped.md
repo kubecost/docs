@@ -2,7 +2,7 @@
 
 FAQ for installing in Kubecost in air-gapped environment
 
-### Q:** I have to put container images in to a private registry to use them in my cluster. What images do I need?
+### Q: I have to put container images in to a private registry to use them in my cluster. What images do I need?
 
 **A:** The following images will need to be downloaded. Please substitute the appropriate version
 for prod-x.xx.x. [Latest releases can be found here](https://github.com/kubecost/cost-analyzer-helm-chart/releases).
