@@ -9,6 +9,7 @@ Here are example uses:
 * http://localhost:9090/model/allocation?window=today
 * http://localhost:9090/model/allocation?window=7d&aggregate=namespace&shareIdle=false
 * http://localhost:9090/model/allocation?window=week&aggregate=cluster,namespace 
+* http://localhost:9090/model/allocation?window=week&aggregate=label:app,label:component
 
 API parameters include the following:
 
@@ -17,7 +18,7 @@ API parameters include the following:
   * "today", "yesterday", "week", "month", "lastweek", "lastmonth"
   * "1586822400,1586908800", etc. (start and end unix timestamps)
   * "2020-04-01T00:00:00Z,2020-04-03T00:00:00Z", etc. (start and end UTC RFC3339 pairs)
-* `aggregate` is used to consolidate cost model data. Supported types are cluster, namespace, deployment, controller, service, and label.
+* `aggregate` is used to consolidate cost model data. Supported types are cluster, namespace, deployment, controller, service, and label. With labels, a CSV with label:key format is used.
 * `accumulate` when set to false this endpoint returns daily time series data vs cumulative data. Default value is false.
 * `shareIdle` (optional) when set to true applies the cost of all idle compute resources to tenants, default false.
 * `shareCost` (optional) a fixed external monthly amount to be split between tenants, e.g. `1000`
