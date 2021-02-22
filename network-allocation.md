@@ -30,7 +30,7 @@ These classifications are important because they correlate with network costing 
 kubectl logs kubecost-network-costs-<pod-identifier> -n kubecost
 ```
 
-This will show you top source and destination IP addresses and bytes transferred on the node where this pod is running.
+This will show you top source and destination IP addresses and bytes transferred on the node where this pod is running. To disable logs, you can set the helm value `networkCosts.trafficLogging` to `false`. 
 
 ### Overriding traffic classifications
 
