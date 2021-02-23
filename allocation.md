@@ -13,7 +13,7 @@ Here are example uses:
 
 API parameters include the following:
 
-* `window` dictates the applicable window for measuring historical asset cost. Currently supported options are as follows:
+* `window` dictates the applicable window for measuring historical cost. Given this API uses the Kubecost ETL pipeline, data is returned with daily resolution. For more granuluar cost metrics, view the [aggregatedCostModel API](https://github.com/kubecost/docs/blob/master/allocation-api.md#aggregated-cost-model-api).  Supported time window options are as follows:
   * "15m", "24h", "7d", "48h", etc. 
   * "today", "yesterday", "week", "month", "lastweek", "lastmonth"
   * "1586822400,1586908800", etc. (start and end unix timestamps)
