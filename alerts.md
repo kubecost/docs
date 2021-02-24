@@ -12,8 +12,12 @@ As of v1.72.0, Kubecost supports four types of notifications:
  2. [Budget](#type-budget) -- sends an email and/or Slack alert when spend crosses a defined threshold
 
  3. [Spend Change](#type-spend-change) -- sends an email and/or Slack alert reporting unexpected spend increases relative to moving averages
- 
- 4. [Health Diagnostic](#type-health-diagnostic) -- used for production monitoring for the health of Kubecost itself
+
+ 4. [Beta] [Efficiency](#type-efficiency) -- detect when a Kubernetes tenant is operating below a target cost efficiency threshold
+
+ 5. [Health Diagnostic](#type-health-diagnostic) -- used for production monitoring for the health of Kubecost itself
+
+
   
 ## Configuring Alerts in Helm
 
@@ -80,6 +84,34 @@ Required parameters (by individual namespace):
 					- owner@example.com
 					- owner2@example.com
 				slackWebhookUrl: https://hooks.slack.com/services/<different-from-global> # optional, overrides globalSlackWebhookUrl default
+```
+
+#### Type: Efficiency 
+
+> Note: this feature is currently in Beta
+
+Define cost efficiency thresholds and alert when tenants are running below this level.
+
+Required parameters:
+
+- `type: efficiency`
+- `efficiencyThreshold: <threshold>` -- efficiency threshold ranging from 0.0 to 1.0
+- `aggregation: <agg-parameter>` -- configurable, accepts all aggregations supported by the [aggregated cost model API](https://github.com/kubecost/docs/blob/2ea9021e8530369d53184ea5382b2e4c080bb426/allocation-api.md#aggregated-cost-model-api)
+- `window: <N>d` number of days for measuring efficiency
+
+Optional paremeters:
+- `spendThreshold` represents a minimal spend threshold for alerting
+-  `filter` limit the aggregations that this alert will cover
+
+The example below sends a Slack alert when any namespace spending is running below 40% cost efficiency and has spent more than $100 during the last one day. 
+
+```
+- type: efficiency
+	efficiencyThreshold: 0.4  # Alert if below this percentage cost efficiency
+	spendThreshold: 100 # optional, alert if tenant has spend more than $100 over this window
+	window: 1d    # measure efficiency over last 
+	aggregation: namespace
+	slackWebhookUrl: ‘https://hooks.slack.com/services/TE6GRBNET/BFFK0P848/jFWmsadgfjhiBJp30p’ # optional, overrides global Slack webhook 
 ```
 
 #### Type: Budget
