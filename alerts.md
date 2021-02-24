@@ -178,26 +178,35 @@ Review these steps to verify alerts are being passed to the Kubecost application
 First, ensure that the Helm values are successfully read into the configmap:
 
 -   Confirm that the `global.notifications.alertConfigs.enabled` field is set to `true`
--   Run `helm template ./cost-analyzer -n kubecost > test-alert-config.yaml`
--   Open `test-alert-config.yaml`
--   Find the section starting with `# Source: cost-analyzer/templates/cost-analyzer-alerts-configmap.yaml`
--   Ensure that the Helm values are successfully read into the configmap under the `data` field.
+-   Run `kubectl get configmap alert-configs -n kubecost -o json` to view alerts configmap.
+-   Ensure that the Helm values are successfully read into the configmap under alerts.json under the `data` field.
 -   Example:
 
 ```
-# Source: cost-analyzer/templates/cost-analyzer-alerts-configmap.yaml
-apiVersion: v1
-kind: ConfigMap
-metadata:
-name: alert-configs
-labels:
-	app.kubernetes.io/name: cost-analyzer
-	helm.sh/chart: cost-analyzer-1.68.1
-	app.kubernetes.io/instance: RELEASE-NAME
-	app.kubernetes.io/managed-by: Helm
-app: cost-analyzer
-data:
-	alerts.json: <all-fields-and-values-under-alertConfigs-as-json-string>
+{
+    "apiVersion": "v1",
+    "data": {
+        "alerts.json": "{\"alerts\":[{\"aggregation\":\"namespace\",\"efficiencyThreshold\":0.4,\"spendThreshold\":1,\"type\":\"efficiency\",\"window\":\"1d\"}],\"enabled\":true,\"frontendUrl\":\"http://localhost:9090\",\"globalAlertEmails\":[\"recipient@example.com\"],\"globalSlackWebhookUrl\":\"https://hooks.slack.com/services/TE6RTBNET/BFFK0P848/jFWms48dnxlk4BBPiBJp30p\",\"kubecostHealth\":true}"
+    },
+    "kind": "ConfigMap",
+    "metadata": {
+        "annotations": {
+            "meta.helm.sh/release-name": "kubecost",
+            "meta.helm.sh/release-namespace": "kubecost"
+        },
+        "creationTimestamp": "2021-01-13T04:14:52Z",
+        "labels": {
+            "app": "cost-analyzer",
+            "app.kubernetes.io/instance": "kubecost-stage",
+            "app.kubernetes.io/managed-by": "Helm",
+	    ...
+        },
+        "name": "alert-configs",
+        "namespace": "kubecost",
+	...
+    }
+}
+
 ```
 
 -   Ensure that the json string is successfully mapped to the appropriate configs
