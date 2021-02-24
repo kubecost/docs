@@ -90,7 +90,7 @@ Required parameters (by individual namespace):
 
 > Note: this feature is currently in Beta
 
-Define cost efficiency thresholds and alert when tenants are running below this level.
+Alert when Kubernetes tenants, e.g. namespaces or label sets, are running below defined cost efficiency thresholds.
 
 Required parameters:
 
