@@ -31,7 +31,7 @@ The alert settings, under `global.notifications.alertConfigs` in `cost-analyzer/
 * `globalSlackWebhookUrl` optional, a global Slack webhook used for alerts, enabled by default if provided
 * `globalAlertEmails` a global list of emails for alerts
 
-#### Example Helm values.yaml
+Example Helm values.yaml: 
 
 ```
 notifications:
@@ -47,11 +47,11 @@ notifications:
 		...
 ```
 
-### Configuring Each Alert Type
+## Configuring Each Alert Type
 
 In addition to `globalSlackWebhookUrl` and `globalAlertEmails` fields, every alert allows optional individual `ownerContact` (a list of email addresses) and `slackWebhookUrl` (if different from `globalSlackWebhookUrl`) fields. Alerts will default to the global Slack and email settings if these optional fields are not supplied.
 
-#### Type: Recurring Update
+### Type: Recurring Update
 
 Required parameters (all namespaces):
 
@@ -67,7 +67,7 @@ Required parameters (by individual namespace):
 - `filter: <value>` -- configurable, accepts a single namespace name (comma separated values unsupported)
 - `window: 7d`
 
-#### Example Helm values.yaml
+Example Helm values.yaml:
 
 ```
 			# Recurring weekly namespace update on all namespaces
@@ -86,7 +86,7 @@ Required parameters (by individual namespace):
 				slackWebhookUrl: https://hooks.slack.com/services/<different-from-global> # optional, overrides globalSlackWebhookUrl default
 ```
 
-#### Type: Efficiency 
+### Type: Efficiency 
 
 > Note: this feature is currently in Beta
 
@@ -114,7 +114,7 @@ The example below sends a Slack alert when any namespace spending is running bel
 	slackWebhookUrl: ‘https://hooks.slack.com/services/TE6GRBNET/BFFK0P848/jFWmsadgfjhiBJp30p’ # optional, overrides global Slack webhook 
 ```
 
-#### Type: Budget
+### Type: Budget
 
 Define spend budgets and alert on budget overruns.
 
@@ -126,7 +126,7 @@ Required parameters:
 - `filter: <value>` -- configurable, accepts a single filter value (comma separated values unsupported)
 - `window: <N>d` or `<M>h` -- configurable, (1 ≤ N ≤ 7, 1 ≤ M ≤ 24)
 
-#### Example Helm values.yaml
+Example Helm values.yaml:
 
 ```
 			# Daily namespace budget alert on namespace `kubecost`
@@ -143,7 +143,7 @@ Required parameters:
 				filter: cluster-one
 ```
 
-#### Type: Spend Change
+### Type: Spend Change
 
 Detect unexpected spend increases/decreases relative to historical moving averages.
 
@@ -156,7 +156,7 @@ Required parameters:
 - `window: <N>d` or `<M>h` -- configurable, (1 ≤ N ≤ 7, 1 ≤ M ≤ 24)
 - `baselineWindow: <N>d` -- configurable, N ≥ 1
 
-### Example Helm values.yaml
+Example Helm values.yaml:
 
 ```
 			# Daily spend change alert on the 
@@ -168,7 +168,7 @@ Required parameters:
 			  filter: kubecost, default # accepts csv
 ```
 
-#### Type: Health Diagnostic
+### Type: Health Diagnostic
 
 Enabling diagnostic alerts in Kubecost sends a Slack message (email coming soon) when an event impacts product uptime. This feature can be enabled in seconds from a values file. The following health events are detected:
 
