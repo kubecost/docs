@@ -16,7 +16,7 @@ Retain data for years with various durable storage options. Provides record keep
 ### Access control with SSO/SAML  
 Finely manage read and/or admin access by individual users or user groups. [Learn more](https://github.com/kubecost/docs/blob/master/user-management.md)
 
-### Advanced custom pricing pipeline
+### Advanced custom pricing
 Advanced custom pricing pipelines give teams the ability to set custom per-asset pricing for resources. This is typically used for on-prem and airgapped environments, but can also be applied to teams that want to allocate internal costs differently than cloud provider defaults. 
 
 ### Advanced integrations  
