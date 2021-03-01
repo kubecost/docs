@@ -97,11 +97,11 @@ Required parameters:
 - `type: efficiency`
 - `efficiencyThreshold: <threshold>` -- efficiency threshold ranging from 0.0 to 1.0
 - `aggregation: <agg-parameter>` -- configurable, accepts all aggregations supported by the [aggregated cost model API](https://github.com/kubecost/docs/blob/2ea9021e8530369d53184ea5382b2e4c080bb426/allocation-api.md#aggregated-cost-model-api)
+- `filter: <value>` -- limit the aggregations that this alert will cover, accepts comma separated values
 - `window: <N>d` number of days for measuring efficiency
 
 Optional paremeters:
 - `spendThreshold` represents a minimal spend threshold for alerting
--  `filter` limit the aggregations that this alert will cover
 
 The example below sends a Slack alert when any namespace spending is running below 40% cost efficiency and has spent more than $100 during the last one day. 
 
