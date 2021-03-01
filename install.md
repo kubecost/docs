@@ -1,9 +1,9 @@
 # Installing Kubecost
 <br/>
 
-We strongly recommend using the Kubecost helm chart to install and operate Kubecost. This chart is available at the [Kubecost Install page](http://kubecost.com/install) for free. This install method contains all the required components to get started, provides access to all Kubecost features, and can scale to large clusters. It also provides the most flexibility for configuring Kubecost and its dependencies.
+We strongly recommend using the free [Kubecost helm chart](http://kubecost.com/install) to install and operate Kubecost. This install method is available for free and contains all the required components to get started, provides access to all Kubecost features, and can scale to large clusters. It also provides the most flexibility for configuring Kubecost and its dependencies.
 
-Alternative options:
+Alternative install options:
 
 * You can run [helm template](https://helm.sh/docs/helm/helm_template/) against the [Kubecost helm chart](https://github.com/kubecost/cost-analyzer-helm-chart) to generate local YAML output. This requires extra effort when compared to directly installing the helm chart but is more flexible than deploying static YAML.
 
