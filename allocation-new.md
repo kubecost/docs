@@ -221,12 +221,12 @@ $ curl http://localhost:9090/model/allocation \
   "code": 200,
   "data": [
     {
-      "default/app=redis": { ... },
-      "kubecost/app=cost-analyzer": { ... },
-      "kubecost/app:prometheus": { ... },
-      "kubecost/app=grafana": { ... },
-      "kubecost/app=prometheus": { ... },
-      "kube-system/app=helm": { ... }
+      "default/app=redis": { /* allocation */ },
+      "kubecost/app=cost-analyzer": { /* allocation */ },
+      "kubecost/app:prometheus": { /* allocation */ },
+      "kubecost/app=grafana": { /* allocation */ },
+      "kubecost/app=prometheus": { /* allocation */ },
+      "kube-system/app=helm": { /* allocation */ }
     }
   ]
 }
