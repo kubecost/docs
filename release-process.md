@@ -19,7 +19,7 @@ A Kubecost Release is a snapshot of the source, build output, artifacts, and oth
 
 ## Nightly releases
 
-A Helm chart release is created every night with the latest images. You can get that Helm repo with the following:
+A Helm chart release is created every night with the latest images. These images should be considered "bleeding edge" and may be unstable. You can get that Helm repo with the following:
 
 ``` sh
 helm repo add kubecost-nightly https://kubecost.github.io/nightly-helm-chart
@@ -30,6 +30,17 @@ You can then update your existing installation to the latest nightly:
 ``` sh
 helm repo update
 helm upgrade kubecost -n kubecost kubecost-nightly/cost-analyzer
+```
+
+If you want to change your installation back to a production release, run the following (assuming you have a Helm repo called `kubecost` tracking the production release):
+
+``` sh
+helm upgrade kubecost kubecost/cost-analyzer \
+  -n kubecost \
+  --set kubecostModel.fullImageName=null \
+  --set kubecostFrontend.fullImageName=null \
+  --set kubecostChecks.fullImageName=null \
+  --set kubecost.fullImageName=null
 ```
 
 ## Getting notified when a release is created
