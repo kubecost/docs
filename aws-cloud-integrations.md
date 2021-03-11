@@ -378,6 +378,8 @@ These values can either be set from the kubecost frontend or via .Values.kubecos
 * `athenaTable` the name of the table created by the CUR setup
   * The table name is typically the database name with the leading `athenacurcfn_` removed (but is not available as a CloudFormation stack resource)
 
+> Make sure using only underscore as an delimiter if needed for tables and views, using dash will not work even though you might be able to create it see [docs](https://docs.aws.amazon.com/athena/latest/ug/tables-databases-columns-names.html).
+
 * If you are using a multi-account setup, you will also need to set `.Values.kubecostProductConfigs.masterPayerARN `To the arn of the role in the masterpayer account, e.g. `arn:aws:iam::530337586275:role/KubecostRole`.
 
 ## Troubleshooting
