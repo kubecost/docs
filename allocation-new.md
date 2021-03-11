@@ -1,9 +1,58 @@
 
 ## Allocation
 
-The Allocation API is the preferred way to query for costs and resources allocated to Kubernetes objects.
+The Allocation API is the preferred way to query for costs and resources allocated to Kubernetes workloads, and optionally aggregated by Kubernetes concepts like `namespace`, `controller`, and `label`. Data is served from one of [Kubecost's ETL pipelines](https://github.com/kubecost/docs/blob/master/allocation-api.md#caching-overview). The endpoint is available at the URL:
+```
+http://<kubecost>/model/allocation
+```
 
-### Schema (version 1.76)
+### Quick start
+
+Request allocation data for each 24-hour period in the last 3 days, aggregated by namespace:
+```
+$ curl http://localhost:9090/model/allocation \
+  -d window=3d \
+  -d aggregate=namespace \
+  -d accumulate=false \
+  -d shareIdle=false
+  -G
+```
+```json
+{
+  "code": 200,
+  "data": [
+    {
+      "__idle__": { ... },
+      "default": { ... },
+      "kube-system": { ... },
+      "kubecost": { ... }
+    },
+    {
+      "__idle__": { ... },
+      "default": { ... },
+      "kube-system": { ... },
+      "kubecost": { ... }
+    },
+    {
+      "__idle__": { ... },
+      "default": { ... },
+      "kube-system": { ... },
+      "kubecost": { ... }
+    },
+    {
+      "__idle__": { ... },
+      "default": { ... },
+      "kube-system": { ... },
+      "kubecost": { ... }
+    }
+  ]
+}
+```
+Above, we use `localhost:9090` as the default Kubecost URL (using the command `kubectl port-forward deployment/kubecost-cost-analyzer -n kubecost 9090`) but your Kubecost instance may be exposed by a service or ingress.
+
+See [Querying](#querying) for the full list of arguments and [Examples](#examples) for more example queries.
+
+### Allocation schema (version 1.76)
 Field | Description
 ---: | :---
 name |
@@ -35,7 +84,7 @@ externalCost |
 totalCost |
 totalEfficiency |
 
-### Example
+### Example allocation
 Here is an example allocation for the `cost-model` container in a pod in Kubecost's `kubecost-cost-analyzer` deployment, deployed into the `kubecost` namespace. The `properties` object describes that, as well as the `cluster`, `node`, `services`, `labels`, and `annotations` related to this allocation. Notice that this allocation ran for 10 hours within the given window, using the resources described by their respective values at a cost dictated by the node on which it ran.
 ```
 {
@@ -98,7 +147,7 @@ Here is an example allocation for the `cost-model` container in a pod in Kubecos
 - `__unallocated__` refers to aggregated allocations without the selected `aggregate` field; e.g. aggregating by `label:app` might produce an `__unallocated__` allocation composed of allocation without the `app` label.
 - `__unmounted__` (or "Unmounted PVs") refers to the resources used by PersistentVolumes that aren't mounted to a Pod using a PVC, and thus cannot be allocated to a Pod.
 
-### Querying ETL
+### Querying
 
 {description of ETL: configuration, build, run, etc.}
 
@@ -110,7 +159,7 @@ Argument | Description
 window (required) | A duration of time over which to query. Accepts: words like `today`, `week`, `month`, `yesterday`, `lastweek`, `lastmonth`; durations like `30m`, `12h`, `7d`; RFC3339 date pairs like `2021-01-02T15:04:05Z,2021-02-02T15:04:05Z`; unix timestamps like `1578002645,1580681045`.
 aggregate | A field by which to aggregate the results. Accepts: `cluster`, `namespace`, `controllerKind`, `controller`, `service`, `label:<name>`, and `annotation:<name>`. Also accepts comma-separated lists for multi-aggregation, like `namespace,label:app`.
 
-#### Examples
+### Examples
 Allocation data for today, unaggregated:
 ```
 $ curl http://localhost:9090/model/allocation \
@@ -125,8 +174,7 @@ $ curl http://localhost:9090/model/allocation \
       "__idle__": { ... },
       "cluster-one/gke-niko-pool-2-9182dfa7-okb2/kubecost/kubecost-cost-analyzer-94dc86fc-lwvrm/cost-model": { ... },
       "cluster-one/gke-niko-pool-2-9182dfa7-okb2/kubecost/kubecost-cost-analyzer-94dc86fc-lwvrm/cost-analyzer-frontend": { ... },
-      "cluster-one/gke-niko-pool-2-9182dfa7-okb2/kubecost/kubecost-grafana-6df5cc66b6-dzszt/grafana": { ... },
-      ...
+      "cluster-one/gke-niko-pool-2-9182dfa7-okb2/kubecost/kubecost-grafana-6df5cc66b6-dzszt/grafana": { ... }
     }
   ]
 }
@@ -221,12 +269,12 @@ $ curl http://localhost:9090/model/allocation \
   "code": 200,
   "data": [
     {
-      "default/app=redis": { },
-      "kubecost/app=cost-analyzer": { },
-      "kubecost/app:prometheus": { },
-      "kubecost/app=grafana": { },
-      "kubecost/app=prometheus": { },
-      "kube-system/app=helm": { }
+      "default/app=redis": { ... },
+      "kubecost/app=cost-analyzer": { ... },
+      "kubecost/app:prometheus": { ... },
+      "kubecost/app=grafana": { ... },
+      "kubecost/app=prometheus": { ... },
+      "kube-system/app=helm": { ... }
     }
   ]
 }
@@ -246,4 +294,4 @@ resolution |
 step |
 aggregate | A field by which to aggregate the results. Accepts: `cluster`, `namespace`, `controllerKind`, `controller`, `service`, `label:<name>`, and `annotation:<name>`. Also accepts comma-separated lists for multi-aggregation, like `namespace,label:app`.
 
-#### Examples
+#### On-demand examples
