@@ -14,8 +14,23 @@ A Kubecost Release is a snapshot of the source, build output, artifacts, and oth
 
 ## Staging releases
 
-* Staging/nightly releases published in [this repo](https://github.com/kubecost/staging-repo).
+* Staging releases are built before scheduled releases and published in [this repo](https://github.com/kubecost/staging-repo).
 * You can get the latest staging build by following the [install steps](https://github.com/kubecost/docs/blob/master/staging.md)
+
+## Nightly releases
+
+A Helm chart release is created every night with the latest images. You can get that Helm repo with the following:
+
+``` sh
+helm repo add kubecost-nightly https://kubecost.github.io/nightly-helm-chart
+```
+
+You can then update your existing installation to the latest nightly:
+
+``` sh
+helm repo update
+helm upgrade kubecost -n kubecost kubecost-nightly/cost-analyzer
+```
 
 ## Getting notified when a release is created
 
