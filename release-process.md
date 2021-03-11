@@ -35,12 +35,7 @@ helm upgrade kubecost -n kubecost kubecost-nightly/cost-analyzer
 If you want to change your installation back to a production release, run the following (assuming you have a Helm repo called `kubecost` tracking the production release):
 
 ``` sh
-helm upgrade kubecost kubecost/cost-analyzer \
-  -n kubecost \
-  --set kubecostModel.fullImageName=null \
-  --set kubecostFrontend.fullImageName=null \
-  --set kubecostChecks.fullImageName=null \
-  --set kubecost.fullImageName=null
+helm upgrade kubecost kubecost/cost-analyzer -n kubecost
 ```
 
 ## Getting notified when a release is created
