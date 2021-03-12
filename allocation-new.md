@@ -282,7 +282,8 @@ $ curl http://localhost:9090/model/allocation \
 
 ## Querying on-demand (experimental)
 
-:warning: **Querying on-demand with high resolution for long windows can cause serious Prometheus issues! Proceed with caution!**
+> :warning: **Proceed with caution**
+> Querying on-demand with high resolution for long windows can cause serious Prometheus issues. Start with short windows (1h) and be careful.
 
 {description of resolution, step, and window}
 
