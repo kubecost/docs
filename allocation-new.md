@@ -1,12 +1,12 @@
 
-## Allocation
+# Allocation
 
 The Allocation API is the preferred way to query for costs and resources allocated to Kubernetes workloads, and optionally aggregated by Kubernetes concepts like `namespace`, `controller`, and `label`. Data is served from one of [Kubecost's ETL pipelines](https://github.com/kubecost/docs/blob/master/allocation-api.md#caching-overview). The endpoint is available at the URL:
 ```
 http://<kubecost>/model/allocation
 ```
 
-### Quick start
+## Quick start
 
 Request allocation data for each 24-hour period in the last 3 days, aggregated by namespace:
 ```
@@ -52,11 +52,11 @@ Above, we use `localhost:9090` as the default Kubecost URL (using the command `k
 
 See [Querying](#querying) for the full list of arguments and [Examples](#examples) for more example queries.
 
-### Allocation schema (version 1.76)
+## Allocation schema (version 1.76)
 Field | Description
 ---: | :---
-name |
-properties |
+name | Name of each relevant Kubernetes concept described by the allocation, delimited by slashes, e.g. "cluster/node/namespace/pod/container"
+properties | Map of name-to-value for all relevant
 window |
 start |
 end |
@@ -147,7 +147,7 @@ Here is an example allocation for the `cost-model` container in a pod in Kubecos
 - `__unallocated__` refers to aggregated allocations without the selected `aggregate` field; e.g. aggregating by `label:app` might produce an `__unallocated__` allocation composed of allocation without the `app` label.
 - `__unmounted__` (or "Unmounted PVs") refers to the resources used by PersistentVolumes that aren't mounted to a Pod using a PVC, and thus cannot be allocated to a Pod.
 
-### Querying
+## Querying
 
 {description of ETL: configuration, build, run, etc.}
 
@@ -159,7 +159,7 @@ Argument | Description
 window (required) | A duration of time over which to query. Accepts: words like `today`, `week`, `month`, `yesterday`, `lastweek`, `lastmonth`; durations like `30m`, `12h`, `7d`; RFC3339 date pairs like `2021-01-02T15:04:05Z,2021-02-02T15:04:05Z`; unix timestamps like `1578002645,1580681045`.
 aggregate | A field by which to aggregate the results. Accepts: `cluster`, `namespace`, `controllerKind`, `controller`, `service`, `label:<name>`, and `annotation:<name>`. Also accepts comma-separated lists for multi-aggregation, like `namespace,label:app`.
 
-### Examples
+### Query examples
 Allocation data for today, unaggregated:
 ```
 $ curl http://localhost:9090/model/allocation \
@@ -280,7 +280,9 @@ $ curl http://localhost:9090/model/allocation \
 }
 ```
 
-### Querying on-demand (experimental)
+## Querying on-demand (experimental)
+
+:warning: **Querying on-demand with high resolution for long windows can cause serious Prometheus issues! Proceed with caution!**
 
 {description of resolution, step, and window}
 
@@ -294,4 +296,4 @@ resolution |
 step |
 aggregate | A field by which to aggregate the results. Accepts: `cluster`, `namespace`, `controllerKind`, `controller`, `service`, `label:<name>`, and `annotation:<name>`. Also accepts comma-separated lists for multi-aggregation, like `namespace,label:app`.
 
-#### On-demand examples
+### On-demand query examples
