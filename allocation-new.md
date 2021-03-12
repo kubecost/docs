@@ -282,9 +282,9 @@ $ curl http://localhost:9090/model/allocation \
 
 ## Querying on-demand (experimental)
 
-> :warning: **Proceed with caution**
+> :warning: **Warning!**
 >
-> Querying on-demand with high resolution for long windows can cause serious Prometheus issues. Start with short windows (1h) and be careful.
+> Querying on-demand with high resolution for long windows can cause serious Prometheus performance issues, including OOM errors. Start with short windows (`1d` or less) and proceed with caution.
 
 {description of resolution, step, and window}
 
