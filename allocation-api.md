@@ -77,7 +77,8 @@ API parameters include the following:
 * `etl` setting this variable to `true` forces a request to be served by the ETL piepline. More info on this feature in the Caching Overview section below. 
 
 <a name="filter-params"></a>  
-Optional filter parameters include the following:   
+Optional filter parameters. Note that these filters might change the calculated costs, for example when splitting the `sharedNamespaces` only
+across a single namespace instead of splitting among all existing namespaces.
 
 Filter | Description
 --------- | -----------
