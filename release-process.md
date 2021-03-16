@@ -42,3 +42,10 @@ helm upgrade kubecost kubecost/cost-analyzer -n kubecost
 
 * You can watch Releases Only ([more info](https://docs.github.com/en/github/managing-subscriptions-and-notifications-on-github/viewing-your-subscriptions)) for this [helm chart repo](https://github.com/kubecost/cost-analyzer-helm-chart).
 Or join our Slack workspace - https://kubecost.slack.com
+
+## Submitting feedback on a release
+
+We always love receiving feedback and feature requests. Please reach out to team@kubecost.com or submit an issue in the respective repo:
+
+* If you installed our helm chart, all issues can be filed at https://github.com/kubecost/cost-analyzer-helm-chart
+* If you installed just the open source cost-model, you can file issues at https://github.com/kubecost/cost-model
