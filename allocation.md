@@ -151,7 +151,7 @@ Here is an example allocation for the `cost-model` container in a pod in Kubecos
 ```
 
 ### Special types of allocation
-- `__idle__` refers to resources on a cluster that were not dedicated to a Kubernetes object. An idle resource can be shared (proportionally or evenly) with the other allocations from the same cluster. (See the argument `shareIdle`.)
+- `__idle__` refers to resources on a cluster that were not dedicated to a Kubernetes object (e.g. unused CPU core-hours on a node). An idle resource can be shared (proportionally or evenly) with the other allocations from the same cluster. (See the argument `shareIdle`.)
 - `__unallocated__` refers to aggregated allocations without the selected `aggregate` field; e.g. aggregating by `label:app` might produce an `__unallocated__` allocation composed of allocation without the `app` label.
 - `__unmounted__` (or "Unmounted PVs") refers to the resources used by PersistentVolumes that aren't mounted to a Pod using a PVC, and thus cannot be allocated to a Pod.
 
