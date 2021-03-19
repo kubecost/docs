@@ -79,7 +79,7 @@ gpuHours | Cumulative GPU-hours allocated.
 gpuCost | Cumulative cost of allocated GPU-hours.
 networkCost | Cumulative cost of network usage.
 pvBytes | Average number of bytes of PersistentVolumes allocated while running.
-pvByteHours | Cumulative PersistenVolume byte-hours allocated.
+pvByteHours | Cumulative PersistentVolume byte-hours allocated.
 pvCost | Cumulative cost of allocated PersistentVolume byte-hours.
 ramBytes | Average number of RAM bytes allocated while running.
 ramByteRequestAverage | Average number of RAM bytes allocated while running.
