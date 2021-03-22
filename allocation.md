@@ -74,7 +74,7 @@ cpuCoreRequestAverage | Average number of CPU cores requested while running.
 cpuCoreUsageAverage | Average number of CPU cores used while running.
 cpuCoreHours | Cumulative CPU core-hours allocated.
 cpuCost | Cumulative cost of allocated CPU core-hours.
-cpuEfficiency | Fraction of CPU request that was used.
+cpuEfficiency | Ratio of `cpuCoreUsageAverage`-to-`cpuCoreRequestAverage`, meant to represent the fraction of requested resources that were used.
 gpuHours | Cumulative GPU-hours allocated.
 gpuCost | Cumulative cost of allocated GPU-hours.
 networkCost | Cumulative cost of network usage.
