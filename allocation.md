@@ -86,7 +86,7 @@ ramByteRequestAverage | Average number of RAM bytes allocated while running.
 ramByteUsageAverage | Average number of RAM bytes used while running.
 ramByteHours | Cumulative RAM byte-hours allocated.
 ramCost | Cumulative cost of allocated RAM byte-hours.
-ramEfficiency | Fraction of RAM request that was used.
+ramEfficiency | Ratio of `ramByteUsageAverage`-to-`ramByteRequestAverage`, meant to represent the fraction of requested resources that were used.
 sharedCost | Cumulative cost of shared resources, including: shared namespaces, shared labels, shared overhead.
 externalCost | Cumulative cost of external resources.
 totalCost | Total cumulative cost
