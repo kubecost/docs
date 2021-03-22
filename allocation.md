@@ -90,7 +90,7 @@ ramEfficiency | Ratio of `ramByteUsageAverage`-to-`ramByteRequestAverage`, meant
 sharedCost | Cumulative cost of shared resources, including: shared namespaces, shared labels, shared overhead.
 externalCost | Cumulative cost of external resources.
 totalCost | Total cumulative cost
-totalEfficiency | Cost-weighted average of `cpuEfficiency` and `ramEfficiency`
+totalEfficiency | Cost-weighted average of `cpuEfficiency` and `ramEfficiency`. In equation form: `((cpuEfficiency * cpuCost) + (ramEfficiency * ramCost)) / (cpuCost + ramCost)`
 
 ### Example allocation
 Here is an example allocation for the `cost-model` container in a pod in Kubecost's `kubecost-cost-analyzer` deployment, deployed into the `kubecost` namespace. The `properties` object describes that, as well as the `cluster`, `node`, `services`, `labels`, and `annotations` related to this allocation. Notice that this allocation ran for 10 hours within the given window, using the resources described by their respective values at a cost dictated by the node on which it ran.
