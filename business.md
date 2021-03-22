@@ -7,15 +7,15 @@ Kubecost Business offers even more features and control so that any team can use
 
 ### Multi-cluster visibility
 View all Kubernetes clusters in a single UI by easily toggling between each individual cluster. 
-An unlimited number of clusters supported. 
+Supports viewing data across an unlimited number of clusters.
 
-### Long-term metric retention & Saved Reports  
-Retain spend, allocation, and efficiency data for up to 30 days. Provides record keeping on easily sharing across teams.
+### Long-term metric retention & saved reports  
+Retain spend, allocation, and efficiency data for up to 30 days. Provides custom reports saving for easily sharing across teams.
 
 ### Team alerts & updates
 Kubecost alerts allow teams to receive updates on real-time Kubernetes spend. [Learn more](https://github.com/kubecost/docs/blob/master/alerts.md)
 
-### Business Support   
+### Business support   
 Direct engineering and product support via Slack channel, video, and phone. 
 
 <br/>  
