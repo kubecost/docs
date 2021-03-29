@@ -106,7 +106,7 @@ You can see this information directly in the Kubecost Diagnostics page (screensh
 
 ![](images/diagnostics-prom-targets.png)
 
-If the necessary scrape target is not added to your Prometheus, then refer to [this resource](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#scrape_config) to learn how to add a new job under your Prometheus `scrape_configs` block. 
+If the necessary scrape target is not added to your Prometheus, then refer to [this resource](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#scrape_config) to learn how to add a new job under your Prometheus `scrape_configs` block. You can visit `<your-prometheus-console-url>/config` to view the current scrape_configs block being passed to your Prometheus. 
 
 ### Step 4. No recent Prometheus scrape errors
 
