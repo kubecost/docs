@@ -14,11 +14,11 @@ Time-series version of /costDataModel API. Does not include ETL caching layer an
 
 ## Other APIs (available in Free tier)
 
-__[/aggregatedCostModel](https://github.com/kubecost/docs/blob/2ea9021e8530369d53184ea5382b2e4c080bb426/allocation-api.md#aggregated-cost-model-api)__
+__[/aggregatedCostModel](https://github.com/kubecost/docs/blob/master/allocation-api.md#aggregated-cost-model-api)__
 
 The aggregated cost model API retrieves data similar to the Kubecost Allocation frontend view, e.g. cost by namespace, label, deployment, service and more. Integrated with Kubecost ETL caching layer and CSV pipeline so it is able to scale to large clusters. 
 
-__[/allocation](https://github.com/kubecost/docs/blob/2ed975c695271cb04580b4749a65bc227b5f0c84/allocation.md)__
+__[/allocation](https://github.com/kubecost/docs/blob/master/allocation.md)__
 
 Direct API access to the Kubecost ETL pipeline. 
 
