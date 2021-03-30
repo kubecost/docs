@@ -37,3 +37,5 @@ Container:  "kubernetes_container":  &lt;container>
 </pre>
 
 To use an alternative or existing label schema for GCP cloud assets, you may supply these in your [values.yaml](https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/values.yaml) under the "kubecostProductConfigs.labelMappingConfigs.\<aggregation\>\_external_label" 
+
+> note: Google generates its own labels for GKE resources "goog-gke-node" and "goog-gke-volume". Values with these labels are excluded from OOC costs because they are already included in in-cluster costs under the kubernetes service. This will exclude GKE resources from other clusters however, to address this it is recommended to have kubecost installed on each cluster where insights into costs are required.
