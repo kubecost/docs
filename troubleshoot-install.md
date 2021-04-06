@@ -1,4 +1,6 @@
-[No persistent volumes available...](#persistent-volume)  
+Once an installation is complete, access the Kubecost frontend to view the status of the product. If the Kubecost UI is unavailable, review these common issues to determine the problem:
+
+[No persistent volumes available](#persistent-volume)  
 [Unable to establish a port-forward connection](#port-forward)  
 [FailedScheduling node-exporter](#node-exporter)  
 [No clusters found](#no-cluster)  
