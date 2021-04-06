@@ -7,11 +7,11 @@ General support for Kubecost is provided via the following channels:
 * Github issues can be filed [here](https://github.com/kubecost/cost-analyzer-helm-chart/issues/new/choose)
 * Video and phone support available to all paid plans.
 
-## Enterprise Support & SLAs
+## Paid Support & SLAs
 
-We offer professional support options and SLAs with our Enterprise plans.
+We offer professional support options and SLAs with our Business & Enterprise plans. Standard support hours are 8:00 am through 6:00 pm Pacific time. We respond to all helpdesk tickets within 12 hours and all critical issues within 3 hours.
 
-[Contact us](https://kubecost.com/#contact) to learn more.
+[Contact us](https://www.kubecost.com/about/#contact-module-2) to learn more or to customize this offering.
 
 
   
