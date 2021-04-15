@@ -1,3 +1,5 @@
+# Integrating Azure Out of Cluster Cluster Costs into Kubecost
+
 Kubecost provides the ability to view Kubernetes metrics side-by-side with external cloud services cost, e.g. Azure Database Services. Additionally, it allows Kubecost to reconcile spend with your actual Azure bill. This gives teams running Kubernetes a complete and accurate picture of costs. [More info on this functionality](http://blog.kubecost.com/blog/complete-picture-when-monitoring-kubernetes-costs/)
 
 To configure out-of-cluster (OOC) costs for Azure in Kubecost, you just need to set up daily exportation of cost reports to Azure storage. Once cost reports are exported to Azure Storage, Kubecost will access them through the Azure Storage API to display your OOC cost data alongside your in cluster costs.
@@ -10,7 +12,7 @@ https://docs.microsoft.com/en-us/azure/cost-management-billing/costs/tutorial-ex
 
 It will take a few hours to generate the first report, after which Kubecost can use the Azure Storage API to pull that data. 
 
->note: If you have sensitive data in an Azure Storage account and do not want to give out access to it, create a separate Azure Storage account to store your cost data export.
+>Note: If you have sensitive data in an Azure Storage account and do not want to give out access to it, create a separate Azure Storage account to store your cost data export.
 
 ## Step 2: Provide Access to Azure Storage API
 
@@ -19,10 +21,10 @@ The values needed to provide access to the Azure Storage Account where cost data
 * `<STORE_ACCESS_KEY>` can be found by selecting the “Access Keys” option from the navigation sidebar  then selecting “Show Keys”. Using either of the two keys will work. 
 * `<REPORT_CONTAINER_NAME>` is the name that you choose for the exported cost report when you set it up. This is the name of the container where the CSV cost reports are saved in your Storage account. 
 
-<details>
-	<summary>Maually add secret to cluster (Recommended)</summary>
-	To create this secret you will need to create a JSON file that must be named azure-storage-config.json
- with the following format:
+
+### Maually add secret to cluster (Recommended)
+To create this secret you will need to create a JSON file that must be named azure-storage-config.json
+with the following format:
 
 ```
 {
@@ -36,12 +38,10 @@ Once you have the values filled out use this command to create the secret:
 
 `kubectl create secret generic <SECRET_NAME> --from-file=azure-storage-config.json -n kubecost`
 
-Once the secret is created, set .Values.kubecostProductConfigs.azureStorageSecretName to
-<SECRET_NAME> and upgrade Kubecost via helm, other values related to Azure Storage should not be set.
-</details>
-<br>
- <details>
-		<summary>Create a secret from helm values</summary>
+Once the secret is created, set `.Values.kubecostProductConfigs.azureStorageSecretName` to
+<SECRET_NAME> and upgrade Kubecost via Helm, other values related to Azure Storage (see other method) should not be set.
+ 
+ ### Create a secret from helm values
 
 * Set `.Values.kubecostProductConfigs.azureStorageAccount = <STORAGE_ACCOUNT_NAME>`
 * Set `.Values.kubecostProductConfigs.azureStorageAccessKey = <STORE_ACCESS_KEY>`
@@ -49,10 +49,8 @@ Once the secret is created, set .Values.kubecostProductConfigs.azureStorageSecre
 * Set `.Values.kubecostProductConfigs.azureStorageCreateSecret = true`
 * Do not set `.Values.kubecostProductConfigs.azureStorageSecretName` if you are using this approach
 
-> Note: that this will leave your secrets unencrypted in values.yaml. Use an existing secret as in the next step to avoid this.
-</details>
+> Note: that this will leave your secrets unencrypted in values.yaml. Use a Kubernetes secret as in the previous method to avoid this.
 
-<br>
 After successful set up of Azure OOC costs upon opening the Assets page of Kubecost there will no longer be a banner at the top of the screen will no longer say that OOC is not configured and costs will be broken down by service.
 
 ## Step 3: Tagging Azure resources
