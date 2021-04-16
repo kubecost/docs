@@ -1,6 +1,8 @@
 You can apply your product key at any time within the product UI or during an install or upgrade process. 
 More details on both options are provided below.
 
+> Note: `kubecostToken` is a different concept from your product key and is used for managing trial access.
+
 ## At Install-time
 
 Many Kubecost product configuration options can be specified at install-time, including your product key. 
