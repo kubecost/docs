@@ -6,6 +6,7 @@ __Configuration__
 [Configuring metric storage](#storage-config)  
 [Setting requests & limits](#requests-limits)  
 [Product configuration at install-time](#install-configs)  
+[Setting up a cloud integration](#cloud-integration)  
 [Using an existing Prometheus or Grafana installation](#custom-prom)  
 [Using an existing node exporter installation](#node-exporter)  
 [Exposing Kubecost with an Ingress](#basic-auth)  
@@ -55,6 +56,14 @@ In practice, we recommend running Kubecost for up to 7 days on a production clus
 ## <a name="install-configs"></a>Product configuration at install-time
 
 Kubecost has a number of product configuration options that you can specify at install time in order to minimize the number of settings changes required within product UI. This makes it simple to redeploy Kubecost. These values can be configured under `kubecostProductConfigs` in our [values.yaml](https://github.com/kubecost/cost-analyzer-helm-chart/blob/bb8bcb570e6c52db2ed603f69691ac8a47ff4a26/cost-analyzer/values.yaml#L335). These parameters are passed to a configmap that Kubecost detects and writes to its /var/configs.
+
+## <a name="cloud-integration"></a>Setting up a cloud integration
+
+By default, Kubecost dynamically detects your cloud provider and pull list prices on Azure, AWS, and GCP for all in-cluster assets. By completing a cloud integration, you get the ability to view Kubernetes cost metrics side-by-side with external cloud services cost, e.g. S3, BigQuery, Azure Database Services. Additionally, it allows Kubecost to reconcile spend with your actual cloud bill to reflect enterprise discounts, spot market prices, comittment discounts, and more. This gives teams running Kubernetes a complete and accurate picture of costs. 
+
+&nbsp;&nbsp;&nbsp;&nbsp;[Azure billing integration](/azure-out-of-cluster.md)  
+&nbsp;&nbsp;&nbsp;&nbsp;[AWS billing integration](/aws-out-of-cluster.md)  
+&nbsp;&nbsp;&nbsp;&nbsp;[GCP billing integration](/gcp-out-of-cluster.md)  
 
 ## <a name="node-exporter"></a>Using an existing node exporter
 
