@@ -5,6 +5,7 @@ Once an installation is complete, access the Kubecost frontend to view the statu
 [FailedScheduling node-exporter](#node-exporter)  
 [No clusters found](#no-cluster)  
 [Pods running but app won't load](#app-wont-load)  
+[Trying to run on minikube](#minikube)
 
 
 ## <a name="persistent-volume"></a>Issue: no persistent volumes available for this claim and/or no storage class is set
@@ -116,3 +117,10 @@ If this is true, you are likely to be hitting a CoreDNS routing issue. We recomm
 The core Kubecost product needs read-only permissions.
 
 Many teams deploy helm Tiller with cluster-admin privileges to install and manage applications across different namespaces. More information on managing these permissions at https://v2.helm.sh/docs/rbac/
+
+## <a name="minikube"></a>Question: How can I run on Minikube?
+
+1. Edit nginx configmap ```kubectl edit cm nginx-conf -n kubecost```
+2. Search for 9001 and 9003 (should find kubecost-cost-analyzer.kubecost:9001 & kubecost-cost-analyzer.kubecost:9003)
+3. Change both entries to localhost:9001 and localhost:9003
+4. Restart the kubecost-cost-analyzer pod in the kubecost namespace
