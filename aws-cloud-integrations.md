@@ -331,8 +331,8 @@ Now that the policies have been created, we will need to attach those policies t
 	* Create a json file named <em>service-key.json</em> of the following format
 		```
                 {
-                	"`aws_access_key_id": <ACCESS_KEY_ID>,`
-                	"aws_secret_access_key": <ACCESS_KEY_SECRET>
+                  "aws_access_key_id": "<ACCESS_KEY_ID>",
+                  "aws_secret_access_key": "<ACCESS_KEY_SECRET>"
                 }
 		```
 	* Create a secret from file in the namespace kubecost is deployed in:
