@@ -59,7 +59,7 @@ Kubecost has a number of product configuration options that you can specify at i
 
 ## <a name="cloud-integration"></a>Setting up a cloud integration
 
-By default, Kubecost dynamically detects your cloud provider and pull list prices on Azure, AWS, and GCP for all in-cluster assets. By completing a cloud integration, you get the ability to view Kubernetes cost metrics side-by-side with external cloud services cost, e.g. S3, BigQuery, Azure Database Services. Additionally, it allows Kubecost to reconcile spend with your actual cloud bill to reflect enterprise discounts, spot market prices, comittment discounts, and more. This gives teams running Kubernetes a complete and accurate picture of costs. 
+By default, Kubecost dynamically detects your cloud provider and pulls list prices on Azure, AWS, and GCP for all in-cluster assets. By completing a cloud integration with one of these providers, you get the ability to view Kubernetes cost metrics side-by-side with external cloud services cost, e.g. S3, BigQuery, Azure Database Services. Additionally, it allows Kubecost to reconcile spend with your actual cloud bill to reflect enterprise discounts, spot market prices, comittment discounts, and more. This gives teams running Kubernetes a complete and accurate picture of costs. 
 
 &nbsp;&nbsp;&nbsp;&nbsp;[Azure billing integration](/azure-out-of-cluster.md)  
 &nbsp;&nbsp;&nbsp;&nbsp;[AWS billing integration](/aws-out-of-cluster.md)  
