@@ -40,6 +40,7 @@ For traffic routed to addresses outside of your cluster but inside your VPC, Kub
 * in-region - a list of addresses/ranges that will be classified as the same region between source and destinations but different zones.
 * cross-region -- a list of addresses/ranges that will be classified as different region from the source regions
 
+
 ### Troubleshooting
 
 To verify this feature is functioning properly, you can complete the following steps:
@@ -52,10 +53,13 @@ Common issues:
 
 * Failed to locate network pods -- Error message displayed when the Kubecost app is unable to locate the network pods, which we search for by a label that includes our release name. In particular, we depend on the label `app=<release-name>-network-costs` to locate the pods. If the app has a blank release name this issue may happen. 
 
-* Resource usage is a function of unique src and dest IP/port combinations. Most deployments use a small fraction of a CPU and it is also ok to have this pod CPU throttled moderately.
+* Resource usage is a function of unique src and dest IP/port combinations. Most deployments use a small fraction of a CPU and it is also ok to have this pod CPU throttled. Throttling should increase parse times but should not have other impact. The following Prometheus metrics are available in v15.3 for determining scale and the impact of throttling:
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; `kubecost_network_costs_parsed_entries` is the last number of conntrack entries parsed  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; `kubecost_network_costs_parse_time` is the last recorded parse time  
 
 ### Feature Limitations
 
 * Today this feature is supported on Unix-based images with conntrack  
-* Actively tested against GCP, AWS, and Azure to date  
+* Actively tested against GCP, AWS, and Azure  
 * Daemonsets have shared IP addresses on certain clusters  
