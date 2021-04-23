@@ -51,12 +51,12 @@ There's a number of different ways to look at your node cost data. The default f
 The t2-mediums here are covered by a savings plan. Unblended, we're only being charged $0.06/day for two of them.
 <img width="1047" alt="Screen Shot 2021-04-22 at 11 00 09 PM" src="https://user-images.githubusercontent.com/453512/115825827-d229ca80-a3be-11eb-961f-6ae66f56c605.png">
 
+When amortized costs are selected, the price jumps to $1.50/day
+<img width="739" alt="Screen Shot 2021-04-22 at 11 00 34 PM" src="https://user-images.githubusercontent.com/453512/115825879-e53c9a80-a3be-11eb-99b4-f8d6cc5e32fb.png">
+
 Which should closely match our data on the Assets page.
 <img width="1792" alt="Screen Shot 2021-04-22 at 11 03 45 PM" src="https://user-images.githubusercontent.com/453512/115825960-08ffe080-a3bf-11eb-9968-881f70d11e3c.png">
 
-
-When amortized costs are selected, the price jumps to $1.50/day
-<img width="739" alt="Screen Shot 2021-04-22 at 11 00 34 PM" src="https://user-images.githubusercontent.com/453512/115825879-e53c9a80-a3be-11eb-99b4-f8d6cc5e32fb.png">
 
 
 
