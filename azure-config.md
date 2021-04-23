@@ -1,4 +1,6 @@
-Once you've installed kubecost in an azure account, to access accurate Microsoft Azure billing data, Kubecost needs access to the Billing Rate Card API.
+Once you've installed Kubecost in an azure account, to access accurate Microsoft Azure billing data, Kubecost needs access to the Billing Rate Card API.
+
+> Note: you can also get this functionality plus external costs by completing the full [Kubecost Azure integration](/azure-out-of-cluster.md).
 
 Start by creating an Azure role definition. Below is an example definition, replace YOUR_SUBSCRIPTION_ID with the Subscription ID of your account:
 
