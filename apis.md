@@ -28,5 +28,8 @@ Assets API retrieves the backing cost data broken down by individual assets, e.g
 
 __[/savings](https://docs.google.com/document/d/1h_LQuTdwzbzcSonZ49w0lktaaHsulNsIj-O0OZR12fc/edit)__
 
-Exposes a set of APIs for cost optimization insights, e.g. pod-rightsizing and more. 
+Exposes a set of APIs for cost optimization insights.
 
+__[/savings/requestSizing](./api-request-right-sizing.md)
+
+The API for container request right-sizing recommendations. Refer to this over the general `/savings` doc for this endpoint.
