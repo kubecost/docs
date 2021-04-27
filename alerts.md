@@ -192,7 +192,7 @@ Example Helm values.yaml:
 
 *Versions Earlier than 1.79.0*
 
-This alert used to exist in the `notifications.alertConfigs.kubecostHealth` flag as seen [here](https://github.com/kubecost/cost-analyzer-helm-chart/blob/31dc60d2c539720f2b2a72c8e22b2f6b866580bd/cost-analyzer/values.yaml#L31). If upgrading to version 1.79.0 or newer, remove the `kubecostHealth` flag, and append the alert definition shown above. 
+This alert used to be configured via the `notifications.alertConfigs.kubecostHealth` flag seen [here](https://github.com/kubecost/cost-analyzer-helm-chart/blob/31dc60d2c539720f2b2a72c8e22b2f6b866580bd/cost-analyzer/values.yaml#L31). If upgrading to version 1.79.0 or newer, remove the `kubecostHealth` flag, and append the alert definition shown above. 
 
 
 ### Type: Cluster Health
