@@ -10,4 +10,4 @@ http://<kubecost-address>/model/savings/abandonedWorkloads
 | Name | Type | Description |
 |------|------|-------------|
 | `days` | int | Number of historical days over which network traffic should be measured. |
-| `threshold` | int | The threshold of traffic at which a workload is determined abandoned. |
+| `threshold` | int | The threshold of traffic (bytes/second) at which a workload is determined abandoned. |
