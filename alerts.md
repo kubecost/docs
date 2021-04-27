@@ -206,7 +206,7 @@ Cluster health alerts occur when the cluster health score changes by a specific 
 * Out of Memory Pods
 * Failed Jobs
 
-This alert only only uses Slack (email coming soon), so it requires the `globalSlackWebhookUrl` must be configured. 
+This alert only only uses Slack (email coming soon), so it requires the `globalSlackWebhookUrl` field. 
 
 Example Helm values.yaml:
 
