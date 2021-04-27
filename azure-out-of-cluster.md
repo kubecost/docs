@@ -39,7 +39,7 @@ Once you have the values filled out use this command to create the secret:
 `kubectl create secret generic <SECRET_NAME> --from-file=azure-storage-config.json -n kubecost`
 
 Once the secret is created, set `.Values.kubecostProductConfigs.azureStorageSecretName` to
-<SECRET_NAME> and upgrade Kubecost via Helm, other values related to Azure Storage (see other method) should not be set.
+`<SECRET_NAME>` and upgrade Kubecost via Helm, other values related to Azure Storage (see other method) should not be set.
  
  ### Create a secret from helm values
 
