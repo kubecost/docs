@@ -15,7 +15,9 @@ As of v1.72.0, Kubecost supports four types of notifications:
 
  4. [Beta] [Efficiency](#type-efficiency) -- detect when a Kubernetes tenant is operating below a target cost efficiency threshold
 
- 5. [Health Diagnostic](#type-health-diagnostic) -- used for production monitoring for the health of Kubecost itself
+ 5. [Kubecost Health Diagnostic](#type-kubecost-health-diagnostic) -- used for production monitoring for the health of Kubecost itself
+ 
+ 6. [Cluster Health](#type-health) -- used to determine if the cluster's health score changes by a specific threshold.
 
 
   
@@ -171,15 +173,49 @@ Example Helm values.yaml:
 			  filter: kubecost, default # accepts csv
 ```
 
-### Type: Health Diagnostic
+### Type: Kubecost Health Diagnostic
 
-Enabling diagnostic alerts in Kubecost sends a Slack message (email coming soon) when an event impacts product uptime. This feature can be enabled in seconds from a values file. The following health events are detected:
+Enabling diagnostic alerts in Kubecost occur when an event impacts product uptime. This feature can be enabled in seconds from a values file. The following health events are detected:
 
 * Prometheus is unreachable
 * Kubecost metrics missing over last 5 minutes
 * More coming soon.
 
-To enable, provide a `globalSlackWebhookUrl` value and set this [flag](https://github.com/kubecost/cost-analyzer-helm-chart/blob/31dc60d2c539720f2b2a72c8e22b2f6b866580bd/cost-analyzer/values.yaml#L31) to `true`
+This alert only only uses Slack (email coming soon), so it requires the `globalSlackWebhookUrl` field.
+
+Example Helm values.yaml:
+```
+        # Kubecost Health Diagnostic
+        - type: diagnostic
+          window: 10m               
+ ```
+
+*Versions Earlier than 1.79.0*
+
+This alert used to exist in the `notifications.alertConfigs.kubecostHealth` flag as seen [here](https://github.com/kubecost/cost-analyzer-helm-chart/blob/31dc60d2c539720f2b2a72c8e22b2f6b866580bd/cost-analyzer/values.yaml#L31). If upgrading to version 1.79.0 or newer, remove the `kubecostHealth` flag, and append the alert definition shown above. 
+
+
+### Type: Cluster Health
+
+Cluster health alerts occur when the cluster health score changes by a specific threshold. The health score is calculated based on the following criteria:
+
+* Low Cluster Memory
+* Low Cluster CPU
+* Too Many Pods
+* Crash Looping Pods
+* Out of Memory Pods
+* Failed Jobs
+
+This alert only only uses Slack (email coming soon), so it requires the `globalSlackWebhookUrl` must be configured. 
+
+Example Helm values.yaml:
+
+```
+        # Health Score Alert 
+        - type: health              # Alerts when health score changes by a threshold
+          window: 10m
+          threshold: 5              # Send Alert if health scores changes by 5 or more
+```
 
 ## Alerts Scheduler
 
