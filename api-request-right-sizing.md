@@ -24,36 +24,7 @@ http://<kubecost-address>/model/savings/requestSizing
 
 ### Max Headroom Algorithm
 
-The max headroom algorithm, available with `algorithm=max-headroom`, uses data in the Kubecost ETL to calculate the maximum resource usage (CPU and RAM) over the window. It requires no additional parameters.
-
-The max headroom algorithm is substantially more performant for large Kubernetes clusters because of the efficiency of Kubecost's ETL. Because recommendations are calculated at the controller level, and controllers can have many pods, we use a relatively straightforward algorithm to calculate maximum usage correctly. Here are some example cases:
-
-Weights (equivalent to a given Allocation's max CPU usage, for example) are on the left. Time moves right. Each "line" is the Allocation for one container, defined by the Allocation's Start and End.
-
-```
-3 pods, each with 1 container, under one deployment.
-3 | -----
-5 | -----
-7 | -----
-Correct max for the deployment: 3+5+7 = 15
-```
-
-```
-A CronJob that spins up 1 pod with 1 container.
-3 | ----
-5 |       -----
-7 |              -----
-Correct max for the CronJob: 7
-```
-
-```
-A CronJob that spins up 1 pod with 1 container on a cadence faster than it takes the
-job to run.
-3 | ------
-5 |    ------
-7 |        ------
-Correct max for the CronJob: 7+5 = 12
-```
+The max headroom algorithm, available with `algorithm=max-headroom`, uses data in the Kubecost ETL to calculate the maximum resource usage (CPU and RAM) over the window. It requires no additional parameters. The max headroom algorithm is substantially more performant for large Kubernetes clusters because of the efficiency of Kubecost's ETL. 
 
 ### Percentile Headroom
 
