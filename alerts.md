@@ -17,7 +17,7 @@ As of v1.72.0, Kubecost supports four types of notifications:
 
  5. [Kubecost Health Diagnostic](#type-kubecost-health-diagnostic) -- used for production monitoring for the health of Kubecost itself
  
- 6. [Cluster Health](#type-health) -- used to determine if the cluster's health score changes by a specific threshold.
+ 6. [Cluster Health](#type-cluster-health) -- used to determine if the cluster's health score changes by a specific threshold.
 
 
   
