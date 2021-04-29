@@ -17,4 +17,7 @@ We recommend that you back Kubecost with at least a 32GiB disk. This is the defa
       * If you are on a regional cluster,  we recommend that you provision a second PV using a topology-aware storage class ([more info](https://kubernetes.io/blog/2018/10/11/topology-aware-volume-provisioning-in-kubernetes/#getting-started)). You can set this disk’s storage class by setting persistentVolume.dbStorageClass=your-topology-aware-storage-class-name
 
 
+Troubleshooting Regional Cluster bindings:
+ * If you're using just one PV and still seeing issues with kubecost being rescheduled on zones outside of your disk, consider using a [topology aware storage class](https://kubernetes.io/blog/2018/10/11/topology-aware-volume-provisioning-in-kubernetes/#getting-started). You can set this disk’s storage class by setting persistentVolume.storageClass=your-topology-aware-storage-class-name
+
 
