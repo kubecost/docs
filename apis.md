@@ -1,7 +1,7 @@
 This resource covers primary APIs across open source and commercial Kubecost products.
 
 
-## Open source APIs
+# Open source APIs
 
 __[/costDataModel](https://github.com/kubecost/docs/blob/2ea9021e8530369d53184ea5382b2e4c080bb426/allocation-api.md#cost-model-api)__
 
@@ -12,7 +12,7 @@ __/costDataModelRange__
 Time-series version of /costDataModel API. Does not include ETL caching layer and therefore optimal for small to medium-sized clusters.
 
 
-## Other APIs (available in Free tier)
+# Other APIs (available in Free tier)
 
 __[/allocation](https://github.com/kubecost/docs/blob/master/allocation.md)__
 
