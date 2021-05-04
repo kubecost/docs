@@ -23,6 +23,7 @@ You can stay up to date with Kubecost by joining us on [Slack](https://join.slac
 
 ## Advanced Configuration
 &nbsp;[Allocating out of cluster costs (AWS)](/aws-out-of-cluster.md)  
+&nbsp;[Allocating out of cluster costs (Azure)](/azure-out-of-cluster.md)  
 &nbsp;[Allocating out of cluster costs (GCP)](/gcp-out-of-cluster.md)  
 &nbsp;[AWS Spot feed integration](/getting-started.md#spot-nodes)  
 
