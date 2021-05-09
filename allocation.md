@@ -163,7 +163,7 @@ GET /model/allocation
 Argument | Default | Description
 --: | :--: | :--
 window (required) | — | Duration of time over which to query. Accepts: words like `today`, `week`, `month`, `yesterday`, `lastweek`, `lastmonth`; durations like `30m`, `12h`, `7d`; comma-separated RFC3339 date pairs like `2021-01-02T15:04:05Z,2021-02-02T15:04:05Z`; comma-separated unix timestamp (seconds) pairs like `1578002645,1580681045`.
-aggregate | | Field by which to aggregate the results. Accepts: `cluster`, `namespace`, `controllerKind`, `controller`, `service`, `label:<name>`, and `annotation:<name>`. Also accepts comma-separated lists for multi-aggregation, like `namespace,label:app`.
+aggregate | | Field by which to aggregate the results. Accepts: `cluster`, `namespace`, `controllerKind`, `controller`, `service`,  `pod`, `label:<name>`, and `annotation:<name>`. Also accepts comma-separated lists for multi-aggregation, like `namespace,label:app`.
 accumulate | false | If `true`, sum the entire range of sets into a single set.
 idle | true | If `true`, include idle cost (i.e. the cost of the un-allocated assets) as its own allocation. (See [special types of allocation](#special-types-of-allocation).)
 external | false | If `true`, include [external costs](http://docs.kubecost.com/getting-started#out-of-cluster) in each allocation.
