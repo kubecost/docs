@@ -36,11 +36,39 @@ Alternatively, you can [deploy Kubecost without persistent storage](https://gith
 
 ## <a name="port-forward"></a>Issue: unable to establish a port-forward connection
 
-First, check the status of pods in the target namespace:
+Review the output of the port-forward command:
 
-`kubectl get pods -n kubecost`
+```
+$ kubectl port-forward --namespace kubecost deployment/kubecost-cost-analyzer 9090
+Forwarding from 127.0.0.1:9090 -> 9090
+Forwarding from [::1]:9090 -> 9090
+```
 
-You should see the following pods running
+Forwarding from `127.0.0.1` indicates kubecost should be reachable via a browser at `http://127.0.0.1:9090` or `http://localhost:9090`.
+
+ In some cases it may be nesscary for kubectl to bind to all interfaces. This can be done with the additon of the flag `--address 0.0.0.0`.
+
+```
+$ kubectl port-forward --address 0.0.0.0 --namespace kubecost deployment/kubecost-cost-analyzer 9090
+Forwarding from 0.0.0.0:9090 -> 9090
+```
+
+Navigating to kubecost while port-forwarding should result in "Handling connections" output: 
+
+```
+kubectl port-forward --address 0.0.0.0 --namespace kubecost deployment/kubecost-cost-analyzer 9090
+Forwarding from 0.0.0.0:9090 -> 9090
+Handling connection for 9090
+Handling connection for 9090
+```
+
+To troubleshoot further check the status of pods in the target namespace:
+
+```
+kubectl get pods -n kubecost`
+```
+
+All `kubecost-*` pods should have `Running` or `Completed` status.
 
 <pre>
 NAME                                                     READY   STATUS    RESTARTS   AGE
