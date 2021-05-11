@@ -15,18 +15,14 @@ The following fields apply to each map item under the `reports` key:
 
 * `title` the title/name of your custom report; any non-empty string is accepted
 * `window` the time window the allocation report covers, the following values are supported:
-	- `today`
-	- `yesterday`
-	- `week` week-to-date
-	- `month` month-to-date
-	- `<N>d` last **N+1** days (e.g., `29d` spans the last 30 days)
-	- `<start-date>,<end-date>` -- **custom window**, consisting of  two comma-separated ISO 8601 date strings:
-		* `<start-date>` -- `<YYYY-MM-DD>T00:00:00Z`, start date in UTC; time of day is **rounded down** to the nearest day
-		* `<end-date>` -- `<YYYY-MM-DD>T23:59:59Z`, end date in UTC; time of day is **rounded up** to the nearest day
-		* Example custom window that spans *2020-11-11* to *2020-12-10*:
-			* `2020-11-11T00:00:00Z,2020-12-09T23:59:59Z`
-			* Note that `2020-12-09` rounds up cover the window up until *2020-12-10*, meaning that the parameter above is semantically equivalent to `2020-11-11T12:58:21Z,2020-12-09T00:30:24Z` in the Allocation API
-
+	* key words: `today`, `week` (week-to-date), `month` (month-to-date), `yesterday`, `lastweek`, `lastmonth`
+	* number of days: `{N}d` (last **N** days)
+		* e.g. `30d` for the last 30 days
+	* date range: `{start},{end}` (comma-separated **RFC-3339 date strings** or **unix timestamps**)
+		* e.g. `2021-01-01T00:00:00Z,2021-01-02T00:00:00Z` for the single day of 1 January 2021
+		* e.g. `1609459200,1609545600` for the single day of 1 January 2021
+	* _Note: for all window options, if a window is requested that spans "partial" days, the window will be rounded up to include the nearest full date(s)._
+		* e.g. `2021-01-01T15:04:05Z,2021-01-02T20:21:22Z` will return the two full days of 1 January 2021 and 2 January 2021
 * `aggregateBy` the desired aggregation parameter -- equivalent to *Breakdown* in the Kubecost UI, supports `cluster`, `node`, `namespace`, `controllerKind`, `controller`, `service`, `department`, `environment`, `owner`, and `product`
 * `idle` idle cost allocation, supports `hide`, `share`, and `separate`
 * `accumulate` determines whether or not to sum Allocation costs across the entire window -- equivalent to *Resolution* in the UI, supports `true` (Entire window resolution) and `false` (Daily resolution)
