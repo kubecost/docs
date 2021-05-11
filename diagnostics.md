@@ -31,7 +31,7 @@ Node exporter metrics are used for the following features:
 
 These metrics are not used in the core Assets and Allocation and therefore can be considered optional. [Learn how to disable](http://docs.kubecost.com/getting-started#node-exporter)
 
-If this diagnostic test is failing, view [How to Troubleshoot Missing Metrics](#how-to-troubleshoot-missing-metrics).
+If this diagnostic test is failing and you'd like to have these metrics, view [How to Troubleshoot Missing Metrics](#how-to-troubleshoot-missing-metrics).
 
 ### Recording rules are available
 
