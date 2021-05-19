@@ -1,10 +1,10 @@
 ## Cost Analyzer Persistent Volume
 
-As of v1.67, Kubecost supports persisting its cache to disk. This dramatically reduces the load on startup against your Prometheus/Thanos installations on pod restart/redeploy, but commonly requires more storage. 
+As of v1.67, the persistent volume attached to Kubecost's primary pod (cost-analyzer) contains [ETL cache data](https://github.com/kubecost/docs/blob/master/allocation-api.md#caching-overview) as well as product configuration data. While it's technically optional, because all configurations can be set via configmap, it dramatically reduces the load against your Prometheus/Thanos installations on pod restart/redeploy. For this reason, it's strongly encouraged on larger clusters.
 
 **If you are creating a new installation of kubecost:**
 
-We recommend that you back Kubecost with at least a 32GiB disk. This is the default as of 1.72.0
+We recommend that you back Kubecost with at least a 32GiB disk. This is the default as of 1.72.0.
 
 **If you are upgrading an existing version of Kubecost**
 
