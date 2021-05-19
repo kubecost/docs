@@ -59,7 +59,7 @@ Kubecost utilizes Azure tagging to allocate the costs of Azure resources outside
 
 To allocate external Azure resources to a Kubernetes concept, use the following tag naming scheme:
 
-| Kubernetes Concept 	| AWS Tag Key         	| AWS Tag Value 	|
+| Kubernetes Concept 	| Azure Tag Key       	| Azure Tag Value 	|
 |--------------------	|---------------------	|---------------	|
 | Cluster           	| kubernetes_cluster	| &lt;cluster-name>	|
 | Namespace          	| kubernetes_namespace	| &lt;namespace-name> |
