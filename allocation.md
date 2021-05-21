@@ -178,9 +178,9 @@ filterLabels | | Comma-separated list of annotations to match; e.g. `app:cost-an
 filterServices | | Comma-separated list of services to match; e.g. `frontend-one,frontend-two` will return results with either of those two services.
 shareIdle | false | If `true`, idle cost is allocated proportionally across all non-idle allocations, per-resource. That is, idle CPU cost is shared with each non-idle allocation's CPU cost, according to the percentage of the total CPU cost represented.
 splitIdle | false | If `true`, and `shareIdle == false` Idle Allocations are created on a per cluster or per node basis rather than being aggregated into a single "\_idle\_" allocation.
-idleByNode | false | If `true`, idle allocations are created on a per node basis. This only affects results if `splitIdle == true`
+idleByNode | false | If `true`, idle allocations are created on a per node basis. Which will result in different values when shared and more idle allocations when split.
 reconcile | false | If `true` pulls data from the Assets cache and corrects prices of Allocations according to their related Assets. The corrections from this process are stored in each cost categories cost adjustment field. If the integration with you cloud provider's billing data has been set up, this will result in the most accurate costs for Allocations.
-shareOverhead | false | If `true`, share the cost of cluster overhead assets such as cluster management costs and node attached volumes across tenants of those resources.
+shareOverhead | false | If `true`, share the cost of cluster overhead assets such as cluster management costs and node attached volumes across tenants of those resources. Results are added to the sharedCost field.
 shareNamespaces | | Comma-separated list of namespaces to share; e.g. `kube-system, kubecost` will share the costs of those two namespaces with the remaining non-idle, unshared allocations.
 shareLabels | | Comma-separated list of labels to share; e.g. `env:staging, app:test` will share the costs of those two label values with the remaining non-idle, unshared allocations.
 shareCost | 0.0 | Floating-point value representing a monthly cost to share with the remaining non-idle, unshared allocations; e.g. `30.42` ($1.00/day == $30.42/month) for the query `yesterday` (1 day) will split and distribute exactly $1.00 across the allocations.
