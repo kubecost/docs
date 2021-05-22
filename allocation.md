@@ -17,7 +17,7 @@ $ curl http://localhost:9090/model/allocation \
   -d window=3d \
   -d aggregate=namespace \
   -d accumulate=false \
-  -d shareIdle=false
+  -d shareIdle=false \
   -G
 ```
 ```json
