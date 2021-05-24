@@ -19,7 +19,7 @@ As of v1.72.0, Kubecost supports four types of notifications:
  
  6. [Cluster Health](#type-cluster-health) -- used to determine if the cluster's health score changes by a specific threshold.
 
-
+Have questions or issues? View our [troubleshooting guide](#troubleshooting).
   
 ## Configuring Alerts in Helm
 
@@ -298,3 +298,5 @@ If `nextRun` fails to update, or alerts are not sending at the `nextRun` time, c
 	- unsupported csv filters -- `spendChange` alerts accept `filter` as comma-separated values; other alert types do not.
 	- unsupported alert type -- all alert type names are in camelCase -- check spelling and capitalization for all alert parameters
 	- unsupported aggregation parameters -- see the [aggregated cost model API](https://github.com/kubecost/docs/blob/2ea9021e8530369d53184ea5382b2e4c080bb426/allocation-api.md#aggregated-cost-model-api) for details
+
+Have questions? Join our [Slack community](https://join.slack.com/t/kubecost/shared_invite/enQtNTA2MjQ1NDUyODE5LWFjYzIzNWE4MDkzMmUyZGU4NjkwMzMyMjIyM2E0NGNmYjExZjBiNjk1YzY5ZDI0ZTNhZDg4NjlkMGRkYzFlZTU) or contact us via email at [team@kubecost.com](team@kubecost.com)!
