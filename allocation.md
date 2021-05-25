@@ -58,7 +58,7 @@ Note: querying for "3d" will likely return a range of four sets because the quer
 - 2021/01/02 00:00:00 until 2021/01/03 00:00:00
 - 2021/01/01 00:00:00 until 2021/01/02 00:00:00
 
-See [Querying](#querying) for the full list of arguments and [Examples](#examples) for more example queries.
+See [Querying](#querying) for the full list of arguments and [Examples](#query-examples) for more example queries.
 
 ## Allocation schema (version 1.76)
 Field | Description
