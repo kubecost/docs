@@ -11,7 +11,7 @@ Integrating Kubecost with an existing Prometheus installation can be nuanced. We
 
 Kubecost requires the following minimum versions:
  
-  - kube-state-metrics - v1.6.0 (May 19)
+  - kube-state-metrics - v1.6.0 < v2.0.0 (May 19) Support for v2.0.0+ is upcoming.
   - cAdvisor - kubelet v1.11.0  (May 18)
   - node-exporter - v0.16 (May 18) [Optional Dependency]
 
