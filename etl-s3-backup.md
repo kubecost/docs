@@ -43,3 +43,5 @@ kubectl create secret generic <secret_name> -n kubecost --from-file=object-store
 ### Enable S3 Backup in Helm Values
 
 When installing with helm, use the `--set kubecostModel.etlBucketConfigSecret=<secret_name>` flag and substitute the name of the secret you just created. 
+
+Note that enabling this flag will override the disk storage setting. Also, since the storage is a new location, the ETL will require a full rebuild.
