@@ -79,6 +79,10 @@ In order to repair the file for the problematic date above (Note it's for _Alloc
 http://<kubecost-url>:<port>/model/etl/allocation/repair?window=2020-11-20T00:00:00Z,2020-11-21T00:00:00Z
 ```
 
+NOTE: previous versions of Kubecost (1.81.0 and prior) provided a similar repair feature under the "rebuild" endpoint by passing a window:
+```
+http://<kubecost-url>:<port>/model/etl/[allocation|assets]/rebuild?window=<RFC3339-start>,<RFC3339-end>&commit=true
+```
 
 # How to Troubleshoot Missing Metrics
 
