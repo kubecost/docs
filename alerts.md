@@ -38,7 +38,6 @@ Example Helm values.yaml:
 ```
 notifications:
 	alertConfigs:
-		enabled: true # the settings under alertConfigs are never scheduled unless enabled is set to true
 		frontendUrl: http://localhost:9090  # optional, used for linkbacks
 		globalSlackWebhookUrl: https://hooks.slack.com/services/T00000000/B00000000/XXXXXXXXXXXXXXXXXXXXXXXX  # optional, used for Slack alerts
 		globalAlertEmails:
@@ -55,12 +54,26 @@ In addition to `globalSlackWebhookUrl` and `globalAlertEmails` fields, every ale
 
 ### Type: Recurring Update
 
-Required parameters (all namespaces):
+Required parameters:
 
 - `type: recurringUpdate`
-- `aggregation: namespace`
+- `aggregation: <aggregation>` -- configurable, accepts a single valid aggregation parameter\*
 - `filter: '*'`
-- `window: 7d`
+- `window: <N>d` -- configurable, N ≥ 1
+
+**Valid Aggregation Parameters**: 
+- `cluster`
+- `container`
+- `controller`
+- `namespace`
+- `pod`
+- `service`
+- `deployment`
+- `daemonset`
+- `statefulset`
+- `job`
+- `label` requires the following format: `label:<label_name>`
+- `annotation` requires the following format: `annotation:<annotation_name>`
 
 Required parameters (by individual namespace):
 
@@ -294,7 +307,6 @@ Additionally, confirm that the alerts scheduler has properly parsed and schedule
 If `nextRun` fails to update, or alerts are not sending at the `nextRun` time, check pod logs by running `kubectl logs $(kubectl get pods -n kubecost | awk '{print $1}' | grep "^kubecost-cost-analyzer.\{16\}") -n kubecost -c cost-model > kubecost-logs.txt`
 
 - Common causes of misconfiguration include the following:
-	- Not setting `.Values.global.notifications.alertConfigs.enabled` to `true` -- Kubecost will not read the resulting configmap
 	- unsupported csv filters -- `spendChange` alerts accept `filter` as comma-separated values; other alert types do not.
 	- unsupported alert type -- all alert type names are in camelCase -- check spelling and capitalization for all alert parameters
 	- unsupported aggregation parameters -- see the [aggregated cost model API](https://github.com/kubecost/docs/blob/2ea9021e8530369d53184ea5382b2e4c080bb426/allocation-api.md#aggregated-cost-model-api) for details
