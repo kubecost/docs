@@ -55,12 +55,16 @@ In addition to `globalSlackWebhookUrl` and `globalAlertEmails` fields, every ale
 
 ### Type: Recurring Update
 
-Required parameters (all namespaces):
+Required parameters:
 
 - `type: recurringUpdate`
-- `aggregation: namespace`
+- `aggregation: <aggregation>` -- configurable, accepts a single valid aggregation parameter\*
 - `filter: '*'`
-- `window: 7d`
+- `window: <N>d` -- configurable, N ≥ 1
+
+\* **Valid Aggregation Parameters**: `cluster`, `container`, `controller`, `namespace`, `pod`, `service`, `deployment`, `daemonset`, `statefulset`, `job`
+- `label` requires the following format: `label:<label_name>`
+- `annotation` requires the following format: `annotation:<annotation_name>`
 
 Required parameters (by individual namespace):
 
