@@ -2,7 +2,7 @@ Auditing the cost of workloads can be complex in dynamic Kubernetes environments
 
 ## Audit tool
 
-Visit the `/audit` page on the Kubecost frontend to review inputs to cpu, memory, storage, and node-level costs calculations on the Allocation view. This tool displays cost input data by *container* and compares the product of these metrics to the aggregatedCostModel API which is the backing API for the Allocation view. The default time window measured is 1 day. Note that idle and shared costs are not included as part of this view. 
+Visit the `/audit.html` page on the Kubecost frontend to review inputs to cpu, memory, storage, and node-level costs calculations on the Allocation view. This tool displays cost input data by *container* and compares the product of these metrics to the aggregatedCostModel API which is the backing API for the Allocation view. The default time window measured is 1 day. Note that idle and shared costs are not included as part of this view. 
 
 ![Audit screenshot](/cpu-audit-table.png)
 
