@@ -38,7 +38,6 @@ Example Helm values.yaml:
 ```
 notifications:
 	alertConfigs:
-		enabled: true # the settings under alertConfigs are never scheduled unless enabled is set to true
 		frontendUrl: http://localhost:9090  # optional, used for linkbacks
 		globalSlackWebhookUrl: https://hooks.slack.com/services/T00000000/B00000000/XXXXXXXXXXXXXXXXXXXXXXXX  # optional, used for Slack alerts
 		globalAlertEmails:
@@ -62,7 +61,17 @@ Required parameters:
 - `filter: '*'`
 - `window: <N>d` -- configurable, N ≥ 1
 
-\* **Valid Aggregation Parameters**: `cluster`, `container`, `controller`, `namespace`, `pod`, `service`, `deployment`, `daemonset`, `statefulset`, `job`
+**Valid Aggregation Parameters**: 
+- `cluster`
+- `container`
+- `controller`
+- `namespace`
+- `pod`
+- `service`
+- `deployment`
+- `daemonset`
+- `statefulset`
+- `job`
 - `label` requires the following format: `label:<label_name>`
 - `annotation` requires the following format: `annotation:<annotation_name>`
 
