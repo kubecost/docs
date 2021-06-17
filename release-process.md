@@ -15,7 +15,7 @@ A Kubecost Release is a snapshot of the source, build output, artifacts, and oth
 ## Release candidate (RC) builds
 
 * Release candidates are produced between production releases for early testing
-* To pick up a release candidate, add `--devel` to your helm installa/upgrade instructions. For example:
+* To pick up a release candidate, add `--devel` to your helm install/upgrade instructions. For example:
 
 ```
 helm install kubecost kubecost/cost-analyzer --namespace kubecost --devel
