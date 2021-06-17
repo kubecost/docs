@@ -12,6 +12,16 @@ A Kubecost Release is a snapshot of the source, build output, artifacts, and oth
 * Historically we average one patch release between minor releases.
 * You can target an older release of the Kubecost pod by setting `imageVersion` to the desired value, e.g. ` prod-1.63.1`
 
+## Release candidate (RC) builds
+
+* Release candidates are produced between production releases for early testing
+* To pick up a release candidate, add `--devel` to your helm installa/upgrade instructions. For example:
+
+```
+helm install kubecost kubecost/cost-analyzer --namespace kubecost --devel
+```
+
+
 ## Staging releases
 
 * Staging releases are built before scheduled releases and published in [this repo](https://github.com/kubecost/staging-repo).
