@@ -54,6 +54,8 @@ In addition to `globalSlackWebhookUrl` and `globalAlertEmails` fields, every ale
 
 ### Type: Recurring Update
 
+Sends an recurring email and/or Slack alert with a summary report of cost and efficiency metrics. 
+
 Required parameters:
 
 - `type: recurringUpdate`
