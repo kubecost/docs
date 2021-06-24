@@ -34,7 +34,7 @@ This will show you top source and destination IP addresses and bytes transferred
 
 ### Overriding traffic classifications
 
-For traffic routed to addresses outside of your cluster but inside your VPC, Kubecost supports the ability to directly classifify network traffic to a particular IP address or CIDR block. This feature can be configured in your [values.yaml](https://github.com/kubecost/cost-analyzer-helm-chart/blob/ab384e2eb027e74b2c3e61a7e1733ffa1718170e/cost-analyzer/values.yaml#L288-L322) under `networkCosts.config`. Classifications are defined as follows:
+For traffic routed to addresses outside of your cluster but inside your VPC, Kubecost supports the ability to directly classify network traffic to a particular IP address or CIDR block. This feature can be configured in your [values.yaml](https://github.com/kubecost/cost-analyzer-helm-chart/blob/ab384e2eb027e74b2c3e61a7e1733ffa1718170e/cost-analyzer/values.yaml#L288-L322) under `networkCosts.config`. Classifications are defined as follows:
 
 * in-zone - a list of destination addresses/ranges that will be classified as an in-zone traffic, which is free for most providers. 
 * in-region - a list of addresses/ranges that will be classified as the same region between source and destinations but different zones.
