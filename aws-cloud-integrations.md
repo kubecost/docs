@@ -434,6 +434,6 @@ AWS services used here are:
   * [Athena](https://aws.amazon.com/athena/pricing/)
   * [S3](https://aws.amazon.com/s3/pricing/)
   * [EC2](https://aws.amazon.com/ec2/pricing/) Kubecost's cost-model requires roughly 2 CPU and 10GB of RAM per 50,000 pods monitored. The backing Prometheus database requires roughly 2CPU and 25GB per million metrics ingested per minute. You can pick the ec2 instances necessary to run kubecost accordingly.
-  * [EBS](https://aws.amazon.com/ebs/pricing/) Kubecost can write its cache to disk. Roughly 32 GB per 100,000 pods monitored is sufficient.
+  * [EBS](https://aws.amazon.com/ebs/pricing/) Kubecost can write its cache to disk. Roughly 32 GB per 100,000 pods monitored is sufficient. (Optional-- our cache can exist in memory)
   * [Cloudformation](https://aws.amazon.com/cloudformation/pricing/) (Optional-- manual IAM configuration or via Terraform is fine)
   * [EKS](https://aws.amazon.com/eks/pricing/)  (Optional-- all k8s flavors are supported) 
