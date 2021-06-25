@@ -7,7 +7,8 @@ The simplest way to back up kubecost's ETL is to create a copy locally to then s
 
 # Restoring from a backup
 Untar the results of the etl-backup script into the ETL directory pod.
-eg:
+
+
 ```kubectl cp -c cost-model <untarred-results-of-script> <kubecost-namespace>/<kubecost-podname>/var/configs/db/etl```
 
 
