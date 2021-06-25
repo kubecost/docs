@@ -30,6 +30,41 @@ The max headroom algorithm, available with `algorithm=max-headroom`, uses data i
 
 The percentile headroom algorithm, available with `algorithm=percentile-headroom`, uses Prometheus' `quantile_over_time` to calculate resource usage. It therefore requires an additional parameter, `p`, to specify the quantile. For example, `algorithm=percentile-headroom&p=0.99` will use the 99th-percentile usage as the calculated usage.
 
+## Savings Projection Methodology
+
+The request right-sizing recommendation includes an estimate of the savings that can be realized
+by applying the request right-sizing recommendations. To calculate this estimation, we use each
+container's and its parent controller's (Deployment, CronJob, etc.) lifetime in `window`. We assume
+each container will run on the same node (and therefore have the same resource costs) it ran on
+historically; calculate the monthly rate for that container with the new, reduced resource requests;
+and then we scale that monthly rate by `container lifetime in window / controller lifetime in window`.
+Using the controller's lifetime helps to avoid underestimating savings for recently-created controllers.
+If the container doesn't have a controller (e.g. it is in a raw Pod) then the `window` duration is
+substituted for the controller lifetime.
+
+This logic for estimation is making an assumption that the proportion of time that each container ran
+historically will be the same proportion of time it will run in the future projected month. We think
+this is an effective and easy-to-understand methodology.
+
+Here are a few limited examples to illustrate the principle. Assume `window=7d` for all queries.
+
+1. A Deployment created 1 day ago whose Pods have not churned (restarted, etc.)
+
+   Each of Deployment's container's lifetime will be the same as the controller's lifetime, so
+   the calculated monthly rate won't need to be scaled down. In other words, the projected
+   savings assumes each container under the Deployment will run for a whole month.
+
+2. A CronJob created 5 days ago which runs a single-container Pod for 1 hour, once a day
+
+   Assuming the CronJob has run 5 times, there are 5 containers that have run (one for each
+   Pod created by the CronJob). Each container's raw monthly cost is scaled by `1 / 24 / 5`.
+
+3. A 3-replica Deployment of a single-container Pod created a month ago whose container image
+   was updated 2 days ago
+
+   The 3 containers that were running pre-image update will have their projected monthly cost
+   scaled by `5 / 7` and the 3 containers that were running post-image update will have their
+   projected monthly cost scaled by `2 / 7`.
 
 ## Examples
 
