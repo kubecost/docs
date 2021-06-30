@@ -1,4 +1,4 @@
-Quick Intall Guide
+Quick Install Guide
 ==================
 
 Welcome! This guide will walk you through installing Kubecost into your Kubernetes cluster. The Kubecost helm chart includes all product dependencies and takes only a few minutes to install.
