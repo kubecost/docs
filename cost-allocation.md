@@ -2,23 +2,17 @@
 
 The Kubecost Allocation view allows you to quickly see allocated spend across all native Kubernetes concepts, e.g. namespace, k8s label, and service. It also allows for allocating cost to organizational concepts like team, product/project, department, or environment. This document explains the metrics presented and describes how you can control the data displayed in this view.
 
-![Cost allocation view](cost-allocation.png)
+![Cost allocation view](./images/cost-allocation.png)
 
-### 1. Displayed metrics  
-View either cumulative or run rate costs measured over the selected time window based on the resources allocated. 
 
-* Cumulative Costs -- represents the actual/historical spend captured by the Kubecost agent over the selected time window
-* Rate metrics -- hourly, daily, or monthly "run rate" cost, also used for projected cost figures, based on samples in the selected time window 
+### Date Range 
+![Date Picker](./images/cost-allocation-date-picker.png)
 
-Costs allocations are based on the following:
+Select the Date Range of the report, using common Date Range options or by setting specific start and end dates.
 
-1) resources allocated, i.e. max of resource requests and usage  
-2) the cost of each resource  
-3) the amount of time resources were provisioned  
+### Breakdown
+![Breakdown](./images/cost-allocation-breakdown.png)
 
-For more information, refer to this [FAQ](https://github.com/kubecost/cost-model#frequently-asked-questions) on how each of these inputs is determined based on your environment.
-
-### 2. Aggregation  
 Aggregate cost by namespace, deployment, service and other native Kubernetes concepts. 
 
 Costs aggregations are also visible by other meaningful organizational concepts, e.g. Team, Department, and Product. These aggregations are based on Kubernetes labels, referenced at both the pod and namespace-level, with labels at the pod-level being favored over the namespace label when both are present. The Kubernetes label name used for these concepts can be configured in Settings or in [values.yaml](https://github.com/kubecost/cost-analyzer-helm-chart/blob/19908983ed7c8d4ff1d3e62d98537a39ab61bbab/cost-analyzer/values.yaml#L427-L445) after setting `kubecostProductConfigs.labelMappingConfigs.enabled` to true. Workloads without the relevent label will be shown as `__unallocated__`. 
@@ -32,10 +26,36 @@ kubectl get pods -l 'app notin (prometheus, cost-analyzer, ...)' --all-namespace
 kubectl get pods --show-labels -n <TARGET_NAMESPACE>
 ```
 
-### 3. Time window  
-The designated time window for measuring costs. Results for 1d, 2d, 7d, and 30d queries are cached by default.
 
-### 4. Filter  
+### Additional Options
+
+![Options](./images/cost-allocation-options.png)
+
+#### Idle Cost  
+Allocating idle costs proportionately distributes slack or idle _cluster costs_ to tenants. Specifically, this applies to resources that are provisioned but not being fully used or requested by a tenant. As an example, if your cluster is only 25% utilized, as measured by the max of resource usage and requests, applying idle costs would proportionately increase the cost of each pod/namespace/deployment by 4x. This feature can be enabled by default in Settings.
+
+#### Chart
+View Allocation data in the following formats:
+- Cost: Total cost per aggregation over Date Range
+- Cost over time: Cost per aggregation broken down over days or hours depending on Date Range
+- Proportional Cost: Cost per aggregate displayed as percentage of total cost over Date Range
+
+
+#### Cost metrics  
+View either cumulative or run rate costs measured over the selected time window based on the resources allocated. 
+
+* Cumulative Costs -- represents the actual/historical spend captured by the Kubecost agent over the selected time window
+* Rate metrics -- hourly, daily, or monthly "run rate" cost, also used for projected cost figures, based on samples in the selected time window 
+
+Costs allocations are based on the following:
+
+1) resources allocated, i.e. max of resource requests and usage  
+2) the cost of each resource  
+3) the amount of time resources were provisioned  
+
+For more information, refer to this [FAQ](https://github.com/kubecost/cost-model#frequently-asked-questions) on how each of these inputs is determined based on your environment.
+
+#### Filter  
 Filter resources by namespace, clusterId, and Kubernetes label to more closely investigate a rise in spend or key cost drivers at different aggregations, e.g. Deployments or Pods. When a filter is applied, only resources with this matching value will be shown. These filters are also applied to external out-of-cluster asset tags. Supported filters are as follows:
 
 | Fitler 	| Description         	|
@@ -47,14 +67,15 @@ Filter resources by namespace, clusterId, and Kubernetes label to more closely i
 
 Comma-seperated lists are supported to filter by multple categories, e.g. namespace filter equals `kube-system,kubecost`
    
-### 5. Allocate Idle Cost  
-Allocating idle costs proportionately distributes slack or idle _cluster costs_ to tenants. Specifically, this applies to resources that are provisioned but not being fully used or requested by a tenant. As an example, if your cluster is only 25% utilized, as measured by the max of resource usage and requests, applying idle costs would proportionately increase the cost of each pod/namespace/deployment by 4x. This feature can be enabled by default in Settings.
+#### Shared Resources
 
-### 6. Chart selection  
-Toggle to the bar chart view to see aggregated costs over the selected window, or the time series view to see cost changes over time.
+Select how shared costs set on the settings page will be shared among allocations
 
-### 7. Additional options  
-View other options to export cost data to CSV or view help documentation.
+
+### Save, Load and Download
+![Save/Load/Download](./images/cost-allocation-icons.png)
+
+Use these icons to save report settings or load reports that you have saved in the past. You can also download a report in CSV format.
 
 ### Cost metrics
 
