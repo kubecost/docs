@@ -307,6 +307,19 @@ $ curl http://localhost:9090/model/allocation \
 }
 ```
 
+### Notes on Asset Cost Distribution Methodology:
+
+Both the `reconcile` and `shareTenancyCosts` flags start query-time processes that distribute the costs of Assets to Allocations related to them. For the `reconcile` flag, these connections can be straight forward like the connection between a node Asset and an Allocation where the CPU, GPU and RAM usage can be used to distribute a proportion of the node's cost to the Allocations that run on it. For Assets and Allocations where the connection is less well defined we have opted for a method of distributing the cost that we call Distribution by Usage Hours.
+
+Distribution by Usage Hours takes the usage of the windows (start time and end time) of an Asset and all the Allocations connected to it and finds the number of hours that both the Allocation and Asset were running. The number of hours for each Allocation related to an Asset is called Alloc_Usage_Hours. The sum of all Alloc_Usage_Hours for a single Assets is Total_Usage_Hours. With these values an Assets cost is distributed to each connected Allocation using the formula Asset_Cost * Alloc_Usage_Hours/Total_Usage_Hours. Depending on the Asset type an Allocation can receive proportions of multiple Asset Costs.
+
+Asset types that use this distribution method include:
+- Network (`reconcile`): When the network pod is not enabled. If the network pod is enabled cost is distributed to Allocations proportionally to usage.
+- Load Balancer (`reconcile`)
+- Cluster Management (`shareTenancyCosts`)
+- Disks (`shareTenancyCosts`): Specifically attached disks for nodes not PVs which are handled by `reconcile`
+
+
 ## Querying on-demand (experimental)
 
 > :warning: **WARNING**
