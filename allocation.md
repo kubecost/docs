@@ -307,7 +307,7 @@ $ curl http://localhost:9090/model/allocation \
 }
 ```
 
-### Notes on Asset Cost Distribution Methodology:
+### Allocation of Asset Costs:
 
 Both the `reconcile` and `shareTenancyCosts` flags start query-time processes that distribute the costs of Assets to Allocations related to them. For the `reconcile` flag, these connections can be straightforward like the connection between a node Asset and an Allocation where the CPU, GPU and RAM usage can be used to distribute a proportion of the node's cost to the Allocations that run on it. For Assets and Allocations where the connection is less well-defined, such as network Assets we have opted for a method of distributing the cost that we call Distribution by Usage Hours.
 
