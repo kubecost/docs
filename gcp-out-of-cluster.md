@@ -8,11 +8,6 @@ The following guide provides the steps required for allocating out of cluster co
 
 ## Step 2:  Visit Kubecost setup page and provide configuration info
 
-In Kubecost, visit the Cost Allocation page and select "Add Key".
-
-![Add key](/add-key.png)
-
-On the "Add Key" page, you will see instructions for providing a service key, project ID, and the BigQuery dataset that you have chosen to export data to:
 
 Add a service key to allocate out of cluster resources (e.g. storage buckets and managed databases) back to their Kubernetes owners. The service account needs the following:
 ```
@@ -38,7 +33,7 @@ You can then get your service account key to paste into the UI (be careful with 
  cat compute-viewer-kubecost-key.json 
 ```
 
-Then, follow the remaining instructions found at the "Add Key" link:
+In Kubecost, navigate to the settings page and click "update" for the "External Cloud Cost Configuration (GCP)" setting, then follow the remaining instructions found at the "Add Key" link:
 
 ![GCP out of cluster key entry](/images/gcp-out-of-cluster-config-wo-shell.png)
 
