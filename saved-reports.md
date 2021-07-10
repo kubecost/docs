@@ -23,7 +23,7 @@ The following fields apply to each map item under the `reports` key:
 		* e.g. `1609459200,1609545600` for the single day of 1 January 2021
 	* _Note: for all window options, if a window is requested that spans "partial" days, the window will be rounded up to include the nearest full date(s)._
 		* e.g. `2021-01-01T15:04:05Z,2021-01-02T20:21:22Z` will return the two full days of 1 January 2021 and 2 January 2021
-* `aggregateBy` the desired aggregation parameter -- equivalent to *Breakdown* in the Kubecost UI, supports `cluster`, `node`, `namespace`, `controllerKind`, `controller`, `service`, `department`, `environment`, `owner`, and `product`
+* `aggregateBy` the desired aggregation parameter -- equivalent to *Breakdown* in the Kubecost UI, supports `cluster`, `node`, `namespace`, `controllerKind`, `controller`, and `service`.
 * `idle` idle cost allocation, supports `hide`, `share`, and `separate`
 * `accumulate` determines whether or not to sum Allocation costs across the entire window -- equivalent to *Resolution* in the UI, supports `true` (Entire window resolution) and `false` (Daily resolution)
 * `filters` -- a list of maps consisting of a property and value
