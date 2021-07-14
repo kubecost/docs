@@ -20,6 +20,17 @@ http://<kubecost-address>/model/savings/requestSizing
 | `targetCPUUtilization` | float between 0 and 1 | An amount of headroom to enforce with the new request, based on the calculated (real) usage. If the calculated usage is, for example, 100 mCPU and this parameter is `0.8`, the recommended CPU request will be `100 / 0.8 = 125` mCPU. |
 | `targetRAMUtilization` | float between 0 and 1 | Calculated like CPU. |
 | `window` | string | Duration of time over which to calculate usage. Supports hours or days before the current time in the following format: `2h` or `3d`. |
+| `filterClusters` | string | Comma-separated list of clusters to match; e.g. `cluster-one,cluster-two` will return results from only those two clusters. |
+| `filterNodes` | string | Comma-separated list of nodes to match; e.g. `node-one,node-two` will return results from only those two nodes. |
+| `filterNamespaces` | string | Comma-separated list of namespaces to match; e.g. `namespace-one,namespace-two` will return results from only those two namespaces. |
+| `filterLabels` | string | Comma-separated list of annotations to match; e.g. `app:cost-analyzer, app:prometheus` will return results with either of those two label key-value-pairs. |
+| `filterServices` | string | Comma-separated list of services to match; e.g. `frontend-one,frontend-two` will return results with either of those two services. |
+| `filterControllerKinds` | string | Comma-separated list of controller kinds to match; e.g. `deployment,job` will return results with only those two controller kinds. |
+| `filterControllers` | string | Comma-separated list of controllers to match; e.g. `deployment-one,statefulset-two` will return results from only those two controllers. |
+| `filterPods` | string | Comma-separated list of pods to match; e.g. `pod-one,pod-two` will return results from only those two pods. |
+| `filterAnnotations` | string | Comma-separated list of annotations to match; e.g. `name:annotation-one,name:annotation-two` will return results with either of those two annotation key-value-pairs. |
+| `filterContainers` | string | Comma-separated list of containers to match; e.g. `container-one,container-two` will return results from only those two containers. |
+
 
 ## Savings Projection Methodology
 
