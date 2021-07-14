@@ -63,3 +63,31 @@ spec:
           serviceName: kubecost-cost-analyzer # should be configured if another helm name or service address is used 
           servicePort: 9090
 ```
+
+
+## ALB Example
+
+Once an AWS Load Balancer Controller is installed, you can use a the following Ingress resource manifest pointed at the kubecost-cost-analyzer service: 
+
+
+```
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: kubecost-alb-ingress
+  annotations:  
+    kubernetes.io/ingress.class: alb
+    alb.ingress.kubernetes.io/target-type: ip
+    alb.ingress.kubernetes.io/scheme: internet-facing
+spec:
+  rules:
+    - http:
+        paths:
+        - path: /
+          pathType: Prefix
+          backend:
+            service:
+              name: kubecost-cost-analyzer
+              port:
+                number: 9090
+```                
