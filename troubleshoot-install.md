@@ -1,12 +1,11 @@
 Once an installation is complete, access the Kubecost frontend to view the status of the product. If the Kubecost UI is unavailable, review these common issues to determine the problem:
 
-[No persistent volumes available](#persistent-volume)  
-[Unable to establish a port-forward connection](#port-forward)  
-[FailedScheduling node-exporter](#node-exporter)  
-[No clusters found](#no-cluster)  
-[Pods running but app won't load](#app-wont-load)  
-[Trying to run on minikube](#minikube)
-
+&nbsp;&nbsp;[No persistent volumes available](#persistent-volume)  
+&nbsp;&nbsp;[Unable to establish a port-forward connection](#port-forward)  
+&nbsp;&nbsp;[FailedScheduling node-exporter](#node-exporter)  
+&nbsp;&nbsp;[No clusters found](#no-cluster)  
+&nbsp;&nbsp;[Pods running but app won't load](#app-wont-load)  
+&nbsp;&nbsp;[Trying to run on minikube](#minikube)
 
 ## <a name="persistent-volume"></a>Issue: no persistent volumes available for this claim and/or no storage class is set
 
@@ -114,6 +113,8 @@ If this is true, you are likely to be hitting a CoreDNS routing issue. We recomm
 
 ## <a name="app-wont-load"></a>Question: Why do I need to grant `cluster-admin` privileges?
 
+> Note: this question only applies when installing Kubecost via helm 2 
+
 The core Kubecost product needs read-only permissions.
 
 Many teams deploy helm Tiller with cluster-admin privileges to install and manage applications across different namespaces. More information on managing these permissions at https://v2.helm.sh/docs/rbac/
@@ -124,3 +125,7 @@ Many teams deploy helm Tiller with cluster-admin privileges to install and manag
 2. Search for 9001 and 9003 (should find kubecost-cost-analyzer.kubecost:9001 & kubecost-cost-analyzer.kubecost:9003)
 3. Change both entries to localhost:9001 and localhost:9003
 4. Restart the kubecost-cost-analyzer pod in the kubecost namespace
+
+<br/>
+
+Have a question not answered on this page? Email us at support@kubecost.com or [join the Kubecost Slack community](https://join.slack.com/t/kubecost/shared_invite/enQtNTA2MjQ1NDUyODE5LWFjYzIzNWE4MDkzMmUyZGU4NjkwMzMyMjIyM2E0NGNmYjExZjBiNjk1YzY5ZDI0ZTNhZDg4NjlkMGRkYzFlZTU)!
