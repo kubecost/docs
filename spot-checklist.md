@@ -1,4 +1,4 @@
-# What Spot Checklist is
+# Spot Checklist
 
 The Spot Readiness Checklist investigates your Kubernetes workloads to attempt
 to identify those that are candidates to be schedulable on spot (preemptible)
@@ -21,9 +21,9 @@ configuration to determine readiness:
 - Rolling update strategy (Deployment-only)
 - Manual annotation overrides
 
-# How to interpret Checklist results
+## How to interpret Checklist results
 
-## Controller Type
+### Controller Type
 
 The checklist is configured to investigate a fixed set of controllers, currently
 only Deployments and StatefulSets. More to come!
@@ -37,7 +37,7 @@ that StatefulSets. Scheduling StatefulSet pods on spot nodes can lead to data
 loss.
 
 
-## Replica Count
+### Replica Count
 
 Workloads with a configured replica count of 1 are not considered spot-ready
 because if the single replica is removed from the cluster due to a spot node
@@ -47,7 +47,7 @@ a variable number of replicas that can occur as a result of replicas disappearin
 due to spot node outages.
 
 
-## Local storage
+### Local storage
 
 Currently, workloads are only checked for the presence of an `emptyDir` volume. If
 one is present, the workload is assumed to be not spot-ready.
@@ -57,10 +57,10 @@ If a pod is shut down non-gracefully while it is in the middle of a write, data
 integrity could be compromised. More robust volume checks are currently under
 consideration.
 
-## Pod Disruption Budget
+### Pod Disruption Budget
 
 It is possible to configure a [Pod Disruption Budget (PDB)](https://kubernetes.io/docs/tasks/run-application/configure-pdb/)
-for controllers that causes the schedular to (where possible) adhere to certain
+for controllers that causes the scheduler to (where possible) adhere to certain
 availability requirements for the controller. If a controller has a PDB set up,
 we read it and compute its minimum available replicas and use a simple threshold
 on the ratio `min available / replicas` to determine if the PDB indicates
@@ -73,7 +73,7 @@ always be evaluated on a case-by-case basis and it is possible that an unnecessa
 strict PDB was configured.
 
 
-## (Deployment only) Rolling Update Strategy
+### (Deployment only) Rolling Update Strategy
 
 Deployments have multiple options for update strategies and by default they
 are configured with a Rolling Update Strategy (RUS) with 25% max unavailable. If
@@ -84,14 +84,14 @@ default-configured deployments with replica counts greater than 3 will pass the
 check.
 
 
-## Manual annotation overrides
+### Manual annotation overrides
 
 We also support manually overriding the spot readiness of a controller by annotating
 the controller itself or the namespace it is running in with
 `spot.kubecost.com/spot-ready=true`.
 
 
-# Implementing spot nodes in your cluster
+## Implementing spot nodes in your cluster
 
 Kubecost marking a workload as spot ready is not a guarantee. A domain expert should
 always carefully consider the workload before approving it to run on spot nodes.
