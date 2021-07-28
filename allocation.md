@@ -91,6 +91,7 @@ sharedCost | Cumulative cost of shared resources, including: shared namespaces, 
 externalCost | Cumulative cost of external resources.
 totalCost | Total cumulative cost
 totalEfficiency | Cost-weighted average of `cpuEfficiency` and `ramEfficiency`. In equation form: `((cpuEfficiency * cpuCost) + (ramEfficiency * ramCost)) / (cpuCost + ramCost)`
+rawAllocationOnly | Object with fields `cpuCoreUsageMax` and `ramByteUsageMax`, which are the maximum usages in the `window` for the Allocation. If the Allocation query is aggregated or accumulated, this object will be null because the meaning of maximum is ambiguous in these situations. Consider aggregating by namespace: should the maximum be the maximum of each Allocation individually, or the maximum combined usage of all Allocations (at any point in time in the `window`) in the namespace?
 
 ### Example allocation
 Here is an example allocation for the `cost-model` container in a pod in Kubecost's `kubecost-cost-analyzer` deployment, deployed into the `kubecost` namespace. The `properties` object describes that, as well as the `cluster`, `node`, `services`, `labels`, and `annotations` related to this allocation. Notice that this allocation ran for 10 hours within the given window, using the resources described by their respective values at a cost dictated by the node on which it ran.
