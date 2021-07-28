@@ -64,7 +64,7 @@ See [Querying](#querying) for the full list of arguments and [Examples](#query-e
 Field | Description
 ---: | :---
 name | Name of each relevant Kubernetes concept described by the allocation, delimited by slashes, e.g. "cluster/node/namespace/pod/container"
-properties | Map of name-to-value for all relevant property fields, including: `cluster`, `node`, `namespace`, `controller`, `controllerKind`, `pod`, `container`, `labels`, `annotation`, etc.
+properties | Map of name-to-value for all relevant property fields, including: `cluster`, `node`, `namespace`, `controller`, `controllerKind`, `pod`, `container`, `labels`, `annotation`, etc. Note: Prometheus only supports underscores (`_`) in label names.  Dashes (`-`) and dots (`.`), while supported by Kubernetes, will be translated to underscores by Prometheus.  This will cause the merging of labels, resulting in aggregated costs being charged to a single label.
 window | Period of time over which the allocation is defined.
 start | Precise starting time of the allocation. By definition must be within the window.
 end | Precise ending time of the allocation. By definition must be within the window.
