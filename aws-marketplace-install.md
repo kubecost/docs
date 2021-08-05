@@ -25,8 +25,8 @@ Please contact us at team@kubecost.com with any questions and we'd be happy to h
 We recommend doing this via eksctl. More detail and how to set up the appropriate trust relationships is available [here](https://docs.aws.amazon.com/eks/latest/userguide/create-service-account-iam-policy-and-role.html).
 ```
 eksctl create iamserviceaccount \
-    --name service_account_name \
-    --namespace service_account_namespace \
+    --name awsstore-serviceaccount \
+    --namespace kubecost \
     --cluster cluster_name \
     --attach-policy-arn IAM_policy_ARN \
     --approve \
@@ -41,6 +41,7 @@ Create a file awsstore-values.yaml of the following format. Note that you need t
 
 ```
 awsstore:
+  useAwsStore: true
   annotations:
     eks.amazonaws.com/role-arn: arn:aws:iam::YOUR_AWS_ACCOUNT_ID:role/YOUR_IAM_ROLE_NAME
   imageNameAndVersion: 117940112483.dkr.ecr.us-east-1.amazonaws.com/8cc31d15-33f6-49fe-8d6c-e9c0366cefa0/cg-142668492/gcr.io/kubecost1/awsstore:1.61.3-latest
