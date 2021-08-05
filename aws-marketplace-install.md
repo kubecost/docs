@@ -37,7 +37,7 @@ eksctl create iamserviceaccount \
 
 Access Helm install steps available at [kubecost.com/install](http://kubecost.com/install). 
 
-Supply the following parameters to your _helm install_ command. Note that you need to supply your AWS account ID and an IAM role that supports service accounts in the annotations field below. ([more info](https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html)) via annotation set as .Values.awstore.annotations and deploy Kubecost with AWS Marketplace images.
+Supply the following parameters to your _helm install_ command.
 
 ```
 --set kubecostModel.image=117940112483.dkr.ecr.us-east-1.amazonaws.com/8cc31d15-33f6-49fe-8d6c-e9c0366cefa0/cg-142668492/gcr.io/kubecost1/cost-model \
@@ -50,8 +50,7 @@ Supply the following parameters to your _helm install_ command. Note that you ne
 --set global.grafana.enabled=false \
 --set global.grafana.proxy=false \
 --set awsstore.useAwsStore=true \
---set awsstore.imageNameAndVersion=117940112483.dkr.ecr.us-east-1.amazonaws.com/8cc31d15-33f6-49fe-8d6c-e9c0366cefa0/cg-142668492/gcr.io/kubecost1/awsstore:1.61.3-latest \
---set awsstore.annotations=eks.amazonaws.com/role-arn: arn:aws:iam::YOUR_AWS_ACCOUNT_ID:role/YOUR_IAM_ROLE_NAME
+--set awsstore.imageNameAndVersion=117940112483.dkr.ecr.us-east-1.amazonaws.com/8cc31d15-33f6-49fe-8d6c-e9c0366cefa0/cg-142668492/gcr.io/kubecost1/awsstore:1.61.3-latest
 ```
 
 To partipipate in our free Enterprise on-boarding program, contact us at team@kubecost.com to schedule these sessions!
