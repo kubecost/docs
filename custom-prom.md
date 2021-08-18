@@ -52,36 +52,6 @@ Kubecost uses [Prometheus recording rules](https://prometheus.io/docs/prometheus
 
 > Note: Kubecost recording rules were most recently updated in v1.65.0
 
-### Cadvisor metric labels 
-Kubecost uses `container_name` and `pod_name` labels on cadvisor metrics. For clusters running **k8s v1.16+**, the following relabel config creates the expected labels on cadvisor metrics:
-
-```
-  metric_relabel_configs:
-  - source_labels: [ container ]
-    target_label: container_name
-    regex: (.+)
-    action: replace
-  - source_labels: [ pod ]
-    target_label: pod_name
-    regex: (.+)
-    action: replace
-```
-
-Note that this does not override the source label-- it creates a new label called "pod_name" and copies the value of the pod into it.
-
-On recent versions of **Prometheus Operator**, cadvisor `instance` labels do not match internal Kubernetes node names. This causes usage data to not be registered correctly in Kubecost. The solution is to add the following block into your kubelet/cadvisor scrape config.
-
-```
-  metric_relabel_configs:
-  - source_labels: [node]
-    separator: ;
-    regex: (.*)
-    target_label: instance
-    replacement: $1
-    action: replace
-```
-
-Note that this does override the instance label This is the desired behavior, as the instance label before override represents an internal ip of 10.X.X.X that is not useful for identifying the node or for aggregation.
 
 ### Node exporter metric labels
 
