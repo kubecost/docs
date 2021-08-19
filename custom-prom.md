@@ -1,8 +1,6 @@
 # Custom Prometheus
 
-
-
-Integrating Kubecost with an existing Prometheus installation can be nuanced. We recommend first installing Kubecost with a bundled Prometheus ([instructions](http://kubecost.com/install)) as a dry run before integrating with an external Prometheus deployment. We also recommend getting in touch (team@kubecost.com) for assistance.
+When integrating Kubecost with an existing Prometheus, we recommend first installing Kubecost with a bundled Prometheus ([instructions](http://kubecost.com/install)) as a dry run before integrating with an external Prometheus deployment. You can get in touch (team@kubecost.com) or via our [Slack community](https://join.slack.com/t/kubecost/shared_invite/enQtNTA2MjQ1NDUyODE5LWFjYzIzNWE4MDkzMmUyZGU4NjkwMzMyMjIyM2E0NGNmYjExZjBiNjk1YzY5ZDI0ZTNhZDg4NjlkMGRkYzFlZTU) for assistance.
 
 **Note:** integrating with an existing Prometheus is only officially supported under Kubecost paid plans.
 
@@ -11,9 +9,9 @@ Integrating Kubecost with an existing Prometheus installation can be nuanced. We
 
 Kubecost requires the following minimum versions:
  
-  - kube-state-metrics - v1.6.0 < v2.0.0 Support for v2.0.0+ is upcoming.
-  - cAdvisor - kubelet v1.11.0  (May 18)
-  - node-exporter - v0.16 (May 18) [Optional Dependency]
+  - kube-state-metrics - v1.6.0+ (May 19)
+  - cAdvisor - kubelet v1.11.0+  (May 18)
+  - node-exporter - v0.16+ (May 18) [Optional]
 
 ### Implementation Steps
 
