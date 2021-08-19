@@ -17,10 +17,10 @@ Kubecost requires the following minimum versions:
 
 ### Implementation Steps
 
-1. Copy [values.yaml](https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/values.yaml) and update the following parameters:  
+1. Pass the following parameters in your helm [values file](https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/values.yaml):  
 
-   - `prometheus.fqdn` to match your local Prometheus with this format `  http://<prometheus-server-service-name>.<prometheus-server-namespace>.svc`
-   - `prometheus.enabled` set to `false`  
+   * `prometheus.fqdn` to match your local Prometheus service address with this format `  http://<prometheus-server-service-name>.<prometheus-server-namespace>.svc`
+   * `prometheus.enabled` set to `false`  
 
    Pass this updated file to the Kubecost helm install command with `--values values.yaml`
 
@@ -40,9 +40,9 @@ Kubecost requires the following minimum versions:
         port: 9003
 ```  
 
-This config needs to be added under `extraScrapeConfigs` in Prometheus configuration. [Example](https://github.com/kubecost/cost-analyzer-helm-chart/blob/0758d5df54d8963390ca506ad6e58c597b666ef8/cost-analyzer/values.yaml#L74)
+This config needs to be added under `extraScrapeConfigs` in Prometheus configuration. [View Example](https://github.com/kubecost/cost-analyzer-helm-chart/blob/0758d5df54d8963390ca506ad6e58c597b666ef8/cost-analyzer/values.yaml#L74)
 
-You can confirm that this job is successfully running with the Targets view in Prometheus.
+To confirm this job is successfully scraped by Prometheus, you can view the Targets page in Prometheus and look for a job named `kubecost`.
 
 ![Prometheus Targets](/prom-targets.png)
 
