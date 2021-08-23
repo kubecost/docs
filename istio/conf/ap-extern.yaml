@@ -1,0 +1,11 @@
+apiVersion: security.istio.io/v1beta1
+kind: AuthorizationPolicy
+metadata:
+  name: ap-extern
+  namespace: kubecost
+spec:
+  rules:
+  - to:
+    - operation:
+        ports:
+          - "9003"

@@ -1,0 +1,23 @@
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  labels:
+    cattle.io/creator: norman
+  name: vs-kubecost
+  namespace: kubecost
+spec:
+  gateways:
+  - ${gateway}
+  hosts:
+  - ${host}
+  http:
+  - match:
+    - uri:
+        prefix: /kubecost
+    rewrite:
+      uri: /
+    route:
+    - destination:
+        host: kubecost-cost-analyzer.kubecost.svc.cluster.local
+        port:
+          number: 9090

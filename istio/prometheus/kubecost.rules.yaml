@@ -1,0 +1,58 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: kubecost.rules
+  namespace: cattle-monitoring-system
+spec:
+  groups:
+  - name: kubecost.cpu
+    rules:
+    - expr: sum(rate(container_cpu_usage_seconds_total{container!=""}[5m]))
+      record: cluster:cpu_usage:rate5m
+    - expr: rate(container_cpu_usage_seconds_total{container!=""}[5m])
+      record: cluster:cpu_usage_nosum:rate5m
+    - expr: avg(irate(container_cpu_usage_seconds_total{container!="POD", container!=""}[5m]))
+        by (container,pod,namespace)
+      record: kubecost_container_cpu_usage_irate
+    - expr: sum(container_memory_working_set_bytes{container!="POD",container!=""})
+        by (container,pod,namespace)
+      record: kubecost_container_memory_working_set_bytes
+    - expr: sum(container_memory_working_set_bytes{container!="POD",container!=""})
+      record: kubecost_cluster_memory_working_set_bytes
+  - name: kubecost.savings
+    rules:
+    - expr: sum(avg(kube_pod_owner{owner_kind!="DaemonSet"}) by (pod) * sum(container_cpu_allocation)
+        by (pod))
+      labels:
+        daemonset: "false"
+      record: kubecost_savings_cpu_allocation
+    - expr: sum(avg(kube_pod_owner{owner_kind="DaemonSet"}) by (pod) * sum(container_cpu_allocation)
+        by (pod)) / sum(kube_node_info)
+      labels:
+        daemonset: "true"
+      record: kubecost_savings_cpu_allocation
+    - expr: sum(avg(kube_pod_owner{owner_kind!="DaemonSet"}) by (pod) * sum(container_memory_allocation_bytes)
+        by (pod))
+      labels:
+        daemonset: "false"
+      record: kubecost_savings_memory_allocation_bytes
+    - expr: sum(avg(kube_pod_owner{owner_kind="DaemonSet"}) by (pod) * sum(container_memory_allocation_bytes)
+        by (pod)) / sum(kube_node_info)
+      labels:
+        daemonset: "true"
+      record: kubecost_savings_memory_allocation_bytes
+    - expr: label_replace(sum(kube_pod_status_phase{phase="Running",namespace!="kube-system"}
+        > 0) by (pod, namespace), "pod", "$1", "pod", "(.+)")
+      record: kubecost_savings_running_pods
+    - expr: sum(rate(container_cpu_usage_seconds_total{container!="",container!="POD",node!=""}[5m]))
+        by (namespace, pod, container, node)
+      record: kubecost_savings_container_cpu_usage_seconds
+    - expr: sum(container_memory_working_set_bytes{container!="",container!="POD",node!=""})
+        by (namespace, pod, container, node)
+      record: kubecost_savings_container_memory_usage_bytes
+    - expr: avg(sum(kube_pod_container_resource_requests_cpu_cores{namespace!="kube-system"})
+        by (pod, namespace, node)) by (pod, namespace)
+      record: kubecost_savings_pod_requests_cpu_cores
+    - expr: avg(sum(kube_pod_container_resource_requests_memory_bytes{namespace!="kube-system"})
+        by (pod, namespace, node)) by (pod, namespace)
+      record: kubecost_savings_pod_requests_memory_bytes

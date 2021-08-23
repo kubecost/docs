@@ -1,0 +1,10 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: dr-prometheus
+  namespace: kubecost
+spec:
+  host: rancher-monitoring-prometheus.cattle-monitoring-system.svc.cluster.local
+  trafficPolicy:
+    tls:
+      mode: DISABLE

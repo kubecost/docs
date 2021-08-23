@@ -1,0 +1,11 @@
+apiVersion: security.istio.io/v1beta1
+kind: AuthorizationPolicy
+metadata:
+  name: ap-intern
+  namespace: kubecost
+spec:
+  rules:
+  - from:
+    - source:
+        principals:
+        - cluster.local/ns/kubecost/sa/kubecost-cost-analyzer
