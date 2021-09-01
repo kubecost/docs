@@ -1,3 +1,6 @@
+Federated Clusters
+==================
+
 To view data from multiple clusters simultaneously, Kubecost cluster federation must be enabled.
 This document walks through the necessary steps for enabling this feature.
 
@@ -6,7 +9,7 @@ This document walks through the necessary steps for enabling this feature.
 
 # Master cluster (Postgres)
 
-1. Follow steps [here](long-term-storage.md) to enable long-term storage.  
+1. Follow steps [here](https://github.com/kubecost/docs/blob/master/long-term-storage.md) to enable long-term storage.  
 2. Ensure `remoteWrite.postgres.installLocal` is set to `true` in values.yaml  
 3. Provide a unique identifier for your cluster in `prometheus.server.global.exernal_labels.cluster_id`  
 4. Create a service definition to make Postgres accessible by your other clusters. Below is a sample service definition.  
@@ -39,7 +42,7 @@ spec:
 
 Following these steps for clusters that send data to the master cluster:
 
-1. Same as you did for the master, follow steps [here](long-term-storage.md) to enable long-term storage.  
+1. Same as you did for the master, follow steps [here](https://github.com/kubecost/docs/blob/master/long-term-storage.md) to enable long-term storage.  
 2. Set `remoteWrite.postgres.installLocal` to `false` in values.yaml so you do not redeploy Postgres in this cluster.  
 3. Set `prometheus.server.global.exernal_labels.cluster_id` to any unique identifier of your cluster, e.g. dev-cluster-7.  
 4. Set `prometheus.remoteWrite.postgres.remotePostgresAddress` to the externally accessible IP from master cluster.  
@@ -59,7 +62,7 @@ You should see data with both `cluster_id` values in this response.
 
 # Federated Clusters (Thanos)
 
-1. Follow steps [here](long-term-storage.md#option-b-out-of-cluster-storage-thanos) to enable Thanos durable storage on a Master cluster.  
+1. Follow steps [here](https://github.com/kubecost/docs/blob/master/long-term-storage.md#option-b-out-of-cluster-storage-thanos) to enable Thanos durable storage on a Master cluster.  
 
 2. Repeat the process in Step 1 for each additional secondary cluster, with the following Thanos recommendations: 
    * Reuse your existing storage bucket and access credentials.
@@ -75,7 +78,6 @@ or by passing these parameters directly via helm install or upgrade as follows:
   --set thanos.compact.enabled=false --set thanos.bucket.enabled=false
 ```
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 You can also optionally disable `thanos.store`, `thanos.query` and `thanos.queryFrontend` with thanos/values.yaml or with these flags:  
 
 ```
@@ -84,4 +86,6 @@ You can also optionally disable `thanos.store`, `thanos.query` and `thanos.query
 
 3. Ensure you provide a unique identifier for `prometheus.server.global.external_labels.cluster_id` to have additional clusters be visible in the Kubecost product, e.g. `cluster-two`.  
 
-4. Follow the same verification steps available [here](long-term-storage.md#verify-thanos).  
+4. Follow the same verification steps available [here](https://github.com/kubecost/docs/blob/master/long-term-storage.md#verify-thanos).  
+
+<!--- {"article":"4407595946135","section":"4402815636375","permissiongroup":"1500001277122"} --->

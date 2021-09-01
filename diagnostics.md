@@ -1,4 +1,6 @@
-# Kubecost Diagnostics
+Kubecost Diagnostics
+====================
+
 Kubecost diagnostics run a series of tests to determine if resources necessary for accurate cost reporting are available.
 
 As of release v1.70.0, the results of these tests are displayed at `<your-kubecost-endpoint>/diagnostics.html` and are also accessible via links from Settings.
@@ -37,7 +39,7 @@ If this diagnostic test is failing and you'd like to have these metrics, view [H
 
 The recording rules used by Kubecost are added via our helm installer [values.yaml](https://github.com/kubecost/cost-analyzer-helm-chart/blob/d01434f0489e110beb1bd727310f60c0b15744ec/cost-analyzer/values.yaml#L257-L298) and are used to improve query performance and efficiency. Specific features in Savings require the presence of these recording rules in order to function, so we provide a diagnostic to identify whether or not your install is using the custom recording rules.
 
-![](images/diagnostics-recording-rules.png)
+![](https://raw.githubusercontent.com/kubecost/docs/master/images/diagnostics-recording-rules.png)
 
 If the recording rule diagnostic fails, use the configuration from our helm chart's [values.yaml](https://github.com/kubecost/cost-analyzer-helm-chart/blob/d01434f0489e110beb1bd727310f60c0b15744ec/cost-analyzer/values.yaml#L257-L298) to create them.
 
@@ -61,11 +63,11 @@ Kubecost requests `kube-state-metrics >= v1.6.0`. This version check is complete
 
 A diagnostic view is provided for both the Allocation and Assets pipelines, and is designed to assist in diagnosing missing data found in the Allocation or Assets views. Kubecost's ETL pipelines run in the background to build a daily composition of the data required to build the cost model. For each day the data is collected, a file is written to disk containing the results. These files are used as both a cache and data backup, which the diagnostic view displays:
 
-![](images/diagnostics-etl.png)
+![](https://raw.githubusercontent.com/kubecost/docs/master/images/diagnostics-etl.png)
 
 In the event of a problem, the diagnostic view would help you identify specific days where the ETL pipeline failed to collect data.
 
-![](images/diagnostics-etl-problem.png)
+![](https://raw.githubusercontent.com/kubecost/docs/master/images/diagnostics-etl-problem.png)
 
 Note the file on `Nov 20, 2020` in the above image appears in <span style="color:red">**red**</span>. The data in this file has been flagged by our diagnostics page as *empty* (failed to pass a minimum size threshold). This could happen if the database was temporily unavailable while building that day.
 
@@ -108,7 +110,7 @@ kubectl get pod -l app.kubernetes.io/name=kube-state-metrics --all-namespaces
 
 You can see this information directly in the Kubecost Diagnostics page (screenshot below) or by visiting your Prometheus console and then Status > Targets in the top navigation bar.
 
-![](images/diagnostics-prom-targets.png)
+![](https://raw.githubusercontent.com/kubecost/docs/master/images/diagnostics-prom-targets.png)
 
 If the necessary scrape target is not added to your Prometheus, then refer to [this resource](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#scrape_config) to learn how to add a new job under your Prometheus `scrape_configs` block. You can visit `<your-prometheus-console-url>/config` to view the current scrape_configs block being passed to your Prometheus.
 
@@ -121,3 +123,5 @@ Contact team@kubecost.com or send a message in our Slack workspace if you encoun
 ### Step 5. Metrics not being dropped with Prometheus relabel rules
 
 If metrics are being collected on a supported version of the desired metrics exporter, the final step is to verify that individual metrics are not being dropped in your Prometheus pipeline. This could be in the form of an add or rule under a drop `metric_relabel_configs` block in your Prometheus yaml configuration files.
+
+<!--- {"article":"4407595942679","section":"4402815696919","permissiongroup":"1500001277122"} --->

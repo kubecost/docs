@@ -1,4 +1,6 @@
-# Installing Kubecost
+Installing Kubecost
+===================
+
 <br/>
 
 We **recommend using the [Kubecost helm chart](http://kubecost.com/install) to install and operate Kubecost**. This install method is available for free and contains all the required components to get started, provides access to all Kubecost features, and can scale to large clusters. It also provides the most flexibility for configuring Kubecost and its dependencies.
@@ -13,3 +15,5 @@ Alternative install options:
 
 <br/><br/>
 <br/><br/>
+
+<!--- {"article":"4407601821207","section":"4402815636375","permissiongroup":"1500001277122"} --->

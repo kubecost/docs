@@ -1,6 +1,9 @@
+GCP Long Term Storage
+=====================
+
 __Google Cloud Storage__
 
-Start by [creating a new Google Cloud Storage bucket](https://cloud.google.com/storage/docs/creating-buckets). The following example uses a bucket named `thanos-bucket`. Next, download a service account JSON file from Google's service account manager ([steps](/google-service-account-thanos.md)).
+Start by [creating a new Google Cloud Storage bucket](https://cloud.google.com/storage/docs/creating-buckets). The following example uses a bucket named `thanos-bucket`. Next, download a service account JSON file from Google's service account manager ([steps](https://github.com/kubecost/docs/blob/master/google-service-account-thanos.md)).
 
 Now create a yaml file named `object-store.yaml` in the following format, using your bucket name and service account details:
 
@@ -25,3 +28,5 @@ config:
 **Note:** given that this is yaml, it requires this specific indention.
 
 **Warning:** do not apply a retention policy to your Thanos bucket, as it will prevent Thanos compaction from completing.
+
+<!--- {"article":"4407601822359","section":"4402815680407","permissiongroup":"1500001277122"} --->

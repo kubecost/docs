@@ -1,9 +1,12 @@
+Assets
+======
+
 The Kubecost Assets view shows Kubernetes cluster costs broken down by the individual backing assets in your cluster (e.g. cost by node, disk, and other assets). 
 It’s used to identify spend drivers over time and to audit Allocation data. This view can also optionally show out of cluster assets by service, tag/label, etc.
 
 > Note: Similar to our Allocation API, the Assets API uses our ETL pipeline whichs aggregates data on a daily basis. This allows for enterprise scale with much higher performance. 
 
-![Kubecost Assets view](images/assets-screenshot.png)
+![Kubecost Assets view](https://raw.githubusercontent.com/kubecost/docs/master/images/assets-screenshot.png)
 
 This user interface is available at `<your-kubecost-address>/assets.html`.
 
@@ -90,3 +93,4 @@ After granting Kubecost permission to access cloud billing data, Kubecost adjust
 
 Note that while cloud adjustments typically lag by roughly a day, there are certain adjustments, e.g. credits, that may continue to come in over the course of the month, and in some cases at the very end of the month, so reconciliation adjustments may continue to update over time.
 
+<!--- {"article":"4407595924247","section":"4402829033367","permissiongroup":"1500001277122"} --->

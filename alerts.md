@@ -1,4 +1,5 @@
-# Alerts Documentation
+Alerts Documentation
+====================
 
 ## Summary
 
@@ -113,7 +114,7 @@ Required parameters:
 
 - `type: efficiency`
 - `efficiencyThreshold: <threshold>` -- efficiency threshold ranging from 0.0 to 1.0
-- `aggregation: <agg-parameter>` -- configurable, accepts all aggregations supported by the [aggregated cost model API](https://github.com/kubecost/docs/blob/2ea9021e8530369d53184ea5382b2e4c080bb426/allocation-api.md#aggregated-cost-model-api)
+- `aggregation: <agg-parameter>` -- configurable, accepts all aggregations supported by the [aggregated cost model API](https://github.com/kubecost/docs/blob/master/allocation-api.md#aggregated-cost-model-api)
 - `window: <N>d` number of days for measuring efficiency
 
 Optional paremeters:
@@ -139,7 +140,7 @@ Required parameters:
 
 - `type: budget`
 - `threshold: <amount>` -- cost threshold in configured currency units
-- `aggregation: <agg-parameter>` -- configurable, accepts all aggregations supported by the [aggregated cost model API](https://github.com/kubecost/docs/blob/2ea9021e8530369d53184ea5382b2e4c080bb426/allocation-api.md#aggregated-cost-model-api)
+- `aggregation: <agg-parameter>` -- configurable, accepts all aggregations supported by the [aggregated cost model API](https://github.com/kubecost/docs/blob/master/allocation-api.md#aggregated-cost-model-api)
 - `filter: <value>` -- configurable, accepts a single filter value (comma separated values unsupported)
 - `window: <N>d` or `<M>h` -- configurable, (1 ≤ N ≤ 7, 1 ≤ M ≤ 24)
 
@@ -168,7 +169,7 @@ Required parameters:
 
 - `type: spendChange`
 - `relativeThreshold: <N>` -- configurable, N ≥ -1
-- `aggregation: <agg-value>` -- configurable, accepts all aggregations supported by the [aggregated cost model API](https://github.com/kubecost/docs/blob/2ea9021e8530369d53184ea5382b2e4c080bb426/allocation-api.md#aggregated-cost-model-api)
+- `aggregation: <agg-value>` -- configurable, accepts all aggregations supported by the [aggregated cost model API](https://github.comhttps://github.com/kubecost/docs/blob/master/allocation-api.md#aggregated-cost-model-api)
 - `window: <N>d` or `<M>h` -- configurable, (1 ≤ N ≤ 7, 1 ≤ M ≤ 24)
 - `baselineWindow: <N>d` -- configurable, N ≥ 1
 
@@ -311,6 +312,8 @@ If `nextRun` fails to update, or alerts are not sending at the `nextRun` time, c
 - Common causes of misconfiguration include the following:
 	- unsupported csv filters -- `spendChange` alerts accept `filter` as comma-separated values; other alert types do not.
 	- unsupported alert type -- all alert type names are in camelCase -- check spelling and capitalization for all alert parameters
-	- unsupported aggregation parameters -- see the [aggregated cost model API](https://github.com/kubecost/docs/blob/2ea9021e8530369d53184ea5382b2e4c080bb426/allocation-api.md#aggregated-cost-model-api) for details
+	- unsupported aggregation parameters -- see the [aggregated cost model API](https://github.com/kubecost/docs/blob/master/allocation-api.md#aggregated-cost-model-api) for details
 
 Have questions? Join our [Slack community](https://join.slack.com/t/kubecost/shared_invite/enQtNTA2MjQ1NDUyODE5LWFjYzIzNWE4MDkzMmUyZGU4NjkwMzMyMjIyM2E0NGNmYjExZjBiNjk1YzY5ZDI0ZTNhZDg4NjlkMGRkYzFlZTU) or contact us via email at [team@kubecost.com](team@kubecost.com)!
+
+<!--- {"article":"4407601796759","section":"4402815656599","permissiongroup":"1500001277122"} --->

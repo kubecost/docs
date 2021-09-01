@@ -1,4 +1,5 @@
-# Kubecost Business Features
+Kubecost Business Features
+==========================
 
 Kubecost helps teams with cost and capacity management in Kubernetes-based environments. 
 We help teams to reduce spend while also improving performance and reliability. 
@@ -22,3 +23,5 @@ Direct engineering and product support via Slack channel, video, and phone.
 
 Contact us at [team@kubecost.com](team@kubecost.com) to learn more!
 <br/><br/><br/><br/><br/>
+
+<!--- {"article":"4407595937175","section":"4402829033367","permissiongroup":"1500001277122"} --->

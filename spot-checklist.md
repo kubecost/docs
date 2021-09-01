@@ -1,4 +1,5 @@
-# Spot Checklist
+Spot Checklist
+==============
 
 The Spot Readiness Checklist investigates your Kubernetes workloads to attempt
 to identify those that are candidates to be schedulable on spot (preemptible)
@@ -119,3 +120,4 @@ scheduling problems, especially if capacity is low and spinning up a new node
 takes too long. In the second case, fewer pods are forced to be rescheduled if a
 reclaim event occurs, thus lowering the likelihood of scheduling problems.
 
+<!--- {"article":"4407595980311","section":"4402815656599","permissiongroup":"1500001277122"} --->

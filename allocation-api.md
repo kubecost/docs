@@ -1,3 +1,6 @@
+Kubecost APIs
+=============
+
 Kubecost exposes multiple APIs to obtain cost, resource allocation, and utilization data. Below is documentation on two options: the cost model API and aggregated cost model API.
 
 # Cost model API
@@ -122,3 +125,5 @@ Returning cached data from either caching layer typically takes < 300ms on mediu
 `disableCache=false`.
 
 Have questions? Email us at <team@kubecost.com>.
+
+<!--- {"article":"4407595915543","section":"4402829033367","permissiongroup":"1500001277122"} --->

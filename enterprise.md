@@ -1,4 +1,5 @@
-# Kubecost Enterprise Features
+Kubecost Enterprise Features
+============================
 
 Kubecost helps teams with cost and capacity management in Kubernetes-based environments. 
 We enable teams to reduce spend while also improving performance and reliability. 
@@ -29,3 +30,5 @@ Dedicated SRE support via private Slack channel and video calls. Expert technica
 
 Contact us at [team@kubecost.com](team@kubecost.com) to learn more!
 <br/><br/><br/><br/><br/>
+
+<!--- {"article":"4407601809175","section":"4402829033367","permissiongroup":"1500001277122"} --->

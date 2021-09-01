@@ -1,3 +1,6 @@
+AWS Out of Cluster 
+==================
+
 Integrating Kubecost with your AWS data provides the ability to allocate out of cluster costs, e.g. RDS instances and S3 buckets, back to Kubernetes concepts like namespace and deployment as well as reconcile in cluster assets back to your billing data. The latter is especially helpful when teams are using Reserved Instances, Savings Plans, or Enterprise Discounts. All billing data remains on your cluster when using this functionality and is not shared externally.
 
 The following guide provides the steps required for enabling out of cluster costs allocation and accurate pricing, e.g. [Reserved Instance price allocation](http://docs.kubecost.com/getting-started#ri-committed-discount). In a multi-account organization, all of the following steps will need to be completed in the payer account.
@@ -44,3 +47,6 @@ Instructions for enabling user-defined cost allocation tags [here](https://docs.
 * You may need to upgrade your AWS Glue if you are running an old version https://docs.aws.amazon.com/athena/latest/ug/glue-upgrade.html
 * Finally, review pod logs from the `cost-model` container in the `cost-analyzer` pod and look for auth errors or Athena query results. 
 
+<!--- {"article":"","section": "4402829036567","permissiongroup": "1500001277122"} --->
+
+<!--- {"article":"4407596810519","section":"4402829036567","permissiongroup":"1500001277122"} --->

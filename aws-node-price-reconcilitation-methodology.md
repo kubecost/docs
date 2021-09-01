@@ -1,4 +1,5 @@
-# AWS Node Price Reconciliation Methodology
+AWS Node Price Reconciliation Methodology
+=========================================
 
 Kubecost is capable of aggregating the costs of EC2 compute resources over a given timeframe with a specified duration step size. To achieve this, Kubecost uses Athena queries to gather usage data points with differing price models. The result of this process is a list resources with their cost by timeframe.
 
@@ -57,8 +58,4 @@ When amortized costs are selected, the price jumps to $1.50/day
 Which should closely match our data on the Assets page, for days where we have adjustments come in from the pricing CUR.
 <img width="1792" alt="Screen Shot 2021-04-22 at 11 03 45 PM" src="https://user-images.githubusercontent.com/453512/115825960-08ffe080-a3bf-11eb-9968-881f70d11e3c.png">
 
-
-
-
-
-
+<!--- {"article":"4407596809111","section":"4402829036567","permissiongroup":"1500001277122"} --->

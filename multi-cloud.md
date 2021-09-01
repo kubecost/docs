@@ -1,4 +1,6 @@
-# Setting Up Cloud Integrations
+Setting Up Cloud Integrations
+=============================
+
 This document outlines how to set up cloud integration for accounts on multiple cloud providers, or multiple acounts on the same cloud provider. Multi-Cloud is an enterprise feature. This configuration can be used independent of or in addition to other cloud integration configurations provided by kubecost. Once configured Kubecost will display cloud assets for all configured account and perform reconcilation for all [federated clusters](https://github.com/kubecost/docs/blob/master/long-term-storage.md) that have there respective accounts configured.
 
 ## Step #1 Set up Cloud Cost and Usage Reporting
@@ -114,4 +116,5 @@ Set these values into the following object and add it to the AWS array:
     "projectID": "<ATHENA_PROJECT_ID>"
 }
 ```
-	
+
+<!--- {"article":"4407595968919","section":"4402815636375","permissiongroup":"1500001277122"} --->

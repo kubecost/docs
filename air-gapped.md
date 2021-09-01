@@ -1,4 +1,5 @@
-## Installing in Air-gapped Environments
+Installing in Air-gapped Environments
+=====================================
 
 FAQ for installing in Kubecost in air-gapped environment
 
@@ -36,3 +37,5 @@ There are two options to configure asset prices in your on-premise Kubernetes en
 
 * *Simple pipeline:* per component prices can be configured in a helm values file ([reference](https://github.com/kubecost/cost-analyzer-helm-chart/blob/6c0975614b4a6854be602d1a6f9506ce8b80abdc/cost-analyzer/values.yaml#L559-L570)) or directly in the Kubecost Settings page. This allows your to directly supply the cost of a CPU month, RAM Gb month, etc.
 * *Advanced pipeline:* this method allows each individual asset in your environment to have a unique price. This leverages the Kubecost custom CSV pipeline which is available on Enterprise plans. Contact us team@kubecost.com to learn more.
+
+<!--- {"article":"4407601795863","section":"4402815636375","permissiongroup":"1500001277122"} --->

@@ -1,4 +1,5 @@
-# Kubecost core architecture overview
+Kubecost Core Architecture Overview
+===================================
 
 Below are the major components deployed with the [Kubecost helm chart](http://docs.kubecost.com/install), excluding certain Enterprise components such a durable storage:
 
@@ -20,11 +21,13 @@ Today, the core Kubecost product can be run with just components 1, 3a, and 3b.
 
 See an overview of core components in this diagram:
 
-![Architecture Overview](images/arch.png)
+![Architecture Overview](https://raw.githubusercontent.com/kubecost/docs/master/images/arch.png)
 
 
 # Enterprise architecture overview
 
 The most common implementation of durable storage in the Kubecost application application is with [Thanos](https://thanos.io/). Below is a high-level reference for required components. More information on each Thanos component can be found [here](https://thanos.io/tip/components/).
 
-![Thanos Overview](images/thanos-architecture.png)
+![Thanos Overview](https://raw.githubusercontent.com/kubecost/docs/master/images/thanos-architecture.png)
+
+<!--- {"article":"4407595922711","section":"4402829033367","permissiongroup":"1500001277122"} --->

@@ -1,4 +1,6 @@
-# Cluster Controller
+Cluster Controller
+==================
+
 Kubecost cluster controller enables actions like automated cluster scaledown and 1-click cluster resize. 
 This document show you how to setup and enable this funtionality in the Kubecost product. 
 
@@ -53,3 +55,5 @@ You may also enable via `--set` when running helm install:
 ```bash
 --set clusterController.enabled=true
 ```
+
+<!--- {"article":"4407595938327","section":"4402815636375","permissiongroup":"1500001277122"} --->

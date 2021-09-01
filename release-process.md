@@ -1,4 +1,5 @@
-# Kubecost Release Process
+Kubecost Release Process
+========================
 
 A Kubecost Release is a snapshot of the source, build output, artifacts, and other metadata associated with a tagged version of code.
 
@@ -59,3 +60,5 @@ We always love receiving feedback and feature requests. Please reach out to team
 
 * If you installed our helm chart, all issues can be filed at https://github.com/kubecost/cost-analyzer-helm-chart
 * If you installed just the open source cost-model, you can file issues at https://github.com/kubecost/cost-model
+
+<!--- {"article":"4407601825431","section":"4402829033367","permissiongroup":"1500001277122"} --->

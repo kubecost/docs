@@ -1,3 +1,6 @@
+AWS Cloud Integration
+=====================
+
 Kubecost pulls asset prices from the public AWS pricing API by default. To have accurate pricing information from AWS, you can integrate directly with your account. This integration will properly account for Enterprise Discount Programs, Reserved Instance usage, Savings Plans, spot usage and more. This resource describes the required steps for achieving this.
 
 Your user will need permissions necessary to create the Cost and Usage Report, add IAM credentials for Athena and S3. An optional permission is the ability to add and execute cloudformation templates. Note we do not require root access in the AWS account.
@@ -39,42 +42,44 @@ Download template files from the URLs provided below and upload them as the stac
 
 <details>
   <summary>My kubernetes clusters all run in the same account as the master payer account.</summary>
-  
+  <ol>
+  <li>Download this file: [https://raw.githubusercontent.com/kubecost/cloudformation/master/kubecost-single-account-permissions.yaml](https://raw.githubusercontent.com/kubecost/cloudformation/master/kubecost-single-account-permissions.yaml) /li>
 
-  * Download this file: [https://raw.githubusercontent.com/kubecost/cloudformation/master/kubecost-single-account-permissions.yaml](https://raw.githubusercontent.com/kubecost/cloudformation/master/kubecost-single-account-permissions.yaml)
-  
-  * Navigate to https://console.aws.amazon.com/cloudformation
-  
-  * Click **Create New Stack** if you have never used AWS CloudFormation before. Otherwise, click **Create Stack**. and select **With new resource (standard)**
-  
-  * Under **Prepare template**, choose **Template is ready**.
-  
-  * Under **Template source**, choose **Upload a template file**.
-  
-  * Select **Choose file**.
-  
-  * Choose the downloaded .yaml template, and then choose **Open**.
-  
-  * Choose **Next**.
-  
-  * For **Stack name**, enter a name for your template 
-  
-  * Set the following parameters:
-  	*   AthenaCURBucket: The bucket where the CUR is sent from the “Setting up the CUR” step
-	*   SpotDataFeedBucketName: Optional. The bucket where the spot data feed is sent from the “Setting up the Spot Data feed” step (see below)
-  
-  * Choose **Next**.
-  
-  * Choose **Next**
-  
-  * At the bottom of the page, select **I acknowledge that AWS CloudFormation might create IAM resources.** 
-  
-  * Choose **Create Stack**
+  <li>Navigate to https://console.aws.amazon.com/cloudformation</li>
+
+  <li>Click <strong>Create New Stack</strong> if you have never used AWS CloudFormation before. Otherwise, click **Create Stack**. and select **With new resource (standard)<li>
+
+  <li>Under <strong>Prepare template</strong>, choose <strong>Template is ready</strong></li>
+
+  <li>Under <strong>Template source</strong>, choose <strong>Upload a template file</strong></li>.
+
+   <li>Select <strong>Choose file</strong></li>
+
+  <li>Choose the downloaded .yaml template, and then choose <strong>Open</strong></li>
+
+  <li>Choose <strong>Next</strong>.</li>
+
+  <li>For <strong>Stack name</strong>, enter a name for your template </li>
+
+  <li> Set the following parameters:<li>
+  	 <ol>
+    <li>  AthenaCURBucket: The bucket where the CUR is sent from the “Setting up the CUR” step </li>
+	 <li> SpotDataFeedBucketName: Optional. The bucket where the spot data feed is sent from the “Setting up the Spot Data feed” step (see below) </li>
+    </ol>
+
+  <li> Choose <strong>Next</strong>.</li>
+
+  <li> Choose <strong>Next</strong></li>
+
+  <li> At the bottom of the page, select <strong>I acknowledge that AWS CloudFormation might create IAM resources.</strong></li>
+
+  <li> Choose <strong>Create Stack</strong></li>
+
 </details>
 
 <details>
   <summary>My kubernetes clusters run in different accounts from the master payer account</summary>
-  
+
   * On each sub account running kubecost
 	* Download this file: [https://raw.githubusercontent.com/kubecost/cloudformation/master/kubecost-sub-account-permissions.yaml](https://raw.githubusercontent.com/kubecost/cloudformation/master/kubecost-sub-account-permissions.yaml)
   	* Navigate to https://console.aws.amazon.com/cloudformation
@@ -96,7 +101,7 @@ Download template files from the URLs provided below and upload them as the stac
   	*   Follow the same steps to create a cloudformation stack as above, but with the following as your yaml file instead: [https://raw.githubusercontent.com/kubecost/cloudformation/master/kubecost-masterpayer-account-permissions.yaml](https://raw.githubusercontent.com/kubecost/cloudformation/master/kubecost-masterpayer-account-permissions.yaml) , and with these parameters:
 		*   AthenaCURBucket: The bucket where the CUR is set from the “Setting up the CUR” step
 		*   KubecostClusterID: An account that kubecost is running on that requires access to the Athena CUR
-</details>
+		</details>
 
 ### Add manually
 <details>
@@ -339,7 +344,7 @@ Now that the policies have been created, we will need to attach those policies t
     }
 	```
 	* Create a secret from file in the namespace kubecost is deployed in:
-        	```
+  ```
                 kubectl create secret generic <name> --from-file=service-key.json --namespace <kubecost>
         	```
 	* Set .Values.kubecostProductConfigs.serviceKeySecretName to the name of this secet. Note also that .Values.kubecostProductConfigs.awsServiceKeyName and .Values.kubecostProductConfigs.awsServiceKeyPassword should be unset if adding the service key from values this way.
@@ -350,7 +355,7 @@ Now that the policies have been created, we will need to attach those policies t
 
 <details>
 	<summary>Attach via Service Key on Kubecost frontend</summary>
-	
+
 * Navigate to https://console.aws.amazon.com/iam Access Management > Users . Find the Kubecost User and select Security Credentials > Create Access Key. Note the Access key ID and Secret access key.
 *   You can add the Access key ID and Secret access key on /settings.html  > External Cloud Cost Configuration (AWS) > Update  and setting Service key name to **Access key ID** and Service key secret to **Secret access key**
 
@@ -424,9 +429,9 @@ These values can either be set from the kubecost frontend or via .Values.kubecos
  `awsSpotDataBucket` the configured bucket for the spot data feed
 
  `awsSpotDataPrefix` optional configured prefix for your spot data feed bucket
- 
+
  `spotLabel` optional kubernetes node label name designating whether a node is a spot node. Used to provide pricing estimates until exact spot data becomes available from the CUR
- 
+
  `spotLabelValue` optional kubernetes node label value designating a spot node. Used to provide pricing estimates until exact spot data becomes available from the CUR. For example, if your spot nodes carry a label `lifecycle:spot`, then the spotLabel would be "lifecycle" and the spotLabelValue would be "spot"
 
 ## Summary and Pricing
@@ -437,3 +442,5 @@ AWS services used here are:
   * [EBS](https://aws.amazon.com/ebs/pricing/) Kubecost can write its cache to disk. Roughly 32 GB per 100,000 pods monitored is sufficient. (Optional-- our cache can exist in memory)
   * [Cloudformation](https://aws.amazon.com/cloudformation/pricing/) (Optional-- manual IAM configuration or via Terraform is fine)
   * [EKS](https://aws.amazon.com/eks/pricing/)  (Optional-- all k8s flavors are supported) 
+
+<!--- {"article":"4407595928087","section":"4402829036567","permissiongroup":"1500001277122"} --->

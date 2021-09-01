@@ -1,3 +1,6 @@
+Long Term Storage
+=================
+
 To enable 90+ days of data retention in Kubecost, we recommend deploying with durable storage enabled. We provide two options for doing this: 1) in your cluster and 2) out of the cluster. This functionality also powers the Enterprise multi-cluster view, where data across clusters can be viewed in aggregate, as well as simple backup & restore capabilities.
 
 **Note:** This feature today requires an Enterprise license.
@@ -27,9 +30,9 @@ This step creates the object-store.yaml file that contains your durable storage 
 The details of this file are documented thoroughly in [Thanos documentation](https://thanos.io/tip/thanos/storage.md/).
 
 Use the appropriate guide for your cloud provider:
-* [Google Cloud Storage](long-term-storage-gcp.md)
-* [AWS/S3](long-term-storage-aws.md)
-* [Azure](long-term-storage-azure.md)
+* [Google Cloud Storage](https://github.com/kubecost/docs/blob/master/long-term-storage-gcp.md)
+* [AWS/S3](https://github.com/kubecost/docs/blob/master/long-term-storage-aws.md)
+* [Azure](https://github.com/kubecost/docs/blob/master/long-term-storage-azure.md)
 
 **Step 2:** *Create object-store secret*  
 
@@ -141,3 +144,5 @@ thanos:
       <b>- "kubecost-thanos-store-grpc.kubecost:10901"</b>
 ```
 </pre>
+
+<!--- {"article":"4407595964695","section":"4402815636375","permissiongroup":"1500001277122"} --->

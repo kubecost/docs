@@ -1,3 +1,6 @@
+Add Key
+=======
+
 You can apply your product key at any time within the product UI or during an install or upgrade process. 
 More details on both options are provided below.
 
@@ -16,7 +19,7 @@ To apply your license key within the Kubecost UI, visit the Overview page and th
 Next, select **ADD KEY** in the dialog menu shown below. 
 You can then supply your Kubecost provided license key in the input box that is now visible.
 
-![Add key dialog](/images/add-key-dialog.png)
+![Add key dialog](https://raw.githubusercontent.com/kubecost/docs/master/add-key-dialog.png)
 
 ## Verification
 
@@ -25,3 +28,5 @@ To verify that your key is properly supplied, visit the Settings UI to confirm t
 ![image](https://user-images.githubusercontent.com/298359/111573440-c74c9c00-8767-11eb-842c-cfa18159d1c1.png)
 
 Please reach out to team@kubecost.com with any questions.
+
+<!--- {"article":"4407595912983","section":"4402815636375","permissiongroup":"1500001277122"} --->

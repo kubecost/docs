@@ -1,4 +1,5 @@
-## Running a query in Kubecost bundled Prometheus
+Running a query in Kubecost bundled Prometheus
+==============================================
 
 __1. Connect to Prometheus__
 
@@ -12,9 +13,11 @@ __2. Visit Prometheus UI__
 
 View `http://localhost:9003/` in your web browswer. You should be presented with a UI that looks like the following:
 
-![](images/prom-ui.png)
+![](https://raw.githubusercontent.com/kubecost/docs/master/images/prom-ui.png)
 
 If you're unable to connect, confirm that the Prometheus server pod is in a `Running` state. 
 
 
 __3. Input your desired query + Execute__
+
+<!--- {"article":"4407601824279","section":"4402815656599","permissiongroup":"1500001277122"} --->

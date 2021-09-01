@@ -1,23 +1,24 @@
-# Kubernetes Cost Allocation
+Kubernetes Cost Allocation
+==========================
 
 The Kubecost Allocation view allows you to quickly see allocated spend across all native Kubernetes concepts, e.g. namespace, k8s label, and service. It also allows for allocating cost to organizational concepts like team, product/project, department, or environment. This document explains the metrics presented and describes how you can control the data displayed in this view.
 
-![Cost allocation view](./images/cost-allocation.png)
+![Cost allocation view](https://raw.githubusercontent.com/kubecost/docs/master/images/cost-allocation.png)
 
 
 ### Date Range 
-![Date Picker](./images/cost-allocation-date-picker.png)
+![Date Picker](https://raw.githubusercontent.com/kubecost/docs/master/images/cost-allocation-date-picker.png)
 
 Select the Date Range of the report, using common Date Range options or by setting specific start and end dates.
 
 ### Breakdown
-![Breakdown](./images/cost-allocation-breakdown.png)
+![Breakdown](https://raw.githubusercontent.com/kubecost/docs/master/images/cost-allocation-breakdown.png)
 
 Aggregate cost by namespace, deployment, service and other native Kubernetes concepts. 
 
 Costs aggregations are also visible by other meaningful organizational concepts, e.g. Team, Department, and Product. These aggregations are based on Kubernetes labels, referenced at both the pod and namespace-level, with labels at the pod-level being favored over the namespace label when both are present. The Kubernetes label name used for these concepts can be configured in Settings or in [values.yaml](https://github.com/kubecost/cost-analyzer-helm-chart/blob/19908983ed7c8d4ff1d3e62d98537a39ab61bbab/cost-analyzer/values.yaml#L427-L445) after setting `kubecostProductConfigs.labelMappingConfigs.enabled` to true. Workloads without the relevent label will be shown as `__unallocated__`. 
 
-> Kubernetes annotations can also be used for cost allocation purposes but this requires enabling a helm flag. [Learn more about using annotations](/annotations.md) 
+> Kubernetes annotations can also be used for cost allocation purposes but this requires enabling a helm flag. [Learn more about using annotations](https://github.com/kubecost/docs/blob/master/annotations.md) 
 
 To find what pods are not part of the relevant label set... you can either apply an `__unallocated__` label filter in this allocation view or explore variations of the following kubectl commands:  
 
@@ -29,7 +30,7 @@ kubectl get pods --show-labels -n <TARGET_NAMESPACE>
 
 ### Additional Options
 
-![Options](./images/cost-allocation-options.png)
+![Options](https://raw.githubusercontent.com/kubecost/docs/master/images/cost-allocation-options.png)
 
 #### Idle Cost  
 Allocating idle costs proportionately distributes slack or idle _cluster costs_ to tenants. Specifically, this applies to resources that are provisioned but not being fully used or requested by a tenant. As an example, if your cluster is only 25% utilized, as measured by the max of resource usage and requests, applying idle costs would proportionately increase the cost of each pod/namespace/deployment by 4x. This feature can be enabled by default in Settings.
@@ -73,7 +74,7 @@ Select how shared costs set on the settings page will be shared among allocation
 
 
 ### Save, Load and Download
-![Save/Load/Download](./images/cost-allocation-icons.png)
+![Save/Load/Download](https://raw.githubusercontent.com/kubecost/docs/master/images/cost-allocation-icons.png)
 
 Use these icons to save report settings or load reports that you have saved in the past. You can also download a report in CSV format.
 
@@ -91,3 +92,5 @@ Cost allocation metrics are available for both in-cluster and out-of-cluster res
 | GPU Cost        	| The cost of GPUs requested by this object, as measured by [resource limits](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/). Prices are based on cloud billing prices or custom pricing sheets for on-prem deployments. |
 | Shared Cost        	| The cost of shared resources allocated to this tenant. This field covers shared overhead, shared namespaces, and shared labels. |
 | External Cost        	| The cost of out-of-cluster resources allocated to this object. For example, S3 buckets allocated to a particular Kubernetes deployment. Prices are based on cloud billing data and require a key. This feature is currently available for AWS ([learn more](http://docs.kubecost.com/aws-out-of-cluster.html)), GCP ([learn more](http://docs.kubecost.com/gcp-out-of-cluster.html)) and Azure ([learn more](https://github.com/kubecost/docs/blob/master/azure-out-of-cluster.md)). |
+
+<!--- {"article":"4407601807383","section":"4402829033367","permissiongroup":"1500001277122"} --->

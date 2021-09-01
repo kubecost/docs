@@ -1,4 +1,5 @@
-# Custom Prometheus
+Custom Prometheus
+=================
 
 When integrating Kubecost with an existing Prometheus, we recommend first installing Kubecost with a bundled Prometheus ([instructions](http://kubecost.com/install)) as a dry run before integrating with an external Prometheus deployment. You can get in touch (team@kubecost.com) or via our [Slack community](https://join.slack.com/t/kubecost/shared_invite/enQtNTA2MjQ1NDUyODE5LWFjYzIzNWE4MDkzMmUyZGU4NjkwMzMyMjIyM2E0NGNmYjExZjBiNjk1YzY5ZDI0ZTNhZDg4NjlkMGRkYzFlZTU) for assistance.
 
@@ -42,7 +43,7 @@ This config needs to be added under `extraScrapeConfigs` in Prometheus configura
 
 To confirm this job is successfully scraped by Prometheus, you can view the Targets page in Prometheus and look for a job named `kubecost`.
 
-![Prometheus Targets](/prom-targets.png)
+![Prometheus Targets](https://raw.githubusercontent.com/kubecost/docs/master/prom-targets.png)
 
 <a name="recording-rules"></a>
 ### Recording Rules  
@@ -74,7 +75,7 @@ Note that this does not override the source label-- it creates a new label calle
 <a name="troubleshoot"></a>
 ## Troubleshooting Issues
 
-Visiting `<your-kubecost-endpoint>/diagnostics.html` provides diagnostics info on this integration. [More details](/diagnostics.md)
+Visiting `<your-kubecost-endpoint>/diagnostics.html` provides diagnostics info on this integration. [More details](https://github.com/kubecost/docs/blob/master/diagnostics.md)
 
 Common issues include the following:
 
@@ -97,7 +98,7 @@ If the config file is not returned, this is an indication that an incorrect Prom
 
 You can visit Settings in Kubecost to see basic diagnostic information on these Prometheus metrics:
 
-![Prometheus status diagnostic](/prom-status.png)
+![Prometheus status diagnostic](https://raw.githubusercontent.com/kubecost/docs/master/prom-status.png)
 
 
 <a name="existing-grafana"></a>
@@ -107,7 +108,7 @@ Using an existing Grafana deployment can be accomplished with either of the foll
 
 1) _Option: Directly link to an external Grafana._ After Kubecost installation, visit Settings and update __Grafana Address__ to a URL (e.g. http://demo.kubecost.com/grafana) that is visible to users accessing Grafana dashboards. This variable can alternatively be passed at the time you deploy Kubecost via the `kubecostProductConfigs.grafanaURL` paremeter in [values.yaml](https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/values.yaml). Next, import Kubecost Grafana dashboards as JSON from this [folder](https://github.com/kubecost/cost-analyzer-helm-chart/tree/master/cost-analyzer). 
 
-![Kubecost Settings](/images/settings-grafana.png)
+![Kubecost Settings](https://raw.githubusercontent.com/kubecost/docs/master/images/settings-grafana.png)
 
 2) _Option: Deploy with Grafana sidecar enabled._ Passing the Grafana parameters below in your [values.yaml](https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/values.yaml) will install ConfigMaps for Grafana dashboards that will be picked up by the [Grafana sidecar](https://github.com/helm/charts/tree/master/stable/grafana#sidecar-for-dashboards) if you have Grafana with the dashboard sidecar already installed.
 
@@ -129,3 +130,5 @@ grafana:
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1. sidecar.dashboards.enabled = true  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2. sidecar.dashboards.searchNamespace isn't restrictive, use `ALL` if Kubecost runs in another ns  
+
+<!--- {"article":"4407595941015","section":"4402815636375","permissiongroup":"1500001277122"} --->
