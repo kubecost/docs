@@ -3,9 +3,9 @@ Long Term Storage
 
 To enable 90+ days of data retention in Kubecost, we recommend deploying with durable storage enabled. We provide two options for doing this: 1) in your cluster and 2) out of the cluster. This functionality also powers the Enterprise multi-cluster view, where data across clusters can be viewed in aggregate, as well as simple backup & restore capabilities.
 
-**Note:** This feature requires an [Enterprise license](https://kubecost.com/pricing).
+> Note: This feature requires an [Enterprise license](https://kubecost.com/pricing).
 
-## Option A: In cluster storage (Postgres)  
+## Option A: In cluster storage (Postgres)  -- DEPRECATED
 
 To enable Postgres-based long-term storage, complete the following:
 
@@ -26,67 +26,13 @@ Thanos-based durable storage provides long-term metric retention directly in a u
 
 ### Step 1: Create object-store yaml file
 
-This step creates a yaml file that contains your durable storage target (e.g. GCS, S3, etc.) configuration and access credentials. The details of this file are documented thoroughly in Thanos documentation: https://thanos.io/storage.md/
+This step creates the object-store.yaml file that contains your durable storage target (e.g. GCS, S3, etc.) configuration and access credentials. 
+The details of this file are documented thoroughly in [Thanos documentation](https://thanos.io/tip/thanos/storage.md/).
 
-#### Google Cloud Storage
-
-Start by [creating a new Google Cloud Storage bucket](https://cloud.google.com/storage/docs/creating-buckets). The following example uses a bucket named `thanos-bucket`. Do not apply a retention policy to your Thanos bucket, as it will prevent Thanos compaction from completing.
-
-Next, download a service account JSON file from Google's service account manager ([steps](/google-service-account-thanos.md)).
-
-Now create a yaml file named `object-store.yaml` in the following format, using your bucket name and service account details:
-
-```yaml
-type: GCS
-config:
-  bucket: "thanos-bucket"
-  service_account: |-
-    {
-      "type": "service_account",
-      "project_id": "...",
-      "private_key_id": "...",
-      "private_key": "...",
-      "client_email": "...",
-      "client_id": "...",
-      "auth_uri": "https://accounts.google.com/o/oauth2/auth",
-      "token_uri": "https://oauth2.googleapis.com/token",
-      "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
-      "client_x509_cert_url": ""
-    }
-```
-> Note: given that this is yaml, it requires this specific indention
-
-#### AWS/S3
-
-Start by creating a new S3 bucket with all public access blocked. No other bucket configuration changes should be required. The following example uses a bucket named `kc-thanos-store`.
-
-Next, add an IAM policy to access this bucket ([steps](/aws-service-account-thanos.md)).
-
-Now create a yaml file named `object-store.yaml` with contents similar to the following example. See region to endpoint mappings here: <https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region>
-
-```yaml
-type: S3
-config:
-  bucket: "kc-thanos-store"
-  endpoint: "s3.amazonaws.com"
-  region: "us-east-1"
-  access_key: "AKIAXW6UVLRRTDSCCU4D"
-  insecure: false
-  signature_version2: false
-  encrypt_sse: false
-  secret_key: "<your-secret-key>"
-  put_user_metadata:
-      "X-Amz-Acl": "bucket-owner-full-control"
-  http_config:
-    idle_conn_timeout: 90s
-    response_header_timeout: 2m
-    insecure_skip_verify: false
-  trace:
-    enable: true
-  part_size: 134217728
-```
-
-> Note: given that this is yaml, it requires this specific indention
+Use the appropriate guide for your cloud provider:
+* [Google Cloud Storage](https://github.com/kubecost/docs/blob/main/long-term-storage-gcp.md)
+* [AWS/S3](https://github.com/kubecost/docs/blob/main/long-term-storage-aws.md)
+* [Azure](https://github.com/kubecost/docs/blob/main/long-term-storage-azure.md)
 
 ### Step 2: Create object-store secret
 
@@ -114,9 +60,9 @@ helm install kubecost/cost-analyzer \
 
 Your deployment should now have Thanos enabled!
 
-> Note: if you need to delete a previous install of kubecost, do this before creating the secret in step 2
+> Note: If you need to delete a previous install of kubecost, do this before creating the secret in step 2
 
-> Note: the `thanos-store` pod is by default configured to request 2 Gb in memory.
+> Note: The `thanos-store` pod is by default configured to request 2 Gb in memory.
 
 <a name="verify-thanos"></a>
 **Verify Installation**  
@@ -144,7 +90,11 @@ Also note that the sidecar should identify with the unique `cluster_id` provided
 
 The default retention period for when data is moved into the object storage is currently *2h* - This configuration is based on Thanos suggested values. __By default, it will be 2 hours before data is written to the provided bucket.__
 
-Instead of waiting *2h* to ensure that thanos was configured correctly, the default log level for the thanos workloads is `debug` (it's very light logging even on debug). You can get logs for the `thanos-sidecar`, which is part of the `prometheus-server` pod, and `thanos-store`. The logs should give you a clear indication of whether or not there was a problem consuming the secret and what the issue is. For more on Thanos architecture, view [this resource](https://thanos.io/quick-tutorial.md/#components).
+Instead of waiting *2h* to ensure that thanos was configured correctly, the default log level for the thanos workloads is `debug` (it's very light logging even on debug). You can get logs for the `thanos-sidecar`, which is part of the `prometheus-server` pod, and `thanos-store`. The logs should give you a clear indication of whether or not there was a problem consuming the secret and what the issue is. For more on Thanos architecture, view [this resource](https://github.com/thanos-io/thanos/blob/master/docs/design.md).
+
+### Troubleshooting
+
+#### Cluster not writing data to thanos bucket
 
 If a cluster is not successfully writing data to the bucket, we recommend reviewing `thanos-sidecar` logs with the following command:
 
@@ -158,18 +108,21 @@ Logs in the following format are evidence of a successful bucket write:
 level=debug ts=2019-12-20T20:38:32.288251067Z caller=objstore.go:91 msg="uploaded file" from=/data/thanos/upload/01KL5YG9CQYZ81G9BZMTM3GJFH/meta.json dst=debug/metas/01KL5YG9CQYZ81G9BZMTM3GJFH.json bucket=kc-thanos
 ```
 
-#### Stores not listed at the /stores endpoint
+#### Stores not listed at the `/stores` endpoint
 
-If thanos-query can't connect to both the sidecar and the store, you may want to directly specify the store gRPC service address instead of using DNS discovery (the default).
-You can quickly test if this is the issue by running
+If thanos-query can't connect to both the sidecar and the store, you may want to directly specify the store gRPC service address instead of using DNS discovery (the default). You can quickly test if this is the issue by running
+
  `kubectl edit deployment kubecost-thanos-query -n kubecost`
- and adding 
- `- --store=kubecost-thanos-store-grpc.kubecost:10901` to the container args. This will cause a query restart and you can visit /stores again to see if the store has been added.
+
+and adding
+
+`- --store=kubecost-thanos-store-grpc.kubecost:10901`
+
+to the container args. This will cause a query restart and you can visit `/stores` again to see if the store has been added.
 
 If it has, you'll want to use these addresses instead of DNS more permanently by setting .Values.thanos.query.stores in values-thanos.yaml
 
 <pre>
-```yaml
 ...
 thanos:
   store:
@@ -179,10 +132,10 @@ thanos:
     extraEnv:
       - name: GOGC
         value: "100"
-    resources: 
+    resources:
       requests:
         memory: "2.5Gi"
-  query: 
+  query:
     enabled: true
     timeout: 3m
     # Maximum number of queries processed concurrently by query node.
@@ -198,7 +151,6 @@ thanos:
         value: "100"
     <b>stores:</b>
       <b>- "kubecost-thanos-store-grpc.kubecost:10901"</b>
-```
 </pre>
 
 Edit this doc on [Github](https://github.com/kubecost/docs/blob/main/long-term-storage.md)
