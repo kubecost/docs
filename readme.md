@@ -6,4 +6,6 @@ Kubecost helps you monitor and manage cost and capacity in Kubernetes environmen
 ## Contributing 
 
 Check out the [Contributing and Style Guide](https://github.com/kubecost/docs/blob/master/markdown.md).
-<!--- {"article":"","section":"1500002777682","permissiongroup":"1500001277122"} --->
+
+
+<!--- {"article":"4407763013271","section":"1500002777682","permissiongroup":"1500001277122"} --->

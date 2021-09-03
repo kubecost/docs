@@ -29,4 +29,6 @@ To verify that your key is properly supplied, visit the Settings UI to confirm t
 
 Please reach out to team@kubecost.com with any questions.
 
+Edit this doc on [Github](https://github.com/kubecost/docs/blob/master/add-key.md)
+
 <!--- {"article":"4407595912983","section":"4402815636375","permissiongroup":"1500001277122"} --->

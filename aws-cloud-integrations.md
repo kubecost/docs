@@ -443,4 +443,7 @@ AWS services used here are:
   * [Cloudformation](https://aws.amazon.com/cloudformation/pricing/) (Optional-- manual IAM configuration or via Terraform is fine)
   * [EKS](https://aws.amazon.com/eks/pricing/)  (Optional-- all k8s flavors are supported) 
 
+
+Edit this doc on [Github](https://github.com/kubecost/docs/blob/master/aws-cloud-integrations.md)
+
 <!--- {"article":"4407595928087","section":"4402829036567","permissiongroup":"1500001277122"} --->

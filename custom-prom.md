@@ -131,4 +131,6 @@ grafana:
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1. sidecar.dashboards.enabled = true  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2. sidecar.dashboards.searchNamespace isn't restrictive, use `ALL` if Kubecost runs in another ns  
 
+Edit this doc on [Github](https://github.com/kubecost/docs/blob/master/custom-prom.md)
+
 <!--- {"article":"4407595941015","section":"4402815636375","permissiongroup":"1500001277122"} --->

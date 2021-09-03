@@ -65,4 +65,7 @@ Common issues:
 * Actively tested against GCP, AWS, and Azure  
 * Daemonsets have shared IP addresses on certain clusters  
 
+
+Edit this doc on [Github](https://github.com/kubecost/docs/blob/master/network-allocation.md)
+
 <!--- {"article":"4407595973527","section":"4402815636375","permissiongroup":"1500001277122"} --->

@@ -80,5 +80,6 @@ curl -G \
   -d 'window=3d' \
   ${KUBECOST_ADDRESS}/model/savings/requestSizing
 ```
+Edit this doc on [Github](https://github.com/kubecost/docs/blob/master/api-request-right-sizing.md)
 
 <!--- {"article":"4407595919895","section":"4402829033367","permissiongroup":"1500001277122"} --->

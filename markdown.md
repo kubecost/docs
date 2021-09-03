@@ -2,15 +2,18 @@ Contributing and Markdown Style Guide
 =====================================
 
 *   [Kubecost Docs](#docs)
-    *   [Titles](#doc-titles)
-    *   [Links](#doc-links)
-    *   [Images](#doc-images)
-    *   [Metadata](#doc-metdata)
+    *   [Titles](#docs-titles)
+    *   [Links](#docs-links)
+    *   [Images](#docs-images)
+    *   [Metadata](#docs-metdata)
     *   [Categories and Sections](#docs-cs)
-    *   [Knowledge Base](#docs-kb) 
+    *   [Create a New Doc](#docs-create)
+    *   [Build and Deploy](#docs-bd)
+    *   [Update Existing Doc](#docs-update)
 *   [Overview](#overview)
     *   [Inline HTML](#html)
     *   [Automatic Escaping for Special Characters](#autoescape)
+    *   [HTML details tag](#details)
 *   [Block Elements](#block)
     *   [Paragraphs and Line Breaks](#p)
     *   [Headers](#header)
@@ -28,7 +31,8 @@ Contributing and Markdown Style Guide
     *   [Automatic Links](#autolink)
 
 
-**Note:** This document is itself written using Markdown;
+**Note:** This document is itself written using Markdown; Much of this document is based on the markdown guidelines of the [gomarkdown/markdown](https://github.com/gomarkdown/markdown) library.
+
 * * *
 
 <h2 id="docs">Kubecost Docs</h2>
@@ -37,16 +41,16 @@ Docs for Kubecost are hosted at: https://guide.kubecost.com
 
 The `main` branch of the kubecost/docs repo is pulled and documents are updated daily. 
 
-<h3 id="doc-links">Titles</h3>
+<h3 id="docs-titles">Titles</h3>
 
-The first line of should be the title of the doc as an H1 comment. 
+The first line of document should be the title as an H1 comment. 
 
 ```
 This is a Title
 ===============
 ```
 
-<h3 id="doc-links">Links</h3>
+<h3 id="docs-links">Links</h3>
 
 To link to another doc use a Github link: `https://github.com/kubecost/docs/blob/master/*.md`
 
@@ -54,7 +58,7 @@ To link to another doc use a Github link: `https://github.com/kubecost/docs/blob
 You can get the latest staging build by following the [install steps](https://github.com/kubecost/docs/blob/master/staging.md)
 ```
 
-<h3 id="doc-images">Images</h3>
+<h3 id="docs-images">Images</h3>
 
 Use a direct link to the Github image within the kubecost/docs repo or an alternative host such as GCS or S3. 
 
@@ -62,9 +66,9 @@ Use a direct link to the Github image within the kubecost/docs repo or an altern
 ![Add key dialog](https://raw.githubusercontent.com/kubecost/docs/master/add-key-dialog.png)
 ```
 
-At this time there are aren't limits on the location of images within the kubecost/docs repo. Images may exist in the `/images` folder or in the root directory. 
+At this time there aren't limits on the location of images within the kubecost/docs repo. Images may exist in the `/images` folder or in the root directory. 
 
-<h3 id="doc-metadata">Metadata</h3>
+<h3 id="docs-metadata">Metadata</h3>
 
 An HTML comment is used to store metadata about each document. An aritcle id, section, and permission group. 
 
@@ -74,7 +78,7 @@ An HTML comment is used to store metadata about each document. An aritcle id, se
 
 This metadata string must be the last line of the file. If no metadata string exists the file will be uploaded to the General category of the documentation. 
 
-<h3 id="doc-cs">Categories and Sections</h3>
+<h3 id="docs-cs">Categories and Sections</h3>
 
 - - -
 Architecture: `<!--- {"article":"","section":"4402829033367","permissiongroup":"1500001277122"} --->`
@@ -82,27 +86,54 @@ Architecture: `<!--- {"article":"","section":"4402829033367","permissiongroup":"
 Azure `<!--- {"article":"","section":"4402815682455","permissiongroup":"1500001277122"} --->`
 - - -
 Using Kubecost `<!--- {"article":"","section":"4402815656599","permissiongroup":"1500001277122"} --->`
-- - - 
+- - -
 Setup `<!--- {"article":"","section":"4402815636375","permissiongroup":"1500001277122"} --->`
-- - - 
+- - -
 AWS `<!--- {"article":"","section":"4402829036567","permissiongroup":"1500001277122"} --->`
 - - -
 GCP `<!--- {"article":"","section":"4402815680407","permissiongroup":"1500001277122"} --->`
-- - - 
+- - -
 Troubleshooting `<!--- {"article":"","section":"4402815696919","permissiongroup":"1500001277122"} --->`
-- - - 
+- - -
 Kubecost ("General") `<!--- {"article":"","section":"1500002777682","permissiongroup":"1500001277122"} --->`
 - - -
 
-To create a new document in a specific section pass a metadata string with a `section` and `permissiongroup` and `article` as a blank string Example:
+<h3 id="doc-bd">Build and Deploy</h3>
+
+The `main` branch of the kubecost/docs repo is pulled and documents on guide.kubecost.com are updated daily. During the build phase docs with an empty `article` string in the metadata will be created. Docs with an existing `article` string will be updated to reflect the latest changes. 
+
+<h3 id="doc-create">Create a New Doc</h3>
+
+To create a new document submit a pull request including a markdown file and any image assets to the `main` branch of the kubecost/docs repo. After review and merge on Github a new document will be created on guide.kubecost.com once the build and deploy phase has completed. The metadata string of the new doc will be updated automatically on github with an `article` and `section`,`permissiongroup` info. 
+
+To create a new document in a specific section provide a metadata string with a `section` and `permissiongroup` and `article` as a blank string. Example:
 
 ```
+Section Example Doc
+===========
+
+This will create a new doc in the "Setup" section!
+
 <!--- {"article":"","section":"4402815636375","permissiongroup":"1500001277122"} --->
 ```
 
-<h3 id="doc-images">Images</h3>
+If no metadata string is provided the file will be uploaded to the General category of the documentation. 
 
-todo
+```
+Example Doc
+===========
+
+No metadata? This will create a new doc in the "General" section!
+```
+
+<h3 id="doc-update">Update an Existing Doc</h3>
+
+Submit changes to the file in a pull request to the `main` branch of the kubecost/docs repo. After review and merge on Github the document will be updated on guide.kubecost.com once the build and deploy phase has completed.
+
+<h3 id="doc-gg">Guide Markdown vs Github Markdown</h3>
+
+Providing a seemless experience for consumers of the kubecost documentation Github and guide.kubecost.com is a goal of this project. Most of the supported formatting and features of Github flavored markdown should translate to guide.kubecost.com. 
+
 
 <h2 id="overview">Markdown Overview</h2>
 
@@ -111,11 +142,7 @@ todo
 Markdown's syntax is intended for one purpose: to be used as a
 format for *writing* for the web.
 
-Markdown is not a replacement for HTML, or even close to it. Its
-syntax is very small, corresponding only to a very small subset of
-HTML tags. The idea is *not* to create a syntax that makes it easier
-to insert HTML tags. In my opinion, HTML tags are already easy to
-insert. The idea for Markdown is to make it easy to read, write, and
+The idea for Markdown is to make it easy to read, write, and
 edit prose. HTML is a *publishing* format; Markdown is a *writing*
 format. Thus, Markdown's formatting syntax only addresses issues that
 can be conveyed in plain text.
@@ -134,17 +161,18 @@ to add extra (unwanted) `<p>` tags around HTML block-level tags.
 For example, to add an HTML table to a Markdown article:
 
     This is a regular paragraph.
-
+    
     <table>
         <tr>
             <td>Foo</td>
         </tr>
     </table>
-
+    
     This is another regular paragraph.
 
-Note that Markdown formatting syntax is not processed within block-level
-HTML tags. E.g., you can't use Markdown-style `*emphasis*` inside an
+* Note that Markdown formatting syntax is not processed within block-level HTML tags
+
+E.g., you can't use Markdown-style `*emphasis*` inside an
 HTML block.
 
 Span-level HTML tags -- e.g. `<span>`, `<cite>`, or `<del>` -- can be
@@ -215,6 +243,9 @@ and `&` in your example code needs to be escaped.)
 
 * * *
 
+<h2 id="details">HTML details tag</h2>
+
+In GitHub markdown you can hide content with a `<details>` tag. While on guide.kubecost.com this same behavior is supported HTML must be used within the details tag body. Markdown will be converted to plan text. 
 
 <h2 id="block">Block Elements</h2>
 
@@ -240,8 +271,8 @@ Yes, this takes a tad more effort to create a `<br />`, but a simplistic
 Markdown's email-style [blockquoting][bq] and multi-paragraph [list items][l]
 work best -- and look better -- when you format them with hard breaks.
 
-  [bq]: #blockquote
-  [l]:  #list
+[bq]: #blockquote
+[l]:  #list
 
 
 
@@ -254,7 +285,7 @@ headers) and dashes (for second-level headers). For example:
 
     This is an H1
     =============
-
+    
     This is an H2
     -------------
 
@@ -264,9 +295,9 @@ Atx-style headers use 1-6 hash characters at the start of the line,
 corresponding to header levels 1-6. For example:
 
     # This is an H1
-
+    
     ## This is an H2
-
+    
     ###### This is an H6
 
 Optionally, you may "close" atx-style headers. This is purely
@@ -276,9 +307,9 @@ used to open the header. (The number of opening hashes
 determines the header level.) :
 
     # This is an H1 #
-
+    
     ## This is an H2 ##
-
+    
     ### This is an H3 ######
 
 
@@ -302,7 +333,7 @@ line of a hard-wrapped paragraph:
     > This is a blockquote with two paragraphs. Lorem ipsum dolor sit amet,
     consectetuer adipiscing elit. Aliquam hendrerit mi posuere lectus.
     Vestibulum enim wisi, viverra nec, fringilla in, laoreet vitae, risus.
-
+    
     > Donec sit amet nisl. Aliquam semper ipsum sit amet velit. Suspendisse
     id sem consectetuer libero luctus adipiscing.
 
@@ -428,7 +459,7 @@ will turn into:
 But this:
 
     *   Bird
-
+    
     *   Magic
 
 will turn into:
@@ -445,11 +476,11 @@ or one tab:
     1.  This is a list item with two paragraphs. Lorem ipsum dolor
         sit amet, consectetuer adipiscing elit. Aliquam hendrerit
         mi posuere lectus.
-
+    
         Vestibulum enim wisi, viverra nec, fringilla in, laoreet
         vitae, risus. Donec sit amet nisl. Aliquam semper ipsum
         sit amet velit.
-
+    
     2.  Suspendisse id sem consectetuer libero luctus adipiscing.
 
 It looks nice if you indent every line of the subsequent
@@ -457,18 +488,18 @@ paragraphs, but here again, Markdown will allow you to be
 lazy:
 
     *   This is a list item with two paragraphs.
-
+    
         This is the second paragraph in the list item. You're
     only required to indent the first line. Lorem ipsum dolor
     sit amet, consectetuer adipiscing elit.
-
+    
     *   Another item in the same list.
 
 To put a blockquote within a list item, the blockquote's `>`
 delimiters need to be indented:
 
     *   A list item with a blockquote:
-
+    
         > This is a blockquote
         > inside a list item.
 
@@ -476,7 +507,7 @@ To put a code block within a list item, the code block needs
 to be indented *twice* -- 8 spaces or two tabs:
 
     *   A list item with a code block:
-
+    
             <code goes here>
 
 
@@ -503,13 +534,13 @@ To produce a code block in Markdown, simply indent every line of the
 block by at least 4 spaces or 1 tab. For example, given this input:
 
     This is a normal paragraph:
-
+    
         This is a code block.
 
 Markdown will generate:
 
     <p>This is a normal paragraph:</p>
-
+    
     <pre><code>This is a code block.
     </code></pre>
 
@@ -517,7 +548,7 @@ One level of indentation -- 4 spaces or 1 tab -- is removed from each
 line of the code block. For example, this:
 
     Here is an example of AppleScript:
-
+    
         tell application "Foo"
             beep
         end tell
@@ -525,7 +556,7 @@ line of the code block. For example, this:
 will turn into:
 
     <p>Here is an example of AppleScript:</p>
-
+    
     <pre><code>tell application "Foo"
         beep
     end tell
@@ -565,16 +596,16 @@ wish, you may use spaces between the hyphens or asterisks. Each of the
 following lines will produce a horizontal rule:
 
     * * *
-
+    
     ***
-
+    
     *****
-	
+    
     - - -
-
+    
     ---------------------------------------
-
-	_ _ _
+    
+    _ _ _
 
 
 * * *
@@ -593,14 +624,14 @@ put the URL where you want the link to point, along with an *optional*
 title for the link, surrounded in quotes. For example:
 
     This is [an example](http://example.com/ "Title") inline link.
-
+    
     [This link](http://example.net/) has no title attribute.
 
 Will produce:
 
     <p>This is <a href="http://example.com/" title="Title">
     an example</a> inline link.</p>
-
+    
     <p><a href="http://example.net/">This link</a> has no
     title attribute.</p>
 
@@ -682,7 +713,7 @@ Here's an example of reference links in action:
 
     I get 10 times more traffic from [Google] [1] than from
     [Yahoo] [2] or [MSN] [3].
-
+    
       [1]: http://google.com/        "Google"
       [2]: http://search.yahoo.com/  "Yahoo Search"
       [3]: http://search.msn.com/    "MSN Search"
@@ -691,7 +722,7 @@ Using the implicit link name shortcut, you could instead write:
 
     I get 10 times more traffic from [Google][] than from
     [Yahoo][] or [MSN][].
-
+    
       [google]: http://google.com/        "Google"
       [yahoo]:  http://search.yahoo.com/  "Yahoo Search"
       [msn]:    http://search.msn.com/    "MSN Search"
@@ -733,21 +764,21 @@ HTML `<em>` tag; double `*`'s or `_`'s will be wrapped with an HTML
 `<strong>` tag. E.g., this input:
 
     *single asterisks*
-
+    
     _single underscores_
-
+    
     **double asterisks**
-
+    
     __double underscores__
 
 will produce:
 
     <em>single asterisks</em>
-
+    
     <em>single underscores</em>
-
+    
     <strong>double asterisks</strong>
-
+    
     <strong>double underscores</strong>
 
 You can use whichever style you prefer; the lone restriction is that
@@ -755,7 +786,7 @@ the same character must be used to open and close an emphasis span.
 
 Emphasis can be used in the middle of a word:
 
-    un*fucking*believable
+   Em*ph*asis 
 
 But if you surround an `*` or `_` with spaces, it'll be treated as a
 literal asterisk or underscore.
@@ -835,7 +866,7 @@ for links, allowing for two styles: *inline* and *reference*.
 Inline image syntax looks like this:
 
     ![Alt text](/path/to/img.jpg)
-
+    
     ![Alt text](/path/to/img.jpg "Optional title")
 
 That is:
@@ -871,7 +902,7 @@ use regular HTML `<img>` tags.
 Markdown supports a shortcut style for creating "automatic" links for URLs and email addresses: simply surround the URL or email address with angle brackets. What this means is that if you want to show the actual text of a URL or email address, and also have it be a clickable link, you can do this:
 
     <http://example.com/>
-    
+
 Markdown will turn this into:
 
     <a href="http://example.com/">http://example.com/</a>
@@ -919,9 +950,12 @@ Markdown provides backslash escapes for the following characters:
     []  square brackets
     ()  parentheses
     #   hash mark
-	+	plus sign
-	-	minus sign (hyphen)
+    +	plus sign
+    -	minus sign (hyphen)
     .   dot
     !   exclamation mark
+
+
+Edit this doc on [Github](https://github.com/kubecost/docs/blob/master/markdown.md)
 
 <!--- {"article":"4407604999447","section":"4402815656599","permissiongroup":"1500001277122"} --->

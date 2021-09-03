@@ -28,4 +28,6 @@ in [values.yaml](https://github.com/kubecost/cost-analyzer-helm-chart/blob/maste
      address: http://cluster-a.kubecost.com:9090
 ```
 
+Edit this doc on [Github](https://github.com/kubecost/docs/blob/master/multi-cluster.md)
+
 <!--- {"article":"4407595970711","section":"4402815636375","permissiongroup":"1500001277122"} --->

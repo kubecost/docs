@@ -61,4 +61,6 @@ Once that annotation has been created and set, you'll need to attach it to the p
 For prometheus, set .Values.prometheus.serviceAccounts.server.create to false, and .Values.prometheus.serviceAccounts.server.name to the name of your created service account
 For thanos set `.Values.thanos.compact.serviceAccount`, and `.Values.thanos.store.serviceAccount` to the name of your created service account.
 
+Edit this doc on [Github](https://github.com/kubecost/docs/blob/master/long-term-storage-aws.md)
+
 <!--- {"article":"4407595952151","section":"4402829036567","permissiongroup":"1500001277122"} --->

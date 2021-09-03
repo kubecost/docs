@@ -423,4 +423,6 @@ Here, we provide theoretical error bounds for different resolution values given 
 | 30m | -1.00, 60.00 | -1.00, 6.00 |  0.50, 1.00 | 0.98, 1.00 | 1.00, 1.00 |
 | 60m | -1.00, 120.00 | -1.00, 12.00 | -1.00, 1.00 | 0.96, 1.00 | 0.99, 1.00 |
 
+Edit this doc on [Github](https://github.com/kubecost/docs/blob/master/allocation.md)
+
 <!--- {"article":"4407595916823","section":"4402829033367","permissiongroup":"1500001277122"} --->

@@ -30,4 +30,6 @@ You can stay up to date with Kubecost by joining us on [Slack](https://join.slac
 
 Contact us via email (<team@kubecost.com>) or join us on [Slack](https://join.slack.com/t/kubecost/shared_invite/enQtNTA2MjQ1NDUyODE5LWFjYzIzNWE4MDkzMmUyZGU4NjkwMzMyMjIyM2E0NGNmYjExZjBiNjk1YzY5ZDI0ZTNhZDg4NjlkMGRkYzFlZTU) if you have questions!
 
+Edit this doc on [Github](https://github.com/kubecost/docs/blob/master/index.md)
+
 <!--- {"article":"4407595950359","section":"4402815656599","permissiongroup":"1500001277122"} --->

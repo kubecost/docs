@@ -61,4 +61,6 @@ We always love receiving feedback and feature requests. Please reach out to team
 * If you installed our helm chart, all issues can be filed at https://github.com/kubecost/cost-analyzer-helm-chart
 * If you installed just the open source cost-model, you can file issues at https://github.com/kubecost/cost-model
 
+Edit this doc on [Github](https://github.com/kubecost/docs/blob/master/release-process.md)
+
 <!--- {"article":"4407601825431","section":"4402829033367","permissiongroup":"1500001277122"} --->

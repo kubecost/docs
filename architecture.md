@@ -30,4 +30,6 @@ The most common implementation of durable storage in the Kubecost application ap
 
 ![Thanos Overview](https://raw.githubusercontent.com/kubecost/docs/master/images/thanos-architecture.png)
 
+Edit this doc on [Github](https://github.com/kubecost/docs/blob/master/architecture.md)
+
 <!--- {"article":"4407595922711","section":"4402829033367","permissiongroup":"1500001277122"} --->

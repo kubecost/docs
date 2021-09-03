@@ -43,4 +43,6 @@ are available at `http://<kubecost-address>/model/ENDPOINT`:
 | [`/savings/abandonedWorkloads`](https://github.com/kubecost/docs/blob/master/api-abandoned-workloads.md) | List abandoned workloads based on network traffic.|
 | `/savings/clusterSizing` | Provides recommendations for sizing clusters (node types and quantities). | `/savings/diagnostics` | Reports cached keys in the savings handlers and recent errors. |
 
+Edit this doc on [Github](https://github.com/kubecost/docs/blob/master/apis.md)
+
 <!--- {"article":"4407601802391","section":"4402829033367","permissiongroup":"1500001277122"} --->

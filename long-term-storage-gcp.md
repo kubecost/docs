@@ -29,4 +29,6 @@ config:
 
 **Warning:** do not apply a retention policy to your Thanos bucket, as it will prevent Thanos compaction from completing.
 
+Edit this doc on [Github](https://github.com/kubecost/docs/blob/master/long-term-storage-gcp.md)
+
 <!--- {"article":"4407601822359","section":"4402815680407","permissiongroup":"1500001277122"} --->

@@ -145,4 +145,6 @@ thanos:
 ```
 </pre>
 
+Edit this doc on [Github](https://github.com/kubecost/docs/blob/master/long-term-storage.md)
+
 <!--- {"article":"4407595964695","section":"4402815636375","permissiongroup":"1500001277122"} --->

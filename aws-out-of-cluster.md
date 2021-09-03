@@ -47,6 +47,6 @@ Instructions for enabling user-defined cost allocation tags [here](https://docs.
 * You may need to upgrade your AWS Glue if you are running an old version https://docs.aws.amazon.com/athena/latest/ug/glue-upgrade.html
 * Finally, review pod logs from the `cost-model` container in the `cost-analyzer` pod and look for auth errors or Athena query results. 
 
-<!--- {"article":"","section": "4402829036567","permissiongroup": "1500001277122"} --->
+Edit this doc on [Github](https://github.com/kubecost/docs/blob/master/aws-out-of-cluster.md)
 
 <!--- {"article":"4407596810519","section":"4402829036567","permissiongroup":"1500001277122"} --->

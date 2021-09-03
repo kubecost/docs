@@ -17,4 +17,6 @@ Untar the results of the etl-backup script into the ETL directory pod.
 
 Contact support (team@kubecost.com) if you need additional help
 
+Edit this doc on [Github](https://github.com/kubecost/docs/blob/master/etl-backup.md)
+
 <!--- {"article":"4407601811095","section":"4402815656599","permissiongroup":"1500001277122"} --->

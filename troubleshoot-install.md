@@ -133,4 +133,6 @@ Many teams deploy helm Tiller with cluster-admin privileges to install and manag
 
 Have a question not answered on this page? Email us at support@kubecost.com or [join the Kubecost Slack community](https://join.slack.com/t/kubecost/shared_invite/enQtNTA2MjQ1NDUyODE5LWFjYzIzNWE4MDkzMmUyZGU4NjkwMzMyMjIyM2E0NGNmYjExZjBiNjk1YzY5ZDI0ZTNhZDg4NjlkMGRkYzFlZTU)!
 
+Edit this doc on [Github](https://github.com/kubecost/docs/blob/master/troubleshoot-install.md)
+
 <!--- {"article":"4407601830679","section":"4402815696919","permissiongroup":"1500001277122"} --->
