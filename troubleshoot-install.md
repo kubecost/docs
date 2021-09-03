@@ -91,7 +91,7 @@ Recommended troubleshooting steps are as follows:
 
 Start by reviewing messages in your browser's developer console. Any meaningful errors or warnings may indicate an unexpected response from the Kubecost server.
 
-Next, point your browser to the `/api` endpoint on your target URL. For example, visit `http://localhost:9090/api/` in the scenario shown above. You should expect to see a Prometheus config file at this endpoint. If your cluster address has changed, you can visit Settings in the Kubecost product to update or you can also [add a new](https://github.com/kubecost/docs/blob/master/multi-cluster.md) cluster.  
+Next, point your browser to the `/api` endpoint on your target URL. For example, visit `http://localhost:9090/api/` in the scenario shown above. You should expect to see a Prometheus config file at this endpoint. If your cluster address has changed, you can visit Settings in the Kubecost product to update or you can also [add a new](https://github.com/kubecost/docs/blob/main/multi-cluster.md) cluster.  
 
 If you are unable to successfully retrieve your config file from this /api endpoint, we recommend the following:
 
@@ -133,6 +133,6 @@ Many teams deploy helm Tiller with cluster-admin privileges to install and manag
 
 Have a question not answered on this page? Email us at support@kubecost.com or [join the Kubecost Slack community](https://join.slack.com/t/kubecost/shared_invite/enQtNTA2MjQ1NDUyODE5LWFjYzIzNWE4MDkzMmUyZGU4NjkwMzMyMjIyM2E0NGNmYjExZjBiNjk1YzY5ZDI0ZTNhZDg4NjlkMGRkYzFlZTU)!
 
-Edit this doc on [Github](https://github.com/kubecost/docs/blob/master/troubleshoot-install.md)
+Edit this doc on [Github](https://github.com/kubecost/docs/blob/main/troubleshoot-install.md)
 
 <!--- {"article":"4407601830679","section":"4402815696919","permissiongroup":"1500001277122"} --->

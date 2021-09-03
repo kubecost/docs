@@ -15,7 +15,7 @@ for prod-x.xx.x. [Latest releases can be found here](https://github.com/kubecost
 
 *Kubecost Optional*
 * Kube-state-metrics: quay.io/coreos/kube-state-metrics:v1.9.8
-* NetworkCosts: gcr.io/kubecost1/kubecost-network-costs:v15.1 (used for [network-allocation](https://github.com/kubecost/docs/blob/master/network-allocation.md))
+* NetworkCosts: gcr.io/kubecost1/kubecost-network-costs:v15.1 (used for [network-allocation](https://github.com/kubecost/docs/blob/main/network-allocation.md))
 * BusyBox: registry.hub.docker.com/library/busybox:latest (only for NFS)
 * Cluster controller: gcr.io/kubecost1/cluster-controller:v0.0.2 (used for write actions)
 
@@ -38,6 +38,6 @@ There are two options to configure asset prices in your on-premise Kubernetes en
 * *Simple pipeline:* per component prices can be configured in a helm values file ([reference](https://github.com/kubecost/cost-analyzer-helm-chart/blob/6c0975614b4a6854be602d1a6f9506ce8b80abdc/cost-analyzer/values.yaml#L559-L570)) or directly in the Kubecost Settings page. This allows your to directly supply the cost of a CPU month, RAM Gb month, etc.
 * *Advanced pipeline:* this method allows each individual asset in your environment to have a unique price. This leverages the Kubecost custom CSV pipeline which is available on Enterprise plans. Contact us team@kubecost.com to learn more.
 
-Edit this doc on [Github](https://github.com/kubecost/docs/blob/master/air-gapped.md)
+Edit this doc on [Github](https://github.com/kubecost/docs/blob/main/air-gapped.md)
 
 <!--- {"article":"4407601795863","section":"4402815636375","permissiongroup":"1500001277122"} --->

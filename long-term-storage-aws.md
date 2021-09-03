@@ -5,7 +5,7 @@ __AWS/S3__
 
 Start by creating a new S3 bucket with all public access blocked. No other bucket configuration changes should be required. The following example uses a bucket named `kc-thanos-store`.
 
-Next, add an IAM policy to access this bucket ([steps](https://github.com/kubecost/docs/blob/master/aws-service-account-thanos.md)).
+Next, add an IAM policy to access this bucket ([steps](https://github.com/kubecost/docs/blob/main/aws-service-account-thanos.md)).
 
 Now create a yaml file named `object-store.yaml` with contents similar to the following example. See region to endpoint mappings here: <https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region>
 
@@ -61,6 +61,6 @@ Once that annotation has been created and set, you'll need to attach it to the p
 For prometheus, set .Values.prometheus.serviceAccounts.server.create to false, and .Values.prometheus.serviceAccounts.server.name to the name of your created service account
 For thanos set `.Values.thanos.compact.serviceAccount`, and `.Values.thanos.store.serviceAccount` to the name of your created service account.
 
-Edit this doc on [Github](https://github.com/kubecost/docs/blob/master/long-term-storage-aws.md)
+Edit this doc on [Github](https://github.com/kubecost/docs/blob/main/long-term-storage-aws.md)
 
 <!--- {"article":"4407595952151","section":"4402829036567","permissiongroup":"1500001277122"} --->

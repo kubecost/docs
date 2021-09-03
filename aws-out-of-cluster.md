@@ -7,7 +7,7 @@ The following guide provides the steps required for enabling out of cluster cost
 
 ## Step 1: Create an AWS Cost and Usage Report and Integrate it with Kubecost
 
-[Follow our guide for cloud integrations](https://github.com/kubecost/docs/blob/master/aws-cloud-integrations.md)
+[Follow our guide for cloud integrations](https://github.com/kubecost/docs/blob/main/aws-cloud-integrations.md)
 
 ## Step 2: Tag your resources
 Kubecost utilizes AWS tagging to allocate the costs of AWS resources outside of the Kubernetes cluster to specific Kubernetes concepts, such as namespaces, pods, etc. These costs are then shown in a unified dashboard within the Kubecost interface.
@@ -47,6 +47,6 @@ Instructions for enabling user-defined cost allocation tags [here](https://docs.
 * You may need to upgrade your AWS Glue if you are running an old version https://docs.aws.amazon.com/athena/latest/ug/glue-upgrade.html
 * Finally, review pod logs from the `cost-model` container in the `cost-analyzer` pod and look for auth errors or Athena query results. 
 
-Edit this doc on [Github](https://github.com/kubecost/docs/blob/master/aws-out-of-cluster.md)
+Edit this doc on [Github](https://github.com/kubecost/docs/blob/main/aws-out-of-cluster.md)
 
 <!--- {"article":"4407596810519","section":"4402829036567","permissiongroup":"1500001277122"} --->

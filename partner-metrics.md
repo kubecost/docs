@@ -12,6 +12,6 @@ We also provide a spec implementation in our open source repository to ensure co
 
 Reach out to <team@kubecost.com> to learn more.
 
-Edit this doc on [Github](https://github.com/kubecost/docs/blob/master/partner-metrics.md)
+Edit this doc on [Github](https://github.com/kubecost/docs/blob/main/partner-metrics.md)
 
 <!--- {"article":"4407595975959","section":"4402815656599","permissiongroup":"1500001277122"} --->

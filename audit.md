@@ -47,6 +47,6 @@ We've created this guide to help you spot check cost metrics directly in Prometh
 
 **Reminder:** Don't forget to apply any sustained use or other discounts during a manual spot check.
 
-Edit this doc on [Github](https://github.com/kubecost/docs/blob/master/audit.md)
+Edit this doc on [Github](https://github.com/kubecost/docs/blob/main/audit.md)
 
 <!--- {"article":"4407595925271","section":"4402815656599","permissiongroup":"1500001277122"} --->

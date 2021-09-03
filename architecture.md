@@ -14,7 +14,7 @@ Below are the major components deployed with the [Kubecost helm chart](http://do
     c. Node-exporter -- provides node-level utilization metrics for right-sizing recommendations and cluster utilization  [Optional]  
     d. Pushgateway -- provides ability for users to push new metrics to Prometheus [Optional]  
     e. Alertmanager -- used for custom alerts  [Optional] 
-4. **Network costs** -- optional daemonset for collecting network metrics [learn more](https://github.com/kubecost/docs/blob/master/network-allocation.md)
+4. **Network costs** -- optional daemonset for collecting network metrics [learn more](https://github.com/kubecost/docs/blob/main/network-allocation.md)
 5. **Grafana** -- provides supporting dashboards for Kubecost product 
 
 Today, the core Kubecost product can be run with just components 1, 3a, and 3b.
@@ -30,6 +30,6 @@ The most common implementation of durable storage in the Kubecost application ap
 
 ![Thanos Overview](https://raw.githubusercontent.com/kubecost/docs/master/images/thanos-architecture.png)
 
-Edit this doc on [Github](https://github.com/kubecost/docs/blob/master/architecture.md)
+Edit this doc on [Github](https://github.com/kubecost/docs/blob/main/architecture.md)
 
 <!--- {"article":"4407595922711","section":"4402829033367","permissiongroup":"1500001277122"} --->

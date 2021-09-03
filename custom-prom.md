@@ -75,7 +75,7 @@ Note that this does not override the source label-- it creates a new label calle
 <a name="troubleshoot"></a>
 ## Troubleshooting Issues
 
-Visiting `<your-kubecost-endpoint>/diagnostics.html` provides diagnostics info on this integration. [More details](https://github.com/kubecost/docs/blob/master/diagnostics.md)
+Visiting `<your-kubecost-endpoint>/diagnostics.html` provides diagnostics info on this integration. [More details](https://github.com/kubecost/docs/blob/main/diagnostics.md)
 
 Common issues include the following:
 
@@ -131,6 +131,6 @@ grafana:
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1. sidecar.dashboards.enabled = true  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2. sidecar.dashboards.searchNamespace isn't restrictive, use `ALL` if Kubecost runs in another ns  
 
-Edit this doc on [Github](https://github.com/kubecost/docs/blob/master/custom-prom.md)
+Edit this doc on [Github](https://github.com/kubecost/docs/blob/main/custom-prom.md)
 
 <!--- {"article":"4407595941015","section":"4402815636375","permissiongroup":"1500001277122"} --->

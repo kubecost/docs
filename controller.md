@@ -56,6 +56,6 @@ You may also enable via `--set` when running helm install:
 --set clusterController.enabled=true
 ```
 
-Edit this doc on [Github](https://github.com/kubecost/docs/blob/master/controller.md)
+Edit this doc on [Github](https://github.com/kubecost/docs/blob/main/controller.md)
 
 <!--- {"article":"4407595938327","section":"4402815636375","permissiongroup":"1500001277122"} --->

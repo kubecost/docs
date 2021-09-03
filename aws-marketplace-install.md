@@ -59,6 +59,6 @@ Supply the following parameters to your _helm install_ command.
 To partipipate in our free Enterprise on-boarding program, contact us at team@kubecost.com to schedule these sessions!
 
 
-Edit this doc on [Github](https://github.com/kubecost/docs/blob/master/aws-marketplace-install.md)
+Edit this doc on [Github](https://github.com/kubecost/docs/blob/main/aws-marketplace-install.md)
 
 <!--- {"article":"4407596808087","section":"4402829036567","permissiongroup":"1500001277122"} --->

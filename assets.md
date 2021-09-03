@@ -93,6 +93,6 @@ After granting Kubecost permission to access cloud billing data, Kubecost adjust
 
 Note that while cloud adjustments typically lag by roughly a day, there are certain adjustments, e.g. credits, that may continue to come in over the course of the month, and in some cases at the very end of the month, so reconciliation adjustments may continue to update over time.
 
-Edit this doc on [Github](https://github.com/kubecost/docs/blob/master/assets.md)
+Edit this doc on [Github](https://github.com/kubecost/docs/blob/main/assets.md)
 
 <!--- {"article":"4407595924247","section":"4402829033367","permissiongroup":"1500001277122"} --->

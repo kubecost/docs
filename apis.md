@@ -6,7 +6,7 @@ This resource covers primary APIs across open source and commercial Kubecost pro
 
 # Open source APIs
 
-__[/costDataModel](https://github.com/kubecost/docs/blob/master/allocation-api.md#cost-model-api)__
+__[/costDataModel](https://github.com/kubecost/docs/blob/main/allocation-api.md#cost-model-api)__
 
 Returns unaggregated cost model rate data at the individual container/workload level. Does not include ETL caching layer and therefore optimal for small to medium-sized clusters.
 
@@ -17,15 +17,15 @@ Time-series version of /costDataModel API. Does not include ETL caching layer an
 
 # Other APIs (available in Free tier)
 
-__[/allocation](https://github.com/kubecost/docs/blob/master/allocation.md)__
+__[/allocation](https://github.com/kubecost/docs/blob/main/allocation.md)__
 
 The Kubecost Allocation API is used by the Kubecost Allocation frontend and retrieves cost allocation information for any Kubernetes concept, e.g. cost by namespace, label, deployment, service and more. This API is directly integrated with the Kubecost ETL caching layer and CSV pipeline so it is able to scale to large clusters.
 
-__[/aggregatedCostModel](https://github.com/kubecost/docs/blob/master/allocation-api.md#aggregated-cost-model-api)__
+__[/aggregatedCostModel](https://github.com/kubecost/docs/blob/main/allocation-api.md#aggregated-cost-model-api)__
 
 The aggregated cost model API is actively being replaced by the Kubecost Allocation API.
 
-__[/assets](https://github.com/kubecost/docs/blob/master/assets.md)__
+__[/assets](https://github.com/kubecost/docs/blob/main/assets.md)__
 
 Assets API retrieves the backing cost data broken down by individual assets, e.g. node, disk, etc, and provides various aggregations of this data. Optionally provides the ability to integrate with external cloud assets. 
 
@@ -37,12 +37,12 @@ are available at `http://<kubecost-address>/model/ENDPOINT`:
 | Endpoint | Brief description |
 |----------|-------------------|
 | `/savings` | Provides cluster-level potential savings estimates based on specific savings opportunities available in other endpoints. |
-| [`/savings/requestSizing`](https://github.com/kubecost/docs/blob/master/api-request-right-sizing.md) | Provides recommendations for setting container resource requests. |
+| [`/savings/requestSizing`](https://github.com/kubecost/docs/blob/main/api-request-right-sizing.md) | Provides recommendations for setting container resource requests. |
 | `/projectDisks` | List orphaned disks. |
 | `/projectAddresses` | List orphaned IP addresses. |
-| [`/savings/abandonedWorkloads`](https://github.com/kubecost/docs/blob/master/api-abandoned-workloads.md) | List abandoned workloads based on network traffic.|
+| [`/savings/abandonedWorkloads`](https://github.com/kubecost/docs/blob/main/api-abandoned-workloads.md) | List abandoned workloads based on network traffic.|
 | `/savings/clusterSizing` | Provides recommendations for sizing clusters (node types and quantities). | `/savings/diagnostics` | Reports cached keys in the savings handlers and recent errors. |
 
-Edit this doc on [Github](https://github.com/kubecost/docs/blob/master/apis.md)
+Edit this doc on [Github](https://github.com/kubecost/docs/blob/main/apis.md)
 
 <!--- {"article":"4407601802391","section":"4402829033367","permissiongroup":"1500001277122"} --->

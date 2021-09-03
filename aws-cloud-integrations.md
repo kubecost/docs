@@ -444,6 +444,6 @@ AWS services used here are:
   * [EKS](https://aws.amazon.com/eks/pricing/)  (Optional-- all k8s flavors are supported) 
 
 
-Edit this doc on [Github](https://github.com/kubecost/docs/blob/master/aws-cloud-integrations.md)
+Edit this doc on [Github](https://github.com/kubecost/docs/blob/main/aws-cloud-integrations.md)
 
 <!--- {"article":"4407595928087","section":"4402829036567","permissiongroup":"1500001277122"} --->

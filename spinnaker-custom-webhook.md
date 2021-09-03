@@ -67,6 +67,6 @@ webhook:
         defaultValue: "7d"
 ```
 
-Edit this doc on [Github](https://github.com/kubecost/docs/blob/master/spinnaker-custom-webhook.md)
+Edit this doc on [Github](https://github.com/kubecost/docs/blob/main/spinnaker-custom-webhook.md)
 
 <!--- {"article":"4407601826839","section":"4402815636375","permissiongroup":"1500001277122"} --->

@@ -14,7 +14,7 @@ Supports viewing data across an unlimited number of clusters.
 Retain spend, allocation, and efficiency data for up to 30 days. Provides custom reports saving for easily sharing across teams.
 
 ### Team alerts & updates
-Kubecost alerts allow teams to receive updates on real-time Kubernetes spend. [Learn more](https://github.com/kubecost/docs/blob/master/alerts.md)
+Kubecost alerts allow teams to receive updates on real-time Kubernetes spend. [Learn more](https://github.com/kubecost/docs/blob/main/alerts.md)
 
 ### Business support   
 Direct engineering and product support via Slack channel, video, and phone. 
@@ -24,6 +24,6 @@ Direct engineering and product support via Slack channel, video, and phone.
 Contact us at [team@kubecost.com](team@kubecost.com) to learn more!
 <br/><br/><br/><br/><br/>
 
-Edit this doc on [Github](https://github.com/kubecost/docs/blob/master/business.md)
+Edit this doc on [Github](https://github.com/kubecost/docs/blob/main/business.md)
 
 <!--- {"article":"4407595937175","section":"4402829033367","permissiongroup":"1500001277122"} --->

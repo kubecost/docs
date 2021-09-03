@@ -52,10 +52,10 @@ This is a Title
 
 <h3 id="docs-links">Links</h3>
 
-To link to another doc use a Github link: `https://github.com/kubecost/docs/blob/master/*.md`
+To link to another doc use a Github link: `https://github.com/kubecost/docs/blob/main/*.md`
 
 ```
-You can get the latest staging build by following the [install steps](https://github.com/kubecost/docs/blob/master/staging.md)
+You can get the latest staging build by following the [install steps](https://github.com/kubecost/docs/blob/main/staging.md)
 ```
 
 <h3 id="docs-images">Images</h3>
@@ -956,6 +956,6 @@ Markdown provides backslash escapes for the following characters:
     !   exclamation mark
 
 
-Edit this doc on [Github](https://github.com/kubecost/docs/blob/master/markdown.md)
+Edit this doc on [Github](https://github.com/kubecost/docs/blob/main/markdown.md)
 
 <!--- {"article":"4407604999447","section":"4402815656599","permissiongroup":"1500001277122"} --->

@@ -51,7 +51,7 @@ Field | Description
 
 # Aggregated cost model API
 
-> NOTE: this API is actively being replaced by the [Kubecost Allocation API](https://github.com/kubecost/docs/blob/master/allocation.md). That is the recommended API for querying historical and run-rate cost allocation metrics.
+> NOTE: this API is actively being replaced by the [Kubecost Allocation API](https://github.com/kubecost/docs/blob/main/allocation.md). That is the recommended API for querying historical and run-rate cost allocation metrics.
 
 The aggregated cost model API retrieves data similar to the Kubecost Allocation frontend view (e.g. cost by namespace, label, deployment and more) and is available at the following endpoint:
 
@@ -126,6 +126,6 @@ Returning cached data from either caching layer typically takes < 300ms on mediu
 
 Have questions? Email us at <team@kubecost.com>.
 
-Edit this doc on [Github](https://github.com/kubecost/docs/blob/master/allocation-api.md)
+Edit this doc on [Github](https://github.com/kubecost/docs/blob/main/allocation-api.md)
 
 <!--- {"article":"4407595915543","section":"4402829033367","permissiongroup":"1500001277122"} --->

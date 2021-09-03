@@ -31,6 +31,6 @@ Once back to the service accounts menu, select the `...` at the end of the entry
 #### Confirm JSON
 Confirm a JSON key and hit `Create`. This will download a JSON service account key entry for use with the Thanos `object-store.yaml` mentioned in the initial setup step.
 
-Edit this doc on [Github](https://github.com/kubecost/docs/blob/master/google-service-account-thanos.md)
+Edit this doc on [Github](https://github.com/kubecost/docs/blob/main/google-service-account-thanos.md)
 
 <!--- {"article":"4407601817495","section":"4402815680407","permissiongroup":"1500001277122"} --->

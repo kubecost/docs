@@ -45,6 +45,6 @@ update your secret yaml file as above, and save it as object-store.yaml
 
 Once this is done, you're ready to upgrade!
 
-Edit this doc on [Github](https://github.com/kubecost/docs/blob/master/thanos-upgrade.md)
+Edit this doc on [Github](https://github.com/kubecost/docs/blob/main/thanos-upgrade.md)
 
 <!--- {"article":"4407601829655","section":"4402815636375","permissiongroup":"1500001277122"} --->

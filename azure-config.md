@@ -3,7 +3,7 @@ Azure Config
 
 Once you've installed Kubecost in an azure account, to access accurate Microsoft Azure billing data, Kubecost needs access to the Billing Rate Card API.
 
-> Note: you can also get this functionality plus external costs by completing the full [Kubecost Azure integration](https://github.com/kubecost/docs/blob/master/azure-out-of-cluster.md).
+> Note: you can also get this functionality plus external costs by completing the full [Kubecost Azure integration](https://github.com/kubecost/docs/blob/main/azure-out-of-cluster.md).
 
 Start by creating an Azure role definition. Below is an example definition, replace YOUR_SUBSCRIPTION_ID with the Subscription ID of your account:
 
@@ -46,6 +46,6 @@ helm install kubecost ./cost-analyzer -n kubecost --set kubecostProductConfigs.a
 
 <img width="1792" alt="Screen Shot 2020-12-07 at 12 32 24 PM" src="https://user-images.githubusercontent.com/453512/101402781-12156880-3889-11eb-86ca-55111d36fe14.png">
 
-Edit this doc on [Github](https://github.com/kubecost/docs/blob/master/azure-config.md)
+Edit this doc on [Github](https://github.com/kubecost/docs/blob/main/azure-config.md)
 
 <!--- {"article":"4407595934871","section":"4402815682455","permissiongroup":"1500001277122"} --->

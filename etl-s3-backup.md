@@ -52,6 +52,6 @@ When installing with helm, use the `--set kubecostModel.etlBucketConfigSecret=<s
 
 Note that enabling this flag will override the disk storage setting. Also, since the storage is a new location, the ETL will require a full rebuild.
 
-Edit this doc on [Github](https://github.com/kubecost/docs/blob/master/etl-s3-backup.md)
+Edit this doc on [Github](https://github.com/kubecost/docs/blob/main/etl-s3-backup.md)
 
 <!--- {"article":"4407601815191","section":"4402815636375","permissiongroup":"1500001277122"} --->

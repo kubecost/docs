@@ -1,7 +1,7 @@
 Allocation API
 ==============
 
-The Allocation API is the preferred way to query for costs and resources allocated to Kubernetes workloads, and optionally aggregated by Kubernetes concepts like `namespace`, `controller`, and `label`. Data is served from one of [Kubecost's ETL pipelines](https://github.com/kubecost/docs/blob/master/allocation-api.md#caching-overview). The endpoint is available at the URL:
+The Allocation API is the preferred way to query for costs and resources allocated to Kubernetes workloads, and optionally aggregated by Kubernetes concepts like `namespace`, `controller`, and `label`. Data is served from one of [Kubecost's ETL pipelines](https://github.com/kubecost/docs/blob/main/allocation-api.md#caching-overview). The endpoint is available at the URL:
 ```
 http://<kubecost>/model/allocation
 ```
@@ -423,6 +423,6 @@ Here, we provide theoretical error bounds for different resolution values given 
 | 30m | -1.00, 60.00 | -1.00, 6.00 |  0.50, 1.00 | 0.98, 1.00 | 1.00, 1.00 |
 | 60m | -1.00, 120.00 | -1.00, 12.00 | -1.00, 1.00 | 0.96, 1.00 | 0.99, 1.00 |
 
-Edit this doc on [Github](https://github.com/kubecost/docs/blob/master/allocation.md)
+Edit this doc on [Github](https://github.com/kubecost/docs/blob/main/allocation.md)
 
 <!--- {"article":"4407595916823","section":"4402829033367","permissiongroup":"1500001277122"} --->

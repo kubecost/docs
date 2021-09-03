@@ -9,7 +9,7 @@ In this guide, you'll find everything you need to set up Kubecost for your team.
 
 ## Quick Installation
 
-Check out our [Installation options](https://github.com/kubecost/docs/blob/master/install.md) to start monitoring and managing your spend in minutes.
+Check out our [Installation options](https://github.com/kubecost/docs/blob/main/install.md) to start monitoring and managing your spend in minutes.
 
 ## Staying in the loop
 
@@ -17,19 +17,19 @@ You can stay up to date with Kubecost by joining us on [Slack](https://join.slac
 
 ## Getting Started
 
-[Troubleshooting installation](https://github.com/kubecost/docs/blob/master/troubleshoot-install.md)  
-[Configuring Kubecost](https://github.com/kubecost/docs/blob/master/getting-started.md)  
-[Understanding cost allocation](https://github.com/kubecost/docs/blob/master/cost-allocation.md)  
+[Troubleshooting installation](https://github.com/kubecost/docs/blob/main/troubleshoot-install.md)  
+[Configuring Kubecost](https://github.com/kubecost/docs/blob/main/getting-started.md)  
+[Understanding cost allocation](https://github.com/kubecost/docs/blob/main/cost-allocation.md)  
 [Cost monitoring best practices](http://blog.kubecost.com/blog/cost-monitoring/)  
 
 ## Advanced Configuration
-[Allocating out of cluster costs (AWS)](https://github.com/kubecost/docs/blob/master/aws-out-of-cluster.md)  
-[Allocating out of cluster costs (Azure)](https://github.com/kubecost/docs/blob/master/azure-out-of-cluster.md)  
-[Allocating out of cluster costs (GCP)](https://github.com/kubecost/docs/blob/master/gcp-out-of-cluster.md)  
-[AWS Spot feed integration](https://github.com/kubecost/docs/blob/master/getting-started.md#spot-nodes)  
+[Allocating out of cluster costs (AWS)](https://github.com/kubecost/docs/blob/main/aws-out-of-cluster.md)  
+[Allocating out of cluster costs (Azure)](https://github.com/kubecost/docs/blob/main/azure-out-of-cluster.md)  
+[Allocating out of cluster costs (GCP)](https://github.com/kubecost/docs/blob/main/gcp-out-of-cluster.md)  
+[AWS Spot feed integration](https://github.com/kubecost/docs/blob/main/getting-started.md#spot-nodes)  
 
 Contact us via email (<team@kubecost.com>) or join us on [Slack](https://join.slack.com/t/kubecost/shared_invite/enQtNTA2MjQ1NDUyODE5LWFjYzIzNWE4MDkzMmUyZGU4NjkwMzMyMjIyM2E0NGNmYjExZjBiNjk1YzY5ZDI0ZTNhZDg4NjlkMGRkYzFlZTU) if you have questions!
 
-Edit this doc on [Github](https://github.com/kubecost/docs/blob/master/index.md)
+Edit this doc on [Github](https://github.com/kubecost/docs/blob/main/index.md)
 
 <!--- {"article":"4407595950359","section":"4402815656599","permissiongroup":"1500001277122"} --->
