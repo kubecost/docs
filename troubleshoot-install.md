@@ -3,12 +3,12 @@ Troubleshoot Install
 
 Once an installation is complete, access the Kubecost frontend to view the status of the product. If the Kubecost UI is unavailable, review these common issues to determine the problem:
 
-&nbsp;&nbsp;[No persistent volumes available](#persistent-volume)  
-&nbsp;&nbsp;[Unable to establish a port-forward connection](#port-forward)  
-&nbsp;&nbsp;[FailedScheduling node-exporter](#node-exporter)  
-&nbsp;&nbsp;[No clusters found](#no-cluster)  
-&nbsp;&nbsp;[Pods running but app won't load](#app-wont-load)  
-&nbsp;&nbsp;[Trying to run on minikube](#minikube)
+[No persistent volumes available](#persistent-volume)  
+[Unable to establish a port-forward connection](#port-forward)  
+[FailedScheduling node-exporter](#node-exporter)  
+[No clusters found](#no-cluster)  
+[Pods running but app won't load](#app-wont-load)  
+[Trying to run on minikube](#minikube)
 
 ## <a name="persistent-volume"></a>Issue: no persistent volumes available for this claim and/or no storage class is set
 

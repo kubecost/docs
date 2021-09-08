@@ -49,4 +49,5 @@ If an install is running KSM v1 and does not plan on updating, it is possible to
 
 Edit this doc on [Github](https://github.com/kubecost/docs/blob/main/ksm-metrics.md)
 
-<!--- {"article":"","section":"4402829033367","permissiongroup":"1500001277122"} --->
+
+<!--- {"article":"4408095797911","section":"4402829033367","permissiongroup":"1500001277122"} --->
