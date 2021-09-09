@@ -135,8 +135,7 @@ spec:
   trafficPolicy:
     tls:
       mode: DISABLE
-````
-
+```
 
 ## Virtual Service
 
@@ -178,4 +177,5 @@ After creating the virtual service, Kubcost should be accessible at the Url
 
 Edit this doc on [Github](https://github.com/kubecost/docs/blob/main/istio-rancher.md)
 
-<!--- {"article":"","section":"4402815636375","permissiongroup":"1500001277122"} --->
+
+<!--- {"article":"4408175613719","section":"4402815636375","permissiongroup":"1500001277122"} --->
