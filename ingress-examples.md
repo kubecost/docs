@@ -74,6 +74,7 @@ Once an AWS Load Balancer Controller is installed, you can use a the following I
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
+  namespace: kubecost # replace if kubecost is installed under another namespace
   name: kubecost-alb-ingress
   annotations:  
     kubernetes.io/ingress.class: alb
