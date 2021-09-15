@@ -1,15 +1,19 @@
-# ETL
+# Cloud Integrations
 
-The ETL is a high level structure within Kubecost tasked with, as it name suggest, extracting cost and usage data from various sources (Prometheus, Thanos, Cloud Service Providers), transforming it into Asset and Allocation objects and loading it into caches that allow for fast querying.
+Integration with the Cloud Service Providers via their respective billing APIs allow Kubecost to display Out-of-Cluster costs, which are the costs incurred on a billing account from Services Outside of the cluster(s) where Kubecost is installed, in addition to the ability to reconcile Kubecosts in-cluster predictions with actual billing data to improve accuracy. For more details on these integrations continue reading below. For guides on how to set up these integrations follow the relevant link:
+- [Multi-Cloud](https://github.com/kubecost/docs/blob/master/multi-cloud.md)
+- [AWS](https://github.com/kubecost/docs/blob/master/aws-cloud-integrations.md)
+- [GCP](https://cloud.google.com/billing/docs/how-to/export-data-bigquery)
+- [Azure](https://docs.microsoft.com/en-us/azure/cost-management-billing/costs/tutorial-export-acm-data?tabs=azure-portal) 
 
 ## Cloud Stores
-The ETL contains a Map of Cloud Stores, each of which represent an integration with a Cloud Service Provider. Each Cloud Store is responsible for the Cloud Asset and Reconciliation Pipelines which add Out-of-Cluster costs and Adjust Kubecost's estimated cost respectively via cost and usage data pulled from the Cloud Service Provider. Each Cloud Store has a unique identifier called the `ProviderKey` which varies depending on which Cloud Service Provider is being connected to and ensures that duplicate configurations are not introduced into the ETL. 
+The ETL contains a Map of Cloud Stores, each of which represent an integration with a Cloud Service Provider. Each Cloud Store is responsible for the Cloud Asset and Reconciliation Pipelines which add Out-of-Cluster costs and Adjust Kubecost's estimated cost respectively via cost and usage data pulled from the Cloud Service Provider. Each Cloud Store has a unique identifier called the `ProviderKey` which varies depending on which Cloud Service Provider is being connected to and ensures that duplicate configurations are not introduced into the ETL. The value of the `ProviderKey` is the following for each Cloud Service Provider at scope that the billing data is being for:
 
-- AWS: Account Id of the Master Billing Account
+- AWS: Account Id
 - GCP: Project Id
 - Azure: Subscription Id
 
-The `ProviderKey` can be used as an argument for the endpoints related to the Cloud Processes (Cloud Assets and Reconciliation), to indicate that the specified operation should only be done on a single Cloud Store rather than all of them, which is the default behaviour. Additionally the Cloud Store keeps track of the Status of the Cloud Connection and Diagnostics for each of the Cloud Processes. The Cloud Connection Status is meant to be used as a tool in determining the health of the Cloud Connection that is the basis of each Cloud Store. The Cloud Connection Status has various failure states that are meant to provide actionable information on how to get your Cloud Connection running properly. These are the Cloud Connection Statuses:
+The `ProviderKey` can be used as an argument for the endpoints for Cloud Assets and Reconciliation, to indicate that the specified operation should only be done on a single Cloud Store rather than all of them, which is the default behaviour. Additionally the Cloud Store keeps track of the Status of the Cloud Connection Diagnostics for each of the Cloud Assets and Reconciliation. The Cloud Connection Status is meant to be used as a tool in determining the health of the Cloud Connection that is the basis of each Cloud Store. The Cloud Connection Status has various failure states that are meant to provide actionable information on how to get your Cloud Connection running properly. These are the Cloud Connection Statuses:
 
  - INITIAL_STATUS is the zero value of Cloud Connection Status and means that cloud connection is untested. Once
 Cloud Connection Status has been changed and it should not return to this value. This status is assigned on creation
@@ -35,7 +39,7 @@ already has a SUCCESSFUL_CONNECTION status then this status should not be set, b
 
 - SUCCESSFUL_CONNECTION: means that the Cloud Integration is properly configured and returning data. This status is set on any successful query where data is returned
 
-After starting or restarting, each of the Cloud Processes begins two subprocesses, one which fills in historic data over the coverage of the Daily Asset Store and one which run periodically, on a predefined interval, to collect and process new cost and usage data as it is made available by the Cloud Service Provider. The ETL's status endpoint contains a `cloud` object that provides information about each Cloud Store including the Cloud Connection Status and diagnostic information about each of the Cloud Processes. The diagnostic items on the Cloud Processes are:
+After starting or restarting Cloud Assets or Reconciliation two subprocesses are started, one which fills in historic data over the coverage of the Daily Asset Store and one which run periodically, on a predefined interval, to collect and process new cost and usage data as it is made available by the Cloud Service Provider. The ETL's status endpoint contains a `cloud` object that provides information about each Cloud Store including the Cloud Connection Status and diagnostic information about Cloud Assets and Reconciliation. The diagnostic items on the Cloud Assets and Reconciliation are:
 
 - Coverage: The window of time that historical subprocess has covered
 - LastRun: The last time that the process ran, updates each time the periodic subprocess runs
@@ -142,3 +146,13 @@ API parameters include the following:
 - `provider` is an optional parameter that takes the Provider Key described above. If included only the specified Cloud Store will run the operation, if it is not included all Cloud Stores in the ETL will run the operation.
 
 ---
+
+`http://<kubecost-address>/model/etl/status`
+
+Description:
+
+Returns a status object for the ETL. This includes a sections for `allocation`, `assets` and `cloud`.
+
+Example uses:
+
+`http://localhost:9090/model/etl/status`
