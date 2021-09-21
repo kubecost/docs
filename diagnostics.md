@@ -84,6 +84,21 @@ NOTE: previous versions of Kubecost (1.81.0 and prior) provided a similar repair
 http://<kubecost-url>:<port>/model/etl/[allocation|assets]/rebuild?window=<RFC3339-start>,<RFC3339-end>&commit=true
 ```
 
+## Kubecost ETL pipeline cloud metrics
+
+Once cloud integrations have been set up, Each Cloud Store will have its own diagnostic view which will include its provider key in the title.
+This view will include the Cloud Connection Status, and metrics for the Reconciliation and Cloud Asset Processes of that provider including:
+
+- Coverage: The window of time that historical subprocess has covered
+- LastRun: The last time that the process ran, updates each time the periodic subprocess runs
+- NextRun: Next scheduled run of the periodic subprocess
+- Progress: Ratio of Coverage to Total amount of time to be covered
+- RefreshRate: The interval that the periodic subprocess runs
+- Resolution: The size of the assets being retrieved
+- StartTime: When the Cloud Process was started
+
+For more information about Cloud Integration and related APIs, read the [cloud-integration](https://github.com/kubecost/docs/blob/master/cloud-integration.md) documentation.
+
 # How to Troubleshoot Missing Metrics
 
 ### Step 1. Confirm you are running the correct version of the metric exporter
