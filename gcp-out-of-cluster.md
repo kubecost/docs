@@ -45,7 +45,7 @@ In Kubecost, navigate to the settings page and click "update" for the "External 
 
 ### Configuring using values.yaml (Recommended)
 
-We recommending providing the GCP details in the [values file](https://github.com/kubecost/cost-analyzer-helm-chart/blob/c10e9475b51612d36da8f04618174a98cc62f8fd/cost-analyzer/values.yaml#L572-L574)  to ensure they are retained during a upgrade or redeploy.
+We recommend providing the GCP details in a Helm [values file](https://github.com/kubecost/cost-analyzer-helm-chart/blob/c10e9475b51612d36da8f04618174a98cc62f8fd/cost-analyzer/values.yaml#L572-L574)  to ensure they are retained during a upgrade or redeploy.
 
 Create a secret for the GCP service account key
 > Note: When managing the service account key as a Kubernetes secret, the secret must reference the service account key json file, and that file must be named `compute-viewer-kubecost-key.json`.
