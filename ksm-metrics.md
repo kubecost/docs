@@ -46,6 +46,13 @@ One of the more obvious questions here is `If the metrics you are emitting cover
 
 If an install is running KSM v1 and does not plan on updating, it is possible to disable the KSM metric replication by passing `--set .kubecostMetrics.emitKsmV1Metrics=false` when installing with helm, or by setting the `EMIT_KSM_V1_METRICS` environment variable passed to the cost-model container to `"false"`.
 
+### Dealing with duplicate metrics when a non-Kubecost KSM is present in the cluster
+
+If there is a deployment of KSM outside of Kubecost, Prometheus deployments that scrape Kubecost and the external KSM will have duplicate metrics for the metrics which both Kubecost and the external KSM emit. Kubecost itself is resilient to duplicate metrics, but other services or queries could be affected. There are a few approaches for handling this problem:
+
+- Remove the external KSM from the cluster. If you do this, only the Kubecost-emitted metrics listed above should be available. This could cause other services that depend on KSM metrics to fail.
+- Rewrite queries that cannot handle duplicate metrics to include a filter on `job=<external-KSM-scrape-job>` or to be generally resilient to duplication using query functions like `avg_over_time`.
+- Run a separate Prometheus for Kubecost alone (the default installation behavior of Kubecost) and disable the scraping of Kubecost's metrics in your other Prometheus configurations.
 
 Edit this doc on [Github](https://github.com/kubecost/docs/blob/main/ksm-metrics.md)
 
