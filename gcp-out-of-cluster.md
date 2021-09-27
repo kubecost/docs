@@ -10,7 +10,7 @@ The following guide provides the steps required for allocating out of cluster co
 
 If your Big Query dataset is in a different project than the one were Kubecost is installed see the section on [Cross-Project Service Accounts](#cross-project-service-account-configuration)
 
-Add a service key to allocate out of cluster resources (e.g. storage buckets and managed databases) back to their Kubernetes owners. The servic}e account needs the following:
+Add a service key to allocate out of cluster resources (e.g. storage buckets and managed databases) back to their Kubernetes owners. The service account needs the following:
 ```
 roles/bigquery.user
 roles/compute.viewer
