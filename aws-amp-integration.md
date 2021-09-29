@@ -127,7 +127,7 @@ ___
 
 To verify that the integration is set up, check that the `Prometheus Status` section on Kubecost Settings page does not contain any errors.
 
-<img width="500" alt="Kubecost status no errors" src="https://user-images.githubusercontent.com/22844059/132998278-fd388e9a-8d61-4b8b-ad1c-0e52f17ca251.png">
+![Prometheus status screenshot](https://user-images.githubusercontent.com/22844059/132998278-fd388e9a-8d61-4b8b-ad1c-0e52f17ca251.png)
 
 Have a look at the [Custom Prometheus integration troubleshooting guide](https://docs.kubecost.com/custom-prom.html#troubleshooting-issues) if you run into any errors while setting up the integration. You're also welcome to [reach out to us on Slack](https://join.slack.com/t/kubecost/shared_invite/enQtNTA2MjQ1NDUyODE5LWFjYzIzNWE4MDkzMmUyZGU4NjkwMzMyMjIyM2E0NGNmYjExZjBiNjk1YzY5ZDI0ZTNhZDg4NjlkMGRkYzFlZTU) if you require further assistance.
 
