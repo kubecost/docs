@@ -1,5 +1,4 @@
-Amazon Managed Service for Prometheus
-=====================
+# Amazon Managed Service for Prometheus
 
 [Amazon Managed Service for Prometheus (AMP)](https://docs.aws.amazon.com/prometheus/index.html) is a Prometheus-compatible monitoring service that makes it easy to monitor containerized applications at scale. AMP is currently available in Public Preview mode.
 
@@ -14,7 +13,7 @@ You should first have successfully created an AMP workspace and ingesting Promet
 
 ## 2. Set up Kubecost to use your Prometheus configured with Amazon Managed Service for Prometheus (AMP)
 
-First, download the [values file](https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/values.yaml) and set [`prometheus.enabled`](https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/values.yaml#L4) to `false`, and [`prometheus.fqdn`](https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/values.yaml#L5) to the URL of your Prometheus service address, starting with `http://`. Note that this address is *not* your AMP remote write URL but your Prometheus cluster address, e.g. `http://prometheus-server.prometheus.svc.cluster.local`. 
+First, download the [values file](https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/values.yaml) and set [`prometheus.enabled`](https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/values.yaml#L4) to `false`, and [`prometheus.fqdn`](https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/values.yaml#L5) to the URL of your Prometheus service address, starting with `http://`. Note that this address is _not_ your AMP remote write URL but your Prometheus cluster address, e.g. `http://prometheus-server.prometheus.svc.cluster.local`.
 
 Then, navigate to the directory of the file and apply the changes by running the following `helm` command:
 
@@ -96,16 +95,6 @@ serverFiles:
             record: kubecost_savings_memory_allocation_bytes
             labels:
               daemonset: "true"
-          - expr: label_replace(sum(kube_pod_status_phase{phase="Running",namespace!="kube-system"} > 0) by (pod, namespace), "pod_name", "$1", "pod", "(.+)")
-            record: kubecost_savings_running_pods
-          - expr: sum(rate(container_cpu_usage_seconds_total{container_name!="",container_name!="POD",instance!=""}[5m])) by (namespace, pod_name, container_name, instance)
-            record: kubecost_savings_container_cpu_usage_seconds
-          - expr: sum(container_memory_working_set_bytes{container_name!="",container_name!="POD",instance!=""}) by (namespace, pod_name, container_name, instance)
-            record: kubecost_savings_container_memory_usage_bytes
-          - expr: avg(sum(kube_pod_container_resource_requests{resource="cpu", unit="core", namespace!="kube-system"}) by (pod, namespace, instance)) by (pod, namespace)
-            record: kubecost_savings_pod_requests_cpu_cores
-          - expr: avg(sum(kube_pod_container_resource_requests{resource="memory", unit="byte", namespace!="kube-system"}) by (pod, namespace, instance)) by (pod, namespace)
-            record: kubecost_savings_pod_requests_memory_bytes
 ```
 
 Lastly, apply the changes:
@@ -115,7 +104,7 @@ $ helm upgrade --install prometheus-for-amp prometheus-community/prometheus -n p
 --set-file extraScrapeConfigs=extra_scrape_configs.yaml
 ```
 
-To check that the rules were applied successfully, run Kubecost locally and check that `Prometheus Status` on the Settings page indicates `Kubecost recording rules available in Prometheus` and `Kubecost cost-model metrics available in Prometheus`. 
+To check that the rules were applied successfully, run Kubecost locally and check that `Prometheus Status` on the Settings page indicates `Kubecost recording rules available in Prometheus` and `Kubecost cost-model metrics available in Prometheus`.
 
 ```
 # replace `kubecost` and `deployment/kubecost-cost-analyzer` if needed
@@ -123,7 +112,8 @@ $ kubectl port-forward --namespace kubecost deployment/kubecost-cost-analyzer 90
 ```
 
 Et voilà!
-___
+
+---
 
 To verify that the integration is set up, check that the `Prometheus Status` section on Kubecost Settings page does not contain any errors.
 
