@@ -157,6 +157,39 @@ Here is an example allocation for the `cost-model` container in a pod in Kubecos
 - `__unallocated__` refers to aggregated allocations without the selected `aggregate` field; e.g. aggregating by `label:app` might produce an `__unallocated__` allocation composed of allocations without the `app` label.
 - `__unmounted__` (or "Unmounted PVs") refers to the resources used by PersistentVolumes that aren't mounted to a Pod using a PVC, and thus cannot be allocated to a Pod.
 
+#### Negative Idle
+
+> Negative idle can be caused by problems with metrics. Consult Kubecost's [diagnostics](https://github.com/kubecost/docs/blob/main/diagnostics.md) to make sure Kubecost is functioning correctly first.
+
+It is possible to have a negative idle cost that is technically valid in the following
+situation:
+
+- You have workloads that _request_ resources, but do not use all of them AND
+- You have workloads the _use_ resources beyond the scheduled capacity of the node
+
+For example, say you have 1 node with 4 CPU and 8GB RAM.
+
+- Workload A requests 3 CPU and uses 0
+- Workload B requests 0.5 CPU and uses 3
+- Workload X requests 7 GB RAM and uses 0
+- Workload Y requests 500 MB RAM and uses 6 GB
+
+These workloads will schedule on the node successfully based on their resource
+requests and workloads B and Y shouldn't be evicted unless A or X start using
+some of the resource they technically have allocated and the node encounters
+resource pressure.
+
+Kubecost calculates the cost of workloads based on the "allocated" resources,
+defined as max(request, usage). The above situations is a valid Kubernetes state
+but is technically an "overallocation" of cluster resources because the total
+allocation of CPU is `3 + 3 = 6 > 4` and the total allocation of RAM is
+`7 + 6 = 13 > 8`.
+
+Idle is the cost of unallocated resources, but in this situation there are
+negative unallocated resources (specifically, -2 CPU and -5 GB RAM), thus
+resulting in a negative idle cost.
+
+
 ## Querying
 
 ```
