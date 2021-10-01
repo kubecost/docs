@@ -3,7 +3,6 @@ APIs
 
 This resource covers primary APIs across open source and commercial Kubecost products.
 
-
 # Open source APIs
 
 __[/costDataModel](https://github.com/kubecost/docs/blob/main/allocation-api.md#cost-model-api)__
@@ -14,16 +13,15 @@ __/costDataModelRange__
 
 Time-series version of /costDataModel API. Does not include ETL caching layer and therefore optimal for small to medium-sized clusters.
 
+__[/aggregatedCostModel](https://github.com/kubecost/docs/blob/main/allocation-api.md#aggregated-cost-model-api)__
+
+Aggregated version of the costDataModelRange API, which gives cumulative and rate-based data (as opposed to time series data) for a given aggregation (e.g. namespace, deployment, pod). (This API is actively being replaced by the Allocation API.)
 
 # Other APIs (available in Free tier)
 
 __[/allocation](https://github.com/kubecost/docs/blob/main/allocation.md)__
 
 The Kubecost Allocation API is used by the Kubecost Allocation frontend and retrieves cost allocation information for any Kubernetes concept, e.g. cost by namespace, label, deployment, service and more. This API is directly integrated with the Kubecost ETL caching layer and CSV pipeline so it is able to scale to large clusters.
-
-__[/aggregatedCostModel](https://github.com/kubecost/docs/blob/main/allocation-api.md#aggregated-cost-model-api)__
-
-The aggregated cost model API is actively being replaced by the Kubecost Allocation API.
 
 __[/assets](https://github.com/kubecost/docs/blob/main/assets.md)__
 
