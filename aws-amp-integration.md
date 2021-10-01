@@ -123,4 +123,5 @@ Have a look at the [Custom Prometheus integration troubleshooting guide](https:/
 
 Edit this doc on [Github](https://github.com/kubecost/docs/blob/main/aws-amp-integration.md)
 
-<!--- {"article":"","section":"4402829036567","permissiongroup":"1500001277122"} --->
+
+<!--- {"article":"4409859798679","section":"4402829036567","permissiongroup":"1500001277122"} --->
