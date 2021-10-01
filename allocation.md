@@ -159,7 +159,7 @@ Here is an example allocation for the `cost-model` container in a pod in Kubecos
 
 #### Negative Idle
 
-> Negative idle can be caused by problems with metrics. Consult Kubecost's diagnostics to make sure Kubecost is functioning correctly first.
+> Negative idle can be caused by problems with metrics. Consult Kubecost's [diagnostics](https://github.com/kubecost/docs/blob/main/diagnostics.md) to make sure Kubecost is functioning correctly first.
 
 It is possible to have a negative idle cost that is technically valid in the following
 situation:
