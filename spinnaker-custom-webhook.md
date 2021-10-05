@@ -10,7 +10,7 @@ webhook:
     type: getRequestSizing
     enabled: true
     description: Custom stage to get request sizing for a running container
-    method: POST
+    method: GET
     url: "${parameterValues['kubecost_url']}//model/savings/requestSizing?algorithm=max-headroom&window=${parameterValues['time_window']}&targetCPUUtilization=${parameterValues['target_cpu_utilization']}&targetRAMUtilization=${parameterValues['target_ram_utilization']}&filterContainers=${parameterValues['container_name']}&filterControllers=${parameterValues['controller_name']}&filterNamespaces=${parameterValues['namespace']}"
     parameters:
       - label: "Kubecost API URL"
