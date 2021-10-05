@@ -11,29 +11,14 @@ webhook:
     enabled: true
     description: Custom stage to get request sizing for a running container
     method: POST
-    url: "${parameterValues['kubecost_url']}"
-    payload: |-
-      {
-        "container_name": "${parameterValues['container_name']}",
-        "controller_type": "${parameterValues['controller_type']}",
-        "name": "${parameterValues['name']}",
-        "namespace": "${parameterValues['namespace']}",
-        "percentile": "${parameterValues['percentile']}",
-        "target_cpu_util": "${parameterValues['target_cpu_utilization']}",
-        "target_ram_util": "${parameterValues['target_ram_utilization']}",
-        "window": "${parameterValues['time_window']}"
-      }
-      parameters:
+    url: "${parameterValues['kubecost_url']}//model/savings/requestSizing?algorithm=max-headroom&window=${parameterValues['time_window']}&targetCPUUtilization=${parameterValues['target_cpu_utilization']}&targetRAMUtilization=${parameterValues['target_ram_utilization']}&filterContainers=${parameterValues['container_name']}&filterControllers=${parameterValues['controller_name']}&filterNamespaces=${parameterValues['namespace']}"
+    parameters:
       - label: "Kubecost API URL"
         name: kubecost_url
         description: "Fully qualified Url to the requestSizing api"
         type: string
-      - label: "Controller Type"
-        name: controller_type
-        description: "What type of Kubernetes controller [deployment or statefulset]"
-        type: string
       - label: "Controller Name"
-        name: name
+        name: controller_name
         description: "Name of the controller"
         type: string
       - label: "Container Name"
@@ -44,11 +29,6 @@ webhook:
         name: namespace
         description: "Namespace where controller and container are running"
         type: string
-      - label: "Percentile Target"
-        name: percentile
-        description: "Target percentile for the recommendation"
-        type: string
-        defaultValue: 0.98
       - label: "Target CPU Utilization"
         name: target_cpu_utilization
         description: "Target CPU utilization for the recommendation"
