@@ -6,6 +6,14 @@ Integration with the Cloud Service Providers via their respective billing APIs a
 - [GCP](https://cloud.google.com/billing/docs/how-to/export-data-bigquery)
 - [Azure](https://docs.microsoft.com/en-us/azure/cost-management-billing/costs/tutorial-export-acm-data?tabs=azure-portal) 
 
+## Cloud Integration Configurations
+The Kubecost helm chart provides values which can enable or disable each cloud process on the deployment once a cloud integration has been set up.
+
+Value | Default | Description
+--: | :--: | :--
+`.Values.kubecostModel.etlAssetReconciliationEnabled` | true | Enables Reconciliation processes and endpoints. Corresponds to `ETL_ASSET_RECONCILIATION_ENABLED` environment variable.
+`.Values.kubecostModel.etlAssetReconciliationEnabled` | true | Enables Cloud Assets processes and endpoints. Corresponds to `ETL_CLOUD_ASSETS_ENABLED` environment variable.
+
 ## Cloud Stores
 The ETL contains a Map of Cloud Stores, each of which represent an integration with a Cloud Service Provider. Each Cloud Store is responsible for the Cloud Asset and Reconciliation Pipelines which add Out-of-Cluster costs and Adjust Kubecost's estimated cost respectively via cost and usage data pulled from the Cloud Service Provider. Each Cloud Store has a unique identifier called the `ProviderKey` which varies depending on which Cloud Service Provider is being connected to and ensures that duplicate configurations are not introduced into the ETL. The value of the `ProviderKey` is the following for each Cloud Service Provider at scope that the billing data is being for:
 
@@ -48,6 +56,7 @@ After starting or restarting Cloud Assets or Reconciliation two subprocesses are
 - RefreshRate: The interval that the periodic subprocess runs
 - Resolution: The size of the assets being retrieved
 - StartTime: When the Cloud Process was started
+
 
 ## EndPoints
 
