@@ -1,10 +1,27 @@
 # Cloud Integrations
 
-Integration with the Cloud Service Providers via their respective billing APIs allow Kubecost to display Out-of-Cluster costs, which are the costs incurred on a billing account from Services Outside of the cluster(s) where Kubecost is installed, in addition to the ability to reconcile Kubecosts in-cluster predictions with actual billing data to improve accuracy. For more details on these integrations continue reading below. For guides on how to set up these integrations follow the relevant link:
+Integration with the Cloud Service Providers via their respective billing APIs allow Kubecost to display out-of-cluster costs, which are the costs incurred on a billing account from Services Outside of the cluster(s) where Kubecost is installed, in addition to the ability to reconcile Kubecosts in-cluster predictions with actual billing data to improve accuracy. For more details on these integrations continue reading below. For guides on how to set up these integrations follow the relevant link:
 - [Multi-Cloud](https://github.com/kubecost/docs/blob/master/multi-cloud.md)
 - [AWS](https://github.com/kubecost/docs/blob/master/aws-cloud-integrations.md)
 - [GCP](https://cloud.google.com/billing/docs/how-to/export-data-bigquery)
 - [Azure](https://docs.microsoft.com/en-us/azure/cost-management-billing/costs/tutorial-export-acm-data?tabs=azure-portal) 
+
+## Cloud Processes
+As indicated above, setting up a cloud integration with your Cloud Service Provider allows Kubecost to pull in additional billing data. The two processes that incorporate this information are Reconciliation and Cloud Assets.
+
+### Reconciliation
+Reconciliation matches in-cluster Assets with items found in the billing data pulled from the Cloud Service Provider. This allows kubecost to display the most accurate depiction of your in-cluster spend. Additionally, the reconciliation process creates `Network` assets for in-cluster nodes based on the information in the billing data. The main drawback of this process is that the Cloud Service Providers have between a 6 to 24 hour delay in releasing billing data, and reconciliation requires a complete day of cost data to reconcile with the in-cluster assets. This requires a 48 hour window between the resource usage and reconciliation. If reconciliation is performed within this window, asset cost is deflated to the partially complete cost shown in the billing data.
+
+### Cloud Assets
+The Cloud Assets process allows Kubecost to pull in out-of-cluster cloud spend from your Cloud Service Provider's billing data. This includes any services run by the Cloud Service Provider in addition to compute resources outside of clusters monitored by Kubecost. Additionally, by labeling these Cloud Assets their cost can be distributed to Allocations as external costs. This can help teams get a better understanding of the proportion of out-of-cluster cloud spend that their in-cluster usage is dependant on. Cloud Assets become available as soon as they appear in the billing data, with the 6 to 24 hour delay mentioned above, and are updated as they become more complete.
+
+## Cloud Integration Configurations
+The Kubecost helm chart provides values which can enable or disable each cloud process on the deployment once a cloud integration has been set up. Turning off either of these processes will disable all the benefits provided by them.
+
+Value | Default | Description
+--: | :--: | :--
+`.Values.kubecostModel.etlAssetReconciliationEnabled` | true | Enables Reconciliation processes and endpoints. Corresponds to `ETL_ASSET_RECONCILIATION_ENABLED` environment variable.
+`.Values.kubecostModel.etlCloudAssets` | true | Enables Cloud Assets processes and endpoints. Corresponds to `ETL_CLOUD_ASSETS_ENABLED` environment variable.
 
 ## Cloud Stores
 The ETL contains a Map of Cloud Stores, each of which represent an integration with a Cloud Service Provider. Each Cloud Store is responsible for the Cloud Asset and Reconciliation Pipelines which add Out-of-Cluster costs and Adjust Kubecost's estimated cost respectively via cost and usage data pulled from the Cloud Service Provider. Each Cloud Store has a unique identifier called the `ProviderKey` which varies depending on which Cloud Service Provider is being connected to and ensures that duplicate configurations are not introduced into the ETL. The value of the `ProviderKey` is the following for each Cloud Service Provider at scope that the billing data is being for:
@@ -48,6 +65,7 @@ After starting or restarting Cloud Assets or Reconciliation two subprocesses are
 - RefreshRate: The interval that the periodic subprocess runs
 - Resolution: The size of the assets being retrieved
 - StartTime: When the Cloud Process was started
+
 
 ## EndPoints
 
