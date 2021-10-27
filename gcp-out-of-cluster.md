@@ -1,6 +1,6 @@
-Kubecost provides the ability to allocate out of clusters costs, e.g. Cloud SQL instances and Cloud Storage buckets, back to Kubernetes concepts like namespace and deployment. All data remains on your cluster when using this functionality and is not shared externally. Read the [Cloud Integrations](https://github.com/kubecost/docs/blob/master/cloud-integration.md) docomentation for more information on how Kubecost connects with Cloud Service Providers.
+Kubecost provides the ability to allocate out of clusters costs, e.g. Cloud SQL instances and Cloud Storage buckets, back to Kubernetes concepts like namespace and deployment. All data remains on your cluster when using this functionality and is not shared externally. Read the [Cloud Integrations](https://github.com/kubecost/docs/blob/master/cloud-integration.md) documentation for more information on how Kubecost connects with Cloud Service Providers.
 
-The following guide provides the steps required for allocating out of cluster costs.
+The following guide provides the steps required for allocating out-of-cluster costs.
 
 ## Step 1: Enable billing data export
 
@@ -36,7 +36,7 @@ You can then get your service account key to paste into the UI (be careful with 
 
 In Kubecost, navigate to the settings page and click "update" for the "External Cloud Cost Configuration (GCP)" setting, then follow the remaining instructions found at the "Add Key" link:
 
-![GCP out of cluster key entry](/images/gcp-out-of-cluster-config-wo-shell.png)
+![GCP out-of-cluster key entry](/images/gcp-out-of-cluster-config-wo-shell.png)
 
 
 <a name="bq-name"></a>**BigQuery dataset** requires a BigQuery dataset prefix (e.g. billing_data) in addition to the BigQuery table name. A full example is `billing_data.gcp_billing_export_v1_018AIF_74KD1D_534A2`.
@@ -64,7 +64,7 @@ To use an alternative or existing label schema for GCP cloud assets, you may sup
 
 ## Cross-Project Service Account Configuration
 
-Due to organizational constraints, it is common that Kubecost must be run in a separate project from the project containing the billing data Big Query dataset which is needed for Cloud Integration. It is still possible to configure Kubecost in this scenario, but some of the values in the above script will need to be changed. First you will need the project id of the projects where Kubecost is installed and where the Big Query dataset are located. Additionally you will need a `gcloud` user with the permissions `iam.serviceAccounts.setIamPolicy` for the kubecost project and the ability to manage the roles listed above for the Big Query Project. With these fill in the following script to set the relevant variables:
+Due to organizational constraints, it is common that Kubecost must be run in a separate project from the project containing the billing data Big Query dataset which is needed for Cloud Integration. It is still possible to configure Kubecost in this scenario, but some of the values in the above script will need to be changed. First you will need the project id of the projects where Kubecost is installed and where the Big Query dataset is located. Additionally you will need a `gcloud` user with the permissions `iam.serviceAccounts.setIamPolicy` for the kubecost project and the ability to manage the roles listed above for the Big Query Project. With these fill in the following script to set the relevant variables:
 ```
 export KUBECOST_PROJECT_ID=<Project ID where kubecost is installed>
 export BIG_QUERY_PROJECT_ID=<Project ID where bigquery data is stored>
