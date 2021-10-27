@@ -10,13 +10,13 @@ Integration with the Cloud Service Providers via their respective billing APIs a
 As indicated above, setting up a cloud integration with your Cloud Service Provider allows Kubecost to pull in additional billing data. The two processes that incorporate this information are Reconciliation and Cloud Assets.
 
 ### Reconciliation
-Reconciliation matches in-cluster Assets with items found in the billing data pulled from the Cloud Service Provider. This allows kubecost to display the most accurate depiction of your in-cluster spend. Additionally, the reconciliation process creates `Network` assets for in-cluster nodes based on the information in the billing data. The main drawback of this process is that the Cloud Service Providers have between a 6 to 24 hour delay in releasing billing data, and reconciliation requires a complete day of cost data to reconcile with the in-cluster assets. This requires a 48 hour window between the resource usage and reconciliation. If reconciliation is performed within this window, asset cost is deflated to the partially complete cost shown in the billing data.
+Reconciliation matches in-cluster Assets with items found in the billing data pulled from the Cloud Service Provider. This allows Kubecost to display the most accurate depiction of your in-cluster spend. Additionally, the reconciliation process creates `Network` assets for in-cluster nodes based on the information in the billing data. The main drawback of this process is that the Cloud Service Providers have between a 6 to 24 hour delay in releasing billing data, and reconciliation requires a complete day of cost data to reconcile with the in-cluster assets. This requires a 48 hour window between resource usage and reconciliation. If reconciliation is performed within this window, asset cost is deflated to the partially complete cost shown in the billing data.
 
 ### Cloud Assets
 The Cloud Assets process allows Kubecost to pull in out-of-cluster cloud spend from your Cloud Service Provider's billing data. This includes any services run by the Cloud Service Provider in addition to compute resources outside of clusters monitored by Kubecost. Additionally, by labeling these Cloud Assets their cost can be distributed to Allocations as external costs. This can help teams get a better understanding of the proportion of out-of-cluster cloud spend that their in-cluster usage is dependant on. Cloud Assets become available as soon as they appear in the billing data, with the 6 to 24 hour delay mentioned above, and are updated as they become more complete.
 
 ## Cloud Integration Configurations
-The Kubecost helm chart provides values which can enable or disable each cloud process on the deployment once a cloud integration has been set up. Turning off either of these processes will disable all the benefits provided by them.
+The Kubecost helm chart provides values that can enable or disable each cloud process on the deployment once a cloud integration has been set up. Turning off either of these processes will disable all the benefits provided by them.
 
 Value | Default | Description
 --: | :--: | :--
@@ -24,13 +24,13 @@ Value | Default | Description
 `.Values.kubecostModel.etlCloudAssets` | true | Enables Cloud Assets processes and endpoints. Corresponds to `ETL_CLOUD_ASSETS_ENABLED` environment variable.
 
 ## Cloud Stores
-The ETL contains a Map of Cloud Stores, each of which represent an integration with a Cloud Service Provider. Each Cloud Store is responsible for the Cloud Asset and Reconciliation Pipelines which add Out-of-Cluster costs and Adjust Kubecost's estimated cost respectively via cost and usage data pulled from the Cloud Service Provider. Each Cloud Store has a unique identifier called the `ProviderKey` which varies depending on which Cloud Service Provider is being connected to and ensures that duplicate configurations are not introduced into the ETL. The value of the `ProviderKey` is the following for each Cloud Service Provider at scope that the billing data is being for:
+The ETL contains a Map of Cloud Stores, each of which represents an integration with a Cloud Service Provider. Each Cloud Store is responsible for the Cloud Asset and Reconciliation Pipelines which add Out-of-Cluster costs and Adjust Kubecost's estimated cost respectively via cost and usage data pulled from the Cloud Service Provider. Each Cloud Store has a unique identifier called the `ProviderKey` which varies depending on which Cloud Service Provider is being connected to and ensures that duplicate configurations are not introduced into the ETL. The value of the `ProviderKey` is the following for each Cloud Service Provider at a scope that the billing data is being for:
 
 - AWS: Account Id
 - GCP: Project Id
 - Azure: Subscription Id
 
-The `ProviderKey` can be used as an argument for the endpoints for Cloud Assets and Reconciliation, to indicate that the specified operation should only be done on a single Cloud Store rather than all of them, which is the default behaviour. Additionally the Cloud Store keeps track of the Status of the Cloud Connection Diagnostics for each of the Cloud Assets and Reconciliation. The Cloud Connection Status is meant to be used as a tool in determining the health of the Cloud Connection that is the basis of each Cloud Store. The Cloud Connection Status has various failure states that are meant to provide actionable information on how to get your Cloud Connection running properly. These are the Cloud Connection Statuses:
+The `ProviderKey` can be used as an argument for the endpoints for Cloud Assets and Reconciliation, to indicate that the specified operation should only be done on a single Cloud Store rather than all of them, which is the default behavior. Additionally, the Cloud Store keeps track of the Status of the Cloud Connection Diagnostics for each of the Cloud Assets and Reconciliation. The Cloud Connection Status is meant to be used as a tool in determining the health of the Cloud Connection that is the basis of each Cloud Store. The Cloud Connection Status has various failure states that are meant to provide actionable information on how to get your Cloud Connection running properly. These are the Cloud Connection Statuses:
 
  - INITIAL_STATUS is the zero value of Cloud Connection Status and means that cloud connection is untested. Once
 Cloud Connection Status has been changed and it should not return to this value. This status is assigned on creation
@@ -45,7 +45,7 @@ is assigned during failures in Configuration Retrieval.
 - FAILED_CONNECTION: means that all required Cloud Configuration values are filled in, but a connection with the
 Cloud Provider cannot be established. This is indicative of a typo in one of the Cloud Configuration values or an
 issue in how the connection was set up in the Cloud Provider's Console. The assignment of this status varies
-between Providers, but should happen if there if an error is thrown when an interaction with an object from
+between Providers but should happen if there if an error is thrown when an interaction with an object from
 from the Cloud Service Provider's SDK occurs.
 
 - MISSING_DATA:  means that the Cloud Integration is properly configured, but the cloud provider is not returning
@@ -56,7 +56,7 @@ already has a SUCCESSFUL_CONNECTION status then this status should not be set, b
 
 - SUCCESSFUL_CONNECTION: means that the Cloud Integration is properly configured and returning data. This status is set on any successful query where data is returned
 
-After starting or restarting Cloud Assets or Reconciliation two subprocesses are started, one which fills in historic data over the coverage of the Daily Asset Store and one which run periodically, on a predefined interval, to collect and process new cost and usage data as it is made available by the Cloud Service Provider. The ETL's status endpoint contains a `cloud` object that provides information about each Cloud Store including the Cloud Connection Status and diagnostic information about Cloud Assets and Reconciliation. The diagnostic items on the Cloud Assets and Reconciliation are:
+After starting or restarting Cloud Assets or Reconciliation two subprocesses are started, one which fills in historic data over the coverage of the Daily Asset Store and one which runs periodically, on a predefined interval, to collect and process new cost and usage data as it is made available by the Cloud Service Provider. The ETL's status endpoint contains a `cloud` object that provides information about each Cloud Store including the Cloud Connection Status and diagnostic information about Cloud Assets and Reconciliation. The diagnostic items on the Cloud Assets and Reconciliation are:
 
 - Coverage: The window of time that historical subprocess has covered
 - LastRun: The last time that the process ran, updates each time the periodic subprocess runs
@@ -85,7 +85,7 @@ Example uses:
 
 API parameters include the following:
 
-- `commit` a boolean flag that acts as a safety precaution, these can be long running processes so this endpoint should not be run arbitrarily. a `true` value restarts the process.
+- `commit` is a boolean flag that acts as a safety precaution, these can be long-running processes so this endpoint should not be run arbitrarily. a `true` value restarts the process.
 
 - `provider` is an optional parameter that takes the Provider Key described above. If included only the specified Cloud Store will run the operation, if it is not included all Cloud Stores in the ETL will run the operation.
 
@@ -121,7 +121,7 @@ API parameters include the following:
 
 Description:
 
-Completely restart Reconciliation Pipeline. This operation ends the currently running Reconciliation Pipeline and reconconciles historic Assets in the Daily Asset Store.
+Completely restart Reconciliation Pipeline. This operation ends the currently running Reconciliation Pipeline and reconciles historic Assets in the Daily Asset Store.
 
 Example uses:
 
@@ -133,7 +133,7 @@ Example uses:
 
 API parameters include the following:
 
-- `commit` a boolean flag that acts as a safety precaution, these can be long running processies so this endpoint should not be run arbitrarily. a `true` value restarts the process.
+- `commit` a boolean flag that acts as a safety precaution, these can be long running processes so this endpoint should not be run arbitrarily. a `true` value restarts the process.
 
 - `provider` an optional parameter that takes the Provider Key described above. If included only the specified Cloud Store will run the operation, if it is not included all Cloud Stores in the ETL will run the operation.
 
@@ -169,7 +169,7 @@ API parameters include the following:
 
 Description:
 
-Returns a status object for the ETL. This includes a sections for `allocation`, `assets` and `cloud`.
+Returns a status object for the ETL. This includes sections for `allocation`, `assets`, and `cloud`.
 
 Example uses:
 
