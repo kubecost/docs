@@ -1,8 +1,8 @@
 ## Installing in Air-gapped Environments
 
-FAQ for installing in Kubecost in air-gapped environment
+FAQ for installing in Kubecost in an air-gapped environment
 
-### Q: I have to put container images in to a private registry to use them in my cluster. What images do I need?
+### Q: I have to put container images into a private registry to use them in my cluster. What images do I need?
 
 **A:** The following images will need to be downloaded. Please substitute the appropriate version
 for prod-x.xx.x. [Latest releases can be found here](https://github.com/kubecost/cost-analyzer-helm-chart/releases).
@@ -34,5 +34,5 @@ for prod-x.xx.x. [Latest releases can be found here](https://github.com/kubecost
 
 There are two options to configure asset prices in your on-premise Kubernetes environment:
 
-* *Simple pipeline:* per component prices can be configured in a helm values file ([reference](https://github.com/kubecost/cost-analyzer-helm-chart/blob/6c0975614b4a6854be602d1a6f9506ce8b80abdc/cost-analyzer/values.yaml#L559-L570)) or directly in the Kubecost Settings page. This allows your to directly supply the cost of a CPU month, RAM Gb month, etc.
-* *Advanced pipeline:* this method allows each individual asset in your environment to have a unique price. This leverages the Kubecost custom CSV pipeline which is available on Enterprise plans. Contact us team@kubecost.com to learn more.
+* *Simple pipeline:* per component prices can be configured in a helm values file ([reference](https://github.com/kubecost/cost-analyzer-helm-chart/blob/6c0975614b4a6854be602d1a6f9506ce8b80abdc/cost-analyzer/values.yaml#L559-L570)) or directly in the Kubecost Settings page. This allows you to directly supply the cost of a CPU month, RAM Gb month, etc.
+* *Advanced pipeline:* this method allows each individual asset in your environment to have a unique price. This leverages the Kubecost custom CSV pipeline which is available on Enterprise plans. Contact us at team@kubecost.com to learn more.
