@@ -30,7 +30,7 @@ Next, you'll want to register that role with Azure:
 az role definition create --verbose --role-definition @myrole.json
 ```
 
-Next, create an Azure Service Principle.
+Next, create an Azure Service Principal.
 
 ```
 az ad sp create-for-rbac --name "MyServicePrincipal" --role "MyRateCardRole" --sdk-auth true > my_credentials.json
