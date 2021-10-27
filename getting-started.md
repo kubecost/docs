@@ -25,13 +25,13 @@ __Next Steps__
 
 The default Kubecost installation comes with a 32Gb persistent volume and a 15-day retention period for Prometheus metrics. This is enough space to retain data for ~300 pods, depending on your exact node and container count. See the Kubecost Helm chart [configuration options](https://github.com/kubecost/cost-analyzer-helm-chart) to adjust both retention period and storage size.
 
-To determine the appropriate disk size, you can use this formulate to approximate:
+To determine the appropriate disk size, you can use this formula to approximate:
 
 ```
 needed_disk_space = retention_time_minutes * ingested_samples_per_minutes * bytes_per_sample
 ```
 
-Where ingested samples can be measured as the average over a recent period, e.g. `sum(avg_over_time(scrape_samples_post_metric_relabeling[24h]))`. On average, Prometheus uses around 1.5-2 bytes per sample. So ingesting 100k samples per minute and retaining for 15 days would demand around 40gb. It's recommended to add another 20-30% capacity for headroom and WAL. More info on disk sizing [here](https://prometheus.io/docs/prometheus/latest/storage/#operational-aspects).
+Where ingested samples can be measured as the average over a recent period, e.g. `sum(avg_over_time(scrape_samples_post_metric_relabeling[24h]))`. On average, Prometheus uses around 1.5-2 bytes per sample. So ingesting 100k samples per minute and retaining for 15 days would demand around 40 GB. It's recommended to add another 20-30% capacity for headroom and WAL. More info on disk sizing [here](https://prometheus.io/docs/prometheus/latest/storage/#operational-aspects).
 
 **Note:** We do not recommend retaining greater than 30 days of data in Prometheus for larger clusters. For long-term data retention, contact us (team@kubecost.com) about Kubecost with durable storage enabled.
 
@@ -39,9 +39,9 @@ Where ingested samples can be measured as the average over a recent period, e.g.
 
 ## <a name="custom-prom"></a>Bring your own Prometheus or Grafana
 
-The Kubecost Prometheus deployment is used as both as a source and a sink for cost & capacity metrics. It's optimized to not interfere with other observability instrumentation and by default only contains metrics that are useful to the Kubecost product. This amounts to retaining 70-90% fewer metrics than a standard Prometheus deployment.
+The Kubecost Prometheus deployment is used both as a source and a sink for cost & capacity metrics. It's optimized to not interfere with other observability instrumentation and by default only contains metrics that are useful to the Kubecost product. This amounts to retaining 70-90% fewer metrics than a standard Prometheus deployment.
 
-For the best experience, we generally recommend teams use the bundled `prometheus-server` & `grafana` but reuse their existing `kube-state-metrics` and `node-exporter` deployments if they already exist. This setup allows for the easiest installation process, easiest on-going maintenance, minimal duplication of metrics, and more flexible metric retention.
+For the best experience, we generally recommend teams use the bundled `prometheus-server` & `grafana` but reuse their existing `kube-state-metrics` and `node-exporter` deployments if they already exist. This setup allows for the easiest installation process, easiest ongoing maintenance, minimal duplication of metrics, and more flexible metric retention.
 
 That being said, we do support using an existing Grafana & Prometheus installation in our paid products today. You can see basic setup instructions [here](/custom-prom.md). In our free product, we only provide best efforts support for this integration because of the nuances required in completing this integration successfully. Please contact us (team@kubecost.com) if you want to learn more or if you think we can help!
 
@@ -49,17 +49,17 @@ That being said, we do support using an existing Grafana & Prometheus installati
 
 It's recommended that users set and/or update resource requests and limits before taking Kubecost into production at scale. These inputs can be configured in the Kubecost [values.yaml](https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/values.yaml) for Kubecost modules + subcharts.
 
-Exact recommended values for these parameters depend on the size of your cluster, availability requirements, and usage of the Kubecost product. Suggested values for each container can be found within Kubecost itself on the namespace page. More info on these recommendations is available [here](http://blog.kubecost.com/blog/requests-and-limits/).
+The exact recommended values for these parameters depend on the size of your cluster, availability requirements, and usage of the Kubecost product. Suggested values for each container can be found within Kubecost itself on the namespace page. More info on these recommendations is available [here](http://blog.kubecost.com/blog/requests-and-limits/).
 
 In practice, we recommend running Kubecost for up to 7 days on a production cluster and then tuning resource requests/limits based on resource consumption. Reach out any time to team@kubecost.com if we can help give further guidance.
 
 ## <a name="install-configs"></a>Product configuration at install-time
 
-Kubecost has a number of product configuration options that you can specify at install time in order to minimize the number of settings changes required within product UI. This makes it simple to redeploy Kubecost. These values can be configured under `kubecostProductConfigs` in our [values.yaml](https://github.com/kubecost/cost-analyzer-helm-chart/blob/bb8bcb570e6c52db2ed603f69691ac8a47ff4a26/cost-analyzer/values.yaml#L335). These parameters are passed to a configmap that Kubecost detects and writes to its /var/configs.
+Kubecost has a number of product configuration options that you can specify at install time in order to minimize the number of settings changes required within the product UI. This makes it simple to redeploy Kubecost. These values can be configured under `kubecostProductConfigs` in our [values.yaml](https://github.com/kubecost/cost-analyzer-helm-chart/blob/bb8bcb570e6c52db2ed603f69691ac8a47ff4a26/cost-analyzer/values.yaml#L335). These parameters are passed to a ConfigMap that Kubecost detects and writes to its /var/configs.
 
 ## <a name="cloud-integration"></a>Setting up a cloud integration
 
-By default, Kubecost dynamically detects your cloud provider and pulls list prices on Azure, AWS, and GCP for all in-cluster assets. By completing a cloud integration with one of these providers, you get the ability to view Kubernetes cost metrics side-by-side with external cloud services cost, e.g. S3, BigQuery, Azure Database Services. Additionally, it allows Kubecost to reconcile spend with your actual cloud bill to reflect enterprise discounts, spot market prices, comittment discounts, and more. This gives teams running Kubernetes a complete and accurate picture of costs. 
+By default, Kubecost dynamically detects your cloud provider and pulls list prices on Azure, AWS, and GCP for all in-cluster assets. By completing a cloud integration with one of these providers, you get the ability to view Kubernetes cost metrics side-by-side with external cloud services cost, e.g. S3, BigQuery, Azure Database Services. Additionally, it allows Kubecost to reconcile spend with your actual cloud bill to reflect enterprise discounts, spot market prices, commitment discounts, and more. This gives teams running Kubernetes a complete and accurate picture of costs. 
 
 &nbsp;&nbsp;&nbsp;&nbsp;[Azure billing integration](/azure-out-of-cluster.md)  
 &nbsp;&nbsp;&nbsp;&nbsp;[AWS billing integration](/aws-out-of-cluster.md)  
@@ -85,7 +85,7 @@ For more accurate Spot pricing data, visit Settings in the Kubecost frontend to 
 
 1. Enable the [AWS Spot Instance data feed](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-data-feeds.html).  
 2. Provide the required S3 bucket information in Settings (example shown above).  
-3. Create and attach an IAM role account which can be used to read this bucket. Here's an example policy:  
+3. Create and attach an IAM role account that can be used to read this bucket. Here's an example policy:  
 
 ```
 {
@@ -135,7 +135,7 @@ Accurately tracking AWS Reserved Instance prices requires access to an Athena ta
 
 ## <a name="no-pvs"></a>Deploying Kubecost without persistent volumes
 
-You may optionally pass the following Helm flags to install Kubecost and its bundled dependancies without any Persistent Volumes. Note any time the Prometheus server pod is restarted then all historical billing data will be lost, unless Thanos or other long-term storage is enabled in the Kubecost product.  
+You may optionally pass the following Helm flags to install Kubecost and its bundled dependencies without any Persistent Volumes. Note any time the Prometheus server pod is restarted then all historical billing data will be lost unless Thanos or other long-term storage is enabled in the Kubecost product.  
 
 ```
 --set prometheus.alertmanager.persistentVolume.enabled=false 
@@ -146,7 +146,7 @@ You may optionally pass the following Helm flags to install Kubecost and its bun
 
 ## <a name="cluster-efficiency"></a>Measuring cluster cost efficiency
 
-For teams interested in reducing their Kubernetes costs, we have seen it be beneficial to first understand how efficiently  provisioned resources have been used. This can be answered by measuring the cost of idle resources (e.g. compute, memory, etc)  as a percentage of your overall cluster spend. This figure represents the impact of many infrastructure and application-level decisions, i.e. machine type selection, bin packing efficiency, and more. The Kubecost product (Cluster Overview page) provides a view into this data for an initial assessment of resource efficiency and the cost of waste.
+For teams interested in reducing their Kubernetes costs, we have seen it be beneficial to first understand how efficiently provisioned resources have been used. This can be answered by measuring the cost of idle resources (e.g. compute, memory, etc)  as a percentage of your overall cluster spend. This figure represents the impact of many infrastructure and application-level decisions, i.e. machine type selection, bin packing efficiency, and more. The Kubecost product (Cluster Overview page) provides a view into this data for an initial assessment of resource efficiency and the cost of waste.
 
 <div style="text-align:center;"><img src="/cluster-efficiency.png" /></div>
 
