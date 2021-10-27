@@ -1,6 +1,6 @@
 # Cluster Controller
 Kubecost cluster controller enables actions like automated cluster scaledown and 1-click cluster resize. 
-This document show you how to setup and enable this funtionality in the Kubecost product. 
+This document shows you how to setup and enable this functionality in the Kubecost product. 
 
 Note: Cluster controller supports GKE and EKS clusters and is currently in **ALPHA**.
 
