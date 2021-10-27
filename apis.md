@@ -16,7 +16,7 @@ Time-series version of /costDataModel API. Does not include ETL caching layer an
 
 __[/allocation](https://github.com/kubecost/docs/blob/master/allocation.md)__
 
-The Kubecost Allocation API is used by the Kubecost Allocation frontend and retrieves cost allocation information for any Kubernetes concept, e.g. cost by namespace, label, deployment, service and more. This API is directly integrated with the Kubecost ETL caching layer and CSV pipeline so it is able to scale to large clusters.
+The Kubecost Allocation API is used by the Kubecost Allocation frontend and retrieves cost allocation information for any Kubernetes concept, e.g. cost by namespace, label, deployment, service, and more. This API is directly integrated with the Kubecost ETL caching layer and CSV pipeline so it can scale to large clusters.
 
 __[/aggregatedCostModel](https://github.com/kubecost/docs/blob/master/allocation-api.md#aggregated-cost-model-api)__
 
