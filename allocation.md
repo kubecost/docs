@@ -1,7 +1,7 @@
 Allocation API
 ==============
 
-The Allocation API is the preferred way to query for costs and resources allocated to Kubernetes workloads, and optionally aggregated by Kubernetes concepts like `namespace`, `controller`, and `label`. Data is served from one of [Kubecost's ETL pipelines](https://github.com/kubecost/docs/blob/main/allocation-api.md#caching-overview). The endpoint is available at the URL:
+The Allocation API is the preferred way to query for costs and resources allocated to Kubernetes workloads, and optionally aggregated by Kubernetes concepts like `namespace`, `controller`, and `label`. Data is served from one of [Kubecost's ETL pipelines](https://github.com/kubecost/docs/blob/master/allocation-api.md#caching-overview). The endpoint is available at the URL:
 ```
 http://<kubecost>/model/allocation
 ```
@@ -157,39 +157,6 @@ Here is an example allocation for the `cost-model` container in a pod in Kubecos
 - `__unallocated__` refers to aggregated allocations without the selected `aggregate` field; e.g. aggregating by `label:app` might produce an `__unallocated__` allocation composed of allocations without the `app` label.
 - `__unmounted__` (or "Unmounted PVs") refers to the resources used by PersistentVolumes that aren't mounted to a Pod using a PVC, and thus cannot be allocated to a Pod.
 
-#### Negative Idle
-
-> Negative idle can be caused by problems with metrics. Consult Kubecost's [diagnostics](https://github.com/kubecost/docs/blob/main/diagnostics.md) to make sure Kubecost is functioning correctly first.
-
-It is possible to have a negative idle cost that is valid in the following
-situation:
-
-- You have workloads that _request_ resources, but do not use all of them AND
-- You have workloads that _use_ resources beyond the scheduled capacity of the node
-
-For example, say you have 1 node with 4 CPU and 8GB RAM.
-
-- Workload A requests 3 CPU and uses 0
-- Workload B requests 0.5 CPU and uses 3
-- Workload X requests 7 GB RAM and uses 0
-- Workload Y requests 500 MB RAM and uses 6 GB
-
-These workloads will schedule on the node successfully based on their resource
-requests and workloads B and Y shouldn't be evicted unless A or X start using
-some of the resource they technically have allocated and the node encounters
-resource pressure.
-
-Kubecost calculates the cost of workloads based on the "allocated" resources,
-defined as max(request, usage). The above situations is a valid Kubernetes state
-but is technically an "overallocation" of cluster resources because the total
-allocation of CPU is `3 + 3 = 6 > 4` and the total allocation of RAM is
-`7 + 6 = 13 > 8`.
-
-Idle is the cost of unallocated resources, but in this situation there are
-negative unallocated resources (specifically, -2 CPU and -5 GB RAM), thus
-resulting in a negative idle cost.
-
-
 ## Querying
 
 ```
@@ -211,6 +178,7 @@ filterPods | | Comma-separated list of pods to match; e.g. `pod-one,pod-two` wil
 filterAnnotations | | Comma-separated list of annotations to match; e.g. `name:annotation-one,name:annotation-two` will return results with either of those two annotation key-value-pairs.
 filterLabels | | Comma-separated list of annotations to match; e.g. `app:cost-analyzer, app:prometheus` will return results with either of those two label key-value-pairs.
 filterServices | | Comma-separated list of services to match; e.g. `frontend-one,frontend-two` will return results with either of those two services.
+format | | Set to `csv` to download an accumulated version of the allocation results in CSV format. By default, results will be in JSON format.
 shareIdle | false | If `true`, idle cost is allocated proportionally across all non-idle allocations, per-resource. That is, idle CPU cost is shared with each non-idle allocation's CPU cost, according to the percentage of the total CPU cost represented.
 splitIdle | false | If `true`, and `shareIdle == false` Idle Allocations are created on a per cluster or per node basis rather than being aggregated into a single "\_idle\_" allocation.
 idleByNode | false | If `true`, idle allocations are created on a per node basis. Which will result in different values when shared and more idle allocations when split.
@@ -349,7 +317,7 @@ Both the `reconcile` and `shareTenancyCosts` flags start query-time processes th
 Distribution by Usage Hours takes the usage of the windows (start time and end time) of an Asset and all the Allocations connected to it and finds the number of hours that both the Allocation and Asset were running. The number of hours for each Allocation related to an Asset is called Alloc_Usage_Hours. The sum of all Alloc_Usage_Hours for a single Assets is Total_Usage_Hours. With these values an Assets cost is distributed to each connected Allocation using the formula Asset_Cost * Alloc_Usage_Hours/Total_Usage_Hours. Depending on the Asset type an Allocation can receive proportions of multiple Asset Costs.
 
 Asset types that use this distribution method include:
-- Network (`reconcile`): When the network pod is not enabled cost is distributed by usage hours. If the network pod is enabled cost is distributed to Allocations proportionally to usage. 
+- Network (`reconcile`): When the network pod is not enabled cost is distributed by usage hours. If the network pod is enabled cost is distributed to Allocations proportionally to usage.
 - Load Balancer (`reconcile`)
 - Cluster Management (`shareTenancyCosts`)
 - Attached disks (`shareTenancyCosts`): Does not include PVs, which are handled by `reconcile`
