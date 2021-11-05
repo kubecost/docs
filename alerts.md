@@ -1,12 +1,10 @@
-Alerts Documentation
-====================
-
-## Summary
+Alerts
+======
 
 Kubecost alerts allow teams to receive updates on real-time Kubernetes spend. They are configurable via the Kubecost UI or via Helm values. This resource gives an overview of how to configure Kubecost email and Slack alerts using [Kubecost helm chart values](https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/values.yaml).
   
 
-As of v1.72.0, Kubecost supports four types of notifications:
+## Alert Types
 
  1. [Recurring update](#type-recurring-update) - sends an email and/or Slack alert with cluster spend across all or a set of namespaces, with costs broken down by namespace
 
@@ -24,12 +22,11 @@ Have questions or issues? View our [troubleshooting guide](#troubleshooting).
   
 ## Configuring Alerts in Helm
 
-*Note: `values.yaml` is a source of truth. Alerts set through `values.yaml` will continually overwrite any manual alert settings set through the Kubecost UI.* 
+*Note: Configuring Alerts from the helm chart will set the configuration in `values.yaml` as the source of truth. Alerts set through `values.yaml` will continually overwrite any manual alert settings set through the Kubecost UI.* 
 
 ### Global Alert Parameters  
 The alert settings, under `global.notifications.alertConfigs` in `cost-analyzer/values.yaml`, accept four global fields:
 
-* `enabled` determines whether Kubecost will schedule and display the configured alerts in Notifications, default set to `false`     
 * `frontendUrl` optional, your cost analyzer front end URL used for linkbacks in alert bodies
 * `globalSlackWebhookUrl` optional, a global Slack webhook used for alerts, enabled by default if provided
 * `globalAlertEmails` a global list of emails for alerts
@@ -203,7 +200,7 @@ Example Helm values.yaml:
 ```
         # Kubecost Health Diagnostic
         - type: diagnostic
-          window: 10m               
+          window: 10m
  ```
 
 *Versions Earlier than 1.79.0*
@@ -237,9 +234,7 @@ Example Helm values.yaml:
 
 All times in UTC.
 
-The back end scheduler runs if `alertConfigs.enabled` is set to `true`, and alerts at regular times of day. Alert send times are determined by parsing the supplied `window` parameter. If `alertConfigs.enabled` is `false`, alerts are still configurable via the Kubecost UI Notifications tab, and will send alerts through the front end cron job scheduler.
-
-Alert diagnostics with next and last scheduled run times are only available for alerts configured via Helm, and are viewed via `<your-kubecost-url>/model/getCustomAlertDiagnostics`.
+Alert send times are determined by parsing the supplied `window` parameter. The running alert status containing `nextRun` and `lastRun` metadata can be viewed via the endpoint: `<your-kubecost-url>/model/alerts/status`.
 
 Supported: `weekly` and `daily` special cases, `<N>d`, `<M>h` (1 ≤ N ≤ 7, 1 ≤ M ≤ 24)
 Currently Unsupported: time zone adjustments, windows greater than `7d`, windows less than `1h`
@@ -258,40 +253,44 @@ If 24 is not divisible by the hourly window, schedule at next multiple of `<N>h`
 
 For example, a `7h` alert scheduled at 22:00 checks 00:00, 7:00, 14:00, and 21:00, before arriving at a next send time of 4:00 tomorrow.
 
-## Troubleshooting
 
+## Troubleshooting
 Review these steps to verify alerts are being passed to the Kubecost application correctly.
 
+### Configuration from UI
+If alerts are not configured from `values.yaml`, then they are persisted on the container attached disk (PV or ephemeral disk). This method should only be used on a single replica deployment. To continue troubleshooting, skip ahead to the [Scheduling](#Scheduling) section. 
+
+
+### Configuration via Helm
 First, ensure that the Helm values are successfully read into the configmap:
 
--   Confirm that the `global.notifications.alertConfigs.enabled` field is set to `true`
+-   Confirm that the `global.notifications.alertConfigs` contains a valid configuration.
 -   Run `kubectl get configmap alert-configs -n kubecost -o json` to view alerts configmap.
--   Ensure that the Helm values are successfully read into the configmap under alerts.json under the `data` field.
+-   Ensure that the Helm values are successfully read into the `ConfigMap` as `alerts.json` under the `data` field.
 -   Example:
 
 ```
 {
     "apiVersion": "v1",
-    "data": {
-        "alerts.json": "{\"alerts\":[{\"aggregation\":\"namespace\",\"efficiencyThreshold\":0.4,\"spendThreshold\":1,\"type\":\"efficiency\",\"window\":\"1d\"}],\"enabled\":true,\"frontendUrl\":\"http://localhost:9090\",\"globalAlertEmails\":[\"recipient@example.com\"],\"globalSlackWebhookUrl\":\"https://hooks.slack.com/services/TE6RTBNET/BFFK0P848/jFWms48dnxlk4BBPiBJp30p\",\"kubecostHealth\":true}"
-    },
-    "kind": "ConfigMap",
-    "metadata": {
+	"kind": "ConfigMap",
+	"metadata": {
+		"name": "alert-configs",
+        "namespace": "kubecost",
         "annotations": {
             "meta.helm.sh/release-name": "kubecost",
             "meta.helm.sh/release-namespace": "kubecost"
         },
-        "creationTimestamp": "2021-01-13T04:14:52Z",
         "labels": {
             "app": "cost-analyzer",
             "app.kubernetes.io/instance": "kubecost-stage",
             "app.kubernetes.io/managed-by": "Helm",
 	    ...
         },
-        "name": "alert-configs",
-        "namespace": "kubecost",
 	...
     }
+    "data": {
+        "alerts.json": "{\"alerts\":[{\"aggregation\":\"namespace\",\"efficiencyThreshold\":0.4,\"spendThreshold\":1,\"type\":\"efficiency\",\"window\":\"1d\"}],\"frontendUrl\":\"http://localhost:9090\",\"globalAlertEmails\":[\"recipient@example.com\"],\"globalSlackWebhookUrl\":\"https://hooks.slack.com/services/TE6RTBNET/BFFK0P848/jFWms48dnxlk4BBPiBJp30p\"}"
+    },
 }
 
 ```
@@ -300,19 +299,91 @@ First, ensure that the Helm values are successfully read into the configmap:
 
 Next, confirm that Kubecost product has received configuration data:
 
-- Go to `<your-kubecost-url>/notify.html` in the Kubecost UI to view configured email and Slack settings, weekly updates, namespace updates, cluster budget, and namespace budget alerts.
+- Go to `<your-kubecost-url>/alerts.html` in the Kubecost UI to view all configured alerts settings.
+- If you did not use `values.yaml` to configure your alerts, you can begin that configuration from the `alerts.html` page. 
 
-Additionally, confirm that the alerts scheduler has properly parsed and scheduled a next run for each custom alert by visiting `<your-kubecost-url>/model/getCustomAlertDiagnostics` to view individual alert parameters as well as next and last scheduled run times for individual alerts.
+### Scheduling
+If alerts that you expect to trigger are failing to do so, you may need to investigate when the configured alerts have been internally scheduled to execute condition checks. You can get this information by navigating to `<your-kubecost-url>/model/alerts/status` which will list all alerts which are currently scheduled to run with attached status metadata:
+- *id*: The unique identifier for the scheduled alert.
+- *scheduledOn*: When the scheduler received the configuration and created the live alert.
+- *lastRun*: When the alert conditional checks ran last.
+- *nextRun*: When the alert conditional checks have been scheduled to run next.
+- *lastError*: If an alert conditional triggered an unexpected error during it's last run, this field will be set to that error. Absense of this field indicates no error.
 
-- Confirm that `nextRun` has been updated from "0001-01-01T00:00:00Z"
-- Settings that do not appear in the Notifications page (for example, `spendChange` alerts), but are visible from the `/model/getCustomAlertDiagnostics` endpoint are scheduled to send.
+When investigating the status for potential error cases:
+- Confirm that all configured alerts have a status. 
+- Confirm that `lastRun` and `nextRun` times correctly schedule the execution of the alert conditional checks.
+- Confirm that the `lastError` field doesn't exist for any of the alerts. 
 
-If `nextRun` fails to update, or alerts are not sending at the `nextRun` time, check pod logs by running `kubectl logs $(kubectl get pods -n kubecost | awk '{print $1}' | grep "^kubecost-cost-analyzer.\{16\}") -n kubecost -c cost-model > kubecost-logs.txt`
+### Common Errors 
+Common causes of misconfiguration include the following:
+- unsupported csv filters -- `spendChange` alerts accept `filter` as comma-separated values; other alert types do not.
+- unsupported alert type -- all alert type names are in camelCase -- check spelling and capitalization for all alert parameters
+- unsupported aggregation parameters -- see the [aggregated cost model API](https://github.com/kubecost/docs/blob/2ea9021e8530369d53184ea5382b2e4c080bb426/allocation-api.md#aggregated-cost-model-api) for details
 
-- Common causes of misconfiguration include the following:
-	- unsupported csv filters -- `spendChange` alerts accept `filter` as comma-separated values; other alert types do not.
-	- unsupported alert type -- all alert type names are in camelCase -- check spelling and capitalization for all alert parameters
-	- unsupported aggregation parameters -- see the [aggregated cost model API](https://github.com/kubecost/docs/blob/main/allocation-api.md#aggregated-cost-model-api) for details
+### Unexpected Errors
+If you have exhausted the previous steps, our pod's logging will emit specific warning and error messages pertaining to alert configuration and scheduling. These logs can be retrieved via a bug report from the frontend Settings, or via `kubectl`:
+```bash
+$ kubectl logs $(kubectl get pods -n kubecost | awk '{print $1}' | grep "^kubecost-cost-analyzer.\{16\}") -n kubecost -c cost-model > kubecost-logs.txt
+```
+
+## Alerts API
+The backend API available to support Alerts is available to interface with the current set of scheduled alerts in kubecost. The payloads required to add/update new alerts follow the parameter sets from the configuration specification. The endpoints are available on the `/model` prefix, and are as follows:
+
+The new Alerts API makes available the following new endpoints:
+| Method    | Path           | Description |
+| --------- | -------------- | ----------- |
+| `GET`     | `/alerts`      | Returns an array of all running alert instances `[]AlertPayload` |
+| `POST`    | `/alerts`      | Accepts a request body containing a single `AlertPayload`. If the payloadf contains an ID, the alert with the ID is updated. Otherwise, a new Alert is created. The result of the Add or Update is returned on the response. |
+| `DELETE`  | `/alerts/{id}` | Removes the alert with the id provided in the path |
+
+To configure the specific global configuration values for all alerts, the following endpoints are available:
+| Method    | Path               | Description |
+| --------- | ------------------ | ------------ |
+| `GET`     | `/alerts/linkback` | Returns a `LinkbackPayload` payload instance contains the global alert `frontendUrl` configuration. |
+| `POST`    | `/alerts/linkback` | Sets the `LinkbackPayload` payload to set the global alert `frontendUrl` configuration. |
+| `GET`     | `/alerts/slack`    | Returns a `SlackWebhookPayload` payload instance contains the alert `globalSlackWebhookUrl` configuration. |
+| `POST`    | `/alerts/slack`    | Sets the `SlackWebhookPayload` payload to set the alert `globalSlackWebhookUrl` configuration. |
+| `GET`     | `/alerts/email`    | Returns a `EmailPayload` payload instance contains the alert `globalAlertEmails` configuration. |
+| `POST`    | `/alerts/email`    | Sets the `EmailPayload` payload to set the alert `globalAlertEmails` configuration. |
+
+The request and response payload specifications are as follows:
+### AlertPayload
+The contents of the `AlertPayload` is based on what type of alert you are adding or updating. The payload contents are identical to the configuration specification for each alert type. The `required` field in the table below denote the alert type requirements. 
+
+| Field                 | Required      | Type       | Description  |
+| --------------------- | ------------- | ---------- | ------------ |
+| `type`                | `all`         | `string`   | The `AlertType` of the alert to create described in configuration spec. |
+| `window`              | `all`         | `string`   | The scheduling parameter described in configuration spec. |
+| `aggregation`         | `all`         | `string`   | See aggregation constraints per alert type |
+| `filter`              | `all`         | `string`   | See filter constraints per alert type |
+| `ID`                  | `optional`    | `string`   | Passing the identifier in a request indicates you'd like to update an existing alert's parameters |
+| `ownerContact`        | `optional`    | `[]string` | Overrides the global alerts `globalAlertEmails` for a specific alert |
+| `slackWebhookUrl`     | `optional`    | `string`   | Overrides the global alerts `globalSlackWebhookUrl` for a specific alert |
+| `threshold`           | `budget`      | `float64`  | Used to set the alert threshold for `budget` alert types |
+| `baselineWindow`      | `spendChange` | `string`   | The baseline window used to compare the `window` to for determining spend change. |
+| `relativeThreshold`   | `spendChange` | `float64`  | The relative threshold to trigger the alert when comparing window and baseWindow hourly spend |
+| `efficiencyThreshold` | `efficiency`  | `float64`  | Efficiency threshold between 0.0 and 1.0 |
+| `spendThreshold`      | `efficiency`  | `float64`  | The baseline spend threshold that must be reached before checking efficiency |
+
+### LinkbackPayload
+The contents of the `LinkbackPayload` is simply a `frontendUrl`.
+| Field                 | Required | Type       | Description  |
+| --------------------- | -------- | ---------- | ------------ |
+| `frontendUrl`         | ✔️       | `string`   | The global alert `frontendUrl` configuration used when issuing alert linkbacks. |
+
+### SlackWebhookPayload
+The contents of the `SlackWebhookPayload` is simply a `webhookUrl`.
+| Field                 | Required | Type       | Description  |
+| --------------------- | -------- | ---------- | ------------ |
+| `webhookUrl`          | ✔️       | `string`   | The global alert `webhookUrl` configuration used when issuing slack alerts. |
+
+### EmailPayload
+The contents of the `EmailPayload` is simply an array of email addresses.
+| Field                 | Required | Type        | Description  |
+| --------------------- | -------- | ----------- | ------------ |
+| `recipients`          | ✔️       | `[]string` | The global alert `globalAlertEmails` configuration used when issuing email alerts. |
+
 
 Have questions? Join our [Slack community](https://join.slack.com/t/kubecost/shared_invite/enQtNTA2MjQ1NDUyODE5LWFjYzIzNWE4MDkzMmUyZGU4NjkwMzMyMjIyM2E0NGNmYjExZjBiNjk1YzY5ZDI0ZTNhZDg4NjlkMGRkYzFlZTU) or contact us via email at [team@kubecost.com](team@kubecost.com)!
 
