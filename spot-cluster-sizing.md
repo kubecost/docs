@@ -78,3 +78,5 @@ supports your specific needs.
 
 
 Edit this doc on [Github](https://github.com/kubecost/docs/blob/main/spot-cluster-sizing.md)
+
+<!--- {"article":"4411152599959","section":"360012612813","permissiongroup":"1500001277122"} --->
