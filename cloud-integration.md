@@ -174,3 +174,5 @@ Returns a status object for the ETL. This includes a sections for `allocation`, 
 Example uses:
 
 `http://localhost:9090/model/etl/status`
+
+<!--- {"article":"4412360646679","section":"360012612813","permissiongroup":"1500001277122"} --->
