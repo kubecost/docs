@@ -1,4 +1,5 @@
-# Cloud Integrations
+Cloud Integrations
+==================
 
 Integration with the Cloud Service Providers via their respective billing APIs allow Kubecost to display out-of-cluster costs, which are the costs incurred on a billing account from Services Outside of the cluster(s) where Kubecost is installed, in addition to the ability to reconcile Kubecosts in-cluster predictions with actual billing data to improve accuracy. For more details on these integrations continue reading below. For guides on how to set up these integrations follow the relevant link:
 - [Multi-Cloud](https://github.com/kubecost/docs/blob/master/multi-cloud.md)
@@ -175,4 +176,5 @@ Example uses:
 
 `http://localhost:9090/model/etl/status`
 
-<!--- {"article":"4412360646679","section":"360012612813","permissiongroup":"1500001277122"} --->
+
+<!--- {"article":"4412369153687","section":"4402829033367","permissiongroup":"1500001277122"} --->
