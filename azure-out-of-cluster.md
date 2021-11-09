@@ -7,31 +7,46 @@ To configure out-of-cluster (OOC) costs for Azure in Kubecost, you just need to 
 
 ## Step 1: Export Azure Cost Report
 
-Follow this guide taking note of the name that you use for the exported cost report and select the daily month-to-date option for how the reports will be created.
+Follow this guide taking note of the name that you use for the exported cost report and use the configuration details below.
 
 https://docs.microsoft.com/en-us/azure/cost-management-billing/costs/tutorial-export-acm-data?tabs=azure-portal
 
-It will take a few hours to generate the first report, after which Kubecost can use the Azure Storage API to pull that data. 
+Cost Export Configuration:
+
+* Export Details:
+  * Name: Enter a name of your choice
+  * Metric: `Amortized`
+  * Export Type: `Daily export of month-to-date costs`
+  * Start Date: Todays date
+* File Partitioning: `off`
+* Storage: `Use existing` or `create new`
+  * Provide the configuration details based on your selection.
+
+Make note of the `Storage Account` and `Container Name` for later use when configuring Kubecost to ingest the Azure Cost Export.
+
+It will take a few hours to generate the first report, after which Kubecost can use the Azure Storage API to pull that data.
 
 >Note: If you have sensitive data in an Azure Storage account and do not want to give out access to it, create a separate Azure Storage account to store your cost data export.
 
 ## Step 2: Provide Access to Azure Storage API
 
-The values needed to provide access to the Azure Storage Account where cost data is being exported can be found in the Azure portal in the Storage account where the cost data is being exported. 
+The values needed to provide access to the Azure Storage Account where cost data is being exported can be found in the Azure portal in the Storage account where the cost data is being exported.
+
 * `<STORAGE_ACCOUNT_NAME>` is the name of the Storage account where the exported CSV is being stored.
 * `<STORE_ACCESS_KEY>` can be found by selecting the “Access Keys” option from the navigation sidebar  then selecting “Show Keys”. Using either of the two keys will work. 
-* `<REPORT_CONTAINER_NAME>` is the name that you choose for the exported cost report when you set it up. This is the name of the container where the CSV cost reports are saved in your Storage account. 
+* `<REPORT_CONTAINER_NAME>` is the container name that you choose for the exported cost report when you set it up. This is the name of the container where the CSV cost reports are saved in your Storage account.
+
 With these value in hand you can now provide them to Kubecost to allow access to the Azure Storage API.
 
 ### Option #1: Maually add secret to cluster (Recommended)
 To create this secret you will need to create a JSON file that must be named azure-storage-config.json
 with the following format:
 
-```
+``` json
 {
-	"azureStorageAccount": "<STORAGE_ACCOUNT_NAME>",
-	"azureStorageAccessKey": "<STORE_ACCESS_KEY>",
-	"azureStorageContainer": <REPORT_CONTAINER_NAME>
+  "azureStorageAccount": "<STORAGE_ACCOUNT_NAME>",
+  "azureStorageAccessKey": "<STORE_ACCESS_KEY>",
+  "azureStorageContainer": "<REPORT_CONTAINER_NAME>"
 }
 ```
 
@@ -41,7 +56,7 @@ Once you have the values filled out use this command to create the secret:
 
 Once the secret is created, set `.Values.kubecostProductConfigs.azureStorageSecretName` to
 `<SECRET_NAME>` and upgrade Kubecost via Helm, other values related to Azure Storage (see other method) should not be set.
- 
+
 ### Option #2: Create a secret from helm values
 
 * Set `.Values.kubecostProductConfigs.azureStorageAccount = <STORAGE_ACCOUNT_NAME>`
