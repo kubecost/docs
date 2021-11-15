@@ -116,7 +116,7 @@ If thanos-query can't connect to both the sidecar and the store, you may want to
 
 and adding
 
-`- --store=kubecost-thanos-store-grpc.kubecost:10901`
+`--store=kubecost-thanos-store-grpc.kubecost:10901`
 
 to the container args. This will cause a query restart and you can visit `/stores` again to see if the store has been added.
 
