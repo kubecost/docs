@@ -1,4 +1,5 @@
-# Amazon Managed Service for Prometheus
+Amazon Managed Service for Prometheus
+==================
 
 [Amazon Managed Service for Prometheus (AMP)](https://docs.aws.amazon.com/prometheus/index.html) is a Prometheus-compatible monitoring service that makes it easy to monitor containerized applications at scale.
 
