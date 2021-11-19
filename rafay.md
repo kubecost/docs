@@ -170,4 +170,5 @@ You can find [this same guide](https://docs.rafay.co/recipes/cost/kubecost/) as 
 
 Edit this doc on [Github](https://github.com/kubecost/docs/blob/main/rafay.md)
 
-<!--- {"article":"","section":"4402815636375","permissiongroup":"1500001277122"} --->
+
+<!--- {"article":"4413635957271","section":"4402815636375","permissiongroup":"1500001277122"} --->
