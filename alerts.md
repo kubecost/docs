@@ -9,7 +9,7 @@ As of v1.72.0, Kubecost supports four types of notifications:
 
  1. [Recurring update](#type-recurring-update) - sends an email and/or Slack alert with cluster spend across all or a set of namespaces, with costs broken down by namespace
 
- 2. [Budget](#type-budget) -- sends an email and/or Slack alert when spending crosses a defined threshold
+ 2. [Budget](#type-budget) -- sends an email and/or Slack alert when spend crosses a defined threshold
 
  3. [Spend Change](#type-spend-change) -- sends an email and/or Slack alert reporting unexpected spend increases relative to moving averages
 
