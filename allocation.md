@@ -371,7 +371,7 @@ $ curl http://localhost:9090/model/allocation/compute \
 }
 ```
 
-Allocation data for the last 9d, in steps of 3d, with the resolution of 10m, aggregated by namespace.
+Allocation data for the last 9d, in steps of 3d, with a 10m resolution, aggregated by namespace.
 ```
 $ curl http://localhost:9090/model/allocation/compute \
   -d window=9d \
