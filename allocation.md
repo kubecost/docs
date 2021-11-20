@@ -9,7 +9,7 @@ http://<kubecost>/model/allocation
 >
 > Throughout, we use `localhost:9090` as the default Kubecost URL, but your Kubecost instance may be exposed by a service or ingress. To reach Kubecost at port 9090, run: `kubectl port-forward deployment/kubecost-cost-analyzer -n kubecost 9090`
 
-## Quickstart
+## Quick start
 
 Request allocation data for each 24-hour period in the last three days, aggregated by namespace:
 ```
@@ -64,8 +64,8 @@ See [Querying](#querying) for the full list of arguments and [Examples](#query-e
 Field | Description
 ---: | :---
 name | Name of each relevant Kubernetes concept described by the allocation, delimited by slashes, e.g. "cluster/node/namespace/pod/container"
-properties | Map of name-to-value for all relevant property fields, including `cluster`, `node`, `namespace`, `controller`, `controllerKind`, `pod`, `container`, `labels`, `annotation`, etc. Note: Prometheus only supports underscores (`_`) in label names.  Dashes (`-`) and dots (`.`), while supported by Kubernetes, will be translated to underscores by Prometheus.  This may cause the merging of labels, which could result in aggregated costs being charged to a single label.
-window | Period over which the allocation is defined.
+properties | Map of name-to-value for all relevant property fields, including: `cluster`, `node`, `namespace`, `controller`, `controllerKind`, `pod`, `container`, `labels`, `annotation`, etc. Note: Prometheus only supports underscores (`_`) in label names.  Dashes (`-`) and dots (`.`), while supported by Kubernetes, will be translated to underscores by Prometheus.  This may cause the merging of labels, which could result in aggregated costs being charged to a single label.
+window | Period of time over which the allocation is defined.
 start | Precise starting time of the allocation. By definition must be within the window.
 end | Precise ending time of the allocation. By definition must be within the window.
 minutes | Number of minutes running; i.e. the minutes from `start` until `end`.
