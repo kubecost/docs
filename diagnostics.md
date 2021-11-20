@@ -59,7 +59,7 @@ Kubecost requests `kube-state-metrics >= v1.6.0`. This version check is complete
 
 ## Kubecost ETL pipeline metrics
 
-A diagnostic view is provided for both the Allocation and Assets pipelines and is designed to assist in diagnosing missing data found in the Allocation or Assets views. Kubecost's ETL pipelines run in the background to build a daily composition of the data required to build the cost model. For each day the data is collected, a file is written to a disk containing the results. These files are used as both a cache and data backup, which the diagnostic view displays:
+A diagnostic view is provided for both the Allocation and Assets pipelines, and is designed to assist in diagnosing missing data found in the Allocation or Assets views. Kubecost's ETL pipelines run in the background to build a daily composition of the data required to build the cost model. For each day the data is collected, a file is written to disk containing the results. These files are used as both a cache and data backup, which the diagnostic view displays:
 
 ![](images/diagnostics-etl.png)
 
