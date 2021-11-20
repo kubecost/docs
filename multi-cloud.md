@@ -1,5 +1,5 @@
 # Setting Up Cloud Integrations
-This document outlines how to set up cloud integration for accounts on multiple cloud providers, or multiple accounts on the same cloud provider. Multi-Cloud is an enterprise feature. This configuration can be used independently of or in addition to other cloud integration configurations provided by Kubecost. Once configured Kubecost will display cloud assets for all configured accounts and perform reconciliations for all [federated clusters](https://github.com/kubecost/docs/blob/master/long-term-storage.md) that have their respective accounts configured.
+This document outlines how to set up cloud integration for accounts on multiple cloud providers, or multiple accounts on the same cloud provider. Multi-Cloud is an enterprise feature. This configuration can be used independently of or in addition to other cloud integration configurations provided by Kubecost. Once configured Kubecost will display cloud assets for all configured accounts and perform reconciliation for all [federated clusters](https://github.com/kubecost/docs/blob/master/long-term-storage.md) that have their respective accounts configured.
 
 ## Step #1 Set up Cloud Cost and Usage Reporting
 
