@@ -20,9 +20,9 @@ The Kubecost helm chart provides values which can enable or disable each cloud p
 
 Value | Default | Description
 --: | :--: | :--
-`.Values.kubecostModel.etlAssetReconciliationEnabled` | true | Enables Reconciliation processes and endpoints. Corresponds to `ETL_ASSET_RECONCILIATION_ENABLED` environment variable.
-`.Values.kubecostModel.etlCloudAssets` | true | Enables Cloud Assets processes and endpoints. Corresponds to `ETL_CLOUD_ASSETS_ENABLED` environment variable.
-
+`.Values.kubecostModel.etlAssetReconciliationEnabled` | true | Enables Reconciliation processes and endpoints. This value corresponds to the `ETL_ASSET_RECONCILIATION_ENABLED` environment variable.
+`.Values.kubecostModel.etlCloudAssets` | true | Enables Cloud Assets processes and endpoints. This value corresponds to the `ETL_CLOUD_ASSETS_ENABLED` environment variable.
+`.Values.kubecostModel.cloudAssetsExcludeProviderID` | false | Enabling this flag, pre-aggregates cloud assets at the service and user label level for higher performance build speed and improved asset query times, at the cost of no longer being able to see the cost of individual cloud assets. This value corresponds to the `CLOUD_ASSETS_EXCLUDE_PROVIDER_ID` environment variable. Currently only available on AWS. Users should ensure that `eks:cluster-name` is enabled as described in the [AWS OOC documentation](https://github.com/kubecost/docs/blob/master/aws-out-of-cluster.md#step-2-tag-your-resources) to prevent double counting of EKS resources
 ## Cloud Stores
 The ETL contains a Map of Cloud Stores, each of which represent an integration with a Cloud Service Provider. Each Cloud Store is responsible for the Cloud Asset and Reconciliation Pipelines which add Out-of-Cluster costs and Adjust Kubecost's estimated cost respectively via cost and usage data pulled from the Cloud Service Provider. Each Cloud Store has a unique identifier called the `ProviderKey` which varies depending on which Cloud Service Provider is being connected to and ensures that duplicate configurations are not introduced into the ETL. The value of the `ProviderKey` is the following for each Cloud Service Provider at scope that the billing data is being for:
 
