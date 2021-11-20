@@ -51,7 +51,7 @@ Costs allocations are based on the following:
 
 1) resources allocated, i.e. max of resource requests and usage  
 2) the cost of each resource  
-3) the number of time resources were provisioned  
+3) the amount of time resources were provisioned  
 
 For more information, refer to this [FAQ](https://github.com/kubecost/cost-model#frequently-asked-questions) on how each of these inputs is determined based on your environment.
 
