@@ -2,7 +2,7 @@
 
 Kubecost helps teams with cost and capacity management in Kubernetes-based environments. 
 We enable teams to reduce spend while also improving performance and reliability. 
-For larger teams and companies with a more complex infrastructure, you need the right features in place for efficiency, administration, and security. Kubecost Enterprise offers even more features and control so that any team can use our products, according to your entire organization’s standards.
+For larger teams and companies with more complex infrastructure, you need the right features in place for efficiency, administration, and security. Kubecost Enterprise offers even more features and control so that any team can use our products, according to your entire organization’s standards.
 
 
 ### Unified visibility across all Kubernetes clusters  
