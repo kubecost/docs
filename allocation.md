@@ -177,7 +177,8 @@ filterPods | | Comma-separated list of pods to match; e.g. `pod-one,pod-two` wil
 filterAnnotations | | Comma-separated list of annotations to match; e.g. `name:annotation-one,name:annotation-two` will return results with either of those two annotation key-value-pairs.
 filterLabels | | Comma-separated list of annotations to match; e.g. `app:cost-analyzer, app:prometheus` will return results with either of those two label key-value-pairs.
 filterServices | | Comma-separated list of services to match; e.g. `frontend-one,frontend-two` will return results with either of those two services.
-shareIdle | false | If `true`, idle cost is allocated proportionally across all non-idle allocations, per resource. That is, idle CPU cost is shared with each non-idle allocation's CPU cost, according to the percentage of the total CPU cost represented.
+format | | Set to `csv` to download an accumulated version of the allocation results in CSV format. By default, results will be in JSON format.
+shareIdle | false | If `true`, idle cost is allocated proportionally across all non-idle allocations, per-resource. That is, idle CPU cost is shared with each non-idle allocation's CPU cost, according to the percentage of the total CPU cost represented.
 splitIdle | false | If `true`, and `shareIdle == false` Idle Allocations are created on a per cluster or per node basis rather than being aggregated into a single "\_idle\_" allocation.
 idleByNode | false | If `true`, idle allocations are created on a per node basis. Which will result in different values when shared and more idle allocations when split.
 reconcile | true | If `true` pulls data from the Assets cache and corrects prices of Allocations according to their related Assets. The corrections from this process are stored in each cost categories cost adjustment field. If the integration with your cloud provider's billing data has been set up, this will result in the most accurate costs for Allocations.
@@ -315,7 +316,7 @@ Both the `reconcile` and `shareTenancyCosts` flags start query-time processes th
 Distribution by Usage Hours takes the usage of the windows (start time and end time) of an Asset and all the Allocations connected to it and finds the number of hours that both the Allocation and Asset were running. The number of hours for each Allocation related to an Asset is called Alloc_Usage_Hours. The sum of all Alloc_Usage_Hours for a single Assets is Total_Usage_Hours. With these values, an Assets cost is distributed to each connected Allocation using the formula Asset_Cost * Alloc_Usage_Hours/Total_Usage_Hours. Depending on the Asset type an Allocation can receive proportions of multiple Asset Costs.
 
 Asset types that use this distribution method include:
-- Network (`reconcile`): When the network pod is not enabled cost is distributed by usage hours. If the network pod is enabled cost is distributed to Allocations proportionally to usage. 
+- Network (`reconcile`): When the network pod is not enabled cost is distributed by usage hours. If the network pod is enabled cost is distributed to Allocations proportionally to usage.
 - Load Balancer (`reconcile`)
 - Cluster Management (`shareTenancyCosts`)
 - Attached disks (`shareTenancyCosts`): Does not include PVs, which are handled by `reconcile`
