@@ -18,7 +18,7 @@ To enable this feature, set the following parameter in values.yaml during [Helm 
 
 ### Kubernetes Network Traffic Metrics
 
-The primary source of network metrics comes from a DaemonSet pod hosted on each of the nodes in a cluster. Each daemonset pod uses `hostNetwork: true` such that it can leverage an underlying kernel module to capture network data. Network traffic data is gathered and the destination of any outbound networking is labeled as:
+The primary source of network metrics is a DaemonSet pod hosted on each of the nodes in a cluster. Each daemonset pod uses `hostNetwork: true` such that it can leverage an underlying kernel module to capture network data. Network traffic data is gathered and the destination of any outbound networking is labeled as:
 
  * Internet Egress: Network target destination was not identified within the cluster.  
  * Cross Region Egress: Network target destination was identified, but not in the same provider region.  
