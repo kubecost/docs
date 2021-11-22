@@ -38,7 +38,7 @@ Kubecost requires the following minimum versions:
         port: 9003
 ```  
 
-This config needs to be added under `extraScrapeConfigs` in Prometheus configuration. [View Example](https://github.com/kubecost/cost-analyzer-helm-chart/blob/0758d5df54d8963390ca506ad6e58c597b666ef8/cost-analyzer/values.yaml#L74)
+This config needs to be added under `extraScrapeConfigs` in the Prometheus configuration. [View Example](https://github.com/kubecost/cost-analyzer-helm-chart/blob/0758d5df54d8963390ca506ad6e58c597b666ef8/cost-analyzer/values.yaml#L74)
 
 To confirm this job is successfully scraped by Prometheus, you can view the Targets page in Prometheus and look for a job named `kubecost`.
 
@@ -55,7 +55,7 @@ Kubecost uses [Prometheus recording rules](https://prometheus.io/docs/prometheus
 
 > Note that this step is optional, and only impacts certain efficiency metrics. View [issue/556](https://github.com/kubecost/cost-model/issues/556) for a description of what will be missing if this step is skipped.
 
-You'll need to add the following relabel config to the job that scrapes the node exporter daemonet.
+You'll need to add the following relabel config to the job that scrapes the node exporter DaemonSet.
 
 ```
   - job_name: 'kubernetes-service-endpoints'
@@ -105,7 +105,7 @@ You can visit Settings in Kubecost to see basic diagnostic information on these 
 
 Using an existing Grafana deployment can be accomplished with either of the following two options:
 
-1) _Option: Directly link to an external Grafana._ After Kubecost installation, visit Settings and update __Grafana Address__ to a URL (e.g. http://demo.kubecost.com/grafana) that is visible to users accessing Grafana dashboards. This variable can alternatively be passed at the time you deploy Kubecost via the `kubecostProductConfigs.grafanaURL` paremeter in [values.yaml](https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/values.yaml). Next, import Kubecost Grafana dashboards as JSON from this [folder](https://github.com/kubecost/cost-analyzer-helm-chart/tree/master/cost-analyzer). 
+1) _Option: Directly link to an external Grafana._ After Kubecost installation, visit Settings and update __Grafana Address__ to a URL (e.g. http://demo.kubecost.com/grafana) that is visible to users accessing Grafana dashboards. This variable can alternatively be passed at the time you deploy Kubecost via the `kubecostProductConfigs.grafanaURL` parameter in [values.yaml](https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/values.yaml). Next, import Kubecost Grafana dashboards as JSON from this [folder](https://github.com/kubecost/cost-analyzer-helm-chart/tree/master/cost-analyzer). 
 
 ![Kubecost Settings](/images/settings-grafana.png)
 

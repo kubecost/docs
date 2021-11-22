@@ -53,4 +53,4 @@ Supply the following parameters to your _helm install_ command.
 --set awsstore.imageNameAndVersion=117940112483.dkr.ecr.us-east-1.amazonaws.com/8cc31d15-33f6-49fe-8d6c-e9c0366cefa0/cg-142668492/gcr.io/kubecost1/awsstore:1.61.3-latest
 ```
 
-To partipipate in our free Enterprise on-boarding program, contact us at team@kubecost.com to schedule these sessions!
+To participate in our free Enterprise onboarding program, contact us at team@kubecost.com to schedule these sessions!

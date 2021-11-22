@@ -13,7 +13,7 @@ Here's an example use:
 API parameters include the following:
 
 * `timeWindow` dictates the applicable window for measuring cost metrics. Supported units are d, h, and m.  
-* `offset` shifts timeWindow backwards relative to the current time. Supported units are d, h, and m.
+* `offset` shifts timeWindow backward relative to the current time. Supported units are d, h, and m.
 
 This API returns a set of JSON elements in this format:
 
@@ -42,7 +42,7 @@ Optional request parameters include the following:
 
 Field | Description
 --------- | -----------
-`filterFields` | Blacklist of fields to be filtered from response. For example, appending `&filterFields=cpuused,cpureq,ramreq,ramused` will remove request and usage data.
+`filterFields` | Blacklist of fields to be filtered from the response. For example, appending `&filterFields=cpuused,cpureq,ramreq,ramused` will remove request and usage data.
 `namespace` | Filter results by namespace. For example, appending `&namespace=kubecost` only returns data for the `kubecost` namespace
 
 
@@ -50,7 +50,7 @@ Field | Description
 
 > NOTE: this API is actively being replaced by the [Kubecost Allocation API](https://github.com/kubecost/docs/blob/master/allocation.md). That is the recommended API for querying historical and run-rate cost allocation metrics.
 
-The aggregated cost model API retrieves data similar to the Kubecost Allocation frontend view (e.g. cost by namespace, label, deployment and more) and is available at the following endpoint:
+The aggregated cost model API retrieves data similar to the Kubecost Allocation frontend view (e.g. cost by namespace, label, deployment, and more) and is available at the following endpoint:
 
 `http://<kubecost-address>/model/aggregatedCostModel`
 
@@ -67,16 +67,15 @@ API parameters include the following:
     - "today", "yesterday", "week", "month", "lastweek", "lastmonth"
     - "1586822400,1586908800", etc. (start and end unix timestamps)
     - "2020-04-01T00:00:00Z,2020-04-03T00:00:00Z", etc. (start and end UTC RFC3339 pairs)
-* `offset` (optional) shifts window backwards from current time. Supported units are d, h, m, and s.  
-* `aggregation` is the field used to consolidate cost model data. Supported types are cluster, namespace, controller, deployment, service, label, pod and container.  
-* `aggregationSubfield` used for aggregation types that require sub fields, e.g. aggregation type equals `label` and the value of the label (aggregationSubfield) equals `app`. Comma seperated list of values supported.
-* `allocateIdle` (optional) when set to `true` applies the cost of all idle compute resources to tenants, default `false`.  
+* `offset` (optional) shifts window backward from current time. Supported units are d, h, m, and s.  
+* `aggregationSubfield` used for aggregation types that require subfields, e.g. aggregation type equals `label` and the value of the label (aggregationSubfield) equals `app`. Comma-separated list of values supported.
+* `allocateIdle` (optional) when set to `true`, applies the cost of all idle compute resources to tenants, default `false`.  
 * `sharedNamespaces` (optional) provide a comma-separated list of namespaces (e.g. kube-system) to be allocated to other tenants. These resources are evenly allocated to other tenants as `sharedCost`.  
-* `sharedLabelNames` (optional) provide a comma-separated list of kubernetes labels (e.g. app) to be allocated to other tenants. Must provide the corresponding set of label values in `sharedLabelValues`.  
+* `sharedLabelNames` (optional) provide a comma-separated list of Kubernetes labels (e.g. app) to be allocated to other tenants. Must provide the corresponding set of label values in `sharedLabelValues`.  
 * `sharedLabelValues` (optional) label value (e.g. prometheus) associated with `sharedLabelNames` parameter.  
 * `sharedSplit` (optional) Shared costs are split evenly across tenants unless `weighted` is passed for this request parameter. When allocating shared costs on a weighted basis, these costs are distributed based on the percentage of in-cluster resource costs of the individual pods in the particular aggregation, e.g. namespace.  
 * `disableCache` this API caches recently fetched data by default. Set this variable to `false` to avoid cache entirely.
-* `etl` setting this variable to `true` forces a request to be served by the ETL piepline. More info on this feature in the Caching Overview section below. 
+* `etl` setting this variable to `true` forces a request to be served by the ETL pipeline. More info on this feature is in the Caching Overview section below. 
 
 <a name="filter-params"></a>  
 Optional filter parameters include the following:   
@@ -85,7 +84,7 @@ Filter | Description
 --------- | -----------
 `cluster` | Filter results by cluster ID. For example, appending `&cluster=cluster-one` will restrict data only to the `cluster-one` cluster. Note: cluster ID is generated from `cluster_id` provided during installation.
 `namespace` | Filter results by namespace. For example, appending `&namespace=kubecost` only returns data for the `kubecost` namespace.
-`labels` | Filter results by label. For example, appending `&labels=app%3Dcost-analyzer` only returns data for pods with label `app=cost-analyzer`. CSV list of label values supported. Note that parameters must be url encoded.
+`labels` | Filter results by label(s). For example, appending `&labels=app%3Dcost-analyzer` only returns data for pods with label `app=cost-analyzer`. CSV list of label values supported. Note that parameters must be URL encoded.
 
 This API returns a set of JSON objects in this format:
 
@@ -116,9 +115,9 @@ Kubecost implements a two-layer caching system for cost allocation metrics.
 
 First, the unaggregated cost model is pre-cached for commonly used time windows, 1 and 2 days by default. This data is refreshed every ~5 minutes. 
 
-Longer time windows, 120 days by default, are part of an ETL pipeline that stores cost by day for each workload. This pipeline is updated approximately ~10 mins. On update, only the latest day is rebuilt to reduce load on the underlying data store. Currently this ETL pipeline is stored in memory and is built any time the pod restarts. ETL is built with daily granularity for UI improved performance. Daily aggregations default to `UTC` but timezones can be configured with the `utcOffset` within [values](https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/values.yaml#L102). 
+Longer time windows, 120 days by default, are part of an ETL pipeline that stores cost by day for each workload. This pipeline is updated approximately ~10 mins. On update, only the latest day is rebuilt to reduce the load on the underlying data store. Currently, this ETL pipeline is stored in memory and is built any time the pod restarts. ETL is built with daily granularity for UI improved performance. Daily aggregations default to `UTC` but timezones can be configured with the `utcOffset` within [values](https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/values.yaml#L102). 
 
-Returning cached data from either caching layer typically takes < 300ms on medium-sized clusters. To guarentee you bypass both caches, you can set `etl=false` and 
+Returning cached data from either caching layer typically takes < 300ms on medium-sized clusters. To guarantee you bypass both caches, you can set `etl=false` and 
 `disableCache=false`.
 
 Have questions? Email us at <team@kubecost.com>.

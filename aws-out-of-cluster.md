@@ -1,6 +1,6 @@
-Integrating Kubecost with your AWS data provides the ability to allocate out of cluster costs, e.g. RDS instances and S3 buckets, back to Kubernetes concepts like namespace and deployment as well as reconcile in cluster assets back to your billing data. The latter is especially helpful when teams are using Reserved Instances, Savings Plans, or Enterprise Discounts. All billing data remains on your cluster when using this functionality and is not shared externally. Read the [Cloud Integrations](https://github.com/kubecost/docs/blob/master/cloud-integration.md) docomentation for more information on how Kubecost connects with Cloud Service Providers.
+Integrating Kubecost with your AWS data provides the ability to allocate out-of-cluster costs, e.g. RDS instances and S3 buckets, back to Kubernetes concepts like namespace and deployment as well as reconcile cluster assets back to your billing data. The latter is especially helpful when teams are using Reserved Instances, Savings Plans, or Enterprise Discounts. All billing data remains on your cluster when using this functionality and is not shared externally. Read the [Cloud Integrations](https://github.com/kubecost/docs/blob/master/cloud-integration.md) documentation for more information on how Kubecost connects with Cloud Service Providers.
 
-The following guide provides the steps required for enabling out of cluster costs allocation and accurate pricing, e.g. [Reserved Instance price allocation](http://docs.kubecost.com/getting-started#ri-committed-discount). In a multi-account organization, all of the following steps will need to be completed in the payer account.
+The following guide provides the steps required for enabling out-of-cluster costs allocation and accurate pricing, e.g. [Reserved Instance price allocation](http://docs.kubecost.com/getting-started#ri-committed-discount). In a multi-account organization, all of the following steps will need to be completed in the payer account.
 
 ## Step 1: Create an AWS Cost and Usage Report and Integrate it with Kubecost
 
@@ -43,7 +43,7 @@ Instructions for enabling user-defined cost allocation tags [here](https://docs.
 
 
 * Visit the Allocation view in the Kubecost product. If external costs are not shown, open your browser's Developer Tools > Console to see any reported errors.
-* Query Athena directly to ensure data is availble. Note: it can take up to 6 hours for data to be written. 
+* Query Athena directly to ensure data is available. Note: it can take up to 6 hours for data to be written. 
 * You may need to upgrade your AWS Glue if you are running an old version https://docs.aws.amazon.com/athena/latest/ug/glue-upgrade.html
 * Finally, review pod logs from the `cost-model` container in the `cost-analyzer` pod and look for auth errors or Athena query results. 
 
