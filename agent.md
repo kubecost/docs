@@ -1,7 +1,7 @@
 Installing Agent for Hosted Kubecost (Alpha)
 ======
 
-The `kubecost-agent` is a version the kubecost metric exporter that runs as a primary transport of data into hosted kubecost. In order to install the `kubecost-agent`, you will need a specific storage key provided by the kubecost team.
+The `kubecost-agent` is a version of the kubecost metric exporter that runs as a primary transport of data into hosted kubecost. In order to install the `kubecost-agent`, you will need a specific storage key provided by the kubecost team.
 
 The name of the storage key file provided by the kubecost team will have the name `kubecost-agent.key`
 
@@ -24,6 +24,6 @@ This step will install:
 * prometheus-server Deployment and service 
 * node-exporter DaemonSet
 
-Optionally, the `--set networkCosts.enabled=true` can be used during the helm install to include the `kubecost-network-costs` DaemonSet.
+Optionally, the `--set networkCosts.enabled=true` can be used during the helm install to include the `kubecost-network-costs` DaemonSet. [Learn more](https://docs.kubecost.com/network-allocation.html)
 
 3. Confirm with Kubecost team on successful deployment, which will then provide an endpoint `http://<your-organization>.kubecost.io` which can be used to access all exported data. 
