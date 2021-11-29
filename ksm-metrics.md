@@ -53,6 +53,12 @@ If there is a deployment of KSM outside of Kubecost, Prometheus deployments that
 - Remove the external KSM from the cluster. If you do this, only the Kubecost-emitted metrics listed above should be available. This could cause other services that depend on KSM metrics to fail.
 - Rewrite queries that cannot handle duplicate metrics to include a filter on `job=<external-KSM-scrape-job>` or to be generally resilient to duplication using query functions like `avg_over_time`.
 - Run a separate Prometheus for Kubecost alone (the default installation behavior of Kubecost) and disable the scraping of Kubecost's metrics in your other Prometheus configurations.
+- We support some reducing duplication from Kubecost via config. You can set: 
+```
+emitKsmV1MetricsOnly: true 
+emitKsmV1Metrics: false
+```
+to emit just the metrics kubecost requires from KSMV1 but none of the metrics not included in KSMV2 by default. The metrics we require not available in KSMv2 by default are: `kube_node_lables`, `kube_pod_labels`, and `kube_node_status_capacity_*`. These will be emitted by kubecost in the above configuration.
 
 Edit this doc on [Github](https://github.com/kubecost/docs/blob/main/ksm-metrics.md)
 
