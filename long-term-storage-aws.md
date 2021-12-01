@@ -60,7 +60,7 @@ For thanos set `.Values.thanos.compact.serviceAccount`, and `.Values.thanos.stor
 
 
 
-# Thanos Encryption With s3 and KMS
+__Thanos Encryption With s3 and KMS__
 
 You can encrypt the s3 bucket where kubecost data is stored in AWS via s3 and KMS. However, because thanos can store potentially millions of objects, it is suggested that you use bucket-level encryption instead of object-level encryption. More details available here:
 
