@@ -30,8 +30,8 @@ It will take a few hours to generate the first report, after which Kubecost can 
 
 ## Step 2: Provide Access to Azure Storage API
 
-The values needed to provide access to the Azure Storage Account where cost data is being exported can be found in the Azure portal in the Storage account where the cost data is being exported.
-
+The values needed to provide access to the Azure Storage Account where cost data is being exported can be found in the Azure portal in the Storage account where the cost data is being exported. 
+* `<SUBSCRIPTION_ID>` is the id of the subscription that the exported files are being generated for.
 * `<STORAGE_ACCOUNT_NAME>` is the name of the Storage account where the exported CSV is being stored.
 * `<STORE_ACCESS_KEY>` can be found by selecting the “Access Keys” option from the navigation sidebar  then selecting “Show Keys”. Using either of the two keys will work. 
 * `<REPORT_CONTAINER_NAME>` is the container name that you choose for the exported cost report when you set it up. This is the name of the container where the CSV cost reports are saved in your Storage account.
@@ -44,9 +44,10 @@ with the following format:
 
 ``` json
 {
-  "azureStorageAccount": "<STORAGE_ACCOUNT_NAME>",
-  "azureStorageAccessKey": "<STORE_ACCESS_KEY>",
-  "azureStorageContainer": "<REPORT_CONTAINER_NAME>"
+	"azureSubscriptionID": "<SUBSCRIPTION_ID>",
+	"azureStorageAccount": "<STORAGE_ACCOUNT_NAME>",
+	"azureStorageAccessKey": "<STORE_ACCESS_KEY>",
+	"azureStorageContainer": "<REPORT_CONTAINER_NAME>"
 }
 ```
 
