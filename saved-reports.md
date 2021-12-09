@@ -42,7 +42,7 @@ The following fields apply to each map item under the `reports` key:
   * `service`
   * `statefulset`
   * `team`
-* `idle` idle cost allocation, supports `hide`, `shareByNode`, `shareByCluster` and `separate`
+* `idle` idle cost allocation, supports `hide`, `shareByNode`, `shareByCluster`, and `separate`
 * `accumulate` determines whether or not to sum Allocation costs across the entire window -- equivalent to *Resolution* in the UI, supports `true` (Entire window resolution) and `false` (Daily resolution)
 * `filters` -- a list of maps consisting of a property and value
 	* `property` -- supports `cluster`, `node`, `namespace`, and `label`
