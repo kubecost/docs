@@ -48,7 +48,7 @@ To confirm this job is successfully scraped by Prometheus, you can view the Targ
 ### Recording Rules  
 Kubecost uses [Prometheus recording rules](https://prometheus.io/docs/prometheus/latest/configuration/recording_rules/) to enable certain product features and to help improve product performance. These are recommended additions, especially for medium and large-sized clusters using their own Prometheus installation. You can find the current set of recording rules used in the `rules` block under `prometheus.server.serverFiles` in this [values.yaml](https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/values.yaml) file.
 
-> Note: Kubecost recording rules were most recently updated in v1.65.0
+> Note: Kubecost recording rules were most recently updated in v1.65.0. Maintenance of recording rules will be deprecated in the upcoming 1.90.0
 
 
 ### Node exporter metric labels
