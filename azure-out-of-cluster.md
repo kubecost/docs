@@ -38,7 +38,6 @@ The values needed to provide access to the Azure Storage Account where cost data
 
 With these value in hand you can now provide them to Kubecost to allow access to the Azure Storage API.
 
-### Option #1: Maually add secret to cluster (Recommended)
 To create this secret you will need to create a JSON file that must be named azure-storage-config.json
 with the following format:
 
@@ -58,17 +57,7 @@ Once you have the values filled out use this command to create the secret:
 Once the secret is created, set `.Values.kubecostProductConfigs.azureStorageSecretName` to
 `<SECRET_NAME>` and upgrade Kubecost via Helm, other values related to Azure Storage (see other method) should not be set.
 
-### Option #2: Create a secret from helm values
-
-* Set `.Values.kubecostProductConfigs.azureStorageAccount = <STORAGE_ACCOUNT_NAME>`
-* Set `.Values.kubecostProductConfigs.azureStorageAccessKey = <STORE_ACCESS_KEY>`
-* Set `.Values.kubecostProductConfigs.azureStorageContainer = <REPORT_CONTAINER_NAME>`
-* Set `.Values.kubecostProductConfigs.azureStorageCreateSecret = true`
-* Do not set `.Values.kubecostProductConfigs.azureStorageSecretName` if you are using this approach
-
-> Note: that this will leave your secrets unencrypted in values.yaml. Use a Kubernetes secret as in the previous method to avoid this.
-
-After successful set up of Azure OOC costs upon opening the Assets page of Kubecost there will no longer be a banner at the top of the screen will no longer say that OOC is not configured and costs will be broken down by service.
+After successful set up of Azure OOC costs upon opening the Assets page of Kubecost costs will be broken down by service and there will no longer be a banner at the top of the screen that says OOC is not configured.
 
 ## Step 3: Tagging Azure resources
 
