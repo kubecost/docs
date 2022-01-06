@@ -385,6 +385,7 @@ These values can either be set from the kubecost frontend or via .Values.kubecos
     * The athena database name is available as the value (physical id) of `AWSCURDatabase` in the CloudFormation stack created above (in [Step 2: Setting up Athena](#Step-2:-Setting-up-Athena))
 * `athenaTable` the name of the table created by the Athena setup
   * The table name is typically the database name with the leading `athenacurcfn_` removed (but is not available as a CloudFormation stack resource)
+  * Alternatively the name of a view can be placed in this field to use a subset of the CUR data. Only views with all columns from the CUR table should be used. [Create a view](https://docs.aws.amazon.com/athena/latest/ug/create-view.html)
 
 > Make sure using only underscore as an delimiter if needed for tables and views, using dash will not work even though you might be able to create it see [docs](https://docs.aws.amazon.com/athena/latest/ug/tables-databases-columns-names.html).
 
