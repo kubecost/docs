@@ -17,9 +17,9 @@ http://<kubecost-address>/model/savings/requestSizing
 
 | Name | Type | Description |
 |------|------|-------------|
-| `targetCPUUtilization` | float between 0 and 1 | An amount of headroom to enforce with the new request, based on the calculated (real) usage. If the calculated usage is, for example, 100 mCPU and this parameter is `0.8`, the recommended CPU request will be `100 / 0.8 = 125` mCPU. |
-| `targetRAMUtilization` | float between 0 and 1 | Calculated like CPU. |
-| `window` | string | Duration of time over which to calculate usage. Supports hours or days before the current time in the following format: `2h` or `3d`. |
+| `targetCPUUtilization` | float in the range (0,1] | An amount of headroom to enforce with the new request, based on the calculated (real) usage. If the calculated usage is, for example, 100 mCPU and this parameter is `0.8`, the recommended CPU request will be `100 / 0.8 = 125` mCPU. Inputs that fail to parse (see https://pkg.go.dev/strconv#ParseFloat) or are greater than 1 will not error; they will instead default to your savings profile's default value. If you have not changed the profile, this is  `0.65`.|
+| `targetRAMUtilization` | float in the range (0,1] | Calculated like CPU. |
+| `window` | string | Duration of time over which to calculate usage. Supports hours or days before the current time in the following format: `2h` or `3d`. See the [Allocation API documentation](https://github.com/kubecost/docs/blob/master/allocation.md#querying) for more a more detailed explanation of valid inputs to `window`. |
 | `filterClusters` | string | Comma-separated list of clusters to match; e.g. `cluster-one,cluster-two` will return results from only those two clusters. |
 | `filterNodes` | string | Comma-separated list of nodes to match; e.g. `node-one,node-two` will return results from only those two nodes. |
 | `filterNamespaces` | string | Comma-separated list of namespaces to match; e.g. `namespace-one,namespace-two` will return results from only those two namespaces. |
