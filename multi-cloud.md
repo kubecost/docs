@@ -1,7 +1,8 @@
 Setting Up Cloud Integrations
 =============================
 
-This document outlines how to set up cloud integration for accounts on multiple cloud providers, or multiple acounts on the same cloud provider. Multi-Cloud is an enterprise feature. This configuration can be used independent of or in addition to other cloud integration configurations provided by kubecost. Once configured Kubecost will display cloud assets for all configured account and perform reconcilation for all [federated clusters](https://github.com/kubecost/docs/blob/main/long-term-storage.md) that have there respective accounts configured.
+# Setting Up Cloud Integrations
+This document outlines how to set up cloud integration for accounts on multiple cloud providers, or multiple accounts on the same cloud provider. Multi-Cloud is an enterprise feature. This configuration can be used independently of or in addition to other cloud integration configurations provided by Kubecost. Once configured Kubecost will display cloud assets for all configured accounts and perform reconciliation for all [federated clusters](https://github.com/kubecost/docs/blob/master/long-term-storage.md) that have their respective accounts configured.
 
 ## Step #1 Set up Cloud Cost and Usage Reporting
 
@@ -15,12 +16,12 @@ Set up BigQuery billing data exports with this [guide](https://cloud.google.com/
 
 ### AWS
 
-Follow steps #1-3 to set up and configure a CUR in our [guide](https://github.com/kubecost/docs/blob/main/aws-cloud-integrations.md)
+Follow steps #1-3 to set up and configure a CUR in our [guide](https://github.com/kubecost/docs/blob/master/aws-cloud-integrations.md)
 
 
 ## Step #2 Create Cloud Integration Secret
 
-Secret should contain a file called cloud-integration.json with the following format
+The secret should contain a file called cloud-integration.json with the following format
 
 ```
 {
@@ -29,7 +30,7 @@ Secret should contain a file called cloud-integration.json with the following fo
 "aws": []
 }
 ```
-This Configuration supports multiple configuration per cloud provider simply add any number cloud configuration objects to their respective arrays in the JSON file. The structure and required values for the configuration objects for each cloud provider is described below. Once you have filled in the configuration object use the command
+This Configuration supports multiple configurations per cloud provider simply add any number of cloud configuration objects to their respective arrays in the JSON file. The structure and required values for the configuration objects for each cloud provider are described below. Once you have filled in the configuration object use the command
 ```
 kubectl create secret generic <SECRET_NAME> --from-file=cloud-integration.json -n kubecost
 
@@ -44,7 +45,7 @@ The values needed to provide access to the Azure Storage Account where cost data
 - <STORE_ACCESS_KEY> can be found by selecting the “Access Keys” option from the navigation sidebar then selecting “Show Keys”. Using either of the two keys will work.
 - <REPORT_CONTAINER_NAME> is the name that you choose for the exported cost report when you set it up. This is the name of the container where the CSV cost reports are saved in your Storage account.
 
-Set these values into the following object and add it to the Azure array:
+Set these values into the following object and add them to the Azure array:
 ```
 {
 	"azureSubscriptionID": "<SUBSCRIPTION_ID>",
@@ -89,21 +90,21 @@ Set these values into the following object and add it to the GCP array:
 ```
 
 ### AWS
-For each AWS Account that you would like to configure, create an Access Key for the Kubercost user which has access to the CUR. Navigate to https://console.aws.amazon.com/iam Access Management > Users . Find the Kubecost User and select Security Credentials > Create Access Key. Note the Access key ID and Secret access key.
+For each AWS Account that you would like to configure, create an Access Key for the Kubercost user who has access to the CUR. Navigate to https://console.aws.amazon.com/iam Access Management > Users. Find the Kubecost User and select Security Credentials > Create Access Key. Note the Access key ID and Secret access key.
 
 Gather each of these values from the AWS console for each account you would like to configure.
-- <ACCESS_KEY_ID> ID of the Access Key created in the Previous step
+- <ACCESS_KEY_ID> ID of the Access Key created in the previous step
 - <ACCESS_KEY_SECRET> Secret of the Access Key created in the
 - <ATHENA_BUCKET_NAME> An S3 bucket to store Athena query results that you’ve created that kubecost has permission to access
 The name of the bucket should match s3://aws-athena-query-results-*, so the IAM roles defined above will automatically allow access to it
 The bucket can have a Canned ACL of Private or other permissions as you see fit.
-- <ATHENA_REGION> The aws region athena is running in
-- <ATHENA_DATABASE> the name of the database created by the Athena setup. The athena database name is available as the value (physical id) of AWSCURDatabase in the CloudFormation stack created above (in Step 2: Setting up the Athena of the AWS guild above)
+- <ATHENA_REGION> The AWS region Athena is running in
+- <ATHENA_DATABASE> the name of the database created by the Athena setup. The Athena database name is available as the value (physical id) of AWSCURDatabase in the CloudFormation stack created above (in Step 2: Setting up the Athena of the AWS guild above)
 - <ATHENA_TABLE> the name of the table created by the Athena setup
 The table name is typically the database name with the leading athenacurcfn_ removed (but is not available as a CloudFormation stack resource)
 - <ATHENA_PROJECT_ID> e.g. "530337586277" # The AWS AccountID where the Athena CUR is.
 
-Set these values into the following object and add it to the AWS array:
+Set these values into the following object and add them to the AWS array:
 
 ```
 {
@@ -116,6 +117,7 @@ Set these values into the following object and add it to the AWS array:
     "projectID": "<ATHENA_PROJECT_ID>"
 }
 ```
+	
 
 Edit this doc on [Github](https://github.com/kubecost/docs/blob/main/multi-cloud.md)
 

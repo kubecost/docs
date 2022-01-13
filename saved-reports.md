@@ -43,7 +43,7 @@ The following fields apply to each map item under the `reports` key:
   * `service`
   * `statefulset`
   * `team`
-* `idle` idle cost allocation, supports `hide`, `share`, and `separate`
+* `idle` idle cost allocation, supports `hide`, `shareByNode`, `shareByCluster`, and `separate`
 * `accumulate` determines whether or not to sum Allocation costs across the entire window -- equivalent to *Resolution* in the UI, supports `true` (Entire window resolution) and `false` (Daily resolution)
 * `filters` -- a list of maps consisting of a property and value
 	* `property` -- supports `cluster`, `node`, `namespace`, and `label`
@@ -77,7 +77,7 @@ The following fields apply to each map item under the `reports` key:
       - title: "Example Saved Report 1"
         window: "month"
         aggregateBy: "controllerKind"
-        idle: "share"
+        idle: "shareByNode"
         accumulate: false
         filters:
           - property: "label"
@@ -120,12 +120,13 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app: cost-analyzer
 data:
-  saved-reports.json: '[{"accumulate":false,"aggregateBy":"namespace","filters":[{"property":"cluster","value":"cluster-one,cluster*"},{"property":"namespace","value":"kubecost"}],"idle":"separate","title":"Example Saved Report 0","window":"today"},{"accumulate":false,"aggregateBy":"controllerKind","filters":[{"property":"label","value":"app:cost*,environment:kube*"},{"property":"namespace","value":"kubecost"}],"idle":"share","title":"Example Saved Report 1","window":"month"},{"accumulate":true,"aggregateBy":"service","filters":[],"idle":"hide","title":"Example Saved Report 2","window":"2020-11-11T00:00:00Z,2020-12-09T23:59:59Z"}]'# Source: cost-analyzer/templates/cost-analyzer-alerts-configmap.yaml
+  saved-reports.json: '[{"accumulate":false,"aggregateBy":"namespace","filters":[{"property":"cluster","value":"cluster-one,cluster*"},{"property":"namespace","value":"kubecost"}],"idle":"separate","title":"Example Saved Report 0","window":"today"},{"accumulate":false,"aggregateBy":"controllerKind","filters":[{"property":"label","value":"app:cost*,environment:kube*"},{"property":"namespace","value":"kubecost"}],"idle":"shareByNode","title":"Example Saved Report 1","window":"month"},{"accumulate":true,"aggregateBy":"service","filters":[],"idle":"hide","title":"Example Saved Report 2","window":"2020-11-11T00:00:00Z,2020-12-09T23:59:59Z"}]'# Source: cost-analyzer/templates/cost-analyzer-alerts-configmap.yaml
 ```
 
 3. Ensure that the json string is successfully mapped to the appropriate configs
 
 -   Navigate to `<front-end-url>/model/reports` and ensure that the configured report parameters have been set by selecting the "Open saved reports" button in the upper right hand corner of the report card.
+
 
 Edit this doc on [Github](https://github.com/kubecost/docs/blob/main/saved-reports.md)
 
