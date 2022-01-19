@@ -1,3 +1,5 @@
+# ⚠️ DEPRECATED ⚠️ These APIs are outdated and should not be used. Please refer to the [Allocation API docs](./allocation.md).
+
 Kubecost exposes multiple APIs to obtain cost, resource allocation, and utilization data. Below is documentation on two options: the cost model API and aggregated cost model API.
 
 # Cost model API
