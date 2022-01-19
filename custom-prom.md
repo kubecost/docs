@@ -47,7 +47,7 @@ To confirm this job is successfully scraped by Prometheus, you can view the Targ
 <a name="recording-rules"></a>
 ### Recording Rules
 
-NOTE: There is no need to maintain additional recording rules starting in v1.90.0. This section will be removed soon!
+NOTE: There is no need to add additional recording rules starting in v1.90.0. This section will be removed soon!
 
 Kubecost uses [Prometheus recording rules](https://prometheus.io/docs/prometheus/latest/configuration/recording_rules/) to enable certain product features and to help improve product performance. These are recommended additions, especially for medium and large-sized clusters using their own Prometheus installation. You can find the current set of recording rules used in the `rules` block under `prometheus.server.serverFiles` in this [values.yaml](https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/values.yaml) file.
 
