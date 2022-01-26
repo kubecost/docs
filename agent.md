@@ -17,6 +17,8 @@ helm install kubecost kubecost/cost-analyzer \
   --namespace kubecost \
   --values=https://raw.githubusercontent.com/kubecost/cost-analyzer-helm-chart/develop/cost-analyzer/values-agent.yaml \
   --set kubecostToken="bWJvbHQzNUBnbWFpbC5jb20=xm343yadf98" \
+  --set prometheus.server.global.external_labels.cluster_id=<unique cluster identifier> \
+  --set kubecostProductConfigs.clusterName=<custom cluster name> \
   --set-file agentKey="kubecost-agent.key"
 ```
 This step will install:
@@ -25,5 +27,18 @@ This step will install:
 * node-exporter DaemonSet
 
 Optionally, the `--set networkCosts.enabled=true` can be used during the helm install to include the `kubecost-network-costs` DaemonSet. [Learn more](https://docs.kubecost.com/network-allocation.html)
+
+For multicluster setups, all additional cluster installs would use the following install command:
+```bash
+helm install kubecost kubecost/cost-analyzer \
+  --namespace kubecost \
+  --values=https://raw.githubusercontent.com/kubecost/cost-analyzer-helm-chart/develop/cost-analyzer/values-agent.yaml \
+  --set kubecostToken="bWJvbHQzNUBnbWFpbC5jb20=xm343yadf98" \
+  --set prometheus.server.global.external_labels.cluster_id=<unique cluster identifier> \
+  --set kubecostProductConfigs.clusterName=<custom cluster name> \
+  --set kubecostMetrics.exporter.exportClusterInfo=false \
+  --set kubecostMetrics.exporter.exportClusterCache=false \
+  --set-file agentKey="kubecost-agent.key"
+```
 
 3. Confirm with Kubecost team on successful deployment, which will then provide an endpoint `http://<your-organization>.kubecost.io` which can be used to access all exported data. 
