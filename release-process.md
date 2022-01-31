@@ -4,7 +4,6 @@ A Kubecost Release is a snapshot of the source, build output, artifacts, and oth
 
 ## Production releases 
 
-* Release candidates are scheduled for the last Tuesday of every month.
 * Production releases are scheduled for the first Tuesday of every month.
 * Patch releases are pushed as needed between scheduled releases.
 * Release notes published [here](https://kubecost.com/releases).
