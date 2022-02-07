@@ -10,14 +10,15 @@ The following guide provides the steps required for allocating out-of-cluster co
 
 If your Big Query dataset is in a different project than the one where Kubescost is installed, please see the section on [Cross-Project Service Accounts](#cross-project-service-account-configuration)
 
-Add a service key to allocate out of cluster resources (e.g. storage buckets and managed databases) back to their Kubernetes owners. The service account needs the following:
+Add a service account key to allocate out of cluster resources (e.g. storage buckets and managed databases) back to their Kubernetes owners. The service account needs the following:
 ```
 roles/bigquery.user
 roles/compute.viewer
 roles/bigquery.dataViewer
 roles/bigquery.jobUser
 ```
-If you don't already have a GCP service key, you can run the following commands in your command line to generate and export one. Make sure your gcloud project is where your external costs are being run. 
+If you don't already have a GCP service account with the appropriate rights, you can run the following commands in your command line to generate and export one. Make sure your gcloud project is where your external costs are being run. 
+
 
 ```sh
 export PROJECT_ID=$(gcloud config get-value project)
@@ -41,7 +42,19 @@ In Kubecost, navigate to the settings page and click "update" for the "External 
 
 <a name="bq-name"></a>**BigQuery dataset** requires a BigQuery dataset prefix (e.g. billing_data) in addition to the BigQuery table name. A full example is `billing_data.gcp_billing_export_v1_018AIF_74KD1D_534A2`.
 
-These config values can alternatively be provided via a [values file](https://github.com/kubecost/cost-analyzer-helm-chart/blob/c10e9475b51612d36da8f04618174a98cc62f8fd/cost-analyzer/values.yaml#L572-L574).
+### Configuring using values.yaml (Recommended)
+
+We recommending providing the GCP details in the [values file](https://github.com/kubecost/cost-analyzer-helm-chart/blob/c10e9475b51612d36da8f04618174a98cc62f8fd/cost-analyzer/values.yaml#L572-L574)  to ensure they are retained during a upgrade or redeploy.
+
+Create a secret for the GCP service account key
+> Note: When managing the service account key as a Kubernetes secret, the secret must reference the service account key json file, and that file must be named `compute-viewer-kubecost-key.json`.
+``` sh
+kubectl create secret generic gcp-secret -n kubecost --from-file=./compute-viewer-kubecost-key.json
+```
+
+* Set `.Values.kubecostProductConfigs.projectID = <GCP Project ID that contains the BigQuery Export>`
+* Set `.Values.kubecostProductConfigs.gcpSecretName = <Name of the Kubernetes secret that contains the compute-viewer-kubecost-key.json file>`
+* Set `.Values.kubecostProductConfigs.bigQueryBillingDataDataset = <DATASET.TABLE_NAME that contains the billing export>`
 
 ## Step 3: Label cloud assets
 
