@@ -12,8 +12,8 @@ jobs:
     container:
       image: ghcr.io/kbrwn/docs:latest
       credentials:
-          username: kbrwn
-          password: ${{ secrets.GHCR_TOKEN }}
+        username: kbrwn
+        password: ${{ secrets.REGISTRY_TOKEN }}
     steps:
      - name: run script
        run: |
