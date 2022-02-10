@@ -13,7 +13,7 @@ jobs:
       image: ghcr.io/kbrwn/docs:latest
       credentials:
           username: kbrwn
-          password: ${{ secrets.ghcr_password }}
+          password: ${{ secrets.GHCR_TOKEN }}
     steps:
      - name: run script
        run: |
