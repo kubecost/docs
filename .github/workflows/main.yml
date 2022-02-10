@@ -14,7 +14,3 @@ jobs:
       credentials:
         username: kbrwn
         password: ${{ secrets.REGISTRY_TOKEN }}
-    steps:
-     - name: run script
-       run: |
-         ./run.sh
