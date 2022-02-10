@@ -15,5 +15,6 @@ jobs:
         username: kbrwn
         password: ${{ secrets.REGISTRY_TOKEN }}
     steps: 
-    - run: sh /app/run.sh
+    - run: sh run.sh
+      working-directory: /app
     
