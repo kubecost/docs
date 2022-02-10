@@ -5,22 +5,7 @@ To enable 90+ days of data retention in Kubecost, we recommend deploying with du
 
 > Note: This feature requires an [Enterprise license](https://kubecost.com/pricing).
 
-## Option A: In cluster storage (Postgres)  -- DEPRECATED
-
-To enable Postgres-based long-term storage, complete the following:
-
-1. **Helm chart configuration** -- in [values.yaml](https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/values.yaml) set the `remoteWrite.postgres.enabled` attribute to true. The default backing disk is `200gb` but this can also be directly configured in values.yaml.  
-
-2. **Verify successful install** -- Deploy or upgrade via install instructions at <http://kubecost.com/install>, passing this updated values.yaml file, and verify pods with the prefix `kubecost-cost-analyzer-adapter`
-and `kubecost-cost-analyzer-postgres` are Running.  
-
-3. **Confirm data is available**  
-
-    * Visit this endpoint `http://<kubecost-address>/model/costDataModelRangeLarge`
-
-    * Here's an example use: `http://localhost:9090/model/costDataModelRangeLarge`
-
-## Option B: Out of cluster storage (Thanos)
+Out of cluster storage (Thanos)
 
 Thanos-based durable storage provides long-term metric retention directly in a user-controlled bucket (e.g. S3 or GCS bucket) and can be enabled with the following steps:
 

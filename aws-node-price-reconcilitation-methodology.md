@@ -7,7 +7,7 @@ Kubecost is capable of aggregating the costs of EC2 compute resources over a giv
 
 The reconciliation process makes two queries to Athena, one to gather resources that are paid for with either the on-demand model or a savings plan and one query for resources on the reservation price model. The First query includes resources given at a blended rate, which could be on-demand usage or resources that have exceeded the limits of a savings plan. It will also include resourses which are part of a savings plan which will have a savings plan effective cost. The second query only includes reserved resourse and the cost which reflects the rate they were reserved at.
 
-The Queries make use of the folloing columns from Athena:
+The Queries make use of the following columns from Athena:
 
 - `line_item_usage_start_date` The beginning timestamp of the line item usage. Used to filter resource usage within a date range and to aggregate on usage window.
 

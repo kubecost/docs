@@ -126,10 +126,10 @@ grafana:
       enabled: false
 ```
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;For Option 2, ensure that the following flags are set in your Operator deployment:
+For Option 2, ensure that the following flags are set in your Operator deployment:
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1. sidecar.dashboards.enabled = true  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2. sidecar.dashboards.searchNamespace isn't restrictive, use `ALL` if Kubecost runs in another ns  
+1. sidecar.dashboards.enabled = true  
+2. sidecar.dashboards.searchNamespace isn't restrictive, use `ALL` if Kubecost runs in another ns  
 
 Edit this doc on [Github](https://github.com/kubecost/docs/blob/main/custom-prom.md)
 

@@ -56,8 +56,8 @@ Common issues:
 
 * Resource usage is a function of unique src and dest IP/port combinations. Most deployments use a small fraction of a CPU and it is also ok to have this pod CPU throttled. Throttling should increase parse times but should not have other impact. The following Prometheus metrics are available in v15.3 for determining scale and the impact of throttling:
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; `kubecost_network_costs_parsed_entries` is the last number of conntrack entries parsed  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; `kubecost_network_costs_parse_time` is the last recorded parse time  
+`kubecost_network_costs_parsed_entries` is the last number of conntrack entries parsed  
+`kubecost_network_costs_parse_time` is the last recorded parse time  
 
 ### Feature Limitations
 

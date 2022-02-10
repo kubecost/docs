@@ -1,9 +1,9 @@
 AWS Cloud Integration
 =====================
 
-Kubecost pulls asset prices from the public AWS pricing API by default. To have accurate pricing information from AWS, you can integrate directly with your account. This integration will properly account for Enterprise Discount Programs, Reserved Instance usage, Savings Plans, spot usage and more. This resource describes the required steps for achieving this.
+Kubecost pulls asset prices from the public AWS pricing API by default. To have accurate pricing information from AWS, you can integrate directly with your account. This integration will properly account for Enterprise Discount Programs, Reserved Instance usage, Savings Plans, spot usage, and more. This resource describes the required steps for achieving this.
 
-Your user will need permissions necessary to create the Cost and Usage Report, add IAM credentials for Athena and S3. An optional permission is the ability to add and execute cloudformation templates. Note we do not require root access in the AWS account.
+Your user will need necessary permissions to create the Cost and Usage Report, add IAM credentials for Athena and S3. Optional permission is the ability to add and execute CloudFormation templates. Note we do not require root access in the AWS account.
 
 
 # Cost and Usage Report Integration
@@ -12,7 +12,7 @@ Your user will need permissions necessary to create the Cost and Usage Report, a
 Follow these steps to set up a Cost and Usage Report. Be sure to enable Resource Ids and Athena integration when creating the CUR.
 [https://docs.aws.amazon.com/cur/latest/userguide/cur-create.html](https://docs.aws.amazon.com/cur/latest/userguide/cur-create.html)
 
-> Note the name of the bucket you create for CUR data. This will be used in following step. 
+> Note the name of the bucket you create for CUR data. This will be used in the following step. 
 
 > If you believe you have the correct permissions, but cannot access the Billing and Cost Management page, have the owner of your organization's root account follow these instructions [https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/control-access-billing.html](https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/control-access-billing.html#ControllingAccessWebsite-Activate)
 
@@ -36,281 +36,291 @@ Once Athena is set up with the CUR, you will need to create a new S3 bucket for 
 
 ## Step 3: Setting up IAM permissions
 
-### Add via Cloudformation: 
-Kubecost offers a set of cloudformation templates to help set your IAM roles up. If you’re new to provisioning IAM roles, we suggest downloading our templates and using the cloudformation wizard to set these up: [https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cfn-console-create-stack.html](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cfn-console-create-stack.html) . 
+### Add via CloudFormation: 
+Kubecost offers a set of CloudFormation templates to help set your IAM roles up. If you’re new to provisioning IAM roles, we suggest downloading our templates and using the CloudFormation wizard to set these up: [https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cfn-console-create-stack.html](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cfn-console-create-stack.html). 
 Download template files from the URLs provided below and upload them as the stack template in the Creating a stack > Selecting a stack template step.
 
 <details>
   <summary>My kubernetes clusters all run in the same account as the master payer account.</summary>
-  <ol>
-  <li>Download this file: [https://raw.githubusercontent.com/kubecost/cloudformation/master/kubecost-single-account-permissions.yaml](https://raw.githubusercontent.com/kubecost/cloudformation/master/kubecost-single-account-permissions.yaml) /li>
+  <ul>
+<li><p>Download this file: <a href="https://raw.githubusercontent.com/kubecost/cloudformation/master/kubecost-single-account-permissions.yaml">https://raw.githubusercontent.com/kubecost/cloudformation/master/kubecost-single-account-permissions.yaml</a></p></li>
 
-  <li>Navigate to https://console.aws.amazon.com/cloudformation</li>
+<li><p>Navigate to <a href="https://console.aws.amazon.com/cloudformation">https://console.aws.amazon.com/cloudformation</a></p></li>
 
-  <li>Click <strong>Create New Stack</strong> if you have never used AWS CloudFormation before. Otherwise, click **Create Stack**. and select **With new resource (standard)<li>
+<li><p>Click <strong>Create New Stack</strong> if you have never used AWS CloudFormation before. Otherwise, click <strong>Create Stack</strong>. and select <strong>With new resource (standard)</strong></p></li>
 
-  <li>Under <strong>Prepare template</strong>, choose <strong>Template is ready</strong></li>
+<li><p>Under <strong>Prepare template</strong>, choose <strong>Template is ready</strong>.</p></li>
 
-  <li>Under <strong>Template source</strong>, choose <strong>Upload a template file</strong></li>.
+<li><p>Under <strong>Template source</strong>, choose <strong>Upload a template file</strong>.</p></li>
 
-   <li>Select <strong>Choose file</strong></li>
+<li><p>Select <strong>Choose file</strong>.</p></li>
 
-  <li>Choose the downloaded .yaml template, and then choose <strong>Open</strong></li>
+<li><p>Choose the downloaded .yaml template, and then choose <strong>Open</strong>.</p></li>
 
-  <li>Choose <strong>Next</strong>.</li>
+<li><p>Choose <strong>Next</strong>.</p></li>
 
-  <li>For <strong>Stack name</strong>, enter a name for your template </li>
+<li><p>For <strong>Stack name</strong>, enter a name for your template</p></li>
 
-  <li> Set the following parameters:<li>
-  	 <ol>
-    <li>  AthenaCURBucket: The bucket where the CUR is sent from the “Setting up the CUR” step </li>
-	 <li> SpotDataFeedBucketName: Optional. The bucket where the spot data feed is sent from the “Setting up the Spot Data feed” step (see below) </li>
-    </ol>
+<li><p>Set the following parameters:</p>
 
-  <li> Choose <strong>Next</strong>.</li>
+<ul>
+<li>AthenaCURBucket: The bucket where the CUR is sent from the “Setting up the CUR” step</li>
+<li>SpotDataFeedBucketName: Optional. The bucket where the spot data feed is sent from the “Setting up the Spot Data feed” step (see below)</li>
+</ul></li>
 
-  <li> Choose <strong>Next</strong></li>
+<li><p>Choose <strong>Next</strong>.</p></li>
 
-  <li> At the bottom of the page, select <strong>I acknowledge that AWS CloudFormation might create IAM resources.</strong></li>
+<li><p>Choose <strong>Next</strong></p></li>
 
-  <li> Choose <strong>Create Stack</strong></li>
+<li><p>At the bottom of the page, select <strong>I acknowledge that AWS CloudFormation might create IAM resources.</strong></p></li>
 
+<li><p>Choose <strong>Create Stack</strong></p></li>
+</ul>
 </details>
 
 <details>
   <summary>My kubernetes clusters run in different accounts from the master payer account</summary>
+  <ul>
+<li>On each sub account running Kubecost
 
-  * On each sub account running kubecost
-	* Download this file: [https://raw.githubusercontent.com/kubecost/cloudformation/master/kubecost-sub-account-permissions.yaml](https://raw.githubusercontent.com/kubecost/cloudformation/master/kubecost-sub-account-permissions.yaml)
-  	* Navigate to https://console.aws.amazon.com/cloudformation
- 	* Choose **Create New Stack** if you have never used AWS CloudFormation before. Otherwise, choose **Create Stack**.
-  	* Under **Prepare template**, choose **Template is ready**.
-  	* Under **Template source**, choose **Upload a template file**.
-  	* Select **Choose file**.
-  	* Choose the downloaded .yaml template, and then choose **Open**.
-  	* Choose **Next**.
-  	* For **Stack name**, enter a name for your template 
-  	* Set the following parameters:
-		* MasterPayerAccountID: The account ID of the master payer account where the CUR has been created
-		* SpotDataFeedBucketName: The bucket where the spot data feed is sent from the “Setting up the Spot Data feed” step
-  	* Choose **Next**.
-  	* Choose **Next**
-  	* At the bottom of the page, select **I acknowledge that AWS CloudFormation might create IAM resources.** 
-  	* Choose **Create Stack**
-  * On the master payer account
-  	*   Follow the same steps to create a cloudformation stack as above, but with the following as your yaml file instead: [https://raw.githubusercontent.com/kubecost/cloudformation/master/kubecost-masterpayer-account-permissions.yaml](https://raw.githubusercontent.com/kubecost/cloudformation/master/kubecost-masterpayer-account-permissions.yaml) , and with these parameters:
-		*   AthenaCURBucket: The bucket where the CUR is set from the “Setting up the CUR” step
-		*   KubecostClusterID: An account that kubecost is running on that requires access to the Athena CUR
-		</details>
+<ul>
+<li>Download this file: <a href="https://raw.githubusercontent.com/kubecost/cloudformation/master/kubecost-sub-account-permissions.yaml">https://raw.githubusercontent.com/kubecost/cloudformation/master/kubecost-sub-account-permissions.yaml</a>
+
+<ul>
+<li>Navigate to <a href="https://console.aws.amazon.com/cloudformation">https://console.aws.amazon.com/cloudformation</a></li>
+<li>Choose <strong>Create New Stack</strong> if you have never used AWS CloudFormation before. Otherwise, choose <strong>Create Stack</strong>.</li>
+<li>Under <strong>Prepare template</strong>, choose <strong>Template is ready</strong>.</li>
+<li>Under <strong>Template source</strong>, choose <strong>Upload a template file</strong>.</li>
+<li>Select <strong>Choose file</strong>.</li>
+<li>Choose the downloaded .yaml template, and then choose <strong>Open</strong>.</li>
+<li>Choose <strong>Next</strong>.</li>
+<li>For <strong>Stack name</strong>, enter a name for your template</li>
+<li>Set the following parameters:</li>
+<li>MasterPayerAccountID: The account ID of the master payer account where the CUR has been created</li>
+<li>SpotDataFeedBucketName: The bucket where the spot data feed is sent from the “Setting up the Spot Data feed” step</li>
+<li>Choose <strong>Next</strong>.</li>
+<li>Choose <strong>Next</strong></li>
+<li>At the bottom of the page, select <strong>I acknowledge that AWS CloudFormation might create IAM resources.</strong></li>
+<li>Choose <strong>Create Stack</strong></li>
+</ul></li>
+<li>On the master payer account
+
+<ul>
+<li>Follow the same steps to create a CloudFormation stack as above, but with the following as your yaml file instead: <a href="https://raw.githubusercontent.com/kubecost/cloudformation/master/kubecost-masterpayer-account-permissions.yaml">https://raw.githubusercontent.com/kubecost/cloudformation/master/kubecost-masterpayer-account-permissions.yaml</a> , and with these parameters:</li>
+<li>AthenaCURBucket: The bucket where the CUR is set from the “Setting up the CUR” step</li>
+<li>KubecostClusterID: An account that Kubecost is running on that requires access to the Athena CUR</li>
+</ul></li>
+</ul></li>
+</ul>
+</details>
 
 ### Add manually
 <details>
 	<summary>My Kubernetes clusters run in the same account as the master payer account</summary>
 
-Attach both of the following policies to the same role or user. Use a user if you intend to integrate via servicekey, and a role if via IAM annotation (See more below under Via Pod Annotation by EKS). The SpotDataAccess policy statment is optional if the spot data feed is configured (see “Setting up the Spot Data feed” step below)
+<p>Attach both of the following policies to the same role or user. Use a user if you intend to integrate via servicekey, and a role if via IAM annotation (See more below under Via Pod Annotation by EKS). The SpotDataAccess policy statement is optional if the spot data feed is configured (see “Setting up the Spot Data feed” step below)</p>
 
-```
-        {
-           "Version": "2012-10-17",
-           "Statement": [
+<pre><code>        {
+           &quot;Version&quot;: &quot;2012-10-17&quot;,
+           &quot;Statement&quot;: [
               {
-                 "Sid": "AthenaAccess",
-                 "Effect": "Allow",
-                 "Action": [
-                    "athena:*"
+                 &quot;Sid&quot;: &quot;AthenaAccess&quot;,
+                 &quot;Effect&quot;: &quot;Allow&quot;,
+                 &quot;Action&quot;: [
+                    &quot;athena:*&quot;
                  ],
-                 "Resource": [
-                    "*"
+                 &quot;Resource&quot;: [
+                    &quot;*&quot;
                  ]
               },
               {
-                 "Sid": "ReadAccessToAthenaCurDataViaGlue",
-                 "Effect": "Allow",
-                 "Action": [
-                    "glue:GetDatabase*",
-                    "glue:GetTable*",
-                    "glue:GetPartition*",
-                    "glue:GetUserDefinedFunction",
-                    "glue:BatchGetPartition"
+                 &quot;Sid&quot;: &quot;ReadAccessToAthenaCurDataViaGlue&quot;,
+                 &quot;Effect&quot;: &quot;Allow&quot;,
+                 &quot;Action&quot;: [
+                    &quot;glue:GetDatabase*&quot;,
+                    &quot;glue:GetTable*&quot;,
+                    &quot;glue:GetPartition*&quot;,
+                    &quot;glue:GetUserDefinedFunction&quot;,
+                    &quot;glue:BatchGetPartition&quot;
                  ],
-                 "Resource": [
-                    "arn:aws:glue:*:*:catalog",
-                    "arn:aws:glue:*:*:database/athenacurcfn*",
-                    "arn:aws:glue:*:*:table/athenacurcfn*/*"
+                 &quot;Resource&quot;: [
+                    &quot;arn:aws:glue:*:*:catalog&quot;,
+                    &quot;arn:aws:glue:*:*:database/athenacurcfn*&quot;,
+                    &quot;arn:aws:glue:*:*:table/athenacurcfn*/*&quot;
                  ]
               },
               {
-                 "Sid": "AthenaQueryResultsOutput",
-                 "Effect": "Allow",
-                 "Action": [
-                    "s3:GetBucketLocation",
-                    "s3:GetObject",
-                    "s3:ListBucket",
-                    "s3:ListBucketMultipartUploads",
-                    "s3:ListMultipartUploadParts",
-                    "s3:AbortMultipartUpload",
-                    "s3:CreateBucket",
-                    "s3:PutObject"
+                 &quot;Sid&quot;: &quot;AthenaQueryResultsOutput&quot;,
+                 &quot;Effect&quot;: &quot;Allow&quot;,
+                 &quot;Action&quot;: [
+                    &quot;s3:GetBucketLocation&quot;,
+                    &quot;s3:GetObject&quot;,
+                    &quot;s3:ListBucket&quot;,
+                    &quot;s3:ListBucketMultipartUploads&quot;,
+                    &quot;s3:ListMultipartUploadParts&quot;,
+                    &quot;s3:AbortMultipartUpload&quot;,
+                    &quot;s3:CreateBucket&quot;,
+                    &quot;s3:PutObject&quot;
                  ],
-                 "Resource": [
-                    "arn:aws:s3:::aws-athena-query-results-*"
+                 &quot;Resource&quot;: [
+                    &quot;arn:aws:s3:::aws-athena-query-results-*&quot;
                  ]
               },
 	   
 	      
               {
-                 "Sid": "S3ReadAccessToAwsBillingData",
-                 "Effect": "Allow",
-                 "Action": [
-                    "s3:Get*",
-                    "s3:List*"
+                 &quot;Sid&quot;: &quot;S3ReadAccessToAwsBillingData&quot;,
+                 &quot;Effect&quot;: &quot;Allow&quot;,
+                 &quot;Action&quot;: [
+                    &quot;s3:Get*&quot;,
+                    &quot;s3:List*&quot;
                  ],
-                 "Resource": [
-                    "arn:aws:s3:::${AthenaCURBucket}*"
+                 &quot;Resource&quot;: [
+                    &quot;arn:aws:s3:::${AthenaCURBucket}*&quot;
                  ]
               }
            ]
         }
 	{
-           "Version": "2012-10-17",
-           "Statement": [
+           &quot;Version&quot;: &quot;2012-10-17&quot;,
+           &quot;Statement&quot;: [
               {
-                 "Sid": "SpotDataAccess",
-                 "Effect": "Allow",
-                 "Action": [
-                    "s3:ListAllMyBuckets",
-                    "s3:ListBucket",
-                    "s3:HeadBucket",
-                    "s3:HeadObject",
-                    "s3:List*",
-                    "s3:Get*"
+                 &quot;Sid&quot;: &quot;SpotDataAccess&quot;,
+                 &quot;Effect&quot;: &quot;Allow&quot;,
+                 &quot;Action&quot;: [
+                    &quot;s3:ListAllMyBuckets&quot;,
+                    &quot;s3:ListBucket&quot;,
+                    &quot;s3:HeadBucket&quot;,
+                    &quot;s3:HeadObject&quot;,
+                    &quot;s3:List*&quot;,
+                    &quot;s3:Get*&quot;
                  ],
-                 "Resource": "arn:aws:s3:::${SpotDataFeedBucketName}*"
+                 &quot;Resource&quot;: &quot;arn:aws:s3:::${SpotDataFeedBucketName}*&quot;
               }
            ]
         }
-```
+</code></pre>
 
 </details>
 
 
-<details>
-	<summary>My Kubernetes clusters run in different accounts</summary>
+<p><details>
+	<summary>My Kubernetes clusters run in different accounts</summary></p>
 
-On each sub account running kubecost, attach both of the following policies to the same role or user. Use a user if you intend to integrate via servicekey, and a role if via IAM annotation (See more below under Via Pod Annotation by EKS). The SpotDataAccess policy statment is optional if the spot data feed is configured (see “Setting up the Spot Data feed” step below)
+<p>On each sub account running kubecost, attach both of the following policies to the same role or user. Use a user if you intend to integrate via servicekey, and a role if via IAM annotation (See more below under Via Pod Annotation by EKS). The SpotDataAccess policy statement is optional if the spot data feed is configured (see “Setting up the Spot Data feed” step below)</p>
 
-
-```
-	{
-               "Version": "2012-10-17",
-               "Statement": [
+<pre><code>	{
+               &quot;Version&quot;: &quot;2012-10-17&quot;,
+               &quot;Statement&quot;: [
                   {
-                     "Sid": "AssumeRoleInMasterPayer",
-                     "Effect": "Allow",
-                     "Action": "sts:AssumeRole",
-                     "Resource": "arn:aws:iam::${MasterPayerAccountID}:role/KubecostRole-${This-account’s-id}"
+                     &quot;Sid&quot;: &quot;AssumeRoleInMasterPayer&quot;,
+                     &quot;Effect&quot;: &quot;Allow&quot;,
+                     &quot;Action&quot;: &quot;sts:AssumeRole&quot;,
+                     &quot;Resource&quot;: &quot;arn:aws:iam::${MasterPayerAccountID}:role/KubecostRole-${This-account’s-id}&quot;
                   }
                ]
 	}
 
 	{
-               "Version": "2012-10-17",
-               "Statement": [
+               &quot;Version&quot;: &quot;2012-10-17&quot;,
+               &quot;Statement&quot;: [
                   {
-                     "Sid": "SpotDataAccess",
-                     "Effect": "Allow",
-                     "Action": [
-                        "s3:ListAllMyBuckets",
-                        "s3:ListBucket",
-                        "s3:HeadBucket",
-                        "s3:HeadObject",
-                        "s3:List*",
-                        "s3:Get*"
+                     &quot;Sid&quot;: &quot;SpotDataAccess&quot;,
+                     &quot;Effect&quot;: &quot;Allow&quot;,
+                     &quot;Action&quot;: [
+                        &quot;s3:ListAllMyBuckets&quot;,
+                        &quot;s3:ListBucket&quot;,
+                        &quot;s3:HeadBucket&quot;,
+                        &quot;s3:HeadObject&quot;,
+                        &quot;s3:List*&quot;,
+                        &quot;s3:Get*&quot;
                      ],
-                     "Resource": "arn:aws:s3:::${SpotDataFeedBucketName}*"
+                     &quot;Resource&quot;: &quot;arn:aws:s3:::${SpotDataFeedBucketName}*&quot;
                   }
                ]
 	}
-```
-On the masterpayer account, attach this policy to a role (replace `${AthenaCURBucket}` variable):
-```
-	{
-               "Version": "2012-10-17",
-               "Statement": [
+</code></pre>
+
+<p>On the masterpayer account, attach this policy to a role (replace <code>${AthenaCURBucket}</code> variable):</p>
+
+<pre><code>	{
+               &quot;Version&quot;: &quot;2012-10-17&quot;,
+               &quot;Statement&quot;: [
                   {
-                     "Sid": "AthenaAccess",
-                     "Effect": "Allow",
-                     "Action": [
-                        "athena:*"
+                     &quot;Sid&quot;: &quot;AthenaAccess&quot;,
+                     &quot;Effect&quot;: &quot;Allow&quot;,
+                     &quot;Action&quot;: [
+                        &quot;athena:*&quot;
                      ],
-                     "Resource": [
-                        "*"
+                     &quot;Resource&quot;: [
+                        &quot;*&quot;
                      ]
 	},
 	{
-                     "Sid": "ReadAccessToAthenaCurDataViaGlue",
-                     "Effect": "Allow",
-                     "Action": [
-                        "glue:GetDatabase*",
-                        "glue:GetTable*",
-                        "glue:GetPartition*",
-                        "glue:GetUserDefinedFunction",
-                        "glue:BatchGetPartition"
+                     &quot;Sid&quot;: &quot;ReadAccessToAthenaCurDataViaGlue&quot;,
+                     &quot;Effect&quot;: &quot;Allow&quot;,
+                     &quot;Action&quot;: [
+                        &quot;glue:GetDatabase*&quot;,
+                        &quot;glue:GetTable*&quot;,
+                        &quot;glue:GetPartition*&quot;,
+                        &quot;glue:GetUserDefinedFunction&quot;,
+                        &quot;glue:BatchGetPartition&quot;
                      ],
-                     "Resource": [
-                        "arn:aws:glue:*:*:catalog",
-                        "arn:aws:glue:*:*:database/athenacurcfn*",
-                        "arn:aws:glue:*:*:table/athenacurcfn*/*"
+                     &quot;Resource&quot;: [
+                        &quot;arn:aws:glue:*:*:catalog&quot;,
+                        &quot;arn:aws:glue:*:*:database/athenacurcfn*&quot;,
+                        &quot;arn:aws:glue:*:*:table/athenacurcfn*/*&quot;
                      ]
                   },
                   {
-                     "Sid": "AthenaQueryResultsOutput",
-                     "Effect": "Allow",
-                     "Action": [
-                        "s3:GetBucketLocation",
-                        "s3:GetObject",
-                        "s3:ListBucket",
-                        "s3:ListBucketMultipartUploads",
-                        "s3:ListMultipartUploadParts",
-                        "s3:AbortMultipartUpload",
-                        "s3:CreateBucket",
-                        "s3:PutObject"
+                     &quot;Sid&quot;: &quot;AthenaQueryResultsOutput&quot;,
+                     &quot;Effect&quot;: &quot;Allow&quot;,
+                     &quot;Action&quot;: [
+                        &quot;s3:GetBucketLocation&quot;,
+                        &quot;s3:GetObject&quot;,
+                        &quot;s3:ListBucket&quot;,
+                        &quot;s3:ListBucketMultipartUploads&quot;,
+                        &quot;s3:ListMultipartUploadParts&quot;,
+                        &quot;s3:AbortMultipartUpload&quot;,
+                        &quot;s3:CreateBucket&quot;,
+                        &quot;s3:PutObject&quot;
                      ],
-                     "Resource": [
-                        "arn:aws:s3:::aws-athena-query-results-*"
+                     &quot;Resource&quot;: [
+                        &quot;arn:aws:s3:::aws-athena-query-results-*&quot;
                      ]
                   },
                   {
-                     "Sid": "S3ReadAccessToAwsBillingData",
-                     "Effect": "Allow",
-                     "Action": [
-                        "s3:Get*",
-                        "s3:List*"
+                     &quot;Sid&quot;: &quot;S3ReadAccessToAwsBillingData&quot;,
+                     &quot;Effect&quot;: &quot;Allow&quot;,
+                     &quot;Action&quot;: [
+                        &quot;s3:Get*&quot;,
+                        &quot;s3:List*&quot;
                      ],
-                     "Resource": [
-                        "arn:aws:s3:::${AthenaCURBucket}*"
+                     &quot;Resource&quot;: [
+                        &quot;arn:aws:s3:::${AthenaCURBucket}*&quot;
                      ]
                   }
                ]
 	}
-```
-You will then need to add the following trust statement to the role the policy is attached to (replace `${KubecostClusterID}` variable):
-```
-	{
-               "Version": "2012-10-17",
-               "Statement": [
+</code></pre>
+
+<p>You will then need to add the following trust statement to the role the policy is attached to (replace <code>${KubecostClusterID}</code> variable):</p>
+
+<pre><code>	{
+               &quot;Version&quot;: &quot;2012-10-17&quot;,
+               &quot;Statement&quot;: [
                   {
-                     "Effect": "Allow",
-                     "Principal": {
-                        "AWS": "arn:aws:iam::${KubecostClusterID}:root"
+                     &quot;Effect&quot;: &quot;Allow&quot;,
+                     &quot;Principal&quot;: {
+                        &quot;AWS&quot;: &quot;arn:aws:iam::${KubecostClusterID}:root&quot;
                      },
-                     "Action": [
-                        "sts:AssumeRole"
+                     &quot;Action&quot;: [
+                        &quot;sts:AssumeRole&quot;
                      ]
                   }
                ]
             }
-```
+</code></pre>
 
 </details>
 
@@ -321,54 +331,63 @@ Now that the policies have been created, we will need to attach those policies t
 <details>
 	<summary>Attach via Service Key And Kubernetes Secret</summary>
 
-* Navigate to https://console.aws.amazon.com/iam Access Management > Users . Find the Kubecost User and select Security Credentials > Create Access Key. Note the Access key ID and Secret access key. You'll use it to either Create a secret from helm values or Create and use an existing secret.
+<ul>
+<li><p>Navigate to <a href="https://console.aws.amazon.com/iam">https://console.aws.amazon.com/iam</a> Access Management &gt; Users. Find the Kubecost User and select Security Credentials &gt; Create Access Key. Note the Access key ID and Secret access key. You&rsquo;ll use it to either Create a secret from helm values or Create and use an existing secret.</p>
 
-	<details>
-		<summary>Create a secret from helm values</summary>
+<p><details>
+	<summary>Create a secret from helm values</summary></p>
 
-	* Set `.Values.kubecostProductConfigs.awsServiceKeyName `to <code> <strong>Access key ID</strong></code>
-	*   Set <code>.Values.kubecostProductConfigs.awsServiceKeyPassword </code>to <strong>Secret access key</strong>
-	*   Note that this will leave your secrets unencrypted in values.yaml. Use an existing secret as in the next step to avoid this.
+<ul>
+<li>Set <code>.Values.kubecostProductConfigs.awsServiceKeyName</code>to <code> <strong>Access key ID</strong></code></li>
+<li>Set <code>.Values.kubecostProductConfigs.awsServiceKeyPassword </code>to <strong>Secret access key</strong></li>
+<li>Note that this will leave your secrets unencrypted in values.yaml. Use an existing secret as in the next step to avoid this.</li>
+</ul></li>
+</ul></details>
 
-	</details>
-
-	<details>
+<ul><details>
 		<summary> Create and use an existing secret </summary>
 
-	If you commit your helm values to source control, you may want to create a secret in a different way and import that secret to kubecost.
+<p>If you commit your helm values to source control, you may want to create a secret in a different way and import that secret to kubecost.
 	* Create a json file named <em>service-key.json</em> of the following format
-    ```
+    <code>
     {
-      "aws_access_key_id": "<ACCESS_KEY_ID>",
-      "aws_secret_access_key": "<ACCESS_KEY_SECRET>"
+      &quot;aws_access_key_id&quot;: &quot;&lt;ACCESS_KEY_ID&gt;&quot;,
+      &quot;aws_secret_access_key&quot;: &quot;&lt;ACCESS_KEY_SECRET&gt;&quot;
     }
-	```
+	</code>
 	* Create a secret from file in the namespace kubecost is deployed in:
-  ```
-                kubectl create secret generic <name> --from-file=service-key.json --namespace <kubecost>
-        	```
-	* Set .Values.kubecostProductConfigs.serviceKeySecretName to the name of this secet. Note also that .Values.kubecostProductConfigs.awsServiceKeyName and .Values.kubecostProductConfigs.awsServiceKeyPassword should be unset if adding the service key from values this way.
+        	<code>
+                kubectl create secret generic &lt;name&gt; --from-file=service-key.json --namespace &lt;kubecost&gt;
+        	</code>
+	* Set .Values.kubecostProductConfigs.serviceKeySecretName to the name of this secet. Note also that .Values.kubecostProductConfigs.awsServiceKeyName and .Values.kubecostProductConfigs.awsServiceKeyPassword should be unset if adding the service key from values this way.</p>
 
-	</details>
+</ul></details>
 
 </details>
 
 <details>
 	<summary>Attach via Service Key on Kubecost frontend</summary>
-
-* Navigate to https://console.aws.amazon.com/iam Access Management > Users . Find the Kubecost User and select Security Credentials > Create Access Key. Note the Access key ID and Secret access key.
-*   You can add the Access key ID and Secret access key on /settings.html  > External Cloud Cost Configuration (AWS) > Update  and setting Service key name to **Access key ID** and Service key secret to **Secret access key**
+	
+<ul>
+<li>Navigate to <a href="https://console.aws.amazon.com/iam">https://console.aws.amazon.com/iam</a> Access Management &gt; Users. Find the Kubecost User and select Security Credentials &gt; Create Access Key. Note the Access key ID and Secret access key.</li>
+<li>You can add the Access key ID and Secret access key on /settings.html  &gt; External Cloud Cost Configuration (AWS) &gt; Update  and setting Service key name to <strong>Access key ID</strong> and Service key secret to <strong>Secret access key</strong></li>
+</ul>
 
 </details>
 
 <details>
 	<summary>Attach via Pod Annotation on EKS</summary>
 
-*   First, create an OIDC provider for your cluster with these [steps](https://docs.aws.amazon.com/eks/latest/userguide/enable-iam-roles-for-service-accounts.html)
-*   Next, create a Role with these [steps](https://docs.aws.amazon.com/eks/latest/userguide/create-service-account-iam-policy-and-role.html). 
-	*   When asked to attach policies, you'll want to attach the policies created above in Step 2
-	*   When asked for "namespace" and "serviceaccountname" use the namespace kubecost is installed in and the name of the serviceaccount attached to the cost-analyzer pod. You can find that name by running `kubectl get pods kubecost-cost-analyzer-69689769b8-lf6nq -n <kubecost-namespace> -o yaml | grep serviceAccount`
-* Then, you need to add an annotation to that service account as described in these [docs](https://docs.aws.amazon.com/eks/latest/userguide/specify-service-account-role.html). This annotation can be added to the kubecost service account by setting `.Values.serviceAccount.annotations ` in the helm chart to `eks.amazonaws.com/role-arn: arn:aws:iam::<AWS_ACCOUNT_ID>:role/<IAM_ROLE_NAME>`
+<ul>
+<li>First, create an OIDC provider for your cluster with these <a href="https://docs.aws.amazon.com/eks/latest/userguide/enable-iam-roles-for-service-accounts.html">steps</a></li>
+<li>Next, create a Role with these <a href="https://docs.aws.amazon.com/eks/latest/userguide/create-service-account-iam-policy-and-role.html">steps</a>.
+
+<ul>
+<li>When asked to attach policies, you&rsquo;ll want to attach the policies created above in Step 2</li>
+<li>When asked for &ldquo;namespace&rdquo; and &ldquo;serviceaccountname&rdquo; use the namespace Kubecost is installed in and the name of the serviceaccount attached to the cost-analyzer pod. You can find that name by running <code>kubectl get pods kubecost-cost-analyzer-69689769b8-lf6nq -n &lt;kubecost-namespace&gt; -o yaml | grep serviceAccount</code></li>
+</ul></li>
+<li>Then, you need to add an annotation to that service account as described in these <a href="https://docs.aws.amazon.com/eks/latest/userguide/specify-service-account-role.html">docs</a>. This annotation can be added to the Kubecost service account by setting <code>.Values.serviceAccount.annotations</code> in the helm chart to <code>eks.amazonaws.com/role-arn: arn:aws:iam::&lt;AWS_ACCOUNT_ID&gt;:role/&lt;IAM_ROLE_NAME&gt;</code></li>
+</ul>
 
 </details>
 
@@ -377,7 +396,7 @@ Now that the policies have been created, we will need to attach those policies t
 These values can either be set from the kubecost frontend or via .Values.kubecostProductConfigs in the helm chart. Note that if you set any kubecostProductConfigs from the helm chart, all changes via the frontend will be overridden on pod restart.
 
 * `athenaProjectID` e.g. "530337586277" # The AWS AccountID where the Athena CUR is. 
-* `athenaBucketName` An S3 bucket to store Athena query results that you’ve created that kubecost has permission to access
+* `athenaBucketName` An S3 bucket to store Athena query results that you’ve created that Kubecost has permission to access
     * The name of the bucket should match `s3://aws-athena-query-results-*`, so the IAM roles defined above will automatically allow access to it
     * The bucket can have a Canned ACL of `Private` or other permissions as you see fit.
 * `athenaRegion` The aws region athena is running in
@@ -385,22 +404,21 @@ These values can either be set from the kubecost frontend or via .Values.kubecos
     * The athena database name is available as the value (physical id) of `AWSCURDatabase` in the CloudFormation stack created above (in [Step 2: Setting up Athena](#Step-2:-Setting-up-Athena))
 * `athenaTable` the name of the table created by the Athena setup
   * The table name is typically the database name with the leading `athenacurcfn_` removed (but is not available as a CloudFormation stack resource)
-  * Alternatively the name of a view can be placed in this field to use a subset of the CUR data. Only views with all columns from the CUR table should be used. [Create a view](https://docs.aws.amazon.com/athena/latest/ug/create-view.html)
 
-> Make sure using only underscore as an delimiter if needed for tables and views, using dash will not work even though you might be able to create it see [docs](https://docs.aws.amazon.com/athena/latest/ug/tables-databases-columns-names.html).
+> Make sure use only underscore as a delimiter if needed for tables and views, using dash will not work even though you might be able to create it see [docs](https://docs.aws.amazon.com/athena/latest/ug/tables-databases-columns-names.html).
 
 * If you are using a multi-account setup, you will also need to set `.Values.kubecostProductConfigs.masterPayerARN `To the arn of the role in the masterpayer account, e.g. `arn:aws:iam::530337586275:role/KubecostRole`.
 
 ## Troubleshooting
 
-Once you've integrated with the CUR, you can visit /diagnostics.html in kubecost to determine if kubecost has been successfully integrated with your CUR. If any problems are detected, you will see a yellow warning sign under the cloud provider permissions status header: 
+Once you've integrated with the CUR, you can visit /diagnostics.html in Kubecost to determine if Kubecost has been successfully integrated with your CUR. If any problems are detected, you will see a yellow warning sign under the cloud provider permissions status header: 
 <img width="1792" alt="Screen Shot 2020-12-06 at 9 37 40 PM" src="https://user-images.githubusercontent.com/453512/101316930-587bb080-3812-11eb-8bbc-694a894314d8.png">
 
 You can check pod logs for authentication errors by running 
 `kubectl get pods -n <namespace>`
 `kubectl logs <kubecost-pod-name> -n <namespace> -c cost-model`
 
-If you do not see any authentication errors, log in to your AWS console and visit the Athena dashboard. You should be able to find the CUR. Ensure that the databse with the CUR matches the athenaTable entered in step 4-- it likely has a prefix with athenacurfn_ :
+If you do not see any authentication errors, log in to your AWS console and visit the Athena dashboard. You should be able to find the CUR. Ensure that the database with the CUR matches the athenaTable entered in step 4-- it likely has a prefix with athenacurfn_ :
 <img width="1792" alt="Screen Shot 2020-12-06 at 9 43 31 PM" src="https://user-images.githubusercontent.com/453512/101319459-e6f23100-3816-11eb-8d96-1ab977cb50bd.png">
 
 You can also check query history to see if any queries are failing:
@@ -419,7 +437,7 @@ Kubecost will reconcile your spot prices with CUR billing reports as they become
 
 [https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-data-feeds.html](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-data-feeds.html)
 
-> Note the name of the bucket you create for spot data. This will be used in the following step.
+> Note the name of the bucket you created for spot data. This will be used in the following step.
 
 ## Configuring the Spot Data Feed in Kubecost
 
@@ -430,19 +448,27 @@ These values can either be set from the kubecost frontend or via .Values.kubecos
  `awsSpotDataBucket` the configured bucket for the spot data feed
 
  `awsSpotDataPrefix` optional configured prefix for your spot data feed bucket
-
- `spotLabel` optional kubernetes node label name designating whether a node is a spot node. Used to provide pricing estimates until exact spot data becomes available from the CUR
-
- `spotLabelValue` optional kubernetes node label value designating a spot node. Used to provide pricing estimates until exact spot data becomes available from the CUR. For example, if your spot nodes carry a label `lifecycle:spot`, then the spotLabel would be "lifecycle" and the spotLabelValue would be "spot"
+ 
+ `spotLabel` optional Kubernetes node label name designating whether a node is a spot node. Used to provide pricing estimates until exact spot data becomes available from the CUR
+ 
+ `spotLabelValue` optional Kubernetes node label value designating a spot node. Used to provide pricing estimates until exact spot data becomes available from the CUR. For example, if your spot nodes carry a label `lifecycle:spot`, then the spotLabel would be "lifecycle" and the spotLabelValue would be "spot"
 
 ## Summary and Pricing
+
 AWS services used here are:
-  * [Athena](https://aws.amazon.com/athena/pricing/)
-  * [S3](https://aws.amazon.com/s3/pricing/)
-  * [EC2](https://aws.amazon.com/ec2/pricing/) Kubecost's cost-model requires roughly 2 CPU and 10GB of RAM per 50,000 pods monitored. The backing Prometheus database requires roughly 2CPU and 25GB per million metrics ingested per minute. You can pick the ec2 instances necessary to run kubecost accordingly.
-  * [EBS](https://aws.amazon.com/ebs/pricing/) Kubecost can write its cache to disk. Roughly 32 GB per 100,000 pods monitored is sufficient. (Optional-- our cache can exist in memory)
-  * [Cloudformation](https://aws.amazon.com/cloudformation/pricing/) (Optional-- manual IAM configuration or via Terraform is fine)
-  * [EKS](https://aws.amazon.com/eks/pricing/)  (Optional-- all k8s flavors are supported) 
+
+  - [Athena](https://aws.amazon.com/athena/pricing/)
+  - [S3](https://aws.amazon.com/s3/pricing/)
+  - [EC2](https://aws.amazon.com/ec2/pricing/) 
+  
+  Kubecost's cost-model requires roughly 2 CPU and 10GB of RAM per 50,000 pods monitored. The backing Prometheus database requires roughly 2CPU and 25GB per million metrics ingested per minute. You can pick the ec2 instances necessary to run kubecost accordingly.
+
+  - [EBS](https://aws.amazon.com/ebs/pricing/) 
+  
+  Kubecost can write its cache to disk. Roughly 32 GB per 100,000 pods monitored is sufficient. (Optional-- our cache can exist in memory)
+  
+  - [Cloudformation](https://aws.amazon.com/cloudformation/pricing/) (Optional-- manual IAM configuration or via Terraform is fine)
+  - [EKS](https://aws.amazon.com/eks/pricing/)  (Optional-- all k8s flavors are supported) 
 
 
 Edit this doc on [Github](https://github.com/kubecost/docs/blob/main/aws-cloud-integrations.md)

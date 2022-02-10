@@ -14,20 +14,20 @@ Kubecost utilizes AWS tagging to allocate the costs of AWS resources outside of 
 
 To allocate external AWS resources to a Kubernetes concept, use the following tag naming scheme:
 
-| Kubernetes Concept 	| AWS Tag Key         	| AWS Tag Value 	|
-|--------------------	|---------------------	|---------------	|
-| Cluster           	| kubernetes_cluster	| &lt;cluster-name>	|
-| Namespace          	| kubernetes_namespace	| &lt;namespace-name> |
-| Deployment         	| kubernetes_deployment	| &lt;deployment-name>|
-| Label              	| kubernetes_label_NAME*| &lt;label-value>    |
-| DaemonSet          	| kubernetes_daemonset	| &lt;daemonset-name> |
-| Pod                	| kubernetes_pod	      | &lt;pod-name>     |
-| Container          	| kubernetes_container	| &lt;container-name> |
+| Kubernetes Concept| AWS Tag Key | AWS Tag Value |
+|--------------------|---------------------|---------------|
+| Cluster | kubernetes_cluster	| cluster-name	|
+| Namespace | kubernetes_namespace	| namespace-name |
+| Deployment | kubernetes_deployment	| deployment-name |
+| Label | kubernetes_label_NAME* | label-value    |
+| DaemonSet | kubernetes_daemonset	| daemonset-name |
+| Pod | kubernetes_pod	    | pod-name     |
+| Container | kubernetes_container	| container-name |
 
 
 *\*In the `kubernetes_label_NAME` tag key, the `NAME` portion should appear exactly as the tag appears inside of Kubernetes. For example, for the tag `app.kubernetes.io/name`, this tag key would appear as `kubernetes_label_app.kubernetes.io/name`.*
 
-To use an alternative or existing AWS tag schema, you may supply these in your [values.yaml](https://github.com/kubecost/cost-analyzer-helm-chart/blob/v1.73.0/cost-analyzer/values.yaml#L589) under the "kubecostProductConfigs.labelMappingConfigs.\<aggregation\>\_external_label" . Also be sure to set kubecostProductConfigs.labelMappingConfigs.enabled = true
+To use an alternative or existing AWS tag schema, you may supply these in your [values.yaml](https://github.com/kubecost/cost-analyzer-helm-chart/blob/develop/cost-analyzer/values.yaml#L734) under the `kubecostProductConfigs.labelMappingConfigs.\<aggregation\>\_external_label`. Also be sure to set `kubecostProductConfigs.labelMappingConfigs.enabled = true`
 
 More on AWS tagging [here](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html).
 

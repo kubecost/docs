@@ -8,27 +8,27 @@ FAQ for installing in Kubecost in air-gapped environment
 **A:** The following images will need to be downloaded. Please substitute the appropriate version
 for prod-x.xx.x. [Latest releases can be found here](https://github.com/kubecost/cost-analyzer-helm-chart/releases).
 
-*Kubecost Required*
-* FrontEnd: gcr.io/kubecost1/frontend:prod-x.xx.x
-* Server: gcr.io/kubecost1/server:prod-x.xx.x
-* CostModel: gcr.io/kubecost1/cost-model:prod-x.xx.x
+### Kubecost Required*
+- Frontend: gcr.io/kubecost1/frontend:prod-x.xx.x
+- Server: gcr.io/kubecost1/server:prod-x.xx.x
+- CostModel: gcr.io/kubecost1/cost-model:prod-x.xx.x
 
-*Kubecost Optional*
-* Kube-state-metrics: quay.io/coreos/kube-state-metrics:v1.9.8
-* NetworkCosts: gcr.io/kubecost1/kubecost-network-costs:v15.1 (used for [network-allocation](https://github.com/kubecost/docs/blob/main/network-allocation.md))
-* BusyBox: registry.hub.docker.com/library/busybox:latest (only for NFS)
-* Cluster controller: gcr.io/kubecost1/cluster-controller:v0.0.2 (used for write actions)
+### Kubecost Optional
+- Kube-state-metrics: quay.io/coreos/kube-state-metrics:v1.9.8
+- NetworkCosts: gcr.io/kubecost1/kubecost-network-costs:v15.1 (used for [network-allocation](https://github.com/kubecost/docs/blob/main/network-allocation.md))
+- BusyBox: registry.hub.docker.com/library/busybox:latest (only for NFS)
+- Cluster controller: gcr.io/kubecost1/cluster-controller:v0.0.2 (used for write actions)
 
-*Prometheus - Required when bundled*
-* prom/prometheus:v2.22.2
-* prom/node-exporter:v0.18.1
-* prom/alertmanager:v0.20.0
-* grafana/grafana:7.5.4
-* jimmidyson/configmap-reload:v0.3.0
-* kiwigrid/k8s-sidecar:1.12.2 (can be optional if not using Grafana sidecar)
+### Prometheus - Required when bundled
+- prom/prometheus:v2.22.2
+- prom/node-exporter:v0.18.1
+- prom/alertmanager:v0.20.0
+- grafana/grafana:7.5.4
+- jimmidyson/configmap-reload:v0.3.0
+- kiwigrid/k8s-sidecar:1.12.2 (can be optional if not using Grafana sidecar)
 
-*Thanos - Enterprise/Durable Storage*
-* thanosio/thanos:v0.19.0
+### Thanos - Enterprise/Durable Storage*
+- thanosio/thanos:v0.19.0
 
 
 ### Q: How do I configure prices for my on-premise Assets?
