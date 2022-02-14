@@ -1,11 +1,11 @@
 ETL Backup
 ==========
 
-# Taking backups of your kubecost data.
-Your prometheus retention window may small (15 days by default) to reduce the amount of data stored, meaning if Kubecost's ETL becomes lost or corrupted, it cannot be rebuilt from Prometheus for data older than the retention window. For this reason, you may wish to take backups of Kubecost's ETL pipeline.
+# Taking backups of your Kubecost data.
+Your Prometheus retention window may be small (15 days by default) to reduce the amount of data stored, meaning if Kubecost's ETL becomes lost or corrupted, it cannot be rebuilt from Prometheus for data older than the retention window. For this reason, you may wish to take backups of Kubecost's ETL pipeline.
 
 ## Via Script
-The simplest way to back up kubecost's ETL is to create a copy locally to then send to the filestorage system of your choice. We provide a [script](https://github.com/kubecost/etl-backup) to do that.
+The simplest way to back up Kubecost's ETL is to create a copy locally to then send to the file storage system of your choice. We provide a [script](https://github.com/kubecost/etl-backup) to do that.
 
 
 # Restoring from a backup

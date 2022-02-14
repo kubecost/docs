@@ -1,10 +1,11 @@
 Assets
 ======
 
-The Kubecost Assets view shows Kubernetes cluster costs broken down by the individual backing assets in your cluster (e.g. cost by node, disk, and other assets).
-It’s used to identify spend drivers over time and to audit Allocation data. This view can also optionally show out of cluster assets by service, tag/label, etc.
+The Kubecost Assets view shows Kubernetes cluster costs broken down by the individual backing assets in your cluster (e.g. cost by node, disk, and other assets). 
+It’s used to identify spend drivers over time and to audit Allocation data. This view can also optionally show out-of-cluster assets by service, tag/label, etc.
 
-> Note: Similar to our Allocation API, the Assets API uses our ETL pipeline whichs aggregates data on a daily basis. This allows for enterprise scale with much higher performance.
+> Note: Similar to our Allocation API, the Assets API uses our ETL pipeline which aggregates data daily. This allows for enterprise-scale with much higher performance. 
+
 
 ![Kubecost Assets view](https://raw.githubusercontent.com/kubecost/docs/main/images/assets-screenshot.png)
 
@@ -29,12 +30,12 @@ Here are example uses:
 
 API parameters include the following:
 
-* `window` dictates the applicable window for measuring historical asset cost. Currently supported options are as follows:
-    - "15m", "24h", "7d", "48h", etc.
+* `window` dictates the applicable window for measuring historical asset cost. Currently, supported options are as follows:
+    - "15m", "24h", "7d", "48h", etc. 
     - "today", "yesterday", "week", "month", "lastweek", "lastmonth"
     - "1586822400,1586908800", etc. (start and end unix timestamps)
     - "2020-04-01T00:00:00Z,2020-04-03T00:00:00Z", etc. (start and end UTC RFC3339 pairs)
-* `aggregate` is used to consolidate cost model data. Supported aggregation types are cluster and type. Passing an empty value for this parameter, or not passing one at all, returns data by individual asset.
+* `aggregate` is used to consolidate cost model data. Supported aggregation types are cluster and type. Passing an empty value for this parameter, or not passing one at all, returns data by an individual asset.
 * `accumulate` when set to false this endpoint returns daily time series data vs cumulative data. Default value is false.
 * `disableAdjustments` when set to true, zeros out all adjustments from cloud provider reconciliation, which would otherwise change the totalCost.
 * `format` when set to `csv`, will download an accumulated version of the asset results in CSV format. By default, results will be in JSON format.
@@ -64,6 +65,7 @@ This API returns a set of JSON objects in this format:
 ```
 
 Optional filter parameters take the format of `&<filter>=<value>` appended to the assets URL query and include the following:
+
 | Filter | Description |
 |---------|-----------|
 | `filterAccounts` | Filter results by Cloud account. *Requires cloud configuration.* |
@@ -76,6 +78,7 @@ Optional filter parameters take the format of `&<filter>=<value>` appended to th
 | `filterProviderIDs` | Filter results by provider ID individual to each cloud asset. For examples, go to the Assets page, select Breakdown by Item, and see the Provider ID column. *Requires cloud configuration.* |
 | `filterServices` | Filter results by service. Examples include `Cloud Storage`, `Kubernetes`, `BigQuery`. |
 | `filterTypes` | Filter results by asset type. Examples include `Cloud`, `ClusterManagement`, `Node`, `LoadBalancer`, and `Disk`. |
+
 
 Note:
  - Some filters require cloud configuration, which can be set at `<your-kubecost-address>/keyinstructions.html`
@@ -90,7 +93,8 @@ Note:
 
 # Cloud cost reconciliation
 
-After granting Kubecost permission to access cloud billing data, Kubecost adjusts its asset prices once cloud billing data becomes available, e.g. AWS Cost and Usage Report and the spot data feed. Until this data is available from cloud provider, Kubecost uses data from public cloud APIs to determine cost, or alternatively custom pricing sheets. This allows teams to have highly accurate estimates of asset prices in real-time and then become even more precise once cloud billing data becomes available, which is often 1-2 hours for spot nodes and up to a day for reserved instances/savings plans.
+After granting Kubecost permission to access cloud billing data, Kubecost adjusts its asset prices once cloud billing data becomes available, e.g. AWS Cost and Usage Report and the spot data feed. Until this data is available from cloud providers, Kubecost uses data from public cloud APIs to determine cost, or alternatively custom pricing sheets. This allows teams to have highly accurate estimates of asset prices in real-time and then become even more precise once cloud billing data becomes available, which is often 1-2 hours for spot nodes and up to a day for reserved instances/savings plans. 
+
 
 Note that while cloud adjustments typically lag by roughly a day, there are certain adjustments, e.g. credits, that may continue to come in over the course of the month, and in some cases at the very end of the month, so reconciliation adjustments may continue to update over time.
 

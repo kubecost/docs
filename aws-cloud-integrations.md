@@ -331,8 +331,11 @@ Now that the policies have been created, we will need to attach those policies t
 <details>
 	<summary>Attach via Service Key And Kubernetes Secret</summary>
 
+
 <ul>
 <li><p>Navigate to <a href="https://console.aws.amazon.com/iam">https://console.aws.amazon.com/iam</a> Access Management &gt; Users. Find the Kubecost User and select Security Credentials &gt; Create Access Key. Note the Access key ID and Secret access key. You&rsquo;ll use it to either Create a secret from helm values or Create and use an existing secret.</p>
+	<details>
+		<summary>Create a secret from helm values</summary>
 
 <p><details>
 	<summary>Create a secret from helm values</summary></p>
@@ -360,6 +363,7 @@ Now that the policies have been created, we will need to attach those policies t
                 kubectl create secret generic &lt;name&gt; --from-file=service-key.json --namespace &lt;kubecost&gt;
         	</code>
 	* Set .Values.kubecostProductConfigs.serviceKeySecretName to the name of this secet. Note also that .Values.kubecostProductConfigs.awsServiceKeyName and .Values.kubecostProductConfigs.awsServiceKeyPassword should be unset if adding the service key from values this way.</p>
+
 
 </ul></details>
 

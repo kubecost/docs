@@ -11,15 +11,14 @@ kubectl port-forward -n kubecost service/kubecost-prometheus-server 9003:80
 
 __2. Visit Prometheus UI__
 
-View `http://localhost:9003/` in your web browswer. You should be presented with a UI that looks like the following:
+View `http://localhost:9003/` in your web browser. You should be presented with a UI that looks like the following:
 
-![](https://raw.githubusercontent.com/kubecost/docs/master/images/prom-ui.png)
+![](images/prom-ui.png)
 
 If you're unable to connect, confirm that the Prometheus server pod is in a `Running` state. 
 
 
 __3. Input your desired query + Execute__
-
 
 Edit this doc on [Github](https://github.com/kubecost/docs/blob/main/prometheus.md)
 

@@ -1,6 +1,8 @@
 Network Traffic Cost Allocation
 ===============================
 
+# Network Traffic Cost Allocation
+
 This document summarizes Kubecost network cost allocation, how to enable it, and what it provides.
 
 When this feature is enabled, Kubecost gathers network traffic metrics in combination with provider-specific network costs to provide insight on network data sources as well as the aggregate costs of transfers.
@@ -15,11 +17,11 @@ To enable this feature, set the following parameter in values.yaml during [Helm 
  
  To estimate the resources required to run Kubecost network cost,  you can view our [benchmarking metrics](https://docs.google.com/document/d/10b-Ew78R90UOaZ5gXQUjU5GWZXBIy8H11RK5bbCd2EM/edit).
 
- > **Note:** network cost, which are disabled by default, run as a privileged pod to access the relevant networking kernel module on the host machine.
+ > **Note:** network cost, which is disabled by default, run as a privileged pod to access the relevant networking kernel module on the host machine.
 
 ### Kubernetes Network Traffic Metrics
 
-The primary source of network metrics come from a daemonset pod hosted on each of the nodes in a cluster. Each daemonset pod uses `hostNetwork: true` such that it can leverage an underlying kernel module to capture network data. Network traffic data is gathered and the destination of any outbound networking is labeled as:
+The primary source of network metrics is a DaemonSet pod hosted on each of the nodes in a cluster. Each daemonset pod uses `hostNetwork: true` such that it can leverage an underlying kernel module to capture network data. Network traffic data is gathered and the destination of any outbound networking is labeled as:
 
  * Internet Egress: Network target destination was not identified within the cluster.  
  * Cross Region Egress: Network target destination was identified, but not in the same provider region.  
@@ -31,7 +33,7 @@ These classifications are important because they correlate with network costing 
 kubectl logs kubecost-network-costs-<pod-identifier> -n kubecost
 ```
 
-This will show you top source and destination IP addresses and bytes transferred on the node where this pod is running. To disable logs, you can set the helm value `networkCosts.trafficLogging` to `false`. 
+This will show you the top source and destination IP addresses and bytes transferred on the node where this pod is running. To disable logs, you can set the helm value `networkCosts.trafficLogging` to `false`. 
 
 ### Overriding traffic classifications
 
@@ -39,7 +41,7 @@ For traffic routed to addresses outside of your cluster but inside your VPC, Kub
 
 * in-zone - a list of destination addresses/ranges that will be classified as an in-zone traffic, which is free for most providers. 
 * in-region - a list of addresses/ranges that will be classified as the same region between source and destinations but different zones.
-* cross-region -- a list of addresses/ranges that will be classified as different region from the source regions
+* cross-region -- a list of addresses/ranges that will be classified as the different region from the source regions
 
 
 ### Troubleshooting
@@ -54,7 +56,7 @@ Common issues:
 
 * Failed to locate network pods -- Error message displayed when the Kubecost app is unable to locate the network pods, which we search for by a label that includes our release name. In particular, we depend on the label `app=<release-name>-network-costs` to locate the pods. If the app has a blank release name this issue may happen. 
 
-* Resource usage is a function of unique src and dest IP/port combinations. Most deployments use a small fraction of a CPU and it is also ok to have this pod CPU throttled. Throttling should increase parse times but should not have other impact. The following Prometheus metrics are available in v15.3 for determining scale and the impact of throttling:
+* Resource usage is a function of unique src and dest IP/port combinations. Most deployments use a small fraction of a CPU and it is also ok to have this pod CPU throttled. Throttling should increase parse times but should not have other impacts. The following Prometheus metrics are available in v15.3 for determining the scale and the impact of throttling:
 
 `kubecost_network_costs_parsed_entries` is the last number of conntrack entries parsed  
 `kubecost_network_costs_parse_time` is the last recorded parse time  
