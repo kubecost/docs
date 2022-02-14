@@ -195,9 +195,8 @@ Enabling diagnostic alerts in Kubecost occur when an event impacts product uptim
 
 * Prometheus is unreachable
 * Kubecost metrics missing over last 5 minutes
-* More coming soon.
 
-This alert only uses Slack (email coming soon), so it requires the `globalSlackWebhookUrl` field.
+This alert only uses Slack; email recipients are not supported at this time.
 
 Example Helm values.yaml:
 ```
@@ -222,7 +221,7 @@ Cluster health alerts occur when the cluster health score changes by a specific 
 * Out of Memory Pods
 * Failed Jobs
 
-This alert only uses Slack (email coming soon), so it requires the `globalSlackWebhookUrl` field. 
+This alert only uses Slack; email recipients are not supported at this time.
 
 Example Helm values.yaml:
 
