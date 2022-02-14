@@ -1,4 +1,5 @@
-# ETL S3 Backup
+ETL S3 Backup
+=============
 
 > Note: durable storage functionality is part of Kubecost Enterprise
 
@@ -50,3 +51,7 @@ kubectl create secret generic <secret_name> -n kubecost --from-file=object-store
 When installing with helm, use the `--set kubecostModel.etlBucketConfigSecret=<secret_name>` flag and substitute the name of the secret you just created. 
 
 Note that enabling this flag will override the disk storage setting. Also, since the storage is a new location, the ETL will require a full rebuild.
+
+Edit this doc on [Github](https://github.com/kubecost/docs/blob/main/etl-s3-backup.md)
+
+<!--- {"article":"4407601815191","section":"4402815636375","permissiongroup":"1500001277122"} --->

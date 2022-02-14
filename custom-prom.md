@@ -1,4 +1,5 @@
-# Custom Prometheus
+Custom Prometheus
+=================
 
 When integrating Kubecost with an existing Prometheus, we recommend first installing Kubecost with a bundled Prometheus ([instructions](http://kubecost.com/install)) as a dry run before integrating with an external Prometheus deployment. You can get in touch (team@kubecost.com) or via our [Slack community](https://join.slack.com/t/kubecost/shared_invite/enQtNTA2MjQ1NDUyODE5LWFjYzIzNWE4MDkzMmUyZGU4NjkwMzMyMjIyM2E0NGNmYjExZjBiNjk1YzY5ZDI0ZTNhZDg4NjlkMGRkYzFlZTU) for assistance.
 
@@ -128,7 +129,11 @@ grafana:
       enabled: false
 ```
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;For Option 2, ensure that the following flags are set in your Operator deployment:
+For Option 2, ensure that the following flags are set in your Operator deployment:
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1. sidecar.dashboards.enabled = true  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2. sidecar.dashboards.searchNamespace isn't restrictive, use `ALL` if Kubecost runs in another ns  
+1. sidecar.dashboards.enabled = true  
+2. sidecar.dashboards.searchNamespace isn't restrictive, use `ALL` if Kubecost runs in another namespace.
+
+Edit this doc on [Github](https://github.com/kubecost/docs/blob/main/custom-prom.md)
+
+<!--- {"article":"4407595941015","section":"4402815636375","permissiongroup":"1500001277122"} --->

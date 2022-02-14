@@ -1,4 +1,5 @@
-# Saved Reports Documentation
+Saved Reports
+=============
 
 ### Summary
 
@@ -125,3 +126,8 @@ data:
 3. Ensure that the json string is successfully mapped to the appropriate configs
 
 -   Navigate to `<front-end-url>/model/reports` and ensure that the configured report parameters have been set by selecting the "Open saved reports" button in the upper right hand corner of the report card.
+
+
+Edit this doc on [Github](https://github.com/kubecost/docs/blob/main/saved-reports.md)
+
+<!--- {"article":"4407595977879","section":"4402815656599","permissiongroup":"1500001277122"} --->

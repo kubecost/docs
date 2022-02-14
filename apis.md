@@ -1,3 +1,6 @@
+APIs
+====
+
 This resource covers primary APIs across open source and commercial Kubecost products.
 
 
@@ -41,4 +44,6 @@ are available at `http://<kubecost-address>/model/ENDPOINT`:
 | `/savings/clusterSizing` | Provides recommendations for sizing clusters (node types and quantities). | `/savings/diagnostics` | Reports cached keys in the savings handlers and recent errors. |
 
 
+Edit this doc on [Github](https://github.com/kubecost/docs/blob/main/apis.md)
 
+<!--- {"article":"4407601802391","section":"4402829033367","permissiongroup":"1500001277122"} --->

@@ -1,3 +1,6 @@
+AWS Marketplace Install
+=======================
+
 This document provides the steps for installing the Kubecost Enterprise product from the AWS marketplace. [More info on different tiers.](https://kubecost.com/pricing)
 
 Please contact us at team@kubecost.com with any questions and we'd be happy to help!
@@ -54,3 +57,7 @@ Supply the following parameters to your _helm install_ command.
 ```
 
 To participate in our free Enterprise onboarding program, contact us at team@kubecost.com to schedule these sessions!
+
+Edit this doc on [Github](https://github.com/kubecost/docs/blob/main/aws-marketplace-install.md)
+
+<!--- {"article":"4407596808087","section":"4402829036567","permissiongroup":"1500001277122"} --->

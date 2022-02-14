@@ -1,3 +1,6 @@
+GCP Out of Cluster
+==================
+
 Kubecost provides the ability to allocate out of clusters costs, e.g. Cloud SQL instances and Cloud Storage buckets, back to Kubernetes concepts like namespace and deployment. All data remains on your cluster when using this functionality and is not shared externally. Read the [Cloud Integrations](https://github.com/kubecost/docs/blob/master/cloud-integration.md) documentation for more information on how Kubecost connects with Cloud Service Providers.
 
 The following guide provides the steps required for allocating out-of-cluster costs.
@@ -11,6 +14,7 @@ The following guide provides the steps required for allocating out-of-cluster co
 If your Big Query dataset is in a different project than the one where Kubescost is installed, please see the section on [Cross-Project Service Accounts](#cross-project-service-account-configuration)
 
 Add a service account key to allocate out of cluster resources (e.g. storage buckets and managed databases) back to their Kubernetes owners. The service account needs the following:
+
 ```
 roles/bigquery.user
 roles/compute.viewer
@@ -18,7 +22,6 @@ roles/bigquery.dataViewer
 roles/bigquery.jobUser
 ```
 If you don't already have a GCP service account with the appropriate rights, you can run the following commands in your command line to generate and export one. Make sure your gcloud project is where your external costs are being run. 
-
 
 ```sh
 export PROJECT_ID=$(gcloud config get-value project)
@@ -31,13 +34,14 @@ gcloud iam service-accounts keys create ./compute-viewer-kubecost-key.json --iam
 ```
 
 You can then get your service account key to paste into the UI (be careful with this!):
+
 ```sh
  cat compute-viewer-kubecost-key.json 
 ```
 
 In Kubecost, navigate to the settings page and click "update" for the "External Cloud Cost Configuration (GCP)" setting, then follow the remaining instructions found at the "Add Key" link:
 
-![GCP out-of-cluster key entry](/images/gcp-out-of-cluster-config-wo-shell.png)
+![GCP out-of-cluster key entry](https://github.com/kubecost/docs/main/images/gcp-out-of-cluster-config-wo-shell.png)
 
 
 <a name="bq-name"></a>**BigQuery dataset** requires a BigQuery dataset prefix (e.g. billing_data) in addition to the BigQuery table name. A full example is `billing_data.gcp_billing_export_v1_018AIF_74KD1D_534A2`.
@@ -95,3 +99,7 @@ gcloud iam service-accounts keys create ./$SERVICE_ACCOUNT_NAME-key.json --iam-a
 ```
 
 Now that your service key is created, follow the normal configuration instructions.
+
+Edit this doc on [Github](https://github.com/kubecost/docs/blob/main/gcp-out-of-cluster.md)
+
+<!--- {"article":"4407601816087","section":"4402815680407","permissiongroup":"1500001277122"} --->

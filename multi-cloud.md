@@ -1,3 +1,6 @@
+Setting Up Cloud Integrations
+=============================
+
 # Setting Up Cloud Integrations
 This document outlines how to set up cloud integration for accounts on multiple cloud providers, or multiple accounts on the same cloud provider. Multi-Cloud is an enterprise feature. This configuration can be used independently of or in addition to other cloud integration configurations provided by Kubecost. Once configured Kubecost will display cloud assets for all configured accounts and perform reconciliation for all [federated clusters](https://github.com/kubecost/docs/blob/master/long-term-storage.md) that have their respective accounts configured.
 
@@ -90,6 +93,7 @@ Set these values into the following object and add it to the GCP array:
 For each AWS Account that you would like to configure, create an Access Key for the Kubercost user who has access to the CUR. Navigate to https://console.aws.amazon.com/iam Access Management > Users. Find the Kubecost User and select Security Credentials > Create Access Key. Note the Access key ID and Secret access key.
 
 Gather each of these values from the AWS console for each account you would like to configure.
+
 - <ACCESS_KEY_ID> ID of the Access Key created in the previous step
 - <ACCESS_KEY_SECRET> Secret of the Access Key created in the
 - <ATHENA_BUCKET_NAME> An S3 bucket to store Athena query results that you’ve created that kubecost has permission to access
@@ -114,4 +118,7 @@ Set these values into the following object and add them to the AWS array:
     "projectID": "<ATHENA_PROJECT_ID>"
 }
 ```
-	
+
+Edit this doc on [Github](https://github.com/kubecost/docs/blob/main/multi-cloud.md)
+
+<!--- {"article":"4407595968919","section":"4402815636375","permissiongroup":"1500001277122"} --->

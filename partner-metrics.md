@@ -1,4 +1,5 @@
-## Standardizing Kubernetes cost allocation
+Standardizing Kubernetes cost allocation
+========================================
 
 Measuring costs in Kubernetes environments is complex. Applications and their resources are often ephemeral.
 Teams and even departments share the same resources without transparent prices attached.
@@ -10,3 +11,7 @@ We provide partners a suite of APIs, documentation, and compliance tests designe
 We also provide a spec implementation in our open source repository to ensure consistency and accuracy across a broad range of projects.
 
 Reach out to <team@kubecost.com> to learn more.
+
+Edit this doc on [Github](https://github.com/kubecost/docs/blob/main/partner-metrics.md)
+
+<!--- {"article":"4407595975959","section":"4402815656599","permissiongroup":"1500001277122"} --->

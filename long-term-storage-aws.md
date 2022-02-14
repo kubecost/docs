@@ -1,3 +1,6 @@
+AWS Long Term Storage
+=====================
+
 __AWS/S3__
 
 Start by creating a new S3 bucket with all public access blocked. No other bucket configuration changes should be required. The following example uses a bucket named `kc-thanos-store`.
@@ -67,3 +70,7 @@ You can encrypt the S3 bucket where Kubecost data is stored in AWS via S3 and KM
 https://thanos.io/tip/thanos/storage.md/#s3
 https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucket-key.html
 https://docs.aws.amazon.com/AmazonS3/latest/userguide/configuring-bucket-key-object.html
+
+Edit this doc on [Github](https://github.com/kubecost/docs/blob/main/long-term-storage-aws.md)
+
+<!--- {"article":"4407595952151","section":"4402829036567","permissiongroup":"1500001277122"} --->

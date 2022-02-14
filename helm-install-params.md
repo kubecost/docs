@@ -1,3 +1,6 @@
+Helm Parameters
+===============
+
 There are three different approaches for passing custom helm config values into the Kubecost project:  
 
 
@@ -21,3 +24,7 @@ helm install kubecost/cost-analyzer --name kubecost --values values.yaml
 
 3. **use [values.yaml](https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/values.yaml) from kubecost helm chart repo.** 
 Note that taking this approach means you may need to sync with the repo to use the latest release. 
+
+Edit this doc on [Github](https://github.com/kubecost/docs/blob/main/helm-install-params.md)
+
+<!--- {"article":"4407601818391","section":"4402815636375","permissiongroup":"1500001277122"} --->

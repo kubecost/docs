@@ -1,11 +1,14 @@
+Troubleshoot Install
+====================
+
 Once an installation is complete, access the Kubecost frontend to view the status of the product. If the Kubecost UI is unavailable, review these common issues to determine the problem:
 
-&nbsp;&nbsp;[No persistent volumes available](#persistent-volume)  
-&nbsp;&nbsp;[Unable to establish a port-forward connection](#port-forward)  
-&nbsp;&nbsp;[FailedScheduling node-exporter](#node-exporter)  
-&nbsp;&nbsp;[No clusters found](#no-cluster)  
-&nbsp;&nbsp;[Pods running but app won't load](#app-wont-load)  
-&nbsp;&nbsp;[Trying to run on minikube](#minikube)
+[No persistent volumes available](#persistent-volume)  
+[Unable to establish a port-forward connection](#port-forward)  
+[FailedScheduling node-exporter](#node-exporter)  
+[No clusters found](#no-cluster)  
+[Pods running but app won't load](#app-wont-load)  
+[Trying to run on minikube](#minikube)
 
 ## <a name="persistent-volume"></a>Issue: no persistent volumes available for this claim and/or no storage class is set
 
@@ -82,13 +85,13 @@ helm install kubecost/cost-analyzer --debug --wait --namespace kubecost --name k
 
 You may encounter the following screen if the Kubecost frontend is unable to connect with a live Kubecost server.
 
-![No clusters found](images/no-cluster.png)
+![No clusters found](https://raw.githubusercontent.com/kubecost/docs/master/images/no-cluster.png)
 
 Recommended troubleshooting steps are as follows:
 
 Start by reviewing messages in your browser's developer console. Any meaningful errors or warnings may indicate an unexpected response from the Kubecost server.
 
-Next, point your browser to the `/api` endpoint on your target URL. For example, visit `http://localhost:9090/api/` in the scenario shown above. You should expect to see a Prometheus config file at this endpoint. If your cluster address has changed, you can visit Settings in the Kubecost product to update or you can also [add a new](/multi-cluster.md) cluster.  
+Next, point your browser to the `/api` endpoint on your target URL. For example, visit `http://localhost:9090/api/` in the scenario shown above. You should expect to see a Prometheus config file at this endpoint. If your cluster address has changed, you can visit Settings in the Kubecost product to update or you can also [add a new](https://github.com/kubecost/docs/blob/main/multi-cluster.md) cluster.  
 
 If you are unable to successfully retrieve your config file from this /api endpoint, we recommend the following:
 
@@ -129,3 +132,7 @@ Many teams deploy helm Tiller with cluster-admin privileges to install and manag
 <br/>
 
 Have a question not answered on this page? Email us at support@kubecost.com or [join the Kubecost Slack community](https://join.slack.com/t/kubecost/shared_invite/enQtNTA2MjQ1NDUyODE5LWFjYzIzNWE4MDkzMmUyZGU4NjkwMzMyMjIyM2E0NGNmYjExZjBiNjk1YzY5ZDI0ZTNhZDg4NjlkMGRkYzFlZTU)!
+
+Edit this doc on [Github](https://github.com/kubecost/docs/blob/main/troubleshoot-install.md)
+
+<!--- {"article":"4407601830679","section":"4402815696919","permissiongroup":"1500001277122"} --->

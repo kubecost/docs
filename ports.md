@@ -1,3 +1,6 @@
+Ports
+=====
+
 Kubecost components use following ports by default:
 
 | Component                                         | Port  |
@@ -14,3 +17,7 @@ Kubecost components use following ports by default:
 | prometheus alertmanager-networkpolicy             | 9093  |
 | kubecost-cluster-controller                       | 9731  |
 | kube-state-metrics                                | 8080  |
+
+Edit this doc on [Github](https://github.com/kubecost/docs/blob/main/ports.md)
+
+<!--- {"article":"4425080011671","section":"4402829033367","permissiongroup":"1500001277122"} --->

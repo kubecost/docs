@@ -1,3 +1,6 @@
+Thanos Upgrade
+==============
+
 Kubecost 1.67.0+ uses Thanos 0.15.0. If you're upgrading to kubecost 1.67.0+ from kubecost < 1.67.0 and using thanos, and using AWS s3 as your backing storage for thanos, you'll need to make a small change to your thanos secret in order to bump the thanos version to 0.15.0 before you upgrade kubecost.
 Thanos 0.15.0 has over 10x performance improvements, so this is well worth the effort.
 
@@ -41,3 +44,7 @@ update your secret yaml file as above, and save it as object-store.yaml
 `kubectl create secret generic kubecost-thanos -n kubecost --from-file=./object-store.yaml`
 
 Once this is done, you're ready to upgrade!
+
+Edit this doc on [Github](https://github.com/kubecost/docs/blob/main/thanos-upgrade.md)
+
+<!--- {"article":"4407601829655","section":"4402815636375","permissiongroup":"1500001277122"} --->

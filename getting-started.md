@@ -1,4 +1,5 @@
-# Getting Started
+Getting Started
+===============
 
 Welcome to Kubecost! This page provides commonly used product configurations and feature overviews to help get you up and running after the Kubecost product has been [installed](http://kubecost.com/install).
 
@@ -157,3 +158,8 @@ With an overall understanding of idle spend, you will have a better sense of whe
 * Storage: 65%-80%
 
 Target figures are highly dependent on the predictability and distribution of your resource usage (e.g. P99 vs median), the impact of high utilization on your core product/business metrics, and more. While too low resource utilization is wasteful, too high utilization can lead to latency increases, reliability issues, and other negative behavior.
+
+
+Edit this doc on [Github](https://github.com/kubecost/docs/blob/main/getting-started.md)
+
+<!--- {"article":"4407595947799","section":"4402815636375","permissiongroup":"1500001277122"} --->

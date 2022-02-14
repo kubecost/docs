@@ -1,3 +1,6 @@
+Auditing
+========
+
 Auditing the cost of workloads can be complex in dynamic Kubernetes environments. For this reason, this resource provides an overview of two approaches for inspecting the underlying inputs to cost Allocation metrics. 
 
 ## Audit tool
@@ -43,3 +46,8 @@ We've created this guide to help you spot check cost metrics directly in Prometh
 ![Timeseries graph](images/audit-graph.png)
 
 **Reminder:** Don't forget to apply any sustained use or other discounts during a manual spot check.
+
+
+Edit this doc on [Github](https://github.com/kubecost/docs/blob/main/audit.md)
+
+<!--- {"article":"4407595925271","section":"4402815656599","permissiongroup":"1500001277122"} --->

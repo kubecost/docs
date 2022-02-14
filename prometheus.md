@@ -1,4 +1,5 @@
-## Running a query in Kubecost bundled Prometheus
+Running a query in Kubecost bundled Prometheus
+==============================================
 
 __1. Connect to Prometheus__
 
@@ -18,3 +19,7 @@ If you're unable to connect, confirm that the Prometheus server pod is in a `Run
 
 
 __3. Input your desired query + Execute__
+
+Edit this doc on [Github](https://github.com/kubecost/docs/blob/main/prometheus.md)
+
+<!--- {"article":"4407601824279","section":"4402815656599","permissiongroup":"1500001277122"} --->

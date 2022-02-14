@@ -1,4 +1,5 @@
-## Custom Webhook to Create a Kubecost stage in Spinnaker
+Custom Webhook to Create a Kubecost stage in Spinnaker
+======================================================
 
 Adding the below to Spinnaker will enable a custom stage to query Kubecost for recommendations on a container.
 More info on [Spinnaker custom webhooks](https://spinnaker.io/guides/operator/custom-webhook-stages/#creating-a-custom-webhook-stage)
@@ -45,3 +46,7 @@ webhook:
         type: string
         defaultValue: "7d"
 ```
+
+Edit this doc on [Github](https://github.com/kubecost/docs/blob/main/spinnaker-custom-webhook.md)
+
+<!--- {"article":"4407601826839","section":"4402815636375","permissiongroup":"1500001277122"} --->
