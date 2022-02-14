@@ -7,7 +7,7 @@ It’s used to identify spend drivers over time and to audit Allocation data. Th
 > Note: Similar to our Allocation API, the Assets API uses our ETL pipeline which aggregates data daily. This allows for enterprise-scale with much higher performance. 
 
 
-![Kubecost Assets view](images/assets-screenshot.png)
+![Kubecost Assets view](https://raw.githubusercontent.com/kubecost/docs/main/images/assets-screenshot.png)
 
 This user interface is available at `<your-kubecost-address>/assets.html`.
 
@@ -65,18 +65,20 @@ This API returns a set of JSON objects in this format:
 ```
 
 Optional filter parameters take the format of `&<filter>=<value>` appended to the assets URL query and include the following:
-Filter | Description
---------- | -----------
-`filterAccounts` | Filter results by Cloud account. *Requires cloud configuration.*
-`filterCategories` | Filter results by asset category. Examples include `Network`, `Management`, `Compute`, `Storage`, or `Other`.
-`filterClusters` | Filter results by cluster ID. Note: cluster ID is generated from `cluster_id` provided during installation.
-`filterLabels` | Filter results by cloud label or cloud tag. For example, appending `&labels=deployment:kubecost-cost-analyzer` only returns assets with label `deployment=kubecost-cost-analyzer`. CSV list of label values supported. Note that subparameter `:` symbols are required to denote `<labelKey>:<labelValue>` pairs.
-`filterNames` | Filter results by asset name.
-`filterProjects` | Filter results by cloud project ID. *Requires cloud configuration.*
-`filterProviders` | Filter results by the provider. For example, appending `&filterProviders=GCP` only returns assets belonging to provider `GCP`. *Requires cloud configuration.*
-`filterProviderIDs` | Filter results by provider ID individual to each cloud asset. For example, go to the Assets page, select Breakdown by Item, and see the Provider ID column. *Requires cloud configuration.*
-`filterServices` | Filter results by service. Examples include `Cloud Storage`, `Kubernetes`, `BigQuery`.
-`filterTypes` | Filter results by asset type. Examples include `Cloud`, `ClusterManagement`, `Node`, `LoadBalancer`, and `Disk`.
+
+| Filter | Description |
+|---------|-----------|
+| `filterAccounts` | Filter results by Cloud account. *Requires cloud configuration.* |
+| `filterCategories` | Filter results by asset category. Examples include `Network`,`Management`, `Compute`, `Storage`, or `Other`. |
+| `filterClusters` | Filter results by cluster ID. Note: cluster ID is generated from `cluster_id` provided during installation. |
+| `filterLabels` | Filter results by cloud label or cloud tag. For example, appending `&labels=deployment:kubecost-cost-analyzer` only returns assets with label `deployment=kubecost-cost-analyzer`. CSV list of label values supported. Note that subparameter `:` symbols are required to denote `<labelKey>:<labelValue>` pairs. |
+| `filterNames` | Filter results by asset name. | 
+| `filterProjects` | Filter results by cloud project ID. *Requires cloud configuration.* |
+| `filterProviders` | Filter results by provider. For example, appending `&filterProviders=GCP` only returns assets belonging to provider `GCP`. *Requires cloud configuration.* |
+| `filterProviderIDs` | Filter results by provider ID individual to each cloud asset. For examples, go to the Assets page, select Breakdown by Item, and see the Provider ID column. *Requires cloud configuration.* |
+| `filterServices` | Filter results by service. Examples include `Cloud Storage`, `Kubernetes`, `BigQuery`. |
+| `filterTypes` | Filter results by asset type. Examples include `Cloud`, `ClusterManagement`, `Node`, `LoadBalancer`, and `Disk`. |
+
 
 Note:
  - Some filters require cloud configuration, which can be set at `<your-kubecost-address>/keyinstructions.html`

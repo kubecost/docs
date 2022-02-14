@@ -129,8 +129,7 @@ grafana:
 For Option 2, ensure that the following flags are set in your Operator deployment:
 
 1. sidecar.dashboards.enabled = true  
-2. sidecar.dashboards.searchNamespace isn't restrictive, use `ALL` if Kubecost runs in another ns  
-
+2. sidecar.dashboards.searchNamespace isn't restrictive, use `ALL` if Kubecost runs in another namespace.
 
 Edit this doc on [Github](https://github.com/kubecost/docs/blob/main/custom-prom.md)
 

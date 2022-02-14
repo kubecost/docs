@@ -2,6 +2,7 @@ Cloud Integrations
 ==================
 
 Integration with the Cloud Service Providers via their respective billing APIs allow Kubecost to display out-of-cluster costs, which are the costs incurred on a billing account from Services Outside of the cluster(s) where Kubecost is installed, in addition to the ability to reconcile Kubecosts in-cluster predictions with actual billing data to improve accuracy. For more details on these integrations continue reading below. For guides on how to set up these integrations follow the relevant link:
+
 - [Multi-Cloud](https://github.com/kubecost/docs/blob/master/multi-cloud.md)
 - [AWS](https://github.com/kubecost/docs/blob/master/aws-cloud-integrations.md)
 - [GCP](https://cloud.google.com/billing/docs/how-to/export-data-bigquery)
@@ -14,6 +15,7 @@ As indicated above, setting up a cloud integration with your Cloud Service Provi
 Reconciliation matches in-cluster Assets with items found in the billing data pulled from the Cloud Service Provider. This allows Kubecost to display the most accurate depiction of your in-cluster spend. Additionally, the reconciliation process creates `Network` assets for in-cluster nodes based on the information in the billing data. The main drawback of this process is that the Cloud Service Providers have between a 6 to 24 hour delay in releasing billing data, and reconciliation requires a complete day of cost data to reconcile with the in-cluster assets. This requires a 48 hour window between resource usage and reconciliation. If reconciliation is performed within this window, asset cost is deflated to the partially complete cost shown in the billing data.
 
 The emmited cost-based [metrics](https://github.com/kubecost/cost-model/blob/develop/PROMETHEUS.md#available-metrics) are based on onDemand unless there is definitive data from a cloud provider that the node is not onDemand. This way estimates are as accurate as possible. If a new reserved instance is provisioned or a node joins a savings plan:
+
 1. Kubecost continues to emit onDemand pricing until the node is added to the cloud bill.
 2. Once the node is added to the cloud bill, Kubecost starts emitting something closer to the actual price.
 3. For the time period where Kubecost assumed the node was onDemand but it was actually reserved, reconciliation fixes the price in ETL.
@@ -181,5 +183,8 @@ Returns a status object for the ETL. This includes sections for `allocation`, `a
 Example uses:
 
 `http://localhost:9090/model/etl/status`
+
+
+Edit this doc on [Github](https://github.com/kubecost/docs/blob/main/cloud-integration.md)
 
 <!--- {"article":"4412369153687","section":"4402829033367","permissiongroup":"1500001277122"} --->

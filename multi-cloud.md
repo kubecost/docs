@@ -93,7 +93,8 @@ Set these values into the following object and add it to the GCP array:
 For each AWS Account that you would like to configure, create an Access Key for the Kubercost user who has access to the CUR. Navigate to https://console.aws.amazon.com/iam Access Management > Users. Find the Kubecost User and select Security Credentials > Create Access Key. Note the Access key ID and Secret access key.
 
 Gather each of these values from the AWS console for each account you would like to configure.
-- <ACCESS_KEY_ID> ID of the Access Key created in the previous step
+
+- <ACCESS_KEY_ID> ID of the Access Key created in the Previous step
 - <ACCESS_KEY_SECRET> Secret of the Access Key created in the
 - <ATHENA_BUCKET_NAME> An S3 bucket to store Athena query results that you’ve created that kubecost has permission to access
 The name of the bucket should match s3://aws-athena-query-results-*, so the IAM roles defined above will automatically allow access to it
