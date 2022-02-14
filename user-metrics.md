@@ -46,3 +46,5 @@ We have a number of KSM metrics that have been whitelisted in our [Prometheus Ch
 | `kube_deployment_status_replicas` | |
 | `kube_daemonset_status_desired_number_scheduled` | |
 | `kube_node_info` | |
+
+<!--- {"article":"4425134686743","section":"1500002777682","permissiongroup":"1500001277122"} --->

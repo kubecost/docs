@@ -42,3 +42,5 @@ helm install kubecost kubecost/cost-analyzer \
 ```
 
 3. Confirm with Kubecost team on successful deployment, which will then provide an endpoint `http://<your-organization>.kubecost.io` which can be used to access all exported data. 
+
+<!--- {"article":"4425132038167","section":"1500002777682","permissiongroup":"1500001277122"} --->
