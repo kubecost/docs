@@ -79,7 +79,6 @@ Optional filter parameters take the format of `&<filter>=<value>` appended to th
 | `filterServices` | Filter results by service. Examples include `Cloud Storage`, `Kubernetes`, `BigQuery`. |
 | `filterTypes` | Filter results by asset type. Examples include `Cloud`, `ClusterManagement`, `Node`, `LoadBalancer`, and `Disk`. |
 
-
 Note:
  - Some filters require cloud configuration, which can be set at `<your-kubecost-address>/keyinstructions.html`
  - Multiple filter selections evaluate as ANDs. Each filter selection accepts comma-separated values that evaluate as ORs.

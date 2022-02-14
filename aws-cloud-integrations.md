@@ -207,6 +207,7 @@ Download template files from the URLs provided below and upload them as the stac
 <p><details>
 	<summary>My Kubernetes clusters run in different accounts</summary></p>
 
+
 <p>On each sub account running kubecost, attach both of the following policies to the same role or user. Use a user if you intend to integrate via servicekey, and a role if via IAM annotation (See more below under Via Pod Annotation by EKS). The SpotDataAccess policy statement is optional if the spot data feed is configured (see “Setting up the Spot Data feed” step below)</p>
 
 <pre><code>	{
@@ -330,8 +331,6 @@ Now that the policies have been created, we will need to attach those policies t
 
 <details>
 	<summary>Attach via Service Key And Kubernetes Secret</summary>
-
-
 <ul>
 <li><p>Navigate to <a href="https://console.aws.amazon.com/iam">https://console.aws.amazon.com/iam</a> Access Management &gt; Users. Find the Kubecost User and select Security Credentials &gt; Create Access Key. Note the Access key ID and Secret access key. You&rsquo;ll use it to either Create a secret from helm values or Create and use an existing secret.</p>
 	<details>
@@ -363,7 +362,6 @@ Now that the policies have been created, we will need to attach those policies t
                 kubectl create secret generic &lt;name&gt; --from-file=service-key.json --namespace &lt;kubecost&gt;
         	</code>
 	* Set .Values.kubecostProductConfigs.serviceKeySecretName to the name of this secet. Note also that .Values.kubecostProductConfigs.awsServiceKeyName and .Values.kubecostProductConfigs.awsServiceKeyPassword should be unset if adding the service key from values this way.</p>
-
 
 </ul></details>
 

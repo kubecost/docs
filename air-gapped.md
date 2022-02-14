@@ -40,3 +40,4 @@ There are two options to configure asset prices in your on-premise Kubernetes en
 Edit this doc on [Github](https://github.com/kubecost/docs/blob/main/air-gapped.md)
 
 <!--- {"article":"4407601795863","section":"4402815636375","permissiongroup":"1500001277122"} --->
+

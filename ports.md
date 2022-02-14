@@ -20,5 +20,4 @@ Kubecost components use following ports by default:
 
 Edit this doc on [Github](https://github.com/kubecost/docs/blob/main/ports.md)
 
-
 <!--- {"article":"4425080011671","section":"4402829033367","permissiongroup":"1500001277122"} --->

@@ -1,7 +1,7 @@
 Kubecost Core Architecture Overview
 ===================================
 
-Below are the major components deployed with the [Kubecost helm chart](http://docs.kubecost.com/install), excluding certain Enterprise components such a durable storage:
+Below are the major components deployed with the [Kubecost helm chart](http://docs.kubecost.com/install), excluding certain Enterprise components such as durable storage:
 
 1. **Kubecost Cost-Analyzer Pod**  
     a. Frontend -- runs Nginx and handles routing to Kubecost backend + Prometheus/Grafana  
@@ -25,7 +25,7 @@ See an overview of core components in this diagram:
 
 # Enterprise architecture overview
 
-The most common implementation of durable storage in the Kubecost application application is with [Thanos](https://thanos.io/). Below is a high-level reference for required components. More information on each Thanos component can be found [here](https://thanos.io/tip/components/).
+The most common implementation of durable storage in the Kubecost application is with [Thanos](https://thanos.io/). Below is a high-level reference for the required components. More information on each Thanos component can be found [here](https://thanos.io/tip/components/).
 
 ![Thanos Overview](https://raw.githubusercontent.com/kubecost/docs/main/images/thanos-architecture.png)
 

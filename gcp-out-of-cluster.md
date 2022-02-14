@@ -14,6 +14,7 @@ The following guide provides the steps required for allocating out-of-cluster co
 If your Big Query dataset is in a different project than the one where Kubescost is installed, please see the section on [Cross-Project Service Accounts](#cross-project-service-account-configuration)
 
 Add a service account key to allocate out of cluster resources (e.g. storage buckets and managed databases) back to their Kubernetes owners. The service account needs the following:
+
 ```
 roles/bigquery.user
 roles/compute.viewer
@@ -33,13 +34,14 @@ gcloud iam service-accounts keys create ./compute-viewer-kubecost-key.json --iam
 ```
 
 You can then get your service account key to paste into the UI (be careful with this!):
+
 ```sh
  cat compute-viewer-kubecost-key.json 
 ```
 
 In Kubecost, navigate to the settings page and click "update" for the "External Cloud Cost Configuration (GCP)" setting, then follow the remaining instructions found at the "Add Key" link:
 
-![GCP out-of-cluster key entry](/images/gcp-out-of-cluster-config-wo-shell.png)
+![GCP out-of-cluster key entry](https://github.com/kubecost/docs/main/images/gcp-out-of-cluster-config-wo-shell.png)
 
 
 <a name="bq-name"></a>**BigQuery dataset** requires a BigQuery dataset prefix (e.g. billing_data) in addition to the BigQuery table name. A full example is `billing_data.gcp_billing_export_v1_018AIF_74KD1D_534A2`.
@@ -97,7 +99,6 @@ gcloud iam service-accounts keys create ./$SERVICE_ACCOUNT_NAME-key.json --iam-a
 ```
 
 Now that your service key is created, follow the normal configuration instructions.
-
 
 Edit this doc on [Github](https://github.com/kubecost/docs/blob/main/gcp-out-of-cluster.md)
 

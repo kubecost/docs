@@ -94,7 +94,7 @@ For each AWS Account that you would like to configure, create an Access Key for 
 
 Gather each of these values from the AWS console for each account you would like to configure.
 
-- <ACCESS_KEY_ID> ID of the Access Key created in the Previous step
+- <ACCESS_KEY_ID> ID of the Access Key created in the previous step
 - <ACCESS_KEY_SECRET> Secret of the Access Key created in the
 - <ATHENA_BUCKET_NAME> An S3 bucket to store Athena query results that you’ve created that kubecost has permission to access
 The name of the bucket should match s3://aws-athena-query-results-*, so the IAM roles defined above will automatically allow access to it
@@ -118,7 +118,6 @@ Set these values into the following object and add them to the AWS array:
     "projectID": "<ATHENA_PROJECT_ID>"
 }
 ```
-	
 
 Edit this doc on [Github](https://github.com/kubecost/docs/blob/main/multi-cloud.md)
 
