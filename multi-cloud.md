@@ -1,7 +1,6 @@
 Setting Up Cloud Integrations
 =============================
 
-# Setting Up Cloud Integrations
 This document outlines how to set up cloud integration for accounts on multiple cloud providers, or multiple accounts on the same cloud provider. Multi-Cloud is an enterprise feature. This configuration can be used independently of or in addition to other cloud integration configurations provided by Kubecost. Once configured Kubecost will display cloud assets for all configured accounts and perform reconciliation for all [federated clusters](https://github.com/kubecost/docs/blob/master/long-term-storage.md) that have their respective accounts configured.
 
 ## Step #1 Set up Cloud Cost and Usage Reporting
@@ -97,7 +96,7 @@ Gather each of these values from the AWS console for each account you would like
 - <ACCESS_KEY_ID> ID of the Access Key created in the previous step
 - <ACCESS_KEY_SECRET> Secret of the Access Key created in the
 - <ATHENA_BUCKET_NAME> An S3 bucket to store Athena query results that you’ve created that kubecost has permission to access
-The name of the bucket should match s3://aws-athena-query-results-*, so the IAM roles defined above will automatically allow access to it
+The name of the bucket should match `s3://aws-athena-query-results-*`, so the IAM roles defined above will automatically allow access to it
 The bucket can have a Canned ACL of Private or other permissions as you see fit.
 - <ATHENA_REGION> The AWS region Athena is running in
 - <ATHENA_DATABASE> the name of the database created by the Athena setup. The Athena database name is available as the value (physical id) of AWSCURDatabase in the CloudFormation stack created above (in Step 2: Setting up the Athena of the AWS guild above)
@@ -109,7 +108,7 @@ Set these values into the following object and add them to the AWS array:
 
 ```
 {
-	"serviceKeyName": "<ACCESS_KEY_ID>",
+    "serviceKeyName": "<ACCESS_KEY_ID>",
     "serviceKeySecret":"<ACCESS_KEY_SECRET>",
     "athenaBucketName": "<ATHENA_BUCKET_NAME>",
     "athenaRegion": "<ATHENA_REGION>",
