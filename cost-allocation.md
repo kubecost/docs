@@ -5,16 +5,16 @@ Kubernetes Cost Allocation
 
 The Kubecost Allocation view allows you to quickly see allocated spend across all native Kubernetes concepts, e.g. namespace, k8s label, and service. It also allows for allocating cost to organizational concepts like team, product/project, department, or environment. This document explains the metrics presented and describes how you can control the data displayed in this view.
 
-![Cost allocation view](./images/cost-allocation.png)
+![Cost allocation view](https://raw.githubusercontent.com/kubecost/docs/main/images/cost-allocation.png)
 
 
 ### Date Range 
-![Date Picker](./images/cost-allocation-date-picker.png)
+![Date Picker](https://raw.githubusercontent.com/kubecost/docs/main/images/cost-allocation-date-picker.png)
 
 Select the Date Range of the report, using common Date Range options or by setting specific start and end dates.
 
 ### Breakdown
-![Breakdown](./images/cost-allocation-breakdown.png)
+![Breakdown](https://raw.githubusercontent.com/kubecost/docs/main/images/cost-allocation-breakdown.png)
 
 Aggregate cost by namespace, deployment, service, and other native Kubernetes concepts. 
 
@@ -32,7 +32,7 @@ kubectl get pods --show-labels -n <TARGET_NAMESPACE>
 
 ### Additional Options
 
-![Options](./images/cost-allocation-options.png)
+![Options](https://raw.githubusercontent.com/kubecost/docs/main/images/cost-allocation-options.png)
 
 #### Idle Cost  
 Allocating idle costs proportionately distributes slack or idle _cluster costs_ to tenants. Specifically, this applies to resources that are provisioned but not being fully used or requested by a tenant. As an example, if your cluster is only 25% utilized, as measured by the max of resource usage and requests, applying idle costs would proportionately increase the cost of each pod/namespace/deployment by 4x. This feature can be enabled by default in Settings.
@@ -76,7 +76,7 @@ Select how shared costs set on the settings page will be shared among allocation
 
 
 ### Save, Load and Download
-![Save/Load/Download](./images/cost-allocation-icons.png)
+![Save/Load/Download](https://raw.githubusercontent.com/kubecost/docs/main/images/cost-allocation-icons.png)
 
 Use these icons to save report settings or load reports that you have saved in the past. You can also download a report in CSV format.
 
