@@ -1,12 +1,10 @@
-# Getting started 
-
-This is your guide and roadmap to getting started as a Kubecost community member. The contributor guide outlines a list of prerequisites that need to be completed before you are able to start contributing. We ask all community members to review the Code of Conduct prior to jumping in. 
-
 # Welcome
 
-Have you ever wanted to contribute to an open source project and community? This guide will help you understand the overall organization of the Kubecost project, and direct you to the best places to get started contributing. You’ll be able to pick up issues, write code to fix them, and get your work reviewed and merged.
+Have you ever wanted to contribute to an open source project and community? This guide will help you understand the overall organization of the Kubecost project, and direct you to the best places to get started contributing. You’ll be able to share ideas, pick up issues, write code to fix them, and get your work reviewed and merged.
 
 This document is the single source of truth for how to contribute to the code base. Feel free to browse the [open issues](https://github.com/kubecost/cost-model/issues) and file new ones, all feedback is welcome!
+
+This is your guide and roadmap to getting started as a Kubecost community member. The contributor guide outlines a list of prerequisites that need to be completed before you are able to start contributing, for example we ask all community members to review the Code of Conduct prior to jumping in. 
 
 ## Join our community 
 
@@ -15,9 +13,7 @@ Kubecost is a growing, lively, friendly open-source community. As many open sour
 Communication
 
 * [Slack community](https://join.slack.com/t/kubecost/shared_invite/enQtNTA2MjQ1NDUyODE5LWFjYzIzNWE4MDkzMmUyZGU4NjkwMzMyMjIyM2E0NGNmYjExZjBiNjk1YzY5ZDI0ZTNhZDg4NjlkMGRkYzFlZTU) - check out #support for any help you may need & drop your introduction in the #general channel
-
-* [Website](https://www.kubecost.com/)
-
+* [Kubecost Documentation](https://www.docs.kubecost.com/)
 * Social media & blog
 
     * [Twitter ](https://twitter.com/kubecost)
@@ -28,7 +24,7 @@ Communication
 
     * [Blog](https://blog.kubecost.com/)
 
-* If you have any questions please reach out: [support@kubecost.com](mailto:support@kubecost.com)
+If you have any questions please reach out: [team@kubecost.com](mailto:team@kubecost.com)
 
 # Contributor guide
 
