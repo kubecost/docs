@@ -15,13 +15,9 @@ Communication
 * [Slack community](https://join.slack.com/t/kubecost/shared_invite/enQtNTA2MjQ1NDUyODE5LWFjYzIzNWE4MDkzMmUyZGU4NjkwMzMyMjIyM2E0NGNmYjExZjBiNjk1YzY5ZDI0ZTNhZDg4NjlkMGRkYzFlZTU) - check out #support for any help you may need & drop your introduction in the #general channel
 * [Kubecost Documentation](https://www.docs.kubecost.com/)
 * Social media & blog
-
     * [Twitter ](https://twitter.com/kubecost)
-
     * [LinkedIn](https://www.linkedin.com/company/stackwatch/)
-
     * [Youtube](https://www.youtube.com/channel/UChIoMpeXm85T-kPCW1p9_PA)
-
     * [Blog](https://blog.kubecost.com/)
 
 If you have any questions please reach out: [team@kubecost.com](mailto:team@kubecost.com)
@@ -31,9 +27,7 @@ If you have any questions please reach out: [team@kubecost.com](mailto:team@kube
 Welcome to Kubecost! This guide is broken up into the following sections. It is recommended that you follow these steps in order: 
 
 * Prerequisites: these tasks are required and need to be completed before you can start contributing to Kubecost
-
 * Your First Contribution: things you need to know before making your first contribution
-
 * Contributing: the main reference guide to contributing to Kubecost
 
 # Prerequisites
@@ -54,20 +48,14 @@ Thanks for your help improving the project!
 
 ## Getting help
 
-If you have a question about Kubecost or have encountered problems using it, you can start by asking a question on [Slack](https://join.slack.com/t/kubecost/shared_invite/enQtNTA2MjQ1NDUyODE5LWFjYzIzNWE4MDkzMmUyZGU4NjkwMzMyMjIyM2E0NGNmYjExZjBiNjk1YzY5ZDI0ZTNhZDg4NjlkMGRkYzFlZTU) or via email at [support@kubecost.com](mailto:support@kubecost.com). Check out these resources: 
-
-* [https://guide.kubecost.com/hc/en-us](https://guide.kubecost.com/hc/en-us)
-
-* https://docs.kubecost.com/
+If you have a question about Kubecost or have encountered problems using it, you can start by asking a question on [Slack](https://join.slack.com/t/kubecost/shared_invite/enQtNTA2MjQ1NDUyODE5LWFjYzIzNWE4MDkzMmUyZGU4NjkwMzMyMjIyM2E0NGNmYjExZjBiNjk1YzY5ZDI0ZTNhZDg4NjlkMGRkYzFlZTU) or via email at [support@kubecost.com](mailto:support@kubecost.com). You can also visit [https://docs.kubecost.com/](https://docs.kubecost.com/)
 
 ## Contribution workflow
 
 This repository's contribution workflow follows a typical open-source model:
 
 * [Fork](https://docs.github.com/en/get-started/quickstart/fork-a-repo) this repository
-
 * Work on the forked repository
-
 * Open a pull request to [merge the fork back into this repository](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request-from-a-fork)
 
 ## Building Kubecost
@@ -96,8 +84,10 @@ In order to run cost-model locally, or outside of the runtime of a Kubernetes cl
 
 Example:
 
+```
 export KUBECONFIG_PATH=~/.kube/config
-
+```
+   
 ## Running the integration tests
 
 To run these tests:
