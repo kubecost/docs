@@ -43,7 +43,7 @@ This config needs to be added under `extraScrapeConfigs` in the Prometheus confi
 
 To confirm this job is successfully scraped by Prometheus, you can view the Targets page in Prometheus and look for a job named `kubecost`.
 
-![Prometheus Targets](/prom-targets.png)
+![Prometheus Targets](https://github.com/kubecost/docs/raw/main/prom-targets.png)
 
 <a name="recording-rules"></a>
 ### Recording Rules
@@ -101,7 +101,7 @@ If the config file is not returned, this is an indication that an incorrect Prom
 
 You can visit Settings in Kubecost to see basic diagnostic information on these Prometheus metrics:
 
-![Prometheus status diagnostic](/prom-status.png)
+![Prometheus status diagnostic](https://github.com/kubecost/docs/blob/main/prom-status.png)
 
 
 <a name="existing-grafana"></a>
