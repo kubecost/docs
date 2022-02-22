@@ -80,7 +80,7 @@ Also, the default [values.yaml](https://github.com/kubecost/cost-analyzer-helm-c
 
 For more accurate Spot pricing data, visit Settings in the Kubecost frontend to configure a [data feed](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-data-feeds.html) for AWS Spot instances. This enables the Kubecost product to have actual Spot node prices vs user-provided estimates.
 
-![AWS Spot info](/spot-settings.png)
+![AWS Spot info](https://github.com/kubecost/docs/raw/main/spot-settings.png)
 
 **Necessary Steps**
 
@@ -148,8 +148,6 @@ You may optionally pass the following Helm flags to install Kubecost and its bun
 ## <a name="cluster-efficiency"></a>Measuring cluster cost efficiency
 
 For teams interested in reducing their Kubernetes costs, we have seen it be beneficial to first understand how efficiently provisioned resources have been used. This can be answered by measuring the cost of idle resources (e.g. compute, memory, etc)  as a percentage of your overall cluster spend. This figure represents the impact of many infrastructure and application-level decisions, i.e. machine type selection, bin packing efficiency, and more. The Kubecost product (Cluster Overview page) provides a view into this data for an initial assessment of resource efficiency and the cost of waste.
-
-<div style="text-align:center;"><img src="/cluster-efficiency.png" /></div>
 
 With an overall understanding of idle spend, you will have a better sense of where to focus efforts for efficiency gains. Each resource type can now be tuned for your business. Most teams we’ve seen end up targeting utilization in the following ranges:
 
