@@ -126,7 +126,7 @@ API parameters include the following:
 
 ---
 
-`http://<kubecost-address>/model/etl/asset/reconciliation/rerun`
+`http://<kubecost-address>/model/etl/asset/reconciliation/run`
 
 Description:
 
@@ -134,11 +134,11 @@ Completely restart Reconciliation Pipeline. This operation ends the currently ru
 
 Example uses:
 
-`http://localhost:9090/model/etl/asset/reconciliation/rerun` // this will not run because it is missing the commit parameter
+`http://localhost:9090/model/etl/asset/reconciliation/run` // this will not run because it is missing the commit parameter
 
-`http://localhost:9090/model/etl/asset/reconciliation/rerun?commit=true`
+`http://localhost:9090/model/etl/asset/reconciliation/run?commit=true`
 
-`http://localhost:9090/model/etl/asset/cloud/reconciliation/rerun?commit=true&provider=######-######-######`
+`http://localhost:9090/model/etl/asset/cloud/reconciliation/run?commit=true&provider=######-######-######`
 
 API parameters include the following:
 
