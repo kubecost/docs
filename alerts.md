@@ -233,6 +233,34 @@ Example Helm values.yaml:
           threshold: 5              # Send Alert if health scores changes by 5 or more
 ```
 
+## Configuring Alerts in the Kubecost UI
+
+### Cluster Health and Diagnostic Alerts
+Cluster Health Alerts and Diagnostic Alerts work differently from other alert types. While other alerts monitor cost data for cost or efficiency anomalies, Health and Diagnostics montior the health of Kubecost itself, as well as the health of the cluster running Kubecost. The UI treats these alert types as "on" or "off", managing a single instance of each, and allowing the settings of this single instance to be adjusted.
+
+![Kubecost Health Alerts](images/health_and_diagnostics_alert_controls.png)
+
+NOTE: As of this writing, there is no validation around savings Cluster Health Alerts. If a Health Alert configuration is invalid, it will appear to save, but will not actually take effect. Please check carefully that the alert has a Window and Threshold properly specified.
+
+### Global Recipients
+Global recipients specify a default fallback recipient for each type of message. If an alert does not define any email recipients, its messages will be sent to any emails specified in the Global Recipients email list. Likewise, if an alert does not define a Slack webhook, its messages will be sent to the Global Slack webhook, it one is present.
+
+![Kubecost Alerts Global Recipients](images/alerts_global_recipients.png)
+
+### Budget, Efficiency, Spend Change, and Recurring Update Alerts
+The remaining Alert types share some commonality: they all target a set of Cost Allocation data with `window`, `aggregation` and `filter` parameters, and trigger based on the target data. As such, they are grouped into a table together. The table results can be filtered using the "Filter alerts" input at the top-right of the table. This input can be used to filter based on alert type, aggregation, window, and/or filter.
+
+![Kubecost Alerts Table](images/alerts_table.png)
+
+The `+ Create Alert` button summons a dialog to walk through the creation of a new alert.
+
+![Kubecost Create Alert](images/new_alert_dialog.png)
+
+Alerts can also be edited, removed, and tested from the table. Editing opens a dialog similar to the alert creation dialog, for editing the chosen alert.
+
+### Testing Alerts
+The `Test` buttons in the Table, the Create / Edit dialogs, and beside enabled Health and Diagnostics alerts, can be used to issue a "test" alert. This can be useful to ensure that alerting infrastructure is working correctly and that an alert is properly configured. Issuing a test from the alert edit modal tests the alert with any modifications that have not yet been saved.
+
 ## Alerts Scheduler
 
 All times in UTC.
