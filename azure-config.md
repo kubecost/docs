@@ -44,7 +44,7 @@ The newly created `my_credentials.json` file will contain the relevant configura
 helm install kubecost ./cost-analyzer -n kubecost --set kubecostProductConfigs.azureSubscriptionID=<> --set kubecostProductConfigs.azureClientID=<> --set kubecostProductConfigs.azureTenantID=<> --set kubecostProductConfigs.azureClientPassword=<> --set .kubecostProductConfigs.createServiceKeySecret=true
 ```
 
-> Additionally `kubecostProductConfigs.azureOfferDurableID` can be modified to use the Durable Offer ID of your subscription, which can be found in the Azure Portal in subscriptions. The Default is "MS-AZR-0003p" which is a pay-as-you-go subscription.
+> Additionally `kubecostProductConfigs.azureOfferDurableID` can be modified to use the Offer Durable ID of your subscription, which can be found in the Azure Portal in subscriptions. The Default is "MS-AZR-0003p" which is a pay-as-you-go subscription.
 
 <img width="1792" alt="Screen Shot 2020-12-07 at 12 32 24 PM" src="https://user-images.githubusercontent.com/453512/101402781-12156880-3889-11eb-86ca-55111d36fe14.png">
 
