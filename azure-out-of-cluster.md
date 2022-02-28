@@ -31,9 +31,9 @@ with the following format:
 
 ```
 {
-	"azureStorageAccount": "<STORAGE_ACCOUNT_NAME>",
-	"azureStorageAccessKey": "<STORE_ACCESS_KEY>",
-	"azureStorageContainer": "<REPORT_CONTAINER_NAME>",
+  "azureStorageAccount": "<STORAGE_ACCOUNT_NAME>",
+  "azureStorageAccessKey": "<STORE_ACCESS_KEY>",
+  "azureStorageContainer": "<REPORT_CONTAINER_NAME>",
   "azureCloud": "<AZURE_CLOUD>"
 }
 ```
