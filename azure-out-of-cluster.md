@@ -21,7 +21,9 @@ The values needed to provide access to the Azure Storage Account where cost data
 * `<STORAGE_ACCOUNT_NAME>` is the name of the Storage account where the exported CSV is being stored.
 * `<STORE_ACCESS_KEY>` can be found by selecting the “Access Keys” option from the navigation sidebar then selecting “Show Keys”. Using either of the two keys will work. 
 * `<REPORT_CONTAINER_NAME>` is the name that you choose for the exported cost report when you set it up. This is the name of the container where the CSV cost reports are saved in your Storage account. 
-With this value in hand, you can now provide them to Kubecost to allow access to the Azure Storage API.
+* `<AZURE_CLOUD>` is an optional value which denotes the cloud where the storage account exist, possible values are `public` and `gov`. The default is `public`.
+
+With these values in hand, you can now provide them to Kubecost to allow access to the Azure Storage API.
 
 ### Option #1: Manually add secret to cluster (Recommended)
 To create this secret you will need to create a JSON file that must be named azure-storage-config.json
@@ -29,9 +31,10 @@ with the following format:
 
 ```
 {
-	"azureStorageAccount": "<STORAGE_ACCOUNT_NAME>",
-	"azureStorageAccessKey": "<STORE_ACCESS_KEY>",
-	"azureStorageContainer": <REPORT_CONTAINER_NAME>
+  "azureStorageAccount": "<STORAGE_ACCOUNT_NAME>",
+  "azureStorageAccessKey": "<STORE_ACCESS_KEY>",
+  "azureStorageContainer": "<REPORT_CONTAINER_NAME>",
+  "azureCloud": "<AZURE_CLOUD>"
 }
 ```
 
