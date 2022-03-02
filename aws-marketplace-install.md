@@ -1,6 +1,6 @@
 This document provides the steps for installing the Kubecost Enterprise product from the AWS marketplace. [More info on different tiers.](https://kubecost.com/pricing)
 
-Please contact us at team@kubecost.com with any questions and we'd be happy to help!
+Please contact us at support@kubecost.com with any questions and we'd be happy to help!
 
 ## Step 1. Create an IAM policy
 
@@ -40,8 +40,8 @@ Access Helm install steps available at [kubecost.com/install](http://kubecost.co
 Supply the following parameters to your _helm install_ command.
 
 ```
---set kubecostProductConfigs.productKey.enabled=true
---set kubecostProductConfigs.productKey.key="replace-with-product-key"
+--set kubecostProductConfigs.productKey.enabled=true \
+--set kubecostProductConfigs.productKey.key="replace-with-product-key" \
 --set prometheus.alertmanager.enabled=false \
 --set prometheus.nodeExporter.enabled=false \
 --set global.grafana.enabled=false \
