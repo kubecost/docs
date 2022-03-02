@@ -1,8 +1,6 @@
 Network Traffic Cost Allocation
 ===============================
 
-# Network Traffic Cost Allocation
-
 This document summarizes Kubecost network cost allocation, how to enable it, and what it provides.
 
 When this feature is enabled, Kubecost gathers network traffic metrics in combination with provider-specific network costs to provide insight on network data sources as well as the aggregate costs of transfers.
