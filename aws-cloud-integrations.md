@@ -445,6 +445,8 @@ Kubecost will reconcile your spot prices with CUR billing reports as they become
 
 These values can either be set from the kubecost frontend or via .Values.kubecostProductConfigs in the helm chart. Note that if you set any kubecostProductConfigs from the helm chart, all changes via the frontend will be deleted on pod restart
 
+ `projectID` the Account ID of the AWS Account on which the spot nodes are running.
+
  `awsSpotDataRegion` region of your spot data bucket
 
  `awsSpotDataBucket` the configured bucket for the spot data feed
