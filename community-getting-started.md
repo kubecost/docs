@@ -1,4 +1,7 @@
-# Welcome
+Open Source - Getting Started
+=============================
+
+## Welcome
 
 Have you ever wanted to contribute to an open source project and community? This guide will help you understand the overall organization of the Kubecost project, and direct you to the best places to get started contributing. You’ll be able to share ideas, pick up issues, write code to fix them, and get your work reviewed and merged.
 
@@ -123,5 +126,7 @@ If you need help, you can ask questions on our mailing list, Slack community , o
 ### What does the code of conduct mean for me?
 
 Our code of conduct means that you are responsible for treating everyone on the project with respect and courtesy regardless of their identity. If you are the victim of any inappropriate behavior or comments as described in our code of conduct, we are here for you and will do the best to ensure that the abuser is reprimanded appropriately, per our code. Please report any incidents here: [team@kubecost.com](mailto:team@kubecost.com)
+
+Edit this doc on [Github](https://github.com/kubecost/docs/blob/main/community-getting-started.md)
 
 <!--- {"article":"4442565953943","section":"1500002777682","permissiongroup":"1500001277122"} --->
