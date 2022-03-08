@@ -20,7 +20,7 @@ for prod-x.xx.x. [Latest releases can be found here](https://github.com/kubecost
 - Cluster controller: gcr.io/kubecost1/cluster-controller:v0.0.2 (used for write actions)
 
 ### Prometheus - Required when bundled
-- prom/prometheus:v2.21.1
+- prom/prometheus:v2.31.1
 - prom/node-exporter:v0.18.1
 - prom/alertmanager:v0.23.0
 - grafana/grafana:8.3.2
