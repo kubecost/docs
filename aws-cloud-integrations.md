@@ -16,13 +16,12 @@ Follow these steps to set up a Cost and Usage Report. Be sure to enable Resource
 
 > If you believe you have the correct permissions, but cannot access the Billing and Cost Management page, have the owner of your organization's root account follow these instructions [https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/control-access-billing.html](https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/control-access-billing.html#ControllingAccessWebsite-Activate)
 
-AWS may take several hours to publish data, wait until this is complete before continuing to the next step
+AWS may take several hours to publish data(up to 24 hours), wait until this is complete before continuing to the next step.
 
 ## Step 2: Setting up Athena
 
-[https://docs.aws.amazon.com/cur/latest/userguide/cur-ate-setup.html#create-athena-cur](https://docs.aws.amazon.com/cur/latest/userguide/cur-ate-setup.html#create-athena-cur)
-
-> Click the next **Next Topic** link for step-by-step instructions on setting up Athena through cloud formation
+As part of the CUR creation process, Amazon also creates a CloudFormation template that is used to create the Athena integration. It is created in the CUR S3 bucket under `your-billing-prefix/cur-name` and typically has the filename `crawler-cfn.yml`. You will need to deploy this CloudFormation template in order to complete the CUR Athena integration.
+[https://docs.aws.amazon.com/cur/latest/userguide/use-athena-cf.html](https://docs.aws.amazon.com/cur/latest/userguide/use-athena-cf.html)
 
 Once Athena is set up with the CUR, you will need to create a new S3 bucket for Athena query results.
 
