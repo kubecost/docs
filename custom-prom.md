@@ -43,7 +43,7 @@ This config needs to be added under `extraScrapeConfigs` in the Prometheus confi
 
 To confirm this job is successfully scraped by Prometheus, you can view the Targets page in Prometheus and look for a job named `kubecost`.
 
-![Prometheus Targets](https://github.com/kubecost/docs/raw/main/prom-targets.png)
+![Prometheus Targets](https://raw.githubusercontent.com/kubecost/docs/main/prom-targets.png)
 
 <a name="recording-rules"></a>
 ### Recording Rules
@@ -101,7 +101,7 @@ If the config file is not returned, this is an indication that an incorrect Prom
 
 You can visit Settings in Kubecost to see basic diagnostic information on these Prometheus metrics:
 
-![Prometheus status diagnostic](https://github.com/kubecost/docs/blob/main/prom-status.png)
+![Prometheus status diagnostic](https://raw.githubusercontent.com/kubecost/docs/main/prom-status.png)
 
 
 <a name="existing-grafana"></a>
@@ -111,7 +111,7 @@ Using an existing Grafana deployment can be accomplished with either of the foll
 
 1) _Option: Directly link to an external Grafana._ After Kubecost installation, visit Settings and update __Grafana Address__ to a URL (e.g. http://demo.kubecost.com/grafana) that is visible to users accessing Grafana dashboards. This variable can alternatively be passed at the time you deploy Kubecost via the `kubecostProductConfigs.grafanaURL` parameter in [values.yaml](https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/values.yaml). Next, import Kubecost Grafana dashboards as JSON from this [folder](https://github.com/kubecost/cost-analyzer-helm-chart/tree/master/cost-analyzer). 
 
-![Kubecost Settings](/images/settings-grafana.png)
+![Kubecost Settings](https://raw.githubusercontent.com/kubecost/docs/main/images/settings-grafana.png)
 
 2) _Option: Deploy with Grafana sidecar enabled._ Passing the Grafana parameters below in your [values.yaml](https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/values.yaml) will install ConfigMaps for Grafana dashboards that will be picked up by the [Grafana sidecar](https://github.com/helm/charts/tree/master/stable/grafana#sidecar-for-dashboards) if you have Grafana with the dashboard sidecar already installed.
 

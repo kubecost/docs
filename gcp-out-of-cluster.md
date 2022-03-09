@@ -1,7 +1,7 @@
 GCP Out of Cluster
 ==================
 
-Kubecost provides the ability to allocate out of clusters costs, e.g. Cloud SQL instances and Cloud Storage buckets, back to Kubernetes concepts like namespace and deployment. All data remains on your cluster when using this functionality and is not shared externally. Read the [Cloud Integrations](https://github.com/kubecost/docs/blob/master/cloud-integration.md) documentation for more information on how Kubecost connects with Cloud Service Providers.
+Kubecost provides the ability to allocate out of clusters costs, e.g. Cloud SQL instances and Cloud Storage buckets, back to Kubernetes concepts like namespace and deployment. All data remains on your cluster when using this functionality and is not shared externally. Read the [Cloud Integrations](https://github.com/kubecost/docs/blob/main/cloud-integration.md) documentation for more information on how Kubecost connects with Cloud Service Providers.
 
 The following guide provides the steps required for allocating out-of-cluster costs.
 
@@ -41,7 +41,7 @@ You can then get your service account key to paste into the UI (be careful with 
 
 In Kubecost, navigate to the settings page and click "update" for the "External Cloud Cost Configuration (GCP)" setting, then follow the remaining instructions found at the "Add Key" link:
 
-![GCP out-of-cluster key entry](https://github.com/kubecost/docs/main/images/gcp-out-of-cluster-config-wo-shell.png)
+![GCP out-of-cluster key entry](https://raw.githubusercontent.com/kubecost/docs/main/images/gcp-out-of-cluster-config-wo-shell.png)
 
 
 <a name="bq-name"></a>**BigQuery dataset** requires a BigQuery dataset prefix (e.g. billing_data) in addition to the BigQuery table name. A full example is `billing_data.gcp_billing_export_v1_018AIF_74KD1D_534A2`.

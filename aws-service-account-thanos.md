@@ -43,11 +43,11 @@ In order to create an AWS IAM policy for use with Thanos:
 
 7. Select Attach existing policies directly, search for the policy name provided in step 4, and then create the user.
 
-![image](https://raw.githubusercontent.com/kubecost/docs/master/attach-existing.png)
+![image](https://raw.githubusercontent.com/kubecost/docs/main/attach-existing.png)
 
 8.Capture your Access Key ID and secret in the view below:
 
-![image](https://raw.githubusercontent.com/kubecost/docs/master/key-created.png)
+![image](https://raw.githubusercontent.com/kubecost/docs/main/key-created.png)
 
 If you don’t want to use a service account, IAM credentials retrieved from an instance profile are also supported.
 You must get both access key and secret key from the same method (i.e. both from service or instance profile). More info on retrieving credentials [here](https://thanos.io/storage.md/#credentials).

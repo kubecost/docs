@@ -63,7 +63,7 @@ You can get the latest staging build by following the [install steps](https://gi
 Use a direct link to the Github image within the kubecost/docs repo or an alternative host such as GCS or S3. 
 
 ```
-![Add key dialog](https://raw.githubusercontent.com/kubecost/docs/master/add-key-dialog.png)
+![Add key dialog](https://raw.githubusercontent.com/kubecost/docs/main/add-key-dialog.png)
 ```
 
 At this time there aren't limits on the location of images within the kubecost/docs repo. Images may exist in the `/images` folder or in the root directory. 

@@ -1,13 +1,13 @@
 AWS Out of Cluster 
 ==================
 
-Integrating Kubecost with your AWS data provides the ability to allocate out-of-cluster costs, e.g. RDS instances and S3 buckets, back to Kubernetes concepts like namespace and deployment as well as reconcile cluster assets back to your billing data. The latter is especially helpful when teams are using Reserved Instances, Savings Plans, or Enterprise Discounts. All billing data remains on your cluster when using this functionality and is not shared externally. Read the [Cloud Integrations](https://github.com/kubecost/docs/blob/master/cloud-integration.md) documentation for more information on how Kubecost connects with Cloud Service Providers.
+Integrating Kubecost with your AWS data provides the ability to allocate out-of-cluster costs, e.g. RDS instances and S3 buckets, back to Kubernetes concepts like namespace and deployment as well as reconcile cluster assets back to your billing data. The latter is especially helpful when teams are using Reserved Instances, Savings Plans, or Enterprise Discounts. All billing data remains on your cluster when using this functionality and is not shared externally. Read the [Cloud Integrations](https://github.com/kubecost/docs/blob/main/cloud-integration.md) documentation for more information on how Kubecost connects with Cloud Service Providers.
 
 The following guide provides the steps required for enabling out-of-cluster costs allocation and accurate pricing, e.g. [Reserved Instance price allocation](http://docs.kubecost.com/getting-started#ri-committed-discount). In a multi-account organization, all of the following steps will need to be completed in the payer account.
 
 ## Step 1: Create an AWS Cost and Usage Report and Integrate it with Kubecost
 
-[Follow our guide for cloud integrations](https://github.com/kubecost/docs/blob/master/aws-cloud-integrations.md)
+[Follow our guide for cloud integrations](https://github.com/kubecost/docs/blob/main/aws-cloud-integrations.md)
 
 ## Step 2: Tag your resources
 Kubecost utilizes AWS tagging to allocate the costs of AWS resources outside of the Kubernetes cluster to specific Kubernetes concepts, such as namespaces, pods, etc. These costs are then shown in a unified dashboard within the Kubecost interface.
@@ -27,7 +27,7 @@ To allocate external AWS resources to a Kubernetes concept, use the following ta
 *\*In the `kubernetes_label_NAME` tag key, the `NAME` portion should appear exactly as the tag appears inside of Kubernetes. For example, for the tag `app.kubernetes.io/name`, this tag key would appear as `kubernetes_label_app.kubernetes.io/name`.*
 
 Additionally users must activate the `eks:cluster-name`
-![EKS cluster name user tag](https://github.com/kubecost/docs/main/images/user_eks_cluster_name_tag.png)
+![EKS cluster name user tag](https://raw.githubusercontent.com/kubecost/docs/main/images/user_eks_cluster_name_tag.png)
 
 To use an alternative or existing AWS tag schema, you may supply these in your [values.yaml](https://github.com/kubecost/cost-analyzer-helm-chart/blob/v1.73.0/cost-analyzer/values.yaml#L589) under the "kubecostProductConfigs.labelMappingConfigs.\<aggregation\>\_external_label" . Also be sure to set kubecostProductConfigs.labelMappingConfigs.enabled = true
 

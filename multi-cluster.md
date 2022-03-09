@@ -14,7 +14,7 @@ Adding a cluster directly from the frontend Kubecot adds it locally for your bro
 
 3. Select `Add new cluster` on the Kubecost home page and provide the accessible URL (with port included) for the target Kubecost installation. Here's an example: `http://e9a706220bae04199-1639813551.us-east-2.elb.amazonaws.com:9090`
 
-![Add a cluster view](https://raw.githubusercontent.com/kubecost/docs/master/kubecost-index.png)
+![Add a cluster view](https://raw.githubusercontent.com/kubecost/docs/main/kubecost-index.png)
 
 ## Add at install-time
 
