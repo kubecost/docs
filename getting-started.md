@@ -164,7 +164,7 @@ With an overall understanding of idle spend and resource efficiency, you will ha
 
 Target figures are highly dependent on the predictability and distribution of your resource usage (e.g. P99 vs median), the impact of high utilization on your core product/business metrics, and more. While too low resource utilization is wasteful, too high utilization can lead to latency increases, reliability issues, and other negative behavior.
 
-Efficiency targets can depend on the SLAs of the 
+Efficiency targets can depend on the SLAs of the application-- see our notes on [request right-sizing](https://github.com/kubecost/docs/blob/main/api-request-right-sizing.md) for more details.
 
 
 
