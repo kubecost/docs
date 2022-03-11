@@ -149,8 +149,11 @@ You may optionally pass the following Helm flags to install Kubecost and its bun
 
 For teams interested in reducing their Kubernetes costs, we have seen it be beneficial to first understand how provisioned resources have been used. 
 There are two major concepts to start with: pod resource efficiency and cluster idle costs.
-1. Resource efficiency is defined as resource utilization versus resource request. It is cost-weighted and defined as followed:
+1. Resource efficiency over a time window is defined as the resource utilization over that time window versus the resource request over the same time window. It is cost-weighted and defined as followed:
   ((CPU Usage / CPU Requested) * CPU Cost) + (RAM Usage / RAM Requested) * RAM Cost) / (RAM Cost + CPU Cost))
+  CPU Usage = rate(container_cpu_usage_seconds_total) over the time window
+  RAM Usage = avg(container_memory_working_set_bytes) over the time window
+
   Eg: If a pod is requesting 2 CPU and 1Gb, using 500mCPU and 500MB, CPU on the node costs $10/CPU , and RAM on the node costs $1/GB, we have ((0.5/2) * 20 + (0.5/1) * 1) / (20 + 1) = 5.5 / 21 = 26% 
 2. Idle Cost is defined as the difference between the cost of allocated resources and the cost of the hardware they run on. Allocation is defined as the max of usage and requests. So, idle costs can also be thought of as the cost of the space that the kubernetes scheduler could add pods without disrupting any workloads in but is not currently. Idle can be charged back to pods on a cost-weighted basis or viewed as a separate line item.
 
