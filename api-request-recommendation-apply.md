@@ -16,6 +16,11 @@ features, and thus has write permission to certain resources on your cluster.
 
 > You don't need to set up cloud provider service accounts for Apply to work, but it is recommended.
 
+Just run a standard `helm` install or upgrade with:
+```
+--set clusterController.enabled=true
+```
+
 ## APIs
 
 Apply has dry-run semantics, meaning it is a two step process:
