@@ -14,12 +14,7 @@ For the Apply APIs to be available, you must have Kubecost's Cluster Controller
 [enabled](./controller.md). Cluster Controller contains Kubecost's automation
 features, and thus has write permission to certain resources on your cluster.
 
-> You don't need to set up cloud provider service accounts for Apply to work, but it is recommended.
-
-Just run a standard `helm` install or upgrade with:
-```
---set clusterController.enabled=true
-```
+> Make sure to follow the full setup instructions.
 
 ## APIs
 
