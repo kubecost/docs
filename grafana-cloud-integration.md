@@ -2,7 +2,7 @@
 
 [Grafana Cloud](https://grafana.com/products/cloud/) is a composable observability platform, integrating metrics, traces and logs with Grafana. Customers can leverage the best open source observability software without the overhead of installing, maintaining, and scaling your observability stack.
 
-This document walks through how to integrate Grafana Cloud Prometheus service with Kubecost.
+This document walks through how to integrate the Grafana Cloud Prometheus metrics service with Kubecost.
 
 ## Prerequisites
 
@@ -18,7 +18,7 @@ Install the Grafana Agent for Kubernetes on your cluster. Follow the instruction
 
 Once you’ve set up the Grafana Agent, we’ll need to add some extra configuration to the way Grafana Cloud Prometheus scrapes metrics, so that Kubecost can offer more accurate cost estimates.
 
-Create a file called `extra_scrape_configs.yaml` with the following contents, replacing the `grafana_prometheus_remoteWrite_url`, `username` and `password` placeholders to match your Grafana Cloud account details:
+Create a file called `extra_scrape_configs.yaml` with the following contents, replacing the `grafana_prometheus_remoteWrite_url`, `username` and `password` placeholders to match your Grafana Cloud details, which you’ll find by visiting your organization’s **Grafana Cloud Portal** -> **Prometheus** -> **Password/API key**:
 
 ```yaml
 kind: ConfigMap
@@ -66,7 +66,7 @@ $ kubectl rollout restart deployment/grafana-agent -n <namespace>
 
 ## Step 3: Configure Kubecost recording rules for the Grafana Agent using cortextool
 
-To set up recording rules in Grana Cloud’s Prometheus, download the [cortextool CLI utility](https://github.com/grafana/cortex-tools).
+To set up recording rules in Grana Cloud, download the [cortextool CLI utility](https://github.com/grafana/cortex-tools).
 
 After installing the tool, go ahead and create a file called `kubecost_rules.yaml`:
 
@@ -143,7 +143,7 @@ $ helm install kubecost kubecost/cost-analyzer --namespace kubecost --set kubeco
 
 ## Step 5: Configure Kubecost to query metrics from Grafana Cloud Prometheus
 
-Grab your Grafana Agent API keys, and create two files in your working directory, called `USERNAME` and `PASSWORD` respectively.
+Grab your Grafana Cloud username and API key from Step 1, and create two files in your working directory, called `USERNAME` and `PASSWORD` respectively.
 
 Then, generate a Kubernetes secret called `dbsecret` in the same namespace as Kubecost is installed. The namespace is typically `kubecost`.
 
@@ -151,7 +151,7 @@ Then, generate a Kubernetes secret called `dbsecret` in the same namespace as Ku
 $ kubectl create secret generic dbsecret -namespace kubecost --from-file=USERNAME --from-file=PASSWORD
 ```
 
-Reload Kubecost, using the secret you’ve just created, and the Grafana Cloud Prometheus query URL:
+Reload Kubecost, using the secret you’ve just created, and the Prometheus query URL that you can get from your organization’s **Grafana Cloud Console** -> **Prometheus** -> **Query Endpoint**:
 
 ```sh
 $ helm upgrade kubecost kubecost/cost-analyzer --namespace kubecost --set global.prometheus.fqdn=<grafana_prometheus_query_url> --set global.prometheus.enabled=false --set global.prometheus.queryServiceBasicAuthSecretName=dbsecret
