@@ -1,4 +1,5 @@
-# Grafana Cloud Integration for Kubecost
+Grafana Cloud Integration for Kubecost
+====================
 
 [Grafana Cloud](https://grafana.com/products/cloud/) is a composable observability platform, integrating metrics, traces and logs with Grafana. Customers can leverage the best open source observability software without the overhead of installing, maintaining, and scaling your observability stack.
 
@@ -10,7 +11,7 @@ This document walks through how to integrate the Grafana Cloud Prometheus metric
 - You have created a Grafana Cloud account
 - You have permissions to create Grafana Cloud API keys
 
-## Step 1: Install the Grafana Agent in your cluster
+## Step 1: Install the Grafana Agent on your cluster
 
 Install the Grafana Agent for Kubernetes on your cluster. Follow the instructions provided in the [Grafana Agent for Kubernetes](https://grafana.com/docs/grafana-cloud/kubernetes/agent-k8s/k8s_agent_metrics/) section of the Grafana Cloud documentation.
 
@@ -64,9 +65,9 @@ Re-start the Grafana Agent:
 $ kubectl rollout restart deployment/grafana-agent -n <namespace>
 ```
 
-## Step 3: Configure Kubecost recording rules for the Grafana Agent using cortextool
+## Step 3 (optional): Configure Kubecost recording rules for Grafana Cloud using cortextool
 
-To set up recording rules in Grana Cloud, download the [cortextool CLI utility](https://github.com/grafana/cortex-tools).
+To set up recording rules in Grafana Cloud, download the [cortextool CLI utility](https://github.com/grafana/cortex-tools). While they are optional, they offer improved performance.
 
 After installing the tool, go ahead and create a file called `kubecost_rules.yaml`:
 
@@ -141,7 +142,7 @@ $ helm repo add kubecost https://kubecost.github.io/cost-analyzer/
 $ helm install kubecost kubecost/cost-analyzer --namespace kubecost --set kubecostToken=<token>
 ```
 
-## Step 5: Configure Kubecost to query metrics from Grafana Cloud Prometheus
+## Step 5: Configure Kubecost to query metrics from Grafana Cloud
 
 Grab your Grafana Cloud username and API key from Step 1, and create two files in your working directory, called `USERNAME` and `PASSWORD` respectively.
 
