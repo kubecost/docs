@@ -14,7 +14,9 @@ For the Apply APIs to be available, you must have Kubecost's Cluster Controller
 [enabled](./controller.md). Cluster Controller contains Kubecost's automation
 features, and thus has write permission to certain resources on your cluster.
 
-> Make sure to follow the full setup instructions.
+> Make sure to follow the full setup instructions for Cluster Controller,
+> including creating a secret for cloud provider API access. Cluster Controller
+> won't start without it.
 
 ## APIs
 
