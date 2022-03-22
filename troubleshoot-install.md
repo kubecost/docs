@@ -88,7 +88,7 @@ helm install kubecost/cost-analyzer --debug --wait --namespace kubecost --name k
 
 You may encounter the following screen if the Kubecost frontend is unable to connect with a live Kubecost server.
 
-![No clusters found](https://raw.githubusercontent.com/kubecost/docs/master/images/no-cluster.png)
+![No clusters found](https://raw.githubusercontent.com/kubecost/docs/main/images/no-cluster.png)
 
 Recommended troubleshooting steps are as follows:
 

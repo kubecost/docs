@@ -91,7 +91,7 @@ Cost allocation metrics are available for both in-cluster and out-of-cluster res
 | PV Cost  | The cost of persistent storage volumes claimed by this object. Prices are based on cloud billing prices or custom pricing sheets for on-prem deployments. |
 | GPU Cost        	| The cost of GPUs requested by this object, as measured by [resource limits](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/). Prices are based on cloud billing prices or custom pricing sheets for on-prem deployments. |
 | Shared Cost        	| The cost of shared resources allocated to this tenant. This field covers shared overhead, shared namespaces, and shared labels. |
-| External Cost        	| The cost of out-of-cluster resources allocated to this object. For example, S3 buckets allocated to a particular Kubernetes deployment. Prices are based on cloud billing data and require a key. This feature is currently available for AWS ([learn more](http://docs.kubecost.com/aws-out-of-cluster.html)), GCP ([learn more](http://docs.kubecost.com/gcp-out-of-cluster.html)) and Azure ([learn more](https://github.com/kubecost/docs/blob/master/azure-out-of-cluster.md)). |
+| External Cost        	| The cost of out-of-cluster resources allocated to this object. For example, S3 buckets allocated to a particular Kubernetes deployment. Prices are based on cloud billing data and require a key. This feature is currently available for AWS ([learn more](http://docs.kubecost.com/aws-out-of-cluster.html)), GCP ([learn more](http://docs.kubecost.com/gcp-out-of-cluster.html)) and Azure ([learn more](https://github.com/kubecost/docs/blob/main/azure-out-of-cluster.md)). |
 
 | Metric | Description |
 |-------------------|---------------------|

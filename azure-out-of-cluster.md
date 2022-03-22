@@ -1,7 +1,7 @@
 Adding Azure Out of Cluster Cluster Costs into Kubecost
 ============================================================
 
-Connecting your Azure account to Kubecost allows you to view Kubernetes metrics side-by-side with external cloud services cost, e.g. Azure Database Services. Additionally, it allows Kubecost to reconcile measured Kubernetes spend with your actual Azure bill. This gives teams running Kubernetes a complete and accurate picture of costs. Read the [Cloud Integrations](https://github.com/kubecost/docs/blob/master/cloud-integration.md) documentation for more information on how Kubecost connects with Cloud Service Providers. [More info on this functionality](http://blog.kubecost.com/blog/complete-picture-when-monitoring-kubernetes-costs/). 
+Connecting your Azure account to Kubecost allows you to view Kubernetes metrics side-by-side with external cloud services cost, e.g. Azure Database Services. Additionally, it allows Kubecost to reconcile measured Kubernetes spend with your actual Azure bill. This gives teams running Kubernetes a complete and accurate picture of costs. Read the [Cloud Integrations](https://github.com/kubecost/docs/blob/main/cloud-integration.md) documentation for more information on how Kubecost connects with Cloud Service Providers. [More info on this functionality](http://blog.kubecost.com/blog/complete-picture-when-monitoring-kubernetes-costs/). 
 
 To configure out-of-cluster (OOC) costs for Azure in Kubecost, you just need to set up daily exportation of cost reports to Azure storage. Once cost reports are exported to Azure Storage, Kubecost will access them through the Azure Storage API to display your OOC cost data alongside your in-cluster costs.
 
