@@ -26,7 +26,7 @@ To allocate external AWS resources to a Kubernetes concept, use the following ta
 
 *\*In the `kubernetes_label_NAME` tag key, the `NAME` portion should appear exactly as the tag appears inside of Kubernetes. For example, for the tag `app.kubernetes.io/name`, this tag key would appear as `kubernetes_label_app.kubernetes.io/name`.*
 
-Additionally users must activate the `eks:cluster-name`
+Additionally users must activate the `eks:cluster-name` tag located in the AWS Managment Console under “AWS Billing > Cost allocation tags”.
 ![EKS cluster name user tag](https://raw.githubusercontent.com/kubecost/docs/main/images/user_eks_cluster_name_tag.png)
 
 To use an alternative or existing AWS tag schema, you may supply these in your [values.yaml](https://github.com/kubecost/cost-analyzer-helm-chart/blob/v1.73.0/cost-analyzer/values.yaml#L589) under the "kubecostProductConfigs.labelMappingConfigs.\<aggregation\>\_external_label" . Also be sure to set kubecostProductConfigs.labelMappingConfigs.enabled = true
