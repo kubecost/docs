@@ -2,8 +2,9 @@ Cloud Integrations
 ==================
 
 Integration with the Cloud Service Providers via their respective billing APIs allow Kubecost to display out-of-cluster costs, which are the costs incurred on a billing account from Services Outside of the cluster(s) where Kubecost is installed, in addition to the ability to reconcile Kubecosts in-cluster predictions with actual billing data to improve accuracy. For more details on these integrations continue reading below. For guides on how to set up these integrations follow the relevant link:
-- [Multi-Cloud](https://github.com/kubecost/docs/blob/master/multi-cloud.md)
-- [AWS](https://github.com/kubecost/docs/blob/master/aws-cloud-integrations.md)
+
+- [Multi-Cloud](https://github.com/kubecost/docs/blob/main/multi-cloud.md)
+- [AWS](https://github.com/kubecost/docs/blob/main/aws-cloud-integrations.md)
 - [GCP](https://cloud.google.com/billing/docs/how-to/export-data-bigquery)
 - [Azure](https://docs.microsoft.com/en-us/azure/cost-management-billing/costs/tutorial-export-acm-data?tabs=azure-portal) 
 
@@ -12,6 +13,12 @@ As indicated above, setting up a cloud integration with your Cloud Service Provi
 
 ### Reconciliation
 Reconciliation matches in-cluster Assets with items found in the billing data pulled from the Cloud Service Provider. This allows Kubecost to display the most accurate depiction of your in-cluster spend. Additionally, the reconciliation process creates `Network` assets for in-cluster nodes based on the information in the billing data. The main drawback of this process is that the Cloud Service Providers have between a 6 to 24 hour delay in releasing billing data, and reconciliation requires a complete day of cost data to reconcile with the in-cluster assets. This requires a 48 hour window between resource usage and reconciliation. If reconciliation is performed within this window, asset cost is deflated to the partially complete cost shown in the billing data.
+
+The emmited cost-based [metrics](https://github.com/kubecost/cost-model/blob/develop/PROMETHEUS.md#available-metrics) are based on onDemand unless there is definitive data from a cloud provider that the node is not onDemand. This way estimates are as accurate as possible. If a new reserved instance is provisioned or a node joins a savings plan:
+
+1. Kubecost continues to emit onDemand pricing until the node is added to the cloud bill.
+2. Once the node is added to the cloud bill, Kubecost starts emitting something closer to the actual price.
+3. For the time period where Kubecost assumed the node was onDemand but it was actually reserved, reconciliation fixes the price in ETL.
 
 ### Cloud Assets
 The Cloud Assets process allows Kubecost to pull in out-of-cluster cloud spend from your Cloud Service Provider's billing data. This includes any services run by the Cloud Service Provider in addition to compute resources outside of clusters monitored by Kubecost. Additionally, by labeling these Cloud Assets their cost can be distributed to Allocations as external costs. This can help teams get a better understanding of the proportion of out-of-cluster cloud spend that their in-cluster usage is dependant on. Cloud Assets become available as soon as they appear in the billing data, with the 6 to 24 hour delay mentioned above, and are updated as they become more complete.
@@ -22,8 +29,8 @@ The Kubecost helm chart provides values that can enable or disable each cloud pr
 Value | Default | Description
 --: | :--: | :--
 `.Values.kubecostModel.etlAssetReconciliationEnabled` | true | Enables Reconciliation processes and endpoints. This Helm value corresponds to the `ETL_ASSET_RECONCILIATION_ENABLED` environment variable.
-`.Values.kubecostModel.etlCloudAssets` | true | Enables Cloud Assets processes and endpoints. This Helm value corresponds to the `ETL_CLOUD_ASSETS_ENABLED` environment variable.
-`.Values.kubecostModel.cloudAssetsExcludeProviderID` | false | **This is a BETA feature, support may be dropped in future releases.** Enabling this flag pre-aggregates cloud assets at the service and user label level for higher performance build speed and improved asset query times, at the cost of no longer being able to see the cost of individual cloud assets. This Helm value corresponds to the `CLOUD_ASSETS_EXCLUDE_PROVIDER_ID` environment variable. Currently only available on AWS. Users should ensure that `eks:cluster-name` is enabled as described in the [AWS OOC documentation](https://github.com/kubecost/docs/blob/master/aws-out-of-cluster.md#step-2-tag-your-resources) to prevent double counting of EKS resources.
+`.Values.kubecostModel.etlCloudUsage` | true | Enables Cloud Usage processes and endpoints. This Helm value corresponds to the `ETL_CLOUD_USAGE_ENABLED` environment variable.
+`.Values.kubecostModel.cloudAssetsExcludeProviderID` | false | **This is a BETA feature, support may be dropped in future releases.** Enabling this flag pre-aggregates cloud assets at the service and user label level for higher performance build speed and improved asset query times, at the cost of no longer being able to see the cost of individual cloud assets. This Helm value corresponds to the `CLOUD_ASSETS_EXCLUDE_PROVIDER_ID` environment variable. Currently only available on AWS. Users should ensure that `eks:cluster-name` is enabled as described in the [AWS OOC documentation](https://github.com/kubecost/docs/blob/main/aws-out-of-cluster.md#step-2-tag-your-resources) to prevent double counting of EKS resources.
 `.Values.kubecostModel.etlUseUnblendedClost` | false | **This is a BETA feature, support may be dropped in future releases.** Enabling this flag makes Cloud Assets and Reconciliation use unblended cost for all line items in the CUR including those with savings plans and RI's applied to them. This will cause the amortized upfront costs of these resources to not appear in Kubecost and may cause some assets to have a $0 value if their cost was entirely upfont. This Helm value corresponds to the `ETL_USE_UNBLENDED_COST` environment variable. Currently only available on AWS.
 ## Cloud Stores
 The ETL contains a Map of Cloud Stores, each of which represents an integration with a Cloud Service Provider. Each Cloud Store is responsible for the Cloud Asset and Reconciliation Pipelines which add Out-of-Cluster costs and Adjust Kubecost's estimated cost respectively via cost and usage data pulled from the Cloud Service Provider. Each Cloud Store has a unique identifier called the `ProviderKey` which varies depending on which Cloud Service Provider is being connected to and ensures that duplicate configurations are not introduced into the ETL. The value of the `ProviderKey` is the following for each Cloud Service Provider at a scope that the billing data is being for:
@@ -119,7 +126,7 @@ API parameters include the following:
 
 ---
 
-`http://<kubecost-address>/model/etl/asset/reconciliation/rerun`
+`http://<kubecost-address>/model/etl/asset/reconciliation/run`
 
 Description:
 
@@ -127,11 +134,11 @@ Completely restart Reconciliation Pipeline. This operation ends the currently ru
 
 Example uses:
 
-`http://localhost:9090/model/etl/asset/reconciliation/rerun` // this will not run because it is missing the commit parameter
+`http://localhost:9090/model/etl/asset/reconciliation/run` // this will not run because it is missing the commit parameter
 
-`http://localhost:9090/model/etl/asset/reconciliation/rerun?commit=true`
+`http://localhost:9090/model/etl/asset/reconciliation/run?commit=true`
 
-`http://localhost:9090/model/etl/asset/cloud/reconciliation/rerun?commit=true&provider=######-######-######`
+`http://localhost:9090/model/etl/asset/cloud/reconciliation/run?commit=true&provider=######-######-######`
 
 API parameters include the following:
 
@@ -176,5 +183,7 @@ Returns a status object for the ETL. This includes sections for `allocation`, `a
 Example uses:
 
 `http://localhost:9090/model/etl/status`
+
+Edit this doc on [Github](https://github.com/kubecost/docs/blob/main/cloud-integration.md)
 
 <!--- {"article":"4412369153687","section":"4402829033367","permissiongroup":"1500001277122"} --->

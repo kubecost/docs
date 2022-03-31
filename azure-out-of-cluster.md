@@ -1,8 +1,7 @@
 Adding Azure Out of Cluster Cluster Costs into Kubecost
 ============================================================
 
-
-Connecting your Azure account to Kubecost allows you to view Kubernetes metrics side-by-side with external cloud services cost, e.g. Azure Database Services. Additionally, it allows Kubecost to reconcile measured Kubernetes spend with your actual Azure bill. This gives teams running Kubernetes a complete and accurate picture of costs. Read the [Cloud Integrations](https://github.com/kubecost/docs/blob/master/cloud-integration.md) documentation for more information on how Kubecost connects with Cloud Service Providers. [More info on this functionality](http://blog.kubecost.com/blog/complete-picture-when-monitoring-kubernetes-costs/). 
+Connecting your Azure account to Kubecost allows you to view Kubernetes metrics side-by-side with external cloud services cost, e.g. Azure Database Services. Additionally, it allows Kubecost to reconcile measured Kubernetes spend with your actual Azure bill. This gives teams running Kubernetes a complete and accurate picture of costs. Read the [Cloud Integrations](https://github.com/kubecost/docs/blob/main/cloud-integration.md) documentation for more information on how Kubecost connects with Cloud Service Providers. [More info on this functionality](http://blog.kubecost.com/blog/complete-picture-when-monitoring-kubernetes-costs/). 
 
 To configure out-of-cluster (OOC) costs for Azure in Kubecost, you just need to set up daily exportation of cost reports to Azure storage. Once cost reports are exported to Azure Storage, Kubecost will access them through the Azure Storage API to display your OOC cost data alongside your in-cluster costs.
 
@@ -19,20 +18,25 @@ It will take a few hours to generate the first report, after which Kubecost can 
 ## Step 2: Provide Access to Azure Storage API
 
 The values needed to provide access to the Azure Storage Account where cost data is being exported can be found in the Azure portal in the Storage account where the cost data is being exported. 
+* `<SUBSCRIPTION_ID>` is the id of the subscription that the exported files are being generated for.
 * `<STORAGE_ACCOUNT_NAME>` is the name of the Storage account where the exported CSV is being stored.
 * `<STORE_ACCESS_KEY>` can be found by selecting the “Access Keys” option from the navigation sidebar then selecting “Show Keys”. Using either of the two keys will work. 
 * `<REPORT_CONTAINER_NAME>` is the name that you choose for the exported cost report when you set it up. This is the name of the container where the CSV cost reports are saved in your Storage account. 
-With this value in hand, you can now provide them to Kubecost to allow access to the Azure Storage API.
+* `<AZURE_CLOUD>` is an optional value which denotes the cloud where the storage account exist, possible values are `public` and `gov`. The default is `public`.
 
-### Option #1: Manually add secret to cluster (Recommended)
+With these values in hand, you can now provide them to Kubecost to allow access to the Azure Storage API.
+
+
 To create this secret you will need to create a JSON file that must be named azure-storage-config.json
 with the following format:
 
 ```
 {
-	"azureStorageAccount": "<STORAGE_ACCOUNT_NAME>",
-	"azureStorageAccessKey": "<STORE_ACCESS_KEY>",
-	"azureStorageContainer": <REPORT_CONTAINER_NAME>
+  "azureSubscriptionID": "<SUBSCRIPTION_ID>",
+  "azureStorageAccount": "<STORAGE_ACCOUNT_NAME>",
+  "azureStorageAccessKey": "<STORE_ACCESS_KEY>",
+  "azureStorageContainer": "<REPORT_CONTAINER_NAME>",
+  "azureCloud": "<AZURE_CLOUD>"
 }
 ```
 
@@ -42,18 +46,8 @@ Once you have the values filled out use this command to create the secret:
 
 Once the secret is created, set `.Values.kubecostProductConfigs.azureStorageSecretName` to
 `<SECRET_NAME>` and upgrade Kubecost via Helm, other values related to Azure Storage (see another method) should not be set.
- 
-### Option #2: Create a secret from helm values
 
-* Set `.Values.kubecostProductConfigs.azureStorageAccount = <STORAGE_ACCOUNT_NAME>`
-* Set `.Values.kubecostProductConfigs.azureStorageAccessKey = <STORE_ACCESS_KEY>`
-* Set `.Values.kubecostProductConfigs.azureStorageContainer = <REPORT_CONTAINER_NAME>`
-* Set `.Values.kubecostProductConfigs.azureStorageCreateSecret = true`
-* Do not set `.Values.kubecostProductConfigs.azureStorageSecretName` if you are using this approach
-
-> Note: that this will leave your secrets unencrypted in values.yaml. Use a Kubernetes secret as in the previous method to avoid this.
-
-After successful set up of Azure OOC costs upon opening the Assets page of Kubecost, there will no longer be a banner at the top of the screen that will no longer say that OOC is not configured and costs will be broken down by service.
+After a successful configuration of Azure out of cluster costs, upon opening the Assets page of Kubecost costs will be broken down by service and there will no longer be a banner at the top of the screen that says OOC is not configured.
 
 ## Step 3: Tagging Azure resources
 
@@ -61,15 +55,15 @@ Kubecost utilizes Azure tagging to allocate the costs of Azure resources outside
 
 To allocate external Azure resources to a Kubernetes concept, use the following tag naming scheme:
 
-| Kubernetes Concept 	| Azure Tag Key       	| Azure Tag Value 	|
-|--------------------	|---------------------	|---------------	|
-| Cluster           	| kubernetes_cluster	| &lt;cluster-name>	|
-| Namespace          	| kubernetes_namespace	| &lt;namespace-name> |
-| Deployment         	| kubernetes_deployment	| &lt;deployment-name>|
-| Label              	| kubernetes_label_NAME*| &lt;label-value>    |
-| DaemonSet          	| kubernetes_daemonset	| &lt;daemonset-name> |
-| Pod                	| kubernetes_pod	      | &lt;pod-name>     |
-| Container          	| kubernetes_container	| &lt;container-name> |
+| Kubernetes Concept | Azure Tag Key | Azure Tag Value |
+|--------------------|---------------------|---------------|
+| Cluster           	| kubernetes_cluster	| cluster-name	|
+| Namespace          	| kubernetes_namespace	| namespace-name |
+| Deployment         	| kubernetes_deployment	| deployment-name |
+| Label              	| kubernetes_label_NAME* | label-value    |
+| DaemonSet          	| kubernetes_daemonset	| daemonset-name |
+| Pod                	| kubernetes_pod	      | pod-name     |
+| Container          	| kubernetes_container	| container-name |
 
 
  

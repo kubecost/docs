@@ -6,7 +6,7 @@ Below are the steps for adding an additional cluster on the **Kubecost Business 
 
 ## Add from frontend
 
-Adding a cluster directly from the frontend Kubecot adds it locally for your browser. To make this cluster accessible to other users in your organization, follow the steps to [add at install-time](#add-at-install-time) below. 
+When adding a cluster directly from the frontend, Kubecost adds it locally for your browser. To make this cluster accessible to other users in your organization, follow the steps to [add at install-time](#add-at-install-time) below. 
 
 1. Install Kubecost on the additional cluster you would like to view. The recommended Kubecost install path is available at [kubecost.com/install](https://www.kubecost.com/install).
 
@@ -14,7 +14,7 @@ Adding a cluster directly from the frontend Kubecot adds it locally for your bro
 
 3. Select `Add new cluster` on the Kubecost home page and provide the accessible URL (with port included) for the target Kubecost installation. Here's an example: `http://e9a706220bae04199-1639813551.us-east-2.elb.amazonaws.com:9090`
 
-![Add a cluster view](https://raw.githubusercontent.com/kubecost/docs/master/kubecost-index.png)
+![Add a cluster view](https://raw.githubusercontent.com/kubecost/docs/main/kubecost-index.png)
 
 ## Add at install-time
 

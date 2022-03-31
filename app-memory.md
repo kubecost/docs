@@ -1,6 +1,8 @@
 Kubecost Memory Usage
 =====================
 
+## Heap
+
 There are a number of configuration parameters that impact Kubecost and Prometheus memory usage. 
 To capture a breakdown of current memory usage, visit this URL:
 

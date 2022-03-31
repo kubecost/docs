@@ -13,7 +13,7 @@ __2. Visit Prometheus UI__
 
 View `http://localhost:9003/` in your web browser. You should be presented with a UI that looks like the following:
 
-![](images/prom-ui.png)
+![](https://raw.githubusercontent.com/kubecost/docs/main/images/prom-ui.png)
 
 If you're unable to connect, confirm that the Prometheus server pod is in a `Running` state. 
 

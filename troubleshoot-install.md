@@ -8,7 +8,10 @@ Once an installation is complete, access the Kubecost frontend to view the statu
 [FailedScheduling node-exporter](#node-exporter)  
 [No clusters found](#no-cluster)  
 [Pods running but app won't load](#app-wont-load)  
-[Trying to run on minikube](#minikube)
+[Trying to run on minikube](#minikube) 
+<br/>
+[Error loading metadata](#metadata)
+
 
 ## <a name="persistent-volume"></a>Issue: no persistent volumes available for this claim and/or no storage class is set
 
@@ -85,7 +88,7 @@ helm install kubecost/cost-analyzer --debug --wait --namespace kubecost --name k
 
 You may encounter the following screen if the Kubecost frontend is unable to connect with a live Kubecost server.
 
-![No clusters found](https://raw.githubusercontent.com/kubecost/docs/master/images/no-cluster.png)
+![No clusters found](https://raw.githubusercontent.com/kubecost/docs/main/images/no-cluster.png)
 
 Recommended troubleshooting steps are as follows:
 
@@ -129,10 +132,21 @@ Many teams deploy helm Tiller with cluster-admin privileges to install and manag
 3. Change both entries to localhost:9001 and localhost:9003
 4. Restart the kubecost-cost-analyzer pod in the kubecost namespace
 
-<br/>
+
+## Metadata
+
+Kubecost makes use of cloud provider metadata servers to access instance and cluster metadata. If a restrictive network policy is place this may need to be modified to allow connections from the kubecost pod or namespace. 
+
+Error example:
+
+```
+gcpprovider.go Error loading metadata cluster-name: Get "http://169.254.169.254/computeMetadata/v1/instance/attributes/cluster-name": dial tcp 169.254.169.254:80: i/o timeout
+```
+
 
 Have a question not answered on this page? Email us at support@kubecost.com or [join the Kubecost Slack community](https://join.slack.com/t/kubecost/shared_invite/enQtNTA2MjQ1NDUyODE5LWFjYzIzNWE4MDkzMmUyZGU4NjkwMzMyMjIyM2E0NGNmYjExZjBiNjk1YzY5ZDI0ZTNhZDg4NjlkMGRkYzFlZTU)!
 
 Edit this doc on [Github](https://github.com/kubecost/docs/blob/main/troubleshoot-install.md)
+
 
 <!--- {"article":"4407601830679","section":"4402815696919","permissiongroup":"1500001277122"} --->

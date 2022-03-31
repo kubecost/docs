@@ -7,7 +7,7 @@ Auditing the cost of workloads can be complex in dynamic Kubernetes environments
 
 Visit the `/audit.html` page on the Kubecost frontend to review inputs to CPU, memory, storage, and node-level costs calculations on the Allocation view. This tool displays cost input data by *container* and compares the product of these metrics to the aggregatedCostModel API which is the backing API for the Allocation view. The default time window measured is 1 day. Note that idle and shared costs are not included as part of this view. 
 
-![Audit screenshot](/cpu-audit-table.png)
+![Audit screenshot](https://raw.githubusercontent.com/kubecost/docs/main//cpu-audit-table.png)
 
 If differences are found between the independent inputs and the model itself, select the container name to view its associated Grafana dashboard. This will allow the verification of A) the time this container was running and B) allocated resources [learn more](https://github.com/kubecost/cost-model/blob/develop/README.md#how-do-you-allocate-a-specific-amount-of-ramcpu-to-an-individual-pod-or-container). Viewing node costs at the bottom of this page will enable the verification of C) cost of allocated resources. 
 
@@ -43,7 +43,7 @@ We've created this guide to help you spot check cost metrics directly in Prometh
 
 6. **Confirm consistency with monthly Allocation view.** Visit the Allocation tab in the Kubecost product. Filter by `default ` namespace. Select `monthly run rate` by `pod` then view the time series chart to confirm the values in the previous step are consistent.  
 
-![Timeseries graph](images/audit-graph.png)
+![Timeseries graph](https://raw.githubusercontent.com/kubecost/docs/main/images/audit-graph.png)
 
 **Reminder:** Don't forget to apply any sustained use or other discounts during a manual spot check.
 

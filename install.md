@@ -1,8 +1,6 @@
 Installing Kubecost
 ===================
 
-<br/>
-
 We **recommend using the [Kubecost helm chart](http://kubecost.com/install) to install and operate Kubecost**. This install method is available for free and contains all the required components to get started, provides access to all Kubecost features, and can scale to large clusters. It also provides the most flexibility for configuring Kubecost and its dependencies.
 
 Alternative install options:
@@ -13,8 +11,6 @@ Alternative install options:
 
 * Lastly, you can deploy the open source cost-model directly as a pod. This install path provides a subset of Kubecost functionality and is available [here](https://github.com/kubecost/cost-model/blob/master/deploying-as-a-pod.md). Specifically, this install path deploys the underlying cost allocation model without UI or enterprise functionality, e.g. SAML support. 
 
-<br/><br/>
-<br/><br/>
 
 Edit this doc on [Github](https://github.com/kubecost/docs/blob/main/install.md)
 
