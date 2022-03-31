@@ -133,7 +133,7 @@ If the necessary scrape target is not added to your Prometheus, then refer to [t
 
 You can see information on recent Prometheus scrape errors directly on the Kubecost Diagnostics page when present or by visiting your Prometheus console and then Status > Targets in the top navigation bar.
 
-Contact team@kubecost.com or send a message in our Slack workspace if you encounter an error that you do not recognize.
+Contact support@kubecost.com or send a message in our Slack workspace if you encounter an error that you do not recognize.
 
 ### Step 5. Metrics not being dropped with Prometheus relabel rules
 

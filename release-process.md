@@ -56,7 +56,7 @@ Or join our Slack workspace - https://kubecost.slack.com
 
 ## Submitting feedback on a release
 
-We always love receiving feedback and feature requests. Please reach out to team@kubecost.com or submit an issue in the respective repo:
+We always love receiving feedback and feature requests. Please reach out to support@kubecost.com or submit an issue in the respective repo:
 
 * If you installed our helm chart, all issues can be filed at https://github.com/kubecost/cost-analyzer-helm-chart
 * If you installed just the open source cost-model, you can file issues at https://github.com/kubecost/cost-model

@@ -21,7 +21,7 @@ Direct engineering and product support via Slack channel, video, and phone.
 
 <br/>  
 
-Contact us at [team@kubecost.com](team@kubecost.com) to learn more!
+Contact us at [support@kubecost.com](support@kubecost.com) to learn more!
 <br/><br/><br/><br/><br/>
 
 Edit this doc on [Github](https://github.com/kubecost/docs/blob/main/business.md)

@@ -11,7 +11,7 @@ Visit the `/audit.html` page on the Kubecost frontend to review inputs to CPU, m
 
 If differences are found between the independent inputs and the model itself, select the container name to view its associated Grafana dashboard. This will allow the verification of A) the time this container was running and B) allocated resources [learn more](https://github.com/kubecost/cost-model/blob/develop/README.md#how-do-you-allocate-a-specific-amount-of-ramcpu-to-an-individual-pod-or-container). Viewing node costs at the bottom of this page will enable the verification of C) cost of allocated resources. 
 
-Differences between these independent inputs and the cost model are expected to arise if the `cost-model` /metrics endpoint has not been consistently scraped over the measured time window. Other unexpected differences can be reported to <team@kubecost.com>
+Differences between these independent inputs and the cost model are expected to arise if the `cost-model` /metrics endpoint has not been consistently scraped over the measured time window. Other unexpected differences can be reported to <support@kubecost.com>
 
 ## Manual spot check
 We've created this guide to help you spot check cost metrics directly in Prometheus and ensure they are calculated as expected.

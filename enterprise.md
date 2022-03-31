@@ -28,7 +28,7 @@ Dedicated SRE support via private Slack channel and video calls. Expert technica
 
 <br/>  
 
-Contact us at [team@kubecost.com](team@kubecost.com) to learn more!
+Contact us at [support@kubecost.com](support@kubecost.com) to learn more!
 <br/><br/><br/><br/><br/>
 
 

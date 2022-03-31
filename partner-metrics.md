@@ -10,7 +10,7 @@ To assist, we have created a common definition for determining the cost of pods,
 We provide partners a suite of APIs, documentation, and compliance tests designed to run in a range of Kubernetes environments, including all top cloud providers and on-premise.
 We also provide a spec implementation in our open source repository to ensure consistency and accuracy across a broad range of projects.
 
-Reach out to <team@kubecost.com> to learn more.
+Reach out to <support@kubecost.com> to learn more.
 
 Edit this doc on [Github](https://github.com/kubecost/docs/blob/main/partner-metrics.md)
 
