@@ -34,7 +34,7 @@ needed_disk_space = retention_time_minutes * ingested_samples_per_minutes * byte
 
 Where ingested samples can be measured as the average over a recent period, e.g. `sum(avg_over_time(scrape_samples_post_metric_relabeling[24h]))`. On average, Prometheus uses around 1.5-2 bytes per sample. So ingesting 100k samples per minute and retaining for 15 days would demand around 40 GB. It's recommended to add another 20-30% capacity for headroom and WAL. More info on disk sizing [here](https://prometheus.io/docs/prometheus/latest/storage/#operational-aspects).
 
-**Note:** We do not recommend retaining greater than 30 days of data in Prometheus for larger clusters. For long-term data retention, contact us (team@kubecost.com) about Kubecost with durable storage enabled.
+**Note:** We do not recommend retaining greater than 30 days of data in Prometheus for larger clusters. For long-term data retention, contact us (support@kubecost.com) about Kubecost with durable storage enabled.
 
 [More info on Kubecost Storage](/storage.md)
 
@@ -44,7 +44,7 @@ The Kubecost Prometheus deployment is used both as a source and a sink for cost 
 
 For the best experience, we generally recommend teams use the bundled `prometheus-server` & `grafana` but reuse their existing `kube-state-metrics` and `node-exporter` deployments if they already exist. This setup allows for the easiest installation process, easiest ongoing maintenance, minimal duplication of metrics, and more flexible metric retention.
 
-That being said, we do support using an existing Grafana & Prometheus installation in our paid products today. You can see basic setup instructions [here](/custom-prom.md). In our free product, we only provide best efforts support for this integration because of the nuances required in completing this integration successfully. Please contact us (team@kubecost.com) if you want to learn more or if you think we can help!
+That being said, we do support using an existing Grafana & Prometheus installation in our paid products today. You can see basic setup instructions [here](/custom-prom.md). In our free product, we only provide best efforts support for this integration because of the nuances required in completing this integration successfully. Please contact us (support@kubecost.com) if you want to learn more or if you think we can help!
 
 ## <a name="requests-limits"></a>Setting Requests & Limits
 
@@ -52,7 +52,7 @@ It's recommended that users set and/or update resource requests and limits befor
 
 The exact recommended values for these parameters depend on the size of your cluster, availability requirements, and usage of the Kubecost product. Suggested values for each container can be found within Kubecost itself on the namespace page. More info on these recommendations is available [here](http://blog.kubecost.com/blog/requests-and-limits/).
 
-In practice, we recommend running Kubecost for up to 7 days on a production cluster and then tuning resource requests/limits based on resource consumption. Reach out any time to team@kubecost.com if we can help give further guidance.
+In practice, we recommend running Kubecost for up to 7 days on a production cluster and then tuning resource requests/limits based on resource consumption. Reach out any time to support@kubecost.com if we can help give further guidance.
 
 ## <a name="install-configs"></a>Product configuration at install-time
 
@@ -128,7 +128,7 @@ The Charge figures in logs should be reflected in your `node_total_hourly_cost`
 
 ## <a name="ri-committed-discount"></a>Accurately tracking Reserved Instance or committed use discounts
 
-Paid versions of the Kubecost product reflect Reserved Instance (AWS), committed use (GCP), and custom-negotiated discounts into asset pricing. This allows for accurate allocation of costs to individual teams, apps, etc. Enabling this feature simply requires adding role access to cloud provider billing data and does not egress any data to external services. Contact us (team@kubecost.com) if you're interested in more information.
+Paid versions of the Kubecost product reflect Reserved Instance (AWS), committed use (GCP), and custom-negotiated discounts into asset pricing. This allows for accurate allocation of costs to individual teams, apps, etc. Enabling this feature simply requires adding role access to cloud provider billing data and does not egress any data to external services. Contact us (support@kubecost.com) if you're interested in more information.
 
 #### AWS Reserved Instance Details:
 Accurately tracking AWS Reserved Instance prices requires access to an Athena table containing the Cost and Usage Report (CUR). Data for new RIs may be delayed until the instance data is available in the CUR. Once data is available, Kubecost will reflect the price shown in the [reservation/EffectiveCost]( http://docs.kubecost.com/getting-started#ri-committed-discount) field. Kubecost will also reconcile daily spend with cost figures available in the CUR. 

@@ -128,7 +128,7 @@ Longer time windows, 120 days by default, are part of an ETL pipeline that store
 Returning cached data from either caching layer typically takes < 300ms on medium-sized clusters. To guarantee you bypass both caches, you can set `etl=false` and 
 `disableCache=false`.
 
-Have questions? Email us at <team@kubecost.com>.
+Have questions? Email us at <support@kubecost.com>.
 
 Edit this doc on [Github](https://github.com/kubecost/docs/blob/main/allocation-api.md)
 

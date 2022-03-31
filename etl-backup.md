@@ -14,7 +14,7 @@ Untar the results of the etl-backup script into the ETL directory pod.
 kubectl cp -c cost-model <untarred-results-of-script> <kubecost-namespace>/<kubecost-podname>/var/configs/db/etl
 ```
 
-Contact support (team@kubecost.com) if you need additional help
+Contact support (support@kubecost.com) if you need additional help
 
 Edit this doc on [Github](https://github.com/kubecost/docs/blob/main/etl-backup.md)
 

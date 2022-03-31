@@ -53,7 +53,7 @@ Supply the following parameters to your _helm install_ command.
 --set awsstore.imageNameAndVersion=gcr.io/kubecost1/awsstore:latest
 ```
 
-To participate in our free Enterprise onboarding program, contact us at team@kubecost.com to schedule these sessions!
+To participate in our free Enterprise onboarding program, contact us at support@kubecost.com to schedule these sessions!
 
 
 Edit this doc on [Github](https://github.com/kubecost/docs/blob/main/aws-marketplace-install.md)
