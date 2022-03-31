@@ -4,7 +4,7 @@
 
 Saved reports can be managed via [`values.yaml`](https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/values.yaml), as well as via the Kubecost UI. These two methods of managing saved reports can be combined. The following rules apply:
 
-- If Helm chart definitions are _unused_ (`global.savedReports.enabled = false`), reports created via the UI are saved to a persistent volume, if one is configured, and persist across pod restarts.
+- If Helm chart definitions are _unused_ (`global.savedReports.enabled = false`), reports created via the UI are saved to a persistent volume, and persist across pod restarts.
 
 - If Helm chart definitions are _used_ (`global.savedReports.enabled = true`), they are registered on pod start. Reports can still be freely created/deleted via the UI. On pod restart, however, whatever is defined in the configmap will supersede all UI changes.
 
@@ -97,8 +97,6 @@ The following fields apply to each map item under the `reports` key:
         filters: [] # if no filters, specify empty array
 
 ```
-
-## Managing reports via Helm vs. the Kubecost UI
 
 ## Troubleshooting
 
