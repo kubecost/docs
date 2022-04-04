@@ -2,15 +2,7 @@
 
 ## Summary
 
-Saved reports can be managed via [`values.yaml`](https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/values.yaml), as well as via the Kubecost UI. These two methods of managing saved reports can be combined. The following rules apply:
-
-- If Helm chart definitions are _unused_ (`global.savedReports.enabled = false`), reports created via the UI are saved to a persistent volume, and persist across pod restarts.
-
-- If Helm chart definitions are _used_ (`global.savedReports.enabled = true`), they are registered on pod start. Reports can still be freely created/deleted via the UI. On pod restart, however, whatever is defined in the configmap will supersede all UI changes.
-
-Generally, the configmap, if present, serves as the source of truth at startup.
-
-The rest of this document outlines the process of configuring saved reports through a values file and provides documentation on the required and optional parameters.
+Saved reports can be managed via [`values.yaml`](https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/values.yaml), or via the Kubecost UI, or both. This reference outlines the process of configuring saved reports through a values file, and provides documentation on the required and optional parameters.
 
 ## Saved Report Parameters
 
@@ -97,6 +89,14 @@ The following fields apply to each map item under the `reports` key:
         filters: [] # if no filters, specify empty array
 
 ```
+
+## Combining UI Report Management with `values.yaml`
+
+When defining reports via `values.yaml`, by setting `global.savedReports.enabled = true` in the values file, the reports defined in `values.yaml` are created when the Kubecost pod starts. Reports can still be freely created/deleted via the UI while the pod is running. However, when the pod restarts, whatever is defined the the values file supersedes any UI changes.
+
+Generally, the configmap, if present, serves as the source of truth at startup.
+
+If saved reports are _not_ provided via `values.yaml`, meaning `global.savedReports.enabled = false`, reports created via the UI are saved to a persistent volume, and persist across pod restarts.
 
 ## Troubleshooting
 
