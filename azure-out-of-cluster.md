@@ -60,14 +60,14 @@ To allocate external Azure resources to a Kubernetes concept, use the following 
 | Cluster           	| kubernetes_cluster	| cluster-name	|
 | Namespace          	| kubernetes_namespace	| namespace-name |
 | Deployment         	| kubernetes_deployment	| deployment-name |
-| Label              	| kubernetes_label_NAME* | label-value    |
+| Label              	| kubernetes\_label\_NAME* | label-value    |
 | DaemonSet          	| kubernetes_daemonset	| daemonset-name |
 | Pod                	| kubernetes_pod	      | pod-name     |
 | Container          	| kubernetes_container	| container-name |
 
 
  
-*\*In the kubernetes_label_NAME tag key, the NAME portion should appear exactly as the tag appears inside of Kubernetes. For example, for the tag app.kubernetes.io/name, this tag key would appear as kubernetes_label_app.kubernetes.io/name.*
+*\*In the `kubernetes_label_NAME` tag key, the NAME portion should appear exactly as the tag appears inside of Kubernetes. For example, for the tag `app.kubernetes.io/name`, this tag key would appear as `kubernetes_label_app.kubernetes.io/name.`*
 
 To use an alternative or existing Azure tag schema, you may supply these in your values.yaml under the `kubecostProductConfigs.labelMappingConfigs.<aggregation>_external_label` . Also be sure to set `kubecostProductConfigs.labelMappingConfigs.enabled = true`
 

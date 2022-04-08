@@ -19,7 +19,7 @@ To allocate external AWS resources to a Kubernetes concept, use the following ta
 | Cluster | kubernetes_cluster	| cluster-name	|
 | Namespace | kubernetes_namespace	| namespace-name |
 | Deployment | kubernetes_deployment	| deployment-name |
-| Label | kubernetes_label_NAME* | label-value    |
+| Label | kubernetes\_label\_NAME* | label-value    |
 | DaemonSet | kubernetes_daemonset	| daemonset-name |
 | Pod | kubernetes_pod	    | pod-name     |
 | Container | kubernetes_container	| container-name |
