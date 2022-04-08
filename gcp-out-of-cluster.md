@@ -69,7 +69,7 @@ Learn more [here](https://cloud.google.com/compute/docs/labeling-resources#addin
 Cluster:    "kubernetes_cluster" :   &lt;clusterID>
 Namespace:  "kubernetes_namespace" : &lt;namespace>
 Deployment: "kubernetes_deployment": &lt;deployment>
-Label:      "kubernetes_label_NAME": &lt;label>
+Label:      "kubernetes\_label\_NAME": &lt;label>
 Pod:        "kubernetes_pod":        &lt;pod>
 Daemonset:  "kubernetes_daemonset":  &lt;daemonset>
 Container:  "kubernetes_container":  &lt;container>
