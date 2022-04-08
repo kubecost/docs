@@ -24,7 +24,7 @@ To allocate external AWS resources to a Kubernetes concept, use the following ta
 | Pod | kubernetes_pod	    | pod-name     |
 | Container | kubernetes_container	| container-name |
 
-*\*In the `kubernetes\_label\_NAME` tag key, the `NAME` portion should appear exactly as the tag appears inside of Kubernetes. For example, for the tag `app.kubernetes.io/name`, this tag key would appear as `kubernetes\_label\_app.kubernetes.io/name`.*
+*\*In the `kubernetes_label_NAME` tag key, the `NAME` portion should appear exactly as the tag appears inside of Kubernetes. For example, for the tag `app.kubernetes.io/name`, this tag key would appear as `kubernetes_label_app.kubernetes.io/name`.*
 
 Additionally users must activate the `eks:cluster-name`
 ![EKS cluster name user tag](https://raw.githubusercontent.com/kubecost/docs/main/images/user_eks_cluster_name_tag.png)
