@@ -94,9 +94,9 @@ Recommended troubleshooting steps are as follows:
 
 Start by reviewing messages in your browser's developer console. Any meaningful errors or warnings may indicate an unexpected response from the Kubecost server.
 
-Next, point your browser to the `/api` endpoint on your target URL. For example, visit `http://localhost:9090/api/` in the scenario shown above. You should expect to see a Prometheus config file at this endpoint. If your cluster address has changed, you can visit Settings in the Kubecost product to update or you can also [add a new](https://github.com/kubecost/docs/blob/main/multi-cluster.md) cluster.  
+Next, point your browser to the `/model` endpoint on your target URL. For example, visit `http://localhost:9090/model/` in the scenario shown above. You should expect to see a Prometheus config file at this endpoint. If your cluster address has changed, you can visit Settings in the Kubecost product to update or you can also [add a new](https://github.com/kubecost/docs/blob/main/multi-cluster.md) cluster.  
 
-If you are unable to successfully retrieve your config file from this /api endpoint, we recommend the following:
+If you are unable to successfully retrieve your config file from this /model endpoint, we recommend the following:
 
 1. Check your network connection to this host
 2. View the status of all Prometheus and Kubecost pods in this cluster's deployment to determine if any container are not in a `Ready` or `Completed` state. When performing the default Kubecost install this can be completed with `kubectl get pods -n kubecost`. All pods should be either Running or Completed. You can run `kubectl describe` on any pods not currently in this state.
@@ -110,7 +110,7 @@ If all Kubecost pods are running and you can connect / port-forward to the kubec
 
 1. Connect directly to a backend service with the following command:
 `kubectl port-forward --namespace kubecost service/kubecost-cost-analyzer 9001`
-2. Ensure that `http://localhost:9001` returns the prometheus YAML file
+2. Ensure that `http://localhost:9003` returns the prometheus YAML file
 
 If this is true, you are likely to be hitting a CoreDNS routing issue. We recommend using local routing as a solution:
 
