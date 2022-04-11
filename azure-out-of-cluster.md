@@ -71,7 +71,7 @@ To allocate external Azure resources to a Kubernetes concept, use the following 
 
 To use an alternative or existing Azure tag schema, you may supply these in your values.yaml under the `kubecostProductConfigs.labelMappingConfigs.<aggregation>_external_label` . Also be sure to set `kubecostProductConfigs.labelMappingConfigs.enabled = true`
 
-More on Azure tagging [here](https://docs.microsoft.com/en-us/azure/virtual-machines/tag-portal)
+For more details on what Azure resources support tagging, along with what resource type tags are available in cost reports, please review the official Microsoft documentation [here](https://docs.microsoft.com/en-us/azure/azure-resource-manager/management/tag-support).
 
 ## Troubleshooting and Debugging
 
