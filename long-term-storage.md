@@ -36,8 +36,8 @@ These values can be adjusted under the `thanos` block in `values-thanos.yaml` - 
 It's *important* to note that when running `helm install`, you must provide the base `values.yaml` followed by the override [values-thanos.yaml](https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/values-thanos.yaml). For example:
 
 ```shell
-helm install kubecost/cost-analyzer \
-    --name kubecost \
+helm upgrade kubecost kubecost/cost-analyzer \
+    --install \
     --namespace kubecost \
     -f values.yaml \
     -f values-thanos.yaml
