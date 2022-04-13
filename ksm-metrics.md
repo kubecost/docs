@@ -58,7 +58,24 @@ If there is a deployment of KSM outside of Kubecost, Prometheus deployments that
 emitKsmV1MetricsOnly: true 
 emitKsmV1Metrics: false
 ```
-to emit just the metrics kubecost requires from KSMV1 but none of the metrics not included in KSMV2 by default. The metrics we require not available in KSMv2 by default are: `kube_pod_owner`, `kube_node_labels`, `kube_pod_labels`, and `kube_node_status_capacity_*`. These will be emitted by kubecost in the above configuration.
+to reduce the emission of metrics that overlap with metrics provided by KSM v2. For a code reference, see [here](https://github.com/kubecost/cost-model/blob/0a0793ec040013fe44c058ff37f032449a2f1191/pkg/metrics/kubemetrics.go#L110-L123). The metrics that will still be emitted include:
+
+Node metrics ([code ref](https://github.com/kubecost/cost-model/blob/0a0793ec040013fe44c058ff37f032449a2f1191/pkg/metrics/nodemetrics.go#L30-L57))
+- `kube_node_status_capacity`
+- `kube_node_status_capacity_memory_bytes`
+- `kube_node_status_capacity_cpu_cores`
+- `kube_node_status_allocatable`
+- `kube_node_status_allocatable_memory_bytes`
+- `kube_node_status_allocatable_cpu_cores`
+- `kube_node_labels`
+- `kube_node_status_condition`
+
+Namespace metrics ([code ref](https://github.com/kubecost/cost-model/blob/0a0793ec040013fe44c058ff37f032449a2f1191/pkg/metrics/namespacemetrics.go#L121-L129))
+- `kube_namespace_labels`
+
+Pod metrics ([code ref](https://github.com/kubecost/cost-model/blob/0a0793ec040013fe44c058ff37f032449a2f1191/pkg/metrics/podlabelmetrics.go#L51-L60))
+- `kube_pod_labels`
+- `kube_pod_owner`
 
 Edit this doc on [Github](https://github.com/kubecost/docs/blob/main/ksm-metrics.md)
 
