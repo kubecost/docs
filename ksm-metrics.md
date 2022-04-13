@@ -58,7 +58,7 @@ If there is a deployment of KSM outside of Kubecost, Prometheus deployments that
 emitKsmV1MetricsOnly: true 
 emitKsmV1Metrics: false
 ```
-to emit just the metrics kubecost requires from KSMV1 but none of the metrics not included in KSMV2 by default. The metrics we require not available in KSMv2 by default are: `kube_node_lables`, `kube_pod_labels`, and `kube_node_status_capacity_*`. These will be emitted by kubecost in the above configuration.
+to emit just the metrics kubecost requires from KSMV1 but none of the metrics not included in KSMV2 by default. The metrics we require not available in KSMv2 by default are: `kube_pod_owner`, `kube_node_labels`, `kube_pod_labels`, and `kube_node_status_capacity_*`. These will be emitted by kubecost in the above configuration.
 
 Edit this doc on [Github](https://github.com/kubecost/docs/blob/main/ksm-metrics.md)
 
