@@ -23,9 +23,11 @@ for prod-x.xx.x. [Latest releases can be found here](https://github.com/kubecost
 - prom/prometheus:v2.31.1
 - prom/node-exporter:v0.18.1
 - prom/alertmanager:v0.23.0
-- grafana/grafana:8.3.2
 - jimmidyson/configmap-reload:v0.7.1
 - kiwigrid/k8s-sidecar:1.15.4 (can be optional if not using Grafana sidecar)
+
+### Prometheus - Optional
+- grafana/grafana:8.3.2
 
 ### Thanos - Enterprise/Durable Storage*
 - thanosio/thanos:v0.24.0

@@ -11,8 +11,12 @@ Disable product caching with the following parameters:
 kubecostModel.warmCache=false kubecostModel.warmSavingsCache=false
 kubecostModel.etl=false
 ```
-Note: disabling these has UI performance implications
-Disable grafana by setting `global.grafana.enabled=false && global.grafana.proxy=false`
+
+Disable grafana by setting
+
+```
+global.grafana.enabled=false && global.grafana.proxy=false
+```
 
 When using durable storage…
 
