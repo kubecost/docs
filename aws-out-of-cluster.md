@@ -50,6 +50,8 @@ If a resource has a label with the same name as an account-level tag, the resour
 
 Modifications incurred on account-level tags may take several hours to update on Kubecost. Note that upon such a modification, historical data going back 15 days will be updated to contain the new tag values.
 
+Your AWS account will need to support the `organizations:ListAccounts` and `organizations:ListTagsForResource` policies to benefit from this feature.
+
 ## Having issues?
 
 
