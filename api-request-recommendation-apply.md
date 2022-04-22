@@ -4,18 +4,18 @@
 
 The "Apply" API for request recommendations takes Kubecost's calculated
 [container request recommendations](./api-request-right-sizing.md) and applies
-them to your cluster. This allows you to instantly optimize resource allocation
-across your entire cluster, without fiddling with excessive YAML or arcane
-`kubectl` commands.
+them to your cluster. 
+
+This document is an API reference/spec. You can find the feature how-to guide
+[here](./guide-one-click-request-sizing.md).
 
 ## Requirements
 
-For the Apply APIs to be available, you must have Kubecost's Cluster Controller
-[enabled](./controller.md). Cluster Controller contains Kubecost's automation
-features, and thus has write permission to certain resources on your cluster. You
-don't have to set up the in-cluster secret for a cloud provider service account
-if you only want the 1-click request sizing "Apply" APIs, described in this doc,
-to be available.
+You must have Kubecost's Cluster Controller [enabled](./controller.md). Cluster
+Controller contains Kubecost's automation features (including the APIs described
+in this document), and thus has write permission to certain resources on your
+cluster. Again, see the [how-to guide for 1-click request
+sizing](./guide-one-click-request-sizing.md) for setup instructions.
 
 ## APIs
 
