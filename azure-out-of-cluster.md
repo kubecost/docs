@@ -22,6 +22,7 @@ The values needed to provide access to the Azure Storage Account where cost data
 * `<STORAGE_ACCOUNT_NAME>` is the name of the Storage account where the exported CSV is being stored.
 * `<STORE_ACCESS_KEY>` can be found by selecting the “Access Keys” option from the navigation sidebar then selecting “Show Keys”. Using either of the two keys will work. 
 * `<REPORT_CONTAINER_NAME>` is the name that you choose for the exported cost report when you set it up. This is the name of the container where the CSV cost reports are saved in your Storage account. 
+* `<AZURE_CONTAINER_PATH>` is an optional value which should be used if there is more than one billing report that is exported to the configured container. The path provided should be have only one billing export because kubecost will retrieve the most recent billing report for a given month found within the path.
 * `<AZURE_CLOUD>` is an optional value which denotes the cloud where the storage account exist, possible values are `public` and `gov`. The default is `public`.
 
 With these values in hand, you can now provide them to Kubecost to allow access to the Azure Storage API.
@@ -36,6 +37,7 @@ with the following format:
   "azureStorageAccount": "<STORAGE_ACCOUNT_NAME>",
   "azureStorageAccessKey": "<STORE_ACCESS_KEY>",
   "azureStorageContainer": "<REPORT_CONTAINER_NAME>",
+  "azureContainerPath": "<AZURE_CONTAINER_PATH>",
   "azureCloud": "<AZURE_CLOUD>"
 }
 ```
