@@ -32,4 +32,4 @@ Contact us via email (<support@kubecost.com>) or join us on [Slack](https://join
 
 Edit this doc on [GitHub](https://github.com/kubecost/docs/blob/main/index.md)
 
-<!--- {"article":"4407595950359","section":"4402815656599","permissiongroup":"1500001277122"} --->
+<!--- {"article":"4407595950359","section":"4402815636375","permissiongroup":"1500001277122"} --->
