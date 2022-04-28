@@ -29,4 +29,5 @@ The [Cluster Health](/alerts.md#type-cluster-health) alert is based on a thresho
 
 Edit this doc on [GitHub](https://github.com/kubecost/docs/blob/main/cluster-health-score.md)
 
-<!--- {"article":"","section":"4402815656599","permissiongroup":"1500001277122"} --->
+
+<!--- {"article":"5748367035159","section":"4402815656599","permissiongroup":"1500001277122"} --->
