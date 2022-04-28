@@ -309,7 +309,7 @@ $ curl http://localhost:9090/model/allocation \
   ]
 }
 ```
-Allocation data for today, aggregated by annotation. See to [Enabling Annotation Emission](https://github.com/kubecost/docs/blob/main/annotations.md) enable annotation emision.
+Allocation data for today, aggregated by annotation. See [Enabling Annotation Emission](https://github.com/kubecost/docs/blob/main/annotations.md) to enable annotations.
 ```
 $ curl http://localhost:9090/model/allocation \
   -d window=today \
