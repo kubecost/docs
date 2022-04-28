@@ -1,4 +1,5 @@
-# Guide: 1-click request sizing
+Guide: 1-click request sizing
+=============================
 
 :warning: This feature is in a pre-release (alpha/beta) state. It has limitations. Please read the documentation carefully. :warning:
 
@@ -6,7 +7,7 @@
 resource
 requests](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#requests-and-limits)
 in your cluster based on Kubecost's sizing
-[recommendations](./api-request-right-sizing.md). This allows you to instantly
+[recommendations](https://github.com/kubecost/docs/blob/main/api-request-right-sizing.md). This allows you to instantly
 optimize resource allocation across your entire cluster, without fiddling with
 excessive YAML or arcane `kubectl` commands. You can easily eliminate resource
 over-allocation in your cluster, which paves the way for vast savings via
@@ -48,14 +49,16 @@ helm upgrade \
 
 3. Click the "Automatically implement recommendations" button.
 
-   ![](./images/one-click-request-sizing/configured-with-button.png)
+   ![](https://raw.githubusercontent.com/kubecost/docs/main/images/one-click-request-sizing/configured-with-button.png)
 
 4. Confirm!
 
-   ![](./images/one-click-request-sizing/confirm-dialog.png)
+   ![](https://raw.githubusercontent.com/kubecost/docs/main/images/one-click-request-sizing/confirm-dialog.png)
 
 ## Technical details
 
 If you want to learn more about the APIs that power 1-click request sizing,
 including their limitations, see [the API
-documentation](./api-request-recommendation-apply.md).
+documentation](https://github.com/kubecost/docs/blob/main/api-request-recommendation-apply.md).
+
+<!--- {"article":"","section":"4402815656599","permissiongroup":"1500001277122"} --->
