@@ -1,8 +1,15 @@
 Cluster Controller
 ==================
 
-Kubecost cluster controller enables actions like automated cluster scaledown and 1-click cluster resize. 
-This document shows you how to setup and enable this functionality in the Kubecost product. 
+Kubecost's cluster controller contains contains Kubecost's automation features,
+and thus has write permission to certain resources on your cluster.
+
+Cluster controller enables actions like:
+- automated cluster scaledown
+- 1-click cluster right-sizing
+- [1-click request right-sizing](./guide-one-click-request-sizing.md)
+
+This document shows you how to setup and enable this functionality in the Kubecost product.
 
 Note: Cluster controller supports GKE and EKS clusters and is currently in **ALPHA**.
 

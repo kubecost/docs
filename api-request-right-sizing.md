@@ -1,7 +1,7 @@
-Container Request Right-Sizing API
+Container Request Right-Sizing Recommendation API
 ==================================
 
-The container request right-sizing API provides recommendations for
+The container request right-sizing recommendation API provides recommendations for
 [container resource requests](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/)
 based on configurable parameters and estimates the savings from implementing those recommendations
 on a per-container, per-controller level. Of course, if the cluster-level resources stay static then
