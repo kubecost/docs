@@ -61,4 +61,5 @@ If you want to learn more about the APIs that power 1-click request sizing,
 including their limitations, see [the API
 documentation](https://github.com/kubecost/docs/blob/main/api-request-recommendation-apply.md).
 
-<!--- {"article":"","section":"4402815656599","permissiongroup":"1500001277122"} --->
+
+<!--- {"article":"5843816284823","section":"4402815656599","permissiongroup":"1500001277122"} --->
