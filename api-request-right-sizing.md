@@ -62,12 +62,14 @@ used an avg and max of 1 core.
 Pod 2 ran for 20 minutes [t=45min, t=60min], allocated 3 cores, and
 used an avg and max of 2 cores.
 
+```
 |   ---      | Pod 1 exists
 |         ---| Pod 2 exists
 |____________|
   time ->
 |            |
 0 min        60min
+```
 
 Window = [0min, 60min]
 
