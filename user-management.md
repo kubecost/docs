@@ -1,12 +1,12 @@
 User Management - SSO/SAML/RBAC
 ===============================
 
-Kubecost support access control/Single Sign On (SSO) with SAML 2.0. Kubecost works with most identity providers, including Okta, Auth0, AzureAD, PingID, and KeyCloak.
+Kubecost supports access control/Single Sign On (SSO) with SAML 2.0. Kubecost works with most identity providers including Okta, Auth0, AzureAD, PingID, and KeyCloak.
 
 High-level access control options:
 
 * **User authentication** SSO provides a simple mechanism to restrict application access internally and externally
-* **Custom access roles** Limit users to view a set of namespaces, labels, cluster, or other aggregations
+* **Custom access roles** Limit users based on attributes or group membership to view a set of namespaces, labels, cluster, or other aggregations
 * **Pre-defined user roles**
     * Admin: has permissions to manage users, configure model inputs, and application settings.
     * Viewer: user role with read-only permission
