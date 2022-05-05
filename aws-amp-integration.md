@@ -122,7 +122,7 @@ To verify that the integration is set up, check that the `Prometheus Status` sec
 
 Have a look at the [Custom Prometheus integration troubleshooting guide](https://docs.kubecost.com/custom-prom.html#troubleshooting-issues) if you run into any errors while setting up the integration. You're also welcome to [reach out to us on Slack](https://join.slack.com/t/kubecost/shared_invite/enQtNTA2MjQ1NDUyODE5LWFjYzIzNWE4MDkzMmUyZGU4NjkwMzMyMjIyM2E0NGNmYjExZjBiNjk1YzY5ZDI0ZTNhZDg4NjlkMGRkYzFlZTU) if you require further assistance.
 
-Edit this doc on [Github](https://github.com/kubecost/docs/blob/main/aws-amp-integration.md)
+Edit this doc on [GitHub](https://github.com/kubecost/docs/blob/main/aws-amp-integration.md)
 
 
 <!--- {"article":"4409859798679","section":"4402829036567","permissiongroup":"1500001277122"} --->

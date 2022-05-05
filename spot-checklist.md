@@ -125,6 +125,6 @@ scheduling problems, especially if capacity is low and spinning up a new node
 takes too long. In the second case, fewer pods are forced to be rescheduled if a
 reclaim event occurs, thus lowering the likelihood of scheduling problems.
 
-Edit this doc on [Github](https://github.com/kubecost/docs/blob/main/spot-checklist.md)
+Edit this doc on [GitHub](https://github.com/kubecost/docs/blob/main/spot-checklist.md)
 
 <!--- {"article":"4407595980311","section":"4402815656599","permissiongroup":"1500001277122"} --->

@@ -105,6 +105,6 @@ Cost allocation metrics are available for both in-cluster and out-of-cluster res
 | External Cost | The cost of out-of-cluster resources allocated to this object. For example, S3 buckets allocated to a particular Kubernetes deployment. Prices are based on cloud billing data and require a key. This feature is currently available for AWS ([learn more](http://docs.kubecost.com/aws-out-of-cluster.html)), GCP ([learn more](http://docs.kubecost.com/gcp-out-of-cluster.html)) and Azure ([learn more](https://github.com/kubecost/docs/blob/main/azure-out-of-cluster.md)). |
 
 
-Edit this doc on [Github](https://github.com/kubecost/docs/blob/main/cost-allocation.md)
+Edit this doc on [GitHub](https://github.com/kubecost/docs/blob/main/cost-allocation.md)
 
 <!--- {"article":"4407601807383","section":"4402829033367","permissiongroup":"1500001277122"} --->

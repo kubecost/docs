@@ -16,6 +16,6 @@ kubectl cp -c cost-model <untarred-results-of-script> <kubecost-namespace>/<kube
 
 Contact support (support@kubecost.com) if you need additional help
 
-Edit this doc on [Github](https://github.com/kubecost/docs/blob/main/etl-backup.md)
+Edit this doc on [GitHub](https://github.com/kubecost/docs/blob/main/etl-backup.md)
 
 <!--- {"article":"4407601811095","section":"4402815656599","permissiongroup":"1500001277122"} --->

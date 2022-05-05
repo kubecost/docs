@@ -7,6 +7,6 @@ You can even disable all internet egress in our namespace/product if desired, mo
 
 For more information on Kubecost privacy and security, please reach out to us at <support@kubecost.com>.
 
-Edit this doc on [Github](https://github.com/kubecost/docs/blob/main/security.md)
+Edit this doc on [GitHub](https://github.com/kubecost/docs/blob/main/security.md)
 
 <!--- {"article":"4407595978903","section":"4402829033367","permissiongroup":"1500001277122"} --->

@@ -12,6 +12,6 @@ Alternative install options:
 * Lastly, you can deploy the open source cost-model directly as a pod. This install path provides a subset of Kubecost functionality and is available [here](https://github.com/kubecost/cost-model/blob/master/deploying-as-a-pod.md). Specifically, this install path deploys the underlying cost allocation model without UI or enterprise functionality, e.g. SAML support. 
 
 
-Edit this doc on [Github](https://github.com/kubecost/docs/blob/main/install.md)
+Edit this doc on [GitHub](https://github.com/kubecost/docs/blob/main/install.md)
 
 <!--- {"article":"4407601821207","section":"4402815636375","permissiongroup":"1500001277122"} --->

@@ -172,6 +172,6 @@ Efficiency targets can depend on the SLAs of the application-- see our notes on 
 
 
 
-Edit this doc on [Github](https://github.com/kubecost/docs/blob/main/getting-started.md)
+Edit this doc on [GitHub](https://github.com/kubecost/docs/blob/main/getting-started.md)
 
 <!--- {"article":"4407595947799","section":"4402815636375","permissiongroup":"1500001277122"} --->

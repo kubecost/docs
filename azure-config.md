@@ -49,6 +49,6 @@ helm install kubecost ./cost-analyzer -n kubecost --set kubecostProductConfigs.a
 <img width="1792" alt="Screen Shot 2020-12-07 at 12 32 24 PM" src="https://user-images.githubusercontent.com/453512/101402781-12156880-3889-11eb-86ca-55111d36fe14.png">
 
 
-Edit this doc on [Github](https://github.com/kubecost/docs/blob/main/azure-config.md)
+Edit this doc on [GitHub](https://github.com/kubecost/docs/blob/main/azure-config.md)
 
 <!--- {"article":"4407595934871","section":"4402815682455","permissiongroup":"1500001277122"} --->

@@ -184,6 +184,6 @@ Example uses:
 
 `http://localhost:9090/model/etl/status`
 
-Edit this doc on [Github](https://github.com/kubecost/docs/blob/main/cloud-integration.md)
+Edit this doc on [GitHub](https://github.com/kubecost/docs/blob/main/cloud-integration.md)
 
 <!--- {"article":"4412369153687","section":"4402829033367","permissiongroup":"1500001277122"} --->

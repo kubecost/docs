@@ -162,6 +162,6 @@ That’s it! By now, you should have successfully completed the Kubecost integra
 
 Optionally, you can also add our [Kubecost Community Dashboard](https://grafana.com/grafana/dashboards/15714) to your Grafana Cloud organization to visualize your cloud costs in Grafana.
 
-Edit this doc on [Github](https://github.com/kubecost/docs/blob/main/grafana-cloud-integration.md)
+Edit this doc on [GitHub](https://github.com/kubecost/docs/blob/main/grafana-cloud-integration.md)
 
 <!--- {"article":"5699967551639","section":"4402815636375","permissiongroup":"1500001277122"} --->

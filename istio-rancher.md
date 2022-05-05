@@ -175,7 +175,7 @@ spec:
 After creating the virtual service, Kubcost should be accessible at the Url
 `http(s)://${gateway}/kubecost/`.
 
-Edit this doc on [Github](https://github.com/kubecost/docs/blob/main/istio-rancher.md)
+Edit this doc on [GitHub](https://github.com/kubecost/docs/blob/main/istio-rancher.md)
 
 
 <!--- {"article":"4408175613719","section":"4402815636375","permissiongroup":"1500001277122"} --->
