@@ -38,7 +38,7 @@ There are two options to configure asset prices in your on-premise Kubernetes en
 - *Advanced pipeline:* this method allows each individual asset in your environment to have a unique price. This leverages the Kubecost custom CSV pipeline which is available on Enterprise plans. Contact us at support@kubecost.com to learn more.
 
 
-Edit this doc on [Github](https://github.com/kubecost/docs/blob/main/air-gapped.md)
+Edit this doc on [GitHub](https://github.com/kubecost/docs/blob/main/air-gapped.md)
 
 <!--- {"article":"4407601795863","section":"4402815636375","permissiongroup":"1500001277122"} --->
 

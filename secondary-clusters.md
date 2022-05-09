@@ -37,7 +37,7 @@ For reference, here’s a sample list of helm set command line arguments when ru
 
 There are potentially other configuration options based on the specifics of different deployment requirements. Reach out to team@kubecost.com if you have any questions!
 
-Edit this doc on [Github](https://github.com/kubecost/docs/blob/main/secondary-clusters.md)
+Edit this doc on [GitHub](https://github.com/kubecost/docs/blob/main/secondary-clusters.md)
 
 
 <!--- {"article":"4423256582551","section":"4402829033367","permissiongroup":"1500001277122"} --->

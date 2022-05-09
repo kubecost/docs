@@ -118,7 +118,7 @@ Thanks for your help improving the project!
 
 ### Where can I go for help?
 
-If you need help, you can ask questions on our mailing list, Slack community , or Github issues [list any other communication platforms that your project uses].
+If you need help, you can ask questions on our mailing list, Slack community , or GitHub issues [list any other communication platforms that your project uses].
 
 ### What does the code of conduct mean for me?
 

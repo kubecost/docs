@@ -35,6 +35,6 @@ You can also optionally disable `thanos.store`, `thanos.query` and `thanos.query
 
 4. Follow the same verification steps available [here](https://github.com/kubecost/docs/blob/main/long-term-storage.md#verify-thanos).  
 
-Edit this doc on [Github](https://github.com/kubecost/docs/blob/main/federated-clusters.md)
+Edit this doc on [GitHub](https://github.com/kubecost/docs/blob/main/federated-clusters.md)
 
 <!--- {"article":"4407595946135","section":"4402815636375","permissiongroup":"1500001277122"} --->

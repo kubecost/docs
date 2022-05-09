@@ -134,6 +134,6 @@ For Option 2, ensure that the following flags are set in your Operator deploymen
 1. sidecar.dashboards.enabled = true  
 2. sidecar.dashboards.searchNamespace isn't restrictive, use `ALL` if Kubecost runs in another namespace.
 
-Edit this doc on [Github](https://github.com/kubecost/docs/blob/main/custom-prom.md)
+Edit this doc on [GitHub](https://github.com/kubecost/docs/blob/main/custom-prom.md)
 
 <!--- {"article":"4407595941015","section":"4402815636375","permissiongroup":"1500001277122"} --->

@@ -138,6 +138,6 @@ thanos:
       <b>- "kubecost-thanos-store-grpc.kubecost:10901"</b>
 </pre>
 
-Edit this doc on [Github](https://github.com/kubecost/docs/blob/main/long-term-storage.md)
+Edit this doc on [GitHub](https://github.com/kubecost/docs/blob/main/long-term-storage.md)
 
 <!--- {"article":"4407595964695","section":"4402815636375","permissiongroup":"1500001277122"} --->

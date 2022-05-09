@@ -30,6 +30,6 @@ EMIT_POD_ANNOTATIONS_METRIC="true"
 EMIT_NAMESPACE_ANNOTATIONS_METRIC="true"
 ```
 
-Edit this doc on [Github](https://github.com/kubecost/docs/blob/main/annotations.md)
+Edit this doc on [GitHub](https://github.com/kubecost/docs/blob/main/annotations.md)
 
 <!--- {"article":"4407595918231","section":"4402815656599","permissiongroup":"1500001277122"} --->

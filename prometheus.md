@@ -20,6 +20,6 @@ If you're unable to connect, confirm that the Prometheus server pod is in a `Run
 
 __3. Input your desired query + Execute__
 
-Edit this doc on [Github](https://github.com/kubecost/docs/blob/main/prometheus.md)
+Edit this doc on [GitHub](https://github.com/kubecost/docs/blob/main/prometheus.md)
 
 <!--- {"article":"4407601824279","section":"4402815656599","permissiongroup":"1500001277122"} --->

@@ -61,6 +61,6 @@ Your AWS account will need to support the `organizations:ListAccounts` and `orga
 * Finally, review pod logs from the `cost-model` container in the `cost-analyzer` pod and look for auth errors or Athena query results. 
 
 
-Edit this doc on [Github](https://github.com/kubecost/docs/blob/main/aws-out-of-cluster.md)
+Edit this doc on [GitHub](https://github.com/kubecost/docs/blob/main/aws-out-of-cluster.md)
 
 <!--- {"article":"4407596810519","section":"4402829036567","permissiongroup":"1500001277122"} --->

@@ -24,6 +24,6 @@ Additional [troubleshooting guide](https://docs.google.com/document/d/1cgns9_jHQ
 
 Contact us via email (<support@kubecost.com>) or join us on [Slack](https://join.slack.com/t/kubecost/shared_invite/enQtNTA2MjQ1NDUyODE5LWFjYzIzNWE4MDkzMmUyZGU4NjkwMzMyMjIyM2E0NGNmYjExZjBiNjk1YzY5ZDI0ZTNhZDg4NjlkMGRkYzFlZTU) if you have questions!
 
-Edit this doc on [Github](https://github.com/kubecost/docs/blob/main/user-management.md)
+Edit this doc on [GitHub](https://github.com/kubecost/docs/blob/main/user-management.md)
 
 <!--- {"article":"4407595985047","section":"4402815636375","permissiongroup":"1500001277122"} --->

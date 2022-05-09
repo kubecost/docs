@@ -52,7 +52,7 @@ This is a Title
 
 <h3 id="docs-links">Links</h3>
 
-To link to another doc use a Github link: `https://github.com/kubecost/docs/blob/main/*.md`
+To link to another doc use a GitHub link: `https://github.com/kubecost/docs/blob/main/*.md`
 
 ```
 You can get the latest staging build by following the [install steps](https://github.com/kubecost/docs/blob/main/staging.md)
@@ -60,7 +60,7 @@ You can get the latest staging build by following the [install steps](https://gi
 
 <h3 id="docs-images">Images</h3>
 
-Use a direct link to the Github image within the kubecost/docs repo or an alternative host such as GCS or S3. 
+Use a direct link to the GitHub image within the kubecost/docs repo or an alternative host such as GCS or S3. 
 
 ```
 ![Add key dialog](https://raw.githubusercontent.com/kubecost/docs/main/add-key-dialog.png)
@@ -104,7 +104,7 @@ The `main` branch of the kubecost/docs repo is pulled and documents on guide.kub
 
 <h3 id="doc-create">Create a New Doc</h3>
 
-To create a new document submit a pull request including a markdown file and any image assets to the `main` branch of the kubecost/docs repo. After review and merge on Github a new document will be created on guide.kubecost.com once the build and deploy phase has completed. The metadata string of the new doc will be updated automatically on github with an `article` and `section`,`permissiongroup` info. 
+To create a new document submit a pull request including a markdown file and any image assets to the `main` branch of the kubecost/docs repo. After review and merge on GitHub a new document will be created on guide.kubecost.com once the build and deploy phase has completed. The metadata string of the new doc will be updated automatically on github with an `article` and `section`,`permissiongroup` info. 
 
 To create a new document in a specific section provide a metadata string with a `section` and `permissiongroup` and `article` as a blank string. Example:
 
@@ -128,11 +128,11 @@ No metadata? This will create a new doc in the "General" section!
 
 <h3 id="doc-update">Update an Existing Doc</h3>
 
-Submit changes to the file in a pull request to the `main` branch of the kubecost/docs repo. After review and merge on Github the document will be updated on guide.kubecost.com once the build and deploy phase has completed.
+Submit changes to the file in a pull request to the `main` branch of the kubecost/docs repo. After review and merge on GitHub the document will be updated on guide.kubecost.com once the build and deploy phase has completed.
 
-<h3 id="doc-gg">Guide Markdown vs Github Markdown</h3>
+<h3 id="doc-gg">Guide Markdown vs GitHub Markdown</h3>
 
-Providing a seemless experience for consumers of the kubecost documentation Github and guide.kubecost.com is a goal of this project. Most of the supported formatting and features of Github flavored markdown should translate to guide.kubecost.com. 
+Providing a seemless experience for consumers of the kubecost documentation GitHub and guide.kubecost.com is a goal of this project. Most of the supported formatting and features of GitHub flavored markdown should translate to guide.kubecost.com. 
 
 
 <h2 id="overview">Markdown Overview</h2>
@@ -956,6 +956,6 @@ Markdown provides backslash escapes for the following characters:
     !   exclamation mark
 
 
-Edit this doc on [Github](https://github.com/kubecost/docs/blob/main/markdown.md)
+Edit this doc on [GitHub](https://github.com/kubecost/docs/blob/main/markdown.md)
 
 <!--- {"article":"4407604999447","section":"4402815656599","permissiongroup":"1500001277122"} --->
