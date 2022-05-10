@@ -1,7 +1,7 @@
 User Management - SSO/SAML/RBAC*
 ================================
 
-**Note that SSO and RBAC capabilities are only included with a Kubecost Enterprise Subscription.**
+__*Note that SSO and RBAC capabilities are only included with a Kubecost Enterprise Subscription.__
 
 Kubecost supports access control/Single Sign On (SSO) with SAML 2.0. Kubecost works with most identity providers including Okta, Auth0, AzureAD, PingID, and KeyCloak.
 
