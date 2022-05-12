@@ -5,7 +5,7 @@ Kubecost provides the ability to allocate out of clusters costs, e.g. Cloud SQL 
 
 The following guide provides the steps required for allocating out-of-cluster costs.
 
->A github repository with sample files used in below instructions can be found here: [https://github.com/kubecost/poc-common-configurations/tree/main/gcp](https://github.com/kubecost/poc-common-configurations/tree/main/gcp)
+> A github repository with sample files used in below instructions can be found here: [https://github.com/kubecost/poc-common-configurations/tree/main/gcp](https://github.com/kubecost/poc-common-configurations/tree/main/gcp)
 
 ## Step 1: Enable billing data export
 
