@@ -5,7 +5,7 @@ Kubecost pulls asset prices from the public AWS pricing API by default. To have 
 
 Your user will need necessary permissions to create the Cost and Usage Report, add IAM credentials for Athena and S3. Optional permission is the ability to add and execute CloudFormation templates. Note we do not require root access in the AWS account.
 
-A github repository with sample files required in below instructions can be found here: [https://github.com/kubecost/poc-common-configurations/tree/main/aws](https://github.com/kubecost/poc-common-configurations/tree/main/aws)
+>A github repository with sample files used in below instructions can be found here: [https://github.com/kubecost/poc-common-configurations/tree/main/aws](https://github.com/kubecost/poc-common-configurations/tree/main/aws)
 
 # Cost and Usage Report Integration
 
