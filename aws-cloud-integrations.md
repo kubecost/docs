@@ -5,6 +5,7 @@ Kubecost pulls asset prices from the public AWS pricing API by default. To have 
 
 Your user will need necessary permissions to create the Cost and Usage Report, add IAM credentials for Athena and S3. Optional permission is the ability to add and execute CloudFormation templates. Note we do not require root access in the AWS account.
 
+A github repository with sample files required in below instructions can be found here: [https://github.com/kubecost/poc-common-configurations/tree/main/aws](https://github.com/kubecost/poc-common-configurations/tree/main/aws)
 
 # Cost and Usage Report Integration
 
@@ -12,7 +13,7 @@ Your user will need necessary permissions to create the Cost and Usage Report, a
 Follow these steps to set up a Cost and Usage Report. Be sure to enable Resource Ids and Athena integration when creating the CUR.
 [https://docs.aws.amazon.com/cur/latest/userguide/cur-create.html](https://docs.aws.amazon.com/cur/latest/userguide/cur-create.html)
 
-> Note the name of the bucket you create for CUR data. This will be used in the following step. 
+> Note the name of the bucket you create for CUR data. This will be used in the following step.
 
 > If you believe you have the correct permissions, but cannot access the Billing and Cost Management page, have the owner of your organization's root account follow these instructions [https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/control-access-billing.html](https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/control-access-billing.html#ControllingAccessWebsite-Activate)
 
@@ -35,8 +36,8 @@ Once Athena is set up with the CUR, you will need to create a new S3 bucket for 
 
 ## Step 3: Setting up IAM permissions
 
-### Add via CloudFormation: 
-Kubecost offers a set of CloudFormation templates to help set your IAM roles up. If you’re new to provisioning IAM roles, we suggest downloading our templates and using the CloudFormation wizard to set these up: [https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cfn-console-create-stack.html](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cfn-console-create-stack.html). 
+### Add via CloudFormation:
+Kubecost offers a set of CloudFormation templates to help set your IAM roles up. If you’re new to provisioning IAM roles, we suggest downloading our templates and using the CloudFormation wizard to set these up: [https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cfn-console-create-stack.html](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cfn-console-create-stack.html).
 Download template files from the URLs provided below and upload them as the stack template in the Creating a stack > Selecting a stack template step.
 
 <details>
@@ -165,8 +166,8 @@ Download template files from the URLs provided below and upload them as the stac
                     &quot;arn:aws:s3:::aws-athena-query-results-*&quot;
                  ]
               },
-	   
-	      
+
+
               {
                  &quot;Sid&quot;: &quot;S3ReadAccessToAwsBillingData&quot;,
                  &quot;Effect&quot;: &quot;Allow&quot;,
@@ -368,7 +369,7 @@ Now that the policies have been created, we will need to attach those policies t
 
 <details>
 	<summary>Attach via Service Key on Kubecost frontend</summary>
-	
+
 <ul>
 <li>Navigate to <a href="https://console.aws.amazon.com/iam">https://console.aws.amazon.com/iam</a> Access Management &gt; Users. Find the Kubecost User and select Security Credentials &gt; Create Access Key. Note the Access key ID and Secret access key.</li>
 <li>You can add the Access key ID and Secret access key on /settings.html  &gt; External Cloud Cost Configuration (AWS) &gt; Update  and setting Service key name to <strong>Access key ID</strong> and Service key secret to <strong>Secret access key</strong></li>
@@ -396,7 +397,7 @@ Now that the policies have been created, we will need to attach those policies t
 
 These values can either be set from the kubecost frontend or via .Values.kubecostProductConfigs in the helm chart. Note that if you set any kubecostProductConfigs from the helm chart, all changes via the frontend will be overridden on pod restart.
 
-* `athenaProjectID` e.g. "530337586277" # The AWS AccountID where the Athena CUR is. 
+* `athenaProjectID` e.g. "530337586277" # The AWS AccountID where the Athena CUR is.
 * `athenaBucketName` An S3 bucket to store Athena query results that you’ve created that Kubecost has permission to access
     * The name of the bucket should match `s3://aws-athena-query-results-*`, so the IAM roles defined above will automatically allow access to it
     * The bucket can have a Canned ACL of `Private` or other permissions as you see fit.
@@ -412,10 +413,10 @@ These values can either be set from the kubecost frontend or via .Values.kubecos
 
 ## Troubleshooting
 
-Once you've integrated with the CUR, you can visit /diagnostics.html in Kubecost to determine if Kubecost has been successfully integrated with your CUR. If any problems are detected, you will see a yellow warning sign under the cloud provider permissions status header: 
+Once you've integrated with the CUR, you can visit /diagnostics.html in Kubecost to determine if Kubecost has been successfully integrated with your CUR. If any problems are detected, you will see a yellow warning sign under the cloud provider permissions status header:
 <img width="1792" alt="Screen Shot 2020-12-06 at 9 37 40 PM" src="https://user-images.githubusercontent.com/453512/101316930-587bb080-3812-11eb-8bbc-694a894314d8.png">
 
-You can check pod logs for authentication errors by running 
+You can check pod logs for authentication errors by running
 `kubectl get pods -n <namespace>`
 `kubectl logs <kubecost-pod-name> -n <namespace> -c cost-model`
 
@@ -451,9 +452,9 @@ These values can either be set from the kubecost frontend or via .Values.kubecos
  `awsSpotDataBucket` the configured bucket for the spot data feed
 
  `awsSpotDataPrefix` optional configured prefix for your spot data feed bucket
- 
+
  `spotLabel` optional Kubernetes node label name designating whether a node is a spot node. Used to provide pricing estimates until exact spot data becomes available from the CUR
- 
+
  `spotLabelValue` optional Kubernetes node label value designating a spot node. Used to provide pricing estimates until exact spot data becomes available from the CUR. For example, if your spot nodes carry a label `lifecycle:spot`, then the spotLabel would be "lifecycle" and the spotLabelValue would be "spot"
 
 ## Summary and Pricing
@@ -462,16 +463,16 @@ AWS services used here are:
 
   - [Athena](https://aws.amazon.com/athena/pricing/)
   - [S3](https://aws.amazon.com/s3/pricing/)
-  - [EC2](https://aws.amazon.com/ec2/pricing/) 
-  
+  - [EC2](https://aws.amazon.com/ec2/pricing/)
+
   Kubecost's cost-model requires roughly 2 CPU and 10GB of RAM per 50,000 pods monitored. The backing Prometheus database requires roughly 2CPU and 25GB per million metrics ingested per minute. You can pick the ec2 instances necessary to run kubecost accordingly.
 
-  - [EBS](https://aws.amazon.com/ebs/pricing/) 
-  
+  - [EBS](https://aws.amazon.com/ebs/pricing/)
+
   Kubecost can write its cache to disk. Roughly 32 GB per 100,000 pods monitored is sufficient. (Optional-- our cache can exist in memory)
-  
+
   - [Cloudformation](https://aws.amazon.com/cloudformation/pricing/) (Optional-- manual IAM configuration or via Terraform is fine)
-  - [EKS](https://aws.amazon.com/eks/pricing/)  (Optional-- all k8s flavors are supported) 
+  - [EKS](https://aws.amazon.com/eks/pricing/)  (Optional-- all k8s flavors are supported)
 
 
 Edit this doc on [GitHub](https://github.com/kubecost/docs/blob/main/aws-cloud-integrations.md)
