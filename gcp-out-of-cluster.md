@@ -1,9 +1,11 @@
-GCP Out of Cluster
-==================
+GCP Cloud Integration
+=====================
 
 Kubecost provides the ability to allocate out of clusters costs, e.g. Cloud SQL instances and Cloud Storage buckets, back to Kubernetes concepts like namespace and deployment. All data remains on your cluster when using this functionality and is not shared externally. Read the [Cloud Integrations](https://github.com/kubecost/docs/blob/main/cloud-integration.md) documentation for more information on how Kubecost connects with Cloud Service Providers.
 
 The following guide provides the steps required for allocating out-of-cluster costs.
+
+A github repository with sample files required in below instructions can be found here: [https://github.com/kubecost/poc-common-configurations/tree/main/gcp](https://github.com/kubecost/poc-common-configurations/tree/main/gcp)
 
 ## Step 1: Enable billing data export
 
@@ -21,7 +23,7 @@ roles/compute.viewer
 roles/bigquery.dataViewer
 roles/bigquery.jobUser
 ```
-If you don't already have a GCP service account with the appropriate rights, you can run the following commands in your command line to generate and export one. Make sure your gcloud project is where your external costs are being run. 
+If you don't already have a GCP service account with the appropriate rights, you can run the following commands in your command line to generate and export one. Make sure your gcloud project is where your external costs are being run.
 
 ```sh
 export PROJECT_ID=$(gcloud config get-value project)
@@ -30,13 +32,13 @@ gcloud projects add-iam-policy-binding $PROJECT_ID --member serviceAccount:compu
 gcloud projects add-iam-policy-binding $PROJECT_ID --member serviceAccount:compute-viewer-kubecost@$PROJECT_ID.iam.gserviceaccount.com --role roles/bigquery.user
 gcloud projects add-iam-policy-binding $PROJECT_ID --member serviceAccount:compute-viewer-kubecost@$PROJECT_ID.iam.gserviceaccount.com --role roles/bigquery.dataViewer
 gcloud projects add-iam-policy-binding $PROJECT_ID --member serviceAccount:compute-viewer-kubecost@$PROJECT_ID.iam.gserviceaccount.com --role roles/bigquery.jobUser
-gcloud iam service-accounts keys create ./compute-viewer-kubecost-key.json --iam-account compute-viewer-kubecost@$PROJECT_ID.iam.gserviceaccount.com 
+gcloud iam service-accounts keys create ./compute-viewer-kubecost-key.json --iam-account compute-viewer-kubecost@$PROJECT_ID.iam.gserviceaccount.com
 ```
 
 You can then get your service account key to paste into the UI (be careful with this!):
 
 ```sh
- cat compute-viewer-kubecost-key.json 
+ cat compute-viewer-kubecost-key.json
 ```
 
 In Kubecost, navigate to the settings page and click "update" for the "External Cloud Cost Configuration (GCP)" setting, then follow the remaining instructions found at the "Add Key" link:
@@ -75,7 +77,7 @@ Daemonset:  "kubernetes_daemonset":  &lt;daemonset>
 Container:  "kubernetes_container":  &lt;container>
 </pre>
 
-To use an alternative or existing label schema for GCP cloud assets, you may supply these in your [values.yaml](https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/values.yaml) under the "kubecostProductConfigs.labelMappingConfigs.\<aggregation\>\_external_label" 
+To use an alternative or existing label schema for GCP cloud assets, you may supply these in your [values.yaml](https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/values.yaml) under the "kubecostProductConfigs.labelMappingConfigs.\<aggregation\>\_external_label"
 
 > Note: Google generates special labels for GKE resources (e.g. "goog-gke-node", "goog-gke-volume"). Values with these labels are excluded from out-of-cluster costs because Kubecost already includes them as in-cluster assets. Thus, to make sure all cloud assets are included, we recommend installing Kubecost on each cluster where insights into costs are required.
 

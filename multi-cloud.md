@@ -20,9 +20,9 @@ Follow steps #1-3 to set up and configure a CUR in our [guide](https://github.co
 
 ## Step #2 Create Cloud Integration Secret
 
-The secret should contain a file called cloud-integration.json with the following format
+The secret should contain a file called cloud-integration.json with the following format:
 
-```
+```json
 {
 "azure": [],
 "gcp": [],
@@ -32,10 +32,11 @@ The secret should contain a file called cloud-integration.json with the followin
 This Configuration supports multiple configurations per cloud provider simply add any number of cloud configuration objects to their respective arrays in the JSON file. The structure and required values for the configuration objects for each cloud provider are described below. Once you have filled in the configuration object use the command
 ```
 kubectl create secret generic <SECRET_NAME> --from-file=cloud-integration.json -n kubecost
-
 ```
 
 Once the secret is created, set .Values.kubecostProductConfigs.cloudIntegrationSecret to <SECRET_NAME> and upgrade Kubecost via Helm
+
+A Github repository with sample files required can be found here, just select the cloud provider you are configuring: [https://github.com/kubecost/poc-common-configurations/](https://github.com/kubecost/poc-common-configurations/)
 
 ### Azure
 The values needed to provide access to the Azure Storage Account where cost data is being exported can be found in the Azure portal in the Storage account where the cost data is being exported.
@@ -67,12 +68,12 @@ gcloud projects add-iam-policy-binding $PROJECT_ID --member serviceAccount:compu
 gcloud projects add-iam-policy-binding $PROJECT_ID --member serviceAccount:compute-viewer-kubecost@$PROJECT_ID.iam.gserviceaccount.com --role roles/bigquery.user
 gcloud projects add-iam-policy-binding $PROJECT_ID --member serviceAccount:compute-viewer-kubecost@$PROJECT_ID.iam.gserviceaccount.com --role roles/bigquery.dataViewer
 gcloud projects add-iam-policy-binding $PROJECT_ID --member serviceAccount:compute-viewer-kubecost@$PROJECT_ID.iam.gserviceaccount.com --role roles/bigquery.jobUser
-gcloud iam service-accounts keys create ./compute-viewer-kubecost-key.json --iam-account compute-viewer-kubecost@$PROJECT_ID.iam.gserviceaccount.com 
+gcloud iam service-accounts keys create ./compute-viewer-kubecost-key.json --iam-account compute-viewer-kubecost@$PROJECT_ID.iam.gserviceaccount.com
 You can then get your service account key to paste into the UI (be careful with this!):
 
 ```
 ```
- cat compute-viewer-kubecost-key.json 
+ cat compute-viewer-kubecost-key.json
 
 ```
 
@@ -91,7 +92,7 @@ Set these values into the following object and add it to the GCP array:
 ```
 
 ### AWS
-For each AWS Account that you would like to configure, create an Access Key for the Kubercost user who has access to the CUR. Navigate to https://console.aws.amazon.com/iam Access Management > Users. Find the Kubecost User and select Security Credentials > Create Access Key. Note the Access key ID and Secret access key.
+For each AWS Account that you would like to configure, create an Access Key for the Kubecost user who has access to the CUR. Navigate to https://console.aws.amazon.com/iam Access Management > Users. Find the Kubecost User and select Security Credentials > Create Access Key. Note the Access key ID and Secret access key.
 
 Gather each of these values from the AWS console for each account you would like to configure.
 
