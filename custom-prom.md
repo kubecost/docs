@@ -11,20 +11,21 @@ When integrating Kubecost with an existing Prometheus, we recommend first instal
 **Note:** integrating with an existing Prometheus is only officially supported under Kubecost paid plans.
 
 <a name="dep-versions"></a>
+
 ### Dependency Requirements
 
 Kubecost requires the following minimum versions:
 
-  - kube-state-metrics - v1.6.0+ (May 19)
-  - cAdvisor - kubelet v1.11.0+  (May 18)
-  - node-exporter - v0.16+ (May 18) [Optional]
+- kube-state-metrics - v1.6.0+ (May 19)
+- cAdvisor - kubelet v1.11.0+ (May 18)
+- node-exporter - v0.16+ (May 18) [Optional]
 
 ### Implementation Steps
 
 1. Pass the following parameters in your helm [values file](https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/values.yaml):
 
-    * `prometheus.fqdn` to match your local Prometheus service address with this format `  http://<prometheus-server-service-name>.<prometheus-server-namespace>.svc`
-    * `prometheus.enabled` set to `false`
+   * `prometheus.fqdn` to match your local Prometheus service address with this format ` http://<prometheus-server-service-name>.<prometheus-server-namespace>.svc`
+   * `prometheus.enabled` set to `false`
 
     Pass this updated file to the Kubecost helm install command with `--values values.yaml`
 
@@ -53,6 +54,7 @@ To confirm this job is successfully scraped by Prometheus, you can view the Targ
 ![Prometheus Targets](https://raw.githubusercontent.com/kubecost/docs/main/prom-targets.png)
 
 <a name="recording-rules"></a>
+
 ### Recording Rules
 
 NOTE: There is no need to add additional recording rules starting in v1.90.0. This section will be removed soon!
@@ -60,7 +62,6 @@ NOTE: There is no need to add additional recording rules starting in v1.90.0. Th
 Kubecost uses [Prometheus recording rules](https://prometheus.io/docs/prometheus/latest/configuration/recording_rules/) to enable certain product features and to help improve product performance. These are recommended additions, especially for medium and large-sized clusters using their own Prometheus installation. You can find the current set of recording rules used in the `rules` block under `prometheus.server.serverFiles` in this [values.yaml](https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/values.yaml) file.
 
 > Note: Kubecost recording rules were most recently updated in v1.65.0.
-
 
 ### Node exporter metric labels
 
@@ -83,13 +84,14 @@ You'll need to add the following relabel config to the job that scrapes the node
 Note that this does not override the source label-- it creates a new label called "kubernetes_node" and copies the value of pod into it.
 
 <a name="troubleshoot"></a>
+
 ## Troubleshooting Issues
 
 Visiting `<your-kubecost-endpoint>/diagnostics.html` provides diagnostics info on this integration. [More details](/diagnostics.md)
 
 Common issues include the following:
 
-* Wrong Prometheus FQDN: evidenced by the following pod error message `No valid prometheus config file at  ...` and the init pods hanging. We recommend running `curl <your_prometheus_url>/api/v1/status/config` from a pod in the cluster to confirm that your [Prometheus config](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#configuration-file) is returned. Here is an example, but this needs to be updated based on your Prometheus address:
+* Wrong Prometheus FQDN: evidenced by the following pod error message `No valid prometheus config file at ...` and the init pods hanging. We recommend running `curl <your_prometheus_url>/api/v1/status/config` from a pod in the cluster to confirm that your [Prometheus config](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#configuration-file) is returned. Here is an example, but this needs to be updated based on your Prometheus address:
 
 ```
 kubectl exec kubecost-cost-analyzer-db55d88f6-fr6kc -c cost-analyzer-frontend -n kubecost \
@@ -110,7 +112,6 @@ You can visit Settings in Kubecost to see basic diagnostic information on these 
 
 ![Prometheus status diagnostic](https://raw.githubusercontent.com/kubecost/docs/main/prom-status.png)
 
-
 ## <a name="custom-grafana"></a>Bring your own Grafana
 
 Using an existing Grafana deployment can be accomplished with either of the following two options:
@@ -119,7 +120,7 @@ Using an existing Grafana deployment can be accomplished with either of the foll
 
 ![Kubecost Settings](https://raw.githubusercontent.com/kubecost/docs/main/images/settings-grafana.png)
 
-2) _Option: Deploy with Grafana sidecar enabled._ Passing the Grafana parameters below in your [values.yaml](https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/values.yaml) will install ConfigMaps for Grafana dashboards that will be picked up by the [Grafana sidecar](https://github.com/helm/charts/tree/master/stable/grafana#sidecar-for-dashboards) if you have Grafana with the dashboard sidecar already installed.
+2. _Option: Deploy with Grafana sidecar enabled._ Passing the Grafana parameters below in your [values.yaml](https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/values.yaml) will install ConfigMaps for Grafana dashboards that will be picked up by the [Grafana sidecar](https://github.com/helm/charts/tree/master/stable/grafana#sidecar-for-dashboards) if you have Grafana with the dashboard sidecar already installed.
 
 ```
 global:
@@ -139,6 +140,8 @@ For Option 2, ensure that the following flags are set in your Operator deploymen
 
 1. sidecar.dashboards.enabled = true
 2. sidecar.dashboards.searchNamespace isn't restrictive, use `ALL` if Kubecost runs in another namespace.
+
+Note that with Option 2, the Kubecost UI cannot link to the Grafana dashboards unless `kubecostProductConfigs.grafanaURL` is set, either via the Helm chart, or via the Settings page as described in Option 1.
 
 Edit this doc on [GitHub](https://github.com/kubecost/docs/blob/main/custom-prom.md)
 

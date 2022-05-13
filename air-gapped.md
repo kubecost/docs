@@ -18,12 +18,12 @@ for prod-x.xx.x. [Latest releases can be found here](https://github.com/kubecost
 - NetworkCosts: gcr.io/kubecost1/kubecost-network-costs:v16.0 (used for [network-allocation](https://github.com/kubecost/docs/blob/main/network-allocation.md))
 - BusyBox: registry.hub.docker.com/library/busybox:latest (only for NFS)
 - Cluster controller: gcr.io/kubecost1/cluster-controller:v0.0.2 (used for write actions)
+- Grafana Dashboards: grafana/grafana:8.3.2
 
 ### Prometheus - Required when bundled
 - prom/prometheus:v2.31.1
 - prom/node-exporter:v0.18.1
 - prom/alertmanager:v0.23.0
-- grafana/grafana:8.3.2
 - jimmidyson/configmap-reload:v0.7.1
 - kiwigrid/k8s-sidecar:1.15.4 (can be optional if not using Grafana sidecar)
 
