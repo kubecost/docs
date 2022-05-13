@@ -29,8 +29,10 @@ The secret should contain a file called cloud-integration.json with the followin
 "aws": []
 }
 ```
-This Configuration supports multiple configurations per cloud provider simply add any number of cloud configuration objects to their respective arrays in the JSON file. The structure and required values for the configuration objects for each cloud provider are described below. Once you have filled in the configuration object use the command
-```
+
+This method of Cloud-Integration supports multiple configurations per cloud provider simply by adding each cost export to their respective arrays in the JSON file. The structure and required values for the configuration objects for each cloud provider are described below. Once you have filled in the configuration object use the command:
+
+```bash
 kubectl create secret generic <SECRET_NAME> --from-file=cloud-integration.json -n kubecost
 ```
 
@@ -47,7 +49,8 @@ The values needed to provide access to the Azure Storage Account where cost data
 - `<AZURE_CLOUD>` is an optional value which denotes the cloud where the storage account exist, possible values are `public` and `gov`. The default is `public`.
 
 Set these values into the following object and add them to the Azure array:
-```
+
+```json
 {
 	"azureSubscriptionID": "<SUBSCRIPTION_ID>",
 	"azureStorageAccount": "<STORAGE_ACCOUNT_NAME>",
@@ -60,8 +63,8 @@ Set these values into the following object and add them to the Azure array:
 ### GCP
 
 If you don't already have a GCP service key for any of the projects you would like to configure, you can run the following commands in your command line to generate and export one. Make sure your gcloud project is where your external costs are being run.
-```
 
+```bash
 export PROJECT_ID=$(gcloud config get-value project)
 gcloud iam service-accounts create compute-viewer-kubecost --display-name "Compute Read Only Account Created For Kubecost" --format json
 gcloud projects add-iam-policy-binding $PROJECT_ID --member serviceAccount:compute-viewer-kubecost@$PROJECT_ID.iam.gserviceaccount.com --role roles/compute.viewer
@@ -69,21 +72,21 @@ gcloud projects add-iam-policy-binding $PROJECT_ID --member serviceAccount:compu
 gcloud projects add-iam-policy-binding $PROJECT_ID --member serviceAccount:compute-viewer-kubecost@$PROJECT_ID.iam.gserviceaccount.com --role roles/bigquery.dataViewer
 gcloud projects add-iam-policy-binding $PROJECT_ID --member serviceAccount:compute-viewer-kubecost@$PROJECT_ID.iam.gserviceaccount.com --role roles/bigquery.jobUser
 gcloud iam service-accounts keys create ./compute-viewer-kubecost-key.json --iam-account compute-viewer-kubecost@$PROJECT_ID.iam.gserviceaccount.com
+```
+
 You can then get your service account key to paste into the UI (be careful with this!):
 
-```
-```
- cat compute-viewer-kubecost-key.json
-
+```bash
+cat compute-viewer-kubecost-key.json
 ```
 
 - `<KEY_JSON>` The GCP service key created above. This value should be left as JSON when inserted into the configuration object
 - `<PROJECT_ID>` GCP Project ID should match the Project ID in the GCP service key.
 - `<BILLING_DATA_DATASET>` BigQuery dataset requires a BigQuery dataset prefix (e.g. billing_data) in addition to the BigQuery table name. A full example is billing_data.gcp_billing_export_v1_018AIF_74KD1D_534A2.
 
-
 Set these values into the following object and add it to the GCP array:
-```
+
+```json
 {
 	"key": <KEY_JSON>
 	"projectID": "<PROJECT_ID>",
@@ -109,7 +112,7 @@ The table name is typically the database name with the leading athenacurcfn_ rem
 
 Set these values into the following object and add them to the AWS array:
 
-```
+```json
 {
     "serviceKeyName": "<ACCESS_KEY_ID>",
     "serviceKeySecret":"<ACCESS_KEY_SECRET>",
