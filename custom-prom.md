@@ -1,5 +1,10 @@
-Custom Prometheus
-=================
+Custom Prometheus and Grafana
+=============================
+
+- [Bring your own Prometheus](#custom-prom)
+- [Bring your own Grafana](#custom-grafana)
+
+## <a name="custom-prom"></a>Bring your own Prometheus
 
 When integrating Kubecost with an existing Prometheus, we recommend first installing Kubecost with a bundled Prometheus ([instructions](http://kubecost.com/install)) as a dry run before integrating with an external Prometheus deployment. You can get in touch (support@kubecost.com) or via our [Slack community](https://join.slack.com/t/kubecost/shared_invite/enQtNTA2MjQ1NDUyODE5LWFjYzIzNWE4MDkzMmUyZGU4NjkwMzMyMjIyM2E0NGNmYjExZjBiNjk1YzY5ZDI0ZTNhZDg4NjlkMGRkYzFlZTU) for assistance.
 
@@ -22,9 +27,11 @@ Kubecost requires the following minimum versions:
    * `prometheus.fqdn` to match your local Prometheus service address with this format ` http://<prometheus-server-service-name>.<prometheus-server-namespace>.svc`
    * `prometheus.enabled` set to `false`
 
-   Pass this updated file to the Kubecost helm install command with `--values values.yaml`
+    Pass this updated file to the Kubecost helm install command with `--values values.yaml`
 
-2. <a name="scrape-configs"></a>Have your Prometheus scrape the cost-model `/metrics` endpoint. These metrics are needed for reporting accurate pricing data. Here is an example scrape config:
+    Or add `--set prometheus.fqdn=http://<prometheus-server-service-name>.<prometheus-server-namespace>.svc --set prometheus.enabled=false` the end of your helm install command
+
+1. <a name="scrape-configs"></a>Have your Prometheus scrape the cost-model `/metrics` endpoint. These metrics are needed for reporting accurate pricing data. Here is an example scrape config:
 
 ```
 - job_name: kubecost
@@ -105,13 +112,11 @@ You can visit Settings in Kubecost to see basic diagnostic information on these 
 
 ![Prometheus status diagnostic](https://raw.githubusercontent.com/kubecost/docs/main/prom-status.png)
 
-<a name="existing-grafana"></a>
-
-# Custom Grafana
+## <a name="custom-grafana"></a>Bring your own Grafana
 
 Using an existing Grafana deployment can be accomplished with either of the following two options:
 
-1. _Option: Directly link to an external Grafana._ After Kubecost installation, visit Settings and update **Grafana Address** to a URL (e.g. http://demo.kubecost.com/grafana) that is visible to users accessing Grafana dashboards. This variable can alternatively be passed at the time you deploy Kubecost via the `kubecostProductConfigs.grafanaURL` parameter in [values.yaml](https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/values.yaml). Next, import Kubecost Grafana dashboards as JSON from this [folder](https://github.com/kubecost/cost-analyzer-helm-chart/tree/master/cost-analyzer).
+1) _Option: Directly link to an external Grafana._ After Kubecost installation, visit Settings and update __Grafana Address__ to a URL (e.g. http://demo.kubecost.com/grafana) that is visible to users accessing Grafana dashboards. This variable can alternatively be passed at the time you deploy Kubecost via the `kubecostProductConfigs.grafanaURL` parameter in [values.yaml](https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/values.yaml). Next, import Kubecost Grafana dashboards as JSON from this [folder](https://github.com/kubecost/cost-analyzer-helm-chart/tree/master/cost-analyzer).
 
 ![Kubecost Settings](https://raw.githubusercontent.com/kubecost/docs/main/images/settings-grafana.png)
 

@@ -1,9 +1,11 @@
-Adding Azure Out of Cluster Cluster Costs into Kubecost
-============================================================
+Azure Cloud Integration
+=======================
 
-Connecting your Azure account to Kubecost allows you to view Kubernetes metrics side-by-side with external cloud services cost, e.g. Azure Database Services. Additionally, it allows Kubecost to reconcile measured Kubernetes spend with your actual Azure bill. This gives teams running Kubernetes a complete and accurate picture of costs. Read the [Cloud Integrations](https://github.com/kubecost/docs/blob/main/cloud-integration.md) documentation for more information on how Kubecost connects with Cloud Service Providers. [More info on this functionality](http://blog.kubecost.com/blog/complete-picture-when-monitoring-kubernetes-costs/). 
+Connecting your Azure account to Kubecost allows you to view Kubernetes metrics side-by-side with external cloud services cost, e.g. Azure Database Services. Additionally, it allows Kubecost to reconcile measured Kubernetes spend with your actual Azure bill. This gives teams running Kubernetes a complete and accurate picture of costs. Read the [Cloud Integrations](https://github.com/kubecost/docs/blob/main/cloud-integration.md) documentation for more information on how Kubecost connects with Cloud Service Providers. [More info on this functionality](http://blog.kubecost.com/blog/complete-picture-when-monitoring-kubernetes-costs/).
 
 To configure out-of-cluster (OOC) costs for Azure in Kubecost, you just need to set up daily exportation of cost reports to Azure storage. Once cost reports are exported to Azure Storage, Kubecost will access them through the Azure Storage API to display your OOC cost data alongside your in-cluster costs.
+
+> A github repository with sample files used in below instructions can be found here: [https://github.com/kubecost/poc-common-configurations/tree/main/azure](https://github.com/kubecost/poc-common-configurations/tree/main/azure)
 
 ## Step 1: Export Azure Cost Report
 
@@ -11,17 +13,17 @@ Follow this guide taking note of the name that you use for the exported cost rep
 
 https://docs.microsoft.com/en-us/azure/cost-management-billing/costs/tutorial-export-acm-data?tabs=azure-portal
 
-It will take a few hours to generate the first report, after which Kubecost can use the Azure Storage API to pull that data. 
+It will take a few hours to generate the first report, after which Kubecost can use the Azure Storage API to pull that data.
 
 >Note: If you have sensitive data in an Azure Storage account and do not want to give out access to it, create a separate Azure Storage account to store your cost data export.
 
 ## Step 2: Provide Access to Azure Storage API
 
-The values needed to provide access to the Azure Storage Account where cost data is being exported can be found in the Azure portal in the Storage account where the cost data is being exported. 
+The values needed to provide access to the Azure Storage Account where cost data is being exported can be found in the Azure portal in the Storage account where the cost data is being exported.
 * `<SUBSCRIPTION_ID>` is the id of the subscription that the exported files are being generated for.
 * `<STORAGE_ACCOUNT_NAME>` is the name of the Storage account where the exported CSV is being stored.
-* `<STORE_ACCESS_KEY>` can be found by selecting the “Access Keys” option from the navigation sidebar then selecting “Show Keys”. Using either of the two keys will work. 
-* `<REPORT_CONTAINER_NAME>` is the name that you choose for the exported cost report when you set it up. This is the name of the container where the CSV cost reports are saved in your Storage account. 
+* `<STORE_ACCESS_KEY>` can be found by selecting the “Access Keys” option from the navigation sidebar then selecting “Show Keys”. Using either of the two keys will work.
+* `<REPORT_CONTAINER_NAME>` is the name that you choose for the exported cost report when you set it up. This is the name of the container where the CSV cost reports are saved in your Storage account.
 * `<AZURE_CONTAINER_PATH>` is an optional value which should be used if there is more than one billing report that is exported to the configured container. The path provided should be have only one billing export because kubecost will retrieve the most recent billing report for a given month found within the path.
 * `<AZURE_CLOUD>` is an optional value which denotes the cloud where the storage account exist, possible values are `public` and `gov`. The default is `public`.
 
@@ -68,7 +70,7 @@ To allocate external Azure resources to a Kubernetes concept, use the following 
 | Container          	| kubernetes_container	| container-name |
 
 
- 
+
 *\*In the `kubernetes_label_NAME` tag key, the NAME portion should appear exactly as the tag appears inside of Kubernetes. For example, for the tag `app.kubernetes.io/name`, this tag key would appear as `kubernetes_label_app.kubernetes.io/name.`*
 
 To use an alternative or existing Azure tag schema, you may supply these in your values.yaml under the `kubecostProductConfigs.labelMappingConfigs.<aggregation>_external_label` . Also be sure to set `kubecostProductConfigs.labelMappingConfigs.enabled = true`
