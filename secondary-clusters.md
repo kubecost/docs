@@ -12,6 +12,8 @@ kubecostModel.warmCache=false kubecostModel.warmSavingsCache=false
 kubecostModel.etl=false
 ```
 
+Note: disabling these has UI performance implications
+
 Disable grafana by setting
 
 ```

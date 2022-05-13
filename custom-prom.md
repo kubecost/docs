@@ -1,4 +1,5 @@
-# Custom Prometheus
+Custom Prometheus
+=================
 
 When integrating Kubecost with an existing Prometheus, we recommend first installing Kubecost with a bundled Prometheus ([instructions](http://kubecost.com/install)) as a dry run before integrating with an external Prometheus deployment. You can get in touch (support@kubecost.com) or via our [Slack community](https://join.slack.com/t/kubecost/shared_invite/enQtNTA2MjQ1NDUyODE5LWFjYzIzNWE4MDkzMmUyZGU4NjkwMzMyMjIyM2E0NGNmYjExZjBiNjk1YzY5ZDI0ZTNhZDg4NjlkMGRkYzFlZTU) for assistance.
 
@@ -18,8 +19,8 @@ Kubecost requires the following minimum versions:
 
 1. Pass the following parameters in your helm [values file](https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/values.yaml):
 
-   - `prometheus.fqdn` to match your local Prometheus service address with this format ` http://<prometheus-server-service-name>.<prometheus-server-namespace>.svc`
-   - `prometheus.enabled` set to `false`
+   * `prometheus.fqdn` to match your local Prometheus service address with this format ` http://<prometheus-server-service-name>.<prometheus-server-namespace>.svc`
+   * `prometheus.enabled` set to `false`
 
    Pass this updated file to the Kubecost helm install command with `--values values.yaml`
 
@@ -83,7 +84,7 @@ Visiting `<your-kubecost-endpoint>/diagnostics.html` provides diagnostics info o
 
 Common issues include the following:
 
-- Wrong Prometheus FQDN: evidenced by the following pod error message `No valid prometheus config file at ...` and the init pods hanging. We recommend running `curl <your_prometheus_url>/api/v1/status/config` from a pod in the cluster to confirm that your [Prometheus config](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#configuration-file) is returned. Here is an example, but this needs to be updated based on your Prometheus address:
+* Wrong Prometheus FQDN: evidenced by the following pod error message `No valid prometheus config file at ...` and the init pods hanging. We recommend running `curl <your_prometheus_url>/api/v1/status/config` from a pod in the cluster to confirm that your [Prometheus config](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#configuration-file) is returned. Here is an example, but this needs to be updated based on your Prometheus address:
 
 ```
 kubectl exec kubecost-cost-analyzer-db55d88f6-fr6kc -c cost-analyzer-frontend -n kubecost \
@@ -92,13 +93,13 @@ kubectl exec kubecost-cost-analyzer-db55d88f6-fr6kc -c cost-analyzer-frontend -n
 
 If the config file is not returned, this is an indication that an incorrect Prometheus address has been provided. If a config file is returned from one pod in the cluster but not the Kubecost pod, then the Kubecost pod likely has its access restricted by a network policy, service mesh, etc.
 
-- Prometheus throttling -- ensure Prometheus isn't being CPU throttled due to a low resource request.
+* Prometheus throttling -- ensure Prometheus isn't being CPU throttled due to a low resource request.
 
-- Wrong dependency version -- see the section above about Requirements
+* Wrong dependency version -- see the section above about Requirements
 
-- Missing scrape configs -- visit Prometheus Target page (screenshot above)
+* Missing scrape configs -- visit Prometheus Target page (screenshot above)
 
-- Data incorrectly is a single namespace -- make sure that [honor_labels](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#scrape_config) is enabled
+* Data incorrectly is a single namespace -- make sure that [honor_labels](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#scrape_config) is enabled
 
 You can visit Settings in Kubecost to see basic diagnostic information on these Prometheus metrics:
 
