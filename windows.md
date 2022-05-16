@@ -26,5 +26,5 @@ Collecting data about windows nodes is supported by Kubecost as of v1.93.0; howe
     ```
 
 # Metrics
-  * When tracked by the kubernetes API, nodes should show up with the correct number of pods and resources.
+  * Accurate node and pod data exist by default, since they come from the kubernetes API
   * By default, we will be missing utilization data for pods on window nodes; pods will be billed based on request size. Kubecost can be configured to pick up utilization data for windows nodes; cadvisor must run on these nodes and be scraped.
