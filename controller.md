@@ -1,7 +1,7 @@
 Cluster Controller
 ==================
 
-Kubecost's cluster controller contains contains Kubecost's automation features,
+Kubecost's cluster controller contains Kubecost's automation features,
 and thus has write permission to certain resources on your cluster.
 
 Cluster controller enables actions like:
