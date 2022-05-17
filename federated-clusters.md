@@ -31,7 +31,7 @@ You can also optionally disable `thanos.store`, `thanos.query` and `thanos.query
   --set thanos.query.enabled=false --set thanos.store.enabled=false --set thanos.queryFrontend.enabled=false
 ```
 
-3. Ensure you provide a unique identifier for `prometheus.server.global.external_labels.cluster_id` to have additional clusters be visible in the Kubecost product, e.g. `cluster-two`.
+3. Ensure you provide a unique identifier for `prometheus.server.global.external_labels.cluster_id` to have additional clusters be visible in the Kubecost product, e.g. `cluster-two`. Note: `cluster_id` can be replaced with another label(e.g. `cluster`) by modifying .Values.kubecostModel.promClusterIDLabel.
 
 4. Follow the same verification steps available [here](https://github.com/kubecost/docs/blob/main/long-term-storage.md#verify-thanos).
 
