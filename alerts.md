@@ -219,13 +219,13 @@ Example Helm `values.yaml`:
   window: 10m
   diagnostics: 
     prometheusUp: true
-	cAdvisor: true
-	ksm: true
-	kubecost: true 
-	nodeExporter: true
-	scrapeInterval: true
-	cpuThrottling: true
-	clusterJoinLeave: true
+    cAdvisor: true
+    ksm: true
+    kubecost: true 
+    nodeExporter: true
+    scrapeInterval: true
+    cpuThrottling: true
+    clusterJoinLeave: true
  ```
 
 ----
