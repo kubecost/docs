@@ -56,11 +56,16 @@ Sends a recurring email and/or Slack alert with a summary report of cost and eff
 
 *Required parameters:*
 * `type: recurringUpdate`
-* `aggregation: <aggregation>` -- configurable, accepts a single valid aggregation parameter\*
+* `aggregation: <aggregation>` 
 * `filter: '*'`
-* `window: <N>d` -- configurable, N ≥ 1
+* `window: <N>d`
 
-**Valid Aggregation Parameters**: 
+*Valid Window Parameters*:
+* `<N>d` where `N in [1, 7)` for every N days
+* `7d` or `weekly` for 0:00:00 UTC every Monday
+* `30d` or `monthly` for 0:00:00 UTC on the first day of the month.
+
+*Valid Aggregation Parameters*: 
 * `cluster`
 * `container`
 * `controller`
