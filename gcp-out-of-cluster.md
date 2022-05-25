@@ -13,6 +13,8 @@ The following guide provides the steps required for allocating out-of-cluster co
 
 [https://cloud.google.com/billing/docs/how-to/export-data-bigquery](https://cloud.google.com/billing/docs/how-to/export-data-bigquery)
 
+> GCP users should create [detailed billing export](https://cloud.google.com/billing/docs/how-to/export-data-bigquery-tables#detailed-usage-cost-data-schema) to gain access to all of Kubecost cloud integration features including [reconciliation](https://github.com/kubecost/docs/blob/main/cloud-integration.md#reconciliation)
+
 ## Step 2:  Visit Kubecost setup page and provide configuration info
 
 If your Big Query dataset is in a different project than the one where Kubescost is installed, please see the section on [Cross-Project Service Accounts](#cross-project-service-account-configuration)
