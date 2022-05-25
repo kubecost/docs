@@ -82,9 +82,9 @@ networkCost | Cumulative cost of network usage.
 pvBytes | Average number of bytes of PersistentVolumes allocated while running.
 pvByteHours | Cumulative PersistentVolume byte-hours allocated.
 pvCost | Cumulative cost of allocated PersistentVolume byte-hours.
-ramBytes | Average number of RAM bytes allocated while running.
-ramByteRequestAverage | Average number of RAM bytes allocated while running.
-ramByteUsageAverage | Average number of RAM bytes used while running.
+ramBytes | Average number of RAM bytes allocated. An allocated resource is the source of cost, according to Kubecost - regardless of if a requested resource is used.
+ramByteRequestAverage | Average of the RAM requested by the workload. Requests are a [Kubernetes tool](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#requests-and-limits) for preallocating/reserving resources for a given container.
+ramByteUsageAverage | Average of the RAM used by the workload. This comes from moment-to-moment measurements of live RAM byte usage of each container. This is roughly the number you see under RAM if you pull up Task Manager (Windows), top on Linux, or Activity Monitor (MacOS).
 ramByteHours | Cumulative RAM byte-hours allocated.
 ramCost | Cumulative cost of allocated RAM byte-hours.
 ramEfficiency | Ratio of `ramByteUsageAverage`-to-`ramByteRequestAverage`, meant to represent the fraction of requested resources that were used.
