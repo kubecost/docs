@@ -8,6 +8,8 @@ Integration with the Cloud Service Providers via their respective billing APIs a
 - [GCP](https://cloud.google.com/billing/docs/how-to/export-data-bigquery)
 - [Azure](https://docs.microsoft.com/en-us/azure/cost-management-billing/costs/tutorial-export-acm-data?tabs=azure-portal)
 
+> GCP users should create [detailed billing export](https://cloud.google.com/billing/docs/how-to/export-data-bigquery-tables#detailed-usage-cost-data-schema) to gain access to all of Kubecost cloud integration features including [reconciliation](https://github.com/kubecost/docs/blob/main/cloud-integration.md#reconciliation)
+
 ## Cloud Processes
 As indicated above, setting up a cloud integration with your Cloud Service Provider allows Kubecost to pull in additional billing data. The two processes that incorporate this information are Reconciliation and Cloud Assets.
 
