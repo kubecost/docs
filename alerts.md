@@ -4,7 +4,7 @@ Alerts
 ## Summary
 
 Kubecost alerts allow teams to receive updates on real-time Kubernetes spend. They are configurable via the Kubecost UI or Helm values. This resource gives an overview of how to configure Kubecost email and Slack alerts using [Kubecost helm chart values](https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/values.yaml). The following alert types are supported:
-1. [Recurring update](#type-recurring-update) - sends an email and/or Slack alert with cluster spend across all or a set of namespaces, with costs broken down by namespace
+1. [Recurring update](#type-recurring-update) - sends an email and/or Slack alert with cluster spend across all or a subset of kubernetes resources.
 
 2. [Budget](#type-budget) -- sends an email and/or Slack alert when spend crosses a defined threshold
 
@@ -204,6 +204,7 @@ Enabling diagnostic alerts in Kubecost occur when an event impacts product uptim
   * cAdvisor exported metrics missing expected labels in the last 5 minutes
   * Kubestate Metrics (KSM) exported metrics missing over last 5 minutes
   * Kubestate Metrics (KSM) unexpected version
+  * Node Exporter metrics are missing over last 5 minutes.
   * Scrape Interval prometheus self-scraped metrics missing over last 5 minutes
   * CPU Throttling detected on cost-model in the last 10 minutes
 * Clusters Added/Removed (Enterprise Multicluster Support Only)
