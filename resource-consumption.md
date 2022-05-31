@@ -1,6 +1,10 @@
+Tuning Resource Consumption
+===============
+
 #### Kubecost can run on clusters with thousands of nodes when resource consumption is properly tuned. Here's a chart with some of the steps you can take to tune kubecost, along with descriptions of each.
 
-![Memory Reduction Steps (3)](https://user-images.githubusercontent.com/453512/169488783-53687dfc-a687-48a6-8f1a-a52ef493594e.png)
+![Memory Reduction Steps](https://user-images.githubusercontent.com/453512/171096603-0f0b600f-0452-4ae2-a001-e7c4a26e0ad5.png)
+
 
 ## On Secondaries: Disabling Cloud Assets and Running Kubecost in Agent Mode/With ETL and caching disabled
 * Cloud Assets for all accounts can be pulled in on just primaries by pointing kubecost to one or more management accounts.
@@ -15,22 +19,23 @@
 ## Lower Query Concurrency
 * Lowering query concurrency for the Kubecost ETL build will mean ETL takes longer to build but lower memory consumption
 * The default is 5
-* This can be tuned with eg "--set kubecostModel.maxQueryConcurrency 1"
+* This can be tuned with the Helm value "[--set kubecostModel.maxQueryConcurrency 1](https://github.com/kubecost/cost-analyzer-helm-chart/blob/v1.93.2/cost-analyzer/values.yaml#L272)"
 
 ## Lower Query Resolution
 * Lowering query resolution will reduce memory consumption but will cause short running pods to be sampled and rounded to the nearest interval for their runtimes
 * The default is 300s
-* This can be tuned with eg "--set kubecostModel.etlResolutionSeconds 600"
+* This can be tuned with the Helm value "--set kubecostModel.etlResolutionSeconds 600"
 
-## Lower Scrape Interval
-* Fewer data points scraped from prometheus means less data to collect and store, at the cost of Kubecost making estimations or possibly missing spikes of usage.
+## Longer Scrape Interval
+* Fewer data points scraped from Prometheus means less data to collect and store, at the cost of Kubecost making estimations that possibly miss spikes of usage or short running pods
 * The default is 60s
-* This can be tuned here: https://github.com/kubecost/cost-analyzer-helm-chart/blob/develop/cost-analyzer/values.yaml#L389
+* This can be tuned [here](https://github.com/kubecost/cost-analyzer-helm-chart/blob/v1.93.2/cost-analyzer/values.yaml#L389)
 
 ## Disable or stop scraping node exporter
 * node-exporter is optional. Some health alerts will be disabled if node-exporter is disabled, but savings recommendations and core cost allocation will function as normal
-* This can be disabled with eg "--set prometheus.server.nodeExporter.enabled false"
+* This can be disabled with the Helm value "[--set prometheus.server.nodeExporter.enabled false](https://github.com/kubecost/cost-analyzer-helm-chart/blob/v1.93.2/cost-analyzer/values.yaml#L442)"
 
 ## Enable Filestore
-* Filestore is an improvement over our legacy in-memory ETL store of prometheus data. It was optional in versions up to v1.94.0, but will become the default there.
-* This can be enabled on older versions with eg "--set kubecostModel.etlFileStoreEnabled true" 
+* Filestore is an improvement over our legacy in-memory ETL store of Prometheus data. It was optional in versions up to v1.94.0, but will become the default afterward.
+* This can be enabled on older versions with the Helm value "--set kubecostModel.etlFileStoreEnabled true"
+
