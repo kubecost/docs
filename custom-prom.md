@@ -8,7 +8,7 @@ Custom Prometheus and Grafana
 
 When integrating Kubecost with an existing Prometheus, we recommend first installing Kubecost with a bundled Prometheus ([instructions](http://kubecost.com/install)) as a dry run before integrating with an external Prometheus deployment. You can get in touch (support@kubecost.com) or via our [Slack community](https://join.slack.com/t/kubecost/shared_invite/enQtNTA2MjQ1NDUyODE5LWFjYzIzNWE4MDkzMmUyZGU4NjkwMzMyMjIyM2E0NGNmYjExZjBiNjk1YzY5ZDI0ZTNhZDg4NjlkMGRkYzFlZTU) for assistance.
 
-> Note: the Kubecost team provides best efforts support for free/community users when integrating with an existing Prometheus deployment.
+**Note:** integrating with an existing Prometheus is only officially supported under Kubecost paid plans.
 
 <a name="dep-versions"></a>
 
