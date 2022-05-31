@@ -39,3 +39,4 @@ Tuning Resource Consumption
 * Filestore is an improvement over our legacy in-memory ETL store of Prometheus data. It was optional in versions up to v1.94.0, but will become the default afterward.
 * This can be enabled on older versions with the Helm value "--set kubecostModel.etlFileStoreEnabled true"
 
+<!--- {"article":"6446286863383","section":"1500002777682","permissiongroup":"1500001277122"} --->
