@@ -19,7 +19,7 @@ The following requirements are given:
 
 
 1.	Istio is activated by editing the namespace. To do this, execute the command
-	`kubectl edit namespace kubecost" and insert the label "istio-injection: enbled`
+	`kubectl edit namespace kubecost` and insert the label `istio-injection: enabled`
 	
 2.	After Istio has been activated, some adjustments must be made to the deployment with
 	`kubectl -n kubecost edit deployment kubecost-cost-analyzer` to allow communication within the namespace, for example, the healtch-check is completed successfully. When editing the deployment, the two annotations must be added: 
