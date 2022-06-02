@@ -1,11 +1,11 @@
 Cluster Controller
 ==================
 
-Kubecost's cluster controller contains Kubecost's automation features,
+Kubecost's Cluster Controller contains Kubecost's automation features,
 and thus has write permission to certain resources on your cluster.
 
 Cluster controller enables actions like:
-- automated cluster scaledown
+- Automated cluster scaledown
 - 1-click cluster right-sizing
 - [1-click request right-sizing](./guide-one-click-request-sizing.md)
 
@@ -62,6 +62,12 @@ You may also enable via `--set` when running helm install:
 ```bash
 --set clusterController.enabled=true
 ```
+
+## Using automated cluster scaledown
+
+Cluster Controller wraps all functionality in and provides the same interface/CRDs as https://github.com/kubecost/cluster-turndown. Follow that documentation for usage instructions. You can safely ignore the deployment instructions in that README because you have already deployed Cluster Controller.
+
+> :warning: The v1 -> v2 breaking change mentioned in the cluster-turndown README also applies to Cluster Controller, but for v0.0.6 -> v0.1.0. Cluster Controller was upgraded to v0.1.0 in v1.94 of Kubecost. Follow the [migration guide](https://github.com/kubecost/docs/blob/main/v1-94-turndown-schedule-migration-guide.md) if you use turndown in a version of Kubecost < v1.94 and are upgrading to v1.94+ of Kubecost.
 
 Edit this doc on [GitHub](https://github.com/kubecost/docs/blob/main/controller.md)
 
