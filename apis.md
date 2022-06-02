@@ -37,10 +37,10 @@ are available at `http://<kubecost-address>/model/ENDPOINT`:
 | Endpoint | Brief description |
 |----------|-------------------|
 | `/savings` | Provides cluster-level potential savings estimates based on specific savings opportunities available in other endpoints. |
-| [`/savings/requestSizing`](./api-request-right-sizing.md) | Provides recommendations for setting container resource requests. |
+| [`/savings/requestSizing`](https://github.com/kubecost/docs/blob/main/api-request-right-sizing.md) | Provides recommendations for setting container resource requests. |
 | `/projectDisks` | List orphaned disks. |
 | `/projectAddresses` | List orphaned IP addresses. |
-| [`/savings/abandonedWorkloads`](./api-abandoned-workloads.md) | List abandoned workloads based on network traffic.|
+| [`/savings/abandonedWorkloads`](https://github.com/kubecost/docs/blob/main/api-abandoned-workloads.md) | List abandoned workloads based on network traffic.|
 | `/savings/clusterSizing` | Provides recommendations for sizing clusters (node types and quantities). | `/savings/diagnostics` | Reports cached keys in the savings handlers and recent errors. |
 
 
