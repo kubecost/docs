@@ -99,7 +99,7 @@ When installing with helm, use the `--set kubecostModel.etlBucketConfigSecret=<s
 ## Compatibility 
 If you are using an existing disk storage option for your ETL data, enabling the durable backup feature will retroactively back up all previously stored data\*. This feature is also fully compatible with the existing S3 backup feature. 
 
-\* If you are using a memory store for your ETL data with a local disk backup (`kubecostModel.etlFileStoreEnabled: false`), the backup feature will simply replace the local backup. In order to take advantage of the retroactive backup feature, you will need to update to file store (`kubecostModel.etlFileStoreEnabled: true`). This option is now enabled by default in the helm chart. 
+\* _If you are using a memory store for your ETL data with a local disk backup (`kubecostModel.etlFileStoreEnabled: false`), the backup feature will simply replace the local backup. In order to take advantage of the retroactive backup feature, you will need to update to file store (`kubecostModel.etlFileStoreEnabled: true`). This option is now enabled by default in the helm chart._
 
 ## Monitoring 
 Currently, this feature is still in development, but there is currently a status card available on the diagnostics page that will eventually show the status of the backup system:
