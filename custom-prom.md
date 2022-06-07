@@ -1,8 +1,5 @@
-Custom Prometheus and Grafana
-=============================
-
-- [Bring your own Prometheus](#custom-prom)
-- [Bring your own Grafana](#custom-grafana)
+Prometheus Configuration Guide
+==============================
 
 ## <a name="custom-prom"></a>Bring your own Prometheus
 
