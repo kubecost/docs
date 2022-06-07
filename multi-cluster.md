@@ -1,7 +1,7 @@
 Contexts
 =============
 
-Kubecost supports the ability to monitor multiple **contexts** of clusters. A **context** refers to either a single monitored cluster, or a set of clusters that leverage persistent storage.
+Kubecost supports the ability to monitor multiple **contexts** of clusters. A **context** refers to either a single monitored cluster, or a set of clusters that leverage [durable storage](https://github.com/kubecost/docs/blob/main/long-term-storage.md).
 
 Below are the steps for adding additional contexts on the **Kubecost Business & Enterprise** tier.
 
