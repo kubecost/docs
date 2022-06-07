@@ -8,6 +8,10 @@ Custom Prometheus and Grafana
 
 When integrating Kubecost with an existing Prometheus, we recommend first installing Kubecost with a bundled Prometheus ([instructions](http://kubecost.com/install)) as a dry run before integrating with an external Prometheus deployment. You can get in touch (support@kubecost.com) or via our [Slack community](https://join.slack.com/t/kubecost/shared_invite/enQtNTA2MjQ1NDUyODE5LWFjYzIzNWE4MDkzMmUyZGU4NjkwMzMyMjIyM2E0NGNmYjExZjBiNjk1YzY5ZDI0ZTNhZDg4NjlkMGRkYzFlZTU) for assistance.
 
+The Kubecost Prometheus deployment is used both as a source and a sink for cost & capacity metrics. It’s optimized to not interfere with other observability instrumentation and by default only contains metrics that are useful to the Kubecost product. This results in __70-90% fewer metrics__ than a Prometheus deployment using default settings.
+
+For the best experience, we generally recommend teams use the bundled prometheus-server & grafana but reuse their existing kube-state-metrics and node-exporter deployments if they already exist. This setup allows for the easiest installation process, easiest ongoing maintenance, minimal duplication of metrics, and more flexible metric retention.
+
 > Note: the Kubecost team provides best efforts support for free/community users when integrating with an existing Prometheus deployment.
 
 <a name="dep-versions"></a>
@@ -54,14 +58,6 @@ To confirm this job is successfully scraped by Prometheus, you can view the Targ
 ![Prometheus Targets](https://raw.githubusercontent.com/kubecost/docs/main/prom-targets.png)
 
 <a name="recording-rules"></a>
-
-### Recording Rules
-
-NOTE: There is no need to add additional recording rules starting in v1.90.0. This section will be removed soon!
-
-Kubecost uses [Prometheus recording rules](https://prometheus.io/docs/prometheus/latest/configuration/recording_rules/) to enable certain product features and to help improve product performance. These are recommended additions, especially for medium and large-sized clusters using their own Prometheus installation. You can find the current set of recording rules used in the `rules` block under `prometheus.server.serverFiles` in this [values.yaml](https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/values.yaml) file.
-
-> Note: Kubecost recording rules were most recently updated in v1.65.0.
 
 ### Node exporter metric labels
 
@@ -111,37 +107,6 @@ If the config file is not returned, this is an indication that an incorrect Prom
 You can visit Settings in Kubecost to see basic diagnostic information on these Prometheus metrics:
 
 ![Prometheus status diagnostic](https://raw.githubusercontent.com/kubecost/docs/main/prom-status.png)
-
-## <a name="custom-grafana"></a>Bring your own Grafana
-
-Using an existing Grafana deployment can be accomplished with either of the following two options:
-
-1) _Option: Directly link to an external Grafana._ After Kubecost installation, visit Settings and update __Grafana Address__ to a URL (e.g. http://demo.kubecost.com/grafana) that is visible to users accessing Grafana dashboards. This variable can alternatively be passed at the time you deploy Kubecost via the `kubecostProductConfigs.grafanaURL` parameter in [values.yaml](https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/values.yaml). Next, import Kubecost Grafana dashboards as JSON from this [folder](https://github.com/kubecost/cost-analyzer-helm-chart/tree/master/cost-analyzer).
-
-![Kubecost Settings](https://raw.githubusercontent.com/kubecost/docs/main/images/settings-grafana.png)
-
-2. _Option: Deploy with Grafana sidecar enabled._ Passing the Grafana parameters below in your [values.yaml](https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/values.yaml) will install ConfigMaps for Grafana dashboards that will be picked up by the [Grafana sidecar](https://github.com/helm/charts/tree/master/stable/grafana#sidecar-for-dashboards) if you have Grafana with the dashboard sidecar already installed.
-
-```
-global:
-  grafana:
-    enabled: false
-    domainName: cost-analyzer-grafana.default #example where format is <service-name>.<namespace>
-    proxy: false
-grafana:
-  sidecar:
-    dashboards:
-      enabled: true
-    datasources:
-      enabled: false
-```
-
-For Option 2, ensure that the following flags are set in your Operator deployment:
-
-1. sidecar.dashboards.enabled = true
-2. sidecar.dashboards.searchNamespace isn't restrictive, use `ALL` if Kubecost runs in another namespace.
-
-Note that with Option 2, the Kubecost UI cannot link to the Grafana dashboards unless `kubecostProductConfigs.grafanaURL` is set, either via the Helm chart, or via the Settings page as described in Option 1.
 
 Edit this doc on [GitHub](https://github.com/kubecost/docs/blob/main/custom-prom.md)
 
