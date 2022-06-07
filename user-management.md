@@ -12,6 +12,7 @@ High-level access control options:
 * **Pre-defined user roles**
     * admin: full control with permissions to manage users, configure model inputs, and application settings.
     * readonly: user role with read-only permission
+    * editor: role can change and build alerts and reports, but cannot edit appliaction settings and otherwise functions as read-only.
 
 <br/>
 
