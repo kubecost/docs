@@ -7,7 +7,7 @@ Tuning Resource Consumption
 
 
 ## On Secondaries: Disabling Cloud Assets and Running Kubecost in Agent Mode/With ETL and caching disabled
-* Cloud Assets for all accounts can be pulled in on just primaries by pointing Kubecost to one or more management accounts.
+* Cloud Assets for all accounts can be pulled in on just primaries by pointing Kubecost to one or more management accounts. You can disable Cloud Assets on secondaries by setting `.Values.kubecostModel.etlCloudAsset: false`
 * Secondaries can be configured strictly as metric emitters to save memory. 
 * Learn more about how to best configure secondaries here: https://guide.kubecost.com/hc/en-us/articles/4423256582551-Kubecost-Secondary-Clusters
 
