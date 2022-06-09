@@ -1,11 +1,20 @@
 AWS Multi-Cluster Storage Configuration
 =======================================
 
-## AWS/S3 Federation
+## Sections
 
-Kubecost user a shared storage bucket to store metrics from all clusters (aka `durable storage`).
+* [Overview of AWS/S3 Federation](#overview)
+* [Kubernetes Secret Method](#secret)
+* [Attach IAM role to Service Account Method](#attach-role)
+* [Thanos Encryption With S3 and KMS](#encyption)
+* [Troubleshooting](#troubleshooting)
+* [Additional Help](#help)
 
-There are multiple methods to provide Kubecost access to an S3 bucket. This guide has two examples.
+## <a name="cloud-integration"></a>AWS/S3 Federation
+
+Kubecost user a shared storage bucket to store metrics from all clusters (aka `durable storage`) in order to provide a single-pane-of-glass for viewing cost across many clusters. Multi-cluster is an enterprise feature of Kubecost.
+
+There are multiple methods to provide Kubecost access to an S3 bucket. This guide has two examples:
 
 1. Using a Kubernetes secret
 1. Attaching an IAM role to the service account used by Prometheus
@@ -42,11 +51,11 @@ config:
 ```
 **Note:** given that this is yaml, it requires this specific indention.
 
-## Attach IAM role to Service Account Method
+## <a name="attach-role"></a>Attach IAM role to Service Account Method
 
 Instead of using a secret key in a file, many will want to use this method.
 
-attach the policy to the Thanos pods service accounts. Your `object-store.yaml` should follow the format below when using this option, which does not contain the secret_key and access_key fields.
+Attach the policy to the Thanos pods service accounts. Your `object-store.yaml` should follow the format below when using this option, which does not contain the secret_key and access_key fields.
 
 ```
 type: S3
@@ -78,7 +87,7 @@ Once that annotation has been created and set, you'll need to attach it to the P
 For prometheus, set .Values.prometheus.serviceAccounts.server.create to false, and .Values.prometheus.serviceAccounts.server.name to the name of your created service account
 For thanos set `.Values.thanos.compact.serviceAccount`, and `.Values.thanos.store.serviceAccount` to the name of your created service account.
 
-## Thanos Encryption With S3 and KMS
+## <a name="encryption"></a>Thanos Encryption With S3 and KMS
 
 You can encrypt the S3 bucket where Kubecost data is stored in AWS via S3 and KMS. However, because Thanos can store potentially millions of objects, it is suggested that you use bucket-level encryption instead of object-level encryption. More details available here:
 
@@ -86,7 +95,7 @@ https://thanos.io/tip/thanos/storage.md/#s3
 https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucket-key.html
 https://docs.aws.amazon.com/AmazonS3/latest/userguide/configuring-bucket-key-object.html
 
-## Troubleshooting
+## <a name="troubleshooting"></a>Troubleshooting
 
 Thanos sends data to the bucket every 2 hours. Once 2 hours has passed, logs should indicate if data has been sent successfully or not.
 
@@ -131,6 +140,7 @@ kubectl exec -i -t s3-pod -- aws s3 ls s3://kc-thanos-store
 ```
 This should return a list of objects (or at least not give a permission error).
 
+## <a name="help"></a>Additional Help
 Please let us know if you run into any issues, we are here to help.
 
 [Slack community](https://join.slack.com/t/kubecost/shared_invite/enQtNTA2MjQ1NDUyODE5LWFjYzIzNWE4MDkzMmUyZGU4NjkwMzMyMjIyM2E0NGNmYjExZjBiNjk1YzY5ZDI0ZTNhZDg4NjlkMGRkYzFlZTU) - check out #support for any help you may need & drop your introduction in the #general channel
