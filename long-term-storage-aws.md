@@ -10,9 +10,9 @@ AWS Multi-Cluster Storage Configuration
 * [Troubleshooting](#troubleshooting)
 * [Additional Help](#help)
 
-## <a name="cloud-integration"></a>AWS/S3 Federation
+## <a name="overview"></a>AWS/S3 Federation
 
-Kubecost user a shared storage bucket to store metrics from all clusters (aka `durable storage`) in order to provide a single-pane-of-glass for viewing cost across many clusters. Multi-cluster is an enterprise feature of Kubecost.
+Kubecost uses a shared storage bucket to store metrics from clusters (aka `durable storage`) in order to provide a single-pane-of-glass for viewing cost across many clusters. Multi-cluster is an enterprise feature of Kubecost.
 
 There are multiple methods to provide Kubecost access to an S3 bucket. This guide has two examples:
 
@@ -25,7 +25,7 @@ This is a simple S3 bucket with all public access blocked. No other bucket confi
 
 Once created, add an IAM policy to access this bucket ([steps](/aws-service-account-thanos.md)).
 
-## Kubernetes Secret Method
+## <a name="secret"></a>Kubernetes Secret Method
 
 To use the Kubernetes secret method for allowing access, create a yaml file named `object-store.yaml` with contents similar to the following example. See region to endpoint mappings here: <https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region>
 
@@ -35,7 +35,7 @@ config:
   bucket: "kc-thanos-store"
   endpoint: "s3.amazonaws.com"
   region: "us-east-1"
-  access_key: "AKIAXW6UVLRRTDSCCU4D"
+  access_key: "<your-access-key"
   secret_key: "<your-secret-key>"
   insecure: false
   signature_version2: false
@@ -63,8 +63,6 @@ config:
   bucket: "kc-thanos-store"
   endpoint: "s3.amazonaws.com"
   region: "us-east-1"
-  # access_key: "AKIAXW6UVLRRTDSCCU4D"
-  # secret_key: "<your-secret-key>"
   insecure: false
   signature_version2: false
   put_user_metadata:
@@ -91,9 +89,11 @@ For thanos set `.Values.thanos.compact.serviceAccount`, and `.Values.thanos.stor
 
 You can encrypt the S3 bucket where Kubecost data is stored in AWS via S3 and KMS. However, because Thanos can store potentially millions of objects, it is suggested that you use bucket-level encryption instead of object-level encryption. More details available here:
 
-https://thanos.io/tip/thanos/storage.md/#s3
-https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucket-key.html
-https://docs.aws.amazon.com/AmazonS3/latest/userguide/configuring-bucket-key-object.html
+* <https://thanos.io/tip/thanos/storage.md/#s3>
+
+* <https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucket-key.html>
+
+* <https://docs.aws.amazon.com/AmazonS3/latest/userguide/configuring-bucket-key-object.html>
 
 ## <a name="troubleshooting"></a>Troubleshooting
 
@@ -107,7 +107,7 @@ kubectl logs --namespace kubecost -l app=prometheus -l component=server --prefix
 Should return results like this:
 
 ```log
-[pod/kubecost-prometheus-server-xxx/thanos-sidecar] level=debug ts=2022-06-09T13:00:10.084904136Z caller=objstore.go:206 msg="uploaded file" from=/data/thanos/upload/01G548SSBYSMSSE3G8TP2E6YD1/chunks/000001 dst=01G548SSBYSMSSE3G8TP2E6YD1/chunks/000001 bucket="tracing: kc-thanos-store"
+[pod/kubecost-prometheus-server-xxx/thanos-sidecar] level=debug ts=2022-06-09T13:00:10.084904136Z caller=objstore.go:206 msg="uploaded file" from=/data/thanos/upload/BUCKETID/chunks/000001 dst=BUCKETID/chunks/000001 bucket="tracing: kc-thanos-store"
 ```
 
 As an aside, you can validate the prometheus metrics are all configured with correct cluster names with:
