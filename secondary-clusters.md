@@ -1,11 +1,11 @@
-Kubecost Secondary Clusters
-===========================
+Secondary Clusters Guide
+========================
 
-Secondary clusters are "agent only" clusters that send their metrics to a storage-bucket (aka durable storage) that is accessed by the primary cluster to provide a ___single-pane-of-glass___ view into all aggregated cluster costs globally. This aggregated cluster view is exclusive to `Kubecost Enterprise`.
+Secondary clusters are "agent only" clusters that send their metrics to a central storage-bucket (aka durable storage) that is accessed by the primary cluster to provide a ___single-pane-of-glass___ view into all aggregated cluster costs globally. This aggregated cluster view is exclusive to `Kubecost Enterprise`.
 
 > Note: The UI on secondary clusters will appear broken. It meant for troubleshooting only.
 
-This guide explains settings that can be tuned in order to run the minimum Kubecost components to run more efficiently.
+This guide explains settings that can be tuned in order to run the minimum Kubecost components to run Kubecost more efficiently.
 
 ## Kubecost Global
 
@@ -50,7 +50,9 @@ Disable alertmanager:
 
 ## Thanos
 
-Disable Thanos components. These are only used for troubleshooting on secondary clusters. They will still write to the global storage-bucket via the thanos-sidecar on the prometheus-server pod.
+Disable Thanos components. These are only used for troubleshooting on secondary clusters. See this guide for [troubleshooting via kubectl logs](https://guide.kubecost.com/hc/en-us/articles/4407595964695-Long-Term-Storage#troubleshooting).
+
+> Note: Secondary clusters write to the global storage-bucket via the thanos-sidecar on the prometheus-server pod.
 
 ```sh
 --set thanos.compact.enabled=false
@@ -90,8 +92,6 @@ prometheus:
         # cluster_id should be unique for all clusters and the same value as .kubecostProductConfigs.clusterName
         cluster_id: clusterName
     retention: 2d
-  alertmanager:
-    enabled: false
   # nodeExporter:
   #   enabled: false
   # serviceAccounts:
