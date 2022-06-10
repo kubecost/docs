@@ -42,12 +42,6 @@ Potentially reduce retention even further, metrics are sent to the storage-bucke
 
 You can tune prometheus.server.persistentVolume.size depending on scale, or outright disable persistent storage.
 
-Disable alertmanager:
-
-```bash
---set prometheus.alertmanager.enabled=false
-```
-
 ## Thanos
 
 Disable Thanos components. These are only used for troubleshooting on secondary clusters. See this guide for [troubleshooting via kubectl logs](https://guide.kubecost.com/hc/en-us/articles/4407595964695-Long-Term-Storage#troubleshooting).
