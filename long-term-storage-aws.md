@@ -7,7 +7,7 @@ AWS Multi-Cluster Storage Configuration
 * [Kubernetes Secret Method](#secret)
 * [Attach IAM role to Service Account Method](#attach-role)
 * [Thanos Encryption With S3 and KMS](#encyption)
-* [Troubleshooting](#troubleshooting)
+* [Troubleshooting](https://guide.kubecost.com/hc/en-us/articles/4407595964695-Long-Term-Storage#troubleshooting)
 * [Additional Help](#help)
 
 ## <a name="overview"></a>AWS/S3 Federation
@@ -95,56 +95,15 @@ You can encrypt the S3 bucket where Kubecost data is stored in AWS via S3 and KM
 
 * <https://docs.aws.amazon.com/AmazonS3/latest/userguide/configuring-bucket-key-object.html>
 
-## <a name="troubleshooting"></a>Troubleshooting
-
-Thanos sends data to the bucket every 2 hours. Once 2 hours has passed, logs should indicate if data has been sent successfully or not.
-
-You can monitor the logs with:
-```bash
-kubectl logs --namespace kubecost -l app=prometheus -l component=server --prefix=true --container thanos-sidecar --tail=-1 | grep uploaded
-```
-
-Should return results like this:
-
-```log
-[pod/kubecost-prometheus-server-xxx/thanos-sidecar] level=debug ts=2022-06-09T13:00:10.084904136Z caller=objstore.go:206 msg="uploaded file" from=/data/thanos/upload/BUCKETID/chunks/000001 dst=BUCKETID/chunks/000001 bucket="tracing: kc-thanos-store"
-```
-
-As an aside, you can validate the prometheus metrics are all configured with correct cluster names with:
-
-```bash
-kubectl logs --namespace kubecost -l app=prometheus -l component=server --prefix=true --container thanos-sidecar --tail=-1 | grep external_labels
-```
-
-To troubleshoot the IAM Role Attached to the serviceaccount, you can create a pod using the same service account used by the thanos-sidecar (default is `kubecost-prometheus-server`):
-
-`s3-pod.yaml`
-```yaml
-apiVersion: v1
-kind: Pod
-metadata:
-  labels:
-    run: s3-pod
-  name: s3-pod
-spec:
-  serviceAccountName: kubecost-prometheus-server
-  containers:
-  - image: amazon/aws-cli
-    name: my-aws-cli
-    command: ['sleep', '500']
-```
-
-```bash
-kubectl apply -f s3-pod.yaml
-kubectl exec -i -t s3-pod -- aws s3 ls s3://kc-thanos-store
-```
-This should return a list of objects (or at least not give a permission error).
 
 ## <a name="help"></a>Additional Help
 Please let us know if you run into any issues, we are here to help.
 
 [Slack community](https://join.slack.com/t/kubecost/shared_invite/enQtNTA2MjQ1NDUyODE5LWFjYzIzNWE4MDkzMmUyZGU4NjkwMzMyMjIyM2E0NGNmYjExZjBiNjk1YzY5ZDI0ZTNhZDg4NjlkMGRkYzFlZTU) - check out #support for any help you may need & drop your introduction in the #general channel
 
+Email: <team@kubecost.com>
+
+---
 Edit this doc on [GitHub](https://github.com/kubecost/docs/blob/main/long-term-storage-aws.md)
 
 <!--- {"article":"4407595952151","section":"4402829036567","permissiongroup":"1500001277122"} --->
