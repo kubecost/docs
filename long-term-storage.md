@@ -1,18 +1,21 @@
-Long Term Storage
-=================
+Multi-Cluster / Long Term Storage
+=================================
 
-To enable 90+ days of data retention in Kubecost, we recommend deploying with durable storage enabled. We provide two options for doing this: 1) in your cluster and 2) out of the cluster. This functionality also powers the Enterprise multi-cluster view, where data across clusters can be viewed in aggregate, as well as simple backup & restore capabilities.
+Kubecost leverages Thanos to enable durable storage for three different purposes:
+
+1. Centralize metric data for a global multi-cluster view into Kubernetes costs via a Prometheus sidecar
+1. Allow for unlimited data retention
+1. Backup Kubecost [ETL data](https://guide.kubecost.com/hc/en-us/articles/4407601815191-ETL-S3-Backup)
 
 > Note: This feature requires an [Enterprise license](https://kubecost.com/pricing).
 
-Out of cluster storage (Thanos)
-
-Thanos-based durable storage provides long-term metric retention directly in a user-controlled bucket (e.g. S3 or GCS bucket) and can be enabled with the following steps:
-
+To enable Thanos, follow these steps:
 ### Step 1: <a name="storage"></a>Create object-store.yaml
 
 This step creates the object-store.yaml file that contains your durable storage target (e.g. GCS, S3, etc.) configuration and access credentials.
 The details of this file are documented thoroughly in [Thanos documentation](https://thanos.io/tip/thanos/storage.md/).
+
+We have guides for using cloud-native storage for the largest cloud providers. Other providers can be similarly configured.
 
 Use the appropriate guide for your cloud provider:
 * [Google Cloud Storage](https://github.com/kubecost/docs/blob/main/long-term-storage-gcp.md)
@@ -21,7 +24,7 @@ Use the appropriate guide for your cloud provider:
 
 ### <a name="secret"></a>Step 2: Create object-store secret
 
-The final step prior to installation is to create a secret with the yaml file generated in the previous step:
+Create a secret with the yaml file generated in the previous step:
 
 ```shell
 kubectl create secret generic kubecost-thanos -n kubecost --from-file=./object-store.yaml
@@ -31,39 +34,33 @@ kubectl create secret generic kubecost-thanos -n kubecost --from-file=./object-s
 
 Each cluster needs to be labelled with a unique Cluster ID, this is done in two places.
 
-`values.yaml`
+`values-clusterName.yaml`
 ```yaml
 kubecostProductConfigs:
-  projectID: kubecostProductConfigs_clusterName
+  projectID: yourClusterName
 prometheus:
   server:
     global:
       external_labels:
-        cluster_id: kubecostProductConfigs_clusterName
+        cluster_id: yourClusterName
 ```
 
 ### <a name="deploy"></a>Step 4: Deploying Kubecost with Thanos
 
-The Thanos subchart includes `thanos-bucket`, `thanos-query`, `thanos-store`,  `thanos-compact`, and service discovery for `thanos-sidecar`. These components are recommended when deploying Thanos on multiple clusters.
+The Thanos subchart includes `thanos-bucket`, `thanos-query`, `thanos-store`,  `thanos-compact`, and service discovery for `thanos-sidecar`. These components are recommended when deploying Thanos on the primary cluster.
 
-These values can be adjusted under the `thanos` block in `values-thanos.yaml` - Available options can be observed here: [thanos/values.yaml](https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/charts/thanos/values.yaml)
+These values can be adjusted under the `thanos` block in `values-thanos.yaml` - Available options are here: [thanos/values.yaml](https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/charts/thanos/values.yaml)
 
-It's *important* to note that when running `helm install`, you must provide the base `values.yaml` followed by the override [values-thanos.yaml](https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/values-thanos.yaml). For example:
 
 ```shell
 helm upgrade kubecost kubecost/cost-analyzer \
     --install \
     --namespace kubecost \
-    -f values.yaml \
-    -f https://raw.githubusercontent.com/kubecost/cost-analyzer-helm-chart/master/cost-analyzer/charts/thanos/values.yaml
+    -f https://raw.githubusercontent.com/kubecost/cost-analyzer-helm-chart/master/cost-analyzer/charts/thanos/values.yaml \
+    -f values-clusterName.yaml
 ```
 
-Your deployment should now have Thanos enabled!
-
-> Note: If you need to delete a previous install of kubecost, do this before creating the secret in step 2
-
-> Note: The `thanos-store` pod is by default configured to request 2.5GB memory. See
-
+> Note: The `thanos-store` container is configured to request 2.5GB memory, this may be reduced for smaller deployments. `thanos-store` is only used on the primary Kubecost cluster.
 
 ### <a name="troubleshooting"></a>Troubleshooting
 
