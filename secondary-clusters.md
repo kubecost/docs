@@ -1,7 +1,7 @@
 Secondary Clusters Guide
 ========================
 
-Secondary clusters are "agent only" clusters that send their metrics to a central storage-bucket (aka durable storage) that is accessed by the primary cluster to provide a ___single-pane-of-glass___ view into all aggregated cluster costs globally. This aggregated cluster view is exclusive to `Kubecost Enterprise`.
+Secondary clusters are use a minimal kubecost deployment to send their metrics to a central storage-bucket (aka durable storage) that is accessed by the primary cluster to provide a ___single-pane-of-glass___ view into all aggregated cluster costs globally. This aggregated cluster view is exclusive to `Kubecost Enterprise`.
 
 > Note: The UI on secondary clusters will appear broken. It meant for troubleshooting only.
 
