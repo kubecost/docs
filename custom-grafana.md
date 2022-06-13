@@ -35,3 +35,4 @@ Note that with Option 2, the Kubecost UI cannot link to the Grafana dashboards u
 
 Edit this doc on [GitHub](https://github.com/kubecost/docs/blob/main/custom-grafana.md)
 
+<!--- {"article":"6737508001687","section":"1500002777682","permissiongroup":"1500001277122"} --->
