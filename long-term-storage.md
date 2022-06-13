@@ -10,7 +10,7 @@ Kubecost leverages Thanos to enable durable storage for three different purposes
 > Note: This feature requires an [Enterprise license](https://kubecost.com/pricing).
 
 To enable Thanos, follow these steps:
-### Step 1: <a name="storage"></a>Create object-store.yaml
+## Step 1: <a name="storage"></a>Create object-store.yaml
 
 This step creates the object-store.yaml file that contains your durable storage target (e.g. GCS, S3, etc.) configuration and access credentials.
 The details of this file are documented thoroughly in [Thanos documentation](https://thanos.io/tip/thanos/storage.md/).
@@ -22,7 +22,7 @@ Use the appropriate guide for your cloud provider:
 * [AWS/S3](https://github.com/kubecost/docs/blob/main/long-term-storage-aws.md)
 * [Azure](https://github.com/kubecost/docs/blob/main/long-term-storage-azure.md)
 
-### <a name="secret"></a>Step 2: Create object-store secret
+## <a name="secret"></a>Step 2: Create object-store secret
 
 Create a secret with the yaml file generated in the previous step:
 
@@ -30,22 +30,22 @@ Create a secret with the yaml file generated in the previous step:
 kubectl create secret generic kubecost-thanos -n kubecost --from-file=./object-store.yaml
 ```
 
-### <a name="cluster_id"></a>Step 3: Unique Cluster ID
+## <a name="cluster_id"></a>Step 3: Unique Cluster ID
 
 Each cluster needs to be labelled with a unique Cluster ID, this is done in two places.
 
 `values-clusterName.yaml`
 ```yaml
 kubecostProductConfigs:
-  projectID: yourClusterName
+  clusterName: kubecostProductConfigs_clusterName
 prometheus:
   server:
     global:
       external_labels:
-        cluster_id: yourClusterName
+        cluster_id: kubecostProductConfigs_clusterName
 ```
 
-### <a name="deploy"></a>Step 4: Deploying Kubecost with Thanos
+## <a name="deploy"></a>Step 4: Deploying Kubecost with Thanos
 
 The Thanos subchart includes `thanos-bucket`, `thanos-query`, `thanos-store`,  `thanos-compact`, and service discovery for `thanos-sidecar`. These components are recommended when deploying Thanos on the primary cluster.
 
@@ -56,13 +56,15 @@ These values can be adjusted under the `thanos` block in `values-thanos.yaml` - 
 helm upgrade kubecost kubecost/cost-analyzer \
     --install \
     --namespace kubecost \
-    -f https://raw.githubusercontent.com/kubecost/cost-analyzer-helm-chart/master/cost-analyzer/charts/thanos/values.yaml \
+    -f https://raw.githubusercontent.com/kubecost/cost-analyzer-helm-chart/master/cost-analyzer/values-thanos.yaml \
     -f values-clusterName.yaml
 ```
 
 > Note: The `thanos-store` container is configured to request 2.5GB memory, this may be reduced for smaller deployments. `thanos-store` is only used on the primary Kubecost cluster.
 
-### <a name="troubleshooting"></a>Troubleshooting
+To verify installation, check to see all pods are in a READY state. View pod logs for more detail and see common troubleshooting steps below.
+
+## <a name="troubleshooting"></a>Troubleshooting
 
 Thanos sends data to the bucket every 2 hours. Once 2 hours has passed, logs should indicate if data has been sent successfully or not.
 
@@ -107,7 +109,7 @@ kubectl exec -i -t s3-pod -- aws s3 ls s3://kc-thanos-store
 ```
 This should return a list of objects (or at least not give a permission error).
 
-#### Cluster not writing data to thanos bucket
+### Cluster not writing data to thanos bucket
 
 If a cluster is not successfully writing data to the bucket, we recommend reviewing `thanos-sidecar` logs with the following command:
 
@@ -121,7 +123,7 @@ Logs in the following format are evidence of a successful bucket write:
 level=debug ts=2019-12-20T20:38:32.288251067Z caller=objstore.go:91 msg="uploaded file" from=/data/thanos/upload/BUCKET-ID/meta.json dst=debug/metas/BUCKET-ID.json bucket=kc-thanos
 ```
 
-#### Stores not listed at the `/stores` endpoint
+### Stores not listed at the `/stores` endpoint
 
 If thanos-query can't connect to both the sidecar and the store, you may want to directly specify the store gRPC service address instead of using DNS discovery (the default). You can quickly test if this is the issue by running
 
@@ -166,8 +168,9 @@ thanos:
       <b>- "kubecost-thanos-store-grpc.kubecost:10901"</b>
 </pre>
 
-#### <a name="verify-thanos"></a>Verify Thanos Installation
-In order to verify a correct installation, start by ensuring all pods are running without issue. If the pods mentioned above are not running successfully, then view pod logs for more detail. A common error is as follows, which means you do not have the correct access to the supplied bucket:
+### <a name="verify-thanos"></a>Additional Troubleshooting
+
+A common error is as follows, which means you do not have the correct access to the supplied bucket:
 
 ```text
 thanos-svc-account@project-227514.iam.gserviceaccount.com does not have storage.objects.list access to thanos-bucket., forbidden"

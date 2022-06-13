@@ -1,7 +1,7 @@
 Secondary Clusters Guide
 ========================
 
-Secondary clusters are use a minimal kubecost deployment to send their metrics to a central storage-bucket (aka durable storage) that is accessed by the primary cluster to provide a ___single-pane-of-glass___ view into all aggregated cluster costs globally. This aggregated cluster view is exclusive to `Kubecost Enterprise`.
+Secondary clusters use a minimal Kubecost deployment to send their metrics to a central storage-bucket (aka durable storage) that is accessed by the primary cluster to provide a ___single-pane-of-glass___ view into all aggregated cluster costs globally. This aggregated cluster view is exclusive to `Kubecost Enterprise`.
 
 > Note: The UI on secondary clusters will appear broken. It meant for troubleshooting only.
 
@@ -70,6 +70,7 @@ For reference, this is a list of the most common settings for efficient secondar
 `secondary-clusters.yaml`
 ```yaml
 kubecostModel:
+  clusterName: kubecostProductConfigs_clusterName
   warmCache: false
   warmSavingsCache: false
   etl: false
@@ -84,7 +85,7 @@ prometheus:
     global:
       external_labels:
         # cluster_id should be unique for all clusters and the same value as .kubecostProductConfigs.clusterName
-        cluster_id: clusterName
+        cluster_id: kubecostProductConfigs_clusterName
     retention: 2d
   # nodeExporter:
   #   enabled: false

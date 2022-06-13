@@ -35,7 +35,7 @@ config:
   bucket: "kc-thanos-store"
   endpoint: "s3.amazonaws.com"
   region: "us-east-1"
-  access_key: "<your-access-key"
+  access_key: "<your-access-key>"
   secret_key: "<your-secret-key>"
   insecure: false
   signature_version2: false
@@ -81,9 +81,13 @@ Then, follow the guide at [https://docs.aws.amazon.com/eks/latest/userguide/enab
 You can define the IAM role to associate with a service account in your cluster by creating a service account in the same namespace as kubecost and adding an annotation to it of the form `eks.amazonaws.com/role-arn: arn:aws:iam::<AWS_ACCOUNT_ID>:role/<IAM_ROLE_NAME>`
 as described here: [https://docs.aws.amazon.com/eks/latest/userguide/specify-service-account-role.html](https://docs.aws.amazon.com/eks/latest/userguide/specify-service-account-role.html)
 
-Once that annotation has been created and set, you'll need to attach it to the Prometheus pod, the Thanos compact pod, and the Thanos store pod.
-For prometheus, set .Values.prometheus.serviceAccounts.server.create to false, and .Values.prometheus.serviceAccounts.server.name to the name of your created service account
-For thanos set `.Values.thanos.compact.serviceAccount`, and `.Values.thanos.store.serviceAccount` to the name of your created service account.
+Once that annotation has been created, configure the following:
+```yaml
+.Values.prometheus.serviceAccounts.server.create: false
+.Values.prometheus.serviceAccounts.server.name: serviceAccount # to the name of your created service account
+.Values.thanos.compact.serviceAccount: serviceAccount
+.Values.thanos.store.serviceAccount: serviceAccount
+```
 
 ## <a name="encryption"></a>Thanos Encryption With S3 and KMS
 
