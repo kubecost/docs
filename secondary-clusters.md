@@ -1,11 +1,13 @@
 Secondary Clusters Guide
-========================
+===================
 
 Secondary clusters use a minimal Kubecost deployment to send their metrics to a central storage-bucket (aka durable storage) that is accessed by the primary cluster to provide a ___single-pane-of-glass___ view into all aggregated cluster costs globally. This aggregated cluster view is exclusive to `Kubecost Enterprise`.
 
 > Note: The UI on secondary clusters will appear broken. It meant for troubleshooting only.
 
-This guide explains settings that can be tuned in order to run the minimum Kubecost components to run Kubecost more efficiently.
+This guide explains settings that can be tuned in order to run the minimum Kubecost components to run Kubecost more efficiently. 
+
+See the <a href="https://guide.kubecost.com/hc/en-us/articles/4423256582551-Kubecost-Secondary-Clusters#additional-resources">additional resources</a> section below for complete examples in our github repo.
 
 ## Kubecost Global
 
@@ -115,7 +117,8 @@ Additional considerations are here: <https://guide.kubecost.com/hc/en-us/article
 
 There are potentially other configuration options based on the specifics of different deployment requirements. Reach out to us below if you have any questions.
 
-## <a name="help"></a>Additional Help
+## Help
+<a name="help"></a>
 Please let us know if you run into any issues, we are here to help!
 
 [Slack community](https://join.slack.com/t/kubecost/shared_invite/enQtNTA2MjQ1NDUyODE5LWFjYzIzNWE4MDkzMmUyZGU4NjkwMzMyMjIyM2E0NGNmYjExZjBiNjk1YzY5ZDI0ZTNhZDg4NjlkMGRkYzFlZTU) - check out #support for any help you may need & drop your introduction in the #general channel
