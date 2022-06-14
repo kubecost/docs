@@ -10,7 +10,7 @@ Your user will need necessary permissions to create the Cost and Usage Report, a
 # Cost and Usage Report Integration
 
 ## Step 1: Setting up the CUR
-Follow these steps to set up a Cost and Usage Report. Be sure to enable Resource Ids and Athena integration when creating the CUR.
+Follow these steps to set up a Cost and Usage Report. For time granularity, select Daily. Be sure to enable Resource Ids and Athena integration when creating the CUR.
 [https://docs.aws.amazon.com/cur/latest/userguide/cur-create.html](https://docs.aws.amazon.com/cur/latest/userguide/cur-create.html)
 
 > Note the name of the bucket you create for CUR data. This will be used in the following step.
