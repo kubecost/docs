@@ -69,8 +69,9 @@ For reference, this is a list of the most common settings for efficient secondar
 
 `secondary-clusters.yaml`
 ```yaml
-kubecostModel:
+kubecostProductConfigs:
   clusterName: kubecostProductConfigs_clusterName
+kubecostModel:
   warmCache: false
   warmSavingsCache: false
   etl: false
