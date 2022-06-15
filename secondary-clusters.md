@@ -128,5 +128,4 @@ Email: <team@kubecost.com>
 ---
 Edit this doc on [GitHub](https://github.com/kubecost/docs/blob/main/secondary-clusters.md)
 
-
-<!--- {"article":"4423256582551","section":"4402829033367","permissiongroup":"1500001277122"} --->
+<!--- {"article":"4423256582551","section":"4402815636375","permissiongroup":"1500001277122"} --->
