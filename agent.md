@@ -10,11 +10,13 @@ The name of the storage key file provided by the kubecost team will have the nam
 > Note: integration with CI/CD tools is certainly possible, but we recommend following this guide as closely as possible to ensure a successful deployment.
 
 1. Add the kubecost helm repository:
+
 ```bash
 helm repo add kubecost https://kubecost.github.io/cost-analyzer/
 ```
 
 2. The following will install the kubecost agent and required components using the provided `kubecost-agent.key` (ensure the key file is in the current file directory):
+
 ```bash
 helm upgrade --install kubecost kubecost/cost-analyzer \
   --namespace kubecost-agent --create-namespace\
@@ -26,6 +28,7 @@ helm upgrade --install kubecost kubecost/cost-analyzer \
   --set networkCosts.enabled=true \
   --set-file agentKey="kubecost-agent.key"
 ```
+
 This step will install:
 * kubecost-agent deployment and service
 * prometheus-server deployment and service
@@ -34,7 +37,9 @@ This step will install:
 
 ## Additional Clusters
 
-For multi-cluster setups, all additional cluster installs would use the following install command:
+For multi-cluster setups, all additional cluster installs would use the following install command.
+
+Please ensure CLUSTER_NAME is unique per cluster.
 
 ```bash
 helm upgrade --install kubecost kubecost/cost-analyzer \
@@ -50,14 +55,26 @@ helm upgrade --install kubecost kubecost/cost-analyzer \
   --set-file agentKey="kubecost-agent.key"
 ```
 
-3. Confirm with Kubecost team on successful deployment, which will then provide access to the hosted UI: `https://<your-organization>.kubecost.io` which can be used to access all exported data.
+## Accessing the Kubecost UI
+
+Confirm with Kubecost team on successful deployment, which will then provide access to the hosted UI: `https://<your-organization>.kubecost.io` which can be used to access all exported data.
 
 > Note: Metrics are shipped every 2 hours, a delay is expected when viewing on the UI.
 
 
 ## Troubleshooting Agent Deployments
 
-It is common to have prometheus errors when the kubecost-agent pod starts. They should not continue after the kubecost-prometheus-server pod is ready.
+Check to see all pods are ready:
+
+```bash
+kubectl get pods -n kubecost-agent
+NAME                                          READY   STATUS    RESTARTS   AGE
+kubecost-agent-7665c6fc47-dmrhj               1/1     Running   0          25h
+kubecost-network-costs-hln2w                  1/1     Running   0          25h
+kubecost-prometheus-server-596b9bb9bb-pr4vz   3/3     Running   0          25h
+```
+
+Check the container logs- it is common to have prometheus errors when the kubecost-agent pod starts. They should not continue after the kubecost-prometheus-server pod is ready.
 
 For further troubleshooting, the Kubecost team may ask for the container logs.
 
