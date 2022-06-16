@@ -1,20 +1,18 @@
 Kubernetes Cost Allocation
 ==========================
 
-# Kubernetes Cost Allocation
-
 The Kubecost Allocation view allows you to quickly see allocated spend across all native Kubernetes concepts, e.g. namespace, k8s label, and service. It also allows for allocating cost to organizational concepts like team, product/project, department, or environment. This document explains the metrics presented and describes how you can control the data displayed in this view.
 
-![Cost allocation view](./images/cost-allocation.png)
+![Cost allocation view](https://raw.githubusercontent.com/kubecost/docs/main/images/cost-allocation.png)
 
 
 ### Date Range 
-![Date Picker](./images/cost-allocation-date-picker.png)
+![Date Picker](https://raw.githubusercontent.com/kubecost/docs/main/images/cost-allocation-date-picker.png)
 
 Select the Date Range of the report, using common Date Range options or by setting specific start and end dates.
 
 ### Breakdown
-![Breakdown](./images/cost-allocation-breakdown.png)
+![Breakdown](https://raw.githubusercontent.com/kubecost/docs/main/images/cost-allocation-breakdown.png)
 
 Aggregate cost by namespace, deployment, service, and other native Kubernetes concepts. 
 
@@ -32,7 +30,7 @@ kubectl get pods --show-labels -n <TARGET_NAMESPACE>
 
 ### Additional Options
 
-![Options](./images/cost-allocation-options.png)
+![Options](https://raw.githubusercontent.com/kubecost/docs/main/images/cost-allocation-options.png)
 
 #### Idle Cost  
 Allocating idle costs proportionately distributes slack or idle _cluster costs_ to tenants. Specifically, this applies to resources that are provisioned but not being fully used or requested by a tenant. As an example, if your cluster is only 25% utilized, as measured by the max of resource usage and requests, applying idle costs would proportionately increase the cost of each pod/namespace/deployment by 4x. This feature can be enabled by default in Settings.
@@ -61,12 +59,12 @@ For more information, refer to this [FAQ](https://github.com/kubecost/cost-model
 #### Filter  
 Filter resources by namespace, clusterId, and Kubernetes label to more closely investigate a rise in spend or key cost drivers at different aggregations, e.g. Deployments or Pods. When a filter is applied, only resources with this matching value will be shown. These filters are also applied to external out-of-cluster asset tags. Supported filters are as follows:
 
-| Fitler 	| Description         	|
-|--------------------	|---------------------	|
-| Namespace        	|  Limit results to workloads in a set of namespaces. |
-| ClusterID        	|  Limit results to workloads in a set of clusters with matching IDs. Note: clusterID is passed in _values_ at install-time. |
-| Label        	   |  Limit results to workloads with matching Kubernetes labels. Namespace labels are applied to all of its workloads. Supports filtering by `__unallocated__` field as well|
-| Pod Prefix        	|  Limit results to workloads that begin with this string. |
+| Fitler | Description |
+|--------------------|---------------------|
+| Namespace |  Limit results to workloads in a set of namespaces. |
+| ClusterID |  Limit results to workloads in a set of clusters with matching IDs. Note: clusterID is passed in _values_ at install-time. |
+| Label |  Limit results to workloads with matching Kubernetes labels. Namespace labels are applied to all of its workloads. Supports filtering by `__unallocated__` field as well |
+| Pod Prefix |  Limit results to workloads that begin with this string. |
 
 Comma-separated lists are supported to filter by multiple categories, e.g. namespace filter equals `kube-system,kubecost`
    
@@ -76,7 +74,7 @@ Select how shared costs set on the settings page will be shared among allocation
 
 
 ### Save, Load and Download
-![Save/Load/Download](./images/cost-allocation-icons.png)
+![Save/Load/Download](https://raw.githubusercontent.com/kubecost/docs/main/images/cost-allocation-icons.png)
 
 Use these icons to save report settings or load reports that you have saved in the past. You can also download a report in CSV format.
 
@@ -84,18 +82,18 @@ Use these icons to save report settings or load reports that you have saved in t
 
 Cost allocation metrics are available for both in-cluster and out-of-cluster resources. Here are short descriptions of each metric:
 
-| Metric 	| Description         	|
-|--------------------	|---------------------	|
-| Memory cost        	| The total cost of memory allocated to this object, e.g. namespace or deployment. The amount of memory allocation is equal to the maximum of memory used and memory requested over the measured time window. The price of allocated memory is based on cloud billing APIs or custom pricing sheets. [Learn more](https://github.com/kubecost/cost-model#questions)|
-| CPU Cost        	| The total cost of CPU allocated to this object, e.g. namespace or deployment. The amount of CPU allocated is the greater of CPU usage and CPU requested over the measured time window. The price of the allocated CPU is based on cloud billing APIs or custom pricing sheets. [Learn more](https://github.com/kubecost/cost-model#questions) |
-| Cost Efficiency        	| The percentage of requested CPU & memory dollars utilized over the measured time window. Values range from 0 to above 100 percent. Workloads with no requests but with usage OR workloads with usage > request can report efficiency above 100%. [View Example](https://docs.google.com/spreadsheets/d/15CL2YrJHIcQyDMHu3vB3jXdTdcqEntawmy5T3zsVZ_g/edit#gid=0)|
-| Network Cost        	| The cost of network traffic based on internet egress, cross-zone egress, and other billed transfer. Note: these costs must be enabled. [Learn more](http://docs.kubecost.com/network-allocation)|
-| PV Cost        	| The cost of persistent storage volumes claimed by this object. Prices are based on cloud billing prices or custom pricing sheets for on-prem deployments. |
-| GPU Cost        	| The cost of GPUs requested by this object, as measured by [resource limits](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/). Prices are based on cloud billing prices or custom pricing sheets for on-prem deployments. |
-| Shared Cost        	| The cost of shared resources allocated to this tenant. This field covers shared overhead, shared namespaces, and shared labels. |
-| External Cost        	| The cost of out-of-cluster resources allocated to this object. For example, S3 buckets allocated to a particular Kubernetes deployment. Prices are based on cloud billing data and require a key. This feature is currently available for AWS ([learn more](http://docs.kubecost.com/aws-out-of-cluster.html)), GCP ([learn more](http://docs.kubecost.com/gcp-out-of-cluster.html)) and Azure ([learn more](https://github.com/kubecost/docs/blob/master/azure-out-of-cluster.md)). |
+| Metric | Description |
+|-------------------|---------------------|
+| Memory cost | The total cost of memory allocated to this object, e.g. namespace or deployment. The amount of memory allocated is the greater of memory usage and memory requested over the measured time window. The price of allocated memory is based on cloud billing APIs or custom pricing sheets. [Learn more](https://github.com/kubecost/cost-model#questions) |
+| CPU Cost | The total cost of CPU allocated to this object, e.g. namespace or deployment. The amount of CPU allocated is the greater of CPU usage and CPU requested over the measured time window. The price of allocated CPU is based on cloud billing APIs or custom pricing sheets. [Learn more](https://github.com/kubecost/cost-model#questions) |
+| Cost Efficiency | The percentage of requested CPU & memory dollars utilized over the measured time window. Values range from 0 to above 100 percent. Workloads with no requests but with usage OR workloads with usage > request can report efficiency above 100%. [View Example](https://docs.google.com/spreadsheets/d/15CL2YrJHIcQyDMHu3vB3jXdTdcqEntawmy5T3zsVZ_g/edit#gid=0)|
+| Network Cost | The cost of network traffic based on internet egress, cross-zone egress, and other billed transfer. Note: these costs must be enabled. [Learn more](http://docs.kubecost.com/network-allocation) |
+| PV Cost | The cost of persistent storage volumes claimed by this object. Prices are based on cloud billing prices or custom pricing sheets for on-prem deployments. |
+| GPU Cost | The cost of GPUs requested by this object, as measured by [resource limits](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/). Prices are based on cloud billing prices or custom pricing sheets for on-prem deployments. |
+| Shared Cost | The cost of shared resources allocated to this tenant. This field covers shared overhead, shared namespaces, and shared labels. |
+| External Cost | The cost of out-of-cluster resources allocated to this object. For example, S3 buckets allocated to a particular Kubernetes deployment. Prices are based on cloud billing data and require a key. This feature is currently available for AWS ([learn more](http://docs.kubecost.com/aws-out-of-cluster.html)), GCP ([learn more](http://docs.kubecost.com/gcp-out-of-cluster.html)) and Azure ([learn more](https://github.com/kubecost/docs/blob/main/azure-out-of-cluster.md)). |
 
 
-Edit this doc on [Github](https://github.com/kubecost/docs/blob/main/cost-allocation.md)
+Edit this doc on [GitHub](https://github.com/kubecost/docs/blob/main/cost-allocation.md)
 
 <!--- {"article":"4407601807383","section":"4402829033367","permissiongroup":"1500001277122"} --->

@@ -77,7 +77,7 @@ Kubecost's recommendation as a launching point for a cluster configuration that
 supports your specific needs.
 
 
-Edit this doc on [Github](https://github.com/kubecost/docs/blob/main/spot-cluster-sizing.md)
+Edit this doc on [GitHub](https://github.com/kubecost/docs/blob/main/spot-cluster-sizing.md)
 
 
 <!--- {"article":"4412353032599","section":"4402815656599","permissiongroup":"1500001277122"} --->

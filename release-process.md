@@ -5,7 +5,7 @@ A Kubecost Release is a snapshot of the source, build output, artifacts, and oth
 
 ## Production releases 
 
-* Production releases are scheduled for the 2nd and 4th Tuesday of every month.
+* Production releases are scheduled for the first Tuesday of every month.
 * Patch releases are pushed as needed between scheduled releases.
 * Release notes published [here](https://kubecost.com/releases).
 * Production releases are always generated from Master branches.  
@@ -56,11 +56,11 @@ Or join our Slack workspace - https://kubecost.slack.com
 
 ## Submitting feedback on a release
 
-We always love receiving feedback and feature requests. Please reach out to team@kubecost.com or submit an issue in the respective repo:
+We always love receiving feedback and feature requests. Please reach out to support@kubecost.com or submit an issue in the respective repo:
 
 * If you installed our helm chart, all issues can be filed at https://github.com/kubecost/cost-analyzer-helm-chart
 * If you installed just the open source cost-model, you can file issues at https://github.com/kubecost/cost-model
 
-Edit this doc on [Github](https://github.com/kubecost/docs/blob/main/release-process.md)
+Edit this doc on [GitHub](https://github.com/kubecost/docs/blob/main/release-process.md)
 
 <!--- {"article":"4407601825431","section":"4402829033367","permissiongroup":"1500001277122"} --->

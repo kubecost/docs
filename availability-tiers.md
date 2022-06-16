@@ -14,8 +14,8 @@ Tier | Priority | Default
 
 To apply a namespace tier, add a `tier` namespace label to reflect the desired value.
 
-Have questions or feedback? Contact us at <team@kubecost.com>.
+Have questions or feedback? Contact us at <support@kubecost.com>.
 
-Edit this doc on [Github](https://github.com/kubecost/docs/blob/main/availability-tiers.md)
+Edit this doc on [GitHub](https://github.com/kubecost/docs/blob/main/availability-tiers.md)
 
 <!--- {"article":"4407595926423","section":"4402815656599","permissiongroup":"1500001277122"} --->

@@ -1,8 +1,6 @@
 Network Traffic Cost Allocation
 ===============================
 
-# Network Traffic Cost Allocation
-
 This document summarizes Kubecost network cost allocation, how to enable it, and what it provides.
 
 When this feature is enabled, Kubecost gathers network traffic metrics in combination with provider-specific network costs to provide insight on network data sources as well as the aggregate costs of transfers.
@@ -58,8 +56,8 @@ Common issues:
 
 * Resource usage is a function of unique src and dest IP/port combinations. Most deployments use a small fraction of a CPU and it is also ok to have this pod CPU throttled. Throttling should increase parse times but should not have other impacts. The following Prometheus metrics are available in v15.3 for determining the scale and the impact of throttling:
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; `kubecost_network_costs_parsed_entries` is the last number of conntrack entries parsed  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; `kubecost_network_costs_parse_time` is the last recorded parse time  
+`kubecost_network_costs_parsed_entries` is the last number of conntrack entries parsed  
+`kubecost_network_costs_parse_time` is the last recorded parse time  
 
 ### Feature Limitations
 
@@ -68,6 +66,6 @@ Common issues:
 * Daemonsets have shared IP addresses on certain clusters  
 
 
-Edit this doc on [Github](https://github.com/kubecost/docs/blob/main/network-allocation.md)
+Edit this doc on [GitHub](https://github.com/kubecost/docs/blob/main/network-allocation.md)
 
 <!--- {"article":"4407595973527","section":"4402815636375","permissiongroup":"1500001277122"} --->

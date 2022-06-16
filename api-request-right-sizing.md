@@ -1,7 +1,7 @@
-Container Request Right-Sizing API
+Container Request Right-Sizing Recommendation API
 ==================================
 
-The container request right-sizing API provides recommendations for
+The container request right-sizing recommendation API provides recommendations for
 [container resource requests](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/)
 based on configurable parameters and estimates the savings from implementing those recommendations
 on a per-container, per-controller level. Of course, if the cluster-level resources stay static then
@@ -20,7 +20,7 @@ http://<kubecost-address>/model/savings/requestSizing
 |------|------|-------------|
 | `targetCPUUtilization` | float in the range (0,1] | An amount of headroom to enforce with the new request, based on the calculated (real) usage. If the calculated usage is, for example, 100 mCPU and this parameter is `0.8`, the recommended CPU request will be `100 / 0.8 = 125` mCPU. Inputs that fail to parse (see https://pkg.go.dev/strconv#ParseFloat) or are greater than 1 will not error; they will instead default to your savings profile's default value. If you have not changed the profile, this is  `0.65`.|
 | `targetRAMUtilization` | float in the range (0,1] | Calculated like CPU. |
-| `window` | string | Duration of time over which to calculate usage. Supports hours or days before the current time in the following format: `2h` or `3d`. See the [Allocation API documentation](https://github.com/kubecost/docs/blob/master/allocation.md#querying) for more a more detailed explanation of valid inputs to `window`. |
+| `window` | string | Duration of time over which to calculate usage. Supports hours or days before the current time in the following format: `2h` or `3d`. See the [Allocation API documentation](https://github.com/kubecost/docs/blob/main/allocation.md#querying) for more a more detailed explanation of valid inputs to `window`. Defaults to `1d`. |
 | `filterClusters` | string | Comma-separated list of clusters to match; e.g. `cluster-one,cluster-two` will return results from only those two clusters. |
 | `filterNodes` | string | Comma-separated list of nodes to match; e.g. `node-one,node-two` will return results from only those two nodes. |
 | `filterNamespaces` | string | Comma-separated list of namespaces to match; e.g. `namespace-one,namespace-two` will return results from only those two namespaces. |
@@ -35,41 +35,95 @@ http://<kubecost-address>/model/savings/requestSizing
 
 ## Savings Projection Methodology
 
-The request right-sizing recommendation includes an estimate of the savings that can be realized
-by applying the request right-sizing recommendations. To calculate this estimation, we use each
-container's and its parent controller's (Deployment, CronJob, etc.) lifetime in `window`. We assume
-each container will run on the same node (and therefore have the same resource costs) it ran on
-historically; calculate the monthly rate for that container with the new, reduced resource requests;
-and then we scale that monthly rate by `container lifetime in window/controller lifetime in window`.
-Using the controller's lifetime helps to avoid underestimating savings for recently-created controllers.
-If the container doesn't have a controller (e.g. it is in a raw Pod) then the `window` duration is
-substituted for the controller lifetime.
+The request right-sizing recommendation includes an estimate of the savings that
+can be realized by applying the request right-sizing recommendations. To
+calculate this estimation, we use each container's lifetime and the overall data
+window (max observed cluster lifetime within `window`). We assume each container
+will run on the same node (and therefore have the same resource costs) it ran on
+historically; calculate the monthly rate for that container with the new,
+reduced resource requests; and then we scale that monthly rate by `container
+lifetime in window/data window`. This will underestimate savings for
+recently-created controllers (e.g. a Deployment created 3 days ago in a 7-day
+data window will be assumed to run for 3/7 of the next month when calculating
+monthly savings), but avoids some edge cases that vastly overestimate savings.
 
-This logic for estimation assumes that the proportion of time that each container ran
-historically will be the same proportion of time it will run in the future projected month. We think
-this is an effective and easy-to-understand methodology.
+### Savings projection examples
 
-Here are a few limited examples to illustrate the principle. Assume `window=7d` for all queries.
+#### Two Pods, each with their own controller
 
-1. A Deployment created 1 day ago whose Pods have not churned (restarted, etc.)
+We have a 1 hour window with 2 pods that _look_ like they each have
+their own controller. Each pod has 1 container (with the same name).
 
-   Each of Deployment's container's lifetime will be the same as the controller's lifetime, so
-   the calculated monthly rate won't need to be scaled down. In other words, the projected
-   savings assumes each container under the Deployment will run for a whole month.
+All CPU costs are $7/core-hour
 
-2. A CronJob created 5 days ago which runs a single-container Pod for 1 hour, once a day
+Pod 1 ran for 15 minutes [t=15min, t=30min], allocated 3 cores, and
+used an avg and max of 1 core.
 
-   Assuming the CronJob has run 5 times, 5 containers have run (one for each
-   Pod created by the CronJob). Each container's raw monthly cost is scaled by `1 / 24 / 5`.
+Pod 2 ran for 20 minutes [t=45min, t=60min], allocated 3 cores, and
+used an avg and max of 2 cores.
 
-3. A 3-replica Deployment of a single-container Pod created a month ago whose container image
-   was updated 2 days ago
+```
+|   ---      | Pod 1 exists
+|         ---| Pod 2 exists
+|____________|
+  time ->
+|            |
+0 min        60min
+```
 
-   The 3 containers that were running pre-image update will have their projected monthly cost
-   scaled by `5 / 7` and the 3 containers that were running post-image update will have their
-   projected monthly cost scaled by `2 / 7`.
+Window = [0min, 60min]
 
-## Examples
+We'll right-size with a target utilization of 100%:
+- Pod 1 will be right-sized to an allocation of 1 core.
+- Pod 2 will be right-sized to an allocation of 2 cores.
+
+What should the estimated monthly savings of this right-sizing be?
+
+Controller 1 = Pod 1 ran for (15/45) of the known duration of the
+cluster being alive (we don't know if it was alive from [t=0, t=15]).
+That's (45 min / (60 min/hr) / (730 hr/month)) of a month.
+
+Within the query window, the pod could haved saved:
+2 cores * (15min / (60 min/hr)) = 0.5 core-hours
+0.67 core-hours * $7/core-hour = $3.50
+
+"If that 45 minute window is representative for 30 days (730 hrs)
+then we scale the savings by 1 / (45 / 60 / 730)":
+$3.50 * 1 / (45 / 60 / 730) = $3406.67
+
+For Pod 2 = Controller 2 we can take the same numbers from Pod 1 =
+Controller 1 and halve the savings because it has half the CPU core
+savings.
+
+Savings: $3406.67/mo / 2 = $1703.34/mo
+
+Total savings = $3406.67/mo + $1703.34/mo = $5110.01/mo
+
+#### The above, but the Pods share a controller
+
+We resize the shared container to 2 cores, reducing the savings of
+pod 1 to be the same as the savings for pod 2, because both pods had
+the same overall allocation.
+
+Controller 1 = Pod 1 and Pod 2 ran for 45/45 minutes of the known
+duration of the cluster being alive (we don't know if it was alive
+from [t=0, t=15]).
+That's (45 min / (60 min/hr) / (730 hr/month)) of a month.
+
+Within the query window, Pod 1 could haved saved:
+1 cores * (15min / (60 min/hr)) = 0.25 core-hours
+0.25 core-hours * $7/core-hour = $1.75
+
+Pod 2 saves the same amount = $1.75
+
+That's a total savings for the controller of:
+$1.75 * 2 = $3.50
+
+"If that 45 minute window is representative for 30 days (730 hrs)
+then we scale the savings by 1 / (45 / 60 / 730)":
+Total savings = $3.50 * 1 / (45 / 60 / 730) = $3406.67/mo
+
+## API Examples
 
 ```
 KUBECOST_ADDRESS=http://localhost:9090
@@ -81,6 +135,6 @@ curl -G \
   ${KUBECOST_ADDRESS}/model/savings/requestSizing
 ```
 
-Edit this doc on [Github](https://github.com/kubecost/docs/blob/main/api-request-right-sizing.md)
+Edit this doc on [GitHub](https://github.com/kubecost/docs/blob/main/api-request-right-sizing.md)
 
 <!--- {"article":"4407595919895","section":"4402829033367","permissiongroup":"1500001277122"} --->

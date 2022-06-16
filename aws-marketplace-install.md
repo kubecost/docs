@@ -3,7 +3,7 @@ AWS Marketplace Install
 
 This document provides the steps for installing the Kubecost Enterprise product from the AWS marketplace. [More info on different tiers.](https://kubecost.com/pricing)
 
-Please contact us at team@kubecost.com with any questions and we'd be happy to help!
+Please contact us at support@kubecost.com with any questions and we'd be happy to help!
 
 ## Step 1. Create an IAM policy
 
@@ -43,23 +43,19 @@ Access Helm install steps available at [kubecost.com/install](http://kubecost.co
 Supply the following parameters to your _helm install_ command.
 
 ```
---set kubecostModel.image=117940112483.dkr.ecr.us-east-1.amazonaws.com/8cc31d15-33f6-49fe-8d6c-e9c0366cefa0/cg-142668492/gcr.io/kubecost1/cost-model \
---set kubecostFrontend.image=117940112483.dkr.ecr.us-east-1.amazonaws.com/8cc31d15-33f6-49fe-8d6c-e9c0366cefa0/cg-142668492/gcr.io/kubecost1/frontend \
---set kubecost.image=117940112483.dkr.ecr.us-east-1.amazonaws.com/8cc31d15-33f6-49fe-8d6c-e9c0366cefa0/cg-142668492/gcr.io/kubecost1/server \
---set kubecostChecks.enabled=false \
+--set kubecostProductConfigs.productKey.enabled=true \
+--set kubecostProductConfigs.productKey.key="replace-with-product-key" \
 --set prometheus.alertmanager.enabled=false \
 --set prometheus.nodeExporter.enabled=false \
---set imageVersion="1.61.3-latest" \
 --set global.grafana.enabled=false \
 --set global.grafana.proxy=false \
 --set awsstore.useAwsStore=true \
---set awsstore.imageNameAndVersion=117940112483.dkr.ecr.us-east-1.amazonaws.com/8cc31d15-33f6-49fe-8d6c-e9c0366cefa0/cg-142668492/gcr.io/kubecost1/awsstore:1.61.3-latest
+--set awsstore.imageNameAndVersion=gcr.io/kubecost1/awsstore:latest
 ```
 
-To participate in our free Enterprise onboarding program, contact us at team@kubecost.com to schedule these sessions!
+To participate in our free Enterprise onboarding program, contact us at support@kubecost.com to schedule these sessions!
 
 
-
-Edit this doc on [Github](https://github.com/kubecost/docs/blob/main/aws-marketplace-install.md)
+Edit this doc on [GitHub](https://github.com/kubecost/docs/blob/main/aws-marketplace-install.md)
 
 <!--- {"article":"4407596808087","section":"4402829036567","permissiongroup":"1500001277122"} --->

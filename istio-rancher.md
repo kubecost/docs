@@ -19,7 +19,7 @@ The following requirements are given:
 
 
 1.	Istio is activated by editing the namespace. To do this, execute the command
-	`kubectl edit namespace kubecost" and insert the label "istio-injection: enbled`
+	`kubectl edit namespace kubecost` and insert the label `istio-injection: enabled`
 	
 2.	After Istio has been activated, some adjustments must be made to the deployment with
 	`kubectl -n kubecost edit deployment kubecost-cost-analyzer` to allow communication within the namespace, for example, the healtch-check is completed successfully. When editing the deployment, the two annotations must be added: 
@@ -175,7 +175,7 @@ spec:
 After creating the virtual service, Kubcost should be accessible at the Url
 `http(s)://${gateway}/kubecost/`.
 
-Edit this doc on [Github](https://github.com/kubecost/docs/blob/main/istio-rancher.md)
+Edit this doc on [GitHub](https://github.com/kubecost/docs/blob/main/istio-rancher.md)
 
 
 <!--- {"article":"4408175613719","section":"4402815636375","permissiongroup":"1500001277122"} --->
