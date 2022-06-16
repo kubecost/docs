@@ -16,8 +16,8 @@ helm repo add kubecost https://kubecost.github.io/cost-analyzer/
 
 2. The following will install the kubecost agent and required components using the provided `kubecost-agent.key` (ensure the key file is in the current file directory):
 ```bash
-helm install kubecost kubecost/cost-analyzer \
-  --namespace kubecost-agent \
+helm upgrade --install kubecost kubecost/cost-analyzer \
+  --namespace kubecost-agent --create-namespace\
   --values=https://raw.githubusercontent.com/kubecost/cost-analyzer-helm-chart/develop/cost-analyzer/values-agent.yaml \
   --set prometheus.server.global.external_labels.cluster_id=<CLUSTER_NAME> \
   --set kubecostProductConfigs.clusterName=<CLUSTER_NAME> \
@@ -37,8 +37,8 @@ This step will install:
 For multi-cluster setups, all additional cluster installs would use the following install command:
 
 ```bash
-helm install kubecost kubecost/cost-analyzer \
-  --namespace kubecost-agent \
+helm upgrade --install kubecost kubecost/cost-analyzer \
+  --namespace kubecost-agent --create-namespace\
   --values=https://raw.githubusercontent.com/kubecost/cost-analyzer-helm-chart/develop/cost-analyzer/values-agent.yaml \
   --set prometheus.server.global.external_labels.cluster_id=<CLUSTER_NAME> \
   --set kubecostProductConfigs.clusterName=<CLUSTER_NAME> \
@@ -63,10 +63,13 @@ For further troubleshooting, the Kubecost team may ask for the container logs.
 
 `kubecost-agent-logs.sh`
 ```sh
-kubectl logs --namespace kubecost-agent -l app=kubecost-agent --prefix=true --all-containers --tail=-1 >./kubecost_agent_logs.log
+echo "-----------------kubecost-agent logs-----------------" >./kubecost_agent_logs.log
+kubectl logs --namespace kubecost-agent -l app=kubecost-agent --prefix=true --all-containers --tail=-1 >>./kubecost_agent_logs.log
+echo "-----------------kubecost-prometheus logs-----------------" >>./kubecost_agent_logs.log
 kubectl logs --namespace kubecost-agent -l app=prometheus --prefix=true --all-containers --tail=-1 >>./kubecost_agent_logs.log
+
 # Not generally needed: kubectl logs --namespace kubecost-agent -l app=kubecost-network-costs --prefix=true --all-containers --tail=-1 >>./kubecost_agent_logs.log
-tar -czvf kubecost_agent_logs.tgz ./kubecost_agent_logs.log && rm ./kubecost_agent_logs.log
+# logs are typically small, can just send plain text. otherwise: tar -czvf kubecost_agent_logs.tgz ./kubecost_agent_logs.log && rm ./kubecost_agent_logs.log
 ```
 
 ---
