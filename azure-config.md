@@ -39,14 +39,12 @@ Next, create an Azure Service Principal.
 az ad sp create-for-rbac --name "MyServicePrincipal" --role "MyRateCardRole" --sdk-auth true > my_credentials.json
 ```
 
-The newly created `my_credentials.json` file will contain the relevant configuration information. You can either supply this information in <your-kubecost-endpoint>/settings.html (screenshot below) or in helm values under [kubecostProductConfigs](https://github.com/kubecost/cost-analyzer-helm-chart/blob/b9b24ee7f957d81b3c87937026e7e8889b293764/cost-analyzer/values.yaml#L547-L551) :
+The newly created `my_credentials.json` file will contain the relevant configuration information. You can supply this information in helm values under [kubecostProductConfigs](https://github.com/kubecost/cost-analyzer-helm-chart/blob/b9b24ee7f957d81b3c87937026e7e8889b293764/cost-analyzer/values.yaml#L547-L551) :
  ```
 helm upgrade --install kubecost kubecost/cost-analyzer --namespace kubecost --create-namespace --set kubecostProductConfigs.azureSubscriptionID=<> --set kubecostProductConfigs.azureClientID=<> --set kubecostProductConfigs.azureTenantID=<> --set kubecostProductConfigs.azureClientPassword=<> --set kubecostProductConfigs.createServiceKeySecret=true
 ```
 
 > Additionally `kubecostProductConfigs.azureOfferDurableID` can be modified to use the Offer Durable ID of your subscription, which can be found in the Azure Portal in subscriptions. The Default is "MS-AZR-0003p" which is a pay-as-you-go subscription.
-
-<img width="1792" alt="Screen Shot 2020-12-07 at 12 32 24 PM" src="https://user-images.githubusercontent.com/453512/101402781-12156880-3889-11eb-86ca-55111d36fe14.png">
 
 
 Edit this doc on [GitHub](https://github.com/kubecost/docs/blob/main/azure-config.md)
