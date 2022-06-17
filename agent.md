@@ -19,7 +19,7 @@ helm repo add kubecost https://kubecost.github.io/cost-analyzer/
 
 ```bash
 helm upgrade --install kubecost kubecost/cost-analyzer \
-  --namespace kubecost-agent --create-namespace\
+  --namespace kubecost-agent --create-namespace \
   --values=https://raw.githubusercontent.com/kubecost/cost-analyzer-helm-chart/develop/cost-analyzer/values-agent.yaml \
   --set prometheus.server.global.external_labels.cluster_id=<CLUSTER_NAME> \
   --set kubecostProductConfigs.clusterName=<CLUSTER_NAME> \
@@ -43,7 +43,7 @@ Please ensure CLUSTER_NAME is unique per cluster.
 
 ```bash
 helm upgrade --install kubecost kubecost/cost-analyzer \
-  --namespace kubecost-agent --create-namespace\
+  --namespace kubecost-agent --create-namespace \
   --values=https://raw.githubusercontent.com/kubecost/cost-analyzer-helm-chart/develop/cost-analyzer/values-agent.yaml \
   --set prometheus.server.global.external_labels.cluster_id=<CLUSTER_NAME> \
   --set kubecostProductConfigs.clusterName=<CLUSTER_NAME> \
@@ -74,9 +74,10 @@ kubecost-network-costs-hln2w                  1/1     Running   0          25h
 kubecost-prometheus-server-596b9bb9bb-pr4vz   3/3     Running   0          25h
 ```
 
-Check the container logs- it is common to have prometheus errors when the kubecost-agent pod starts. They should not continue after the kubecost-prometheus-server pod is ready.
+Check the container logs.
+It is common to have prometheus errors when the kubecost-agent pod starts. They should not continue after the kubecost-prometheus-server pod is ready.
 
-For further troubleshooting, the Kubecost team may ask for the container logs.
+For further troubleshooting, the Kubecost team may ask for the container logs. Script for collecting all the logs:
 
 `kubecost-agent-logs.sh`
 ```sh
