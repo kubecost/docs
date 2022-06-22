@@ -9,7 +9,7 @@ Kubecost needs access to the Microsoft Azure Billing Rate Card API to access acc
 
 Start by creating an Azure role definition. Below is an example definition, replace `YOUR_SUBSCRIPTION_ID` with the Subscription ID where your Kubernetes Cluster lives:
 
-```
+```json
 {
     "Name": "KubecostRole",
     "IsCustom": true,
@@ -31,7 +31,7 @@ Save this into a file called `myrole.json`
 
 Next, you'll want to register that role with Azure:
 
-```
+```shell
 az role definition create --verbose --role-definition @myrole.json
 ```
 
@@ -39,7 +39,7 @@ az role definition create --verbose --role-definition @myrole.json
 
 Next, create an Azure Service Principal.
 
-```
+```shell
 az ad sp create-for-rbac --name "KubecostAccess" --role "KubecostRole" --sdk-auth true > my_credentials.json
 ```
 
@@ -50,12 +50,14 @@ The newly created `my_credentials.json` file will contain the relevant configura
 Kubecost supports querying the Azure APIs for cost data based on the region and currency you have configured in your Microsoft Agreement.
 
 Those properties are configured with the following helm values:
+
 * `kubecostProductConfigs.azureBillingRegion`
 * `kubecostProductConfigs.currencyCode`
 
 Be sure to reference you billing information with Microsoft and update the above helm values to reflect your bill to country and currency.
 
 The following Microsoft documents are a helpful reference:
+
 * [Azure Pricing FAQ](https://azure.microsoft.com/en-us/pricing/faq/)
 * [Geographic availability and currency support for the commercial marketplace](https://docs.microsoft.com/en-us/azure/marketplace/marketplace-geo-availability-currencies)
 * [Azure Portal > Cost Management + Billing > Billing Account Properties](https://portal.azure.com/#view/Microsoft_Azure_GTM/ModernBillingMenuBlade/~/Properties)
@@ -66,7 +68,7 @@ The following Microsoft documents are a helpful reference:
 
 Create a file called [`service-key.json`](https://github.com/kubecost/poc-common-configurations/blob/main/azure/service-key.json) and update it with the Service Principal details from the above steps:
 
-``` json
+```json
 {
     "subscriptionId": "<Azure Subscription ID>",
     "serviceKey": {
@@ -80,7 +82,7 @@ Create a file called [`service-key.json`](https://github.com/kubecost/poc-common
 Next, create a secret for the Azure Service Principal
 > Note: When managing the service account key as a Kubernetes secret, the secret must reference the service account key json file, and that file must be named `service-key.json`.
 
-``` shell
+```shell
 kubectl create secret generic azure-service-key -n kubecost --from-file=service-key.json
 ```
 
@@ -92,7 +94,7 @@ Finally, set the `kubecostProductConfigs.serviceKeySecretName` helm value to the
 
 In the [Helm values file](https://github.com/kubecost/cost-analyzer-helm-chart/blob/4eaaa9acef33468dd0d9fac046defe0af17811b4/cost-analyzer/values.yaml#L770-L776):
 
-``` yaml
+```yaml
 kubecostProductConfigs:
   azureSubscriptionID: <Azure Subscription ID>
   azureClientID: <Azure AD App ID>
@@ -106,7 +108,7 @@ kubecostProductConfigs:
 
 Or at the command line:
 
-``` shell
+```shell
 helm upgrade --install kubecost kubecost/cost-analyzer -n kubecost \
   --set kubecostProductConfigs.azureSubscriptionID=<Azure Subscription ID> \
   --set kubecostProductConfigs.azureClientID=<Azure AD App ID> \
