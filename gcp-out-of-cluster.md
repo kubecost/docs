@@ -87,6 +87,14 @@ To use an alternative or existing label schema for GCP cloud assets, you may sup
 
 > Note: Google generates special labels for GKE resources (e.g. "goog-gke-node", "goog-gke-volume"). Values with these labels are excluded from out-of-cluster costs because Kubecost already includes them as in-cluster assets. Thus, to make sure all cloud assets are included, we recommend installing Kubecost on each cluster where insights into costs are required.
 
+### Viewing project-level labels
+
+Project-level labels are applied to all the Assets built from resources defined under a given GCP project. You can filter GCP resources in the Kubecost Assets View (or API) by project-level labels by adding them ('label:value') in the Label/Tag filter.
+
+If a resource has a label with the same name as a project-level label, the resource label value will take precedence.
+
+Modifications incurred on project-level labels may take several hours to update on Kubecost.
+
 ## Cross-Project Service Account Configuration
 
 Due to organizational constraints, it is common that Kubecost must be run in a separate project from the project containing the billing data Big Query dataset which is needed for Cloud Integration. It is still possible to configure Kubecost in this scenario, but some of the values in the above script will need to be changed. First you will need the project id of the projects where Kubecost is installed and where the Big Query dataset is located. Additionally you will need a `gcloud` user with the permissions `iam.serviceAccounts.setIamPolicy` for the kubecost project and the ability to manage the roles listed above for the Big Query Project. With these fill in the following script to set the relevant variables:

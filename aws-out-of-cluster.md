@@ -41,11 +41,11 @@ Instructions for enabling user-defined cost allocation tags [here](https://docs.
 
 ## Viewing account-level tags
 
-You can view AWS account-level tags in Kubecost; tags are applied to all the resources defined under a given AWS account. You can filter AWS resources in the Kubecost Assets View (or API) by account-level tags by adding them ('tag:value') in the Label/Tag filter. 
+Account-level tags are applied (as labels) to all the Assets built from resources defined under a given AWS account. You can filter AWS resources in the Kubecost Assets View (or API) by account-level tags by adding them ('tag:value') in the Label/Tag filter.
 
-If a resource has a label with the same name as an account-level tag, the resource label value will take precedence; it won't be overridden by the value of the account-level tag.
+If a resource has a label with the same name as an account-level tag, the resource label value will take precedence.
 
-Modifications incurred on account-level tags may take several hours to update on Kubecost. Note that upon such a modification, historical data going back 15 days will be updated to contain the new tag values.
+Modifications incurred on account-level tags may take several hours to update on Kubecost.
 
 Your AWS account will need to support the `organizations:ListAccounts` and `organizations:ListTagsForResource` policies to benefit from this feature.
 
