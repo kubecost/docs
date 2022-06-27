@@ -22,6 +22,8 @@ Cost-based [metrics](https://github.com/kubecost/cost-model/blob/develop/PROMETH
 2. Once the node is added to the cloud bill, Kubecost starts emitting something closer to the actual price.
 3. For the time period where Kubecost assumed the node was onDemand but it was actually reserved, reconciliation fixes the price in ETL.
 
+Note: The reconciled Assets will inherit the labels from the corresponding items in the billing data.
+
 ### Cloud Assets
 The Cloud Assets process allows Kubecost to pull in out-of-cluster cloud spend from your Cloud Service Provider's billing data. This includes any services run by the Cloud Service Provider in addition to compute resources outside of clusters monitored by Kubecost. Additionally, by labeling these Cloud Assets their cost can be distributed to Allocations as external costs. This can help teams get a better understanding of the proportion of out-of-cluster cloud spend that their in-cluster usage is dependant on. Cloud Assets become available as soon as they appear in the billing data, with the 6 to 24 hour delay mentioned above, and are updated as they become more complete.
 
