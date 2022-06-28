@@ -10,7 +10,8 @@ Kubecost leverages Thanos to enable durable storage for three different purposes
 > Note: This feature requires an [Enterprise license](https://kubecost.com/pricing).
 
 To enable Thanos, follow these steps:
-## Step 1: <a name="storage"></a>Create object-store.yaml
+
+## Step 1: Create object-store.yaml
 
 This step creates the object-store.yaml file that contains your durable storage target (e.g. GCS, S3, etc.) configuration and access credentials.
 The details of this file are documented thoroughly in [Thanos documentation](https://thanos.io/tip/thanos/storage.md/).
@@ -18,11 +19,12 @@ The details of this file are documented thoroughly in [Thanos documentation](htt
 We have guides for using cloud-native storage for the largest cloud providers. Other providers can be similarly configured.
 
 Use the appropriate guide for your cloud provider:
+
 * [Google Cloud Storage](https://github.com/kubecost/docs/blob/main/long-term-storage-gcp.md)
 * [AWS/S3](https://github.com/kubecost/docs/blob/main/long-term-storage-aws.md)
 * [Azure](https://github.com/kubecost/docs/blob/main/long-term-storage-azure.md)
 
-## <a name="secret"></a>Step 2: Create object-store secret
+## Step 2: Create object-store secret
 
 Create a secret with the yaml file generated in the previous step:
 
@@ -30,11 +32,12 @@ Create a secret with the yaml file generated in the previous step:
 kubectl create secret generic kubecost-thanos -n kubecost --from-file=./object-store.yaml
 ```
 
-## <a name="cluster_id"></a>Step 3: Unique Cluster ID
+## Step 3: Unique Cluster ID
 
 Each cluster needs to be labelled with a unique Cluster ID, this is done in two places.
 
 `values-clusterName.yaml`
+
 ```yaml
 kubecostProductConfigs:
   clusterName: kubecostProductConfigs_clusterName
@@ -45,12 +48,11 @@ prometheus:
         cluster_id: kubecostProductConfigs_clusterName
 ```
 
-## <a name="deploy"></a>Step 4: Deploying Kubecost with Thanos
+## Step 4: Deploying Kubecost with Thanos
 
 The Thanos subchart includes `thanos-bucket`, `thanos-query`, `thanos-store`,  `thanos-compact`, and service discovery for `thanos-sidecar`. These components are recommended when deploying Thanos on the primary cluster.
 
 These values can be adjusted under the `thanos` block in `values-thanos.yaml` - Available options are here: [thanos/values.yaml](https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/charts/thanos/values.yaml)
-
 
 ```shell
 helm upgrade kubecost kubecost/cost-analyzer \
@@ -64,11 +66,12 @@ helm upgrade kubecost kubecost/cost-analyzer \
 
 To verify installation, check to see all pods are in a READY state. View pod logs for more detail and see common troubleshooting steps below.
 
-## <a name="troubleshooting"></a>Troubleshooting
+## Troubleshooting
 
 Thanos sends data to the bucket every 2 hours. Once 2 hours has passed, logs should indicate if data has been sent successfully or not.
 
 You can monitor the logs with:
+
 ```bash
 kubectl logs --namespace kubecost -l app=prometheus -l component=server --prefix=true --container thanos-sidecar --tail=-1 | grep uploaded
 ```
@@ -88,6 +91,7 @@ kubectl logs --namespace kubecost -l app=prometheus -l component=server --prefix
 To troubleshoot the IAM Role Attached to the serviceaccount, you can create a pod using the same service account used by the thanos-sidecar (default is `kubecost-prometheus-server`):
 
 `s3-pod.yaml`
+
 ```yaml
 apiVersion: v1
 kind: Pod
@@ -107,6 +111,7 @@ spec:
 kubectl apply -f s3-pod.yaml
 kubectl exec -i -t s3-pod -- aws s3 ls s3://kc-thanos-store
 ```
+
 This should return a list of objects (or at least not give a permission error).
 
 ### Cluster not writing data to thanos bucket
@@ -168,7 +173,7 @@ thanos:
       <b>- "kubecost-thanos-store-grpc.kubecost:10901"</b>
 </pre>
 
-### <a name="verify-thanos"></a>Additional Troubleshooting
+### Additional Troubleshooting
 
 A common error is as follows, which means you do not have the correct access to the supplied bucket:
 
@@ -182,7 +187,7 @@ Assuming pods are running, use port forwarding to connect to the `thanos-query-h
 kubectl port-forward svc/kubecost-thanos-query-http 8080:10902 --namespace kubecost
 ```
 
-Then navigate to http://localhost:8080 in your browser. This page should look very similar to the Prometheus console.
+Then navigate to <http://localhost:8080> in your browser. This page should look very similar to the Prometheus console.
 
 ![image](https://raw.githubusercontent.com/kubecost/docs/main/images/thanos-query.png)
 
@@ -196,13 +201,13 @@ The default retention period for when data is moved into the object storage is c
 
 Instead of waiting *2h* to ensure that thanos was configured correctly, the default log level for the thanos workloads is `debug` (it's very light logging even on debug). You can get logs for the `thanos-sidecar`, which is part of the `prometheus-server` pod, and `thanos-store`. The logs should give you a clear indication of whether or not there was a problem consuming the secret and what the issue is. For more on Thanos architecture, view [this resource](https://github.com/thanos-io/thanos/blob/master/docs/design.md).
 
-## <a name="help"></a>Additional Help
+## Additional Help
+
 Please let us know if you run into any issues, we are here to help.
 
 [Slack community](https://join.slack.com/t/kubecost/shared_invite/enQtNTA2MjQ1NDUyODE5LWFjYzIzNWE4MDkzMmUyZGU4NjkwMzMyMjIyM2E0NGNmYjExZjBiNjk1YzY5ZDI0ZTNhZDg4NjlkMGRkYzFlZTU) - check out #support for any help you may need & drop your introduction in the #general channel
 
 Email: <team@kubecost.com>
-
 
 ---
 Edit this doc on [GitHub](https://github.com/kubecost/docs/blob/main/long-term-storage.md)
