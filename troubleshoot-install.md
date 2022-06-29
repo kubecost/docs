@@ -1,16 +1,7 @@
 Troubleshooting
 ===============
 
-Once an installation is complete, access the Kubecost frontend to view the status of the product. If the Kubecost UI is unavailable, review these common issues to determine the problem:
-
-- [General troubleshooting commands](#general-troubleshooting")
-- [No persistent volumes available](#persistent-volume)
-- [Unable to establish a port-forward connection](#port-forward)
-- [FailedScheduling node-exporter](#node-exporter)
-- [No clusters found](#no-cluster)
-- [Pods running but app won't load](#app-wont-load)
-- [Trying to run on Minikube](#minikube)
-- [Error loading metadata](#metadata)
+Once an installation is complete, access the Kubecost frontend to view the status of the product. If the Kubecost UI is unavailable, review these troubleshooting resources to determine the problem:
 
 ## <a name="general-troubleshooting"></a>General troubleshooting commands
 These kubernetes commands can be helpful when finding issues with deployments:
