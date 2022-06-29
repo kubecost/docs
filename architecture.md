@@ -16,7 +16,7 @@ Below are the major components deployed with the [Kubecost helm chart](http://do
 3. **Network costs** -- optional DaemonSet for collecting network metrics [learn more](https://github.com/kubecost/docs/blob/main/network-allocation.md)
 4. **Grafana** -- provides supporting dashboards for Kubecost product [Optional]
 
-Today, the core Kubecost product can be run with just components 1, 3a, and 3b.
+Today, the core Kubecost product can be run with just components 1, 2a, and 2b.
 
 See an overview of core components in this diagram:
 
