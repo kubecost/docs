@@ -7,14 +7,17 @@ Once an installation is complete, access the Kubecost frontend to view the statu
 These kubernetes commands can be helpful when finding issues with deployments:
 
 1. This command will find all events that aren't normal, with the most recent listed last. Use this if pods are not even starting:
+
     ```bash
     kubectl get events --sort-by=.metadata.creationTimestamp --field-selector type!=Normal
     ```
+
 1. If a pod is in CrashLoopBackOff, check its logs. Commonly it will be a misconfiguration in helm. If the cost-analyzer pod is the issue, check the logs with:
 
     ```bash
     kubectl logs deployment/kubecost-cost-analyzer -c cost-model
     ```
+
 1. Alternatively, Lens is a great tool for diagnosing many issues in a single view. See our blog post on [using Lens with Kubecost](https://blog.kubecost.com/blog/lens-kubecost-extension/)
 
 ## Issue: no persistent volumes available for this claim and/or no storage class is set
