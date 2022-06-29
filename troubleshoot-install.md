@@ -62,8 +62,7 @@ Alternatively, you can deploy Kubecost without persistent storage to store by fo
 helm upgrade -i --create-namespace kubecost kubecost/cost-analyzer \
 --namespace kubecost \
 --set persistentVolume.enabled="false" \
---set prometheus.server.persistentVolume.enabled="false" \
---set kubecostToken="aGVsbUBrdWJlY29zdC5jb20=xm343yadf98"
+--set prometheus.server.persistentVolume.enabled="false"
 </pre>
 
 ## <a name="port-forward"></a>Issue: unable to establish a port-forward connection
