@@ -3,7 +3,7 @@ Troubleshooting
 
 Once an installation is complete, access the Kubecost frontend to view the status of the product. If the Kubecost UI is unavailable, review these troubleshooting resources to determine the problem:
 
-## <a name="general-troubleshooting"></a>General troubleshooting commands
+## General troubleshooting commands
 These kubernetes commands can be helpful when finding issues with deployments:
 
 1. This command will find all events that aren't normal, with the most recent listed last. Use this if pods are not even starting:
@@ -17,7 +17,7 @@ These kubernetes commands can be helpful when finding issues with deployments:
     ```
 1. Alternatively, Lens is a great tool for diagnosing many issues in a single view. See our blog post on [using Lens with Kubecost](https://blog.kubecost.com/blog/lens-kubecost-extension/)
 
-## <a name="persistent-volume"></a>Issue: no persistent volumes available for this claim and/or no storage class is set
+## Issue: no persistent volumes available for this claim and/or no storage class is set
 
 Your clusters need a default storage class for the Kubecost and Prometheus persistent volumes to be successfully attached.
 
@@ -34,7 +34,7 @@ standard (default)  kubernetes.io/gce-pd  10d
 
 If you see a name but no (default) next to it, run
 
-```kubectl patch storageclass <name> -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'```
+`kubectl patch storageclass <name> -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'`
 
 If you don’t see a name, you need to add a storage class. For help doing this, see the following guides:
 
@@ -46,17 +46,19 @@ Alternatively, you can deploy Kubecost without persistent storage to store by fo
 > Note: This setup is only for experimental purpose. The metric data is reset when kubecost's pod is rescheduled.
 
 1. On your terminal, run this command to add the kubecost helm repository:
-```helm repo add kubecost https://kubecost.github.io/cost-analyzer/```
+
+`helm repo add kubecost https://kubecost.github.io/cost-analyzer/`
 
 1. Next, run this command to deploy Kubecost without persistent storage:
-<pre>
-helm upgrade -i --create-namespace kubecost kubecost/cost-analyzer \
---namespace kubecost \
+
+```
+helm upgrade -install kubecost kubecost/cost-analyzer \
+--namespace kubecost --create-namespace \
 --set persistentVolume.enabled="false" \
 --set prometheus.server.persistentVolume.enabled="false"
-</pre>
+```
 
-## <a name="port-forward"></a>Issue: unable to establish a port-forward connection
+## Issue: unable to establish a port-forward connection
 
 First, check the status of pods in the target namespace:
 
@@ -66,15 +68,10 @@ You should see the following pods running
 
 <pre>
 NAME                                                     READY   STATUS    RESTARTS   AGE
-kubecost-cost-analyzer-599bf995d4-rq8g8                  2/2     Running   2          5m
+kubecost-cost-analyzer-599bf995d4-rq8g8                  2/2     Running   0          5m
 kubecost-grafana-5cdd75755b-5s9j9                        1/1     Running   0          5m
 kubecost-prometheus-kube-state-metrics-bd985f98b-bl8xd   1/1     Running   0          5m
 kubecost-prometheus-node-exporter-24b8x                  1/1     Running   0          5m
-kubecost-prometheus-node-exporter-4k4w8                  1/1     Running   0          5m
-...
-kubecost-prometheus-node-exporter-vxpw8                  1/1     Running   0          5m
-kubecost-prometheus-node-exporter-zd6rd                  1/1     Running   0          5m
-kubecost-prometheus-pushgateway-6f4f8bbfd9-k5r47         1/1     Running   0          5m
 kubecost-prometheus-server-6fb8f99bb7-4tjwn              2/2     Running   0          5m
 </pre>
 
@@ -85,7 +82,7 @@ If any __pod is not Running__ other than cost-analyzer-checks, you can use the f
 `kubectl describe pod <pod-name> -n kubecost`
 
 
-## <a name="node-exporter"></a>Issue: FailedScheduling kubecost-prometheus-node-exporter
+## Issue: FailedScheduling kubecost-prometheus-node-exporter
 
 If there is an existing `node-exporter` daemonset, the Kubecost Helm chart may timeout due to a conflict. You can disable the installation of `node-exporter` by passing the following parameters to the Helm install.
 
@@ -96,7 +93,7 @@ helm install kubecost/cost-analyzer --debug --wait --namespace kubecost --name k
     --set prometheus.serviceAccounts.nodeExporter.create=false
  ```
 
-## <a name="no-cluster"></a>Issue: Unable to connect to a cluster
+## Issue: Unable to connect to a cluster
 
 You may encounter the following screen if the Kubecost frontend is unable to connect with a live Kubecost server.
 
@@ -118,7 +115,7 @@ If you are unable to successfully retrieve your config file from this /model end
 
 Please contact us at support@kubecost.com or on [Slack](https://join.slack.com/t/kubecost/shared_invite/enQtNTA2MjQ1NDUyODE5LWFjYzIzNWE4MDkzMmUyZGU4NjkwMzMyMjIyM2E0NGNmYjExZjBiNjk1YzY5ZDI0ZTNhZDg4NjlkMGRkYzFlZTU) at any point with questions.
 
-## <a name="app-wont-load"></a>Issue: Unable to load app
+## Issue: Unable to load app
 
 If all Kubecost pods are running and you can connect / port-forward to the kubecost-cost-analyzer pod but none of the app's UI will load, we recommend testing the following:
 
@@ -131,7 +128,7 @@ If this is true, you are likely to be hitting a CoreDNS routing issue. We recomm
 1. Go to <https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/templates/cost-analyzer-frontend-config-map-template.yaml#L13>
 2. Replace ```{{ $serviceName }}.{{ .Release.Namespace }}``` with ```localhost```
 
-## <a name="app-wont-load"></a>Question: Why do I need to grant `cluster-admin` privileges?
+## Question: Why do I need to grant `cluster-admin` privileges?
 
 > Note: this question only applies when installing Kubecost via helm 2
 
@@ -139,15 +136,14 @@ The core Kubecost product needs read-only permissions.
 
 Many teams deploy helm Tiller with cluster-admin privileges to install and manage applications across different namespaces. More information on managing these permissions at https://v2.helm.sh/docs/rbac/
 
-## <a name="minikube"></a>Question: How can I run on Minikube?
+## Question: How can I run on Minikube?
 
 1. Edit nginx configmap ```kubectl edit cm nginx-conf -n kubecost```
 2. Search for 9001 and 9003 (should find kubecost-cost-analyzer.kubecost:9001 & kubecost-cost-analyzer.kubecost:9003)
 3. Change both entries to localhost:9001 and localhost:9003
 4. Restart the kubecost-cost-analyzer pod in the kubecost namespace
 
-
-## <a name="metadata"></a>Error loading metadata
+## Error loading metadata
 
 Kubecost makes use of cloud provider metadata servers to access instance and cluster metadata. If a restrictive network policy is place this may need to be modified to allow connections from the kubecost pod or namespace.
 
@@ -157,8 +153,9 @@ Error example:
 gcpprovider.go Error loading metadata cluster-name: Get "http://169.254.169.254/computeMetadata/v1/instance/attributes/cluster-name": dial tcp 169.254.169.254:80: i/o timeout
 ```
 
-
 Have a question not answered on this page? Email us at support@kubecost.com or [join the Kubecost Slack community](https://join.slack.com/t/kubecost/shared_invite/enQtNTA2MjQ1NDUyODE5LWFjYzIzNWE4MDkzMmUyZGU4NjkwMzMyMjIyM2E0NGNmYjExZjBiNjk1YzY5ZDI0ZTNhZDg4NjlkMGRkYzFlZTU)!
+
+---
 
 Edit this doc on [GitHub](https://github.com/kubecost/docs/blob/main/troubleshoot-install.md)
 
