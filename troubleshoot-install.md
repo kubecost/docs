@@ -1,16 +1,7 @@
 Troubleshooting
 ===============
 
-Once an installation is complete, access the Kubecost frontend to view the status of the product. If the Kubecost UI is unavailable, review these common issues to determine the problem:
-
-- [General troubleshooting commands](#general-troubleshooting")
-- [No persistent volumes available](#persistent-volume)
-- [Unable to establish a port-forward connection](#port-forward)
-- [FailedScheduling node-exporter](#node-exporter)
-- [No clusters found](#no-cluster)
-- [Pods running but app won't load](#app-wont-load)
-- [Trying to run on Minikube](#minikube)
-- [Error loading metadata](#metadata)
+Once an installation is complete, access the Kubecost frontend to view the status of the product. If the Kubecost UI is unavailable, review these troubleshooting resources to determine the problem:
 
 ## <a name="general-troubleshooting"></a>General troubleshooting commands
 These kubernetes commands can be helpful when finding issues with deployments:
@@ -50,7 +41,20 @@ If you don’t see a name, you need to add a storage class. For help doing this,
 * AWS: [https://docs.aws.amazon.com/eks/latest/userguide/storage-classes.html](https://docs.aws.amazon.com/eks/latest/userguide/storage-classes.html)
 * Azure: [https://kubernetes.io/docs/concepts/storage/storage-classes/#azure-disk](https://kubernetes.io/docs/concepts/storage/storage-classes/#azure-disk)
 
-Alternatively, you can [deploy Kubecost without persistent storage](https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/values.yaml#L148).
+Alternatively, you can deploy Kubecost without persistent storage to store by following these steps:
+
+> Note: This setup is only for experimental purpose. The metric data is reset when kubecost's pod is rescheduled.
+
+1. On your terminal, run this command to add the kubecost helm repository:
+```helm repo add kubecost https://kubecost.github.io/cost-analyzer/```
+
+1. Next, run this command to deploy Kubecost without persistent storage:
+<pre>
+helm upgrade -i --create-namespace kubecost kubecost/cost-analyzer \
+--namespace kubecost \
+--set persistentVolume.enabled="false" \
+--set prometheus.server.persistentVolume.enabled="false"
+</pre>
 
 ## <a name="port-forward"></a>Issue: unable to establish a port-forward connection
 
