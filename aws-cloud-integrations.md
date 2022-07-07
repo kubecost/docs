@@ -391,6 +391,17 @@ Now that the policies have been created, we will need to attach those policies t
 <li>Then, you need to add an annotation to that service account as described in these <a href="https://docs.aws.amazon.com/eks/latest/userguide/specify-service-account-role.html">docs</a>. This annotation can be added to the Kubecost service account by setting <code>.Values.serviceAccount.annotations</code> in the helm chart to <code>eks.amazonaws.com/role-arn: arn:aws:iam::&lt;AWS_ACCOUNT_ID&gt;:role/&lt;IAM_ROLE_NAME&gt;</code></li>
 </ul>
 
+> Note: If you see the error: `User: ***/assumed-role/<role-name>/### is not authorized to perform: sts:AssumeRole on resource...`, you can add the following to your policy permissions to allow the role the correct permissions:
+
+```
+    "Statement": [
+        {
+            "Action": "sts:AssumeRole",
+            "Effect": "Allow",
+            "Resource": "*"
+        }
+    ]
+```
 </details>
 
 ## Step 5: Provide CUR config values to Kubecost
