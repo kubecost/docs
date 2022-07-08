@@ -65,7 +65,10 @@ helm upgrade -i kubecost kubecost/cost-analyzer \
     --set awsstore.imageNameAndVersion=709825985650.dkr.ecr.us-east-1.amazonaws.com/stackwatch/awsstore:${IMAGETAG} \
     --set imageVersion=${IMAGETAG} \
     --set kubecostFrontend.image=709825985650.dkr.ecr.us-east-1.amazonaws.com/stackwatch/frontend \
-    --set kubecostModel.image=709825985650.dkr.ecr.us-east-1.amazonaws.com/stackwatch/cost-model
+    --set kubecostModel.image=709825985650.dkr.ecr.us-east-1.amazonaws.com/stackwatch/cost-model \
+    --set prometheus.server.image.repository=709825985650.dkr.ecr.us-east-1.amazonaws.com/stackwatch/contract/quay.io/prometheus  \
+    --set prometheus.server.image.tag=v2.35.0
+
 ```
 - You can run these following commands to enable port-forwarding and access Kubecost dashboard at `http://localhost:9090`
 
