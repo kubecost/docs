@@ -80,6 +80,7 @@ Visiting `<your-kubecost-endpoint>/diagnostics.html` provides diagnostics info o
 Common issues include the following:
 
 * Wrong Prometheus FQDN: evidenced by the following pod error message `No valid prometheus config file at ...` and the init pods hanging. We recommend running `curl <your_prometheus_url>/api/v1/status/config` from a pod in the cluster to confirm that your [Prometheus config](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#configuration-file) is returned. Here is an example, but this needs to be updated based on your Prometheus address:
+* If you are still not able to curl to above fqdn, Try giving the port number where prometheus service is running, `curl <your_prometheus_url:port_numer>/api/v1/status/config`
 
 ```sh
 kubectl exec kubecost-cost-analyzer-db55d88f6-fr6kc -c cost-analyzer-frontend -n kubecost \
