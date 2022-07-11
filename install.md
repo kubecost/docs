@@ -1,7 +1,7 @@
 Installation
 ===================
 
-To get started with OpenCost and Kubecost, **the recommended path is to [install Kubecost community version](http://kubecost.com/install)**. This installation method is available for free and leverages the Kubecost Helm Chart. It provides access to all OpenCost and Kubecost community functionality and can scale to large clusters. This will also provide a token for trialing and retaining data across different Kubecost product tiers.
+To get started with OpenCost and Kubecost, **the recommended path is to [install Kubecost Commmunity Version](http://kubecost.com/install)**. This installation method is available for free and leverages the Kubecost Helm Chart. It provides access to all OpenCost and Kubecost community functionality and can scale to large clusters. This will also provide a token for trialing and retaining data across different Kubecost product tiers.
 
 ## Alternative installation methods
 
