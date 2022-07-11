@@ -3,24 +3,23 @@ Installing in Air-gapped Environments
 
 FAQ for installing in Kubecost in an air-gapped environment
 
-### Q: I have to put container images into a private registry to use them in my cluster. What images do I need?
+### I have to put container images into a private registry to use them in my cluster. What images do I need?
 
-**A:** The following images will need to be downloaded. Please substitute the appropriate version
-for prod-x.xx.x. [Latest releases can be found here](https://github.com/kubecost/cost-analyzer-helm-chart/releases).
+The following images will need to be downloaded. Please substitute the appropriate version for prod-x.xx.x. [Latest releases can be found here](https://github.com/kubecost/cost-analyzer-helm-chart/releases).
 
-### Kubecost Required*
+#### Kubecost: Required
 - Frontend: gcr.io/kubecost1/frontend:prod-x.xx.x
 - Server: gcr.io/kubecost1/server:prod-x.xx.x
 - CostModel: gcr.io/kubecost1/cost-model:prod-x.xx.x
 
-### Kubecost Optional
+#### Kubecost: Optional
 - Kube-state-metrics: quay.io/coreos/kube-state-metrics:v1.9.8
 - NetworkCosts: gcr.io/kubecost1/kubecost-network-costs:v16.0 (used for [network-allocation](https://github.com/kubecost/docs/blob/main/network-allocation.md))
 - BusyBox: registry.hub.docker.com/library/busybox:latest (only for NFS)
 - Cluster controller: gcr.io/kubecost1/cluster-controller:v0.0.2 (used for write actions)
 - Grafana Dashboards: grafana/grafana:8.3.2
 
-### Prometheus - Required when bundled
+#### Prometheus: Required when bundled
 - prom/prometheus:v2.31.1
 - prom/node-exporter:v0.18.1
 - prom/alertmanager:v0.23.0
@@ -30,7 +29,7 @@ for prod-x.xx.x. [Latest releases can be found here](https://github.com/kubecost
 ### Thanos - Enterprise/Durable Storage*
 - thanosio/thanos:v0.24.0
 
-### Q: How do I configure prices for my on-premise Assets?
+### How do I configure prices for my on-premise Assets?
 
 There are two options to configure asset prices in your on-premise Kubernetes environment:
 
