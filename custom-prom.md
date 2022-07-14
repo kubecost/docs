@@ -53,6 +53,44 @@ To confirm this job is successfully scraped by Prometheus, you can view the Targ
 
 ![Prometheus Targets](https://raw.githubusercontent.com/kubecost/docs/main/prom-targets.png)
 
+## Cadvisor metric labels
+
+Kubecost uses `container_name` and `pod_name` labels on cadvisor metrics. For clusters running **k8s v1.16+**, the following relabel config creates the expected labels on cadvisor metrics:
+
+```
+  metric_relabel_configs:
+  - source_labels: [ container ]
+    target_label: container_name
+    regex: (.+)
+    action: replace
+  - source_labels: [ pod ]
+    target_label: pod_name
+    regex: (.+)
+    action: replace
+```
+
+For clusters running **k8s v1.15 or below**, you will need to adjust the relabel config in your [values.yaml](https://github.com/kubecost/cost-analyzer-helm-chart/blob/5fa8e0b590744c92aec820d36f37205b18a2fea2/cost-analyzer/charts/prometheus/values.yaml#L1206-L1217) so that all 4 rules (`container_name`, `container`, `pod_name`, and `pod`) are all recorded:
+
+```
+  metric_relabel_configs:
+  - source_labels: [ container_name ]
+    target_label: container
+    regex: (.+)
+    action: replace
+  - source_labels: [ pod_name ]
+    target_label: pod
+    regex: (.+)
+    action: replace 
+  - source_labels: [ container ]
+    target_label: container_name
+    regex: (.+)
+    action: replace
+  - source_labels: [ pod ]
+    target_label: pod_name
+    regex: (.+)
+    action: replace
+```
+
 ## Node exporter metric labels
 
 > Note that this step is optional, and only impacts certain efficiency metrics. View [issue/556](https://github.com/kubecost/cost-model/issues/556) for a description of what will be missing if this step is skipped.
