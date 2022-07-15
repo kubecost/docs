@@ -5,17 +5,17 @@ Installing Kubecost with Plural
 
 Kubecost is available as direct install with Plural, and it synergizes very well with the ecosystem, providing cost monitoring out of the box to users that deploy their Kubernetes clusters with Plural.
 
-## Getting Started
+## Getting started
 
-First, create an account on [https://app.plural.sh](https://app.plural.sh). This is only to track your installations and allow for the delivery of automated upgrades, you will not be asked to provide any infrastructure credentials or sensitive information.
+First, create an account on [https://app.plural.sh](https://app.plural.sh). This is only to track your installations and allow for the delivery of automated upgrades. You will not be asked to provide any infrastructure credentials or sensitive information.
 
-Next, install the Plural CLI by following steps 1, 2, and 3 of [these instructions](https://docs.plural.sh/getting-started).
+Next, install the Plural CLI by following steps 1-3 of [these instructions](https://docs.plural.sh/getting-started).
 
-You'll need a Git repository to store your Plural configuration in. This will contain the Helm charts, Terraform config, and Kubernetes manifests that Plural will autogenerate for you.
+You'll need a Git repository to store your Plural configuration. This will contain the Helm charts, Terraform config, and Kubernetes manifests that Plural will autogenerate for you.
 
 You have two options:
 - Run `plural init` in any directory to let Plural initiate an OAuth workflow to create a Git repo for you.
-- Create a Git repo manually, clone it down and run `plural init` inside it.
+- Create a Git repo manually, clone it down, and run `plural init` inside it.
 
 Running `plural init` will start a configuration wizard to configure your Git repo and cloud provider for use with Plural. You're now ready to install Kubecost on your Plural repo.
 
@@ -33,7 +33,7 @@ Now, to add it your workspace, run the install command. If you're on AWS, this i
 plural bundle install kubecost kubecost-aws
 ```
 
-Plural's Kubecost distribution has support for AWS, GCP and Azure, so feel free to pick whichever best fits your infrastructure.
+Plural's Kubecost distribution has support for AWS, GCP, and Azure, so feel free to pick whichever best fits your infrastructure.
 
 The CLI will prompt you to choose whether you want to use Plural OIDC. [OIDC](https://openid.net/connect/) allows you to login to the applications you host on Plural with your login to [app.plural.sh](https://app.plural.sh), acting as an SSO provider. 
 
@@ -44,7 +44,7 @@ plural build
 plural deploy --commit "deploying kubecost"
 ```
 
-> Deploys will generally take 10-20 minutes, based on your cloud provider.
+> **Note**: Deploys will generally take 10-20 minutes, based on your cloud provider.
 
 ## Installing the Plural Console
 
@@ -56,7 +56,7 @@ plural build
 plural deploy --commit "deploying the console too"
 ```
 
-## Accessing your Kubecost Installation
+## Accessing your Kubecost installation
 
 Now, head over to `kubecost.YOUR_SUBDOMAIN.onplural.sh` to access the Kubecost UI. If you set up a different subdomain for Kubecost during installation, make sure to use that instead.
 
@@ -78,7 +78,7 @@ To bring your entire Plural deployment down, run:
 plural destroy
 ```
 
-> Only do this if you're absolutely sure you want to bring down all associated resources with this repository.
+> **Note:** Only do this if you're absolutely sure you want to bring down all associated resources with this repository.
 
 ## Troubleshooting
 
@@ -86,7 +86,7 @@ If you have any issues with installing Kubecost on Plural, feel free to join our
 
 If you'd like to request any new features for our Kubecost installation, feel free to open an issue or PR at https://github.com/pluralsh/plural-artifacts.
 
-## Further Reading
+## Further reading
 
 To learn more about what you can do with Plural and more advanced uses of the platform, feel free to dive deeper into our docs [here.](https://docs.plural.sh)
 
