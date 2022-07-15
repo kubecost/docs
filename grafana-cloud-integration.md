@@ -127,7 +127,7 @@ cortextool rules print \
 --key=<grafana_cloud_api_key>
 ```
 
-Re-start the Grafana Agent:
+Restart the Grafana Agent:
 
 ```sh
 $ kubectl rollout restart deployment/grafana-agent -namespace <namespace>
