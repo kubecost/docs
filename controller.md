@@ -11,9 +11,9 @@ Cluster controller enables actions like:
 
 This document shows you how to setup and enable this functionality in the Kubecost product.
 
-Note: Cluster controller supports GKE and EKS clusters and is currently in **ALPHA**.
+> **Note**: Cluster controller supports GKE and EKS clusters and is currently in Alpha.
 
-### GKE Setup
+## GKE setup
 
 The following command performs the steps required to set up a service account.
 [More info](https://github.com/kubecost/cluster-turndown/blob/master/scripts/README.md) 
@@ -29,9 +29,9 @@ To use [this setup script](https://github.com/kubecost/cluster-turndown/blob/mas
 * **Namespace**: This should be the namespace which Kubecost will be installed, e.g `kubecost`
 * **Secret Name**: This should always be set to `cluster-controller-service-key`, which is the secret name mounted by the Kubecost helm chart.
 
-### EKS Setup
+## EKS Setup
 
-Create a new User with **AutoScalingFullAccess** permissions. Create a new file, service-key.json, and use the access key id and secret access key to fill out the following template:
+Create a new User with 'AutoScalingFullAccess' permissions. Create a new file, *service-key.json*, and use the access key id and secret access key to fill out the following template:
 
 ```json
 {
@@ -50,7 +50,7 @@ $ kubectl create secret generic cluster-controller-service-key -n <NAMESPACE> --
 
 ## Deploying
 Once the secret has been successfully created containing the provider service key, 
-you can enable the `cluster-controller` in the helm chart by finding the `clusterController` config block and setting `enabled: true`
+you can enable the `cluster-controller` in the Helm Chart by finding the `clusterController` config block and setting `enabled: true`
 
 ```yaml
 # Kubecost Cluster Controller for Right Sizing and Cluster Turndown
@@ -58,7 +58,8 @@ clusterController:
     enabled: true
 ```
 
-You may also enable via `--set` when running helm install:
+You may also enable via `--set` when running Helm install:
+
 ```bash
 --set clusterController.enabled=true
 ```
@@ -67,7 +68,7 @@ You may also enable via `--set` when running helm install:
 
 Cluster Controller wraps all functionality in and provides the same interface/CRDs as https://github.com/kubecost/cluster-turndown. Follow that documentation for usage instructions. You can safely ignore the deployment instructions in that README because you have already deployed Cluster Controller.
 
-> :warning: The v1 -> v2 breaking change mentioned in the cluster-turndown README also applies to Cluster Controller, but for v0.0.6 -> v0.1.0. Cluster Controller was upgraded to v0.1.0 in v1.94 of Kubecost. Follow the [migration guide](https://github.com/kubecost/docs/blob/main/v1-94-turndown-schedule-migration-guide.md) if you use turndown in a version of Kubecost < v1.94 and are upgrading to v1.94+ of Kubecost.
+> **Note**: The v1 -> v2 breaking change mentioned in the cluster-turndown README also applies to Cluster Controller, but for v0.0.6 -> v0.1.0. Cluster Controller was upgraded to v0.1.0 in v1.94 of Kubecost. Follow the [migration guide](https://github.com/kubecost/docs/blob/main/v1-94-turndown-schedule-migration-guide.md) if you use turndown in a version of Kubecost < v1.94 and are upgrading to v1.94+ of Kubecost.
 
 Edit this doc on [GitHub](https://github.com/kubecost/docs/blob/main/controller.md)
 
