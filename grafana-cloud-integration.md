@@ -164,4 +164,4 @@ Optionally, you can also add our [Kubecost Dashboard for Grafana Cloud](https://
 
 Edit this doc on [GitHub](https://github.com/kubecost/docs/blob/main/grafana-cloud-integration.md)
 
-<!--- {"article":"5699967551639","section":"4402815636375","permissiongroup":"1500001277122"} --->
+<!--- {"article":"5699259004311","section":"4402815636375","permissiongroup":"1500001277122"} --->
