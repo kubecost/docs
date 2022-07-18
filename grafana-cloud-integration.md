@@ -69,7 +69,7 @@ $ kubectl rollout restart deployment/grafana-agent -n <namespace>
 
 To set up recording rules in Grafana Cloud, download the [cortextool CLI utility](https://github.com/grafana/cortex-tools). While they are optional, they offer improved performance.
 
-After installing the tool, create a file called _kubecost_rules.yaml_:
+After installing the tool, create a file called \_kubecost\_rules.yaml\_:
 
 ```yaml
 # kubecost_rules.yaml
@@ -107,7 +107,7 @@ groups:
           daemonset: "true"
 ```
 
-Then, making sure you are in the same directory as your _kubecost_rules.yaml_, load the rules using `cortextool`. Replace address with your Grafana Cloud’s Prometheus query URL.
+Then, making sure you are in the same directory as your \_kubecost\_rules.yaml\_, load the rules using `cortextool`. Replace address with your Grafana Cloud’s Prometheus query URL.
 
 ```sh
 cortextool rules load \
