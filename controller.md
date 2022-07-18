@@ -29,7 +29,7 @@ To use [this setup script](https://github.com/kubecost/cluster-turndown/blob/mas
 * **Namespace**: This should be the namespace which Kubecost will be installed, e.g `kubecost`
 * **Secret Name**: This should always be set to `cluster-controller-service-key`, which is the secret name mounted by the Kubecost helm chart.
 
-## EKS Setup
+## EKS setup
 
 Create a new User with 'AutoScalingFullAccess' permissions. Create a new file, *service-key.json*, and use the access key id and secret access key to fill out the following template:
 
