@@ -28,7 +28,7 @@ Check out our [Installation options](https://github.com/kubecost/docs/blob/main/
 
 You can stay up to date with Kubecost by following releases on [GitHub](https://github.com/kubecost/cost-analyzer-helm-chart/releases).
 
-Contact us via email (<support@kubecost.com>) or join us on [Slack](https://join.slack.com/t/kubecost/shared_invite/enQtNTA2MjQ1NDUyODE5LWFjYzIzNWE4MDkzMmUyZGU4NjkwMzMyMjIyM2E0NGNmYjExZjBiNjk1YzY5ZDI0ZTNhZDg4NjlkMGRkYzFlZTU)if you have questions!
+Contact us via email (<support@kubecost.com>) or join us on [Slack](https://join.slack.com/t/kubecost/shared_invite/enQtNTA2MjQ1NDUyODE5LWFjYzIzNWE4MDkzMmUyZGU4NjkwMzMyMjIyM2E0NGNmYjExZjBiNjk1YzY5ZDI0ZTNhZDg4NjlkMGRkYzFlZTU) if you have questions!
 
 Edit this doc on [GitHub](https://github.com/kubecost/docs/blob/main/index.md)
 
