@@ -28,12 +28,16 @@ http://<kubecost-address>/model/assets/diff
 ## API Examples
 
 ```
+// Compare yesterdays assets to todays assets
 http://localhost:9090/model/assets/diff?before=yesterday&after=today
 
+// Compare assets from 5 days ago to assets from the last day
 http://localhost:9090/model/assets/diff?before=1d offset 5d&after=1d
 
+// Compare assets from last month to assets from this month
 http://localhost:9090/model/assets/diff?before=lastmonth&after=month
 
+// Compare assets on 07/01/2022 to assets on 07/06/2022
 http://localhost:9090/model/assets/diff?before=2022-07-01T00:00:00Z,2022-07-02T00:00:00Z&after=2022-07-06T00:00:00Z,2022-07-07T00:00:00Z
 
 ```
@@ -43,22 +47,25 @@ http://localhost:9090/model/assets/diff?before=2022-07-01T00:00:00Z,2022-07-02T0
 ```
 {
     ...
-    Entity: // this is just a typical asset
-        { 
-            type: Disk,
-            properties: {"category":"Storage","provider":"GCP","project":"guestbook-227502","service":"Kubernetes","cluster":"cluster-one","name":"gke-nick-dev-default-pool-d26dab9e-55qb","providerID":"gke-nick-dev-default-pool-d26dab9e-55qb"},
-            labels: {},
-            window: {"start":"2022-07-08T00:00:00Z","end":"2022-07-16T00:00:00Z"},
-            start: "2022-07-08T00:00:00Z",
-            end: "2022-07-15T18:33:00Z",
-            minutes: 11193.000000,
-            byteHours: 21733694071398.398438,
-            bytes: 116503318527.999985,
-            breakdown: {"idle":0.9557036583241117,"other":0,"system":0.04429634167588818,"user":0},
-            adjustment: 0.000000,
-            totalCost: 1.118155
+    "":
+        {
+            Entity: // this is just a typical asset
+                { 
+                    type: Disk,
+                    properties: {"category":"Storage","provider":"GCP","project":"guestbook-227502","service":"Kubernetes","cluster":"cluster-one","name":"gke-nick-dev-default-pool-d26dab9e-55qb","providerID":"gke-nick-dev-default-pool-d26dab9e-55qb"},
+                    labels: {},
+                    window: {"start":"2022-07-08T00:00:00Z","end":"2022-07-16T00:00:00Z"},
+                    start: "2022-07-08T00:00:00Z",
+                    end: "2022-07-15T18:33:00Z",
+                    minutes: 11193.000000,
+                    byteHours: 21733694071398.398438,
+                    bytes: 116503318527.999985,
+                    breakdown: {"idle":0.9557036583241117,"other":0,"system":0.04429634167588818,"user":0},
+                    adjustment: 0.000000,
+                    totalCost: 1.118155
+                }
+            Kind: "added" // the kind of change it was ("added", "removed", or "changed")
         }
-    Kind: "added" // the kind of change it was ("added" or "removed")
     ...
 }
 ```
