@@ -9,7 +9,7 @@ The Kubecost Prometheus deployment is used both as a source and store of metrics
 
 For the best experience, we generally recommend teams use the bundled prometheus-server & grafana but reuse their existing kube-state-metrics and node-exporter deployments if they already exist. This setup allows for the easiest installation process, easiest ongoing maintenance, minimal duplication of metrics, and more flexible metric retention.
 
-> Note: the Kubecost team provides best efforts support for free/community users when integrating with an existing Prometheus deployment.
+> **Note**: the Kubecost team provides best efforts support for free/community users when integrating with an existing Prometheus deployment.
 
 
 ## Dependency Requirements
@@ -55,7 +55,7 @@ To confirm this job is successfully scraped by Prometheus, you can view the Targ
 
 ## Node exporter metric labels
 
-> Note that this step is optional, and only impacts certain efficiency metrics. View [issue/556](https://github.com/kubecost/cost-model/issues/556) for a description of what will be missing if this step is skipped.
+> **Note**: This step is optional, and only impacts certain efficiency metrics. View [issue/556](https://github.com/kubecost/cost-model/issues/556) for a description of what will be missing if this step is skipped.
 
 You'll need to add the following relabel config to the job that scrapes the node exporter DaemonSet.
 
@@ -71,15 +71,15 @@ You'll need to add the following relabel config to the job that scrapes the node
         target_label: kubernetes_node
 ```
 
-Note that this does not override the source label-- it creates a new label called "kubernetes_node" and copies the value of pod into it.
+Note that this does not override the source label. It creates a new label called "kubernetes_node" and copies the value of pod into it.
 
-## Troubleshooting Issues
+## Troubleshooting
 
 Visiting `<your-kubecost-endpoint>/diagnostics.html` provides diagnostics info on this integration. [More details](/diagnostics.md)
 
 Common issues include the following:
 
-* Wrong Prometheus FQDN: evidenced by the following pod error message `No valid prometheus config file at ...` and the init pods hanging. We recommend running `curl <your_prometheus_url>/api/v1/status/config` from a pod in the cluster to confirm that your [Prometheus config](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#configuration-file) is returned. Here is an example, but this needs to be updated based on your Prometheus address:
+**Wrong Prometheus FQDN**: Evidenced by the following pod error message `No valid prometheus config file at ...` and the init pods hanging. We recommend running `curl <your_prometheus_url>/api/v1/status/config` from a pod in the cluster to confirm that your [Prometheus config](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#configuration-file) is returned. Here is an example, but this needs to be updated based on your Prometheus address:
 
 ```sh
 kubectl exec kubecost-cost-analyzer-db55d88f6-fr6kc -c cost-analyzer-frontend -n kubecost \
@@ -88,13 +88,13 @@ kubectl exec kubecost-cost-analyzer-db55d88f6-fr6kc -c cost-analyzer-frontend -n
 
 If the config file is not returned, this is an indication that an incorrect Prometheus address has been provided. If a config file is returned from one pod in the cluster but not the Kubecost pod, then the Kubecost pod likely has its access restricted by a network policy, service mesh, etc.
 
-* Prometheus throttling -- ensure Prometheus isn't being CPU throttled due to a low resource request.
+**Prometheus throttling**: Ensure Prometheus isn't being CPU throttled due to a low resource request.
 
-* Wrong dependency version -- see the section above about Requirements
+**Wrong dependency version**: Review the Dependency Requirements section above
 
-* Missing scrape configs -- visit Prometheus Target page (screenshot above)
+**Missing scrape configs**: Visit Prometheus Targets page (screenshot above)
 
-* Data incorrectly is a single namespace -- make sure that [honor_labels](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#scrape_config) is enabled
+**Data incorrectly is a single namespace**: Make sure that [honor_labels](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#scrape_config) is enabled
 
 You can visit Settings in Kubecost to see basic diagnostic information on these Prometheus metrics:
 
