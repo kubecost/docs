@@ -47,24 +47,24 @@ http://localhost:9090/model/assets/diff?before=2022-07-01T00:00:00Z,2022-07-02T0
 ```
 {
     ...
-    "":
+    "__undefined__/__undefined__/__undefined__/Storage/__undefined__/Disk/Kubernetes/gke-nick-dev-default-pool-d26dab9e-55qb/gke-nick-dev-default-pool-d26dab9e-55qb":
         {
-            Entity: // this is just a typical asset
-                { 
-                    type: Disk,
-                    properties: {"category":"Storage","provider":"GCP","project":"guestbook-227502","service":"Kubernetes","cluster":"cluster-one","name":"gke-nick-dev-default-pool-d26dab9e-55qb","providerID":"gke-nick-dev-default-pool-d26dab9e-55qb"},
+            Entity: // this is a typical asset
+                {
+                    type: "Disk",
+                    properties: {"category":"Storage","service":"Kubernetes","name":"gke-nick-dev-default-pool-d26dab9e-55qb","providerID":"gke-nick-dev-default-pool-d26dab9e-55qb"},
                     labels: {},
-                    window: {"start":"2022-07-08T00:00:00Z","end":"2022-07-16T00:00:00Z"},
-                    start: "2022-07-08T00:00:00Z",
-                    end: "2022-07-15T18:33:00Z",
-                    minutes: 11193.000000,
-                    byteHours: 21733694071398.398438,
-                    bytes: 116503318527.999985,
-                    breakdown: {"idle":0.9557036583241117,"other":0,"system":0.04429634167588818,"user":0},
+                    window: {"start":"2022-07-18T22:00:00Z","end":"2022-07-19T22:00:00Z"},
+                    start: "2022-07-18T15:00:00-07:00",
+                    end: "2022-07-19T14:43:00-07:00",
+                    minutes: 1423.000000,
+                    byteHours: 2763070371089.066895,
+                    bytes: 116503318528.000015,
+                    breakdown: {"idle":0.9518633801103309,"other":0,"system":0.04813661988966931,"user":0},
                     adjustment: 0.000000,
-                    totalCost: 1.118155
-                }
-            Kind: "added" // the kind of change it was ("added", "removed", or "changed")
+                    totalCost: 0.144021
+                },
+            Kind: "added" // the type of change ("added", "removed", or "changed")
         }
     ...
 }
