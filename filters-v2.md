@@ -7,6 +7,10 @@ v1.96 of Kubecost, superseding the original filtering parameters (e.g.
 to introduce support for "not equals" (e.g. `namespace != kubecost`) queries
 while maintaining extensibility.
 
+> V1 filters will continue to be supported in all relevant APIs. APIs will first
+> check for the `filter=` parameter. If it is present, V2 filters will be used.
+> If it is not present, APIs will attempt to use V1 filters.
+
 ## How to use V2 filters
 
 V2 filters exist under the `filter=` parameter in supported APIs (initially,
