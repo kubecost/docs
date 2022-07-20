@@ -7,7 +7,7 @@ When this feature is enabled, Kubecost gathers network traffic metrics in combin
 
 ## Enabling network costs
 
-To enable this feature, set the following parameter in values.yaml during [Helm installation](http://kubecost.com/install):
+To enable this feature, set the following parameter in _values.yaml_ during [Helm installation](http://kubecost.com/install):
  ```
  networkCosts.enabled=true
  ```
@@ -35,7 +35,7 @@ This will show you the top source and destination IP addresses and bytes transfe
 
 ## Overriding traffic classifications
 
-For traffic routed to addresses outside of your cluster but inside your VPC, Kubecost supports the ability to directly classify network traffic to a particular IP address or CIDR block. This feature can be configured in your [values.yaml](https://github.com/kubecost/cost-analyzer-helm-chart/blob/ab384e2eb027e74b2c3e61a7e1733ffa1718170e/cost-analyzer/values.yaml#L288-L322) under `networkCosts.config`. Classifications are defined as follows:
+For traffic routed to addresses outside of your cluster but inside your VPC, Kubecost supports the ability to directly classify network traffic to a particular IP address or CIDR block. This feature can be configured in your [_values.yaml_](https://github.com/kubecost/cost-analyzer-helm-chart/blob/ab384e2eb027e74b2c3e61a7e1733ffa1718170e/cost-analyzer/values.yaml#L288-L322) under `networkCosts.config`. Classifications are defined as follows:
 
 * In-zone: A list of destination addresses/ranges that will be classified as an in-zone traffic, which is free for most providers. 
 * In-region: A list of addresses/ranges that will be classified as the same region between source and destinations but different zones.
