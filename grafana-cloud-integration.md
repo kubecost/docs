@@ -15,10 +15,10 @@ This document will show you how to integrate the Grafana Cloud Prometheus metric
 
 Install the Grafana Agent for Kubernetes on your cluster. On the existing K8s cluster that you intend to install Kubecost, run the following commands to install grafana agent to scrape the metrics from Kubecost /metrics end point. The script below installs Grafana agent with necessary scraping configuration for Kubecost, you may want to add additional scrape configuration for your set up. Please remember to replace these following values by your actual Grafana cloud's values:
 
-REPLACE-WITH-GRAFANA-PROM-REMOTE-WRITE-ENDPOINT
-REPLACE-WITH-GRAFANA-PROM-REMOTE-WRITE-USERNAME
-REPLACE-WITH-GRAFANA-PROM-REMOTE-WRITE-API-KEY
-REPLACE-WITH-YOUR-CLUSTER-NAME
+- REPLACE-WITH-GRAFANA-PROM-REMOTE-WRITE-ENDPOINT
+- REPLACE-WITH-GRAFANA-PROM-REMOTE-WRITE-USERNAME
+- REPLACE-WITH-GRAFANA-PROM-REMOTE-WRITE-API-KEY
+- REPLACE-WITH-YOUR-CLUSTER-NAME
 
 
 ```Bash
@@ -73,7 +73,9 @@ MANIFEST_URL=https://raw.githubusercontent.com/grafana/agent/v0.24.2/production/
 ```
 > Note: Verify if Grafana-agent is scraping data (optional)
 
+```Bash
 kubectl -n kubecost logs grafana-agent-0
+```
 
 To learn more about how to install and config Grafana agent as well as additional scrape configuration, please refer to [Grafana Agent for Kubernetes](https://grafana.com/docs/grafana-cloud/kubernetes/agent-k8s/k8s_agent_metrics/) section of the Grafana Cloud documentation. Or you can check Kubecost Prometheus scrape config at this [Github repository](https://github.com/kubecost/cost-analyzer-helm-chart/blob/ebe7e088debecd23f90e6dd75b425828901a246c/cost-analyzer/charts/prometheus/values.yaml#L1152)
 
