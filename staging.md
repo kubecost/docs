@@ -6,15 +6,15 @@ To upgrade an existing Kubecost Helm Chart deployment to the latest staging buil
 
 1. Add [Staging Repo](https://github.com/kubecost/staging-repo)
 
-  ```
-  helm repo add kubecoststagingrepo https://kubecost.github.io/staging-repo/
-  ```
+    ```
+      helm repo add kubecoststagingrepo https://kubecost.github.io/staging-repo/
+    ```
 
 2. Upgrade Kubecost to use staging repo 
 
-  ```
-   helm upgrade kubecost kubecoststagingrepo/cost-analyzer -n kubecost
-  ```
+    ```
+     helm upgrade kubecost kubecoststagingrepo/cost-analyzer -n kubecost
+    ```
 
 Edit this doc on [GitHub](https://github.com/kubecost/docs/blob/main/staging.md)
 
