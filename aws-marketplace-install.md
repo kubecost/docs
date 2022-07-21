@@ -7,7 +7,7 @@ Please contact us at support@kubecost.com with any questions and we'd be happy t
 
 ## Step 1. Create an IAM policy
 
-To deploy Kubecost from AWS Marketplace, you need to assign IAM policy with approriate IAM permission to a Kubernetes (K8s) service account before starting the deployment. You can either use AWS managed policy `arn:aws:iam::aws:policy/AWSMarketplaceMeteringRegisterUsage` or creating your own IAM policy. You can learn [more info on how to create a new policy](https://docs.aws.amazon.com/IAM/latest/UserGuide/tutorial_managed-policies.html#step1-create-policy)
+To deploy Kubecost from AWS Marketplace, you need to assign an IAM policy with approriate IAM permission to a Kubernetes (K8s) service account before starting the deployment. You can either use AWS managed policy `arn:aws:iam::aws:policy/AWSMarketplaceMeteringRegisterUsage` or creating your own IAM policy. You can learn [more info on how to create a new policy](https://docs.aws.amazon.com/IAM/latest/UserGuide/tutorial_managed-policies.html#step1-create-policy)
 
 Example IAM policy:
 
@@ -44,14 +44,14 @@ eksctl create iamserviceaccount \
     --approve \
     --override-existing-serviceaccounts
 ```
-For more detail and how to set up the appropriate trust relationships is available [here](https://docs.aws.amazon.com/eks/latest/userguide/create-service-account-iam-policy-and-role.html).
+More details and how to set up the appropriate trust relationships is available [here](https://docs.aws.amazon.com/eks/latest/userguide/create-service-account-iam-policy-and-role.html).
 
-> Note: Your Amazon EKS cluster need to have IAM OIDC provider enabled to set up IRSA. You can learn more on how to enable IAM OIDC provider at this [AWS documentation](https://docs.aws.amazon.com/eks/latest/userguide/enable-iam-roles-for-service-accounts.html) 
+> Note: Your Amazon EKS cluster needs to have IAM OIDC provider enabled to set up IRSA. You can learn more on how to enable IAM OIDC provider with this [AWS documentation](https://docs.aws.amazon.com/eks/latest/userguide/enable-iam-roles-for-service-accounts.html) 
 ## Step 3. Deploy Kubecost with attached IAM role
 
-- Define which available version you would like to install using this following command (you can check available version title from the AWS Marketplace product):
+- Define which available version you would like to install using this following command (you can check available version title from the AWS Marketplace product, e.g: prod-1.95.0):
 
-`export IMAGETAG=prod-1.94.2`
+`export IMAGETAG=<VERSION-TITLE>`
 
 - Deploy Kubecost with `Helm` using the following command:
 
