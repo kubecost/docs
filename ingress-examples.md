@@ -5,6 +5,8 @@ Enabling external access to the Kubecost product requires exposing access to por
 Exposing this endpoint will handle routing to Grafana as well.
 This can be accomplished with a number of approaches, including Ingress or Service definitions.
 
+> Note: you should be cautious about exposing endpoints and recommend consulting your orgnanization's internal recommendations. 
+
 Common samples below and others can be found on our [GitHub repository](https://github.com/kubecost/poc-common-configurations/tree/main/ingress-examples).
 
 The following example definitions use the NGINX [Ingress Controller](https://kubernetes.io/docs/concepts/services-networking/ingress-controllers/).
