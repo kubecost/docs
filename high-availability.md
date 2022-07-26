@@ -21,7 +21,7 @@ In order to enable the leader/follower and high availability features, the follo
 * ETL FileStore is Enabled (enabled by default)
 * [ETL Bucket Backup](https://raw.githubusercontent.com/kubecost/docs/main/etl-backup.md) is Configured
 
-For eexample, using our helm chart, the following is an acceptable configuration:
+For example, using our helm chart, the following is an acceptable configuration:
 ```bash
 helm install --name kubecost --namespace kubecost \
 	--set kubecostDeployment.leaderFollower.enabled=true \ 
