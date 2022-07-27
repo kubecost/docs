@@ -16,7 +16,7 @@ Kubecost alerts allow teams to receive updates on real-time Kubernetes spend. Th
  
 6. [Cluster Health](#type-cluster-health) -- used to determine if the cluster's health score changes by a specific threshold.
 
-7. [Asset Budget](#type-asset-budget) -- sends an email and/or Slack alert when a particular asset spend crosses a defined threshold.
+7. [Asset Budget](#type-asset-budget) -- sends an email and/or Slack alert when spend for a particular set of assets crosses a defined threshold.
 
 8. [Cloud Report](#type-cloud-report) -- sends an email and/or Slack alert with asset spend across all or a subset of cloud resources.
 
@@ -33,7 +33,7 @@ The alert settings, under `global.notifications.alertConfigs` in `cost-analyzer/
 * `globalSlackWebhookUrl` optional, a global Slack webhook used for alerts, enabled by default if provided
 * `globalAlertEmails` a global list of emails for alerts
 
-Example Helm `values.yaml`: 
+Example Helm *values.yaml*: 
 
 ```yaml
 notifications:
@@ -89,7 +89,7 @@ Required parameters (by individual namespace):
 * `filter: <value>` -- configurable, accepts a single namespace name (comma-separated values unsupported)
 * `window: 7d`
 
-Example Helm `values.yaml`:
+Example Helm *values.yaml*:
 
 ```
 # Recurring weekly namespace update on all namespaces
@@ -150,7 +150,7 @@ Define spend budgets and alert on budget overruns.
 * `filter: <value>` -- configurable, accepts a single filter value (comma-separated values unsupported)
 * `window: <N>d` or `<M>h` -- configurable, (1 ≤ N ≤ 7, 1 ≤ M ≤ 24)
 
-Example Helm `values.yaml`:
+Example Helm *values.yaml*:
 
 ```
 # Daily namespace budget alert on namespace `kubecost`
@@ -172,7 +172,7 @@ Example Helm `values.yaml`:
 
 ### Type: Asset Budget
 
-Define asset budgets and alert on asset that overruns the threshold set.
+Define asset budgets and alert when cloud or Kubernetes assets overrun the threshold set.
 
 *Required parameters:*
 * `type: assetBudget`
@@ -191,7 +191,7 @@ Define asset budgets and alert on asset that overruns the threshold set.
 * `providerid`
 * `label` requires the following format: `label:<label_name>=<label_value>`
 
-Example Helm `values.yaml`:
+Example Helm *values.yaml*:
 
 ```
 # Daily namespace budget alert on type `Node,Loadbalancer`
@@ -212,7 +212,7 @@ Example Helm `values.yaml`:
 
 ### Type: Cloud Report
 
-Sends a recurring email and/or Slack alert with a asset summary report of cost and efficiency metrics. 
+Sends a recurring email and/or Slack alert with a cloud and/or Kubernetes assets summary report. 
 
 *Required parameters:*
 * `type: cloudReport`
@@ -235,7 +235,7 @@ Sends a recurring email and/or Slack alert with a asset summary report of cost a
 * `providerid`
 * `label` requires the following format: `label:<label_name>=<label_value>`
 
-Example Helm `values.yaml`:
+Example Helm *values.yaml*:
 
 ```
 # Recurring weekly cloud update on all cluster
@@ -270,7 +270,7 @@ Detect unexpected spend increases/decreases relative to historical moving averag
 *Optional parameters:*
 * `filter: <value>` -- limit the aggregations that this alert will cover, accepts comma-separated values
 
-Example Helm `values.yaml`:
+Example Helm *values.yaml*:
 
 ```
 # Daily spend change alert on the 
@@ -309,7 +309,7 @@ Enabling diagnostic alerts in Kubecost occur when an event impacts product uptim
 
 This alert only uses Slack (email coming soon), so it requires the `globalSlackWebhookUrl` field, or setting the `slackWebhookUrl` field for the alert.
 
-Example Helm `values.yaml`:
+Example Helm *values.yaml*:
 ```
 # Kubecost Health Diagnostic
 - type: diagnostic
@@ -340,7 +340,7 @@ Cluster health alerts occur when the cluster health score changes by a specific 
 
 This alert only uses Slack (email coming soon), so it requires the `globalSlackWebhookUrl` field, or setting the `slackWebhookUrl` field for the alert.
 
-Example Helm values.yaml:
+Example Helm *values.yaml*:
 
 ```
 # Health Score Alert 
