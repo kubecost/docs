@@ -96,6 +96,8 @@ If the config file is not returned, this is an indication that an incorrect Prom
 
 **Data incorrectly is a single namespace**: Make sure that [honor_labels](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#scrape_config) is enabled
 
+**Negative idle reported**: Make sure the kubecost job is being correctly scraped and that node_total_hourly_cost and kube_node_status_capacity_cpu_cores exist in Prometheus.
+
 You can visit Settings in Kubecost to see basic diagnostic information on these Prometheus metrics:
 
 ![Prometheus status diagnostic](https://raw.githubusercontent.com/kubecost/docs/main/prom-status.png)
