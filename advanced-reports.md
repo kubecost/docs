@@ -1,7 +1,7 @@
 Advanced Reporting
 ======
 
-Kubecost Advanced Reporting allows teams to sculpt and tailor custom reports to easily view the information they care about. Providing an interesection between K8s Allocation and Cloud Assets data, this tool provides insight into important cost considerations.
+Kubecost Advanced Reporting allows teams to sculpt and tailor custom reports to easily view the information they care about. Providing an intersection between K8s Allocation and Cloud Assets data, this tool provides insight into important cost considerations.
 
 
 ![Kubecost Advanced Reporting UI](https://raw.githubusercontent.com/kubecost/docs/main/images/sample-advanced-report.png)
@@ -28,7 +28,7 @@ Add-Ons or Visual Elements are used to enhance your report and provide a high-le
 > Note: This feature is currently disabled for this release.
 
 
-Edit this doc on [Github](https://github.com/kubecost/docs/blob/main/advanced-reports.md)
+Edit this doc on [GitHub](https://github.com/kubecost/docs/blob/main/advanced-reports.md)
 
 
 <!--- {"article":"5991192077079","section":"4402815656599","permissiongroup":"1500001277122"} --->
