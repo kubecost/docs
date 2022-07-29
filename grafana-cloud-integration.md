@@ -152,7 +152,7 @@ groups:
 EOF
 ```
 
-Then, making sure you are in the same directory as your \_kubecost\_rules.yaml\_, load the rules using `cortextool`. Replace address with your Grafana Cloud’s Prometheus endpoint (Remember to omit the /api/prom path from the endpoint URL).
+Then, making sure you are in the same directory as your \_kubecost\_rules.yaml\_, load the rules using `cortextool`. Replace the address with your Grafana Cloud’s Prometheus endpoint (Remember to omit the /api/prom path from the endpoint URL).
 
 ```Bash
 cortextool rules load \
@@ -171,9 +171,9 @@ cortextool rules print \
 --key=<REPLACE-WITH-GRAFANA-PROM-REMOTE-WRITE-API-KEY>
 ```
 
-## Step 4: Install Kubecost on the cluster:
+## Step 4: Install Kubecost on the cluster
 
-Install Kubecost on your K8s cluster with Grafana Cloud Prometheus query endpoint and `dbsecret` we created in step 2
+Install Kubecost on your K8s cluster with Grafana Cloud Prometheus query endpoint and `dbsecret` you created in Step 2.
 
 ```Bash
 helm upgrade -i -n kubecost kubecost kubecost/cost-analyzer \
