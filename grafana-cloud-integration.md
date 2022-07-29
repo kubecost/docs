@@ -71,7 +71,7 @@ EOF
 MANIFEST_URL=https://raw.githubusercontent.com/grafana/agent/v0.24.2/production/kubernetes/agent-bare.yaml NAMESPACE=kubecost /bin/sh -c "$(curl -fsSL https://raw.githubusercontent.com/grafana/agent/v0.24.2/production/kubernetes/install-bare.sh)" | kubectl apply -f -
 
 ```
-> Note: Verify if Grafana-agent is scraping data (optional)
+> *Note*: Verify if Grafana-agent is scraping data (optional)
 
 ```Bash
 kubectl -n kubecost logs grafana-agent-0
