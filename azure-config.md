@@ -40,7 +40,7 @@ az role definition create --verbose --role-definition @myrole.json
 Next, create an Azure Service Principal.
 
 ```shell
-az ad sp create-for-rbac --name "KubecostAccess" --role "KubecostRole" --sdk-auth true > my_credentials.json
+az ad sp create-for-rbac --name "KubecostAccess" --role "KubecostRole" --scope "/subscriptions/YOUR_SUBSCRIPTION_ID" --sdk-auth true > my_credentials.json
 ```
 
 The newly created `my_credentials.json` file will contain the relevant configuration information.
