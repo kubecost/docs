@@ -24,10 +24,10 @@ Have questions or issues? View our [troubleshooting guide](#troubleshooting).
   
 ## Configuring Alerts in Helm
 
-*Note: `values.yaml` is a source of truth. Alerts set through `values.yaml` will continually overwrite any manual alert settings set through the Kubecost UI.* 
+> **Note**: *values.yaml* is a source of truth. Alerts set through *values.yaml* will continually overwrite any manual alert settings set through the Kubecost UI.
 
 ### Global Alert Parameters  
-The alert settings, under `global.notifications.alertConfigs` in `cost-analyzer/values.yaml`, accept four global fields:
+The alert settings, under *global.notifications.alertConfigs* in *cost-analyzer/values.yaml*, accept four global fields:
 
 * `frontendUrl` optional, your cost analyzer front end URL used for linkbacks in alert bodies
 * `globalSlackWebhookUrl` optional, a global Slack webhook used for alerts, enabled by default if provided
