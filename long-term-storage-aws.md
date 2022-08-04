@@ -97,7 +97,7 @@ See: [Troubleshooting](https://guide.kubecost.com/hc/en-us/articles/440759596469
 ## Additional Help
 <a name="help"></a>Please let us know if you run into any issues, we are here to help.
 
-[Slack community](https://join.slack.com/t/kubecost/shared_invite/enQtNTA2MjQ1NDUyODE5LWFjYzIzNWE4MDkzMmUyZGU4NjkwMzMyMjIyM2E0NGNmYjExZjBiNjk1YzY5ZDI0ZTNhZDg4NjlkMGRkYzFlZTU) - check out #support for any help you may need & drop your introduction in the #general channel
+[Slack community](https://join.slack.com/t/kubecost/shared_invite/zt-1dz4a0bb4-InvSsHr9SQsT_D5PBle2rw) - check out #support for any help you may need & drop your introduction in the #general channel
 
 Email: <team@kubecost.com>
 

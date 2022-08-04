@@ -12,7 +12,7 @@ Kubecost is a growing, lively, friendly open-source community. As many open sour
 
 Communication
 
-* [Slack community](https://join.slack.com/t/kubecost/shared_invite/enQtNTA2MjQ1NDUyODE5LWFjYzIzNWE4MDkzMmUyZGU4NjkwMzMyMjIyM2E0NGNmYjExZjBiNjk1YzY5ZDI0ZTNhZDg4NjlkMGRkYzFlZTU) - check out #support for any help you may need & drop your introduction in the #general channel
+* [Slack community](https://join.slack.com/t/kubecost/shared_invite/zt-1dz4a0bb4-InvSsHr9SQsT_D5PBle2rw) - check out #support for any help you may need & drop your introduction in the #general channel
 * [Kubecost Documentation](https://www.docs.kubecost.com/)
 * Social media & blog
     * [Twitter ](https://twitter.com/kubecost)
@@ -48,7 +48,7 @@ Thanks for your help improving the project!
 
 ## Getting help
 
-If you have a question about Kubecost or have encountered problems using it, you can start by asking a question on [Slack](https://join.slack.com/t/kubecost/shared_invite/enQtNTA2MjQ1NDUyODE5LWFjYzIzNWE4MDkzMmUyZGU4NjkwMzMyMjIyM2E0NGNmYjExZjBiNjk1YzY5ZDI0ZTNhZDg4NjlkMGRkYzFlZTU) or via email at [support@kubecost.com](mailto:support@kubecost.com). You can also visit [https://docs.kubecost.com/](https://docs.kubecost.com/)
+If you have a question about Kubecost or have encountered problems using it, you can start by asking a question on [Slack](https://join.slack.com/t/kubecost/shared_invite/zt-1dz4a0bb4-InvSsHr9SQsT_D5PBle2rw) or via email at [support@kubecost.com](mailto:support@kubecost.com). You can also visit [https://docs.kubecost.com/](https://docs.kubecost.com/)
 
 ## Contribution workflow
 
@@ -112,7 +112,7 @@ Please write a commit message with Fixes Issue # if there is an outstanding issu
 
 Please run go fmt on the project directory. Lint can be okay (for example, comments on exported functions are nice but not required on the server).
 
-Please email us (support@kubecost.com) or reach out to us on [Slack](https://join.slack.com/t/kubecost/shared_invite/enQtNTA2MjQ1NDUyODE5LWFjYzIzNWE4MDkzMmUyZGU4NjkwMzMyMjIyM2E0NGNmYjExZjBiNjk1YzY5ZDI0ZTNhZDg4NjlkMGRkYzFlZTU) if you need help or have any questions!
+Please email us (support@kubecost.com) or reach out to us on [Slack](https://join.slack.com/t/kubecost/shared_invite/zt-1dz4a0bb4-InvSsHr9SQsT_D5PBle2rw) if you need help or have any questions!
 
 Thanks for your help improving the project!
 

@@ -4,7 +4,7 @@ Getting Support
 General support for Kubecost is provided via the following channels:
 
 * Our support email is <support@kubecost.com>. Please reach out with issues, questions, or even feature requests.
-* Our Slack workspace ([invite](https://join.slack.com/t/kubecost/shared_invite/enQtNTA2MjQ1NDUyODE5LWFjYzIzNWE4MDkzMmUyZGU4NjkwMzMyMjIyM2E0NGNmYjExZjBiNjk1YzY5ZDI0ZTNhZDg4NjlkMGRkYzFlZTU)) (dedicated SRE available for Enterprise plans)
+* Our Slack workspace ([invite](https://join.slack.com/t/kubecost/shared_invite/zt-1dz4a0bb4-InvSsHr9SQsT_D5PBle2rw)) (dedicated SRE available for Enterprise plans)
 * GitHub issues can be filed [here](https://github.com/kubecost/cost-analyzer-helm-chart/issues/new/choose)
 * Video and phone support available to all paid plans.
 
