@@ -1,7 +1,7 @@
 Asset Diff API
 ====================================
 
-The diff API provides a diff between two windows of all the added or removed assets from the later (before parameter) to the earlier (after parameter) window.
+The diff API provides a diff of two windows that returns all the added, removed, or cost changed assets from the later window (before parameter) to the earlier window (after parameter). This endpoint does a comparison of two asset sets in the given windows and accumulates the results.
 
 The endpoint is available at
 ```
@@ -13,6 +13,7 @@ http://<kubecost-address>/model/assets/diff
 |------|------|-------------|
 | `before` | string | Duration in time of the past. Supports hours or days before the current time in the following format: `2h` or `3d`. See the [Allocation API documentation](https://github.com/kubecost/docs/blob/main/allocation.md#querying) for more a more detailed explanation of valid inputs to `window`. Important note: `before` must be further in the past than `after` (e.g. `after=1d`, `before=1d offset 1d`) |
 | `after` | string | Duration in time closest to now. Supports hours or days before the current time in the following format: `2h` or `3d`. See the [Allocation API documentation](https://github.com/kubecost/docs/blob/main/allocation.md#querying) for more a more detailed explanation of valid inputs to `window`. Important note: `after` must be closer to now than `before` (e.g. `before=1d offset 7d`, `after=1d offset 3d`) |
+| `costChangeRatio` | float64 | Changes the ratio of cost changes when displaying 'Changed' types. e.g. `costChangeRatio=0.1` will display all assets that had a cost change of 0.1 (10%) or more. Defaults to 0.05 (5%). |
 | `aggregate` | string | Used to consolidate cost model data. Passing an empty value for this parameter, or not passing one at all, returns data by an individual asset. |
 | `filterClusters` | string | Comma-separated list of clusters to match; e.g. `cluster-one,cluster-two` will return results from only those two clusters. |
 | `filterNodes` | string | Comma-separated list of nodes to match; e.g. `node-one,node-two` will return results from only those two nodes. |
@@ -40,6 +41,8 @@ http://localhost:9090/model/assets/diff?before=lastmonth&after=month
 // Compare assets on 07/01/2022 to assets on 07/06/2022
 http://localhost:9090/model/assets/diff?before=2022-07-01T00:00:00Z,2022-07-02T00:00:00Z&after=2022-07-06T00:00:00Z,2022-07-07T00:00:00Z
 
+// Compare yesterdays assets to todays assets, displaying all assets that have a total cost change of 10% or more
+http://localhost:9090/model/assets/diff?before=yesterday&after=today&costChangeRatio=0.1
 ```
 
 ## Example API Response
