@@ -1,6 +1,8 @@
 Namespace Contacts
 ==================
 
+### ⚠️ DEPRECATED ⚠️  The `setNamespaceAttributes` and `getNamespaceAttributes` api endpoints were removed in v1.88.0.
+
 Use the following API to set a namespace owner, contact info and enable/disable email alerts. This API is available at:
 
 `http://<kubecost-address>/api/setNamespaceAttributes`
