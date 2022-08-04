@@ -39,7 +39,7 @@ The first line returned by the `curl` command should contain your `fqdn` paramet
 Using Prometheus at http://prometheus-server.prometheus.svc.cluster.local.
 ```
 
-Seek help in our [troubleshooting guide](https://docs.kubecost.com/custom-prom.html#troubleshooting-issues) or [reach out to us on Slack](https://join.slack.com/t/kubecost/shared_invite/enQtNTA2MjQ1NDUyODE5LWFjYzIzNWE4MDkzMmUyZGU4NjkwMzMyMjIyM2E0NGNmYjExZjBiNjk1YzY5ZDI0ZTNhZDg4NjlkMGRkYzFlZTU) if you run into any issues.
+Seek help in our [troubleshooting guide](https://docs.kubecost.com/custom-prom.html#troubleshooting-issues) or [reach out to us on Slack](https://join.slack.com/t/kubecost/shared_invite/zt-1dz4a0bb4-InvSsHr9SQsT_D5PBle2rw) if you run into any issues.
 
 ## 3. Set up your Prometheus to scrape metrics from Kubecost
 
@@ -120,7 +120,7 @@ To verify that the integration is set up, check that the `Prometheus Status` sec
 
 ![Prometheus status screenshot](https://user-images.githubusercontent.com/22844059/132998278-fd388e9a-8d61-4b8b-ad1c-0e52f17ca251.png)
 
-Have a look at the [Custom Prometheus integration troubleshooting guide](https://docs.kubecost.com/custom-prom.html#troubleshooting-issues) if you run into any errors while setting up the integration. You're also welcome to [reach out to us on Slack](https://join.slack.com/t/kubecost/shared_invite/enQtNTA2MjQ1NDUyODE5LWFjYzIzNWE4MDkzMmUyZGU4NjkwMzMyMjIyM2E0NGNmYjExZjBiNjk1YzY5ZDI0ZTNhZDg4NjlkMGRkYzFlZTU) if you require further assistance.
+Have a look at the [Custom Prometheus integration troubleshooting guide](https://docs.kubecost.com/custom-prom.html#troubleshooting-issues) if you run into any errors while setting up the integration. You're also welcome to [reach out to us on Slack](https://join.slack.com/t/kubecost/shared_invite/zt-1dz4a0bb4-InvSsHr9SQsT_D5PBle2rw) if you require further assistance.
 
 Edit this doc on [GitHub](https://github.com/kubecost/docs/blob/main/aws-amp-integration.md)
 

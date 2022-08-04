@@ -74,7 +74,7 @@ helm upgrade -i kubecost kubecost/cost-analyzer \
 
 `kubectl port-forward --namespace kubecost deployment/kubecost-cost-analyzer 9090`
 
-You can now start monitoring your Amazon EKS cluster cost with Kubecost. For advanced setup or if you have any questions, you can contact us on [Slack](https://join.slack.com/t/kubecost/shared_invite/enQtNTA2MjQ1NDUyODE5LWFjYzIzNWE4MDkzMmUyZGU4NjkwMzMyMjIyM2E0NGNmYjExZjBiNjk1YzY5ZDI0ZTNhZDg4NjlkMGRkYzFlZTU) or email at team@kubecost.com 
+You can now start monitoring your Amazon EKS cluster cost with Kubecost. For advanced setup or if you have any questions, you can contact us on [Slack](https://join.slack.com/t/kubecost/shared_invite/zt-1dz4a0bb4-InvSsHr9SQsT_D5PBle2rw) or email at team@kubecost.com 
 
 To participate in our free Enterprise onboarding program, contact us at support@kubecost.com to schedule these sessions!
 
