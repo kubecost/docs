@@ -434,7 +434,7 @@ kubectl -n kubecost get secret dbsecret -o json | jq '.data | map_values(@base64
 
 To set up recording rules in Grafana Cloud, download the [cortextool CLI utility](https://github.com/grafana/cortex-tools). While they are optional, they offer improved performance.
 
-After installing the tool, create a file called \_kubecost\_rules.yaml\_ with the following command:
+After installing the tool, create a file called `kubecost-rules.yaml` with the following command:
 
 <details>
   <summary>Click to see code</summary>
@@ -477,14 +477,14 @@ EOF
 ```
 </details>
 
-Then, making sure you are in the same directory as your \_kubecost\_rules.yaml\_, load the rules using `cortextool`. Replace the address with your Grafana Cloud’s Prometheus endpoint (Remember to omit the /api/prom path from the endpoint URL).
+Then, making sure you are in the same directory as your `kubecost-rules.yaml`, load the rules using `cortextool`. Replace the address with your Grafana Cloud’s Prometheus endpoint (Remember to omit the /api/prom path from the endpoint URL).
 
 ```Bash
 cortextool rules load \
 --address=<REPLACE-WITH-GRAFANA-PROM-ENDPOINT> \
 --id=<REPLACE-WITH-GRAFANA-PROM-REMOTE-WRITE-USERNAME> \
 --key=<REPLACE-WITH-GRAFANA-PROM-REMOTE-WRITE-API-KEY> \
-kubecost_rules.yaml
+kubecost-rules.yaml
 ```
 
 Print out the rules to verify that they’ve been loaded correctly:
