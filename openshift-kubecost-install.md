@@ -475,7 +475,7 @@ cortextool rules load \
 --address=<REPLACE-WITH-GRAFANA-PROM-ENDPOINT> \
 --id=<REPLACE-WITH-GRAFANA-PROM-REMOTE-WRITE-USERNAME> \
 --key=<REPLACE-WITH-GRAFANA-PROM-REMOTE-WRITE-API-KEY> \
-kubecost_rules.yaml
+kubecost-rules.yaml
 ```
 
 Print out the rules to verify that they’ve been loaded correctly:
