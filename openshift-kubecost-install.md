@@ -425,7 +425,7 @@ kubectl -n kubecost get secret dbsecret -o json | jq '.data | map_values(@base64
 
 To set up recording rules in Grafana Cloud, download the [cortextool CLI utility](https://github.com/grafana/cortex-tools). While they are optional, they offer improved performance.
 
-After installing the tool, create a file called \_kubecost\_rules.yaml\_ with the following command:
+After installing the tool, create a file called `kubecost-rules.yaml` with the following command:
 
 <details>
   <summary>Click to see code</summary>
