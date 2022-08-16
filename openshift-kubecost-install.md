@@ -468,7 +468,7 @@ EOF
 ```
 </details>
 
-Then, making sure you are in the same directory as your \_kubecost\_rules.yaml\_, load the rules using `cortextool`. Replace the address with your Grafana Cloud’s Prometheus endpoint (Remember to omit the /api/prom path from the endpoint URL).
+Then, making sure you are in the same directory as your `kubecost-rules.yaml`, load the rules using `cortextool`. Replace the address with your Grafana Cloud’s Prometheus endpoint (Remember to omit the /api/prom path from the endpoint URL).
 
 ```Bash
 cortextool rules load \
