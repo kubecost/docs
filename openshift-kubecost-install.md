@@ -1,45 +1,52 @@
-Install Kubecost on Redhat Openshift cluster
+Install Kubecost on Redhat OpenShift cluster
 ==================
 
-## Overview
+# Overview
 
-This documentation provides instructions on how to deploy Kubecost on Redhat Openshift cluster. Additional security settings may also be required. You can refer to the Architecture overview and installation section for more information. 
+This documentation provides instructions on how to deploy Kubecost on Redhat OpenShift cluster. Additional security settings may also be required. You can refer to the Architecture overview and installation section for more information. 
 
 ---
-## Architecture overview:
+# Architecture overview:
 
-Currently there are 2 main options to deploy Kubecost on Redhat Openshift Cluster (OCP).
+Currently there are 2 main options to deploy Kubecost on Redhat OpenShift Cluster (OCP).
 
-### Standard deployment:
+## Standard deployment:
 
-Kubecost is installed with Cost Analyzer and Prometheus as a time-series database. Data is gathered by the Prometheus installed with Kubecost (user-defined Prometheus). Other metrics are scraped by user-defined Prometheus from OCP monitoring stack managed components like KSM, OSM, CAdvisor, etc .... Kubecost then push and query metrics to/from user-defined Prometheus. Enterprise set up could also work with Thanos as additional component.
+Kubecost is installed with Cost Analyzer and Prometheus as a time-series database. Data is gathered by the Prometheus installed with Kubecost (bundled Prometheus). Other metrics are scraped by bundled Prometheus from OCP monitoring stack managed components like Kube State Metrics (KSM), Openshift Service Mesh (OSM), CAdvisor, etc .... Kubecost then push and query metrics to/from bundled Prometheus. Enterprise set up could also work with Thanos as additional component.
 
 The standard deployment is illustrated in the following diagram:
 
-![Standard deployment](images/standard-lightbg.png)
+![Standard deployment](images/ocp-standard.png)
 
-### Grafana managed Prometheus deployment:
+## Grafana managed Prometheus deployment:
 
-Kubecost is installed with the core components only (cost model, frontend) without user-defined Prometheus and other components. Grafana agent is installed as part of the solution to scrape the metrics from OCP monitoring stack managed components and Kubecost `/metrics` endpoint to write the data back to the Grafana Cloud managed Prometheus (Grafana Prometheus) instance. Kubecost reads the metrics directly from Grafana managed Prometheus.
+Kubecost is installed with the core components only (cost model, frontend) without bundled Prometheus and other components. Grafana agent is installed as part of the solution to scrape the metrics from OCP monitoring stack managed components and Kubecost `/metrics` endpoint to write the data back to the Grafana Cloud managed Prometheus (Grafana Prometheus) instance. Kubecost reads the metrics directly from Grafana managed Prometheus.
 
 The Grafana managed Prometheus deployment is illustrated in the following diagram:
 
-![Grafana managed Prometheus deployment](images/grafana-agent-lightbg.png)
+![Grafana managed Prometheus deployment](images/ocp-grafana-agent.png)
 
-## Installation instructions:
+# Installation instructions:
 
-### Standard deployment:
+## Standard deployment:
 
-**1. Clone this repository to your dev environment.**
+### Prerequisites:
+
+- You have an existing OpenShift cluster.
+- You have approriate access to that OpenShift cluster to create new project and deploy new workloads.
+
+### Installation:
+
+#### Step 1: Clone this repository to your dev environment.
 
 `git clone https://github.com/kubecost/openshift-helm-chart.git`
 `cd openshift-helm-chart`
 
-**2 Update configuration:**
+#### Step 2: Update configuration.
 
-Replace `CLUSTER_NAME` by your desired value in this file [values-openshift.yaml](https://github.com/kubecost/openshift-helm-chart/blob/main/values-openshift.yaml)
+Replace `$CLUSTER_NAME` with your desired value in this file [values-openshift.yaml](https://github.com/kubecost/openshift-helm-chart/blob/main/values-openshift.yaml)
 
-**3. Install Kubecost**
+#### Step 3: Install Kubecost.
 
 Then install against the local cost-analyzer repo using following helm install command:
 
@@ -49,24 +56,26 @@ helm upgrade --install kubecost ./cost-analyzer --namespace kubecost --create-na
 
 Wait for all pods to be ready.
 
-Create a route to the service `kubecost-cost-analyzer` on port `9090` of the `kubecost` project. You can learn more about how to do it on your Openshift portal in this [LINK](https://docs.openshift.com/container-platform/3.11/dev_guide/routes.html#:~:text=to%20the%20router.-,Creating%20Routes,Applications%20section%20of%20the%20navigation.&text=The%20new%20route%20inherits%20the,using%20the%20%2D%2Dname%20option.)
+Create a route to the service `kubecost-cost-analyzer` on port `9090` of the `kubecost` project. You can learn more about how to do it on your OpenShift portal in this [LINK](https://docs.openshift.com/container-platform/3.11/dev_guide/routes.html#:~:text=to%20the%20router.-,Creating%20Routes,Applications%20section%20of%20the%20navigation.&text=The%20new%20route%20inherits%20the,using%20the%20%2D%2Dname%20option.)
 
 Kubecost will be collecting data, please wait 5-15 minutes before the UI to reflect the resources in the local cluster.
 
-### Grafana managed Prometheus deployment:
+## Grafana managed Prometheus deployment:
 
-#### Prerequisites:
+### Prerequisites:
 
-- You have created a Grafana Cloud account & You have permissions to create Grafana Cloud API keys
+- You have created a Grafana Cloud account and you have permissions to create Grafana Cloud API keys
 - Add required service account for grafana-agent to `hostmount-anyuid` SCC:
 
-`oc adm policy add-scc-to-user hostmount-anyuid system:serviceaccount:kubecost:grafana-agent`
+```bash
+oc adm policy add-scc-to-user hostmount-anyuid system:serviceaccount:kubecost:grafana-agent
+```
 
-#### Installation:
+### Installation:
 
-**1. Clone this repository to your dev environment.**
+#### Step 1: Clone this repository to your dev environment.
    
-**2. Install the Grafana Agent on your cluster.**
+#### Step 2: Install the Grafana Agent on your cluster.
 
 On the existing K8s cluster that you intend to install Kubecost, run the following commands to install grafana agent to scrape the metrics from Kubecost /metrics end point. The script below installs Grafana agent with necessary scraping configuration for Kubecost, you may want to add additional scrape configuration for your set up. Please remember to replace these following values by your actual Grafana cloud's values:
 
@@ -389,11 +398,11 @@ MANIFEST_URL=https://raw.githubusercontent.com/kubecost/openshift-helm-chart/mai
 
 To learn more about how to install and config Grafana agent as well as additional scrape configuration, please refer to [Grafana Agent for Kubernetes](https://grafana.com/docs/grafana-cloud/kubernetes/agent-k8s/k8s_agent_metrics/) section of the Grafana Cloud documentation. Or you can check Kubecost Prometheus scrape config at this [Github repository](https://github.com/kubecost/cost-analyzer-helm-chart/blob/ebe7e088debecd23f90e6dd75b425828901a246c/cost-analyzer/charts/prometheus/values.yaml#L1152)
 
-**3. Verify if grafana-agent is scraping data successfully:**
+#### Step 3: Verify if grafana-agent is scraping data successfully.
 
 `kubectl -n kubecost logs grafana-agent-0`
 
-**4. Create dbsecret to allow Kubecots to query the metrics from Grafana Cloud Prometheus:**
+#### Step 4: Create dbsecret to allow Kubecost to query the metrics from Grafana Cloud Prometheus.
 
 - Create two files in your working directory, called `USERNAME` and `PASSWORD` respectively
   
@@ -421,7 +430,7 @@ kubectl create secret generic dbsecret \
 ```Bash
 kubectl -n kubecost get secret dbsecret -o json | jq '.data | map_values(@base64d)'
 ```
-**5. (optional): Configure Kubecost recording rules for Grafana Cloud using cortextool**
+#### Step 5 (optional): Configure Kubecost recording rules for Grafana Cloud using cortextool.
 
 To set up recording rules in Grafana Cloud, download the [cortextool CLI utility](https://github.com/grafana/cortex-tools). While they are optional, they offer improved performance.
 
@@ -486,7 +495,7 @@ cortextool rules print \
 --id=<REPLACE-WITH-GRAFANA-PROM-REMOTE-WRITE-USERNAME> \
 --key=<REPLACE-WITH-GRAFANA-PROM-REMOTE-WRITE-API-KEY>
 ```
-**6. Install Kubecost on the cluster:**
+#### Step 6: Install Kubecost on the cluster.
 
 Install Kubecost on your K8s cluster with Grafana Cloud Prometheus query endpoint and `dbsecret` you created in Step 4
 
@@ -504,7 +513,7 @@ The process is complete. By now, you should have successfully completed the Kube
 
 Optionally, you can also add our [Kubecost Dashboard for Grafana Cloud](https://grafana.com/grafana/dashboards/15714) to your organization to visualize your cloud costs in Grafana.
 
-## Support
+# Support
 
 For advanced setup or if you have any questions, you can contact us on [Slack](https://join.slack.com/t/kubecost/shared_invite/enQtNTA2MjQ1NDUyODE5LWFjYzIzNWE4MDkzMmUyZGU4NjkwMzMyMjIyM2E0NGNmYjExZjBiNjk1YzY5ZDI0ZTNhZDg4NjlkMGRkYzFlZTU) or email at team@kubecost.com
 
