@@ -16,7 +16,7 @@ Kubecost is installed with Cost Analyzer and Prometheus as a time-series databas
 
 The standard deployment is illustrated in the following diagram:
 
-![Standard deployment](images/ocp-standard.png)
+![Standard deployment](https://raw.githubusercontent.com/kubecost/docs/main/images/ocp-standard.png)
 
 ## Grafana managed Prometheus deployment:
 
@@ -24,7 +24,7 @@ Kubecost is installed with the core components only (cost model, frontend) witho
 
 The Grafana managed Prometheus deployment is illustrated in the following diagram:
 
-![Grafana managed Prometheus deployment](images/ocp-grafana-agent.png)
+![Grafana managed Prometheus deployment](https://raw.githubusercontent.com/kubecost/docs/main/images/ocp-grafana-agent.png)
 
 # Installation instructions:
 
@@ -87,7 +87,7 @@ On the existing K8s cluster that you intend to install Kubecost, run the followi
 <details>
   <summary>Click to see code</summary>
 
-```yaml
+```bash
 cat <<'EOF' |
 
 kind: ConfigMap
