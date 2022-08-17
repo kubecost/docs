@@ -519,4 +519,5 @@ For advanced setup or if you have any questions, you can contact us on [Slack](h
 
 To participate in our free Enterprise onboarding program, contact us at support@kubecost.com to schedule these sessions!
 
-<!--- {"article":"","section":"4402815636375","permissiongroup":"1500001277122"} --->
+
+<!--- {"article":"8241029276567","section":"4402815636375","permissiongroup":"1500001277122"} --->
