@@ -9,7 +9,6 @@ The following images will need to be downloaded. Please substitute the appropria
 
 #### Kubecost: Required
 - Frontend: gcr.io/kubecost1/frontend:prod-x.xx.x
-- Server: gcr.io/kubecost1/server:prod-x.xx.x
 - CostModel: gcr.io/kubecost1/cost-model:prod-x.xx.x
 
 #### Kubecost: Optional
