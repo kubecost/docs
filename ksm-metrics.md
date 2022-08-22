@@ -76,6 +76,7 @@ If there is a deployment of KSM outside of Kubecost, Prometheus deployments that
     - Pod metrics ([code ref](https://github.com/kubecost/cost-model/blob/0a0793ec040013fe44c058ff37f032449a2f1191/pkg/metrics/podlabelmetrics.go#L51-L60))
       - `kube_pod_labels`
       - `kube_pod_owner`
+  - If you are already running KSM v2, and have set the helm value to only emit KSM v1 metrics, you can also disable the Kubecost based KSM deployment by setting the helm value `prometheus.kube-state-metrics.disabled` to `true`.
 
 Edit this doc on [GitHub](https://github.com/kubecost/docs/blob/main/ksm-metrics.md)
 
