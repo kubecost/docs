@@ -3,7 +3,7 @@ Prometheus Configuration Guide
 
 ## Bring your own Prometheus
 
-There are several considerations to considering before disabling the Kubecost included Prometheus deployment. Kubecost _strongly_ recommends installing Kubecost with the bundled Prometheus in most environments.
+There are several considerations when disabling the Kubecost included Prometheus deployment. Kubecost _strongly_ recommends installing Kubecost with the bundled Prometheus in most environments.
 
 The Kubecost Prometheus deployment is optimized to not interfere with other observability instrumentation and by default only contains metrics that are useful to the Kubecost product. This results in __70-90% fewer metrics__ than a Prometheus deployment using default settings.
 
