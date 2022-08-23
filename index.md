@@ -3,7 +3,7 @@ Welcome
 
 __Kubecost helps you monitor and manage cost and capacity in Kubernetes environments.__ We integrate with your infrastructure to help your team track, manage, and reduce spend. 
 
-Below are frequently visited Kubecost documentation pages for both the Kubecost [open source project](https://github.com/kubecost/cost-model) as well as the [Commercial Kubecost product](http://kubecost.com).
+Below are frequently visited Kubecost documentation pages for both the [Commercial Kubecost product](http://kubecost.com) and [OpenCost](https://www.opencost.io/).
 
 In this guide, you'll find everything you need to set up Kubecost for your team.
 
