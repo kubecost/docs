@@ -109,6 +109,7 @@ The bucket can have a Canned ACL of Private or other permissions as you see fit.
 - `<ATHENA_TABLE>` the name of the table created by the Athena setup
 The table name is typically the database name with the leading athenacurcfn_ removed (but is not available as a CloudFormation stack resource)
 - `<ATHENA_PROJECT_ID>` e.g. "530337586277" # The AWS AccountID where the Athena CUR is.
+- `<MASTER_PAYER_ARN>` Is an optional value which should be set if you are using a multi-account billing set-up and are not accessing athena through the primary account. It should be set to the arn of the role in the masterpayer account, e.g. `arn:aws:iam::530337586275:role/KubecostRole`.
 
 Set these values into the following object and add them to the AWS array:
 
@@ -120,7 +121,8 @@ Set these values into the following object and add them to the AWS array:
     "athenaRegion": "<ATHENA_REGION>",
     "athenaDatabase": "<ATHENA_DATABASE>",
     "athenaTable": "<ATHENA_TABLE>",
-    "projectID": "<ATHENA_PROJECT_ID>"
+    "projectID": "<ATHENA_PROJECT_ID>",
+    "masterPayerARN": "<MASTER_PAYER_ARN>"
 }
 ```
 
