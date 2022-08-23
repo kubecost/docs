@@ -22,8 +22,23 @@ See an overview of core components in this diagram:
 
 ![Architecture Overview](https://raw.githubusercontent.com/kubecost/docs/main/images/arch.png)
 
+## Provider Pricing Architecture Overview
 
-# Enterprise architecture overview
+Kubecost interacts with provider pricing in a few different ways.
+
+- onDemand Rates (AWS, Azure, GCP, and Custom Pricing CSV)
+- Negotiated Rates (Azure, GCP, and Custom Pricing CSV)
+- Spot Data Feed (AWS)
+- [Cloud Provider Billing for Reconciliation and Out-of-Cluster Spend](https://github.com/kubecost/docs/blob/main/cloud-integration.md)
+  - [AWS Cost and Usage Report](https://github.com/kubecost/docs/blob/main/aws-cloud-integrations.md)
+  - [Azure Cost Export](https://github.com/kubecost/docs/blob/main/azure-out-of-cluster.md)
+  - [Google BigQuery Export](https://github.com/kubecost/docs/blob/main/gcp-out-of-cluster.md)
+
+In a Enterprise federated setup, only the Primary Kubecost Cluster needs access to the Cloud Provider Billing.
+
+![Provider Pricing Overview](https://raw.githubusercontent.com/kubecost/docs/main/images/cloud-bill-diagram.png)
+
+## Enterprise Architecture Overview
 
 The most common implementation of durable storage in the Kubecost application is with [Thanos](https://thanos.io/). Below is a high-level reference for the required components. More information on each Thanos component can be found [here](https://thanos.io/tip/components/).
 
