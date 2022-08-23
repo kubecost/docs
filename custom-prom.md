@@ -47,7 +47,8 @@ Kubecost requires the following minimum versions:
     --set global.prometheus.enabled=false
   ```
 
-  > **Note** The fqdn can be a full path: https://prometheus-prod-us-central-x.grafana.net/api/prom/
+  **Note** The fqdn can be a full path: https://prometheus-prod-us-central-x.grafana.net/api/prom/ if you use Grafana Cloud managed Prometheus. Learn more at [Grafana Cloud Integration for Kubecost](https://guide.kubecost.com/hc/en-us/articles/5699967551639-Grafana-Cloud-Integration-for-Kubecost)
+
 
 1. Have your Prometheus scrape the cost-model `/metrics` endpoint. These metrics are needed for reporting accurate pricing data. Here is an example scrape config:
 
