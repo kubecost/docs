@@ -15,7 +15,7 @@ Additonally, if multi-cluster metric aggregation is required, Kubecost provides 
 
 If you have node-exporter and/or KSM running on your cluster, follow this step to disable the Kubecost included versions. Additional detail on [KSM requiments](https://github.com/kubecost/docs/blob/main/ksm-metrics.md).
 
-> **Note**: As opposed to our recommendation above, we highly recommend disabling the Kubecost's node-exporter and kube-state-metrics if you already have them running in your cluster. Because node-exporter runs on host-network and port 9100, additional daemonsets will be stuck `Pending`.
+> **Note**: In contrast to our recommendation above, we do recommend disabling the Kubecost's node-exporter and kube-state-metrics if you already have them running in your cluster.
 
   ```sh
   helm upgrade --install kubecost \
