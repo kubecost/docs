@@ -39,16 +39,15 @@ Kubecost requires the following minimum versions:
 
 1. Pass the following parameters in your helm install:
 
-  ```sh
-  helm upgrade --install kubecost \
-    --repo https://kubecost.github.io/cost-analyzer/ cost-analyzer \
-    --namespace kubecost --create-namespace \
-    --set global.prometheus.fqdn=http://<prometheus-server-service-name>.<prometheus-server-namespace>.svc:port \
-    --set global.prometheus.enabled=false
-  ```
+    ```sh
+    helm upgrade --install kubecost \
+      --repo https://kubecost.github.io/cost-analyzer/ cost-analyzer \
+      --namespace kubecost --create-namespace \
+      --set global.prometheus.fqdn=http://<prometheus-server-service-name>.<prometheus-server-namespace>.svc:port \
+      --set global.prometheus.enabled=false
+    ```
 
-  **Note** The fqdn can be a full path: https://prometheus-prod-us-central-x.grafana.net/api/prom/ if you use Grafana Cloud managed Prometheus. Learn more at [Grafana Cloud Integration for Kubecost](https://guide.kubecost.com/hc/en-us/articles/5699967551639-Grafana-Cloud-Integration-for-Kubecost)
-
+    **Note** The fqdn can be a full path: https://prometheus-prod-us-central-x.grafana.net/api/prom/ if you use Grafana Cloud managed Prometheus. Learn more at [Grafana Cloud Integration for Kubecost](https://guide.kubecost.com/hc/en-us/articles/5699967551639-Grafana-Cloud-Integration-for-Kubecost)
 
 1. Have your Prometheus scrape the cost-model `/metrics` endpoint. These metrics are needed for reporting accurate pricing data. Here is an example scrape config:
 
