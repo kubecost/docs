@@ -3,7 +3,7 @@ Prometheus Configuration Guide
 
 ## Bring your own Prometheus
 
-When integrating Kubecost with an existing Prometheus, we _strongly_ recommend installing Kubecost with a bundled Prometheus ([instructions](http://kubecost.com/install)).
+There are several considerations to considering before disabling the Kubecost included Prometheus deployment. Kubecost _strongly_ recommends installing Kubecost with the bundled Prometheus in most environments.
 
 The Kubecost Prometheus deployment is optimized to not interfere with other observability instrumentation and by default only contains metrics that are useful to the Kubecost product. This results in __70-90% fewer metrics__ than a Prometheus deployment using default settings.
 
@@ -11,11 +11,11 @@ Additonally, if multi-cluster metric aggregation is required, Kubecost provides 
 
 > **Note**: the Kubecost team provides best efforts support for free/community users when integrating with an existing Prometheus deployment.
 
-## Disable node-exporter and kube-state-metrics (recomended)
+## Disable node-exporter and kube-state-metrics (recommended)
 
-If you have node-exporter and/or KSM running on your cluster, follow this step to disable the Kubecost included versions.
+If you have node-exporter and/or KSM running on your cluster, follow this step to disable the Kubecost included versions. Additional detail on [KSM requiments](https://github.com/kubecost/docs/blob/main/ksm-metrics.md).
 
-> **Note**: As opposed to our recomendation above, we highly recomend disabling the Kubecost's node-exporter and kube-state-metrics if you already have them running in your cluster. Because node-exporter runs on host-network and port 9100, additional daemonsets will be stuck `Pending`.
+> **Note**: As opposed to our recommendation above, we highly recommend disabling the Kubecost's node-exporter and kube-state-metrics if you already have them running in your cluster. Because node-exporter runs on host-network and port 9100, additional daemonsets will be stuck `Pending`.
 
   ```sh
   helm upgrade --install kubecost \
@@ -33,7 +33,7 @@ Kubecost requires the following minimum versions:
 - cAdvisor - kubelet v1.11.0+ (May 18)
 - node-exporter - v0.16+ (May 18) [Optional]
 
-## Steps to disable Kubecost's Prometheus Deployment (not recomended)
+## Steps to disable Kubecost's Prometheus Deployment (not recommended)
 
 **Before contintuing, see the note above about Kubecost's bundled prometheus**
 
