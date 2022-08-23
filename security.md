@@ -7,7 +7,7 @@ Ensuring your data's integrity, confidentiality, and availability has been part 
 Users interact with the application by deploying a Docker image to their infrastructure. When using hosted Kubecost, the system architecture is distributed across AWS availability zones which increases fault tolerance. Each system component is designed to be resilient and redundant.
 
 ## ISMS procedures
-Kubecost is committed to investing in Information Security and to reducing the risk to the business and its customers. Executive leadership is involved in designing, reviewing, and approving all ISMS policies. Effectiveness of these policies is measured via identified application security vulnerabilities, security incidents, and effectiveness of controls relative to process, operational, or business changes.
+Kubecost is committed to investing in Information Security and to reducing the risk to the business and its customers. Executive leadership is involved in designing, reviewing, and approving all Information Security Management System (ISMS) policies. Effectiveness of these policies is measured via identified application security vulnerabilities, security incidents, and effectiveness of controls relative to process, operational, or business changes.
 
 ## Access control
 All staff must use unique accounts for all access. The use of shared accounts is not permitted. Where enforceable, two-factor authentication is required. Staff access rights are granted according to the requirements of a specific role and responsibilities. Employees are only provided with access to the network and network services that they have been specifically authorized to use, and their accounts are created and granted access to resources based on their job roles.
@@ -32,7 +32,7 @@ Industry-leading data privacy and protection.
 * Security Groups are also used as an additional security measure to allow both Inbound/Outbound traffic between instances of the same category.
 
 ## Code security
-Application code is version controlled using Github. All code changes are tracked with full revision history and  are attributable to a specific individual. Code must be reviewed and accepted by a different engineer than the author of the change.
+Application code is version controlled using GitHub. All code changes are tracked with full revision history and  are attributable to a specific individual. Code must be reviewed and accepted by a different engineer than the author of the change.
 Application and system security
 Each new server instance is updated with the latest security patches available before deployment. Logging and monitoring interfaces enabled and logs are stored in a centralized location. The Engineering team monitors for patches that address issues or vulnerabilities in production systems. Patches are staged in the Staging environment and monitored to ensure stability and compatibility. After they pass monitoring requirements, the patches are rolled out to Production.
 
