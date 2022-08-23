@@ -1,15 +1,13 @@
 Prometheus Configuration Guide
 ==============================
 
-## Bring your own Prometheus (not recomended)
+## Bring your own Prometheus
 
 When integrating Kubecost with an existing Prometheus, we _strongly_ recommend installing Kubecost with a bundled Prometheus ([instructions](http://kubecost.com/install)).
 
 The Kubecost Prometheus deployment is optimized to not interfere with other observability instrumentation and by default only contains metrics that are useful to the Kubecost product. This results in __70-90% fewer metrics__ than a Prometheus deployment using default settings.
 
 Additonally, if multi-cluster metric aggregation is required, Kubecost provides a turnkey solution that is highly tuned and simple to support using the included Prometheus deployment.
-
-For the best experience, we generally recommend teams use the bundled prometheus-server & grafana but reuse their existing kube-state-metrics and node-exporter deployments if they already exist. This setup allows for the easiest installation process, easiest ongoing maintenance, minimal duplication of metrics, and more flexible metric retention.
 
 > **Note**: the Kubecost team provides best efforts support for free/community users when integrating with an existing Prometheus deployment.
 
@@ -35,7 +33,7 @@ Kubecost requires the following minimum versions:
 - cAdvisor - kubelet v1.11.0+ (May 18)
 - node-exporter - v0.16+ (May 18) [Optional]
 
-## Steps to disable Kubecost's Prometheus Deployment
+## Steps to disable Kubecost's Prometheus Deployment (not recomended)
 
 **Before contintuing, see the note above about Kubecost's bundled prometheus**
 
