@@ -47,7 +47,7 @@ The newly created `my_credentials.json` file will contain the relevant configura
 
 ## Azure Billing Region, Offer Durable ID, and Currency
 
-Kubecost supports querying the Azure APIs for cost data based on the region, offer durable id, and currency you have configured in your Microsoft billing agreement.
+Kubecost supports querying the Azure APIs for cost data based on the region, offer durable id, and currency defined in your Microsoft Azure offer.
 
 Those properties are configured with the following helm values:
 
@@ -55,7 +55,7 @@ Those properties are configured with the following helm values:
 * `kubecostProductConfigs.azureOfferDurableID`
 * `kubecostProductConfigs.currencyCode`
 
-Be sure to verify your billing information with Microsoft and update the above helm values to reflect your bill to country, subscription offer durable id, and currency.
+Be sure to verify your billing information with Microsoft and update the above helm values to reflect your bill to country, subscription offer durable id/number, and currency.
 
 The following Microsoft documents are a helpful reference:
 
@@ -63,6 +63,7 @@ The following Microsoft documents are a helpful reference:
 * [Azure Pricing FAQ](https://azure.microsoft.com/en-us/pricing/faq/)
 * [Geographic availability and currency support for the commercial marketplace](https://docs.microsoft.com/en-us/azure/marketplace/marketplace-geo-availability-currencies)
 * [Azure Portal > Cost Management + Billing > Billing Account Properties](https://portal.azure.com/#view/Microsoft_Azure_GTM/ModernBillingMenuBlade/~/Properties)
+* [Understand Cost Management data](https://docs.microsoft.com/en-us/azure/cost-management-billing/costs/understand-cost-mgt-data)
 
 ## Supplying Azure Service Principal Details to Kubecost
 
