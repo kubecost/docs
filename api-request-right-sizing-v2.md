@@ -1,7 +1,7 @@
-Container Request Right-Sizing Recommendation API (V2)
+Container Request Right Sizing Recommendation API (v2)
 ==================================
 
-The container request right-sizing recommendation API provides recommendations
+The container request right sizing recommendation API provides recommendations
 for [container resource
 requests](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/)
 based on configurable parameters and estimates the savings from implementing
@@ -26,7 +26,7 @@ http://<kubecost-address>/model/savings/requestSizingV2
 | `filter` | string | A filter to reduce the set of workloads for which recommendations will be calculated. See [V2 Filters](https://github.com/kubecost/docs/blob/main/filteres-v2.md) for syntax. V1 filters are also supported, please see v1 API documentation. |
 
 
-## API Examples
+## API examples
 
 ```
 KUBECOST_ADDRESS='http://localhost:9090/model'
@@ -39,7 +39,7 @@ curl -G \
   ${KUBECOST_ADDRESS}/savings/requestSizingV2
 ```
 
-## Recommendation Methodology
+## Recommendation methodology
 
 The "base" recommendation is calculated from the maximum observed usage of each
 resource per unique container _spec_ (e.g. a 2-replica, 3-container Deployment
@@ -53,7 +53,7 @@ The base recommendation for the Deployment's container will be 800 mCPU and 300
 MiB of RAM. Overhead will be added to the base recommendation according to the
 target utilization parameters as described above.
 
-## Savings Projection Methodology
+## Savings projection methodology
 
 See [v1 docs](https://github.com/kubecost/docs/blob/main/api-request-right-sizing.md#savings-projection-methodology).
 
