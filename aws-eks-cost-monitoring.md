@@ -9,11 +9,11 @@ Amazon EKS integration
 
 ## User experience:
 
-![User experience](images/AWS-EKS-cost-monitoring-ux.png)
+![User experience](https://raw.githubusercontent.com/kubecost/docs/main/images/AWS-EKS-cost-monitoring-ux.png)
 
 ## Amazon EKS cost monitoring with Kubecost architecture:
 
-![User experience](images/AWS-EKS-cost-monitoring-architecture.png)
+![User experience](https://raw.githubusercontent.com/kubecost/docs/main/images/AWS-EKS-cost-monitoring-architecture.png)
 
 # Deploying Kubecost on EKS
 To get started, you can follow these steps to deploy Kubecost into your Amazon EKS cluster in a few minutes using Helm.
