@@ -54,4 +54,9 @@ You can now start monitoring your Amazon EKS cluster cost and efficiency. Depend
 - You can check Kubecost documentation for [Ingress Examples](https://guide.kubecost.com/hc/en-us/articles/4407601820055-Ingress-Examples) as a reference for using Nginx ingress controller with basic auth.
 - You can also consider using AWS LoadBalancer controller to expose Kubecost and use Amazon Cognito for authentication, authorization and user management. You can learn more at [“How to use Application Load Balancer and Amazon Cognito to authenticate users for your Kubernetes web apps”](https://aws.amazon.com/blogs/containers/how-to-use-application-load-balancer-and-amazon-cognito-to-authenticate-users-for-your-kubernetes-web-apps/) AWS blog post.
 
+# Additional resources:
+
+- [Amazon EKS documentation](https://docs.aws.amazon.com/eks/latest/userguide/cost-monitoring.html)
+- [Amazon blog post](https://aws.amazon.com/blogs/containers/aws-and-kubecost-collaborate-to-deliver-cost-monitoring-for-eks-customers/)
+
 <!--- {"article":"","section":"4402829036567","permissiongroup":"1500001277122"} --->
