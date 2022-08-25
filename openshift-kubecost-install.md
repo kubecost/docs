@@ -3,7 +3,7 @@ Install Kubecost on Redhat OpenShift cluster
 
 # Overview
 
-In this blog post, you will learn how to deploy Kubecost on the Redhat OpenShift cluster with step-by-step instructions. Next, let's start with the Architecture overview and then move forward to the installation section for instructions. 
+In this documentation, you will learn how to deploy Kubecost on the Redhat OpenShift cluster with step-by-step instructions. Next, let's start with the Architecture overview and then move forward to the installation section for instructions. 
 
 ---
 ## Architecture overview:
