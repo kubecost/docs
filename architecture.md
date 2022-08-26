@@ -8,8 +8,8 @@ Below are the major components deployed with the [Kubecost helm chart](http://do
     b. Cost-model -- provides cost allocation calculations and metrics, both reads and writes to Prometheus  
 2. **Prometheus**  
     a. Prometheus server -- time-series data store for cost & health metrics  
-    b. Kube-state-metrics -- provides Kubernetes API metrics, e.g. resource requests [Optional]
-    c. Node-exporter -- provides node-level utilization metrics for right-sizing recommendations and cluster utilization [Optional]
+    b. Kube-state-metrics -- provides Kubernetes API metrics, e.g. resource requests [Optional]  
+    c. Node-exporter -- provides node-level utilization metrics for right-sizing recommendations and cluster utilization [Optional]  
     d. Pushgateway -- provides the ability for users to push new metrics to Prometheus [Optional]  
     e. Alertmanager -- used for custom alerts  [Optional]
 3. **Network costs** -- used for determining network egress costs [Optional] - [Learn more](https://github.com/kubecost/docs/blob/main/network-allocation.md)
