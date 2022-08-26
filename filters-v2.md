@@ -59,7 +59,7 @@ Filter values are strings surrounded by `"`. Multiple values can be separated by
 
 Each individual filter is separated by a `+`, representing logical AND.
 
-## Formal Grammar and Implementation
+## Formal grammar and implementation
 
 To see the filter language's formal grammar and lexer/parser implementation, check out
 OpenCost's [`pkg/util/allocationfilterutil/v2`](https://github.com/opencost/opencost/tree/develop/pkg/util/allocationfilterutil/v2).
