@@ -18,12 +18,11 @@ cluster right-sizing and other optimizations.
 Install Kubecost with cluster controller enabled, which is the only Kubecost
 component with write permission to your cluster.
 
-Make sure the Kubecost helm repo is set up! See kubecost.com/install
+Make sure the Kubecost helm repo is set up! See [kubecost.com/install](https://www.kubecost.com/install#show-instructions)
 
 This command will install Kubecost if you haven't already. You can use "--set clusterController.enabled=true" to get cluster controller running if you already have Kubecost installed.
-   
-```bash
 
+```bash
 helm upgrade \
     -i \
     --create-namespace kubecost \
