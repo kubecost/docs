@@ -58,7 +58,7 @@ Wait for all pods to be ready.
 
 Create a route to the service `kubecost-cost-analyzer` on port `9090` of the `kubecost` project. You can learn more about how to do it on your OpenShift portal in this [LINK](https://docs.openshift.com/container-platform/3.11/dev_guide/routes.html#:~:text=to%20the%20router.-,Creating%20Routes,Applications%20section%20of%20the%20navigation.&text=The%20new%20route%20inherits%20the,using%20the%20%2D%2Dname%20option.)
 
-Kubecost will be collecting data, please wait 5-15 minutes before the UI to reflects the resources in the local cluster.
+Kubecost will be collecting data, please wait 5-15 minutes for the UI to reflect the resources in the local cluster.
 
 ### Grafana managed Prometheus deployment:
 
