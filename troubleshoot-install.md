@@ -131,14 +131,6 @@ If this is true, you are likely to be hitting a CoreDNS routing issue. We recomm
 1. Go to <https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/templates/cost-analyzer-frontend-config-map-template.yaml#L13>
 2. Replace ```{{ $serviceName }}.{{ .Release.Namespace }}``` with ```localhost```
 
-## Question: Why do I need to grant `cluster-admin` privileges?
-
-> **Note**: This question only applies when installing Kubecost via helm 2
-
-The core Kubecost product needs read-only permissions.
-
-Many teams deploy helm Tiller with cluster-admin privileges to install and manage applications across different namespaces. More information on managing these permissions at https://v2.helm.sh/docs/rbac/
-
 ## Question: How can I run on Minikube?
 
 1. Edit nginx configmap ```kubectl edit cm nginx-conf -n kubecost```
