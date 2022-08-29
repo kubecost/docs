@@ -3,7 +3,7 @@ Azure Rate Card Configuration
 
 Kubecost needs access to the Microsoft Azure Billing Rate Card API to access accurate pricing data for your Kubernetes resources.
 
-> Note: you can also get this functionality plus external costs by completing the full [Azure billing integration](/azure-out-of-cluster.md).
+> **Note**: you can also get this functionality plus external costs by completing the full [Azure billing integration](/azure-out-of-cluster.md).
 
 ## Creating a Custom Azure Role
 
@@ -45,9 +45,9 @@ az ad sp create-for-rbac --name "KubecostAccess" --role "KubecostRole" --scope "
 
 The newly created `my_credentials.json` file will contain the relevant configuration information.
 
-## Azure Billing Region, Offer Durable ID, and Currency
+## Azure billing region, offer durable ID, and currency
 
-Kubecost supports querying the Azure APIs for cost data based on the region, offer durable id, and currency defined in your Microsoft Azure offer.
+Kubecost supports querying the Azure APIs for cost data based on the region, offer durable ID, and currency defined in your Microsoft Azure offer.
 
 Those properties are configured with the following helm values:
 
@@ -55,7 +55,7 @@ Those properties are configured with the following helm values:
 * `kubecostProductConfigs.azureOfferDurableID`
 * `kubecostProductConfigs.currencyCode`
 
-Be sure to verify your billing information with Microsoft and update the above helm values to reflect your bill to country, subscription offer durable id/number, and currency.
+Be sure to verify your billing information with Microsoft and update the above Helm values to reflect your bill to country, subscription offer durable id/number, and currency.
 
 The following Microsoft documents are a helpful reference:
 
@@ -65,7 +65,7 @@ The following Microsoft documents are a helpful reference:
 * [Azure Portal > Cost Management + Billing > Billing Account Properties](https://portal.azure.com/#view/Microsoft_Azure_GTM/ModernBillingMenuBlade/~/Properties)
 * [Understand Cost Management data](https://docs.microsoft.com/en-us/azure/cost-management-billing/costs/understand-cost-mgt-data)
 
-## Supplying Azure Service Principal Details to Kubecost
+## Supplying Azure Service Principal details to Kubecost
 
 ### Via a Kubernetes secret (Recommended)
 
@@ -84,7 +84,7 @@ Create a file called [`service-key.json`](https://github.com/kubecost/poc-common
 
 Next, create a secret for the Azure Service Principal
 
-> Note: When managing the service account key as a Kubernetes secret, the secret must reference the service account key json file, and that file must be named `service-key.json`.
+> **Note**: When managing the service account key as a Kubernetes secret, the secret must reference the service account key json file, and that file must be named `service-key.json`.
 
 ```shell
 kubectl create secret generic azure-service-key -n kubecost --from-file=service-key.json
@@ -122,13 +122,11 @@ helm upgrade --install kubecost kubecost/cost-analyzer -n kubecost \
   --set kubecostProductConfigs.createServiceKeySecret=true
 ```
 
-## Additional Help
+## Additional help
 
 Please let us know if you run into any issues, we are here to help.
 
-[Slack community](https://join.slack.com/t/kubecost/shared_invite/zt-1dz4a0bb4-InvSsHr9SQsT_D5PBle2rw) - check out the `#support` channel for any help you may need & drop your introduction in the `#general` channel
-
-Email: <team@kubecost.com>
+Join our [Slack community](https://join.slack.com/t/kubecost/shared_invite/zt-1dz4a0bb4-InvSsHr9SQsT_D5PBle2rw) and check out the #support channel for any help you may need, or email us at (support@kubecost.com)[support@kubecost.com].
 
 Edit this doc on [GitHub](https://github.com/kubecost/docs/blob/main/azure-config.md)
 
