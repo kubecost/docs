@@ -12,13 +12,13 @@ These kubernetes commands can be helpful when finding issues with deployments:
     kubectl get events --sort-by=.metadata.creationTimestamp --field-selector type!=Normal
     ```
 
-1. If a pod is in CrashLoopBackOff, check its logs. Commonly it will be a misconfiguration in helm. If the cost-analyzer pod is the issue, check the logs with:
+12. If a pod is in CrashLoopBackOff, check its logs. Commonly it will be a misconfiguration in helm. If the cost-analyzer pod is the issue, check the logs with:
 
     ```bash
     kubectl logs deployment/kubecost-cost-analyzer -c cost-model
     ```
 
-1. Alternatively, Lens is a great tool for diagnosing many issues in a single view. See our blog post on [using Lens with Kubecost](https://blog.kubecost.com/blog/lens-kubecost-extension/)
+3. Alternatively, Lens is a great tool for diagnosing many issues in a single view. See our blog post on [using Lens with Kubecost](https://blog.kubecost.com/blog/lens-kubecost-extension/)
 
 ## Issue: no persistent volumes available for this claim and/or no storage class is set
 
@@ -46,22 +46,22 @@ If you don’t see a name, you need to add a storage class. For help doing this,
 
 Alternatively, you can deploy Kubecost without persistent storage to store by following these steps:
 
-> Note: This setup is only for experimental purpose. The metric data is reset when kubecost's pod is rescheduled.
+> **Note** This setup is only for experimental purpose. The metric data is reset when kubecost's pod is rescheduled.
 
-1. On your terminal, run this command to add the kubecost helm repository:
+1. On your terminal, run this command to add the Kubecost Helm repository:
 
-`helm repo add kubecost https://kubecost.github.io/cost-analyzer/`
+    `helm repo add kubecost https://kubecost.github.io/cost-analyzer/`
 
-1. Next, run this command to deploy Kubecost without persistent storage:
+2. Next, run this command to deploy Kubecost without persistent storage:
 
-```
-helm upgrade -install kubecost kubecost/cost-analyzer \
---namespace kubecost --create-namespace \
---set persistentVolume.enabled="false" \
---set prometheus.server.persistentVolume.enabled="false"
-```
+    ```
+    helm upgrade -install kubecost kubecost/cost-analyzer \
+    --namespace kubecost --create-namespace \
+    --set persistentVolume.enabled="false" \
+    --set prometheus.server.persistentVolume.enabled="false"
+    ```
 
-## Issue: unable to establish a port-forward connection
+## Issue: Unable to establish a port-forward connection
 
 First, check the status of pods in the target namespace:
 
@@ -123,7 +123,7 @@ Please contact us at support@kubecost.com or on [Slack](https://join.slack.com/t
 If all Kubecost pods are running and you can connect / port-forward to the kubecost-cost-analyzer pod but none of the app's UI will load, we recommend testing the following:
 
 1. Connect directly to a backend service with the following command:
-`kubectl port-forward --namespace kubecost service/kubecost-cost-analyzer 9001`
+    `kubectl port-forward --namespace kubecost service/kubecost-cost-analyzer 9001`
 2. Ensure that `http://localhost:9001` returns the prometheus YAML file
 
 If this is true, you are likely to be hitting a CoreDNS routing issue. We recommend using local routing as a solution:
@@ -133,7 +133,7 @@ If this is true, you are likely to be hitting a CoreDNS routing issue. We recomm
 
 ## Question: Why do I need to grant `cluster-admin` privileges?
 
-> Note: this question only applies when installing Kubecost via helm 2
+> **Note**: This question only applies when installing Kubecost via helm 2
 
 The core Kubecost product needs read-only permissions.
 
@@ -156,7 +156,7 @@ Error example:
 gcpprovider.go Error loading metadata cluster-name: Get "http://169.254.169.254/computeMetadata/v1/instance/attributes/cluster-name": dial tcp 169.254.169.254:80: i/o timeout
 ```
 
-Have a question not answered on this page? Email us at support@kubecost.com or [join the Kubecost Slack community](https://join.slack.com/t/kubecost/shared_invite/zt-1dz4a0bb4-InvSsHr9SQsT_D5PBle2rw)!
+Have a question not answered on this page? Email us at [support@kubecost.com](support@kubecost.com) or [join the Kubecost Slack community](https://join.slack.com/t/kubecost/shared_invite/zt-1dz4a0bb4-InvSsHr9SQsT_D5PBle2rw)!
 
 ---
 
