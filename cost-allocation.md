@@ -54,7 +54,7 @@ View Allocation data in the following formats:
 4. Proportional cost: Cost per aggregate displayed as a percentage of total cost over date range
 5. Cost treemap: Heirarchically structured view of costs in current aggregation
 
-### Cost metrics 
+### Cost metric
 View either cumulative or run rate costs measured over the selected time window based on the resources allocated. 
 
 * Cumulative Cost: represents the actual/historical spend captured by the Kubecost agent over the selected time window
@@ -74,7 +74,7 @@ Filter resources by namespace, clusterId, and/or Kubernetes label to more closel
 | Filter | Description |
 |--------------------|---------------------|
 | Namespace |  Limit results to workloads in a set of namespaces. |
-| ClusterID |  Limit results to workloads in a set of clusters with matching IDs. Note: clusterID is passed in _values_ at install-time. |
+| Cluster |  Limit results to workloads in a set of clusters with matching IDs. Note: clusterID is passed in _values_ at install-time. |
 | Label |  Limit results to workloads with matching Kubernetes labels. Namespace labels are applied to all of its workloads. Supports filtering by `__unallocated__` field as well |
 | Pod Prefix |  Limit results to workloads that begin with this string. |
 
@@ -82,7 +82,7 @@ Comma-separated lists are supported to filter by multiple categories, e.g. names
    
 ### Shared resources
 
-Select how shared costs set on the settings page will be shared among allocations
+Select how shared costs set on the settings page will be shared among allocations. Pick from default shared resources, or select a custom shared resource. A custom shared resource can be selected in the Configure custom shared resources feature at the bottom of the _Edit report_ window.
 
 ## 4. Additional dashboard icons
 ![Save/Load/Download](https://raw.githubusercontent.com/kubecost/docs/main/images/icons.JPG)
