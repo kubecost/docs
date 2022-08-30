@@ -124,81 +124,81 @@ Replace `${AthenaCURBucket}` and `${SpotDataFeedBucketName}` variables:</p>
 
 <pre><code>
 {
-    {
-    &quot;Version&quot;: &quot;2012-10-17&quot;,
-    &quot;Statement&quot;: [
-        {
-            &quot;Sid&quot;: &quot;ReadAccessToAthenaCurData&quot;,
-            &quot;Effect&quot;: &quot;Allow&quot;,
-            &quot;Action&quot;: [
-                &quot;athena:GetQueryExecution&quot;,
-                &quot;athena:GetQueryResults&quot;,
-                &quot;athena:StartQueryExecution&quot;,
-                &quot;glue:GetPartitions&quot;,
-                &quot;glue:GetTable&quot;,
-                &quot;glue:GetDatabase&quot;,
-                &quot;glue:GetDatabases&quot;
-            ],
-            &quot;Resource&quot;: [
-                &quot;arn:aws:athena:*:*:workgroup/*&quot;,
-                &quot;arn:aws:glue:*:*:catalog&quot;,
-                &quot;arn:aws:glue:*:*:database/athenacurcfn*&quot;,
-                &quot;arn:aws:glue:*:*:table/athenacurcfn*/*&quot;
-            ]
-        },
-        {
-            &quot;Sid&quot;: &quot;AthenaQueryResultsOutput&quot;,
-            &quot;Effect&quot;: &quot;Allow&quot;,
-            &quot;Action&quot;: [
-                &quot;s3:GetBucketAcl&quot;,
-                &quot;s3:GetBucketLocation&quot;,
-                &quot;s3:GetObject&quot;,
-                &quot;s3:ListBucket&quot;,
-                &quot;s3:PutObject&quot;
-            ],
-            &quot;Resource&quot;: [
-                &quot;arn:aws:s3:::aws-athena-query-results-*&quot;,
-                &quot;arn:aws:s3:::aws-athena-query-results-*/*&quot;
-            ]
-        },
-        {
-            &quot;Sid&quot;: &quot;S3ReadAccessToAwsBillingData&quot;,
-            &quot;Effect&quot;: &quot;Allow&quot;,
-            &quot;Action&quot;: [
-                &quot;s3:GetBucketAcl&quot;,
-                &quot;s3:GetBucketLocation&quot;,
-                &quot;s3:GetObject&quot;,
-                &quot;s3:ListBucket&quot;
-            ],
-            &quot;Resource&quot;: [
-                &quot;arn:aws:s3:::${AthenaCURBucket}&quot;,
-                &quot;arn:aws:s3:::${AthenaCURBucket/*&quot;
-            ]
-        },
-        {
-            &quot;Sid&quot;: &quot;SpotDataAccess&quot;,
-            &quot;Effect&quot;: &quot;Allow&quot;,
-            &quot;Action&quot;: [
-                &quot;s3:GetBucketAcl&quot;,
-                &quot;s3:GetBucketLocation&quot;,
-                &quot;s3:GetObject&quot;,
-                &quot;s3:ListBucket&quot;
-            ],
-            &quot;Resource&quot;: [
-                &quot;arn:aws:s3:::${SpotDataFeedBucketName}&quot;,
-                &quot;arn:aws:s3:::${SpotDataFeedBucketName}/*&quot;
-            ]
-        },
-        {
-            &quot;Sid&quot;: &quot;OrganizationAccountTags&quot;,
-            &quot;Effect&quot;: &quot;Allow&quot;,
-            &quot;Action&quot;: [
-                &quot;organizations:ListAccounts&quot;,
-                &quot;organizations:ListTagsForResource&quot;
-            ],
-            &quot;Resource&quot;: &quot;*&quot;
-        }
-    ]
+   {
+   &quot;Version&quot;: &quot;2012-10-17&quot;,
+   &quot;Statement&quot;: [
+      {
+         &quot;Sid&quot;: &quot;ReadAccessToAthenaCurData&quot;,
+         &quot;Effect&quot;: &quot;Allow&quot;,
+         &quot;Action&quot;: [
+            &quot;athena:GetQueryExecution&quot;,
+            &quot;athena:GetQueryResults&quot;,
+            &quot;athena:StartQueryExecution&quot;,
+            &quot;glue:GetPartitions&quot;,
+            &quot;glue:GetTable&quot;,
+            &quot;glue:GetDatabase&quot;,
+            &quot;glue:GetDatabases&quot;
+         ],
+         &quot;Resource&quot;: [
+            &quot;arn:aws:athena:*:*:workgroup/*&quot;,
+            &quot;arn:aws:glue:*:*:catalog&quot;,
+            &quot;arn:aws:glue:*:*:database/athenacurcfn*&quot;,
+            &quot;arn:aws:glue:*:*:table/athenacurcfn*/*&quot;
+         ]
+      },
+      {
+         &quot;Sid&quot;: &quot;AthenaQueryResultsOutput&quot;,
+         &quot;Effect&quot;: &quot;Allow&quot;,
+         &quot;Action&quot;: [
+            &quot;s3:GetBucketAcl&quot;,
+            &quot;s3:GetBucketLocation&quot;,
+            &quot;s3:GetObject&quot;,
+            &quot;s3:ListBucket&quot;,
+            &quot;s3:PutObject&quot;
+         ],
+         &quot;Resource&quot;: [
+            &quot;arn:aws:s3:::aws-athena-query-results-*&quot;,
+            &quot;arn:aws:s3:::aws-athena-query-results-*/*&quot;
+         ]
+      },
+      {
+         &quot;Sid&quot;: &quot;S3ReadAccessToAwsBillingData&quot;,
+         &quot;Effect&quot;: &quot;Allow&quot;,
+         &quot;Action&quot;: [
+            &quot;s3:GetBucketAcl&quot;,
+            &quot;s3:GetBucketLocation&quot;,
+            &quot;s3:GetObject&quot;,
+            &quot;s3:ListBucket&quot;
+         ],
+         &quot;Resource&quot;: [
+            &quot;arn:aws:s3:::${AthenaCURBucket}&quot;,
+            &quot;arn:aws:s3:::${AthenaCURBucket/*&quot;
+         ]
+      },
+      {
+         &quot;Sid&quot;: &quot;SpotDataAccess&quot;,
+         &quot;Effect&quot;: &quot;Allow&quot;,
+         &quot;Action&quot;: [
+            &quot;s3:GetBucketAcl&quot;,
+            &quot;s3:GetBucketLocation&quot;,
+            &quot;s3:GetObject&quot;,
+            &quot;s3:ListBucket&quot;
+         ],
+         &quot;Resource&quot;: [
+            &quot;arn:aws:s3:::${SpotDataFeedBucketName}&quot;,
+            &quot;arn:aws:s3:::${SpotDataFeedBucketName}/*&quot;
+         ]
+      },
+      {
+         &quot;Sid&quot;: &quot;OrganizationAccountTags&quot;,
+         &quot;Effect&quot;: &quot;Allow&quot;,
+         &quot;Action&quot;: [
+            &quot;organizations:ListAccounts&quot;,
+            &quot;organizations:ListTagsForResource&quot;
+         ],
+         &quot;Resource&quot;: &quot;*&quot;
+      }
+   ]
 }
 </code></pre>
 
@@ -225,14 +225,14 @@ Replace `${AthenaCURBucket}` and `${SpotDataFeedBucketName}` variables:</p>
          &quot;Sid&quot;: &quot;SpotDataAccess&quot;,
          &quot;Effect&quot;: &quot;Allow&quot;,
          &quot;Action&quot;: [
-               &quot;s3:GetBucketAcl&quot;,
-               &quot;s3:GetBucketLocation&quot;,
-               &quot;s3:GetObject&quot;,
-               &quot;s3:ListBucket&quot;
+            &quot;s3:GetBucketAcl&quot;,
+            &quot;s3:GetBucketLocation&quot;,
+            &quot;s3:GetObject&quot;,
+            &quot;s3:ListBucket&quot;
          ],
          &quot;Resource&quot;: [
-               &quot;arn:aws:s3:::${SpotDataFeedBucketName}&quot;,
-               &quot;arn:aws:s3:::${SpotDataFeedBucketName}/*&quot;
+            &quot;arn:aws:s3:::${SpotDataFeedBucketName}&quot;,
+            &quot;arn:aws:s3:::${SpotDataFeedBucketName}/*&quot;
          ]
       }
    ]
@@ -246,67 +246,67 @@ Replace `${AthenaCURBucket}` variable:</p>
 
 <pre><code>
 {
-    {
-    &quot;Version&quot;: &quot;2012-10-17&quot;,
-    &quot;Statement&quot;: [
-        {
-            &quot;Sid&quot;: &quot;ReadAccessToAthenaCurData&quot;,
-            &quot;Effect&quot;: &quot;Allow&quot;,
-            &quot;Action&quot;: [
-                &quot;athena:GetQueryExecution&quot;,
-                &quot;athena:GetQueryResults&quot;,
-                &quot;athena:StartQueryExecution&quot;,
-                &quot;glue:GetPartitions&quot;,
-                &quot;glue:GetTable&quot;,
-                &quot;glue:GetDatabase&quot;,
-                &quot;glue:GetDatabases&quot;
-            ],
-            &quot;Resource&quot;: [
-                &quot;arn:aws:athena:*:*:workgroup/*&quot;,
-                &quot;arn:aws:glue:*:*:catalog&quot;,
-                &quot;arn:aws:glue:*:*:database/athenacurcfn*&quot;,
-                &quot;arn:aws:glue:*:*:table/athenacurcfn*/*&quot;
-            ]
-        },
-        {
-            &quot;Sid&quot;: &quot;AthenaQueryResultsOutput&quot;,
-            &quot;Effect&quot;: &quot;Allow&quot;,
-            &quot;Action&quot;: [
-                &quot;s3:GetBucketAcl&quot;,
-                &quot;s3:GetBucketLocation&quot;,
-                &quot;s3:GetObject&quot;,
-                &quot;s3:ListBucket&quot;,
-                &quot;s3:PutObject&quot;
-            ],
-            &quot;Resource&quot;: [
-                &quot;arn:aws:s3:::aws-athena-query-results-*&quot;,
-                &quot;arn:aws:s3:::aws-athena-query-results-*/*&quot;
-            ]
-        },
-        {
-            &quot;Sid&quot;: &quot;S3ReadAccessToAwsBillingData&quot;,
-            &quot;Effect&quot;: &quot;Allow&quot;,
-            &quot;Action&quot;: [
-                &quot;s3:GetBucketAcl&quot;,
-                &quot;s3:GetBucketLocation&quot;,
-                &quot;s3:GetObject&quot;,
-                &quot;s3:ListBucket&quot;
-            ],
-            &quot;Resource&quot;: [
-                &quot;arn:aws:s3:::${AthenaCURBucket}&quot;,
-                &quot;arn:aws:s3:::${AthenaCURBucket/*&quot;
-            ]
-        },
-        {
-            &quot;Sid&quot;: &quot;OrganizationAccountTags&quot;,
-            &quot;Effect&quot;: &quot;Allow&quot;,
-            &quot;Action&quot;: [
-                &quot;organizations:ListAccounts&quot;,
-                &quot;organizations:ListTagsForResource&quot;
-            ],
-            &quot;Resource&quot;: &quot;*&quot;
-        }
-    ]
+   {
+   &quot;Version&quot;: &quot;2012-10-17&quot;,
+   &quot;Statement&quot;: [
+      {
+         &quot;Sid&quot;: &quot;ReadAccessToAthenaCurData&quot;,
+         &quot;Effect&quot;: &quot;Allow&quot;,
+         &quot;Action&quot;: [
+            &quot;athena:GetQueryExecution&quot;,
+            &quot;athena:GetQueryResults&quot;,
+            &quot;athena:StartQueryExecution&quot;,
+            &quot;glue:GetPartitions&quot;,
+            &quot;glue:GetTable&quot;,
+            &quot;glue:GetDatabase&quot;,
+            &quot;glue:GetDatabases&quot;
+         ],
+         &quot;Resource&quot;: [
+            &quot;arn:aws:athena:*:*:workgroup/*&quot;,
+            &quot;arn:aws:glue:*:*:catalog&quot;,
+            &quot;arn:aws:glue:*:*:database/athenacurcfn*&quot;,
+            &quot;arn:aws:glue:*:*:table/athenacurcfn*/*&quot;
+         ]
+      },
+      {
+         &quot;Sid&quot;: &quot;AthenaQueryResultsOutput&quot;,
+         &quot;Effect&quot;: &quot;Allow&quot;,
+         &quot;Action&quot;: [
+            &quot;s3:GetBucketAcl&quot;,
+            &quot;s3:GetBucketLocation&quot;,
+            &quot;s3:GetObject&quot;,
+            &quot;s3:ListBucket&quot;,
+            &quot;s3:PutObject&quot;
+         ],
+         &quot;Resource&quot;: [
+            &quot;arn:aws:s3:::aws-athena-query-results-*&quot;,
+            &quot;arn:aws:s3:::aws-athena-query-results-*/*&quot;
+         ]
+      },
+      {
+         &quot;Sid&quot;: &quot;S3ReadAccessToAwsBillingData&quot;,
+         &quot;Effect&quot;: &quot;Allow&quot;,
+         &quot;Action&quot;: [
+            &quot;s3:GetBucketAcl&quot;,
+            &quot;s3:GetBucketLocation&quot;,
+            &quot;s3:GetObject&quot;,
+            &quot;s3:ListBucket&quot;
+         ],
+         &quot;Resource&quot;: [
+            &quot;arn:aws:s3:::${AthenaCURBucket}&quot;,
+            &quot;arn:aws:s3:::${AthenaCURBucket/*&quot;
+         ]
+      },
+      {
+         &quot;Sid&quot;: &quot;OrganizationAccountTags&quot;,
+         &quot;Effect&quot;: &quot;Allow&quot;,
+         &quot;Action&quot;: [
+            &quot;organizations:ListAccounts&quot;,
+            &quot;organizations:ListTagsForResource&quot;
+         ],
+         &quot;Resource&quot;: &quot;*&quot;
+      }
+   ]
 }
 </code></pre>
 
