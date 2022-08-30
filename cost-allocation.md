@@ -71,7 +71,7 @@ For more information, refer to this [FAQ](https://github.com/kubecost/cost-model
 ### Filters 
 Filter resources by namespace, clusterId, and/or Kubernetes label to more closely investigate a rise in spend or key cost drivers at different aggregations such as deployments or pods. When a filter is applied, only resources with this matching value will be shown. These filters are also applied to external out-of-cluster asset tags. Supported filters are as follows:
 
-| Fitler | Description |
+| Filter | Description |
 |--------------------|---------------------|
 | Namespace |  Limit results to workloads in a set of namespaces. |
 | ClusterID |  Limit results to workloads in a set of clusters with matching IDs. Note: clusterID is passed in _values_ at install-time. |
