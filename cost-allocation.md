@@ -1,63 +1,75 @@
 Kubernetes Cost Allocation
 ==========================
 
-The Kubecost Allocation view allows you to quickly see allocated spend across all native Kubernetes concepts, e.g. namespace, k8s label, and service. It also allows for allocating cost to organizational concepts like team, product/project, department, or environment. This document explains the metrics presented and describes how you can control the data displayed in this view.
+The Kubecost Cost Allocation dashboard allows you to quickly see allocated spend across all native Kubernetes concepts, e.g. namespace, k8s label, and service. It also allows for allocating cost to organizational concepts like team, product/project, department, or environment. This document explains the metrics presented and describes how you can control the data displayed in this view.
 
-![Cost allocation view](https://raw.githubusercontent.com/kubecost/docs/main/images/cost-allocation.png)
+## Cost Allocation dashboard
+
+![Cost Allocation dashboard](https://raw.githubusercontent.com/kubecost/docs/main/images/costallocationmenu.png)
+
+This is the main Kubecost Cost Allocation dashboard. In the screenshot there are multiple features to take notice of which are covered in this guide:
+1. Date Range filter
+2. Aggregate filters
+3. _Edit report_ icon
+4. Additional dashboard icons
+5. Cost metrics table
 
 
-### Date Range 
-![Date Picker](https://raw.githubusercontent.com/kubecost/docs/main/images/cost-allocation-date-picker.png)
+## 1. Date Range 
+![Date Range](https://raw.githubusercontent.com/kubecost/docs/main/images/daterange.JPG)
 
-Select the Date Range of the report, using common Date Range options or by setting specific start and end dates.
+Select the date range of the report by setting specific start and end dates, or using one of the preset options.
 
-### Breakdown
-![Breakdown](https://raw.githubusercontent.com/kubecost/docs/main/images/cost-allocation-breakdown.png)
+## 2. Aggregate filters
+![Breakdown](https://raw.githubusercontent.com/kubecost/docs/main/images/aggregateby.JPG)
 
-Aggregate cost by namespace, deployment, service, and other native Kubernetes concepts. 
+Here you can aggregate cost by namespace, deployment, service, and other native Kubernetes concepts. While selecting Single Aggregation, you will only be able to select one concept at a time. While selecting Multi Aggregation, you will be able to filter for multiple concepts at the same time.
 
 Costs aggregations are also visible by other meaningful organizational concepts, e.g. Team, Department, and Product. These aggregations are based on Kubernetes labels, referenced at both the pod and namespace-level, with labels at the pod-level being favored over the namespace label when both are present. The Kubernetes label name used for these concepts can be configured in Settings or in [values.yaml](https://github.com/kubecost/cost-analyzer-helm-chart/blob/19908983ed7c8d4ff1d3e62d98537a39ab61bbab/cost-analyzer/values.yaml#L427-L445) after setting `kubecostProductConfigs.labelMappingConfigs.enabled` to true. Workloads without the relevant label will be shown as `__unallocated__`. 
 
-> Kubernetes annotations can also be used for cost allocation purposes but this requires enabling a helm flag. [Learn more about using annotations](/annotations.md) 
+> **Note**: Kubernetes annotations can also be used for cost allocation purposes but this requires enabling a helm flag. [Learn more about using annotations](/annotations.md) 
 
-To find what pods are not part of the relevant label set... you can either apply an `__unallocated__` label filter in this allocation view or explore variations of the following kubectl commands:  
+To find what pods are not part of the relevant label set, you can either apply an `__unallocated__` label filter in this allocation view or explore variations of the following kubectl commands:  
 
 ```
 kubectl get pods -l 'app notin (prometheus, cost-analyzer, ...)' --all-namespaces
 kubectl get pods --show-labels -n <TARGET_NAMESPACE>
 ```
 
+## 3. Edit report icon
 
-### Additional Options
+![Options](https://raw.githubusercontent.com/kubecost/docs/main/images/options.JPG)
 
-![Options](https://raw.githubusercontent.com/kubecost/docs/main/images/cost-allocation-options.png)
+The _Edit report_ icon has additional options to filter your search.
 
-#### Idle Cost  
+### Idle costs  
 Allocating idle costs proportionately distributes slack or idle _cluster costs_ to tenants. Specifically, this applies to resources that are provisioned but not being fully used or requested by a tenant. As an example, if your cluster is only 25% utilized, as measured by the max of resource usage and requests, applying idle costs would proportionately increase the cost of each pod/namespace/deployment by 4x. This feature can be enabled by default in Settings.
 
-#### Chart
+### Chart
 View Allocation data in the following formats:
-- Cost: Total cost per aggregation over Date Range
-- Cost over time: Cost per aggregation broken down over days or hours depending on Date Range
-- Proportional Cost: Cost per aggregate displayed as a percentage of total cost over Date Range
 
+1. Cost: Total cost per aggregation over Date Range
+2. Cost over time: Cost per aggregation broken down over days or hours depending on Date Range
+3. Efficiency over time:
+4. Proportional cost: Cost per aggregate displayed as a percentage of total cost over Date Range
+5. Cost treemap:
 
-#### Cost metrics  
+### Cost metrics 
 View either cumulative or run rate costs measured over the selected time window based on the resources allocated. 
 
-* Cumulative Costs -- represents the actual/historical spend captured by the Kubecost agent over the selected time window
-* Rate metrics -- hourly, daily, or monthly "run rate" cost, also used for projected cost figures, based on samples in the selected time window 
+* Cumulative Cost: represents the actual/historical spend captured by the Kubecost agent over the selected time window
+* Rate metrics: Monthly, daily, or hourly "run rate" cost, also used for projected cost figures, based on samples in the selected time window 
 
 Costs allocations are based on the following:
 
 1) resources allocated, i.e. max of resource requests and usage  
 2) the cost of each resource  
-3) the amount of time resources were provisioned  
+3) the amount of time resources were provisioned
 
 For more information, refer to this [FAQ](https://github.com/kubecost/cost-model#frequently-asked-questions) on how each of these inputs is determined based on your environment.
 
-#### Filter  
-Filter resources by namespace, clusterId, and Kubernetes label to more closely investigate a rise in spend or key cost drivers at different aggregations, e.g. Deployments or Pods. When a filter is applied, only resources with this matching value will be shown. These filters are also applied to external out-of-cluster asset tags. Supported filters are as follows:
+### Filters 
+Filter resources by namespace, clusterId, and/or Kubernetes label to more closely investigate a rise in spend or key cost drivers at different aggregations such as deployments or pods. When a filter is applied, only resources with this matching value will be shown. These filters are also applied to external out-of-cluster asset tags. Supported filters are as follows:
 
 | Fitler | Description |
 |--------------------|---------------------|
@@ -68,19 +80,22 @@ Filter resources by namespace, clusterId, and Kubernetes label to more closely i
 
 Comma-separated lists are supported to filter by multiple categories, e.g. namespace filter equals `kube-system,kubecost`
    
-#### Shared Resources
+### Shared resources
 
 Select how shared costs set on the settings page will be shared among allocations
 
+## 4. Additional dashboard icons
+![Save/Load/Download](https://raw.githubusercontent.com/kubecost/docs/main/images/icons.JPG)
 
-### Save, Load and Download
-![Save/Load/Download](https://raw.githubusercontent.com/kubecost/docs/main/images/cost-allocation-icons.png)
+Directly next to the _Edit report_ icon are several additional icons for configuring reports:
+* _Save/unsave report_ icon: Save or unsave your current report
+* _Alerts_ icon: Send one of four reports routinely: recurring, efficiency, budget, and spend change
+* _Open saved report_ icon: Open a report that was previously saved using the _Save report_ icon
+* _Download CSV_ icon: Download your current report as a CSV file
 
-Use these icons to save report settings or load reports that you have saved in the past. You can also download a report in CSV format.
+## 5. Cost metrics table
 
-### Cost metrics
-
-Cost allocation metrics are available for both in-cluster and out-of-cluster resources. Here are short descriptions of each metric:
+Cost allocation metrics are available for both in-cluster and out-of-cluster resources:
 
 | Metric | Description |
 |-------------------|---------------------|
