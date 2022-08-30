@@ -23,7 +23,7 @@ If you have node-exporter and/or KSM running on your cluster, follow this step t
     --namespace kubecost --create-namespace \
     --set prometheus.nodeExporter.enabled=false \
     --set prometheus.serviceAccounts.nodeExporter.create=false \
-    --set prometheus.kubeStateMetrics.enabled=false
+    --set prometheus.kube-state-metrics.disabled=true
   ```
 ## Dependency Requirements
 
