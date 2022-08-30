@@ -41,7 +41,7 @@ Kubecost offers a set of CloudFormation templates to help set your IAM roles up.
 Download template files from the URLs provided below and upload them as the stack template in the Creating a stack > Selecting a stack template step.
 
 <details>
-  <summary>My kubernetes clusters all run in the same account as the master payer account.</summary>
+  <summary>My kubernetes clusters all run in the same account as the payer account.</summary>
   <ul>
 <li><p>Download this file: <a href="https://raw.githubusercontent.com/kubecost/cloudformation/master/kubecost-single-account-permissions.yaml">https://raw.githubusercontent.com/kubecost/cloudformation/master/kubecost-single-account-permissions.yaml</a></p></li>
 
@@ -79,7 +79,7 @@ Download template files from the URLs provided below and upload them as the stac
 </details>
 
 <details>
-  <summary>My kubernetes clusters run in different accounts from the master payer account</summary>
+  <summary>My kubernetes clusters run in different accounts from the payer account</summary>
   <ul>
 <li>On each sub account running Kubecost
 
@@ -96,14 +96,14 @@ Download template files from the URLs provided below and upload them as the stac
 <li>Choose <strong>Next</strong>.</li>
 <li>For <strong>Stack name</strong>, enter a name for your template</li>
 <li>Set the following parameters:</li>
-<li>MasterPayerAccountID: The account ID of the master payer account where the CUR has been created</li>
+<li>MasterPayerAccountID: The account ID of the payer account where the CUR has been created</li>
 <li>SpotDataFeedBucketName: The bucket where the spot data feed is sent from the “Setting up the Spot Data feed” step</li>
 <li>Choose <strong>Next</strong>.</li>
 <li>Choose <strong>Next</strong></li>
 <li>At the bottom of the page, select <strong>I acknowledge that AWS CloudFormation might create IAM resources.</strong></li>
 <li>Choose <strong>Create Stack</strong></li>
 </ul></li>
-<li>On the master payer account
+<li>On the payer account
 
 <ul>
 <li>Follow the same steps to create a CloudFormation stack as above, but with the following as your yaml file instead: <a href="https://raw.githubusercontent.com/kubecost/cloudformation/master/kubecost-masterpayer-account-permissions.yaml">https://raw.githubusercontent.com/kubecost/cloudformation/master/kubecost-masterpayer-account-permissions.yaml</a> , and with these parameters:</li>
@@ -116,9 +116,11 @@ Download template files from the URLs provided below and upload them as the stac
 
 ### Add manually
 <details>
-	<summary>My Kubernetes clusters run in the same account as the master payer account</summary>
+	<summary>My Kubernetes clusters run in the same account as the payer account</summary>
 
-<p>Attach both of the following policies to the same role or user. Use a user if you intend to integrate via servicekey, and a role if via IAM annotation (See more below under Via Pod Annotation by EKS). The SpotDataAccess policy statement is optional if the spot data feed is configured (see “Setting up the Spot Data feed” step below)</p>
+<p>Attach both of the following policies to the same role or user. Use a user if you intend to integrate via servicekey, and a role if via IAM annotation (See more below under Via Pod Annotation by EKS). The SpotDataAccess policy statement is optional if the spot data feed is configured (see “Setting up the Spot Data feed” step below).
+
+Replace `${AthenaCURBucket}` and `${SpotDataFeedBucketName}` variables:</p>
 
 <pre><code>
 {
@@ -205,124 +207,131 @@ Download template files from the URLs provided below and upload them as the stac
 <p><details>
 	<summary>My Kubernetes clusters run in different accounts</summary></p>
 
+<p>On each sub account running kubecost, attach both of the following policies to the same role or user. Use a user if you intend to integrate via servicekey, and a role if via IAM annotation (See more below under Via Pod Annotation by EKS). The SpotDataAccess policy statement is optional if the spot data feed is configured (see “Setting up the Spot Data feed” step below).
 
-<p>On each sub account running kubecost, attach both of the following policies to the same role or user. Use a user if you intend to integrate via servicekey, and a role if via IAM annotation (See more below under Via Pod Annotation by EKS). The SpotDataAccess policy statement is optional if the spot data feed is configured (see “Setting up the Spot Data feed” step below)</p>
+Replace `${AthenaCURBucket}` and `${SpotDataFeedBucketName}` variables:</p>
 
-<pre><code>	{
-               &quot;Version&quot;: &quot;2012-10-17&quot;,
-               &quot;Statement&quot;: [
-                  {
-                     &quot;Sid&quot;: &quot;AssumeRoleInMasterPayer&quot;,
-                     &quot;Effect&quot;: &quot;Allow&quot;,
-                     &quot;Action&quot;: &quot;sts:AssumeRole&quot;,
-                     &quot;Resource&quot;: &quot;arn:aws:iam::${MasterPayerAccountID}:role/KubecostRole-${This-account’s-id}&quot;
-                  }
-               ]
-	}
+<pre><code>
+{
+   &quot;Version&quot;: &quot;2012-10-17&quot;,
+   &quot;Statement&quot;: [
+      {
+         &quot;Sid&quot;: &quot;AssumeRoleInPayerAccount&quot;,
+         &quot;Effect&quot;: &quot;Allow&quot;,
+         &quot;Action&quot;: &quot;sts:AssumeRole&quot;,
+         &quot;Resource&quot;: &quot;arn:aws:iam::${PayerAccountID}:role/KubecostRole-${This-account’s-id}&quot;
+      },
+      {
+         &quot;Sid&quot;: &quot;SpotDataAccess&quot;,
+         &quot;Effect&quot;: &quot;Allow&quot;,
+         &quot;Action&quot;: [
+               &quot;s3:GetBucketAcl&quot;,
+               &quot;s3:GetBucketLocation&quot;,
+               &quot;s3:GetObject&quot;,
+               &quot;s3:ListBucket&quot;
+         ],
+         &quot;Resource&quot;: [
+               &quot;arn:aws:s3:::${SpotDataFeedBucketName}&quot;,
+               &quot;arn:aws:s3:::${SpotDataFeedBucketName}/*&quot;
+         ]
+      }
+   ]
+}
 
-	{
-               &quot;Version&quot;: &quot;2012-10-17&quot;,
-               &quot;Statement&quot;: [
-                  {
-                     &quot;Sid&quot;: &quot;SpotDataAccess&quot;,
-                     &quot;Effect&quot;: &quot;Allow&quot;,
-                     &quot;Action&quot;: [
-                        &quot;s3:ListAllMyBuckets&quot;,
-                        &quot;s3:ListBucket&quot;,
-                        &quot;s3:HeadBucket&quot;,
-                        &quot;s3:HeadObject&quot;,
-                        &quot;s3:List*&quot;,
-                        &quot;s3:Get*&quot;
-                     ],
-                     &quot;Resource&quot;: &quot;arn:aws:s3:::${SpotDataFeedBucketName}*&quot;
-                  }
-               ]
-	}
 </code></pre>
 
-<p>On the masterpayer account, attach this policy to a role (replace <code>${AthenaCURBucket}</code> variable):</p>
+<p>On the payer account, attach this policy to a role. 
 
-<pre><code>	{
-               &quot;Version&quot;: &quot;2012-10-17&quot;,
-               &quot;Statement&quot;: [
-                  {
-                     &quot;Sid&quot;: &quot;AthenaAccess&quot;,
-                     &quot;Effect&quot;: &quot;Allow&quot;,
-                     &quot;Action&quot;: [
-                        &quot;athena:*&quot;
-                     ],
-                     &quot;Resource&quot;: [
-                        &quot;*&quot;
-                     ]
-	},
-	{
-                     &quot;Sid&quot;: &quot;ReadAccessToAthenaCurDataViaGlue&quot;,
-                     &quot;Effect&quot;: &quot;Allow&quot;,
-                     &quot;Action&quot;: [
-                        &quot;glue:GetDatabase*&quot;,
-                        &quot;glue:GetTable*&quot;,
-                        &quot;glue:GetPartition*&quot;,
-                        &quot;glue:GetUserDefinedFunction&quot;,
-                        &quot;glue:BatchGetPartition&quot;
-                     ],
-                     &quot;Resource&quot;: [
-                        &quot;arn:aws:glue:*:*:catalog&quot;,
-                        &quot;arn:aws:glue:*:*:database/athenacurcfn*&quot;,
-                        &quot;arn:aws:glue:*:*:table/athenacurcfn*/*&quot;
-                     ]
-                  },
-                  {
-                     &quot;Sid&quot;: &quot;AthenaQueryResultsOutput&quot;,
-                     &quot;Effect&quot;: &quot;Allow&quot;,
-                     &quot;Action&quot;: [
-                        &quot;s3:GetBucketLocation&quot;,
-                        &quot;s3:GetObject&quot;,
-                        &quot;s3:ListBucket&quot;,
-                        &quot;s3:ListBucketMultipartUploads&quot;,
-                        &quot;s3:ListMultipartUploadParts&quot;,
-                        &quot;s3:AbortMultipartUpload&quot;,
-                        &quot;s3:CreateBucket&quot;,
-                        &quot;s3:PutObject&quot;
-                     ],
-                     &quot;Resource&quot;: [
-                        &quot;arn:aws:s3:::aws-athena-query-results-*&quot;
-                     ]
-                  },
-                  {
-                     &quot;Sid&quot;: &quot;S3ReadAccessToAwsBillingData&quot;,
-                     &quot;Effect&quot;: &quot;Allow&quot;,
-                     &quot;Action&quot;: [
-                        &quot;s3:Get*&quot;,
-                        &quot;s3:List*&quot;
-                     ],
-                     &quot;Resource&quot;: [
-                        &quot;arn:aws:s3:::${AthenaCURBucket}*&quot;
-                     ]
-                  }
-               ]
-	}
+Replace `${AthenaCURBucket}` variable:</p>
+
+<pre><code>
+{
+    {
+    &quot;Version&quot;: &quot;2012-10-17&quot;,
+    &quot;Statement&quot;: [
+        {
+            &quot;Sid&quot;: &quot;ReadAccessToAthenaCurData&quot;,
+            &quot;Effect&quot;: &quot;Allow&quot;,
+            &quot;Action&quot;: [
+                &quot;athena:GetQueryExecution&quot;,
+                &quot;athena:GetQueryResults&quot;,
+                &quot;athena:StartQueryExecution&quot;,
+                &quot;glue:GetPartitions&quot;,
+                &quot;glue:GetTable&quot;,
+                &quot;glue:GetDatabase&quot;,
+                &quot;glue:GetDatabases&quot;
+            ],
+            &quot;Resource&quot;: [
+                &quot;arn:aws:athena:*:*:workgroup/*&quot;,
+                &quot;arn:aws:glue:*:*:catalog&quot;,
+                &quot;arn:aws:glue:*:*:database/athenacurcfn*&quot;,
+                &quot;arn:aws:glue:*:*:table/athenacurcfn*/*&quot;
+            ]
+        },
+        {
+            &quot;Sid&quot;: &quot;AthenaQueryResultsOutput&quot;,
+            &quot;Effect&quot;: &quot;Allow&quot;,
+            &quot;Action&quot;: [
+                &quot;s3:GetBucketAcl&quot;,
+                &quot;s3:GetBucketLocation&quot;,
+                &quot;s3:GetObject&quot;,
+                &quot;s3:ListBucket&quot;,
+                &quot;s3:PutObject&quot;
+            ],
+            &quot;Resource&quot;: [
+                &quot;arn:aws:s3:::aws-athena-query-results-*&quot;,
+                &quot;arn:aws:s3:::aws-athena-query-results-*/*&quot;
+            ]
+        },
+        {
+            &quot;Sid&quot;: &quot;S3ReadAccessToAwsBillingData&quot;,
+            &quot;Effect&quot;: &quot;Allow&quot;,
+            &quot;Action&quot;: [
+                &quot;s3:GetBucketAcl&quot;,
+                &quot;s3:GetBucketLocation&quot;,
+                &quot;s3:GetObject&quot;,
+                &quot;s3:ListBucket&quot;
+            ],
+            &quot;Resource&quot;: [
+                &quot;arn:aws:s3:::${AthenaCURBucket}&quot;,
+                &quot;arn:aws:s3:::${AthenaCURBucket/*&quot;
+            ]
+        },
+        {
+            &quot;Sid&quot;: &quot;OrganizationAccountTags&quot;,
+            &quot;Effect&quot;: &quot;Allow&quot;,
+            &quot;Action&quot;: [
+                &quot;organizations:ListAccounts&quot;,
+                &quot;organizations:ListTagsForResource&quot;
+            ],
+            &quot;Resource&quot;: &quot;*&quot;
+        }
+    ]
+}
 </code></pre>
 
-<p>You will then need to add the following trust statement to the role the policy is attached to (replace <code>${KubecostClusterID}</code> variable):</p>
+<p>You will then need to add the following trust statement to the role the policy is attached to.
 
-<pre><code>	{
-               &quot;Version&quot;: &quot;2012-10-17&quot;,
-               &quot;Statement&quot;: [
-                  {
-                     &quot;Effect&quot;: &quot;Allow&quot;,
-                     &quot;Principal&quot;: {
-                        &quot;AWS&quot;: &quot;arn:aws:iam::${KubecostClusterID}:root&quot;
-                     },
-                     &quot;Action&quot;: [
-                        &quot;sts:AssumeRole&quot;
-                     ]
-                  }
-               ]
-            }
+Replace `${KubecostClusterID}` variable:</p>
+
+<pre><code>
+{
+   &quot;Version&quot;: &quot;2012-10-17&quot;,
+   &quot;Statement&quot;: [
+      {
+         &quot;Effect&quot;: &quot;Allow&quot;,
+         &quot;Principal&quot;: {
+            &quot;AWS&quot;: &quot;arn:aws:iam::${KubecostClusterID}:root&quot;
+         },
+         &quot;Action&quot;: [
+            &quot;sts:AssumeRole&quot;
+         ]
+      }
+   ]
+}
 </code></pre>
 
 </details>
-
 
 ## Step 4: Attaching IAM permissions to Kubecost
 Now that the policies have been created, we will need to attach those policies to Kubecost. We support the following methods:
@@ -418,7 +427,7 @@ These values can either be set from the kubecost frontend or via .Values.kubecos
 
 > Make sure use only underscore as a delimiter if needed for tables and views, using dash will not work even though you might be able to create it see [docs](https://docs.aws.amazon.com/athena/latest/ug/tables-databases-columns-names.html).
 
-* If you are using a multi-account setup, you will also need to set `.Values.kubecostProductConfigs.masterPayerARN `To the arn of the role in the masterpayer account, e.g. `arn:aws:iam::530337586275:role/KubecostRole`.
+* If you are using a multi-account setup, you will also need to set `.Values.kubecostProductConfigs.masterPayerARN `To the arn of the role in the payer account, e.g. `arn:aws:iam::530337586275:role/KubecostRole`.
 
 ## Troubleshooting
 
