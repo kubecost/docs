@@ -48,11 +48,11 @@ Allocating idle costs proportionately distributes slack or idle _cluster costs_ 
 ### Chart
 View Allocation data in the following formats:
 
-1. Cost: Total cost per aggregation over Date Range
-2. Cost over time: Cost per aggregation broken down over days or hours depending on Date Range
-3. Efficiency over time:
-4. Proportional cost: Cost per aggregate displayed as a percentage of total cost over Date Range
-5. Cost treemap:
+1. Cost: Total cost per aggregation over date range
+2. Cost over time: Cost per aggregation broken down over days or hours depending on date range
+3. Efficiency over time: Shows resource efficiency over given date range
+4. Proportional cost: Cost per aggregate displayed as a percentage of total cost over date range
+5. Cost treemap: Heirarchically structured view of costs in current aggregation
 
 ### Cost metrics 
 View either cumulative or run rate costs measured over the selected time window based on the resources allocated. 
