@@ -120,89 +120,87 @@ Download template files from the URLs provided below and upload them as the stac
 
 <p>Attach both of the following policies to the same role or user. Use a user if you intend to integrate via servicekey, and a role if via IAM annotation (See more below under Via Pod Annotation by EKS). The SpotDataAccess policy statement is optional if the spot data feed is configured (see “Setting up the Spot Data feed” step below)</p>
 
-<pre><code>        {
-           &quot;Version&quot;: &quot;2012-10-17&quot;,
-           &quot;Statement&quot;: [
-              {
-                 &quot;Sid&quot;: &quot;AthenaAccess&quot;,
-                 &quot;Effect&quot;: &quot;Allow&quot;,
-                 &quot;Action&quot;: [
-                    &quot;athena:*&quot;
-                 ],
-                 &quot;Resource&quot;: [
-                    &quot;*&quot;
-                 ]
-              },
-              {
-                 &quot;Sid&quot;: &quot;ReadAccessToAthenaCurDataViaGlue&quot;,
-                 &quot;Effect&quot;: &quot;Allow&quot;,
-                 &quot;Action&quot;: [
-                    &quot;glue:GetDatabase*&quot;,
-                    &quot;glue:GetTable*&quot;,
-                    &quot;glue:GetPartition*&quot;,
-                    &quot;glue:GetUserDefinedFunction&quot;,
-                    &quot;glue:BatchGetPartition&quot;
-                 ],
-                 &quot;Resource&quot;: [
-                    &quot;arn:aws:glue:*:*:catalog&quot;,
-                    &quot;arn:aws:glue:*:*:database/athenacurcfn*&quot;,
-                    &quot;arn:aws:glue:*:*:table/athenacurcfn*/*&quot;
-                 ]
-              },
-              {
-                 &quot;Sid&quot;: &quot;AthenaQueryResultsOutput&quot;,
-                 &quot;Effect&quot;: &quot;Allow&quot;,
-                 &quot;Action&quot;: [
-                    &quot;s3:GetBucketLocation&quot;,
-                    &quot;s3:GetObject&quot;,
-                    &quot;s3:ListBucket&quot;,
-                    &quot;s3:ListBucketMultipartUploads&quot;,
-                    &quot;s3:ListMultipartUploadParts&quot;,
-                    &quot;s3:AbortMultipartUpload&quot;,
-                    &quot;s3:CreateBucket&quot;,
-                    &quot;s3:PutObject&quot;
-                 ],
-                 &quot;Resource&quot;: [
-                    &quot;arn:aws:s3:::aws-athena-query-results-*&quot;
-                 ]
-              },
-
-
-              {
-                 &quot;Sid&quot;: &quot;S3ReadAccessToAwsBillingData&quot;,
-                 &quot;Effect&quot;: &quot;Allow&quot;,
-                 &quot;Action&quot;: [
-                    &quot;s3:Get*&quot;,
-                    &quot;s3:List*&quot;
-                 ],
-                 &quot;Resource&quot;: [
-                    &quot;arn:aws:s3:::${AthenaCURBucket}*&quot;
-                 ]
-              }
-           ]
+<pre><code>
+{
+    {
+    &quot;Version&quot;: &quot;2012-10-17&quot;,
+    &quot;Statement&quot;: [
+        {
+            &quot;Sid&quot;: &quot;ReadAccessToAthenaCurData&quot;,
+            &quot;Effect&quot;: &quot;Allow&quot;,
+            &quot;Action&quot;: [
+                &quot;athena:GetQueryExecution&quot;,
+                &quot;athena:GetQueryResults&quot;,
+                &quot;athena:StartQueryExecution&quot;,
+                &quot;glue:GetPartitions&quot;,
+                &quot;glue:GetTable&quot;,
+                &quot;glue:GetDatabase&quot;,
+                &quot;glue:GetDatabases&quot;
+            ],
+            &quot;Resource&quot;: [
+                &quot;arn:aws:athena:*:*:workgroup/*&quot;,
+                &quot;arn:aws:glue:*:*:catalog&quot;,
+                &quot;arn:aws:glue:*:*:database/athenacurcfn*&quot;,
+                &quot;arn:aws:glue:*:*:table/athenacurcfn*/*&quot;
+            ]
+        },
+        {
+            &quot;Sid&quot;: &quot;AthenaQueryResultsOutput&quot;,
+            &quot;Effect&quot;: &quot;Allow&quot;,
+            &quot;Action&quot;: [
+                &quot;s3:GetBucketAcl&quot;,
+                &quot;s3:GetBucketLocation&quot;,
+                &quot;s3:GetObject&quot;,
+                &quot;s3:ListBucket&quot;,
+                &quot;s3:PutObject&quot;
+            ],
+            &quot;Resource&quot;: [
+                &quot;arn:aws:s3:::aws-athena-query-results-*&quot;,
+                &quot;arn:aws:s3:::aws-athena-query-results-*/*&quot;
+            ]
+        },
+        {
+            &quot;Sid&quot;: &quot;S3ReadAccessToAwsBillingData&quot;,
+            &quot;Effect&quot;: &quot;Allow&quot;,
+            &quot;Action&quot;: [
+                &quot;s3:GetBucketAcl&quot;,
+                &quot;s3:GetBucketLocation&quot;,
+                &quot;s3:GetObject&quot;,
+                &quot;s3:ListBucket&quot;
+            ],
+            &quot;Resource&quot;: [
+                &quot;arn:aws:s3:::${AthenaCURBucket}&quot;,
+                &quot;arn:aws:s3:::${AthenaCURBucket/*&quot;
+            ]
+        },
+        {
+            &quot;Sid&quot;: &quot;SpotDataAccess&quot;,
+            &quot;Effect&quot;: &quot;Allow&quot;,
+            &quot;Action&quot;: [
+                &quot;s3:GetBucketAcl&quot;,
+                &quot;s3:GetBucketLocation&quot;,
+                &quot;s3:GetObject&quot;,
+                &quot;s3:ListBucket&quot;
+            ],
+            &quot;Resource&quot;: [
+                &quot;arn:aws:s3:::${SpotDataFeedBucketName}&quot;,
+                &quot;arn:aws:s3:::${SpotDataFeedBucketName}/*&quot;
+            ]
+        },
+        {
+            &quot;Sid&quot;: &quot;OrganizationAccountTags&quot;,
+            &quot;Effect&quot;: &quot;Allow&quot;,
+            &quot;Action&quot;: [
+                &quot;organizations:ListAccounts&quot;,
+                &quot;organizations:ListTagsForResource&quot;
+            ],
+            &quot;Resource&quot;: &quot;*&quot;
         }
-	{
-           &quot;Version&quot;: &quot;2012-10-17&quot;,
-           &quot;Statement&quot;: [
-              {
-                 &quot;Sid&quot;: &quot;SpotDataAccess&quot;,
-                 &quot;Effect&quot;: &quot;Allow&quot;,
-                 &quot;Action&quot;: [
-                    &quot;s3:ListAllMyBuckets&quot;,
-                    &quot;s3:ListBucket&quot;,
-                    &quot;s3:HeadBucket&quot;,
-                    &quot;s3:HeadObject&quot;,
-                    &quot;s3:List*&quot;,
-                    &quot;s3:Get*&quot;
-                 ],
-                 &quot;Resource&quot;: &quot;arn:aws:s3:::${SpotDataFeedBucketName}*&quot;
-              }
-           ]
-        }
+    ]
+}
 </code></pre>
 
 </details>
-
 
 <p><details>
 	<summary>My Kubernetes clusters run in different accounts</summary></p>
