@@ -82,7 +82,7 @@ Filter resources by namespace, clusterId, and/or Kubernetes label to more closel
 | Controller kind | Limit results to workloads based on controller type |
 | Pod |  Limit results to workloads where the pod name is filtered for. |
 
-Comma-separated lists are supported to filter by multiple categories, e.g. namespace filter equals `kube-system,kubecost`
+Comma-separated lists are supported to filter by multiple categories, e.g. namespace filter equals `kube-system,kubecost`. Wild card filters are also supported, indicated by a * following the filter, e.g. `namespace=kube*` to return any namespace beginning with `kube`. 
    
 ### Shared resources
 
