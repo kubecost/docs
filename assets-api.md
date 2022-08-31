@@ -2,7 +2,7 @@ Assets API
 ==========
 
 
-The assets API retrieves backing cost data broken down by individual assets in your cluster but also provides various aggregations of this data.
+The Assets API retrieves backing cost data broken down by individual assets in your cluster but also provides various aggregations of this data.
 
 The API is available at the following endpoint:
 
