@@ -73,10 +73,14 @@ Filter resources by namespace, clusterId, and/or Kubernetes label to more closel
 
 | Filter | Description |
 |--------------------|---------------------|
-| Namespace |  Limit results to workloads in a set of namespaces. |
 | Cluster |  Limit results to workloads in a set of clusters with matching IDs. Note: clusterID is passed in _values_ at install-time. |
+| Node | Limit results to workloads where the node name is filtered for. |
+| Namespace |  Limit results to workloads in a set of namespaces. |
 | Label |  Limit results to workloads with matching Kubernetes labels. Namespace labels are applied to all of its workloads. Supports filtering by `__unallocated__` field as well |
-| Pod Prefix |  Limit results to workloads that begin with this string. |
+| Service | Limit results to workloads based on service |
+| Controller | Limit results to workloads based on controller name |
+| Controller kind | Limit results to workloads based on controller type |
+| Pod |  Limit results to workloads where the pod name is filtered for. |
 
 Comma-separated lists are supported to filter by multiple categories, e.g. namespace filter equals `kube-system,kubecost`
    
@@ -99,14 +103,14 @@ Cost allocation metrics are available for both in-cluster and out-of-cluster res
 
 | Metric | Description |
 |-------------------|---------------------|
-| Memory cost | The total cost of memory allocated to this object, e.g. namespace or deployment. The amount of memory allocated is the greater of memory usage and memory requested over the measured time window. The price of allocated memory is based on cloud billing APIs or custom pricing sheets. [Learn more](https://github.com/kubecost/cost-model#questions) |
-| CPU Cost | The total cost of CPU allocated to this object, e.g. namespace or deployment. The amount of CPU allocated is the greater of CPU usage and CPU requested over the measured time window. The price of allocated CPU is based on cloud billing APIs or custom pricing sheets. [Learn more](https://github.com/kubecost/cost-model#questions) |
-| Cost Efficiency | The percentage of requested CPU & memory dollars utilized over the measured time window. Values range from 0 to above 100 percent. Workloads with no requests but with usage OR workloads with usage > request can report efficiency above 100%. [View Example](https://docs.google.com/spreadsheets/d/15CL2YrJHIcQyDMHu3vB3jXdTdcqEntawmy5T3zsVZ_g/edit#gid=0)|
-| Network Cost | The cost of network traffic based on internet egress, cross-zone egress, and other billed transfer. Note: these costs must be enabled. [Learn more](http://docs.kubecost.com/network-allocation) |
-| PV Cost | The cost of persistent storage volumes claimed by this object. Prices are based on cloud billing prices or custom pricing sheets for on-prem deployments. |
+| CPU | The total cost of CPU allocated to this object, e.g. namespace or deployment. The amount of CPU allocated is the greater of CPU usage and CPU requested over the measured time window. The price of allocated CPU is based on cloud billing APIs or custom pricing sheets. [Learn more](https://github.com/kubecost/cost-model#questions) |
 | GPU Cost | The cost of GPUs requested by this object, as measured by [resource limits](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/). Prices are based on cloud billing prices or custom pricing sheets for on-prem deployments. |
+| RAM | The total cost of memory allocated to this object, e.g. namespace or deployment. The amount of memory allocated is the greater of memory usage and memory requested over the measured time window. The price of allocated memory is based on cloud billing APIs or custom pricing sheets. [Learn more](https://github.com/kubecost/cost-model#questions) |
+| Persistent Volume (PV) Cost | The cost of persistent storage volumes claimed by this object. Prices are based on cloud billing prices or custom pricing sheets for on-prem deployments. |
+| Network Cost | The cost of network traffic based on internet egress, cross-zone egress, and other billed transfer. Note: these costs must be enabled. [Learn more](http://docs.kubecost.com/network-allocation) |
+| Load Balancer (LB) cost | The cost of cloud-service load balancer that has been allocated. |
 | Shared Cost | The cost of shared resources allocated to this tenant. This field covers shared overhead, shared namespaces, and shared labels. |
-| External Cost | The cost of out-of-cluster resources allocated to this object. For example, S3 buckets allocated to a particular Kubernetes deployment. Prices are based on cloud billing data and require a key. This feature is currently available for AWS ([learn more](http://docs.kubecost.com/aws-out-of-cluster.html)), GCP ([learn more](http://docs.kubecost.com/gcp-out-of-cluster.html)) and Azure ([learn more](https://github.com/kubecost/docs/blob/main/azure-out-of-cluster.md)). |
+| Cost Efficiency | The percentage of requested CPU & memory dollars utilized over the measured time window. Values range from 0 to above 100 percent. Workloads with no requests but with usage OR workloads with usage > request can report efficiency above 100%. [View Example](https://docs.google.com/spreadsheets/d/15CL2YrJHIcQyDMHu3vB3jXdTdcqEntawmy5T3zsVZ_g/edit#gid=0)|
 
 
 Edit this doc on [GitHub](https://github.com/kubecost/docs/blob/main/cost-allocation.md)
