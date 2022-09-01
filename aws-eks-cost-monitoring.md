@@ -33,6 +33,18 @@ oci://public.ecr.aws/kubecost/cost-analyzer --version <$VERSION> \
 -f https://raw.githubusercontent.com/kubecost/cost-analyzer-helm-chart/develop/cost-analyzer/values-eks-cost-monitoring.yaml
 ```
 
+To install Kubecost on Amazon EKS cluster on AWS Graviton2 (ARM-based processor), you can run following command:
+
+```bash
+helm upgrade -i kubecost \
+oci://public.ecr.aws/kubecost/cost-analyzer --version 1.96.0 \
+--namespace kubecost --create-namespace \
+-f https://raw.githubusercontent.com/linhlam-kc/cost-analyzer-helm-chart/aws-eks/cost-analyzer/values-eks-cost-monitoring.yaml \
+--set prometheus.configmapReload.prometheus.image.repository=jimmidyson/configmap-reload
+```
+
+> **Note**: On the Amazon EKS cluster with mixed processor architecture worker nodes (AMD64, ARM64), this parameter can be used to schedule Kubecost deployment on ARM-based worker nodes: `--set nodeSelector."beta\\.kubernetes\\.io/arch"=arm64`
+
 > **Note**: Remember to replace $VERSION with actual version number. You can find all available versions at https://gallery.ecr.aws/kubecost/cost-analyzer
 
 By default, the installation will include certain prerequisite software including Prometheus and kube-state-metrics. To customize your deployment, for example skipping these prerequisites if you already have them running in your cluster, you can configure any of the [available values](https://github.com/kubecost/cost-analyzer-helm-chart/blob/develop/cost-analyzer/values-eks-cost-monitoring.yaml) to modify storage, network configuration, and more. 
