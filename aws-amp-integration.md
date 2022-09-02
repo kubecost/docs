@@ -1,70 +1,147 @@
 Amazon Managed Service for Prometheus
 ==================
+## Overview.
 
-[Amazon Managed Service for Prometheus (AMP)](https://docs.aws.amazon.com/prometheus/index.html) is a Prometheus-compatible monitoring service that makes it easy to monitor containerized applications at scale.
+Kubecost leverages the open-source Prometheus project as a time series database, and post-processes the data in Prometheus to perform costs allocation calculation and provide optimization insights for your Kubernetes clusters such as Amazon Elastic Kubernetes Service (Amazon EKS). Prometheus is a single machine statically-resourced container, so depend on your cluster size or when your cluster scale out, it could exceed the scraping capabilities of a single Prometheus server. In the collaboration with Amazon Web Services (AWS), Kubecost integrates with [Amazon Managed Service for Prometheus (AMP)](https://docs.aws.amazon.com/prometheus/index.html) - a managed Prometheus-compatible monitoring service - to enable customer to easily monitor Kubernetes cost at scale. 
 
-Integrating AMP with Kubecost follows a workflow that is similar to integrating Kubecost with any [Custom Prometheus](https://docs.kubecost.com/custom-prom.html).
+## Reference Resources.
 
-## 1. Set up a Prometheus with Amazon Managed Service for Prometheus (AMP) and Kubecost
+- [Amazon Managed Prometheus (AMP)](https://docs.aws.amazon.com/prometheus/latest/userguide/what-is-Amazon-Managed-Service-Prometheus.html)
+- [AMP IAM permissions and policies](https://docs.aws.amazon.com/prometheus/latest/userguide/AMP-and-IAM.html)
 
-You should first have successfully created an AMP workspace and ingesting Prometheus metrics into it, and have installed Kubecost, separately.
+## Instructions.
+### Install Amazon Managed Prometheus (AMP).
+#### Prerequisites.
+- You have an existing AWS account.
+- You have IAM credentials to create AMP and IAM role programatically.
+- You have existing Amazon EKS cluster with OIDC enabled. You can consider to use following command to enable OIDC for your existing Amazon EKS cluster:
 
-- [AMP Getting Started User Guide](https://docs.aws.amazon.com/prometheus/latest/userguide/AMP-getting-started.html)
-- [Kubecost Installation Guide](https://docs.kubecost.com/install)
-
-## 2. Set up Kubecost to use your Prometheus configured with Amazon Managed Service for Prometheus (AMP)
-
-First, download the [values file](https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/values.yaml) and set [`prometheus.enabled`](https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/values.yaml#L4) to `false`, and [`prometheus.fqdn`](https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/values.yaml#L5) to the URL of your Prometheus service address, starting with `http://`. Note that this address is _not_ your AMP remote write URL but your Prometheus cluster address, e.g. `http://prometheus-server.prometheus.svc.cluster.local`.
-
-Then, navigate to the directory of the file and apply the changes by running the following `helm` command:
-
-```
-# replace the namespace and filename if needed
-$ helm upgrade --install kubecost kubecost/cost-analyzer --namespace kubecost -f ./values.yaml
-```
-
-Verify that Kubecost is using the Prometheus server configured to remote write metrics to AMP rather than Kubecost's default Prometheus installation by forwarding Kubecost to a local port and querying the `/api` endpoint:
+> **Note**: remember to replace `YOUR_CLUSTER_NAME` and `AWS_REGION` by your desired values
 
 ```
-# replace `kubecost` and `deployment/kubecost-cost-analyzer` if needed
-$ kubectl port-forward --namespace kubecost deployment/kubecost-cost-analyzer 9090
+export YOUR_CLUSTER_NAME=AWS-cluster-one
+export AWS_REGION=us-west-2
 
-# in another Terminal window
-$ curl http://localhost:9090/api/
+eksctl utils associate-iam-oidc-provider \
+    --cluster ${YOUR_CLUSTER_NAME} --region ${AWS_REGION} \
+    --approve
+```
+#### Set up AMP.
+
+You can use following AWS CLI command to create new AMP workspace:
+
+```bash
+export AWS_REGION=us-west-2
+aws amp create-workspace --alias kubecost-amp --region $AWS_REGION
+```
+Example output:
+
+```json
+{
+    "arn": "arn:aws:aps:us-west-2:xxxxxxxxxxxxx:workspace/$<AMP_WORKSPACE_ID>",
+    "status": {
+        "statusCode": "CREATING"
+    },
+    "tags": {},
+    "workspaceId": "$<AMP_WORKSPACE_ID>"
+}
+```
+The workspace should be created in few seconds. You can login to [AWS AMP console](https://console.aws.amazon.com/prometheus/) to retrieve more information. You need to save `Endpoint - query URL` and `Endpoint - remote write URL` for using later.
+
+For example:
+
+REMOTEWRITEURL="https://aps-workspaces.us-west-2.amazonaws.com/workspaces/$<AMP_WORKSPACE_ID>/api/v1/remote_write"
+QUERYURL="https://aps-workspaces.us-west-2.amazonaws.com/workspaces/$<AMP_WORKSPACE_ID>/api/v1/query"
+
+### Install Kubecost with the default values.
+
+#### Prerequisites.
+- Install the following tools: [Helm 3.9+](https://helm.sh/docs/intro/install/), [kubectl](https://kubernetes.io/docs/tasks/tools/), and optionally [eksctl](https://eksctl.io/) and [AWS CLI](https://aws.amazon.com/cli/).
+- You have access to an [Amazon EKS cluster](https://aws.amazon.com/eks/).
+
+#### Installation.
+
+Run this following command to install Kubecost from Amazon ECR Public Gallery:
+
+```bash
+helm upgrade -i kubecost \
+oci://public.ecr.aws/kubecost/cost-analyzer --version <$VERSION> \
+--namespace kubecost --create-namespace \
+-f https://tinyurl.com/kubecost-amazon-eks
+```
+### Set up IAM role for Kubecost service account (IRSA):
+
+These following commands help to automate these following tasks:
+- Create an IAM role with the AWS managed IAM policy and trusted policy for the following service accounts: `kubecost-cost-analyzer`, `kubecost-prometheus-server`.
+- Modify current K8s service accounts with annotation to attach new IAM role.
+
+> **Note**: remember to replace `YOUR_CLUSTER_NAME` and `AWS_REGION` by your desired values
+
+```
+export YOUR_CLUSTER_NAME=AWS-cluster-one
+export AWS_REGION=us-west-2
+
+kubectl create ns kubecost
+
+eksctl create iamserviceaccount \
+    --name kubecost-cost-analyzer \
+    --namespace kubecost \
+    --cluster ${YOUR_CLUSTER_NAME} --region ${AWS_REGION} \
+    --attach-policy-arn arn:aws:iam::aws:policy/AmazonPrometheusQueryAccess \
+    --attach-policy-arn arn:aws:iam::aws:policy/AmazonPrometheusRemoteWriteAccess \
+    --override-existing-serviceaccounts \
+    --approve
+
+
+eksctl create iamserviceaccount \
+    --name kubecost-prometheus-server \
+    --namespace kubecost \
+    --cluster ${YOUR_CLUSTER_NAME} --region ${AWS_REGION} \
+    --attach-policy-arn arn:aws:iam::aws:policy/AmazonPrometheusQueryAccess \
+    --attach-policy-arn arn:aws:iam::aws:policy/AmazonPrometheusRemoteWriteAccess \
+    --override-existing-serviceaccounts \
+    --approve
 ```
 
-The first line returned by the `curl` command should contain your `fqdn` parameter URL, like so:
+For more information, you can check AWS documentation at [IAM roles for service accounts](https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html) and learn more about AMP managed policy at [Identity-based policy examples for Amazon Managed Service for Prometheus](https://docs.aws.amazon.com/prometheus/latest/userguide/security_iam_id-based-policy-examples.html)
 
-```
-Using Prometheus at http://prometheus-server.prometheus.svc.cluster.local.
-```
+### Configure Kubecost to use AMP as time series database.
 
-Seek help in our [troubleshooting guide](https://docs.kubecost.com/custom-prom.html#troubleshooting-issues) or [reach out to us on Slack](https://join.slack.com/t/kubecost/shared_invite/zt-1dz4a0bb4-InvSsHr9SQsT_D5PBle2rw) if you run into any issues.
+- If you use the default values as in this documentation, you can simply run this command to update Kubecost Helm release to use your AMP workspace as time series database.
 
-## 3. Set up your Prometheus to scrape metrics from Kubecost
-
-First, create a file called `extra_scrape_configs.yaml` with the following contents, replacing `<your_kubecost_namespace>` with your Kubecost namespace:
-
-```
-- job_name: kubecost
-  honor_labels: true
-  scrape_interval: 1m
-  scrape_timeout: 10s
-  metrics_path: /metrics
-  scheme: http
-  dns_sd_configs:
-    - names:
-        - kubecost-cost-analyzer.<your_kubecost_namespace>
-      type: "A"
-      port: 9003
-
+```bash
+helm upgrade -i kubecost \
+oci://public.ecr.aws/kubecost/cost-analyzer --version <$VERSION> \
+--namespace kubecost --create-namespace \
+-f https://tinyurl.com/kubecost-amazon-eks
+-f https://tinyurl.com/kubecost-amp
+--set global.amp.prometheusServerEndpoint ${REMOTEWRITEURL}
+--set remoteWriteService ${QUERYURL}
 ```
 
-Then, add these recording rules as `serverFiles` to the Prometheus `override_values.yaml` override file. While they are optional, they offer improved performance.
+- For advanced configuration, you can download [values-amp.yaml](https://raw.githubusercontent.com/kubecost/cost-analyzer-helm-chart/develop/cost-analyzer/values-amp.yaml) locally to edit it accordingly then run the following command:
 
+```bash
+helm upgrade -i kubecost \
+oci://public.ecr.aws/kubecost/cost-analyzer --version <$VERSION> \
+--namespace kubecost --create-namespace \
+-f https://tinyurl.com/kubecost-amazon-eks
+-f https://tinyurl.com/kubecost-amp
 ```
-serverFiles:
-  rules:
+
+---
+
+To verify that the integration is set up, check that the `Prometheus Status` section on Kubecost Settings page.
+
+![Prometheus status screenshot](https://user-images.githubusercontent.com/22844059/132998278-fd388e9a-8d61-4b8b-ad1c-0e52f17ca251.png)
+
+Have a look at the [Custom Prometheus integration troubleshooting guide](https://docs.kubecost.com/custom-prom.html#troubleshooting-issues) if you run into any errors while setting up the integration. You're also welcome to [reach out to us on Slack](https://join.slack.com/t/kubecost/shared_invite/zt-1dz4a0bb4-InvSsHr9SQsT_D5PBle2rw) if you require further assistance or if you need support from AWS team, you can submit a support request through your existing [AWS support contract](https://aws.amazon.com/contact-us/).
+
+### Add recording rules (optional)
+
+You can add these recording rules to improve the performance. Recording rules allow you to precompute frequently needed or computationally expensive expressions and save their results as a new set of time series. Querying the precomputed result is often much faster than running the original expression every time it is needed. Follow this instruction: https://docs.aws.amazon.com/prometheus/latest/userguide/AMP-Ruler.html to add these following rules:
+
+```yaml
     groups:
       - name: CPU
         rules:
@@ -97,30 +174,6 @@ serverFiles:
             labels:
               daemonset: "true"
 ```
-
-Lastly, apply the changes:
-
-```
-$ helm upgrade --install prometheus-for-amp prometheus-community/prometheus -n prometheus -f ./override_values.yaml \
---set-file extraScrapeConfigs=extra_scrape_configs.yaml
-```
-
-To check that the rules were applied successfully, run Kubecost locally and check that `Prometheus Status` on the Settings page indicates `Kubecost recording rules available in Prometheus` and `Kubecost cost-model metrics available in Prometheus`.
-
-```
-# replace `kubecost` and `deployment/kubecost-cost-analyzer` if needed
-$ kubectl port-forward --namespace kubecost deployment/kubecost-cost-analyzer 9090
-```
-
-Et voilà!
-
----
-
-To verify that the integration is set up, check that the `Prometheus Status` section on Kubecost Settings page does not contain any errors.
-
-![Prometheus status screenshot](https://user-images.githubusercontent.com/22844059/132998278-fd388e9a-8d61-4b8b-ad1c-0e52f17ca251.png)
-
-Have a look at the [Custom Prometheus integration troubleshooting guide](https://docs.kubecost.com/custom-prom.html#troubleshooting-issues) if you run into any errors while setting up the integration. You're also welcome to [reach out to us on Slack](https://join.slack.com/t/kubecost/shared_invite/zt-1dz4a0bb4-InvSsHr9SQsT_D5PBle2rw) if you require further assistance.
 
 Edit this doc on [GitHub](https://github.com/kubecost/docs/blob/main/aws-amp-integration.md)
 
