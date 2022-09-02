@@ -2,7 +2,7 @@ Amazon Managed Service for Prometheus
 ==================
 ## Overview.
 
-Kubecost leverages the open-source Prometheus project as a time series database, and post-processes the data in Prometheus to perform costs allocation calculation and provide optimization insights for your Kubernetes clusters such as Amazon Elastic Kubernetes Service (Amazon EKS). Prometheus is a single machine statically-resourced container, so depend on your cluster size or when your cluster scale out, it could exceed the scraping capabilities of a single Prometheus server. In the collaboration with Amazon Web Services (AWS), Kubecost integrates with [Amazon Managed Service for Prometheus (AMP)](https://docs.aws.amazon.com/prometheus/index.html) - a managed Prometheus-compatible monitoring service - to enable customer to easily monitor Kubernetes cost at scale. 
+Kubecost leverages the open-source Prometheus project as a time series database and post-processes the data in Prometheus to perform cost allocation calculations and provide optimization insights for your Kubernetes clusters such as Amazon Elastic Kubernetes Service (Amazon EKS). Prometheus is a single machine statically-resourced container, so depending on your cluster size or when your cluster scales out, it could exceed the scraping capabilities of a single Prometheus server. In the collaboration with Amazon Web Services (AWS), Kubecost integrates with [Amazon Managed Service for Prometheus (AMP)](https://docs.aws.amazon.com/prometheus/index.html) - a managed Prometheus-compatible monitoring service - to enable the customer to easily monitor Kubernetes cost at scale. 
 
 ## Reference Resources.
 
@@ -13,10 +13,10 @@ Kubecost leverages the open-source Prometheus project as a time series database,
 ### Install Amazon Managed Prometheus (AMP).
 #### Prerequisites.
 - You have an existing AWS account.
-- You have IAM credentials to create AMP and IAM role programatically.
-- You have existing Amazon EKS cluster with OIDC enabled. You can consider to use following command to enable OIDC for your existing Amazon EKS cluster:
+- You have IAM credentials to create AMP and IAM roles programmatically.
+- You have an existing Amazon EKS cluster with OIDC enabled. You can consider using the following command to enable OIDC for your existing Amazon EKS cluster:
 
-> **Note**: remember to replace `YOUR_CLUSTER_NAME` and `AWS_REGION` by your desired values
+> **Note**: remember to replace `YOUR_CLUSTER_NAME` and `AWS_REGION` with your desired values
 
 ```
 export YOUR_CLUSTER_NAME=AWS-cluster-one
@@ -28,7 +28,7 @@ eksctl utils associate-iam-oidc-provider \
 ```
 #### Set up AMP.
 
-You can use following AWS CLI command to create new AMP workspace:
+You can use the following AWS CLI command to create a new AMP workspace:
 
 ```bash
 export AWS_REGION=us-west-2
@@ -46,7 +46,7 @@ Example output:
     "workspaceId": "$<AMP_WORKSPACE_ID>"
 }
 ```
-The workspace should be created in few seconds. You can login to [AWS AMP console](https://console.aws.amazon.com/prometheus/) to retrieve more information. You need to save `Endpoint - query URL` and `Endpoint - remote write URL` for using later.
+The workspace should be created in a few seconds. You can log in to [AWS AMP console](https://console.aws.amazon.com/prometheus/) to retrieve more information. You need to save `Endpoint - query URL` and `Endpoint - remote write URL` for use later.
 
 For example:
 
@@ -61,7 +61,7 @@ QUERYURL="https://aps-workspaces.us-west-2.amazonaws.com/workspaces/$<AMP_WORKSP
 
 #### Installation.
 
-Run this following command to install Kubecost from Amazon ECR Public Gallery:
+Run the following command to install Kubecost from Amazon ECR Public Gallery:
 
 ```bash
 helm upgrade -i kubecost \
@@ -71,7 +71,7 @@ oci://public.ecr.aws/kubecost/cost-analyzer --version <$VERSION> \
 ```
 ### Set up IAM role for Kubecost service account (IRSA):
 
-These following commands help to automate these following tasks:
+These following commands help to automate the following tasks:
 - Create an IAM role with the AWS managed IAM policy and trusted policy for the following service accounts: `kubecost-cost-analyzer`, `kubecost-prometheus-server`.
 - Modify current K8s service accounts with annotation to attach new IAM role.
 
@@ -105,9 +105,9 @@ eksctl create iamserviceaccount \
 
 For more information, you can check AWS documentation at [IAM roles for service accounts](https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html) and learn more about AMP managed policy at [Identity-based policy examples for Amazon Managed Service for Prometheus](https://docs.aws.amazon.com/prometheus/latest/userguide/security_iam_id-based-policy-examples.html)
 
-### Configure Kubecost to use AMP as time series database.
+### Configure Kubecost to use AMP as a time series database.
 
-- If you use the default values as in this documentation, you can simply run this command to update Kubecost Helm release to use your AMP workspace as time series database.
+- If you use the default values as in this documentation, you can simply run this command to update Kubecost Helm release to use your AMP workspace as a time series database.
 
 ```bash
 helm upgrade -i kubecost \
@@ -131,7 +131,7 @@ oci://public.ecr.aws/kubecost/cost-analyzer --version <$VERSION> \
 
 ---
 
-To verify that the integration is set up, check that the `Prometheus Status` section on Kubecost Settings page.
+To verify that the integration is set up, check the `Prometheus Status` section on Kubecost Settings page.
 
 ![Prometheus status screenshot](https://user-images.githubusercontent.com/22844059/132998278-fd388e9a-8d61-4b8b-ad1c-0e52f17ca251.png)
 
@@ -139,7 +139,7 @@ Have a look at the [Custom Prometheus integration troubleshooting guide](https:/
 
 ### Add recording rules (optional)
 
-You can add these recording rules to improve the performance. Recording rules allow you to precompute frequently needed or computationally expensive expressions and save their results as a new set of time series. Querying the precomputed result is often much faster than running the original expression every time it is needed. Follow this instruction: https://docs.aws.amazon.com/prometheus/latest/userguide/AMP-Ruler.html to add these following rules:
+You can add these recording rules to improve the performance. Recording rules allow you to precompute frequently needed or computationally expensive expressions and save their results as a new set of time series. Querying the precomputed result is often much faster than running the original expression every time it is needed. Follow this instruction: https://docs.aws.amazon.com/prometheus/latest/userguide/AMP-Ruler.html to add the following rules:
 
 ```yaml
     groups:
