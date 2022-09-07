@@ -37,7 +37,7 @@ To install Kubecost on Amazon EKS cluster on AWS Graviton2 (ARM-based processor)
 
 ```bash
 helm upgrade -i kubecost \
-oci://public.ecr.aws/kubecost/cost-analyzer --version 1.96.0 \
+oci://public.ecr.aws/kubecost/cost-analyzer --version <$VERSION> \
 --namespace kubecost --create-namespace \
 -f https://raw.githubusercontent.com/linhlam-kc/cost-analyzer-helm-chart/aws-eks/cost-analyzer/values-eks-cost-monitoring.yaml \
 --set prometheus.configmapReload.prometheus.image.repository=jimmidyson/configmap-reload
