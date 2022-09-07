@@ -16,7 +16,8 @@ High-level access control options:
 
 <br/>
 
-Setup guide: [https://github.com/kubecost/poc-common-configurations/tree/main/saml-okta](https://github.com/kubecost/poc-common-configurations/tree/main/saml-okta)
+AzureAD setup guide: [https://github.com/kubecost/poc-common-configurations/tree/main/saml-azuread](https://github.com/kubecost/poc-common-configurations/tree/main/saml-azuread)
+Okta setup guide: [https://github.com/kubecost/poc-common-configurations/tree/main/saml-okta](https://github.com/kubecost/poc-common-configurations/tree/main/saml-okta)
 
 Additional [troubleshooting guide](https://docs.google.com/document/d/1cgns9_jHQy5GFB2Yzd3Qlyd-owlbLqVi9Ti6IuCYCJE)
 
