@@ -46,12 +46,11 @@ Example output:
     "workspaceId": "$<AMP_WORKSPACE_ID>"
 }
 ```
-The workspace should be created in a few seconds. You can log in to [AWS AMP console](https://console.aws.amazon.com/prometheus/) to retrieve more information. You need to save `Endpoint - query URL` and `Endpoint - remote write URL` for use later.
 
-For example:
+The workspace should be created in a few seconds. You can log in to [AWS AMP console](https://console.aws.amazon.com/prometheus/) to retrieve more information. You need to set `$REMOTEWRITEURL` and `$QUERYURL` for using in the integration with Kubecost later as follows:
 
 REMOTEWRITEURL="https://aps-workspaces.us-west-2.amazonaws.com/workspaces/$<AMP_WORKSPACE_ID>/api/v1/remote_write"
-QUERYURL="https://aps-workspaces.us-west-2.amazonaws.com/workspaces/$<AMP_WORKSPACE_ID>/api/v1/query"
+QUERYURL="http://localhost:8005/workspaces/$<AMP_WORKSPACE_ID>"
 
 ### Install Kubecost with the default values.
 
@@ -115,8 +114,8 @@ oci://public.ecr.aws/kubecost/cost-analyzer --version <$VERSION> \
 --namespace kubecost --create-namespace \
 -f https://tinyurl.com/kubecost-amazon-eks
 -f https://tinyurl.com/kubecost-amp
---set global.amp.prometheusServerEndpoint ${REMOTEWRITEURL}
---set remoteWriteService ${QUERYURL}
+--set global.amp.prometheusServerEndpoint ${QUERYURL}
+--set remoteWriteService ${REMOTEWRITEURL}
 ```
 
 - For advanced configuration, you can download [values-amp.yaml](https://raw.githubusercontent.com/kubecost/cost-analyzer-helm-chart/develop/cost-analyzer/values-amp.yaml) locally to edit it accordingly then run the following command:
@@ -126,7 +125,7 @@ helm upgrade -i kubecost \
 oci://public.ecr.aws/kubecost/cost-analyzer --version <$VERSION> \
 --namespace kubecost --create-namespace \
 -f https://tinyurl.com/kubecost-amazon-eks
--f https://tinyurl.com/kubecost-amp
+-f PATH_TO_THE_LOCAL_DIRECTORY/values-amp.yaml
 ```
 
 ---
