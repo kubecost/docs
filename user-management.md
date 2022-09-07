@@ -19,7 +19,7 @@ High-level access control options:
 - AzureAD setup guide: [https://github.com/kubecost/poc-common-configurations/tree/main/saml-azuread](https://github.com/kubecost/poc-common-configurations/tree/main/saml-azuread)
 - Okta setup guide: [https://github.com/kubecost/poc-common-configurations/tree/main/saml-okta](https://github.com/kubecost/poc-common-configurations/tree/main/saml-okta)
 
- > Note that all SAML 2.0 providers also work- the above guides can be used as templates for what is required.
+ > **Note**: All SAML 2.0 providers also work. The above guides can be used as templates for what is required.
 
 Additional [troubleshooting guide](https://docs.google.com/document/d/1cgns9_jHQy5GFB2Yzd3Qlyd-owlbLqVi9Ti6IuCYCJE)
 
