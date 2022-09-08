@@ -19,11 +19,12 @@ You should now be at the Service account permissions (optional) page. Select the
 
 You should now be prompted to allow specific accounts access to this service account. This should be based on specific internal needs and is not a requirement. You can leave empty and select _Done_.__
 
-Once back to the Service accounts page, select the _Actions_ icon at the end of the entry you just created and select _Create key_.
+## Create a key
+Once back to the Service accounts page, select the _Actions_ icon > _Manage keys_. Then, select the _Add Key_ dropdown and select _Create new key_. A Create private key window opens.
 
 ![image](https://user-images.githubusercontent.com/334480/66668267-d3ebcd00-ec22-11e9-9e8c-4f178b8dd265.png)
 
-Confirm a JSON key and select `Create`. This will download a JSON service account key entry for use with the Thanos `object-store.yaml` mentioned in the initial setup step.
+Select _JSON_ as the Key type and select _Create_. This will download a JSON service account key entry for use with the Thanos `object-store.yaml` mentioned in the initial setup step.
 
 
 Edit this doc on [GitHub](https://github.com/kubecost/docs/blob/main/google-service-account-thanos.md)
