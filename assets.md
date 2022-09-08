@@ -12,11 +12,11 @@ This user interface is available at `<your-kubecost-address>/assets.html`.
 
 This is the main Kubecost Assets dashboard. In the screenshot there are multiple features to take notice of which are covered in this guide:
 
-*Date Range* filter
-*Aggregate by* filter
-*Edit search parameters* icon
-Additional dashboard icons
-Assets metrics table
+1. *Date Range* filter
+2. *Aggregate by* filter
+3. *Edit search parameters* icon
+4. Additional dashboard icons
+5. Assets metrics table
 
 ## 1. Date Range filter
 ![Date Range](https://raw.githubusercontent.com/kubecost/docs/main/images/assetsdate.PNG)
