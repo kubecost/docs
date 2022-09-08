@@ -16,11 +16,11 @@ Kubecost leverages the open-source Prometheus project as a time series database 
 - You have IAM credentials to create AMP and IAM roles programmatically.
 - You have an existing Amazon EKS cluster with OIDC enabled. You can consider using the following command to enable OIDC for your existing Amazon EKS cluster:
 
-> **Note**: remember to replace `YOUR_CLUSTER_NAME` and `AWS_REGION` with your desired values
+> **Note**: remember to replace `<YOUR_CLUSTER_NAME>` and `<AWS_REGION>` with your desired values
 
 ```
-export YOUR_CLUSTER_NAME=AWS-cluster-one
-export AWS_REGION=us-west-2
+export YOUR_CLUSTER_NAME=<YOUR-CLUSTER-NAME>
+export AWS_REGION=<YOUR-AWS-REGION>
 
 eksctl utils associate-iam-oidc-provider \
     --cluster ${YOUR_CLUSTER_NAME} --region ${AWS_REGION} \
@@ -31,26 +31,26 @@ eksctl utils associate-iam-oidc-provider \
 You can use the following AWS CLI command to create a new AMP workspace:
 
 ```bash
-export AWS_REGION=us-west-2
+export AWS_REGION=<YOUR-AWS-REGION>
 aws amp create-workspace --alias kubecost-amp --region $AWS_REGION
 ```
 Example output:
 
 ```json
 {
-    "arn": "arn:aws:aps:us-west-2:xxxxxxxxxxxxx:workspace/$<AMP_WORKSPACE_ID>",
+    "arn": "arn:aws:aps:us-west-2:xxxxxxxxxxxxx:workspace/${AMP_WORKSPACE_ID}",
     "status": {
         "statusCode": "CREATING"
     },
     "tags": {},
-    "workspaceId": "$<AMP_WORKSPACE_ID>"
+    "workspaceId": "${AMP_WORKSPACE_ID}"
 }
 ```
 
 The workspace should be created in a few seconds. You can log in to [AWS AMP console](https://console.aws.amazon.com/prometheus/) to retrieve more information. You need to set `$REMOTEWRITEURL` and `$QUERYURL` for using in the integration with Kubecost later as follows:
 
-REMOTEWRITEURL="https://aps-workspaces.us-west-2.amazonaws.com/workspaces/$<AMP_WORKSPACE_ID>/api/v1/remote_write"
-QUERYURL="http://localhost:8005/workspaces/$<AMP_WORKSPACE_ID>"
+REMOTEWRITEURL="https://aps-workspaces.us-west-2.amazonaws.com/workspaces/${AMP_WORKSPACE_ID}/api/v1/remote_write"
+QUERYURL="http://localhost:8005/workspaces/${AMP_WORKSPACE_ID}"
 
 ### Install Kubecost with the default values.
 
@@ -74,11 +74,11 @@ These following commands help to automate the following tasks:
 - Create an IAM role with the AWS managed IAM policy and trusted policy for the following service accounts: `kubecost-cost-analyzer`, `kubecost-prometheus-server`.
 - Modify current K8s service accounts with annotation to attach new IAM role.
 
-> **Note**: remember to replace `YOUR_CLUSTER_NAME` and `AWS_REGION` by your desired values
+> **Note**: remember to replace `<YOUR_CLUSTER_NAME>` and `<AWS_REGION>` with your desired values
 
 ```
-export YOUR_CLUSTER_NAME=AWS-cluster-one
-export AWS_REGION=us-west-2
+export YOUR_CLUSTER_NAME=<YOUR-CLUSTER-NAME>
+export AWS_REGION=<YOUR-AWS-REGION>
 
 kubectl create ns kubecost
 
@@ -112,10 +112,10 @@ For more information, you can check AWS documentation at [IAM roles for service 
 helm upgrade -i kubecost \
 oci://public.ecr.aws/kubecost/cost-analyzer --version <$VERSION> \
 --namespace kubecost --create-namespace \
--f https://tinyurl.com/kubecost-amazon-eks
--f https://tinyurl.com/kubecost-amp
---set global.amp.prometheusServerEndpoint ${QUERYURL}
---set remoteWriteService ${REMOTEWRITEURL}
+-f https://tinyurl.com/kubecost-amazon-eks \
+-f https://tinyurl.com/kubecost-amp \
+--set global.amp.prometheusServerEndpoint=${QUERYURL} \
+--set global.amp.remoteWriteService=${REMOTEWRITEURL}
 ```
 
 - For advanced configuration, you can download [values-amp.yaml](https://raw.githubusercontent.com/kubecost/cost-analyzer-helm-chart/develop/cost-analyzer/values-amp.yaml) locally to edit it accordingly then run the following command:
@@ -124,9 +124,17 @@ oci://public.ecr.aws/kubecost/cost-analyzer --version <$VERSION> \
 helm upgrade -i kubecost \
 oci://public.ecr.aws/kubecost/cost-analyzer --version <$VERSION> \
 --namespace kubecost --create-namespace \
--f https://tinyurl.com/kubecost-amazon-eks
+-f https://tinyurl.com/kubecost-amazon-eks \
 -f PATH_TO_THE_LOCAL_DIRECTORY/values-amp.yaml
 ```
+
+- Next, run the following command to restart the Prometheus deployment to reload the service account configuration:
+  
+```bash
+kubectl rollout restart deployment/kubecost-prometheus-server -n kubecost
+```
+
+- Your Kubecost setup is now start writing and collecting data from AMP. Data should be ready for viewing within 15 minutes.
 
 ---
 
