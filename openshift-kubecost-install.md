@@ -37,21 +37,28 @@ The Grafana managed Prometheus deployment is illustrated in the following diagra
 
 #### Installation:
 
-##### Step 1: Clone this repository to your dev environment.
-
-`git clone https://github.com/kubecost/openshift-helm-chart.git`
-`cd openshift-helm-chart`
-
-##### Step 2: Update configuration.
-
-Replace `$CLUSTER_NAME` with your desired value in this file [values-openshift.yaml](https://github.com/kubecost/openshift-helm-chart/blob/main/values-openshift.yaml)
-
-##### Step 3: Install Kubecost.
-
-Then install against the local cost-analyzer repo using the following helm install command:
+Run the following helm install command to install Kubecost:
 
 ```bash
-helm upgrade --install kubecost ./cost-analyzer --namespace kubecost --create-namespace -f ./values-openshift.yaml
+helm upgrade --install kubecost \
+--repo https://raw.githubusercontent.com/kubecost/openshift-helm-chart/main cost-analyzer \
+--namespace kubecost --create-namespace \
+-f https://raw.githubusercontent.com/kubecost/openshift-helm-chart/main/values-openshift.yaml
+```
+
+If you want to install Kubecost with your desired cluster name, you can use the following commands:
+
+> **Note**: remember to replace CLUSTER_NAME by your desired value 
+
+```bash
+export CLUSTER_ID="CLUSTER_NAME"
+
+helm upgrade --install kubecost \
+--repo https://raw.githubusercontent.com/kubecost/openshift-helm-chart/main cost-analyzer \
+--namespace kubecost --create-namespace \
+-f https://raw.githubusercontent.com/kubecost/openshift-helm-chart/main/values-openshift.yaml \
+--set kubecostProductConfigs.clusterName=${CLUSTER_ID} \
+--set prometheus.server.global.external_labels.cluster_id=${CLUSTER_ID}
 ```
 
 Wait for all pods to be ready.
@@ -503,13 +510,20 @@ cortextool rules print \
 Install Kubecost on your K8s cluster with Grafana Cloud Prometheus query endpoint and `dbsecret` you created in Step 4
 
 ```Bash
+export CLUSTER_ID="CLUSTER_OCP"
+# Replace REPLACE-WITH-GRAFANA-PROM-QUERY-ENDPOINT with your Grafana cloud value. Example: https://prometheus-prod-10-prod-us-central-0.grafana.net/api/prom/
+export GRAFANA_QUERY_ENDPOINT="REPLACE-WITH-GRAFANA-PROM-QUERY-ENDPOINT"
 
-helm upgrade -i -n kubecost kubecost ./cost-analyzer \
-    --set kubecostModel.promClusterIDLabel=cluster \
-    --set global.prometheus.fqdn=https://<REPLACE-WITH-GRAFANA-PROM-QUERY-ENDPOINT> \
-    --set global.prometheus.enabled=false \
-    --set global.prometheus.queryServiceBasicAuthSecretName=dbsecret
-
+helm upgrade --install kubecost \
+--repo https://raw.githubusercontent.com/kubecost/openshift-helm-chart/main cost-analyzer \
+--namespace kubecost --create-namespace \
+-f https://raw.githubusercontent.com/kubecost/openshift-helm-chart/main/values-openshift.yaml \
+--set kubecostProductConfigs.clusterName=${CLUSTER_ID} \
+--set prometheus.server.global.external_labels.cluster_id=${CLUSTER_ID} \
+--set kubecostModel.promClusterIDLabel=cluster \
+--set global.prometheus.fqdn=${GRAFANA_QUERY_ENDPOINT} \
+--set global.prometheus.enabled=false \
+--set global.prometheus.queryServiceBasicAuthSecretName=dbsecret
 ```
 
 The process is complete. By now, you should have successfully completed the Kubecost integration with Grafana Cloud.
