@@ -40,7 +40,8 @@ helm upgrade -i kubecost \
 oci://public.ecr.aws/kubecost/cost-analyzer --version <$VERSION> \
 --namespace kubecost --create-namespace \
 -f https://raw.githubusercontent.com/linhlam-kc/cost-analyzer-helm-chart/aws-eks/cost-analyzer/values-eks-cost-monitoring.yaml \
---set prometheus.configmapReload.prometheus.image.repository=jimmidyson/configmap-reload
+--set prometheus.configmapReload.prometheus.image.repository=jimmidyson/configmap-reload \
+--set prometheus.configmapReload.prometheus.image.tag=v0.7.1
 ```
 
 > **Note**: On the Amazon EKS cluster with mixed processor architecture worker nodes (AMD64, ARM64), this parameter can be used to schedule Kubecost deployment on ARM-based worker nodes: `--set nodeSelector."beta\\.kubernetes\\.io/arch"=arm64`
