@@ -7,13 +7,13 @@ Read the [Cloud Integrations](https://github.com/kubecost/docs/blob/main/cloud-i
 
 The following guide provides the steps required for allocating out-of-cluster costs in GCP.
 
-> A github repository with sample files used in below instructions can be found here: [https://github.com/kubecost/poc-common-configurations/tree/main/gcp](https://github.com/kubecost/poc-common-configurations/tree/main/gcp)
+> **Note**: A GitHub repository with sample files used in below instructions can be found here: [https://github.com/kubecost/poc-common-configurations/tree/main/gcp](https://github.com/kubecost/poc-common-configurations/tree/main/gcp)
 
 ## Step 1: Enable billing data export
 
 [https://cloud.google.com/billing/docs/how-to/export-data-bigquery](https://cloud.google.com/billing/docs/how-to/export-data-bigquery)
 
-> GCP users should create [detailed billing export](https://cloud.google.com/billing/docs/how-to/export-data-bigquery-tables#detailed-usage-cost-data-schema) to gain access to all of Kubecost cloud integration features including [reconciliation](https://github.com/kubecost/docs/blob/main/cloud-integration.md#reconciliation)
+GCP users should create [detailed billing export](https://cloud.google.com/billing/docs/how-to/export-data-bigquery-tables#detailed-usage-cost-data-schema) to gain access to all of Kubecost cloud integration features including [reconciliation](https://github.com/kubecost/docs/blob/main/cloud-integration.md#reconciliation)
 
 ## Step 2:  Visit Kubecost setup page and provide configuration info
 
@@ -46,7 +46,7 @@ You can then get your service account key to paste into the UI (be careful with 
 cat compute-viewer-kubecost-key.json
 ```
 
-In Kubecost, navigate to the settings page and click "update" for the "External Cloud Cost Configuration (GCP)" setting, then follow the remaining instructions found at the "Add Key" link:
+In Kubecost, sellect _Settings_ from the left navigation, and under External Cloud Cost Configuration (GCP), select _Update_, then follow the remaining instructions found at the "Add Key" link:
 
 ![GCP out-of-cluster key entry](https://raw.githubusercontent.com/kubecost/docs/main/images/gcp-out-of-cluster-config-wo-shell.png)
 
@@ -55,10 +55,9 @@ In Kubecost, navigate to the settings page and click "update" for the "External 
 
 ### Configuring using values.yaml (Recommended)
 
-We recommending providing the GCP details in the [values file](https://github.com/kubecost/cost-analyzer-helm-chart/blob/c10e9475b51612d36da8f04618174a98cc62f8fd/cost-analyzer/values.yaml#L572-L574)  to ensure they are retained during a upgrade or redeploy.
+It is recommended to provide the GCP details in the [values file](https://github.com/kubecost/cost-analyzer-helm-chart/blob/c10e9475b51612d36da8f04618174a98cc62f8fd/cost-analyzer/values.yaml#L572-L574)  to ensure they are retained during a upgrade or redeploy.
 
-Create a secret for the GCP service account key
-> Note: When managing the service account key as a Kubernetes secret, the secret must reference the service account key json file, and that file must be named `compute-viewer-kubecost-key.json`.
+Then create a secret for the GCP service account key:
 
 ```sh
 kubectl create secret generic gcp-secret -n kubecost --from-file=./compute-viewer-kubecost-key.json
@@ -67,6 +66,8 @@ kubectl create secret generic gcp-secret -n kubecost --from-file=./compute-viewe
 * Set `.Values.kubecostProductConfigs.projectID = <GCP Project ID that contains the BigQuery Export>`
 * Set `.Values.kubecostProductConfigs.gcpSecretName = <Name of the Kubernetes secret that contains the compute-viewer-kubecost-key.json file>`
 * Set `.Values.kubecostProductConfigs.bigQueryBillingDataDataset = <DATASET.TABLE_NAME that contains the billing export>`
+
+> **Note**: When managing the service account key as a Kubernetes secret, the secret must reference the service account key json file, and that file must be named `compute-viewer-kubecost-key.json`.
 
 ## Step 3: Label cloud assets
 
@@ -85,7 +86,7 @@ Container:  "kubernetes_container":  &lt;container>
 
 To use an alternative or existing label schema for GCP cloud assets, you may supply these in your [values.yaml](https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/values.yaml) under the "kubecostProductConfigs.labelMappingConfigs.\<aggregation\>\_external_label"
 
-> Note: Google generates special labels for GKE resources (e.g. "goog-gke-node", "goog-gke-volume"). Values with these labels are excluded from out-of-cluster costs because Kubecost already includes them as in-cluster assets. Thus, to make sure all cloud assets are included, we recommend installing Kubecost on each cluster where insights into costs are required.
+> **Note**: Google generates special labels for GKE resources (e.g. "goog-gke-node", "goog-gke-volume"). Values with these labels are excluded from out-of-cluster costs because Kubecost already includes them as in-cluster assets. Thus, to make sure all cloud assets are included, we recommend installing Kubecost on each cluster where insights into costs are required.
 
 ### Viewing project-level labels
 
