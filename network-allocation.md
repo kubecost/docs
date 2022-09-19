@@ -43,7 +43,7 @@ For traffic routed to addresses outside of your cluster but inside your VPC, Kub
 
 ## Cloud Provider Service Tagging
 
-When traffic is destined to a cloud providers service, the network traffic pod can tag the traffic with the relevant service name (e.g. AWS S3, Azure Storage, Google Cloud Storage).
+When traffic is directed towards a cloud providers service, the network traffic pod can tag the traffic with the relevant service name (e.g. AWS S3, Azure Storage, Google Cloud Storage).
 
 To enable this feature, set the following Helm values:
 
