@@ -23,7 +23,7 @@ This is the main Kubecost Assets dashboard. In the screenshot there are multiple
 
 Select the date range of the report by setting specific start and end dates, or using one of the preset options.
 
-## 2. *Aggregate by* filter
+## 2. Aggregate filter
 ![Aggregate by](https://raw.githubusercontent.com/kubecost/docs/main/images/assetsaggregateby.PNG)
 
 Here you can aggregate cost by native Kubernetes concepts. While selecting Single Aggregation, you will only be able to select one concept at a time. While selecting Multi Aggregation, you will be able to filter for multiple concepts at the same time. Assets will be by default aggregated by Service.
@@ -53,6 +53,7 @@ Directly next to the *Edit search parameters* icon are several additional icons 
 * Save/unsave report icon: Save or unsave your current report
 * Open saved report icon: Open a report that was previously saved using the Save report icon
 * Download CSV icon: Download your current report as a CSV file
+
 ## 5. Assets metrics table
 The assets metrics table displays your aggregate assets, with four columns to organize by.
 
