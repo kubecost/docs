@@ -172,7 +172,7 @@ Replace `${AthenaCURBucket}` and `${SpotDataFeedBucketName}` variables:</p>
          ],
          &quot;Resource&quot;: [
             &quot;arn:aws:s3:::${AthenaCURBucket}&quot;,
-            &quot;arn:aws:s3:::${AthenaCURBucket/*&quot;
+            &quot;arn:aws:s3:::${AthenaCURBucket}/*&quot;
          ]
       },
       {
@@ -209,7 +209,7 @@ Replace `${AthenaCURBucket}` and `${SpotDataFeedBucketName}` variables:</p>
 
 <p>On each sub account running kubecost, attach both of the following policies to the same role or user. Use a user if you intend to integrate via servicekey, and a role if via IAM annotation (See more below under Via Pod Annotation by EKS). The SpotDataAccess policy statement is optional if the spot data feed is configured (see “Setting up the Spot Data feed” step below).
 
-Replace `${AthenaCURBucket}` and `${SpotDataFeedBucketName}` variables:</p>
+Replace `${PayerAccountID}`, `${CurrentAccountID}`, and `${SpotDataFeedBucketName}` variables:</p>
 
 <pre><code>
 {
@@ -219,7 +219,7 @@ Replace `${AthenaCURBucket}` and `${SpotDataFeedBucketName}` variables:</p>
          &quot;Sid&quot;: &quot;AssumeRoleInPayerAccount&quot;,
          &quot;Effect&quot;: &quot;Allow&quot;,
          &quot;Action&quot;: &quot;sts:AssumeRole&quot;,
-         &quot;Resource&quot;: &quot;arn:aws:iam::${PayerAccountID}:role/KubecostRole-${This-account’s-id}&quot;
+         &quot;Resource&quot;: &quot;arn:aws:iam::${PayerAccountID}:role/KubecostRole-${CurrentAccountID}&quot;
       },
       {
          &quot;Sid&quot;: &quot;SpotDataAccess&quot;,
