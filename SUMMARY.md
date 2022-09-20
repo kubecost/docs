@@ -1,6 +1,19 @@
 # Table of contents
 
-* [Add Key](README.md)
+* [Welcome to the Docs!](README.md)
+
+## Group 1
+
+* [Page 1](group-1/page-1.md)
+
+## Setup
+
+* [Installation](setup/install.md)
+* [Helm Parameters](setup/helm-install-params.md)
+
+***
+
+* [Add Key](<README (1).md>)
 * [Advanced Reporting](advanced-reports.md)
 * [Installing Agent for Hosted Kubecost (Alpha)](agent.md)
 * [Installing in Air-gapped Environments](air-gapped.md)
@@ -51,12 +64,10 @@
 * [Creating a Google Service Account](google-service-account-thanos.md)
 * [Grafana Cloud Integration for Kubecost](grafana-cloud-integration.md)
 * [Guide: 1-click request sizing](guide-one-click-request-sizing.md)
-* [Helm Parameters](helm-install-params.md)
 * [High Availability Kubecost](high-availability.md)
 * [Welcome](index.md)
 * [Ingress Examples](ingress-examples.md)
 * [Installing Kubecost with Plural](install-on-plural.md)
-* [Installation](install.md)
 * [Installation Kubecost with Istio (Rancher)](istio-rancher.md)
 * [Kube-State-Metrics (KSM) Emission](ksm-metrics.md)
 * [AWS Multi-Cluster Storage Configuration](long-term-storage-aws.md)

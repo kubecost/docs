@@ -1,58 +1,33 @@
-# Add Key
+# Welcome to the Docs!
 
-You can apply your product key at any time within the product UI or during an install or upgrade process. More details on both options are provided below.
+## Welcome
 
-{% hint style="info" %}
-`kubecostToken` is a different concept from your product key and is used for managing trial access.
-{% endhint %}
+**Kubecost helps you monitor and manage cost and capacity in Kubernetes environments.** We integrate with your infrastructure to help your team track, manage, and reduce spend.
 
-## At install-time
+Below are frequently visited Kubecost documentation pages for both the [Commercial Kubecost product](http://kubecost.com) and [OpenCost](https://www.opencost.io/).
 
-Many Kubecost product configuration options can be specified at install-time, including your product key.
+In this guide, you’ll find everything you need to set up Kubecost for your team.
 
-### Option 1: Storing productkey in a secret
+### Quick Installation
 
-To create a secret you will need to create a JSON file called _productkey.json_ with the following format. Be sure to replace `<YOUR_PRODUCT_KEY>` with your Kubecost product key.
+Check out our [Installation options](https://guide.kubecost.com/hc/en-us/articles/4407601821207) to start monitoring and managing your spend in minutes.
 
-```javascript
-{ 
-    "key": "<YOUR_PRODUCT_KEY>"
-}
-```
+### Getting Started
 
-Run the following command to create the secret. Replace `<SECRET_NAME>` with a name for the secret (example: `productkeysecret`):
+[Troubleshooting installation](https://guide.kubecost.com/hc/en-us/articles/4407601830679)\
+[Configuring Kubecost](https://guide.kubecost.com/hc/en-us/articles/4407595947799)\
+[Understanding cost allocation](https://guide.kubecost.com/hc/en-us/articles/4407601807383)\
+[Cost monitoring best practices](http://blog.kubecost.com/blog/cost-monitoring/)
 
-```shell
-$ kubectl create secret generic <SECRET_NAME> -n kubecost --from-file=./productkey.json
-```
+### Advanced Configuration
 
-Update your [_values.yaml_](https://github.com/kubecost/cost-analyzer-helm-chart/blob/5eedab0433445a5b8e134113beb95f4598cd5e2d/cost-analyzer/values.yaml#L714-L717) to enable the product key and specify the secret name:
+[Allocating out of cluster costs (AWS)](https://guide.kubecost.com/hc/en-us/articles/4407596810519)\
+[Allocating out of cluster costs (Azure)](https://guide.kubecost.com/hc/en-us/articles/4407595936023)\
+[Allocating out of cluster costs (GCP)](https://guide.kubecost.com/hc/en-us/articles/4407601816087)\
+[AWS Spot feed integration](https://guide.kubecost.com/hc/en-us/articles/4407595947799#spot-nodes)
 
-* `kubecostProductConfigs.productKey.enabled = true`
-* `kubecostProductConfigs.productKey.secretname = <SECRET_NAME>`
+### Staying in the loop
 
-Run a `helm upgrade` to start using your product key.
+You can stay up to date with Kubecost by following releases on [GitHub](https://github.com/kubecost/cost-analyzer-helm-chart/releases).
 
-### Option 2: Specifying product key in _values.yaml_
-
-This specific parameter can be configured under `kubecostProductConfigs.productKey.key` in your [_values.yaml_](https://github.com/kubecost/cost-analyzer-helm-chart/blob/84dfbe4addedfee55b50af6ca44c1f62966d4457/cost-analyzer/values.yaml#L426).
-
-> **Note**: you must also set the `kubecostProductConfigs.productKey.enabled` config to `true` when using this option. That this will leave your secrets unencrypted in _values.yaml_. Use a Kubernetes secret as in the previous method to avoid this.
-
-## In product
-
-To apply your license key within the Kubecost UI, visit the Overview page and then select **Upgrade** in the page header.
-
-Next, select **Add Key** in the dialog menu shown below.
-
-You can then supply your Kubecost provided license key in the input box that is now visible.
-
-![Add key dialog](https://raw.githubusercontent.com/kubecost/docs/main/images/add-key-dialog.png)
-
-## Verification
-
-To verify that your key is properly supplied, visit the Settings UI to confirm the final digits are as expected:
-
-![image](https://user-images.githubusercontent.com/298359/111573440-c74c9c00-8767-11eb-842c-cfa18159d1c1.png)
-
-Edit this doc on [GitHub](https://github.com/kubecost/docs/blob/main/add-key.md)
+Contact us via email ([support@kubecost.com](mailto:support@kubecost.com)) or join us on [Slack](https://join.slack.com/t/kubecost/shared\_invite/zt-1dz4a0bb4-InvSsHr9SQsT\_D5PBle2rw) if you have questions!
