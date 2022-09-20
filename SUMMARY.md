@@ -8,8 +8,8 @@
 
 ## Setup
 
-* [Installation](setup/install.md)
-* [Helm Parameters](setup/helm-install-params.md)
+* [Installation](install.md)
+* [Helm Parameters](helm-install-params.md)
 
 ***
 
