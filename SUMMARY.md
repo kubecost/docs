@@ -2,14 +2,10 @@
 
 * [Welcome to the Docs!](README.md)
 
-## Group 1
-
-* [Page 1](group-1/page-1.md)
-
 ## Setup
 
-* [Installation](install.md)
-* [Helm Parameters](helm-install-params.md)
+* [Installation](setup/install/README.md)
+  * [Helm Parameters](setup/install/helm-install-params.md)
 
 ***
 
