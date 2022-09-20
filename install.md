@@ -6,6 +6,8 @@ To get started with Kubecost and OpenCost, **the recommended path is to** [**ins
 
 {% tabs %}
 {% tab title="Standard Features" %}
+Kubecost provides real-time cost visibility and insights for teams using Kubernetes, helping you continuously reduce your cloud costs.
+
 *   **Cost Allocation**
 
     Flexible, customizable cost breakdown and resource allocation for accurate showbacks, [chargebacks](https://blog.kubecost.com/blog/kubernetes-chargeback), and ongoing monitoring

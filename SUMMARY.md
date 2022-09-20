@@ -4,8 +4,8 @@
 
 ## Setup
 
-* [Installation](setup/install/README.md)
-  * [Helm Parameters](setup/install/helm-install-params.md)
+* [Installation](install.md)
+  * [Helm Parameters](helm-install-params.md)
 
 ***
 
