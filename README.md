@@ -8,8 +8,6 @@ Below are frequently visited Kubecost documentation pages for both the [Commerci
 
 In this guide, you’ll find everything you need to set up Kubecost for your team.
 
-``[`test link`](cloud-integration.md#cloud-integration-configurations)``
-
 ### Quick Installation
 
 Check out our [Installation options](https://guide.kubecost.com/hc/en-us/articles/4407601821207) to start monitoring and managing your spend in minutes.
