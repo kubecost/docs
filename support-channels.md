@@ -10,7 +10,7 @@ General support for Kubecost is provided via the following channels:
 
 ## Paid Support & SLAs
 
-We offer professional support options and SLAs with our Business & Enterprise plans. Standard support hours are 9:00 AM - 8:00 PM PST. We respond to all helpdesk tickets within 12 hours and all critical issues within 3 hours.
+We offer professional support options and SLAs with our Business & Enterprise plans. Standard support hours are 9:00 AM - 8:00 PM EST. We respond to all helpdesk tickets within 12 hours and all critical issues within 3 hours.
 
 [Contact us](https://www.kubecost.com/about/#contact-module-2) to learn more or to customize this offering.
 
