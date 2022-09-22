@@ -77,11 +77,6 @@ These following commands help to automate the following tasks:
 > **Note**: remember to replace `<YOUR_CLUSTER_NAME>` and `<AWS_REGION>` with your desired values
 
 ```
-export YOUR_CLUSTER_NAME=<YOUR-CLUSTER-NAME>
-export AWS_REGION=<YOUR-AWS-REGION>
-
-kubectl create ns kubecost
-
 eksctl create iamserviceaccount \
     --name kubecost-cost-analyzer \
     --namespace kubecost \
