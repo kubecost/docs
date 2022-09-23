@@ -40,30 +40,10 @@ az role definition create --verbose --role-definition @myrole.json
 Next, create an Azure Service Principal.
 
 ```shell
-az ad sp create-for-rbac --name "KubecostAccess" --role "KubecostRole" --scope "/subscriptions/YOUR_SUBSCRIPTION_ID" --sdk-auth true > my_credentials.json
+az ad sp create-for-rbac --name "KubecostAccess" --role "KubecostRole" --scope "/subscriptions/YOUR_SUBSCRIPTION_ID" --output json
 ```
 
-The newly created `my_credentials.json` file will contain the relevant configuration information.
-
-## Azure billing region, offer durable ID, and currency
-
-Kubecost supports querying the Azure APIs for cost data based on the region, offer durable ID, and currency defined in your Microsoft Azure offer.
-
-Those properties are configured with the following helm values:
-
-* `kubecostProductConfigs.azureBillingRegion`
-* `kubecostProductConfigs.azureOfferDurableID`
-* `kubecostProductConfigs.currencyCode`
-
-Be sure to verify your billing information with Microsoft and update the above Helm values to reflect your bill to country, subscription offer durable id/number, and currency.
-
-The following Microsoft documents are a helpful reference:
-
-* [Microsoft Azure Offer Details](https://azure.microsoft.com/en-us/support/legal/offer-details/)
-* [Azure Pricing FAQ](https://azure.microsoft.com/en-us/pricing/faq/)
-* [Geographic availability and currency support for the commercial marketplace](https://docs.microsoft.com/en-us/azure/marketplace/marketplace-geo-availability-currencies)
-* [Azure Portal > Cost Management + Billing > Billing Account Properties](https://portal.azure.com/#view/Microsoft_Azure_GTM/ModernBillingMenuBlade/~/Properties)
-* [Understand Cost Management data](https://docs.microsoft.com/en-us/azure/cost-management-billing/costs/understand-cost-mgt-data)
+Keep this information which is used in the service-key.json below.
 
 ## Supplying Azure Service Principal details to Kubecost
 
@@ -76,6 +56,7 @@ Create a file called [`service-key.json`](https://github.com/kubecost/poc-common
     "subscriptionId": "<Azure Subscription ID>",
     "serviceKey": {
         "appId": "<Azure AD App ID>",
+        "displayName": "KubecostAccess",
         "password": "<Azure AD Client Secret>",
         "tenant": "<Azure AD Tenant ID>"
     }
@@ -121,6 +102,26 @@ helm upgrade --install kubecost kubecost/cost-analyzer -n kubecost \
   --set kubecostProductConfigs.currencyCode=USD
   --set kubecostProductConfigs.createServiceKeySecret=true
 ```
+
+## Azure billing region, offer durable ID, and currency
+
+Kubecost supports querying the Azure APIs for cost data based on the region, offer durable ID, and currency defined in your Microsoft Azure offer.
+
+Those properties are configured with the following helm values:
+
+* `kubecostProductConfigs.azureBillingRegion`
+* `kubecostProductConfigs.azureOfferDurableID`
+* `kubecostProductConfigs.currencyCode`
+
+Be sure to verify your billing information with Microsoft and update the above Helm values to reflect your bill to country, subscription offer durable id/number, and currency.
+
+The following Microsoft documents are a helpful reference:
+
+* [Microsoft Azure Offer Details](https://azure.microsoft.com/en-us/support/legal/offer-details/)
+* [Azure Pricing FAQ](https://azure.microsoft.com/en-us/pricing/faq/)
+* [Geographic availability and currency support for the commercial marketplace](https://docs.microsoft.com/en-us/azure/marketplace/marketplace-geo-availability-currencies)
+* [Azure Portal > Cost Management + Billing > Billing Account Properties](https://portal.azure.com/#view/Microsoft_Azure_GTM/ModernBillingMenuBlade/~/Properties)
+* [Understand Cost Management data](https://docs.microsoft.com/en-us/azure/cost-management-billing/costs/understand-cost-mgt-data)
 
 ## Additional help
 
