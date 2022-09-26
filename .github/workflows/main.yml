@@ -11,6 +11,9 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: ghcr.io/kubecost/docsbuilder:latest
+      credentials:
+        username: ${{ github.actor }}
+        password: ${{ secrets.github_token }}
     steps: 
     - run: sh run.sh
       working-directory: /app
