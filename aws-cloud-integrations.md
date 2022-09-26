@@ -422,7 +422,7 @@ These values can either be set from the kubecost frontend or via .Values.kubecos
 
 > **Note**: Make sure use only underscore as a delimiter if needed for tables and views, using dash will not work even though you might be able to create it see [docs](https://docs.aws.amazon.com/athena/latest/ug/tables-databases-columns-names.html).
 
-* If you are using a multi-account setup, you will also need to set `.Values.kubecostProductConfigs.masterPayerARN ` to the AWS resource number (ARN) of the role in the masterpayer account, e.g. `arn:aws:iam::530337586275:role/KubecostRole`.
+* If you are using a multi-account setup, you will also need to set `.Values.kubecostProductConfigs.masterPayerARN ` to the Amazon Resource Number (ARN) of the role in the masterpayer account, e.g. `arn:aws:iam::530337586275:role/KubecostRole`.
 
 ## Troubleshooting
 
