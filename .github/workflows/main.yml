@@ -10,10 +10,7 @@ jobs:
   docs-docker:
     runs-on: ubuntu-latest
     container:
-      image: ghcr.io/kubecost/docbuilder:latest
-      credentials:
-        username: teevans
-        password: ${{ secrets.REGISTRY_TOKEN }}
+      image: ghcr.io/kubecost/docsbuilder:latest
     steps: 
     - run: sh run.sh
       working-directory: /app
