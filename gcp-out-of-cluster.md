@@ -41,24 +41,18 @@ gcloud projects add-iam-policy-binding $PROJECT_ID --member serviceAccount:compu
 
 Once you've created the GCP service account, you can connect it to Kubecost in one of two ways:
 
+### Connect using Workload Identity federation (recommended)
+You can set up an [IAM policy binding](https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity#authenticating_to) to bind a Kubernetes service account to your GCP service account.
+```sh
+gcloud iam service-accounts add-iam-policy-binding compute-viewer-kubecost@$PROJECT_ID.iam.gserviceaccount.com --role roles/iam.workloadIdentityUser --member serviceAccount:compute-viewer-kubecost.svc.id.goog[NAMESPACE/KSA_NAME]
+```
+where `NAMESPACE` and `KSA_NAME` are the namespace Kubecost is installed into and the name of the service account attributed to the Kubecost deployment
+
 ### Connect using a service account key
 Create a service account key:
 ```sh
 gcloud iam service-accounts keys create ./compute-viewer-kubecost-key.json --iam-account compute-viewer-kubecost@$PROJECT_ID.iam.gserviceaccount.com
 ```
-
-### Connect using Workload Identity federation
-Instead of manually setting up a service account key, you can use an [IAM policy binding](https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity#authenticating_to) to bind a Kubernetes service account to your GCP service account.
-```sh
-gcloud iam service-accounts add-iam-policy-binding compute-viewer-kubecost@$PROJECT_ID.iam.gserviceaccount.com --role roles/iam.workloadIdentityUser --member serviceAccount:compute-viewer-kubecost.svc.id.goog[NAMESPACE/KSA_NAME]
-```
-where `NAMESPACE` and `KSA_NAME` are the namespace Kubecost is installed into and the name of the service account attributed to the Kubecost deployment 
-
-Annotate the service account attributed to the Kubecost deployment:
-```sh
-kubectl annotate serviceaccount KSA_NAME --namespace NAMESPACE iam.gke.io/gcp-service-account=compute-viewer-kubecost@$PROJECT_ID.iam.gserviceaccount.com
-```
-where `NAMESPACE` and `KSA_NAME` are the namespace Kubecost is installed into and the name of the service account attributed to the Kubecost deployment
 
 Once the GCP service account has been connected, set up the remaining configuration parameters:
 
@@ -69,7 +63,7 @@ In Kubecost, select _Settings_ from the left navigation, and under External Clou
 
 <a name="bq-name"></a>**BigQuery dataset** requires a BigQuery dataset prefix (e.g. billing_data) in addition to the BigQuery table name. A full example is `billing_data.gcp_billing_export_v1_018AIF_74KD1D_534A2`
 
-<a name="bq-name"></a>**Service key** If you've created a service account key, copy the contents of the `compute-viewer-kubecost-key.json` file and paste them here (be careful with this!). If you've connected using Workload Identity federation, you should leave this box empty.
+<a name="bq-name"></a>**Service key** If you've connected using Workload Identity federation, you should leave this box empty. If you've created a service account key, copy the contents of the `compute-viewer-kubecost-key.json` file and paste them here (be careful with this!)
 
 ### Configuring using values.yaml (Recommended)
 
@@ -78,10 +72,11 @@ It is recommended to provide the GCP details in the [values file](https://github
 * Set `.Values.kubecostProductConfigs.projectID = <GCP Project ID that contains the BigQuery Export>`
 * Set `.Values.kubecostProductConfigs.bigQueryBillingDataDataset = <DATASET.TABLE_NAME that contains the billing export>`
 
-If you've connected using Workload Identity federation, no additional setup is required.
+If you've connected using Workload Identity federation:
+* Set `.Values.nodeSelector = iam.gke.io/gke-metadata-server-enabled: "true"` to update the Kubecost deployment to run on nodes that use Workload Identity
+* Set `.Values.serviceAccount.annotations = iam.gke.io/gcp-service-account: compute-viewer-kubecost@$PROJECT_ID.iam.gserviceaccount.com` where $PROJECT_ID defined in the `gcloud` commands above
 
-Otherwise, create a secret for the GCP service account key you've created:
-
+Otherwise, if you've connected using a service account key, create a secret for the GCP service account key you've created:
 ```sh
 kubectl create secret generic gcp-secret -n kubecost --from-file=./compute-viewer-kubecost-key.json
 ```
