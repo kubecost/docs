@@ -33,4 +33,4 @@ in [values.yaml](https://github.com/kubecost/cost-analyzer-helm-chart/blob/maste
 
 Edit this doc on [GitHub](https://github.com/kubecost/docs/blob/main/context-switcher.md)
 
-<!--- {"article":"4407595970712","section":"4402815636375","permissiongroup":"1500001277122"} --->
+<!--- {"article":"","section":"4402815636375","permissiongroup":"1500001277122"} --->
