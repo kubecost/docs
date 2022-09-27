@@ -48,6 +48,8 @@ gcloud iam service-accounts add-iam-policy-binding compute-viewer-kubecost@$PROJ
 ```
 where `NAMESPACE` and `KSA_NAME` are the namespace Kubecost is installed into and the name of the service account attributed to the Kubecost deployment
 
+You will also need to enable the [IAM Service Account Credentials API](https://cloud.google.com/iam/docs/reference/credentials/rest) in the gcloud project.
+
 ### Connect using a service account key
 Create a service account key:
 ```sh
