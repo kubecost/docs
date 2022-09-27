@@ -8,9 +8,9 @@ Integration with the Cloud Service Providers via their respective billing APIs a
 - [GCP](https://cloud.google.com/billing/docs/how-to/export-data-bigquery)
 - [Azure](https://docs.microsoft.com/en-us/azure/cost-management-billing/costs/tutorial-export-acm-data?tabs=azure-portal)
 
-> GCP users should create [detailed billing export](https://cloud.google.com/billing/docs/how-to/export-data-bigquery-tables#detailed-usage-cost-data-schema) to gain access to all of Kubecost cloud integration features including [reconciliation](https://github.com/kubecost/docs/blob/main/cloud-integration.md#reconciliation)
+> **Note**: GCP users should create [detailed billing export](https://cloud.google.com/billing/docs/how-to/export-data-bigquery-tables#detailed-usage-cost-data-schema) to gain access to all of Kubecost cloud integration features including [reconciliation](https://github.com/kubecost/docs/blob/main/cloud-integration.md#reconciliation)
 
-## Cloud Processes
+## Cloud processes
 As indicated above, setting up a cloud integration with your Cloud Service Provider allows Kubecost to pull in additional billing data. The two processes that incorporate this information are Reconciliation and Cloud Usage.
 
 ### Reconciliation
@@ -28,12 +28,15 @@ Note: The reconciled Assets will inherit the labels from the corresponding items
 The Cloud Usage process allows Kubecost to pull in out-of-cluster cloud spend from your Cloud Service Provider's billing data. This includes any services run by the Cloud Service Provider in addition to compute resources outside of clusters monitored by Kubecost. Additionally, by labeling these Cloud Usage, their cost can be distributed to Allocations as external costs. This can help teams get a better understanding of the proportion of out-of-cluster cloud spend that their in-cluster usage is dependant on. CloudUsages become available as soon as they appear in the billing data, with the 6 to 24 hour delay mentioned above, and are updated as they become more complete.
 
 ## Cloud Integration Configurations
-The Kubecost helm chart provides values that can enable or disable each cloud process on the deployment once a cloud integration has been set up. Turning off either of these processes will disable all the benefits provided by them.
+The Kubecost Helm Chart provides values that can enable or disable each cloud process on the deployment once a cloud integration has been set up. Turning off either of these processes will disable all the benefits provided by them.
 
 Value | Default | Description
 --: | :--: | :--
 `.Values.kubecostModel.etlAssetReconciliationEnabled` | true | Enables Reconciliation processes and endpoints. This Helm value corresponds to the `ETL_ASSET_RECONCILIATION_ENABLED` environment variable.
 `.Values.kubecostModel.etlCloudUsage` | true | Enables Cloud Usage processes and endpoints. This Helm value corresponds to the `ETL_CLOUD_USAGE_ENABLED` environment variable.
+`.Values.kubecostModel.etlCloudRefreshRateHours` | 6 | The inteval at which the run loop executes for both Reconciliation and Cloud Usage. Reducing this value will decrease resource usage and billing data access costs, but will result in a larger delay in the most current data being displayed. This Helm value corresponds to the `ETL_CLOUD_REFRESH_RATE_HOURS` environment variable.
+`.Values.kubecostModel.etlCloudQueryWindowDays` | 7 | The maximum number of days that will be queried from a cloud integration in a single query. Reducing this value can help to reduce memory usage during the build process, but will also result in more queries which can drive up billing data access costs. This Helm value  corresponds to the `ETL_CLOUD_QUERY_WINDOW_DAYS` environment variable.
+`.Values.kubecostModel.etlCloudRunWindowDays` | 3 | The number of days into the past each run loop will query. Reducing this value will reduce memory load, however it can cause kubecost to miss updates to the CUR, if this has happend the day will need to be manually repaired. This Helm value corresponds to the `ETL_CLOUD_RUN_WINDOW_DAYS` environment variable.
 `.Values.kubecostModel.cloudAssetsExcludeProviderID` | false | **This is a BETA feature, support may be dropped in future releases.** Enabling this flag pre-aggregates CloudUsage at the service and user label level. This gives higher performance build speeds and improved asset query times at the aggregated level. This feature is meant for users with extrememly large CURs only. For insights below the aggregated level, Athena can queried dirrectly by clicking on the aggregated line item. This query has filters for Provider, Account, Service and Label of the line item being examined. This highly filtered query will take longer to load, around 20-30 seconds. Drilling down below the aggregate level uses ad-hoc queries to Athena which have a fixed cost that is partially based on the size of the dataset being queried. Since this feature is meant for users with larger CURs this cost can accumulate. To get a better idea of your per query check the Athena rate for your region [here](https://aws.amazon.com/athena/pricing/), and view the ammount of data being scanned per query in the Athena dashboard. This Helm value corresponds to the `CLOUD_ASSETS_EXCLUDE_PROVIDER_ID` environment variable. Currently only available on AWS. 
 `.Values.kubecostModel.etlUseUnblendedClost` | false | **This is a BETA feature, support may be dropped in future releases.** Enabling this flag makes Cloud Usage and Reconciliation use unblended cost for all line items in the CUR including those with savings plans and RI's applied to them. This will cause the amortized upfront costs of these resources to not appear in Kubecost and may cause some assets to have a $0 value if their cost was entirely upfont. This Helm value corresponds to the `ETL_USE_UNBLENDED_COST` environment variable. Currently only available on AWS.
 
@@ -46,29 +49,29 @@ The ETL contains a Map of Cloud Stores, each of which represents an integration 
 
 The `ProviderKey` can be used as an argument for the endpoints for Cloud Usage and Reconciliation, to indicate that the specified operation should only be done on a single Cloud Store rather than all of them, which is the default behavior. Additionally, the Cloud Store keeps track of the Status of the Cloud Connection Diagnostics for each of the Cloud Usage and Reconciliation. The Cloud Connection Status is meant to be used as a tool in determining the health of the Cloud Connection that is the basis of each Cloud Store. The Cloud Connection Status has various failure states that are meant to provide actionable information on how to get your Cloud Connection running properly. These are the Cloud Connection Statuses:
 
- - INITIAL_STATUS is the zero value of Cloud Connection Status and means that cloud connection is untested. Once
+ - _INITIAL_STATUS_: The zero value of Cloud Connection Status and means that cloud connection is untested. Once
 Cloud Connection Status has been changed and it should not return to this value. This status is assigned on creation
 to the Cloud Store
 
-- MISSING_CONFIGURATION means that Kubecost has not detected any method of Cloud Configuration. This value is only
+- _MISSING_CONFIGURATION_: Kubecost has not detected any method of Cloud Configuration. This value is only
 possible on the first Cloud Store that is created as a wrapper for the open source cloud provider. This status
 is assigned during failures in Configuration Retrieval.
 
-- INCOMPLETE_CONFIGURATION means that Cloud Configuration is missing required values to connect to the cloud provider. This status is assigned during failures in Configuration Retrieval.
+- _INCOMPLETE_CONFIGURATION_: Cloud Configuration is missing required values to connect to the cloud provider. This status is assigned during failures in Configuration Retrieval.
 
-- FAILED_CONNECTION: means that all required Cloud Configuration values are filled in, but a connection with the
+- _FAILED_CONNECTION_: All required Cloud Configuration values are filled in, but a connection with the
 Cloud Provider cannot be established. This is indicative of a typo in one of the Cloud Configuration values or an
 issue in how the connection was set up in the Cloud Provider's Console. The assignment of this status varies
 between Providers but should happen if there if an error is thrown when an interaction with an object from
 from the Cloud Service Provider's SDK occurs.
 
-- MISSING_DATA:  means that the Cloud Integration is properly configured, but the cloud provider is not returning
+- _MISSING_DATA_: The Cloud Integration is properly configured, but the cloud provider is not returning
 billing/cost and usage data. This status is indicative of the billing/cost and usage data export of the Cloud Provider
 being incorrectly set up or the export being set up in the last 48 hours and not having started populating data yet.
 This status is set when a query has been successfully made but the results come back empty. If the cloud provider,
 already has a SUCCESSFUL_CONNECTION status then this status should not be set, because this indicates that the specific query made may have been empty.
 
-- SUCCESSFUL_CONNECTION: means that the Cloud Integration is properly configured and returning data. This status is set on any successful query where data is returned
+- _SUCCESSFUL_CONNECTION_: The Cloud Integration is properly configured and returning data. This status is set on any successful query where data is returned
 
 After starting or restarting Cloud Usage or Reconciliation two subprocesses are started, one which fills in historic data over the coverage of the Daily CloudUsage and Asset Store respectively and one which runs periodically, on a predefined interval, to collect and process new cost and usage data as it is made available by the Cloud Service Provider. The ETL's status endpoint contains a `cloud` object that provides information about each Cloud Store including the Cloud Connection Status and diagnostic information about Cloud Usage and Reconciliation. The diagnostic items on the Cloud Usage and Reconciliation are:
 
