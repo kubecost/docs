@@ -12,7 +12,7 @@ jobs:
     container:
       image: ghcr.io/kubecost/docsbuilder:latest
       env:
-          GITHUB_TOKEN: ${{ github.token }}
+          GH_PAT: ${{ secrets.gh_pat }}
       credentials:
         username: ${{ github.actor }}
         password: ${{ secrets.github_token }}
