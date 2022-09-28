@@ -1,9 +1,8 @@
 root: ./
 
 ​structure:  
-    readme: getting-started.md
     summary: SUMMARY.md​
 
 redirects:  
-    hc/en-us/articles/8135370079511-Asset-Diff-API: asset-diff
-    hc/en-us/articles/8135370079511: asset-diff
+    hc/en-us/articles/8135370079511-Asset-Diff-API: asset-diff.md
+    hc/en-us/articles/8135370079511: asset-diff.md
