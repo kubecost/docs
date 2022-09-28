@@ -20,6 +20,10 @@ http://<kubecost-address>/model/savings/requestSizingV2
 
 | Name | Type | Description |
 |------|------|-------------|
+| `algorithmCPU` | string | The algorithm to be used to calculate CPU recommendations based on historical CPU usage data. Options are `max` and `quantile`. Max recommendations are based on the maximum-observed usage in `window`. Quantile recommendations are based on a quantile of observed usage in `window` (requires the `qCPU` parameter to set the desired quantile).
+| `algorithmRAM` | string | Like `algorithmCPU`, but for RAM recommendations.
+| `qCPU` | float in the range (0, 1] | The desired quantile to base CPU recommendations on. Only used if `algorithmCPU=quantile`. Note: a quantile of `0.95` is the same as a 95th percentile.
+| `qRAM` | float in the range (0, 1] | Like `qCPU`, but for RAM recommendations.
 | `targetCPUUtilization` | float in the range (0,1] | An ratio of headroom on the base recommended CPU request. If the base recommendation is 100 mCPU and this parameter is `0.8`, the recommended CPU request will be `100 / 0.8 = 125` mCPU. Defaults to `0.7`. Inputs that fail to parse (see https://pkg.go.dev/strconv#ParseFloat) will default to `0.7`.|
 | `targetRAMUtilization` | float in the range (0,1] | Calculated like CPU. |
 | `window` | string | Required parameter. Duration of time over which to calculate usage. Supports days before the current time in the following format: `3d`. See the [Allocation API documentation](https://github.com/kubecost/docs/blob/main/allocation.md#querying) for more a more detailed explanation of valid inputs to `window`. |
@@ -41,7 +45,7 @@ curl -G \
 
 ## Recommendation methodology
 
-The "base" recommendation is calculated from the maximum observed usage of each
+The "base" recommendation is calculated from the observed usage of each
 resource per unique container _spec_ (e.g. a 2-replica, 3-container Deployment
 will have 3 recommendations: one for each container spec).
 
@@ -49,7 +53,7 @@ Say you have a single-container Deployment with two replicas: A and B.
 - A's container had peak usages of 120 mCPU and 300 MiB of RAM.
 - B's container had peak usages of 800 mCPU and 120 MiB of RAM.
 
-The base recommendation for the Deployment's container will be 800 mCPU and 300
+The max algorithm recommendation for the Deployment's container will be 800 mCPU and 300
 MiB of RAM. Overhead will be added to the base recommendation according to the
 target utilization parameters as described above.
 
