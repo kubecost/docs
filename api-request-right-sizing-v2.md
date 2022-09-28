@@ -57,4 +57,4 @@ target utilization parameters as described above.
 
 See [v1 docs](https://github.com/kubecost/docs/blob/main/api-request-right-sizing.md#savings-projection-methodology).
 
-<!--- {"article":"4407595919895","section":"4402829033367","permissiongroup":"1500001277122"} --->
+<!--- {"article":"","section":"4402829033367","permissiongroup":"1500001277122"} --->

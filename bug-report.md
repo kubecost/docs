@@ -1,9 +1,9 @@
-Capture a bug report
+Capture a Bug Report
 ====================
 
 The Kubecost bug report feature captures relevant product configuration data and diagnostic logs for reviewing an active Kubecost deployment.
 
-To capture a bug report: visit __Settings__, scroll to the bottom, and select __CAPTURE BUG REPORT__.
+To capture a bug report: visit __Settings__, scroll to the bottom, and select __Capture bug report__.
 
 ![Bug report button in setings](https://raw.githubusercontent.com/kubecost/docs/main/images/bug-report.png)
 

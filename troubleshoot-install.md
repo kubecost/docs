@@ -116,8 +116,6 @@ If you are unable to successfully retrieve your config file from this /model end
 2. View the status of all Prometheus and Kubecost pods in this cluster's deployment to determine if any container are not in a `Ready` or `Completed` state. When performing the default Kubecost install this can be completed with `kubectl get pods -n kubecost`. All pods should be either Running or Completed. You can run `kubectl describe` on any pods not currently in this state.
 3. Finally, view pod logs for any pod that is not in the Running or Completed state to find a specific error message.
 
-Please contact us at support@kubecost.com or on [Slack](https://join.slack.com/t/kubecost/shared_invite/zt-1dz4a0bb4-InvSsHr9SQsT_D5PBle2rw) at any point with questions.
-
 ## Issue: Unable to load app
 
 If all Kubecost pods are running and you can connect / port-forward to the kubecost-cost-analyzer pod but none of the app's UI will load, we recommend testing the following:
