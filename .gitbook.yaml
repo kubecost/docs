@@ -6,3 +6,5 @@ root: ./
 redirects:  
     hc/en-us/articles/8135370079511-Asset-Diff-API: asset-diff.md
     hc/en-us/articles/8135370079511: asset-diff.md
+    8135370079511-Asset-Diff-API: asset-diff.md
+    8135370079511: asset-diff.md
