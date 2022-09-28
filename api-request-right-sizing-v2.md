@@ -20,7 +20,7 @@ http://<kubecost-address>/model/savings/requestSizingV2
 
 | Name | Type | Description |
 |------|------|-------------|
-| `algorithmCPU` | string | The algorithm to be used to calculate CPU recommendations based on historical CPU usage data. Options are `max` and `quantile`. Max recommendations are based on the maximum-observed usage in `window`. Quantile recommendations are based on a quantile of observed usage in `window` (requires the `qCPU` parameter to set the desired quantile).
+| `algorithmCPU` | string | The algorithm to be used to calculate CPU recommendations based on historical CPU usage data. Options are `max` and `quantile`. Max recommendations are based on the maximum-observed usage in `window`. Quantile recommendations are based on a quantile of observed usage in `window` (requires the `qCPU` parameter to set the desired quantile). Defaults to `max`.
 | `algorithmRAM` | string | Like `algorithmCPU`, but for RAM recommendations.
 | `qCPU` | float in the range (0, 1] | The desired quantile to base CPU recommendations on. Only used if `algorithmCPU=quantile`. Note: a quantile of `0.95` is the same as a 95th percentile.
 | `qRAM` | float in the range (0, 1] | Like `qCPU`, but for RAM recommendations.
@@ -36,6 +36,9 @@ http://<kubecost-address>/model/savings/requestSizingV2
 KUBECOST_ADDRESS='http://localhost:9090/model'
 
 curl -G \
+  -d 'algorithmCPU=quantile' \
+  -d 'qCPU=0.95' \
+  -d 'algorithmRAM=max' \
   -d 'targetCPUUtilization=0.8' \
   -d 'targetRAMUtilization=0.8' \
   -d 'window=3d' \
