@@ -6,10 +6,7 @@
 
 * [Installation](install.md)
   * [Helm Parameters](helm-install-params.md)
-
-## Frequently Asked Questions
-
-* [Page 1](frequently-asked-questions/page-1.md)
+* [Frequently Asked Questions](setup/frequently-asked-questions.md)
 
 ***
 
