@@ -6,6 +6,7 @@
 
 * [Installation](install.md)
   * [Helm Parameters](helm-install-params.md)
+* [Frequently Asked Questions](setup/frequently-asked-questions.md)
 
 ***
 
@@ -95,8 +96,8 @@
 * [Deploy Kubecost Staging Builds](staging.md)
 * [Cost Analyzer Persistent Volume](storage.md)
 * [Getting Support](support-channels.md)
-* [Thanos Upgrade](thanos-upgrade.md)
 * [Troubleshooting](troubleshoot-install.md)
+* [Thanos Upgrade](thanos-upgrade.md)
 * [User Management - SSO/SAML/RBAC\*](user-management.md)
 * [User Metrics](user-metrics.md)
 * [v1.94+ TurndownSchedule Migration Guide](v1-94-turndown-schedule-migration-guide.md)
