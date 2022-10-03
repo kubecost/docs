@@ -6,7 +6,7 @@ Kubecost can run on clusters with mixed Linux and Windows nodes. The Kubecost po
 
 ## Deployment
 
-When using a helm install, this can be done simply with:
+When using a Helm install, this can be done simply with:
 
 ```sh
 helm install kubecost \
