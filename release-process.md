@@ -4,13 +4,23 @@ A Kubecost Release is a snapshot of the source, build output, artifacts, and oth
 
 ## Production releases 
 
-* Production releases are scheduled for the 2nd and 4th Tuesday of every month.
+* Production releases are scheduled for the first Tuesday of every month.
 * Patch releases are pushed as needed between scheduled releases.
 * Release notes published [here](https://kubecost.com/releases).
 * Production releases are always generated from Master branches.  
 * In each production release, we update each image version plus our helm chart version in lock step. 
 * Historically we average one patch release between minor releases.
 * You can target an older release of the Kubecost pod by setting `imageVersion` to the desired value, e.g. ` prod-1.63.1`
+
+## Release candidate (RC) builds
+
+* Release candidates are produced between production releases for early testing
+* To pick up a release candidate, add `--devel` to your helm install/upgrade instructions. For example:
+
+```
+helm install kubecost kubecost/cost-analyzer --namespace kubecost --devel
+```
+
 
 ## Staging releases
 

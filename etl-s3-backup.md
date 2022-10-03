@@ -1,5 +1,10 @@
 # ETL S3 Backup
-When the ETL pipeline collects data, it stores both daily and hourly (if configured) binary on a configured storage. This defaults to a PV based disk storage, but can be configured to use S3 instead using the following steps:
+
+> Note: durable storage functionality is part of Kubecost Enterprise
+
+When the ETL pipeline collects data, it stores both daily and hourly (if configured) cost metrics on a configured storage. This defaults to a persistent volume based disk storage, but can be configured to use external durable storage.
+
+This feature can be configured to use S3 with the following steps:
 
 ### Create a Secret for S3 Storage
 This secret should follow the configuration layout documented for Thanos here: https://thanos.io/v0.21/thanos/storage.md/#s3. For reference, here's the schema:

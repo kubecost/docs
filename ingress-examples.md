@@ -37,7 +37,7 @@ Here is a [second basic auth example](https://kubernetes.github.io/ingress-nginx
 
 ## Non-root path example
 
-Note that when deploying *Grafana* on a non-root url, you also need to update your grafana.ini to reflect this. [More info](https://github.com/kubecost/cost-analyzer-helm-chart/blob/cae42c28e12ecf8f1ad13ee17be8ce6633380b96/cost-analyzer/values.yaml#L335-L339).
+Note that when deploying *Grafana* on a non-root URL, you also need to update your grafana.ini to reflect this. [More info](https://github.com/kubecost/cost-analyzer-helm-chart/blob/cae42c28e12ecf8f1ad13ee17be8ce6633380b96/cost-analyzer/values.yaml#L335-L339).
 
 ```
 apiVersion: networking.k8s.io/v1beta1
@@ -63,3 +63,31 @@ spec:
           serviceName: kubecost-cost-analyzer # should be configured if another helm name or service address is used 
           servicePort: 9090
 ```
+
+
+## ALB Example
+
+Once an AWS Load Balancer Controller is installed, you can use the following Ingress resource manifest pointed at the kubecost-cost-analyzer service: 
+
+
+```
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: kubecost-alb-ingress
+  annotations:  
+    kubernetes.io/ingress.class: alb
+    alb.ingress.kubernetes.io/target-type: ip
+    alb.ingress.kubernetes.io/scheme: internet-facing
+spec:
+  rules:
+    - http:
+        paths:
+        - path: /
+          pathType: Prefix
+          backend:
+            service:
+              name: kubecost-cost-analyzer
+              port:
+                number: 9090
+```                

@@ -2,7 +2,7 @@ To enable 90+ days of data retention in Kubecost, we recommend deploying with du
 
 **Note:** This feature today requires an Enterprise license.
 
-## Option A: In cluster storage (Postgres)  
+## Option A: In cluster storage (Postgres)  -- DEPRECATED
 
 To enable Postgres-based long-term storage, complete the following:
 

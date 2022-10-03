@@ -14,7 +14,7 @@ In order to create a Google service account for use with Thanos:
 ![image](https://user-images.githubusercontent.com/334480/66667856-faf5cf00-ec21-11e9-817d-65c2dad92af4.png)
 
 #### Press `Create`.
-You should now be at the `Service account permissions (optional)` screen. Click inside the `Role` box, and set the first entry to **Storage Object Creator**. Click the `+ Add Another Role` and set the second  entry to **Storage Object Viewer**.
+You should now be at the `Service account permissions (optional)` screen. Click inside the `Role` box, and set the first entry to **Storage Object Creator**. Click the `+ Add Another Role` and set the second entry to **Storage Object Viewer**.
 
 ![image](https://user-images.githubusercontent.com/334480/66667955-2ed0f480-ec22-11e9-90cb-b160b8170aa4.png)
 

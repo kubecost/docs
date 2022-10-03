@@ -2,7 +2,7 @@
 
 ## Summary
 
-Kubecost alerts allow teams to receive updates on real-time Kubernetes spend. They are configurable via the Kubecost UI or via Helm values. This resource gives an overview of how to configure Kubecost email and Slack alerts using [Kubecost helm chart values](https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/values.yaml).
+Kubecost alerts allow teams to receive updates on real-time Kubernetes spend. They are configurable via the Kubecost UI or Helm values. This resource gives an overview of how to configure Kubecost email and Slack alerts using [Kubecost helm chart values](https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/values.yaml).
   
 
 As of v1.72.0, Kubecost supports four types of notifications:
@@ -13,7 +13,7 @@ As of v1.72.0, Kubecost supports four types of notifications:
 
  3. [Spend Change](#type-spend-change) -- sends an email and/or Slack alert reporting unexpected spend increases relative to moving averages
 
- 4. [Beta] [Efficiency](#type-efficiency) -- detect when a Kubernetes tenant is operating below a target cost efficiency threshold
+ 4. [Beta] [Efficiency](#type-efficiency) -- detect when a Kubernetes tenant is operating below a target cost-efficiency threshold
 
  5. [Kubecost Health Diagnostic](#type-kubecost-health-diagnostic) -- used for production monitoring for the health of Kubecost itself
  
@@ -54,6 +54,8 @@ In addition to `globalSlackWebhookUrl` and `globalAlertEmails` fields, every ale
 
 ### Type: Recurring Update
 
+Sends a recurring email and/or Slack alert with a summary report of cost and efficiency metrics. 
+
 Required parameters:
 
 - `type: recurringUpdate`
@@ -79,7 +81,7 @@ Required parameters (by individual namespace):
 
 - `type: recurringUpdate`
 - `aggregation: namespace`
-- `filter: <value>` -- configurable, accepts a single namespace name (comma separated values unsupported)
+- `filter: <value>` -- configurable, accepts a single namespace name (comma-separated values unsupported)
 - `window: 7d`
 
 Example Helm values.yaml:
@@ -105,7 +107,7 @@ Example Helm values.yaml:
 
 > Note: this feature is currently in Beta
 
-Alert when Kubernetes tenants, e.g. namespaces or label sets, are running below defined cost efficiency thresholds.
+Alert when Kubernetes tenants, e.g. namespaces or label sets, are running below defined cost-efficiency thresholds.
 
 Required parameters:
 
@@ -114,11 +116,11 @@ Required parameters:
 - `aggregation: <agg-parameter>` -- configurable, accepts all aggregations supported by the [aggregated cost model API](https://github.com/kubecost/docs/blob/2ea9021e8530369d53184ea5382b2e4c080bb426/allocation-api.md#aggregated-cost-model-api)
 - `window: <N>d` number of days for measuring efficiency
 
-Optional paremeters:
-- `filter: <value>` -- limit the aggregations that this alert will cover, accepts comma separated values
-- `spendThreshold` represents a minimal spend threshold for alerting
+Optional parameters:
+- `filter: <value>` -- limit the aggregations that this alert will cover, accepts comma-separated values
+- `spendThreshold` represents a minimum spend threshold for alerting
 
-The example below sends a Slack alert when any namespace spending is running below 40% cost efficiency and has spent more than $100 during the last one day. 
+The example below sends a Slack alert when any namespace spending is running below 40% cost efficiency and has spent more than $100 during the last day. 
 
 ```
 - type: efficiency
@@ -138,7 +140,7 @@ Required parameters:
 - `type: budget`
 - `threshold: <amount>` -- cost threshold in configured currency units
 - `aggregation: <agg-parameter>` -- configurable, accepts all aggregations supported by the [aggregated cost model API](https://github.com/kubecost/docs/blob/2ea9021e8530369d53184ea5382b2e4c080bb426/allocation-api.md#aggregated-cost-model-api)
-- `filter: <value>` -- configurable, accepts a single filter value (comma separated values unsupported)
+- `filter: <value>` -- configurable, accepts a single filter value (comma-separated values unsupported)
 - `window: <N>d` or `<M>h` -- configurable, (1 ≤ N ≤ 7, 1 ≤ M ≤ 24)
 
 Example Helm values.yaml:
@@ -172,7 +174,7 @@ Required parameters:
 
 Optional parameters:
 
-- `filter: <value>` -- limit the aggregations that this alert will cover, accepts comma separated values
+- `filter: <value>` -- limit the aggregations that this alert will cover, accepts comma-separated values
 
 Example Helm values.yaml:
 
@@ -194,7 +196,7 @@ Enabling diagnostic alerts in Kubecost occur when an event impacts product uptim
 * Kubecost metrics missing over last 5 minutes
 * More coming soon.
 
-This alert only only uses Slack (email coming soon), so it requires the `globalSlackWebhookUrl` field.
+This alert only uses Slack (email coming soon), so it requires the `globalSlackWebhookUrl` field.
 
 Example Helm values.yaml:
 ```
@@ -219,7 +221,7 @@ Cluster health alerts occur when the cluster health score changes by a specific 
 * Out of Memory Pods
 * Failed Jobs
 
-This alert only only uses Slack (email coming soon), so it requires the `globalSlackWebhookUrl` field. 
+This alert only uses Slack (email coming soon), so it requires the `globalSlackWebhookUrl` field. 
 
 Example Helm values.yaml:
 
@@ -234,7 +236,7 @@ Example Helm values.yaml:
 
 All times in UTC.
 
-The back end scheduler runs if `alertConfigs.enabled` is set to `true`, and alerts at regular times of day. Alert send times are determined by parsing the supplied `window` parameter. If `alertConfigs.enabled` is `false`, alerts are still configurable via the Kubecost UI Notifications tab, and will send alerts through the front end cron job scheduler.
+The back end scheduler runs if `alertConfigs.enabled` is set to `true`, and alerts at regular times of the day. Alert send times are determined by parsing the supplied `window` parameter. If `alertConfigs.enabled` is `false`, alerts are still configurable via the Kubecost UI Notifications tab, and will send alerts through the front end cron job scheduler.
 
 Alert diagnostics with next and last scheduled run times are only available for alerts configured via Helm, and are viewed via `<your-kubecost-url>/model/getCustomAlertDiagnostics`.
 
@@ -249,11 +251,11 @@ For example, a `5d` alert scheduled on Monday will send on Saturday at 00:00, an
 
 An `<N>h` alert sends at the earliest time of day after now that is a multiple of N.
 
-For example, a `6h` alert scheduled at any time between 12pm and 6pm will send next at 6pm and subsequently at 12am the next day.
+For example, a `6h` alert scheduled at any time between 12 pm and 6 pm will send next at 6 pm and subsequently at 12 am the next day.
 
-If 24 is not divisible by the hourly window, schedule at next multiple of `<N>h` after now, starting from current day at 00:00.
+If 24 is not divisible by the hourly window, schedule at next multiple of `<N>h` after now, starting from the current day at 00:00.
 
-For example, a `7h` alert scheduled at 22:00 checks 00:00, 7:00, 14:00, and 21:00, before arriving at a next send time of 4:00 tomorrow.
+For example, a `7h` alert scheduled at 22:00 checks 00:00, 7:00, 14:00, and 21:00, before arriving at the next send time of 4:00 tomorrow.
 
 ## Troubleshooting
 

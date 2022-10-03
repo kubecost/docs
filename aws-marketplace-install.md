@@ -1,6 +1,6 @@
 This document provides the steps for installing the Kubecost Enterprise product from the AWS marketplace. [More info on different tiers.](https://kubecost.com/pricing)
 
-Please contact us at team@kubecost.com with any questions and we'd be happy to help!
+Please contact us at support@kubecost.com with any questions and we'd be happy to help!
 
 ## Step 1. Create an IAM policy
 
@@ -25,8 +25,8 @@ Please contact us at team@kubecost.com with any questions and we'd be happy to h
 We recommend doing this via eksctl. More detail and how to set up the appropriate trust relationships is available [here](https://docs.aws.amazon.com/eks/latest/userguide/create-service-account-iam-policy-and-role.html).
 ```
 eksctl create iamserviceaccount \
-    --name service_account_name \
-    --namespace service_account_namespace \
+    --name awsstore-serviceaccount \
+    --namespace kubecost \
     --cluster cluster_name \
     --attach-policy-arn IAM_policy_ARN \
     --approve \
@@ -37,28 +37,17 @@ eksctl create iamserviceaccount \
 
 Access Helm install steps available at [kubecost.com/install](http://kubecost.com/install). 
 
-Create a file awsstore-values.yaml of the following format. Note that you need to supply your AWS account ID and an IAM role that supports service accounts in the annotations field below.  ([more info](https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html)) via annotation set as .Values.awstore.annotations and deploy Kubecost with AWS Marketplace images. 
+Supply the following parameters to your _helm install_ command.
 
 ```
-awsstore:
-  annotations:
-    eks.amazonaws.com/role-arn: arn:aws:iam::YOUR_AWS_ACCOUNT_ID:role/YOUR_IAM_ROLE_NAME
-  imageNameAndVersion: 117940112483.dkr.ecr.us-east-1.amazonaws.com/8cc31d15-33f6-49fe-8d6c-e9c0366cefa0/cg-142668492/gcr.io/kubecost1/awsstore:1.61.3-latest
-```
-
-Supply the following parameters to your _helm install_ command 
-
-```
---set kubecostModel.image=117940112483.dkr.ecr.us-east-1.amazonaws.com/8cc31d15-33f6-49fe-8d6c-e9c0366cefa0/cg-142668492/gcr.io/kubecost1/cost-model \
---set kubecostFrontend.image=117940112483.dkr.ecr.us-east-1.amazonaws.com/8cc31d15-33f6-49fe-8d6c-e9c0366cefa0/cg-142668492/gcr.io/kubecost1/frontend \
---set kubecost.image=117940112483.dkr.ecr.us-east-1.amazonaws.com/8cc31d15-33f6-49fe-8d6c-e9c0366cefa0/cg-142668492/gcr.io/kubecost1/server \
---set kubecostChecks.enabled=false \
+--set kubecostProductConfigs.productKey.enabled=true \
+--set kubecostProductConfigs.productKey.key="replace-with-product-key" \
 --set prometheus.alertmanager.enabled=false \
 --set prometheus.nodeExporter.enabled=false \
---set imageVersion="1.61.3-latest" \
 --set global.grafana.enabled=false \
 --set global.grafana.proxy=false \
--f awsstore-values.yaml
+--set awsstore.useAwsStore=true \
+--set awsstore.imageNameAndVersion=gcr.io/kubecost1/awsstore:latest
 ```
 
-To partipipate in our free Enterprise on-boarding program, contact us at team@kubecost.com to schedule these sessions!
+To participate in our free Enterprise onboarding program, contact us at team@kubecost.com to schedule these sessions!

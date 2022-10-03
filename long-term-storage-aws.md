@@ -28,7 +28,7 @@ config:
 ```
 **Note:** given that this is yaml, it requires this specific indention.
 
-Instead of using a service key, you can alternatively attach the policy to the Thanos pods service accounts. Your `object-store.yaml` should follow the format below when using this option, which does not contain the secret_key and access_key field.
+Instead of using a service key, you can alternatively attach the policy to the Thanos pods service accounts. Your `object-store.yaml` should follow the format below when using this option, which does not contain the secret_key and access_key fields.
 
 ```
 type: S3
@@ -54,6 +54,16 @@ Then, follow the guide at [https://docs.aws.amazon.com/eks/latest/userguide/enab
 You can define the IAM role to associate with a service account in your cluster by creating a service account in the same namespace as kubecost and adding an annotation to it of the form `eks.amazonaws.com/role-arn: arn:aws:iam::<AWS_ACCOUNT_ID>:role/<IAM_ROLE_NAME>`
 as described here: [https://docs.aws.amazon.com/eks/latest/userguide/specify-service-account-role.html](https://docs.aws.amazon.com/eks/latest/userguide/specify-service-account-role.html)
 
-Once that annotation has been created and set, you'll need to attach it to the prometheus pod, the thanos compact pod, and the thanos store pod.
+Once that annotation has been created and set, you'll need to attach it to the Prometheus pod, the Thanos compact pod, and the Thanos store pod.
 For prometheus, set .Values.prometheus.serviceAccounts.server.create to false, and .Values.prometheus.serviceAccounts.server.name to the name of your created service account
 For thanos set `.Values.thanos.compact.serviceAccount`, and `.Values.thanos.store.serviceAccount` to the name of your created service account.
+
+
+
+__Thanos Encryption With S3 and KMS__
+
+You can encrypt the S3 bucket where Kubecost data is stored in AWS via S3 and KMS. However, because Thanos can store potentially millions of objects, it is suggested that you use bucket-level encryption instead of object-level encryption. More details available here:
+
+https://thanos.io/tip/thanos/storage.md/#s3
+https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucket-key.html
+https://docs.aws.amazon.com/AmazonS3/latest/userguide/configuring-bucket-key-object.html
