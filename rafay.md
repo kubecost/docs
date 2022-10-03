@@ -18,12 +18,10 @@ Under **Integrations**:
 - Select **Repositories** and create a new repository named `kubecost` of type **Helm**
 - Click **Create**
 
-![Create Repository](https://docs.rafay.co/recipes/cost/img/kubecost/kubecost-repository-1.png)
+![Create Repository](https://raw.githubusercontent.com/kubecost/docs/main/images/kubecost-repository-1.png)
 
 - Enter the endpoint value of `https://kubecost.github.io/cost-analyzer/`
 - Click **Save**
-
-![Create Repository](https://docs.rafay.co/recipes/cost/img/kubecost/kubecost-repository-2.png)
 
 ## Step 2: Customize Values
 
@@ -43,24 +41,12 @@ kubecostToken: 'token_string'
 - Login into the [Rafay Web Console](https://console.rafay.dev/) and navigate to your Project as an _Org Admin_ or _Infrastructure Admin_
 - Under **Infrastructure**, select **Namespaces** and create a new namespace called `kubecost`, and select type **Wizard**
 
-![Create Namespace](https://docs.rafay.co/recipes/cost/img/kubecost/kubecost-namespace-1.png)
+![Create Namespace](https://raw.githubusercontent.com/kubecost/docs/main/images/kubecost-namespace-1.png)
 
 - Click **Save & Go to Placement**
-
-![Create Namespace](https://docs.rafay.co/recipes/cost/img/kubecost/kubecost-namespace-2.png)
-
 - Select the cluster/s that the namespace will be added to. Select **Save & Go To Publish**
-
-![Create Namespace](https://docs.rafay.co/recipes/cost/img/kubecost/kubecost-namespace-3.png)
-
 - Click **Publish** to publish the namespace to the selected cluster(s)
-
-![Create Namespace](https://docs.rafay.co/recipes/cost/img/kubecost/kubecost-namespace-4.png)
-
 - Once the namespace has been published, Click **Exit**
-
-![Create Namespace](https://docs.rafay.co/recipes/cost/img/kubecost/kubecost-namespace-5.png)
-
 - Under **Infrastructure**, select **Clusters**
 - Click on the `kubectl` button on the cluster to open a virtual terminal
 - Verify that the `kubecost` namespace has been created by running the following command:
@@ -84,7 +70,7 @@ From the [Web Console](https://console.rafay.dev/):
 - Select `kubecost` for the namespace
 - Click **Create**
 
-![Create Addon](https://docs.rafay.co/recipes/cost/img/kubecost/kubecost-addon-1.png)
+![Create Addon](https://raw.githubusercontent.com/kubecost/docs/main/images/kubecost-addon-1.png)
 
 - Create a new version of the add-on
 - Select **New Version**
@@ -94,8 +80,6 @@ From the [Web Console](https://console.rafay.dev/):
 - Upload the `kubecost-custom-values.yaml` file that was previously created
 - Click **Save Changes**
 
-![Create Addon](https://docs.rafay.co/recipes/cost/img/kubecost/kubecost-addon-2.png)
-
 ## Step 5: Create a Blueprint
 
 Once you've created the Kubecost add-on, use it in assembling a custom cluster blueprint. You can add other add-ons to the same custom blueprint.
@@ -104,7 +88,7 @@ Once you've created the Kubecost add-on, use it in assembling a custom cluster b
 - Create a new blueprint and give it a name such as `kubecost`
 - Click **Save**
 
-![Create Blueprint](https://docs.rafay.co/recipes/cost/img/kubecost/kubecost-blueprint-1.png)
+![Create Blueprint](https://raw.githubusercontent.com/kubecost/docs/main/images/kubecost-blueprint-1.png)
 
 - Create a new version of the blueprint
 - Select **New Version**
@@ -112,7 +96,7 @@ Once you've created the Kubecost add-on, use it in assembling a custom cluster b
 - Under Add-Ons, select the `kubecost` Add-on and the version that was previously created
 - Click **Save Changes**
 
-![Create Blueprint](https://docs.rafay.co/recipes/cost/img/kubecost/kubecost-blueprint-2.png)
+![Create Blueprint](https://raw.githubusercontent.com/kubecost/docs/main/images/kubecost-blueprint-2.png)
 
 ## Step 6: Apply Blueprint
 
@@ -122,7 +106,7 @@ You may now apply this custom blueprint to a cluster.
 - Select **Update Blueprint** and select the `kubecost` blueprint and version you created previously
 - Click on **Save and Publish**
 
-![Update Blueprint](https://docs.rafay.co/recipes/cost/img/kubecost/kubecost-blueprint-3.png)
+![Update Blueprint](https://raw.githubusercontent.com/kubecost/docs/main/images/kubecost-blueprint-3.png)
 
 This will start the deployment of the Add-ons configured in the `kubecost` blueprint to the targeted cluster. The blueprint sync process can take a few minutes. Once complete, the cluster will display the current cluster blueprint details and whether the sync was successful or not.
 
@@ -160,7 +144,7 @@ Handling connection for 9090
 
 You can now access the Kubecost UI by visiting `http://localhost:9090` on your browser.
 
-![kubecost Dashboards](https://docs.rafay.co/recipes/cost/img/kubecost/kubecost-view-1.png)
+![kubecost Dashboards](https://raw.githubusercontent.com/kubecost/docs/main/images/kubecost-view-1.png)
 
 ---
 
