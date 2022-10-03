@@ -1,5 +1,7 @@
-Container Request Right-Sizing Recommendation API
+Container Request Right-Sizing Recommendation API (V1)
 ==================================
+
+NOTE: This API is **deprecated**. Please use the [V2 API](https://github.com/kubecost/docs/blob/main/api-request-right-sizing-v2.md) if starting new work.
 
 The container request right-sizing recommendation API provides recommendations for
 [container resource requests](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/)
@@ -85,7 +87,7 @@ That's (45 min / (60 min/hr) / (730 hr/month)) of a month.
 
 Within the query window, the pod could haved saved:
 2 cores * (15min / (60 min/hr)) = 0.5 core-hours
-0.67 core-hours * $7/core-hour = $3.50
+0.5 core-hours * $7/core-hour = $3.50
 
 "If that 45 minute window is representative for 30 days (730 hrs)
 then we scale the savings by 1 / (45 / 60 / 730)":

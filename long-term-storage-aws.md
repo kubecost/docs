@@ -8,15 +8,15 @@ Kubecost uses a shared storage bucket to store metrics from clusters (aka `durab
 There are multiple methods to provide Kubecost access to an S3 bucket. This guide has two examples:
 
 1. Using a Kubernetes secret
-1. Attaching an IAM role to the service account used by Prometheus
+1. Attaching an AWS Identity and Access Management (IAM) role to the service account used by Prometheus
 
-Either method will need an S3 bucket, our example bucket is named `kc-thanos-store`.
+Both methods require an S3 bucket. Our example bucket is named `kc-thanos-store`.
 
 This is a simple S3 bucket with all public access blocked. No other bucket configuration changes should be required.
 
 Once created, add an IAM policy to access this bucket ([steps](/aws-service-account-thanos.md)).
 
-## Kubernetes Secret Method
+## Method 1: Kubernetes Secret Method
 <a name="secret"></a>
 To use the Kubernetes secret method for allowing access, create a yaml file named `object-store.yaml` with contents similar to the following example. See region to endpoint mappings here: <https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region>
 
@@ -40,9 +40,9 @@ config:
     enable: true
   part_size: 134217728
 ```
-**Note:** given that this is yaml, it requires this specific indention.
+> **Note:** Because this is a YAML, it requires this specific indention.
 
-## Attach IAM role to Service Account Method
+## Method 2: Attach IAM role to Service Account Method
 <a name="attach-role"></a>
 Instead of using a secret key in a file, many will want to use this method.
 
@@ -92,14 +92,7 @@ You can encrypt the S3 bucket where Kubecost data is stored in AWS via S3 and KM
 
 ## Troubleshooting
 
-See: [Troubleshooting](https://guide.kubecost.com/hc/en-us/articles/4407595964695-Long-Term-Storage#troubleshooting)
-
-## Additional Help
-<a name="help"></a>Please let us know if you run into any issues, we are here to help.
-
-[Slack community](https://join.slack.com/t/kubecost/shared_invite/enQtNTA2MjQ1NDUyODE5LWFjYzIzNWE4MDkzMmUyZGU4NjkwMzMyMjIyM2E0NGNmYjExZjBiNjk1YzY5ZDI0ZTNhZDg4NjlkMGRkYzFlZTU) - check out #support for any help you may need & drop your introduction in the #general channel
-
-Email: <team@kubecost.com>
+Visit the [**Multi-Cluster / Long Term Storage**](https://guide.kubecost.com/hc/en-us/articles/4407595964695-Long-Term-Storage#troubleshooting) article for troubleshooting help.
 
 ---
 Edit this doc on [GitHub](https://github.com/kubecost/docs/blob/main/long-term-storage-aws.md)
