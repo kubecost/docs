@@ -16,11 +16,14 @@ High-level access control options:
 
 <br/>
 
-Setup guide: [https://github.com/kubecost/poc-common-configurations/tree/main/saml-okta](https://github.com/kubecost/poc-common-configurations/tree/main/saml-okta)
+- AzureAD setup guide: [https://github.com/kubecost/poc-common-configurations/tree/main/saml-azuread](https://github.com/kubecost/poc-common-configurations/tree/main/saml-azuread)
+- Okta setup guide: [https://github.com/kubecost/poc-common-configurations/tree/main/saml-okta](https://github.com/kubecost/poc-common-configurations/tree/main/saml-okta)
+
+ > **Note**: All SAML 2.0 providers also work. The above guides can be used as templates for what is required.
 
 Additional [troubleshooting guide](https://docs.google.com/document/d/1cgns9_jHQy5GFB2Yzd3Qlyd-owlbLqVi9Ti6IuCYCJE)
 
-Contact us via email (<support@kubecost.com>) or join us on [Slack](https://join.slack.com/t/kubecost/shared_invite/enQtNTA2MjQ1NDUyODE5LWFjYzIzNWE4MDkzMmUyZGU4NjkwMzMyMjIyM2E0NGNmYjExZjBiNjk1YzY5ZDI0ZTNhZDg4NjlkMGRkYzFlZTU) if you have questions!
+Contact us via email (<support@kubecost.com>) or join us on [Slack](https://join.slack.com/t/kubecost/shared_invite/zt-1dz4a0bb4-InvSsHr9SQsT_D5PBle2rw) if you have questions!
 
 Edit this doc on [GitHub](https://github.com/kubecost/docs/blob/main/user-management.md)
 

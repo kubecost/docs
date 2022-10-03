@@ -3,9 +3,9 @@ Azure Rate Card Configuration
 
 Kubecost needs access to the Microsoft Azure Billing Rate Card API to access accurate pricing data for your Kubernetes resources.
 
-> Note: you can also get this functionality plus external costs by completing the full [Azure billing integration](/azure-out-of-cluster.md).
+> **Note**: you can also get this functionality plus external costs by completing the full [Azure billing integration](/azure-out-of-cluster.md).
 
-## Creating a Custom Azure Role
+## Creating a Custom Azure role
 
 Start by creating an Azure role definition. Below is an example definition, replace `YOUR_SUBSCRIPTION_ID` with the Subscription ID where your Kubernetes Cluster lives:
 
@@ -40,29 +40,12 @@ az role definition create --verbose --role-definition @myrole.json
 Next, create an Azure Service Principal.
 
 ```shell
-az ad sp create-for-rbac --name "KubecostAccess" --role "KubecostRole" --sdk-auth true > my_credentials.json
+az ad sp create-for-rbac --name "KubecostAccess" --role "KubecostRole" --scope "/subscriptions/YOUR_SUBSCRIPTION_ID" --output json
 ```
 
-The newly created `my_credentials.json` file will contain the relevant configuration information.
+Keep this information which is used in the service-key.json below.
 
-## Azure Billing Region and Currency
-
-Kubecost supports querying the Azure APIs for cost data based on the region and currency you have configured in your Microsoft Agreement.
-
-Those properties are configured with the following helm values:
-
-* `kubecostProductConfigs.azureBillingRegion`
-* `kubecostProductConfigs.currencyCode`
-
-Be sure to reference you billing information with Microsoft and update the above helm values to reflect your bill to country and currency.
-
-The following Microsoft documents are a helpful reference:
-
-* [Azure Pricing FAQ](https://azure.microsoft.com/en-us/pricing/faq/)
-* [Geographic availability and currency support for the commercial marketplace](https://docs.microsoft.com/en-us/azure/marketplace/marketplace-geo-availability-currencies)
-* [Azure Portal > Cost Management + Billing > Billing Account Properties](https://portal.azure.com/#view/Microsoft_Azure_GTM/ModernBillingMenuBlade/~/Properties)
-
-## Supplying Azure Service Principal Details to Kubecost
+## Supplying Azure Service Principal details to Kubecost
 
 ### Via a Kubernetes secret (Recommended)
 
@@ -73,6 +56,7 @@ Create a file called [`service-key.json`](https://github.com/kubecost/poc-common
     "subscriptionId": "<Azure Subscription ID>",
     "serviceKey": {
         "appId": "<Azure AD App ID>",
+        "displayName": "KubecostAccess",
         "password": "<Azure AD Client Secret>",
         "tenant": "<Azure AD Tenant ID>"
     }
@@ -80,7 +64,8 @@ Create a file called [`service-key.json`](https://github.com/kubecost/poc-common
 ```
 
 Next, create a secret for the Azure Service Principal
-> Note: When managing the service account key as a Kubernetes secret, the secret must reference the service account key json file, and that file must be named `service-key.json`.
+
+> **Note**: When managing the service account key as a Kubernetes secret, the secret must reference the service account key JSON file, and that file must be named `service-key.json`.
 
 ```shell
 kubectl create secret generic azure-service-key -n kubecost --from-file=service-key.json
@@ -88,9 +73,7 @@ kubectl create secret generic azure-service-key -n kubecost --from-file=service-
 
 Finally, set the `kubecostProductConfigs.serviceKeySecretName` helm value to the name of the Kubernetes secret you created. We use the value `azure-service-key` in our examples.
 
-> Additionally, the Helm value `kubecostProductConfigs.azureOfferDurableID` can be modified to use the Offer Durable ID of your subscription, which can be found in the Azure Portal under Subscriptions. The default value is `MS-AZR-0003P` which is a pay-as-you-go subscription.
-
-### Via Helm Values
+### Via Helm values
 
 In the [Helm values file](https://github.com/kubecost/cost-analyzer-helm-chart/blob/4eaaa9acef33468dd0d9fac046defe0af17811b4/cost-analyzer/values.yaml#L770-L776):
 
@@ -120,13 +103,31 @@ helm upgrade --install kubecost kubecost/cost-analyzer -n kubecost \
   --set kubecostProductConfigs.createServiceKeySecret=true
 ```
 
-## Additional Help
+## Azure billing region, offer durable ID, and currency
+
+Kubecost supports querying the Azure APIs for cost data based on the region, offer durable ID, and currency defined in your Microsoft Azure offer.
+
+Those properties are configured with the following helm values:
+
+* `kubecostProductConfigs.azureBillingRegion`
+* `kubecostProductConfigs.azureOfferDurableID`
+* `kubecostProductConfigs.currencyCode`
+
+Be sure to verify your billing information with Microsoft and update the above Helm values to reflect your bill to country, subscription offer durable id/number, and currency.
+
+The following Microsoft documents are a helpful reference:
+
+* [Microsoft Azure Offer Details](https://azure.microsoft.com/en-us/support/legal/offer-details/)
+* [Azure Pricing FAQ](https://azure.microsoft.com/en-us/pricing/faq/)
+* [Geographic availability and currency support for the commercial marketplace](https://docs.microsoft.com/en-us/azure/marketplace/marketplace-geo-availability-currencies)
+* [Azure Portal > Cost Management + Billing > Billing Account Properties](https://portal.azure.com/#view/Microsoft_Azure_GTM/ModernBillingMenuBlade/~/Properties)
+* [Understand Cost Management data](https://docs.microsoft.com/en-us/azure/cost-management-billing/costs/understand-cost-mgt-data)
+
+## Additional help
 
 Please let us know if you run into any issues, we are here to help.
 
-[Slack community](https://join.slack.com/t/kubecost/shared_invite/enQtNTA2MjQ1NDUyODE5LWFjYzIzNWE4MDkzMmUyZGU4NjkwMzMyMjIyM2E0NGNmYjExZjBiNjk1YzY5ZDI0ZTNhZDg4NjlkMGRkYzFlZTU) - check out the `#support` channel for any help you may need & drop your introduction in the `#general` channel
-
-Email: <team@kubecost.com>
+Join our [Slack community](https://join.slack.com/t/kubecost/shared_invite/zt-1dz4a0bb4-InvSsHr9SQsT_D5PBle2rw) and check out the #support channel for any help you may need, or email us at (support@kubecost.com)[support@kubecost.com].
 
 Edit this doc on [GitHub](https://github.com/kubecost/docs/blob/main/azure-config.md)
 

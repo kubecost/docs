@@ -42,8 +42,12 @@ The following fields apply to each map item under the `reports` key:
   - `service`
   - `statefulset`
   - `team`
+- `chartDisplay` -- Can be one of `category`, `series`, `efficiency`, `percentage`, or `treemap`. See [Cost Allocation Charts](https://guide.kubecost.com/hc/en-us/articles/4407601807383-Kubernetes-Cost-Allocation#chart) for more info.
 - `idle` idle cost allocation, supports `hide`, `shareByNode`, `shareByCluster`, and `separate`
 - `accumulate` determines whether or not to sum Allocation costs across the entire window -- equivalent to _Resolution_ in the UI, supports `true` (Entire window resolution) and `false` (Daily resolution)
+- `sharedNamespaces` -- a list containing namespaces to share costs for.
+- `sharedOverhead` -- an integer representing overhead costs to share.
+- `sharedLabels` -- a list of labels to share costs for, requires the following format: `label:<label_name>`
 - `filters` -- a list of maps consisting of a property and value
   - `property` -- supports `cluster`, `node`, `namespace`, and `label`
   - `value` -- property value(s) to filter on, supports wildcard filtering with a `*` suffix
@@ -66,6 +70,9 @@ The following fields apply to each map item under the `reports` key:
         aggregateBy: "namespace"
         idle: "separate"
         accumulate: false # daily resolution
+        sharedNamespaces:
+          - monitoring
+          - kube-system
         filters:
           - property: "cluster"
             value: "cluster-one,cluster*" # supports wildcard filtering and multiple comma separated values

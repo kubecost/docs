@@ -1,11 +1,11 @@
-v1.94+ TurndownSchedule migration guide
+v1.94+ TurndownSchedule Migration Guide
 =======================================
 
 In v1.94 of Kubecost, the `turndownschedules.kubecost.k8s.io/v1alpha1` Custom Resource Definition (CRD) was [moved](https://github.com/kubecost/cost-analyzer-helm-chart/pull/1444) to `turndownschedules.kubecost.com/v1alpha1` to adhere to [Kubernetes policy for CRD domain namespacing](https://github.com/kubernetes/enhancements/pull/1111). This is a breaking change for users of Cluster Controller's turndown functionality. Please follow this guide for a successful migration of your turndown schedule resources.
 
 > As part of this change, the CRD was updated to use `apiextensions.k8s.io/v1` because `v1beta1` was removed in K8s v1.22. If using Kubecost v1.94+, Cluster Controller's turndown functionality will not work on K8s versions before the introduction of `apiextensions.k8s.io/v1`.
 
-# Situation 1: You have deployed cluster controller but don't use turndown
+## Scenario 1: You have deployed Cluster Controller but don't use turndown
 
 In this situation, you've deployed Kubecost's Cluster Controller at some point
 using `--set clusterController.enabled=true`, but you don't use the turndown functionality.
@@ -23,7 +23,7 @@ This situation is easy! You can do nothing, and turndown should continue to beha
 If you would like to be fastidious and clean up the old CRD, simply run `kubectl delete crd turndownschedules.kubecost.k8s.io` after upgrading Kubecost to v1.94 or higher.
 
 
-# Situation 2: You currently use turndown
+## Scenario 2: You currently use turndown
 
 In this situation, you've deployed Kubecost's Cluster Controller at some point using `--set clusterController.enabled=true` and you have at least one `turndownschedule.kubecost.k8s.io` resource currently present in your cluster.
 
@@ -38,13 +38,13 @@ And this command should return at least one resource:
 We have a few steps to perform if you want Cluster Controller's turndown functionality to continue to behave according to your already-defined turndown schedules.
 
 1.  Upgrade Kubecost to v1.94 or higher with `--set clusterController.enabled=true`
-2.  Make sure the new CRD has been defined after your Kubecost upgrade.
+2.  Make sure the new CRD has been defined after your Kubecost upgrade
     
     This command should return a line:
     
         kubectl get crd turndownschedules.kubecost.com
 
-3.  Copy your existing `turndownschedules.kubecost.k8s.io` resources into the new CRD.
+3.  Copy your existing `turndownschedules.kubecost.k8s.io` resources into the new CRD
     
         kubectl get turndownschedules.kubecost.k8s.io -o yaml \
             | sed 's|kubecost.k8s.io|kubecost.com|' \
@@ -58,11 +58,10 @@ We have a few steps to perform if you want Cluster Controller's turndown functio
             crd/turndownschedules.kubecost.k8s.io \
             -p '{"metadata":{"finalizers":[]}}' \
             --type=merge
-        
-    > The following command may be unnecessary because Helm should automatically remove the `turndownschedules.kubecost.k8s.io` resource during the upgrade. The removal will remain in a pending state until the finalizer patch above is implemented.
+
+    > **Note**: The following command may be unnecessary because Helm should automatically remove the `turndownschedules.kubecost.k8s.io` resource during the upgrade. The removal will remain in a pending state until the finalizer patch above is implemented.
 
         kubectl delete crd turndownschedules.kubecost.k8s.io
-
 
 
 <!--- {"article":"6737520506519","section":"4402815636375","permissiongroup":"1500001277122"} --->

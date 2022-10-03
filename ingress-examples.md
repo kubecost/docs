@@ -1,11 +1,13 @@
 Ingress Examples
 ================
 
-Enabling external access to the Kubecost product requires exposing access to port 9090 on the `kubecost-cost-analyzer` pod.
+Enabling external access to the Kubecost product requires exposing access to port 9090 on the `kubecost-cost-analyzer` Pod.
 Exposing this endpoint will handle routing to Grafana as well.
 This can be accomplished with a number of approaches, including Ingress or Service definitions.
 
-Common samples below, others can be found on our github repo: [https://github.com/kubecost/poc-common-configurations/tree/main/ingress-examples](https://github.com/kubecost/poc-common-configurations/tree/main/ingress-examples)
+> **Note:** you should be cautious about exposing endpoints and recommend consulting your organization's internal recommendations. 
+
+Common samples below and others can be found on our [GitHub repository](https://github.com/kubecost/poc-common-configurations/tree/main/ingress-examples).
 
 The following example definitions use the NGINX [Ingress Controller](https://kubernetes.io/docs/concepts/services-networking/ingress-controllers/).
 
@@ -57,7 +59,7 @@ Here is a [second basic auth example](https://kubernetes.github.io/ingress-nginx
 
 ## Non-root path example
 
-Note that when deploying *Grafana* on a non-root URL, you also need to update your grafana.ini to reflect this. [More info](https://github.com/kubecost/cost-analyzer-helm-chart/blob/cae42c28e12ecf8f1ad13ee17be8ce6633380b96/cost-analyzer/values.yaml#L335-L339).
+Note that when deploying Grafana on a non-root URL, you also need to update your grafana.ini to reflect this. [More info](https://github.com/kubecost/cost-analyzer-helm-chart/blob/cae42c28e12ecf8f1ad13ee17be8ce6633380b96/cost-analyzer/values.yaml#L335-L339).
 
 ```yaml
 apiVersion: networking.k8s.io/v1beta1
@@ -87,7 +89,7 @@ spec:
 
 ## ALB Example
 
-Once an AWS Load Balancer Controller is installed, you can use the following Ingress resource manifest pointed at the kubecost-cost-analyzer service:
+Once an AWS Load Balancer Controller is installed, you can use the following Ingress resource manifest pointed at the Kubecost cost-analyzer service:
 
 
 ```yaml

@@ -1,7 +1,7 @@
 Guide: 1-click request sizing
 =============================
 
-:warning: This feature is in a pre-release (alpha/beta) state. It has limitations. Please read the documentation carefully. :warning:
+> **Note**: This feature is in a pre-release (alpha/beta) state. It has limitations. Please read the documentation carefully.
 
 1-click request sizing is a feature that will instantly update [container
 resource
@@ -15,15 +15,14 @@ cluster right-sizing and other optimizations.
 
 ## Setup
 
-Install Kubecost with cluster controller enabled, which is the only Kubecost
+Install Kubecost with Cluster Controller enabled, which is the only Kubecost
 component with write permission to your cluster.
-   
-```bash
-# Make sure the Kubecost helm repo is set up! See kubecost.com/install
 
-# This command will install Kubecost if you haven't already. You can use
-# "--set clusterController.enabled=true" to get cluster controller running if 
-# you already have Kubecost installed.
+Make sure the Kubecost helm repo is set up! See [kubecost.com/install](https://www.kubecost.com/install#show-instructions)
+
+This command will install Kubecost if you haven't already. You can use "--set clusterController.enabled=true" to get Cluster Controller running if you already have Kubecost installed.
+
+```bash
 helm upgrade \
     -i \
     --create-namespace kubecost \
@@ -35,30 +34,30 @@ helm upgrade \
 ## Using 1-click request sizing
 
 1. Visit the request sizing page of your Kubecost installation
-   ```bash
-   kubectl port-forward \
-       -n kubecost \
-       service/kubecost-cost-analyzer \
-       9090
-   ```
-   
-   Then visit [http://localhost:9090/request-sizing.html](http://localhost:9090/request-sizing.html)
+      ```bash
+      kubectl port-forward \
+          -n kubecost \
+          service/kubecost-cost-analyzer \
+          9090
+      ```
+
+      Then visit [http://localhost:9090/request-sizing.html](http://localhost:9090/request-sizing.html)
 
 2. Modify the request sizing settings, like profile, window, and filters, until
    you have a set of recommendations you are ready to apply to your cluster.
 
 3. Click the "Automatically implement recommendations" button.
 
-   ![](https://raw.githubusercontent.com/kubecost/docs/main/images/one-click-request-sizing/configured-with-button.png)
+      ![](https://raw.githubusercontent.com/kubecost/docs/main/images/one-click-request-sizing/configured-with-button.png)
 
 4. Confirm!
 
-   ![](https://raw.githubusercontent.com/kubecost/docs/main/images/one-click-request-sizing/confirm-dialog.png)
+      ![](https://raw.githubusercontent.com/kubecost/docs/main/images/one-click-request-sizing/confirm-dialog.png)
 
 ## Technical details
 
 If you want to learn more about the APIs that power 1-click request sizing,
-including their limitations, see [the API
+including their limitations, see the corresponding [API
 documentation](https://github.com/kubecost/docs/blob/main/api-request-recommendation-apply.md).
 
 

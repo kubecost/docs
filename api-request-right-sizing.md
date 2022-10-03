@@ -1,5 +1,7 @@
-Container Request Right-Sizing Recommendation API
+Container Request Right-Sizing Recommendation API (V1)
 ==================================
+
+NOTE: This API is **deprecated**. Please use the [V2 API](https://github.com/kubecost/docs/blob/main/api-request-right-sizing-v2.md) if starting new work.
 
 The container request right-sizing recommendation API provides recommendations for
 [container resource requests](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/)
