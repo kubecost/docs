@@ -1,4 +1,5 @@
-# Events
+Events API
+=============
 
 Kubecost emits events when certain things happen. Those events are also recorded in an event log in the interest of diagnosing problems.
 
@@ -39,7 +40,7 @@ Kubecost emits events when certain things happen. Those events are also recorded
 
 To access the most recent events in the event log, invoke `GET <kubecost>/model/etl/log`, which will provide the following, e.g.:
 
-```
+``` json
 {
   "code": 200,
   "data": {
@@ -128,3 +129,5 @@ To access the most recent events in the event log, invoke `GET <kubecost>/model/
 ```
 
 This log will additionally be appended to bug reports.
+
+<!--- {"article":"","section":"8454342470679","permissiongroup":"1500001277122"} --->
