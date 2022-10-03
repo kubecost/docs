@@ -33,7 +33,7 @@ Kubecost interacts with provider pricing in a few different ways.
   - [Azure Cost Export](https://github.com/kubecost/docs/blob/main/azure-out-of-cluster.md)
   - [Google BigQuery Export](https://github.com/kubecost/docs/blob/main/gcp-out-of-cluster.md)
 
-In a Enterprise federated setup, only the Primary Kubecost Cluster needs access to the Cloud Provider Billing.
+In an Enterprise federated setup, only the Primary Kubecost Cluster needs access to the Cloud Provider Billing.
 
 ![Provider Pricing Overview](https://raw.githubusercontent.com/kubecost/docs/main/images/cloud-bill-diagram.png)
 
