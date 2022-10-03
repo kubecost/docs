@@ -6,11 +6,11 @@
 
 * [Installation](install.md)
   * [Helm Parameters](helm-install-params.md)
+  * [Add Key](<README (1).md>)
 * [Frequently Asked Questions](setup/frequently-asked-questions.md)
 
 ***
 
-* [Add Key](<README (1).md>)
 * [Advanced Reporting](advanced-reports.md)
 * [Installing Agent for Hosted Kubecost (Alpha)](agent.md)
 * [Installing in Air-gapped Environments](air-gapped.md)
