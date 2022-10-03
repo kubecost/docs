@@ -9,7 +9,6 @@ Kubecost components use following ports by default:
 | ingress https                                     | 443   |
 | grafana                                           | 3000  |
 | cost-analyzer                                     | 3001  |
-| cost-analyzer-service - tcp-server                | 9001  |
 | cost-analyzer-service - tcp-model                 | 9003  |
 | cost-analyzer-service - api-server                | 9004  |
 | prometheus service                                | 9090  |
@@ -18,6 +17,6 @@ Kubecost components use following ports by default:
 | kubecost-cluster-controller                       | 9731  |
 | kube-state-metrics                                | 8080  |
 
-Edit this doc on [Github](https://github.com/kubecost/docs/blob/main/ports.md)
+Edit this doc on [GitHub](https://github.com/kubecost/docs/blob/main/ports.md)
 
 <!--- {"article":"4425080011671","section":"4402829033367","permissiongroup":"1500001277122"} --->

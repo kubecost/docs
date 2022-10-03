@@ -15,7 +15,7 @@ An unlimited number of clusters is supported.
 Retain data for years with various durable storage options. Provides record keeping on spend, allocation, and efficiency metrics with simple backup & restore functionality.
 
 ### Access control with SSO/SAML  
-Finely manage read and/or admin access by individual users or user groups. [Learn more](https://github.com/kubecost/docs/blob/master/user-management.md)
+Finely manage read and/or admin access by individual users or user groups. [Learn more](https://github.com/kubecost/docs/blob/main/user-management.md)
 
 ### Advanced custom pricing
 Advanced custom pricing pipelines give teams the ability to set custom per-asset pricing for resources. This is typically used for on-prem and air-gapped environments, but can also be applied to teams that want to allocate internal costs differently than cloud provider defaults. 
@@ -28,10 +28,10 @@ Dedicated SRE support via private Slack channel and video calls. Expert technica
 
 <br/>  
 
-Contact us at [team@kubecost.com](team@kubecost.com) to learn more!
+Contact us at [support@kubecost.com](support@kubecost.com) to learn more!
 <br/><br/><br/><br/><br/>
 
 
-Edit this doc on [Github](https://github.com/kubecost/docs/blob/main/enterprise.md)
+Edit this doc on [GitHub](https://github.com/kubecost/docs/blob/main/enterprise.md)
 
 <!--- {"article":"4407601809175","section":"4402829033367","permissiongroup":"1500001277122"} --->

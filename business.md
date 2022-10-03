@@ -7,8 +7,8 @@ For medium-sized teams and companies with more complex infrastructure you need t
 Kubecost Business offers even more features and control so that any team can use our products, according to your entire organization’s standards.
 
 ### Multi-cluster visibility
-View all Kubernetes clusters in a single UI by easily toggling between each individual cluster. 
-Supports viewing data across an unlimited number of clusters.
+View all Kubernetes clusters by easily toggling between each individual cluster. 
+Supports installation of Kubecost across an unlimited number of individual clusters.
 
 ### Long-term metric retention & saved reports  
 Retain spend, allocation, and efficiency data for up to 30 days. Provides custom reports saving for easily sharing across teams.
@@ -21,9 +21,9 @@ Direct engineering and product support via Slack channel, video, and phone.
 
 <br/>  
 
-Contact us at [team@kubecost.com](team@kubecost.com) to learn more!
+Contact us at [support@kubecost.com](support@kubecost.com) to learn more!
 <br/><br/><br/><br/><br/>
 
-Edit this doc on [Github](https://github.com/kubecost/docs/blob/main/business.md)
+Edit this doc on [GitHub](https://github.com/kubecost/docs/blob/main/business.md)
 
 <!--- {"article":"4407595937175","section":"4402829033367","permissiongroup":"1500001277122"} --->

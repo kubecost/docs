@@ -1,103 +1,80 @@
-Assets
+Kubernetes Assets
 ======
 
 The Kubecost Assets view shows Kubernetes cluster costs broken down by the individual backing assets in your cluster (e.g. cost by node, disk, and other assets). 
 It’s used to identify spend drivers over time and to audit Allocation data. This view can also optionally show out-of-cluster assets by service, tag/label, etc.
 
-> Note: Similar to our Allocation API, the Assets API uses our ETL pipeline which aggregates data daily. This allows for enterprise-scale with much higher performance. 
+> **Note**: Similar to our Allocation API, the Assets API uses our ETL pipeline which aggregates data daily. This allows for enterprise-scale with much higher performance.
 
-
-![Kubecost Assets view](https://raw.githubusercontent.com/kubecost/docs/main/images/assets-screenshot.png)
+![Kubecost Assets view](https://raw.githubusercontent.com/kubecost/docs/main/images/assets.PNG.png)
 
 This user interface is available at `<your-kubecost-address>/assets.html`.
 
-# Assets API
+This is the main Kubecost Assets dashboard. In the screenshot there are multiple features to take notice of which are covered in this guide:
 
-The assets API retrieves backing cost data broken down by individual assets in your cluster but also provides various aggregations of this data.
+1. *Date Range* filter
+2. *Aggregate by* filter
+3. *Edit search parameters* icon
+4. Additional dashboard icons
+5. Assets metrics table
 
-The API is available at the following endpoint:
+## 1. Date Range filter
+![Date Range](https://raw.githubusercontent.com/kubecost/docs/main/images/assetsdate.PNG)
 
-```
-http://<your-kubecost-address>/model/assets
-```
+Select the date range of the report by setting specific start and end dates, or using one of the preset options.
 
-Here are example uses:
+## 2. Aggregate filter
+![Aggregate by](https://raw.githubusercontent.com/kubecost/docs/main/images/assetsaggregateby.PNG)
 
-* http://localhost:9090/model/assets?window=today
-* http://localhost:9090/model/assets?window=7d
-* http://localhost:9090/model/assets?window=7d&aggregate=type
-* http://localhost:9090/model/assets?window=7d&aggregate=type&accumulate=true
+Here you can aggregate cost by native Kubernetes concepts. While selecting Single Aggregation, you will only be able to select one concept at a time. While selecting Multi Aggregation, you will be able to filter for multiple concepts at the same time. Assets will be by default aggregated by Service.
 
-API parameters include the following:
+## 3. Edit search parameters icon
+![Edit search parameters](https://raw.githubusercontent.com/kubecost/docs/main/images/assetsfilter.PNG)
 
-* `window` dictates the applicable window for measuring historical asset cost. Currently, supported options are as follows:
-    - "15m", "24h", "7d", "48h", etc. 
-    - "today", "yesterday", "week", "month", "lastweek", "lastmonth"
-    - "1586822400,1586908800", etc. (start and end unix timestamps)
-    - "2020-04-01T00:00:00Z,2020-04-03T00:00:00Z", etc. (start and end UTC RFC3339 pairs)
-* `aggregate` is used to consolidate cost model data. Supported aggregation types are cluster and type. Passing an empty value for this parameter, or not passing one at all, returns data by an individual asset.
-* `accumulate` when set to false this endpoint returns daily time series data vs cumulative data. Default value is false.
-* `disableAdjustments` when set to true, zeros out all adjustments from cloud provider reconciliation, which would otherwise change the totalCost.
-* `format` when set to `csv`, will download an accumulated version of the asset results in CSV format. By default, results will be in JSON format.
+The Edit report icon has additional options to filter your search.
 
-This API returns a set of JSON objects in this format:
+### Resolution
+Change the display of your recent assets by service. *Daily* provides a day-by-day breakdown of assets. *Entire window* creates a semicircle that shows each asset as a sizable portion based on total cost within the displayed time frame.
 
-```
-  {
-    cluster: "cluster-one"  // parent cluster for asset
-    cpuCores: 2  // number of CPUs, given this is a node asset type
-    cpuCost: 0.047416 // cumulative cost of CPU measured over time window
-    discount: 0.3 // discount applied to asset cost
-    end: "2020-08-21T00:00:00+0000" // end of measured time window
-    gpuCost: 0
-    key: "cluster-one/node/gke-niko-n1-standard-2-wljla-8df8e58a-hfy7"
-    name: "gke-niko-n1-standard-2-wljla-8df8e58a-hfy7"
-    nodeType: "n1-standard-2"
-    preemptible: 0
-    providerID: "gke-niko-n1-standard-2-wljla-8df8e58a-hfy7"
-    ramBytes: 7840256000
-    ramCost: 0.023203
-    start: "2020-08-20T00:00:00+0000"
-    adjustment: 0.0023 // amount added to totalCost during reconciliation with cloud provider data
-    totalCost: 0.049434 // total asset cost after applied discount
-    type: "node" // e.g. node, disk, cluster management fee, etc
-}
-```
+### Cost metric
+View either cumulative or run rate costs measured over the selected time window based on the assets being filtered for.
 
-Optional filter parameters take the format of `&<filter>=<value>` appended to the assets URL query and include the following:
+* Cumulative Cost: represents the actual/historical spend captured by the Kubecost agent over the selected time window
+* Rate metrics: Monthly, daily, or hourly “run rate” cost, also used for projected cost figures, based on samples in the selected time window
 
-| Filter | Description |
-|---------|-----------|
-| `filterAccounts` | Filter results by Cloud account. *Requires cloud configuration.* |
-| `filterCategories` | Filter results by asset category. Examples include `Network`,`Management`, `Compute`, `Storage`, or `Other`. |
-| `filterClusters` | Filter results by cluster ID. Note: cluster ID is generated from `cluster_id` provided during installation. |
-| `filterLabels` | Filter results by cloud label or cloud tag. For example, appending `&labels=deployment:kubecost-cost-analyzer` only returns assets with label `deployment=kubecost-cost-analyzer`. CSV list of label values supported. Note that subparameter `:` symbols are required to denote `<labelKey>:<labelValue>` pairs. |
-| `filterNames` | Filter results by asset name. | 
-| `filterProjects` | Filter results by cloud project ID. *Requires cloud configuration.* |
-| `filterProviders` | Filter results by provider. For example, appending `&filterProviders=GCP` only returns assets belonging to provider `GCP`. *Requires cloud configuration.* |
-| `filterProviderIDs` | Filter results by provider ID individual to each cloud asset. For examples, go to the Assets page, select Breakdown by Item, and see the Provider ID column. *Requires cloud configuration.* |
-| `filterServices` | Filter results by service. Examples include `Cloud Storage`, `Kubernetes`, `BigQuery`. |
-| `filterTypes` | Filter results by asset type. Examples include `Cloud`, `ClusterManagement`, `Node`, `LoadBalancer`, and `Disk`. |
+### Filters
+Filter assets by category, service, or other means. When a filter is applied, only resources with this matching value will be shown.
 
-Note:
- - Some filters require cloud configuration, which can be set at `<your-kubecost-address>/keyinstructions.html`
- - Multiple filter selections evaluate as ANDs. Each filter selection accepts comma-separated values that evaluate as ORs.
-    - For example, including both `filterClusters=cluster-one` and `filterNames=name1,name2` logically evaluates as `(cluster == cluster-one) && (name == name1 || name == name2)`
- - All filters are case-sensitive except for `filterTypes`
- - All filters accept wildcard filters denoted by a URL-encoded `*` suffix, except for `filterTypes` and the label key in `filterLabels`
-    - For example, `filterProviderIDs=gke%2A` will return all assets with a `gke` string prefix in its Provider ID.
-    - For example, `filterLabels=deployment%3Dkube%2A` will return all assets with `deployment` label value containing a `kube` prefix.
- - Invalid filters return no assets.
+## 4. Additional dashboard icons
+![Additional dashboard icons](https://raw.githubusercontent.com/kubecost/docs/main/images/assetsicons.PNG)
 
+Directly next to the *Edit search parameters* icon are several additional icons for configuring reports:
 
-# Cloud cost reconciliation
+* Save/unsave report icon: Save or unsave your current report
+* Open saved report icon: Open a report that was previously saved using the Save report icon
+* Download CSV icon: Download your current report as a CSV file
+
+## 5. Assets metrics table
+The assets metrics table displays your aggregate assets, with four columns to organize by.
+
+* Name: Name of the aggregate group
+* Credits: Amount deducted from total cost due to provider-applied credit. A negative number means the total cost was reduced.
+* Adjusted: Amount added to total cost based on reconciliation with cloud provider’s billing data.
+* Total cost: Shows the total cost of the aggregate asset factoring in additions or subtractions from the Credits and Adjusted columns.
+
+Hovering over the gray info icon next to each asset will provide you with the hours run and hourly cost of the asset. To the left of each asset name is one of several Category icons (you can aggregate by these): Storage, Network, Compute, Management, and Other.
+
+Gray bubble text may appear next to an asset. These are all manually-assigned labels to an asset. To filter assets for a particular label, select the *Edit search parameters* icon, then select *Label/Tag* from the Filters dropdown and enter the complete name of the label.
+
+You can select an aggregate asset to view all individual assets comprising it. Each individual asset should have a ProviderID.
+
+## Cloud cost reconciliation
 
 After granting Kubecost permission to access cloud billing data, Kubecost adjusts its asset prices once cloud billing data becomes available, e.g. AWS Cost and Usage Report and the spot data feed. Until this data is available from cloud providers, Kubecost uses data from public cloud APIs to determine cost, or alternatively custom pricing sheets. This allows teams to have highly accurate estimates of asset prices in real-time and then become even more precise once cloud billing data becomes available, which is often 1-2 hours for spot nodes and up to a day for reserved instances/savings plans. 
-
 
 Note that while cloud adjustments typically lag by roughly a day, there are certain adjustments, e.g. credits, that may continue to come in over the course of the month, and in some cases at the very end of the month, so reconciliation adjustments may continue to update over time.
 
 
-Edit this doc on [Github](https://github.com/kubecost/docs/blob/main/assets.md)
+Edit this doc on [GitHub](https://github.com/kubecost/docs/blob/main/assets.md)
 
 <!--- {"article":"4407595924247","section":"4402829033367","permissiongroup":"1500001277122"} --->
