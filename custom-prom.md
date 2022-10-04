@@ -1,32 +1,58 @@
-# Custom Prometheus
+Prometheus Configuration Guide
+==============================
 
+## Bring your own Prometheus
 
+There are several considerations when disabling the Kubecost included Prometheus deployment. Kubecost _strongly_ recommends installing Kubecost with the bundled Prometheus in most environments.
 
-Integrating Kubecost with an existing Prometheus installation can be nuanced. We recommend first installing Kubecost with a bundled Prometheus ([instructions](http://kubecost.com/install)) as a dry run before integrating with an external Prometheus deployment. We also recommend getting in touch (team@kubecost.com) for assistance.
+The Kubecost Prometheus deployment is optimized to not interfere with other observability instrumentation and by default only contains metrics that are useful to the Kubecost product. This results in __70-90% fewer metrics__ than a Prometheus deployment using default settings.
 
-**Note:** integrating with an existing Prometheus is only officially supported under Kubecost paid plans.
+Additonally, if multi-cluster metric aggregation is required, Kubecost provides a turnkey solution that is highly tuned and simple to support using the included Prometheus deployment.
 
-<a name="dep-versions"></a>
-### Dependency Requirements
+> **Note**: the Kubecost team provides best efforts support for free/community users when integrating with an existing Prometheus deployment.
+
+## Disable node-exporter and kube-state-metrics (recommended)
+
+If you have node-exporter and/or KSM running on your cluster, follow this step to disable the Kubecost included versions. Additional detail on [KSM requiments](https://github.com/kubecost/docs/blob/main/ksm-metrics.md).
+
+> **Note**: In contrast to our recommendation above, we do recommend disabling the Kubecost's node-exporter and kube-state-metrics if you already have them running in your cluster.
+
+  ```sh
+  helm upgrade --install kubecost \
+    --repo https://kubecost.github.io/cost-analyzer/ cost-analyzer \
+    --namespace kubecost --create-namespace \
+    --set prometheus.nodeExporter.enabled=false \
+    --set prometheus.serviceAccounts.nodeExporter.create=false \
+    --set prometheus.kubeStateMetrics.enabled=false
+  ```
+## Dependency Requirements
 
 Kubecost requires the following minimum versions:
- 
-  - kube-state-metrics - v1.6.0 (May 19)
-  - cAdvisor - kubelet v1.11.0  (May 18)
-  - node-exporter - v0.16 (May 18) [Optional Dependency]
 
-### Implementation Steps
+- prometheus - v2.18 (support for v2.13 - v2.17 with limited features.)
+- kube-state-metrics - v1.6.0+ (May 19)
+- cAdvisor - kubelet v1.11.0+ (May 18)
+- node-exporter - v0.16+ (May 18) [Optional]
 
-1. Copy [values.yaml](https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/values.yaml) and update the following parameters:  
+## Steps to disable Kubecost's Prometheus Deployment (not recommended)
 
-   - `prometheus.fqdn` to match your local Prometheus with this format `  http://<prometheus-server-service-name>.<prometheus-server-namespace>.svc`
-   - `prometheus.enabled` set to `false`  
+**Before contintuing, see the note above about Kubecost's bundled prometheus**
 
-   Pass this updated file to the Kubecost helm install command with `--values values.yaml`
+1. Pass the following parameters in your helm install:
 
-2. <a name="scrape-configs"></a>Have your Prometheus scrape the cost-model `/metrics` endpoint. These metrics are needed for reporting accurate pricing data. Here is an example scrape config:
+    ```sh
+    helm upgrade --install kubecost \
+      --repo https://kubecost.github.io/cost-analyzer/ cost-analyzer \
+      --namespace kubecost --create-namespace \
+      --set global.prometheus.fqdn=http://<prometheus-server-service-name>.<prometheus-server-namespace>.svc \
+      --set global.prometheus.enabled=false
+    ```
 
-```
+    **Note** The fqdn can be a full path: https://prometheus-prod-us-central-x.grafana.net/api/prom/ if you use Grafana Cloud managed Prometheus. Learn more at [Grafana Cloud Integration for Kubecost](https://guide.kubecost.com/hc/en-us/articles/5699967551639-Grafana-Cloud-Integration-for-Kubecost)
+
+1. Have your Prometheus scrape the cost-model `/metrics` endpoint. These metrics are needed for reporting accurate pricing data. Here is an example scrape config:
+
+```yaml
 - job_name: kubecost
       honor_labels: true
       scrape_interval: 1m
@@ -38,58 +64,21 @@ Kubecost requires the following minimum versions:
         - kubecost-cost-analyzer.<namespace-of-your-kubecost>
         type: 'A'
         port: 9003
-```  
-
-This config needs to be added under `extraScrapeConfigs` in Prometheus configuration. [Example](https://github.com/kubecost/cost-analyzer-helm-chart/blob/0758d5df54d8963390ca506ad6e58c597b666ef8/cost-analyzer/values.yaml#L74)
-
-You can confirm that this job is successfully running with the Targets view in Prometheus.
-
-![Prometheus Targets](/prom-targets.png)
-
-<a name="recording-rules"></a>
-### Recording Rules  
-Kubecost uses [Prometheus recording rules](https://prometheus.io/docs/prometheus/latest/configuration/recording_rules/) to enable certain product features and to help improve product performance. These are recommended additions, especially for medium and large-sized clusters using their own Prometheus installation. You can find the current set of recording rules used in the `rules` block under `prometheus.server.serverFiles` in this [values.yaml](https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/values.yaml) file.
-
-> Note: Kubecost recording rules were most recently updated in v1.65.0
-
-### Cadvisor metric labels 
-Kubecost uses `container_name` and `pod_name` labels on cadvisor metrics. For clusters running **k8s v1.16+**, the following relabel config creates the expected labels on cadvisor metrics:
-
-```
-  metric_relabel_configs:
-  - source_labels: [ container ]
-    target_label: container_name
-    regex: (.+)
-    action: replace
-  - source_labels: [ pod ]
-    target_label: pod_name
-    regex: (.+)
-    action: replace
 ```
 
-Note that this does not override the source label-- it creates a new label called "pod_name" and copies the value of the pod into it.
+This config needs to be added to  `extraScrapeConfigs` in the Prometheus configuration. Example [extraScrapeConfigs.yaml](https://raw.githubusercontent.com/kubecost/docs/main/extraScrapeConfigs.yaml)
 
-On recent versions of **Prometheus Operator**, cadvisor `instance` labels do not match internal Kubernetes node names. This causes usage data to not be registered correctly in Kubecost. The solution is to add the following block into your kubelet/cadvisor scrape config.
+To confirm this job is successfully scraped by Prometheus, you can view the Targets page in Prometheus and look for a job named `kubecost`.
 
-```
-  metric_relabel_configs:
-  - source_labels: [node]
-    separator: ;
-    regex: (.*)
-    target_label: instance
-    replacement: $1
-    action: replace
-```
+![Prometheus Targets](https://raw.githubusercontent.com/kubecost/docs/main/prom-targets.png)
 
-Note that this does override the instance label This is the desired behavior, as the instance label before override represents an internal ip of 10.X.X.X that is not useful for identifying the node or for aggregation.
+## Node exporter metric labels
 
-### Node exporter metric labels
+> **Note**: This step is optional, and only impacts certain efficiency metrics. View [issue/556](https://github.com/kubecost/cost-model/issues/556) for a description of what will be missing if this step is skipped.
 
-> Note that this step is optional, and only impacts certain efficiency metrics. View [issue/556](https://github.com/kubecost/cost-model/issues/556) for a description of what will be missing if this step is skipped.
+You'll need to add the following relabel config to the job that scrapes the node exporter DaemonSet.
 
-You'll need to add the following relabel config to the job that scrapes the node exporter daemonet.
-
-```
+```yaml
   - job_name: 'kubernetes-service-endpoints'
 
     kubernetes_sd_configs:
@@ -101,63 +90,42 @@ You'll need to add the following relabel config to the job that scrapes the node
         target_label: kubernetes_node
 ```
 
-Note that this does not override the source label-- it creates a new label called "kubernetes_node" and copies the value of pod into it.
+Note that this does not override the source label. It creates a new label called "kubernetes_node" and copies the value of pod into it.
 
-<a name="troubleshoot"></a>
-## Troubleshooting Issues
+## Troubleshooting
 
 Visiting `<your-kubecost-endpoint>/diagnostics.html` provides diagnostics info on this integration. [More details](/diagnostics.md)
 
 Common issues include the following:
 
-* Wrong Prometheus FQDN: evidenced by the following pod error message `No valid prometheus config file at  ...` and the init pods hanging. We recommend running `curl <your_prometheus_url>/api/v1/status/config` from a pod in the cluster to confirm that your [Prometheus config](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#configuration-file) is returned. Here is an example, but this needs to be updated based on your Prometheus address:
+**Wrong Prometheus FQDN**: Evidenced by the following pod error message `No valid prometheus config file at ...` and the init pods hanging. We recommend running `curl <your_prometheus_url>/api/v1/status/config` from a pod in the cluster to confirm that your [Prometheus config](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#configuration-file) is returned. Here is an example, but this needs to be updated based on your Prometheus address:
 
-```
+```sh
 kubectl exec kubecost-cost-analyzer-db55d88f6-fr6kc -c cost-analyzer-frontend -n kubecost \
 -- curl http://kubecost-prometheus-server.kubecost/api/v1/status/config
 ```
 
 If the config file is not returned, this is an indication that an incorrect Prometheus address has been provided. If a config file is returned from one pod in the cluster but not the Kubecost pod, then the Kubecost pod likely has its access restricted by a network policy, service mesh, etc.
 
-* Prometheus throttling -- ensure Prometheus isn't being CPU throttled due to a low resource request.
+**Prometheus throttling**: Ensure Prometheus isn't being CPU throttled due to a low resource request.
 
-* Wrong dependency version -- see the section above about Requirements
+**Wrong dependency version**: Review the Dependency Requirements section above
 
-* Missing scrape configs -- visit Prometheus Target page (screenshot above)
+**Missing scrape configs**: Visit Prometheus Targets page (screenshot above)
 
-* Data incorrectly is a single namespace -- make sure that [honor_labels](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#scrape_config) is enabled
+**Data incorrectly is a single namespace**: Make sure that [honor_labels](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#scrape_config) is enabled
+
+**Negative idle reported**: Make sure the kubecost job is scraping Kubecost. Metrics for `node_total_hourly_cost` should exist in Prometheus.
 
 You can visit Settings in Kubecost to see basic diagnostic information on these Prometheus metrics:
 
-![Prometheus status diagnostic](/prom-status.png)
+![Prometheus status diagnostic](https://raw.githubusercontent.com/kubecost/docs/main/prom-status.png)
 
+---
 
-<a name="existing-grafana"></a>
-# Custom Grafana
+Have a question not answered on this page? Email us at support@kubecost.com or [join the Kubecost Slack community](https://join.slack.com/t/kubecost/shared_invite/zt-1dz4a0bb4-InvSsHr9SQsT_D5PBle2rw)!
 
-Using an existing Grafana deployment can be accomplished with either of the following two options:
+---
+Edit this doc on [GitHub](https://github.com/kubecost/docs/blob/main/custom-prom.md)
 
-1) _Option: Directly link to an external Grafana._ After Kubecost installation, visit Settings and update __Grafana Address__ to a URL (e.g. http://demo.kubecost.com/grafana) that is visible to users accessing Grafana dashboards. This variable can alternatively be passed at the time you deploy Kubecost via the `kubecostProductConfigs.grafanaURL` paremeter in [values.yaml](https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/values.yaml). Next, import Kubecost Grafana dashboards as JSON from this [folder](https://github.com/kubecost/cost-analyzer-helm-chart/tree/master/cost-analyzer). 
-
-![Kubecost Settings](/images/settings-grafana.png)
-
-2) _Option: Deploy with Grafana sidecar enabled._ Passing the Grafana parameters below in your [values.yaml](https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/values.yaml) will install ConfigMaps for Grafana dashboards that will be picked up by the [Grafana sidecar](https://github.com/helm/charts/tree/master/stable/grafana#sidecar-for-dashboards) if you have Grafana with the dashboard sidecar already installed.
-
-```
-global:
-  grafana:
-    enabled: false
-    domainName: cost-analyzer-grafana.default #example where format is <service-name>.<namespace>
-    proxy: false
-grafana:
-  sidecar:
-    dashboards:
-      enabled: true
-    datasources:
-      enabled: false
-```
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;For Option 2, ensure that the following flags are set in your Operator deployment:
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1. sidecar.dashboards.enabled = true  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2. sidecar.dashboards.searchNamespace isn't restrictive, use `ALL` if Kubecost runs in another ns  
+<!--- {"article":"4407595941015","section":"4402815636375","permissiongroup":"1500001277122"} --->
