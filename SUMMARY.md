@@ -22,11 +22,11 @@
   * [Multi-Cluster / Long Term Storage](long-term-storage.md)
   * [Prometheus Configuration Guide](custom-prom.md)
   * [Thanos Upgrade](thanos-upgrade.md)
-* [Frequently Asked Questions](setup/frequently-asked-questions/README.md)
-  * [Advanced Reporting](setup/frequently-asked-questions/advanced-reports.md)
+* [Frequently Asked Questions](setup/frequently-asked-questions.md)
 
 ***
 
+* [Advanced Reporting](advanced-reports.md)
 * [Installing Agent for Hosted Kubecost (Alpha)](agent.md)
 * [Alerts](alerts.md)
 * [allocation-api](allocation-api.md)
