@@ -41,6 +41,15 @@ For traffic routed to addresses outside of your cluster but inside your VPC, Kub
 * In-region: A list of addresses/ranges that will be classified as the same region between source and destinations but different zones.
 * Cross-region: A list of addresses/ranges that will be classified as the different region from the source regions
 
+## Cloud Provider Service Tagging
+
+When traffic is directed towards a cloud providers service, the network traffic pod can tag the traffic with the relevant service name (e.g. AWS S3, Azure Storage, Google Cloud Storage).
+
+To enable this feature, set the following Helm values:
+
+* For AWS, use [`networkCosts.config.services.amazon-web-services=true`](https://github.com/kubecost/cost-analyzer-helm-chart/blob/5787607bf307379363715a220a271e203f0207b4/cost-analyzer/values.yaml#L582)
+* For Azure, use [`networkCosts.config.services.azure-cloud-services=true`](https://github.com/kubecost/cost-analyzer-helm-chart/blob/5787607bf307379363715a220a271e203f0207b4/cost-analyzer/values.yaml#L585)
+* For GCP, use [`networkCosts.config.services.google-cloud-services=true`](https://github.com/kubecost/cost-analyzer-helm-chart/blob/5787607bf307379363715a220a271e203f0207b4/cost-analyzer/values.yaml#L579)
 
 ## Troubleshooting
 
@@ -64,7 +73,6 @@ To verify this feature is functioning properly, you can complete the following s
 * Today this feature is supported on Unix-based images with conntrack  
 * Actively tested against GCP, AWS, and Azure  
 * Daemonsets have shared IP addresses on certain clusters  
-
 
 Edit this doc on [GitHub](https://github.com/kubecost/docs/blob/main/network-allocation.md)
 
