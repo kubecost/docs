@@ -63,11 +63,39 @@ Alternatively, you can deploy Kubecost without persistent storage to store by fo
 
 ## Issue: Unable to establish a port-forward connection
 
-First, check the status of pods in the target namespace:
+Review the output of the port-forward command:
 
-`kubectl get pods -n kubecost`
+```
+$ kubectl port-forward --namespace kubecost deployment/kubecost-cost-analyzer 9090
+Forwarding from 127.0.0.1:9090 -> 9090
+Forwarding from [::1]:9090 -> 9090
+```
 
-You should see the following pods running
+Forwarding from `127.0.0.1` indicates kubecost should be reachable via a browser at `http://127.0.0.1:9090` or `http://localhost:9090`.
+
+In some cases it may be necessary for kubectl to bind to all interfaces. This can be done with the addition of the flag `--address 0.0.0.0`.
+
+```
+$ kubectl port-forward --address 0.0.0.0 --namespace kubecost deployment/kubecost-cost-analyzer 9090
+Forwarding from 0.0.0.0:9090 -> 9090
+```
+
+Navigating to kubecost while port-forwarding should result in "Handling connection" output in the terminal: 
+
+```
+kubectl port-forward --address 0.0.0.0 --namespace kubecost deployment/kubecost-cost-analyzer 9090
+Forwarding from 0.0.0.0:9090 -> 9090
+Handling connection for 9090
+Handling connection for 9090
+```
+
+To troubleshoot further check the status of pods in the kubecost namespace:
+
+```
+kubectl get pods -n kubecost`
+```
+
+All `kubecost-*` pods should have `Running` or `Completed` status.
 
 <pre>
 NAME                                                     READY   STATUS    RESTARTS   AGE
@@ -83,7 +111,6 @@ If the cost-analyzer or prometheus-server __pods are missing__, we recommend rei
 If any __pod is not Running__ other than cost-analyzer-checks, you can use the following command to find errors in the recent event log:
 
 `kubectl describe pod <pod-name> -n kubecost`
-
 
 ## Issue: FailedScheduling kubecost-prometheus-node-exporter
 
@@ -151,6 +178,5 @@ Have a question not answered on this page? Email us at [support@kubecost.com](su
 ---
 
 Edit this doc on [GitHub](https://github.com/kubecost/docs/blob/main/troubleshoot-install.md)
-
 
 <!--- {"article":"4407601830679","section":"4402815696919","permissiongroup":"1500001277122"} --->
