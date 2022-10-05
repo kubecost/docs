@@ -25,7 +25,7 @@
   * [Deploy Kubecost Staging Builds](staging.md)
   * [Cost Analyzer Persistent Volume](storage.md)
   * [Network Traffic Cost Allocation](network-allocation.md)
-  * [Add Key](<add-key.md>)
+  * [Add Key](add-key.md)
   * [Custom Webhook to Create a Kubecost stage in Spinnaker](spinnaker-custom-webhook.md)
   * [v1.94+ TurndownSchedule Migration Guide](v1-94-turndown-schedule-migration-guide.md)
   * [Contexts](context-switcher.md)
@@ -60,7 +60,7 @@
 
 ## APIs
 
-* [apis](apis.md)
+* [APIs](apis.md)
   * [Abandoned Workloads](api-abandoned-workloads.md)
   * [Allocation API (Deprecated)](allocation-api.md)
   * [Allocation API](allocation.md)
@@ -119,8 +119,5 @@
   * [Getting Support](support-channels.md)
   * [Capture a bug report](bug-report.md)
   * [Kubecost Diagnostics](diagnostics.md)
-
 * [Frequently Asked Questions](setup/frequently-asked-questions.md)
 * [Contact Us](contactus.md)
-
-***
