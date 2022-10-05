@@ -26,7 +26,7 @@
 
 ## Advanced Configuration
 
-* [Add Key](<add-key.md>)
+* [Add Key](add-key.md)
 * [Enabling Annotation Emission](annotations.md)
 * [Multi-Cluster Options](multi-cluster.md)
 * [Federated Clusters](federated-clusters.md)
