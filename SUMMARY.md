@@ -5,9 +5,9 @@
 ## Install and Configure
 
 * [Installation](install.md)
-  * [Environment](env.md)
+  * [Environment](install-and-configure/install/environment.md)
   * [Helm Parameters](helm-install-params.md)
-  * Provider Installations
+  * [Provider Installations](install-and-configure/install/provider-installations/README.md)
     * [Amazon EKS Integration](aws-eks-cost-monitoring.md)
     * [AWS Marketplace Install](aws-marketplace-install.md)
     * [Installation Kubecost with Istio (Rancher)](istio-rancher.md)
@@ -33,22 +33,19 @@
 * [v1.94+ TurndownSchedule Migration Guide](v1-94-turndown-schedule-migration-guide.md)
 * [User Management - SSO/SAML/RBAC\*](user-management.md)
 * [Deploy Kubecost Staging Builds](staging.md)
-
 * [Multi-Cluster / Long Term Storage](long-term-storage.md)
-  * AWS
+  * [AWS](advanced-configuration/long-term-storage/aws/README.md)
     * [AWS Multi-Cluster Storage Configuration](long-term-storage-aws.md)
     * [Creating a Thanos IAM policy](aws-service-account-thanos.md)
-  * Azure
+  * [Azure](advanced-configuration/long-term-storage/azure/README.md)
     * [Azure Long Term Storage](long-term-storage-azure.md)
-  * GCP
+  * [GCP](advanced-configuration/long-term-storage/gcp/README.md)
     * [GCP Long Term Storage](long-term-storage-gcp.md)
   * [Thanos Upgrade](thanos-upgrade.md)
-
 * [Cluster Controller](controller.md)
 * [High Availability Kubecost](high-availability.md)
 * [Windows Node Support](windows.md)
 * [ETL Backup](etl-backup.md)
-
 * [Cloud Billing Integrations](cloud-integration.md)
   * [Multi-Cloud Integrations](multi-cloud.md)
   * [AWS Cloud Integrations](aws-cloud-integrations.md)
@@ -133,5 +130,3 @@
 * [community-getting-started](community-getting-started.md)
 * [Namespace Contacts](namespace-contacts.md)
 * [Allocation API (Deprecated)](allocation-api.md)
-
-***
