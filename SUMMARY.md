@@ -107,8 +107,6 @@
 * [Kubecost Memory Usage](app-memory.md)
 * [Secondary Clusters Guide](secondary-clusters.md)
 * [Kube-State-Metrics (KSM) Emission](ksm-metrics.md)
-* [Kubecost Business Features](business.md)
-* [Kubecost Enterprise Features](enterprise.md)
 * [Kubecost Release Process](release-process.md)
 
 ## Troubleshooting
@@ -130,4 +128,10 @@
 
 * [community-getting-started](community-getting-started.md)
 * [Namespace Contacts](namespace-contacts.md)
+<<<<<<< HEAD
 
+=======
+* [Allocation API (Deprecated)](allocation-api.md)
+* [Kubecost Business Features](business.md)
+* [Kubecost Enterprise Features](enterprise.md)
+>>>>>>> de77a9c1a79673dd05e38cc7a3d8b4f00300c574
