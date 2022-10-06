@@ -24,37 +24,36 @@
   * [Contexts](context-switcher.md)
   * [Ingress Examples](ingress-examples.md)
 
-## Advanced Configuration
-
-* [Add Key](add-key.md)
-* [Enabling Annotation Emission](annotations.md)
-* [Multi-Cluster Options](multi-cluster.md)
-* [Federated Clusters](federated-clusters.md)
-* [v1.94+ TurndownSchedule Migration Guide](v1-94-turndown-schedule-migration-guide.md)
-* [User Management - SSO/SAML/RBAC\*](user-management.md)
-* [Deploy Kubecost Staging Builds](staging.md)
-* [Multi-Cluster / Long Term Storage](long-term-storage.md)
-  * [AWS](advanced-configuration/long-term-storage/aws/README.md)
-    * [AWS Multi-Cluster Storage Configuration](long-term-storage-aws.md)
-    * [Creating a Thanos IAM policy](aws-service-account-thanos.md)
-  * [Azure](advanced-configuration/long-term-storage/azure/README.md)
-    * [Azure Long Term Storage](long-term-storage-azure.md)
-  * [GCP](advanced-configuration/long-term-storage/gcp/README.md)
-    * [GCP Long Term Storage](long-term-storage-gcp.md)
-  * [Thanos Upgrade](thanos-upgrade.md)
-* [Cluster Controller](controller.md)
-* [High Availability Kubecost](high-availability.md)
-* [Windows Node Support](windows.md)
-* [ETL Backup](etl-backup.md)
-* [Cloud Billing Integrations](cloud-integration.md)
-  * [Multi-Cloud Integrations](multi-cloud.md)
-  * [AWS Cloud Integrations](aws-cloud-integrations.md)
-    * [AWS Out of Cluster](aws-out-of-cluster.md)
-    * [AWS Node Price Reconciliation Methodology](aws-node-price-reconcilitation-methodology.md)
-  * [Azure Cloud Integration](azure-out-of-cluster.md)
-    * [Azure Rate Card Configuration](azure-config.md)
-  * [GCP Cloud Integration](gcp-out-of-cluster.md)
-    * [Creating a Google Service Account](google-service-account-thanos.md)
+* Advanced Configuration
+  * [Add Key](add-key.md)
+  * [Enabling Annotation Emission](annotations.md)
+  * [Multi-Cluster Options](multi-cluster.md)
+  * [Federated Clusters](federated-clusters.md)
+  * [v1.94+ TurndownSchedule Migration Guide](v1-94-turndown-schedule-migration-guide.md)
+  * [User Management - SSO/SAML/RBAC\*](user-management.md)
+  * [Deploy Kubecost Staging Builds](staging.md)
+  * [Multi-Cluster / Long Term Storage](long-term-storage.md)
+    * [AWS](advanced-configuration/long-term-storage/aws/README.md)
+      * [AWS Multi-Cluster Storage Configuration](long-term-storage-aws.md)
+      * [Creating a Thanos IAM policy](aws-service-account-thanos.md)
+    * [Azure](advanced-configuration/long-term-storage/azure/README.md)
+      * [Azure Long Term Storage](long-term-storage-azure.md)
+    * [GCP](advanced-configuration/long-term-storage/gcp/README.md)
+      * [GCP Long Term Storage](long-term-storage-gcp.md)
+    * [Thanos Upgrade](thanos-upgrade.md)
+  * [Cluster Controller](controller.md)
+  * [High Availability Kubecost](high-availability.md)
+  * [Windows Node Support](windows.md)
+  * [ETL Backup](etl-backup.md)
+  * [Cloud Billing Integrations](cloud-integration.md)
+    * [Multi-Cloud Integrations](multi-cloud.md)
+    * [AWS Cloud Integrations](aws-cloud-integrations.md)
+      * [AWS Out of Cluster](aws-out-of-cluster.md)
+      * [AWS Node Price Reconciliation Methodology](aws-node-price-reconcilitation-methodology.md)
+    * [Azure Cloud Integration](azure-out-of-cluster.md)
+      * [Azure Rate Card Configuration](azure-config.md)
+    * [GCP Cloud Integration](gcp-out-of-cluster.md)
+      * [Creating a Google Service Account](google-service-account-thanos.md)
 
 ## Integrations
 
@@ -64,7 +63,6 @@
 
 * [OpenCost Product Comparison](opencost-product-comparison.md)
 * [User Metrics](user-metrics.md)
-* [Outages](outages.md)
 * [Installing Agent for Hosted Kubecost (Alpha)](agent.md)
 * [Tuning Resource Consumption](resource-consumption.md)
 
@@ -72,6 +70,7 @@
 
 * [Getting Started](getting-started.md)
   * [Standardizing Kubernetes cost allocation](partner-metrics.md)
+  * [Kubernetes Cost Allocation](cost-allocation.md)
   * [Availability Tiers](availability-tiers.md)
   * [Cluster Health Score](cluster-health-score.md)
   * [Spot Checklist](spot-checklist.md)
@@ -81,6 +80,7 @@
   * [Saved Reports](saved-reports.md)
   * [Alerts](alerts.md)
   * [Advanced Reporting](advanced-reports.md)
+  * [Kubernetes Assets](assets.md)
 
 ## APIs
 
@@ -99,14 +99,13 @@
 
 * [Kubecost Core Architecture Overview](architecture.md)
 * [Open Source](open-source-deps.md)
-* [Kubernetes Assets](assets.md)
 * [Security and Data Protection](security.md)
 * [Ports](ports.md)
-* [Kubernetes Cost Allocation](cost-allocation.md)
 * [Kubecost Memory Usage](app-memory.md)
 * [Secondary Clusters Guide](secondary-clusters.md)
 * [Kube-State-Metrics (KSM) Emission](ksm-metrics.md)
 * [Kubecost Release Process](release-process.md)
+* [Outages](outages.md)
 
 ## Troubleshooting
 
