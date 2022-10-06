@@ -15,7 +15,6 @@
     * [Installing Kubecost with Plural](install-on-plural.md)
     * [Installing in Air-gapped Environments](air-gapped.md)
     * [Install Kubecost on Redhat OpenShift](openshift-kubecost-install.md)
-    * [Allocation API (Deprecated)](allocation-api.md)
   * [Grafana Configuration Guide](custom-grafana.md)
   * [Prometheus Configuration Guide](custom-prom.md)
     * [Amazon Managed Service for Prometheus](aws-amp-integration.md)
@@ -128,10 +127,4 @@
 
 * [community-getting-started](community-getting-started.md)
 * [Namespace Contacts](namespace-contacts.md)
-<<<<<<< HEAD
-
-=======
 * [Allocation API (Deprecated)](allocation-api.md)
-* [Kubecost Business Features](business.md)
-* [Kubecost Enterprise Features](enterprise.md)
->>>>>>> de77a9c1a79673dd05e38cc7a3d8b4f00300c574
