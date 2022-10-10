@@ -1,10 +1,8 @@
 # Saved Reports
 
-## Summary
-
 Saved reports can be managed via [`values.yaml`](https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/values.yaml), or via the Kubecost UI, or both. This reference outlines the process of configuring saved reports through a values file, and provides documentation on the required and optional parameters.
 
-## Saved Report Parameters
+## Saved report parameters
 
 The saved report settings, under `global.savedReports`, accept two parameters:
 
@@ -57,7 +55,7 @@ The following fields apply to each map item under the `reports` key:
     - _e.g., (namespace=foo,bar), (node=fizz) evaluates as (namespace == foo || namespace == bar) && node=fizz_
   - **Important:** If no filters used, supply an empty list `[]`
 
-## Example Helm values.yaml Saved Reports Section
+## Example Helm values.yaml Saved Reports section
 
 ```
    # Set saved report(s) accessible in reports.html
@@ -97,7 +95,7 @@ The following fields apply to each map item under the `reports` key:
 
 ```
 
-## Combining UI Report Management with `values.yaml`
+## Combining UI report management with `values.yaml`
 
 When defining reports via `values.yaml`, by setting `global.savedReports.enabled = true` in the values file, the reports defined in `values.yaml` are created when the Kubecost pod starts. Reports can still be freely created/deleted via the UI while the pod is running. However, when the pod restarts, whatever is defined the the values file supersedes any UI changes.
 
