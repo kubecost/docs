@@ -93,9 +93,9 @@
   * [Container Request Right Sizing Recommendation API (v2)](api-request-right-sizing-v2.md)
   * [Asset Diff API](asset-diff.md)
   * [Audit API](audit-api.md)
-  * Deprecated APIs
-    * [Container Request Right-Sizing Recommendation API (V1) - Deprecated](api-request-right-sizing.md)
-    * [costDataModel & aggregatedCostModel API - Deprecated](allocation-api.md)
+* Deprecated APIs
+  * [Container Request Right-Sizing Recommendation API (V1) - Deprecated](api-request-right-sizing.md)
+  * [costDataModel & aggregatedCostModel API - Deprecated](allocation-api.md)
 
 ## Architecture
 
