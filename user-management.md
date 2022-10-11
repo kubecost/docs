@@ -21,7 +21,7 @@ Kubecost supports access control/Single Sign On (SSO) with SAML 2.0. Kubecost wo
 
  > **Note**: All SAML 2.0 providers also work. The above guides can be used as templates for what is required.
 
-## SAML Troubleshooting guide
+## SAML troubleshooting guide
 1. Disable SAML and confirm that the cost-analyzer pod starts.
 2. If Step 1 is successful, but the pod is crashing or never enters the ready state when SAML is added, it is likely that there is panic loading or parsing SAML data. You should be able to pull the logs by fetching logs for the previous pod:
 
@@ -109,6 +109,13 @@ From the following [PingIdentity article](https://support.pingidentity.com/s/art
 On the PingID side: specify an attribute contract “SAML_SP_NAME_QUALIFIER” with the format `urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified`.
 
 On the Kubecost side: in your Helm values, set `saml.nameIDFormat` to the same format set by PingID:
+
+```
+saml:
+  nameIDFormat: “urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified”
+```
+
+Make sure `audienceURI` and `appRootURL` match the entityID configured within PingFed.
 
 Edit this doc on [GitHub](https://github.com/kubecost/docs/blob/main/user-management.md)
 
