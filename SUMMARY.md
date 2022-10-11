@@ -84,7 +84,7 @@
 
 ## APIs
 
-* [APIs](apis.md)
+* [Current APIs](apis.md)
   * [Allocation API](allocation.md)
   * [V2 Filters](filters-v2.md)
   * [Assets API](assets-api.md)
