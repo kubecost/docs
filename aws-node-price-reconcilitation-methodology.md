@@ -50,12 +50,15 @@ These results are then merged into one set, with the provider id used to associa
 There are several different ways to look at your node cost data. The default for the cost explorer is "unblended" but it makes the most sense from an allocation perspective to use the "amortized" rates. Be sure "amortized" is selected when looking at cost data. Here's an example of how they can vary dramatically on our test cluster.
 
 The t2-mediums here are covered by a savings plan. Unblended, we're only being charged $0.06/day for two of them.
+
 <img width="1047" alt="Screen Shot 2021-04-22 at 11 00 09 PM" src="https://user-images.githubusercontent.com/453512/115825827-d229ca80-a3be-11eb-961f-6ae66f56c605.png">
 
 When amortized costs are selected, the price jumps to $1.50/day
+
 <img width="1427" alt="Screen Shot 2021-04-22 at 11 05 28 PM" src="https://user-images.githubusercontent.com/453512/115826171-52e8c680-a3bf-11eb-8e47-fd62a2e9a44b.png">
 
 Which should closely match our data on the Assets page, for days where we have adjustments come in from the pricing CUR.
+
 <img width="1792" alt="Screen Shot 2021-04-22 at 11 03 45 PM" src="https://user-images.githubusercontent.com/453512/115825960-08ffe080-a3bf-11eb-9968-881f70d11e3c.png">
 
 
