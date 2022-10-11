@@ -40,9 +40,9 @@ This specific parameter can be configured under `kubecostProductConfigs.productK
 
 ## In product
 
-To apply your license key within the Kubecost UI, visit the Overview page and then select **Upgrade** in the page header.
+To apply your license key within the Kubecost UI, visit the Overview page and then select *Upgrade* in the page header.
 
-Next, select **Add Key** in the dialog menu shown below.
+Next, select *Add Key* in the dialog menu shown below.
 
 You can then supply your Kubecost provided license key in the input box that is now visible.
 
