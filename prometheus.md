@@ -17,7 +17,7 @@ View `http://localhost:9003/` in your web browser. You should be presented with 
 
 If you're unable to connect, confirm that the Prometheus server pod is in a `Running` state. 
 
-## Step 3. Input your desired query and execute
+## Step 3: Input your desired query and execute
 
 Edit this doc on [GitHub](https://github.com/kubecost/docs/blob/main/prometheus.md)
 
