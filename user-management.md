@@ -74,7 +74,7 @@ Certain metadata URLs could potentially return an EntitiesDescriptor, instead of
 
 You are left with data in a similar format to the example below: 
 
-```
+```xml
 <EntityDescriptor xmlns="urn:oasis:names:tc:SAML:2.0:metadata" xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" entityID="kubecost-entity-id">
   .... 
 </EntityDescriptor>
