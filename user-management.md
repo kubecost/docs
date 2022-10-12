@@ -29,7 +29,7 @@ Kubecost supports access control/Single Sign On (SSO) with SAML 2.0. Kubecost wo
 
 If you’re supplying the SAML from the address of an Identity Provider Server: curl the saml metadata endpoint from within the Kubecost pod and ensure that a valid XML EntityDescriptor is being returned and downloaded. The response should be in this format:
 
-```
+```shell
 kubectl exec kubecost-cost-analyzer-84fb785f55-2ssgj -c cost-analyzer-frontend -n kubecost -it -- /bin/sh
 curl https://dev-elu2z98r.auth0.com/samlp/metadata/c6nY4M37rBP0qSO1IYIqBPPyIPxLS8v2
 
