@@ -110,7 +110,7 @@ On the PingID side: specify an attribute contract “SAML_SP_NAME_QUALIFIER” w
 
 On the Kubecost side: in your Helm values, set `saml.nameIDFormat` to the same format set by PingID:
 
-```
+```yaml
 saml:
   nameIDFormat: “urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified”
 ```
