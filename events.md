@@ -130,4 +130,5 @@ To access the most recent events in the event log, invoke `GET <kubecost>/model/
 
 This log will additionally be appended to bug reports.
 
-<!--- {"article":"","section":"8454342470679","permissiongroup":"1500001277122"} --->
+
+<!--- {"article":"9505088647319","section":"8454342470679","permissiongroup":"1500001277122"} --->
