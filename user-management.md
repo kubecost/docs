@@ -86,7 +86,7 @@ Then, you can upload the EntityDescriptor to a secret in the same namespace as k
 
 To use this secret, in your helm values set metadataSecretName to the name of the secret created above, and set idpMetadataURL to the empty string:
 
-```
+```yaml
 saml:
   metadataSecretName: “metadata-secret”
   idpMetadataURL: “”
