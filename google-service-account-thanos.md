@@ -1,3 +1,6 @@
+Creating a Google Service Account
+=================================
+
 ### Creating a Google Service Account
 In order to create a Google service account for use with Thanos:
 
@@ -14,7 +17,7 @@ In order to create a Google service account for use with Thanos:
 ![image](https://user-images.githubusercontent.com/334480/66667856-faf5cf00-ec21-11e9-817d-65c2dad92af4.png)
 
 #### Press `Create`.
-You should now be at the `Service account permissions (optional)` screen. Click inside the `Role` box, and set the first entry to **Storage Object Creator**. Click the `+ Add Another Role` and set the second  entry to **Storage Object Viewer**.
+You should now be at the `Service account permissions (optional)` screen. Click inside the `Role` box, and set the first entry to **Storage Object Creator**. Click the `+ Add Another Role` and set the second entry to **Storage Object Viewer**.
 
 ![image](https://user-images.githubusercontent.com/334480/66667955-2ed0f480-ec22-11e9-90cb-b160b8170aa4.png)
 
@@ -28,3 +31,8 @@ Once back to the service accounts menu, select the `...` at the end of the entry
 
 #### Confirm JSON
 Confirm a JSON key and hit `Create`. This will download a JSON service account key entry for use with the Thanos `object-store.yaml` mentioned in the initial setup step.
+
+
+Edit this doc on [GitHub](https://github.com/kubecost/docs/blob/main/google-service-account-thanos.md)
+
+<!--- {"article":"4407601817495","section":"4402815680407","permissiongroup":"1500001277122"} --->

@@ -1,4 +1,5 @@
-# Spot Checklist
+Spot Checklist
+==============
 
 The Spot Readiness Checklist investigates your Kubernetes workloads to attempt
 to identify those that are candidates to be schedulable on spot (preemptible)
@@ -93,6 +94,11 @@ the controller itself or the namespace it is running in with
 
 ## Implementing spot nodes in your cluster
 
+The Checklist is now deployed alongside a [recommended cluster configuration](./spot-cluster-sizing.md)
+which automatically suggests a set of spot and on-demand nodes to use in your cluster
+based on the Checklist. If you do not want to use that, read the following for
+some important information:
+
 Kubecost marking a workload as spot ready is not a guarantee. A domain expert should
 always carefully consider the workload before approving it to run on spot nodes.
 
@@ -119,3 +125,6 @@ scheduling problems, especially if capacity is low and spinning up a new node
 takes too long. In the second case, fewer pods are forced to be rescheduled if a
 reclaim event occurs, thus lowering the likelihood of scheduling problems.
 
+Edit this doc on [GitHub](https://github.com/kubecost/docs/blob/main/spot-checklist.md)
+
+<!--- {"article":"4407595980311","section":"4402815656599","permissiongroup":"1500001277122"} --->

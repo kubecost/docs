@@ -1,12 +1,15 @@
-Kubecost 1.67.0+ uses Thanos 0.15.0. If you're upgrading to kubecost 1.67.0+ from kubecost < 1.67.0 and using thanos, and using AWS s3 as your backing storage for thanos, you'll need to make a small change to your thanos secret in order to bump the thanos version to 0.15.0 before you upgrade kubecost.
-Thanos 0.15.0 has over 10x performance improvements, so this is well worth the effort.
+Thanos Upgrade
+==============
 
-Your values-thanos.yaml needs to be updated to the new defaults: https://github.com/kubecost/cost-analyzer-helm-chart/commit/752b584a520f2ff089517341ab2eca2664980dab#diff-b5f07a55b9483e6b0fc339c7a03fa08b .
+Kubecost 1.67.0+ uses Thanos 0.15.0. If you're upgrading to Kubecost 1.67.0+ from Kubecost < 1.67.0 and using Thanos, and using AWS s3 as your backing storage for Thanos, you'll need to make a small change to your Thanos secret in order to bump the Thanos version to 0.15.0 before you upgrade Kubecost.
+Thanos 0.15.0 has over 10x performance improvements, so this is recommended.
+
+Your _values-thanos.yaml_ needs to be updated to the new defaults: https://github.com/kubecost/cost-analyzer-helm-chart/commit/752b584a520f2ff089517341ab2eca2664980dab#diff-b5f07a55b9483e6b0fc339c7a03fa08b.
 The PR bumps the image version, adds the [query-frontend](https://thanos.io/tip/components/query-frontend.md/) component, and increases concurrency. 
 
-This is simplified if you're using our default values-thanos.yaml -- that has the new configs already.
+This is simplified if you're using our default _values-thanos.yaml_, which has the new configs already.
 
-**However, for the thanos secret you're using, the "encrypt-sse" line needs to be removed. Everything else should stay the same.**
+> **Note**: For the Thanos secret you're using, the "encrypt-sse" line needs to be removed. Everything else should stay the same.
 
 For example, view this sample config:
 
@@ -36,8 +39,12 @@ The easiest way to do this is to delete the existing secret and upload a new one
 
 `kubectl delete secret -n kubecost kubecost-thanos`
 
-update your secret yaml file as above, and save it as object-store.yaml
+Update your secret yaml file as above, and save it as _object-store.yaml_.
 
 `kubectl create secret generic kubecost-thanos -n kubecost --from-file=./object-store.yaml`
 
 Once this is done, you're ready to upgrade!
+
+Edit this doc on [GitHub](https://github.com/kubecost/docs/blob/main/thanos-upgrade.md)
+
+<!--- {"article":"4407601829655","section":"4402815636375","permissiongroup":"1500001277122"} --->

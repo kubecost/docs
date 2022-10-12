@@ -1,12 +1,17 @@
-Once you've installed Kubecost in an azure account, to access accurate Microsoft Azure billing data, Kubecost needs access to the Billing Rate Card API.
+Azure Rate Card Configuration
+============
 
-> Note: you can also get this functionality plus external costs by completing the full [Kubecost Azure integration](/azure-out-of-cluster.md).
+Kubecost needs access to the Microsoft Azure Billing Rate Card API to access accurate pricing data for your Kubernetes resources.
 
-Start by creating an Azure role definition. Below is an example definition, replace YOUR_SUBSCRIPTION_ID with the Subscription ID of your account:
+> **Note**: you can also get this functionality plus external costs by completing the full [Azure billing integration](/azure-out-of-cluster.md).
 
-```
+## Creating a Custom Azure Role
+
+Start by creating an Azure role definition. Below is an example definition, replace `YOUR_SUBSCRIPTION_ID` with the Subscription ID where your Kubernetes Cluster lives:
+
+```json
 {
-    "Name": "MyRateCardRole",
+    "Name": "KubecostRole",
     "IsCustom": true,
     "Description": "Rate Card query role",
     "Actions": [
@@ -22,24 +27,107 @@ Start by creating an Azure role definition. Below is an example definition, repl
 }
 ```
 
-Save this into a file called myrole.json
+Save this into a file called `myrole.json`
 
 Next, you'll want to register that role with Azure:
 
-```
+```shell
 az role definition create --verbose --role-definition @myrole.json
 ```
 
-Next, create an Azure Service Principle.
+## Creating an Azure Service Principal
 
-```
-az ad sp create-for-rbac --name "MyServicePrincipal" --role "MyRateCardRole" --sdk-auth true > my_credentials.json
-```
+Next, create an Azure Service Principal.
 
-The newly created `my_credentials.json` file will contain the relevant configuration information. You can either supply this information in <your-kubecost-endpoint>/settings.html (screenshot below) or in helm values under [kubecostProductConfigs](https://github.com/kubecost/cost-analyzer-helm-chart/blob/b9b24ee7f957d81b3c87937026e7e8889b293764/cost-analyzer/values.yaml#L547-L551) :
- ```
-helm install kubecost ./cost-analyzer -n kubecost --set kubecostProductConfigs.azureClientID=<> --set kubecostProductConfigs.azureTenantID=<> --set kubecostProductConfigs.azureClientPassword=<> --set .kubecostProductConfigs.createServiceKeySecret=true
+```shell
+az ad sp create-for-rbac --name "KubecostAccess" --role "KubecostRole" --scope "/subscriptions/YOUR_SUBSCRIPTION_ID" --sdk-auth true > my_credentials.json
 ```
 
-<img width="1792" alt="Screen Shot 2020-12-07 at 12 32 24 PM" src="https://user-images.githubusercontent.com/453512/101402781-12156880-3889-11eb-86ca-55111d36fe14.png">
+The newly created `my_credentials.json` file will contain the relevant configuration information.
 
+## Azure billing region, offer durable ID, and currency
+
+Kubecost supports querying the Azure APIs for cost data based on the region, offer durable ID, and currency defined in your Microsoft Azure offer.
+
+Those properties are configured with the following helm values:
+
+* `kubecostProductConfigs.azureBillingRegion`
+* `kubecostProductConfigs.azureOfferDurableID`
+* `kubecostProductConfigs.currencyCode`
+
+Be sure to verify your billing information with Microsoft and update the above Helm values to reflect your bill to country, subscription offer durable id/number, and currency.
+
+The following Microsoft documents are a helpful reference:
+
+* [Microsoft Azure Offer Details](https://azure.microsoft.com/en-us/support/legal/offer-details/)
+* [Azure Pricing FAQ](https://azure.microsoft.com/en-us/pricing/faq/)
+* [Geographic availability and currency support for the commercial marketplace](https://docs.microsoft.com/en-us/azure/marketplace/marketplace-geo-availability-currencies)
+* [Azure Portal > Cost Management + Billing > Billing Account Properties](https://portal.azure.com/#view/Microsoft_Azure_GTM/ModernBillingMenuBlade/~/Properties)
+* [Understand Cost Management data](https://docs.microsoft.com/en-us/azure/cost-management-billing/costs/understand-cost-mgt-data)
+
+## Supplying Azure Service Principal details to Kubecost
+
+### Via a Kubernetes secret (Recommended)
+
+Create a file called [`service-key.json`](https://github.com/kubecost/poc-common-configurations/blob/main/azure/service-key.json) and update it with the Service Principal details from the above steps:
+
+```json
+{
+    "subscriptionId": "<Azure Subscription ID>",
+    "serviceKey": {
+        "appId": "<Azure AD App ID>",
+        "password": "<Azure AD Client Secret>",
+        "tenant": "<Azure AD Tenant ID>"
+    }
+}
+```
+
+Next, create a secret for the Azure Service Principal
+
+> **Note**: When managing the service account key as a Kubernetes secret, the secret must reference the service account key json file, and that file must be named `service-key.json`.
+
+```shell
+kubectl create secret generic azure-service-key -n kubecost --from-file=service-key.json
+```
+
+Finally, set the `kubecostProductConfigs.serviceKeySecretName` helm value to the name of the Kubernetes secret you created. We use the value `azure-service-key` in our examples.
+
+### Via Helm Values
+
+In the [Helm values file](https://github.com/kubecost/cost-analyzer-helm-chart/blob/4eaaa9acef33468dd0d9fac046defe0af17811b4/cost-analyzer/values.yaml#L770-L776):
+
+```yaml
+kubecostProductConfigs:
+  azureSubscriptionID: <Azure Subscription ID>
+  azureClientID: <Azure AD App ID>
+  azureTenantID: <Azure AD Tenant ID>
+  azureClientPassword: <Azure AD Client Secret>
+  azureOfferDurableID: MS-AZR-0003P
+  azureBillingRegion: US
+  currencyCode: USD
+  createServiceKeySecret: true
+```
+
+Or at the command line:
+
+```shell
+helm upgrade --install kubecost kubecost/cost-analyzer -n kubecost \
+  --set kubecostProductConfigs.azureSubscriptionID=<Azure Subscription ID> \
+  --set kubecostProductConfigs.azureClientID=<Azure AD App ID> \
+  --set kubecostProductConfigs.azureTenantID=<Azure AD Tenant ID> \
+  --set kubecostProductConfigs.azureClientPassword=<Azure AD Client Secret> \
+  --set kubecostProductConfigs.azureOfferDurableID=MS-AZR-0003P \
+  --set kubecostProductConfigs.azureBillingRegion=US
+  --set kubecostProductConfigs.currencyCode=USD
+  --set kubecostProductConfigs.createServiceKeySecret=true
+```
+
+## Additional help
+
+Please let us know if you run into any issues, we are here to help.
+
+Join our [Slack community](https://join.slack.com/t/kubecost/shared_invite/zt-1dz4a0bb4-InvSsHr9SQsT_D5PBle2rw) and check out the #support channel for any help you may need, or email us at (support@kubecost.com)[support@kubecost.com].
+
+Edit this doc on [GitHub](https://github.com/kubecost/docs/blob/main/azure-config.md)
+
+<!--- {"article":"4407595934871","section":"4402815682455","permissiongroup":"1500001277122"} --->

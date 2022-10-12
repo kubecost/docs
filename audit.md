@@ -1,14 +1,17 @@
-Auditing the cost of workloads can be complex in dynamic Kubernetes environments. For this reason, this resource provides an overview on two approaches for inspecting the underlying inputs to cost Allocation metrics. 
+Auditing
+========
+
+Auditing the cost of workloads can be complex in dynamic Kubernetes environments. For this reason, this resource provides an overview of two approaches for inspecting the underlying inputs to cost Allocation metrics. 
 
 ## Audit tool
 
-Visit the `/audit.html` page on the Kubecost frontend to review inputs to cpu, memory, storage, and node-level costs calculations on the Allocation view. This tool displays cost input data by *container* and compares the product of these metrics to the aggregatedCostModel API which is the backing API for the Allocation view. The default time window measured is 1 day. Note that idle and shared costs are not included as part of this view. 
+Visit the `/audit.html` page on the Kubecost frontend to review inputs to CPU, memory, storage, and node-level costs calculations on the Allocation view. This tool displays cost input data by *container* and compares the product of these metrics to the aggregatedCostModel API which is the backing API for the Allocation view. The default time window measured is 1 day. Note that idle and shared costs are not included as part of this view. 
 
-![Audit screenshot](/cpu-audit-table.png)
+![Audit screenshot](https://raw.githubusercontent.com/kubecost/docs/main//cpu-audit-table.png)
 
-If differences are found between the independant inputs and the model itself, select the container name to view its associated Grafana dashboard. This will allow the verification of A) the time this container was running and B) amount of resource allocated [learn more](https://github.com/kubecost/cost-model/blob/develop/README.md#how-do-you-allocate-a-specific-amount-of-ramcpu-to-an-individual-pod-or-container). Viewing node costs at the bottom of this page will enable the verificaion of C) cost of allocated resources. 
+If differences are found between the independent inputs and the model itself, select the container name to view its associated Grafana dashboard. This will allow the verification of A) the time this container was running and B) allocated resources [learn more](https://github.com/kubecost/cost-model/blob/develop/README.md#how-do-you-allocate-a-specific-amount-of-ramcpu-to-an-individual-pod-or-container). Viewing node costs at the bottom of this page will enable the verification of C) cost of allocated resources. 
 
-Differences between these independant inputs and the cost model are expected to arise if the `cost-model` /metrics endpoint has not been consistently scraped over the measured time window. Other unexpected differences can be reported to <team@kubecost.com>
+Differences between these independent inputs and the cost model are expected to arise if the `cost-model` /metrics endpoint has not been consistently scraped over the measured time window. Other unexpected differences can be reported to <support@kubecost.com>
 
 ## Manual spot check
 We've created this guide to help you spot check cost metrics directly in Prometheus and ensure they are calculated as expected.
@@ -40,6 +43,11 @@ We've created this guide to help you spot check cost metrics directly in Prometh
 
 6. **Confirm consistency with monthly Allocation view.** Visit the Allocation tab in the Kubecost product. Filter by `default ` namespace. Select `monthly run rate` by `pod` then view the time series chart to confirm the values in the previous step are consistent.  
 
-![Timeseries graph](images/audit-graph.png)
+![Timeseries graph](https://raw.githubusercontent.com/kubecost/docs/main/images/audit-graph.png)
 
 **Reminder:** Don't forget to apply any sustained use or other discounts during a manual spot check.
+
+
+Edit this doc on [GitHub](https://github.com/kubecost/docs/blob/main/audit.md)
+
+<!--- {"article":"4407595925271","section":"4402815656599","permissiongroup":"1500001277122"} --->

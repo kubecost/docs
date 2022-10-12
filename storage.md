@@ -1,6 +1,7 @@
-## Cost Analyzer Persistent Volume
+Cost Analyzer Persistent Volume
+===============================
 
-As of v1.67, the persistent volume attached to Kubecost's primary pod (cost-analyzer) contains [ETL cache data](https://github.com/kubecost/docs/blob/master/allocation-api.md#caching-overview) as well as product configuration data. While it's technically optional, because all configurations can be set via configmap, it dramatically reduces the load against your Prometheus/Thanos installations on pod restart/redeploy. For this reason, it's strongly encouraged on larger clusters.
+As of v1.67, the persistent volume attached to Kubecost's primary Pod (cost-analyzer) contains [ETL cache data](https://github.com/kubecost/docs/blob/main/allocation-api.md#caching-overview) as well as product configuration data. While it's technically optional, because all configurations can be set via configmap, it dramatically reduces the load against your Prometheus/Thanos installations on Pod restart/redeploy. For this reason, it's strongly encouraged on larger clusters.
 
 **If you are creating a new installation of kubecost:**
 
@@ -17,9 +18,12 @@ We recommend that you back Kubecost with at least a 32GiB disk. This is the defa
       * If you are on a regional cluster,  we recommend that you provision a second PV using a topology-aware storage class ([more info](https://kubernetes.io/blog/2018/10/11/topology-aware-volume-provisioning-in-kubernetes/#getting-started)). You can set this disk’s storage class by setting persistentVolume.dbStorageClass=your-topology-aware-storage-class-name
 
 
-#### Regional Cluster bindings
+## Regional Cluster bindings
 
 If you're using just one PV and still seeing issues with Kubecost being rescheduled on zones outside of your disk, consider using a [topology aware storage class](https://kubernetes.io/blog/2018/10/11/topology-aware-volume-provisioning-in-kubernetes/#getting-started). You can set the Kubecost disk’s storage class by setting 
 `persistentVolume.storageClass=your-topology-aware-storage-class-name` 
 
 
+Edit this doc on [GitHub](https://github.com/kubecost/docs/blob/main/storage.md)
+
+<!--- {"article":"4407595981591","section":"4402815636375","permissiongroup":"1500001277122"} --->
