@@ -16,4 +16,5 @@ As of v1.85.0, a pod requesting virtual GPUs using the [AWS Virtual GPU device p
 
 More information about consuming GPU resources can be found [here](https://kubernetes.io/docs/tasks/manage-gpus/scheduling-gpus/).
 
-<!--- {"article":"","section":"4402815656599","permissiongroup":"1500001277122"} --->
+
+<!--- {"article":"9530812762135","section":"4402815656599","permissiongroup":"1500001277122"} --->
