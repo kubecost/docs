@@ -13,7 +13,7 @@ http://<kubecost-address>/model/savings/persistentVolumeSizing
 |------|------|-------------|
 | `headroomPct` | int | Percent of additional headroom to add to recommended capacity based on max usage of the PV. Defaults to 10% |
 
-## API Examples
+## API examples
 
 ```
 // See all PVs; make recommendations with 25% additional headroom 
@@ -23,7 +23,7 @@ http://localhost:9090/model/savings/persistentVolumeSizing?headroomPct=25
 http://localhost:9090/model/savings/persistentVolumeSizing?headroomPct=40
 ```
 
-## Example API Response
+## Example API response
 
 ```
 recommendations:
