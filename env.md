@@ -4,13 +4,13 @@ Supported Environments
 ## Supported Cloud Providers
 
 * AWS (Amazon Web Services)
-  * All regions supported, as shown in [opencost/pkg/cloud/awsprovider.go​](https://github.com/opencost/opencost/blob/develop/pkg/cloud/awsprovider.go#L111)
+  * All regions supported, as shown in [opencost/pkg/cloud/awsprovider.go​](https://github.com/opencost/opencost/blob/0c2f063052723a65ca62a4c75be23392806b6fac/pkg/cloud/awsprovider.go#L111)
   * x86, ARM
 * GCP (Google Cloud Platform)
-  * All regions supported, as shown in [opencost/pkg/cloud/gcpprovider.go​](https://github.com/opencost/opencost/blob/develop/pkg/cloud/gcpprovider.go#L41)
+  * All regions supported, as shown in [opencost/pkg/cloud/gcpprovider.go​](https://github.com/opencost/opencost/blob/0c2f063052723a65ca62a4c75be23392806b6fac/pkg/cloud/gcpprovider.go#L41)
   * x86
 * Azure (Microsoft)
-  * All regions supported, as shown in [opencost/pkg/cloud/azureprovider.go​](https://github.com/opencost/opencost/blob/develop/pkg/cloud/azureprovider.go#L82)
+  * All regions supported, as shown in [opencost/pkg/cloud/azureprovider.go​](https://github.com/opencost/opencost/blob/0c2f063052723a65ca62a4c75be23392806b6fac/pkg/cloud/azureprovider.go#L82)
   * x86
 
 ## Supported Cluster Types
