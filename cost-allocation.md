@@ -111,7 +111,11 @@ Cost allocation metrics are available for both in-cluster and out-of-cluster res
 | Network | The cost of network traffic based on internet egress, cross-zone egress, and other billed transfer. Note: these costs must be enabled. [Learn more](http://docs.kubecost.com/network-allocation). When Network Traffic Cost are not enabled, the Node network costs from the cloud service provider's [billing integration](https://guide.kubecost.com/hc/en-us/articles/4412369153687-Cloud-Integrations) will be spread proportionally based on cost weighted usage.  |
 | Load Balancer (LB) cost | The cost of cloud-service load balancer that has been allocated. |
 | Shared | The cost of shared resources allocated to this tenant. This field covers shared overhead, shared namespaces, and shared labels. |
-| Cost Efficiency | The percentage of requested CPU & memory dollars utilized over the measured time window. Values range from 0 to above 100 percent. Workloads with no requests but with usage OR workloads with usage > request can report efficiency above 100%. [View Example](https://docs.google.com/spreadsheets/d/15CL2YrJHIcQyDMHu3vB3jXdTdcqEntawmy5T3zsVZ_g/edit#gid=0)|
+| Cost Efficiency | The percentage of requested CPU & memory dollars utilized over the measured time window. Values range from 0 to above 100 percent. Workloads with no requests but with usage OR workloads with usage > request can report efficiency above 100%.|
+
+### Cost efficiency table example
+
+![Cost Efficiency table](https://raw.githubusercontent.com/kubecost/docs/main/images/table.PNG)
 
 
 Edit this doc on [GitHub](https://github.com/kubecost/docs/blob/main/cost-allocation.md)
