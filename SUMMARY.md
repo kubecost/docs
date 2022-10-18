@@ -23,8 +23,7 @@
   * [Network Traffic Cost Allocation](network-allocation.md)
   * [Contexts](context-switcher.md)
   * [Ingress Examples](ingress-examples.md)
-
-* Advanced Configuration
+* [Advanced Configuration](install-and-configure/advanced-configuration/README.md)
   * [Add Key](add-key.md)
   * [Enabling Annotation Emission](annotations.md)
   * [Multi-Cluster Options](multi-cluster.md)
@@ -93,7 +92,7 @@
   * [Container Request Right Sizing Recommendation API (v2)](api-request-right-sizing-v2.md)
   * [Asset Diff API](asset-diff.md)
   * [Audit API](audit-api.md)
-* Deprecated APIs
+* [Deprecated APIs](apis/deprecated-apis/README.md)
   * [Container Request Right-Sizing Recommendation API (V1) - Deprecated](api-request-right-sizing.md)
   * [costDataModel & aggregatedCostModel API - Deprecated](allocation-api.md)
 
