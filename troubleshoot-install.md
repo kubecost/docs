@@ -12,13 +12,39 @@ These kubernetes commands can be helpful when finding issues with deployments:
     kubectl get events --sort-by=.metadata.creationTimestamp --field-selector type!=Normal
     ```
 
-12. If a pod is in CrashLoopBackOff, check its logs. Commonly it will be a misconfiguration in helm. If the cost-analyzer pod is the issue, check the logs with:
+2. Another option is to check for a describe command of the specific pod in question. This command will give a list of the Events specific to this pod.
+
+    ```bash
+    > kubectl -n kubecost get pods
+    NAME                                          READY   STATUS              RESTARTS   AGE
+    kubecost-cost-analyzer-5cb499f74f-c5ndf       0/2     ContainerCreating   0          2m14s
+    kubecost-kube-state-metrics-99bb8c55b-v2bgd   1/1     Running             0          2m14s
+    kubecost-prometheus-server-f99987f55-86snj    2/2     Running             0          2m14s
+
+    > kubectl -n kubecost describe pod kubecost-cost-analyzer-5cb499f74f-c5ndf
+    Name:         kubecost-cost-analyzer-5cb499f74f-c5ndf
+    Namespace:    kubecost
+    Priority:     0
+    Node:         gke-kc-integration-test--default-pool-e04c72e7-vsxl/10.128.0.102
+    Start Time:   Wed, 19 Oct 2022 04:15:05 -0500
+    Labels:       app=cost-analyzer
+                app.kubernetes.io/instance=kubecost
+                app.kubernetes.io/name=cost-analyzer
+                pod-template-hash=b654c4867
+    ...
+    Events:
+        <RELEVANT ERROR MESSAGES HERE>
+        <RELEVANT ERROR MESSAGES HERE>
+        <RELEVANT ERROR MESSAGES HERE>
+    ```
+
+3. If a pod is in CrashLoopBackOff, check its logs. Commonly it will be a misconfiguration in helm. If the cost-analyzer pod is the issue, check the logs with:
 
     ```bash
     kubectl logs deployment/kubecost-cost-analyzer -c cost-model
     ```
 
-3. Alternatively, Lens is a great tool for diagnosing many issues in a single view. See our blog post on [using Lens with Kubecost](https://blog.kubecost.com/blog/lens-kubecost-extension/)
+4. Alternatively, Lens is a great tool for diagnosing many issues in a single view. See our blog post on [using Lens with Kubecost](https://blog.kubecost.com/blog/lens-kubecost-extension/)
 
 ## Issue: no persistent volumes available for this claim and/or no storage class is set
 
