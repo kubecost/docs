@@ -38,13 +38,13 @@ These kubernetes commands can be helpful when finding issues with deployments:
         <RELEVANT ERROR MESSAGES HERE>
     ```
 
-3. If a pod is in CrashLoopBackOff, check its logs. Commonly it will be a misconfiguration in helm. If the cost-analyzer pod is the issue, check the logs with:
+3. If a pod is in CrashLoopBackOff, check its logs. Commonly it will be a misconfiguration in Helm. If the cost-analyzer pod is the issue, check the logs with:
 
     ```bash
     kubectl logs deployment/kubecost-cost-analyzer -c cost-model
     ```
 
-4. Alternatively, Lens is a great tool for diagnosing many issues in a single view. See our blog post on [using Lens with Kubecost](https://blog.kubecost.com/blog/lens-kubecost-extension/)
+4. Alternatively, Lens is a great tool for diagnosing many issues in a single view. See our blog post on [using Lens with Kubecost](https://blog.kubecost.com/blog/lens-kubecost-extension/) to learn more.
 
 ## Issue: no persistent volumes available for this claim and/or no storage class is set
 
@@ -72,7 +72,7 @@ If you don’t see a name, you need to add a storage class. For help doing this,
 
 Alternatively, you can deploy Kubecost without persistent storage to store by following these steps:
 
-> **Note** This setup is only for experimental purpose. The metric data is reset when kubecost's pod is rescheduled.
+> **Note**: This setup is only for experimental purpose. The metric data is reset when Kubecost's pod is rescheduled.
 
 1. On your terminal, run this command to add the Kubecost Helm repository:
 
@@ -106,7 +106,7 @@ $ kubectl port-forward --address 0.0.0.0 --namespace kubecost deployment/kubecos
 Forwarding from 0.0.0.0:9090 -> 9090
 ```
 
-Navigating to kubecost while port-forwarding should result in "Handling connection" output in the terminal: 
+Navigating to Kubecost while port-forwarding should result in "Handling connection" output in the terminal: 
 
 ```
 kubectl port-forward --address 0.0.0.0 --namespace kubecost deployment/kubecost-cost-analyzer 9090
@@ -115,7 +115,7 @@ Handling connection for 9090
 Handling connection for 9090
 ```
 
-To troubleshoot further check the status of pods in the kubecost namespace:
+To troubleshoot further, check the status of pods in the Kubecost namespace:
 
 ```
 kubectl get pods -n kubecost`
@@ -171,7 +171,7 @@ If you are unable to successfully retrieve your config file from this /model end
 
 ## Issue: Unable to load app
 
-If all Kubecost pods are running and you can connect / port-forward to the kubecost-cost-analyzer pod but none of the app's UI will load, we recommend testing the following:
+If all Kubecost pods are running and you can connect/port-forward to the kubecost-cost-analyzer pod but none of the app's UI will load, we recommend testing the following:
 
 1. Connect directly to a backend service with the following command:
     `kubectl port-forward --namespace kubecost service/kubecost-cost-analyzer 9001`
