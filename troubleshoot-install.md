@@ -46,7 +46,7 @@ These kubernetes commands can be helpful when finding issues with deployments:
 
 4. Alternatively, Lens is a great tool for diagnosing many issues in a single view. See our blog post on [using Lens with Kubecost](https://blog.kubecost.com/blog/lens-kubecost-extension/) to learn more.
 
-## Issue: no persistent volumes available for this claim and/or no storage class is set
+## Issue: No persistent volumes available for this claim and/or no storage class is set
 
 Your clusters need a default storage class for the Kubecost and Prometheus persistent volumes to be successfully attached.
 
