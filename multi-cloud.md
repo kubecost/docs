@@ -111,7 +111,7 @@ The table name is typically the database name with the leading athenacurcfn_ rem
 - `<ATHENA_PROJECT_ID>` e.g. "530337586277" # The AWS AccountID where the Athena CUR is.
 - `<MASTER_PAYER_ARN>` Is an optional value which should be set if you are using a multi-account billing set-up and are not accessing athena through the primary account. It should be set to the arn of the role in the masterpayer account, e.g. `arn:aws:iam::530337586275:role/KubecostRole`.
 
-Set these values into the following object and add them to the AWS array:
+Set these values into the following object and add them to the AWS array in the *cloud-integration.json*:
 
 ```json
 {
@@ -125,6 +125,7 @@ Set these values into the following object and add them to the AWS array:
     "masterPayerARN": "<MASTER_PAYER_ARN>"
 }
 ```
+Additionally set the `kubecostProductConfigs.projectID` helm value to the AWS account that Kubecost is being installed in.
 
 Edit this doc on [GitHub](https://github.com/kubecost/docs/blob/main/multi-cloud.md)
 
