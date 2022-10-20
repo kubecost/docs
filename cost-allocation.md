@@ -76,12 +76,12 @@ Filter resources by namespace, clusterId, and/or Kubernetes label to more closel
 |--------------------|---------------------|
 | Cluster |  Limit results to workloads in a set of clusters with matching IDs. Note: clusterID is passed in _values_ at install-time. |
 | Node | Limit results to workloads where the node name is filtered for. |
-| Namespace |  Limit results to workloads in a set of namespaces. |
-| Label |  Limit results to workloads with matching Kubernetes labels. Namespace labels are applied to all of its workloads. Supports filtering by `__unallocated__` field as well |
-| Service | Limit results to workloads based on service |
-| Controller | Limit results to workloads based on controller name |
-| Controller kind | Limit results to workloads based on controller type |
-| Pod |  Limit results to workloads where the pod name is filtered for. |
+| Namespace |  Limit results to workloads in a set of Kubernetes namespaces. |
+| Label |  Limit results to workloads with matching Kubernetes labels. Namespace labels are applied to all of its workloads. Supports filtering by `__unallocated__` field as well. |
+| Service | Limit results to workloads based on Kubernetes service name.|
+| Controller | Limit results to workloads based on Kubernetes controller name. |
+| Controller kind | Limit results to workloads based on Kubernetes controller (Daemonset, Deployment, Job, Statefulset, Replicaset, etc) type. |
+| Pod |  Limit results to workloads where the Kubernetes pod name is filtered for. |
 
 Comma-separated lists are supported to filter by multiple categories, e.g. namespace filter equals `kube-system,kubecost`. Wild card filters are also supported, indicated by a * following the filter, e.g. `namespace=kube*` to return any namespace beginning with `kube`. 
    
