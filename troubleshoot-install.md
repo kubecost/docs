@@ -172,10 +172,14 @@ To disable PodSecurityPolicy from Kubecost's Grafana Helm Chart:
 
 ```bash
 # Verify that you don't see "podsecuritypolicy" referenced anywhere
-$ helm upgrade -i kubecost kubecost/cost-analyzer --set grafana.rbac.pspEnabled=false --dry-run
-
+$ helm upgrade -i kubecost kubecost/cost-analyzer --dry-run \
+    --set grafana.rbac.pspEnabled=false \
+    --set podSecurityPolicy.enabled=false
+    
 # Install or upgrade Kubecost with PodSecurityPolicy disabled in Grafana
-$ helm upgrade -i kubecost kubecost/cost-analyzer --set grafana.rbac.pspEnabled=false
+$ helm upgrade -i kubecost kubecost/cost-analyzer \
+    --set grafana.rbac.pspEnabled=false \
+    --set podSecurityPolicy.enabled=false
 ```
 
 ## Question: How can I run on Minikube?
