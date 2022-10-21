@@ -1,4 +1,4 @@
-User Management - SSO/SAML/RBAC*
+User Management - SSO/SAML/RBAC
 ================================
 
 > **Note**: SSO and RBAC capabilities are only included with a Kubecost Enterprise Subscription.
