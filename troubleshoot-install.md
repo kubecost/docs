@@ -171,19 +171,11 @@ Error: INSTALLATION FAILED: unable to build kubernetes objects from release mani
 To disable PodSecurityPolicy from Kubecost's Grafana Helm Chart:
 
 ```bash
-# Clone the Helm chart
-$ git clone git@github.com:kubecost/cost-analyzer-helm-chart.git
-​
-# Update Grafana's configuration for PodSecurityPolicy
-# 
-# FILE:
-# ./cost-analyzer-helm-chart/cost-analyzer/charts/grafana/values.yaml
-# 
-# CONFIG:
-# .Values.rbac.pspEnabled: false
-​
-# Retry installing Kubecost, referencing the local Helm Chart
-$ helm upgrade -i kubecost ./cost-analyzer
+# Verify that you don't see "podsecuritypolicy" referenced anywhere
+$ helm upgrade -i kubecost kubecost/cost-analyzer --set grafana.rbac.pspEnabled=false --dry-run
+
+# Install or upgrade Kubecost with PodSecurityPolicy disabled in Grafana
+$ helm upgrade -i kubecost kubecost/cost-analyzer --set grafana.rbac.pspEnabled=false
 ```
 
 ## Question: How can I run on Minikube?
