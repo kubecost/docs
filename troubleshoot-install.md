@@ -168,7 +168,7 @@ Error: INSTALLATION FAILED: unable to build kubernetes objects from release mani
 ]
 ```
 
-To disable PodSecurityPolicy from Kubecost's Grafana Helm Chart:
+To disable PodSecurityPolicy in your deployment:
 
 ```bash
 # Verify that you don't see "podsecuritypolicy" referenced anywhere
