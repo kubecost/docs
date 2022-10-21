@@ -3,8 +3,6 @@ AWS Marketplace Install
 
 This document provides the steps for installing the Kubecost product from the AWS marketplace. [More info on different tiers.](https://kubecost.com/pricing)
 
-Please contact us at support@kubecost.com with any questions and we'd be happy to help!
-
 ## Step 1: Create an IAM policy
 
 To deploy Kubecost from AWS Marketplace, you need to assign an IAM policy with approriate IAM permission to a Kubernetes (K8s) service account before starting the deployment. You can either use AWS managed policy `arn:aws:iam::aws:policy/AWSMarketplaceMeteringRegisterUsage` or creating your own IAM policy. You can learn [more info on how to create a new policy](https://docs.aws.amazon.com/IAM/latest/UserGuide/tutorial_managed-policies.html#step1-create-policy)
@@ -75,9 +73,7 @@ helm upgrade -i kubecost kubecost/cost-analyzer \
 
 `kubectl port-forward --namespace kubecost deployment/kubecost-cost-analyzer 9090`
 
-You can now start monitoring your Amazon EKS cluster cost with Kubecost. For advanced setup or if you have any questions, you can contact us on [Slack](https://join.slack.com/t/kubecost/shared_invite/zt-1dz4a0bb4-InvSsHr9SQsT_D5PBle2rw) or email at team@kubecost.com 
-
-To participate in our free Enterprise onboarding program, contact us at support@kubecost.com to schedule these sessions.
+You can now start monitoring your Amazon EKS cluster cost with Kubecost. For advanced setup, free Enterprise onboarding program, or any other questions, contact us at [support@kubecost.com](support@kubecost.com) to schedule these sessions.
 
 
 Edit this doc on [GitHub](https://github.com/kubecost/docs/blob/main/aws-marketplace-install.md)
