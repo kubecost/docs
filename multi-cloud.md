@@ -122,7 +122,7 @@ Set these values into the following object and add them to the AWS array in the 
     "athenaRegion": "<ATHENA_REGION>",
     "athenaDatabase": "<ATHENA_DATABASE>",
     "athenaTable": "<ATHENA_TABLE>",
-    "athenaWorkgroup: "<ATHENA_WORKGROUP>",
+    "athenaWorkgroup": "<ATHENA_WORKGROUP>",
     "projectID": "<ATHENA_PROJECT_ID>",
     "masterPayerARN": "<MASTER_PAYER_ARN>"
 }
