@@ -442,6 +442,39 @@ You can also check query history to see if any queries are failing:
 	
 <img width="1792" alt="Screen Shot 2020-12-06 at 9 43 50 PM" src="https://user-images.githubusercontent.com/453512/101319633-24ef5500-3817-11eb-9f87-55a903428936.png">
 
+### Common Athean errors.
+
+#### Incorrect bucket in IAM Policy.
+
+* **Symptom:** 
+   A similar error to this will be shown on the diagnostics page under "Pricing Sources" on the "Diagnostics" page. You can search for the <Athena Query ID> in the Athena dashboard to find additional info about the error.
+   ```
+   QueryAthenaPaginated: query execution error: no query results available for query <Athena Query ID>
+   ```
+	
+   And / or the following error will be found in the Kubecost `cost-model` container logs.
+   ```
+   Permission denied on S3 path: s3://cur-report/cur-report-1341234545/cur-report-1341234545year=2022/month=8
+
+   This query ran against the "athena_cur_1341234545" database, unless qualified by the query. Please post the error message on our forum  or contact customer support  with Query Id: <Athena Query ID>
+   ```
+	
+* **Resolution:**
+	This error is typically caused by the incorrect (Athena results) s3 bucket being specified in the cloudformation template of step 3 from above. To resolve the issue ensure the bucket used for storing the AWS CUR report (step 1) is specified in the `S3ReadAccessToAwsBillingData` SID of the IAM policy (default: kubecost-athena-access) attached to the user or role used by Kubecost (Default: KubecostUser / KubecostRole). See the following example.
+	```
+	        {
+            "Action": [
+                "s3:Get*",
+                "s3:List*"
+            ],
+            "Resource": [
+                "arn:aws:s3:::<AWS CUR BUCKET>*"
+            ],
+            "Effect": "Allow",
+            "Sid": "S3ReadAccessToAwsBillingData"
+        }
+	```
+
 ## Relating out-of-cluster costs to k8s resources via tags?
 
 *   [Activating User-Defined Cost Allocation Tags - AWS Billing and Cost Management](https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/activating-tags.html)
