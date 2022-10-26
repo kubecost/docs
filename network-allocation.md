@@ -13,9 +13,17 @@ To enable this feature, set the following parameter in _values.yaml_ during [Hel
  ```
  You can view a list of common config options [here](https://github.com/kubecost/cost-analyzer-helm-chart/blob/ab384e2eb027e74b2c3e61a7e1733ffa1718170e/cost-analyzer/values.yaml#L276). If you are integrating with an existing Prometheus, you can set `networkCosts.prometheusScrape=true` and the network costs service should be auto-discovered.
  
- To estimate the resources required to run Kubecost network cost,  you can view our [benchmarking metrics](https://docs.google.com/document/d/10b-Ew78R90UOaZ5gXQUjU5GWZXBIy8H11RK5bbCd2EM/edit).
+> **Note**: Network cost, which is disabled by default, needs to be run as a privileged pod to access the relevant networking kernel module on the host machine.
+ 
+### Benchmarking metrics
 
- > **Note**: Network cost, which is disabled by default, needs to be run as a privileged Pod to access the relevant networking kernel module on the host machine.
+The [network-simulator](http://github.com/kubecost/network-simulator) was used to real-time simulate updating conntrack entries while simultaneously running a cluster simulated [network-costs](http://github.com/kubecost/kubecost-network-costs) instance. To profile the heap, after a warmup of roughly five minutes, a heap profile of 1,000,000 Conntrack entries was gathered and examined.
+
+Each conntrack entry is equivalent to two transport directions, so every conntrack entry is two map entries (connections).
+
+After modifications were made to the network-costs to parallelize the delta and dispatch, large map comparisons were significantly lighter in memory. The same tests were performed against simulated data with the following footprint results.
+
+![images/post optimization.PNG](https://github.com/kubecost/docs/blob/130e641856d3b6306171f386591e1cd71bc21985/images/post%20optimization.PNG)
 
 ## Kubernetes network traffic metrics
 
