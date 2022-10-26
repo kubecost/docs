@@ -120,6 +120,9 @@ gcloud iam service-accounts keys create ./$SERVICE_ACCOUNT_NAME-key.json --iam-a
 
 Now that your service key is created, follow the normal configuration instructions.
 
+## Common configuration issues:
+* Account labels not showing up in partitions: there are cases where labels applied at the account label do not show up in the date-partitioned data. If account level labels are not showing up, you can switch to querying them unpartitioned by setting an extraEnv in kubecost of name: GCP_ACCOUNT_LABELS_NOT_PARTITIONED  value: true: https://github.com/kubecost/cost-analyzer-helm-chart/blob/v1.98.0-rc.1/cost-analyzer/values.yaml#L304
+
 Edit this doc on [GitHub](https://github.com/kubecost/docs/blob/main/gcp-out-of-cluster.md)
 
 <!--- {"article":"4407601816087","section":"4402815680407","permissiongroup":"1500001277122"} --->
