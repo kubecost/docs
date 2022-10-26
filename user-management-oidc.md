@@ -44,11 +44,7 @@ If the domain is configured alongside the access token, then requests should con
 
 The JWT ID token must contain a field (claim) named `hd` with the desired domain value. We verify that the token has been properly signed (using provider certificates) and has not expired before processing the claim.
 
-Removing a previously set Helm value is done by setting `.Values.oidc.hostedDomain = ""`. Simply removing the hostedDomain field from the helm config will not work at the moment.
-
-Validate that the config has been correctly removed by checking that `hostedDomain=""` in the **/var/configs/oidc/oidc.json** file inside the cost-model container.
-
-For Google OAuth 2.0, the domain to match the hostedDomain helm parameter is the hd parameter in the id_token field of the token endpoint response.
+To remove a previously set Helm value, you will need to set the value to an empty string: `.Values.oidc.hostedDomain = ""`. To validate that the config has been removed, you can check the `/var/configs/oidc/oidc.json` inside the cost-model container.
 
 Edit this doc on [GitHub](https://github.com/kubecost/docs/blob/main/user-management-oidc.md)
 
