@@ -8,27 +8,14 @@ User Management - SSO/OIDC
 The OIDC integration in Kubecost is fulfilled via the helm configuration parameters `.Values.oidc` [as shown here](https://github.com/kubecost/cost-analyzer-helm-chart/blob/develop/cost-analyzer/values.yaml).
 
 ## Supported identity providers
+
 Please refer to the following references to find out more about how to configure the Helm parameters to suit each OIDC identiy provider integration.
 
-### Gluu
-
-Please refer to [Gluu documentation](https://gluu.org/docs/gluu-server/4.0/admin-guide/openid-connect/).
-
-### Okta
-
-Please refer to [Okta documentation](https://developer.okta.com/docs/reference/api/oidc/#request-parameters).
-
-### Azure
-
-Please refer to [Azure documentation](https://learn.microsoft.com/en-us/azure/active-directory/develop/v2-protocols-oidc#send-the-sign-in-request).
-
-### Google OAuth 2.0
-
-Please refer to [Google OAuth 2.0 documentation](https://developers.google.com/identity/openid-connect/openid-connect#authenticatingtheuser).
-
-### Auth0
-
-Please refer to [Auth0 documentation](https://auth0.com/docs/get-started/authentication-and-authorization-flow/add-login-auth-code-flow).
+* [Gluu docs](https://gluu.org/docs/gluu-server/4.0/admin-guide/openid-connect/)
+* [Okta docs](https://developer.okta.com/docs/reference/api/oidc/#request-parameters)
+* [Azure docs](https://learn.microsoft.com/en-us/azure/active-directory/develop/v2-protocols-oidc#send-the-sign-in-request)
+* [Google OAuth 2.0 docs](https://developers.google.com/identity/openid-connect/openid-connect#authenticatingtheuser)
+* [Auth0 docs](https://auth0.com/docs/get-started/authentication-and-authorization-flow/add-login-auth-code-flow)
 
 > **Note**: Auth0 does not support Introspection; therefore we can only validate the access token by calling /userinfo within our current remote token validation flow. This will cause the Kubecost UI to not function under an Auth0 integration, as it makes a large number of continuous calls to load the various components on the page and the Auth0 /userinfo endpoint is rate limited. Independent calls against Kubecost endpoints (eg. via cURL or Postman) should still be supported.
 
