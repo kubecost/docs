@@ -55,6 +55,8 @@ Kubecost can run on clusters with thousands of nodes when resource consumption i
 
 * Optionally enabling impactful memory thresholds can ensure the Go runtime GC throttles at more aggressive frequencies at or approaching the soft limit.
 * There is not a one-size fits all value here, and users looking to tune the parameters should be aware that lower values may reduce overall performance if setting the value too low. If users set the the `resources.requests` memory values appropriately, using the same value for `softMemoryLimit` will instruct the Go runtime to keep its heap acquisition and release within the same bounds as the expectations of the pod memory use.
+* This can be tuned with the Helm value:
+  * `--set kubecostModel.softMemoryLimit=<Units><B, KiB, MiB, GiB>`
 * More info on this environment variable can be found [here](https://tip.golang.org/doc/gc-guide).
 
 
