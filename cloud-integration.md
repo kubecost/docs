@@ -1,22 +1,20 @@
 Cloud Integrations
 ==================
 
-Integration with the Cloud Service Providers via their respective billing APIs allow Kubecost to display out-of-cluster costs, which are the costs incurred on a billing account from Services Outside of the cluster(s) where Kubecost is installed, in addition to the ability to reconcile Kubecosts in-cluster predictions with actual billing data to improve accuracy. For more details on these integrations continue reading below. For guides on how to set up these integrations follow the relevant link:
+Integration with the cloud service providers (CSPs) via their respective billing APIs allow Kubecost to displayout of cluster (OOC) costs, which are the costs incurred on a billing account from Services Outside of the cluster(s) where Kubecost is installed, in addition to the ability to reconcile Kubecosts in-cluster predictions with actual billing data to improve accuracy. For more details on these integrations continue reading below. For guides on how to set up these integrations follow the relevant link:
 
 - [Multi-Cloud](https://github.com/kubecost/docs/blob/main/multi-cloud.md)
 - [AWS](https://github.com/kubecost/docs/blob/main/aws-cloud-integrations.md)
-- [GCP](https://cloud.google.com/billing/docs/how-to/export-data-bigquery)
+- [GCP](https://guide.kubecost.com/hc/en-us/articles/4407601816087)
 - [Azure](https://docs.microsoft.com/en-us/azure/cost-management-billing/costs/tutorial-export-acm-data?tabs=azure-portal)
 
- **Note**: 
-- Select Amortized cost while setting up the cost-management-billing in Azure, Amortized costs fit better with what we are doing.
-- GCP users should create [detailed billing export](https://cloud.google.com/billing/docs/how-to/export-data-bigquery-tables#detailed-usage-cost-data-schema) to gain access to all of Kubecost cloud integration features including [reconciliation](https://github.com/kubecost/docs/blob/main/cloud-integration.md#reconciliation)
+ > **Note**: Select _Amortized cost_ while setting up the cost-management-billing in Azure. GCP users should create [detailed billing export](https://cloud.google.com/billing/docs/how-to/export-data-bigquery-tables#detailed-usage-cost-data-schema) to gain access to all of Kubecost cloud integration features including [reconciliation](https://github.com/kubecost/docs/blob/main/cloud-integration.md#reconciliation)
 
 ## Cloud processes
-As indicated above, setting up a cloud integration with your Cloud Service Provider allows Kubecost to pull in additional billing data. The two processes that incorporate this information are Reconciliation and Cloud Usage.
+As indicated above, setting up a cloud integration with your CSP allows Kubecost to pull in additional billing data. The two processes that incorporate this information are **reconciliation** and **Cloud Usage**.
 
 ### Reconciliation
-Reconciliation matches in-cluster assets with items found in the billing data pulled from the Cloud Service Provider. This allows Kubecost to display the most accurate depiction of your in-cluster spend. Additionally, the reconciliation process creates `Network` assets for in-cluster nodes based on the information in the billing data. The main drawback of this process is that the Cloud Service Providers have between a 6 to 24 hour delay in releasing billing data, and reconciliation requires a complete day of cost data to reconcile with the in-cluster assets. This requires a 48 hour window between resource usage and reconciliation. If reconciliation is performed within this window, asset cost is deflated to the partially complete cost shown in the billing data.
+Reconciliation matches in-cluster assets with items found in the billing data pulled from the CSP. This allows Kubecost to display the most accurate depiction of your in-cluster spend. Additionally, the reconciliation process creates `Network` assets for in-cluster nodes based on the information in the billing data. The main drawback of this process is that the CSPs have between a 6 to 24 hour delay in releasing billing data, and reconciliation requires a complete day of cost data to reconcile with the in-cluster assets. This requires a 48 hour window between resource usage and reconciliation. If reconciliation is performed within this window, asset cost is deflated to the partially complete cost shown in the billing data.
 
 Cost-based [metrics](https://github.com/kubecost/cost-model/blob/develop/PROMETHEUS.md#available-metrics) are based on onDemand pricing unless there is definitive data from a cloud provider that the node is not onDemand. This way estimates are as accurate as possible. If a new reserved instance is provisioned or a node joins a savings plan:
 
@@ -24,13 +22,13 @@ Cost-based [metrics](https://github.com/kubecost/cost-model/blob/develop/PROMETH
 2. Once the node is added to the cloud bill, Kubecost starts emitting something closer to the actual price.
 3. For the time period where Kubecost assumed the node was onDemand but it was actually reserved, reconciliation fixes the price in ETL.
 
-Note: The reconciled Assets will inherit the labels from the corresponding items in the billing data. If there exist identical label keys between the original assets and those of the billing data items, the label value of the original asset will take precedence.
+> **Note:** The reconciled Assets will inherit the labels from the corresponding items in the billing data. If there exist identical label keys between the original assets and those of the billing data items, the label value of the original asset will take precedence.
 
 ### Cloud Usage
-The Cloud Usage process allows Kubecost to pull in out-of-cluster cloud spend from your Cloud Service Provider's billing data. This includes any services run by the Cloud Service Provider in addition to compute resources outside of clusters monitored by Kubecost. Additionally, by labeling these Cloud Usage, their cost can be distributed to Allocations as external costs. This can help teams get a better understanding of the proportion of out-of-cluster cloud spend that their in-cluster usage is dependant on. CloudUsages become available as soon as they appear in the billing data, with the 6 to 24 hour delay mentioned above, and are updated as they become more complete.
+The Cloud Usage process allows Kubecost to pull in out-of-cluster cloud spend from your CSP's billing data. This includes any services run by the CSP in addition to compute resources outside of clusters monitored by Kubecost. Additionally, by labeling these Cloud Usage, their cost can be distributed to Allocations as external costs. This can help teams get a better understanding of the proportion of OOC cloud spend that their in-cluster usage is dependant on. CloudUsages become available as soon as they appear in the billing data, with the 6 to 24 hour delay mentioned above, and are updated as they become more complete.
 
-## Cloud Integration Configurations
-The Kubecost Helm Chart provides values that can enable or disable each cloud process on the deployment once a cloud integration has been set up. Turning off either of these processes will disable all the benefits provided by them.
+## Cloud integration configurations
+The Kubecost Helm chart provides values that can enable or disable each cloud process on the deployment once a cloud integration has been set up. Turning off either of these processes will disable all the benefits provided by them.
 
 Value | Default | Description
 --: | :--: | :--
@@ -43,7 +41,7 @@ Value | Default | Description
 `.Values.kubecostModel.etlUseUnblendedClost` | false | **This is a BETA feature, support may be dropped in future releases.** Enabling this flag makes Cloud Usage and Reconciliation use unblended cost for all line items in the CUR including those with savings plans and RI's applied to them. This will cause the amortized upfront costs of these resources to not appear in Kubecost and may cause some assets to have a $0 value if their cost was entirely upfont. This Helm value corresponds to the `ETL_USE_UNBLENDED_COST` environment variable. Currently only available on AWS.
 
 ## Cloud Stores
-The ETL contains a Map of Cloud Stores, each of which represents an integration with a Cloud Service Provider. Each Cloud Store is responsible for the Cloud Usage and Reconciliation Pipelines which add Out-of-Cluster costs and Adjust Kubecost's estimated cost respectively via cost and usage data pulled from the Cloud Service Provider. Each Cloud Store has a unique identifier called the `ProviderKey` which varies depending on which Cloud Service Provider is being connected to and ensures that duplicate configurations are not introduced into the ETL. The value of the `ProviderKey` is the following for each Cloud Service Provider at a scope that the billing data is being for:
+The ETL contains a Map of Cloud Stores, each of which represents an integration with a CSP. Each Cloud Store is responsible for the Cloud Usage and Reconciliation Pipelines which add OOC costs and Adjust Kubecost's estimated cost respectively via cost and usage data pulled from the CSP. Each Cloud Store has a unique identifier called the `ProviderKey` which varies depending on which CSP is being connected to and ensures that duplicate configurations are not introduced into the ETL. The value of the `ProviderKey` is the following for each CSP at a scope that the billing data is being for:
 
 - AWS: Account Id
 - GCP: Project Id
@@ -63,7 +61,7 @@ is assigned during failures in Configuration Retrieval.
 
 - _FAILED_CONNECTION_: All required Cloud Configuration values are filled in, but a connection with the
 Cloud Provider cannot be established. This is indicative of a typo in one of the Cloud Configuration values or an
-issue in how the connection was set up in the Cloud Provider's Console. The assignment of this status varies
+issue in how the connection was set up in the CSP's Console. The assignment of this status varies
 between Providers but should happen if there if an error is thrown when an interaction with an object from
 from the Cloud Service Provider's SDK occurs.
 
