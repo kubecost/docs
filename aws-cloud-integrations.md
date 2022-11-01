@@ -457,6 +457,8 @@ Kubecost will reconcile your spot prices with CUR billing reports as they become
 
 These values can either be set from the kubecost frontend or via .Values.kubecostProductConfigs in the Helm Chart. Note that if you set any kubecostProductConfigs from the Helm Chart, all changes via the frontend will be deleted on pod restart.
 
+Spot data feed provide same functionality as aws cur integration , The only difference is you will receive Spot Feed data hourly with the Spot Feed Integration. The AWS Cloud Integration, or CUR, is delayed up to 48 hours.  So if you are looking for accurate costs across the board, as most customers do, you can skip the Spot Feed integration. If your use case is different want to go for spot data feed make sure you had the right information to make an informed decision.
+
 * `projectID` the Account ID of the AWS Account on which the spot nodes are running.
 
 * `awsSpotDataRegion` region of your spot data bucket
@@ -468,6 +470,22 @@ These values can either be set from the kubecost frontend or via .Values.kubecos
 *  `spotLabel` optional Kubernetes node label name designating whether a node is a spot node. Used to provide pricing estimates until exact spot data becomes available from the CUR
 
 * `spotLabelValue` optional Kubernetes node label value designating a spot node. Used to provide pricing estimates until exact spot data becomes available from the CUR. For example, if your spot nodes carry a label `lifecycle:spot`, then the spotLabel would be "lifecycle" and the spotLabelValue would be "spot"
+
+## Troubleshooting Spot data feed
+**Symptom:** 
+If you see spot data instnace not found
+	
+<img width="902" alt="1fva81l9sph6hh-image" src="https://user-images.githubusercontent.com/102574445/199281977-3195b1d1-e3a5-4561-85da-eb8b24e23f27.png">
+	
+Very below points
+	
+- Make sure data is present in the spot data feed bucket.
+- If you have primary and secondary clusters, spot data feed should be configured in primary and all your secondary clusters.
+- Make sure Project ID and athenaProjectID are configured correctly, You can cross-verify the values under helm values in bug report
+- Check the value of kubecost_node_is_spot in Prometheus: "1" - spot data instance configuration is correct, "0" - Not configured properly.
+- Make sure the IAM permissions are aligned with https://github.com/kubecost/cloudformation/blob/7feace26637aa2ece1481fda394927ef8e1e3cad/kubecost-single-account-permissions.yaml#L36
+- Make sure the Spot data feed bucket has all permissions to access by Kubecost
+- The spot instance in the spot data feed bucket should match the instance in the cluster where the spot data feed is configured. awsSpotDataBucket has to be present in the right cluster.
 
 ## Summary and pricing
 
