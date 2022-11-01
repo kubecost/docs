@@ -12,15 +12,41 @@ These kubernetes commands can be helpful when finding issues with deployments:
     kubectl get events --sort-by=.metadata.creationTimestamp --field-selector type!=Normal
     ```
 
-12. If a pod is in CrashLoopBackOff, check its logs. Commonly it will be a misconfiguration in helm. If the cost-analyzer pod is the issue, check the logs with:
+2. Another option is to check for a describe command of the specific pod in question. This command will give a list of the Events specific to this pod.
+
+    ```bash
+    > kubectl -n kubecost get pods
+    NAME                                          READY   STATUS              RESTARTS   AGE
+    kubecost-cost-analyzer-5cb499f74f-c5ndf       0/2     ContainerCreating   0          2m14s
+    kubecost-kube-state-metrics-99bb8c55b-v2bgd   1/1     Running             0          2m14s
+    kubecost-prometheus-server-f99987f55-86snj    2/2     Running             0          2m14s
+
+    > kubectl -n kubecost describe pod kubecost-cost-analyzer-5cb499f74f-c5ndf
+    Name:         kubecost-cost-analyzer-5cb499f74f-c5ndf
+    Namespace:    kubecost
+    Priority:     0
+    Node:         gke-kc-integration-test--default-pool-e04c72e7-vsxl/10.128.0.102
+    Start Time:   Wed, 19 Oct 2022 04:15:05 -0500
+    Labels:       app=cost-analyzer
+                app.kubernetes.io/instance=kubecost
+                app.kubernetes.io/name=cost-analyzer
+                pod-template-hash=b654c4867
+    ...
+    Events:
+        <RELEVANT ERROR MESSAGES HERE>
+        <RELEVANT ERROR MESSAGES HERE>
+        <RELEVANT ERROR MESSAGES HERE>
+    ```
+
+3. If a pod is in CrashLoopBackOff, check its logs. Commonly it will be a misconfiguration in Helm. If the cost-analyzer pod is the issue, check the logs with:
 
     ```bash
     kubectl logs deployment/kubecost-cost-analyzer -c cost-model
     ```
 
-3. Alternatively, Lens is a great tool for diagnosing many issues in a single view. See our blog post on [using Lens with Kubecost](https://blog.kubecost.com/blog/lens-kubecost-extension/)
+4. Alternatively, Lens is a great tool for diagnosing many issues in a single view. See our blog post on [using Lens with Kubecost](https://blog.kubecost.com/blog/lens-kubecost-extension/) to learn more.
 
-## Issue: no persistent volumes available for this claim and/or no storage class is set
+## Issue: No persistent volumes available for this claim and/or no storage class is set
 
 Your clusters need a default storage class for the Kubecost and Prometheus persistent volumes to be successfully attached.
 
@@ -46,7 +72,7 @@ If you don’t see a name, you need to add a storage class. For help doing this,
 
 Alternatively, you can deploy Kubecost without persistent storage to store by following these steps:
 
-> **Note** This setup is only for experimental purpose. The metric data is reset when kubecost's pod is rescheduled.
+> **Note**: This setup is only for experimental purpose. The metric data is reset when Kubecost's pod is rescheduled.
 
 1. On your terminal, run this command to add the Kubecost Helm repository:
 
@@ -80,7 +106,7 @@ $ kubectl port-forward --address 0.0.0.0 --namespace kubecost deployment/kubecos
 Forwarding from 0.0.0.0:9090 -> 9090
 ```
 
-Navigating to kubecost while port-forwarding should result in "Handling connection" output in the terminal: 
+Navigating to Kubecost while port-forwarding should result in "Handling connection" output in the terminal: 
 
 ```
 kubectl port-forward --address 0.0.0.0 --namespace kubecost deployment/kubecost-cost-analyzer 9090
@@ -89,7 +115,7 @@ Handling connection for 9090
 Handling connection for 9090
 ```
 
-To troubleshoot further check the status of pods in the kubecost namespace:
+To troubleshoot further, check the status of pods in the Kubecost namespace:
 
 ```
 kubectl get pods -n kubecost`
@@ -145,7 +171,7 @@ If you are unable to successfully retrieve your config file from this /model end
 
 ## Issue: Unable to load app
 
-If all Kubecost pods are running and you can connect / port-forward to the kubecost-cost-analyzer pod but none of the app's UI will load, we recommend testing the following:
+If all Kubecost pods are running and you can connect/port-forward to the kubecost-cost-analyzer pod but none of the app's UI will load, we recommend testing the following:
 
 1. Connect directly to a backend service with the following command:
     `kubectl port-forward --namespace kubecost service/kubecost-cost-analyzer 9001`
