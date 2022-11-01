@@ -1,28 +1,26 @@
 AWS Cloud Integration
 =====================
 
-Kubecost pulls asset prices from the public AWS pricing API by default. To have accurate pricing information from AWS, you can integrate directly with your account. This integration will properly account for Enterprise Discount Programs, Reserved Instance usage, Savings Plans, spot usage, and more. This resource describes the required steps for achieving this.
+Kubecost pulls asset prices from the public AWS pricing API by default. To have accurate pricing information from AWS, you can integrate directly with your account. This integration will properly account for Enterprise Discount Programs, Reserved Instance usage, Savings Plans, spot usage, and more.
 
-Your user will need necessary permissions to create the Cost and Usage Report (CUR), add IAM credentials for Athena and S3. Optional permission is the ability to add and execute CloudFormation templates. Kubecost does not require root access in the AWS account.
+You will need necessary permissions to create the Cost and Usage Report (CUR), and add IAM credentials for Athena and S3. Optional permission is the ability to add and execute CloudFormation templates. Kubecost does not require root access in the AWS account.
 
 A GitHub repository with sample files used in below instructions can be found here: [https://github.com/kubecost/poc-common-configurations/tree/main/aws](https://github.com/kubecost/poc-common-configurations/tree/main/aws)
 
-## Cost and Usage Report Integration
+## Cost and Usage Report integration
 
 ### Step 1: Setting up the CUR
-Follow these steps to set up a Cost and Usage Report. For time granularity, select Daily. Be sure to enable Resource Ids and Athena integration when creating the CUR.
-[https://docs.aws.amazon.com/cur/latest/userguide/cur-create.html](https://docs.aws.amazon.com/cur/latest/userguide/cur-create.html)
+Follow [these steps](https://docs.aws.amazon.com/cur/latest/userguide/cur-create.html) to set up a CUR. For time granularity, select *Daily*. Be sure to enable Resource IDs and Athena integration when creating the CUR.
 
 Remember the name of the bucket you create for CUR data. This will be used in Step 2.
 
-> **Note**: If you believe you have the correct permissions, but cannot access the Billing and Cost Management page, have the owner of your organization's root account follow these instructions [https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/control-access-billing.html](https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/control-access-billing.html#ControllingAccessWebsite-Activate)
+> **Note**: If you believe you have the correct permissions, but cannot access the Billing and Cost Management page, have the owner of your organization's root account follow [these instructions](https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/control-access-billing.html#ControllingAccessWebsite-Activate)
 
-AWS may take several hours to publish data (up to 24 hours), wait until this is complete before continuing to the next step.
+AWS may take up to 24 hours to publish data. Wait until this is complete before continuing to the next step.
 
 ### Step 2: Setting up Athena
 
-As part of the CUR creation process, Amazon also creates a CloudFormation template that is used to create the Athena integration. It is created in the CUR S3 bucket under `your-billing-prefix/cur-name` and typically has the filename `crawler-cfn.yml`. You will need to deploy this CloudFormation template in order to complete the CUR Athena integration.
-[https://docs.aws.amazon.com/cur/latest/userguide/use-athena-cf.html](https://docs.aws.amazon.com/cur/latest/userguide/use-athena-cf.html)
+As part of the CUR creation process, Amazon also creates a CloudFormation template that is used to create the Athena integration. It is created in the CUR S3 bucket under `your-billing-prefix/cur-name` and typically has the filename `crawler-cfn.yml`. You will need to deploy this CloudFormation template in order to complete the CUR Athena integration. You can read more about this [here](https://docs.aws.amazon.com/cur/latest/userguide/use-athena-cf.html).
 
 Once Athena is set up with the CUR, you will need to create a new S3 bucket for Athena query results.
 
@@ -47,7 +45,7 @@ Download template files from the URLs provided below and upload them as the stac
 
 <li><p>Navigate to <a href="https://console.aws.amazon.com/cloudformation">https://console.aws.amazon.com/cloudformation</a></p></li>
 
-<li><p>Click <strong>Create New Stack</strong> if you have never used AWS CloudFormation before. Otherwise, click <strong>Create Stack</strong>. and select <strong>With new resource (standard)</strong></p></li>
+<li><p>Click <strong>Create New Stack</strong> if you have never used AWS CloudFormation before. Otherwise, select <strong>Create Stack</strong>, and select <strong>With new resource (standard)</strong></p></li>
 
 <li><p>Under <strong>Prepare template</strong>, choose <strong>Template is ready</strong>.</p></li>
 
@@ -80,7 +78,7 @@ Download template files from the URLs provided below and upload them as the stac
 
 
 <details>
-  <summary>My kubernetes clusters run in different accounts from the master payer account</summary>
+  <summary>My Kubernetes clusters run in different accounts from the master payer account</summary>
   <ul>
 <li>On each sub account running Kubecost
 
@@ -453,7 +451,7 @@ Kubecost will reconcile your spot prices with CUR billing reports as they become
 
 [https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-data-feeds.html](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-data-feeds.html)
 
-## Configuring the Spot Data Feed in Kubecost
+## Configuring the Spot Data feed in Kubecost
 
 These values can either be set from the kubecost frontend or via .Values.kubecostProductConfigs in the Helm Chart. Note that if you set any kubecostProductConfigs from the Helm Chart, all changes via the frontend will be deleted on pod restart.
 
@@ -472,12 +470,12 @@ Spot data feed provide same functionality as aws cur integration , The only diff
 * `spotLabelValue` optional Kubernetes node label value designating a spot node. Used to provide pricing estimates until exact spot data becomes available from the CUR. For example, if your spot nodes carry a label `lifecycle:spot`, then the spotLabel would be "lifecycle" and the spotLabelValue would be "spot"
 
 ## Troubleshooting Spot data feed
-**Symptom:** 
-If you see spot data instnace not found
+
+### Spot data instance not found
 	
 <img width="902" alt="1fva81l9sph6hh-image" src="https://user-images.githubusercontent.com/102574445/199281977-3195b1d1-e3a5-4561-85da-eb8b24e23f27.png">
 	
-Verify below points
+Verify below points:
 	
 - Make sure data is present in the spot data feed bucket.
 - Make sure Project ID are configured correctly, You can cross-verify the values under helm values in bug report
