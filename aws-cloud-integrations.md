@@ -535,12 +535,14 @@ Spot data feed provide same functionality as aws cur integration , The only diff
 Verify below points:
 	
 - Make sure data is present in the spot data feed bucket.
-- Make sure Project ID are configured correctly, You can cross-verify the values under helm values in bug report
-- Check the value of kubecost_node_is_spot in Prometheus: "1" - spot data instance configuration is correct, "0" - Not configured properly.
-- Is there a prefix? If so is that configured in kubecost?
+- Make sure Project ID is configured correctly. You can cross-verify the values under helm values in bug report
+- Check the value of kubecost_node_is_spot in Prometheus:
+	- "1" means spot data instance configuration is correct.
+	- "0" means not configured properly.
+- Is there a prefix? If so, is it configured in kubecost?
 - Make sure the IAM permissions are aligned with https://github.com/kubecost/cloudformation/blob/7feace26637aa2ece1481fda394927ef8e1e3cad/kubecost-single-account-permissions.yaml#L36
 - Make sure the Spot data feed bucket has all permissions to access by Kubecost
-- The spot instance in the spot data feed bucket should match the instance in the cluster where the spot data feed is configured. awsSpotDataBucket has to be present in the right cluster.
+- The Spot instance in the Spot data feed bucket should match the instance in the cluster where the spot data feed is configured. awsSpotDataBucket has to be present in the right cluster.
 
 ## Summary and pricing
 
