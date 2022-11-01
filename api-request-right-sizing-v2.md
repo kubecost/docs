@@ -20,7 +20,7 @@ http://<kubecost-address>/model/savings/requestSizingV2
 
 | Name | Type | Description |
 |------|------|-------------|
-| `algorithmCPU` | string | The algorithm to be used to calculate CPU recommendations based on historical CPU usage data. Options are `max` and `quantile`. Max recommendations are based on the maximum-observed usage in `window`. Quantile recommendations are based on a quantile of observed usage in `window` (requires the `qCPU` parameter to set the desired quantile). Defaults to `max`.
+| `algorithmCPU` | string | The algorithm to be used to calculate CPU recommendations based on historical CPU usage data. Options are `max` and `quantile`. Max recommendations are based on the maximum-observed usage in `window`. Quantile recommendations are based on a quantile of observed usage in `window` (requires the `qCPU` parameter to set the desired quantile). Defaults to `max`. NOTE: To use the `quantile` algorithm, the ContainerStats pipeline must be enabled. Please see the note on the `.Values.kubecostModel.containerStatsEnabled` value [on the Helm chart](https://github.com/kubecost/cost-analyzer-helm-chart/blob/develop/cost-analyzer/values.yaml).
 | `algorithmRAM` | string | Like `algorithmCPU`, but for RAM recommendations.
 | `qCPU` | float in the range (0, 1] | The desired quantile to base CPU recommendations on. Only used if `algorithmCPU=quantile`. Note: a quantile of `0.95` is the same as a 95th percentile.
 | `qRAM` | float in the range (0, 1] | Like `qCPU`, but for RAM recommendations.
