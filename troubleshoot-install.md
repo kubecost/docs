@@ -171,14 +171,6 @@ Error: INSTALLATION FAILED: unable to build kubernetes objects from release mani
 To disable PodSecurityPolicy in your deployment:
 
 ```bash
-# Verify that you don't see "podsecuritypolicy" referenced anywhere
-$ helm upgrade -i kubecost kubecost/cost-analyzer --namespace kubecost --dry-run \
-    --set podSecurityPolicy.enabled=false \
-    --set networkCosts.podSecurityPolicy.enabled=false \
-    --set prometheus.podSecurityPolicy.enabled=false \
-    --set grafana.rbac.pspEnabled=false
-
-# Install or upgrade Kubecost with PodSecurityPolicy disabled in Grafana
 $ helm upgrade -i kubecost kubecost/cost-analyzer --namespace kubecost \
     --set podSecurityPolicy.enabled=false \
     --set networkCosts.podSecurityPolicy.enabled=false \
