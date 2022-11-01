@@ -534,7 +534,7 @@ If you see spot data instnace not found
 	
 <img width="902" alt="1fva81l9sph6hh-image" src="https://user-images.githubusercontent.com/102574445/199281977-3195b1d1-e3a5-4561-85da-eb8b24e23f27.png">
 	
-Very below points
+Verify below points
 	
 - Make sure data is present in the spot data feed bucket.
 - If you have primary and secondary clusters, spot data feed should be configured in primary and all your secondary clusters.
