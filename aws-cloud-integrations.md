@@ -1,28 +1,26 @@
 AWS Cloud Integration
 =====================
 
-Kubecost pulls asset prices from the public AWS pricing API by default. To have accurate pricing information from AWS, you can integrate directly with your account. This integration will properly account for Enterprise Discount Programs, Reserved Instance usage, Savings Plans, spot usage, and more. This resource describes the required steps for achieving this.
+Kubecost pulls asset prices from the public AWS pricing API by default. To have accurate pricing information from AWS, you can integrate directly with your account. This integration will properly account for Enterprise Discount Programs, Reserved Instance usage, Savings Plans, spot usage, and more.
 
-Your user will need necessary permissions to create the Cost and Usage Report (CUR), add IAM credentials for Athena and S3. Optional permission is the ability to add and execute CloudFormation templates. Kubecost does not require root access in the AWS account.
+You will need necessary permissions to create the Cost and Usage Report (CUR), and add IAM credentials for Athena and S3. Optional permission is the ability to add and execute CloudFormation templates. Kubecost does not require root access in the AWS account.
 
 A GitHub repository with sample files used in below instructions can be found here: [https://github.com/kubecost/poc-common-configurations/tree/main/aws](https://github.com/kubecost/poc-common-configurations/tree/main/aws)
 
-## Cost and Usage Report Integration
+## Cost and Usage Report integration
 
 ### Step 1: Setting up the CUR
-Follow these steps to set up a Cost and Usage Report. For time granularity, select Daily. Be sure to enable Resource Ids and Athena integration when creating the CUR.
-[https://docs.aws.amazon.com/cur/latest/userguide/cur-create.html](https://docs.aws.amazon.com/cur/latest/userguide/cur-create.html)
+Follow [these steps](https://docs.aws.amazon.com/cur/latest/userguide/cur-create.html) to set up a CUR. For time granularity, select *Daily*. Be sure to enable Resource IDs and Athena integration when creating the CUR.
 
 Remember the name of the bucket you create for CUR data. This will be used in Step 2.
 
-> **Note**: If you believe you have the correct permissions, but cannot access the Billing and Cost Management page, have the owner of your organization's root account follow these instructions [https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/control-access-billing.html](https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/control-access-billing.html#ControllingAccessWebsite-Activate)
+> **Note**: If you believe you have the correct permissions, but cannot access the Billing and Cost Management page, have the owner of your organization's root account follow [these instructions](https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/control-access-billing.html#ControllingAccessWebsite-Activate)
 
-AWS may take several hours to publish data (up to 24 hours), wait until this is complete before continuing to the next step.
+AWS may take up to 24 hours to publish data. Wait until this is complete before continuing to the next step.
 
 ### Step 2: Setting up Athena
 
-As part of the CUR creation process, Amazon also creates a CloudFormation template that is used to create the Athena integration. It is created in the CUR S3 bucket under `your-billing-prefix/cur-name` and typically has the filename `crawler-cfn.yml`. You will need to deploy this CloudFormation template in order to complete the CUR Athena integration.
-[https://docs.aws.amazon.com/cur/latest/userguide/use-athena-cf.html](https://docs.aws.amazon.com/cur/latest/userguide/use-athena-cf.html)
+As part of the CUR creation process, Amazon also creates a CloudFormation template that is used to create the Athena integration. It is created in the CUR S3 bucket under `your-billing-prefix/cur-name` and typically has the filename `crawler-cfn.yml`. You will need to deploy this CloudFormation template in order to complete the CUR Athena integration. You can read more about this [here](https://docs.aws.amazon.com/cur/latest/userguide/use-athena-cf.html).
 
 Once Athena is set up with the CUR, you will need to create a new S3 bucket for Athena query results.
 
@@ -47,7 +45,7 @@ Download template files from the URLs provided below and upload them as the stac
 
 <li><p>Navigate to <a href="https://console.aws.amazon.com/cloudformation">https://console.aws.amazon.com/cloudformation</a></p></li>
 
-<li><p>Click <strong>Create New Stack</strong> if you have never used AWS CloudFormation before. Otherwise, click <strong>Create Stack</strong>. and select <strong>With new resource (standard)</strong></p></li>
+<li><p>Click <strong>Create New Stack</strong> if you have never used AWS CloudFormation before. Otherwise, select <strong>Create Stack</strong>, and select <strong>With new resource (standard)</strong></p></li>
 
 <li><p>Under <strong>Prepare template</strong>, choose <strong>Template is ready</strong>.</p></li>
 
@@ -80,7 +78,7 @@ Download template files from the URLs provided below and upload them as the stac
 
 
 <details>
-  <summary>My kubernetes clusters run in different accounts from the master payer account</summary>
+  <summary>My Kubernetes clusters run in different accounts from the master payer account</summary>
   <ul>
 <li>On each sub account running Kubecost
 
@@ -419,6 +417,7 @@ These values can either be set from the kubecost frontend or via .Values.kubecos
     * The athena database name is available as the value (physical id) of `AWSCURDatabase` in the CloudFormation stack created above (in [Step 2: Setting up Athena](#Step-2:-Setting-up-Athena))
 * `athenaTable` the name of the table created by the Athena setup
   * The table name is typically the database name with the leading `athenacurcfn_` removed (but is not available as a CloudFormation stack resource)
+* `athenaWorkgroup` The workgroup assigned to be used with Athena. If not specified, defaults to `Primary`
 
 > **Note**: Make sure use only underscore as a delimiter if needed for tables and views, using dash will not work even though you might be able to create it see [docs](https://docs.aws.amazon.com/athena/latest/ug/tables-databases-columns-names.html).
 
@@ -442,6 +441,63 @@ You can also check query history to see if any queries are failing:
 	
 <img width="1792" alt="Screen Shot 2020-12-06 at 9 43 50 PM" src="https://user-images.githubusercontent.com/453512/101319633-24ef5500-3817-11eb-9f87-55a903428936.png">
 
+### Common Athena errors.
+
+#### Incorrect bucket in IAM Policy.
+
+* **Symptom:** 
+   A similar error to this will be shown on the diagnostics page under "Pricing Sources" on the "Diagnostics" page. You can search for the <Athena Query ID> in the Athena "Recent queries" dashboard to find additional info about the error.
+   ```
+   QueryAthenaPaginated: query execution error: no query results available for query <Athena Query ID>
+   ```
+	
+   And / or the following error will be found in the Kubecost `cost-model` container logs.
+   ```
+   Permission denied on S3 path: s3://cur-report/cur-report/cur-report/year=2022/month=8
+
+   This query ran against the "athenacurcfn_test" database, unless qualified by the query. Please post the error message on our forum  or contact customer support  with Query Id: <Athena Query ID>
+   ```
+	
+* **Resolution:**
+	This error is typically caused by the incorrect (Athena results) s3 bucket being specified in the cloudformation template of step 3 from above. To resolve the issue ensure the bucket used for storing the AWS CUR report (step 1) is specified in the `S3ReadAccessToAwsBillingData` SID of the IAM policy (default: kubecost-athena-access) attached to the user or role used by Kubecost (Default: KubecostUser / KubecostRole). See the following example. **NOTE:** This error can also occur when master payer cross account permissions are incorrect, that solution may differ.
+	```
+	        {
+            "Action": [
+                "s3:Get*",
+                "s3:List*"
+            ],
+            "Resource": [
+                "arn:aws:s3:::<AWS CUR BUCKET>*"
+            ],
+            "Effect": "Allow",
+            "Sid": "S3ReadAccessToAwsBillingData"
+        }
+	```
+#### Query not supported
+* **Symptom:** 
+A similar error to this will be shown on the diagnostics page under "Pricing Sources" on the "Diagnostics" page.
+```
+QueryAthenaPaginated: start query error: operation error Athena: StartQueryExecution, https response error StatusCode: 400, RequestID: <Athena Query ID>, InvalidRequestException: Queries of this type are not supported
+```
+
+* **Resolution:**
+While rare, this issue was caused by and Athena instance which failed to provision properly on AWS. The solution was to delete the Athena DB and deploy a new one. To verify this is needed, find the failed query ID in the Athena "Recent queries" dashboard and attempt to manually run the query.
+	
+#### HTTPS Response error
+* **Symptom:** 
+A similar error to this will be shown on the diagnostics page under "Pricing Sources" on the "Diagnostics" page.
+```
+QueryAthenaPaginated: start query error: operation error Athena: StartQueryExecution, https response error StatusCode: 400, RequestID: ********************, InvalidRequestException: Unable to verify/create output bucket aws-athena-query-results-test
+```
+
+* **Resolution:**
+Previously, if you ran a query without specifying a value for Query result location, and the query result location setting was not overridden by a workgroup, Athena created a default location for you.
+Now, before you can run an Athena query in a region in which your account hasn't used Athena previously, you must specify a query result location, or use a workgroup that overrides the query result location setting. While Athena no longer creates a default query results location for you, previously created default aws-athena-query-results-MyAcctID-MyRegion locations remain valid and you can continue to use them.
+https://docs.aws.amazon.com/athena/latest/ug/querying.html#query-results-specify-location
+The bucket should be in the format of:
+`aws-athena-query-results-MyAcctID-MyRegion`
+It may also be required to remove and reinstall Kubecost. If doing this please remeber to backup ETL files prior or contact support for additional assistance.
+
 ## Relating out-of-cluster costs to k8s resources via tags?
 
 *   [Activating User-Defined Cost Allocation Tags - AWS Billing and Cost Management](https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/activating-tags.html)
@@ -453,9 +509,11 @@ Kubecost will reconcile your spot prices with CUR billing reports as they become
 
 [https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-data-feeds.html](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-data-feeds.html)
 
-## Configuring the Spot Data Feed in Kubecost
+## Configuring the Spot Data feed in Kubecost
 
 These values can either be set from the kubecost frontend or via .Values.kubecostProductConfigs in the Helm Chart. Note that if you set any kubecostProductConfigs from the Helm Chart, all changes via the frontend will be deleted on pod restart.
+
+Spot data feed provide same functionality as aws cur integration , The only difference is you will receive Spot Feed data hourly with the Spot Feed Integration. The AWS Cloud Integration, or CUR, is delayed up to 48 hours.  So if you are looking for accurate costs across the board, as most customers do, you can skip the Spot Feed integration. If your use case is different want to go for spot data feed make sure you had the right information to make an informed decision.
 
 * `projectID` the Account ID of the AWS Account on which the spot nodes are running.
 
@@ -468,6 +526,24 @@ These values can either be set from the kubecost frontend or via .Values.kubecos
 *  `spotLabel` optional Kubernetes node label name designating whether a node is a spot node. Used to provide pricing estimates until exact spot data becomes available from the CUR
 
 * `spotLabelValue` optional Kubernetes node label value designating a spot node. Used to provide pricing estimates until exact spot data becomes available from the CUR. For example, if your spot nodes carry a label `lifecycle:spot`, then the spotLabel would be "lifecycle" and the spotLabelValue would be "spot"
+
+## Troubleshooting Spot data feed
+
+### Spot data instance not found
+	
+<img width="902" alt="1fva81l9sph6hh-image" src="https://user-images.githubusercontent.com/102574445/199281977-3195b1d1-e3a5-4561-85da-eb8b24e23f27.png">
+	
+Verify below points:
+	
+- Make sure data is present in the spot data feed bucket.
+- Make sure Project ID is configured correctly. You can cross-verify the values under helm values in bug report
+- Check the value of kubecost_node_is_spot in Prometheus:
+	- "1" means spot data instance configuration is correct.
+	- "0" means not configured properly.
+- Is there a prefix? If so, is it configured in kubecost?
+- Make sure the IAM permissions are aligned with https://github.com/kubecost/cloudformation/blob/7feace26637aa2ece1481fda394927ef8e1e3cad/kubecost-single-account-permissions.yaml#L36
+- Make sure the Spot data feed bucket has all permissions to access by Kubecost
+- The Spot instance in the Spot data feed bucket should match the instance in the cluster where the spot data feed is configured. awsSpotDataBucket has to be present in the right cluster.
 
 ## Summary and pricing
 

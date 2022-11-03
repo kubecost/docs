@@ -124,7 +124,10 @@ If you are using an existing disk storage option for your ETL data, enabling the
 
 Currently, this feature is still in development, but there is currently a status card available on the diagnostics page that will eventually show the status of the backup system:
 
+## Troubleshooting
+In some scenarios like when using Memory store, setting `kubecostModel.etlHourlyStoreDurationHours` to a value of `48` hours or less will cause ETL backup files to become truncated. The current recomendation is to keep [etlHourlyStoreDurationHours](https://github.com/kubecost/cost-analyzer-helm-chart/blob/8fd5502925c28c56af38b0c4e66c4ec746761d50/cost-analyzer/values.yaml#L322) at its default of `49` hours.
 ![Diagnostic ETL Backup Status](https://raw.githubusercontent.com/kubecost/docs/main/images/diagnostics-etl-backup-status.png)
+
 
 Edit this doc on [GitHub](https://github.com/kubecost/docs/blob/main/etl-backup.md)
 
