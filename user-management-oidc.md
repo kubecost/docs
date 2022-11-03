@@ -5,7 +5,7 @@ User Management - SSO/OIDC
 
 ## Helm configuration
 
-The OIDC integration in Kubecost is fulfilled via the helm configuration parameters `.Values.oidc` [as shown here](https://github.com/kubecost/cost-analyzer-helm-chart/blob/develop/cost-analyzer/values.yaml).
+The OIDC integration in Kubecost is fulfilled via the helm configuration parameters `.Values.oidc` [as shown here](https://github.com/kubecost/cost-analyzer-helm-chart/blob/721555b6641f72f2fd0c12f737243268923430e0/cost-analyzer/values.yaml#L194-L202).
 
 ## Supported identity providers
 
@@ -30,7 +30,7 @@ Please refer to the following references to find out more about how to configure
    2. Set "Valid Redirect URIs" to `http://your-kubecost-address/model/oidc/authorize`.
    3. Set "Base URL" to `http://your-kubecost-address`.
 
-The [`.Values.oidc`](https://github.com/kubecost/cost-analyzer-helm-chart/blob/develop/cost-analyzer/values.yaml) for Keycloak should be as follows:
+The [`.Values.oidc`](https://github.com/kubecost/cost-analyzer-helm-chart/blob/721555b6641f72f2fd0c12f737243268923430e0/cost-analyzer/values.yaml#L194-L202) for Keycloak should be as follows:
 
 ```yaml
 oidc:
