@@ -1,46 +1,57 @@
 ETL Backup
 ==========
 
-## Manual ETL data backup
-Your Prometheus retention window may be small (15 days by default) to reduce the amount of data stored, meaning if Kubecost's ETL becomes lost or corrupted, it cannot be rebuilt from Prometheus for data older than the retention window. For this reason, you may wish to take backups of Kubecost's ETL pipeline.
+Kubecost's ETL is a computed cache based on Prometheus's metrics, from which the user can perform all possible Kubecost queries. The ETL data is stored in a `PersistentVolume` mounted to the `kubecost-cost-analyzer` pod.
 
-## Backup via Bash script
-The simplest way to back up Kubecost's ETL is to create a copy locally to then send to the file storage system of your choice. We provide a [script](https://github.com/kubecost/etl-backup) to do that.
+There are a number of reasons why you may want to backup this ETL data:
 
-## Restoring a backup
-Untar the results of the etl-backup script into the ETL directory pod.
+* to ensure a copy of your Kubecost data exists, so that you can restore the data if needed
+* if you would like to reduce the amount of data stored in Prometheus (15 day retention window by default) or Thanos
 
-```
-kubectl cp -c cost-model <untarred-results-of-script> <kubecost-namespace>/<kubecost-podname>/var/configs/db/etl
+## Option 1: Backup via Bash script
+
+The simplest way to backup Kubecost's ETL is to copy the pod's ETL store to your local disk. You can then send that file to any other storage system of your choice. We provide a [script](https://github.com/kubecost/etl-backup) to do that.
+
+To restore the backup, untar the results of the etl-backup script into the ETL directory pod.
+
+```bash
+kubectl cp -c cost-model <untarred-results-of-script> <kubecost-namespace>/<kubecost-pod-name>/var/configs/db/etl
 ```
 
 There is also a Bash script available to restore the backup [here](https://github.com/kubecost/etl-backup/blob/main/upload-etl.sh).
 
-## Automated durable ETL backups and monitoring 
-We provide cloud storage backups for ETL backing storage. Backups are not the typical approach of "halt all reads/writes and dump the database." Instead, the backup system is a transparent feature that will always ensure that local ETL data is backed up, and if local data is missing, it can be retrieved from backup storage. This feature protects users from accidental data loss by ensuring that previously backed up data can be restored at runtime. 
+## Option 2: Automated durable ETL backups and monitoring
+
+We provide cloud storage backups for ETL backing storage. Backups are not the typical approach of "halt all reads/writes and dump the database." Instead, the backup system is a transparent feature that will always ensure that local ETL data is backed up, and if local data is missing, it can be retrieved from backup storage. This feature protects users from accidental data loss by ensuring that previously backed up data can be restored at runtime.
 
 > **Note**: Durable backup storage functionality is only part of Kubecost Enterprise.
 
 When the ETL pipeline collects data, it stores both daily and hourly (if configured) cost metrics on a configured storage. This defaults to a persistent volume based disk storage, but can be configured to use external durable storage on the following providers:
-* AWS S3 
+
+* AWS S3
 * Azure Blob Storage
 * Google Cloud Storage
 
-## Create storage configuration secret
-This configuration secret follows the same layout documented for Thanos here: https://thanos.io/v0.21/thanos/storage.md 
+### Step 1: Create storage configuration secret
 
-You will need to create a file `object-store.yaml` using the chosen storage provider configuration layout documented below, and issue the following console command to create the secret from this file:
+This configuration secret follows the same layout documented for Thanos here: <https://thanos.io/v0.21/thanos/storage.md>
+
+You will need to create a file named `object-store.yaml` using the chosen storage provider configuration (documented below), and run the following command to create the secret from this file:
 
 ```bash
-kubectl create secret generic <secret_name> -n kubecost --from-file=object-store.yaml
+kubectl create secret generic <YOUR_SECRET_NAME> -n kubecost --from-file=object-store.yaml
 ```
 
-> **Note**: Use the file name `object-store.yaml` if using this method. 
+> **Note**: The file must be named `object-store.yaml`
 
-## Existing Thanos users
-If you are using a cloud storage provider with Thanos, you can use the same bucket configuration secret with the `--set kubecostModel.etlBucketConfigSecret=<secret_name>` flag to enable the backup feature. This will backup all ETL data to the same bucket being used by Thanos. 
+#### Existing Thanos users
 
-### S3
+If you have already configured Thanos following [this documentation](https://github.com/kubecost/docs/blob/main/long-term-storage.md), you can reuse the previously created bucket configuration secret.
+
+Setting `.Values.kubecostModel.etlBucketConfigSecret=kubecost-thanos` will enable the backup feature. This will backup all ETL data to the same bucket being used by Thanos.
+
+#### S3
+
 The configuration schema for S3 is documented here: [S3 Storage](https://thanos.io/v0.21/thanos/storage.md#s3). For reference, here's an example:
 
 ```yaml
@@ -57,7 +68,8 @@ config:
     "X-Amz-Acl": "bucket-owner-full-control"
 ```
 
-### Google Cloud Storage
+#### Google Cloud Storage
+
 The configuration schema for Google Cloud Storage is documented here: [Google Cloud Storage Storage](https://thanos.io/v0.21/thanos/storage.md/#gcs). For reference, here's an example:
 
 ```yaml
@@ -79,7 +91,8 @@ config:
     }    
 ```
 
-### Azure
+#### Azure
+
 The configuration schema for Azure is documented here: [Azure Storage](https://thanos.io/v0.21/thanos/storage.md/#azure). For reference, here's an example:
 
 ```yaml
@@ -91,20 +104,27 @@ config:
   endpoint: ""
 ```
 
-## Enable ETL backup in Helm values
+### Step 2: Enable ETL backup in Helm values
 
-When installing with Helm, use the `--set kubecostModel.etlBucketConfigSecret=<secret_name>` flag and substitute the name of the secret you just created. The backup solution will work with `kubecostModel.etlFileStore: true` as well. 
+If Kubecost was isntalled with Helm, ensure the following values are set.
 
-## Compatibility 
-If you are using an existing disk storage option for your ETL data, enabling the durable backup feature will retroactively back up all previously stored data\*. This feature is also fully compatible with the existing S3 backup feature. 
+```yaml
+kubecostModel:
+  etlFileStore: true
+  etlBucketConfigSecret: <YOUR_SECRET_NAME>
+```
+
+### Compatibility
+
+If you are using an existing disk storage option for your ETL data, enabling the durable backup feature will retroactively back up all previously stored data\*. This feature is also fully compatible with the existing S3 backup feature.
 
 \* _If you are using a memory store for your ETL data with a local disk backup (`kubecostModel.etlFileStoreEnabled: false`), the backup feature will simply replace the local backup. In order to take advantage of the retroactive backup feature, you will need to update to file store (`kubecostModel.etlFileStoreEnabled: true`). This option is now enabled by default in the helm chart._
 
-## Monitoring 
+## Monitoring
+
 Currently, this feature is still in development, but there is currently a status card available on the diagnostics page that will eventually show the status of the backup system:
 
 ![Diagnostic ETL Backup Status](https://raw.githubusercontent.com/kubecost/docs/main/images/diagnostics-etl-backup-status.png)
-
 
 Edit this doc on [GitHub](https://github.com/kubecost/docs/blob/main/etl-backup.md)
 
