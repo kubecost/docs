@@ -182,6 +182,28 @@ If this is true, you are likely to be hitting a CoreDNS routing issue. We recomm
 1. Go to <https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/templates/cost-analyzer-frontend-config-map-template.yaml#L13>
 2. Replace ```{{ $serviceName }}.{{ .Release.Namespace }}``` with ```localhost```
 
+## Issue: PodSecurityPolicy CRD is missing for `kubecost-grafana` and `kubecost-cost-analyzer-psp`
+
+PodSecurityPolicy has been [removed from Kubernetes v1.25](https://kubernetes.io/docs/concepts/security/pod-security-policy/). This will result in the following error during install.
+
+```bash
+$ helm install kubecost kubecost/cost-analyzer
+Error: INSTALLATION FAILED: unable to build kubernetes objects from release manifest: [
+    resource mapping not found for name: "kubecost-grafana" namespace: "" from "": no matches for kind "PodSecurityPolicy" in version "policy/v1beta1" ensure CRDs are installed first,
+    resource mapping not found for name: "kubecost-cost-analyzer-psp" namespace: "" from "": no matches for kind "PodSecurityPolicy" in version "policy/v1beta1" ensure CRDs are installed first
+]
+```
+
+To disable PodSecurityPolicy in your deployment:
+
+```bash
+$ helm upgrade -i kubecost kubecost/cost-analyzer --namespace kubecost \
+    --set podSecurityPolicy.enabled=false \
+    --set networkCosts.podSecurityPolicy.enabled=false \
+    --set prometheus.podSecurityPolicy.enabled=false \
+    --set grafana.rbac.pspEnabled=false
+```
+
 ## Question: How can I run on Minikube?
 
 1. Edit nginx configmap ```kubectl edit cm nginx-conf -n kubecost```
