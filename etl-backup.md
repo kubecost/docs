@@ -106,7 +106,7 @@ config:
 
 ### Step 2: Enable ETL backup in Helm values
 
-If Kubecost was isntalled with Helm, ensure the following values are set.
+If Kubecost was installed via Helm, ensure the following values are set.
 
 ```yaml
 kubecostModel:
