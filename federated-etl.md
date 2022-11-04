@@ -25,13 +25,14 @@ The Storages referred to here are an S3 (or GCP/Azure equivalent) storage bucket
 
 ## Example diagram
 This diagram shows an example setup of the Federated ETL with:
-* 3 pure federated Clusters (not classified as any other cluster type)
-* 1 Federator Cluster that is also a federated Cluster
-* 1 Primary Cluster that is also a federated Cluster
+* Three pure federated clusters (not classified as any other cluster type): Cluster 1, Cluster 2, and Cluster 3
+* One Federator cluster that is also a federated Cluster: Cluster 4
+* One Primary cluster that is also a federated Cluster: Cluster 5
 
 The result is 5 clusters federated together.
 
-![Federated ETL diagram](https://raw.githubusercontent.com/kubecost/docs/main/images/federated-etl.png)
+![Federated ETL diagram](https://user-images.githubusercontent.com/32113845/200037732-102f12b4-732b-435c-b3d0-c23018a6a7e6.png)
+
 
 ## Setup
 ### Step 1: Storage configuration
