@@ -31,37 +31,40 @@ This diagram shows an example setup of the Federated ETL with:
 
 The result is 5 clusters federated together.
 
-**insert diagram**
+![Federated ETL diagram](https://raw.githubusercontent.com/kubecost/docs/main/images/federated-etl.png)
 
 ## Setup
-### Step 1: Storage Configuration
+### Step 1: Storage configuration
 
-1. For any cluster in the pipeline (Federator, federated, Primary, or any combination of the three), create a file federated-store.yaml w/ the same format used for Thanos/S3 backup.
-2. Then, add a secret using that file kubectl create secret generic <secret_name> -n kubecost --from-file=federated-store.yaml.
-        1. If you would like to use an existing secret already mounted/configured through kubecostModel.etlBucketConfigSecret, set federatedETL.useExistingS3Config to true. This will override any secret configured using the above.
-        2. If using existing config, be aware that since Federated ETL clusters share an S3 bucket, it is not advised to do this for more than one of the clusters as Kubecost S3 backup may become unreliable and cause issues with the pipeline. To avoid this, use the separate federated secret as mentioned above.
+1. For any cluster in the pipeline (Federator, federated, Primary, or any combination of the three), create a file *federated-store.yaml* with the same format used for Thanos/S3 backup.
+2. Add a secret using that file: `kubectl create secret generic <secret_name> -n kubecost --from-file=federated-store.yaml`.
 
-### Step 2: Cluster Configuration (Federated/Federator)
-For all clusters you want to federate together i.e. see their data on the Primary, set .Values.federatedETL.federatedCluster to true. This cluster is now a federated cluster, and can also be a Federator or Primary cluster.
-For the cluster “hosting” the federator, set .Values.federatedETL.federator.enabled to true. This cluster is now a Federator cluster, and can also be a Federated or Primary cluster.
-[Optional] If you have any Federated Clusters pushing to a store that you do not want a Federator cluster to federate, add the cluster id under the federator config section .Values.federatedETL.federator.clusters.
-If this param is empty/not set, the Federator will simply take all ETL files in the /federated directory and federate them automatically.
-Multiple federators federating from the same source will not break, but it’s not recommended.
+    * If you would like to use an existing secret already mounted/configured through `kubecostModel.etlBucketConfigSecret`, set `federatedETL.useExistingS3Config` to `true`. This will override any secret configured using the above.
+    * If using existing config, be aware that since Federated ETL clusters share an S3 bucket, it is not advised to do this for more than one of the clusters, as Kubecost S3 backup may become unreliable and cause issues with the pipeline. To avoid this, use the separate federated secret as mentioned above.
 
-3. Cluster Configuration (Primary)
-For the cluster that will be the primary cluster, set Values.federatedETL.primaryCluster to true. This cluster is now a Primary cluster, and can also be a Federator or federated cluster.
-IMPORTANT If the primary cluster is also to be federated, please wait 2-3 hours for data to populate federated storage before setting a federated cluster to primary (i.e. set .Values.federatedETL.federatedCluster to true, then wait to set Values.federatedETL.primaryCluster to true). This allows for maximum certainty of data consistency.
-If you do not set this cluster to be federated as well as primary (as above in 4a), you will not see local data for this cluster.
-The primary cluster’s local ETL will be overwritten with combined federated data.
-This can be undone by unsetting it as a primary cluster and rebuilding ETL.
-Setting a primary cluster may result in a loss of the cluster’s local ETL data, so it is recommended to back up any filestore data that one would want to save to S3 before designating the cluster as primary. 
-Alternatively, a fresh Kubecost install can be used as a consumer of combined federated data by setting it as the Primary but not a federated cluster.
+### Step 2: Cluster configuration (Federated/Federator)
 
-4. Verifying Successful Configuration
-The Federated ETL should begin functioning. On any ETL action on a federated cluster (Load/Put into local ETL store) the federated clusters will add data to federated storage. The Federator will run 5 minutes after federator cluster startup, and then every 30 minutes after that, merging that data into the combined storage, where it can be read by the primary.
-To verify Federated Clusters are uploading their data correctly, check the container logs on a Federated Cluster. It should log federated uploads when ETL build steps run. The S3 bucket can also be checked to see if data is being written to the /federated/<cluster_id> path.
-To verify the Federator is functioning, check the container logs on the Federator Cluster. The S3 bucket can also be checked to verify that data is being written to /federated/combined.
-To verify the entire pipeline is working, either query Allocations/Assets OR view the respective views on the frontend. Multi-cluster data should appear after:
-The Federator has run at least once
-There was data in the Federated Storage for the Federator to have combined.
+1. For all clusters you want to federate together i.e. see their data on the Primary, set `.Values.federatedETL.federatedCluster` to `true`. This cluster is now a federated cluster, and can also be a Federator or Primary cluster.
+
+2. For the cluster “hosting” the federator, set `.Values.federatedETL.federator.enabled` to `true`. This cluster is now a Federator cluster, and can also be a Federated or Primary cluster.
+    * Optional: If you have any Federated Clusters pushing to a store that you do not want a Federator cluster to federate, add the cluster id under the federator config section `.Values.federatedETL.federator.clusters`.
+    * If this parameter is empty or not set, the Federator will take all ETL files in the `/federated` directory and federate them automatically.
+    * Multiple federators federating from the same source will not break, but it’s not recommended.
+
+### Step 3: Cluster configuration (Primary)
+1. For the cluster that will be the primary cluster, set `Values.federatedETL.primaryCluster` to `true`. This cluster is now a Primary cluster, and can also be a Federator or federated cluster.
+   * **Important**: If the primary cluster is also to be federated, please wait 2-3 hours for data to populate federated storage before setting a federated cluster to primary (i.e. set `.Values.federatedETL.federatedCluster` to `true`, then wait to set `Values.federatedETL.primaryCluster` to `true`). This allows for maximum certainty of data consistency.
+   * If you do not set this cluster to be federated as well as primary, you will not see local data for this cluster.
+   * The primary cluster’s local ETL will be overwritten with combined federated data.
+        * This can be undone by unsetting it as a primary cluster and rebuilding ETL.
+        * Setting a primary cluster may result in a loss of the cluster’s local ETL data, so it is recommended to back up any filestore data that one would want to save to S3 before designating the cluster as primary. 
+        * Alternatively, a fresh Kubecost install can be used as a consumer of combined federated data by setting it as the Primary but not a federated cluster.
+
+### Step 4: Verifying successful configuration
+1. The Federated ETL should begin functioning. On any ETL action on a federated cluster (Load/Put into local ETL store) the federated clusters will add data to federated storage. The Federator will run 5 minutes after federator cluster startup, and then every 30 minutes after that, merging that data into the combined storage, where it can be read by the primary.
+    * To verify Federated Clusters are uploading their data correctly, check the container logs on a Federated Cluster. It should log federated uploads when ETL build steps run. The S3 bucket can also be checked to see if data is being written to the `/federated/<cluster_id>` path.
+    * To verify the Federator is functioning, check the container logs on the Federator Cluster. The S3 bucket can also be checked to verify that data is being written to `/federated/combined`.
+    * To verify the entire pipeline is working, either query `Allocations/Assets` or view the respective views on the frontend. Multi-cluster data should appear after:
+        * The Federator has run at least once
+        * There was data in the Federated Storage for the Federator to have combined.
 
