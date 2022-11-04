@@ -44,13 +44,13 @@ kubectl create secret generic <YOUR_SECRET_NAME> -n kubecost --from-file=object-
 
 > **Note**: The file must be named `object-store.yaml`
 
-#### Existing Thanos users
+**Existing Thanos users**
 
 If you have already configured Thanos following [this documentation](https://github.com/kubecost/docs/blob/main/long-term-storage.md), you can reuse the previously created bucket configuration secret.
 
 Setting `.Values.kubecostModel.etlBucketConfigSecret=kubecost-thanos` will enable the backup feature. This will backup all ETL data to the same bucket being used by Thanos.
 
-#### S3
+**S3**
 
 The configuration schema for S3 is documented here: [S3 Storage](https://thanos.io/v0.21/thanos/storage.md#s3). For reference, here's an example:
 
@@ -68,7 +68,7 @@ config:
     "X-Amz-Acl": "bucket-owner-full-control"
 ```
 
-#### Google Cloud Storage
+**Google Cloud Storage**
 
 The configuration schema for Google Cloud Storage is documented here: [Google Cloud Storage Storage](https://thanos.io/v0.21/thanos/storage.md/#gcs). For reference, here's an example:
 
@@ -91,7 +91,7 @@ config:
     }    
 ```
 
-#### Azure
+**Azure**
 
 The configuration schema for Azure is documented here: [Azure Storage](https://thanos.io/v0.21/thanos/storage.md/#azure). For reference, here's an example:
 
