@@ -65,6 +65,6 @@ The result is 5 clusters federated together.
     * To verify Federated Clusters are uploading their data correctly, check the container logs on a Federated Cluster. It should log federated uploads when ETL build steps run. The S3 bucket can also be checked to see if data is being written to the `/federated/<cluster_id>` path.
     * To verify the Federator is functioning, check the container logs on the Federator Cluster. The S3 bucket can also be checked to verify that data is being written to `/federated/combined`.
     * To verify the entire pipeline is working, either query `Allocations/Assets` or view the respective views on the frontend. Multi-cluster data should appear after:
-        * The Federator has run at least once
+        * The Federator has run at least once.
         * There was data in the Federated Storage for the Federator to have combined.
 
