@@ -7,7 +7,7 @@ Federated ETL gives teams the benefit of federating multiple Kubecost installati
 The federated ETL is composed of three types of clusters.
 
 * **Federated Clusters**: The clusters which are being federated (clusters whose data will be combined and viewable at the end of the federated ETL pipeline). These clusters upload their ETL files after they have built them to Federated Storage.
-* **Federator Clusters**: The cluster on which the Federator (see in Other Components) is set to run within the core cost-analyzer container. This cluster combines the Federated Cluster data uploaded to federated storage into combined storage.
+* **Federator Clusters**: The cluster on which the Federator (see in Other components) is set to run within the core cost-analyzer container. This cluster combines the Federated Cluster data uploaded to federated storage into combined storage.
 * **Primary Cluster**: A cluster where you can see the total Federated data that was combined from your Federated Clusters. These clusters read from combined storage.
 
 These cluster designations can overlap, in that some clusters may be several types at once. A cluster that is a Federated Cluster, Federator Cluster, and Primary Cluster will perform the following functions:
