@@ -69,3 +69,4 @@ The result is 5 clusters federated together.
         * The Federator has run at least once.
         * There was data in the Federated Storage for the Federator to have combined.
 
+<!--- {"article":"10015110616599","section":"1500002777682","permissiongroup":"1500001277122"} --->
