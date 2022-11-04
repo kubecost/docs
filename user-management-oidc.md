@@ -78,4 +78,5 @@ To remove a previously set Helm value, you will need to set the value to an empt
 
 Edit this doc on [GitHub](https://github.com/kubecost/docs/blob/main/user-management-oidc.md)
 
-<!--- {"article":"","section":"4402815636375","permissiongroup":"1500001277122"} --->
+
+<!--- {"article":"10018767892119","section":"4402815636375","permissiongroup":"1500001277122"} --->
