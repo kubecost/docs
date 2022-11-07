@@ -25,8 +25,8 @@ e.g. if now is `2003-08-23T08:30:00Z`, the pipeline will only build up to the
 window from `2003-08-22T00:00:00Z` to `2003-08-23T00:00:00Z`.
 
 The pipeline will return an error response if a requested time range of data
-contains any windows (24 hour chunks) are expected (should be in the store)
-but not available (the pipeline has not yet built and loaded a complete set of
+contains any windows (24 hour chunks) are _expected_ (should be in the store)
+but not _available_ (the pipeline has not yet built and loaded a complete set of
 data into the store).
 
 ## Logs
