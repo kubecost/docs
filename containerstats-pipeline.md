@@ -13,7 +13,7 @@ recommendations. Review the doc for this feature [here](https://github.com/kubec
 
 ### Debugging
 
-There is an for introspecting pipeline data available at
+There is an API for introspecting pipeline data available at
 `/model/containerstats/quantiles`. It does not have a stable schema and is not
 supported as an official product feature. It is only intended for limited
 debugging.
