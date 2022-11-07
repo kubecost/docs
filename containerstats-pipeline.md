@@ -1,4 +1,4 @@
-# The ContainerStats pipeline
+# ContainerStats Pipeline
 
 The ContainerStats pipeline builds statistical representations of individual
 containers' resource usage over time.  The pipeline is part of the `cost-model` container.
@@ -9,7 +9,7 @@ containers' resource usage over time.  The pipeline is part of the `cost-model` 
 
 The primary user of ContainerStats pipeline data is v2 of the request right-
 sizing recommendation API. ContainerStats data is used for quantile-based
-recommendations. [Docs](https://github.com/kubecost/docs/blob/main/api-request-right-sizing-v2.md)
+recommendations. Review the doc for this feature [here](https://github.com/kubecost/docs/blob/main/api-request-right-sizing-v2.md).
 
 ### Debugging
 
@@ -19,12 +19,12 @@ available at `/model/containerstats/quantiles`.
 ## Behavior
 
 The pipeline builds 24 hour "windows" of data. It only builds complete windows,
-e.g. if now is `2003-08-23T08:30:00Z` the pipeline will only build up to the
+e.g. if now is `2003-08-23T08:30:00Z`, the pipeline will only build up to the
 window from `2003-08-22T00:00:00Z` to `2003-08-23T00:00:00Z`.
 
 The pipeline will return an error response if a requested time range of data
-contains any windows (24 hour chunks) are "expected" (should be in the store)
-but not "available" (the pipeline has not yet built and loaded a complete set of
+contains any windows (24 hour chunks) are expected (should be in the store)
+but not available (the pipeline has not yet built and loaded a complete set of
 data into the store).
 
 ## Logs
@@ -32,7 +32,7 @@ data into the store).
 All ContainerStats-related log messages should contain `ContainerStats` or
 `ContainerStatsSet`. The pipeline logs a few things at INFO level to show that
 the pipeline is running successfully. Much greater detail is available at the
-DEBUG level. See [the official instructions](https://github.com/kubecost/cost-analyzer-helm-chart#adjusting-log-output) if you would like to learn how to change the log level.
+DEBUG level. See [the official instructions](https://github.com/kubecost/cost-analyzer-helm-chart#adjusting-log-output) to learn how to change the log level.
 
 ## Configuration
 
