@@ -11,7 +11,7 @@ You can also find us on the following platforms:
 * [Slack](https://join.slack.com/t/kubecost/shared\_invite/zt-1dz4a0bb4-InvSsHr9SQsT\_D5PBle2rw)
 * [LinkedIn](https://www.linkedin.com/company/kubecost/)
 * [Twitter](https://twitter.com/kubecost)
-* [YouTube](https://www.youtube.com/channel/UChIoMpeXm85T-kPCW1p9\_PA/featured)
+* [YouTube](https://www.youtube.com/channel/UChIoMpeXm85T-kPCW1p9_PA/featured)
 
 **Mailing address:**\
     Stackwatch, Inc.\
