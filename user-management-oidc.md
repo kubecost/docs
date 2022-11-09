@@ -5,7 +5,21 @@ User Management - SSO/OIDC
 
 ## Helm configuration
 
-The OIDC integration in Kubecost is fulfilled via the helm configuration parameters `.Values.oidc` [as shown here](https://github.com/kubecost/cost-analyzer-helm-chart/blob/721555b6641f72f2fd0c12f737243268923430e0/cost-analyzer/values.yaml#L194-L202).
+The OIDC integration in Kubecost is fulfilled via the `.Values.oidc` configuration parameters in the Helm chart.
+
+```yaml
+oidc:
+   enabled: true
+   clientID: "" # application/client client_id parameter obtained from provider, used to make requests to server
+   clientSecret: "" # application/client client_secret parameter obtained from provider, used to make requests to server
+   secretName: "kubecost-oidc-secret" # k8s secret where clientSecret will be stored
+   authURL: "https://my.auth.server/authorize" # endpoint for login to auth server
+   loginRedirectURL: "http://my.kubecost.url/model/oidc/authorize" # Kubecost url configured in provider for redirect after authentication
+   discoveryURL: "https://my.auth.server/.well-known/openid-configuration" # url for OIDC endpoint discovery
+#  hostedDomain: "example.com" # optional, blocks access to the auth domain specified in the hd claim of the provider ID token
+```
+
+> **Note**: `authURL` may require additional request parameters depending on the provider. Some commonly required parameters are `client_id=***` and `response_type=code`. Please check the provider documentation for more information.
 
 ## Supported identity providers
 
@@ -20,7 +34,7 @@ Please refer to the following references to find out more about how to configure
 
 > **Note**: Auth0 does not support Introspection; therefore we can only validate the access token by calling /userinfo within our current remote token validation flow. This will cause the Kubecost UI to not function under an Auth0 integration, as it makes a large number of continuous calls to load the various components on the page and the Auth0 /userinfo endpoint is rate limited. Independent calls against Kubecost endpoints (eg. via cURL or Postman) should still be supported.
 
-## Keycloak setup
+### Keycloak setup
 
 1. Create a new [Keycloak Realm](https://www.keycloak.org/getting-started/getting-started-kube#_create_a_realm).
 2. Navigate to "Realm Settings" -> "General" -> "Endpoints" -> "OpenID Endpoint Configuration" -> "Clients".
