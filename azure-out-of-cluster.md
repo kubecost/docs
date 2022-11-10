@@ -15,7 +15,7 @@ https://docs.microsoft.com/en-us/azure/cost-management-billing/costs/tutorial-ex
 
 It will take a few hours to generate the first report, after which Kubecost can use the Azure Storage API to pull that data.
 
->Note: If you have sensitive data in an Azure Storage account and do not want to give out access to it, create a separate Azure Storage account to store your cost data export.
+> **Note**: If you have sensitive data in an Azure Storage account and do not want to give out access to it, create a separate Azure Storage account to store your cost data export.
 
 ## Step 2: Provide access to Azure Storage API
 
