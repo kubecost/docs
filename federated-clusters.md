@@ -39,6 +39,6 @@ This document walks through the necessary steps for enabling this feature.
 
 Sample configurations for each cloud provider can be found here: [https://github.com/kubecost/poc-common-configurations/](https://github.com/kubecost/poc-common-configurations/)
 
-Edit this doc on [GitHub](https://github.com/kubecost/docs/blob/main/federated-clusters.md)
+
 
 <!--- {"article":"4407595946135","section":"4402815636375","permissiongroup":"1500001277122"} --->

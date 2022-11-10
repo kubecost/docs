@@ -25,6 +25,6 @@ namespaces: {
 
 Expected response: this API should return a 200 response code with JSON string representation of the object passed.   
 
-Edit this doc on [GitHub](https://github.com/kubecost/docs/blob/main/namespace-contacts.md)
+
 
 <!--- {"article":"4407595972119","section":"4402815656599","permissiongroup":"1500001277122"} --->

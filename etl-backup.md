@@ -130,6 +130,6 @@ Currently, this feature is still in development, but there is currently a status
 
 In some scenarios like when using Memory store, setting `kubecostModel.etlHourlyStoreDurationHours` to a value of `48` hours or less will cause ETL backup files to become truncated. The current recomendation is to keep [etlHourlyStoreDurationHours](https://github.com/kubecost/cost-analyzer-helm-chart/blob/8fd5502925c28c56af38b0c4e66c4ec746761d50/cost-analyzer/values.yaml#L322) at its default of `49` hours.
 
-Edit this doc on [GitHub](https://github.com/kubecost/docs/blob/main/etl-backup.md)
+
 
 <!--- {"article":"4407601811095","section":"4402815656599","permissiongroup":"1500001277122"} --->

@@ -76,6 +76,6 @@ helm upgrade -i kubecost kubecost/cost-analyzer \
 You can now start monitoring your Amazon EKS cluster cost with Kubecost. For advanced setup or other questions, contact us at [support@kubecost.com](support@kubecost.com) to schedule these sessions.
 
 
-Edit this doc on [GitHub](https://github.com/kubecost/docs/blob/main/aws-marketplace-install.md)
+
 
 <!--- {"article":"4407596808087","section":"4402829036567","permissiongroup":"1500001277122"} --->

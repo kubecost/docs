@@ -9,6 +9,6 @@ Kubecost supports two methods for users with multiple clusters, and they can be 
 > **Note**: Kubecost Free version can now be installed on an unlimited number of individual clusters. Larger teams may benefits from one of the above subscriptions to better manage many clusters. See [pricing](https://www.kubecost.com/pricing) for more details.
 
 ---
-Edit this doc on [GitHub](https://github.com/kubecost/docs/blob/main/multi-cluster.md)
+
 
 <!--- {"article":"4407595970711","section":"4402815636375","permissiongroup":"1500001277122"} --->

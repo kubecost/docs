@@ -117,6 +117,6 @@ saml:
 
 Make sure `audienceURI` and `appRootURL` match the entityID configured within PingFed.
 
-Edit this doc on [GitHub](https://github.com/kubecost/docs/blob/main/user-management.md)
+
 
 <!--- {"article":"4407595985047","section":"4402815636375","permissiongroup":"1500001277122"} --->

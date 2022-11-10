@@ -139,6 +139,6 @@ The remaining sections are optional and may be useful for specific use cases.
 
 </br>
 
-Edit this doc on [GitHub](https://github.com/kubecost/docs/blob/main/getting-started.md)
+
 
 <!--- {"article":"4407595947799","section":"4402815636375","permissiongroup":"1500001277122"} --->

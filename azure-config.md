@@ -123,6 +123,6 @@ The following Microsoft documents are a helpful reference:
 * [Azure Portal > Cost Management + Billing > Billing Account Properties](https://portal.azure.com/#view/Microsoft_Azure_GTM/ModernBillingMenuBlade/~/Properties)
 * [Understand Cost Management data](https://docs.microsoft.com/en-us/azure/cost-management-billing/costs/understand-cost-mgt-data)
 
-Edit this doc on [GitHub](https://github.com/kubecost/docs/blob/main/azure-config.md)
+
 
 <!--- {"article":"4407595934871","section":"4402815682455","permissiongroup":"1500001277122"} --->

@@ -13,6 +13,6 @@ This downloads a bug report in text format to your local machine. You can then s
 
 We do not recommend distributing this report broadly because log data is included.
 
-Edit this doc on [GitHub](https://github.com/kubecost/docs/blob/main/bug-report.md)
+
 
 <!--- {"article":"4407601805975","section":"4402815696919","permissiongroup":"1500001277122"} --->

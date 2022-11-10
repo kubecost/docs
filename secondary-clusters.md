@@ -122,6 +122,6 @@ There are potentially other configuration options based on the specifics of diff
 Write to us at [support@kubecost.com](support@kubecost.com).
 
 ---
-Edit this doc on [GitHub](https://github.com/kubecost/docs/blob/main/secondary-clusters.md)
+
 
 <!--- {"article":"4423256582551","section":"4402815636375","permissiongroup":"1500001277122"} --->

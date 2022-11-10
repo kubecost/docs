@@ -32,6 +32,6 @@ Contact us at [support@kubecost.com](support@kubecost.com) to learn more!
 <br/><br/><br/><br/><br/>
 
 
-Edit this doc on [GitHub](https://github.com/kubecost/docs/blob/main/enterprise.md)
+
 
 <!--- {"article":"4407601809175","section":"4402829033367","permissiongroup":"1500001277122"} --->

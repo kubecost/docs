@@ -118,6 +118,6 @@ Cost allocation metrics are available for both in-cluster and out-of-cluster res
 ![Cost Efficiency table](https://raw.githubusercontent.com/kubecost/docs/main/images/table.PNG)
 
 
-Edit this doc on [GitHub](https://github.com/kubecost/docs/blob/main/cost-allocation.md)
+
 
 <!--- {"article":"4407601807383","section":"4402829033367","permissiongroup":"1500001277122"} --->

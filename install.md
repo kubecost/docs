@@ -18,6 +18,6 @@ To get started with Kubecost and OpenCost, **the recommended path is to [install
 
 * Lastly, you can deploy the open source project directly as a Pod. This install path provides a subset of free functionality and is available [here](https://github.com/kubecost/cost-model/blob/master/deploying-as-a-pod.md). Specifically, this install path deploys the underlying cost allocation model without the same UI or access to enterprise functionality, e.g. SAML support.
 
-Edit this doc on [GitHub](https://github.com/kubecost/docs/blob/main/install.md)
+
 
 <!--- {"article":"4407601821207","section":"4402815636375","permissiongroup":"1500001277122"} --->

@@ -90,7 +90,7 @@ The JWT ID token must contain a field (claim) named `hd` with the desired domain
 
 To remove a previously set Helm value, you will need to set the value to an empty string: `.Values.oidc.hostedDomain = ""`. To validate that the config has been removed, you can check the `/var/configs/oidc/oidc.json` inside the cost-model container.
 
-Edit this doc on [GitHub](https://github.com/kubecost/docs/blob/main/user-management-oidc.md)
+
 
 
 <!--- {"article":"10018767892119","section":"4402815636375","permissiongroup":"1500001277122"} --->

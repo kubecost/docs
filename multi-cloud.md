@@ -129,6 +129,6 @@ Set these values into the following object and add them to the AWS array in the 
 ```
 Additionally set the `kubecostProductConfigs.projectID` helm value to the AWS account that Kubecost is being installed in.
 
-Edit this doc on [GitHub](https://github.com/kubecost/docs/blob/main/multi-cloud.md)
+
 
 <!--- {"article":"4407595968919","section":"4402815636375","permissiongroup":"1500001277122"} --->

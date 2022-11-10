@@ -78,6 +78,6 @@ If there is a deployment of KSM outside of Kubecost, Prometheus deployments that
       - `kube_pod_owner`
   - If you are already running KSM v2, and have set the helm value to only emit KSM v1 metrics, you can also disable the Kubecost based KSM deployment by setting the helm value `prometheus.kube-state-metrics.disabled` to `true`.
 
-Edit this doc on [GitHub](https://github.com/kubecost/docs/blob/main/ksm-metrics.md)
+
 
 <!--- {"article":"4408095797911","section":"4402829033367","permissiongroup":"1500001277122"} --->
