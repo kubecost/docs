@@ -33,8 +33,9 @@ Industry-leading data privacy and protection.
 
 ## Code security
 Application code is version controlled using GitHub. All code changes are tracked with full revision history and  are attributable to a specific individual. Code must be reviewed and accepted by a different engineer than the author of the change.
-Application and system security
-Each new server instance is updated with the latest security patches available before deployment. Logging and monitoring interfaces enabled and logs are stored in a centralized location. The Engineering team monitors for patches that address issues or vulnerabilities in production systems. Patches are staged in the Staging environment and monitored to ensure stability and compatibility. After they pass monitoring requirements, the patches are rolled out to Production.
+
+### Application and system security
+Each new server instance is updated with the latest security patches available before deployment. Logging and monitoring interfaces enabled and logs are stored in a centralized location. The engineering team monitors for patches that address common vulnerabilities and exposures in production systems. This is done through nightly scans that monitor all containers. Patches are staged in the Staging environment and monitored to ensure stability and compatibility. After they pass monitoring requirements, the patches are rolled out to Production.
 
 ## Employee management
 Data privacy and security policies are distributed and available to all employees, and all employees are required to review and abide by all ISMS policies. An internal audit is conducted at least annually to ensure accuracy and compliance with these policies.
