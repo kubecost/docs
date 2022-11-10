@@ -129,6 +129,6 @@ Please let us know if you run into any issues, we are here to help.
 
 Join our [Slack community](https://join.slack.com/t/kubecost/shared_invite/zt-1dz4a0bb4-InvSsHr9SQsT_D5PBle2rw) and check out the #support channel for any help you may need, or email us at (support@kubecost.com)[support@kubecost.com].
 
-Edit this doc on [GitHub](https://github.com/kubecost/docs/blob/main/azure-config.md)
+
 
 <!--- {"article":"4407595934871","section":"4402815682455","permissiongroup":"1500001277122"} --->

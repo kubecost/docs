@@ -55,6 +55,6 @@ kubecostDeployment:
 
 ----
 
-Edit this doc on [GitHub](https://github.com/kubecost/docs/blob/main/high-availability.md)
+
 
 <!--- {"article":"9038721747223","section":"4402829033367","permissiongroup":"1500001277122"} --->

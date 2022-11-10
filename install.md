@@ -85,4 +85,4 @@ For larger teams and companies with more complex infrastructure, you need the ri
 * You can install via [flat manifest](https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/README.md#manifest). This install path provides less flexibility for managing your deployment and has several product limitations, e.g. Thanos is not easily enabled.
 * Lastly, you can deploy the open source project directly as a Pod. This install path provides a subset of free functionality and is available [here](https://github.com/kubecost/cost-model/blob/master/deploying-as-a-pod.md). Specifically, this install path deploys the underlying cost allocation model without the same UI or access to enterprise functionality, e.g. SAML support.
 
-Edit this doc on [GitHub](https://github.com/kubecost/docs/blob/main/install.md)
+

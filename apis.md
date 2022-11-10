@@ -42,4 +42,4 @@ Savings endpoints provide cost optimization insights. The following savings endp
 | [`/savings/abandonedWorkloads`](https://github.com/kubecost/docs/blob/main/api-abandoned-workloads.md)  | List abandoned workloads based on network traffic.                                                                       |
 | `/savings/clusterSizing`                                                                                | Provides recommendations for sizing clusters (node types and quantities).                                                |
 
-Edit this doc on [GitHub](https://github.com/kubecost/docs/blob/main/apis.md)
+

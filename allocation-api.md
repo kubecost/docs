@@ -130,6 +130,6 @@ Returning cached data from either caching layer typically takes < 300ms on mediu
 
 Have questions? Email us at <support@kubecost.com>.
 
-Edit this doc on [GitHub](https://github.com/kubecost/docs/blob/main/allocation-api.md)
+
 
 <!--- {"article":"4407595915543","section":"4402829033367","permissiongroup":"1500001277122"} --->

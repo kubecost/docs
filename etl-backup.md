@@ -107,6 +107,6 @@ Currently, this feature is still in development, but there is currently a status
 ![Diagnostic ETL Backup Status](https://raw.githubusercontent.com/kubecost/docs/main/images/diagnostics-etl-backup-status.png)
 
 
-Edit this doc on [GitHub](https://github.com/kubecost/docs/blob/main/etl-backup.md)
+
 
 <!--- {"article":"4407601811095","section":"4402815656599","permissiongroup":"1500001277122"} --->

@@ -32,6 +32,6 @@ For Option 2, ensure that the following flags are set in your Operator deploymen
 Note that with Option 2, the Kubecost UI cannot link to the Grafana dashboards unless `kubecostProductConfigs.grafanaURL` is set, either via the Helm chart, or via the Settings page as described in Option 1.
 
 
-Edit this doc on [GitHub](https://github.com/kubecost/docs/blob/main/custom-grafana.md)
+
 
 <!--- {"article":"6737508001687","section":"1500002777682","permissiongroup":"1500001277122"} --->

@@ -55,4 +55,4 @@ To verify that your key is properly supplied, visit the Settings UI to confirm t
 
 ![image](https://user-images.githubusercontent.com/298359/111573440-c74c9c00-8767-11eb-842c-cfa18159d1c1.png)
 
-Edit this doc on [GitHub](https://github.com/kubecost/docs/blob/main/add-key.md)
+

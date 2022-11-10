@@ -950,4 +950,4 @@ _   underscore
 !   exclamation mark
 ```
 
-Edit this doc on [GitHub](https://github.com/kubecost/docs/blob/main/markdown.md)
+

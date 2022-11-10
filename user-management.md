@@ -25,4 +25,4 @@ Additional [troubleshooting guide](https://docs.google.com/document/d/1cgns9\_jH
 
 Contact us via email ([support@kubecost.com](mailto:support@kubecost.com)) or join us on [Slack](https://join.slack.com/t/kubecost/shared\_invite/zt-1dz4a0bb4-InvSsHr9SQsT\_D5PBle2rw) if you have questions!
 
-Edit this doc on [GitHub](https://github.com/kubecost/docs/blob/main/user-management.md)
+

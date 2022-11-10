@@ -114,6 +114,6 @@ Cost allocation metrics are available for both in-cluster and out-of-cluster res
 | Cost Efficiency | The percentage of requested CPU & memory dollars utilized over the measured time window. Values range from 0 to above 100 percent. Workloads with no requests but with usage OR workloads with usage > request can report efficiency above 100%. [View Example](https://docs.google.com/spreadsheets/d/15CL2YrJHIcQyDMHu3vB3jXdTdcqEntawmy5T3zsVZ_g/edit#gid=0)|
 
 
-Edit this doc on [GitHub](https://github.com/kubecost/docs/blob/main/cost-allocation.md)
+
 
 <!--- {"article":"4407601807383","section":"4402829033367","permissiongroup":"1500001277122"} --->

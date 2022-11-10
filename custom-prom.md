@@ -126,6 +126,6 @@ You can visit Settings in Kubecost to see basic diagnostic information on these 
 Have a question not answered on this page? Email us at support@kubecost.com or [join the Kubecost Slack community](https://join.slack.com/t/kubecost/shared_invite/zt-1dz4a0bb4-InvSsHr9SQsT_D5PBle2rw)!
 
 ---
-Edit this doc on [GitHub](https://github.com/kubecost/docs/blob/main/custom-prom.md)
+
 
 <!--- {"article":"4407595941015","section":"4402815636375","permissiongroup":"1500001277122"} --->

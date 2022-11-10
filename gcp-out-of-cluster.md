@@ -120,6 +120,6 @@ gcloud iam service-accounts keys create ./$SERVICE_ACCOUNT_NAME-key.json --iam-a
 
 Now that your service key is created, follow the normal configuration instructions.
 
-Edit this doc on [GitHub](https://github.com/kubecost/docs/blob/main/gcp-out-of-cluster.md)
+
 
 <!--- {"article":"4407601816087","section":"4402815680407","permissiongroup":"1500001277122"} --->

@@ -28,4 +28,4 @@ Contact us at [support@kubecost.com](support@kubecost.com) to learn more!\
 \
 
 
-Edit this doc on [GitHub](https://github.com/kubecost/docs/blob/main/business.md)
+

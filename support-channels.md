@@ -14,6 +14,6 @@ We offer professional support options and SLAs with our Business & Enterprise pl
 
 [Contact us](https://www.kubecost.com/about/#contact-module-2) to learn more or to customize this offering.
 
-Edit this doc on [GitHub](https://github.com/kubecost/docs/blob/main/support-channels.md)
+
 
 <!--- {"article":"4407595983127","section":"4402815696919","permissiongroup":"1500001277122"} --->

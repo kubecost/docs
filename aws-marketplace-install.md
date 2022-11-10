@@ -79,6 +79,6 @@ You can now start monitoring your Amazon EKS cluster cost with Kubecost. For adv
 To participate in our free Enterprise onboarding program, contact us at support@kubecost.com to schedule these sessions!
 
 
-Edit this doc on [GitHub](https://github.com/kubecost/docs/blob/main/aws-marketplace-install.md)
+
 
 <!--- {"article":"4407596808087","section":"4402829036567","permissiongroup":"1500001277122"} --->

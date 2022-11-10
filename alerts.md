@@ -464,6 +464,6 @@ If `nextRun` fails to update, or alerts are not sending at the `nextRun` time, c
 Have questions? Join our [Slack community](https://join.slack.com/t/kubecost/shared_invite/zt-1dz4a0bb4-InvSsHr9SQsT_D5PBle2rw) or contact us via email at [support@kubecost.com](support@kubecost.com)!
 
 
-Edit this doc on [GitHub](https://github.com/kubecost/docs/blob/main/alerts.md)
+
 
 <!--- {"article":"4407601796759","section":"4402815656599","permissiongroup":"1500001277122"} --->

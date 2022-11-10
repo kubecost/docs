@@ -24,6 +24,6 @@ Once back to the Service accounts page, select the _Actions_ icon > _Manage keys
 
 Select _JSON_ as the Key type and select _Create_. This will download a JSON service account key entry for use with the Thanos `object-store.yaml` mentioned in the initial setup step.
 
-Edit this doc on [GitHub](https://github.com/kubecost/docs/blob/main/google-service-account-thanos.md)
+
 
 <!--- {"article":"4407601817495","section":"4402815680407","permissiongroup":"1500001277122"} --->

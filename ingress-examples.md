@@ -114,6 +114,6 @@ spec:
                 number: 9090
 ```
 
-Edit this doc on [GitHub](https://github.com/kubecost/docs/blob/main/ingress-examples.md)
+
 
 <!--- {"article":"4407601820055","section":"4402815636375","permissiongroup":"1500001277122"} --->

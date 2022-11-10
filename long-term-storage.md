@@ -202,6 +202,6 @@ The default retention period for when data is moved into the object storage is c
 Instead of waiting *2h* to ensure that thanos was configured correctly, the default log level for the thanos workloads is `debug` (it's very light logging even on debug). You can get logs for the `thanos-sidecar`, which is part of the `prometheus-server` Pod, and `thanos-store`. The logs should give you a clear indication of whether or not there was a problem consuming the secret and what the issue is. For more on Thanos architecture, view [this resource](https://github.com/thanos-io/thanos/blob/master/docs/design.md).
 
 ---
-Edit this doc on [GitHub](https://github.com/kubecost/docs/blob/main/long-term-storage.md)
+
 
 <!--- {"article":"4407595964695","section":"4402815636375","permissiongroup":"1500001277122"} --->

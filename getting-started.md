@@ -141,4 +141,4 @@ Eg: If a pod is requesting 2 CPU and 1Gb, using 500mCPU and 500MB, CPU on the no
 \
 
 
-Edit this doc on [GitHub](https://github.com/kubecost/docs/blob/main/getting-started.md)
+

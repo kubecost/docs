@@ -152,7 +152,7 @@ Et voilà! You have successfully created a custom cluster blueprint with the `ku
 
 You can find [this same guide](https://docs.rafay.co/recipes/cost/kubecost/) as well as the guides for how to create or import a cluster using the Rafay controller on the [Rafay documentation site](https://docs.kubecost.com/custom-prom.html#troubleshooting-issues).
 
-Edit this doc on [GitHub](https://github.com/kubecost/docs/blob/main/rafay.md)
+
 
 
 <!--- {"article":"4413635957271","section":"4402815636375","permissiongroup":"1500001277122"} --->
