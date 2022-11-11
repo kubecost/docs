@@ -17,13 +17,13 @@ To enable this feature, set the following parameter in _values.yaml_ during [Hel
  
 ### Benchmarking metrics
 
-The [network-simulator](http://github.com/kubecost/network-simulator) was used to real-time simulate updating conntrack entries while simultaneously running a cluster simulated [network-costs](http://github.com/kubecost/kubecost-network-costs) instance. To profile the heap, after a warmup of roughly five minutes, a heap profile of 1,000,000 Conntrack entries was gathered and examined.
+The network-simulator was used to real-time simulate updating conntrack entries while simultaneously running a cluster simulated network-costs instance. To profile the heap, after a warmup of roughly five minutes, a heap profile of 1,000,000 Conntrack entries was gathered and examined.
 
 Each Conntrack entry is equivalent to two transport directions, so every conntrack entry is two map entries (connections).
 
 After modifications were made to the network-costs to parallelize the delta and dispatch, large map comparisons were significantly lighter in memory. The same tests were performed against simulated data with the following footprint results.
 
-![images/post optimization.PNG](https://github.com/kubecost/docs/blob/130e641856d3b6306171f386591e1cd71bc21985/images/post%20optimization.PNG)
+![Benchmarking metrics](https://raw.githubusercontent.com/kubecost/docs/main/images/post%20optimization.PNG)
 
 ## Kubernetes network traffic metrics
 
