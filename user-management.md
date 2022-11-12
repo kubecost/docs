@@ -3,35 +3,65 @@ User Management - SSO/SAML/RBAC
 
 > **Note**: SSO and RBAC capabilities are only included with a Kubecost Enterprise Subscription.
 
-Kubecost supports access control/Single Sign On (SSO) with SAML 2.0. Kubecost works with most identity providers including Okta, Auth0, AzureAD, PingID, and KeyCloak.
+Kubecost supports Single Sign On (SSO) and Role Based Access Control (RBAC) with SAML 2.0. Kubecost works with most identity providers including Okta, Auth0, AzureAD, PingID, and KeyCloak.
 
-## High-level access control options
+## Overview of features 
 
-* **User authentication** SSO provides a simple mechanism to restrict application access internally and externally
-* **Custom access roles** Limit users based on attributes or group membership to view a set of namespaces, labels, cluster, or other aggregations
-* **Pre-defined user roles**
-    * admin: full control with permissions to manage users, configure model inputs, and application settings.
-    * readonly: user role with read-only permission
-    * editor: role can change and build alerts and reports, but cannot edit application settings and otherwise functions as read-only.
+* **User authentication (`.Values.saml`)**: SSO provides a simple mechanism to restrict application access internally and externally
+* **Pre-defined user roles (`.Values.saml.rbac`)**:
+  * `admin`: Full control with permissions to manage users, configure model inputs, and application settings.
+  * `readonly`: User role with read-only permission.
+  * `editor`: Role can change and build alerts and reports, but cannot edit application settings and otherwise functions as read-only.
+* **Custom access roles (`filters.json`)**: Limit users based on attributes or group membership to view a set of namespaces, labels, cluster, or other aggregations
+
+```yaml
+# EXAMPLE CONFIGURATION
+# View setup guides below, for full list of Helm configuration values
+saml:
+  enabled: true
+  secretName: "kubecost-okta"
+  idpMetadataURL: "https://your.idp.subdomain.okta.com/app/exk4h09oysB785123/sso/saml/metadata"
+  appRootURL: "https://kubecost.your.com"
+  authTimeout: 1440
+  audienceURI: "https://kubecost.your.com"
+  nameIDFormat: "urn:oasis:names:tc:SAML:2.0:attrname-format:basic"
+  rbac:
+    enabled: true
+    groups:
+      - name: admin
+        enabled: true
+        assertionName: "kubecost_group"
+        assertionValues:
+          - "kubecost_admin"
+          - "kubecost_superusers"
+      - name: readonly
+        enabled: true
+        assertionName:  "kubecost_group"
+        assertionvalues:
+          - "kubecost_users"
+    customGroups:
+      - assertionName: "kubecost_group"
+```
 
 ## Setup guides
 
-- [AzureAD setup guide](https://github.com/kubecost/poc-common-configurations/tree/main/saml-azuread)
-- [Okta setup guide](https://github.com/kubecost/poc-common-configurations/tree/main/saml-okta)
+* [AzureAD setup guide](https://github.com/kubecost/poc-common-configurations/tree/main/saml-azuread)
+* [Okta setup guide](https://github.com/kubecost/poc-common-configurations/tree/main/saml-okta)
 
- > **Note**: All SAML 2.0 providers also work. The above guides can be used as templates for what is required.
+> **Note**: All SAML 2.0 providers also work. The above guides can be used as templates for what is required.
 
 ## SAML troubleshooting guide
+
 1. Disable SAML and confirm that the cost-analyzer pod starts.
-2. If Step 1 is successful, but the pod is crashing or never enters the ready state when SAML is added, it is likely that there is panic loading or parsing SAML data. You should be able to pull the logs by fetching logs for the previous pod:
+2. If step 1 is successful, but the pod is crashing or never enters the ready state when SAML is added, it is likely that there is panic loading or parsing SAML data.
 
-`kubectl logs -n kubecost <pod-name> --previous`
+    `kubectl logs deployment/kubecost-cost-analyzer -c cost-model -n kubecost`
 
-If you’re supplying the SAML from the address of an Identity Provider Server: curl the saml metadata endpoint from within the Kubecost pod and ensure that a valid XML EntityDescriptor is being returned and downloaded. The response should be in this format:
+If you’re supplying the SAML from the address of an Identity Provider Server, `curl` the SAML metadata endpoint from within the Kubecost pod and ensure that a valid XML EntityDescriptor is being returned and downloaded. The response should be in this format:
 
-```shell
-kubectl exec kubecost-cost-analyzer-84fb785f55-2ssgj -c cost-analyzer-frontend -n kubecost -it -- /bin/sh
-curl https://dev-elu2z98r.auth0.com/samlp/metadata/c6nY4M37rBP0qSO1IYIqBPPyIPxLS8v2
+```bash
+$ kubectl exec deployment/kubecost-cost-analyzer -c cost-analyzer-frontend -n kubecost -it -- /bin/sh
+$ curl https://dev-elu2z98r.auth0.com/samlp/metadata/c6nY4M37rBP0qSO1IYIqBPPyIPxLS8v2
 
 <EntityDescriptor entityID="urn:dev-elu2z98r.auth0.com" xmlns="urn:oasis:names:tc:SAML:2.0:metadata">
   <IDPSSODescriptor protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol">
@@ -116,7 +146,5 @@ saml:
 ```
 
 Make sure `audienceURI` and `appRootURL` match the entityID configured within PingFed.
-
-
 
 <!--- {"article":"4407595985047","section":"4402815636375","permissiongroup":"1500001277122"} --->
