@@ -12,7 +12,7 @@ Kubecost supports Single Sign On (SSO) and Role Based Access Control (RBAC) with
   * `admin`: Full control with permissions to manage users, configure model inputs, and application settings.
   * `readonly`: User role with read-only permission.
   * `editor`: Role can change and build alerts and reports, but cannot edit application settings and otherwise functions as read-only.
-* **Custom access roles (`filters.json`)**: Limit users based on attributes or group membership to view a set of namespaces, labels, cluster, or other aggregations
+* **Custom access roles (`filters.json`)**: Limit users based on attributes or group membership to view a set of namespaces, clusters, or other aggregations
 
 ```yaml
 # EXAMPLE CONFIGURATION
