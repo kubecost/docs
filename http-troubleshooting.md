@@ -20,6 +20,13 @@ This is usually the Nginx gateway (inside the `kubecost-cost-analyzer` pod) repo
 * If client requests are only timing out on Kubecost and nothing else, Kubecost may need more CPU/memory so that it can process the API requests faster.
 * A router/proxy between the client and the Kubecost service may be timing out the request too quickly.
 
+### Test command
+
+> **Note**: The following test command can be used for troubleshooting both 499 and 504 errors.
+
+* If running the following command fails or hangs when the pod is ready, the error is likely due to intermittent DNS:
+  *  `kubectl exec -i -t -n kubecost kubecost-cost-analyzer-55c45d9d95-8m2sq -c cost-analyzer-frontend -- curl kubecost-cost-analyzer.kubecost:9090/model/clusterInfo`
+
 ## HTTP 504 Gateway timeout
 
 Almost always because the `cost-model` container in the `kubecost-cost-analyzer` pod is down. If the pods are consistently restarting, this could be due to OOM (Out of Memory) errors. As noted in our [AWS Cloud Integration](https://guide.kubecost.com/hc/en-us/articles/4407595928087-AWS-Cloud-Integration#summary-and-pricing) doc:
@@ -28,5 +35,3 @@ Almost always because the `cost-model` container in the `kubecost-cost-analyzer`
 > Kubecost can write its cache to disk. Roughly 32 GB per 100,000 pods monitored is sufficient. 
 
 * Ensure you have allowed enough memory requests and limits.
-* If running the following command fails or hangs when the pod is ready, the error is likely due to intermittent DNS:
-  *  `kubectl exec -i -t -n kubecost kubecost-cost-analyzer-55c45d9d95-8m2sq -c cost-analyzer-frontend -- curl kubecost-cost-analyzer.kubecost:9090/model/clusterInfo`
