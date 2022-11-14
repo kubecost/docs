@@ -14,7 +14,7 @@ in the network path.
 
 ## HTTP 499 Client closed connection
 
-This is usually the Nginx gateway (inside the `kubecost-cost-analyzer` pod) reporting that the client has closed the connection.
+This is usually the NGINX gateway (inside the `kubecost-cost-analyzer` pod) reporting that the client has closed the connection.
 
 * All client requests may need increased timeouts.
 * If client requests are only timing out on Kubecost and nothing else, Kubecost may need more CPU/memory so that it can process the API requests faster.
