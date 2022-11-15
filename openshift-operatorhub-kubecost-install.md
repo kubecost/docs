@@ -17,7 +17,7 @@ This document provides instructions for deploying Kubecost into Red Hat Openshif
 ## Discover Kubecost operator:
 
 1. Log in to your OCP cluster web console.
-2. Select Operators --> OperatorHub --> Enter Kubecost in the search box.
+2. Select Operators > OperatorHub > Enter Kubecost in the search box.
 3. Create a namespace named Kubecost:
 
 ```bash
@@ -30,7 +30,7 @@ Example screenshot:
 
 ## Deploy Kubecost:
 
-#### **Step 1:** Install Kubecost operator
+### **Step 1:** Install Kubecost operator
 
 On the OperatorHub page, find Kubecost, then click install. You will be on the Operator Installation page, which shows all related information. Select your desired version and settings, then click `Install`
 
