@@ -1,16 +1,16 @@
-Guide: Continuous request right-sizing with Kubecost's Kubescaler
+Continuous Request Right-Sizing with Kubecost's Kubescaler
 =================================================================
 
-> **Note**: This feature is in a pre-release (alpha/beta) state. It has limitations. please read the documentation carefully.
+> **Note**: This feature is in a pre-release (alpha/beta) state and has limitations. Please read the documentation carefully.
 
-Kubecost's Kubescaler implements continuous request right-sizing: the automatic application of Kubecost's high-fidelity [recommendations](https://github.com/kubecost/docs/blob/main/api-request-right-sizing-v2.md) to your containers' resource requests. This provides an easy way to automatically improve your allocation of cluster resources by improving efficiency!
+Kubecost's Kubescaler implements continuous request right-sizing: the automatic application of Kubecost's high-fidelity [recommendations](https://github.com/kubecost/docs/blob/main/api-request-right-sizing-v2.md) to your containers' resource requests. This provides an easy way to automatically improve your allocation of cluster resources by improving efficiency.
 
 Kubescaler can be enabled and configured on a per-workload basis so that only
-the workloads you want to be edited will be edited.
+the workloads you want edited will be edited.
 
 ## Setup
 
-Kubescaler is part of the [cluster-controller](https://github.com/kubecost/docs/blob/main/controller.md) component of Kubecost. Follow the instructions in that doc to get it running in your cluster! Please note that the cloud provider "key" setup is not
+Kubescaler is part of the [cluster-controller](https://github.com/kubecost/docs/blob/main/controller.md) component of Kubecost. Follow the instructions in that doc to get it running in your cluster. Please note that the cloud provider "key" setup is not
 required for Kubescaler to work.
 
 ## Usage
@@ -59,7 +59,7 @@ Kubescaler will take care of the rest! It will apply the best-available
 recommended requests to the annotated controller every 11 hours.
 
 Here's a helpful `kubectl` command if you want to check current requests for
-your Deployments:
+your deployments:
 ``` sh
 kubectl get deployment -n "kubecost" -o=jsonpath="{range .items[*]}"deployment/"{.metadata.name}{'\n'}{range .spec.template.spec.containers[*]}{.name}{'\t'}{.resources.requests}{'\n'}{end}{'\n'}{end}"
 ```
