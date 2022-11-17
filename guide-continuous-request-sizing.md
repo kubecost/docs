@@ -29,7 +29,7 @@ Planned support:
 | ---------- | ----------- | ---------- |
 | `request.autoscaling.kubecost.com/enabled` | Whether to autoscale the workload. See note on `KUBESCALER_RESIZE_ALL_DEFAULT`. | `true`, `false` |
 | `request.autoscaling.kubecost.com/frequencyMinutes` | How often to autoscale the workload, in minutes. If unset, a conservative default is used. | `73` |
-| `request.autoscaling.kubecost.com/scheduleStart` | Optional augmentation to the frequency parameter. If both are set, the workload will be resized on the scheduled frequency, aligned to the start. So if frequency is 24h and the start is midnight, the workload will be rescheduled at (about) midnight every day. Formatted as RFC3339. | `2022-11-28T00:00:00Z` |
+| `request.autoscaling.kubecost.com/scheduleStart` | Optional augmentation to the frequency parameter. If both are set, the workload will be resized on the scheduled frequency, aligned to the start. If frequency is 24h and the start is midnight, the workload will be rescheduled at (about) midnight every day. Formatted as RFC3339. | `2022-11-28T00:00:00Z` |
 | `cpu.request.autoscaling.kubecost.com/targetUtilization` | Target utilization  (CPU) for the recommendation algorithm. If unset, the backing recommendation service's default is used. | `0.8` |
 | `memory.request.autoscaling.kubecost.com/targetUtilization` | Target utilization (Memory/RAM) for the recommendation algorithm. If unset, the backing recommendation service's default is used. | `0.8` |
 
@@ -37,7 +37,7 @@ Notable Helm values:
 
 | Helm value | Description | Example(s) |
 | ---------- | ----------- | ---------- |
-| `clusterController.kubescaler.resizeAllDefault` | If true, Kubescaler will switch to default-enabled for all workloads unless they are explicitly annotate to DISABLE autoscaling. This is recommended for low-stakes clusters where you want to prioritize workload efficiency without reworking deployment specs for all workloads. | `true` |
+| `clusterController.kubescaler.resizeAllDefault` | If true, Kubescaler will switch to default-enabled for all workloads unless they are explicitly annotate to `DISABLE` autoscaling. This is recommended for low-stakes clusters where you want to prioritize workload efficiency without reworking deployment specs for all workloads. | `true` |
 
 ### Example
 
@@ -55,11 +55,10 @@ kubectl annotate -n "${NS}" deployment "${DEP}" "${AN_TCPU}"
 kubectl annotate -n "${NS}" deployment "${DEP}" "${AN_TMEM}"
 ```
 
-Kubescaler will take care of the rest! It will apply the best-available
+Kubescaler will take care of the rest. It will apply the best-available
 recommended requests to the annotated controller every 11 hours.
 
-Here's a helpful `kubectl` command if you want to check current requests for
-your deployments:
+To check current requests for your deployments, use the following command:
 ``` sh
 kubectl get deployment -n "kubecost" -o=jsonpath="{range .items[*]}"deployment/"{.metadata.name}{'\n'}{range .spec.template.spec.containers[*]}{.name}{'\t'}{.resources.requests}{'\n'}{end}{'\n'}{end}"
 ```
