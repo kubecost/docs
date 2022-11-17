@@ -1,7 +1,7 @@
 Installing Agent for Kubecost Cloud
 ============================================
 
-The _kubecost-agent_ is a lightweight Kubecost exporter that sends metrics to hosted kubecost. In order to install the _kubecost-agent_, you will need a specific key provided by Kubecost.
+The _kubecost-agent_ is a lightweight Kubecost exporter that sends metrics to Kubecost Cloud. In order to install the _kubecost-agent_, you will need a specific key provided by Kubecost.
 
 The name of the storage key file provided by the kubecost team will have the name `kubecost-agent.key`
 
@@ -63,7 +63,6 @@ Confirm with Kubecost team on successful deployment, which will then provide acc
 
 > **Note**: Metrics are shipped every two hours, a delay is expected when viewing on the UI.
 
-
 ## Troubleshooting agent deployments
 
 Check to see all pods are ready:
@@ -76,7 +75,7 @@ kubecost-network-costs-hln2w                  1/1     Running   0          25h
 kubecost-prometheus-server-596b9bb9bb-pr4vz   3/3     Running   0          25h
 ```
 
-Check the container logs. It is common to have Prometheus errors when the kubecost-agent pod starts. They should not continue after the kubecost-prometheus-server pod is ready. For further troubleshooting, the Kubecost team may ask for the container logs. Script for collecting all the logs:
+Check the container logs. It is common to have Prometheus errors when the `kubecost-agent` pod starts. They should not continue after the `kubecost-prometheus-server` pod is ready. For further troubleshooting, the Kubecost team may ask for the container logs. Script for collecting all the logs:
 
 `kubecost-agent-logs.sh`
 ```sh
