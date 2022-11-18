@@ -10,7 +10,7 @@ the workloads you want edited will be edited.
 
 ## Setup
 
-Kubescaler is part of the [cluster-controller](https://github.com/kubecost/docs/blob/main/controller.md) component of Kubecost. Follow the instructions in that doc to get it running in your cluster. Please note that the cloud provider "key" setup is not
+Kubescaler is part of the [Cluster Controller](https://github.com/kubecost/docs/blob/main/controller.md) component of Kubecost. Follow the instructions in that doc to get it running in your cluster. Please note that the cloud provider "key" setup is not
 required for Kubescaler to work.
 
 ## Usage
