@@ -58,7 +58,7 @@ kubectl annotate -n "${NS}" deployment "${DEP}" "${AN_TMEM}"
 Kubescaler will take care of the rest. It will apply the best-available
 recommended requests to the annotated controller every 11 hours.
 
-To check current requests for your deployments, use the following command:
+To check current requests for your Deployments, use the following command:
 ``` sh
 kubectl get deployment -n "kubecost" -o=jsonpath="{range .items[*]}"deployment/"{.metadata.name}{'\n'}{range .spec.template.spec.containers[*]}{.name}{'\t'}{.resources.requests}{'\n'}{end}{'\n'}{end}"
 ```
