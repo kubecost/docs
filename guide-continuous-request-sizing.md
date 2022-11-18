@@ -37,7 +37,7 @@ Notable Helm values:
 
 | Helm value | Description | Example(s) |
 | ---------- | ----------- | ---------- |
-| `clusterController.kubescaler.resizeAllDefault` | If true, Kubescaler will switch to default-enabled for all workloads unless they are explicitly annotate to `DISABLE` autoscaling. This is recommended for low-stakes clusters where you want to prioritize workload efficiency without reworking deployment specs for all workloads. | `true` |
+| `clusterController.kubescaler.resizeAllDefault` | If true, Kubescaler will switch to default-enabled for all workloads unless they are annotated with `request.autoscaling.kubecost.com/enabled=false`. This is recommended for low-stakes clusters where you want to prioritize workload efficiency without reworking deployment specs for all workloads. | `true` |
 
 ### Example
 
