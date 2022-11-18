@@ -27,7 +27,7 @@ To enable this feature, set the following parameter in _values.yaml_ during [Hel
 
 In order to reduce resource usage, Kubecost recommends setting a CPU limit on the network-costs daemonset. This will cause a few seconds delay during peak usage and does not effect overall accuracy. This is done by default in Kubecost 1.99+.
 
-For existing deployments, recommended values are (though these can vary by cluster size):
+For existing deployments, these are the recommended values:
 
 ```
     resources:
@@ -37,6 +37,7 @@ For existing deployments, recommended values are (though these can vary by clust
         cpu: 50m
         memory: 20Mi
 ```
+ > This write-up regarding CPU limiting <https://home.robusta.dev/blog/stop-using-cpu-limits> has points worth considering. In the case of low-priority/latency insensitive jobs, there is little risk to setting CPU limits.
 
 ### Benchmarking metrics
 
