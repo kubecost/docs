@@ -23,7 +23,7 @@ To enable this feature, set the following parameter in _values.yaml_ during [Hel
 
 > **Note**: Network cost, which is disabled by default, needs to be run as a privileged pod to access the relevant networking kernel module on the host machine.
 
-## Resource Limiting
+## Resource limiting
 
 In order to reduce resource usage, Kubecost recommends setting a CPU limit on the network-costs daemonset. This will cause a few seconds delay during peak usage and does not effect overall accuracy. This is done by default in Kubecost 1.99+.
 
