@@ -10,12 +10,14 @@ Metrics include egress and ingress data transfers by pod and are classified as i
 ## Enabling network costs
 
 To enable this feature, set the following parameter in _values.yaml_ during [Helm installation](http://kubecost.com/install):
+
  ```
  networkCosts.enabled=true
  ```
+
  You can view a list of common config options [here](https://github.com/kubecost/cost-analyzer-helm-chart/blob/700cfa306c8e78bc9a1039b584769b9a0e0757d0/cost-analyzer/values.yaml#L573).
 
- If using the included Prometheus instance, the scrape is automatically conifgured.
+ If using the included Prometheus instance, the scrape is automatically configured.
 
  If you are integrating with an existing Prometheus, you can set `networkCosts.prometheusScrape=true` and the network costs service should be auto-discovered.
 
@@ -29,7 +31,7 @@ In order to reduce resource usage, Kubecost recommends setting a CPU limit on th
 
 For existing deployments, these are the recommended values:
 
-```
+```yaml
     resources:
       limits:
         cpu: 500m
@@ -37,13 +39,12 @@ For existing deployments, these are the recommended values:
         cpu: 50m
         memory: 20Mi
 ```
- > This write-up regarding CPU limiting <https://home.robusta.dev/blog/stop-using-cpu-limits> has points worth considering. In the case of low-priority/latency insensitive jobs, there is little risk to setting CPU limits.
 
 ### Benchmarking metrics
 
-The network-simulator was used to real-time simulate updating conntrack entries while simultaneously running a cluster simulated network-costs instance. To profile the heap, after a warmup of roughly five minutes, a heap profile of 1,000,000 Conntrack entries was gathered and examined.
+The network-simulator was used to real-time simulate updating conntrack entries while simultaneously running a cluster simulated network-costs instance. To profile the heap, after a warmup of roughly five minutes, a heap profile of 1,000,000 conntrack entries was gathered and examined.
 
-Each Conntrack entry is equivalent to two transport directions, so every conntrack entry is two map entries (connections).
+Each conntrack entry is equivalent to two transport directions, so every conntrack entry is two map entries (connections).
 
 After modifications were made to the network-costs to parallelize the delta and dispatch, large map comparisons were significantly lighter in memory. The same tests were performed against simulated data with the following footprint results.
 
@@ -53,13 +54,13 @@ After modifications were made to the network-costs to parallelize the delta and 
 
 The primary source of network metrics is a DaemonSet Pod hosted on each of the nodes in a cluster. Each daemonset pod uses `hostNetwork: true` such that it can leverage an underlying kernel module to capture network data. Network traffic data is gathered and the destination of any outbound networking is labeled as:
 
- * Internet Egress: Network target destination was not identified within the cluster.
- * Cross Region Egress: Network target destination was identified, but not in the same provider region.
- * Cross Zone Egress: Network target destination was identified, and was part of the same region but not the same zone.
+* Internet Egress: Network target destination was not identified within the cluster.
+* Cross Region Egress: Network target destination was identified, but not in the same provider region.
+* Cross Zone Egress: Network target destination was identified, and was part of the same region but not the same zone.
 
 These classifications are important because they correlate with network costing models for most cloud providers. To see more detail on these metric classifications, you can view pod logs with the following command:
 
-```
+```sh
 kubectl logs kubecost-network-costs-<pod-identifier> -n kubecost
 ```
 
@@ -91,7 +92,7 @@ To verify this feature is functioning properly, you can complete the following s
 2. Ensure `kubecost-networking` target is Up in your Prometheus Targets list. View any visible errors if this target is not Up. You can further verify data is being scrapped by the presence of the `kubecost_pod_network_egress_bytes_total` metric in Prometheus.
 3. Verify Network Costs are available in your Kubecost Allocation view. View your browser's Developer Console on this page for any access/permissions errors if costs are not shown.
 
-### Common issues:
+### Common issues
 
 * Failed to locate network pods -- Error message displayed when the Kubecost app is unable to locate the network pods, which we search for by a label that includes our release name. In particular, we depend on the label `app=<release-name>-network-costs` to locate the pods. If the app has a blank release name this issue may happen.
 
@@ -105,7 +106,5 @@ To verify this feature is functioning properly, you can complete the following s
 * Today this feature is supported on Unix-based images with conntrack
 * Actively tested against GCP, AWS, and Azure
 * Daemonsets have shared IP addresses on certain clusters
-
-
 
 <!--- {"article":"4407595973527","section":"4402815636375","permissiongroup":"1500001277122"} --->
