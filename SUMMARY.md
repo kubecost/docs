@@ -95,6 +95,7 @@
 * [Deprecated APIs](apis/deprecated-apis/README.md)
   * [Container Request Right-Sizing Recommendation API (V1) - Deprecated](api-request-right-sizing.md)
   * [costDataModel & aggregatedCostModel API - Deprecated](allocation-api.md)
+  * [Namespace Contacts](namespace-contacts.md)
 
 ## Architecture
 
@@ -122,8 +123,3 @@
 * [Contact Us](contactus.md)
 * [Kubecost Blog](https://blog.kubecost.com/)
 * [Kubecost Release Notes](https://github.com/kubecost/cost-analyzer-helm-chart/releases)
-
-## Delete?
-
-* [community-getting-started](community-getting-started.md)
-* [Namespace Contacts](namespace-contacts.md)
