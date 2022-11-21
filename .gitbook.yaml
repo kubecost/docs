@@ -75,7 +75,7 @@ redirects:
     4407595981591: storage.md
     4407595973527: agent.md network-allocation.md
     5699967551639: custom-prom.md
-    4407601826839: spinnaker-custom-webhook.md
+    hc/en-us/articles/4407601826839: spinnaker-custom-webhook.md
     6737520506519: v1-94-turndown-schedule-migration-guide.md
     4407601830679: secondary-clusters.md troubleshoot-install.md
     4407595983127: support-channels.md
@@ -167,7 +167,7 @@ redirects:
     4407595981591-Cost-Analyzer-Persistent-Volume: storage.md
     4407595973527-Network-Traffic-Cost-Allocation: agent.md network-allocation.md
     5699967551639-Grafana-Cloud-Integration-for-Kubecost: custom-prom.md
-    4407601826839-Custom-Webhook-to-Create-a-Kubecost-stage-in-Spinnaker: spinnaker-custom-webhook.md
+    hc/en-us/articles/4407601826839-Custom-Webhook-to-Create-a-Kubecost-stage-in-Spinnaker: spinnaker-custom-webhook.md
     6737520506519-v1-94-TurndownSchedule-migration-guide: v1-94-turndown-schedule-migration-guide.md
     4407601830679-Troubleshoot-Install: secondary-clusters.md troubleshoot-install.md
     4407595983127-Getting-Support: support-channels.md
