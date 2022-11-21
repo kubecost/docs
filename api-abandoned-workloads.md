@@ -15,4 +15,3 @@ http://<kubecost-address>/model/savings/abandonedWorkloads
 
 
 
-<!--- {"article":"4407601797911","section":"4402829033367","permissiongroup":"1500001277122"} --->

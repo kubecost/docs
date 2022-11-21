@@ -64,4 +64,4 @@ We have a few steps to perform if you want Cluster Controller's turndown functio
         kubectl delete crd turndownschedules.kubecost.k8s.io
 
 
-<!--- {"article":"6737520506519","section":"4402815636375","permissiongroup":"1500001277122"} --->
+

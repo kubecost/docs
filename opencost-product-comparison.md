@@ -11,4 +11,4 @@
 
 Learn more about the different Kubecost versions and get started [here](https://www.kubecost.com/pricing/).
 
-<!--- {"article":"8292513994903","section":"1500002777682","permissiongroup":"1500001277122"} --->
+

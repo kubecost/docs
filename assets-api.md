@@ -78,4 +78,4 @@ Note:
     - For example, `filterLabels=deployment%3Dkube%2A` will return all assets with `deployment` label value containing a `kube` prefix.
  - Invalid filters return no assets.
 
-<!--- {"article":"8554606459671","section":"1500002777682","permissiongroup":"1500001277122"} --->
+

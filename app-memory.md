@@ -22,4 +22,3 @@ Next, share these files directly with our team via email (support@kubecost.com) 
 
 
 
-<!--- {"article":"4407595921431","section":"4402829033367","permissiongroup":"1500001277122"} --->

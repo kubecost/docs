@@ -35,4 +35,4 @@ Note that with Option 2, the Kubecost UI cannot link to the Grafana dashboards u
 > 
 > `--set grafana.grafana.ini.server.root_url: "%(protocol)s://%(domain)s:%(http_port)s/kubecost/grafana"`
 
-<!--- {"article":"6737508001687","section":"1500002777682","permissiongroup":"1500001277122"} --->
+

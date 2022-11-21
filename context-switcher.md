@@ -34,4 +34,3 @@ in [values.yaml](https://github.com/kubecost/cost-analyzer-helm-chart/blob/maste
 
 
 
-<!--- {"article":"9177037361175","section":"4402815636375","permissiongroup":"1500001277122"} --->

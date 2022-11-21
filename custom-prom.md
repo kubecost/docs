@@ -130,4 +130,4 @@ Have a question not answered on this page? Email us at support@kubecost.com or [
 ---
 
 
-<!--- {"article":"4407595941015","section":"4402815636375","permissiongroup":"1500001277122"} --->
+

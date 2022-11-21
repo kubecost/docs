@@ -132,4 +132,3 @@ Have questions? Email us at <support@kubecost.com>.
 
 
 
-<!--- {"article":"4407595915543","section":"4402829033367","permissiongroup":"1500001277122"} --->

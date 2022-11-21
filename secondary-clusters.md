@@ -124,4 +124,4 @@ Write to us at [support@kubecost.com](support@kubecost.com).
 ---
 
 
-<!--- {"article":"4423256582551","section":"4402815636375","permissiongroup":"1500001277122"} --->
+

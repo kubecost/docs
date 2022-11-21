@@ -27,4 +27,4 @@ Expected response: this API should return a 200 response code with JSON string r
 
 
 
-<!--- {"article":"4407595972119","section":"4402815656599","permissiongroup":"1500001277122"} --->
+

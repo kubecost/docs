@@ -71,4 +71,4 @@ You can now start monitoring your Amazon EKS cluster cost and efficiency. Depend
 - [Amazon blog post](https://aws.amazon.com/blogs/containers/aws-and-kubecost-collaborate-to-deliver-cost-monitoring-for-eks-customers/)
 
 
-<!--- {"article":"8428105779095","section":"4402829036567","permissiongroup":"1500001277122"} --->
+

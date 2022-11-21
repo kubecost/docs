@@ -89,4 +89,4 @@ kubectl logs --namespace kubecost-agent -l app=prometheus --prefix=true --all-co
 ```
 
 ---
-<!--- {"article":"4425132038167","section":"1500002777682","permissiongroup":"1500001277122"} --->
+

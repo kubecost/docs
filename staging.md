@@ -18,4 +18,4 @@ To upgrade an existing Kubecost Helm Chart deployment to the latest staging buil
 
 
 
-<!--- {"article":"4407601828247","section":"4402815636375","permissiongroup":"1500001277122"} --->
+

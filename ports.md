@@ -19,4 +19,4 @@ Kubecost components use following ports by default:
 
 
 
-<!--- {"article":"4425080011671","section":"4402829033367","permissiongroup":"1500001277122"} --->
+

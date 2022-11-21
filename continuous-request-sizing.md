@@ -63,4 +63,3 @@ To check current requests for your Deployments, use the following command:
 kubectl get deployment -n "kubecost" -o=jsonpath="{range .items[*]}"deployment/"{.metadata.name}{'\n'}{range .spec.template.spec.containers[*]}{.name}{'\t'}{.resources.requests}{'\n'}{end}{'\n'}{end}"
 ```
 
-<!--- {"article":"10330083197975","section":"1500002777682","permissiongroup":"1500001277122"} --->

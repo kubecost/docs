@@ -562,4 +562,4 @@ AWS services used here are:
   - [Cloudformation](https://aws.amazon.com/cloudformation/pricing/) (Optional: manual IAM configuration or via Terraform is fine)
   - [EKS](https://aws.amazon.com/eks/pricing/)  (Optional: all K8s flavors are supported)
 
-<!--- {"article":"4407595928087","section":"4402829036567","permissiongroup":"1500001277122"} --->
+

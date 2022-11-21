@@ -34,4 +34,4 @@ are available at `http://<kubecost-address>/model/ENDPOINT`:
 
 
 
-<!--- {"article":"4407601802391","section":"4402829033367","permissiongroup":"1500001277122"} --->
+

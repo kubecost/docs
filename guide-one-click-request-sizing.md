@@ -61,4 +61,4 @@ including their limitations, see the corresponding [API
 documentation](https://github.com/kubecost/docs/blob/main/api-request-recommendation-apply.md).
 
 
-<!--- {"article":"5843816284823","section":"4402815656599","permissiongroup":"1500001277122"} --->
+

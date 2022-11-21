@@ -60,4 +60,4 @@ Kubecost can run on clusters with thousands of nodes when resource consumption i
 * More info on this environment variable can be found [here](https://tip.golang.org/doc/gc-guide).
 
 
-<!--- {"article":"6446286863383","section":"1500002777682","permissiongroup":"1500001277122"} --->
+

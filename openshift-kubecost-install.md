@@ -537,4 +537,4 @@ Optionally, you can also add our [Kubecost Dashboard for Grafana Cloud](https://
 
 For advanced setup or if you have any questions, you can contact us on [Slack](https://join.slack.com/t/kubecost/shared_invite/enQtNTA2MjQ1NDUyODE5LWFjYzIzNWE4MDkzMmUyZGU4NjkwMzMyMjIyM2E0NGNmYjExZjBiNjk1YzY5ZDI0ZTNhZDg4NjlkMGRkYzFlZTU) or email us at [support@kubecost.com](support@kubecost.com).
 
-<!--- {"article":"8241029276567","section":"4402815636375","permissiongroup":"1500001277122"} --->
+

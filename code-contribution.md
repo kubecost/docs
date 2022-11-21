@@ -105,4 +105,4 @@ If you need help, you can ask questions on our mailing list, Slack community , o
 
 Our code of conduct means that you are responsible for treating everyone on the project with respect and courtesy regardless of their identity. If you are the victim of any inappropriate behavior or comments as described in our code of conduct, we are here for you and will do the best to ensure that the abuser is reprimanded appropriately, per our code. Please report any incidents here: [team@kubecost.com](mailto:team@kubecost.com)
 
-<!--- {"article":"4442565953943","section":"1500002777682","permissiongroup":"1500001277122"} --->
+
