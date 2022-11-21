@@ -12,6 +12,7 @@ You can also find us on the following platforms:
 * [LinkedIn](https://www.linkedin.com/company/kubecost/)
 * [Twitter](https://twitter.com/kubecost)
 * [YouTube](https://www.youtube.com/channel/UChIoMpeXm85T-kPCW1p9_PA/featured)
+* [GitHub](https://github.com/kubecost)
 
 **Mailing address:**\
     Stackwatch, Inc.\
