@@ -14,9 +14,9 @@ redirects:
     hc/en-us/articles/4407595915543: allocation-api.md
     hc/en-us/articles/4407595916823: allocation.md
     hc/en-us/articles/4407595918231: annotations.md
-    hc/en-us/articles/4407595919895: api-request-right-sizing-v2.md api-request-right-sizing.md
+    hc/en-us/articles/4407595919895: api-request-right-sizing.md
     hc/en-us/articles/4407595921431: app-memory.md
-    hc/en-us/articles/4407595922711: architecture.md multi-cluster.md
+    hc/en-us/articles/4407595922711: architecture.md
     hc/en-us/articles/4407595924247: assets.md
     hc/en-us/articles/4407595925271: audit.md
     hc/en-us/articles/4407595926423: availability-tiers.md
@@ -37,7 +37,7 @@ redirects:
     hc/en-us/articles/4407595968919: multi-cloud.md
     hc/en-us/articles/4407595970711: multi-cluster.md
     hc/en-us/articles/4407595972119: namespace-contacts.md
-    hc/en-us/articles/4407595973527: agent.md network-allocation.md
+    hc/en-us/articles/4407595973527: network-allocation.md
     hc/en-us/articles/4407595974679: open-source-deps.md
     hc/en-us/articles/4407595975959: partner-metrics.md
     hc/en-us/articles/4407595977879: saved-reports.md
@@ -86,7 +86,7 @@ redirects:
     hc/en-us/articles/5699259004311: grafana-cloud-integration.md
     hc/en-us/articles/5748367035159: cluster-health-score.md
     hc/en-us/articles/5843799319703: api-request-recommendation-apply.md
-    hc/en-us/articles/5843816284823: controller.md guide-one-click-request-sizing.md
+    hc/en-us/articles/5843816284823: guide-one-click-request-sizing.md
     hc/en-us/articles/5991192077079: advanced-reports.md
     hc/en-us/articles/6152374933655: windows.md
     hc/en-us/articles/6446286863383: resource-consumption.md
@@ -116,9 +116,9 @@ redirects:
     hc/en-us/articles/4407595915543-Kubecost-APIs: allocation-api.md
     hc/en-us/articles/4407595916823-Allocation-API: allocation.md
     hc/en-us/articles/4407595918231-Enabling-Annotation-Emission: annotations.md
-    hc/en-us/articles/4407595919895-Container-Request-Right-Sizing-API: api-request-right-sizing-v2.md api-request-right-sizing.md
+    hc/en-us/articles/4407595919895-Container-Request-Right-Sizing-API: api-request-right-sizing.md
     hc/en-us/articles/4407595921431-Kubecost-Memory-Usage: app-memory.md
-    hc/en-us/articles/4407595922711-Kubecost-Core-Architecture-Overview: architecture.md multi-cluster.md
+    hc/en-us/articles/4407595922711-Kubecost-Core-Architecture-Overview: architecture.md
     hc/en-us/articles/4407595924247-Assets: assets.md
     hc/en-us/articles/4407595925271-Auditing: audit.md
     hc/en-us/articles/4407595926423-Availability-Tiers: availability-tiers.md
@@ -139,7 +139,7 @@ redirects:
     hc/en-us/articles/4407595968919-Setting-Up-Cloud-Integrations: multi-cloud.md
     hc/en-us/articles/4407595970711-Multi-cluster: multi-cluster.md
     hc/en-us/articles/4407595972119-Namespace-Contacts: namespace-contacts.md
-    hc/en-us/articles/4407595973527-Network-Traffic-Cost-Allocation: agent.md network-allocation.md
+    hc/en-us/articles/4407595973527-Network-Traffic-Cost-Allocation: network-allocation.md
     hc/en-us/articles/4407595974679-Open-Source: open-source-deps.md
     hc/en-us/articles/4407595975959-Standardizing-Kubernetes-cost-allocation: partner-metrics.md
     hc/en-us/articles/4407595977879-Saved-Reports: saved-reports.md
@@ -188,7 +188,7 @@ redirects:
     hc/en-us/articles/5699259004311-Grafana-Cloud-Integration-for-Kubecost: grafana-cloud-integration.md
     hc/en-us/articles/5748367035159-Cluster-Health-Score-: cluster-health-score.md
     hc/en-us/articles/5843799319703-Container-Request-Recommendation-Apply-APIs: api-request-recommendation-apply.md
-    hc/en-us/articles/5843816284823-Guide-1-click-request-sizing: controller.md guide-one-click-request-sizing.md
+    hc/en-us/articles/5843816284823-Guide-1-click-request-sizing: guide-one-click-request-sizing.md
     hc/en-us/articles/5991192077079-Advanced-Reporting: advanced-reports.md
     hc/en-us/articles/6152374933655-Windows-Node-Support: windows.md
     hc/en-us/articles/6446286863383-Tuning-Resource-Consumption: resource-consumption.md
