@@ -36,7 +36,7 @@ There are two options to configure asset prices in your on-premise Kubernetes en
 - *Advanced pipeline:* this method allows each individual asset in your environment to have a unique price. This leverages the Kubecost custom CSV pipeline which is available on Enterprise plans. Contact us at support@kubecost.com to learn more.
 
 ### I use AWS and want the public pricing but can't allow Kubecost to ingress/egress data
-- Use a proxy for the AWS pricing api; you can set and [extra env var](https://github.com/kubecost/cost-analyzer-helm-chart/blob/v1.98/cost-analyzer/values.yaml#L304) to the address of your proxy. 
+- Use a proxy for the AWS pricing api; you can set AWS_PRICING_URL via the [extra env var](https://github.com/kubecost/cost-analyzer-helm-chart/blob/v1.98/cost-analyzer/values.yaml#L304) to the address of your proxy. 
 
 
 
