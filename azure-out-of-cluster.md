@@ -15,7 +15,7 @@ https://docs.microsoft.com/en-us/azure/cost-management-billing/costs/tutorial-ex
 
 It will take a few hours to generate the first report, after which Kubecost can use the Azure Storage API to pull that data.
 
->Note: If you have sensitive data in an Azure Storage account and do not want to give out access to it, create a separate Azure Storage account to store your cost data export.
+> **Note**: If you have sensitive data in an Azure Storage account and do not want to give out access to it, create a separate Azure Storage account to store your cost data export.
 
 ## Step 2: Provide access to Azure Storage API
 
@@ -29,25 +29,30 @@ The values needed to provide access to the Azure Storage Account where cost data
 
 With these values in hand, you can now provide them to Kubecost to allow access to the Azure Storage API.
 
-To create this secret you will need to create a JSON file that must be named azure-storage-config.json
+To create this secret you will need to create a JSON file that **MUST** be named cloud-integration.json
+**Note:** The file name should be cloud-integration.json.Any other file name will not work.
 with the following format:
 
 ```
 {
-  "azureSubscriptionID": "<SUBSCRIPTION_ID>",
-  "azureStorageAccount": "<STORAGE_ACCOUNT_NAME>",
-  "azureStorageAccessKey": "<STORE_ACCESS_KEY>",
-  "azureStorageContainer": "<REPORT_CONTAINER_NAME>",
-  "azureContainerPath": "<AZURE_CONTAINER_PATH>",
-  "azureCloud": "<AZURE_CLOUD>"
+    "azure": [
+        {
+            "azureSubscriptionID": "AZ_cloud_integration_subscriptionId",
+            "azureStorageAccount": "AZ_cloud_integration_azureStorageAccount",
+            "azureStorageAccessKey": "AZ_cloud_integration_azureStorageAccessKey",
+            "azureStorageContainer": "AZ_cloud_integration_azureStorageContainer",
+            "azureContainerPath": "",
+            "azureCloud": "public/gov"
+        }
+    ]
 }
 ```
 
 Once you have the values filled out use this command to create the secret:
 
-`kubectl create secret generic <SECRET_NAME> --from-file=azure-storage-config.json -n kubecost`
+`kubectl create secret generic <SECRET_NAME> --from-file=cloud-integration.json -n kubecost`
 
-Once the secret is created, set `.Values.kubecostProductConfigs.azureStorageSecretName` to
+Once the secret is created, set `.Values.kubecostProductConfigs.cloudIntegrationSecret` to
 `<SECRET_NAME>` and upgrade Kubecost via Helm, other values related to Azure Storage (see another method) should not be set.
 
 After a successful configuration of Azure out of cluster costs, upon opening the Assets page of Kubecost costs will be broken down by service and there will no longer be a banner at the top of the screen that says OOC is not configured.

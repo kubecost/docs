@@ -67,7 +67,7 @@ Costs allocations are based on the following:
 2) the cost of each resource  
 3) the amount of time resources were provisioned
 
-For more information, refer to this [FAQ](https://github.com/kubecost/cost-model#frequently-asked-questions) on how each of these inputs is determined based on your environment.
+For more information, refer to the [OpenCost spec](https://github.com/opencost/opencost/blob/develop/spec/opencost-specv01.md).
 
 ### Filters 
 Filter resources by namespace, clusterId, and/or Kubernetes label to more closely investigate a rise in spend or key cost drivers at different aggregations such as deployments or pods. When a filter is applied, only resources with this matching value will be shown. These filters are also applied to external out-of-cluster asset tags. Supported filters are as follows:
@@ -76,12 +76,12 @@ Filter resources by namespace, clusterId, and/or Kubernetes label to more closel
 |--------------------|---------------------|
 | Cluster |  Limit results to workloads in a set of clusters with matching IDs. Note: clusterID is passed in _values_ at install-time. |
 | Node | Limit results to workloads where the node name is filtered for. |
-| Namespace |  Limit results to workloads in a set of namespaces. |
-| Label |  Limit results to workloads with matching Kubernetes labels. Namespace labels are applied to all of its workloads. Supports filtering by `__unallocated__` field as well |
-| Service | Limit results to workloads based on service |
-| Controller | Limit results to workloads based on controller name |
-| Controller kind | Limit results to workloads based on controller type |
-| Pod |  Limit results to workloads where the pod name is filtered for. |
+| Namespace |  Limit results to workloads in a set of Kubernetes namespaces. |
+| Label |  Limit results to workloads with matching Kubernetes labels. Namespace labels are applied to all of its workloads. Supports filtering by `__unallocated__` field as well. |
+| Service | Limit results to workloads based on Kubernetes service name.|
+| Controller | Limit results to workloads based on Kubernetes controller name. |
+| Controller kind | Limit results to workloads based on Kubernetes controller (Daemonset, Deployment, Job, Statefulset, Replicaset, etc) type. |
+| Pod |  Limit results to workloads where the Kubernetes pod name is filtered for. |
 
 Comma-separated lists are supported to filter by multiple categories, e.g. namespace filter equals `kube-system,kubecost`. Wild card filters are also supported, indicated by a * following the filter, e.g. `namespace=kube*` to return any namespace beginning with `kube`. 
    
@@ -105,15 +105,16 @@ Cost allocation metrics are available for both in-cluster and out-of-cluster res
 | Metric | Description |
 |-------------------|---------------------|
 | CPU | The total cost of CPU allocated to this object, e.g. namespace or deployment. The amount of CPU allocated is the greater of CPU usage and CPU requested over the measured time window. The price of allocated CPU is based on cloud billing APIs or custom pricing sheets. [Learn more](https://github.com/kubecost/cost-model#questions) |
-| GPU | The cost of GPUs requested by this object, as measured by [resource limits](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/). Prices are based on cloud billing prices or custom pricing sheets for on-prem deployments. |
+| GPU | The cost of GPUs requested by this object, as measured by [resource limits](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/). Prices are based on cloud billing prices or custom pricing sheets for on-prem deployments. [Learn more](https://github.com/kubecost/docs/blob/main/gpu-allocation.md)
 | RAM | The total cost of memory allocated to this object, e.g. namespace or deployment. The amount of memory allocated is the greater of memory usage and memory requested over the measured time window. The price of allocated memory is based on cloud billing APIs or custom pricing sheets. [Learn more](https://github.com/kubecost/cost-model#questions) |
 | Persistent Volume (PV) Cost | The cost of persistent storage volumes claimed by this object. Prices are based on cloud billing prices or custom pricing sheets for on-prem deployments. |
 | Network | The cost of network traffic based on internet egress, cross-zone egress, and other billed transfer. Note: these costs must be enabled. [Learn more](http://docs.kubecost.com/network-allocation). When Network Traffic Cost are not enabled, the Node network costs from the cloud service provider's [billing integration](https://guide.kubecost.com/hc/en-us/articles/4412369153687-Cloud-Integrations) will be spread proportionally based on cost weighted usage.  |
 | Load Balancer (LB) cost | The cost of cloud-service load balancer that has been allocated. |
 | Shared | The cost of shared resources allocated to this tenant. This field covers shared overhead, shared namespaces, and shared labels. |
-| Cost Efficiency | The percentage of requested CPU & memory dollars utilized over the measured time window. Values range from 0 to above 100 percent. Workloads with no requests but with usage OR workloads with usage > request can report efficiency above 100%. [View Example](https://docs.google.com/spreadsheets/d/15CL2YrJHIcQyDMHu3vB3jXdTdcqEntawmy5T3zsVZ_g/edit#gid=0)|
+| Cost Efficiency | The percentage of requested CPU & memory dollars utilized over the measured time window. Values range from 0 to above 100 percent. Workloads with no requests but with usage OR workloads with usage > request can report efficiency above 100%.|
 
+### Cost efficiency table example
 
-
+![Cost Efficiency table](https://raw.githubusercontent.com/kubecost/docs/main/images/table.PNG)
 
 <!--- {"article":"4407601807383","section":"4402829033367","permissiongroup":"1500001277122"} --->

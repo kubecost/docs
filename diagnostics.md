@@ -142,5 +142,3 @@ Contact support@kubecost.com or send a message in our Slack workspace if you enc
 #### Step 5. Metrics not being dropped with Prometheus relabel rules
 
 If metrics are being collected on a supported version of the desired metrics exporter, the final step is to verify that individual metrics are not being dropped in your Prometheus pipeline. This could be in the form of an add or rule under a drop `metric_relabel_configs` block in your Prometheus yaml configuration files.
-
-

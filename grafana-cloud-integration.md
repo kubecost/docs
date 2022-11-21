@@ -7,13 +7,13 @@ This document will show you how to integrate the Grafana Cloud Prometheus metric
 
 ## Prerequisites
 
-- You have access to a running Kubernetes cluster (K8s)
+- You have access to a running Kubernetes cluster
 - You have created a Grafana Cloud account
 - You have permissions to create Grafana Cloud API keys
 
 ## Step 1: Install the Grafana Agent on your cluster
 
-Install the Grafana Agent for Kubernetes on your cluster. On the existing K8s cluster that you intend to install Kubecost, run the following commands to install grafana agent to scrape the metrics from Kubecost /metrics end point. The script below installs Grafana agent with necessary scraping configuration for Kubecost, you may want to add additional scrape configuration for your set up. Please remember to replace these following values by your actual Grafana cloud's values:
+Install the Grafana Agent for Kubernetes on your cluster. On the existing K8s cluster that you intend to install Kubecost, run the following commands to install the Grafana Agent to scrape the metrics from Kubecost `/metrics` end point. The script below installs the Grafana Agent with necessary scraping configuration for Kubecost, you may want to add additional scrape configuration for your set up. Please remember to replace these following values by your actual Grafana cloud's values:
 
 - REPLACE-WITH-GRAFANA-PROM-REMOTE-WRITE-ENDPOINT
 - REPLACE-WITH-GRAFANA-PROM-REMOTE-WRITE-USERNAME
@@ -71,17 +71,17 @@ EOF
 MANIFEST_URL=https://raw.githubusercontent.com/grafana/agent/v0.24.2/production/kubernetes/agent-bare.yaml NAMESPACE=kubecost /bin/sh -c "$(curl -fsSL https://raw.githubusercontent.com/grafana/agent/v0.24.2/production/kubernetes/install-bare.sh)" | kubectl apply -f -
 
 ```
-> *Note*: Verify if Grafana-agent is scraping data (optional)
+> **Note**: Verify if grafana-agent is scraping data (optional)
 
 ```Bash
 kubectl -n kubecost logs grafana-agent-0
 ```
 
-To learn more about how to install and config Grafana agent as well as additional scrape configuration, please refer to [Grafana Agent for Kubernetes](https://grafana.com/docs/grafana-cloud/kubernetes/agent-k8s/k8s_agent_metrics/) section of the Grafana Cloud documentation. Or you can check Kubecost Prometheus scrape config at this [Github repository](https://github.com/kubecost/cost-analyzer-helm-chart/blob/ebe7e088debecd23f90e6dd75b425828901a246c/cost-analyzer/charts/prometheus/values.yaml#L1152)
+To learn more about how to install and config Grafana agent as well as additional scrape configuration, please refer to [Grafana Agent for Kubernetes](https://grafana.com/docs/grafana-cloud/kubernetes/agent-k8s/k8s_agent_metrics/) section of the Grafana Cloud documentation or you can check Kubecost Prometheus scrape config at this [GitHub repository](https://github.com/kubecost/cost-analyzer-helm-chart/blob/ebe7e088debecd23f90e6dd75b425828901a246c/cost-analyzer/charts/prometheus/values.yaml#L1152).
 
-## Step 2: Create dbsecret to allow Kubecots to query the metrics from Grafana Cloud Prometheus:
+## Step 2: Create `dbsecret` to allow Kubecots to query the metrics from Grafana Cloud Prometheus:
 
-- Create two files in your working directory, called `USERNAME` and `PASSWORD` respectively
+Create two files in your working directory, called `USERNAME` and `PASSWORD` respectively
   
 ```Bash
 export PASSWORD=<REPLACE-WITH-GRAFANA-PROM-REMOTE-WRITE-API-KEY>
@@ -89,12 +89,12 @@ export USERNAME=<REPLACE-WITH-GRAFANA-PROM-REMOTE-WRITE-USERNAME>
 printf "${PASSWORD}" > PASSWORD
 printf "${USERNAME}" > USERNAME
 ```
-- Verify that you can run query against your Grafana Cloud Prometheus query endpoint (Optional):
+Verify that you can run query against your Grafana Cloud Prometheus query endpoint (optional):
 
 ```Bash
 cred="$( echo $NAME:$PASSWORD | base64 )"; curl -H "Authorization: Basic $cred" https://<REPLACE-WITH-GRAFANA-PROM-QUERY-ENDPOINT>/api/v1/query?query=up
 ```
-- Create K8s secret name dbsecret:
+Create K8s secret name `dbsecret`:
 
 ```Bash
 kubectl create secret generic dbsecret \
@@ -102,12 +102,11 @@ kubectl create secret generic dbsecret \
     --from-file=USERNAME \
     --from-file=PASSWORD
 ```
-- Verify if the credentials appears correctly - Optional (Any trailing space or new line etc ...)
+Verify if the credentials appears correctly - Optional (Any trailing space or new line etc ...)
 
 ```Bash
 kubectl -n kubecost get secret dbsecret -o json | jq '.data | map_values(@base64d)'
 ```
-
 
 ## Step 3 (optional): Configure Kubecost recording rules for Grafana Cloud using cortextool
 
@@ -152,7 +151,7 @@ groups:
 EOF
 ```
 
-Then, making sure you are in the same directory as your \_kubecost\_rules.yaml\_, load the rules using `cortextool`. Replace the address with your Grafana Cloud’s Prometheus endpoint (Remember to omit the /api/prom path from the endpoint URL).
+Then, making sure you are in the same directory as your `_kubecost\_rules.yaml_`, load the rules using `cortextool`. Replace the address with your Grafana Cloud’s Prometheus endpoint (Remember to omit the /api/prom path from the endpoint URL).
 
 ```Bash
 cortextool rules load \

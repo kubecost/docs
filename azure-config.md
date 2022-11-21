@@ -3,7 +3,7 @@ Azure Rate Card Configuration
 
 Kubecost needs access to the Microsoft Azure Billing Rate Card API to access accurate pricing data for your Kubernetes resources.
 
-> **Note**: you can also get this functionality plus external costs by completing the full [Azure billing integration](/azure-out-of-cluster.md).
+> **Note**: You can also get this functionality plus external costs by completing the full [Azure billing integration](/azure-out-of-cluster.md).
 
 ## Creating a Custom Azure role
 
@@ -122,12 +122,6 @@ The following Microsoft documents are a helpful reference:
 * [Geographic availability and currency support for the commercial marketplace](https://docs.microsoft.com/en-us/azure/marketplace/marketplace-geo-availability-currencies)
 * [Azure Portal > Cost Management + Billing > Billing Account Properties](https://portal.azure.com/#view/Microsoft_Azure_GTM/ModernBillingMenuBlade/~/Properties)
 * [Understand Cost Management data](https://docs.microsoft.com/en-us/azure/cost-management-billing/costs/understand-cost-mgt-data)
-
-## Additional help
-
-Please let us know if you run into any issues, we are here to help.
-
-Join our [Slack community](https://join.slack.com/t/kubecost/shared_invite/zt-1dz4a0bb4-InvSsHr9SQsT_D5PBle2rw) and check out the #support channel for any help you may need, or email us at (support@kubecost.com)[support@kubecost.com].
 
 
 

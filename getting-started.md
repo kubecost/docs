@@ -137,8 +137,3 @@ Eg: If a pod is requesting 2 CPU and 1Gb, using 500mCPU and 500MB, CPU on the no
 <p>Efficiency targets can depend on the SLAs of the application-- see our notes on <a href="https://github.com/kubecost/docs/blob/main/api-request-right-sizing.md">request right-sizing</a> for more details.</p>
 
 </details>
-
-\
-
-
-

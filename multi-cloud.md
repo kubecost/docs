@@ -108,10 +108,11 @@ The bucket can have a Canned ACL of Private or other permissions as you see fit.
 - `<ATHENA_DATABASE>` the name of the database created by the Athena setup. The Athena database name is available as the value (physical id) of AWSCURDatabase in the CloudFormation stack created above (in Step 2: Setting up the Athena of the AWS guild above)
 - `<ATHENA_TABLE>` the name of the table created by the Athena setup
 The table name is typically the database name with the leading athenacurcfn_ removed (but is not available as a CloudFormation stack resource)
+- `<ATHENA_WORKGROUP>` The workgroup assigned to be used with Athena. If omitted, defaults to `Primary`.
 - `<ATHENA_PROJECT_ID>` e.g. "530337586277" # The AWS AccountID where the Athena CUR is.
 - `<MASTER_PAYER_ARN>` Is an optional value which should be set if you are using a multi-account billing set-up and are not accessing athena through the primary account. It should be set to the arn of the role in the masterpayer account, e.g. `arn:aws:iam::530337586275:role/KubecostRole`.
 
-Set these values into the following object and add them to the AWS array:
+Set these values into the following object and add them to the AWS array in the *cloud-integration.json*:
 
 ```json
 {
@@ -121,11 +122,11 @@ Set these values into the following object and add them to the AWS array:
     "athenaRegion": "<ATHENA_REGION>",
     "athenaDatabase": "<ATHENA_DATABASE>",
     "athenaTable": "<ATHENA_TABLE>",
+    "athenaWorkgroup": "<ATHENA_WORKGROUP>",
     "projectID": "<ATHENA_PROJECT_ID>",
     "masterPayerARN": "<MASTER_PAYER_ARN>"
 }
 ```
-
-
+Additionally set the `kubecostProductConfigs.projectID` helm value to the AWS account that Kubecost is being installed in.
 
 <!--- {"article":"4407595968919","section":"4402815636375","permissiongroup":"1500001277122"} --->

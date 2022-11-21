@@ -18,14 +18,4 @@ Kubecost alerts allow teams to receive updates on real-time Kubernetes spend. [L
 
 Direct engineering and product support via Slack channel, video, and phone.
 
-\
-
-
-Contact us at [support@kubecost.com](support@kubecost.com) to learn more!\
-\
-\
-\
-\
-
-
-
+Contact us at [support@kubecost.com](support@kubecost.com) to learn more!

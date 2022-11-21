@@ -94,7 +94,7 @@ the controller itself or the namespace it is running in with
 
 ## Implementing spot nodes in your cluster
 
-The Checklist is now deployed alongside a [recommended cluster configuration](./spot-cluster-sizing.md)
+The Checklist is now deployed alongside a [recommended cluster configuration](https://guide.kubecost.com/hc/en-us/articles/4412353032599-Spot-Cluster-Sizing)
 which automatically suggests a set of spot and on-demand nodes to use in your cluster
 based on the Checklist. If you do not want to use that, read the following for
 some important information:

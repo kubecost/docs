@@ -26,14 +26,4 @@ Connect internal alerting, monitoring, and BI solutions to Kubecost metrics and 
 
 Dedicated SRE support via private Slack channel and video calls. Expert technical support and guidance based on your specific goals.
 
-\
-
-
-Contact us at [support@kubecost.com](support@kubecost.com) to learn more!\
-\
-\
-\
-\
-
-
-
+Contact us at [support@kubecost.com](support@kubecost.com) to learn more!

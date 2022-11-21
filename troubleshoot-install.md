@@ -12,15 +12,65 @@ These kubernetes commands can be helpful when finding issues with deployments:
     kubectl get events --sort-by=.metadata.creationTimestamp --field-selector type!=Normal
     ```
 
-12. If a pod is in CrashLoopBackOff, check its logs. Commonly it will be a misconfiguration in helm. If the cost-analyzer pod is the issue, check the logs with:
+2. Another option is to check for a describe command of the specific pod in question. This command will give a list of the Events specific to this pod.
+
+    ```bash
+    > kubectl -n kubecost get pods
+    NAME                                          READY   STATUS              RESTARTS   AGE
+    kubecost-cost-analyzer-5cb499f74f-c5ndf       0/2     ContainerCreating   0          2m14s
+    kubecost-kube-state-metrics-99bb8c55b-v2bgd   1/1     Running             0          2m14s
+    kubecost-prometheus-server-f99987f55-86snj    2/2     Running             0          2m14s
+
+    > kubectl -n kubecost describe pod kubecost-cost-analyzer-5cb499f74f-c5ndf
+    Name:         kubecost-cost-analyzer-5cb499f74f-c5ndf
+    Namespace:    kubecost
+    Priority:     0
+    Node:         gke-kc-integration-test--default-pool-e04c72e7-vsxl/10.128.0.102
+    Start Time:   Wed, 19 Oct 2022 04:15:05 -0500
+    Labels:       app=cost-analyzer
+                app.kubernetes.io/instance=kubecost
+                app.kubernetes.io/name=cost-analyzer
+                pod-template-hash=b654c4867
+    ...
+    Events:
+        <RELEVANT ERROR MESSAGES HERE>
+        <RELEVANT ERROR MESSAGES HERE>
+        <RELEVANT ERROR MESSAGES HERE>
+    ```
+
+3. If a pod is in CrashLoopBackOff, check its logs. Commonly it will be a misconfiguration in Helm. If the cost-analyzer pod is the issue, check the logs with:
 
     ```bash
     kubectl logs deployment/kubecost-cost-analyzer -c cost-model
     ```
 
-3. Alternatively, Lens is a great tool for diagnosing many issues in a single view. See our blog post on [using Lens with Kubecost](https://blog.kubecost.com/blog/lens-kubecost-extension/)
+4. Alternatively, Lens is a great tool for diagnosing many issues in a single view. See our blog post on [using Lens with Kubecost](https://blog.kubecost.com/blog/lens-kubecost-extension/) to learn more.
 
-## Issue: no persistent volumes available for this claim and/or no storage class is set
+## Configuring log levels
+
+The log output can be adjusted while deploying through Helm by using the `LOG_LEVEL` and/or `LOG_FORMAT` environment variables. These variables include:
+* `trace`
+* `debug`
+* `info`
+* `warn`
+* `error`
+* `fatal`
+
+For example, to set the log level to `debug`, add the following flag to the Helm command:
+
+    --set 'kubecostModel.extraEnv[0].name=LOG_LEVEL,kubecostModel.extraEnv[0].value=debug'
+
+`LOG_FORMAT` options:
+
+* `JSON`
+    * A structured logging output
+    * `{"level":"info","time":"2006-01-02T15:04:05.999999999Z07:00","message":"Starting cost-model (git commit \"1.91.0-rc.0\")"}`
+
+* `pretty`
+    * A nice human readable output 
+    * `2006-01-02T15:04:05.999999999Z07:00 INF Starting cost-model (git commit "1.91.0-rc.0")`
+
+## Issue: No persistent volumes available for this claim and/or no storage class is set
 
 Your clusters need a default storage class for the Kubecost and Prometheus persistent volumes to be successfully attached.
 
@@ -46,7 +96,7 @@ If you don’t see a name, you need to add a storage class. For help doing this,
 
 Alternatively, you can deploy Kubecost without persistent storage to store by following these steps:
 
-> **Note** This setup is only for experimental purpose. The metric data is reset when kubecost's pod is rescheduled.
+> **Note**: This setup is only for experimental purpose. The metric data is reset when Kubecost's pod is rescheduled.
 
 1. On your terminal, run this command to add the Kubecost Helm repository:
 
@@ -63,11 +113,39 @@ Alternatively, you can deploy Kubecost without persistent storage to store by fo
 
 ## Issue: Unable to establish a port-forward connection
 
-First, check the status of pods in the target namespace:
+Review the output of the port-forward command:
 
-`kubectl get pods -n kubecost`
+```
+$ kubectl port-forward --namespace kubecost deployment/kubecost-cost-analyzer 9090
+Forwarding from 127.0.0.1:9090 -> 9090
+Forwarding from [::1]:9090 -> 9090
+```
 
-You should see the following pods running
+Forwarding from `127.0.0.1` indicates kubecost should be reachable via a browser at `http://127.0.0.1:9090` or `http://localhost:9090`.
+
+In some cases it may be necessary for kubectl to bind to all interfaces. This can be done with the addition of the flag `--address 0.0.0.0`.
+
+```
+$ kubectl port-forward --address 0.0.0.0 --namespace kubecost deployment/kubecost-cost-analyzer 9090
+Forwarding from 0.0.0.0:9090 -> 9090
+```
+
+Navigating to Kubecost while port-forwarding should result in "Handling connection" output in the terminal: 
+
+```
+kubectl port-forward --address 0.0.0.0 --namespace kubecost deployment/kubecost-cost-analyzer 9090
+Forwarding from 0.0.0.0:9090 -> 9090
+Handling connection for 9090
+Handling connection for 9090
+```
+
+To troubleshoot further, check the status of pods in the Kubecost namespace:
+
+```
+kubectl get pods -n kubecost`
+```
+
+All `kubecost-*` pods should have `Running` or `Completed` status.
 
 <pre>
 NAME                                                     READY   STATUS    RESTARTS   AGE
@@ -83,7 +161,6 @@ If the cost-analyzer or prometheus-server __pods are missing__, we recommend rei
 If any __pod is not Running__ other than cost-analyzer-checks, you can use the following command to find errors in the recent event log:
 
 `kubectl describe pod <pod-name> -n kubecost`
-
 
 ## Issue: FailedScheduling kubecost-prometheus-node-exporter
 
@@ -118,7 +195,7 @@ If you are unable to successfully retrieve your config file from this /model end
 
 ## Issue: Unable to load app
 
-If all Kubecost pods are running and you can connect / port-forward to the kubecost-cost-analyzer pod but none of the app's UI will load, we recommend testing the following:
+If all Kubecost pods are running and you can connect/port-forward to the kubecost-cost-analyzer pod but none of the app's UI will load, we recommend testing the following:
 
 1. Connect directly to a backend service with the following command:
     `kubectl port-forward --namespace kubecost service/kubecost-cost-analyzer 9001`
@@ -128,6 +205,28 @@ If this is true, you are likely to be hitting a CoreDNS routing issue. We recomm
 
 1. Go to <https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/templates/cost-analyzer-frontend-config-map-template.yaml#L13>
 2. Replace ```{{ $serviceName }}.{{ .Release.Namespace }}``` with ```localhost```
+
+## Issue: PodSecurityPolicy CRD is missing for `kubecost-grafana` and `kubecost-cost-analyzer-psp`
+
+PodSecurityPolicy has been [removed from Kubernetes v1.25](https://kubernetes.io/docs/concepts/security/pod-security-policy/). This will result in the following error during install.
+
+```bash
+$ helm install kubecost kubecost/cost-analyzer
+Error: INSTALLATION FAILED: unable to build kubernetes objects from release manifest: [
+    resource mapping not found for name: "kubecost-grafana" namespace: "" from "": no matches for kind "PodSecurityPolicy" in version "policy/v1beta1" ensure CRDs are installed first,
+    resource mapping not found for name: "kubecost-cost-analyzer-psp" namespace: "" from "": no matches for kind "PodSecurityPolicy" in version "policy/v1beta1" ensure CRDs are installed first
+]
+```
+
+To disable PodSecurityPolicy in your deployment:
+
+```bash
+$ helm upgrade -i kubecost kubecost/cost-analyzer --namespace kubecost \
+    --set podSecurityPolicy.enabled=false \
+    --set networkCosts.podSecurityPolicy.enabled=false \
+    --set prometheus.podSecurityPolicy.enabled=false \
+    --set grafana.rbac.pspEnabled=false
+```
 
 ## Question: How can I run on Minikube?
 
@@ -149,7 +248,6 @@ gcpprovider.go Error loading metadata cluster-name: Get "http://169.254.169.254/
 Have a question not answered on this page? Email us at [support@kubecost.com](support@kubecost.com) or [join the Kubecost Slack community](https://join.slack.com/t/kubecost/shared_invite/zt-1dz4a0bb4-InvSsHr9SQsT_D5PBle2rw)!
 
 ---
-
 
 
 
