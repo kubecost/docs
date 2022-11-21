@@ -36,20 +36,6 @@ These metrics are not used in the core Assets and Allocation and therefore can b
 
 If this diagnostic test is failing and you'd like to have these metrics, view [How to Troubleshoot Missing Metrics](diagnostics.md#how-to-troubleshoot-missing-metrics).
 
-#### Recording rules are available
-
-The recording rules used by Kubecost are added via our helm installer [values.yaml](https://github.com/kubecost/cost-analyzer-helm-chart/blob/d01434f0489e110beb1bd727310f60c0b15744ec/cost-analyzer/values.yaml#L257-L298) and are used to improve query performance and efficiency. Specific features in Savings require the presence of these recording rules in order to function, so we provide a diagnostic to identify whether or not your install is using the custom recording rules.
-
-![](https://raw.githubusercontent.com/kubecost/docs/main/images/diagnostics-recording-rules.png)
-
-If the recording rule diagnostic fails, use the configuration from our helm chart's [values.yaml](https://github.com/kubecost/cost-analyzer-helm-chart/blob/d01434f0489e110beb1bd727310f60c0b15744ec/cost-analyzer/values.yaml#L257-L298) to create them.
-
-You can verify diagnostics have been added to Prometheus by port-forwarding into Prometheus and visiting Status > Rules. Here is an example command to connect if you've installed Kubecost in the kubecost namespace:
-
-`kubectl port-forward -n kubecost service/kubecost-prometheus-server -n kubecost 9003:80`
-
-You should see the following: ![screencapture-localhost-9003-rules-2020-12-22-14\_48\_23](https://user-images.githubusercontent.com/453512/102940664-aecd2e00-4465-11eb-9407-8484aed6a5eb.png)
-
 #### Expected kube-state-metrics version found
 
 Kubecost requests `kube-state-metrics >= v1.6.0`. This version check is completed with verifying the existence of the `kube_persistentvolume_capacity_bytes` metric. If this diagnostic test is failing, we recommend you:
@@ -59,7 +45,6 @@ Kubecost requests `kube-state-metrics >= v1.6.0`. This version check is complete
 2. Verify this, and potentially other, kube-state-metrics metrics are not being dropped with Prometheus relabel rules\
 
 3. Determine if no persistent volumes are present in this cluster -- if so, you can ignore this diagnostic check\
-
 
 ### Kubecost ETL pipeline metrics
 
