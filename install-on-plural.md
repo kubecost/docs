@@ -90,7 +90,7 @@ If you'd like to request any new features for our Kubecost installation, feel fr
 
 To learn more about what you can do with Plural and more advanced uses of the platform, feel free to dive deeper into our docs [here.](https://docs.plural.sh)
 
-Edit this doc on [GitHub.](https://github.com/kubecost/docs/blob/main/install-on-plural.md)
+
 
 
 <!--- {"article":"7788112146711","section":"4402815636375","permissiongroup":"1500001277122"} --->

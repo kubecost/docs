@@ -16,6 +16,6 @@ To upgrade an existing Kubecost Helm Chart deployment to the latest staging buil
      helm upgrade kubecost kubecoststagingrepo/cost-analyzer -n kubecost
     ```
 
-Edit this doc on [GitHub](https://github.com/kubecost/docs/blob/main/staging.md)
+
 
 <!--- {"article":"4407601828247","section":"4402815636375","permissiongroup":"1500001277122"} --->

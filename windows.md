@@ -17,7 +17,7 @@ helm install kubecost \
 
 ## Detail
 
-The cluster must have at least 1 linux node for the Kubecost pods to run on:
+The cluster must have at least 1 Linux node for the Kubecost pods to run on:
 
   * Use a nodeSelector for all Kubecost deployments:
 
@@ -27,7 +27,7 @@ The cluster must have at least 1 linux node for the Kubecost pods to run on:
         kubernetes.io/os: linux
       containers:
     ```
-  * For daemonsets, set the affinity to only allow scheduling on Windows nodes:
+  * For DaemonSets, set the affinity to only allow scheduling on Windows nodes:
     ```
       affinity:
         nodeAffinity:
@@ -40,14 +40,14 @@ The cluster must have at least 1 linux node for the Kubecost pods to run on:
                 - linux
     ```
 
-See the list of all deployments and daemonsets here: <https://github.com/kubecost/cost-analyzer-helm-chart/blob/develop/cost-analyzer/values-windows-node-affinity.yaml>
+See the list of all deployments and DaemonSets [here](https://github.com/kubecost/cost-analyzer-helm-chart/blob/develop/cost-analyzer/values-windows-node-affinity.yaml).
 
 ## Metrics
 
-  * Collecting data about windows nodes is supported by Kubecost as of v1.93.0.
-  * Accurate node and pod data exist by default, since they come from the kubernetes API
-  * Kubecost requires caadvisor for pod utilization data to determine costs at the container level.
-  * Currently, for pods on Windows nodes- pods will be billed based on request size.
-  * See https://github.com/google/cadvisor/issues/2170 for additional details.
+  * Collecting data about Windows nodes is supported by Kubecost as of v1.93.0.
+  * Accurate node and pod data exists by default, since they come from the Kubernetes API.
+  * Kubecost requires cAdvisor for pod utilization data to determine costs at the container level.
+  * Currently, for pods on Windows nodes: pods will be billed based on request size.
+  * See this [cAdvisor Git issue](https://guide.kubecost.com/hc/en-us/articles/6152374933655-Windows-Node-Support) for additional details.
 
 <!--- {"article":"6152374933655","section":"1500002777682","permissiongroup":"1500001277122"} --->

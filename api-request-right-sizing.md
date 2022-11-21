@@ -137,6 +137,6 @@ curl -G \
   ${KUBECOST_ADDRESS}/model/savings/requestSizing
 ```
 
-Edit this doc on [GitHub](https://github.com/kubecost/docs/blob/main/api-request-right-sizing.md)
+
 
 <!--- {"article":"4407595919895","section":"4402829033367","permissiongroup":"1500001277122"} --->

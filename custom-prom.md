@@ -29,6 +29,7 @@ If you have node-exporter and/or KSM running on your cluster, follow this step t
 
 Kubecost requires the following minimum versions:
 
+- prometheus - v2.18 (support for v2.13 - v2.17 with limited features.)
 - kube-state-metrics - v1.6.0+ (May 19)
 - cAdvisor - kubelet v1.11.0+ (May 18)
 - node-exporter - v0.16+ (May 18) [Optional]
@@ -125,6 +126,6 @@ You can visit Settings in Kubecost to see basic diagnostic information on these 
 Have a question not answered on this page? Email us at support@kubecost.com or [join the Kubecost Slack community](https://join.slack.com/t/kubecost/shared_invite/zt-1dz4a0bb4-InvSsHr9SQsT_D5PBle2rw)!
 
 ---
-Edit this doc on [GitHub](https://github.com/kubecost/docs/blob/main/custom-prom.md)
+
 
 <!--- {"article":"4407595941015","section":"4402815636375","permissiongroup":"1500001277122"} --->

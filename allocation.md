@@ -181,7 +181,7 @@ shareIdle | false | If `true`, idle cost is allocated proportionally across all 
 splitIdle | false | If `true`, and `shareIdle == false` Idle Allocations are created on a per cluster or per node basis rather than being aggregated into a single "\_idle\_" allocation.
 idleByNode | false | If `true`, idle allocations are created on a per node basis. Which will result in different values when shared and more idle allocations when split.
 reconcile | true | If `true` pulls data from the Assets cache and corrects prices of Allocations according to their related Assets. The corrections from this process are stored in each cost categories cost adjustment field. If the integration with your cloud provider's billing data has been set up, this will result in the most accurate costs for Allocations.
-shareTenancyCosts | true | If `true`, share the cost of cluster overhead assets such as cluster management costs and node attached volumes across tenants of those resources. Results are added to the sharedCost field.
+shareTenancyCosts | true | If `true`, share the cost of cluster overhead assets such as cluster management costs and node attached volumes across tenants of those resources. Results are added to the sharedCost field. As of v1.93.0 both cluster management and attached volumes are shared by cluster.
 shareNamespaces | | Comma-separated list of namespaces to share; e.g. `kube-system, kubecost` will share the costs of those two namespaces with the remaining non-idle, unshared allocations.
 shareLabels | | Comma-separated list of labels to share; e.g. `env:staging, app:test` will share the costs of those two label values with the remaining non-idle, unshared allocations.
 shareCost | 0.0 | Floating-point value representing a monthly cost to share with the remaining non-idle, unshared allocations; e.g. `30.42` ($1.00/day == $30.42/month) for the query `yesterday` (1 day) will split and distribute exactly $1.00 across the allocations.
@@ -440,6 +440,6 @@ Here, we provide theoretical error bounds for different resolution values given 
 | 30m | -1.00, 60.00 | -1.00, 6.00 |  0.50, 1.00 | 0.98, 1.00 | 1.00, 1.00 |
 | 60m | -1.00, 120.00 | -1.00, 12.00 | -1.00, 1.00 | 0.96, 1.00 | 0.99, 1.00 |
 
-Edit this doc on [GitHub](https://github.com/kubecost/docs/blob/main/allocation.md)
+
 
 <!--- {"article":"4407595916823","section":"4402829033367","permissiongroup":"1500001277122"} --->

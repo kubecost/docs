@@ -22,11 +22,11 @@ Kubecost alerts allow teams to receive updates on real-time Kubernetes spend. Th
 
 Have questions or issues? View our [troubleshooting guide](#troubleshooting).
   
-## Configuring Alerts in Helm
+## Configuring alerts in Helm
 
 > **Note**: *values.yaml* is a source of truth. Alerts set through *values.yaml* will continually overwrite any manual alert settings set through the Kubecost UI.
 
-### Global Alert Parameters  
+### Global alert parameters  
 The alert settings, under *global.notifications.alertConfigs* in *cost-analyzer/values.yaml*, accept four global fields:
 
 * `frontendUrl` optional, your cost analyzer front end URL used for linkbacks in alert bodies
@@ -50,11 +50,11 @@ notifications:
       # ...
 ```
 
-## Configuring Each Alert Type
+## Configuring each alert type
 
 In addition to `globalSlackWebhookUrl` and `globalAlertEmails` fields, every alert allows optional individual `ownerContact` (a list of email addresses) and `slackWebhookUrl` (if different from `globalSlackWebhookUrl`) fields. Alerts will default to the global Slack and email settings if these optional fields are not supplied.
 
-### Type: Recurring Update
+### Type: Recurring update
 
 Sends a recurring email and/or Slack alert with a summary report of cost and efficiency metrics. 
 
@@ -170,7 +170,7 @@ Example Helm *values.yaml*:
 ----
 
 
-### Type: Asset Budget
+### Type: Asset budget
 
 Define asset budgets and alert when cloud or Kubernetes assets overrun the threshold set.
 
@@ -210,7 +210,7 @@ Example Helm *values.yaml*:
 
 ----
 
-### Type: Cloud Report
+### Type: Cloud report
 
 Sends a recurring email and/or Slack alert with a cloud and/or Kubernetes assets summary report. 
 
@@ -256,7 +256,7 @@ Example Helm *values.yaml*:
 
 ----
 
-### Type: Spend Change
+### Type: Spend change
 
 Detect unexpected spend increases/decreases relative to historical moving averages.
 
@@ -284,7 +284,7 @@ Example Helm *values.yaml*:
 
 ----
 
-### Type: Kubecost Health Diagnostic
+### Type: Kubecost health diagnostic
 
 Enabling diagnostic alerts in Kubecost occur when an event impacts product uptime. This feature can be enabled in seconds from a values file. The following events are grouped into distinct categories that each result in a separate alert notification: 
 
@@ -327,7 +327,7 @@ Example Helm *values.yaml*:
 
 ----
 
-### Type: Cluster Health
+### Type: Cluster health
 
 Cluster health alerts occur when the cluster health score changes by a specific threshold. The health score is calculated based on the following criteria:
 
@@ -351,7 +351,7 @@ Example Helm *values.yaml*:
 
 ----
 
-## Configuring Alerts in the Kubecost UI
+## Configuring alerts in the Kubecost UI
 
 ### Cluster Health and Diagnostic Alerts
 
@@ -361,13 +361,13 @@ Cluster Health Alerts and Diagnostic Alerts work differently from other alert ty
 
 NOTE: As of this writing, there is no validation around Cluster Health Alerts. If a Health Alert configuration is invalid, it will appear to save, but will not actually take effect. Please check carefully that the alert has a Window and Threshold properly specified.
 
-### Global Recipients
+### Global recipients
 
 Global recipients specify a default fallback recipient for each type of message. If an alert does not define any email recipients, its messages will be sent to any emails specified in the Global Recipients email list. Likewise, if an alert does not define a Slack webhook, its messages will be sent to the Global Slack webhook, it one is present. Alerts that do define recipients will ignore the global setting for recipients of that type.
 
 ![Kubecost Alerts Global Recipients](https://raw.githubusercontent.com/kubecost/docs/main/images/alerts_global_recipients.png)
 
-### Budget, Efficiency, Spend Change, and Recurring Update Alerts
+### Budget, efficiency, spend change, and recurring update alerts
 
 The remaining Alert types share some commonality: they all target a set of Cost Allocation data with `window`, `aggregation` and `filter` parameters, and trigger based on the target data. The table results can be filtered using the "Filter alerts" input at the top-right of the table. This input can be used to filter based on alert type, aggregation, window, and/or filter.
 
@@ -379,18 +379,18 @@ The `+ Create Alert` button summons a dialog to walk through the creation of a n
 
 Alerts can also be edited, removed, and tested from the table. Editing opens a dialog similar to the alert creation dialog, for editing the chosen alert.
 
-### Testing Alerts
+### Testing alerts
 
 The `Test` buttons in the Table, the Create / Edit dialogs, and beside enabled Health and Diagnostics alerts, can be used to issue a "test" alert. This can be useful to ensure that alerting infrastructure is working correctly and that an alert is properly configured. Issuing a test from the alert edit modal tests the alert with any modifications that have not yet been saved.
 
-## Alerts Scheduler
+## Alerts scheduler
 
 All times in UTC. Alert send times are determined by parsing the supplied `window` parameter.  Alert diagnostics with next and last scheduled run times are available via `<your-kubecost-url>/model/alerts/status`.
 
 Supported: `weekly` and `daily` special cases, `<N>d`, `<M>h` (1 ≤ N ≤ 7, 1 ≤ M ≤ 24)
 Currently Unsupported: time zone adjustments, windows greater than `7d`, windows less than `1h`
 
-### Scheduler Behavior
+### Scheduler behavior
 
 An `<N>d` alert sends at 00:00 UTC N day(s) from now, i.e., N days from now rounded down to midnight. 
 
@@ -417,7 +417,7 @@ General Steps:
 	* `nextRun`: The date and time (UTC) that the alert will next run checks. 
 	* `lastError`: If running the alert checks fails for unexpected reasons, this field will contain the error message.
 
-If Using Helm:
+If using Helm:
 * Run `kubectl get configmap alert-configs -n kubecost -o json` to view alerts configmap.
 * Ensure that the Helm values are successfully read into the configmap under alerts.json under the `data` field.
 * Example:
@@ -460,10 +460,5 @@ If `nextRun` fails to update, or alerts are not sending at the `nextRun` time, c
   * unsupported csv filters -- `spendChange` alerts accept `filter` as comma-separated values; other alert types do not.
   * unsupported alert type -- all alert type names are in camelCase -- check spelling and capitalization for all alert parameters
   * unsupported aggregation parameters -- see the [aggregated cost model API](https://github.com/kubecost/docs/blob/2ea9021e8530369d53184ea5382b2e4c080bb426/allocation-api.md#aggregated-cost-model-api) for details
-
-Have questions? Join our [Slack community](https://join.slack.com/t/kubecost/shared_invite/zt-1dz4a0bb4-InvSsHr9SQsT_D5PBle2rw) or contact us via email at [support@kubecost.com](support@kubecost.com)!
-
-
-Edit this doc on [GitHub](https://github.com/kubecost/docs/blob/main/alerts.md)
 
 <!--- {"article":"4407601796759","section":"4402815656599","permissiongroup":"1500001277122"} --->

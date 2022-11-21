@@ -24,6 +24,6 @@ If you're using just one PV and still seeing issues with Kubecost being reschedu
 `persistentVolume.storageClass=your-topology-aware-storage-class-name` 
 
 
-Edit this doc on [GitHub](https://github.com/kubecost/docs/blob/main/storage.md)
+
 
 <!--- {"article":"4407595981591","section":"4402815636375","permissiongroup":"1500001277122"} --->

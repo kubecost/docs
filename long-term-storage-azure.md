@@ -17,6 +17,6 @@ config:
   max_retries: 0
 ```
 
-Edit this doc on [GitHub](https://github.com/kubecost/docs/blob/main/long-term-storage-azure.md)
+
 
 <!--- {"article":"4407595954327","section":"4402815682455","permissiongroup":"1500001277122"} --->
