@@ -1,9 +1,6 @@
 Node Pricing
 ============
 
-How do you determine RAM/CPU/GPU costs for a node when this data isn’t provided by a cloud provider?
----------------
-
 When explicit RAM, CPU or GPU prices are not provided by your cloud provider, the Kubecost model falls back to the ratio of base CPU, GPU and RAM price inputs supplied. The default values for these parameters are based on the marginal resource rates of the cloud provider, but they can be customized within Kubecost.
 
 These base RAM/CPU/GPU prices are normalized to ensure the sum of each component is equal to the total price of the node provisioned, based on billing rates from your provider. When the sum of RAM/CPU/GPU costs is greater (or less) than the price of the node, then the ratio between the input prices is held constant.
