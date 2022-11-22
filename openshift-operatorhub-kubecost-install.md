@@ -1,7 +1,6 @@
-Deploy Kubecost from Red Hat Openshift’s OperatorHub.
-==================
+# Deploy Kubecost from Red Hat Openshift’s OperatorHub
 
-## Overview:
+## Overview
 
 The OperatorHub is available via the Red Hat OpenShift Container Platform web console and is the interface that cluster administrators use to discover and install Operators. With one click, an Operator can be pulled from their off-cluster source, installed and subscribed on the cluster, and made ready for engineering teams to self-service manage the product across deployment environments using the Operator Lifecycle Manager (OLM). Kubecost is now available on the [Embedded OperatorHub in OpenShift and OKD](https://github.com/redhat-openshift-ecosystem/community-operators-prod/tree/main/operators)
 
@@ -9,12 +8,12 @@ This document provides instructions for deploying Kubecost into Red Hat Openshif
 
 ![Standard deployment](https://raw.githubusercontent.com/kubecost/docs/main/images/ocp-standard.png)
 
-## Prerequisites:
+## Prerequisites
 
 - You need to have an existing OCP cluster version 4.9.x or higher.
 - You have appropriate access to that OpenShift cluster to create a new project and deploy new workloads.
 
-## Discover Kubecost operator:
+## Discover Kubecost operator
 
 1. Log in to your OCP cluster web console.
 2. Select Operators > OperatorHub > Enter Kubecost in the search box.
@@ -28,7 +27,7 @@ Example screenshot:
 
 ![Discovery](https://raw.githubusercontent.com/kubecost/docs/main/images/ocp-operator-discovery.png)
 
-## Deploy Kubecost:
+## Deploy Kubecost
 
 ### **Step 1:** Install Kubecost operator
 
@@ -46,7 +45,7 @@ You can click on `View Operators` to review the details as in the following scre
 
 Kubecost operator is now installed successfully. Next, you can start to install Kubecost using the custom resources definition (CRD)
 
-### Step 2: Create a CRD to deploy Kubecost:
+### Step 2: Create a CRD to deploy Kubecost
 
 - You can customize the CRD definition similarly to the custom values file when deploying with Helm chart.
 - After creating a CRD file, apply it to deploy Kubecost:
@@ -157,6 +156,5 @@ You can uninstall Kubecost operator by following [these instructions](https://ac
 ## Support
 
 For advanced setup or if you have any questions, you can contact us on [Slack](https://join.slack.com/t/kubecost/shared_invite/enQtNTA2MjQ1NDUyODE5LWFjYzIzNWE4MDkzMmUyZGU4NjkwMzMyMjIyM2E0NGNmYjExZjBiNjk1YzY5ZDI0ZTNhZDg4NjlkMGRkYzFlZTU) or email us at [support@kubecost.com](support@kubecost.com).
-
 
 <!--- {"article":"10248765796375","section":"4402815636375","permissiongroup":"1500001277122"} --->
