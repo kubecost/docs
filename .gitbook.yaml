@@ -24,7 +24,7 @@ redirects:
     hc/en-us/articles/4407595933847: aws-service-account-thanos.md
     hc/en-us/articles/4407595934871: azure-config.md
     hc/en-us/articles/4407595936023: azure-out-of-cluster.md
-    hc/en-us/articles/4407595937175: business.md
+    hc/en-us/articles/4407595937175: install.md
     hc/en-us/articles/4407595938327: controller.md
     hc/en-us/articles/4407595941015: custom-prom.md
     hc/en-us/articles/4407595942679: diagnostics.md
@@ -55,7 +55,7 @@ redirects:
     hc/en-us/articles/4407601802391: apis.md
     hc/en-us/articles/4407601805975: bug-report.md
     hc/en-us/articles/4407601807383: cost-allocation.md
-    hc/en-us/articles/4407601809175: enterprise.md
+    hc/en-us/articles/4407601809175: install.md
     hc/en-us/articles/4407601810199: env.md
     hc/en-us/articles/4407601811095: etl-backup.md
     hc/en-us/articles/4407601816087: gcp-out-of-cluster.md
@@ -126,7 +126,7 @@ redirects:
     hc/en-us/articles/4407595933847-Creating-a-Thanos-IAM-policy: aws-service-account-thanos.md
     hc/en-us/articles/4407595934871-Azure-Config: azure-config.md
     hc/en-us/articles/4407595936023-Adding-Azure-Out-of-Cluster-Cluster-Costs-into-Kubecost: azure-out-of-cluster.md
-    hc/en-us/articles/4407595937175-Kubecost-Business-Features: business.md
+    hc/en-us/articles/4407595937175-Kubecost-Business-Features: install.md
     hc/en-us/articles/4407595938327-Cluster-Controller: controller.md
     hc/en-us/articles/4407595941015-Custom-Prometheus: custom-prom.md
     hc/en-us/articles/4407595942679-Kubecost-Diagnostics: diagnostics.md
@@ -157,7 +157,7 @@ redirects:
     hc/en-us/articles/4407601802391-APIs: apis.md
     hc/en-us/articles/4407601805975-Capture-a-Bug-Report: bug-report.md
     hc/en-us/articles/4407601807383-Kubernetes-Cost-Allocation: cost-allocation.md
-    hc/en-us/articles/4407601809175-Kubecost-Enterprise-Features: enterprise.md
+    hc/en-us/articles/4407601809175-Kubecost-Enterprise-Features: install.md
     hc/en-us/articles/4407601810199-Environment: env.md
     hc/en-us/articles/4407601811095-ETL-Backup: etl-backup.md
     hc/en-us/articles/4407601816087-GCP-Out-of-Cluster: gcp-out-of-cluster.md
