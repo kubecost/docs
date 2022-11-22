@@ -1,5 +1,5 @@
-On-Prem Pricing
-===============
+Node Pricing
+============
 
 How do you determine RAM/CPU/GPU costs for a node when this data isn’t provided by a cloud provider?
 ---------------
@@ -11,3 +11,5 @@ These base RAM/CPU/GPU prices are normalized to ensure the sum of each component
 For example, imagine a node with 1 GPU, 1 CPU and 1 Gb of RAM that costs $35/mo. If your base GPU price is $30, base CPU price is $30 and RAM GB price is $10, then these inputs will be normalized to $15 for GPU, $15 for CPU and $5 for RAM so that the sum equals the cost of the node. Note that the price of a GPU, as well as the price of a CPU, remains 3x the price of a GB of RAM.
 
     NodeHourlyCost = NORMALIZED_GPU_PRICE * # of GPUs + NORMALIZED_CPU_PRICE * # of CPUs + NORMALIZED_RAM_PRICE * # of RAM GB
+
+[Code Reference](https://github.com/opencost/opencost/blob/v1.98.0/pkg/costmodel/costmodel.go#L933)
