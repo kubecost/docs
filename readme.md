@@ -1,35 +1,35 @@
-# Welcome to the Docs!
+Kubecost Documentation
+======================
 
-## Welcome
+Kubecost helps you monitor and manage cost and capacity in Kubernetes environments. Check out [our website](kubecost.com) for more info. 
 
-**Kubecost helps you monitor and manage cost and capacity in Kubernetes environments.** We integrate with your infrastructure to help your team track, manage, and reduce spend.
+This repo contains all external documentation for Kubecost. Additionally, this doc provides information for contirbuting to our docs for continual improvement. Docs for Kubecost are hosted at [here](https://guide.kubecost.com). The main branch of the kubecost/docs repo is pulled and documents are updated daily.
 
-Below are frequently visited Kubecost documentation pages for both the [Commercial Kubecost product](http://kubecost.com) and [OpenCost](https://www.opencost.io/).
+## Markdown
 
-In this guide, you’ll find everything you need to set up Kubecost for your team.
+All Kubecost docs are formatted in Markdown. For those unfamiliar, the [Markdown Guide](https://www.markdownguide.org/getting-started/) is a one-stop shop for using this markup syntax language.
 
-### Quick Installation
+## Contributing
 
-Check out our [Installation options](https://guide.kubecost.com/hc/en-us/articles/4407601821207) to start monitoring and managing your spend in minutes.
+We encourage users who notice errors in our documentation to bring these to our attention, or if you feel inclined, submit changes personally.
 
-### Getting Started
+### Build and deploy
 
-[Troubleshooting installation](https://guide.kubecost.com/hc/en-us/articles/4407601830679)\
-[Configuring Kubecost](https://guide.kubecost.com/hc/en-us/articles/4407595947799)\
-[Understanding cost allocation](https://guide.kubecost.com/hc/en-us/articles/4407601807383)\
-[Cost monitoring best practices](http://blog.kubecost.com/blog/cost-monitoring/)
+The main branch of the kubecost/docs repo is pulled and documents on guide.kubecost.com are updated daily.
 
-### Advanced Configuration
+### Create a new doc
 
-[Allocating out of cluster costs (AWS)](https://guide.kubecost.com/hc/en-us/articles/4407596810519)\
-[Allocating out of cluster costs (Azure)](https://guide.kubecost.com/hc/en-us/articles/4407595936023)\
-[Allocating out of cluster costs (GCP)](https://guide.kubecost.com/hc/en-us/articles/4407601816087)\
-[AWS Spot feed integration](https://guide.kubecost.com/hc/en-us/articles/4407595947799#spot-nodes)
+To create a new document, submit a pull request including a Markdown file and any image assets to the main branch of the kubecost/docs repo. After reviewing and merging on GitHub, a new document will be created on guide.kubecost.com once the build and deploy phase has completed.
 
-### Staying in the loop
+### Images
 
-You can stay up to date with Kubecost by following releases on [GitHub](https://github.com/kubecost/cost-analyzer-helm-chart/releases).
+Use a direct link to the GitHub image within the kubecost/docs repo or an alternative host such as GCS or S3.
 
-Contact us via email ([support@kubecost.com](mailto:support@kubecost.com)) or join us on [Slack](https://join.slack.com/t/kubecost/shared\_invite/zt-1dz4a0bb4-InvSsHr9SQsT\_D5PBle2rw) if you have questions!
+```
+![Add key dialog](https://raw.githubusercontent.com/kubecost/docs/main/add-key-dialog.png)
+```
+ 
+At this time there aren't limits on the location of images within the kubecost/docs repo. Images may exist in the `/images` folder or in the root directory.
+
 
 <!--- {"article":"4407763013271","section":"1500002777682","permissiongroup":"1500001277122"} --->

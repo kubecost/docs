@@ -35,9 +35,6 @@ There are two options to configure asset prices in your on-premise Kubernetes en
 - *Simple pipeline:* per component prices can be configured in a helm values file ([reference](https://github.com/kubecost/cost-analyzer-helm-chart/blob/6c0975614b4a6854be602d1a6f9506ce8b80abdc/cost-analyzer/values.yaml#L559-L570)) or directly in the Kubecost Settings page. This allows you to directly supply the cost of a CPU month, RAM Gb month, etc.
 - *Advanced pipeline:* this method allows each individual asset in your environment to have a unique price. This leverages the Kubecost custom CSV pipeline which is available on Enterprise plans. Contact us at support@kubecost.com to learn more.
 
-### I use AWS and want the public pricing but can't allow Kubecost to ingress/egress data
-- Use a proxy for the AWS pricing API; you can set `AWS_PRICING_URL` via the [extra env var](https://github.com/kubecost/cost-analyzer-helm-chart/blob/v1.98/cost-analyzer/values.yaml#L304) to the address of your proxy. 
-
 
 
 

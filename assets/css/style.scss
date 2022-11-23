@@ -1,0 +1,30 @@
+---
+---
+
+@import "{{ site.theme }}";
+
+body ul {padding-left: 2em;}
+code { padding: .2em .4em; background-color: rgba(27,31,35,.05); border-radius: 3px; box-shadow: none;}
+li {color: #24292e; font-size: 16px;}
+pre code { background-color: #f8f8f8}
+p {color: #24292e; font-family: Helvetica,Arial,sans-serif; font-size: 16px; line-height: 1.5;}
+td {padding: 6px 13px; text-align: left; color: #24292e; font-weight: 400;}
+th{padding: 6px 13px; border: 1px solid #dfe2e5;}
+table{margin-bottom: 16px;}
+h1 {font-family: 'Space Grotesk', sans-serif; font-size: 52px;}
+h2 {font-family: 'Space Grotesk', sans-serif;}
+
+aside#sidebar {background: transparent url(../images/sidebar-bg.jpg) 202px 0 no-repeat; float: left;}
+
+.copyright {display:none;}
+.inner { max-width: 1400px; }
+.nav-link {font-size: 16px; line-height: 1.6;}
+#header_wrap .inner {padding-top: 40px;}
+#main_content_wrap { background: #fff; padding-bottom: 50px;}
+#main-content { float: right; }
+#main-content h1 {font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji;}
+#main-content h1:before { content: ""; margin-left: -0.5em; }
+#main-content h3 {font-family: Helvetica,Arial,sans-serif}
+#main-content h3:before { margin-left: -1em; content: "//"; }
+#project_tagline{font-size: 22px; padding-bottom: 0px; margin-top: 0px;}
+

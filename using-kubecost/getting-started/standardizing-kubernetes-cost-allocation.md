@@ -1,2 +1,0 @@
-# Standardizing Kubernetes cost allocation
-

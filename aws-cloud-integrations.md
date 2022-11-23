@@ -35,11 +35,11 @@ Once Athena is set up with the CUR, you will need to create a new S3 bucket for 
 ### Step 3: Setting up IAM permissions
 
 #### Add via CloudFormation:
-Kubecost offers a set of CloudFormation templates to help set your IAM roles up. If you’re new to provisioning IAM roles, we suggest downloading our templates and using the CloudFormation wizard to set these up, as explained [here](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cfn-console-create-stack.html).
+Kubecost offers a set of CloudFormation templates to help set your IAM roles up. If you’re new to provisioning IAM roles, we suggest downloading our templates and using the CloudFormation wizard to set these up: [https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cfn-console-create-stack.html](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cfn-console-create-stack.html).
 Download template files from the URLs provided below and upload them as the stack template in the Creating a stack > Selecting a stack template step.
 
 <details>
-  <summary>My Kubernetes clusters all run in the same account as the master payer account.</summary>
+  <summary>My kubernetes clusters all run in the same account as the master payer account.</summary>
   <ul>
 <li><p>Download this file: <a href="https://raw.githubusercontent.com/kubecost/cloudformation/master/kubecost-single-account-permissions.yaml">https://raw.githubusercontent.com/kubecost/cloudformation/master/kubecost-single-account-permissions.yaml</a></p></li>
 
@@ -62,8 +62,8 @@ Download template files from the URLs provided below and upload them as the stac
 <li><p>Set the following parameters:</p>
 
 <ul>
-<li>AthenaCURBucket: The bucket where the CUR is sent from Step 1</li>
-<li>SpotDataFeedBucketName: Optional: The bucket where the spot data feed is sent from the “Setting up the Spot Data feed” step (see below)</li>
+<li>AthenaCURBucket: The bucket where the CUR is sent from the “Setting up the CUR” step</li>
+<li>SpotDataFeedBucketName: Optional. The bucket where the spot data feed is sent from the “Setting up the Spot Data feed” step (see below)</li>
 </ul></li>
 
 <li><p>Choose <strong>Next</strong>.</p></li>
@@ -105,8 +105,8 @@ Download template files from the URLs provided below and upload them as the stac
 <li>On the master payer account
 
 <ul>
-<li>Follow the same steps to create a CloudFormation stack as above, but with the following as your .yaml file instead: <a href="https://raw.githubusercontent.com/kubecost/cloudformation/master/kubecost-masterpayer-account-permissions.yaml">https://raw.githubusercontent.com/kubecost/cloudformation/master/kubecost-masterpayer-account-permissions.yaml</a> , and with these parameters:</li>
-<li>AthenaCURBucket: The bucket where the CUR is set from Step 1</li>
+<li>Follow the same steps to create a CloudFormation stack as above, but with the following as your yaml file instead: <a href="https://raw.githubusercontent.com/kubecost/cloudformation/master/kubecost-masterpayer-account-permissions.yaml">https://raw.githubusercontent.com/kubecost/cloudformation/master/kubecost-masterpayer-account-permissions.yaml</a> , and with these parameters:</li>
+<li>AthenaCURBucket: The bucket where the CUR is set from the “Setting up the CUR” step</li>
 <li>KubecostClusterID: An account that Kubecost is running on that requires access to the Athena CUR</li>
 </ul></li>
 </ul></li>
@@ -117,7 +117,7 @@ Download template files from the URLs provided below and upload them as the stac
 <details>
 	<summary>My Kubernetes clusters run in the same account as the master payer account</summary>
 
-<p>Attach both of the following policies to the same role or user. Use a user if you intend to integrate via ServiceKey, and a role if via IAM annotation (See more below under Via Pod Annotation by EKS). The SpotDataAccess policy statement is optional if the spot data feed is configured (see “Setting up the Spot Data feed” step below)</p>
+<p>Attach both of the following policies to the same role or user. Use a user if you intend to integrate via servicekey, and a role if via IAM annotation (See more below under Via Pod Annotation by EKS). The SpotDataAccess policy statement is optional if the spot data feed is configured (see “Setting up the Spot Data feed” step below)</p>
 
 <pre><code>        {
            &quot;Version&quot;: &quot;2012-10-17&quot;,
@@ -207,7 +207,7 @@ Download template files from the URLs provided below and upload them as the stac
 	<summary>My Kubernetes clusters run in different accounts</summary></p>
 
 
-<p>On each sub account running kubecost, attach both of the following policies to the same role or user. Use a user if you intend to integrate via ServiceKey, and a role if via IAM annotation (See more below under Via Pod Annotation by EKS). The SpotDataAccess policy statement is optional if the spot data feed is configured (see “Setting up the Spot Data feed” step below)</p>
+<p>On each sub account running kubecost, attach both of the following policies to the same role or user. Use a user if you intend to integrate via servicekey, and a role if via IAM annotation (See more below under Via Pod Annotation by EKS). The SpotDataAccess policy statement is optional if the spot data feed is configured (see “Setting up the Spot Data feed” step below)</p>
 
 <pre><code>	{
                &quot;Version&quot;: &quot;2012-10-17&quot;,
@@ -304,7 +304,7 @@ Download template files from the URLs provided below and upload them as the stac
 	}
 </code></pre>
 
-<p>Then add the following trust statement to the role the policy is attached to (replace <code>${KubecostClusterID}</code> variable):</p>
+<p>You will then need to add the following trust statement to the role the policy is attached to (replace <code>${KubecostClusterID}</code> variable):</p>
 
 <pre><code>	{
                &quot;Version&quot;: &quot;2012-10-17&quot;,
@@ -326,17 +326,17 @@ Download template files from the URLs provided below and upload them as the stac
 
 
 ### Step 4: Attaching IAM permissions to Kubecost
-Now that the policies have been created, attach those policies to Kubecost. We support the following methods:
+Now that the policies have been created, we will need to attach those policies to Kubecost. We support the following methods:
 
 <details>
-	<summary>Attach via ServiceKey And Kubernetes Secret</summary>
+	<summary>Attach via Service Key And Kubernetes Secret</summary>
 <ul>
 <li><p>Navigate to <a href="https://console.aws.amazon.com/iam">https://console.aws.amazon.com/iam</a> Access Management &gt; Users. Find the Kubecost User and select Security Credentials &gt; Create Access Key. Note the Access key ID and Secret access key. You&rsquo;ll use it to either Create a secret from helm values or Create and use an existing secret.</p>
 	<details>
-		<summary>Create a secret from Helm values</summary>
+		<summary>Create a secret from helm values</summary>
 
 <p><details>
-	<summary>Create a secret from Helm values</summary></p>
+	<summary>Create a secret from helm values</summary></p>
 
 <ul>
 <li>Set <code>.Values.kubecostProductConfigs.awsServiceKeyName</code>to <code> <strong>Access key ID</strong></code></li>
@@ -348,8 +348,8 @@ Now that the policies have been created, attach those policies to Kubecost. We s
 <ul><details>
 		<summary> Create and use an existing secret </summary>
 
-<p>If you commit your Helm values to source control, you may want to create a secret in a different way and import that secret to kubecost.
-	* Create a .json file named <em>service-key.json</em> of the following format
+<p>If you commit your helm values to source control, you may want to create a secret in a different way and import that secret to kubecost.
+	* Create a json file named <em>service-key.json</em> of the following format
     <code>
     {
       &quot;aws_access_key_id&quot;: &quot;&lt;ACCESS_KEY_ID&gt;&quot;,
@@ -536,9 +536,9 @@ Spot data feed provide same functionality as aws cur integration , The only diff
 Verify below points:
 	
 - Make sure data is present in the spot data feed bucket.
-- Make sure Project ID is configured correctly. You can cross-verify the values under Helm values in bug report
+- Make sure Project ID is configured correctly. You can cross-verify the values under helm values in bug report
 - Check the value of kubecost_node_is_spot in Prometheus:
-	- "1" means Spot data instance configuration is correct.
+	- "1" means spot data instance configuration is correct.
 	- "0" means not configured properly.
 - Is there a prefix? If so, is it configured in kubecost?
 - Make sure the IAM permissions are aligned with https://github.com/kubecost/cloudformation/blob/7feace26637aa2ece1481fda394927ef8e1e3cad/kubecost-single-account-permissions.yaml#L36
@@ -553,13 +553,16 @@ AWS services used here are:
   - [S3](https://aws.amazon.com/s3/pricing/)
   - [EC2](https://aws.amazon.com/ec2/pricing/)
 
-  Kubecost's `cost-model` requires roughly 2 CPU and 10 GB of RAM per 50,000 pods monitored. The backing Prometheus database requires roughly 2 CPU and 25 GB per million metrics ingested per minute. You can pick the EC2 instances necessary to run Kubecost accordingly.
+  Kubecost's cost-model requires roughly 2 CPU and 10GB of RAM per 50,000 pods monitored. The backing Prometheus database requires roughly 2CPU and 25GB per million metrics ingested per minute. You can pick the ec2 instances necessary to run kubecost accordingly.
 
   - [EBS](https://aws.amazon.com/ebs/pricing/)
 
-  Kubecost can write its cache to disk. Roughly 32 GB per 100,000 pods monitored is sufficient. (Optional: our cache can exist in memory)
+  Kubecost can write its cache to disk. Roughly 32 GB per 100,000 pods monitored is sufficient. (Optional-- our cache can exist in memory)
 
-  - [Cloudformation](https://aws.amazon.com/cloudformation/pricing/) (Optional: manual IAM configuration or via Terraform is fine)
-  - [EKS](https://aws.amazon.com/eks/pricing/)  (Optional: all K8s flavors are supported)
+  - [Cloudformation](https://aws.amazon.com/cloudformation/pricing/) (Optional-- manual IAM configuration or via Terraform is fine)
+  - [EKS](https://aws.amazon.com/eks/pricing/)  (Optional-- all k8s flavors are supported)
+
+
+
 
 <!--- {"article":"4407595928087","section":"4402829036567","permissiongroup":"1500001277122"} --->
