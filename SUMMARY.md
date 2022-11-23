@@ -114,7 +114,8 @@
 ## Troubleshooting
 
 * [Frequently Asked Questions](setup/frequently-asked-questions.md)
-* [Troubleshoot Install](troubleshoot-install.md)
+* [Troubleshoot Install](http-troubleshooting.md)
+* [HTTP Response Code Troubleshooting](troubleshoot-install.md)
 * [Capture a Bug Report](bug-report.md)
 * [Kubecost Diagnostics](diagnostics.md)
 * [Running a query in Kubecost bundled Prometheus](prometheus.md)
