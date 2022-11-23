@@ -70,14 +70,14 @@
 ## Using Kubecost
 
 * [Getting Started](getting-started.md)
-  * [Standardizing Kubernetes cost allocation](partner-metrics.md)
+  * [Standardizing Kubernetes cost allocation](using-kubecost/getting-started/standardizing-kubernetes-cost-allocation.md)
   * [Kubernetes Cost Allocation](cost-allocation.md)
   * [Availability Tiers](availability-tiers.md)
   * [Cluster Health Score](cluster-health-score.md)
   * [Spot Checklist](spot-checklist.md)
   * [Spot Cluster Sizing](spot-cluster-sizing.md)
   * [Guide: 1-click request sizing](guide-one-click-request-sizing.md)
-  * [Auditing](audit.md)
+  * [Auditing](using-kubecost/getting-started/auditing.md)
   * [Saved Reports](saved-reports.md)
   * [Alerts](alerts.md)
   * [Advanced Reporting](advanced-reports.md)
