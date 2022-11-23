@@ -50,6 +50,4 @@ In order to create an AWS IAM policy for use with Thanos:
 If you don’t want to use a service account, IAM credentials retrieved from an instance profile are also supported.
 You must get both access key and secret key from the same method (i.e. both from service or instance profile). More info on retrieving credentials [here](https://thanos.io/storage.md/#credentials).
 
-
-
 <!--- {"article":"4407595933847","section":"4402829036567","permissiongroup":"1500001277122"} --->

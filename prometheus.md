@@ -19,6 +19,4 @@ If you're unable to connect, confirm that the Prometheus server pod is in a `Run
 
 ## Step 3: Input your desired query and execute
 
-
-
 <!--- {"article":"4407601824279","section":"4402815656599","permissiongroup":"1500001277122"} --->

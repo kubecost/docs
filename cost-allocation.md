@@ -67,7 +67,7 @@ Costs allocations are based on the following:
 2) the cost of each resource  
 3) the amount of time resources were provisioned
 
-For more information, refer to this [FAQ](https://github.com/kubecost/cost-model#frequently-asked-questions) on how each of these inputs is determined based on your environment.
+For more information, refer to the [OpenCost spec](https://github.com/opencost/opencost/blob/develop/spec/opencost-specv01.md).
 
 ### Filters 
 Filter resources by namespace, clusterId, and/or Kubernetes label to more closely investigate a rise in spend or key cost drivers at different aggregations such as deployments or pods. When a filter is applied, only resources with this matching value will be shown. These filters are also applied to external out-of-cluster asset tags. Supported filters are as follows:
@@ -116,8 +116,5 @@ Cost allocation metrics are available for both in-cluster and out-of-cluster res
 ### Cost efficiency table example
 
 ![Cost Efficiency table](https://raw.githubusercontent.com/kubecost/docs/main/images/table.PNG)
-
-
-
 
 <!--- {"article":"4407601807383","section":"4402829033367","permissiongroup":"1500001277122"} --->

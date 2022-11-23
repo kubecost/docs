@@ -461,6 +461,4 @@ If `nextRun` fails to update, or alerts are not sending at the `nextRun` time, c
   * unsupported alert type -- all alert type names are in camelCase -- check spelling and capitalization for all alert parameters
   * unsupported aggregation parameters -- see the [aggregated cost model API](https://github.com/kubecost/docs/blob/2ea9021e8530369d53184ea5382b2e4c080bb426/allocation-api.md#aggregated-cost-model-api) for details
 
-
-
 <!--- {"article":"4407601796759","section":"4402815656599","permissiongroup":"1500001277122"} --->
