@@ -1,25 +1,27 @@
-Azure Cloud Integration
-=======================
+# Azure Cloud Integration
 
-Connecting your Azure account to Kubecost allows you to view Kubernetes metrics side-by-side with external cloud services cost, e.g. Azure Database Services. Additionally, it allows Kubecost to reconcile measured Kubernetes spend with your actual Azure bill. This gives teams running Kubernetes a complete and accurate picture of costs. Read the [Cloud Integrations](https://github.com/kubecost/docs/blob/main/cloud-integration.md) documentation for more information on how Kubecost connects with Cloud Service Providers. [More info on this functionality](http://blog.kubecost.com/blog/complete-picture-when-monitoring-kubernetes-costs/).
+Connecting your Azure account to Kubecost allows you to view Kubernetes metrics side-by-side with out-of-cluster costs (e.g. Azure Database Services). Additionally, it allows Kubecost to reconcile measured Kubernetes spend with your actual Azure bill. This gives teams running Kubernetes a complete and accurate picture of costs.
 
-To configure out-of-cluster (OOC) costs for Azure in Kubecost, you just need to set up daily exportation of cost reports to Azure storage. Once cost reports are exported to Azure Storage, Kubecost will access them through the Azure Storage API to display your OOC cost data alongside your in-cluster costs.
+For more information, read the cloud integrations [doc](https://docs.kubecost.com/install-and-configure/advanced-configuration/cloud-integration) and [blog post](https://blog.kubecost.com/blog/complete-picture-when-monitoring-kubernetes-costs/).
+
+To configure Kubecost's Azure Cloud Integration, you will need to set up daily exports of cost reports to Azure storage. Kubecost will then access your cost reports through the Azure Storage API to display your out-of-cluster cost data alongside your in-cluster costs.
 
 > **Note**: A GitHub repository with sample files used in below instructions can be found here: [https://github.com/kubecost/poc-common-configurations/tree/main/azure](https://github.com/kubecost/poc-common-configurations/tree/main/azure)
 
 ## Step 1: Export Azure cost report
 
-Follow this guide taking note of the name that you use for the exported cost report and select the daily month-to-date option for how the reports will be created.
+Follow this [Azure guide](https://learn.microsoft.com/en-us/azure/cost-management-billing/costs/tutorial-export-acm-data) to export cost reports. Ensure you select the "Daily export of month-to-date costs" and "Amortized cost (Usage and Purchases)" options. Also take note of the "StorageAccount" and "StorageContainer" specified when choosing where to export the data to.
 
-https://docs.microsoft.com/en-us/azure/cost-management-billing/costs/tutorial-export-acm-data?tabs=azure-portal
+Alternatively, you can follow this [Kubecost guide](https://github.com/kubecost/azure-hackfest-lab/tree/a51fad1b9640b5991e5d567941f5086eb626a83f/0\_create-azure-cost-export).
 
 It will take a few hours to generate the first report, after which Kubecost can use the Azure Storage API to pull that data.
 
-> **Note**: If you have sensitive data in an Azure Storage account and do not want to give out access to it, create a separate Azure Storage account to store your cost data export.
+> **Note**: If you have sensitive data in an existing Azure Storage account, it is recommended to create a separate Azure Storage account to store your cost data export.
 
 ## Step 2: Provide access to Azure Storage API
 
-The values needed to provide access to the Azure Storage Account where cost data is being exported can be found in the Azure portal in the Storage account where the cost data is being exported.
+They following values can be located in the Azure Portal under "Cost Managent -> Exports" or "Storage accounts":
+
 * `<SUBSCRIPTION_ID>` is the id of the subscription that the exported files are being generated for.
 * `<STORAGE_ACCOUNT_NAME>` is the name of the Storage account where the exported CSV is being stored.
 * `<STORE_ACCESS_KEY>` can be found by selecting the “Access Keys” option from the navigation sidebar then selecting “Show Keys”. Using either of the two keys will work.
@@ -27,13 +29,9 @@ The values needed to provide access to the Azure Storage Account where cost data
 * `<AZURE_CONTAINER_PATH>` is an optional value which should be used if there is more than one billing report that is exported to the configured container. The path provided should be have only one billing export because kubecost will retrieve the most recent billing report for a given month found within the path.
 * `<AZURE_CLOUD>` is an optional value which denotes the cloud where the storage account exist, possible values are `public` and `gov`. The default is `public`.
 
-With these values in hand, you can now provide them to Kubecost to allow access to the Azure Storage API.
+Next, create a JSON file which _**must**_ be named `cloud-integration.json` with the following format:
 
-To create this secret you will need to create a JSON file that **MUST** be named cloud-integration.json
-**Note:** The file name should be cloud-integration.json.Any other file name will not work.
-with the following format:
-
-```
+```json
 {
     "azure": [
         {
@@ -48,14 +46,30 @@ with the following format:
 }
 ```
 
-Once you have the values filled out use this command to create the secret:
+Next, create the secret:
 
-`kubectl create secret generic <SECRET_NAME> --from-file=cloud-integration.json -n kubecost`
+```bash
+$ kubectl create secret generic <SECRET_NAME> --from-file=cloud-integration.json -n kubecost
+```
 
-Once the secret is created, set `.Values.kubecostProductConfigs.cloudIntegrationSecret` to
-`<SECRET_NAME>` and upgrade Kubecost via Helm, other values related to Azure Storage (see another method) should not be set.
+Next, ensure the following are set in your Helm values:
 
-After a successful configuration of Azure out of cluster costs, upon opening the Assets page of Kubecost costs will be broken down by service and there will no longer be a banner at the top of the screen that says OOC is not configured.
+```yaml
+kubecostProductConfigs:
+  cloudIntegrationSecret: <SECRET_NAME>
+```
+
+Next, upgrade Kubecost via Helm.
+
+```bash
+$ helm upgrade kubecost kubecost/cost-analyzer -n kubecost -f values.yaml
+```
+
+You can verify a successful configuration by checking the following:
+
+* The "/assets" view will be broken down by cloud service (e.g. "Microsoft.compute", "Microsoft.storage")
+* The "/assets" view will no longer show a banner that says "External cloud cost not configured"
+* The "/diagnostics" view will show a green checkmark under "Cloud Integrations"
 
 ## Step 3: Tagging Azure resources
 
@@ -63,19 +77,17 @@ Kubecost utilizes Azure tagging to allocate the costs of Azure resources outside
 
 To allocate external Azure resources to a Kubernetes concept, use the following tag naming scheme:
 
-| Kubernetes Concept | Azure Tag Key | Azure Tag Value |
-|--------------------|---------------------|---------------|
-| Cluster           	| kubernetes_cluster	| cluster-name	|
-| Namespace          	| kubernetes_namespace	| namespace-name |
-| Deployment         	| kubernetes_deployment	| deployment-name |
-| Label              	| kubernetes\_label\_NAME* | label-value    |
-| DaemonSet          	| kubernetes_daemonset	| daemonset-name |
-| Pod                	| kubernetes_pod	      | pod-name     |
-| Container          	| kubernetes_container	| container-name |
+| Kubernetes Concept | Azure Tag Key             | Azure Tag Value |
+| ------------------ | ------------------------- | --------------- |
+| Cluster            | kubernetes\_cluster       | cluster-name    |
+| Namespace          | kubernetes\_namespace     | namespace-name  |
+| Deployment         | kubernetes\_deployment    | deployment-name |
+| Label              | kubernetes\_label\_NAME\* | label-value     |
+| DaemonSet          | kubernetes\_daemonset     | daemonset-name  |
+| Pod                | kubernetes\_pod           | pod-name        |
+| Container          | kubernetes\_container     | container-name  |
 
-
-
-*\*In the `kubernetes_label_NAME` tag key, the NAME portion should appear exactly as the tag appears inside of Kubernetes. For example, for the tag `app.kubernetes.io/name`, this tag key would appear as `kubernetes_label_app.kubernetes.io/name.`*
+_\*In the `kubernetes_label_NAME` tag key, the NAME portion should appear exactly as the tag appears inside of Kubernetes. For example, for the tag `app.kubernetes.io/name`, this tag key would appear as `kubernetes_label_app.kubernetes.io/name.`_
 
 To use an alternative or existing Azure tag schema, you may supply these in your values.yaml under the `kubecostProductConfigs.labelMappingConfigs.<aggregation>_external_label` . Also be sure to set `kubecostProductConfigs.labelMappingConfigs.enabled = true`
 
@@ -95,10 +107,4 @@ A failed configuration may be due to the secret not being present on your cluste
 
 ### Check Kubernetes logs
 
-To get a concise view of the logs generated by Kubecost to create the assets page use `kubectl <KUBECOST_PODNAME>  -f | grep "Asset ETL"`.
- <KUBECOST_PODNAME> can be retrieved using `kubectl get pods -n kubecost -l app=cost-analyzer -o json | jq '.items[] | select(.status.phase=="Running") | .metadata.name' | tr -d \"`.
-
-
-
-
-<!--- {"article":"4407595936023","section":"4402815682455","permissiongroup":"1500001277122"} --->
+To get a concise view of the logs generated by Kubecost to create the assets page use `kubectl <KUBECOST_PODNAME> -f | grep "Asset ETL"`. \<KUBECOST\_PODNAME> can be retrieved using `kubectl get pods -n kubecost -l app=cost-analyzer -o json | jq '.items[] | select(.status.phase=="Running") | .metadata.name' | tr -d \"`.
