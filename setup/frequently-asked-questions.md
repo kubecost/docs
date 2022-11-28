@@ -1,11 +1,11 @@
 ---
-description: 'TODO: internal links & cleanup'
+description: 'Common Kubecost questions (faq).'
 ---
 
 # Frequently Asked Questions
 
 Q: How can I reduce CPU or Memory resource consumption by Kubecost?\
-A: Please see our tuning guide at: [https://guide.kubecost.com/hc/en-us/articles/6446286863383-Tuning-Resource-Consumption](https://guide.kubecost.com/hc/en-us/articles/6446286863383-Tuning-Resource-Consumption)
+A: Please see our tuning guide at: [https://docs.kubecost.com/general/resource-consumption](https://docs.kubecost.com/general/resource-consumption)
 
 Q: Can I safely configure Thanos Compaction [down sampling](https://thanos.io/tip/components/compact.md/#downsampling)?\
 A: Yes, Kubecost is resilient to downsampling. However turning query concurrency is going to be most beneficial, especially during the long rebuild windows. To tune downsampling use the following Thanos subchart [values](https://github.com/kubecost/cost-analyzer-helm-chart/blob/b5b089ce217636fb2b7e6f42daed37397d28d3aa/cost-analyzer/charts/thanos/values.yaml#L525-L530).
@@ -35,7 +35,7 @@ Q: I just enabled the CUR and AWS integration but do not see any cloud resources
 A: The AWS CUR and billing data from other cloud providers lags by 24-48 hours.
 
 Q: Why is the UI on my secondary Kubecost install broken?\
-A: This is normal if you have followed this [secondary tuning guide](https://guide.kubecost.com/hc/en-us/articles/4423256582551-Kubecost-Secondary-Clusters), its focus is reducing resource usage at the cost of breaking the secondary UI. The secondary UI should only be used for diagnostics.
+A: This is normal if you have followed this [secondary tuning guide](https://docs.kubecost.com/architecture/secondary-clusters), its focus is reducing resource usage at the cost of breaking the secondary UI. The secondary UI should only be used for diagnostics.
 
 Q: I have two standalone Kubecost clusters in an Azure subscription, each reside in their own resource group. How can I limit the billing export for each cluster to only the resource group instead of the entire subscription?\
 A: You can create two billing exports each scoped to the corresponding resource group. More info can be found here: [https://learn.microsoft.com/en-us/azure/cost-management-billing/costs/tutorial-export-acm-data?tabs=azure-portal#create-a-daily-export](https://learn.microsoft.com/en-us/azure/cost-management-billing/costs/tutorial-export-acm-data?tabs=azure-portal#create-a-daily-export)
@@ -59,7 +59,7 @@ Q: Does Kubecost cost efficiency calculation take GPU into consideration?\
 A: No, the reason is that we get GPU efficiency from integration with the Nvidia DCGM, which is a third-party integration that needs to be set up manually with kubecost.
 
 Q: Should I use amortized prices when setting up my CUR or billing export?\
-A: Yes, amortized allows upfront costs of the resources to appear in Kubecost. [More info](https://guide.kubecost.com/hc/en-us/articles/4412369153687-Cloud-Integrations#cloud-integration-configurations).
+A: Yes, amortized allows upfront costs of the resources to appear in Kubecost. [More info](https://docs.kubecost.com/install-and-configure/advanced-configuration/cloud-integration#cloud-integration-configurations).
 
 Q: Do I need to configure the Cloud integration on the Secondary clusters?\
 A: No, Only if you are planing on viewing the UI on the secondary. This is because the cloud reconciliation process happens after the data is shipped to the Thanos store.
@@ -113,6 +113,21 @@ id: "a454aafd-fd08-4aa8-bcf3-99d49e082ff1"
 type: "recurringUpdate"
 window: "1h" 
 ```
+
+Q: Kubecost allows we configure in-zone/in-region/cross-region traffic classification, after I tried to configured this and it does show that the values have been configured, I couldn’t see in the dashboard showing traffic classification allocation, is this features still supported? (something like this: https://blog.kubecost.com/blog/network-egress-traffic-costs/)\
+A: Check http://your.kubecost.com/details! From there, look for the bottom right box to view more network details. It also may be important to have the network-costs daemonset running in your cluster.
+
+Q: When cloud integration is not yet enabled, does Kubecost's usage of public pricing data take into account the region the node is on?\
+A: Yes. This can be verified by reviewing the code at [opencost/pkg/cloud](https://github.com/opencost/opencost/tree/1795bcddb1d91d3e60772030528274c4dff29185/pkg/cloud). Specifically, if you start at [GetNodeCost()](https://github.com/opencost/opencost/blob/1795bcddb1d91d3e60772030528274c4dff29185/pkg/costmodel/costmodel.go#L933) you can follow the chain of function calls. It's slightly different for each cloud provider, but it should look roughly like this: `pkg/costmodel/GetNodeCost() → pkg/cloud/NodePricing() → pkg/cloud/DownloadPricingData() → pkg/cloud/getRegionPricing()`
+
+Q: If I disable node exporter, will it affect the metrics emitted by Kubecost?\
+A: Yes you can disable node exporter as it is optional. No it will not have an effect on Kubecost's metrics.
+
+Q: “No Athena Bucket Configured” error on /diagnostics view?\
+A: Verify that the the AWS IAM Policy has been correctly configured (step3). Verify that the IAM role has been given to Kubecost (step4).
+
+Q: What time zone is shown by Kubecost?\
+A: All APIs and metrics will be based on and accept UTC zones. When viewing the data from your web browser, the graphs displayed will convert this UTC time to your local machine's time zone.
 
 ###
 
