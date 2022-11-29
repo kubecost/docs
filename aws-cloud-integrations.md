@@ -337,8 +337,8 @@ Now that the policies have been created, attach those policies to Kubecost. We s
 	<details>
 		<summary>Create a secret from Helm values</summary>
 
-<details>
-	<summary>Create a secret from Helm values</summary>
+<p><details>
+	<summary>Create a secret from Helm values</summary></p>
 
 <ul>
 <li>Set <code>.Values.kubecostProductConfigs.awsServiceKeyName</code>to <code> <strong>Access key ID</strong></code></li>
