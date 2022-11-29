@@ -20,6 +20,8 @@ It will take a few hours to generate the first report, after which Kubecost can 
 
 ## Step 2: Provide access to Azure Storage API
 
+> **NOTE:** If you are using the alternative [multi-cloud integration](https://docs.kubecost.com/install-and-configure/advanced-configuration/cloud-integration/multi-cloud) method **step 2** is not required.
+
 They following values can be located in the Azure Portal under "Cost Managent -> Exports" or "Storage accounts":
 
 * `<SUBSCRIPTION_ID>` is the id of the subscription that the exported files are being generated for.
