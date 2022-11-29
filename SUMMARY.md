@@ -66,6 +66,7 @@
 * [User Metrics](user-metrics.md)
 * [Installing Agent for Hosted Kubecost (Alpha)](agent.md)
 * [Tuning Resource Consumption](resource-consumption.md)
+* [Calculating Node Pricing](node-pricing.md)
 
 ## Using Kubecost
 
