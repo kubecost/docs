@@ -1,4 +1,4 @@
-Node Pricing
+Calculating Node Pricing
 ============
 
 When explicit RAM, CPU or GPU prices are not provided by your cloud provider, the Kubecost model falls back to the ratio of base CPU, GPU and RAM price inputs supplied. The default values for these parameters are based on the marginal resource rates of the cloud provider, but they can be customized within Kubecost.
