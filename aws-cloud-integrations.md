@@ -328,6 +328,8 @@ Download template files from the URLs provided below and upload them as the stac
 ### Step 4: Attaching IAM permissions to Kubecost
 Now that the policies have been created, attach those policies to Kubecost. We support the following methods:
 
+> **NOTE:** If you are using the alternative [multi-cloud integration](https://docs.kubecost.com/install-and-configure/advanced-configuration/cloud-integration/multi-cloud) method steps 4 and 5 are not required. The use of "Attach via Pod Annotation on EKS" authentication is optional.
+
 <details>
 	<summary>Attach via ServiceKey And Kubernetes Secret</summary>
 <ul>
@@ -335,8 +337,8 @@ Now that the policies have been created, attach those policies to Kubecost. We s
 	<details>
 		<summary>Create a secret from Helm values</summary>
 
-<p><details>
-	<summary>Create a secret from Helm values</summary></p>
+<details>
+	<summary>Create a secret from Helm values</summary>
 
 <ul>
 <li>Set <code>.Values.kubecostProductConfigs.awsServiceKeyName</code>to <code> <strong>Access key ID</strong></code></li>
