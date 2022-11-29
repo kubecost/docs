@@ -64,7 +64,7 @@
 
 * [OpenCost Product Comparison](opencost-product-comparison.md)
 * [User Metrics](user-metrics.md)
-* [Installing Agent for Hosted Kubecost (Alpha)](agent.md)
+* [Installing Agent for Kubecost Cloud (Alpha)](agent.md)
 * [Tuning Resource Consumption](resource-consumption.md)
 
 ## Using Kubecost
