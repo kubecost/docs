@@ -20,6 +20,7 @@ It will take a few hours to generate the first report, after which Kubecost can 
 
 ## Step 2: Provide access to Azure Storage API
 
+
 They following values can be located in the Azure Portal under "Cost Managent -> Exports" or "Storage accounts":
 
 * `<SUBSCRIPTION_ID>` is the id of the subscription that the exported files are being generated for.
@@ -45,6 +46,8 @@ Next, create a JSON file which _**must**_ be named `cloud-integration.json` with
     ]
 }
 ```
+
+> **NOTE:** Additional details about the `cloud-integration.json` file can be found in our [multi-cloud integration](https://docs.kubecost.com/install-and-configure/advanced-configuration/cloud-integration/multi-cloud) documentation.
 
 Next, create the secret:
 
