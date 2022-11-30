@@ -18,6 +18,8 @@ It will take a few hours to generate the first report, after which Kubecost can 
 
 > **Note**: If you have sensitive data in an existing Azure Storage account, it is recommended to create a separate Azure Storage account to store your cost data export.
 
+> **Note**: For more granular billing data it is possible to [scope Azure cost exports](https://learn.microsoft.com/en-us/azure/cost-management-billing/costs/understand-work-scopes) to resource groups, management groups, departments, or enrollments. AKS clusters will create their own resource groups which can be used. This functionality can then be combined with Kubecost [multi-cloud](https://docs.kubecost.com/install-and-configure/advanced-configuration/cloud-integration/multi-cloud) to ingest multiple scoped billing exports.
+
 ## Step 2: Provide access to Azure Storage API
 
 
