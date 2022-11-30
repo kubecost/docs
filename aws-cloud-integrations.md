@@ -416,7 +416,7 @@ kubecostProductConfigs:
 
 These values can either be set from the kubecost frontend or via .Values.kubecostProductConfigs in the helm chart. Note that if you set any kubecostProductConfigs from the Helm chart, all changes via the frontend will be overridden on pod restart.
 
-* `athenaProjectID` e.g. "530337586277" # The AWS AccountID where the Athena CUR is.
+* `athenaProjectID` e.g. "530337586277" # The AWS AccountID where the Athena CUR is. Generally your masterpayer account.
 * `athenaBucketName` An S3 bucket to store Athena query results that you’ve created that Kubecost has permission to access
   * The name of the bucket should match `s3://aws-athena-query-results-*`, so the IAM roles defined above will automatically allow access to it
   * The bucket can have a Canned ACL of `Private` or other permissions as you see fit.
