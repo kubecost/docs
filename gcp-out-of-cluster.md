@@ -47,7 +47,7 @@ Once you've created the GCP service account, you can connect it to Kubecost in o
 ### Connect using Workload Identity federation (recommended)
 You can set up an [IAM policy binding](https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity#authenticating_to) to bind a Kubernetes service account to your GCP service account.
 ```sh
-gcloud iam service-accounts add-iam-policy-binding compute-viewer-kubecost@$PROJECT_ID.iam.gserviceaccount.com --role roles/iam.workloadIdentityUser --member serviceAccount:compute-viewer-kubecost.svc.id.goog[NAMESPACE/KSA_NAME]
+gcloud iam service-accounts add-iam-policy-binding compute-viewer-kubecost@$PROJECT_ID.iam.gserviceaccount.com --role roles/iam.workloadIdentityUser --member "serviceAccount:$PROJECT_ID.svc.id.goog[NAMESPACE/KSA_NAME]"
 ```
 where `NAMESPACE` and `KSA_NAME` are the namespace Kubecost is installed into and the name of the service account attributed to the Kubecost deployment
 
