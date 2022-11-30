@@ -103,6 +103,7 @@
 ## Architecture
 
 * [Kubecost Core Architecture Overview](architecture.md)
+* [Kubecost Cloud Architecture Overview](kubecost-cloud-architecture.md)
 * [Open Source](open-source-deps.md)
 * [Security and Data Protection](security.md)
 * [Ports](ports.md)
