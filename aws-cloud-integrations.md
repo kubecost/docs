@@ -307,6 +307,8 @@ Then add the following trust statement to the role the policy is attached to (re
 
 ### Step 4: Attaching IAM permissions to Kubecost
 
+> **Note:** If you are using the alternative [multi-cloud integration](https://docs.kubecost.com/install-and-configure/advanced-configuration/cloud-integration/multi-cloud) method, steps 4 and 5 are not required. The use of "Attach via Pod Annotation on EKS" authentication is optional.
+
 Now that the policies have been created, attach those policies to Kubecost. We support the following methods:
 
 <details>
