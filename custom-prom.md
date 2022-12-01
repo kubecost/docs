@@ -109,6 +109,13 @@ kubectl exec kubecost-cost-analyzer-<UID> -c cost-analyzer-frontend -n kubecost 
 
 If the config file is not returned, this is an indication that an incorrect Prometheus address has been provided. If a config file is returned from one pod in the cluster but not the Kubecost pod, then the Kubecost pod likely has its access restricted by a network policy, service mesh, etc.
 
+**Context Deadline Exceeded**: Network policies, Mesh networks, or other security related tooling can block network traffic between Prometheus and Kubecost which will result in the Kubecost scrape target state as being down in the Prometheus targets UI. To assist in troubleshooting this type of error you can use the `wget` command from within the Prometheus Server container to try and reach the Kubecost target manually. Note the "namespace" and "deployment" name in this command may need updated to match your environment.\
+
+When succesfull this command should return all of the Kubecost metrics. Failures may be indicative of the network traffic being blocked.
+```
+kubectl exec -it -n monitoring deployment/prometheus-server -c prometheus-server --  wget -S -O - http://kubecost-cost-analyzer:9003/metrics
+```
+
 **Prometheus throttling**: Ensure Prometheus isn't being CPU throttled due to a low resource request.
 
 **Wrong dependency version**: Review the Dependency Requirements section above
