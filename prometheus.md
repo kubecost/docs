@@ -1,4 +1,4 @@
-Running a query in Kubecost bundled Prometheus
+Running a Query in Kubecost-Bundled Prometheus
 ==============================================
 
 ## Step 1: Connect to Prometheus
