@@ -113,7 +113,7 @@ If the config file is not returned, this is an indication that an incorrect Prom
 
 When succesfull this command should return all of the Kubecost metrics. Failures may be indicative of the network traffic being blocked.
 ```
-kubectl exec -it -n monitoring deployment/prometheus-server -c prometheus-server --  wget -S -O - http://kubecost-cost-analyzer:9003/metrics
+kubectl exec -it -n monitoring deployment/prometheus-server -c prometheus-server --  wget -S -O - http://kubecost-cost-analyzer.kubecost:9003/metrics
 ```
 
 **Prometheus throttling**: Ensure Prometheus isn't being CPU throttled due to a low resource request.
