@@ -58,7 +58,7 @@
 
 ## Integrations
 
-* [Custom Webhook to Create a Kubecost stage in Spinnaker](spinnaker-custom-webhook.md)
+* [Custom Webhook to Create a Kubecost Stage in Spinnaker](spinnaker-custom-webhook.md)
 
 ## General
 
@@ -71,13 +71,13 @@
 ## Using Kubecost
 
 * [Getting Started](getting-started.md)
-  * [Standardizing Kubernetes cost allocation](using-kubecost/getting-started/standardizing-kubernetes-cost-allocation.md)
+  * [Standardizing Kubernetes Cost Allocation](using-kubecost/getting-started/standardizing-kubernetes-cost-allocation.md)
   * [Kubernetes Cost Allocation](cost-allocation.md)
   * [Availability Tiers](availability-tiers.md)
   * [Cluster Health Score](cluster-health-score.md)
   * [Spot Checklist](spot-checklist.md)
   * [Spot Cluster Sizing](spot-cluster-sizing.md)
-  * [Guide: 1-click request sizing](guide-one-click-request-sizing.md)
+  * [Guide: 1-click Request Sizing](guide-one-click-request-sizing.md)
   * [Auditing](using-kubecost/getting-started/auditing.md)
   * [Saved Reports](saved-reports.md)
   * [Alerts](alerts.md)
@@ -120,7 +120,7 @@
 * [Capture a Bug Report](bug-report.md)
 * [Bug Bounty Program](bug-bounty-program.md)
 * [Kubecost Diagnostics](diagnostics.md)
-* [Running a query in Kubecost bundled Prometheus](prometheus.md)
+* [Running a Query in Kubecost-bundled Prometheus](prometheus.md)
 * [Getting Support](support-channels.md)
 
 ## Other Resources
