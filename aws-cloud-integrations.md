@@ -1,10 +1,10 @@
-# AWS Cloud Integrations
+# AWS Cloud Integration
 
-Kubecost pulls asset prices from the public AWS pricing API by default. To have accurate pricing information from AWS, you can integrate directly with your account. This integration will properly account for Enterprise Discount Programs, Reserved Instance usage, Savings Plans, spot usage, and more.
+By default, Kubecost pulls On-Demand asset prices from the public AWS pricing API. For more accurate pricing, this integration will allow Kubecost to reconcile your current measured Kubernetes spend with your actual AWS bill. This integration also properly accounts for Enterprise Discount Programs, Reserved Instance usage, Savings Plans, spot usage, and more.
 
-You will need necessary permissions to create the Cost and Usage Report (CUR), and add IAM credentials for Athena and S3. Optional permission is the ability to add and execute CloudFormation templates. Kubecost does not require root access in the AWS account.
+You will need permissions to create the Cost and Usage Report (CUR), and add IAM credentials for Athena and S3. Optional permission is the ability to add and execute CloudFormation templates. Kubecost does not require root access in the AWS account.
 
-A GitHub repository with sample files used in below instructions can be found here: [https://github.com/kubecost/poc-common-configurations/tree/main/aws](https://github.com/kubecost/poc-common-configurations/tree/main/aws)
+A Github repository with sample files which follow the below instructions can be found [here](https://github.com/kubecost/poc-common-configurations/tree/main/aws).
 
 ## Cost and Usage Report integration
 
@@ -89,7 +89,7 @@ Kubecost offers a set of CloudFormation templates to help set your IAM roles up.
 
 </details>
 
-#### Add manually
+#### Add manually:
 
 <details>
 
@@ -388,30 +388,6 @@ kubecostProductConfigs:
 
 </details>
 
-<details>
-
-<summary>Attach via Pod Annotation on EKS</summary>
-
-* First, create an OIDC provider for your cluster with these [steps](https://docs.aws.amazon.com/eks/latest/userguide/enable-iam-roles-for-service-accounts.html)
-* Next, create a Role with these [steps](https://docs.aws.amazon.com/eks/latest/userguide/associate-service-account-role.html).
-  * When asked to attach policies, you’ll want to attach the policies created above in Step 3
-  * When asked for “namespace” and “serviceaccountname” use the namespace Kubecost is installed in and the name of the serviceaccount attached to the cost-analyzer pod. You can find that name by running `kubectl get pods kubecost-cost-analyzer-69689769b8-lf6nq -n <kubecost-namespace> -o yaml | grep serviceAccount`
-* Then, you need to add an annotation to that service account as described in these [docs](https://docs.aws.amazon.com/eks/latest/userguide/associate-service-account-role.html). This annotation can be added to the Kubecost service account by setting `.Values.serviceAccount.annotations` in the helm chart to `eks.amazonaws.com/role-arn: arn:aws:iam::<AWS_ACCOUNT_ID>:role/<IAM_ROLE_NAME>`
-
-**Note**: If you see the error: `User: ***/assumed-role/<role-name>/### is not authorized to perform: sts:AssumeRole on resource...`, you can add the following to your policy permissions to allow the role the correct permissions:
-
-```
-    "Statement": [
-        {
-            "Action": "sts:AssumeRole",
-            "Effect": "Allow",
-            "Resource": "*"
-        }
-    ]
-```
-
-</details>
-
 ### Step 5: Provide CUR config values to Kubecost
 
 These values can either be set from the kubecost frontend or via .Values.kubecostProductConfigs in the helm chart. Note that if you set any kubecostProductConfigs from the Helm chart, all changes via the frontend will be overridden on pod restart.
@@ -499,48 +475,6 @@ QueryAthenaPaginated: start query error: operation error Athena: StartQueryExecu
 ```
 
 * **Resolution:** Previously, if you ran a query without specifying a value for Query result location, and the query result location setting was not overridden by a workgroup, Athena created a default location for you. Now, before you can run an Athena query in a region in which your account hasn't used Athena previously, you must specify a query result location, or use a workgroup that overrides the query result location setting. While Athena no longer creates a default query results location for you, previously created default aws-athena-query-results-MyAcctID-MyRegion locations remain valid and you can continue to use them. https://docs.aws.amazon.com/athena/latest/ug/querying.html#query-results-specify-location The bucket should be in the format of: `aws-athena-query-results-MyAcctID-MyRegion` It may also be required to remove and reinstall Kubecost. If doing this please remeber to backup ETL files prior or contact support for additional assistance.
-
-## Relating out-of-cluster costs to k8s resources via tags?
-
-* [Activating User-Defined Cost Allocation Tags - AWS Billing and Cost Management](https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/activating-tags.html)
-* See [Step 2 here](http://docs.kubecost.com/aws-out-of-cluster.html) for more information on how to supply tags or use existing tags.
-
-## Spot Data feed integration
-
-Kubecost will reconcile your spot prices with CUR billing reports as they become available (usually 1-2 days), but pricing data can be pulled hourly by integrating directly with the AWS spot feed. To enable, follow these steps:
-
-[https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-data-feeds.html](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-data-feeds.html)
-
-## Configuring the Spot Data feed in Kubecost
-
-These values can either be set from the kubecost frontend or via .Values.kubecostProductConfigs in the Helm Chart. Note that if you set any kubecostProductConfigs from the Helm Chart, all changes via the frontend will be deleted on pod restart.
-
-Spot data feed provide same functionality as aws cur integration , The only difference is you will receive Spot Feed data hourly with the Spot Feed Integration. The AWS Cloud Integration, or CUR, is delayed up to 48 hours. So if you are looking for accurate costs across the board, as most customers do, you can skip the Spot Feed integration. If your use case is different want to go for spot data feed make sure you had the right information to make an informed decision.
-
-* `projectID` the Account ID of the AWS Account on which the spot nodes are running.
-* `awsSpotDataRegion` region of your spot data bucket
-* `awsSpotDataBucket` the configured bucket for the spot data feed
-* `awsSpotDataPrefix` optional configured prefix for your spot data feed bucket
-* `spotLabel` optional Kubernetes node label name designating whether a node is a spot node. Used to provide pricing estimates until exact spot data becomes available from the CUR
-* `spotLabelValue` optional Kubernetes node label value designating a spot node. Used to provide pricing estimates until exact spot data becomes available from the CUR. For example, if your spot nodes carry a label `lifecycle:spot`, then the spotLabel would be "lifecycle" and the spotLabelValue would be "spot"
-
-## Troubleshooting Spot data feed
-
-### Spot data instance not found
-
-![1fva81l9sph6hh-image](https://user-images.githubusercontent.com/102574445/199281977-3195b1d1-e3a5-4561-85da-eb8b24e23f27.png)
-
-Verify below points:
-
-* Make sure data is present in the spot data feed bucket.
-* Make sure Project ID is configured correctly. You can cross-verify the values under Helm values in bug report
-* Check the value of kubecost\_node\_is\_spot in Prometheus:
-  * "1" means Spot data instance configuration is correct.
-  * "0" means not configured properly.
-* Is there a prefix? If so, is it configured in kubecost?
-* Make sure the IAM permissions are aligned with https://github.com/kubecost/cloudformation/blob/7feace26637aa2ece1481fda394927ef8e1e3cad/kubecost-single-account-permissions.yaml#L36
-* Make sure the Spot data feed bucket has all permissions to access by Kubecost
-* The Spot instance in the Spot data feed bucket should match the instance in the cluster where the spot data feed is configured. awsSpotDataBucket has to be present in the right cluster.
 
 ## Summary and pricing
 
