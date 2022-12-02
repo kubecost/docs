@@ -118,6 +118,7 @@
 * [Frequently Asked Questions](setup/frequently-asked-questions.md)
 * [Troubleshoot Install](troubleshoot-install.md)
 * [Capture a Bug Report](bug-report.md)
+* [Bug Bounty Program](bug-bounty-program.md)
 * [Kubecost Diagnostics](diagnostics.md)
 * [Running a query in Kubecost bundled Prometheus](prometheus.md)
 * [Getting Support](support-channels.md)
