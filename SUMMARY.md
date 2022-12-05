@@ -79,7 +79,6 @@
   * [Spot Checklist](spot-checklist.md)
   * [Spot Cluster Sizing](spot-cluster-sizing.md)
   * [Guide: 1-click Request Sizing](guide-one-click-request-sizing.md)
-  * [Auditing](using-kubecost/getting-started/auditing.md)
   * [Saved Reports](saved-reports.md)
   * [Alerts](alerts.md)
   * [Advanced Reporting](advanced-reports.md)
