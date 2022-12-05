@@ -37,7 +37,7 @@ kubectl get pods -l 'app notin (prometheus, cost-analyzer, ...)' --all-namespace
 kubectl get pods --show-labels -n <TARGET_NAMESPACE>
 ```
 
-## Edit report icon
+## Edit report
 
 <figure><img src=".gitbook/assets/editreport.png" alt=""><figcaption><p>Edit Report window</p></figcaption></figure>
 
