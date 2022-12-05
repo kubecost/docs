@@ -19,8 +19,3 @@ A UI is provided to manage the configurations which make up a report.
 | Shared resources                 | Accessed in _Edit Report_. Field to handle default and custom shared resources (adjusted on the Settings page). Configure custom shared overhead costs, namespaces, and labels |
 | External Cost Breakdown/eye icon | Compare K8s costs with out-of-cluster (OOC) costs                                                                                                                              |
 
-## Visual Add-Ons
-
-Add-Ons or Visual Elements are used to enhance your report and provide a high-level view about the information important to you.
-
-> Note: This feature is currently disabled for this release.
