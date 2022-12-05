@@ -39,7 +39,7 @@ kubectl get pods --show-labels -n <TARGET_NAMESPACE>
 
 ## Edit report icon
 
-<figure><img src=".gitbook/assets/editreport.png" alt=""><figcaption></figcaption></figure>
+<figure><img src=".gitbook/assets/editreport.png" alt=""><figcaption><p>Edit Report window</p></figcaption></figure>
 
 The _Edit Report_ icon has additional options to filter your search.
 
@@ -95,7 +95,7 @@ Select how shared costs set on the settings page will be shared among allocation
 
 ## Additional options
 
-<figure><img src=".gitbook/assets/dots.png" alt=""><figcaption></figcaption></figure>
+<figure><img src=".gitbook/assets/dots.png" alt=""><figcaption><p>Additional options</p></figcaption></figure>
 
 The three horizontal lines/meatballs icon will provide additional options for handling your report:
 
