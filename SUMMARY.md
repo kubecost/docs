@@ -72,7 +72,6 @@
 ## Using Kubecost
 
 * [Getting Started](getting-started.md)
-  * [Standardizing Kubernetes Cost Allocation](using-kubecost/getting-started/standardizing-kubernetes-cost-allocation.md)
   * [Kubernetes Cost Allocation](cost-allocation.md)
   * [Availability Tiers](availability-tiers.md)
   * [Cluster Health Score](cluster-health-score.md)
