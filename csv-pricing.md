@@ -85,7 +85,7 @@ The following resource documents the steps required to set up custom prices with
     2. Run the following query: `node_total_hourly_cost`
         1. You should see output similar to this: `node_total_hourly_cost{instance="ip-172-20-41-147.us-east-compute.internal",instance_type="t2.medium",job="kubecost",node="ip-172-20-41-147.us-east-2.compute.internal",region="us-east-2"} | 0.04`
     3. Verify that the price on the right is consistent with your CSV prices
-        1. Get the providerID from node instance: `kubectl get nodes ip-172-20-41-147.us-east-2.compute.internal -o=jsonpath=" providerID:{.spec.providerID}"providerID:aws:///us-east-2a/i-071001c20d001bb6b
+        1. Get the providerID from node instance: `kubectl get nodes ip-172-20-41-147.us-east-2.compute.internal -o=jsonpath=" providerID:{.spec.providerID}"providerID:aws:///us-east-2a/i-071001c20d001bb6b`
         2. Check in the csv that the resource_id matches the cost
 
 ## Pricing discounts
