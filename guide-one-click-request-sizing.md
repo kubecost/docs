@@ -7,29 +7,11 @@ Guide: 1-click request sizing
 resource
 requests](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#requests-and-limits)
 in your cluster based on Kubecost's sizing
-[recommendations](https://github.com/kubecost/docs/blob/main/api-request-right-sizing.md). This allows you to instantly
-optimize resource allocation across your entire cluster, without fiddling with
-excessive YAML or arcane `kubectl` commands. You can easily eliminate resource
-over-allocation in your cluster, which paves the way for vast savings via
-cluster right-sizing and other optimizations.
+[recommendations](https://github.com/kubecost/docs/blob/main/api-request-right-sizing.md). 
 
 ## Setup
 
-Install Kubecost with Cluster Controller enabled, which is the only Kubecost
-component with write permission to your cluster.
-
-Make sure the Kubecost helm repo is set up! See [kubecost.com/install](https://www.kubecost.com/install#show-instructions)
-
-This command will install Kubecost if you haven't already. You can use "--set clusterController.enabled=true" to get Cluster Controller running if you already have Kubecost installed.
-
-```bash
-helm upgrade \
-    -i \
-    --create-namespace kubecost \
-    kubecost/cost-analyzer \
-    --set kubecostToken="aWljaGFlbEBrdQQY29zdljb203yadf98" \
-    --set clusterController.enabled=true
-```
+See the high-level [automatic request right-sizing guide](https://github.com/kubecost/docs/blob/main/auto-request-sizing.md).
 
 ## Using 1-click request sizing
 
