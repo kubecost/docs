@@ -30,6 +30,8 @@ Select the date range of the report by setting specific start and end dates, or 
 
 Here you can aggregate cost by native Kubernetes concepts. While selecting Single Aggregation, you will only be able to select one concept at a time. While selecting Multi Aggregation, you will be able to filter for multiple concepts at the same time. Assets will be by default aggregated by Service.
 
+> **Note**: Service in this context refers to an external cloud service.
+
 ## Edit Report
 
 <figure><img src=".gitbook/assets/assetseditreport.png" alt=""><figcaption><p>Edit Report window</p></figcaption></figure>
