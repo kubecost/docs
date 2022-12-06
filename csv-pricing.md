@@ -16,10 +16,9 @@ The following resource documents the steps required to set up custom prices with
     csvAccessCredentials: pricing-schema-access-secret
     ```
     
-    S3 bucket access is supported with the format `s3://<bucket-name>/<key>`, for example 's3://kc-csv-test/pricing_schema.csv
-`. Otherwise, the CSV file will be read from the cost-analyzer PV, for example:
+    S3 bucket access is supported with the format `s3://<bucket-name>/<key>`, for example `s3://kc-csv-test/pricing_schema.csv`. Otherwise, the CSV file will be read from the cost-analyzer PV, for example:
 
-    ```
+    ``` yaml
     pricingCsv:
     enabled: true
     location:
@@ -36,7 +35,7 @@ The following resource documents the steps required to set up custom prices with
     
 2. For S3 locations, provide file access. The required permissions are:
 
-    ```
+    ```json
     {
     "Version": "2012-10-17",
     "Statement": [
@@ -102,7 +101,7 @@ The following logic is used to match node prices accurately:
 
 You can check a summary of the number of nodes that have matched with the CSV by visiting /model/pricingSourceCounts. The response is a JSON object of the form:
 
-```
+``` jsonc
 data: {
 	TotalNodes: 10
 	PricingType: { 
