@@ -1,4 +1,4 @@
-# Installing Alibaba on Kubecost
+# Installing Kubecost on Alibaba
 
 ## Helm install Kubecost
 
@@ -40,7 +40,7 @@ These two can be generated in the Alibaba Cloud portal. Hover over your user acc
 
 ### Cannot install Kubecost without a default StorageClass
 
-While getting all the available Storage Classes that the Alibaba K8s cluster comes with, there is not a default storage class. Kubecost installation may fail as the cost-model pod and Prometheus server pod would be in a status pending state.
+While getting all the available Storage Classes that the Alibaba K8s cluster comes with, there may not be a default storage class. Kubecost installation may fail as the cost-model pod and Prometheus server pod would be in a status pending state.
 
 To fix this issue, make any of the Storage Classes in the Alibaba K8s cluster as Default using the below command:
 
