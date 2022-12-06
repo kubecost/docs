@@ -1,6 +1,6 @@
 # CSV Pricing
 
-> **Note**: This feature is only oficially supported on Kubecost Enterprise plans and during free trials.
+> **Note**: This feature is only officially supported on Kubecost Enterprise plans and during free trials.
 
 The following resource documents the steps required to set up custom prices with a CSV pipeline. This feature allows for individual assets (e.g. nodes) to be supplied at unique prices. Common uses are for on-premise machines or for external enterprise discounts. 
 
