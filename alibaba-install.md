@@ -30,8 +30,8 @@ Your path needs a file having Alibaba Cloud secrets. Alibaba secrets can be pass
 
 ```
 {
-      "alibaba_access_key_id": “XXX”
-     “alibaba_secret_access_key”: “XXX”
+     "alibaba_access_key_id": “XXX”
+     "alibaba_secret_access_key": “XXX"
 }
 ```
 These two can be generated in the Alibaba Cloud portal. Hover over your user account icon, then select _AccessKey Management_. A new window opens. Select _Create AccessKey_ to generate a unique access token for your Kubecost that will be used for all the activity related to Kubecost.
