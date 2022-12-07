@@ -10,12 +10,13 @@ excessive YAML or arcane `kubectl` commands. You can easily eliminate resource
 over-allocation in your cluster, which paves the way for vast savings via
 cluster right-sizing and other optimizations.
 
-> Cluster Controller is disabled by default because it is the only component of
+> **Note**: Cluster Controller is disabled by default because it is the only component of
 > Kubecost with write access to cluster resources.
 
 ## Setup
 
-To enable this functionality, set the value `clusterController.enabled=true`, like so:
+To enable this functionality, set the value `clusterController.enabled=true`, as seen below:
+
 ```sh
 helm upgrade \
     -i \
@@ -25,8 +26,7 @@ helm upgrade \
     --set clusterController.enabled=true
 ```
 
-> While the full Cluster Controller setup (with provider key) is not required,
-> it doesn't hurt.
+> **Note**: This setup will only provide functionality for continuous request right-sizing. For 1-click right-sizing and automated cluster scaledown functionality, follow the corresponding setup for your cloud service provider on the [Cluster Controller](https://github.com/kubecost/docs/blob/main/controller.md) page to create a provider key.
 
 ## Usage
 
