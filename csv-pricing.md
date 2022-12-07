@@ -55,7 +55,8 @@ The following resource documents the steps required to set up custom prices with
     ```
    
    There are two options for adding the credentials to the Kubecost pod:
-    1. Service key: Create an S3 service key with the permissions above, then add its ID and access key as a K8s secret:
+   
+   1. Service key: Create an S3 service key with the permissions above, then add its ID and access key as a K8s secret:
         1. `kubectl create secret generic pricing-schema-access-secret -n kubecost --from-literal=AWS_ACCESS_KEY_ID=id --from-literal=AWS_SECRET_ACCESS_KEY=key`
         2. The name of this secret should be the same as csvAccessCredentials in values.yaml above
     2. [AWS IAM (IRSA) service account annotation](https://docs.aws.amazon.com/eks/latest/userguide/adot-iam.html)
@@ -75,6 +76,7 @@ The following resource documents the steps required to set up custom prices with
 ![Pricing table](https://raw.githubusercontent.com/kubecost/docs/main/images/pricing.png)
 
 ## GPU pricing:
+
 1. The node the GPU is attached to must be matched by a CSV node price. Typically this will be matched on instance type (node.kubernetes.io/instance-type)
 2. Supported GPU labels are currently:
     * gpu.nvidia.com/class
