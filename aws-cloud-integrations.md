@@ -483,7 +483,7 @@ QueryAthenaPaginated: start query error: operation error Athena: StartQueryExecu
 	
 #### Missing Athena Column
 	
-* **Symptom:** An error is shown on the diagnostics page under "Pricing Sources" on the "Diagnostics" page or in the Kubecost `cost-model` container logs.
+* **Symptom:** An error is shown under "Pricing Sources" on the "Diagnostics" page or in the Kubecost `cost-model` container logs.
 	
 ```
 QueryAthenaPaginated: query execution error: no query results available for query <Athena Query ID>
