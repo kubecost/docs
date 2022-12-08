@@ -427,7 +427,7 @@ You can also check query history to see if any queries are failing:
 
 ![Screen Shot 2020-12-06 at 9 43 50 PM](https://user-images.githubusercontent.com/453512/101319633-24ef5500-3817-11eb-9f87-55a903428936.png)
 
-### Common Athena errors.
+### Common Athena errors
 
 #### Incorrect bucket in IAM Policy.
 
