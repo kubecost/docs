@@ -12,7 +12,6 @@ A Github repository with sample files which follow the below instructions can be
 
 Follow [these steps](https://docs.aws.amazon.com/cur/latest/userguide/cur-create.html) to set up a CUR using the settings below.
 
-> **Note**: When Creating the CUR report use the following options.
 > - For time granularity, select **Daily**.
 > - Select the checkbox to enable **Resource IDs** in the report.
 > - Select the checkbox to enable **Athena integration** with the report.
