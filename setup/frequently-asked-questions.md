@@ -129,5 +129,5 @@ A: Verify that the the AWS IAM Policy has been correctly configured (step3). Ver
 Q: What time zone is shown by Kubecost?\
 A: All APIs and metrics will be based on and accept UTC zones. When viewing the data from your web browser, the graphs displayed will convert this UTC time to your local machine's time zone.
 
-###
-
+Q: When using the `aggregate` parameter with the Allocation API `/model/allocation`, the returned line items don't always list the full set of "properties". \
+A: This happens when the values of these "properties" collide upon performing the aggregation. For example if performing the aggregation by `aggregate=label:app`, the line item `app=hello-world` may belong to multiple namespaces and Kubecost would therefore omit "properties.namespace" altogether. The most effective workaround is to perform a multiaggregation (`aggregate=namespace,label:app`) to ensure all the properties you want exist in the result. More discussion in this [Github Issue](https://github.com/kubecost/cost-analyzer-helm-chart/issues/1839).
