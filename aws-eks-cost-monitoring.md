@@ -1,7 +1,7 @@
 Amazon EKS integration
 ==================
 
-[Amazon Elastic Kubernetes Services (Amazon EKS)](https://aws.amazon.com/eks/) is a managed container service to run and scale Kubernetes applications in the AWS cloud. In the collaboration with Amazon EKS, Kubecost provides optimized bundle for Amazon EKS cluster cost visibility that enable customer to accurately track costs by namespace, cluster, pod or organizational concepts such as team or application. Customers can use their existing AWS support agreements to obtain support. Kubernetes platform administrators and finance leaders can use Kubecost to visualize a breakdown of their Amazon EKS cluster charges, allocate costs, and chargeback organizational units such as application teams.
+[Amazon Elastic Kubernetes Services (Amazon EKS)](https://aws.amazon.com/eks/) is a managed container service to run and scale Kubernetes applications in the AWS cloud. In collaboration with Amazon EKS, Kubecost provides optimized bundle for Amazon EKS cluster cost visibility that enables customers to accurately track costs by namespace, cluster, pod or organizational concepts such as team or application. Customers can use their existing AWS support agreements to obtain support. Kubernetes platform administrators and finance leaders can use Kubecost to visualize a breakdown of their Amazon EKS cluster charges, allocate costs, and chargeback organizational units such as application teams.
 
 ## Architecture overview:
 
@@ -13,7 +13,7 @@ Amazon EKS cost monitoring with Kubecost architecture:
 
 ![User experience](https://raw.githubusercontent.com/kubecost/docs/main/images/AWS-EKS-cost-monitoring-architecture.png)
 
-## Deploying Kubecost on EKS
+## Deploying Kubecost on Amazon EKS cluster using Helm
 To get started, you can follow these steps to deploy Kubecost into your Amazon EKS cluster in a few minutes using Helm.
 
 ### Prerequisites:
@@ -65,10 +65,93 @@ You can now start monitoring your Amazon EKS cluster cost and efficiency. Depend
 - You can check Kubecost documentation for [Ingress Examples](https://guide.kubecost.com/hc/en-us/articles/4407601820055-Ingress-Examples) as a reference for using Nginx ingress controller with basic auth.
 - You can also consider using AWS LoadBalancer controller to expose Kubecost and use Amazon Cognito for authentication, authorization and user management. You can learn more at [“How to use Application Load Balancer and Amazon Cognito to authenticate users for your Kubernetes web apps”](https://aws.amazon.com/blogs/containers/how-to-use-application-load-balancer-and-amazon-cognito-to-authenticate-users-for-your-kubernetes-web-apps/) AWS blog post.
 
+## Deploying Kubecost on Amazon EKS cluster using Amazon EKS add-on
+
+### Prerequisites:
+- Subscribe to Kubecost product on AWS Marketplace at: https://aws.amazon.com/marketplace/pp/prodview-jatxqd2ccqvgc
+- Install the following tools: [kubectl](https://kubernetes.io/docs/tasks/tools/), [AWS CLI](https://aws.amazon.com/cli/), and optionally [eksctl](https://eksctl.io/)
+- You have access to an [Amazon EKS cluster](https://aws.amazon.com/eks/)
+### Discover and enable Kubecost add-on from AWS console
+
+After subscribing to AWS Marketplace product successfully and follow the on-screen instruction, you are redirected to Amazon EKS console:
+
+TBD
+
+### Enable Kubecost add-on using AWS CLI
+
+On your workspace, run the following command to enable Kubecost add-on for your Amazon EKS cluster:
+
+> **Note**: You need to replace $YOUR_CLUSTER_NAME, $AWS_REGION accordingly by your actual Amazon EKS cluster name and AWS region.
+
+```bash
+aws eks create-addon --addon-name kubecost_kubecost --cluster-name $YOUR_CLUSTER_NAME --region $AWS_REGION
+```
+
+Example output:
+
+```bash
+{
+    "addon": {
+        "addonName": "kubecost_kubecost",
+        "clusterName": "$YOUR_CLUSTER_NAME",
+        "status": "CREATING",
+        "addonVersion": "v1.97.0-eksbuild.1",
+        "health": {
+            "issues": []
+        },
+        "addonArn": "arn:aws:eks:$AWS_REGION:xxxxxxxxxxxx:addon/$YOUR_CLUSTER_NAME/kubecost_kubecost/90c23198-cdd3-b295-c410-xxxxxxxxxxxx",
+        "createdAt": "2022-12-01T12:18:26.497000-08:00",
+        "modifiedAt": "2022-12-01T12:50:52.222000-08:00",
+        "tags": {}
+    }
+}
+```
+To monitor the installation status, you can run the following command:
+
+```bash
+aws eks describe-addon --addon-name kubecost_kubecost --cluster-name $YOUR_CLUSTER_NAME --region $AWS_REGION
+```
+
+Example output:
+
+```bash
+{
+    "addon": {
+        "addonName": "kubecost_kubecost",
+        "clusterName": "$YOUR_CLUSTER_NAME",
+        "status": "ACTIVE",
+        "addonVersion": "v1.97.0-eksbuild.1",
+        "health": {
+            "issues": []
+        },
+        "addonArn": "arn:aws:eks:$AWS_REGION:xxxxxxxxxxxx:addon/$YOUR_CLUSTER_NAME/kubecost_kubecost/90c23198-cdd3-b295-c410-xxxxxxxxxxxx",
+        "createdAt": "2022-12-01T12:18:26.497000-08:00",
+        "modifiedAt": "2022-11-10T12:53:21.140000-08:00",
+        "tags": {}
+    }
+}
+```
+
+The Kubecost add-on should be available in few minutes. Run the following command to enable port-forwarding to expose the Kubecost dashboard:
+
+```bash
+kubectl port-forward --namespace kubecost deployment/cost-analyzer 9090
+```
+
+### Disable Kubecost add-on
+
+To disable Kubecost add-on, you can run the following command:
+
+```bash
+aws eks delete-addon --addon-name kubecost_kubecost --cluster-name $YOUR_CLUSTER_NAME --region $AWS_REGION
+```
 ## Additional resources:
 
 - [Amazon EKS documentation](https://docs.aws.amazon.com/eks/latest/userguide/cost-monitoring.html)
 - [Amazon blog post](https://aws.amazon.com/blogs/containers/aws-and-kubecost-collaborate-to-deliver-cost-monitoring-for-eks-customers/)
+- AWS Blog: [New – AWS Marketplace for Containers Now Supports Direct Deployment to Amazon EKS Clusters](https://aws.amazon.com/blogs/aws/new-aws-marketplace-for-containers-now-supports-direct-deployment-to-amazon-eks-clusters/)
+- [Learn more about Amazon EKS add-on](https://docs.aws.amazon.com/eks/latest/userguide/eks-add-ons.html)
+- [Learn more about how to manage Amazon EKS add-on](https://docs.aws.amazon.com/eks/latest/userguide/managing-add-ons.html)
 
 
 <!--- {"article":"8428105779095","section":"4402829036567","permissiongroup":"1500001277122"} --->

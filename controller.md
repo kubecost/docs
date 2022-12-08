@@ -7,8 +7,7 @@ and thus has write permission to certain resources on your cluster.
 Cluster controller enables actions like:
 - Automated cluster scaledown
 - 1-click cluster right-sizing
-- [1-click request right-sizing](https://guide.kubecost.com/hc/en-us/articles/5843816284823-Guide-1-click-request-sizing)
-- [Continuous request right-sizing](https://github.com/kubecost/docs/blob/main/guide-continuous-request-sizing.md)
+- [Automated request right-sizing](https://github.com/kubecost/docs/blob/main/auto-request-sizing.md)
 
 This document shows you how to setup and enable this functionality in the Kubecost product.
 

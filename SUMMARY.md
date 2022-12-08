@@ -48,8 +48,9 @@
   * [ETL Backup](etl-backup.md)
   * [Cloud Billing Integrations](cloud-integration.md)
     * [Multi-Cloud Integrations](multi-cloud.md)
-    * [AWS Cloud Integrations](aws-cloud-integrations.md)
+    * [AWS Cloud Integration](aws-cloud-integrations.md)
       * [AWS Out of Cluster](aws-out-of-cluster.md)
+      * [AWS Spot Instances](install-and-configure/advanced-configuration/cloud-integration/aws-cloud-integrations/aws-spot-instances.md)
       * [AWS Node Price Reconciliation Methodology](aws-node-price-reconcilitation-methodology.md)
     * [Azure Cloud Integration](azure-out-of-cluster.md)
       * [Azure Rate Card Configuration](azure-config.md)
@@ -58,26 +59,27 @@
 
 ## Integrations
 
-* [Custom Webhook to Create a Kubecost stage in Spinnaker](spinnaker-custom-webhook.md)
+* [Custom Webhook to Create a Kubecost Stage in Spinnaker](spinnaker-custom-webhook.md)
 
 ## General
 
 * [OpenCost Product Comparison](opencost-product-comparison.md)
 * [User Metrics](user-metrics.md)
-* [Installing Agent for Hosted Kubecost (Alpha)](agent.md)
+* [Installing Agent for Kubecost Cloud (Alpha)](agent.md)
 * [Tuning Resource Consumption](resource-consumption.md)
+* [Calculating Node Pricing](node-pricing.md)
 
 ## Using Kubecost
 
 * [Getting Started](getting-started.md)
-  * [Standardizing Kubernetes cost allocation](partner-metrics.md)
   * [Kubernetes Cost Allocation](cost-allocation.md)
   * [Availability Tiers](availability-tiers.md)
   * [Cluster Health Score](cluster-health-score.md)
   * [Spot Checklist](spot-checklist.md)
   * [Spot Cluster Sizing](spot-cluster-sizing.md)
-  * [Guide: 1-click request sizing](guide-one-click-request-sizing.md)
-  * [Auditing](audit.md)
+  * [Automatic request right-sizing](auto-request-sizing.md)
+    * [Guide: 1-click Request Sizing](guide-one-click-request-sizing.md)
+    * [Continuous request right-sizing](continuous-request-sizing.md)
   * [Saved Reports](saved-reports.md)
   * [Alerts](alerts.md)
   * [Advanced Reporting](advanced-reports.md)
@@ -102,6 +104,7 @@
 ## Architecture
 
 * [Kubecost Core Architecture Overview](architecture.md)
+* [Kubecost Cloud Architecture Overview](kubecost-cloud-architecture.md)
 * [Open Source](open-source-deps.md)
 * [Security and Data Protection](security.md)
 * [Ports](ports.md)
@@ -115,9 +118,10 @@
 
 * [Frequently Asked Questions](setup/frequently-asked-questions.md)
 * [Troubleshoot Install](troubleshoot-install.md)
-* [Capture a bug report](bug-report.md)
+* [Capture a Bug Report](bug-report.md)
+* [Bug Bounty Program](bug-bounty-program.md)
 * [Kubecost Diagnostics](diagnostics.md)
-* [Running a query in Kubecost bundled Prometheus](prometheus.md)
+* [Running a Query in Kubecost-bundled Prometheus](prometheus.md)
 * [Getting Support](support-channels.md)
 
 ## Other Resources

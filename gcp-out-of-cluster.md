@@ -17,6 +17,9 @@ GCP users should create [detailed billing export](https://cloud.google.com/billi
 
 ## Step 2:  Visit Kubecost setup page and provide configuration info
 
+
+> **NOTE:** If you are using the alternative [multi-cloud integration](https://docs.kubecost.com/install-and-configure/advanced-configuration/cloud-integration/multi-cloud) method, **step 2** is not required.
+
 If your Big Query dataset is in a different project than the one where Kubecost is installed, please see the section on [Cross-Project Service Accounts](#cross-project-service-account-configuration)
 
 Add a service account key to allocate out of cluster resources (e.g. storage buckets and managed databases) back to their Kubernetes owners. The service account needs the following:
@@ -44,7 +47,7 @@ Once you've created the GCP service account, you can connect it to Kubecost in o
 ### Connect using Workload Identity federation (recommended)
 You can set up an [IAM policy binding](https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity#authenticating_to) to bind a Kubernetes service account to your GCP service account.
 ```sh
-gcloud iam service-accounts add-iam-policy-binding compute-viewer-kubecost@$PROJECT_ID.iam.gserviceaccount.com --role roles/iam.workloadIdentityUser --member serviceAccount:compute-viewer-kubecost.svc.id.goog[NAMESPACE/KSA_NAME]
+gcloud iam service-accounts add-iam-policy-binding compute-viewer-kubecost@$PROJECT_ID.iam.gserviceaccount.com --role roles/iam.workloadIdentityUser --member "serviceAccount:$PROJECT_ID.svc.id.goog[NAMESPACE/KSA_NAME]"
 ```
 where `NAMESPACE` and `KSA_NAME` are the namespace Kubecost is installed into and the name of the service account attributed to the Kubecost deployment
 
