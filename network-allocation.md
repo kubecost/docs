@@ -1,5 +1,4 @@
-Network Traffic Cost Allocation
-===============================
+# Network Traffic Cost Allocation
 
 This document summarizes Kubecost network cost allocation, how to enable it, and what it provides.
 
@@ -11,8 +10,9 @@ Metrics include egress and ingress data transfers by pod and are classified as i
 
 To enable this feature, set the following parameter in _values.yaml_ during [Helm installation](http://kubecost.com/install):
 
- ```
- networkCosts.enabled=true
+ ``` yaml
+ networkCosts:
+   enabled: true
  ```
 
  You can view a list of common config options [here](https://github.com/kubecost/cost-analyzer-helm-chart/blob/700cfa306c8e78bc9a1039b584769b9a0e0757d0/cost-analyzer/values.yaml#L573).
@@ -107,4 +107,18 @@ To verify this feature is functioning properly, you can complete the following s
 * Actively tested against GCP, AWS, and Azure
 * Daemonsets have shared IP addresses on certain clusters
 
-<!--- {"article":"4407595973527","section":"4402815636375","permissiongroup":"1500001277122"} --->
+## Network Cost Calculation Methodology
+
+There are two primary concerns when factoring in how Network Costs are calculated: [Cloud Integration](./cloud-integration.md) and the existence of the [Network Costs Daemonset](./network-allocation.md).
+
+### Cloud integration
+
+When working with a Kubecost instance that has cloud integration configured, network costs will be pulled in as line-items on a per-node basis from your cost report. This will result in a baseline estimate that is accurate on the raw price, however, it could lead to discrepancies when viewing from a pod level. For instance, take the example of one pod that communicates inter-regionally with a cloud service, and another interacts cross-regionally. These services would be charged at different rates according to your cloud provider, however they both would be assigned the same network costs due to the network costs being attached to the node itself.
+
+### Network costs daemonset
+
+When you enable the network costs daemonset, Kubecost has the ability to attribute the network-byte traffic to specific pods. This will allow the best level of cost distribution from a pod standpoint, as we have specific values to attribute per-workload. These prices will be based on public API pricing, however, so the exact cost value you see might be incorrect.
+
+### Both cloud integration and network cost daemonset
+
+Enabling both of these options will allow for Kubecost to reconcile the metric data that it gathered from the network costs daemonset. This will allow us to have accurate baseline pricing numbers while also having the network-traffic between pods so that the costs can be correctly distributed.
