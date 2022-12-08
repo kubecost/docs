@@ -105,10 +105,10 @@ always carefully consider the workload before approving it to run on spot nodes.
 Most cloud providers support a mix of spot and non-spot nodes in the cluster and
 they have guides:
 
-- AWS (EKS) <https://docs.aws.amazon.com/eks/latest/userguide/managed-node-groups.html#managed-node-group-capacity-types>
-- GCP (GKE) <https://cloud.google.com/kubernetes-engine/docs/how-to/preemptible-vms>
-- Azure (AKS) <https://docs.microsoft.com/en-us/azure/aks/spot-node-pool>
-
+- [AWS (EKS)](https://docs.aws.amazon.com/eks/latest/userguide/managed-node-groups.html#managed-node-group-capacity-types)
+- [GCP (GKE)](https://cloud.google.com/kubernetes-engine/docs/how-to/preemptible-vms)
+- [Azure (AKS)](https://docs.microsoft.com/en-us/azure/aks/spot-node-pool)
+- 
 Different cloud providers have different guarantees on shutdown windows and automatic
 draining of spot nodes that are about to be removed. Consult your provider&rsquo;s
 documentation before introducing spot nodes to your cluster.
@@ -125,6 +125,6 @@ scheduling problems, especially if capacity is low and spinning up a new node
 takes too long. In the second case, fewer pods are forced to be rescheduled if a
 reclaim event occurs, thus lowering the likelihood of scheduling problems.
 
-Edit this doc on [GitHub](https://github.com/kubecost/docs/blob/main/spot-checklist.md)
+
 
 <!--- {"article":"4407595980311","section":"4402815656599","permissiongroup":"1500001277122"} --->

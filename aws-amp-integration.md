@@ -177,7 +177,7 @@ You can add these recording rules to improve the performance. Recording rules al
               daemonset: "true"
 ```
 
-Edit this doc on [GitHub](https://github.com/kubecost/docs/blob/main/aws-amp-integration.md)
+
 
 
 <!--- {"article":"4409859798679","section":"4402829036567","permissiongroup":"1500001277122"} --->

@@ -5,39 +5,72 @@ This document summarizes Kubecost network cost allocation, how to enable it, and
 
 When this feature is enabled, Kubecost gathers network traffic metrics in combination with provider-specific network costs to provide insight on network data sources as well as the aggregate costs of transfers.
 
+Metrics include egress and ingress data transfers by pod and are classified as internet, cross-region and cross-zone.
+
 ## Enabling network costs
 
 To enable this feature, set the following parameter in _values.yaml_ during [Helm installation](http://kubecost.com/install):
+
  ```
  networkCosts.enabled=true
  ```
- You can view a list of common config options [here](https://github.com/kubecost/cost-analyzer-helm-chart/blob/ab384e2eb027e74b2c3e61a7e1733ffa1718170e/cost-analyzer/values.yaml#L276). If you are integrating with an existing Prometheus, you can set `networkCosts.prometheusScrape=true` and the network costs service should be auto-discovered.
- 
- To estimate the resources required to run Kubecost network cost,  you can view our [benchmarking metrics](https://docs.google.com/document/d/10b-Ew78R90UOaZ5gXQUjU5GWZXBIy8H11RK5bbCd2EM/edit).
 
- > **Note**: Network cost, which is disabled by default, needs to be run as a privileged Pod to access the relevant networking kernel module on the host machine.
+ You can view a list of common config options [here](https://github.com/kubecost/cost-analyzer-helm-chart/blob/700cfa306c8e78bc9a1039b584769b9a0e0757d0/cost-analyzer/values.yaml#L573).
+
+ If using the included Prometheus instance, the scrape is automatically configured.
+
+ If you are integrating with an existing Prometheus, you can set `networkCosts.prometheusScrape=true` and the network costs service should be auto-discovered.
+
+ Alternatively a serviceMonitor is also [available](https://github.com/kubecost/cost-analyzer-helm-chart/blob/700cfa306c8e78bc9a1039b584769b9a0e0757d0/cost-analyzer/values.yaml#L716).
+
+> **Note**: Network cost, which is disabled by default, needs to be run as a privileged pod to access the relevant networking kernel module on the host machine.
+
+## Resource limiting
+
+In order to reduce resource usage, Kubecost recommends setting a CPU limit on the network-costs daemonset. This will cause a few seconds delay during peak usage and does not effect overall accuracy. This is done by default in Kubecost 1.99+.
+
+For existing deployments, these are the recommended values:
+
+```yaml
+    resources:
+      limits:
+        cpu: 500m
+      requests:
+        cpu: 50m
+        memory: 20Mi
+```
+
+### Benchmarking metrics
+
+The network-simulator was used to real-time simulate updating conntrack entries while simultaneously running a cluster simulated network-costs instance. To profile the heap, after a warmup of roughly five minutes, a heap profile of 1,000,000 conntrack entries was gathered and examined.
+
+Each conntrack entry is equivalent to two transport directions, so every conntrack entry is two map entries (connections).
+
+After modifications were made to the network-costs to parallelize the delta and dispatch, large map comparisons were significantly lighter in memory. The same tests were performed against simulated data with the following footprint results.
+
+![Benchmarking metrics](https://raw.githubusercontent.com/kubecost/docs/main/images/post%20optimization.PNG)
 
 ## Kubernetes network traffic metrics
 
 The primary source of network metrics is a DaemonSet Pod hosted on each of the nodes in a cluster. Each daemonset pod uses `hostNetwork: true` such that it can leverage an underlying kernel module to capture network data. Network traffic data is gathered and the destination of any outbound networking is labeled as:
 
- * Internet Egress: Network target destination was not identified within the cluster.  
- * Cross Region Egress: Network target destination was identified, but not in the same provider region.  
- * Cross Zone Egress: Network target destination was identified, and was part of the same region but not the same zone.  
+* Internet Egress: Network target destination was not identified within the cluster.
+* Cross Region Egress: Network target destination was identified, but not in the same provider region.
+* Cross Zone Egress: Network target destination was identified, and was part of the same region but not the same zone.
 
 These classifications are important because they correlate with network costing models for most cloud providers. To see more detail on these metric classifications, you can view pod logs with the following command:
 
-```
+```sh
 kubectl logs kubecost-network-costs-<pod-identifier> -n kubecost
 ```
 
-This will show you the top source and destination IP addresses and bytes transferred on the node where this Pod is running. To disable logs, you can set the helm value `networkCosts.trafficLogging` to `false`. 
+This will show you the top source and destination IP addresses and bytes transferred on the node where this Pod is running. To disable logs, you can set the helm value `networkCosts.trafficLogging` to `false`.
 
 ## Overriding traffic classifications
 
 For traffic routed to addresses outside of your cluster but inside your VPC, Kubecost supports the ability to directly classify network traffic to a particular IP address or CIDR block. This feature can be configured in your [_values.yaml_](https://github.com/kubecost/cost-analyzer-helm-chart/blob/ab384e2eb027e74b2c3e61a7e1733ffa1718170e/cost-analyzer/values.yaml#L288-L322) under `networkCosts.config`. Classifications are defined as follows:
 
-* In-zone: A list of destination addresses/ranges that will be classified as an in-zone traffic, which is free for most providers. 
+* In-zone: A list of destination addresses/ranges that will be classified as an in-zone traffic, which is free for most providers.
 * In-region: A list of addresses/ranges that will be classified as the same region between source and destinations but different zones.
 * Cross-region: A list of addresses/ranges that will be classified as the different region from the source regions
 
@@ -55,25 +88,23 @@ To enable this feature, set the following Helm values:
 
 To verify this feature is functioning properly, you can complete the following steps:
 
-1. Confirm the `kubecost-network-costs` Pods are Running. If these Pods are not in a Running state, _kubectl describe_ them and/or view their logs for errors.  
-2. Ensure `kubecost-networking` target is Up in your Prometheus Targets list. View any visible errors if this target is not Up. You can further verify data is being scrapped by the presence of the `kubecost_pod_network_egress_bytes_total` metric in Prometheus. 
-3. Verify Network Costs are available in your Kubecost Allocation view. View your browser's Developer Console on this page for any access/permissions errors if costs are not shown.  
+1. Confirm the `kubecost-network-costs` Pods are Running. If these Pods are not in a Running state, _kubectl describe_ them and/or view their logs for errors.
+2. Ensure `kubecost-networking` target is Up in your Prometheus Targets list. View any visible errors if this target is not Up. You can further verify data is being scrapped by the presence of the `kubecost_pod_network_egress_bytes_total` metric in Prometheus.
+3. Verify Network Costs are available in your Kubecost Allocation view. View your browser's Developer Console on this page for any access/permissions errors if costs are not shown.
 
-### Common issues:
+### Common issues
 
-* Failed to locate network pods -- Error message displayed when the Kubecost app is unable to locate the network pods, which we search for by a label that includes our release name. In particular, we depend on the label `app=<release-name>-network-costs` to locate the pods. If the app has a blank release name this issue may happen. 
+* Failed to locate network pods -- Error message displayed when the Kubecost app is unable to locate the network pods, which we search for by a label that includes our release name. In particular, we depend on the label `app=<release-name>-network-costs` to locate the pods. If the app has a blank release name this issue may happen.
 
 * Resource usage is a function of unique src and dest IP/port combinations. Most deployments use a small fraction of a CPU and it is also ok to have this Pod CPU throttled. Throttling should increase parse times but should not have other impacts. The following Prometheus metrics are available in v15.3 for determining the scale and the impact of throttling:
 
-`kubecost_network_costs_parsed_entries` is the last number of conntrack entries parsed  
-`kubecost_network_costs_parse_time` is the last recorded parse time  
+`kubecost_network_costs_parsed_entries` is the last number of conntrack entries parsed
+`kubecost_network_costs_parse_time` is the last recorded parse time
 
 ## Feature limitations
 
-* Today this feature is supported on Unix-based images with conntrack  
-* Actively tested against GCP, AWS, and Azure  
-* Daemonsets have shared IP addresses on certain clusters  
-
-Edit this doc on [GitHub](https://github.com/kubecost/docs/blob/main/network-allocation.md)
+* Today this feature is supported on Unix-based images with conntrack
+* Actively tested against GCP, AWS, and Azure
+* Daemonsets have shared IP addresses on certain clusters
 
 <!--- {"article":"4407595973527","section":"4402815636375","permissiongroup":"1500001277122"} --->

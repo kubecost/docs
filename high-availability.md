@@ -16,7 +16,7 @@ The Leader/Follower implementation leverages a `coordination.k8s.io/v1` `Lease` 
 
 ![Leader/Follower](https://raw.githubusercontent.com/kubecost/docs/main/images/leader-follower.png)
 
-## How to Configure High Availability
+## Configuring high availability
 
 In order to enable the leader/follower and high availability features, the following must also be configured:
 * Replicas are set to a value greater than 1
@@ -55,6 +55,6 @@ kubecostDeployment:
 
 ----
 
-Edit this doc on [GitHub](https://github.com/kubecost/docs/blob/main/high-availability.md)
+
 
 <!--- {"article":"9038721747223","section":"4402829033367","permissiongroup":"1500001277122"} --->

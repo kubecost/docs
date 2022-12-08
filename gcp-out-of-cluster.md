@@ -17,7 +17,10 @@ GCP users should create [detailed billing export](https://cloud.google.com/billi
 
 ## Step 2:  Visit Kubecost setup page and provide configuration info
 
-If your Big Query dataset is in a different project than the one where Kubescost is installed, please see the section on [Cross-Project Service Accounts](#cross-project-service-account-configuration)
+
+> **NOTE:** If you are using the alternative [multi-cloud integration](https://docs.kubecost.com/install-and-configure/advanced-configuration/cloud-integration/multi-cloud) method, **step 2** is not required.
+
+If your Big Query dataset is in a different project than the one where Kubecost is installed, please see the section on [Cross-Project Service Accounts](#cross-project-service-account-configuration)
 
 Add a service account key to allocate out of cluster resources (e.g. storage buckets and managed databases) back to their Kubernetes owners. The service account needs the following:
 
@@ -37,35 +40,52 @@ gcloud projects add-iam-policy-binding $PROJECT_ID --member serviceAccount:compu
 gcloud projects add-iam-policy-binding $PROJECT_ID --member serviceAccount:compute-viewer-kubecost@$PROJECT_ID.iam.gserviceaccount.com --role roles/bigquery.user
 gcloud projects add-iam-policy-binding $PROJECT_ID --member serviceAccount:compute-viewer-kubecost@$PROJECT_ID.iam.gserviceaccount.com --role roles/bigquery.dataViewer
 gcloud projects add-iam-policy-binding $PROJECT_ID --member serviceAccount:compute-viewer-kubecost@$PROJECT_ID.iam.gserviceaccount.com --role roles/bigquery.jobUser
+```
+
+Once you've created the GCP service account, you can connect it to Kubecost in one of two ways:
+
+### Connect using Workload Identity federation (recommended)
+You can set up an [IAM policy binding](https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity#authenticating_to) to bind a Kubernetes service account to your GCP service account.
+```sh
+gcloud iam service-accounts add-iam-policy-binding compute-viewer-kubecost@$PROJECT_ID.iam.gserviceaccount.com --role roles/iam.workloadIdentityUser --member "serviceAccount:$PROJECT_ID.svc.id.goog[NAMESPACE/KSA_NAME]"
+```
+where `NAMESPACE` and `KSA_NAME` are the namespace Kubecost is installed into and the name of the service account attributed to the Kubecost deployment
+
+You will also need to enable the [IAM Service Account Credentials API](https://cloud.google.com/iam/docs/reference/credentials/rest) in the gcloud project.
+
+### Connect using a service account key
+Create a service account key:
+```sh
 gcloud iam service-accounts keys create ./compute-viewer-kubecost-key.json --iam-account compute-viewer-kubecost@$PROJECT_ID.iam.gserviceaccount.com
 ```
 
-You can then get your service account key to paste into the UI (be careful with this!):
+Once the GCP service account has been connected, set up the remaining configuration parameters:
 
-```sh
-cat compute-viewer-kubecost-key.json
-```
-
-In Kubecost, sellect _Settings_ from the left navigation, and under External Cloud Cost Configuration (GCP), select _Update_, then follow the remaining instructions found at the "Add Key" link:
+### Configuring via the Kubecost UI
+In Kubecost, select _Settings_ from the left navigation, and under External Cloud Cost Configuration (GCP), select _Update_, then follow the remaining instructions found at the "Add Key" link:
 
 ![GCP out-of-cluster key entry](https://raw.githubusercontent.com/kubecost/docs/main/images/gcp-out-of-cluster-config-wo-shell.png)
 
+<a name="bq-name"></a>**BigQuery dataset** requires a BigQuery dataset prefix (e.g. billing_data) in addition to the BigQuery table name. A full example is `billing_data.gcp_billing_export_v1_018AIF_74KD1D_534A2`
 
-<a name="bq-name"></a>**BigQuery dataset** requires a BigQuery dataset prefix (e.g. billing_data) in addition to the BigQuery table name. A full example is `billing_data.gcp_billing_export_v1_018AIF_74KD1D_534A2`.
+<a name="bq-name"></a>**Service key** If you've connected using Workload Identity federation, you should leave this box empty. If you've created a service account key, copy the contents of the `compute-viewer-kubecost-key.json` file and paste them here (be careful with this!)
 
 ### Configuring using values.yaml (Recommended)
 
-It is recommended to provide the GCP details in the [values file](https://github.com/kubecost/cost-analyzer-helm-chart/blob/c10e9475b51612d36da8f04618174a98cc62f8fd/cost-analyzer/values.yaml#L572-L574)  to ensure they are retained during a upgrade or redeploy.
+It is recommended to provide the GCP details in the [values file](https://github.com/kubecost/cost-analyzer-helm-chart/blob/c10e9475b51612d36da8f04618174a98cc62f8fd/cost-analyzer/values.yaml#L572-L574) to ensure they are retained during an upgrade or redeploy.
 
-Then create a secret for the GCP service account key:
+* Set `.Values.kubecostProductConfigs.projectID = <GCP Project ID that contains the BigQuery Export>`
+* Set `.Values.kubecostProductConfigs.bigQueryBillingDataDataset = <DATASET.TABLE_NAME that contains the billing export>`
 
+If you've connected using Workload Identity federation:
+* Set `.Values.nodeSelector = iam.gke.io/gke-metadata-server-enabled: "true"` to update the Kubecost deployment to run on nodes that use Workload Identity
+* Set `.Values.serviceAccount.annotations = iam.gke.io/gcp-service-account: compute-viewer-kubecost@$PROJECT_ID.iam.gserviceaccount.com` where $PROJECT_ID defined in the `gcloud` commands above
+
+Otherwise, if you've connected using a service account key, create a secret for the GCP service account key you've created:
 ```sh
 kubectl create secret generic gcp-secret -n kubecost --from-file=./compute-viewer-kubecost-key.json
 ```
-
-* Set `.Values.kubecostProductConfigs.projectID = <GCP Project ID that contains the BigQuery Export>`
-* Set `.Values.kubecostProductConfigs.gcpSecretName = <Name of the Kubernetes secret that contains the compute-viewer-kubecost-key.json file>`
-* Set `.Values.kubecostProductConfigs.bigQueryBillingDataDataset = <DATASET.TABLE_NAME that contains the billing export>`
+Then, set `.Values.kubecostProductConfigs.gcpSecretName = <Name of the Kubernetes secret that contains the compute-viewer-kubecost-key.json file>`
 
 > **Note**: When managing the service account key as a Kubernetes secret, the secret must reference the service account key json file, and that file must be named `compute-viewer-kubecost-key.json`.
 
@@ -106,7 +126,7 @@ export BIG_QUERY_PROJECT_ID=<Project ID where bigquery data is stored>
 export SERVICE_ACCOUNT_NAME=<Unique name for your service account>
 ```
 
-Once these values have been set, this script can be run and will create the service key needed for this configuration.
+Once these values have been set, this script can be run and will create the service account needed for this configuration.
 
 ```sh
 gcloud config set project KUBECOST_PROJECT_ID
@@ -115,11 +135,11 @@ gcloud projects add-iam-policy-binding $BIG_QUERY_PROJECT_ID --member serviceAcc
 gcloud projects add-iam-policy-binding $BIG_QUERY_PROJECT_ID --member serviceAccount:$SERVICE_ACCOUNT_NAME@$KUBECOST_PROJECT_ID.iam.gserviceaccount.com --role roles/bigquery.user
 gcloud projects add-iam-policy-binding $BIG_QUERY_PROJECT_ID --member serviceAccount:$SERVICE_ACCOUNT_NAME@$KUBECOST_PROJECT_ID.iam.gserviceaccount.com --role roles/bigquery.dataViewer
 gcloud projects add-iam-policy-binding $BIG_QUERY_PROJECT_ID --member serviceAccount:$SERVICE_ACCOUNT_NAME@$KUBECOST_PROJECT_ID.iam.gserviceaccount.com --role roles/bigquery.jobUser
-gcloud iam service-accounts keys create ./$SERVICE_ACCOUNT_NAME-key.json --iam-account $SERVICE_ACCOUNT_NAME@$KUBECOST_PROJECT_ID.iam.gserviceaccount.com
 ```
 
-Now that your service key is created, follow the normal configuration instructions.
+Now that your service account is created, follow the normal configuration instructions.
 
-Edit this doc on [GitHub](https://github.com/kubecost/docs/blob/main/gcp-out-of-cluster.md)
+## Common configuration issues:
+* Account labels not showing up in partitions: there are cases where labels applied at the account label do not show up in the date-partitioned data. If account level labels are not showing up, you can switch to querying them unpartitioned by setting an extraEnv in kubecost of name: GCP_ACCOUNT_LABELS_NOT_PARTITIONED  value: true: https://github.com/kubecost/cost-analyzer-helm-chart/blob/v1.98.0-rc.1/cost-analyzer/values.yaml#L304
 
 <!--- {"article":"4407601816087","section":"4402815680407","permissiongroup":"1500001277122"} --->

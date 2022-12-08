@@ -1,9 +1,10 @@
-Add Key
-=======
+# Add Key
 
 You can apply your product key at any time within the product UI or during an install or upgrade process. More details on both options are provided below.
 
-> **Note**: `kubecostToken` is a different concept from your product key and is used for managing trial access.
+{% hint style="info" %}
+`kubecostToken` is a different concept from your product key and is used for managing trial access.
+{% endhint %}
 
 ## At install-time
 
@@ -13,7 +14,7 @@ Many Kubecost product configuration options can be specified at install-time, in
 
 To create a secret you will need to create a JSON file called _productkey.json_ with the following format. Be sure to replace `<YOUR_PRODUCT_KEY>` with your Kubecost product key.
 
-``` javascript
+```javascript
 { 
     "key": "<YOUR_PRODUCT_KEY>"
 }
@@ -21,7 +22,7 @@ To create a secret you will need to create a JSON file called _productkey.json_ 
 
 Run the following command to create the secret. Replace `<SECRET_NAME>` with a name for the secret (example: `productkeysecret`):
 
-``` shell
+```shell
 $ kubectl create secret generic <SECRET_NAME> -n kubecost --from-file=./productkey.json
 ```
 
@@ -53,7 +54,3 @@ You can then supply your Kubecost provided license key in the input box that is 
 To verify that your key is properly supplied, visit the Settings UI to confirm the final digits are as expected:
 
 ![image](https://user-images.githubusercontent.com/298359/111573440-c74c9c00-8767-11eb-842c-cfa18159d1c1.png)
-
-Edit this doc on [GitHub](https://github.com/kubecost/docs/blob/main/add-key.md)
-
-<!--- {"article":"4407595912983","section":"4402815636375","permissiongroup":"1500001277122"} --->
