@@ -39,7 +39,7 @@ Only required for nodes with GPUs
 
 Provide a file path for your CSV pricing data in [values.yaml](https://github.com/kubecost/cost-analyzer-helm-chart/blob/develop/cost-analyzer/values-custom-pricing.yaml). This path can reference a local PV or an S3 bucket.
 
-```yaml
+``` yaml
 pricingCsv:
     enabled: true
     location:
@@ -74,8 +74,8 @@ extraVolumeMounts:
 
 For S3 locations, provide file access. Required IAM permissions:
 
-```json
-    {
+``` json
+{
     "Version": "2012-10-17",
     "Statement": [
         {
@@ -84,13 +84,13 @@ For S3 locations, provide file access. Required IAM permissions:
                 "s3:Get*",
                 "s3:List*"
             ],
-           "Resource": [
+            "Resource": [
                 "arn:aws:s3:::<your-bucket-name>/*",
                 "arn:aws:s3:::<your-bucket-name>"
             ]
         }
-      ]
-    }
+    ]
+}
 ```
 
 There are two options for adding the credentials to the Kubecost pod:
