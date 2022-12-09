@@ -62,11 +62,12 @@ pricingCsv:
   enabled: true
   location:
     URI: /var/kubecost-csv/custom-pricing.csv
-    location: local
+
 extraVolumes:
 - name: kubecost-csv
   configMap:
     name: csv-pricing
+
 extraVolumeMounts:
 - name: kubecost-csv
   mountPath: /var/kubecost-csv
