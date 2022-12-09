@@ -26,7 +26,7 @@ helm upgrade \
     --set clusterController.enabled=true
 ```
 
-> **Note**: This setup will only provide functionality for continuous request right-sizing. For 1-click right-sizing and automated cluster scaledown functionality, follow the corresponding setup for your cloud service provider on the [Cluster Controller](https://github.com/kubecost/docs/blob/main/controller.md) page to create a provider key.
+> **Note**: This setup will only provide functionality for continuous request right-sizing. For 1-click right-sizing and automated cluster scaledown functionality, follow the setup for your corresponding Kubernetes service (GKE or EKS) on the [Cluster Controller](https://github.com/kubecost/docs/blob/main/controller.md) page to create a provider key.
 
 ## Usage
 
