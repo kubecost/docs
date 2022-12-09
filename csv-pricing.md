@@ -127,7 +127,3 @@ data:
     }
 }
 ```
-
-## Need Additional Help?
-
-Contact us
