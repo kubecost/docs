@@ -95,10 +95,12 @@ For S3 locations, provide file access. Required IAM permissions:
 
 There are two options for adding the credentials to the Kubecost pod:
 
-   1. Service key: Create an S3 service key with the permissions above, then add its ID and access key as a K8s secret:
-        1. `kubectl create secret generic pricing-schema-access-secret -n kubecost --from-literal=AWS_ACCESS_KEY_ID=id --from-literal=AWS_SECRET_ACCESS_KEY=key`
-        2. The name of this secret should be the same as csvAccessCredentials in values.yaml above
-    2. [AWS IAM (IRSA) service account annotation](https://docs.aws.amazon.com/eks/latest/userguide/adot-iam.html)
+1. Service key: Create an S3 service key with the permissions above, then add its ID and access key as a K8s secret:
+   1. `kubectl create secret generic pricing-schema-access-secret -n kubecost --from-literal=AWS_ACCESS_KEY_ID=id --from-literal=AWS_SECRET_ACCESS_KEY=key`
+   2. The name of this secret should be the same as csvAccessCredentials in values.yaml above
+
+
+2. AWS IAM (IRSA) [service account annotation](https://docs.aws.amazon.com/eks/latest/userguide/adot-iam.html)
 
 ## Pricing discounts
 
@@ -121,7 +123,7 @@ data:
 	PricingType: {
 		csvExact: 5 // exact matches by the providerID field
 		csvClass: 4 // matches where the region and instanceType match
-		“”: 1 // matches that use our default pricing
+		"": 1 // matches that use our default pricing
     }
 }
 ```
