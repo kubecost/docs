@@ -119,15 +119,10 @@ If the config file is not returned, this is an indication that an incorrect Prom
 
 **Negative idle reported**: Make sure the kubecost job is scraping Kubecost. Metrics for `node_total_hourly_cost` should exist in Prometheus.
 
-You can visit Settings in Kubecost to see basic diagnostic information on these Prometheus metrics:
+In Kubecost, you can view basic diagnostic information on these Prometheus metrics by selecting _Settings_ in the left navigation, then scrolling down to Prometheus Status, as seen below:
 
 ![Prometheus status diagnostic](https://raw.githubusercontent.com/kubecost/docs/main/prom-status.png)
 
----
-
-Have a question not answered on this page? Email us at support@kubecost.com or [join the Kubecost Slack community](https://join.slack.com/t/kubecost/shared_invite/zt-1dz4a0bb4-InvSsHr9SQsT_D5PBle2rw)!
-
----
 
 
 <!--- {"article":"4407595941015","section":"4402815636375","permissiongroup":"1500001277122"} --->
