@@ -1,7 +1,7 @@
 Amazon EKS integration
 ==================
 
-[Amazon Elastic Kubernetes Services (Amazon EKS)](https://aws.amazon.com/eks/) is a managed container service to run and scale Kubernetes applications in the AWS cloud. In the collaboration with Amazon EKS, Kubecost provides optimized bundle for Amazon EKS cluster cost visibility that enable customer to accurately track costs by namespace, cluster, pod or organizational concepts such as team or application. Customers can use their existing AWS support agreements to obtain support. Kubernetes platform administrators and finance leaders can use Kubecost to visualize a breakdown of their Amazon EKS cluster charges, allocate costs, and chargeback organizational units such as application teams.
+[Amazon Elastic Kubernetes Services (Amazon EKS)](https://aws.amazon.com/eks/) is a managed container service to run and scale Kubernetes applications in the AWS cloud. In collaboration with Amazon EKS, Kubecost provides optimized bundle for Amazon EKS cluster cost visibility that enables customers to accurately track costs by namespace, cluster, pod or organizational concepts such as team or application. Customers can use their existing AWS support agreements to obtain support. Kubernetes platform administrators and finance leaders can use Kubecost to visualize a breakdown of their Amazon EKS cluster charges, allocate costs, and chargeback organizational units such as application teams.
 
 ## Architecture overview:
 
@@ -68,14 +68,12 @@ You can now start monitoring your Amazon EKS cluster cost and efficiency. Depend
 ## Deploying Kubecost on Amazon EKS cluster using Amazon EKS add-on
 
 ### Prerequisites:
-- Subscribe to Kubecost product on AWS Marketplace at: https://aws.amazon.com/marketplace/pp/prodview-jatxqd2ccqvgc
+- Subscribe to Kubecost on AWS Marketplace at: https://aws.amazon.com/marketplace/pp/prodview-jatxqd2ccqvgc
 - Install the following tools: [kubectl](https://kubernetes.io/docs/tasks/tools/), [AWS CLI](https://aws.amazon.com/cli/), and optionally [eksctl](https://eksctl.io/)
 - You have access to an [Amazon EKS cluster](https://aws.amazon.com/eks/)
 ### Discover and enable Kubecost add-on from AWS console
 
-After subscribing to AWS Marketplace product successfully and follow the on-screen instruction, you are redirected to Amazon EKS console:
-
-TBD
+After subscribing to Kuebcost on AWS Marketplace and following the on-screen instructions successfully, you are redirected to Amazon EKS console. To get started in the Amazon EKS console, go to your EKS clusters, and in the Add-ons tab, select *Get more add-ons* to find Kubecost EKS add-ons in the cluster setting of your existing EKS clusters. You can use the search bar to find "Kubecost - Amazon EKS cost monitoring" and following the on-screen instructions to enable Kubecost add-on for your Amazon EKS cluster. You can learn more about direct deployment to Amazon EKS clusters from this [AWS blog post](https://aws.amazon.com/blogs/aws/new-aws-marketplace-for-containers-now-supports-direct-deployment-to-amazon-eks-clusters/).
 
 ### Enable Kubecost add-on using AWS CLI
 

@@ -14,15 +14,7 @@ See the high-level [automatic request right-sizing guide](https://github.com/kub
 
 ## Usage
 
-Kubescaler is configured on a workload-by-workload basis via annotations.
-
-Supported workload types:
-- Deployments
-
-Planned support:
-- DaemonSets
-- Uncontrolled Pods
-- ...and more!
+Kubescaler is configured on a workload-by-workload basis via annotations. Currently, only deployment workloads are supported.
 
 | Annotation | Description | Example(s) |
 | ---------- | ----------- | ---------- |

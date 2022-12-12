@@ -10,7 +10,11 @@ A Github repository with sample files which follow the below instructions can be
 
 ### Step 1: Setting up the CUR
 
-Follow [these steps](https://docs.aws.amazon.com/cur/latest/userguide/cur-create.html) to set up a CUR. For time granularity, select _Daily_. Be sure to enable Resource IDs and Athena integration when creating the CUR.
+Follow [these steps](https://docs.aws.amazon.com/cur/latest/userguide/cur-create.html) to set up a CUR using the settings below.
+
+> - For time granularity, select **Daily**.
+> - Select the checkbox to enable **Resource IDs** in the report.
+> - Select the checkbox to enable **Athena integration** with the report.
 
 Remember the name of the bucket you create for CUR data. This will be used in Step 2.
 
@@ -423,7 +427,7 @@ You can also check query history to see if any queries are failing:
 
 ![Screen Shot 2020-12-06 at 9 43 50 PM](https://user-images.githubusercontent.com/453512/101319633-24ef5500-3817-11eb-9f87-55a903428936.png)
 
-### Common Athena errors.
+### Common Athena errors
 
 #### Incorrect bucket in IAM Policy.
 
@@ -475,6 +479,23 @@ QueryAthenaPaginated: start query error: operation error Athena: StartQueryExecu
 ```
 
 * **Resolution:** Previously, if you ran a query without specifying a value for Query result location, and the query result location setting was not overridden by a workgroup, Athena created a default location for you. Now, before you can run an Athena query in a region in which your account hasn't used Athena previously, you must specify a query result location, or use a workgroup that overrides the query result location setting. While Athena no longer creates a default query results location for you, previously created default aws-athena-query-results-MyAcctID-MyRegion locations remain valid and you can continue to use them. https://docs.aws.amazon.com/athena/latest/ug/querying.html#query-results-specify-location The bucket should be in the format of: `aws-athena-query-results-MyAcctID-MyRegion` It may also be required to remove and reinstall Kubecost. If doing this please remeber to backup ETL files prior or contact support for additional assistance.
+	
+#### Missing Athena Column
+	
+* **Symptom:** An error is shown under "Pricing Sources" on the "Diagnostics" page or in the Kubecost `cost-model` container logs.
+	
+```
+QueryAthenaPaginated: query execution error: no query results available for query <Athena Query ID>
+ 
+Checking the athena logs we see a syntax error:
+   
+SYNTAX_ERROR: line 4:3: Column 'line_item_resource_id' cannot be resolved
+
+This query ran against the "<DB Name>" database, unless qualified by the query
+```
+
+* **Resolution:** Verify in the AWS "Cost and Ussage" report UI that the **Resource IDs** are enabled as "Report content" for the CUR report created in Step 1. If the **Resource IDs** are not enabled you will need to re-create the report, this will require redoing Steps 1
+ and 2 from this page.
 
 ## Summary and pricing
 
