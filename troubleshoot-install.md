@@ -111,6 +111,22 @@ Alternatively, you can deploy Kubecost without persistent storage to store by fo
     --set prometheus.server.persistentVolume.enabled="false"
     ```
 
+## Issue: waiting for a volume to be created, either by external provisioner "ebs.csi.aws.com" or manually created by system administrator.
+
+If the PVC is in pending state for more than 5 minutes, the cluster is Amazon EKS 1.23+ the error message appears as the following example:
+
+```bash
+kubectl describe pvc cost-analyzer -n kubecost | grep "ebs.csi.aws.com"
+```
+Example result
+```
+Annotations:   volume.beta.kubernetes.io/storage-provisioner: ebs.csi.aws.com
+               volume.kubernetes.io/storage-provisioner: ebs.csi.aws.com
+  Normal  ExternalProvisioning  69s (x82 over 21m)  persistentvolume-controller  waiting for a volume to be created, either by external provisioner "ebs.csi.aws.com" or manually created by system administrator
+```
+
+You need to install [AWS EBS CSI driver](https://docs.aws.amazon.com/eks/latest/userguide/ebs-csi.html) because the Amazon EKS cluster version 1.23+ uses "ebs.csi.aws.com" provisioner even the AWS EBS CSI ddriver has not been installed yet.
+
 ## Issue: Unable to establish a port-forward connection
 
 Review the output of the port-forward command:
