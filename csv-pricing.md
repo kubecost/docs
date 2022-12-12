@@ -41,8 +41,8 @@ Provide a file path for your CSV pricing data in [values.yaml](https://github.co
 
 ``` yaml
 pricingCsv:
-    enabled: true
-    location:
+  enabled: true
+  location:
     provider: "AWS|GCP"
     region: "us-east-1"
     URI: s3://YOUR_BUCKET/path/custom-pricing.csv
@@ -118,13 +118,16 @@ The following logic is used to match node prices accurately:
 You can check a summary of the number of nodes that have matched with the CSV by visiting /model/pricingSourceCounts. The response is a JSON object of the form:
 
 ``` jsonc
-data:
 {
-	TotalNodes: 10
-	PricingType: {
-		csvExact: 5 // exact matches by the providerID field
-		csvClass: 4 // matches where the region and instanceType match
-		"": 1 // matches that use our default pricing
+    "code": 200,
+    "status": "success",
+    "data": {
+        "TotalNodes": 10,
+        "PricingType": {
+            "csvExact": 5, // exact matches by the providerID field
+            "csvClass": 4, // matches where the region and instanceType match
+            "": 1 // matches that use our default pricing
+        }
     }
 }
 ```
