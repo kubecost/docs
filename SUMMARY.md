@@ -10,6 +10,7 @@
   * [Provider Installations](install-and-configure/install/provider-installations/README.md)
     * [Amazon EKS Integration](aws-eks-cost-monitoring.md)
     * [AWS Marketplace Install](aws-marketplace-install.md)
+    * [Installing Kubecost on Alibaba](alibaba-install.md)
     * [Installation Kubecost with Istio (Rancher)](istio-rancher.md)
     * [Installing Kubecost with Rafay](rafay.md)
     * [Installing Kubecost with Plural](install-on-plural.md)
@@ -84,6 +85,7 @@
   * [Alerts](alerts.md)
   * [Advanced Reporting](advanced-reports.md)
   * [Kubernetes Assets](assets.md)
+  * [CSV Pricing](csv-pricing.md)
 
 ## APIs
 
