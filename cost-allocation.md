@@ -61,6 +61,10 @@ View Allocation data in the following formats:
 4. Proportional cost: Cost per aggregate displayed as a percentage of total cost over date range
 5. Cost Treemap: Heirarchically structured view of costs in current aggregation
 
+You can select _Edit Report_ > _Chart_, then select _Cost over time_ from the dropdown to have your data displayed by a per-day basis. Hovering over any day's data will provide a breakdown of your spending.
+
+![Cost over time data](https://raw.githubusercontent.com/kubecost/docs/main/images/perdaybasis.png)
+
 ### Cost metric
 
 View either cumulative or run rate costs measured over the selected time window based on the resources allocated.
