@@ -4,7 +4,7 @@ Kubecost Advanced Reporting allows teams to sculpt and tailor custom reports to 
 
 <figure><img src=".gitbook/assets/advancedreporting.PNG" alt=""><figcaption></figcaption></figure>
 
-## Report Configurations
+## Report configurations
 
 A UI is provided to manage the configurations which make up a report. Advanced Reporting is accessed from the selecting _Reports_ from the left navigation, then selecting _Visit the new Advanced Reporting page (Beta)_.
 
