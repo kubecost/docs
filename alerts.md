@@ -2,16 +2,16 @@
 
 ## Summary
 
-Kubecost alerts allow teams to receive updates on real-time Kubernetes spend. They are configurable via the Kubecost UI or Helm values. This resource gives an overview of how to configure Kubecost email and Slack alerts using [Kubecost Helm chart values](https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/values.yaml). The following alert types are supported:
+Kubecost alerts allow teams to receive updates on real-time Kubernetes spend. They are configurable via the Kubecost UI or Helm values. This resource gives an overview of how to configure Kubecost email and Slack alerts using [Kubecost Helm chart values](https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/values.yaml). Alerts are either created to monitor specific data sets and trends, or they must be toggled on or off. The following alert types are supported:
 
-1. [Recurring update](alerts.md#type-recurring-update): sends an email and/or Slack alert with cluster spend across all or a subset of kubernetes resources.
-2. [Budget](alerts.md#type-budget): sends an email and/or Slack alert when spend crosses a defined threshold
-3. [Spend Change](alerts.md#type-spend-change): sends an email and/or Slack alert reporting unexpected spend increases relative to moving averages
-4. \[Beta] [Efficiency](alerts.md#type-efficiency): detect when a Kubernetes tenant is operating below a target cost-efficiency threshold
-5. [Kubecost Health Diagnostic](alerts.md#type-kubecost-health-diagnostic): used for production monitoring for the health of Kubecost itself
-6. [Cluster Health](alerts.md#type-cluster-health): used to determine if the cluster's health score changes by a specific threshold.
-7. [Asset Budget](alerts.md#type-asset-budget): sends an email and/or Slack alert when spend for a particular set of assets crosses a defined threshold.
-8. [Cloud Report](alerts.md#type-cloud-report): sends an email and/or Slack alert with asset spend across all or a subset of cloud resources.
+1. [Allocation Budget](alerts.md#type-budget): Sends an email and/or Slack alert when spending crosses a defined threshold
+2. \[Beta] [Allocation Efficiency](alerts.md#type-efficiency): Detects when a Kubernetes tenant is operating below a target cost-efficiency threshold
+3. [Allocation Recurring Update](alerts.md#type-recurring-update): Sends an email and/or Slack alert with cluster spending across all or a subset of kubernetes resources.
+4. [Allocation Spend Change](alerts.md#type-spend-change): Sends an email and/or Slack alert reporting unexpected spend increases relative to moving averages
+5. [Asset Budget](alerts.md#type-asset-budget): sends an email and/or Slack alert when spend for a particular set of assets crosses a defined threshold.
+6. [Cloud Report](alerts.md#type-cloud-report): sends an email and/or Slack alert with asset spend across all or a subset of cloud resources.
+7. [Monitor Cluster Health](alerts.md#type-cluster-health): used to determine if the cluster's health score changes by a specific threshold. Can only be toggled on/off.
+8. [Monitor Kubecost Health](alerts.md#type-kubecost-health-diagnostic): used for production monitoring for the health of Kubecost itself. Can only be toggled on/off.
 
 Have questions or issues? View our [troubleshooting guide](alerts.md#troubleshooting).
 
@@ -48,7 +48,67 @@ notifications:
 
 In addition to `globalSlackWebhookUrl` and `globalAlertEmails` fields, every alert allows optional individual `ownerContact` (a list of email addresses) and `slackWebhookUrl` (if different from `globalSlackWebhookUrl`) fields. Alerts will default to the global Slack and email settings if these optional fields are not supplied.
 
-### Type: Recurring update
+### Type: Allocation Budget
+
+Define spend budgets and alert on budget overruns.
+
+_Required parameters:_
+
+* `type: budget`
+* `threshold: <amount>` -- cost threshold in configured currency units
+* `aggregation: <agg-parameter>` -- configurable, accepts all aggregations supported by the [aggregated cost model API](https://github.com/kubecost/docs/blob/2ea9021e8530369d53184ea5382b2e4c080bb426/allocation-api.md#aggregated-cost-model-api)
+* `filter: <value>` -- configurable, accepts a single filter value (comma-separated values unsupported)
+* `window: <N>d` or `<M>h` -- configurable, (1 ≤ N ≤ 7, 1 ≤ M ≤ 24)
+
+Example Helm _values.yaml_:
+
+```
+# Daily namespace budget alert on namespace `kubecost`
+- type: budget
+  threshold: 50
+  window: daily # or 1d
+  aggregation: namespace
+  filter: kubecost
+# 3d cluster budget alert on cluster `cluster-one`
+- type: budget
+  threshold: 600
+  window: 3d
+  aggregation: cluster
+  filter: cluster-one
+```
+***
+
+### Type: Allocation Efficiency
+
+> **Note**: this feature is currently in Beta.
+
+Alert when Kubernetes tenants, e.g. namespaces or label sets, are running below defined cost-efficiency thresholds.
+
+_Required parameters:_
+
+* `type: efficiency`
+* `efficiencyThreshold: <threshold>` -- efficiency threshold ranging from 0.0 to 1.0
+* `aggregation: <agg-parameter>` -- configurable, accepts all aggregations supported by the [aggregated cost model API](https://github.com/kubecost/docs/blob/2ea9021e8530369d53184ea5382b2e4c080bb426/allocation-api.md#aggregated-cost-model-api)
+* `window: <N>d` number of days for measuring efficiency
+
+_Optional parameters:_
+
+* `filter: <value>` -- limit the aggregations that this alert will cover, accepts comma-separated values
+* `spendThreshold` represents a minimum spend threshold for alerting
+
+The example below sends a Slack alert when any namespace spending is running below 40% cost efficiency and has spent more than $100 during the last day.
+
+```
+- type: efficiency
+  efficiencyThreshold: 0.4  # Alert if below this percentage cost efficiency
+  spendThreshold: 100 # optional, alert if tenant has spend more than $100 over this window
+  window: 1d    # measure efficiency over last 
+  aggregation: namespace
+  slackWebhookUrl: ‘https://hooks.slack.com/services/TE6GRBNET/BFFK0P848/jFWmsadgfjhiBJp30p’ # optional, overrides global Slack webhook 
+```
+***
+
+### Type: Allocation Recurring Update
 
 Sends a recurring email and/or Slack alert with a summary report of cost and efficiency metrics.
 
@@ -105,66 +165,39 @@ Example Helm _values.yaml_:
     - owner2@example.com
   slackWebhookUrl: https://hooks.slack.com/services/<different-from-global> # optional, overrides globalSlackWebhookUrl default
 ```
+***
 
-### Type: Efficiency
+### Type: Allocation Spend change
 
-> Note: this feature is currently in Beta
-
-Alert when Kubernetes tenants, e.g. namespaces or label sets, are running below defined cost-efficiency thresholds.
+Detect unexpected spend increases/decreases relative to historical moving averages.
 
 _Required parameters:_
 
-* `type: efficiency`
-* `efficiencyThreshold: <threshold>` -- efficiency threshold ranging from 0.0 to 1.0
-* `aggregation: <agg-parameter>` -- configurable, accepts all aggregations supported by the [aggregated cost model API](https://github.com/kubecost/docs/blob/2ea9021e8530369d53184ea5382b2e4c080bb426/allocation-api.md#aggregated-cost-model-api)
-* `window: <N>d` number of days for measuring efficiency
+* `type: spendChange`
+* `relativeThreshold: <N>` -- configurable, N ≥ -1
+* `aggregation: <agg-value>` -- configurable, accepts all aggregations supported by the [aggregated cost model API](https://github.com/kubecost/docs/blob/2ea9021e8530369d53184ea5382b2e4c080bb426/allocation-api.md#aggregated-cost-model-api)
+* `window: <N>d` or `<M>h` -- configurable, (1 ≤ N ≤ 7, 1 ≤ M ≤ 24)
+* `baselineWindow: <N>d` -- configurable, N ≥ 1
 
 _Optional parameters:_
 
 * `filter: <value>` -- limit the aggregations that this alert will cover, accepts comma-separated values
-* `spendThreshold` represents a minimum spend threshold for alerting
-
-The example below sends a Slack alert when any namespace spending is running below 40% cost efficiency and has spent more than $100 during the last day.
-
-```
-- type: efficiency
-  efficiencyThreshold: 0.4  # Alert if below this percentage cost efficiency
-  spendThreshold: 100 # optional, alert if tenant has spend more than $100 over this window
-  window: 1d    # measure efficiency over last 
-  aggregation: namespace
-  slackWebhookUrl: ‘https://hooks.slack.com/services/TE6GRBNET/BFFK0P848/jFWmsadgfjhiBJp30p’ # optional, overrides global Slack webhook 
-```
-
-### Type: Budget
-
-Define spend budgets and alert on budget overruns.
-
-_Required parameters:_
-
-* `type: budget`
-* `threshold: <amount>` -- cost threshold in configured currency units
-* `aggregation: <agg-parameter>` -- configurable, accepts all aggregations supported by the [aggregated cost model API](https://github.com/kubecost/docs/blob/2ea9021e8530369d53184ea5382b2e4c080bb426/allocation-api.md#aggregated-cost-model-api)
-* `filter: <value>` -- configurable, accepts a single filter value (comma-separated values unsupported)
-* `window: <N>d` or `<M>h` -- configurable, (1 ≤ N ≤ 7, 1 ≤ M ≤ 24)
 
 Example Helm _values.yaml_:
 
 ```
-# Daily namespace budget alert on namespace `kubecost`
-- type: budget
-  threshold: 50
-  window: daily # or 1d
+# Daily spend change alert on the 
+- type: spendChange
+  relativeThreshold: 0.20   # change relative to baseline average cost. Must be greater than -1 (can be negative).
+  window: 1d                # accepts ‘d’, ‘h’
+  baselineWindow: 30d       # previous window, offset by window
   aggregation: namespace
-  filter: kubecost
-# 3d cluster budget alert on cluster `cluster-one`
-- type: budget
-  threshold: 600
-  window: 3d
-  aggregation: cluster
-  filter: cluster-one
+  filter: kubecost, default # accepts csv
 ```
 
-### Type: Asset budget
+***
+
+### Type: Asset Budget
 
 Define asset budgets and alert when cloud or Kubernetes assets overrun the threshold set.
 
@@ -206,7 +239,7 @@ Example Helm _values.yaml_:
 
 ***
 
-### Type: Cloud report
+### Type: Cloud Report
 
 Sends a recurring email and/or Slack alert with a cloud and/or Kubernetes assets summary report.
 
@@ -255,37 +288,31 @@ Example Helm _values.yaml_:
 
 ***
 
-### Type: Spend change
+### Type: Monitor Cluster Health
 
-Detect unexpected spend increases/decreases relative to historical moving averages.
+Cluster health alerts occur when the cluster health score changes by a specific threshold. The health score is calculated based on the following criteria:
 
-_Required parameters:_
+* Low Cluster Memory
+* Low Cluster CPU
+* Too Many Pods
+* Crash Looping Pods
+* Out of Memory Pods
+* Failed Jobs
 
-* `type: spendChange`
-* `relativeThreshold: <N>` -- configurable, N ≥ -1
-* `aggregation: <agg-value>` -- configurable, accepts all aggregations supported by the [aggregated cost model API](https://github.com/kubecost/docs/blob/2ea9021e8530369d53184ea5382b2e4c080bb426/allocation-api.md#aggregated-cost-model-api)
-* `window: <N>d` or `<M>h` -- configurable, (1 ≤ N ≤ 7, 1 ≤ M ≤ 24)
-* `baselineWindow: <N>d` -- configurable, N ≥ 1
-
-_Optional parameters:_
-
-* `filter: <value>` -- limit the aggregations that this alert will cover, accepts comma-separated values
+This alert only uses Slack (email coming soon), so it requires the `globalSlackWebhookUrl` field, or setting the `slackWebhookUrl` field for the alert.
 
 Example Helm _values.yaml_:
 
 ```
-# Daily spend change alert on the 
-- type: spendChange
-  relativeThreshold: 0.20   # change relative to baseline average cost. Must be greater than -1 (can be negative).
-  window: 1d                # accepts ‘d’, ‘h’
-  baselineWindow: 30d       # previous window, offset by window
-  aggregation: namespace
-  filter: kubecost, default # accepts csv
+# Health Score Alert 
+- type: health              # Alerts when health score changes by a threshold
+  window: 10m
+  threshold: 5              # Send Alert if health scores changes by 5 or more
 ```
 
 ***
 
-### Type: Kubecost health diagnostic
+### Type: Monitor Kubecost Health
 
 Enabling diagnostic alerts in Kubecost occur when an event impacts product uptime. This feature can be enabled in seconds from a values file. The following events are grouped into distinct categories that each result in a separate alert notification:
 
@@ -331,35 +358,11 @@ Example Helm _values.yaml_:
 
 ***
 
-### Type: Cluster health
-
-Cluster health alerts occur when the cluster health score changes by a specific threshold. The health score is calculated based on the following criteria:
-
-* Low Cluster Memory
-* Low Cluster CPU
-* Too Many Pods
-* Crash Looping Pods
-* Out of Memory Pods
-* Failed Jobs
-
-This alert only uses Slack (email coming soon), so it requires the `globalSlackWebhookUrl` field, or setting the `slackWebhookUrl` field for the alert.
-
-Example Helm _values.yaml_:
-
-```
-# Health Score Alert 
-- type: health              # Alerts when health score changes by a threshold
-  window: 10m
-  threshold: 5              # Send Alert if health scores changes by 5 or more
-```
-
-***
-
 ## Configuring alerts in the Kubecost UI
 
-### Cluster Health and Diagnostic Alerts
+### Cluster and Kubecost Health Alerts
 
-Cluster Health Alerts and Diagnostic Alerts work differently from other alert types. While other alerts monitor cost data for cost or efficiency anomalies, Health and Diagnostics montior the health of Kubecost itself, as well as the health of the cluster running Kubecost. The UI treats these alert types as "on" or "off", managing a single instance of each, and allowing the settings of this single instance to be adjusted.
+Cluster Health Alerts and Kubecost Health Alerts work differently from other alert types. While other alerts monitor cost data for cost or efficiency anomalies, these two montior the health of Kubecost itself, as well as the health of the cluster running Kubecost. For this reason, multiple of these alert types cannot be created. In the UI, switches for these alert types can be toggled either on or off, managing a single instance of each, and allowing the settings of these single instances to be adjusted.
 
 <figure><img src=".gitbook/assets/alertshealth.png" alt=""><figcaption><p>Cluster and Kubecost Health Alerts</p></figcaption></figure>
 
