@@ -375,13 +375,13 @@ Global recipients specify a default fallback recipient for each type of message.
 
 The remaining Alert types share some commonality: they all target a set of Cost Allocation data with `window`, `aggregation` and `filter` parameters, and trigger based on the target data. The table results can be filtered using the "Filter alerts" input at the top-right of the table. This input can be used to filter based on alert type, aggregation, window, and/or filter.
 
-<figure><img src=".gitbook/assets/createalert.png" alt=""><figcaption><p>Create Alert window</p></figcaption></figure>
-
 The _+ Create Alert_ button opens a window where you can insert details about a new alert.
 
-![Kubecost Create Alert window](https://raw.githubusercontent.com/kubecost/docs/main/images/new\_alert\_dialog.png)
+<figure><img src=".gitbook/assets/createalert.png" alt=""><figcaption><p>Create Alert window</p></figcaption></figure>
 
 Alerts can also be edited, removed, and tested from the table. Editing opens a dialog similar to the alert creation dialog, for editing the chosen alert.
+
+When creating an alert, you can have these alerts sent to Slack or via email. You can customize the subject field for an email, and attach multiple recipients. Alerts sent via email will contain a PDF of your report which shows the Kubecost UI for your Allocation/Asset page(s). This can be helpful for distributing visual information to those without immediate access to Kubecost.
 
 ### Testing alerts
 

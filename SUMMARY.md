@@ -79,7 +79,7 @@
   * [Spot Checklist](spot-checklist.md)
   * [Spot Cluster Sizing](spot-cluster-sizing.md)
   * [Automatic Request Right-Sizing](auto-request-sizing.md)
-    * [Guide: 1-click Request Sizing](guide-one-click-request-sizing.md)
+    * [Guide: 1-click Request Sizing](using-kubecost/getting-started/auto-request-sizing/guide-1-click-request-sizing.md)
     * [Continuous Request Right-Sizing](continuous-request-sizing.md)
   * [Saved Reports](saved-reports.md)
   * [Alerts](alerts.md)
