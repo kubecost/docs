@@ -4,6 +4,7 @@ root: ./
     summary: SUMMARY.md​
 
 redirects:
+    enterprise: install-and-configure/install#enterprise-features
     alerts.html: alerts.md
     hc/en-us/articles/10015110616599: federated-etl.md
     hc/en-us/articles/10018767892119: user-management-oidc.md
