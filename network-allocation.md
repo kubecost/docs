@@ -2,7 +2,7 @@
 
 This document describes how Kubecost calculates network costs.
 
-
+![network-costs screenshot](images/network-cost-overview.png)
 ## Network Cost Calculation Methodology
 
 Kubecost uses best-effort to allocate network transfer costs to the workloads generating those costs. The level of accuracy has several factors described below.
