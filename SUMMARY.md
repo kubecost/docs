@@ -51,7 +51,7 @@
   * [User Management - SSO/SAML/RBAC](user-management.md)
   * [Multi-Cluster Options](multi-cluster.md)
   * [Federated Clusters](federated-clusters.md)
-  * [v1.94+ TurndownSchedule Migration Guide](v1-94-turndown-schedule-migration-guide.md)
+  * [TurndownSchedule Migration Guide](turndown-schedule-migration-guide.md)
   * [Deploy Kubecost Staging Builds](staging.md)
   * [Cluster Controller](controller.md)
   * [High Availability Kubecost](high-availability.md)
