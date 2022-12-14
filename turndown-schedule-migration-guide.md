@@ -1,9 +1,9 @@
-v1.94+ TurndownSchedule Migration Guide
+TurndownSchedule Migration Guide
 =======================================
 
 In v1.94 of Kubecost, the `turndownschedules.kubecost.k8s.io/v1alpha1` Custom Resource Definition (CRD) was [moved](https://github.com/kubecost/cost-analyzer-helm-chart/pull/1444) to `turndownschedules.kubecost.com/v1alpha1` to adhere to [Kubernetes policy for CRD domain namespacing](https://github.com/kubernetes/enhancements/pull/1111). This is a breaking change for users of Cluster Controller's turndown functionality. Please follow this guide for a successful migration of your turndown schedule resources.
 
-> As part of this change, the CRD was updated to use `apiextensions.k8s.io/v1` because `v1beta1` was removed in K8s v1.22. If using Kubecost v1.94+, Cluster Controller's turndown functionality will not work on K8s versions before the introduction of `apiextensions.k8s.io/v1`.
+> **Note**: As part of this change, the CRD was updated to use `apiextensions.k8s.io/v1` because `v1beta1` was removed in K8s v1.22. If using Kubecost v1.94+, Cluster Controller's turndown functionality will not work on K8s versions before the introduction of `apiextensions.k8s.io/v1`.
 
 ## Scenario 1: You have deployed Cluster Controller but don't use turndown
 

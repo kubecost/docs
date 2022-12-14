@@ -11,22 +11,22 @@ Kubecost provides real-time cost visibility and insights for teams using Kuberne
 *   **Cost Allocation**
 
     Flexible, customizable cost breakdown and resource allocation for accurate showbacks, [chargebacks](https://blog.kubecost.com/blog/kubernetes-chargeback), and ongoing monitoring
-*   #### Unified cost monitoring
+*   **Unified cost monitoring**
 
     See all of your Kubernetes and out-of-cluster spend in one place, with full cloud service billing integration
-*   #### Optimization Insights
+*   **Optimization Insights**
 
     Get customized recommendations based on your own environment and behavior patterns
-*   #### Alerts & Governance
+*   **Alerts & Governance**
 
     Achieve peak application performance and improve reliability with customizable alerts, configurable Availability Tiers, and real-time updates.
-*   #### Purpose-built for teams running Kubernetes
+*   **Purpose-built for teams running Kubernetes**
 
     Running containers on Kubernetes requires a new approach for visualizing and optimizing spend. Kubecost is designed from the ground up for Kubernetes and the Cloud Native ecosystem.
-*   #### Own & control all of your own data
+*   **Own & control all of your own data**
 
     Kubecost is fully deployed in your infrastructure—we don’t require you to egress any data to a remote service. It’s deeply important to us that users are able to retain and control access to their own private information, e.g. sensitive cloud spend data.
-*   #### Built on open source
+*   **Built on open source**
 
     Kubecost began as an open source project with a goal of giving small engineering teams access to great cost visibility. As a result, our solution is tightly integrated with the open source cloud native ecosystem, e.g. Kubernetes, Prometheus, and Grafana.
 {% endtab %}
@@ -34,7 +34,7 @@ Kubecost provides real-time cost visibility and insights for teams using Kuberne
 {% tab title="Business Features" %}
 For medium-sized teams and companies with more complex infrastructure you need the right features in place for efficiency, administration, and security. Kubecost Business offers even more features and control so that any team can use our products, according to your entire organization’s standards.
 
-*   #### Multi-cluster visibility
+*   **Multi-cluster visibility**
 
     View all Kubernetes clusters by easily toggling between each individual cluster. Supports installation of Kubecost across an unlimited number of individual clusters.
 *   **Long-term metric retention & saved reports**
@@ -59,7 +59,10 @@ For larger teams and companies with more complex infrastructure, you need the ri
     Retain data for years with various durable storage options. Provides record keeping on spend, allocation, and efficiency metrics with simple backup & restore functionality.
 *   **Access control with SSO/SAML**
 
-    Finely manage read and/or admin access by individual users or user groups. [Learn more](https://github.com/kubecost/docs/blob/master/user-management.md)
+    Finely manage read and/or admin access by individual users or user groups. [Learn more](https://github.com/kubecost/docs/blob/master/user-management.md).
+*   **High availability mode**
+
+    Use multiple Kubecost replica pods with a Leader/Follower implementation to ensure one leader always exists across all replicas to run high availability mode. [Learn more](https://docs.kubecost.com/install-and-configure/advanced-configuration/high-availability).
 *   **Advanced custom pricing**
 
     Advanced custom pricing pipelines give teams the ability to set custom per-asset pricing for resources. This is typically used for on-prem and air-gapped environments, but can also be applied to teams that want to allocate internal costs differently than cloud provider defaults.
@@ -84,6 +87,3 @@ For larger teams and companies with more complex infrastructure, you need the ri
 * You can run [Helm Template](https://helm.sh/docs/helm/helm\_template/) against the [Kubecost Helm Chart](https://github.com/kubecost/cost-analyzer-helm-chart/) to generate local YAML output. This requires extra effort when compared to directly installing the Helm Chart but is more flexible than deploying static YAML.
 * You can install via [flat manifest](https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/README.md#manifest). This install path provides less flexibility for managing your deployment and has several product limitations, e.g. Thanos is not easily enabled.
 * Lastly, you can deploy the open source OpenCost project directly as a Pod. This install path provides a subset of free functionality and is available [here](https://www.opencost.io/docs/install). Specifically, this install path deploys the underlying cost allocation model without the same UI or access to enterprise functionality, e.g. SAML support.
-
-
-
