@@ -5,8 +5,8 @@ Kubecost's ETL is a computed cache based on Prometheus's metrics, from which the
 
 There are a number of reasons why you may want to backup this ETL data:
 
-* to ensure a copy of your Kubecost data exists, so that you can restore the data if needed
-* if you would like to reduce the amount of data stored in Prometheus (15 day retention window by default) or Thanos
+* To ensure a copy of your Kubecost data exists, so that you can restore the data if needed
+* If you would like to reduce the amount of data stored in Prometheus (15 day retention window by default) or Thanos
 
 ## Option 1: Backup via Bash script
 
