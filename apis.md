@@ -1,6 +1,4 @@
-# apis
-
-## APIs
+# Kubecost API Directory
 
 This resource covers primary APIs across open source and commercial Kubecost products.
 
