@@ -10,7 +10,7 @@ To configure Kubecost's Azure Cloud Integration, you will need to set up daily e
 
 ## Step 1: Export Azure cost report
 
-Follow this [Azure guide](https://learn.microsoft.com/en-us/azure/cost-management-billing/costs/tutorial-export-acm-data) to export cost reports. Ensure you select the "Daily export of month-to-date costs" and "Amortized cost (Usage and Purchases)" options. Also take note of the "StorageAccount" and "StorageContainer" specified when choosing where to export the data to.
+Follow this [Azure guide](https://learn.microsoft.com/en-us/azure/cost-management-billing/costs/tutorial-export-acm-data) to export cost reports. Ensure you select the "Daily export of month-to-date costs" and "Amortized cost (Usage and Purchases)" options while leaving off File Partitioning. Also take note of the "StorageAccount" and "StorageContainer" specified when choosing where to export the data to.
 
 Alternatively, you can follow this [Kubecost guide](https://github.com/kubecost/azure-hackfest-lab/tree/a51fad1b9640b5991e5d567941f5086eb626a83f/0\_create-azure-cost-export).
 
