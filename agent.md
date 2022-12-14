@@ -1,4 +1,4 @@
-# Installing Agent for Kubecost Cloud (limited access)
+# Installing Agent for Kubecost Cloud (Alpha)
 
 The _kubecost-agent_ is a lightweight Kubecost exporter that sends metrics to Kubecost Cloud. In order to install the _kubecost-agent_, you will need a specific key provided by Kubecost.
 
