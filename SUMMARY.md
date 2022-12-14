@@ -7,6 +7,7 @@
 * [Installation](install.md)
   * [Environment](install-and-configure/install/environment.md)
   * [Helm Parameters](helm-install-params.md)
+  * [Ingress Examples](ingress-examples.md)
   * [Provider Installations](install-and-configure/install/provider-installations/README.md)
     * [Amazon EKS Integration](aws-eks-cost-monitoring.md)
     * [AWS Marketplace Install](aws-marketplace-install.md)
@@ -22,12 +23,10 @@
     * [Amazon Managed Service for Prometheus](aws-amp-integration.md)
     * [Grafana Cloud Integration for Kubecost](grafana-cloud-integration.md)
   * [Cost Analyzer Persistent Volume](storage.md)
-  * [Network Traffic Cost Allocation](network-allocation.md)
-  * [Contexts](context-switcher.md)
-  * [Ingress Examples](ingress-examples.md)
 * [Advanced Configuration](install-and-configure/advanced-configuration/README.md)
   * [Add Key](add-key.md)
   * [Enabling Annotation Emission](annotations.md)
+  * [Network Traffic Cost Allocation](network-allocation.md)
   * [Multi-Cluster Options](multi-cluster.md)
   * [Federated Clusters](federated-clusters.md)
   * [v1.94+ TurndownSchedule Migration Guide](v1-94-turndown-schedule-migration-guide.md)
@@ -86,6 +85,7 @@
   * [Advanced Reporting](advanced-reports.md)
   * [Kubernetes Assets](assets.md)
   * [CSV Pricing](csv-pricing.md)
+  * [Contexts](context-switcher.md)
 
 ## APIs
 
