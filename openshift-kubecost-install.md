@@ -1,14 +1,9 @@
 Install Kubecost on Red Hat OpenShift cluster
 ==================
 
-# Overview
-
-In this documentation, you will learn how to deploy Kubecost on the Red Hat OpenShift cluster with step-by-step instructions. Next, let's start with the Architecture overview and then move forward to the installation section for instructions. 
-
----
 ## Architecture overview:
 
-Currently, there are 2 main options to deploy Kubecost on Red Hat OpenShift Cluster (OCP).
+Currently, there are two main options to deploy Kubecost on Red Hat OpenShift Cluster (OCP).
 
 ### Standard deployment:
 
@@ -26,18 +21,16 @@ The Grafana managed Prometheus deployment is illustrated in the following diagra
 
 ![Grafana managed Prometheus deployment](https://raw.githubusercontent.com/kubecost/docs/main/images/ocp-grafana-agent.png)
 
-## Installation instructions:
+## Standard deployment guide
 
-### Standard deployment:
-
-#### Prerequisites:
+### Prerequisites:
 
 - You have an existing OpenShift cluster.
 - You have appropriate access to that OpenShift cluster to create a new project and deploy new workloads.
 
-#### Installation:
+### Installation:
 
-Run the following helm install command to install Kubecost:
+Run the following Helm install command to install Kubecost:
 
 ```bash
 helm upgrade --install kubecost \
@@ -48,7 +41,7 @@ helm upgrade --install kubecost \
 
 If you want to install Kubecost with your desired cluster name, you can use the following commands:
 
-> **Note**: remember to replace CLUSTER_ID's value by your desired value
+> **Note**: Remember to replace CLUSTER_ID's value by your desired value
 
 ```bash
 export CLUSTER_ID="CLUSTER_OCP"
@@ -67,9 +60,9 @@ Create a route to the service `kubecost-cost-analyzer` on port `9090` of the `ku
 
 Kubecost will be collecting data, please wait 5-15 minutes for the UI to reflect the resources in the local cluster.
 
-### Grafana managed Prometheus deployment:
+## Grafana managed Prometheus deployment:
 
-#### Prerequisites:
+### Prerequisites:
 
 - You have created a Grafana Cloud account and you have permissions to create Grafana Cloud API keys
 - Add required service account for grafana-agent to `hostmount-anyuid` SCC:
@@ -78,9 +71,9 @@ Kubecost will be collecting data, please wait 5-15 minutes for the UI to reflect
 oc adm policy add-scc-to-user hostmount-anyuid system:serviceaccount:kubecost:grafana-agent
 ```
 
-#### Installation:
+### Installation:
    
-##### Step 1: Install the Grafana Agent on your cluster.
+#### Step 1: Install the Grafana Agent on your cluster.
 
 On the existing K8s cluster that you intend to install Kubecost, run the following commands to install Grafana agent to scrape the metrics from Kubecost /metrics endpoint. The script below installs Grafana agent with the necessary scraping configuration for Kubecost, you may want to add an additional scrape configuration for your setup. Please remember to replace the following values with your actual Grafana cloud's values:
 
@@ -403,11 +396,11 @@ MANIFEST_URL=https://raw.githubusercontent.com/kubecost/openshift-helm-chart/mai
 
 To learn more about how to install and config Grafana agent as well as additional scrape configuration, please refer to [Grafana Agent for Kubernetes](https://grafana.com/docs/grafana-cloud/kubernetes/agent-k8s/k8s_agent_metrics/) section of the Grafana Cloud documentation. Or you can check Kubecost Prometheus scrape config at this [Github repository](https://github.com/kubecost/cost-analyzer-helm-chart/blob/ebe7e088debecd23f90e6dd75b425828901a246c/cost-analyzer/charts/prometheus/values.yaml#L1152)
 
-##### Step 2: Verify if grafana-agent is scraping data successfully.
+#### Step 2: Verify if grafana-agent is scraping data successfully.
 
 `kubectl -n kubecost logs grafana-agent-0`
 
-##### Step 3: Create dbsecret to allow Kubecost to query the metrics from Grafana Cloud Prometheus.
+#### Step 3: Create dbsecret to allow Kubecost to query the metrics from Grafana Cloud Prometheus.
 
 - Create two files in your working directory, called `USERNAME` and `PASSWORD` respectively
   
@@ -435,6 +428,7 @@ kubectl create secret generic dbsecret \
 ```Bash
 kubectl -n kubecost get secret dbsecret -o json | jq '.data | map_values(@base64d)'
 ```
+
 #### Step 4 (optional): Configure Kubecost recording rules for Grafana Cloud using cortextool.
 
 To set up recording rules in Grafana Cloud, download the [cortextool CLI utility](https://github.com/grafana/cortex-tools). While they are optional, they offer improved performance.
@@ -500,11 +494,11 @@ cortextool rules print \
 --id=<REPLACE-WITH-GRAFANA-PROM-REMOTE-WRITE-USERNAME> \
 --key=<REPLACE-WITH-GRAFANA-PROM-REMOTE-WRITE-API-KEY>
 ```
-##### Step 5: Install Kubecost on the cluster.
+#### Step 5: Install Kubecost on the cluster.
 
 Install Kubecost on your K8s cluster with Grafana Cloud Prometheus query endpoint and `dbsecret` you created in Step 4
 
-> **Note**: remember to replace CLUSTER_ID's value by your desired value 
+> **Note**: Remember to replace CLUSTER_ID's value by your desired value 
 
 ```Bash
 export CLUSTER_ID="CLUSTER_OCP"
@@ -539,11 +533,8 @@ The process is complete. By now, you should have successfully completed the Kube
 
 Optionally, you can also add our [Kubecost Dashboard for Grafana Cloud](https://grafana.com/grafana/dashboards/15714) to your organization to visualize your cloud costs in Grafana.
 
-# Support
+## Support
 
-For advanced setup or if you have any questions, you can contact us on [Slack](https://join.slack.com/t/kubecost/shared_invite/enQtNTA2MjQ1NDUyODE5LWFjYzIzNWE4MDkzMmUyZGU4NjkwMzMyMjIyM2E0NGNmYjExZjBiNjk1YzY5ZDI0ZTNhZDg4NjlkMGRkYzFlZTU) or email at team@kubecost.com
-
-To participate in our free Enterprise onboarding program, contact us at support@kubecost.com to schedule these sessions!
-
+For advanced setup or if you have any questions, you can contact us on [Slack](https://join.slack.com/t/kubecost/shared_invite/enQtNTA2MjQ1NDUyODE5LWFjYzIzNWE4MDkzMmUyZGU4NjkwMzMyMjIyM2E0NGNmYjExZjBiNjk1YzY5ZDI0ZTNhZDg4NjlkMGRkYzFlZTU) or email us at [support@kubecost.com](support@kubecost.com).
 
 <!--- {"article":"8241029276567","section":"4402815636375","permissiongroup":"1500001277122"} --->
