@@ -1,9 +1,9 @@
-Troubleshooting
-===============
+# Troubleshooting
 
 Once an installation is complete, access the Kubecost frontend to view the status of the product. If the Kubecost UI is unavailable, review these troubleshooting resources to determine the problem:
 
 ## General troubleshooting commands
+
 These kubernetes commands can be helpful when finding issues with deployments:
 
 1. This command will find all events that aren't normal, with the most recent listed last. Use this if pods are not even starting:
@@ -49,6 +49,7 @@ These kubernetes commands can be helpful when finding issues with deployments:
 ## Configuring log levels
 
 The log output can be adjusted while deploying through Helm by using the `LOG_LEVEL` and/or `LOG_FORMAT` environment variables. These variables include:
+
 * `trace`
 * `debug`
 * `info`
@@ -56,19 +57,21 @@ The log output can be adjusted while deploying through Helm by using the `LOG_LE
 * `error`
 * `fatal`
 
-For example, to set the log level to `debug`, add the following flag to the Helm command:
+For example, to set the log level to `debug`, add the following flag to the Helm command:  
 
-    --set 'kubecostModel.extraEnv[0].name=LOG_LEVEL,kubecostModel.extraEnv[0].value=debug'
+``` bash
+--set 'kubecostModel.extraEnv[0].name=LOG_LEVEL,kubecostModel.extraEnv[0].value=debug'
+```
 
 `LOG_FORMAT` options:
 
 * `JSON`
-    * A structured logging output
-    * `{"level":"info","time":"2006-01-02T15:04:05.999999999Z07:00","message":"Starting cost-model (git commit \"1.91.0-rc.0\")"}`
+  * A structured logging output
+  * `{"level":"info","time":"2006-01-02T15:04:05.999999999Z07:00","message":"Starting cost-model (git commit \"1.91.0-rc.0\")"}`
 
 * `pretty`
-    * A nice human readable output 
-    * `2006-01-02T15:04:05.999999999Z07:00 INF Starting cost-model (git commit "1.91.0-rc.0")`
+  * A nice human readable output 
+  * `2006-01-02T15:04:05.999999999Z07:00 INF Starting cost-model (git commit "1.91.0-rc.0")`
 
 ## Issue: No persistent volumes available for this claim and/or no storage class is set
 
@@ -76,7 +79,9 @@ Your clusters need a default storage class for the Kubecost and Prometheus persi
 
 To check if a storage class exists, you can run
 
-```kubectl get storageclass```
+```bash
+kubectl get storageclass
+```
 
 You should see a storageclass name with (default) next to it as in this example.
 
@@ -104,18 +109,37 @@ Alternatively, you can deploy Kubecost without persistent storage to store by fo
 
 2. Next, run this command to deploy Kubecost without persistent storage:
 
-    ```
+    ``` bash
     helm upgrade -install kubecost kubecost/cost-analyzer \
     --namespace kubecost --create-namespace \
     --set persistentVolume.enabled="false" \
     --set prometheus.server.persistentVolume.enabled="false"
     ```
 
+## Issue: Waiting for a volume to be created, either by external provisioner "ebs.csi.aws.com" or manually created by system administrator
+
+If the PVC is in a pending state for more than 5 minutes, and the cluster is Amazon EKS 1.23+ the error message appears as the following example:
+
+``` bash
+kubectl describe pvc cost-analyzer -n kubecost | grep "ebs.csi.aws.com"
+```
+
+Example result:
+
+``` bash
+Annotations:   volume.beta.kubernetes.io/storage-provisioner: ebs.csi.aws.com
+               volume.kubernetes.io/storage-provisioner: ebs.csi.aws.com
+                         
+Normal  ExternalProvisioning  69s (x82 over 21m)  persistentvolume-controller  waiting for a volume to be created, either by external provisioner "ebs.csi.aws.com" or manually created by system administrator
+```
+
+You need to install the [AWS EBS CSI driver](https://docs.aws.amazon.com/eks/latest/userguide/ebs-csi.html) because the Amazon EKS cluster version 1.23+ uses "ebs.csi.aws.com" provisioner and the AWS EBS CSI driver has not been installed yet.
+
 ## Issue: Unable to establish a port-forward connection
 
 Review the output of the port-forward command:
 
-```
+``` bash
 $ kubectl port-forward --namespace kubecost deployment/kubecost-cost-analyzer 9090
 Forwarding from 127.0.0.1:9090 -> 9090
 Forwarding from [::1]:9090 -> 9090
@@ -125,14 +149,14 @@ Forwarding from `127.0.0.1` indicates kubecost should be reachable via a browser
 
 In some cases it may be necessary for kubectl to bind to all interfaces. This can be done with the addition of the flag `--address 0.0.0.0`.
 
-```
+``` bash
 $ kubectl port-forward --address 0.0.0.0 --namespace kubecost deployment/kubecost-cost-analyzer 9090
 Forwarding from 0.0.0.0:9090 -> 9090
 ```
 
 Navigating to Kubecost while port-forwarding should result in "Handling connection" output in the terminal: 
 
-```
+``` bash
 kubectl port-forward --address 0.0.0.0 --namespace kubecost deployment/kubecost-cost-analyzer 9090
 Forwarding from 0.0.0.0:9090 -> 9090
 Handling connection for 9090
@@ -141,7 +165,7 @@ Handling connection for 9090
 
 To troubleshoot further, check the status of pods in the Kubecost namespace:
 
-```
+``` bash
 kubectl get pods -n kubecost`
 ```
 
