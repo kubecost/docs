@@ -176,7 +176,7 @@ filterPods | | Comma-separated list of pods to match; e.g. `pod-one,pod-two` wil
 filterAnnotations | | Comma-separated list of annotations to match; e.g. `name:annotation-one,name:annotation-two` will return results with either of those two annotation key-value-pairs.
 filterLabels | | Comma-separated list of annotations to match; e.g. `app:cost-analyzer, app:prometheus` will return results with either of those two label key-value-pairs.
 filterServices | | Comma-separated list of services to match; e.g. `frontend-one,frontend-two` will return results with either of those two services.
-format | | Set to `csv` to download an accumulated version of the allocation results in CSV format. By default, results will be in JSON format.
+format | | Set to `csv` to download an accumulated version of the allocation results in CSV format. Set to `pdf` to download an accumulated version of the allocation results in PDF format. By default, results will be in JSON format.
 shareIdle | false | If `true`, idle cost is allocated proportionally across all non-idle allocations, per-resource. That is, idle CPU cost is shared with each non-idle allocation's CPU cost, according to the percentage of the total CPU cost represented.
 splitIdle | false | If `true`, and `shareIdle == false` Idle Allocations are created on a per cluster or per node basis rather than being aggregated into a single "\_idle\_" allocation.
 idleByNode | false | If `true`, idle allocations are created on a per node basis. Which will result in different values when shared and more idle allocations when split.
