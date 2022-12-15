@@ -1,9 +1,10 @@
 root: ./
 
-​structure:
-    summary: SUMMARY.md​
+structure:
+    summary: SUMMARY.md
 
 redirects:
+    gcp-out-of-cluster.html: gcp-out-of-cluster.md
     enterprise: install-and-configure/install#enterprise-features
     alerts.html: alerts.md
     hc/en-us/articles/10015110616599: federated-etl.md
