@@ -6,8 +6,8 @@ For more details on these integrations, continue reading below. For guides on ho
 
 * [Multi-Cloud](multi-cloud.md)
 * [AWS](aws-cloud-integrations.md)
-* [GCP](https://guide.kubecost.com/hc/en-us/articles/4407601816087)
-* [Azure](https://docs.microsoft.com/en-us/azure/cost-management-billing/costs/tutorial-export-acm-data?tabs=azure-portal)
+* [GCP](https://docs.kubecost.com/install-and-configure/install/cloud-integration/gcp-out-of-cluster)
+* [Azure](https://docs.kubecost.com/install-and-configure/install/cloud-integration/azure-out-of-cluster)
 
 > **Note**: Select _Amortized cost_ while setting up the cost-management-billing in Azure. GCP users should create [detailed billing export](https://cloud.google.com/billing/docs/how-to/export-data-bigquery-tables#detailed-usage-cost-data-schema) to gain access to all of Kubecost cloud integration features including [reconciliation](cloud-integration.md#reconciliation)
 
@@ -29,7 +29,7 @@ Cost-based metrics are based on onDemand pricing unless there is definitive data
 
 ### Cloud Usage
 
-The Cloud Usage process allows Kubecost to pull in out-of-cluster cloud spend from your CSP's billing data. This includes any services run by the CSP in addition to compute resources outside of clusters monitored by Kubecost. Additionally, by labeling these Cloud Usage, their cost can be distributed to Allocations as external costs. This can help teams get a better understanding of the proportion of OOC cloud spend that their in-cluster usage is dependant on. CloudUsages become available as soon as they appear in the billing data, with the 6 to 24 hour delay mentioned above, and are updated as they become more complete.
+The Cloud Usage process allows Kubecost to pull in out-of-cluster cloud spend from your CSP's billing data. This includes any services run by the CSP in addition to compute resources outside of clusters (OOC) monitored by Kubecost. Additionally, by labeling these Cloud Usage, their cost can be distributed to Allocations as external costs. This can help teams get a better understanding of the proportion of OOC cloud spend that their in-cluster usage is dependant on. CloudUsages become available as soon as they appear in the billing data, with the 6 to 24 hour delay mentioned above, and are updated as they become more complete.
 
 ## Cloud integration configurations
 

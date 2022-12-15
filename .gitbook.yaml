@@ -5,7 +5,7 @@ structure:
 
 redirects:
     gcp-out-of-cluster.html: gcp-out-of-cluster.md
-    enterprise: install.md
+    enterprise.html: install.md
     alerts.html: alerts.md
     hc/en-us/articles/10015110616599: federated-etl.md
     hc/en-us/articles/10018767892119: user-management-oidc.md
