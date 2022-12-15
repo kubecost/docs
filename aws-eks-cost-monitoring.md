@@ -150,6 +150,3 @@ aws eks delete-addon --addon-name kubecost_kubecost --cluster-name $YOUR_CLUSTER
 - AWS Blog: [New – AWS Marketplace for Containers Now Supports Direct Deployment to Amazon EKS Clusters](https://aws.amazon.com/blogs/aws/new-aws-marketplace-for-containers-now-supports-direct-deployment-to-amazon-eks-clusters/)
 - [Learn more about Amazon EKS add-on](https://docs.aws.amazon.com/eks/latest/userguide/eks-add-ons.html)
 - [Learn more about how to manage Amazon EKS add-on](https://docs.aws.amazon.com/eks/latest/userguide/managing-add-ons.html)
-
-
-<!--- {"article":"8428105779095","section":"4402829036567","permissiongroup":"1500001277122"} --->

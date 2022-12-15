@@ -44,7 +44,3 @@ Update your secret yaml file as above, and save it as _object-store.yaml_.
 `kubectl create secret generic kubecost-thanos -n kubecost --from-file=./object-store.yaml`
 
 Once this is done, you're ready to upgrade!
-
-
-
-<!--- {"article":"4407601829655","section":"4402815636375","permissiongroup":"1500001277122"} --->

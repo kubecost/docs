@@ -72,5 +72,3 @@ http://localhost:9090/model/assets/diff?before=yesterday&after=today&costChangeR
     ...
 }
 ```
-
-<!--- {"article":"8135370079511","section":"1500002777682","permissiongroup":"1500001277122"} --->

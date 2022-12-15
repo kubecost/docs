@@ -60,8 +60,3 @@ When _Amortized costs_ is selected, the price jumps to $1.50/day
 This should closely match our data on the Assets page, for days where we have adjustments come in from the pricing CUR.
 
 <img width="1792" alt="Screen Shot 2021-04-22 at 11 03 45 PM" src="https://user-images.githubusercontent.com/453512/115825960-08ffe080-a3bf-11eb-9968-881f70d11e3c.png">
-
-
-
-
-<!--- {"article":"4407596809111","section":"4402829036567","permissiongroup":"1500001277122"} --->

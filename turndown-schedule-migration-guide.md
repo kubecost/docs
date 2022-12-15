@@ -62,6 +62,3 @@ We have a few steps to perform if you want Cluster Controller's turndown functio
     > **Note**: The following command may be unnecessary because Helm should automatically remove the `turndownschedules.kubecost.k8s.io` resource during the upgrade. The removal will remain in a pending state until the finalizer patch above is implemented.
 
         kubectl delete crd turndownschedules.kubecost.k8s.io
-
-
-<!--- {"article":"6737520506519","section":"4402815636375","permissiongroup":"1500001277122"} --->

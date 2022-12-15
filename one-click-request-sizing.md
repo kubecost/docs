@@ -29,5 +29,3 @@ See the high-level [automatic request right-sizing guide](https://github.com/kub
       ![Customize Request Sizing Recommendations window](https://github.com/kubecost/docs/blob/main/images/rightsizingcustomize.png)
 
 3. Select _Automatically Implement Recommendations_. Select _Yes, apply the recommendation_ to confirm.
-
-<!--- {"article":"5843816284823","section":"4402815656599","permissiongroup":"1500001277122"} --->

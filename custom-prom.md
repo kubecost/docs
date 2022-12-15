@@ -122,7 +122,3 @@ If the config file is not returned, this is an indication that an incorrect Prom
 In Kubecost, you can view basic diagnostic information on these Prometheus metrics by selecting _Settings_ in the left navigation, then scrolling down to Prometheus Status, as seen below:
 
 ![Prometheus status diagnostic](https://raw.githubusercontent.com/kubecost/docs/main/prom-status.png)
-
-
-
-<!--- {"article":"4407595941015","section":"4402815636375","permissiongroup":"1500001277122"} --->

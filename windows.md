@@ -49,5 +49,3 @@ See the list of all deployments and DaemonSets [here](https://github.com/kubecos
   * Kubecost requires cAdvisor for pod utilization data to determine costs at the container level.
   * Currently, for pods on Windows nodes: pods will be billed based on request size.
   * See this [cAdvisor Git issue](https://guide.kubecost.com/hc/en-us/articles/6152374933655-Windows-Node-Support) for additional details.
-
-<!--- {"article":"6152374933655","section":"1500002777682","permissiongroup":"1500001277122"} --->

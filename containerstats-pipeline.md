@@ -47,5 +47,3 @@ environment variables.
 | Prometheus/Thanos configuration | | The pipeline inherits most of the existing Prometheus/Thanos configuration because it leverages the same client(s) used by the Asset and Allocation pipelines. Specific deviations will be mentioned. |
 | `ETL_MAX_PROMETHEUS_QUERY_DURATION_MINUTES` | `kubecostModel.maxPrometheusQueryDurationMinutes` | The pipeline will obey this, but may fail to initialize if this is set below the minimum value supported by the pipeline (10 minutes).
 | "Storage" configration | | The pipeline inherits most of the existing "store" configuration used by other pipelines like Asset and Allocation. This includes, but is not limited to: store duration, store type (file, federated, etc.), leader election, storage pathing, storage directory, bucket storage, and backup. |
-
-<!--- {"article":"10071917787159","section":"1500002777682","permissiongroup":"1500001277122"} --->

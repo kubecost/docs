@@ -54,8 +54,3 @@ Your AWS account will need to support the `organizations:ListAccounts` and `orga
 * Query Athena directly to ensure data is available. Note: it can take up to 6 hours for data to be written. 
 * You may need to upgrade your AWS Glue if you are running an old version https://docs.aws.amazon.com/athena/latest/ug/glue-upgrade.html
 * Finally, review pod logs from the `cost-model` container in the `cost-analyzer` pod and look for auth errors or Athena query results. 
-
-
-
-
-<!--- {"article":"4407596810519","section":"4402829036567","permissiongroup":"1500001277122"} --->

@@ -72,5 +72,3 @@ Asset Reconciliation Audit records differences in assets and the Cloud items tha
 Equality Audit records the difference in cost between Allocations and Assets aggregated by cluster and Keyed on cluster
 
 * `clusters`: A `map[string]*AuditFloatResult` which records differences in allocations by cluster and assets by cluster. Keyed by cluster id
-
-<!--- {"article":"7302571484823","section":"1500002777682","permissiongroup":"1500001277122"} --->

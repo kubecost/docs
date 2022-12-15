@@ -29,5 +29,3 @@ In the [values.yaml](https://github.com/kubecost/cost-analyzer-helm-chart/blob/d
 EMIT_POD_ANNOTATIONS_METRIC="true"
 EMIT_NAMESPACE_ANNOTATIONS_METRIC="true"
 ```
-
-<!--- {"article":"4407595918231","section":"4402815656599","permissiongroup":"1500001277122"} --->

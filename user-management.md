@@ -146,4 +146,3 @@ saml:
 ```
 
 Make sure `audienceURI` and `appRootURL` match the entityID configured within PingFed.
-

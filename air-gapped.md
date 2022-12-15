@@ -37,9 +37,3 @@ There are two options to configure asset prices in your on-premise Kubernetes en
 
 ### I use AWS and want the public pricing but can't allow Kubecost to ingress/egress data
 - Use a proxy for the AWS pricing API; you can set `AWS_PRICING_URL` via the [extra env var](https://github.com/kubecost/cost-analyzer-helm-chart/blob/v1.98/cost-analyzer/values.yaml#L304) to the address of your proxy. 
-
-
-
-
-<!--- {"article":"4407601795863","section":"4402815636375","permissiongroup":"1500001277122"} --->
-

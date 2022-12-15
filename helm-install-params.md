@@ -22,6 +22,3 @@ There are three different approaches for passing custom Helm config values into 
 3. **Use** [**values.yaml**](https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/values.yaml) **from the Kubecost Helm Chart repository.**
 
 > **Note**: Taking this approach means you may need to sync with the repo to use the latest release.
-
-
-

@@ -176,8 +176,3 @@ You can add these recording rules to improve the performance. Recording rules al
             labels:
               daemonset: "true"
 ```
-
-
-
-
-<!--- {"article":"4409859798679","section":"4402829036567","permissiongroup":"1500001277122"} --->
