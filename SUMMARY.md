@@ -5,15 +5,15 @@
 ## Getting Started
 
 - [OpenCost vs Kubecost](opencost-v-kubecost.md)
-  - [Installing Kubecost](install-and-configure/install/helm.md)
-    - [Helm (Recommended)](install-and-configure/install/helm.md)
-  - [Next Steps](install-and-configure/install/connect-cloud.md)
-    - [Connect Cloud Providers](install-and-configure/install/connect-cloud.md)
-    - [Add more Clusters](install.md)
-      - [Use Federated ETL (Recommended)](install.md)
-      - [Use Thanos](install.md)
-    - [Enable Durable Storage](install.md)
-    - [Expose Kubecost Frontend](install.md)
+- [Installing Kubecost](install-and-configure/install/helm.md)
+  - [Helm (Recommended)](install-and-configure/install/helm.md)
+- [Next Steps](install-and-configure/install/connect-cloud.md)
+  - [Connect Cloud Providers](install-and-configure/install/connect-cloud.md)
+  - [Add more Clusters](install.md)
+    - [Use Federated ETL (Recommended)](install.md)
+    - [Use Thanos](install.md)
+  - [Enable Durable Storage](install.md)
+  - [Expose Kubecost Frontend](install.md)
 
 ## Install and Configure
 
