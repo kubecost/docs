@@ -7,7 +7,7 @@ Secondary clusters use a minimal Kubecost deployment to send their metrics to a 
 
 This guide explains settings that can be tuned in order to run the minimum Kubecost components to run Kubecost more efficiently. 
 
-See the <a href="https://guide.kubecost.com/hc/en-us/articles/4423256582551-Kubecost-Secondary-Clusters#additional-resources">additional resources</a> section below for complete examples in our github repo.
+See the [additional resources](/architecture/secondary-clusters#additional-resources) section below for complete examples in our github repo.
 
 ## Kubecost Global
 
@@ -46,7 +46,7 @@ You can tune prometheus.server.persistentVolume.size depending on scale, or outr
 
 ## Thanos
 
-Disable Thanos components. These are only used for troubleshooting on secondary clusters. See this guide for [troubleshooting via kubectl logs](https://guide.kubecost.com/hc/en-us/articles/4407595964695-Long-Term-Storage#troubleshooting).
+Disable Thanos components. These are only used for troubleshooting on secondary clusters. See this guide for [troubleshooting via kubectl logs](/install-and-configure/install/long-term-storage#troubleshooting).
 
 > **Note**: Secondary clusters write to the global storage-bucket via the thanos-sidecar on the prometheus-server pod.
 
@@ -62,7 +62,7 @@ Disable Thanos components. These are only used for troubleshooting on secondary 
 
 You can disable node-exporter and the service account if cluster/node rightsizing recommendations are not required.
 
-> **Note**: node-export must be disabled if there is an existing daemonset. More info [here](https://guide.kubecost.com/hc/en-us/articles/4407601830679-Troubleshoot-Install#a-name-node-exporter-a-issue-failedscheduling-kubecost-prometheus-node-exporter).
+> **Note**: node-export must be disabled if there is an existing daemonset. More info [here](/troubleshooting/troubleshoot-install#issue-failedscheduling-kubecost-prometheus-node-exporter).
 
 ## Helm values
 
@@ -111,7 +111,7 @@ thanos:
 
 You can find complete installation guides and sample files on our [repo](https://github.com/kubecost/poc-common-configurations)
 
-Additional considerations for properly tuning resource consumption is [here](https://guide.kubecost.com/hc/en-us/articles/6446286863383-Tuning-Resource-Consumption).
+Additional considerations for properly tuning resource consumption is [here](/general/resource-consumption).
 
 ## Help
 <a name="help"></a>

@@ -92,4 +92,4 @@ You can encrypt the S3 bucket where Kubecost data is stored in AWS via S3 and KM
 
 ## Troubleshooting
 
-Visit the [**Multi-Cluster / Long Term Storage**](https://guide.kubecost.com/hc/en-us/articles/4407595964695-Long-Term-Storage#troubleshooting) article for troubleshooting help.
+Visit the [**Multi-Cluster / Long Term Storage**](/install-and-configure/install/long-term-storage#troubleshooting) article for troubleshooting help.

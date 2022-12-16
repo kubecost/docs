@@ -34,7 +34,7 @@ This will install:
 * `kubecost-agent` deployment and service
 * `prometheus-server` deployment and service
 * node-exporter daemonSet (set to false if you already have node-exporter running)
-* network-costs daemonSet (optional, collects additional metrics used for egress cost visibility) [learn more](https://guide.kubecost.com/hc/en-us/articles/4407595973527)
+* network-costs daemonSet (optional, collects additional metrics used for egress cost visibility) [learn more](/install-and-configure/advanced-configuration/network-allocation)
 
 ## Additional clusters
 

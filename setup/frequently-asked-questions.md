@@ -101,7 +101,7 @@ A: Decreasing resolution may flatten out cost spikes but the summation of costs 
 Q: Is there a way to test alerts via the API?\
 A: Yes, there is a `/alert/test` API endpoint that sends a blank test message. [Code](https://github.com/kubecost/kubecost-cost-model/blob/948c2d1e9aff42808f5458be9f557769aad1b493/pkg/cmd/costmodel/costmodel.go#L2508)\
 \
-Another suggestion for testing alert filters is to create an alert with a small window and waited. The [API](https://guide.kubecost.com/hc/en-us/articles/4407601796759-Alerts-Documentation#alerts-scheduler) will allow hours in the window.&#x20;
+Another suggestion for testing alert filters is to create an alert with a small window and waited. The [API](/using-kubecost/getting-started/alerts#alerts-scheduler) will allow hours in the window.&#x20;
 
 Example of [test API](http://localhost:9090/model/alerts/test)\ payload:
 
