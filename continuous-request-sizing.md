@@ -3,14 +3,14 @@ Continuous Request Right-Sizing with Kubecost's Kubescaler
 
 > **Note**: This feature is in a pre-release (alpha/beta) state and has limitations. Please read the documentation carefully.
 
-Kubecost's Kubescaler implements continuous request right-sizing: the automatic application of Kubecost's high-fidelity [recommendations](https://github.com/kubecost/docs/blob/main/api-request-right-sizing-v2.md) to your containers' resource requests. This provides an easy way to automatically improve your allocation of cluster resources by improving efficiency.
+Kubecost's Kubescaler implements continuous request right-sizing: the automatic application of Kubecost's high-fidelity [recommendations](/api-request-right-sizing-v2.md) to your containers' resource requests. This provides an easy way to automatically improve your allocation of cluster resources by improving efficiency.
 
 Kubescaler can be enabled and configured on a per-workload basis so that only
 the workloads you want edited will be edited.
 
 ## Setup
 
-See the high-level [automatic request right-sizing guide](https://github.com/kubecost/docs/blob/main/auto-request-sizing.md). Kubescaler is part of Cluster Controller.
+See the high-level [automatic request right-sizing guide](/auto-request-sizing.md). Kubescaler is part of Cluster Controller.
 
 ## Usage
 

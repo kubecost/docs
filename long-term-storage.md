@@ -20,9 +20,9 @@ We have guides for using cloud-native storage for the largest cloud providers. O
 
 Use the appropriate guide for your cloud provider:
 
-* [Google Cloud Storage](https://github.com/kubecost/docs/blob/main/long-term-storage-gcp.md)
-* [AWS/S3](https://github.com/kubecost/docs/blob/main/long-term-storage-aws.md)
-* [Azure](https://github.com/kubecost/docs/blob/main/long-term-storage-azure.md)
+* [Google Cloud Storage](/long-term-storage-gcp.md)
+* [AWS/S3](/long-term-storage-aws.md)
+* [Azure](/long-term-storage-azure.md)
 
 ## Step 2: Create object-store secret
 

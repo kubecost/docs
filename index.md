@@ -9,20 +9,20 @@ In this guide, you'll find everything you need to set up Kubecost for your team.
 
 ## Quick Installation
 
-Check out our [Installation options](https://github.com/kubecost/docs/blob/main/install.md) to start monitoring and managing your spend in minutes.
+Check out our [Installation options](/install.md) to start monitoring and managing your spend in minutes.
 
 ## Getting Started
 
-[Troubleshooting installation](https://github.com/kubecost/docs/blob/main/troubleshoot-install.md)  
-[Configuring Kubecost](https://github.com/kubecost/docs/blob/main/getting-started.md)  
-[Understanding cost allocation](https://github.com/kubecost/docs/blob/main/cost-allocation.md)  
+[Troubleshooting installation](/troubleshoot-install.md)  
+[Configuring Kubecost](/using-kubecost/getting-started)  
+[Understanding cost allocation](/cost-allocation.md)  
 [Cost monitoring best practices](https://blog.kubecost.com/blog/cost-monitoring/)  
 
 ## Advanced Configuration
-[Allocating out of cluster costs (AWS)](https://github.com/kubecost/docs/blob/main/aws-out-of-cluster.md)  
-[Allocating out of cluster costs (Azure)](https://github.com/kubecost/docs/blob/main/azure-out-of-cluster.md)  
-[Allocating out of cluster costs (GCP)](https://github.com/kubecost/docs/blob/main/gcp-out-of-cluster.md)  
-[AWS Spot feed integration](https://github.com/kubecost/docs/blob/main/getting-started.md#spot-nodes)
+[Allocating out of cluster costs (AWS)](/aws-out-of-cluster.md)  
+[Allocating out of cluster costs (Azure)](/azure-out-of-cluster.md)  
+[Allocating out of cluster costs (GCP)](/gcp-out-of-cluster.md)  
+[AWS Spot feed integration](/using-kubecost/getting-started#spot-nodes)
 
 ## Staying in the loop
 

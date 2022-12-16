@@ -33,7 +33,7 @@ kubectl create secret generic <YOUR_SECRET_NAME> -n kubecost --from-file=object-
 
 **Existing Thanos users**
 
-If you have already configured Thanos following [this documentation](https://github.com/kubecost/docs/blob/main/long-term-storage.md), you can reuse the previously created bucket configuration secret.
+If you have already configured Thanos following [this documentation](/long-term-storage.md), you can reuse the previously created bucket configuration secret.
 
 Setting `.Values.kubecostModel.etlBucketConfigSecret=kubecost-thanos` will enable the backup feature. This will backup all ETL data to the same bucket being used by Thanos.
 

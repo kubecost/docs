@@ -10,7 +10,7 @@ The agent requires 2 pods and an optional daemonSet:
 2. **Prometheus Server Pod**
     a. Prometheus server: short-term time-series data store (14 days or less)
     b. Thanos sidecar: ships metrics to Kubecost Cloud S3 bucket every 3 hours
-3. **Network costs**: (optional) used for determining network egress costs. Learn more [here](https://github.com/kubecost/docs/blob/main/network-allocation.md)
+3. **Network costs**: (optional) used for determining network egress costs. Learn more [here](/network-allocation.md)
 
 ## Architecture Overview
 

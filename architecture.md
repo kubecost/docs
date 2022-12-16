@@ -12,7 +12,7 @@ Below are the major components deployed with the [Kubecost helm chart](/install-
     c. Node-exporter -- provides metrics for reserved instance recommendations, various Kubecost Grafana dashboards, and cluster health alerts [Optional]  
     d. Pushgateway -- provides the ability for users to push new metrics to Prometheus [Optional]  
     e. Alertmanager -- used for custom alerts  [Optional]
-3. **Network costs** -- used for determining network egress costs [Optional] - [Learn more](https://github.com/kubecost/docs/blob/main/network-allocation.md)
+3. **Network costs** -- used for determining network egress costs [Optional] - [Learn more](/network-allocation.md)
 4. **Grafana** -- provides supporting dashboards for Kubecost product [Optional]
 
 Today, the core Kubecost product can be run with just components 1 and 2a.
@@ -28,10 +28,10 @@ Kubecost interacts with provider pricing in a few different ways.
 - onDemand Rates (AWS, Azure, GCP, and Custom Pricing CSV)
 - Negotiated Rates (Azure, GCP, and Custom Pricing CSV)
 - Spot Data Feed (AWS)
-- [Cloud Provider Billing for Reconciliation and Out-of-Cluster Spend](https://github.com/kubecost/docs/blob/main/cloud-integration.md)
-  - [AWS Cost and Usage Report](https://github.com/kubecost/docs/blob/main/aws-cloud-integrations.md)
-  - [Azure Cost Export](https://github.com/kubecost/docs/blob/main/azure-out-of-cluster.md)
-  - [Google BigQuery Export](https://github.com/kubecost/docs/blob/main/gcp-out-of-cluster.md)
+- [Cloud Provider Billing for Reconciliation and Out-of-Cluster Spend](/cloud-integration.md)
+  - [AWS Cost and Usage Report](/aws-cloud-integrations.md)
+  - [Azure Cost Export](/azure-out-of-cluster.md)
+  - [Google BigQuery Export](/gcp-out-of-cluster.md)
 
 In an Enterprise federated setup, only the Primary Kubecost Cluster needs access to the Cloud Provider Billing.
 
