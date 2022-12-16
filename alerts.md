@@ -56,7 +56,7 @@ _Required parameters:_
 
 * `type: budget`
 * `threshold: <amount>` -- cost threshold in configured currency units
-* `aggregation: <agg-parameter>` -- configurable, accepts all aggregations supported by the [aggregated cost model API](https://github.com/kubecost/docs/blob/2ea9021e8530369d53184ea5382b2e4c080bb426/allocation-api.md#aggregated-cost-model-api)
+* `aggregation: <agg-parameter>` -- configurable, accepts all aggregations supported by the [aggregated cost model API](/apis/deprecated-apis/allocation-api#aggregated-cost-model-api)
 * `filter: <value>` -- configurable, accepts a single filter value (comma-separated values unsupported)
 * `window: <N>d` or `<M>h` -- configurable, (1 ≤ N ≤ 7, 1 ≤ M ≤ 24)
 
@@ -88,7 +88,7 @@ _Required parameters:_
 
 * `type: efficiency`
 * `efficiencyThreshold: <threshold>` -- efficiency threshold ranging from 0.0 to 1.0
-* `aggregation: <agg-parameter>` -- configurable, accepts all aggregations supported by the [aggregated cost model API](https://github.com/kubecost/docs/blob/2ea9021e8530369d53184ea5382b2e4c080bb426/allocation-api.md#aggregated-cost-model-api)
+* `aggregation: <agg-parameter>` -- configurable, accepts all aggregations supported by the [aggregated cost model API](/apis/deprecated-apis/allocation-api#aggregated-cost-model-api)
 * `window: <N>d` number of days for measuring efficiency
 
 _Optional parameters:_
@@ -175,7 +175,7 @@ _Required parameters:_
 
 * `type: spendChange`
 * `relativeThreshold: <N>` -- configurable, N ≥ -1
-* `aggregation: <agg-value>` -- configurable, accepts all aggregations supported by the [aggregated cost model API](https://github.com/kubecost/docs/blob/2ea9021e8530369d53184ea5382b2e4c080bb426/allocation-api.md#aggregated-cost-model-api)
+* `aggregation: <agg-value>` -- configurable, accepts all aggregations supported by the [aggregated cost model API](/apis/deprecated-apis/allocation-api#aggregated-cost-model-api)
 * `window: <N>d` or `<M>h` -- configurable, (1 ≤ N ≤ 7, 1 ≤ M ≤ 24)
 * `baselineWindow: <N>d` -- configurable, N ≥ 1
 
@@ -205,7 +205,7 @@ _Required parameters:_
 
 * `type: assetBudget`
 * `threshold: <amount>` -- cost threshold in configured currency units
-* `aggregation: <agg-parameter>` -- configurable, accepts all aggregations supported by the [asset API](https://github.com/kubecost/docs/blob/2ea9021e8530369d53184ea5382b2e4c080bb426/assets.md)
+* `aggregation: <agg-parameter>` -- configurable, accepts all aggregations supported by the [asset API](/using-kubecost/getting-started/assets)
 * `filter: <value>(,<value>,...)` -- configurable, accepts any 1 or more filter values which are comma seperated values
 * `window: <N>d` or `<M>h` -- configurable, (1 ≤ N ≤ 7, 1 ≤ M ≤ 24)
 
@@ -467,4 +467,4 @@ Common causes of misconfiguration include the following:
 
 * unsupported csv filters -- `spendChange` alerts accept `filter` as comma-separated values; other alert types do not.
 * unsupported alert type -- all alert type names are in camelCase -- check spelling and capitalization for all alert parameters
-* unsupported aggregation parameters -- see the [aggregated cost model API](https://github.com/kubecost/docs/blob/2ea9021e8530369d53184ea5382b2e4c080bb426/allocation-api.md#aggregated-cost-model-api) for details
+* unsupported aggregation parameters -- see the [aggregated cost model API](/apis/deprecated-apis/allocation-api#aggregated-cost-model-api) for details
