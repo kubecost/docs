@@ -78,7 +78,7 @@
   * [Spot Checklist](spot-checklist.md)
   * [Spot Cluster Sizing](spot-cluster-sizing.md)
   * [Automatic Request Right-Sizing](auto-request-sizing.md)
-    * [1-click Request Sizing](1-click-request-sizing.md)
+    * [1-click Request Sizing](one-click-request-sizing.md)
     * [Continuous Request Right-Sizing](continuous-request-sizing.md)
   * [Saved Reports](saved-reports.md)
   * [Alerts](alerts.md)
