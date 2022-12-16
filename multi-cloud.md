@@ -8,7 +8,7 @@ For each Cloud Account that you would like to configure you will need to make su
 
 ### Azure
 
-Set up cost data export following this guide [guide](https://github.com/kubecost/docs/blob/main/azure-out-of-cluster.md)
+Set up cost data export following this [guide](https://github.com/kubecost/docs/blob/main/azure-out-of-cluster.md)
 
 ### GCP
 
