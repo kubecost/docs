@@ -1,20 +1,16 @@
 Kubecost Cloud Architecture Overview
 ===================================
 
-Below are the major components deployed with the [Kubecost Helm chart](http://docs.kubecost.com/install) for Kubecost Cloud, excluding certain Enterprise components such as durable storage:
+Kubecost Cloud uses an agent to gather metrics and send them to an in-region s3 bucket.
 
-1. **Kubecost Agent Pod Pod**  
-    a. Cost-model: provides cost allocation calculations and metrics, both reads and writes to Prometheus
-2. **Prometheus**  
-    a. Prometheus server: time-series data store for cost and health metrics  
+The agent requires 2 pods and an optional daemonset:
+
+1. **Kubecost Agent Pod**
+    a. Cost-model: provides cost allocation calculations and metrics, reads from and scraped by Prometheus server
+2. **Prometheus Server Pod**
+    a. Prometheus server: short-term time-series data store (14 days or less)
     b. Thanos sidecar: ships metrics to Kubecost Cloud S3 bucket every 3 hours
 3. **Network costs**: (optional) used for determining network egress costs. Learn more [here](https://github.com/kubecost/docs/blob/main/network-allocation.md)
-
-Kubecost Cloud can be run with just components 1 and 2a.
-
-See an overview of core components in this diagram:
-
-![Core Components Diagram](https://raw.githubusercontent.com/kubecost/docs/main/images/kubepromchart.PNG)
 
 ## Architecture Overview
 
