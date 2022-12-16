@@ -17,7 +17,7 @@ Check out our [Installation options](https://guide.kubecost.com/hc/en-us/article
 [Troubleshooting installation](https://guide.kubecost.com/hc/en-us/articles/4407601830679)\
 [Configuring Kubecost](https://guide.kubecost.com/hc/en-us/articles/4407595947799)\
 [Understanding cost allocation](https://guide.kubecost.com/hc/en-us/articles/4407601807383)\
-[Cost monitoring best practices](http://blog.kubecost.com/blog/cost-monitoring/)
+[Cost monitoring best practices](https://blog.kubecost.com/blog/cost-monitoring/)
 
 ### Advanced Configuration
 

@@ -166,7 +166,7 @@ window (required) | — | Duration of time over which to query. Accepts: words l
 aggregate | | Field by which to aggregate the results. Accepts: `cluster`, `namespace`, `controllerKind`, `controller`, `service`, `node`, `pod`, `label:<name>`, and `annotation:<name>`. Also accepts comma-separated lists for multi-aggregation, like `namespace,label:app`.
 accumulate | false | If `true`, sum the entire range of sets into a single set.
 idle | true | If `true`, include idle cost (i.e. the cost of the un-allocated assets) as its own allocation. (See [special types of allocation](#special-types-of-allocation).)
-external | false | If `true`, include [external costs](http://docs.kubecost.com/getting-started#out-of-cluster) in each allocation.
+external | false | If `true`, include [external costs](https://docs.kubecost.com/getting-started#out-of-cluster) in each allocation.
 filterClusters | | Comma-separated list of clusters to match; e.g. `cluster-one,cluster-two` will return results from only those two clusters.
 filterNodes | | Comma-separated list of nodes to match; e.g. `node-one,node-two` will return results from only those two nodes.
 filterNamespaces | | Comma-separated list of namespaces to match; e.g. `namespace-one,namespace-two` will return results from only those two namespaces.

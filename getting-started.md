@@ -17,7 +17,7 @@ Welcome to Kubecost! This page provides commonly used product configurations and
 **Next Steps**
 
 * [Measure cluster cost efficiency](getting-started.md#cluster-efficiency)
-* [Cost monitoring best practices](http://blog.kubecost.com/blog/cost-monitoring/)
+* [Cost monitoring best practices](https://blog.kubecost.com/blog/cost-monitoring/)
 * [Understanding cost allocation metrics](cost-allocation.md)
 
 ## Overview
@@ -72,7 +72,7 @@ Where ingested samples can be measured as the average over a recent period, e.g.
 
 It's recommended that users set and/or update resource requests and limits before taking Kubecost into production at scale. These inputs can be configured in the Kubecost [values.yaml](https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/values.yaml) for Kubecost modules + subcharts.
 
-The exact recommended values for these parameters depend on the size of your cluster, availability requirements, and usage of the Kubecost product. Suggested values for each container can be found within Kubecost itself on the namespace page. More info on these recommendations is available [here](http://blog.kubecost.com/blog/requests-and-limits/).
+The exact recommended values for these parameters depend on the size of your cluster, availability requirements, and usage of the Kubecost product. Suggested values for each container can be found within Kubecost itself on the namespace page. More info on these recommendations is available [here](https://blog.kubecost.com/blog/requests-and-limits/).
 
 In practice, we recommend running Kubecost for up to 7 days on a production cluster and then tuning resource requests/limits based on resource consumption. Reach out any time to support@kubecost.com if we can help give further guidance.
 

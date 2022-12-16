@@ -16,7 +16,7 @@ Check out our [Installation options](https://github.com/kubecost/docs/blob/main/
 [Troubleshooting installation](https://github.com/kubecost/docs/blob/main/troubleshoot-install.md)  
 [Configuring Kubecost](https://github.com/kubecost/docs/blob/main/getting-started.md)  
 [Understanding cost allocation](https://github.com/kubecost/docs/blob/main/cost-allocation.md)  
-[Cost monitoring best practices](http://blog.kubecost.com/blog/cost-monitoring/)  
+[Cost monitoring best practices](https://blog.kubecost.com/blog/cost-monitoring/)  
 
 ## Advanced Configuration
 [Allocating out of cluster costs (AWS)](https://github.com/kubecost/docs/blob/main/aws-out-of-cluster.md)  
