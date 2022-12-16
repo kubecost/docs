@@ -29,7 +29,7 @@ To view the raw network transfer data, Grafana dashboard that is almost ready to
 
 ## Enabling network costs
 
-To enable this feature, set the following parameter in _values.yaml_ during [Helm installation](http://kubecost.com/install):
+To enable this feature, set the following parameter in _values.yaml_ during [Helm installation](https://kubecost.com/install):
 
  ``` yaml
  networkCosts:
