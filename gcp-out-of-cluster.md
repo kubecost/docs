@@ -18,7 +18,7 @@ GCP users should create [detailed billing export](https://cloud.google.com/billi
 ## Step 2:  Visit Kubecost setup page and provide configuration info
 
 
-> **Note:** If you are using the alternative [multi-cloud integration](https://docs.kubecost.com/install-and-configure/advanced-configuration/cloud-integration/multi-cloud) method, Step 2 is not required.
+> **Note:** If you are using the alternative [multi-cloud integration](/install-and-configure/advanced-configuration/cloud-integration/multi-cloud) method, Step 2 is not required.
 
 If your Big Query dataset is in a different project than the one where Kubecost is installed, please see the section on [Cross-Project Service Accounts](#cross-project-service-account-configuration)
 

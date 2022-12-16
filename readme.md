@@ -1,4 +1,4 @@
-# Welcome to the Docs!
+# Welcome to the Docs
 
 ## Welcome
 

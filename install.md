@@ -62,7 +62,7 @@ For larger teams and companies with more complex infrastructure, you need the ri
     Finely manage read and/or admin access by individual users or user groups. [Learn more](https://github.com/kubecost/docs/blob/master/user-management.md).
 *   **High availability mode**
 
-    Use multiple Kubecost replica pods with a Leader/Follower implementation to ensure one leader always exists across all replicas to run high availability mode. [Learn more](https://docs.kubecost.com/install-and-configure/advanced-configuration/high-availability).
+    Use multiple Kubecost replica pods with a Leader/Follower implementation to ensure one leader always exists across all replicas to run high availability mode. [Learn more](/install-and-configure/advanced-configuration/high-availability).
 *   **Advanced custom pricing**
 
     Advanced custom pricing pipelines give teams the ability to set custom per-asset pricing for resources. This is typically used for on-prem and air-gapped environments, but can also be applied to teams that want to allocate internal costs differently than cloud provider defaults.
