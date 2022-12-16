@@ -99,12 +99,22 @@ For more details on what Azure resources support tagging, along with what resour
 
 ## Troubleshooting and debugging
 
-* A successful configuration will show the following:
-  * The "/assets" view will be broken down by cloud service (e.g. "Microsoft.compute", "Microsoft.storage")
-  * The "/assets" view will no longer show a banner that says "External cloud cost not configured"
-  * The "/diagnostics" view will show a green checkmark under "Cloud Integrations"
+To validate that the configuration was successful:
+
+* The "/assets" view will be broken down by cloud service (e.g. "Microsoft.compute", "Microsoft.storage")
+* The "/assets" view will no longer show a banner that says "External cloud cost not configured"
+* The "/diagnostics" view will show a green checkmark under "Cloud Integrations"
+* Note: if there are no in-cluster costs for a particular day, then there will not be out-of-cluster costs either.
+
+To troubleshoot a configuration that is not yet working:
+
 * `$ kubectl get secrets -n kubecost` to verify you've properly configured `cloud-integration.json`.
 * `$ helm get values kubecost` to verify you've properly set `.Values.kubecostProductConfigs.cloudIntegrationSecret`
 * Verify that a non-empty CSV file has been created at this path in your Azure Portal Storage Account: `<STORAGE_ACCOUNT>/<CONTAINER_NAME>/<OPTIONAL_CONTAINER_PATH>/<COST_EXPORT_NAME>/<DATE_RANGE>/<CSV_FILE>`. Ensure new CSVs are being generated every day.
 * When opening a cost report CSV, ensure that there are rows in the file that do not have a MeterCategory of “Virtual Machines” or “Storage” as these items are ignored because they are in cluster costs. Additionally, make sure that there are items with a UsageDateTime that matches the date you are interested in.
-* Note: if there are no in-cluster costs for a particular day, then there will not be out-of-cluster costs either.
+
+When reviewing logs:
+
+* The following error is reflective of Kubecost's previous Azure Cloud Integration method and can be safely disregarded.
+  
+  ```ERR Error, Failed to locate azure storage config file: /var/azure-storage-config/azure-storage-config.json```
