@@ -42,7 +42,3 @@ In an Enterprise federated setup, only the Primary Kubecost Cluster needs access
 The most common implementation of durable storage in the Kubecost application is with [Thanos](https://thanos.io/). Below is a high-level reference for the required components. More information on each Thanos component can be found [here](https://thanos.io/tip/components/).
 
 ![Thanos Overview](https://raw.githubusercontent.com/kubecost/docs/main/images/thanos-architecture.png)
-
-
-
-<!--- {"article":"4407595922711","section":"4402829033367","permissiongroup":"1500001277122"} --->

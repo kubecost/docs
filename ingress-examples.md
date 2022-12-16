@@ -113,7 +113,3 @@ spec:
               port:
                 number: 9090
 ```
-
-
-
-<!--- {"article":"4407601820055","section":"4402815636375","permissiongroup":"1500001277122"} --->

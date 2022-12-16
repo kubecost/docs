@@ -34,4 +34,3 @@ Once enabled, you can follow the detailed usage guides for "1-click" (instantane
 
 - [1-click](https://github.com/kubecost/docs/blob/main/guide-one-click-request-sizing.md)
 - [Continuous](https://github.com/kubecost/docs/blob/main/continuous-request-sizing.md)
-

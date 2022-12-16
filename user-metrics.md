@@ -131,6 +131,3 @@ GitHub: [https://github.com/NVIDIA/k8s-device-plugin](https://github.com/NVIDIA/
 | Metric                          | Description              |
 | ------------------------------- | ------------------------ |
 | `DCGM_FI_DEV_GPU_UTIL` | GPU utilization | 
-
-
-<!--- {"article":"4425134686743","section":"1500002777682","permissiongroup":"1500001277122"} --->

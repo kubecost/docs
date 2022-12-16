@@ -75,9 +75,3 @@ type for `S` but we are considering adding multiple node type support. If your
 cluster requires specific node types for certain workloads, consider using
 Kubecost's recommendation as a launching point for a cluster configuration that
 supports your specific needs.
-
-
-
-
-
-<!--- {"article":"4412353032599","section":"4402815656599","permissiongroup":"1500001277122"} --->

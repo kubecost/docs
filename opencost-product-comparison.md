@@ -10,5 +10,3 @@
 | Support | Built and supported by community users. Interact with our vibrant community to quickly and easily learn, build, and deploy OpenCost for Kubernetes cost monitoring! | Ticket-based support dedicated to resolving issues quickly and efficiently. Available 9:00 AM - 8:00 PM EST | Ticket-based support dedicated to resolving issues quickly and efficiently. Available 9:00 AM - 8:00 PM EST | Ticket-based support dedicated to resolving issues quickly and efficiently. Available 9:00 AM - 8:00 PM EST |
 
 Learn more about the different Kubecost versions and get started [here](https://www.kubecost.com/pricing/).
-
-<!--- {"article":"8292513994903","section":"1500002777682","permissiongroup":"1500001277122"} --->

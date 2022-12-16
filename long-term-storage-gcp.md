@@ -26,7 +26,3 @@ config:
 > **Note:** Because this is a YAML file, it requires this specific indention.
 
 > **Warning**: Do not apply a retention policy to your Thanos bucket, as it will prevent Thanos compaction from completing.
-
-
-
-<!--- {"article":"4407601822359","section":"4402815680407","permissiongroup":"1500001277122"} --->

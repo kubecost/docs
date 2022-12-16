@@ -77,5 +77,3 @@ The result is 5 clusters federated together.
     * To verify the entire pipeline is working, either query `Allocations/Assets` or view the respective views on the frontend. Multi-cluster data should appear after:
         * The Federator has run at least once.
         * There was data in the Federated Storage for the Federator to have combined.
-
-<!--- {"article":"10015110616599","section":"1500002777682","permissiongroup":"1500001277122"} --->

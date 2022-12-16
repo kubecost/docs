@@ -122,7 +122,3 @@ The following Microsoft documents are a helpful reference:
 * [Geographic availability and currency support for the commercial marketplace](https://docs.microsoft.com/en-us/azure/marketplace/marketplace-geo-availability-currencies)
 * [Azure Portal > Cost Management + Billing > Billing Account Properties](https://portal.azure.com/#view/Microsoft_Azure_GTM/ModernBillingMenuBlade/~/Properties)
 * [Understand Cost Management data](https://docs.microsoft.com/en-us/azure/cost-management-billing/costs/understand-cost-mgt-data)
-
-
-
-<!--- {"article":"4407595934871","section":"4402815682455","permissiongroup":"1500001277122"} --->

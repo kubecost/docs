@@ -116,6 +116,3 @@ The API response includes the original plan, plus some metadata:
 - The Apply APIs do not support sizing Pods without a controller. This is also planned to change.
 
 - The Apply APIs do not support clusters other than the "local" cluster (the cluster that the instance of Kubecost you are interacting with via HTTP is running on). If you are interested in this functionality, please let us know.
-
-
-<!--- {"article":"5843799319703","section":"4402829033367","permissiongroup":"1500001277122"} --->
