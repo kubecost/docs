@@ -13,7 +13,7 @@ When adding a context directly from the frontend, Kubecost adds it locally for y
 
 2. Expose port 9090 of the `kubecost-cost-analyzer` Pod. This can be done with a Kubernetes Ingress ([example](https://github.com/kubecost/docs/blob/main/getting-started.md#basic-auth)) or LoadBalancer ([example](https://github.com/kubecost/docs/blob/main/kubecost-lb.yaml)).
 
- > **Note**: By default, a LoadBalancer exposes endpoints to the wide internet. Be careful about following the authentication requirements of your organization and environment.
+   > **Note**: By default, a LoadBalancer exposes endpoints to the wide internet. Be careful about following the authentication requirements of your organization and environment.
 
 3. Select _Add new cluster_ on the Kubecost home page and provide the accessible URL (with port included) for the target Kubecost installation. Here's an example: `http://e9a706220bae04199-1639813551.us-east-2.elb.amazonaws.com:9090`
 
