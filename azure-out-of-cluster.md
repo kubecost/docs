@@ -48,7 +48,7 @@ Next, create a JSON file which _**must**_ be named `cloud-integration.json` with
 }
 ```
 
-> **NOTE:** Additional details about the `cloud-integration.json` file can be found in our [multi-cloud integration](https://docs.kubecost.com/install-and-configure/advanced-configuration/cloud-integration/multi-cloud) documentation.
+> **Note:** Additional details about the `cloud-integration.json` file can be found in our [multi-cloud integration](https://docs.kubecost.com/install-and-configure/advanced-configuration/cloud-integration/multi-cloud) documentation.
 
 Next, create the secret:
 
@@ -104,7 +104,8 @@ To validate that the configuration was successful:
 * The "/assets" view will be broken down by cloud service (e.g. "Microsoft.compute", "Microsoft.storage")
 * The "/assets" view will no longer show a banner that says "External cloud cost not configured"
 * The "/diagnostics" view will show a green checkmark under "Cloud Integrations"
-* Note: if there are no in-cluster costs for a particular day, then there will not be out-of-cluster costs either.
+
+> **Note**: if there are no in-cluster costs for a particular day, then there will not be out-of-cluster costs either
 
 To troubleshoot a configuration that is not yet working:
 
