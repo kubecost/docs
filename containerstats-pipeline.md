@@ -1,7 +1,18 @@
 # ContainerStats Pipeline
 
 The ContainerStats pipeline builds statistical representations of individual
-containers' resource usage over time.  The pipeline is part of the `cost-model` container.
+containers' resource usage over time.  The pipeline is part of the `cost-model`
+container.
+
+## Helm Configuration
+
+```yaml
+kubecostModel:
+  containerStatsEnabled: true
+```
+
+Ensure you allow ~2hrs for the pipeline to run before issuing a query which
+leverages this pipeline
 
 ## APIs
 
