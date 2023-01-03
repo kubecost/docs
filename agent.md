@@ -28,8 +28,11 @@ helm install kubecost-agent \
 ```
 
 Optionally, add the Network Costs Daemonset:
+
 * All Providers: `--set networkCosts.enabled=true`
+
 And one of the following (if applicable):
+
 * AWS `--set networkCosts.config.services.amazon-web-services=true`
 * Azure `--set networkCosts.config.services.azure-cloud-services=true`
 * GCP `--set networkCosts.config.services.google-cloud-services=true`
@@ -38,7 +41,7 @@ This will install:
 
 * `kubecost-agent` deployment and service
 * `prometheus-server` deployment and service
-* network-costs daemonSet (optional, collects additional metrics used for egress cost visibility) [learn more](network-allocation.md)
+* `network-costs` daemonSet (optional, collects additional metrics used for egress cost visibility) [learn more](network-allocation.md)
 
 ## Additional clusters
 
