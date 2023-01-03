@@ -1,4 +1,4 @@
-# Installing Agent for Kubecost Cloud (limited availability)
+# Installing Agent for Kubecost Cloud
 
 The _kubecost-agent_ is a lightweight Kubecost exporter that sends metrics to Kubecost Cloud. In order to install the _kubecost-agent_, you will need a specific key provided by Kubecost.
 
@@ -29,6 +29,7 @@ helm install kubecost-agent \
 
 Optionally, add the Network Costs Daemonset:
 * All Providers: `--set networkCosts.enabled=true`
+
 And one of the following (if applicable):
 * AWS `--set networkCosts.config.services.amazon-web-services=true`
 * Azure `--set networkCosts.config.services.azure-cloud-services=true`

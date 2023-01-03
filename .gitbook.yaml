@@ -185,7 +185,7 @@ redirects:
     hc/en-us/articles/4413635957271-Installing-Kubecost-with-Rafay: rafay.md
     hc/en-us/articles/4423256582551-Kubecost-Secondary-Clusters: secondary-clusters.md
     hc/en-us/articles/4425080011671-Ports: ports.md
-    hc/en-us/articles/4425132038167-Installing-Agent-for-Hosted-Kubecost-Alpha-: agent.md
+    hc/en-us/articles/4425132038167-Installing-Agent-for-Hosted-Kubecost: agent.md
     hc/en-us/articles/4425134686743-User-Metrics: user-metrics.md
     hc/en-us/articles/4442565953943-Getting-Started: code-contribution.md
     hc/en-us/articles/5699259004311-Grafana-Cloud-Integration-for-Kubecost: grafana-cloud-integration.md
