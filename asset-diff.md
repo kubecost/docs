@@ -8,7 +8,7 @@ The endpoint is available at
 http://<kubecost-address>/model/assets/diff
 ```
 
-## Paramters
+## Parameters
 | Name | Type | Description |
 |------|------|-------------|
 | `before` | string | Duration in time of the past. Supports hours or days before the current time in the following format: `2h` or `3d`. See the [Allocation API documentation](https://github.com/kubecost/docs/blob/main/allocation.md#querying) for more a more detailed explanation of valid inputs to `window`. Important note: `before` must be further in the past than `after` (e.g. `after=1d`, `before=1d offset 1d`) |
