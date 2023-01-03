@@ -1,5 +1,4 @@
-Container Request Right Sizing Recommendation API (v2)
-==================================
+# Container Request Right Sizing Recommendation API (v2)
 
 The container request right sizing recommendation API provides recommendations
 for [container resource
@@ -15,24 +14,22 @@ The endpoint is available at
 http://<kubecost-address>/model/savings/requestSizingV2
 ```
 
-
 ## Parameters
 
 | Name | Type | Description |
 |------|------|-------------|
-| `algorithmCPU` | string | The algorithm to be used to calculate CPU recommendations based on historical CPU usage data. Options are `max` and `quantile`. Max recommendations are based on the maximum-observed usage in `window`. Quantile recommendations are based on a quantile of observed usage in `window` (requires the `qCPU` parameter to set the desired quantile). Defaults to `max`. NOTE: To use the `quantile` algorithm, the ContainerStats pipeline must be enabled. Please see the note on the `.Values.kubecostModel.containerStatsEnabled` value [on the Helm chart](https://github.com/kubecost/cost-analyzer-helm-chart/blob/develop/cost-analyzer/values.yaml).
+| `algorithmCPU` | string | The algorithm to be used to calculate CPU recommendations based on historical CPU usage data. Options are `max` and `quantile`. Max recommendations are based on the maximum-observed usage in `window`. Quantile recommendations are based on a quantile of observed usage in `window` (requires the `qCPU` parameter to set the desired quantile). Defaults to `max`. NOTE: To use the `quantile` algorithm, the [ContainerStats Pipeline](./containerstats-pipeline.md) must be enabled.
 | `algorithmRAM` | string | Like `algorithmCPU`, but for RAM recommendations.
 | `qCPU` | float in the range (0, 1] | The desired quantile to base CPU recommendations on. Only used if `algorithmCPU=quantile`. Note: a quantile of `0.95` is the same as a 95th percentile.
 | `qRAM` | float in the range (0, 1] | Like `qCPU`, but for RAM recommendations.
 | `targetCPUUtilization` | float in the range (0,1] | An ratio of headroom on the base recommended CPU request. If the base recommendation is 100 mCPU and this parameter is `0.8`, the recommended CPU request will be `100 / 0.8 = 125` mCPU. Defaults to `0.7`. Inputs that fail to parse (see https://pkg.go.dev/strconv#ParseFloat) will default to `0.7`.|
 | `targetRAMUtilization` | float in the range (0,1] | Calculated like CPU. |
-| `window` | string | Required parameter. Duration of time over which to calculate usage. Supports days before the current time in the following format: `3d`. Note: Hourly windows are not currently supported. See the [Allocation API documentation](https://github.com/kubecost/docs/blob/main/allocation.md#querying) for more a more detailed explanation of valid inputs to `window`. |
+| `window` | string | Required parameter. Duration of time over which to calculate usage. Supports days before the current time in the following format: `3d`. Note: Hourly windows are not currently supported. Note: It's recommended to provide a window greater than `2d`. See the [Allocation API documentation](https://github.com/kubecost/docs/blob/main/allocation.md#querying) for more a more detailed explanation of valid inputs to `window`. |
 | `filter` | string | A filter to reduce the set of workloads for which recommendations will be calculated. See [V2 Filters](https://github.com/kubecost/docs/blob/main/filteres-v2.md) for syntax. V1 filters are also supported, please see v1 API documentation. |
-
 
 ## API examples
 
-```
+```bash
 KUBECOST_ADDRESS='http://localhost:9090/model'
 
 curl -G \
