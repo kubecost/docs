@@ -47,7 +47,7 @@
 * [Advanced Configuration](install-and-configure/advanced-configuration/README.md)
   * [Add Key](add-key.md)
   * [Enabling Annotation Emission](annotations.md)
-  * [Network Traffic Cost Allocation](network-allocation.md)
+  * [Network Cost Configuration](network-costs-configuration.md)
   * [User Management - SSO/SAML/RBAC](user-management.md)
   * [Multi-Cluster Options](multi-cluster.md)
   * [Federated Clusters](federated-clusters.md)
@@ -107,6 +107,7 @@
 
 * [Kubecost Core Architecture Overview](architecture.md)
 * [Kubecost Cloud Architecture Overview](kubecost-cloud-architecture.md)
+* [Network Traffic Cost Allocation](network-allocation.md)
 * [Open Source](open-source-deps.md)
 * [Security and Data Protection](security.md)
 * [Ports](ports.md)
