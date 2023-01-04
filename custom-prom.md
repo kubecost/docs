@@ -7,13 +7,13 @@ There are several considerations when disabling the Kubecost included Prometheus
 
 The Kubecost Prometheus deployment is optimized to not interfere with other observability instrumentation and by default only contains metrics that are useful to the Kubecost product. This results in __70-90% fewer metrics__ than a Prometheus deployment using default settings.
 
-Additonally, if multi-cluster metric aggregation is required, Kubecost provides a turnkey solution that is highly tuned and simple to support using the included Prometheus deployment.
+Additionally, if multi-cluster metric aggregation is required, Kubecost provides a turnkey solution that is highly tuned and simple to support using the included Prometheus deployment.
 
 > **Note**: the Kubecost team provides best efforts support for free/community users when integrating with an existing Prometheus deployment.
 
 ## Disable node-exporter and kube-state-metrics (recommended)
 
-If you have node-exporter and/or KSM running on your cluster, follow this step to disable the Kubecost included versions. Additional detail on [KSM requiments](https://github.com/kubecost/docs/blob/main/ksm-metrics.md).
+If you have node-exporter and/or KSM running on your cluster, follow this step to disable the Kubecost included versions. Additional detail on [KSM requirements](https://github.com/kubecost/docs/blob/main/ksm-metrics.md).
 
 > **Note**: In contrast to our recommendation above, we do recommend disabling the Kubecost's node-exporter and kube-state-metrics if you already have them running in your cluster.
 
@@ -36,7 +36,7 @@ Kubecost requires the following minimum versions:
 
 ## Steps to disable Kubecost's Prometheus Deployment (not recommended)
 
-**Before contintuing, see the note above about Kubecost's bundled prometheus**
+**Before continuing, see the note above about Kubecost's bundled prometheus**
 
 1. Pass the following parameters in your helm install:
 
@@ -44,7 +44,7 @@ Kubecost requires the following minimum versions:
     helm upgrade --install kubecost \
       --repo https://kubecost.github.io/cost-analyzer/ cost-analyzer \
       --namespace kubecost --create-namespace \
-      --set global.prometheus.fqdn=http://<prometheus-server-service-name>.<prometheus-server-namespace>.svc \
+      --set global.prometheus.fqdn=http://<prometheus-server-service-name>:<port>.<prometheus-server-namespace>.svc \
       --set global.prometheus.enabled=false
     ```
 
@@ -98,34 +98,74 @@ Visiting `<your-kubecost-endpoint>/diagnostics.html` provides diagnostics info o
 
 Common issues include the following:
 
-**Wrong Prometheus FQDN**: Evidenced by the following pod error message `No valid prometheus config file at ...` and the init pods hanging. We recommend running `curl <your_prometheus_url>/api/v1/status/config` from a pod in the cluster to confirm that your [Prometheus config](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#configuration-file) is returned. Here is an example, but this needs to be updated based on your pod name and Prometheus address:
+### Misconfigured Prometheus FQDN
+
+Evidenced by the following pod error message `No valid prometheus config file at ...` and the init pods hanging. We recommend running `curl <your_prometheus_url>/api/v1/status/config` from a pod in the cluster to confirm that your [Prometheus config](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#configuration-file) is returned. Here is an example, but this needs to be updated based on your pod name and Prometheus address:
 
 ```sh
-kubectl exec kubecost-cost-analyzer-<UID> -c cost-analyzer-frontend -n kubecost \
--- curl http://<your_prometheus_url>/api/v1/status/config
+kubectl exec -i -t -n kubecost \
+  $(kubectl get pod --namespace kubecost|grep analyzer -m1 |awk '{print $1}') \
+  -c cost-analyzer-frontend -- \
+  curl http://<your_prometheus_url>/api/v1/status/config
 ```
 
-> **Note**: In the above example, <your_prometheus_url> may include a port number and/or a custom path name, resulting in a url like, e.g., http://kubecost-prometheus-server.kubecost:9080/prometheus/api/v1/status/config.
+> **Note**: In the above example, `$(kubectl get pod --namespace kubecost|grep analyzer -m1 |awk '{print $1}')` simply finds the name of a cost analyzer pod. You can replace this with the pod name, example: `kubecost-cost-analyzer-5bc6947b94-58hmx`
+
+> **Note**: In the above example, <your_prometheus_url> may include a port number and/or namespace, example: `http://prometheus-operator-kube-p-prometheus.monitoring:9090/api/v1/status/config`
 
 If the config file is not returned, this is an indication that an incorrect Prometheus address has been provided. If a config file is returned from one pod in the cluster but not the Kubecost pod, then the Kubecost pod likely has its access restricted by a network policy, service mesh, etc.
 
-**Context Deadline Exceeded**: Network policies, Mesh networks, or other security related tooling can block network traffic between Prometheus and Kubecost which will result in the Kubecost scrape target state as being down in the Prometheus targets UI. To assist in troubleshooting this type of error you can use the `wget` command from within the Prometheus Server container to try and reach the Kubecost target manually. Note the "namespace" and "deployment" name in this command may need updated to match your environment, this example uses the default Kubecost Prometheus deployment.\
+### Context Deadline Exceeded
 
-When succesfull this command should return all of the Kubecost metrics. Failures may be indicative of the network traffic being blocked.
+Network policies, Mesh networks, or other security related tooling can block network traffic between Prometheus and Kubecost which will result in the Kubecost scrape target state as being down in the Prometheus targets UI. To assist in troubleshooting this type of error you can use the `curl` command from within the cost-analyzer container to try and reach the Prometheus target. Note the "namespace" and "deployment" name in this command may need updated to match your environment, this example uses the default Kubecost Prometheus deployment.\
+
+When successful, this command should return all of the metrics that Kubecost uses. Failures may be indicative of the network traffic being blocked.
+
+```sh
+kubectl exec -i -t -n kubecost \
+  $(kubectl get pod --namespace kubecost|grep analyzer -m1 |awk '{print $1}') \
+  -c cost-analyzer-frontend -- \
+  curl "http://<your_prometheus_url>/metrics"
 ```
-kubectl exec -it deployment/kubecost-prometheus-server -n kubecost -c prometheus-server --  wget -S -O - http://kubecost-cost-analyzer.kubecost:9003/metrics
-```
 
-**Prometheus throttling**: Ensure Prometheus isn't being CPU throttled due to a low resource request.
+### Prometheus throttling
 
-**Wrong dependency version**: Review the Dependency Requirements section above
+Ensure Prometheus isn't being CPU throttled due to a low resource request.
 
-**Missing scrape configs**: Visit Prometheus Targets page (screenshot above)
+### Wrong dependency version
 
-**Data incorrectly is a single namespace**: Make sure that [honor_labels](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#scrape_config) is enabled
+Review the Dependency Requirements section above
 
-**Negative idle reported**: Make sure the kubecost job is scraping Kubecost. Metrics for `node_total_hourly_cost` should exist in Prometheus.
+### Missing scrape configs
 
-In Kubecost, you can view basic diagnostic information on these Prometheus metrics by selecting _Settings_ in the left navigation, then scrolling down to Prometheus Status, as seen below:
+Visit Prometheus Targets page (screenshot above)
+
+### Data incorrectly is a single namespace
+
+Make sure that [honor_labels](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#scrape_config) is enabled
+
+### Negative idle reported
+
+1. Make sure prometheus is scraping Kubecost search metrics for: `node_total_hourly_cost`
+
+  ```sh
+  kubectl exec -i -t -n kubecost \
+  $(kubectl get pod --namespace kubecost|grep analyzer -m1 |awk '{print $1}') \
+  -c cost-analyzer-frontend -- \
+  curl "http://localhost:9003/metrics" | grep node_total_hourly_cost
+  ```
+
+2. Ensure kube-state-metrics are available: `kube_node_status_capacity`
+
+  ```sh
+  kubectl exec -i -t -n kubecost \
+  $(kubectl get pod --namespace kubecost|grep analyzer -m1 |awk '{print $1}') \
+  -c cost-analyzer-frontend -- \
+  curl "http://localhost:9003/metrics" | grep kube_node_status_capacity
+  ```
+
+### Diagnostics
+
+In Kubecost, you can view basic diagnostic information for Prometheus metrics by selecting _Settings_ in the left navigation, then scrolling down to Prometheus Status, as seen below:
 
 ![Prometheus status diagnostic](https://raw.githubusercontent.com/kubecost/docs/main/prom-status.png)
