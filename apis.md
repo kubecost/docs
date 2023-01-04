@@ -22,7 +22,7 @@ The Kubecost Allocation API is used by the Kubecost Allocation frontend and retr
 
 The aggregated cost model API is actively being replaced by the Kubecost Allocation API.
 
-[**/assets**](https://github.com/kubecost/docs/blob/main/assets.md)
+[**/assets**](https://docs.kubecost.com/apis/apis/assets-api)
 
 The assets API retrieves the backing cost data broken down by individual assets, e.g. node, disk, etc, and provides various aggregations of this data. Optionally provides the ability to integrate with external cloud assets.
 
