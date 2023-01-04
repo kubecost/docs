@@ -44,7 +44,7 @@ Kubecost requires the following minimum versions:
     helm upgrade --install kubecost \
       --repo https://kubecost.github.io/cost-analyzer/ cost-analyzer \
       --namespace kubecost --create-namespace \
-      --set global.prometheus.fqdn=http://<prometheus-server-service-name>.<prometheus-server-namespace>.svc \
+      --set global.prometheus.fqdn=http://<prometheus-server-service-name>:<port>.<prometheus-server-namespace>.svc \
       --set global.prometheus.enabled=false
     ```
 
@@ -101,7 +101,10 @@ Common issues include the following:
 **Wrong Prometheus FQDN**: Evidenced by the following pod error message `No valid prometheus config file at ...` and the init pods hanging. We recommend running `curl <your_prometheus_url>/api/v1/status/config` from a pod in the cluster to confirm that your [Prometheus config](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#configuration-file) is returned. Here is an example, but this needs to be updated based on your pod name and Prometheus address:
 
 ```sh
-kubectl exec -i -t -n kubecost $(kubectl get pod --namespace kubecost|grep analyzer -m1 |awk '{print $1}') -c cost-analyzer-frontend -- curl http://<your_prometheus_url>/api/v1/status/config
+kubectl exec -i -t -n kubecost \
+  $(kubectl get pod --namespace kubecost|grep analyzer -m1 |awk '{print $1}') \
+  -c cost-analyzer-frontend -- \
+  curl http://<your_prometheus_url>/api/v1/status/config
 ```
 
 > **Note**: In the above example, `$(kubectl get pod --namespace kubecost|grep analyzer -m1 |awk '{print $1}')` simply finds the name of a cost analyzer pod. You can replace this with the pod name, example: `kubecost-cost-analyzer-5bc6947b94-58hmx`
@@ -110,12 +113,15 @@ kubectl exec -i -t -n kubecost $(kubectl get pod --namespace kubecost|grep analy
 
 If the config file is not returned, this is an indication that an incorrect Prometheus address has been provided. If a config file is returned from one pod in the cluster but not the Kubecost pod, then the Kubecost pod likely has its access restricted by a network policy, service mesh, etc.
 
-**Context Deadline Exceeded**: Network policies, Mesh networks, or other security related tooling can block network traffic between Prometheus and Kubecost which will result in the Kubecost scrape target state as being down in the Prometheus targets UI. To assist in troubleshooting this type of error you can use the `wget` command from within the Prometheus Server container to try and reach the Kubecost target manually. Note the "namespace" and "deployment" name in this command may need updated to match your environment, this example uses the default Kubecost Prometheus deployment.\
+**Context Deadline Exceeded**: Network policies, Mesh networks, or other security related tooling can block network traffic between Prometheus and Kubecost which will result in the Kubecost scrape target state as being down in the Prometheus targets UI. To assist in troubleshooting this type of error you can use the `curl` command from within the cost-analyzer container to try and reach the Prometheus target. Note the "namespace" and "deployment" name in this command may need updated to match your environment, this example uses the default Kubecost Prometheus deployment.\
 
-When successfully this command should return all of the Kubecost metrics. Failures may be indicative of the network traffic being blocked.
+When successful, this command should return all of the metrics that Kubecost uses. Failures may be indicative of the network traffic being blocked.
 
 ```sh
-kubectl exec -i -t -n kubecost $(kubectl get pod --namespace kubecost|grep analyzer -m1 |awk '{print $1}') -c cost-analyzer-frontend -- curl "http://localhost:9003/metrics"
+kubectl exec -i -t -n kubecost \
+  $(kubectl get pod --namespace kubecost|grep analyzer -m1 |awk '{print $1}') \
+  -c cost-analyzer-frontend -- \
+  curl "http://<your_prometheus_url>/metrics"
 ```
 
 **Prometheus throttling**: Ensure Prometheus isn't being CPU throttled due to a low resource request.
@@ -131,12 +137,19 @@ kubectl exec -i -t -n kubecost $(kubectl get pod --namespace kubecost|grep analy
 1. Make sure prometheus is scraping Kubecost search metrics for: `node_total_hourly_cost`
 
   ```sh
-  kubectl exec -i -t -n kubecost $(kubectl get pod --namespace kubecost|grep analyzer -m1 |awk '{print $1}') -c cost-analyzer-frontend -- curl "http://localhost:9003/metrics" | grep node_total_hourly_cost
+  kubectl exec -i -t -n kubecost \
+  $(kubectl get pod --namespace kubecost|grep analyzer -m1 |awk '{print $1}') \
+  -c cost-analyzer-frontend -- \
+  curl "http://localhost:9003/metrics" | grep node_total_hourly_cost
   ```
+
 2. Ensure kube-state-metrics are available: `kube_node_status_capacity`
 
   ```sh
-  kubectl exec -i -t -n kubecost $(kubectl get pod --namespace kubecost|grep analyzer -m1 |awk '{print $1}') -c cost-analyzer-frontend -- curl "http://localhost:9003/metrics" | grep kube_node_status_capacity
+  kubectl exec -i -t -n kubecost \
+  $(kubectl get pod --namespace kubecost|grep analyzer -m1 |awk '{print $1}') \
+  -c cost-analyzer-frontend -- \
+  curl "http://localhost:9003/metrics" | grep kube_node_status_capacity
   ```
 
 In Kubecost, you can view basic diagnostic information on these Prometheus metrics by selecting _Settings_ in the left navigation, then scrolling down to Prometheus Status, as seen below:
