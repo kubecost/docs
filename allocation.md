@@ -73,23 +73,23 @@ cpuCoreRequestAverage | Average number of CPU cores requested while running.
 cpuCoreUsageAverage | Average number of CPU cores used while running.
 cpuCoreHours | Cumulative CPU core-hours allocated.
 cpuCost | Cumulative cost of allocated CPU core-hours.
-cpuCostAdjustment |
+cpuCostAdjustment | Matches CPU costs to reconciled assets and divides cost
 cpuEfficiency | Ratio of `cpuCoreUsageAverage`-to-`cpuCoreRequestAverage`, meant to represent the fraction of requested resources that were used.
 gpuCount | Number of GPUs allocated to the workload.
 gpuHours | Cumulative GPU-hours allocated.
 gpuCost | Cumulative cost of allocated GPU-hours.
-gpuCostAdjustment |
+gpuCostAdjustment | Matches GPU costs to reconciled assets and divides cost
 networkTransferBytes |
 networkReceiveBytes |
 networkCost | Cumulative cost of network usage.
-networkCostAdjustment |
+networkCostAdjustment | Matches network costs to reconciled assets and divides cost
 loadBalancerCost | Cumulative cost of allocated load balancers.
-loadBalancerCostAdjustment |
+loadBalancerCostAdjustment | Matches load balancer costs to reconciled assets and divides cost
 pvBytes | Average number of bytes of PersistentVolumes allocated while running.
 pvByteHours | Cumulative PersistentVolume byte-hours allocated.
 pvCost | Cumulative cost of allocated PersistentVolume byte-hours.
-pvs |
-pvCostAdjustment | 
+pvs | 
+pvCostAdjustment | Matches persistent volume costs to reconciled assets and divides cost
 ramBytes | Average number of RAM bytes allocated. An allocated resource is the source of cost, according to Kubecost - regardless of if a requested resource is used.
 ramByteRequestAverage | Average of the RAM requested by the workload. Requests are a [Kubernetes tool](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#requests-and-limits) for preallocating/reserving resources for a given container.
 ramByteUsageAverage | Average of the RAM used by the workload. This comes from moment-to-moment measurements of live RAM byte usage of each container. This is roughly the number you see under RAM if you pull up Task Manager (Windows), top on Linux, or Activity Monitor (MacOS).
