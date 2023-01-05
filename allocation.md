@@ -79,8 +79,8 @@ gpuCount | Number of GPUs allocated to the workload.
 gpuHours | Cumulative GPU-hours allocated.
 gpuCost | Cumulative cost of allocated GPU-hours.
 gpuCostAdjustment | Matches GPU costs to reconciled assets and divides cost
-networkTransferBytes |
-networkReceiveBytes |
+networkTransferBytes | Cost of data being sent outside the network
+networkReceiveBytes | Cost of data being received by the network
 networkCost | Cumulative cost of network usage.
 networkCostAdjustment | Matches network costs to reconciled assets and divides cost
 loadBalancerCost | Cumulative cost of allocated load balancers.
@@ -88,7 +88,7 @@ loadBalancerCostAdjustment | Matches load balancer costs to reconciled assets an
 pvBytes | Average number of bytes of PersistentVolumes allocated while running.
 pvByteHours | Cumulative PersistentVolume byte-hours allocated.
 pvCost | Cumulative cost of allocated PersistentVolume byte-hours.
-pvs | 
+pvs | Allocation of PersistentVolumeClaim costs to specific pods
 pvCostAdjustment | Matches persistent volume costs to reconciled assets and divides cost
 ramBytes | Average number of RAM bytes allocated. An allocated resource is the source of cost, according to Kubecost - regardless of if a requested resource is used.
 ramByteRequestAverage | Average of the RAM requested by the workload. Requests are a [Kubernetes tool](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#requests-and-limits) for preallocating/reserving resources for a given container.
