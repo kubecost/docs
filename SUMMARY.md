@@ -74,6 +74,7 @@
 
 * [Getting Started](getting-started.md)
   * [Kubernetes Cost Allocation](cost-allocation.md)
+  * [Efficiency and Idle](efficiency-idle.md)
   * [Availability Tiers](availability-tiers.md)
   * [Cluster Health Score](cluster-health-score.md)
   * [Spot Checklist](spot-checklist.md)
