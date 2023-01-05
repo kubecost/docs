@@ -88,7 +88,7 @@ loadBalancerCostAdjustment | Matches load balancer costs to reconciled assets an
 pvBytes | Average number of bytes of PersistentVolumes allocated while running.
 pvByteHours | Cumulative PersistentVolume byte-hours allocated.
 pvCost | Cumulative cost of allocated PersistentVolume byte-hours.
-pvs | Allocation of PersistentVolumeClaim costs to specific pods
+pvs | Map of PersistentVolumeClaim costs that have been allocated to the workload
 pvCostAdjustment | Matches persistent volume costs to reconciled assets and divides cost
 ramBytes | Average number of RAM bytes allocated. An allocated resource is the source of cost, according to Kubecost - regardless of if a requested resource is used.
 ramByteRequestAverage | Average of the RAM requested by the workload. Requests are a [Kubernetes tool](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#requests-and-limits) for preallocating/reserving resources for a given container.
