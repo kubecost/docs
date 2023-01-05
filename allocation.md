@@ -51,7 +51,7 @@ $ curl http://localhost:9090/model/allocation \
 }
 ```
 
-Note: querying for "3d" will likely return a range of four sets because the queried range will overlap with four precomputed 24-hour sets, each aligned to the configured timezone. For instance, querying "3d" on 2021/01/04T12:00:00 will return:
+> **Note**: Querying for "3d" will likely return a range of four sets because the queried range will overlap with four precomputed 24-hour sets, each aligned to the configured timezone. For instance, querying "3d" on 2021/01/04T12:00:00 will return:
 - 2021/01/04 00:00:00 until 2021/01/04T12:00:00 (now)
 - 2021/01/03 00:00:00 until 2021/01/04 00:00:00
 - 2021/01/02 00:00:00 until 2021/01/03 00:00:00
@@ -73,23 +73,23 @@ cpuCoreRequestAverage | Average number of CPU cores requested while running.
 cpuCoreUsageAverage | Average number of CPU cores used while running.
 cpuCoreHours | Cumulative CPU core-hours allocated.
 cpuCost | Cumulative cost of allocated CPU core-hours.
-cpuCostAdjustment | Matches CPU costs to reconciled assets and divides cost
+cpuCostAdjustment | Adjusted CPU cost after allocations have been matched to reconciled assets
 cpuEfficiency | Ratio of `cpuCoreUsageAverage`-to-`cpuCoreRequestAverage`, meant to represent the fraction of requested resources that were used.
 gpuCount | Number of GPUs allocated to the workload.
 gpuHours | Cumulative GPU-hours allocated.
 gpuCost | Cumulative cost of allocated GPU-hours.
-gpuCostAdjustment | Matches GPU costs to reconciled assets and divides cost
+gpuCostAdjustment | Adjusted GPU cost after allocations have been matched to reconciled assets
 networkTransferBytes | Cost of network data being sent
 networkReceiveBytes | Cost of network data being received
 networkCost | Cumulative cost of network usage.
 networkCostAdjustment | Matches network costs to reconciled assets and divides cost
 loadBalancerCost | Cumulative cost of allocated load balancers.
-loadBalancerCostAdjustment | Matches load balancer costs to reconciled assets and divides cost
+loadBalancerCostAdjustment | Adjusted load balancer cost after allocations have been matched to reconciled assets
 pvBytes | Average number of bytes of PersistentVolumes allocated while running.
 pvByteHours | Cumulative PersistentVolume byte-hours allocated.
 pvCost | Cumulative cost of allocated PersistentVolume byte-hours.
 pvs | Map of PersistentVolumeClaim costs that have been allocated to the workload
-pvCostAdjustment | Matches persistent volume costs to reconciled assets and divides cost
+pvCostAdjustment | Adjusted persistent volume cost after allocations have been matched to reconciled assets
 ramBytes | Average number of RAM bytes allocated. An allocated resource is the source of cost, according to Kubecost - regardless of if a requested resource is used.
 ramByteRequestAverage | Average of the RAM requested by the workload. Requests are a [Kubernetes tool](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#requests-and-limits) for preallocating/reserving resources for a given container.
 ramByteUsageAverage | Average of the RAM used by the workload. This comes from moment-to-moment measurements of live RAM byte usage of each container. This is roughly the number you see under RAM if you pull up Task Manager (Windows), top on Linux, or Activity Monitor (MacOS).
