@@ -2,6 +2,8 @@
 
 For teams interested in reducing their Kubernetes costs, we have seen it be beneficial to first understand how provisioned resources have been used. There are two major concepts to start with: pod resource efficiency and cluster idle costs.
 
+![The Allocations view aggregated by namespace, which shows efficiency & idle](./images/efficiency-idle.png)
+
 ## Pod resource efficiency
 
 Resource efficiency over a time window is defined as the resource utilization over that time window versus the resource request over the same time window. It is cost-weighted and defined as followed:
