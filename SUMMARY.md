@@ -60,6 +60,7 @@
 ## Integrations
 
 * [Custom Webhook to Create a Kubecost Stage in Spinnaker](spinnaker-custom-webhook.md)
+* [Gluu Server with OIDC Configuration Guide](integrations/gluu-server-with-oidc-configuration-guide.md)
 
 ## General
 
