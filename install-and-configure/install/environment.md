@@ -25,4 +25,4 @@ Supported Environments
 ## Supported Kubernetes Versions
 
 * Kubecost runs in any Kubernetes v1.8 (Aug 2017) or greater environment.
-* Kubernetes 1.22 is officially supported as of v1.91.0
+* Kubernetes 1.25 is officially supported as of v1.99.0
