@@ -47,7 +47,7 @@
 * [Advanced Configuration](install-and-configure/advanced-configuration/README.md)
   * [Add Key](add-key.md)
   * [Enabling Annotation Emission](annotations.md)
-  * [Network Traffic Cost Allocation](network-allocation.md)
+  * [Network Cost Configuration](network-costs-configuration.md)
   * [User Management - SSO/SAML/RBAC](user-management.md)
   * [Multi-Cluster Options](multi-cluster.md)
   * [Federated Clusters](federated-clusters.md)
@@ -65,7 +65,7 @@
 
 * [OpenCost Product Comparison](opencost-product-comparison.md)
 * [User Metrics](user-metrics.md)
-* [Installing Agent for Kubecost Cloud (Alpha)](agent.md)
+* [Installing Agent for Kubecost Cloud (limited availability)](agent.md)
 * [Tuning Resource Consumption](resource-consumption.md)
 * [Calculating Node Pricing](node-pricing.md)
 
@@ -107,6 +107,7 @@
 
 * [Kubecost Core Architecture Overview](architecture.md)
 * [Kubecost Cloud Architecture Overview](kubecost-cloud-architecture.md)
+* [Network Traffic Cost Allocation](network-allocation.md)
 * [Open Source](open-source-deps.md)
 * [Security and Data Protection](security.md)
 * [Ports](ports.md)
@@ -120,6 +121,7 @@
 
 * [Frequently Asked Questions](setup/frequently-asked-questions.md)
 * [Troubleshoot Install](troubleshoot-install.md)
+* [HTTP Error Troubleshooting](http-troubleshooting.md)
 * [Capture a Bug Report](bug-report.md)
 * [Bug Bounty Program](bug-bounty-program.md)
 * [Kubecost Diagnostics](diagnostics.md)

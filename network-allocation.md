@@ -3,11 +3,12 @@
 This document describes how Kubecost calculates network costs.
 
 ![network-costs screenshot](images/network-cost-overview.png)
+
 ## Network Cost Calculation Methodology
 
 Kubecost uses best-effort to allocate network transfer costs to the workloads generating those costs. The level of accuracy has several factors described below.
 
-There are two primary factors when determining how network costs are calculated: [Cloud Integration](./cloud-integration.md) and the existence of the [network costs daemonset](./network-allocation.md).
+There are two primary factors when determining how network costs are calculated: [Cloud Integration](./cloud-integration.md) and the existence of the [network costs daemonset](./network-costs-configuration.md).
 
 ### Base Functionality
 
