@@ -79,8 +79,8 @@ gpuCount | Number of GPUs allocated to the workload.
 gpuHours | Cumulative GPU-hours allocated.
 gpuCost | Cumulative cost of allocated GPU-hours.
 gpuCostAdjustment | Matches GPU costs to reconciled assets and divides cost
-networkTransferBytes | Cost of data being sent outside the network
-networkReceiveBytes | Cost of data being received by the network
+networkTransferBytes | Cost of network data being sent
+networkReceiveBytes | Cost of network data being received
 networkCost | Cumulative cost of network usage.
 networkCostAdjustment | Matches network costs to reconciled assets and divides cost
 loadBalancerCost | Cumulative cost of allocated load balancers.
