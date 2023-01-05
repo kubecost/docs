@@ -5,7 +5,7 @@ Kubecost leverages Thanos to enable durable storage for three different purposes
 
 1. Centralize metric data for a global multi-cluster view into Kubernetes costs via a Prometheus sidecar
 1. Allow for unlimited data retention
-1. Backup Kubecost [ETL data](https://guide.kubecost.com/hc/en-us/articles/4407601815191-ETL-S3-Backup)
+1. Backup Kubecost [ETL data](/install-and-configure/install/etl-backup)
 
 > **Note**: This feature requires an [Enterprise license](https://kubecost.com/pricing).
 
@@ -20,9 +20,9 @@ We have guides for using cloud-native storage for the largest cloud providers. O
 
 Use the appropriate guide for your cloud provider:
 
-* [Google Cloud Storage](https://github.com/kubecost/docs/blob/main/long-term-storage-gcp.md)
-* [AWS/S3](https://github.com/kubecost/docs/blob/main/long-term-storage-aws.md)
-* [Azure](https://github.com/kubecost/docs/blob/main/long-term-storage-azure.md)
+* [Google Cloud Storage](/long-term-storage-gcp.md)
+* [AWS/S3](/long-term-storage-aws.md)
+* [Azure](/long-term-storage-azure.md)
 
 ## Step 2: Create object-store secret
 

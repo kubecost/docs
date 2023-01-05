@@ -13,7 +13,7 @@ Additionally, if multi-cluster metric aggregation is required, Kubecost provides
 
 ## Disable node-exporter and kube-state-metrics (recommended)
 
-If you have node-exporter and/or KSM running on your cluster, follow this step to disable the Kubecost included versions. Additional detail on [KSM requirements](https://github.com/kubecost/docs/blob/main/ksm-metrics.md).
+If you have node-exporter and/or KSM running on your cluster, follow this step to disable the Kubecost included versions. Additional detail on [KSM requiments](/ksm-metrics.md).
 
 > **Note**: In contrast to our recommendation above, we do recommend disabling the Kubecost's node-exporter and kube-state-metrics if you already have them running in your cluster.
 
@@ -48,7 +48,7 @@ Kubecost requires the following minimum versions:
       --set global.prometheus.enabled=false
     ```
 
-    **Note** The fqdn can be a full path: https://prometheus-prod-us-central-x.grafana.net/api/prom/ if you use Grafana Cloud managed Prometheus. Learn more at [Grafana Cloud Integration for Kubecost](https://guide.kubecost.com/hc/en-us/articles/5699967551639-Grafana-Cloud-Integration-for-Kubecost)
+    **Note** The fqdn can be a full path: https://prometheus-prod-us-central-x.grafana.net/api/prom/ if you use Grafana Cloud managed Prometheus. Learn more at [Grafana Cloud Integration for Kubecost](/install-and-configure/install/custom-prom/grafana-cloud-integration)
 
 1. Have your Prometheus scrape the cost-model `/metrics` endpoint. These metrics are needed for reporting accurate pricing data. Here is an example scrape config:
 

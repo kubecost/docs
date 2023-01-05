@@ -20,7 +20,7 @@ leverages this pipeline
 
 The primary user of ContainerStats pipeline data is v2 of the request right-
 sizing recommendation API. ContainerStats data is used for quantile-based
-recommendations. Review the doc for this feature [here](https://github.com/kubecost/docs/blob/main/api-request-right-sizing-v2.md).
+recommendations. Review the doc for this feature [here](/api-request-right-sizing-v2.md).
 
 ### Debugging
 

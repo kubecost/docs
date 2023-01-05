@@ -9,7 +9,7 @@ This document walks through the necessary steps for enabling this feature.
 
 # Thanos
 
-1. Follow steps [here](https://github.com/kubecost/docs/blob/main/long-term-storage.md#option-b-out-of-cluster-storage-thanos) to enable Thanos durable storage on a Master cluster.
+1. Follow steps [here](/long-term-storage.md#option-b-out-of-cluster-storage-thanos) to enable Thanos durable storage on a Master cluster.
 
 2. Repeat the process in Step 1 for each additional secondary cluster, with the following Thanos recommendations:
    * Reuse your existing storage bucket and access credentials.
@@ -35,6 +35,6 @@ This document walks through the necessary steps for enabling this feature.
 
     > **Note**: `cluster_id` can be replaced with another label (e.g. `cluster`) by modifying .Values.kubecostModel.promClusterIDLabel.
 
-4. Follow the same verification steps available [here](https://github.com/kubecost/docs/blob/main/long-term-storage.md#verify-thanos).
+4. Follow the same verification steps available [here](/long-term-storage.md#verify-thanos).
 
 Sample configurations for each cloud provider can be found here: [https://github.com/kubecost/poc-common-configurations/](https://github.com/kubecost/poc-common-configurations/)

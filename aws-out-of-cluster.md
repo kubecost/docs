@@ -1,13 +1,13 @@
 AWS Out of Cluster 
 ==================
 
-Integrating Kubecost with your AWS data provides the ability to allocate out-of-cluster (OOC) costs, e.g. RDS instances and S3 buckets, back to Kubernetes concepts like namespace and deployment as well as reconcile cluster assets back to your billing data. The latter is especially helpful when teams are using Reserved Instances, Savings Plans, or Enterprise Discounts. All billing data remains on your cluster when using this functionality and is not shared externally. Read the [Cloud Integrations](https://github.com/kubecost/docs/blob/main/cloud-integration.md) documentation for more information on how Kubecost connects with Cloud Service Providers.
+Integrating Kubecost with your AWS data provides the ability to allocate out-of-cluster (OOC) costs, e.g. RDS instances and S3 buckets, back to Kubernetes concepts like namespace and deployment as well as reconcile cluster assets back to your billing data. The latter is especially helpful when teams are using Reserved Instances, Savings Plans, or Enterprise Discounts. All billing data remains on your cluster when using this functionality and is not shared externally. Read the [Cloud Integrations](/cloud-integration.md) documentation for more information on how Kubecost connects with Cloud Service Providers.
 
-The following guide provides the steps required for enabling OOC costs allocation and accurate pricing, e.g. [Reserved Instance price allocation](http://docs.kubecost.com/getting-started#ri-committed-discount). In a multi-account organization, all of the following steps will need to be completed in the payer account.
+The following guide provides the steps required for enabling OOC costs allocation and accurate pricing, e.g. [Reserved Instance price allocation](/using-kubecost/getting-started#ri-committed-discount). In a multi-account organization, all of the following steps will need to be completed in the payer account.
 
 ## Step 1: Create an AWS Cost and Usage Report (CUR) and Integrate it with Kubecost
 
-[Follow our guide for cloud integrations](https://github.com/kubecost/docs/blob/main/aws-cloud-integrations.md)
+[Follow our guide for cloud integrations](/aws-cloud-integrations.md)
 
 ## Step 2: Tag your resources
 Kubecost utilizes AWS tagging to allocate the costs of AWS resources outside of the Kubernetes cluster to specific Kubernetes concepts, such as namespaces, pods, etc. These costs are then shown in a unified dashboard within the Kubecost interface.

@@ -26,7 +26,7 @@ helm install kubecost kubecost/cost-analyzer --namespace kubecost --devel
 ## Staging releases
 
 * Staging releases are built before scheduled releases and published in [this repo](https://github.com/kubecost/staging-repo).
-* You can get the latest staging build by following the [install steps](https://github.com/kubecost/docs/blob/main/staging.md)
+* You can get the latest staging build by following the [install steps](/staging.md)
 
 ## Nightly releases
 

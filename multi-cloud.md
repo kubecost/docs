@@ -1,6 +1,6 @@
 # Setting Up Cloud Integrations
 
-This document outlines how to set up cloud integration for accounts on multiple cloud providers, or multiple accounts on the same cloud provider. Multi-Cloud is an enterprise feature. This configuration can be used independently of or in addition to other cloud integration configurations provided by Kubecost. Once configured, Kubecost will display cloud assets for all configured accounts and perform reconciliation for all [federated clusters](https://github.com/kubecost/docs/blob/main/long-term-storage.md) that have their respective accounts configured.
+This document outlines how to set up cloud integration for accounts on multiple cloud providers, or multiple accounts on the same cloud provider. Multi-Cloud is an enterprise feature. This configuration can be used independently of or in addition to other cloud integration configurations provided by Kubecost. Once configured, Kubecost will display cloud assets for all configured accounts and perform reconciliation for all [federated clusters](/long-term-storage.md) that have their respective accounts configured.
 
 ## Step 1: Set up cloud cost and usage reporting
 
@@ -16,7 +16,7 @@ Set up BigQuery billing data exports with this [guide](https://cloud.google.com/
 
 ### AWS
 
-Follow steps 1-3 to set up and configure a Cost and Usage Report (CUR) in our [guide](https://github.com/kubecost/docs/blob/main/aws-cloud-integrations.md)
+Follow steps 1-3 to set up and configure a Cost and Usage Report (CUR) in our [guide](/aws-cloud-integrations.md)
 
 ## Step 2: Create cloud integration secret
 

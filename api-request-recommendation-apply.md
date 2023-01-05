@@ -4,19 +4,19 @@ Container Request Recommendation "Apply" APIs
 :warning: This feature is in a pre-release (alpha/beta) state. It has limitations. Please read the documentation carefully. :warning:
 
 The "Apply" API for request recommendations takes Kubecost's calculated
-[container request recommendations](https://github.com/kubecost/docs/blob/main/api-request-right-sizing.md) and applies
+[container request recommendations](/api-request-right-sizing.md) and applies
 them to your cluster. 
 
 This document is an API reference/spec. You can find the feature how-to guide
-[here](https://github.com/kubecost/docs/blob/main/guide-one-click-request-sizing.md).
+[here](/guide-one-click-request-sizing.md).
 
 ## Requirements
 
-You must have Kubecost's Cluster Controller [enabled](https://github.com/kubecost/docs/blob/main/controller.md). Cluster
+You must have Kubecost's Cluster Controller [enabled](/controller.md). Cluster
 Controller contains Kubecost's automation features (including the APIs described
 in this document), and thus has write permission to certain resources on your
 cluster. Again, see the [how-to guide for 1-click request
-sizing](https://github.com/kubecost/docs/blob/main/guide-one-click-request-sizing.md) for setup instructions.
+sizing](/guide-one-click-request-sizing.md) for setup instructions.
 
 ## APIs
 
@@ -26,7 +26,7 @@ Apply has dry-run semantics, meaning it is a two step process:
 
 ### Plan
 
-The Plan API is available at `http://kubecost.example.com/cluster/requestsizer/plan`. It expects a POST request with a body that is identical to a response from the [request right-sizing recommendation API](https://github.com/kubecost/docs/blob/main/api-request-right-sizing.md).
+The Plan API is available at `http://kubecost.example.com/cluster/requestsizer/plan`. It expects a POST request with a body that is identical to a response from the [request right-sizing recommendation API](/api-request-right-sizing.md).
 
 For example, using `curl`:
 

@@ -1,7 +1,7 @@
 High Availability Kubecost
 ==========================
 
-Running Kubecost in high availability mode is a feature that relies on multiple Kubecost replica pods implementing the [ETL Bucket Backup](https://docs.kubecost.com/install-and-configure/advanced-configuration/etl-backup) feature combined with a Leader/Follower implementation which ensures that there always exists exactly one leader across all replicas.
+Running Kubecost in high availability mode is a feature that relies on multiple Kubecost replica pods implementing the [ETL Bucket Backup](/install-and-configure/advanced-configuration/etl-backup) feature combined with a Leader/Follower implementation which ensures that there always exists exactly one leader across all replicas.
 
 > **Note**: High availability mode is only available in Kubecost Enterprise.
 

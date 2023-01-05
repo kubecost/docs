@@ -24,8 +24,8 @@ http://<kubecost-address>/model/savings/requestSizingV2
 | `qRAM` | float in the range (0, 1] | Like `qCPU`, but for RAM recommendations.
 | `targetCPUUtilization` | float in the range (0,1] | An ratio of headroom on the base recommended CPU request. If the base recommendation is 100 mCPU and this parameter is `0.8`, the recommended CPU request will be `100 / 0.8 = 125` mCPU. Defaults to `0.7`. Inputs that fail to parse (see https://pkg.go.dev/strconv#ParseFloat) will default to `0.7`.|
 | `targetRAMUtilization` | float in the range (0,1] | Calculated like CPU. |
-| `window` | string | Required parameter. Duration of time over which to calculate usage. Supports days before the current time in the following format: `3d`. Note: Hourly windows are not currently supported. Note: It's recommended to provide a window greater than `2d`. See the [Allocation API documentation](https://github.com/kubecost/docs/blob/main/allocation.md#querying) for more a more detailed explanation of valid inputs to `window`. |
-| `filter` | string | A filter to reduce the set of workloads for which recommendations will be calculated. See [V2 Filters](https://github.com/kubecost/docs/blob/main/filteres-v2.md) for syntax. V1 filters are also supported, please see v1 API documentation. |
+| `window` | string | Required parameter. Duration of time over which to calculate usage. Supports days before the current time in the following format: `3d`. Note: Hourly windows are not currently supported. Note: It's recommended to provide a window greater than `2d`. See the [Allocation API documentation](/allocation.md#querying) for more a more detailed explanation of valid inputs to `window`. |
+| `filter` | string | A filter to reduce the set of workloads for which recommendations will be calculated. See [V2 Filters](/filteres-v2.md) for syntax. V1 filters are also supported, please see v1 API documentation. |
 
 ## API examples
 
@@ -59,4 +59,4 @@ target utilization parameters as described above.
 
 ## Savings projection methodology
 
-See [v1 docs](https://github.com/kubecost/docs/blob/main/api-request-right-sizing.md#savings-projection-methodology).
+See [v1 docs](/api-request-right-sizing.md#savings-projection-methodology).

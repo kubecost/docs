@@ -32,7 +32,7 @@ Node exporter metrics are used for the following features:
 * Show a compute 'breakdown' on Overview's Resource Efficiency graph, i.e. system vs idle vs user. The Compute bar on this graph will appear as a single solid colored bar when this diagnostic is failing.
 * Various Kubecost Grafana dashboards
 
-These metrics are not used in the core Assets and Allocation and therefore can be considered optional. [Learn how to disable](http://docs.kubecost.com/getting-started#node-exporter)
+These metrics are not used in the core Assets and Allocation and therefore can be considered optional. [Learn how to disable](/using-kubecost/getting-started#using-an-existing-node-exporter)
 
 If this diagnostic test is failing and you'd like to have these metrics, view [How to Troubleshoot Missing Metrics](diagnostics.md#how-to-troubleshoot-missing-metrics).
 
@@ -88,7 +88,7 @@ Once cloud integrations have been set up, Each Cloud Store will have its own dia
 * Resolution: The size of the assets being retrieved
 * StartTime: When the Cloud Process was started
 
-For more information about Cloud Integration and related APIs, read the [cloud-integration](https://github.com/kubecost/docs/blob/main/cloud-integration.md) documentation.
+For more information about Cloud Integration and related APIs, read the [cloud-integration](/cloud-integration.md) documentation.
 
 ## How to Troubleshoot Missing Metrics
 

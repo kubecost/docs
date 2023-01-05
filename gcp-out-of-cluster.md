@@ -3,7 +3,7 @@ GCP Cloud Integration
 
 Kubecost provides the ability to allocate out of cluster costs, e.g. Cloud SQL instances and Cloud Storage buckets, back to Kubernetes concepts like namespace and deployment.
 
-Read the [Cloud Integrations](https://github.com/kubecost/docs/blob/main/cloud-integration.md) documentation for more information on how Kubecost connects with Cloud Service Providers.
+Read the [Cloud Integrations](/cloud-integration.md) documentation for more information on how Kubecost connects with Cloud Service Providers.
 
 The following guide provides the steps required for allocating out-of-cluster costs in GCP.
 
@@ -13,12 +13,12 @@ The following guide provides the steps required for allocating out-of-cluster co
 
 [https://cloud.google.com/billing/docs/how-to/export-data-bigquery](https://cloud.google.com/billing/docs/how-to/export-data-bigquery)
 
-GCP users should create [detailed billing export](https://cloud.google.com/billing/docs/how-to/export-data-bigquery-tables#detailed-usage-cost-data-schema) to gain access to all of Kubecost cloud integration features including [reconciliation](https://github.com/kubecost/docs/blob/main/cloud-integration.md#reconciliation)
+GCP users should create [detailed billing export](https://cloud.google.com/billing/docs/how-to/export-data-bigquery-tables#detailed-usage-cost-data-schema) to gain access to all of Kubecost cloud integration features including [reconciliation](/cloud-integration.md#reconciliation)
 
 ## Step 2:  Visit Kubecost setup page and provide configuration info
 
 
-> **Note:** If you are using the alternative [multi-cloud integration](https://docs.kubecost.com/install-and-configure/advanced-configuration/cloud-integration/multi-cloud) method, Step 2 is not required.
+> **Note:** If you are using the alternative [multi-cloud integration](/install-and-configure/advanced-configuration/cloud-integration/multi-cloud) method, Step 2 is not required.
 
 If your Big Query dataset is in a different project than the one where Kubecost is installed, please see the section on [Cross-Project Service Accounts](#cross-project-service-account-configuration)
 

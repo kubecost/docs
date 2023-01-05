@@ -16,7 +16,7 @@ A default installation of Kubecost will use the onDemand rates for internet egre
 
 ### Cloud Integration
 
-Kubecost uses [cloud integration](https://docs.kubecost.com/install-and-configure/advanced-configuration/cloud-integration) to pull actual cloud provider billing information.
+Kubecost uses [cloud integration](/install-and-configure/advanced-configuration/cloud-integration) to pull actual cloud provider billing information.
 
 Cloud providers allocate data transfers as line-items on a per-node basis. Kubecost will allocate network transfer costs based on each pod's share of `container_network_transmit_bytes_total` of its node.
 

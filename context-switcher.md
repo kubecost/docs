@@ -1,7 +1,7 @@
 Contexts
 ========
 
-Kubecost supports the ability to monitor multiple **contexts** of clusters. A context refers to either a single monitored cluster, or a set of clusters that leverage [durable storage](https://github.com/kubecost/docs/blob/main/long-term-storage.md).
+Kubecost supports the ability to monitor multiple **contexts** of clusters. A context refers to either a single monitored cluster, or a set of clusters that leverage [durable storage](/long-term-storage.md).
 
 Below are the steps for adding additional contexts on the Kubecost Business and Enterprise tier.
 
@@ -11,7 +11,7 @@ When adding a context directly from the frontend, Kubecost adds it locally for y
 
 1. Install Kubecost on the additional cluster you would like to view. The recommended Kubecost install path is available at [kubecost.com/install](https://www.kubecost.com/install).
 
-2. Expose port 9090 of the `kubecost-cost-analyzer` Pod. This can be done with a Kubernetes Ingress ([example](https://github.com/kubecost/docs/blob/main/getting-started.md#basic-auth)) or LoadBalancer ([example](https://github.com/kubecost/docs/blob/main/kubecost-lb.yaml)).
+2. Expose port 9090 of the `kubecost-cost-analyzer` Pod. This can be done with a Kubernetes Ingress ([example](/using-kubecost/getting-started#basic-auth)) or LoadBalancer ([example](/kubecost-lb.yaml)).
 
    > **Note**: By default, a LoadBalancer exposes endpoints to the wide internet. Be careful about following the authentication requirements of your organization and environment.
 

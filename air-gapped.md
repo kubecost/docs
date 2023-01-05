@@ -13,7 +13,7 @@ The following images will need to be downloaded. Please substitute the appropria
 
 #### Kubecost: Optional
 - Kube-state-metrics: quay.io/coreos/kube-state-metrics:v1.9.8
-- NetworkCosts: gcr.io/kubecost1/kubecost-network-costs:v16.0 (used for [network-allocation](https://github.com/kubecost/docs/blob/main/network-allocation.md))
+- NetworkCosts: gcr.io/kubecost1/kubecost-network-costs:v16.0 (used for [network-allocation](/network-allocation.md))
 - BusyBox: registry.hub.docker.com/library/busybox:latest (only for NFS)
 - Cluster controller: gcr.io/kubecost1/cluster-controller:v0.0.2 (used for write actions)
 - Grafana Dashboards: grafana/grafana:8.3.2
