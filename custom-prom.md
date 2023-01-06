@@ -199,6 +199,8 @@ Ensure that all clusters and nodes have values- output should be similar to the 
     | jq
   ```
 
+  > Note on Mac OS: change `date -d '1 day ago' "+%Y-%m-%dT%H:%M:%SZ` to `date -v '-1d' "+%Y-%m-%dT%H:%M:%SZ"`
+
 2. Ensure kube-state-metrics are available: `kube_node_status_capacity`
 
   ```sh
@@ -210,6 +212,7 @@ Ensure that all clusters and nodes have values- output should be similar to the 
     --data-urlencode "query=avg (sum_over_time(kube_node_status_capacity[1d])) by (cluster_id, node)" \
     | jq
   ```
+
 
 For both queries, verify nodes are returned:
 
