@@ -4,10 +4,6 @@ This resource covers primary APIs across open source and commercial Kubecost pro
 
 ## Open source APIs
 
-****[**/costDataModel**](allocation-api.md#cost-model-api)****
-
-Returns unaggregated cost model rate data at the individual container/workload level. It does not include the ETL caching layer and is therefore optimal for small to medium-sized clusters.
-
 **/costDataModelRange**
 
 Time-series version of /costDataModel API. It does not include the ETL caching layer is and therefore optimal for small to medium-sized clusters.
