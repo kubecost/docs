@@ -43,7 +43,7 @@ One of the more obvious questions here is *"If the metrics you are emitting cove
 
 ## Disabling KSM emission
 
-While not recommended, you can disable the Kubecost cost-model's emission of KSM by setting the following helm value, or ensuring the cost-model container's environment variable `EMIT_KSM_V1_METRICS="false"`.
+While not recommended, you can disable the Kubecost cost-model's emission of KSM by setting the following Helm value, or ensuring the cost-model container's environment variable `EMIT_KSM_V1_METRICS="false"`.
 
 ```yaml
 kubecostMetrics:
