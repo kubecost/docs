@@ -77,6 +77,9 @@ cpuEfficiency | Ratio of `cpuCoreUsageAverage`-to-`cpuCoreRequestAverage`, meant
 gpuHours | Cumulative GPU-hours allocated.
 gpuCost | Cumulative cost of allocated GPU-hours.
 networkCost | Cumulative cost of network usage.
+networkCrossZoneCost | Cumulative cost of Cross-zone network egress usage.
+networkCrossRegionCost | Cumulative cost of Cross-region network egress usage.
+networkInternetCost | Cumulative cost of internet egress usage.
 pvBytes | Average number of bytes of PersistentVolumes allocated while running.
 pvByteHours | Cumulative PersistentVolume byte-hours allocated.
 pvCost | Cumulative cost of allocated PersistentVolume byte-hours.
