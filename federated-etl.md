@@ -44,7 +44,7 @@ The result is 5 clusters federated together.
 ### Step 1: Storage configuration
 
 1. For any cluster in the pipeline (Federator, Federated, Primary, or any combination of the three), create a file *federated-store.yaml* with the same format used for Thanos/S3 backup.
-2. Add a secret using that file: `kubectl create secret generic <secret_name> -n kubecost --from-file=federated-store.yaml`.
+2. Add a secret using that file: `kubectl create secret generic <secret_name> -n kubecost --from-file=federated-store.yaml`. Then set `kubecostModel.federatedStorageConfigSecret` to the kubernetes secret name.
 
     * If you would like to use an existing secret already mounted/configured through `kubecostModel.etlBucketConfigSecret`, set `federatedETL.useExistingS3Config` to `true`. This will override any secret configured using the above.
     * If using existing config, be aware that since Federated ETL clusters share an S3 bucket, it is not advised to do this for more than one of the clusters, as Kubecost S3 backup may become unreliable and cause issues with the pipeline. To avoid this, use the separate federated secret as mentioned above.
