@@ -199,7 +199,7 @@ Ensure that all clusters and nodes have values- output should be similar to the 
     | jq
   ```
 
-  > Note on Mac OS: change `date -d '1 day ago' "+%Y-%m-%dT%H:%M:%SZ` to `date -v '-1d' "+%Y-%m-%dT%H:%M:%SZ"`
+  > Note on Mac OS: change `date -d '1 day ago'` to `date -v '-1d'`
 
 2. Ensure kube-state-metrics are available: `kube_node_status_capacity`
 
