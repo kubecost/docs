@@ -150,18 +150,6 @@ Make sure that [honor_labels](https://prometheus.io/docs/prometheus/latest/confi
 
 Ensure results are not null for both queries below.
 
-Bad:
-
-```json
-{"status":"success","data":{"resultType":"vector","result":[]}}
-```
-
-Good:
-
-```json
-{"status":"success","data":{"resultType":"vector","result":[{"metric":{"__name__":"node_total_hourly_cost","instance":"aks-agentpool-81479558-vmss000001","instance_type":"Standard_B4ms","job":"kubecost","node":"aks-agentpool-81479558-vmss000001","provider_id":"azure:///subscriptions/0bd50fdf-c923-4e1e-850c-196dd3dcc5d3/resourceGroups/mc_kc-demo_kc-demo-dev_eastus/providers/Microsoft.Compute/virtualMachineScaleSets/aks-agentpool-81479558-vmss/virtualMachines/1","region":"eastus"},"value":[1673020150,"0.16599565032196045"]}]}}
-```
-
 
 1. Make sure prometheus is scraping Kubecost search metrics for: `node_total_hourly_cost`
 
@@ -180,6 +168,20 @@ Good:
     -c cost-analyzer-frontend -- \
     curl "http://localhost:9003/prometheusQuery?query=kube_node_status_capacity"
   ```
+
+For both queries, verify nodes are returned:
+
+Bad:
+
+```json
+{"status":"success","data":{"resultType":"vector","result":[]}}
+```
+
+Good:
+
+```json
+{"status":"success","data":{"resultType":"vector","result":[{"metric":{"__name__":"node_total_hourly_cost","instance":"aks-agentpool-81479558-vmss000001","instance_type":"Standard_B4ms","job":"kubecost","node":"aks-agentpool-81479558-vmss000001","provider_id":"azure:///.../virtualMachines/1","region":"eastus"},"value":[1673020150,"0.16599565032196045"]}]}}
+```
 
 #### Enterprise Multi-Cluster Test
 
@@ -208,6 +210,20 @@ Ensure that all clusters and nodes have values- output should be similar to the 
     --data-urlencode "query=avg (sum_over_time(kube_node_status_capacity[1d])) by (cluster_id, node)" \
     | jq
   ```
+
+For both queries, verify nodes are returned:
+
+Bad:
+
+```json
+{"status":"success","data":{"resultType":"vector","result":[]}}
+```
+
+Good:
+
+```json
+{"status":"success","data":{"resultType":"vector","result":[{"metric":{"__name__":"node_total_hourly_cost","instance":"aks-agentpool-81479558-vmss000001","instance_type":"Standard_B4ms","job":"kubecost","node":"aks-agentpool-81479558-vmss000001","provider_id":"azure:///.../virtualMachines/1","region":"eastus"},"value":[1673020150,"0.16599565032196045"]}]}}
+```
 
 ### Diagnostics
 
