@@ -73,6 +73,15 @@ For example, to set the log level to `debug`, add the following flag to the Helm
   * A nice human readable output 
   * `2006-01-02T15:04:05.999999999Z07:00 INF Starting cost-model (git commit "1.91.0-rc.0")`
 
+### Temporarily setting log level
+To temporarily set the log level (does not persist between Pod restarts, Helm deployments, etc.), you can send a POST request to `/logs/level` with one of the valid log levels. Here's an example:
+
+```sh
+curl -X POST \
+    'http://localhost:9090/model/logs/level' \
+    -d '{"level": "debug"}'
+```
+
 ## Issue: No persistent volumes available for this claim and/or no storage class is set
 
 Your clusters need a default storage class for the Kubecost and Prometheus persistent volumes to be successfully attached.
