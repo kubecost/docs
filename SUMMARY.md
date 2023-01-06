@@ -91,7 +91,7 @@
 
 ## APIs
 
-* [Kubecost API Directory](apis.md)
+* [Kubecost API Directory](apis-overview.md)
   * [Allocation API](allocation.md)
   * [V2 Filters](filters-v2.md)
   * [Assets API](assets-api.md)
