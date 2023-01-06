@@ -41,6 +41,20 @@ The result is 5 clusters federated together.
 
 ## Setup
 
+### Step 0: Ensure unique cluster IDs
+
+Ensure each federated cluster has a unique `clusterName` and `cluster_id`:
+
+```yaml
+kubecostProductConfigs:
+  clusterName: federated-one
+prometheus:
+  server:
+    global:
+      external_labels:
+        cluster_id: federated-one
+```
+
 ### Step 1: Storage configuration
 
 1. For any cluster in the pipeline (Federator, Federated, Primary, or any combination of the three), create a file *federated-store.yaml* with the same format used for Thanos/S3 backup.
