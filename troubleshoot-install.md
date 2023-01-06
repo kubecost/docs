@@ -82,6 +82,8 @@ curl -X POST \
     -d '{"level": "debug"}'
 ```
 
+A GET request can be sent to the same endpoint to retrieve the current log level.
+
 ## Issue: No persistent volumes available for this claim and/or no storage class is set
 
 Your clusters need a default storage class for the Kubecost and Prometheus persistent volumes to be successfully attached.
