@@ -146,22 +146,67 @@ Make sure that [honor_labels](https://prometheus.io/docs/prometheus/latest/confi
 
 ### Negative idle reported
 
+#### Single Cluster Tests
+
+Ensure results are not null for both queries below.
+
+Bad:
+
+```json
+{"status":"success","data":{"resultType":"vector","result":[]}}
+```
+
+Good:
+
+```json
+{"status":"success","data":{"resultType":"vector","result":[{"metric":{"__name__":"node_total_hourly_cost","instance":"aks-agentpool-81479558-vmss000001","instance_type":"Standard_B4ms","job":"kubecost","node":"aks-agentpool-81479558-vmss000001","provider_id":"azure:///subscriptions/0bd50fdf-c923-4e1e-850c-196dd3dcc5d3/resourceGroups/mc_kc-demo_kc-demo-dev_eastus/providers/Microsoft.Compute/virtualMachineScaleSets/aks-agentpool-81479558-vmss/virtualMachines/1","region":"eastus"},"value":[1673020150,"0.16599565032196045"]}]}}
+```
+
+
 1. Make sure prometheus is scraping Kubecost search metrics for: `node_total_hourly_cost`
 
   ```sh
   kubectl exec -i -t -n kubecost \
-  $(kubectl get pod --namespace kubecost|grep analyzer -m1 |awk '{print $1}') \
-  -c cost-analyzer-frontend -- \
-  curl "http://localhost:9003/metrics" | grep node_total_hourly_cost
+    $(kubectl get pod --namespace kubecost|grep analyzer -m1 |awk '{print $1}') \
+    -c cost-analyzer-frontend -- \
+    curl "http://localhost:9003/prometheusQuery?query=node_total_hourly_cost"
   ```
 
 2. Ensure kube-state-metrics are available: `kube_node_status_capacity`
 
   ```sh
   kubectl exec -i -t -n kubecost \
-  $(kubectl get pod --namespace kubecost|grep analyzer -m1 |awk '{print $1}') \
-  -c cost-analyzer-frontend -- \
-  curl "http://localhost:9003/metrics" | grep kube_node_status_capacity
+    $(kubectl get pod --namespace kubecost|grep analyzer -m1 |awk '{print $1}') \
+    -c cost-analyzer-frontend -- \
+    curl "http://localhost:9003/prometheusQuery?query=kube_node_status_capacity"
+  ```
+
+#### Enterprise Multi-Cluster Test
+
+Ensure that all clusters and nodes have values- output should be similar to the above Single Cluster Tests
+
+1. Make sure prometheus is scraping Kubecost search metrics for: `node_total_hourly_cost`
+
+  ```sh
+  kubectl exec -i -t -n kubecost \
+    $(kubectl get pod --namespace kubecost|grep analyzer -m1 |awk '{print $1}') \
+    -c cost-analyzer-frontend -- \
+    curl -G http://localhost:9003/thanosQuery \
+    -d time=`date -d '1 day ago' "+%Y-%m-%dT%H:%M:%SZ"` \
+    --data-urlencode "query=avg (sum_over_time(node_total_hourly_cost[1d])) by (cluster_id, node)" \
+    | jq
+  ```
+
+2. Ensure kube-state-metrics are available: `kube_node_status_capacity`
+
+  ```sh
+  kubectl exec -i -t -n kubecost \
+    $(kubectl get pod --namespace kubecost|grep analyzer -m1 |awk '{print $1}') \
+    -c cost-analyzer-frontend -- \
+    curl -G http://localhost:9003/thanosQuery \
+    -d time=`date -d '1 day ago' "+%Y-%m-%dT%H:%M:%SZ"` \
+    --data-urlencode "query=avg (sum_over_time(kube_node_status_capacity[1d])) by (cluster_id, node)" \
+    | jq
   ```
 
 ### Diagnostics
