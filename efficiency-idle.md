@@ -33,11 +33,11 @@ Then, a cluster might look like:
 
 In total, there are 12 units of resources, and idle can be shared as follows:
 
-**Separate**: In this single cluster across two nodes, there are 7 total idles.
+* **Separate**: In this single cluster across two nodes, there are 7 total idles.
 
-**Share By Node**: The first node has 4 resources used and 2 idle. The second node has 1 resource used and 5 idle. If you share idle by node, then w1-4 will share 2 idles, and w5 will get 5 idles.
+* **Share By Node**: The first node has 4 resources used and 2 idle. The second node has 1 resource used and 5 idle. If you share idle by node, then w1-4 will share 2 idles, and w5 will get 5 idles.
 
-**Share By Cluster**: The single cluster has 5 resources used and 7 idle. If you share idle by cluster, then the 5 workloads will share the 7 idles
+* **Share By Cluster**: The single cluster has 5 resources used and 7 idle. If you share idle by cluster, then the 5 workloads will share the 7 idles
 
 ## Target values for efficiency and idle
 
@@ -45,7 +45,7 @@ The most common pattern for cost reduction is to ask service owners to tune the 
 
 Efficiency targets can depend on the SLAs of the application -- see our notes on [request right-sizing](./api-request-right-sizing-v2.md) for more details.
 
-Most teams we’ve seen end up targeting idle in the following ranges.
+It's recommended to target idle in the following ranges:
 
 * CPU: 50%-65%
 * Memory: 45%-60%
