@@ -21,7 +21,7 @@ When the ETL pipeline collects data, it stores both daily and hourly (if configu
 
 ### Step 1: Create storage configuration secret
 
-This configuration secret follows the same layout Thanos uses in their own doc [here](https://thanos.io/v0.21/thanos/storage.md).
+This configuration secret follows the same layout documented for Thanos here: [https://thanos.io/v0.21/thanos/storage.md](https://thanos.io/v0.21/thanos/storage.md)
 
 You will need to create a file named `object-store.yaml` using the chosen storage provider configuration (documented below), and run the following command to create the secret from this file:
 
@@ -33,13 +33,13 @@ kubectl create secret generic <YOUR_SECRET_NAME> -n kubecost --from-file=object-
 
 **Existing Thanos users**
 
-If you have already configured Thanos following [our Multi-Cluster/Long-Term Storage doc](/long-term-storage.md), you can reuse the previously created bucket configuration secret.
+If you have already configured Thanos following [this documentation](long-term-storage.md), you can reuse the previously created bucket configuration secret.
 
 Setting `.Values.kubecostModel.etlBucketConfigSecret=kubecost-thanos` will enable the backup feature. This will backup all ETL data to the same bucket being used by Thanos.
 
 **S3**
 
-The configuration schema for S3 is documented [here](https://thanos.io/v0.21/thanos/storage.md#s3). For reference, here's an example:
+The configuration schema for S3 is documented here: [S3 Storage](https://thanos.io/v0.21/thanos/storage.md#s3). For reference, here's an example:
 
 ```yaml
 type: S3
@@ -57,7 +57,7 @@ config:
 
 **Google Cloud Storage**
 
-The configuration schema for Google Cloud Storage is documented [here](https://thanos.io/v0.21/thanos/storage.md/#gcs). For reference, here's an example:
+The configuration schema for Google Cloud Storage is documented here: [Google Cloud Storage Storage](https://thanos.io/v0.21/thanos/storage.md/#gcs). For reference, here's an example:
 
 ```yaml
 type: GCS
@@ -80,7 +80,7 @@ config:
 
 **Azure**
 
-The configuration schema for Azure is documented [here](https://thanos.io/v0.21/thanos/storage.md/#azure). For reference, here's an example:
+The configuration schema for Azure is documented here: [Azure Storage](https://thanos.io/v0.21/thanos/storage.md/#azure). For reference, here's an example:
 
 ```yaml
 type: AZURE
@@ -120,7 +120,7 @@ There is also a Bash script available to restore the backup [here](https://githu
 
 ## Monitoring
 
-Currently, this feature is still in development, but you can check the status of the backup system by selecting _Settings_ > _Diagnostics_ > View Full Diagnostics__, then scrolling down to File Backup, as shown below:
+Currently, this feature is still in development, but there is currently a status card available on the diagnostics page that will eventually show the status of the backup system:
 
 ![Diagnostic ETL Backup Status](https://raw.githubusercontent.com/kubecost/docs/main/images/diagnostics-etl-backup-status.png)
 
