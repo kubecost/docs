@@ -2,13 +2,13 @@
 
 :warning: This feature is in a pre-release (alpha/beta) state. It has limitations. Please read the documentation carefully. :warning:
 
-The "Apply" API for request recommendations takes Kubecost's calculated [container request recommendations](api-request-right-sizing.md) and applies them to your cluster.
+The "Apply" API for request recommendations takes Kubecost's calculated [container request recommendations](api-request-right-sizing-v2.md) and applies them to your cluster.
 
 This document is an API reference/spec. You can find the feature how-to guide [here](guide-one-click-request-sizing.md).
 
 ## Requirements
 
-You must have Kubecost's Cluster Controller [enabled](controller.md). Cluster Controller contains Kubecost's automation features (including the APIs described in this document), and thus has write permission to certain resources on your cluster. Again, see the [how-to guide for 1-click request sizing](guide-one-click-request-sizing.md) for setup instructions.
+You must have Kubecost's Cluster Controller [enabled](controller.md). Cluster Controller contains Kubecost's automation features (including the APIs described in this document), and thus has write permission to certain resources on your cluster. Again, see the [how-to guide for 1-click request sizing](one-click-request-sizing.md) for setup instructions.
 
 ## APIs
 
@@ -19,7 +19,7 @@ Apply has dry-run semantics, meaning it is a two step process:
 
 ### Plan API
 
-The Plan API is available at `http://kubecost.example.com/cluster/requestsizer/plan`. It expects a POST request with a body that is identical to a response from the [request right-sizing recommendation API](https://docs.kubecost.com/apis/apis-overview/api-request-right-sizing-v2).
+The Plan API is available at `http://kubecost.example.com/cluster/requestsizer/plan`. It expects a POST request with a body that is identical to a response from the [request right-sizing recommendation API](api-request-right-sizing-v2).
 
 Examine the curl example below. The API response can be inspected to see what Kubecost will attempt to do before running the apply step. The plan may do less than the recommendation, see Current Limitations.
 
