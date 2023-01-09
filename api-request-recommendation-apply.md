@@ -1,36 +1,31 @@
-Container Request Recommendation "Apply" APIs
-=============================================
+# Container Request Recommendation "Apply" APIs
 
 :warning: This feature is in a pre-release (alpha/beta) state. It has limitations. Please read the documentation carefully. :warning:
 
-The "Apply" API for request recommendations takes Kubecost's calculated
-[container request recommendations](/api-request-right-sizing.md) and applies
-them to your cluster. 
+The "Apply" API for request recommendations takes Kubecost's calculated [container request recommendations](api-request-right-sizing.md) and applies them to your cluster.
 
-This document is an API reference/spec. You can find the feature how-to guide
-[here](/guide-one-click-request-sizing.md).
+This document is an API reference/spec. You can find the feature how-to guide [here](guide-one-click-request-sizing.md).
 
 ## Requirements
 
-You must have Kubecost's Cluster Controller [enabled](/controller.md). Cluster
-Controller contains Kubecost's automation features (including the APIs described
-in this document), and thus has write permission to certain resources on your
-cluster. Again, see the [how-to guide for 1-click request
-sizing](/guide-one-click-request-sizing.md) for setup instructions.
+You must have Kubecost's Cluster Controller [enabled](controller.md). Cluster Controller contains Kubecost's automation features (including the APIs described in this document), and thus has write permission to certain resources on your cluster. Again, see the [how-to guide for 1-click request sizing](guide-one-click-request-sizing.md) for setup instructions.
 
 ## APIs
 
 Apply has dry-run semantics, meaning it is a two step process:
+
 1. Plan what will happen
 2. Execute the plan
 
-### Plan
+### Plan API
 
-The Plan API is available at `http://kubecost.example.com/cluster/requestsizer/plan`. It expects a POST request with a body that is identical to a response from the [request right-sizing recommendation API](/api-request-right-sizing.md).
+The Plan API is available at `http://kubecost.example.com/cluster/requestsizer/plan`. It expects a POST request with a body that is identical to a response from the [request right-sizing recommendation API](https://docs.kubecost.com/apis/apis-overview/api-request-right-sizing-v2).
 
-For example, using `curl`:
+Examine the curl example below. The API response can be inspected to see what Kubecost will attempt to do before running the apply step. The plan may do less than the recommendation, see Current Limitations.
 
-```sh
+{% tabs %}
+{% tab title="Request" %}
+```
 # Make to `kubectl port-forward -n kubecost service/kubecost-cost-analyzer 9090`
 # or replace 'localhost:9090' with 'kubecost.example.com'
 
@@ -42,12 +37,10 @@ curl -XGET 'http://localhost:9090/model/savings/requestSizing' \
         --data-binary @- \
         'http://localhost:9090/cluster/requestsizer/plan'
 ```
+{% endtab %}
 
-The API response can be inspected to see what Kubecost will attempt to do before
-running the apply step. The plan may do less than the recommendation, see
-Current Limitations.
-
-```json
+{% tab title="Response" %}
+```
 {
   "cluster-name": {
     "namespace-name": [
@@ -56,8 +49,8 @@ Current Limitations.
         "Kind": "controller-kind-X",
         "ContainerPlans": {
           "container-name-X": {
-            "TargetCPURequestMillicores": XX,
-            "TargetRAMRequestBytes": XX,
+            "TargetCPURequestMillicores": 0.00,
+            "TargetRAMRequestBytes": 0.00,
           },
           ...
         }
@@ -69,14 +62,18 @@ Current Limitations.
   ...
 }
 ```
+{% endtab %}
+{% endtabs %}
 
-### Apply
+### Apply API
 
 The Apply API is available at `http://kubecost.example.com/cluster/requestsizer/plan`. It expects a POST request with a body that is identical to a response from the Plan API.
 
-For example, using `curl`:
+In the curl example below, the API response includes the original plan, plus some metadata:
 
-```sh
+{% tabs %}
+{% tab title="Request" %}
+```
 # Make to `kubectl port-forward -n kubecost service/kubecost-cost-analyzer 9090`
 # or replace 'localhost:9090' with 'kubecost.example.com'
 
@@ -93,10 +90,10 @@ curl -XGET 'http://localhost:9090/model/savings/requestSizing' \
         --data-binary @- \
         'http://localhost:9090/cluster/requestsizer/apply'
 ```
+{% endtab %}
 
-The API response includes the original plan, plus some metadata:
-
-```json
+{% tab title="Response" %}
+```
 {
   "TimeInitiated": "",
   "TimeFinished": "",
@@ -106,13 +103,12 @@ The API response includes the original plan, plus some metadata:
   "FromPlan": <the plan passed as argument>
 }
 ```
+{% endtab %}
+{% endtabs %}
 
 ## Current Limitations
 
-- The Apply APIs only "size down," i.e. they will never increase a container requests, only lower them. This is currently done out of an abundance of caution while the APIs are being tested. We don't want to size up requests and cause a cluster that was running fine to run out of capacity, even if setting the requests to a higher level would provide better availability guarantees.
-
-- The Apply APIs only support some controller kinds (Deployments, DaemonSets, StatefulSets, ReplicaSets) at the moment. This is planned to increase soon and is subject to change.
-
-- The Apply APIs do not support sizing Pods without a controller. This is also planned to change.
-
-- The Apply APIs do not support clusters other than the "local" cluster (the cluster that the instance of Kubecost you are interacting with via HTTP is running on). If you are interested in this functionality, please let us know.
+* The Apply APIs only "size down," i.e. they will never increase a container requests, only lower them. This is currently done out of an abundance of caution while the APIs are being tested. We don't want to size up requests and cause a cluster that was running fine to run out of capacity, even if setting the requests to a higher level would provide better availability guarantees.
+* The Apply APIs only support some controller kinds (Deployments, DaemonSets, StatefulSets, ReplicaSets) at the moment. This is planned to increase soon and is subject to change.
+* The Apply APIs do not support sizing pods without a controller. This is also planned to change.
+* The Apply APIs do not support clusters other than the "local" cluster (the cluster that the instance of Kubecost you are interacting with via HTTP is running on).
