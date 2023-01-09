@@ -178,17 +178,17 @@ Comma-separated list of containers to match; e.g.
             Entity: // this is a typical asset
                 {
                     type: "Disk",
-                    properties: {"category":"Storage","service":"Kubernetes","name":"gke-nick-dev-default-pool-d26dab9e-55qb","providerID":"gke-nick-dev-default-pool-d26dab9e-55qb"},
+                    properties: {"category":"Storage","service":"Kubernetes","name":"...","providerID":"..."},
                     labels: {},
                     window: {"start":"2022-07-18T22:00:00Z","end":"2022-07-19T22:00:00Z"},
                     start: "2022-07-18T15:00:00-07:00",
                     end: "2022-07-19T14:43:00-07:00",
                     minutes: 1423.000000,
-                    byteHours: 2763070371089.066895,
-                    bytes: 116503318528.000015,
-                    breakdown: {"idle":0.9518633801103309,"other":0,"system":0.04813661988966931,"user":0},
-                    adjustment: 0.000000,
-                    totalCost: 0.144021
+                    byteHours: 0.00,
+                    bytes: 0.00,
+                    breakdown: {"idle":0.00,"other":0,"system":0.00,"user":0},
+                    adjustment: 0.00,
+                    totalCost: 0.00
                 },
             Kind: "added" // the type of change ("added", "removed", or "changed")
         }
@@ -216,6 +216,6 @@ Compare assets on 07/01/2022 to assets on 07/06/2022:
 
 `http://localhost:9090/model/assets/diff?before=2022-07-01T00:00:00Z,2022-07-02T00:00:00Z&after=2022-07-06T00:00:00Z,2022-07-07T00:00:00Z`
 
-Compare yesterdats assets to today's assets, displaying all assets that have a total cost change of 10% or more.
+Compare yesterday's assets to today's assets, displaying all assets that have a total cost change of 10% or more:
 
 `http://localhost:9090/model/assets/diff?before=yesterday&after=today&costChangeRatio=0.1`
