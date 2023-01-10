@@ -131,3 +131,6 @@ A: All APIs and metrics will be based on and accept UTC zones. When viewing the 
 
 Q: When using the `aggregate` parameter with the Allocation API `/model/allocation`, the returned line items don't always list the full set of "properties". \
 A: This happens when the values of these "properties" collide upon performing the aggregation. For example if performing the aggregation by `aggregate=label:app`, the line item `app=hello-world` may belong to multiple namespaces and Kubecost would therefore omit "properties.namespace" altogether. The most effective workaround is to perform a multiaggregation (`aggregate=namespace,label:app`) to ensure all the properties you want exist in the result. More discussion in this [Github issue](https://github.com/kubecost/cost-analyzer-helm-chart/issues/1839).
+
+Q: What is the difference between `.Values.kubecostToken` and `Values.kubecostProductConfigs.productKey`? \
+A: `.Values.kubecostToken` is primarily used to manage trial access and is provided to you when visiting <http://kubecost.com/install>. `.Values.kubecostProductConfigs.productKey` is used to apply a Business/Enterprise license. More info in this [doc](add-key.md).

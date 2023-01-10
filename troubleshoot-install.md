@@ -259,6 +259,12 @@ $ helm upgrade -i kubecost kubecost/cost-analyzer --namespace kubecost \
 3. Change both entries to localhost:9001 and localhost:9003
 4. Restart the kubecost-cost-analyzer pod in the kubecost namespace
 
+## Question: What is the difference between `.Values.kubecostToken` and `Values.kubecostProductConfigs.productKey`?
+
+`.Values.kubecostToken` is primarily used to manage trial access and is provided to you when visiting <http://kubecost.com/install>.
+
+`.Values.kubecostProductConfigs.productKey` is used to apply a Business/Enterprise license. More info in this [doc](add-key.md).
+
 ## Error loading metadata
 
 Kubecost makes use of cloud provider metadata servers to access instance and cluster metadata. If a restrictive network policy is place this may need to be modified to allow connections from the kubecost pod or namespace.
