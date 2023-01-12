@@ -97,7 +97,7 @@
   * [Assets API](assets-api.md)
   * [Abandoned Workloads](api-abandoned-workloads.md)
   * [Container Request Recommendation "Apply" APIs](api-request-recommendation-apply.md)
-  * [Container Request Right Sizing Recommendation API (v2)](api-request-right-sizing-v2.md)
+  * [Container Request Right Sizing Recommendation API (V2)](api-request-right-sizing-v2.md)
   * [Asset Diff API](asset-diff.md)
   * [Audit API](audit-api.md)
 * [Deprecated APIs](apis/deprecated-apis/README.md)
