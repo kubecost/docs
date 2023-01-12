@@ -261,7 +261,7 @@ This error appears when you install Kubecost using AWS optimized version on your
 
 ### B. Your docker auth token for Amazon ECR public gallery is expired
 
-- Resolution: Try to login to the Amazon ECR public galley again to refresh the auth token with the following commands:
+- Resolution: Try to login to the Amazon ECR public gallery again to refresh the auth token with the following commands:
 
 ```bash
 aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws
