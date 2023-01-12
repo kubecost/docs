@@ -251,7 +251,23 @@ $ helm upgrade -i kubecost kubecost/cost-analyzer --namespace kubecost \
     --set prometheus.podSecurityPolicy.enabled=false \
     --set grafana.rbac.pspEnabled=false
 ```
+## Issue: failed to download "oci://public.ecr.aws/kubecost/cost-analyzer" at version "x.xx.x"
 
+This error appears when you install Kubecost using AWS optimized version on your Amazon EKS cluster. There are a few reasons that generate this error message:
+
+### A. The Kubecost version that you tried to install is not available yet
+
+- Resolution: check our ECR public gallery for the latest available version at https://gallery.ecr.aws/kubecost/cost-analyzer
+
+### B. Your docker auth token for Amazon ECR public gallery is expired
+
+- Resolution: Try to login to the Amazon ECR public galley again to refresh the auth token with the following commands:
+
+```bash
+aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws
+export HELM_EXPERIMENTAL_OCI=1
+aws ecr-public get-login-password --region us-east-1 | helm registry login --username AWS --password-stdin public.ecr.aws
+```
 ## Question: How can I run on Minikube?
 
 1. Edit nginx configmap ```kubectl edit cm nginx-conf -n kubecost```
