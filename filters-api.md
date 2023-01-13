@@ -1,4 +1,4 @@
-# Allocation API Filters (v2)
+# API Filters (v2)
 
 This document outlines the filtering language added to the Allocation API in v1.96 of Kubecost, superseding the original filtering parameters (e.g. `filterNamespaces=`). One of the primary goals of the new filter language was to introduce support for "not equals" (e.g. `namespace != kubecost`) queries while maintaining extensibility.
 
@@ -30,7 +30,11 @@ Each individual filter is separated by a `+`, representing logical AND.
 
 ## Using filters
 
-Filters exist under the `filter=` parameter in supported APIs (initially, just the Allocation APIs). Here are some example filters to give a feel for the language:
+Filters exist under the `filter=` parameter in supported APIs. Supported APIs are currently:
+* [Allocation API](/allocation-api.md)
+* [Request Sizing APIs](/api-request-right-sizing-v2.md) (**Note**: This is currently only supported in beta UI view.)
+
+Here are some example filters to see how the filtering language works:
 
 * `namespace:"kubecost"+container:"cost-model"` Return only results that are in the `kubecost` namespace and are for the `cost-model` container.
 * `cluster:"cluster-one"+label[app]="cost-analyzer"` Return only results in cluster `cluster-one` that are labeled with `app=cost-analyzer`.
@@ -45,8 +49,6 @@ http://localhost:9090/model/allocation?window=1d&accumulate=true&aggregate=names
 ```
 
 The format is essentially: `<filter field> <filter op> <filter value>`
-
-
 
 ## Formal grammar and implementation
 
