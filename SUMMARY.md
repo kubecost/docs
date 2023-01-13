@@ -93,7 +93,7 @@
 
 * [Kubecost API Directory](apis-overview.md)
   * [Allocation API](allocation.md)
-  * [V2 Filters](filters-v2.md)
+  * [Allocation API Filters (v2)](filters-api.md)
   * [Assets API](assets-api.md)
   * [Abandoned Workloads](api-abandoned-workloads.md)
   * [Container Request Recommendation "Apply" APIs](api-request-recommendation-apply.md)
