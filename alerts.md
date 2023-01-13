@@ -56,7 +56,7 @@ _Required parameters:_
 
 * `type: budget`
 * `threshold: <amount>` -- cost threshold in configured currency units
-* `aggregation: <agg-parameter>` -- configurable, accepts all aggregations supported by the [aggregated cost model API](/apis/deprecated-apis/allocation-api#aggregated-cost-model-api)
+* `aggregation: <agg-parameter>` -- configurable, accepts all aggregations supported by the [aggregated cost model API](apis/deprecated-apis/allocation-api/#aggregated-cost-model-api)
 * `filter: <value>` -- configurable, accepts a single filter value (comma-separated values unsupported)
 * `window: <N>d` or `<M>h` -- configurable, (1 ≤ N ≤ 7, 1 ≤ M ≤ 24)
 
@@ -76,7 +76,6 @@ Example Helm _values.yaml_:
   aggregation: cluster
   filter: cluster-one
 ```
-***
 
 ### Type: Allocation Efficiency
 
@@ -88,7 +87,7 @@ _Required parameters:_
 
 * `type: efficiency`
 * `efficiencyThreshold: <threshold>` -- efficiency threshold ranging from 0.0 to 1.0
-* `aggregation: <agg-parameter>` -- configurable, accepts all aggregations supported by the [aggregated cost model API](/apis/deprecated-apis/allocation-api#aggregated-cost-model-api)
+* `aggregation: <agg-parameter>` -- configurable, accepts all aggregations supported by the [aggregated cost model API](apis/deprecated-apis/allocation-api/#aggregated-cost-model-api)
 * `window: <N>d` number of days for measuring efficiency
 
 _Optional parameters:_
@@ -106,7 +105,6 @@ The example below sends a Slack alert when any namespace spending is running bel
   aggregation: namespace
   slackWebhookUrl: ‘https://hooks.slack.com/services/TE6GRBNET/BFFK0P848/jFWmsadgfjhiBJp30p’ # optional, overrides global Slack webhook 
 ```
-***
 
 ### Type: Allocation Recurring Update
 
@@ -165,7 +163,6 @@ Example Helm _values.yaml_:
     - owner2@example.com
   slackWebhookUrl: https://hooks.slack.com/services/<different-from-global> # optional, overrides globalSlackWebhookUrl default
 ```
-***
 
 ### Type: Allocation Spend change
 
@@ -175,7 +172,7 @@ _Required parameters:_
 
 * `type: spendChange`
 * `relativeThreshold: <N>` -- configurable, N ≥ -1
-* `aggregation: <agg-value>` -- configurable, accepts all aggregations supported by the [aggregated cost model API](/apis/deprecated-apis/allocation-api#aggregated-cost-model-api)
+* `aggregation: <agg-value>` -- configurable, accepts all aggregations supported by the [aggregated cost model API](apis/deprecated-apis/allocation-api/#aggregated-cost-model-api)
 * `window: <N>d` or `<M>h` -- configurable, (1 ≤ N ≤ 7, 1 ≤ M ≤ 24)
 * `baselineWindow: <N>d` -- configurable, N ≥ 1
 
@@ -195,8 +192,6 @@ Example Helm _values.yaml_:
   filter: kubecost, default # accepts csv
 ```
 
-***
-
 ### Type: Asset Budget
 
 Define asset budgets and alert when cloud or Kubernetes assets overrun the threshold set.
@@ -205,7 +200,7 @@ _Required parameters:_
 
 * `type: assetBudget`
 * `threshold: <amount>` -- cost threshold in configured currency units
-* `aggregation: <agg-parameter>` -- configurable, accepts all aggregations supported by the [asset API](/using-kubecost/getting-started/assets)
+* `aggregation: <agg-parameter>` -- configurable, accepts all aggregations supported by the [asset API](using-kubecost/getting-started/assets/)
 * `filter: <value>(,<value>,...)` -- configurable, accepts any 1 or more filter values which are comma seperated values
 * `window: <N>d` or `<M>h` -- configurable, (1 ≤ N ≤ 7, 1 ≤ M ≤ 24)
 
@@ -286,8 +281,6 @@ Example Helm _values.yaml_:
   slackWebhookUrl: https://hooks.slack.com/services/<different-from-global> # optional, overrides globalSlackWebhookUrl default
 ```
 
-***
-
 ### Type: Monitor Cluster Health
 
 Cluster health alerts occur when the cluster health score changes by a specific threshold. The health score is calculated based on the following criteria:
@@ -309,8 +302,6 @@ Example Helm _values.yaml_:
   window: 10m
   threshold: 5              # Send Alert if health scores changes by 5 or more
 ```
-
-***
 
 ### Type: Monitor Kubecost Health
 
@@ -356,8 +347,6 @@ Example Helm _values.yaml_:
     clusterJoinLeave: true
 ```
 
-***
-
 ## Configuring alerts in the Kubecost UI
 
 ### Cluster and Kubecost Health Alerts
@@ -366,7 +355,7 @@ Cluster Health Alerts and Kubecost Health Alerts work differently from other ale
 
 <figure><img src=".gitbook/assets/alertshealth.png" alt=""><figcaption><p>Cluster and Kubecost Health Alerts</p></figcaption></figure>
 
-> &#x20;**Note**: There is no validation around Cluster Health Alerts. If a Health Alert configuration is invalid, it will appear to save, but will not actually take effect. Please check carefully that the alert has a Window and Threshold properly specified.
+> **Note**: There is no validation around Cluster Health Alerts. If a Health Alert configuration is invalid, it will appear to save, but will not actually take effect. Please check carefully that the alert has a Window and Threshold properly specified.
 
 ### Global recipients
 
@@ -465,6 +454,6 @@ If `nextRun` fails to update, or alerts are not sending at the `nextRun` time, c
 
 Common causes of misconfiguration include the following:
 
-* unsupported csv filters -- `spendChange` alerts accept `filter` as comma-separated values; other alert types do not.
-* unsupported alert type -- all alert type names are in camelCase -- check spelling and capitalization for all alert parameters
-* unsupported aggregation parameters -- see the [aggregated cost model API](/apis/deprecated-apis/allocation-api#aggregated-cost-model-api) for details
+* Unsupported csv filters: `spendChange` alerts accept `filter` as comma-separated values; other alert types do not.
+* Unsupported alert type: all alert type names are in camelCase. Check spelling and capitalization for all alert parameters
+* Unsupported aggregation parameters: see the [Allocation API ](https://docs.kubecost.com/apis/apis-overview/allocation)doc for details
