@@ -1,4 +1,4 @@
-# API Filters (v2)
+# Filter Parameters (v2)
 
 This document outlines the filtering language added to the Allocation API in v1.96 of Kubecost, superseding the original filtering parameters (e.g. `filterNamespaces=`). One of the primary goals of the new filter language was to introduce support for "not equals" (e.g. `namespace != kubecost`) queries while maintaining extensibility.
 
