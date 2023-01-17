@@ -19,5 +19,5 @@ See the high-level [automatic request right-sizing guide](auto-request-sizing.md
 
 
 
-    <figure><img src="images/rightsizingcustomize (1).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src=".gitbook/assets/rightsizingcustomize.png" alt=""><figcaption></figcaption></figure>
 3. Select _Automatically Implement Recommendations_. Select _Yes, apply the recommendation_ to confirm.

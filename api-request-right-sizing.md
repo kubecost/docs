@@ -1,6 +1,6 @@
 # Container Request Right-Sizing Recommendation API (V1) - Deprecated
 
-> &#x20;**Note**: This API is **deprecated**. Please use the [V2 API](api-request-right-sizing-v2.md) if starting new work.
+> **Warning**: This API is now deprecated. This page should not be consulted. Please reference [Container Request Right-Sizing Recommendation API (v2)](api-request-right-sizing-v2.md) for updated information.
 
 The container request right-sizing recommendation API provides recommendations for [container resource requests](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/) based on configurable parameters and estimates the savings from implementing those recommendations on a per-container, per-controller level. Of course, if the cluster-level resources stay static then you will likely not enjoy real savings from applying these recommendations until you reduce your cluster resources. Instead, your idle allocation will increase.
 
