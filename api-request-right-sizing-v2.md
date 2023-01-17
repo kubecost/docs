@@ -132,6 +132,37 @@ A filter to reduce the set of workloads for which recommendations will be calcul
 
  for syntax. V1 filters are also supported.
 {% endswagger-parameter %}
+
+{% swagger-response status="200: OK" description="" %}
+```javascript
+[
+    {
+        "clusterID": "...",
+        "namespace": "...",
+        "controllerKind": "...",
+        "controllerName": "...",
+        "containerName": "...",
+        "recommendedRequest": {
+            "cpu": "00m",
+            "memory": "00Mi"
+        },
+        "monthlySavings": {
+            "cpu": 0.00,
+            "memory": 0.00
+        },
+        "latestKnownRequest": {
+            "cpu": "00m",
+            "memory": "00Mi"
+        },
+        "currentEfficiency": {
+            "cpu": 0.00,
+            "memory": 0.00,
+            "total": 0.00
+        }
+    }
+]
+```
+{% endswagger-response %}
 {% endswagger %}
 
 ## API examples
