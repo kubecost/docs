@@ -2,16 +2,13 @@
 
 The _kubecost-agent_ is a lightweight Kubecost exporter that sends metrics to Kubecost Cloud. In order to install the _kubecost-agent_, you will need a specific key provided by Kubecost.
 
-The Kubecost Cloud architecture is [here](kubecost-cloud-architecture.md)
-
 The name of the storage key file provided by the Kubecost team will have the name `kubecost-agent.key`
 
-> **Note**: Kubecost Cloud is currently in limited availability. You can learn about more about it and request an invitation [here](https://www.kubecost.com/kubecost-cloud-limited-availability/).
+> **Note**: Kubecost Cloud is currently in limited availability. You can learn about more about it and request an invitation [here](https://www.kubecost.com/kubecost-cloud-limited-availability/). Learn about the architecture for Kubecost Cloud [here](kubecost-cloud-architecture.md).
 
 ## Installation using Helm
 
 > **Note**: Integration with CI/CD tools is possible, but it is recommended to follow this guide as closely as possible to ensure a successful deployment.
-
 
 The following will install the Kubecost agent and required components using the provided `kubecost-agent.key` (ensure the key file is in the current file directory):
 

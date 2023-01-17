@@ -1,6 +1,6 @@
 # Namespace Contacts
 
-> &#x20;**Note:** The `setNamespaceAttributes` and `getNamespaceAttributes` API endpoints were removed in v1.88.0 and are now **deprecated**.
+> **Warning**: As of v1.88.0, the `setNamespaceAttributes` and `getNamespaceAttributes`API endpoints are now deprecated. This page should not be consulted.
 
 Use the following API to set a namespace owner, contact info and enable/disable email alerts. This API is available at:
 
