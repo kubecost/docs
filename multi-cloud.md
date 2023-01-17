@@ -122,4 +122,4 @@ Set these values into the following object and add them to the AWS array in the 
 }
 ```
 
-Additionally set the `kubecostProductConfigs.projectID` helm value to the AWS account that Kubecost is being installed in.
+Additionally set the `kubecostProductConfigs.athenaProjectID` helm value to the AWS account that Kubecost is being installed in.
