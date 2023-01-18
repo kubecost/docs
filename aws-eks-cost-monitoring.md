@@ -19,6 +19,7 @@ To get started, you can follow these steps to deploy Kubecost into your Amazon E
 ### Prerequisites:
 - Install the following tools: [Helm 3.9+](https://helm.sh/docs/intro/install/), [kubectl](https://kubernetes.io/docs/tasks/tools/), and optionally [eksctl](https://eksctl.io/) and [AWS CLI](https://aws.amazon.com/cli/).
 - You have access to an [Amazon EKS cluster](https://aws.amazon.com/eks/).
+- If your cluster is version 1.23 or later, you must have the [Amazon EBS CSI driver](https://docs.aws.amazon.com/eks/latest/userguide/ebs-csi.html) installed on your cluster.
 
 ### Step 1: Install Kubecost on your Amazon EKS cluster
 
