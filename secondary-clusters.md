@@ -1,13 +1,12 @@
-Secondary Clusters Guide
-===================
+# Secondary Clusters Guide
 
-Secondary clusters use a minimal Kubecost deployment to send their metrics to a central storage-bucket (aka durable storage) that is accessed by the primary cluster to provide a ___single-pane-of-glass___ view into all aggregated cluster costs globally. This aggregated cluster view is exclusive to Kubecost Enterprise.
+Secondary clusters use a minimal Kubecost deployment to send their metrics to a central storage-bucket (aka durable storage) that is accessed by the primary cluster to provide a **single-pane-of-glass** view into all aggregated cluster costs globally. This aggregated cluster view is exclusive to Kubecost Enterprise.
 
 > **Note**: The UI on secondary clusters will appear broken. It is meant for troubleshooting only.
 
-This guide explains settings that can be tuned in order to run the minimum Kubecost components to run Kubecost more efficiently. 
+This guide explains settings that can be tuned in order to run the minimum Kubecost components to run Kubecost more efficiently.
 
-See the [additional resources](/architecture/secondary-clusters#additional-resources) section below for complete examples in our github repo.
+See the [additional resources](#additional-resources) section below for complete examples in our github repo.
 
 ## Kubecost Global
 
@@ -46,7 +45,7 @@ You can tune prometheus.server.persistentVolume.size depending on scale, or outr
 
 ## Thanos
 
-Disable Thanos components. These are only used for troubleshooting on secondary clusters. See this guide for [troubleshooting via kubectl logs](/install-and-configure/install/long-term-storage#troubleshooting).
+Disable Thanos components. These are only used for troubleshooting on secondary clusters. See this guide for [troubleshooting via kubectl logs](./long-term-storage.md#troubleshooting).
 
 > **Note**: Secondary clusters write to the global storage-bucket via the thanos-sidecar on the prometheus-server pod.
 
@@ -62,16 +61,18 @@ Disable Thanos components. These are only used for troubleshooting on secondary 
 
 You can disable node-exporter and the service account if cluster/node rightsizing recommendations are not required.
 
-> **Note**: node-export must be disabled if there is an existing daemonset. More info [here](/troubleshooting/troubleshoot-install#issue-failedscheduling-kubecost-prometheus-node-exporter).
+> **Note**: node-export must be disabled if there is an existing daemonset. More info [here](./troubleshoot-install.md#issue-failedscheduling-kubecost-prometheus-node-exporter).
 
 ## Helm values
 
 For reference, this is a list of the most common settings for efficient secondary clusters:
 
 `secondary-clusters.yaml`
+
 ```yaml
 kubecostProductConfigs:
   clusterName: kubecostProductConfigs_clusterName
+  # productKey not needed on secondary clusters
 kubecostModel:
   warmCache: false
   warmSavingsCache: false
@@ -109,7 +110,7 @@ thanos:
 
 ## Additional resources
 
-You can find complete installation guides and sample files on our [repo](https://github.com/kubecost/poc-common-configurations)
+You can find complete installation guides and sample files on our [repo](https://github.com/kubecost/poc-common-configurations).
 
 Additional considerations for properly tuning resource consumption is [here](/general/resource-consumption).
 
