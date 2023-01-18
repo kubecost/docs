@@ -1,6 +1,6 @@
 # Secondary Clusters Guide
 
-Secondary clusters use a minimal Kubecost deployment to send their metrics to a central storage-bucket (aka durable storage) that is accessed by the primary cluster to provide a ***single-pane-of-glass*** view into all aggregated cluster costs globally. This aggregated cluster view is exclusive to Kubecost Enterprise.
+Secondary clusters use a minimal Kubecost deployment to send their metrics to a central storage-bucket (aka durable storage) that is accessed by the primary cluster to provide a **single-pane-of-glass** view into all aggregated cluster costs globally. This aggregated cluster view is exclusive to Kubecost Enterprise.
 
 > **Note**: The UI on secondary clusters will appear broken. It is meant for troubleshooting only.
 
