@@ -19,7 +19,30 @@ To get started, you can follow these steps to deploy Kubecost into your Amazon E
 ### Prerequisites:
 - Install the following tools: [Helm 3.9+](https://helm.sh/docs/intro/install/), [kubectl](https://kubernetes.io/docs/tasks/tools/), and optionally [eksctl](https://eksctl.io/) and [AWS CLI](https://aws.amazon.com/cli/).
 - You have access to an [Amazon EKS cluster](https://aws.amazon.com/eks/).
-- If your cluster is version 1.23 or later, you must have the [Amazon EBS CSI driver](https://docs.aws.amazon.com/eks/latest/userguide/ebs-csi.html) installed on your cluster.
+- If your cluster is version 1.23 or later, you must have the [Amazon EBS CSI driver](https://docs.aws.amazon.com/eks/latest/userguide/ebs-csi.html) installed on your cluster. You can also follow these instructions to install Amazon EBS CSI driver:
+
+1. Run the following command to create an IAM service account with the policies needed to use the Amazon EBS CSI Driver.
+> **Note**: Remember to replace `$CLUSTER_NAME` by your actual cluster name
+
+```bash
+eksctl create iamserviceaccount   \
+    --name ebs-csi-controller-sa   \
+    --namespace kube-system   \
+    --cluster $CLUSTER_NAME   \
+    --attach-policy-arn arn:aws:iam::aws:policy/service-role/AmazonEBSCSIDriverPolicy  \
+    --approve \
+    --role-only \
+    --role-name AmazonEKS_EBS_CSI_DriverRole
+export SERVICE_ACCOUNT_ROLE_ARN=$(aws iam get-role --role-name AmazonEKS_EBS_CSI_DriverRole | jq -r '.Role.Arn')
+```
+
+2. Install the Amazon EBS CSI add-on for EKS using the AmazonEKS_EBS_CSI_DriverRole by issuing the following command:
+```
+eksctl create addon --name aws-ebs-csi-driver --cluster $CLUSTER_NAME \
+    --service-account-role-arn $SERVICE_ACCOUNT_ROLE_ARN --force
+```
+
+After completing these prerequisite steps, you're ready to begin EKS integration.
 
 ### Step 1: Install Kubecost on your Amazon EKS cluster
 
