@@ -80,7 +80,7 @@ gpuHours | Cumulative GPU-hours allocated.
 gpuCost | Cumulative cost of allocated GPU-hours.
 gpuCostAdjustment | Change in cost after allocated GPUs have been reconciled with updated node cost
 networkTransferBytes | Cost of network data being sent
-networkReceiveBytes | Cost of network data being received
+networkReceiveBytes | Total bytes received by the workload
 networkCost | Cumulative cost of network usage.
 networkCostAdjustment | Updated network cost
 loadBalancerCost | Cumulative cost of allocated load balancers.
