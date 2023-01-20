@@ -18,7 +18,7 @@ Supported Environments
 * ​Managed Kubernetes clusters (e.g. EKS, GKE, AKS) *most common*
 * ​Kubernetes distributions (e.g. OpenShift, DigitalOcean, Rancher, Tanzu)
 * ​Bootstrapped Kubernetes cluster​
-* On-prem and air-gapped using custom [pricing sheets](/install-and-configure/install/provider-installations/air-gapped#how-do-i-configure-prices-for-my-on-premise-assets)
+* On-prem and air-gapped using custom [pricing sheets](https://docs.kubecost.com/install-and-configure/install/provider-installations/air-gapped#how-do-i-configure-prices-for-my-on-premise-assets)
 
 **This list is certainly not exhaustive!** This is simply a list of observations as to where our users run Kubecost based on their questions/feedback.
 
