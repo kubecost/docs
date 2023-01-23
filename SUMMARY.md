@@ -88,6 +88,7 @@
   * [Kubernetes Assets](assets.md)
   * [CSV Pricing](csv-pricing.md)
   * [Contexts](context-switcher.md)
+  * [ContainerStats Pipeline](containerstats-pipeline.md)
 
 ## APIs
 
