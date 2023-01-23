@@ -30,6 +30,13 @@ Notable Helm values:
 | ---------- | ----------- | ---------- |
 | `clusterController.kubescaler.resizeAllDefault` | If true, Kubescaler will switch to default-enabled for all workloads unless they are annotated with `request.autoscaling.kubecost.com/enabled=false`. This is recommended for low-stakes clusters where you want to prioritize workload efficiency without reworking deployment specs for all workloads. | `true` |
 
+### Supported workload types
+Kubescaler supports:
+- Deployments
+
+Kubescaler cannot support:
+- "Uncontrolled" Pods. See https://github.com/kubernetes/kubernetes/issues/24913
+
 ### Example
 
 ``` sh
