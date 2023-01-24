@@ -14,7 +14,7 @@ Welcome to Kubecost! This page provides commonly used product configurations and
 * [Exposing Kubecost with an Ingress](/install-and-configure/install/ingress-examples)
 * [Deploying Kubecost without persistent volumes](getting-started.md#no-pvs)
 
-**Next Steps**
+**Next steps**
 
 * [Measure cluster cost efficiency](getting-started.md#cluster-efficiency)
 * [Cost monitoring best practices](https://blog.kubecost.com/blog/cost-monitoring/)
@@ -22,13 +22,13 @@ Welcome to Kubecost! This page provides commonly used product configurations and
 
 ## Overview
 
-There are many methods to setup Kubecost. A simple helm install will provide most functionality to understand what Kubecost can do. When you do not pass any values to the helm install, many of the customizations below are available in the settings tab.
+There are many methods to setup Kubecost. A simple Helm install will provide most functionality to understand what Kubecost can do. When you do not pass any values to the Helm install, many of the customizations below are available in _Settings_.
 
 By default, Kubecost will detect the cloud provider where it is installed and pull **list prices** for nodes, storage and LoadBalancers on Azure, AWS, and GCP.
 
 ## Use cloud-integration(s) for Accurate Billing Data <a href="#cloud-integration" id="cloud-integration"></a>
 
-While the basic helm install is useful for understanding the value Kubecost provides, most will want to deploy with an **Infrastructure as code** model. There are many methods to provide Kubecost with the necessary service accounts / privileges needed. We generally recommend using the various `cloud-integration` guides below.
+While the basic Helm install is useful for understanding the value Kubecost provides, most will want to deploy with an **Infrastructure as code** model. There are many methods to provide Kubecost with the necessary service accounts or privileges needed. Follow the various `cloud-integration` guides below.
 
 By completing the cloud-integration with each provider, Kubecost is able to reconcile costs with your actual cloud bill to reflect enterprise discounts, spot market prices, commitment discounts, and more.
 
@@ -40,7 +40,7 @@ For Enterprise Subscriptions, Cloud-integration is only run on the `Primary Clus
 * [Azure cloud-integration](azure-out-of-cluster.md)
 * [GCP cloud-integration](gcp-out-of-cluster.md)
 
-## Additional Considerations
+## Additional considerations
 
 The remaining sections are optional and may be useful for specific use cases.
 
@@ -62,19 +62,19 @@ needed_disk_space = retention_time_minutes * ingested_samples_per_minutes * byte
 
 Where ingested samples can be measured as the average over a recent period, e.g. `sum(avg_over_time(scrape_samples_post_metric_relabeling[24h]))`. On average, Prometheus uses around 1.5-2 bytes per sample. So ingesting 100k samples per minute and retaining for 15 days would demand around 40 GB. It’s recommended to add another 20-30% capacity for headroom and WAL. More info on disk sizing [here](https://prometheus.io/docs/prometheus/latest/storage/#operational-aspects).
 
-**Note:** We do not recommend retaining greater than 30 days of data in Prometheus for larger clusters. For long-term data retention, contact us (support@kubecost.com) about Kubecost with durable storage enabled.
+**Note:** More than 30 days of data should not be stored in Prometheus for larger clusters. For long-term data retention, contact us (support@kubecost.com) about Kubecost with durable storage enabled.
 
-[More info on Kubecost Storage](docs.kubecost.com/storage/)
+[More info on Kubecost Storage here](docs.kubecost.com/storage/).
 
 <details>
 
 <summary><strong>Setting Requests &#x26; Limits</strong></summary>
 
-It's recommended that users set and/or update resource requests and limits before taking Kubecost into production at scale. These inputs can be configured in the Kubecost [values.yaml](https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/values.yaml) for Kubecost modules + subcharts.
+Users should set and/or update resource requests and limits before taking Kubecost into production at scale. These inputs can be configured in the Kubecost [values.yaml](https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/values.yaml) for Kubecost modules and subcharts.
 
 The exact recommended values for these parameters depend on the size of your cluster, availability requirements, and usage of the Kubecost product. Suggested values for each container can be found within Kubecost itself on the namespace page. More info on these recommendations is available [here](https://blog.kubecost.com/blog/requests-and-limits/).
 
-In practice, we recommend running Kubecost for up to 7 days on a production cluster and then tuning resource requests/limits based on resource consumption. Reach out any time to support@kubecost.com if we can help give further guidance.
+For best results, run Kubecost for up to seven days on a production cluster and then tune resource requests/limits based on resource consumption. Reach out any time to support@kubecost.com if we can help give further guidance.
 
 </details>
 
