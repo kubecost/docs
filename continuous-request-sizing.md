@@ -33,6 +33,7 @@ Notable Helm values:
 ### Supported workload types
 Kubescaler supports:
 - Deployments
+- DaemonSets
 
 Kubescaler cannot support:
 - "Uncontrolled" Pods. Learn more [here](https://github.com/kubernetes/kubernetes/issues/24913).
