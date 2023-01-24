@@ -35,7 +35,7 @@ Kubescaler supports:
 - Deployments
 
 Kubescaler cannot support:
-- "Uncontrolled" Pods. See https://github.com/kubernetes/kubernetes/issues/24913
+- "Uncontrolled" Pods. Learn more [here](https://github.com/kubernetes/kubernetes/issues/24913).
 
 ### Example
 
