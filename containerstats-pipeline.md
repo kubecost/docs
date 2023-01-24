@@ -1,6 +1,6 @@
 # ContainerStats Pipeline
 
-The ContainerStats pipeline builds histograms, statistical representations of individual
+The ContainerStats pipeline builds statistical representations of individual
 containers' resource usage over time.  The pipeline is part of the `cost-model`
 container.
 
