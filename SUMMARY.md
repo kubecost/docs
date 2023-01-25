@@ -129,6 +129,7 @@
 * [Capture a Bug Report](bug-report.md)
 * [Bug Bounty Program](bug-bounty-program.md)
 * [Kubecost Diagnostics](diagnostics.md)
+* [Repair Kubecost ETLs](etl-repair.md)
 * [Running a Query in Kubecost-bundled Prometheus](prometheus.md)
 * [Getting Support](support-channels.md)
 
