@@ -8,10 +8,10 @@ Welcome to Kubecost! This page provides commonly used product configurations and
 * [Product configuration at install-time](getting-started.md#install-configs)
 * [Configuring metric storage](getting-started.md#storage-config)
 * [Setting requests & limits](getting-started.md#requests-limits)
-* [Using an existing Prometheus installation](/install-and-configure/install/custom-prom)
-* [Using an existing Grafana installation](/install-and-configure/install/custom-grafana)
+* [Using an existing Prometheus installation](/custom-prom.md)
+* [Using an existing Grafana installation](/custom-grafana.md)
 * [Using an existing node exporter installation](getting-started.md#node-exporter)
-* [Exposing Kubecost with an Ingress](/install-and-configure/install/ingress-examples)
+* [Exposing Kubecost with an Ingress](ingress-examples.md)
 * [Deploying Kubecost without persistent volumes](getting-started.md#no-pvs)
 
 **Next steps**
