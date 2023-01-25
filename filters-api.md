@@ -31,7 +31,7 @@ Each individual filter is separated by a `+`, representing logical AND.
 ## Using filters
 
 Filters exist under the `filter=` parameter in supported APIs. Supported APIs are currently:
-* [Allocation API](/allocation-api.md)
+* [Allocation API](/allocation.md)
 * [Request Sizing APIs](/api-request-right-sizing-v2.md) (**Note**: This is currently only supported in beta UI view.)
 
 Here are some example filters to see how the filtering language works:
