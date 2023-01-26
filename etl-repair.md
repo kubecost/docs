@@ -1,6 +1,6 @@
 # Repair Kubecost ETLs
 
-> **Note**: It is highly recommended to configure [ETL Backups](./etl-backup.md) to prevent situations in which you would need to repair large amounts of missing ETL data.
+> **Note**: Configuring [ETL Backups](./etl-backup.md) can prevent situations where you would need to repair large amounts of missing ETL data.
 
 Kubecost's ETL is a computed cache built upon Prometheus metrics and cloud billing data, from which nearly all API requests made by the user and the Kubecost frontend currently rely upon.
 
@@ -78,7 +78,7 @@ INF ETL: Allocation[ETL[allocations][1d]]: Repair[rptgQ]: starting [2023-01-03T0
 
 ## Troubleshooting
 
-If the ETL data looks incorrect or you see one of the following error messages, there are several things to check:
+If the ETL data looks incorrect, or you see one of the following error messages, there are several things to check:
 
 ```txt
 [Error] ETL: CloudAsset[*****************]: Build[******]: 
