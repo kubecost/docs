@@ -1,10 +1,10 @@
 # Azure Cloud Integration
 
-Connecting your Azure account to Kubecost allows you to view Kubernetes metrics side-by-side with out-of-cluster (OOC) costs (e.g. Azure Database Services). Additionally, it allows Kubecost to reconcile measured Kubernetes spend with your actual Azure bill. This gives teams running Kubernetes a complete and accurate picture of costs. For more information, read the cloud integrations [doc](/install-and-configure/advanced-configuration/cloud-integration) and [blog post](https://blog.kubecost.com/blog/complete-picture-when-monitoring-kubernetes-costs/).
+Connecting your Azure account to Kubecost allows you to view Kubernetes metrics side-by-side with out-of-cluster (OOC) costs (e.g. Azure Database Services). Additionally, it allows Kubecost to reconcile measured Kubernetes spend with your actual Azure bill. This gives teams running Kubernetes a complete and accurate picture of costs. For more information, read the cloud integrations [doc](/cloud-integration.md) and [blog post](https://blog.kubecost.com/blog/complete-picture-when-monitoring-kubernetes-costs/).
 
 To configure Kubecost's Azure Cloud Integration, you will need to set up daily exports of cost reports to Azure storage. Kubecost will then access your cost reports through the Azure Storage API to display your out-of-cluster cost data alongside your in-cluster costs.
 
-> **Note**: A GitHub repository with sample files used in below instructions can be found here: [https://github.com/kubecost/poc-common-configurations/tree/main/azure](https://github.com/kubecost/poc-common-configurations/tree/main/azure)
+> **Note**: A GitHub repository with sample files used in below instructions can be found [here](https://github.com/kubecost/poc-common-configurations/tree/main/azure).
 
 ## Step 1: Export Azure cost report
 
@@ -18,7 +18,7 @@ Once the cost export has successfully executed, verify that a non-empty CSV file
 
 > **Note**: If you have sensitive data in an existing Azure Storage account, it is recommended to create a separate Azure Storage account to store your cost data export.
 
-> **Note**: For more granular billing data it is possible to [scope Azure cost exports](https://learn.microsoft.com/en-us/azure/cost-management-billing/costs/understand-work-scopes) to resource groups, management groups, departments, or enrollments. AKS clusters will create their own resource groups which can be used. This functionality can then be combined with Kubecost [multi-cloud](/install-and-configure/advanced-configuration/cloud-integration/multi-cloud) to ingest multiple scoped billing exports.
+> **Note**: For more granular billing data it is possible to [scope Azure cost exports](https://learn.microsoft.com/en-us/azure/cost-management-billing/costs/understand-work-scopes) to resource groups, management groups, departments, or enrollments. AKS clusters will create their own resource groups which can be used. This functionality can then be combined with Kubecost [multi-cloud](/multi-cloud.md) to ingest multiple scoped billing exports.
 
 ## Step 2: Provide access to Azure Storage API
 
@@ -48,7 +48,7 @@ Next, create a JSON file which _**must**_ be named `cloud-integration.json` with
 }
 ```
 
-> **NOTE:** Additional details about the `cloud-integration.json` file can be found in our [multi-cloud integration](/install-and-configure/advanced-configuration/cloud-integration/multi-cloud) documentation.
+> **Note:** Additional details about the `cloud-integration.json` file can be found in our [multi-cloud integration](/multi-cloud.md) documentation.
 
 Next, create the secret:
 

@@ -1,4 +1,4 @@
-Amazon EKS integration
+Amazon EKS Integration
 ==================
 
 [Amazon Elastic Kubernetes Services (Amazon EKS)](https://aws.amazon.com/eks/) is a managed container service to run and scale Kubernetes applications in the AWS cloud. In collaboration with Amazon EKS, Kubecost provides optimized bundle for Amazon EKS cluster cost visibility that enables customers to accurately track costs by namespace, cluster, pod or organizational concepts such as team or application. Customers can use their existing AWS support agreements to obtain support. Kubernetes platform administrators and finance leaders can use Kubecost to visualize a breakdown of their Amazon EKS cluster charges, allocate costs, and chargeback organizational units such as application teams.
@@ -86,7 +86,7 @@ On your web browser, navigate to http://localhost:9090 to access the dashboard.
 
 You can now start monitoring your Amazon EKS cluster cost and efficiency. Depending on your organization’s requirements and set up, you may have different options to expose Kubecost for internal access. There are few examples that you can use for your references:
 
-- You can check Kubecost documentation for [Ingress Examples](/install-and-configure/install/ingress-examples) as a reference for using Nginx ingress controller with basic auth.
+- You can check Kubecost documentation for [Ingress Examples](/ingress-examples.md) as a reference for using Nginx ingress controller with basic auth.
 - You can also consider using AWS LoadBalancer controller to expose Kubecost and use Amazon Cognito for authentication, authorization and user management. You can learn more at [“How to use Application Load Balancer and Amazon Cognito to authenticate users for your Kubernetes web apps”](https://aws.amazon.com/blogs/containers/how-to-use-application-load-balancer-and-amazon-cognito-to-authenticate-users-for-your-kubernetes-web-apps/) AWS blog post.
 
 ## Deploying Kubecost on Amazon EKS cluster using Amazon EKS add-on

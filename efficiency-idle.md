@@ -8,7 +8,7 @@ For teams interested in reducing their Kubernetes costs, it's beneficial to firs
 
 Resource efficiency over a time window is defined as the resource utilization over that time window versus the resource request over the same time window. It is cost-weighted and defined as followed:
 
-* ((CPU Usage / CPU Requested) \* CPU Cost) + (RAM Usage / RAM Requested) \* RAM Cost) / (RAM Cost + CPU Cost))
+* (((CPU Usage / CPU Requested) * CPU Cost) + ((RAM Usage / RAM Requested) * RAM Cost)) / (RAM Cost + CPU Cost)
 * CPU Usage = rate(container\_cpu\_usage\_seconds\_total) over the time window
 * RAM Usage = avg(container\_memory\_working\_set\_bytes) over the time window
 

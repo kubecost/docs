@@ -1,7 +1,7 @@
 Kubecost Core Architecture Overview
 ===================================
 
-Below are the major components deployed with the [Kubecost Helm chart](/install-and-configure/install), excluding certain Enterprise components such as durable storage:
+Below are the major components deployed with the [Kubecost Helm chart](/install.md), excluding certain Enterprise components such as durable storage:
 
 1. **Kubecost Cost-Analyzer Pod**  
     a. Frontend -- runs Nginx and handles routing to Kubecost backend + Prometheus/Grafana  

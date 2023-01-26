@@ -6,7 +6,7 @@ Secondary clusters use a minimal Kubecost deployment to send their metrics to a 
 
 This guide explains settings that can be tuned in order to run the minimum Kubecost components to run Kubecost more efficiently.
 
-See the [additional resources](#additional-resources) section below for complete examples in our github repo.
+See the [additional resources](#additional-resources) section below for complete examples in our GitHub repo.
 
 ## Kubecost Global
 
@@ -41,7 +41,7 @@ The following configuration options further reduce resource consumption when not
 
 Potentially reducing retention even further, metrics are sent to the storage-bucket every 2 hours.
 
-You can tune prometheus.server.persistentVolume.size depending on scale, or outright disable persistent storage.
+You can tune `prometheus.server.persistentVolume.size` depending on scale, or outright disable persistent storage.
 
 ## Thanos
 
@@ -112,12 +112,4 @@ thanos:
 
 You can find complete installation guides and sample files on our [repo](https://github.com/kubecost/poc-common-configurations).
 
-Additional considerations for properly tuning resource consumption is [here](/general/resource-consumption).
-
-## Help
-<a name="help"></a>
-There are potentially other configuration options based on the specifics of different deployment requirements. Reach out to us if you run into any issues, we are here to help!
-
-[Slack community](https://join.slack.com/t/kubecost/shared_invite/zt-1dz4a0bb4-InvSsHr9SQsT_D5PBle2rw) - check out #support for any help you may need & drop your introduction in the #general channel
-
-Write to us at [support@kubecost.com](support@kubecost.com).
+Additional considerations for properly tuning resource consumption is [here](/resource-consumption.md).

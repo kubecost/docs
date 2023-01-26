@@ -3,22 +3,21 @@ GCP Cloud Integration
 
 Kubecost provides the ability to allocate out of cluster costs, e.g. Cloud SQL instances and Cloud Storage buckets, back to Kubernetes concepts like namespace and deployment.
 
-Read the [Cloud Integrations](/cloud-integration.md) documentation for more information on how Kubecost connects with Cloud Service Providers.
+Read the [Cloud Billing Integrations](/cloud-integration.md) documentation for more information on how Kubecost connects with Cloud Service Providers.
 
 The following guide provides the steps required for allocating out-of-cluster costs in GCP.
 
-> **Note**: A GitHub repository with sample files used in below instructions can be found here: [https://github.com/kubecost/poc-common-configurations/tree/main/gcp](https://github.com/kubecost/poc-common-configurations/tree/main/gcp)
+> **Note**: A GitHub repository with sample files used in below instructions can be found [here](https://github.com/kubecost/poc-common-configurations/tree/main/gcp).
 
 ## Step 1: Enable billing data export
 
-[https://cloud.google.com/billing/docs/how-to/export-data-bigquery](https://cloud.google.com/billing/docs/how-to/export-data-bigquery)
+Begin by reviewing [Google's documentation](https://cloud.google.com/billing/docs/how-to/export-data-bigquery) on exporting cloud billing data to BigQuery.
 
-GCP users should create [detailed billing export](https://cloud.google.com/billing/docs/how-to/export-data-bigquery-tables#detailed-usage-cost-data-schema) to gain access to all of Kubecost cloud integration features including [reconciliation](/cloud-integration.md#reconciliation)
+GCP users should create [detailed billing export](https://cloud.google.com/billing/docs/how-to/export-data-bigquery-tables#detailed-usage-cost-data-schema) to gain access to all of Kubecost cloud integration features including [reconciliation](/cloud-integration.md#reconciliation).
 
 ## Step 2:  Visit Kubecost setup page and provide configuration info
 
-
-> **Note:** If you are using the alternative [multi-cloud integration](/install-and-configure/advanced-configuration/cloud-integration/multi-cloud) method, Step 2 is not required.
+> **Note:** If you are using the alternative [multi-cloud integration](/multi-cloud.md) method, Step 2 is not required.
 
 If your Big Query dataset is in a different project than the one where Kubecost is installed, please see the section on [Cross-Project Service Accounts](#cross-project-service-account-configuration)
 
@@ -87,7 +86,7 @@ kubectl create secret generic gcp-secret -n kubecost --from-file=./compute-viewe
 ```
 Then, set `.Values.kubecostProductConfigs.gcpSecretName = <Name of the Kubernetes secret that contains the compute-viewer-kubecost-key.json file>`
 
-> **Note**: When managing the service account key as a Kubernetes secret, the secret must reference the service account key json file, and that file must be named `compute-viewer-kubecost-key.json`.
+> **Note**: When managing the service account key as a Kubernetes secret, the secret must reference the service account key JSON file, and that file must be named `compute-viewer-kubecost-key.json`.
 
 ## Step 3: Label cloud assets
 

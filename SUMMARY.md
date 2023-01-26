@@ -104,7 +104,7 @@
   * [Filter Parameters (v2)](filters-api.md)
 * [Deprecated APIs](apis/deprecated-apis/README.md)
   * [Container Request Right-Sizing Recommendation API (V1) - Deprecated](api-request-right-sizing.md)
-  * [costDataModel & aggregatedCostModel API - Deprecated](allocation-api.md)
+  * [costDataModel & aggregatedCostModel API - Deprecated](cost-model-deprecated.md)
   * [Namespace Contacts](namespace-contacts.md)
 
 ## Architecture
@@ -128,6 +128,7 @@
 * [HTTP Error Troubleshooting](http-troubleshooting.md)
 * [Kubecost Diagnostics](diagnostics.md)
 * [Capture a Bug Report](bug-report.md)
+* [Repair Kubecost ETLs](etl-repair.md)
 * [Running a Query in Kubecost-bundled Prometheus](prometheus.md)
 * [Bug Bounty Program](bug-bounty-program.md)
 * [Getting Support](support-channels.md)
