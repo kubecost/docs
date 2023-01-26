@@ -64,7 +64,7 @@ Where ingested samples can be measured as the average over a recent period, e.g.
 
 **Note:** More than 30 days of data should not be stored in Prometheus for larger clusters. For long-term data retention, contact us (support@kubecost.com) about Kubecost with durable storage enabled.
 
-[More info on Kubecost Storage here](docs.kubecost.com/storage/).
+[More info on Kubecost Storage here](/storage.md).
 
 <details>
 
