@@ -40,7 +40,7 @@ The algorithm to be used to calculate CPU recommendations based on historical CP
 
  algorithm, the 
 
-[ContainerStats Pipeline](containerstats-pipeline.md)
+[ContainerStats Pipeline](/containerstats-pipeline.md)
 
  must be enabled.
 {% endswagger-parameter %}
