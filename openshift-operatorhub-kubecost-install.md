@@ -4,7 +4,7 @@
 
 The OperatorHub is available via the Red Hat OpenShift Container Platform web console and is the interface that cluster administrators use to discover and install Operators. With one click, an Operator can be pulled from their off-cluster source, installed and subscribed on the cluster, and made ready for engineering teams to self-service manage the product across deployment environments using the Operator Lifecycle Manager (OLM). Kubecost is now available on the [Embedded OperatorHub in OpenShift and OKD](https://github.com/redhat-openshift-ecosystem/community-operators-prod/tree/main/operators)
 
-This document provides instructions for deploying Kubecost into Red Hat Openshift 4.9.x or higher using Red Hat Openshift platform (OCP) web console. Kubecost's operator on the [Embedded OperatorHub in OpenShift and OKD](https://github.com/redhat-openshift-ecosystem/community-operators-prod/tree/main/operators) is an alternative to [Kubecost Free version](/general/opencost-product-comparison). Kubecost's operator uses an Operator pattern to deploy and manage the Kubecost deployment on the Red Hat Openshift platform.
+This document provides instructions for deploying Kubecost into Red Hat Openshift 4.9.x or higher using Red Hat Openshift platform (OCP) web console. Kubecost's operator on the [Embedded OperatorHub in OpenShift and OKD](https://github.com/redhat-openshift-ecosystem/community-operators-prod/tree/main/operators) is an alternative to [Kubecost Free version](/opencost-product-comparison.md). Kubecost's operator uses an Operator pattern to deploy and manage the Kubecost deployment on the Red Hat Openshift platform.
 
 ![Standard deployment](https://raw.githubusercontent.com/kubecost/docs/main/images/ocp-standard.png)
 
