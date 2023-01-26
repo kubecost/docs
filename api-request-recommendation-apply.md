@@ -17,7 +17,7 @@ Apply has dry-run semantics, meaning it is a two-step process:
 
 ### Plan API
 
-The Plan API is available at `http://kubecost.example.com/cluster/requestsizer/plan`. It expects a POST request with a body that is identical to a response from the [request right-sizing recommendation API](api-request-right-sizing-v2).
+The Plan API is available at `http://kubecost.example.com/cluster/requestsizer/plan`. It expects a POST request with a body that is identical to a response from the [request right-sizing recommendation API](/api-request-right-sizing-v2.md).
 
 Examine the curl example below. The API response can be inspected to see what Kubecost will attempt to do before running the apply step. The plan may do less than the recommendation, see Current Limitations.
 
