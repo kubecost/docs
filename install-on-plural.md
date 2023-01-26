@@ -82,9 +82,9 @@ plural destroy
 
 ## Troubleshooting
 
-If you have any issues with installing Kubecost on Plural, feel free to join our [Discord Community](https://discord.gg/bEBAMXV64s) and we can help you out.
+If you have any issues with installing Kubecost on Plural, feel free to join the Plural [Discord Community](https://discord.gg/bEBAMXV64s) and we can help you out.
 
-If you'd like to request any new features for our Kubecost installation, feel free to open an issue or PR at https://github.com/pluralsh/plural-artifacts.
+If you'd like to request any new features for our Kubecost installation, feel free to open an issue or PR [here](https://github.com/pluralsh/plural-artifacts).
 
 ## Further reading
 
