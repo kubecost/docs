@@ -6,7 +6,7 @@ Secondary clusters use a minimal Kubecost deployment to send their metrics to a 
 
 This guide explains settings that can be tuned in order to run the minimum Kubecost components to run Kubecost more efficiently.
 
-See the [additional resources](#additional-resources) section below for complete examples in our github repo.
+See the [additional resources](#additional-resources) section below for complete examples in our GitHub repo.
 
 ## Kubecost Global
 
