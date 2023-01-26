@@ -21,7 +21,7 @@ When the ETL pipeline collects data, it stores both daily and hourly (if configu
 
 ### Step 1: Create storage configuration secret
 
-This configuration secret follows the same layout documented for Thanos here: <https://thanos.io/v0.21/thanos/storage.md>
+This configuration secret follows the same layout documented for Thanos [here](https://thanos.io/v0.21/thanos/storage.md).
 
 You will need to create a file named `object-store.yaml` using the chosen storage provider configuration (documented below), and run the following command to create the secret from this file:
 
@@ -31,15 +31,15 @@ kubectl create secret generic <YOUR_SECRET_NAME> -n kubecost --from-file=object-
 
 > **Note**: The file must be named `object-store.yaml`
 
-**Existing Thanos users**
+#### Existing Thanos users
 
 If you have already configured Thanos following [this documentation](/long-term-storage.md), you can reuse the previously created bucket configuration secret.
 
 Setting `.Values.kubecostModel.etlBucketConfigSecret=kubecost-thanos` will enable the backup feature. This will backup all ETL data to the same bucket being used by Thanos.
 
-**S3**
+#### S3
 
-The configuration schema for S3 is documented here: [S3 Storage](https://thanos.io/v0.21/thanos/storage.md#s3). For reference, here's an example:
+The configuration schema for S3 is documented [here](https://thanos.io/v0.21/thanos/storage.md#s3). For reference, here's an example:
 
 ```yaml
 type: S3
@@ -55,9 +55,9 @@ config:
     "X-Amz-Acl": "bucket-owner-full-control"
 ```
 
-**Google Cloud Storage**
+#### Google Cloud Storage
 
-The configuration schema for Google Cloud Storage is documented here: [Google Cloud Storage Storage](https://thanos.io/v0.21/thanos/storage.md/#gcs). For reference, here's an example:
+The configuration schema for Google Cloud Storage is documented [here](https://thanos.io/v0.21/thanos/storage.md/#gcs). For reference, here's an example:
 
 ```yaml
 type: GCS
@@ -78,9 +78,9 @@ config:
     }    
 ```
 
-**Azure**
+#### Azure
 
-The configuration schema for Azure is documented here: [Azure Storage](https://thanos.io/v0.21/thanos/storage.md/#azure). For reference, here's an example:
+The configuration schema for Azure is documented [here](https://thanos.io/v0.21/thanos/storage.md/#azure). For reference, here's an example:
 
 ```yaml
 type: AZURE
@@ -104,7 +104,7 @@ kubecostModel:
 
 If you are using an existing disk storage option for your ETL data, enabling the durable backup feature will retroactively back up all previously stored data\*. This feature is also fully compatible with the existing S3 backup feature.
 
-\* _If you are using a memory store for your ETL data with a local disk backup (`kubecostModel.etlFileStoreEnabled: false`), the backup feature will simply replace the local backup. In order to take advantage of the retroactive backup feature, you will need to update to file store (`kubecostModel.etlFileStoreEnabled: true`). This option is now enabled by default in the helm chart._
+\* _If you are using a memory store for your ETL data with a local disk backup (`kubecostModel.etlFileStoreEnabled: false`), the backup feature will simply replace the local backup. In order to take advantage of the retroactive backup feature, you will need to update to file store (`kubecostModel.etlFileStoreEnabled: true`). This option is now enabled by default in the Helm chart._
 
 ## Option 2: Manual backup via Bash script
 
