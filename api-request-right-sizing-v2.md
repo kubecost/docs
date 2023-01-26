@@ -116,7 +116,7 @@ Required parameter. Duration of time over which to calculate usage. Supports day
 
 . See the 
 
-[Allocation API documentation](allocation.md#querying)
+[Allocation API documentation](/allocation.md)
 
  for more a more detailed explanation of valid inputs to 
 
@@ -128,7 +128,7 @@ Required parameter. Duration of time over which to calculate usage. Supports day
 {% swagger-parameter in="path" name="filter" type="string" %}
 A filter to reduce the set of workloads for which recommendations will be calculated. See 
 
-[V2 Filters](filteres-v2.md)
+[Filter parameters](filters-api.md)
 
  for syntax. V1 filters are also supported.
 {% endswagger-parameter %}
