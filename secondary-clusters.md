@@ -41,7 +41,7 @@ The following configuration options further reduce resource consumption when not
 
 Potentially reducing retention even further, metrics are sent to the storage-bucket every 2 hours.
 
-You can tune prometheus.server.persistentVolume.size depending on scale, or outright disable persistent storage.
+You can tune `prometheus.server.persistentVolume.size` depending on scale, or outright disable persistent storage.
 
 ## Thanos
 
@@ -112,7 +112,7 @@ thanos:
 
 You can find complete installation guides and sample files on our [repo](https://github.com/kubecost/poc-common-configurations).
 
-Additional considerations for properly tuning resource consumption is [here](/general/resource-consumption).
+Additional considerations for properly tuning resource consumption is [here](/resource-consumption.md).
 
 ## Help
 <a name="help"></a>
