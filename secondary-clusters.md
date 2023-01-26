@@ -113,11 +113,3 @@ thanos:
 You can find complete installation guides and sample files on our [repo](https://github.com/kubecost/poc-common-configurations).
 
 Additional considerations for properly tuning resource consumption is [here](/resource-consumption.md).
-
-## Help
-<a name="help"></a>
-There are potentially other configuration options based on the specifics of different deployment requirements. Reach out to us if you run into any issues, we are here to help!
-
-[Slack community](https://join.slack.com/t/kubecost/shared_invite/zt-1dz4a0bb4-InvSsHr9SQsT_D5PBle2rw) - check out #support for any help you may need & drop your introduction in the #general channel
-
-Write to us at [support@kubecost.com](support@kubecost.com).
