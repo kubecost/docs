@@ -5,7 +5,7 @@ Kubecost leverages Thanos to enable durable storage for three different purposes
 
 1. Centralize metric data for a global multi-cluster view into Kubernetes costs via a Prometheus sidecar
 1. Allow for unlimited data retention
-1. Backup Kubecost [ETL data](/install-and-configure/install/etl-backup)
+1. Backup Kubecost [ETL data](/etl-backup.md)
 
 > **Note**: This feature requires an [Enterprise license](https://kubecost.com/pricing).
 
