@@ -4,16 +4,16 @@
 
 Kubecost alerts allow teams to receive updates on real-time Kubernetes spend. They are configurable via the Kubecost UI or Helm values. This resource gives an overview of how to configure Kubecost email and Slack alerts using [Kubecost Helm chart values](https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/values.yaml). Alerts are either created to monitor specific data sets and trends, or they must be toggled on or off. The following alert types are supported:
 
-1. [Allocation Budget](alerts.md#type-budget): Sends an email and/or Slack alert when spending crosses a defined threshold
-2. \[Beta] [Allocation Efficiency](alerts.md#type-efficiency): Detects when a Kubernetes tenant is operating below a target cost-efficiency threshold
-3. [Allocation Recurring Update](alerts.md#type-recurring-update): Sends an email and/or Slack alert with cluster spending across all or a subset of kubernetes resources.
-4. [Allocation Spend Change](alerts.md#type-spend-change): Sends an email and/or Slack alert reporting unexpected spend increases relative to moving averages
-5. [Asset Budget](alerts.md#type-asset-budget): sends an email and/or Slack alert when spend for a particular set of assets crosses a defined threshold.
-6. [Cloud Report](alerts.md#type-cloud-report): sends an email and/or Slack alert with asset spend across all or a subset of cloud resources.
-7. [Monitor Cluster Health](alerts.md#type-cluster-health): used to determine if the cluster's health score changes by a specific threshold. Can only be toggled on/off.
-8. [Monitor Kubecost Health](alerts.md#type-kubecost-health-diagnostic): used for production monitoring for the health of Kubecost itself. Can only be toggled on/off.
+1. [Allocation Budget](/alerts.md#type-allocation-budget): Sends an email and/or Slack alert when spending crosses a defined threshold
+2. \[Beta] [Allocation Efficiency](/alerts.md#type-allocation-efficiency): Detects when a Kubernetes tenant is operating below a target cost-efficiency threshold
+3. [Allocation Recurring Update](/alerts.md#type-allocation-recurring-update): Sends an email and/or Slack alert with cluster spending across all or a subset of kubernetes resources.
+4. [Allocation Spend Change](/alerts.md#type-allocation-spend-change): Sends an email and/or Slack alert reporting unexpected spend increases relative to moving averages
+5. [Asset Budget](/alerts.md#type-asset-budget): sends an email and/or Slack alert when spend for a particular set of assets crosses a defined threshold.
+6. [Cloud Report](/alerts.md#type-cloud-report): sends an email and/or Slack alert with asset spend across all or a subset of cloud resources.
+7. [Monitor Cluster Health](/alerts.md#type-monitor-cluster-health): used to determine if the cluster's health score changes by a specific threshold. Can only be toggled on/off.
+8. [Monitor Kubecost Health](/alerts.md#type-monitor-kubecost-health): used for production monitoring for the health of Kubecost itself. Can only be toggled on/off.
 
-Have questions or issues? View our [troubleshooting guide](alerts.md#troubleshooting).
+Have questions or issues? View our [troubleshooting guide](/alerts.md#troubleshooting).
 
 ## Configuring alerts in Helm
 
@@ -56,7 +56,7 @@ _Required parameters:_
 
 * `type: budget`
 * `threshold: <amount>` -- cost threshold in configured currency units
-* `aggregation: <agg-parameter>` -- configurable, accepts all aggregations supported by the [aggregated cost model API](apis/deprecated-apis/allocation-api/#aggregated-cost-model-api)
+* `aggregation: <agg-parameter>` -- configurable, accepts all aggregations supported by the [Allocation API](/allocation.md)
 * `filter: <value>` -- configurable, accepts a single filter value (comma-separated values unsupported)
 * `window: <N>d` or `<M>h` -- configurable, (1 ≤ N ≤ 7, 1 ≤ M ≤ 24)
 
@@ -87,7 +87,7 @@ _Required parameters:_
 
 * `type: efficiency`
 * `efficiencyThreshold: <threshold>` -- efficiency threshold ranging from 0.0 to 1.0
-* `aggregation: <agg-parameter>` -- configurable, accepts all aggregations supported by the [aggregated cost model API](apis/deprecated-apis/allocation-api/#aggregated-cost-model-api)
+* `aggregation: <agg-parameter>` -- configurable, accepts all aggregations supported by the [Allocation API](/allocation.md)
 * `window: <N>d` number of days for measuring efficiency
 
 _Optional parameters:_
@@ -172,7 +172,7 @@ _Required parameters:_
 
 * `type: spendChange`
 * `relativeThreshold: <N>` -- configurable, N ≥ -1
-* `aggregation: <agg-value>` -- configurable, accepts all aggregations supported by the [aggregated cost model API](apis/deprecated-apis/allocation-api/#aggregated-cost-model-api)
+* `aggregation: <agg-value>` -- configurable, accepts all aggregations supported by the [Allocation API](/allocation.md)
 * `window: <N>d` or `<M>h` -- configurable, (1 ≤ N ≤ 7, 1 ≤ M ≤ 24)
 * `baselineWindow: <N>d` -- configurable, N ≥ 1
 
@@ -200,7 +200,7 @@ _Required parameters:_
 
 * `type: assetBudget`
 * `threshold: <amount>` -- cost threshold in configured currency units
-* `aggregation: <agg-parameter>` -- configurable, accepts all aggregations supported by the [asset API](using-kubecost/getting-started/assets/)
+* `aggregation: <agg-parameter>` -- configurable, accepts all aggregations supported by the [Asset API](/assets-api.md)
 * `filter: <value>(,<value>,...)` -- configurable, accepts any 1 or more filter values which are comma seperated values
 * `window: <N>d` or `<M>h` -- configurable, (1 ≤ N ≤ 7, 1 ≤ M ≤ 24)
 
@@ -455,5 +455,5 @@ If `nextRun` fails to update, or alerts are not sending at the `nextRun` time, c
 Common causes of misconfiguration include the following:
 
 * Unsupported csv filters: `spendChange` alerts accept `filter` as comma-separated values; other alert types do not.
-* Unsupported alert type: all alert type names are in camelCase. Check spelling and capitalization for all alert parameters
-* Unsupported aggregation parameters: see the [Allocation API ](https://docs.kubecost.com/apis/apis-overview/allocation)doc for details
+* Unsupported alert type: all alert type names are in camelCase. Check spelling and capitalization for all alert parameters.
+* Unsupported aggregation parameters: see the [Allocation API](/allocation.md) doc for details.
