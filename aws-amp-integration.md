@@ -131,13 +131,11 @@ kubectl rollout restart deployment/kubecost-prometheus-server -n kubecost
 
 Your Kubecost setup is now start writing and collecting data from AMP. Data should be ready for viewing within 15 minutes.
 
----
-
 To verify that the integration is set up, check the `Prometheus Status` section on Kubecost Settings page.
 
 ![Prometheus status screenshot](https://user-images.githubusercontent.com/22844059/132998278-fd388e9a-8d61-4b8b-ad1c-0e52f17ca251.png)
 
-Have a look at the [Custom Prometheus integration troubleshooting guide](/custom-prom#troubleshooting-issues) if you run into any errors while setting up the integration. You're also welcome to [reach out to us on Slack](https://join.slack.com/t/kubecost/shared_invite/zt-1dz4a0bb4-InvSsHr9SQsT_D5PBle2rw) if you require further assistance or if you need support from AWS team, you can submit a support request through your existing [AWS support contract](https://aws.amazon.com/contact-us/).
+Have a look at the [Custom Prometheus integration troubleshooting guide](/custom-prom#troubleshooting) if you run into any errors while setting up the integration. You're also welcome to [reach out to us on Slack](https://join.slack.com/t/kubecost/shared_invite/zt-1dz4a0bb4-InvSsHr9SQsT_D5PBle2rw) if you require further assistance, or if you need support from AWS team, you can submit a support request through your existing [AWS support contract](https://aws.amazon.com/contact-us/).
 
 ### Add recording rules (optional)
 
