@@ -4,13 +4,20 @@ There are three different approaches for passing custom Helm config values into 
 
 1.  **Pass exact parameters via `--set` command-line flags.** For example, you can only pass a product key if that is all you need to configure.
 
-    ```
-      helm install kubecost/cost-analyzer --name kubecost --set kubecostProductConfigs.productKey.key="123" ...
+    ```bash
+      helm install kubecost cost-analyzer \
+        --repo https://kubecost.github.io/cost-analyzer/ \
+        --namespace kubecost --create-namespace \
+        --set kubecostProductConfigs.productKey.key="123"
+        ...
     ```
 2.  **Pass exact parameters via custom `values` file** Similar to option #1, you can create a separate values file that contains only the parameters needed.
 
-    ```
-      helm install kubecost/cost-analyzer --name kubecost --values values.yaml
+    ```bash
+      helm install kubecost cost-analyzer \
+        --repo https://kubecost.github.io/cost-analyzer/ \
+        --namespace kubecost --create-namespace \
+        --values values.yaml
     ```
 
     ```
