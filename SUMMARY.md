@@ -126,11 +126,11 @@
 * [Frequently Asked Questions](setup/frequently-asked-questions.md)
 * [Troubleshoot Install](troubleshoot-install.md)
 * [HTTP Error Troubleshooting](http-troubleshooting.md)
-* [Capture a Bug Report](bug-report.md)
-* [Bug Bounty Program](bug-bounty-program.md)
 * [Kubecost Diagnostics](diagnostics.md)
+* [Capture a Bug Report](bug-report.md)
 * [Repair Kubecost ETLs](etl-repair.md)
 * [Running a Query in Kubecost-bundled Prometheus](prometheus.md)
+* [Bug Bounty Program](bug-bounty-program.md)
 * [Getting Support](support-channels.md)
 
 ## Other Resources
