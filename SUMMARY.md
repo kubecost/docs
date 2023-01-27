@@ -49,6 +49,7 @@
   * [Enabling Annotation Emission](annotations.md)
   * [Network Cost Configuration](network-costs-configuration.md)
   * [User Management - SSO/SAML/RBAC](user-management.md)
+  * [User Management - SSO/OIDC](user-management-oidc.md)
   * [Multi-Cluster Options](multi-cluster.md)
   * [Federated Clusters](federated-clusters.md)
   * [TurndownSchedule Migration Guide](turndown-schedule-migration-guide.md)
