@@ -47,7 +47,3 @@ Data privacy and security policies are distributed and available to all employee
 * Employees knowingly violating security policies are subject to disciplinary action up to termination, with additional or alternative consequences in place for carelessness or malfeasance.
 
 For more information on Kubecost privacy and security, please reach out to us at <support@kubecost.com>.
-
-
-
-<!--- {"article":"4407595978903","section":"4402829033367","permissiongroup":"1500001277122"} --->

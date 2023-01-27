@@ -1,6 +1,6 @@
 # Container Request Right-Sizing Recommendation API (V1) - Deprecated
 
-> &#x20;**Note**: This API is **deprecated**. Please use the [V2 API](api-request-right-sizing-v2.md) if starting new work.
+> **Warning**: This API is now deprecated. This page should not be consulted. Please reference [Container Request Right-Sizing Recommendation API (v2)](api-request-right-sizing-v2.md) for updated information.
 
 The container request right-sizing recommendation API provides recommendations for [container resource requests](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/) based on configurable parameters and estimates the savings from implementing those recommendations on a per-container, per-controller level. Of course, if the cluster-level resources stay static then you will likely not enjoy real savings from applying these recommendations until you reduce your cluster resources. Instead, your idle allocation will increase.
 
@@ -64,7 +64,7 @@ What should the estimated monthly savings of this right-sizing be?
 
 Controller 1 = Pod 1 ran for (15/45) of the known duration of the cluster being alive (we don't know if it was alive from \[t=0, t=15]). That's (45 min / (60 min/hr) / (730 hr/month)) of a month.
 
-Within the query window, the pod could haved saved: 2 cores \* (15min / (60 min/hr)) = 0.5 core-hours 0.5 core-hours \* $7/core-hour = $3.50
+Within the query window, the pod could have saved: 2 cores \* (15min / (60 min/hr)) = 0.5 core-hours 0.5 core-hours \* $7/core-hour = $3.50
 
 "If that 45 minute window is representative for 30 days (730 hrs) then we scale the savings by 1 / (45 / 60 / 730)": $3.50 \* 1 / (45 / 60 / 730) = $3406.67
 
@@ -80,7 +80,7 @@ We resize the shared container to 2 cores, reducing the savings of pod 1 to be t
 
 Controller 1 = Pod 1 and Pod 2 ran for 45/45 minutes of the known duration of the cluster being alive (we don't know if it was alive from \[t=0, t=15]). That's (45 min / (60 min/hr) / (730 hr/month)) of a month.
 
-Within the query window, Pod 1 could haved saved: 1 cores \* (15min / (60 min/hr)) = 0.25 core-hours 0.25 core-hours \* $7/core-hour = $1.75
+Within the query window, Pod 1 could have saved: 1 cores \* (15min / (60 min/hr)) = 0.25 core-hours 0.25 core-hours \* $7/core-hour = $1.75
 
 Pod 2 saves the same amount = $1.75
 

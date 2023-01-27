@@ -89,8 +89,3 @@ If the domain is configured alongside the access token, then requests should con
 The JWT ID token must contain a field (claim) named `hd` with the desired domain value. We verify that the token has been properly signed (using provider certificates) and has not expired before processing the claim.
 
 To remove a previously set Helm value, you will need to set the value to an empty string: `.Values.oidc.hostedDomain = ""`. To validate that the config has been removed, you can check the `/var/configs/oidc/oidc.json` inside the cost-model container.
-
-
-
-
-<!--- {"article":"10018767892119","section":"4402815636375","permissiongroup":"1500001277122"} --->

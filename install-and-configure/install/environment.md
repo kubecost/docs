@@ -18,15 +18,11 @@ Supported Environments
 * ​Managed Kubernetes clusters (e.g. EKS, GKE, AKS) *most common*
 * ​Kubernetes distributions (e.g. OpenShift, DigitalOcean, Rancher, Tanzu)
 * ​Bootstrapped Kubernetes cluster​
-* On-prem and air-gapped using custom [pricing sheets](https://guide.kubecost.com/hc/en-us/articles/4407601795863#q-how-do-i-configure-prices-for-my-on-premise-assets)
+* On-prem and air-gapped using custom [pricing sheets](https://docs.kubecost.com/install-and-configure/install/provider-installations/air-gapped#how-do-i-configure-prices-for-my-on-premise-assets)
 
 **This list is certainly not exhaustive!** This is simply a list of observations as to where our users run Kubecost based on their questions/feedback.
 
 ## Supported Kubernetes Versions
 
 * Kubecost runs in any Kubernetes v1.8 (Aug 2017) or greater environment.
-* Kubernetes 1.22 is officially supported as of v1.91.0
-
-
-
-<!--- {"article":"4407601810199","section":"4402815636375","permissiongroup":"1500001277122"} --->
+* Kubernetes 1.25 is officially supported as of v1.99.0

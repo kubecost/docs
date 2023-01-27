@@ -1,22 +1,18 @@
 # ContainerStats Pipeline
 
 The ContainerStats pipeline builds statistical representations of individual
-containers' resource usage over time.  The pipeline is part of the `cost-model` container.
+containers' resource usage over time.  The pipeline is part of the `cost-model`
+container.
 
-## APIs
+## Helm configuration
 
-### Request right-sizing recommendation v2
+```yaml
+kubecostModel:
+  containerStatsEnabled: true
+```
 
-The primary user of ContainerStats pipeline data is v2 of the request right-
-sizing recommendation API. ContainerStats data is used for quantile-based
-recommendations. Review the doc for this feature [here](https://github.com/kubecost/docs/blob/main/api-request-right-sizing-v2.md).
-
-### Debugging
-
-There is an API for introspecting pipeline data available at
-`/model/containerstats/quantiles`. It does not have a stable schema and is not
-supported as an official product feature. It is only intended for limited
-debugging.
+Ensure you allow ~2hrs for the pipeline to run before issuing a query which
+leverages this pipeline
 
 ## Behavior
 
@@ -29,12 +25,27 @@ contains any windows (24 hour chunks) are _expected_ (should be in the store)
 but not _available_ (the pipeline has not yet built and loaded a complete set of
 data into the store).
 
+## Usage in Kubecost APIs
+
+### Request right-sizing recommendation (v2)
+
+The primary user of ContainerStats pipeline data is v2 of the request right-
+sizing recommendation API. ContainerStats data is used for quantile-based
+recommendations. Review the doc for this feature [here](/api-request-right-sizing-v2.md).
+
+### Debugging
+
+There is an API for introspecting pipeline data available at
+`/model/containerstats/quantiles`. It does not have a stable schema and is not
+supported as an official product feature. It is only intended for limited
+debugging.
+
 ## Logs
 
 All ContainerStats-related log messages should contain `ContainerStats` or
-`ContainerStatsSet`. The pipeline logs a few things at INFO level to show that
+`ContainerStatsSet`. The pipeline logs a few things at `INFO` level to show that
 the pipeline is running successfully. Much greater detail is available at the
-DEBUG level. See [the official instructions](https://github.com/kubecost/cost-analyzer-helm-chart#adjusting-log-output) to learn how to change the log level.
+`DEBUG` level. See [the official instructions](https://github.com/kubecost/cost-analyzer-helm-chart#adjusting-log-output) to learn how to change the log level.
 
 ## Configuration
 
@@ -47,5 +58,3 @@ environment variables.
 | Prometheus/Thanos configuration | | The pipeline inherits most of the existing Prometheus/Thanos configuration because it leverages the same client(s) used by the Asset and Allocation pipelines. Specific deviations will be mentioned. |
 | `ETL_MAX_PROMETHEUS_QUERY_DURATION_MINUTES` | `kubecostModel.maxPrometheusQueryDurationMinutes` | The pipeline will obey this, but may fail to initialize if this is set below the minimum value supported by the pipeline (10 minutes).
 | "Storage" configration | | The pipeline inherits most of the existing "store" configuration used by other pipelines like Asset and Allocation. This includes, but is not limited to: store duration, store type (file, federated, etc.), leader election, storage pathing, storage directory, bucket storage, and backup. |
-
-<!--- {"article":"10071917787159","section":"1500002777682","permissiongroup":"1500001277122"} --->

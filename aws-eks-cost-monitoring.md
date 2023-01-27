@@ -1,4 +1,4 @@
-Amazon EKS integration
+Amazon EKS Integration
 ==================
 
 [Amazon Elastic Kubernetes Services (Amazon EKS)](https://aws.amazon.com/eks/) is a managed container service to run and scale Kubernetes applications in the AWS cloud. In collaboration with Amazon EKS, Kubecost provides optimized bundle for Amazon EKS cluster cost visibility that enables customers to accurately track costs by namespace, cluster, pod or organizational concepts such as team or application. Customers can use their existing AWS support agreements to obtain support. Kubernetes platform administrators and finance leaders can use Kubecost to visualize a breakdown of their Amazon EKS cluster charges, allocate costs, and chargeback organizational units such as application teams.
@@ -19,6 +19,30 @@ To get started, you can follow these steps to deploy Kubecost into your Amazon E
 ### Prerequisites:
 - Install the following tools: [Helm 3.9+](https://helm.sh/docs/intro/install/), [kubectl](https://kubernetes.io/docs/tasks/tools/), and optionally [eksctl](https://eksctl.io/) and [AWS CLI](https://aws.amazon.com/cli/).
 - You have access to an [Amazon EKS cluster](https://aws.amazon.com/eks/).
+- If your cluster is version 1.23 or later, you must have the [Amazon EBS CSI driver](https://docs.aws.amazon.com/eks/latest/userguide/ebs-csi.html) installed on your cluster. You can also follow these instructions to install Amazon EBS CSI driver:
+
+1. Run the following command to create an IAM service account with the policies needed to use the Amazon EBS CSI Driver.
+> **Note**: Remember to replace `$CLUSTER_NAME` by your actual cluster name
+
+```bash
+eksctl create iamserviceaccount   \
+    --name ebs-csi-controller-sa   \
+    --namespace kube-system   \
+    --cluster $CLUSTER_NAME   \
+    --attach-policy-arn arn:aws:iam::aws:policy/service-role/AmazonEBSCSIDriverPolicy  \
+    --approve \
+    --role-only \
+    --role-name AmazonEKS_EBS_CSI_DriverRole
+export SERVICE_ACCOUNT_ROLE_ARN=$(aws iam get-role --role-name AmazonEKS_EBS_CSI_DriverRole | jq -r '.Role.Arn')
+```
+
+2. Install the Amazon EBS CSI add-on for EKS using the AmazonEKS_EBS_CSI_DriverRole by issuing the following command:
+```
+eksctl create addon --name aws-ebs-csi-driver --cluster $CLUSTER_NAME \
+    --service-account-role-arn $SERVICE_ACCOUNT_ROLE_ARN --force
+```
+
+After completing these prerequisite steps, you're ready to begin EKS integration.
 
 ### Step 1: Install Kubecost on your Amazon EKS cluster
 
@@ -62,7 +86,7 @@ On your web browser, navigate to http://localhost:9090 to access the dashboard.
 
 You can now start monitoring your Amazon EKS cluster cost and efficiency. Depending on your organization’s requirements and set up, you may have different options to expose Kubecost for internal access. There are few examples that you can use for your references:
 
-- You can check Kubecost documentation for [Ingress Examples](https://guide.kubecost.com/hc/en-us/articles/4407601820055-Ingress-Examples) as a reference for using Nginx ingress controller with basic auth.
+- You can check Kubecost documentation for [Ingress Examples](/ingress-examples.md) as a reference for using Nginx ingress controller with basic auth.
 - You can also consider using AWS LoadBalancer controller to expose Kubecost and use Amazon Cognito for authentication, authorization and user management. You can learn more at [“How to use Application Load Balancer and Amazon Cognito to authenticate users for your Kubernetes web apps”](https://aws.amazon.com/blogs/containers/how-to-use-application-load-balancer-and-amazon-cognito-to-authenticate-users-for-your-kubernetes-web-apps/) AWS blog post.
 
 ## Deploying Kubecost on Amazon EKS cluster using Amazon EKS add-on
@@ -150,6 +174,3 @@ aws eks delete-addon --addon-name kubecost_kubecost --cluster-name $YOUR_CLUSTER
 - AWS Blog: [New – AWS Marketplace for Containers Now Supports Direct Deployment to Amazon EKS Clusters](https://aws.amazon.com/blogs/aws/new-aws-marketplace-for-containers-now-supports-direct-deployment-to-amazon-eks-clusters/)
 - [Learn more about Amazon EKS add-on](https://docs.aws.amazon.com/eks/latest/userguide/eks-add-ons.html)
 - [Learn more about how to manage Amazon EKS add-on](https://docs.aws.amazon.com/eks/latest/userguide/managing-add-ons.html)
-
-
-<!--- {"article":"8428105779095","section":"4402829036567","permissiongroup":"1500001277122"} --->

@@ -1,13 +1,12 @@
-Secondary Clusters Guide
-===================
+# Secondary Clusters Guide
 
-Secondary clusters use a minimal Kubecost deployment to send their metrics to a central storage-bucket (aka durable storage) that is accessed by the primary cluster to provide a ___single-pane-of-glass___ view into all aggregated cluster costs globally. This aggregated cluster view is exclusive to Kubecost Enterprise.
+Secondary clusters use a minimal Kubecost deployment to send their metrics to a central storage-bucket (aka durable storage) that is accessed by the primary cluster to provide a **single-pane-of-glass** view into all aggregated cluster costs globally. This aggregated cluster view is exclusive to Kubecost Enterprise.
 
 > **Note**: The UI on secondary clusters will appear broken. It is meant for troubleshooting only.
 
-This guide explains settings that can be tuned in order to run the minimum Kubecost components to run Kubecost more efficiently. 
+This guide explains settings that can be tuned in order to run the minimum Kubecost components to run Kubecost more efficiently.
 
-See the <a href="https://guide.kubecost.com/hc/en-us/articles/4423256582551-Kubecost-Secondary-Clusters#additional-resources">additional resources</a> section below for complete examples in our github repo.
+See the [additional resources](#additional-resources) section below for complete examples in our GitHub repo.
 
 ## Kubecost Global
 
@@ -42,11 +41,11 @@ The following configuration options further reduce resource consumption when not
 
 Potentially reducing retention even further, metrics are sent to the storage-bucket every 2 hours.
 
-You can tune prometheus.server.persistentVolume.size depending on scale, or outright disable persistent storage.
+You can tune `prometheus.server.persistentVolume.size` depending on scale, or outright disable persistent storage.
 
 ## Thanos
 
-Disable Thanos components. These are only used for troubleshooting on secondary clusters. See this guide for [troubleshooting via kubectl logs](https://guide.kubecost.com/hc/en-us/articles/4407595964695-Long-Term-Storage#troubleshooting).
+Disable Thanos components. These are only used for troubleshooting on secondary clusters. See this guide for [troubleshooting via kubectl logs](./long-term-storage.md#troubleshooting).
 
 > **Note**: Secondary clusters write to the global storage-bucket via the thanos-sidecar on the prometheus-server pod.
 
@@ -62,16 +61,18 @@ Disable Thanos components. These are only used for troubleshooting on secondary 
 
 You can disable node-exporter and the service account if cluster/node rightsizing recommendations are not required.
 
-> **Note**: node-export must be disabled if there is an existing daemonset. More info [here](https://guide.kubecost.com/hc/en-us/articles/4407601830679-Troubleshoot-Install#a-name-node-exporter-a-issue-failedscheduling-kubecost-prometheus-node-exporter).
+> **Note**: node-export must be disabled if there is an existing daemonset. More info [here](./troubleshoot-install.md#issue-failedscheduling-kubecost-prometheus-node-exporter).
 
 ## Helm values
 
 For reference, this is a list of the most common settings for efficient secondary clusters:
 
 `secondary-clusters.yaml`
+
 ```yaml
 kubecostProductConfigs:
   clusterName: kubecostProductConfigs_clusterName
+  # productKey not needed on secondary clusters
 kubecostModel:
   warmCache: false
   warmSavingsCache: false
@@ -109,19 +110,6 @@ thanos:
 
 ## Additional resources
 
-You can find complete installation guides and sample files on our [repo](https://github.com/kubecost/poc-common-configurations)
+You can find complete installation guides and sample files on our [repo](https://github.com/kubecost/poc-common-configurations).
 
-Additional considerations for properly tuning resource consumption is [here](https://guide.kubecost.com/hc/en-us/articles/6446286863383-Tuning-Resource-Consumption).
-
-## Help
-<a name="help"></a>
-There are potentially other configuration options based on the specifics of different deployment requirements. Reach out to us if you run into any issues, we are here to help!
-
-[Slack community](https://join.slack.com/t/kubecost/shared_invite/zt-1dz4a0bb4-InvSsHr9SQsT_D5PBle2rw) - check out #support for any help you may need & drop your introduction in the #general channel
-
-Write to us at [support@kubecost.com](support@kubecost.com).
-
----
-
-
-<!--- {"article":"4423256582551","section":"4402815636375","permissiongroup":"1500001277122"} --->
+Additional considerations for properly tuning resource consumption is [here](/resource-consumption.md).

@@ -1,9 +1,9 @@
 High Availability Kubecost
 ==========================
 
-Running Kubecost in high availability mode is a feature that relies on multiple Kubecost replica pods implementing the [ETL Bucket Backup](https://docs.kubecost.com/install-and-configure/advanced-configuration/etl-backup) feature combined with a Leader/Follower implementation which ensures that there always exists exactly one leader across all replicas.
+Running Kubecost in high availabilit (HA) mode is a feature that relies on multiple Kubecost replica pods implementing the [ETL Bucket Backup](/etl-backup.md) feature combined with a Leader/Follower implementation which ensures that there always exists exactly one leader across all replicas.
 
-> **Note**: High availability mode is only available in Kubecost Enterprise.
+> **Note**: HA mode is only available in Kubecost Enterprise.
 
 ## Leader + Follower
 
@@ -18,12 +18,12 @@ The Leader/Follower implementation leverages a `coordination.k8s.io/v1` `Lease` 
 
 ## Configuring high availability
 
-In order to enable the leader/follower and high availability features, the following must also be configured:
+In order to enable the leader/follower and HA features, the following must also be configured:
 * Replicas are set to a value greater than 1
 * ETL FileStore is Enabled (enabled by default)
-* [ETL Bucket Backup](https://raw.githubusercontent.com/kubecost/docs/main/etl-backup.md) is Configured
+* [ETL Bucket Backup](/etl-backup.md) is configured
 
-For example, using our helm chart, the following is an acceptable configuration:
+For example, using our Helm chart, the following is an acceptable configuration:
 ```bash
 helm install --name kubecost --namespace kubecost \
 	--set kubecostDeployment.leaderFollower.enabled=true \ 
@@ -52,9 +52,3 @@ kubecostDeployment:
   leaderFollower:
     enabled: true
 ```
-
-----
-
-
-
-<!--- {"article":"9038721747223","section":"4402829033367","permissiongroup":"1500001277122"} --->

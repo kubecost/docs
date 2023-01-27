@@ -24,7 +24,7 @@ Check out our [Installation options](https://guide.kubecost.com/hc/en-us/article
 [Allocating out of cluster costs (AWS)](https://guide.kubecost.com/hc/en-us/articles/4407596810519)\
 [Allocating out of cluster costs (Azure)](https://guide.kubecost.com/hc/en-us/articles/4407595936023)\
 [Allocating out of cluster costs (GCP)](https://guide.kubecost.com/hc/en-us/articles/4407601816087)\
-[AWS Spot feed integration](https://guide.kubecost.com/hc/en-us/articles/4407595947799#spot-nodes)
+[AWS Spot feed integration](/aws-spot-instances.md#spot-data-feed-integration)
 
 ### Staying in the loop
 

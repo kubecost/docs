@@ -41,10 +41,24 @@ The result is 5 clusters federated together.
 
 ## Setup
 
+### Step 0: Ensure unique cluster IDs
+
+Ensure each federated cluster has a unique `clusterName` and `cluster_id`:
+
+```yaml
+kubecostProductConfigs:
+  clusterName: federated-one
+prometheus:
+  server:
+    global:
+      external_labels:
+        cluster_id: federated-one
+```
+
 ### Step 1: Storage configuration
 
 1. For any cluster in the pipeline (Federator, Federated, Primary, or any combination of the three), create a file *federated-store.yaml* with the same format used for Thanos/S3 backup.
-2. Add a secret using that file: `kubectl create secret generic <secret_name> -n kubecost --from-file=federated-store.yaml`.
+2. Add a secret using that file: `kubectl create secret generic <secret_name> -n kubecost --from-file=federated-store.yaml`. Then set `kubecostModel.federatedStorageConfigSecret` to the kubernetes secret name.
 
     * If you would like to use an existing secret already mounted/configured through `kubecostModel.etlBucketConfigSecret`, set `federatedETL.useExistingS3Config` to `true`. This will override any secret configured using the above.
     * If using existing config, be aware that since Federated ETL clusters share an S3 bucket, it is not advised to do this for more than one of the clusters, as Kubecost S3 backup may become unreliable and cause issues with the pipeline. To avoid this, use the separate federated secret as mentioned above.
@@ -77,5 +91,3 @@ The result is 5 clusters federated together.
     * To verify the entire pipeline is working, either query `Allocations/Assets` or view the respective views on the frontend. Multi-cluster data should appear after:
         * The Federator has run at least once.
         * There was data in the Federated Storage for the Federator to have combined.
-
-<!--- {"article":"10015110616599","section":"1500002777682","permissiongroup":"1500001277122"} --->

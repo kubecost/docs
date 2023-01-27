@@ -2,7 +2,7 @@
 
 ## Overview
 
- > The network costs daemonset is an optional utility that gives Kubecost more detail to attribute costs to the correct pods.
+The network costs daemonset is an optional utility that gives Kubecost more detail to attribute costs to the correct pods.
 
 When networkCost is enabled, Kubecost gathers pod-level network traffic metrics to allocate network transfer costs to the pod responsible for the traffic.
 
@@ -13,7 +13,7 @@ The network-costs metrics are collected using a daemonset (one pod per node) tha
 
 ## Usage
 
-With the network-costs daemonset enabled, the "Network" column on the Allocations UI will reflect the portion of network transfer costs based on the chart-level aggregation.
+With the network-costs daemonset enabled, the Network column on the Allocations page will reflect the portion of network transfer costs based on the chart-level aggregation.
 
 ![network-cost-allocation](images/network-cost-allocation.png)
 
@@ -25,11 +25,9 @@ When using Kubecost version 1.99 and above: Greater detail can be accessed throu
 
 To view the raw network transfer data, Grafana dashboard that is almost ready to publish (just needs QA testing to verify accuracy): https://github.com/kubecost/cost-analyzer-helm-chart/blob/network-transfer-data-grafana-dashboard/cost-analyzer/network-transfer-data.json
 
-
-
 ## Enabling network costs
 
-To enable this feature, set the following parameter in _values.yaml_ during [Helm installation](http://kubecost.com/install):
+To enable this feature, set the following parameter in _values.yaml_ during [Helm installation](https://kubecost.com/install):
 
  ``` yaml
  networkCosts:
@@ -73,7 +71,7 @@ networkCosts:
       #      - "20.0.0.0/8"
 ```
 
-## Additional Configuration
+## Additional configuration
 
  You can view a list of common config options [here](https://github.com/kubecost/cost-analyzer-helm-chart/blob/700cfa306c8e78bc9a1039b584769b9a0e0757d0/cost-analyzer/values.yaml#L573).
 
@@ -182,7 +180,7 @@ To verify this feature is functioning properly, you can complete the following s
 
 ### Common issues
 
-* Failed to locate network pods -- Error message displayed when the Kubecost app is unable to locate the network pods, which we search for by a label that includes our release name. In particular, we depend on the label `app=<release-name>-network-costs` to locate the pods. If the app has a blank release name this issue may happen.
+* Failed to locate network pods: Error message displayed when the Kubecost app is unable to locate the network pods, which we search for by a label that includes our release name. In particular, we depend on the label `app=<release-name>-network-costs` to locate the pods. If the app has a blank release name this issue may happen.
 
 * Resource usage is a function of unique src and dest IP/port combinations. Most deployments use a small fraction of a CPU and it is also ok to have this Pod CPU throttled. Throttling should increase parse times but should not have other impacts. The following Prometheus metrics are available in v15.3 for determining the scale and the impact of throttling:
 
@@ -194,4 +192,3 @@ To verify this feature is functioning properly, you can complete the following s
 * Today this feature is supported on Unix-based images with conntrack
 * Actively tested against GCP, AWS, and Azure
 * Pods that use hostNetwork share the host IP address
-

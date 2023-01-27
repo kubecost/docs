@@ -4,7 +4,7 @@
 
 The OperatorHub is available via the Red Hat OpenShift Container Platform web console and is the interface that cluster administrators use to discover and install Operators. With one click, an Operator can be pulled from their off-cluster source, installed and subscribed on the cluster, and made ready for engineering teams to self-service manage the product across deployment environments using the Operator Lifecycle Manager (OLM). Kubecost is now available on the [Embedded OperatorHub in OpenShift and OKD](https://github.com/redhat-openshift-ecosystem/community-operators-prod/tree/main/operators)
 
-This document provides instructions for deploying Kubecost into Red Hat Openshift 4.9.x or higher using Red Hat Openshift platform (OCP) web console. Kubecost's operator on the [Embedded OperatorHub in OpenShift and OKD](https://github.com/redhat-openshift-ecosystem/community-operators-prod/tree/main/operators) is an alternative to [Kubecost Free version](https://guide.kubecost.com/hc/en-us/articles/8292513994903-OpenCost-Product-Comparison). Kubecost's operator uses an Operator pattern to deploy and manage the Kubecost deployment on the Red Hat Openshift platform.
+This document provides instructions for deploying Kubecost into Red Hat Openshift 4.9.x or higher using Red Hat Openshift platform (OCP) web console. Kubecost's operator on the [Embedded OperatorHub in OpenShift and OKD](https://github.com/redhat-openshift-ecosystem/community-operators-prod/tree/main/operators) is an alternative to [Kubecost Free version](/opencost-product-comparison.md). Kubecost's operator uses an Operator pattern to deploy and manage the Kubecost deployment on the Red Hat Openshift platform.
 
 ![Standard deployment](https://raw.githubusercontent.com/kubecost/docs/main/images/ocp-standard.png)
 
@@ -156,5 +156,3 @@ You can uninstall Kubecost operator by following [these instructions](https://ac
 ## Support
 
 For advanced setup or if you have any questions, you can contact us on [Slack](https://join.slack.com/t/kubecost/shared_invite/enQtNTA2MjQ1NDUyODE5LWFjYzIzNWE4MDkzMmUyZGU4NjkwMzMyMjIyM2E0NGNmYjExZjBiNjk1YzY5ZDI0ZTNhZDg4NjlkMGRkYzFlZTU) or email us at [support@kubecost.com](support@kubecost.com).
-
-<!--- {"article":"10248765796375","section":"4402815636375","permissiongroup":"1500001277122"} --->

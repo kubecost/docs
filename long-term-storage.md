@@ -5,7 +5,7 @@ Kubecost leverages Thanos to enable durable storage for three different purposes
 
 1. Centralize metric data for a global multi-cluster view into Kubernetes costs via a Prometheus sidecar
 1. Allow for unlimited data retention
-1. Backup Kubecost [ETL data](https://guide.kubecost.com/hc/en-us/articles/4407601815191-ETL-S3-Backup)
+1. Backup Kubecost [ETL data](/etl-backup.md)
 
 > **Note**: This feature requires an [Enterprise license](https://kubecost.com/pricing).
 
@@ -20,9 +20,9 @@ We have guides for using cloud-native storage for the largest cloud providers. O
 
 Use the appropriate guide for your cloud provider:
 
-* [Google Cloud Storage](https://github.com/kubecost/docs/blob/main/long-term-storage-gcp.md)
-* [AWS/S3](https://github.com/kubecost/docs/blob/main/long-term-storage-aws.md)
-* [Azure](https://github.com/kubecost/docs/blob/main/long-term-storage-azure.md)
+* [Google Cloud Storage](/long-term-storage-gcp.md)
+* [AWS/S3](/long-term-storage-aws.md)
+* [Azure](/long-term-storage-azure.md)
 
 ## Step 2: Create object-store secret
 
@@ -200,8 +200,3 @@ Also note that the sidecar should identify with the unique `cluster_id` provided
 The default retention period for when data is moved into the object storage is currently *2h* - This configuration is based on Thanos suggested values. __By default, it will be 2 hours before data is written to the provided bucket.__
 
 Instead of waiting *2h* to ensure that thanos was configured correctly, the default log level for the thanos workloads is `debug` (it's very light logging even on debug). You can get logs for the `thanos-sidecar`, which is part of the `prometheus-server` Pod, and `thanos-store`. The logs should give you a clear indication of whether or not there was a problem consuming the secret and what the issue is. For more on Thanos architecture, view [this resource](https://github.com/thanos-io/thanos/blob/master/docs/design.md).
-
----
-
-
-<!--- {"article":"4407595964695","section":"4402815636375","permissiongroup":"1500001277122"} --->

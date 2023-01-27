@@ -28,6 +28,7 @@
     * [GCP](install-and-configure/install/long-term-storage/gcp/README.md)
       * [GCP Long Term Storage](long-term-storage-gcp.md)
     * [Thanos Upgrade](thanos-upgrade.md)
+  * [ETL Backup](etl-backup.md)
   * [Provider Installations](install-and-configure/install/provider-installations/README.md)
     * [Amazon EKS Integration](aws-eks-cost-monitoring.md)
     * [AWS Marketplace Install](aws-marketplace-install.md)
@@ -46,8 +47,7 @@
 * [Advanced Configuration](install-and-configure/advanced-configuration/README.md)
   * [Add Key](add-key.md)
   * [Enabling Annotation Emission](annotations.md)
-  * [Network Traffic Cost Allocation](network-allocation.md)
-  * [ETL Backup](etl-backup.md)
+  * [Network Cost Configuration](network-costs-configuration.md)
   * [User Management - SSO/SAML/RBAC](user-management.md)
   * [Multi-Cluster Options](multi-cluster.md)
   * [Federated Clusters](federated-clusters.md)
@@ -60,12 +60,13 @@
 ## Integrations
 
 * [Custom Webhook to Create a Kubecost Stage in Spinnaker](spinnaker-custom-webhook.md)
+* [Gluu Server with OIDC Configuration Guide](integrations/gluu-server-with-oidc-configuration-guide.md)
 
 ## General
 
 * [OpenCost Product Comparison](opencost-product-comparison.md)
 * [User Metrics](user-metrics.md)
-* [Installing Agent for Kubecost Cloud (Alpha)](agent.md)
+* [Installing Agent for Kubecost Cloud (limited availability)](agent.md)
 * [Tuning Resource Consumption](resource-consumption.md)
 * [Calculating Node Pricing](node-pricing.md)
 
@@ -73,12 +74,13 @@
 
 * [Getting Started](getting-started.md)
   * [Kubernetes Cost Allocation](cost-allocation.md)
+  * [Efficiency and Idle](efficiency-idle.md)
   * [Availability Tiers](availability-tiers.md)
   * [Cluster Health Score](cluster-health-score.md)
   * [Spot Checklist](spot-checklist.md)
   * [Spot Cluster Sizing](spot-cluster-sizing.md)
   * [Automatic Request Right-Sizing](auto-request-sizing.md)
-    * [Guide: 1-click Request Sizing](using-kubecost/getting-started/auto-request-sizing/guide-1-click-request-sizing.md)
+    * [1-click Request Sizing](one-click-request-sizing.md)
     * [Continuous Request Right-Sizing](continuous-request-sizing.md)
   * [Saved Reports](saved-reports.md)
   * [Alerts](alerts.md)
@@ -86,27 +88,30 @@
   * [Kubernetes Assets](assets.md)
   * [CSV Pricing](csv-pricing.md)
   * [Contexts](context-switcher.md)
+  * [ContainerStats Pipeline](containerstats-pipeline.md)
 
 ## APIs
 
-* [Kubecost API Directory](apis.md)
+* [Kubecost API Directory](apis-overview.md)
   * [Allocation API](allocation.md)
-  * [V2 Filters](filters-v2.md)
   * [Assets API](assets-api.md)
   * [Abandoned Workloads](api-abandoned-workloads.md)
   * [Container Request Recommendation "Apply" APIs](api-request-recommendation-apply.md)
-  * [Container Request Right Sizing Recommendation API (v2)](api-request-right-sizing-v2.md)
+  * [Container Request Right Sizing Recommendation API (V2)](api-request-right-sizing-v2.md)
   * [Asset Diff API](asset-diff.md)
   * [Audit API](audit-api.md)
+  * [Events API](api-events.md)
+  * [Filter Parameters (v2)](filters-api.md)
 * [Deprecated APIs](apis/deprecated-apis/README.md)
   * [Container Request Right-Sizing Recommendation API (V1) - Deprecated](api-request-right-sizing.md)
-  * [costDataModel & aggregatedCostModel API - Deprecated](allocation-api.md)
+  * [costDataModel & aggregatedCostModel API - Deprecated](cost-model-deprecated.md)
   * [Namespace Contacts](namespace-contacts.md)
 
 ## Architecture
 
 * [Kubecost Core Architecture Overview](architecture.md)
 * [Kubecost Cloud Architecture Overview](kubecost-cloud-architecture.md)
+* [Network Traffic Cost Allocation](network-allocation.md)
 * [Open Source](open-source-deps.md)
 * [Security and Data Protection](security.md)
 * [Ports](ports.md)
@@ -120,10 +125,12 @@
 
 * [Frequently Asked Questions](setup/frequently-asked-questions.md)
 * [Troubleshoot Install](troubleshoot-install.md)
-* [Capture a Bug Report](bug-report.md)
-* [Bug Bounty Program](bug-bounty-program.md)
+* [HTTP Error Troubleshooting](http-troubleshooting.md)
 * [Kubecost Diagnostics](diagnostics.md)
+* [Capture a Bug Report](bug-report.md)
+* [Repair Kubecost ETLs](etl-repair.md)
 * [Running a Query in Kubecost-bundled Prometheus](prometheus.md)
+* [Bug Bounty Program](bug-bounty-program.md)
 * [Getting Support](support-channels.md)
 
 ## Other Resources

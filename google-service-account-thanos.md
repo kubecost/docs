@@ -23,7 +23,3 @@ You should now be prompted to allow specific accounts access to this service acc
 Once back to the Service accounts page, select the _Actions_ icon > _Manage keys_. Then, select the _Add Key_ dropdown and select _Create new key_. A Create private key window opens.
 
 Select _JSON_ as the Key type and select _Create_. This will download a JSON service account key entry for use with the Thanos `object-store.yaml` mentioned in the initial setup step.
-
-
-
-<!--- {"article":"4407601817495","section":"4402815680407","permissiongroup":"1500001277122"} --->

@@ -1,4 +1,4 @@
-# diagnostics
+# Kubecost Diagnostics
 
 ## Kubecost Diagnostics
 
@@ -32,7 +32,7 @@ Node exporter metrics are used for the following features:
 * Show a compute 'breakdown' on Overview's Resource Efficiency graph, i.e. system vs idle vs user. The Compute bar on this graph will appear as a single solid colored bar when this diagnostic is failing.
 * Various Kubecost Grafana dashboards
 
-These metrics are not used in the core Assets and Allocation and therefore can be considered optional. [Learn how to disable](http://docs.kubecost.com/getting-started#node-exporter)
+These metrics are not used in the core Assets and Allocation and therefore can be considered optional. Learn how to disable [here](https://docs.kubecost.com/using-kubecost/getting-started#using-an-existing-node-exporter).
 
 If this diagnostic test is failing and you'd like to have these metrics, view [How to Troubleshoot Missing Metrics](diagnostics.md#how-to-troubleshoot-missing-metrics).
 
@@ -40,11 +40,9 @@ If this diagnostic test is failing and you'd like to have these metrics, view [H
 
 Kubecost requests `kube-state-metrics >= v1.6.0`. This version check is completed with verifying the existence of the `kube_persistentvolume_capacity_bytes` metric. If this diagnostic test is failing, we recommend you:
 
-1. Confirm kube-state-metrics version requirement is met\
-
-2. Verify this, and potentially other, kube-state-metrics metrics are not being dropped with Prometheus relabel rules\
-
-3. Determine if no persistent volumes are present in this cluster -- if so, you can ignore this diagnostic check\
+1. Confirm kube-state-metrics version requirement is met\\
+2. Verify this, and potentially other, kube-state-metrics metrics are not being dropped with Prometheus relabel rules\\
+3. Determine if no persistent volumes are present in this cluster -- if so, you can ignore this diagnostic check\\
 
 ### Kubecost ETL pipeline metrics
 
@@ -70,7 +68,7 @@ In order to repair the file for the problematic date above (Note it's for _Alloc
 http://<kubecost-url>:<port>/model/etl/allocation/repair?window=2020-11-20T00:00:00Z,2020-11-21T00:00:00Z
 ```
 
-NOTE: Previous versions of Kubecost (1.81.0 and prior) provided a similar repair feature under the "rebuild" endpoint by passing a window:
+> &#x20;**Note**: Previous versions of Kubecost (1.81.0 and prior) provided a similar repair feature under the "rebuild" endpoint by passing a window:
 
 ```
 http://<kubecost-url>:<port>/model/etl/[allocation|assets]/rebuild?window=<RFC3339-start>,<RFC3339-end>&commit=true
@@ -88,7 +86,7 @@ Once cloud integrations have been set up, Each Cloud Store will have its own dia
 * Resolution: The size of the assets being retrieved
 * StartTime: When the Cloud Process was started
 
-For more information about Cloud Integration and related APIs, read the [cloud-integration](https://github.com/kubecost/docs/blob/main/cloud-integration.md) documentation.
+For more information about Cloud Integration and related APIs, read the [cloud-integration](cloud-integration.md) documentation.
 
 ## How to Troubleshoot Missing Metrics
 
@@ -120,10 +118,10 @@ If the necessary scrape target is not added to your Prometheus, then refer to [t
 
 #### Step 4. No recent Prometheus scrape errors
 
-You can see information on recent Prometheus scrape errors directly on the Kubecost Diagnostics page when present or by visiting your Prometheus console and then Status > Targets in the top navigation bar.
+You can see information on recent Prometheus scrape errors directly on the Kubecost Diagnostics page when present or by visiting your Prometheus console and then _Status_ > _Targets_ in the top navigation bar.
 
 Contact support@kubecost.com or send a message in our Slack workspace if you encounter an error that you do not recognize.
 
 #### Step 5. Metrics not being dropped with Prometheus relabel rules
 
-If metrics are being collected on a supported version of the desired metrics exporter, the final step is to verify that individual metrics are not being dropped in your Prometheus pipeline. This could be in the form of an add or rule under a drop `metric_relabel_configs` block in your Prometheus yaml configuration files.
+If metrics are being collected on a supported version of the desired metrics exporter, the final step is to verify that individual metrics are not being dropped in your Prometheus pipeline. This could be in the form of an add or rule under a drop `metric_relabel_configs` block in your Prometheus .yaml configuration files.

@@ -3,14 +3,14 @@ Continuous Request Right-Sizing with Kubecost's Kubescaler
 
 > **Note**: This feature is in a pre-release (alpha/beta) state and has limitations. Please read the documentation carefully.
 
-Kubecost's Kubescaler implements continuous request right-sizing: the automatic application of Kubecost's high-fidelity [recommendations](https://github.com/kubecost/docs/blob/main/api-request-right-sizing-v2.md) to your containers' resource requests. This provides an easy way to automatically improve your allocation of cluster resources by improving efficiency.
+Kubecost's Kubescaler implements continuous request right-sizing: the automatic application of Kubecost's high-fidelity [recommendations](/api-request-right-sizing-v2.md) to your containers' resource requests. This provides an easy way to automatically improve your allocation of cluster resources by improving efficiency.
 
 Kubescaler can be enabled and configured on a per-workload basis so that only
 the workloads you want edited will be edited.
 
 ## Setup
 
-See the high-level [automatic request right-sizing guide](https://github.com/kubecost/docs/blob/main/auto-request-sizing.md). Kubescaler is part of Cluster Controller.
+See the high-level [automatic request right-sizing guide](/auto-request-sizing.md). Kubescaler is part of Cluster Controller.
 
 ## Usage
 
@@ -29,6 +29,13 @@ Notable Helm values:
 | Helm value | Description | Example(s) |
 | ---------- | ----------- | ---------- |
 | `clusterController.kubescaler.resizeAllDefault` | If true, Kubescaler will switch to default-enabled for all workloads unless they are annotated with `request.autoscaling.kubecost.com/enabled=false`. This is recommended for low-stakes clusters where you want to prioritize workload efficiency without reworking deployment specs for all workloads. | `true` |
+
+### Supported workload types
+Kubescaler supports:
+- Deployments
+
+Kubescaler cannot support:
+- "Uncontrolled" Pods. Learn more [here](https://github.com/kubernetes/kubernetes/issues/24913).
 
 ### Example
 
@@ -53,5 +60,3 @@ To check current requests for your Deployments, use the following command:
 ``` sh
 kubectl get deployment -n "kubecost" -o=jsonpath="{range .items[*]}"deployment/"{.metadata.name}{'\n'}{range .spec.template.spec.containers[*]}{.name}{'\t'}{.resources.requests}{'\n'}{end}{'\n'}{end}"
 ```
-
-<!--- {"article":"10330083197975","section":"1500002777682","permissiongroup":"1500001277122"} --->

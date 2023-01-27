@@ -1,64 +1,68 @@
-# Installing Agent for Kubecost Cloud (Alpha)
+# Installing Agent for Kubecost Cloud (limited availability)
 
 The _kubecost-agent_ is a lightweight Kubecost exporter that sends metrics to Kubecost Cloud. In order to install the _kubecost-agent_, you will need a specific key provided by Kubecost.
 
 The name of the storage key file provided by the Kubecost team will have the name `kubecost-agent.key`
 
-> **Note**: Kubecost Cloud is currently in limited availability. You can learn about more about it and request an invitation [here](https://www.kubecost.com/kubecost-cloud-limited-availability/).
+> **Note**: Kubecost Cloud is currently in limited availability. You can learn about more about it and request an invitation [here](https://www.kubecost.com/kubecost-cloud-limited-availability/). Learn about the architecture for Kubecost Cloud [here](kubecost-cloud-architecture.md).
 
 ## Installation using Helm
 
 > **Note**: Integration with CI/CD tools is possible, but it is recommended to follow this guide as closely as possible to ensure a successful deployment.
 
-1.  Add the Kubecost Helm repository:
-
-    ```bash
-    helm repo add kubecost https://kubecost.github.io/cost-analyzer/
-    ```
-2. The following will install the Kubecost agent and required components using the provided `kubecost-agent.key` (ensure the key file is in the current file directory):
+The following will install the Kubecost agent and required components using the provided `kubecost-agent.key` (ensure the key file is in the current file directory):
 
 ```bash
-helm upgrade --install kubecost kubecost/cost-analyzer \
+helm install kubecost-agent \
+  --repo https://kubecost.github.io/cost-analyzer cost-analyzer \
   --namespace kubecost-agent --create-namespace \
-  --values=https://raw.githubusercontent.com/kubecost/cost-analyzer-helm-chart/develop/cost-analyzer/values-agent.yaml \
-  --set prometheus.server.global.external_labels.cluster_id=<CLUSTER_NAME> \
-  --set kubecostProductConfigs.clusterName=<CLUSTER_NAME> \
-  --set prometheus.nodeExporter.enabled=true \
-  --set prometheus.serviceAccounts.nodeExporter.create=true \
-  --set networkCosts.enabled=true \
-  --set-file agentKey="kubecost-agent.key"
+  --values https://raw.githubusercontent.com/kubecost/cost-analyzer-helm-chart/develop/cost-analyzer/values-agent.yaml \
+  --set prometheus.server.global.external_labels.cluster_id=CLUSTER_NAME \
+  --set kubecostProductConfigs.clusterName=CLUSTER_NAME \
+  --set prometheus.nodeExporter.enabled=false \
+  --set-file agentKey=kubecost-agent.key \
+  --set agentKeySecretName=kubecost-agent-object-store
 ```
+
+Optionally, add the Network Costs Daemonset:
+
+* All Providers: `--set networkCosts.enabled=true`
+
+And one of the following (if applicable):
+
+* AWS `--set networkCosts.config.services.amazon-web-services=true`
+* Azure `--set networkCosts.config.services.azure-cloud-services=true`
+* GCP `--set networkCosts.config.services.google-cloud-services=true`
 
 This will install:
 
 * `kubecost-agent` deployment and service
 * `prometheus-server` deployment and service
-* node-exporter daemonSet (set to false if you already have node-exporter running)
-* network-costs daemonSet (optional, collects additional metrics used for egress cost visibility) [learn more](https://guide.kubecost.com/hc/en-us/articles/4407595973527)
+* `network-costs` daemonSet (optional, collects additional metrics used for egress cost visibility) [learn more](network-allocation.md)
 
 ## Additional clusters
 
-For multi-cluster setups, all additional cluster installs would use the following install command:
+For multi-cluster setups, install the agent with the following command:
 
 > **Note**: Please ensure CLUSTER\_NAME is unique per cluster.
 
 ```bash
-helm upgrade --install kubecost kubecost/cost-analyzer \
+helm install kubecost-agent \
+  --repo https://kubecost.github.io/cost-analyzer cost-analyzer \
   --namespace kubecost-agent --create-namespace \
-  --values=https://raw.githubusercontent.com/kubecost/cost-analyzer-helm-chart/develop/cost-analyzer/values-agent.yaml \
-  --set prometheus.server.global.external_labels.cluster_id=<CLUSTER_NAME> \
-  --set kubecostProductConfigs.clusterName=<CLUSTER_NAME> \
+  --values https://raw.githubusercontent.com/kubecost/cost-analyzer-helm-chart/develop/cost-analyzer/values-agent.yaml \
+  --set prometheus.server.global.external_labels.cluster_id=CLUSTER_NAME \
+  --set kubecostProductConfigs.clusterName=CLUSTER_NAME \
+  --set prometheus.nodeExporter.enabled=false \
+  --set-file agentKey=kubecost-agent.key \
+  --set agentKeySecretName=kubecost-agent-object-store \
   --set kubecostMetrics.exporter.exportClusterInfo=false \
-  --set kubecostMetrics.exporter.exportClusterCache=false \
-  --set prometheus.nodeExporter.enabled=true \
-  --set prometheus.serviceAccounts.nodeExporter.create=true \
-  --set networkCosts.enabled=true \
-  --set-file agentKey="kubecost-agent.key"
+  --set kubecostMetrics.exporter.exportClusterCache=false
 ```
 
 ## Accessing the Kubecost UI
 
-Confirm with Kubecost team on successful deployment, which will then provide access to the hosted UI: `https://<your-organization>.kubecost.io` which can be used to access all exported data.
+Confirm with Kubecost team on successful deployment, which will then provide access to the hosted UI: `https://<your-organization>.kubecost.cloud` which can be used to access all exported data.
 
 > **Note**: Metrics are shipped every two hours. A delay is expected when viewing on the UI.
 

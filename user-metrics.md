@@ -58,7 +58,7 @@ GitHub: [https://github.com/google/cadvisor](https://github.com/google/cadvisor)
 | `container_cpu_cfs_throttled_periods_total` | Number of throttled period intervals |
 
 ### Kube-State-Metrics
-The following KSM metrics are both consumed and emitted by the Kubecost installation. The `cost-model` replicates all of these metrics such that a KSM installation is not actually required. Read more [here](https://github.com/kubecost/docs/blob/main/ksm-metrics.md).
+The following KSM metrics are both consumed and emitted by the Kubecost installation. The `cost-model` replicates all of these metrics such that a KSM installation is not actually required. Read more [here](/ksm-metrics.md).
 
 GitHub: [https://github.com/kubernetes/kube-state-metrics](https://github.com/kubernetes/kube-state-metrics)
 
@@ -131,6 +131,3 @@ GitHub: [https://github.com/NVIDIA/k8s-device-plugin](https://github.com/NVIDIA/
 | Metric                          | Description              |
 | ------------------------------- | ------------------------ |
 | `DCGM_FI_DEV_GPU_UTIL` | GPU utilization | 
-
-
-<!--- {"article":"4425134686743","section":"1500002777682","permissiongroup":"1500001277122"} --->

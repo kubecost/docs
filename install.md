@@ -1,6 +1,6 @@
 # Installation
 
-To get started with Kubecost and OpenCost, **the recommended path is to** [**install Kubecost Commmunity Version**](http://kubecost.com/install). This installation method is available for free and leverages the Kubecost Helm Chart. It provides access to all OpenCost and Kubecost community functionality and can scale to large clusters. This will also provide a token for trialing and retaining data across different Kubecost product tiers.
+To get started with Kubecost and OpenCost, **the recommended path is to** [**install Kubecost Commmunity Version**](https://kubecost.com/install). This installation method is available for free and leverages the Kubecost Helm Chart. It provides access to all OpenCost and Kubecost community functionality and can scale to large clusters. This will also provide a token for trialing and retaining data across different Kubecost product tiers.
 
 ## Kubecost Features
 
@@ -42,7 +42,7 @@ For medium-sized teams and companies with more complex infrastructure you need t
     Retain spend, allocation, and efficiency data for up to 30 days. Provides custom reports saving for easily sharing across teams.
 *   **Team alerts & updates**
 
-    Kubecost alerts allow teams to receive updates on real-time Kubernetes spend. [Learn more](https://github.com/kubecost/docs/blob/master/alerts.md)
+    Kubecost alerts allow teams to receive updates on real-time Kubernetes spend. [Learn more](/alerts.md)
 *   **Business support**
 
     Direct engineering and product support via Slack channel, video, and phone.
@@ -59,10 +59,10 @@ For larger teams and companies with more complex infrastructure, you need the ri
     Retain data for years with various durable storage options. Provides record keeping on spend, allocation, and efficiency metrics with simple backup & restore functionality.
 *   **Access control with SSO/SAML**
 
-    Finely manage read and/or admin access by individual users or user groups. [Learn more](https://github.com/kubecost/docs/blob/master/user-management.md).
+    Finely manage read and/or admin access by individual users or user groups. [Learn more](/user-management.md).
 *   **High availability mode**
 
-    Use multiple Kubecost replica pods with a Leader/Follower implementation to ensure one leader always exists across all replicas to run high availability mode. [Learn more](https://docs.kubecost.com/install-and-configure/advanced-configuration/high-availability).
+    Use multiple Kubecost replica pods with a Leader/Follower implementation to ensure one leader always exists across all replicas to run high availability mode. [Learn more](/high-availability.md).
 *   **Advanced custom pricing**
 
     Advanced custom pricing pipelines give teams the ability to set custom per-asset pricing for resources. This is typically used for on-prem and air-gapped environments, but can also be applied to teams that want to allocate internal costs differently than cloud provider defaults.

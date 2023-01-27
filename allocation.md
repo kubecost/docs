@@ -1,12 +1,12 @@
 Allocation API
 ==============
 
-The Allocation API is the preferred way to query for costs and resources allocated to Kubernetes workloads and optionally aggregated by Kubernetes concepts like `namespace`, `controller`, and `label`. Data is served from one of [Kubecost's ETL pipelines](https://github.com/kubecost/docs/blob/main/allocation-api.md#caching-overview). The endpoint is available at the URL:
+The Allocation API is the preferred way to query for costs and resources allocated to Kubernetes workloads and optionally aggregated by Kubernetes concepts like `namespace`, `controller`, and `label`. Data is served from one of [Kubecost's ETL pipelines](/allocation-api.md#caching-overview). The endpoint is available at the URL:
 ```
 http://<kubecost>/model/allocation
 ```
 
-> **Note**: Throughout, we use `localhost:9090` as the default Kubecost URL, but your Kubecost instance may be exposed by a service or ingress. To reach Kubecost at port 9090, run: `kubectl port-forward deployment/kubecost-cost-analyzer -n kubecost 9090`
+> **Note**: Throughout, we use `localhost:9090` as the default Kubecost URL, but your Kubecost instance may be exposed by a service or ingress. To reach Kubecost at port 9090, run: `kubectl port-forward deployment/kubecost-cost-analyzer -n kubecost 9090`. When querying the cost-model container directly (ex. localhost:9003), the `/model` part of the URI should be removed.
 
 ## Quick start
 
@@ -51,7 +51,7 @@ $ curl http://localhost:9090/model/allocation \
 }
 ```
 
-Note: querying for "3d" will likely return a range of four sets because the queried range will overlap with four precomputed 24-hour sets, each aligned to the configured timezone. For instance, querying "3d" on 2021/01/04T12:00:00 will return:
+> **Note**: Querying for "3d" will likely return a range of four sets because the queried range will overlap with four precomputed 24-hour sets, each aligned to the configured timezone. For instance, querying "3d" on 2021/01/04T12:00:00 will return:
 - 2021/01/04 00:00:00 until 2021/01/04T12:00:00 (now)
 - 2021/01/03 00:00:00 until 2021/01/04 00:00:00
 - 2021/01/02 00:00:00 until 2021/01/03 00:00:00
@@ -59,7 +59,7 @@ Note: querying for "3d" will likely return a range of four sets because the quer
 
 See [Querying](#querying) for the full list of arguments and [Examples](#query-examples) for more example queries.
 
-## Allocation schema (version 1.76)
+## Allocation schema
 Field | Description
 ---: | :---
 name | Name of each relevant Kubernetes concept described by the allocation, delimited by slashes, e.g. "cluster/node/namespace/pod/container"
@@ -73,13 +73,23 @@ cpuCoreRequestAverage | Average number of CPU cores requested while running.
 cpuCoreUsageAverage | Average number of CPU cores used while running.
 cpuCoreHours | Cumulative CPU core-hours allocated.
 cpuCost | Cumulative cost of allocated CPU core-hours.
+cpuCostAdjustment | Change in cost after allocated CPUs have been reconciled with updated node cost
 cpuEfficiency | Ratio of `cpuCoreUsageAverage`-to-`cpuCoreRequestAverage`, meant to represent the fraction of requested resources that were used.
+gpuCount | Number of GPUs allocated to the workload.
 gpuHours | Cumulative GPU-hours allocated.
 gpuCost | Cumulative cost of allocated GPU-hours.
+gpuCostAdjustment | Change in cost after allocated GPUs have been reconciled with updated node cost
+networkTransferBytes | Total bytes sent from the workload
+networkReceiveBytes | Total bytes received by the workload
 networkCost | Cumulative cost of network usage.
+networkCostAdjustment | Updated network cost
+loadBalancerCost | Cumulative cost of allocated load balancers.
+loadBalancerCostAdjustment | Updated load balancer cost.
 pvBytes | Average number of bytes of PersistentVolumes allocated while running.
 pvByteHours | Cumulative PersistentVolume byte-hours allocated.
 pvCost | Cumulative cost of allocated PersistentVolume byte-hours.
+pvs | Map of PersistentVolumeClaim costs that have been allocated to the workload
+pvCostAdjustment | Updated persistent volume cost.
 ramBytes | Average number of RAM bytes allocated. An allocated resource is the source of cost, according to Kubecost - regardless of if a requested resource is used.
 ramByteRequestAverage | Average of the RAM requested by the workload. Requests are a [Kubernetes tool](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#requests-and-limits) for preallocating/reserving resources for a given container.
 ramByteUsageAverage | Average of the RAM used by the workload. This comes from moment-to-moment measurements of live RAM byte usage of each container. This is roughly the number you see under RAM if you pull up Task Manager (Windows), top on Linux, or Activity Monitor (MacOS).
@@ -166,7 +176,7 @@ window (required) | — | Duration of time over which to query. Accepts: words l
 aggregate | | Field by which to aggregate the results. Accepts: `cluster`, `namespace`, `controllerKind`, `controller`, `service`, `node`, `pod`, `label:<name>`, and `annotation:<name>`. Also accepts comma-separated lists for multi-aggregation, like `namespace,label:app`.
 accumulate | false | If `true`, sum the entire range of sets into a single set.
 idle | true | If `true`, include idle cost (i.e. the cost of the un-allocated assets) as its own allocation. (See [special types of allocation](#special-types-of-allocation).)
-external | false | If `true`, include [external costs](http://docs.kubecost.com/getting-started#out-of-cluster) in each allocation.
+external | false | If `true`, include [external costs](/using-kubecost/getting-started#out-of-cluster) in each allocation.
 filterClusters | | Comma-separated list of clusters to match; e.g. `cluster-one,cluster-two` will return results from only those two clusters.
 filterNodes | | Comma-separated list of nodes to match; e.g. `node-one,node-two` will return results from only those two nodes.
 filterNamespaces | | Comma-separated list of namespaces to match; e.g. `namespace-one,namespace-two` will return results from only those two namespaces.
@@ -176,7 +186,7 @@ filterPods | | Comma-separated list of pods to match; e.g. `pod-one,pod-two` wil
 filterAnnotations | | Comma-separated list of annotations to match; e.g. `name:annotation-one,name:annotation-two` will return results with either of those two annotation key-value-pairs.
 filterLabels | | Comma-separated list of annotations to match; e.g. `app:cost-analyzer, app:prometheus` will return results with either of those two label key-value-pairs.
 filterServices | | Comma-separated list of services to match; e.g. `frontend-one,frontend-two` will return results with either of those two services.
-format | | Set to `csv` to download an accumulated version of the allocation results in CSV format. By default, results will be in JSON format.
+format | | Set to `csv` to download an accumulated version of the allocation results in CSV format. Set to `pdf` to download an accumulated version of the allocation results in PDF format. By default, results will be in JSON format.
 shareIdle | false | If `true`, idle cost is allocated proportionally across all non-idle allocations, per-resource. That is, idle CPU cost is shared with each non-idle allocation's CPU cost, according to the percentage of the total CPU cost represented.
 splitIdle | false | If `true`, and `shareIdle == false` Idle Allocations are created on a per cluster or per node basis rather than being aggregated into a single "\_idle\_" allocation.
 idleByNode | false | If `true`, idle allocations are created on a per node basis. Which will result in different values when shared and more idle allocations when split.
@@ -307,7 +317,7 @@ $ curl http://localhost:9090/model/allocation \
   ]
 }
 ```
-Allocation data for today, aggregated by annotation. See [Enabling Annotation Emission](https://github.com/kubecost/docs/blob/main/annotations.md) to enable annotations.
+Allocation data for today, aggregated by annotation. See [Enabling Annotation Emission](/annotations.md) to enable annotations.
 ```
 $ curl http://localhost:9090/model/allocation \
   -d window=today \
@@ -439,7 +449,3 @@ Here, we provide theoretical error bounds for different resolution values given 
 | 10m | -1.00, 20.00 | -1.00, 2.00 |  0.83, 1.00 | 0.99, 1.00 | 1.00, 1.00 |
 | 30m | -1.00, 60.00 | -1.00, 6.00 |  0.50, 1.00 | 0.98, 1.00 | 1.00, 1.00 |
 | 60m | -1.00, 120.00 | -1.00, 12.00 | -1.00, 1.00 | 0.96, 1.00 | 0.99, 1.00 |
-
-
-
-<!--- {"article":"4407595916823","section":"4402829033367","permissiongroup":"1500001277122"} --->

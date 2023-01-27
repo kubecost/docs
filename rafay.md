@@ -5,7 +5,7 @@ Installing Kubecost with Rafay
 
 See [Rafay documentation](https://docs.rafay.co/) to learn more about the platform and how to use it.
 
-This document will walk you through installing Kubecost on a cluster that has been provisioned or imported using the Rafay controller. The steps below describe how to create and use a custom cluster blueprint via the [Rafay Web Console](https://console.rafay.dev/). The entire workflow can also be fully automated and embedded into an automation pipeline using the [RCTL CLI utility](https://docs.rafay.co/cli/overview/) or [Rafay REST APIs](https://docs.rafay.co/api/apis/).
+This document will walk you through installing Kubecost on a cluster that has been provisioned or imported using the Rafay controller. The steps below describe how to create and use a custom cluster blueprint via the [Rafay Web Console](https://console.rafay.dev/). The entire workflow can also be fully automated and embedded into an automation pipeline using the [RCTL CLI utility](https://docs.rafay.co/cli/overview/) or [Rafay REST APIs](https://docs.rafay.co/automation/api/apis/).
 
 ## Prerequisites
 
@@ -150,6 +150,4 @@ You can now access the Kubecost UI by visiting `http://localhost:9090` on your b
 
 You have now successfully created a custom cluster blueprint with the `kubecost` add-on and applied to a cluster. Use this blueprint on as many clusters as you require.
 
-You can find [this same guide](https://docs.rafay.co/recipes/cost/kubecost/) as well as the guides for how to create or import a cluster using the Rafay controller on the [Rafay documentation site](https://docs.kubecost.com/custom-prom.html#troubleshooting-issues).
-
-<!--- {"article":"4413635957271","section":"4402815636375","permissiongroup":"1500001277122"} --->
+You can find [this same guide](https://docs.rafay.co/recipes/cost/kubecost/) as well as the guides for how to create or import a cluster using the Rafay controller on the [Rafay documentation site](https://docs.rafay.co/clusters/overview/).

@@ -209,7 +209,7 @@ If you are using a port other than 9090 for your port-forward, try adding the ur
 
 Next, you can review messages in your browser's developer console. Any meaningful errors or warnings may indicate an unexpected response from the Kubecost server.
 
-Next, point your browser to the `/model` endpoint on your target URL. For example, visit `http://localhost:9090/model/` in the scenario shown above. You should expect to see a Prometheus config file at this endpoint. If your cluster address has changed, you can visit Settings in the Kubecost product to update or you can also [add a new](https://github.com/kubecost/docs/blob/main/multi-cluster.md) cluster.
+Next, point your browser to the `/model` endpoint on your target URL. For example, visit `http://localhost:9090/model/` in the scenario shown above. You should expect to see a Prometheus config file at this endpoint. If your cluster address has changed, you can visit Settings in the Kubecost product to update or you can also [add a new](/multi-cluster.md) cluster.
 
 If you are unable to successfully retrieve your config file from this /model endpoint, we recommend the following:
 
@@ -251,13 +251,35 @@ $ helm upgrade -i kubecost kubecost/cost-analyzer --namespace kubecost \
     --set prometheus.podSecurityPolicy.enabled=false \
     --set grafana.rbac.pspEnabled=false
 ```
+## Issue: failed to download "oci://public.ecr.aws/kubecost/cost-analyzer" at version "x.xx.x"
 
+This error appears when you install Kubecost using AWS optimized version on your Amazon EKS cluster. There are a few reasons that generate this error message:
+
+### A. The Kubecost version that you tried to install is not available yet
+
+- Resolution: check our ECR public gallery for the latest available version at https://gallery.ecr.aws/kubecost/cost-analyzer
+
+### B. Your docker auth token for Amazon ECR public gallery is expired
+
+- Resolution: Try to login to the Amazon ECR public gallery again to refresh the auth token with the following commands:
+
+```bash
+aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws
+export HELM_EXPERIMENTAL_OCI=1
+aws ecr-public get-login-password --region us-east-1 | helm registry login --username AWS --password-stdin public.ecr.aws
+```
 ## Question: How can I run on Minikube?
 
 1. Edit nginx configmap ```kubectl edit cm nginx-conf -n kubecost```
 2. Search for 9001 and 9003 (should find kubecost-cost-analyzer.kubecost:9001 & kubecost-cost-analyzer.kubecost:9003)
 3. Change both entries to localhost:9001 and localhost:9003
 4. Restart the kubecost-cost-analyzer pod in the kubecost namespace
+
+## Question: What is the difference between `.Values.kubecostToken` and `Values.kubecostProductConfigs.productKey`?
+
+`.Values.kubecostToken` is primarily used to manage trial access and is provided to you when visiting <http://kubecost.com/install>.
+
+`.Values.kubecostProductConfigs.productKey` is used to apply a Business/Enterprise license. More info in this [doc](/add-key.md).
 
 ## Error loading metadata
 
@@ -270,9 +292,3 @@ gcpprovider.go Error loading metadata cluster-name: Get "http://169.254.169.254/
 ```
 
 Have a question not answered on this page? Email us at [support@kubecost.com](support@kubecost.com) or [join the Kubecost Slack community](https://join.slack.com/t/kubecost/shared_invite/zt-1dz4a0bb4-InvSsHr9SQsT_D5PBle2rw)!
-
----
-
-
-
-<!--- {"article":"4407601830679","section":"4402815696919","permissiongroup":"1500001277122"} --->

@@ -12,9 +12,9 @@ A Github repository with sample files which follow the below instructions can be
 
 Follow [these steps](https://docs.aws.amazon.com/cur/latest/userguide/cur-create.html) to set up a CUR using the settings below.
 
-> - For time granularity, select **Daily**.
-> - Select the checkbox to enable **Resource IDs** in the report.
-> - Select the checkbox to enable **Athena integration** with the report.
+> * For time granularity, select _Daily_.
+> * Select the checkbox to enable _Resource IDs_ in the report.
+> * Select the checkbox to enable _Athena integration_ with the report.
 
 Remember the name of the bucket you create for CUR data. This will be used in Step 2.
 
@@ -46,22 +46,22 @@ Kubecost offers a set of CloudFormation templates to help set your IAM roles up.
 
 <summary>My Kubernetes clusters all run in the same account as the master payer account.</summary>
 
-* Download this file: [https://raw.githubusercontent.com/kubecost/cloudformation/master/kubecost-single-account-permissions.yaml](https://raw.githubusercontent.com/kubecost/cloudformation/master/kubecost-single-account-permissions.yaml)
-* Navigate to [https://console.aws.amazon.com/cloudformation](https://console.aws.amazon.com/cloudformation)
-* Click **Create New Stack** if you have never used AWS CloudFormation before. Otherwise, select **Create Stack**, and select **With new resource (standard)**
-* Under **Prepare template**, choose **Template is ready**.
-* Under **Template source**, choose **Upload a template file**.
-* Select **Choose file**.
-* Choose the downloaded .yaml template, and then choose **Open**.
-* Choose **Next**.
-* For **Stack name**, enter a name for your template
+* Download [this .yaml file](https://raw.githubusercontent.com/kubecost/cloudformation/master/kubecost-single-account-permissions.yaml).&#x20;
+* Navigate to the [AWS Console Cloud Formation page](https://console.aws.amazon.com/cloudformation).&#x20;
+* Select _Create New Stack_ if you have never used AWS CloudFormation before. Otherwise, select _Create Stack_, and select _With new resource (standard)._
+* Under _Prepare template_, choose _Template is ready_.
+* Under _Template source_, choose _Upload a template file_.
+* Select _Choose file_.
+* Choose the downloaded .yaml template, then select _Open_.
+* Select _Next_.
+* For _Stack name_, enter a name for your template.
 * Set the following parameters:
-  * AthenaCURBucket: The bucket where the CUR is sent from Step 1
-  * SpotDataFeedBucketName: Optional: The bucket where the spot data feed is sent from the “Setting up the Spot Data feed” step (see below)
-* Choose **Next**.
-* Choose **Next**
-* At the bottom of the page, select **I acknowledge that AWS CloudFormation might create IAM resources.**
-* Choose **Create Stack**
+  * `AthenaCURBucket`: The bucket where the CUR is sent from Step 1
+  * `SpotDataFeedBucketName`: (Optional) The bucket where the Spot data feed is sent from the “Setting up the Spot Data feed” step (see below)
+* Select _**** Next_.
+* Select _Next_.
+* At the bottom of the page, select _I acknowledge that AWS CloudFormation might create IAM resources._
+* Select _Create Stack._
 
 </details>
 
@@ -69,27 +69,27 @@ Kubecost offers a set of CloudFormation templates to help set your IAM roles up.
 
 <summary>My Kubernetes clusters run in different accounts from the master payer account</summary>
 
-* On each sub account running Kubecost
-  * Download this file: [https://raw.githubusercontent.com/kubecost/cloudformation/master/kubecost-sub-account-permissions.yaml](https://raw.githubusercontent.com/kubecost/cloudformation/master/kubecost-sub-account-permissions.yaml)
-    * Navigate to [https://console.aws.amazon.com/cloudformation](https://console.aws.amazon.com/cloudformation)
-    * Choose **Create New Stack** if you have never used AWS CloudFormation before. Otherwise, choose **Create Stack**.
-    * Under **Prepare template**, choose **Template is ready**.
-    * Under **Template source**, choose **Upload a template file**.
-    * Select **Choose file**.
-    * Choose the downloaded .yaml template, and then choose **Open**.
-    * Choose **Next**.
-    * For **Stack name**, enter a name for your template
+* On each sub account running Kubecost:
+  * Download [this .yaml file](https://raw.githubusercontent.com/kubecost/cloudformation/master/kubecost-sub-account-permissions.yaml).&#x20;
+    * Navigate to the [AWS Console Cloud Formation page](https://console.aws.amazon.com/cloudformation).&#x20;
+    * Select _Create New Stack_ if you have never used AWS CloudFormation before. Otherwise, select _Create Stack_.
+    * Under _Prepare template_, select _Template is ready_.
+    * Under _Template source_, choose _Upload a template file_.
+    * Select _Choose file_.
+    * Choose the downloaded .yaml template, and then select _Open_.
+    * Select _Next_.
+    * For _Stack name_, enter a name for your template.
     * Set the following parameters:
-    * MasterPayerAccountID: The account ID of the master payer account where the CUR has been created
-    * SpotDataFeedBucketName: The bucket where the spot data feed is sent from the “Setting up the Spot Data feed” step
-    * Choose **Next**.
-    * Choose **Next**
-    * At the bottom of the page, select **I acknowledge that AWS CloudFormation might create IAM resources.**
-    * Choose **Create Stack**
-  * On the master payer account
-    * Follow the same steps to create a CloudFormation stack as above, but with the following as your .yaml file instead: [https://raw.githubusercontent.com/kubecost/cloudformation/master/kubecost-masterpayer-account-permissions.yaml](https://raw.githubusercontent.com/kubecost/cloudformation/master/kubecost-masterpayer-account-permissions.yaml) , and with these parameters:
-    * AthenaCURBucket: The bucket where the CUR is set from Step 1
-    * KubecostClusterID: An account that Kubecost is running on that requires access to the Athena CUR
+    * `MasterPayerAccountI`: The account ID of the master payer account where the CUR has been created
+    * `SpotDataFeedBucketName`: The bucket where the Spot data feed is sent from the “Setting up the Spot Data feed” step
+    * Select _Next_.
+    * Select _Next_.
+    * At the bottom of the page, select _I acknowledge that AWS CloudFormation might create IAM resources._
+    * Select _Create Stack._
+  * On the master payer account:
+    * Follow the same steps to create a CloudFormation stack as above, but using [this .yaml file](https://raw.githubusercontent.com/kubecost/cloudformation/master/kubecost-masterpayer-account-permissions.yaml) instead, and with these parameters:
+      * `AthenaCURBucket`: The bucket where the CUR is set from Step 1
+      * `KubecostClusterID`: An account that Kubecost is running on that requires access to the Athena CUR.
 
 </details>
 
@@ -99,7 +99,7 @@ Kubecost offers a set of CloudFormation templates to help set your IAM roles up.
 
 <summary>My Kubernetes clusters run in the same account as the master payer account</summary>
 
-Attach both of the following policies to the same role or user. Use a user if you intend to integrate via ServiceKey, and a role if via IAM annotation (See more below under Via Pod Annotation by EKS). The SpotDataAccess policy statement is optional if the spot data feed is configured (see “Setting up the Spot Data feed” step below)
+Attach both of the following policies to the same role or user. Use a user if you intend to integrate via ServiceKey, and a role if via IAM annotation (see more below under Via Pod Annotation by EKS). The SpotDataAccess policy statement is optional if the Spot data feed is configured (see “Setting up the Spot Data feed” step below).
 
 ```
         {
@@ -189,7 +189,7 @@ Attach both of the following policies to the same role or user. Use a user if yo
 
 <summary>My Kubernetes clusters run in different accounts</summary>
 
-On each sub account running kubecost, attach both of the following policies to the same role or user. Use a user if you intend to integrate via ServiceKey, and a role if via IAM annotation (See more below under Via Pod Annotation by EKS). The SpotDataAccess policy statement is optional if the spot data feed is configured (see “Setting up the Spot Data feed” step below)
+On each sub account running Kubecost, attach both of the following policies to the same role or user. Use a user if you intend to integrate via ServiceKey, and a role if via IAM annotation (see more below under Via Pod Annotation by EKS). The SpotDataAccess policy statement is optional if the Spot data feed is configured (see “Setting up the Spot Data feed” step below).
 
 ```
 	{
@@ -224,7 +224,7 @@ On each sub account running kubecost, attach both of the following policies to t
 	}
 ```
 
-On the masterpayer account, attach this policy to a role (replace `${AthenaCURBucket}` variable):
+On the master payer account, attach this policy to a role (replace `${AthenaCURBucket}` variable):
 
 ```
 	{
@@ -311,19 +311,19 @@ Then add the following trust statement to the role the policy is attached to (re
 
 ### Step 4: Attaching IAM permissions to Kubecost
 
-> **Note:** If you are using the alternative [multi-cloud integration](https://docs.kubecost.com/install-and-configure/advanced-configuration/cloud-integration/multi-cloud) method, steps 4 and 5 are not required. The use of "Attach via Pod Annotation on EKS" authentication is optional.
+> **Note:** If you are using the alternative [multi-cloud integration](/multi-cloud.md) method, steps 4 and 5 are not required. The use of "Attach via Pod Annotation on EKS" authentication is optional.
 
 Now that the policies have been created, attach those policies to Kubecost. We support the following methods:
 
 <details>
 
-<summary>Attach via ServiceKey And Kubernetes Secret</summary>
+<summary>Attach via ServiceKey and Kubernetes Secret</summary>
 
-Navigate to [https://console.aws.amazon.com/iam](https://console.aws.amazon.com/iam) > Access Management > Users. Find the Kubecost User and select Security Credentials > Create Access Key. Note the Access Key ID and Secret Access Key. Set the below configs from either Option 1 or Option 2, but _not both_.
+Navigate to the [AWS IAM Console](https://console.aws.amazon.com/iam), then select _Access Management_ > _Users_. Find the Kubecost User and select _Security Credentials_ > _Create Access Key_. Note the Access Key ID and Secret Access Key. Set the below configs from either Option 1 or Option 2, but **not both.**
 
 **Option 1 (generate a secret from Helm values):**
 
-Note that this will leave your AWS keys unencrypted in your `values.yaml.` Set the following helm values:
+Note that this will leave your AWS keys unencrypted in your `values.yaml.` Set the following Helm values:
 
 ```yaml
 kubecostProductConfigs:
@@ -344,13 +344,13 @@ This may be the preferred method if your Helm values are in version control and 
 }
 ```
 
-* Create a kubernetes secret:
+* Create a Kubernetes secret:
 
 ```bash
 $ kubectl create secret generic <SECRET_NAME> --from-file=service-key.json --namespace <kubecost> 
 ```
 
-* Set the helm value:
+* Set the Helm value:
 
 ```yaml
 kubecostProductConfigs:
@@ -363,8 +363,8 @@ kubecostProductConfigs:
 
 <summary>Attach via Service Key on Kubecost frontend</summary>
 
-* Navigate to [https://console.aws.amazon.com/iam](https://console.aws.amazon.com/iam) Access Management > Users. Find the Kubecost User and select Security Credentials > Create Access Key. Note the Access key ID and Secret access key.
-* You can add the Access key ID and Secret access key on /settings.html > External Cloud Cost Configuration (AWS) > Update and setting Service key name to **Access key ID** and Service key secret to **Secret access key**
+* Navigate to the [AWS IAM Console](https://console.aws.amazon.com/iam), then select _Access Management_ > _Users_. Find the Kubecost User and select _Security Credentials_ > _Create Access Key_. Note the Access Key ID and Secret Access Key.
+* You can add the Access key ID and Secret access key on /settings.html > _External Cloud Cost Configuration (AWS)_ > _Update_ and setting _Service key name_ to _Access key ID_ and _Service key secret_ to _Secret access key._
 
 </details>
 
@@ -372,11 +372,11 @@ kubecostProductConfigs:
 
 <summary>Attach via Pod Annotation on EKS</summary>
 
-* First, create an OIDC provider for your cluster with these [steps](https://docs.aws.amazon.com/eks/latest/userguide/enable-iam-roles-for-service-accounts.html)
+* First, create an OIDC provider for your cluster with these [steps](https://docs.aws.amazon.com/eks/latest/userguide/enable-iam-roles-for-service-accounts.html).
 * Next, create a Role with these [steps](https://docs.aws.amazon.com/eks/latest/userguide/associate-service-account-role.html).
   * When asked to attach policies, you’ll want to attach the policies created above in Step 3
   * When asked for “namespace” and “serviceaccountname” use the namespace Kubecost is installed in and the name of the serviceaccount attached to the cost-analyzer pod. You can find that name by running `kubectl get pods kubecost-cost-analyzer-69689769b8-lf6nq -n <kubecost-namespace> -o yaml | grep serviceAccount`
-* Then, you need to add an annotation to that service account as described in these [docs](https://docs.aws.amazon.com/eks/latest/userguide/associate-service-account-role.html). This annotation can be added to the Kubecost service account by setting `.Values.serviceAccount.annotations` in the helm chart to `eks.amazonaws.com/role-arn: arn:aws:iam::<AWS_ACCOUNT_ID>:role/<IAM_ROLE_NAME>`
+* Then, you need to add an annotation to that service account as described in this [AWS](https://docs.aws.amazon.com/eks/latest/userguide/associate-service-account-role.html)[ doc](https://docs.aws.amazon.com/eks/latest/userguide/associate-service-account-role.html). This annotation can be added to the Kubecost service account by setting `.Values.serviceAccount.annotations` in the Helm chart to `eks.amazonaws.com/role-arn: arn:aws:iam::<AWS_ACCOUNT_ID>:role/<IAM_ROLE_NAME>`
 
 **Note**: If you see the error: `User: ***/assumed-role/<role-name>/### is not authorized to perform: sts:AssumeRole on resource...`, you can add the following to your policy permissions to allow the role the correct permissions:
 
@@ -394,7 +394,7 @@ kubecostProductConfigs:
 
 ### Step 5: Provide CUR config values to Kubecost
 
-These values can either be set from the kubecost frontend or via .Values.kubecostProductConfigs in the helm chart. Note that if you set any kubecostProductConfigs from the Helm chart, all changes via the frontend will be overridden on pod restart.
+These values can either be set from the Kubecost UI or via `.Values.kubecostProductConfigs` in the Helm chart. Note that if you set any `kubecostProductConfigs` from the Helm chart, all changes via the frontend will be overridden on pod restart.
 
 * `athenaProjectID` e.g. "530337586277" # The AWS AccountID where the Athena CUR is. Generally your master payer account.
 * `athenaBucketName` An S3 bucket to store Athena query results that you’ve created that Kubecost has permission to access
@@ -407,9 +407,9 @@ These values can either be set from the kubecost frontend or via .Values.kubecos
   * The table name is typically the database name with the leading `athenacurcfn_` removed (but is not available as a CloudFormation stack resource)
 * `athenaWorkgroup` The workgroup assigned to be used with Athena. If not specified, defaults to `Primary`
 
-> **Note**: Make sure use only underscore as a delimiter if needed for tables and views, using dash will not work even though you might be able to create it see [docs](https://docs.aws.amazon.com/athena/latest/ug/tables-databases-columns-names.html).
+> **Note**: Make sure to use only underscore as a delimiter if needed for tables and views. Using a hyphen/dash will not work even though you might be able to create it. See the [AWS docs](https://docs.aws.amazon.com/athena/latest/ug/tables-databases-columns-names.html) for more info.
 
-* If you are using a multi-account setup, you will also need to set `.Values.kubecostProductConfigs.masterPayerARN` to the Amazon Resource Number (ARN) of the role in the masterpayer account, e.g. `arn:aws:iam::530337586275:role/KubecostRole`.
+* If you are using a multi-account setup, you will also need to set `.Values.kubecostProductConfigs.masterPayerARN` to the Amazon Resource Number (ARN) of the role in the master payer account, e.g. `arn:aws:iam::530337586275:role/KubecostRole`.
 
 ## Troubleshooting
 
@@ -419,7 +419,7 @@ Once you've integrated with the CUR, you can visit /diagnostics.html in Kubecost
 
 You can check pod logs for authentication errors by running: `kubectl get pods -n <namespace>` `kubectl logs <kubecost-pod-name> -n <namespace> -c cost-model`
 
-If you do not see any authentication errors, log in to your AWS console and visit the Athena dashboard. You should be able to find the CUR. Ensure that the database with the CUR matches the athenaTable entered in step 4-- it likely has a prefix with athenacurfn\_ :
+If you do not see any authentication errors, log in to your AWS console and visit the Athena dashboard. You should be able to find the CUR. Ensure that the database with the CUR matches the athenaTable entered in Step 4 - it likely has a prefix with `athenacurfn_` :
 
 ![Screen Shot 2020-12-06 at 9 43 31 PM](https://user-images.githubusercontent.com/453512/101319459-e6f23100-3816-11eb-8d96-1ab977cb50bd.png)
 
@@ -437,28 +437,30 @@ You can also check query history to see if any queries are failing:
     QueryAthenaPaginated: query execution error: no query results available for query <Athena Query ID>
     ```
 
-    And / or the following error will be found in the Kubecost `cost-model` container logs.
+    And/or the following error will be found in the Kubecost `cost-model` container logs.
 
     ```
     Permission denied on S3 path: s3://cur-report/cur-report/cur-report/year=2022/month=8
 
     This query ran against the "athenacurcfn_test" database, unless qualified by the query. Please post the error message on our forum  or contact customer support  with Query Id: <Athena Query ID>
     ```
-*   **Resolution:** This error is typically caused by the incorrect (Athena results) s3 bucket being specified in the cloudformation template of step 3 from above. To resolve the issue ensure the bucket used for storing the AWS CUR report (step 1) is specified in the `S3ReadAccessToAwsBillingData` SID of the IAM policy (default: kubecost-athena-access) attached to the user or role used by Kubecost (Default: KubecostUser / KubecostRole). See the following example. **NOTE:** This error can also occur when master payer cross account permissions are incorrect, that solution may differ.
+* **Resolution:** This error is typically caused by the incorrect (Athena results) s3 bucket being specified in the cloudformation template of step 3 from above. To resolve the issue ensure the bucket used for storing the AWS CUR report (step 1) is specified in the `S3ReadAccessToAwsBillingData` SID of the IAM policy (default: kubecost-athena-access) attached to the user or role used by Kubecost (Default: KubecostUser / KubecostRole). See the following example.&#x20;
 
-    ```
-            {
-            "Action": [
-                "s3:Get*",
-                "s3:List*"
-            ],
-            "Resource": [
-                "arn:aws:s3:::<AWS CUR BUCKET>*"
-            ],
-            "Effect": "Allow",
-            "Sid": "S3ReadAccessToAwsBillingData"
-        }
-    ```
+> **Note:** This error can also occur when master payer cross account permissions are incorrect, that solution may differ.
+
+```
+        {
+        "Action": [
+            "s3:Get*",
+            "s3:List*"
+        ],
+        "Resource": [
+            "arn:aws:s3:::<AWS CUR BUCKET>*"
+        ],
+        "Effect": "Allow",
+        "Sid": "S3ReadAccessToAwsBillingData"
+    }
+```
 
 #### Query not supported
 
@@ -479,11 +481,11 @@ QueryAthenaPaginated: start query error: operation error Athena: StartQueryExecu
 ```
 
 * **Resolution:** Previously, if you ran a query without specifying a value for Query result location, and the query result location setting was not overridden by a workgroup, Athena created a default location for you. Now, before you can run an Athena query in a region in which your account hasn't used Athena previously, you must specify a query result location, or use a workgroup that overrides the query result location setting. While Athena no longer creates a default query results location for you, previously created default aws-athena-query-results-MyAcctID-MyRegion locations remain valid and you can continue to use them. https://docs.aws.amazon.com/athena/latest/ug/querying.html#query-results-specify-location The bucket should be in the format of: `aws-athena-query-results-MyAcctID-MyRegion` It may also be required to remove and reinstall Kubecost. If doing this please remeber to backup ETL files prior or contact support for additional assistance.
-	
+
 #### Missing Athena Column
-	
+
 * **Symptom:** An error is shown under "Pricing Sources" on the "Diagnostics" page or in the Kubecost `cost-model` container logs.
-	
+
 ```
 QueryAthenaPaginated: query execution error: no query results available for query <Athena Query ID>
  
@@ -494,8 +496,7 @@ SYNTAX_ERROR: line 4:3: Column 'line_item_resource_id' cannot be resolved
 This query ran against the "<DB Name>" database, unless qualified by the query
 ```
 
-* **Resolution:** Verify in the AWS "Cost and Ussage" report UI that the **Resource IDs** are enabled as "Report content" for the CUR report created in Step 1. If the **Resource IDs** are not enabled you will need to re-create the report, this will require redoing Steps 1
- and 2 from this page.
+* **Resolution:** Verify in the AWS "Cost and Ussage" report UI that the **Resource IDs** are enabled as "Report content" for the CUR report created in Step 1. If the **Resource IDs** are not enabled you will need to re-create the report, this will require redoing Steps 1 and 2 from this page.
 
 ## Summary and pricing
 

@@ -10,13 +10,13 @@ Kubecost can run on clusters with thousands of nodes when resource consumption i
 * Cloud Assets for all accounts can be pulled in on just primaries by pointing Kubecost to one or more management accounts. You can disable Cloud Assets on secondaries by setting the following Helm value:
   * `--set kubecostModel.etlCloudAsset=false`
 * Secondaries can be configured strictly as metric emitters to save memory.
-* Learn more about how to best configure secondaries [here](https://guide.kubecost.com/hc/en-us/articles/4423256582551-Kubecost-Secondary-Clusters).
+* Learn more about how to best configure secondaries [here](/secondary-clusters.md).
 
 ## Exclude provider IDs in Cloud Assets
 
 * Kubecost is capable of tracking each individual cloud billing line item; however on certain accounts this can be quite large.
 * (AWS Only, GCP/Azure coming soon) If this is excluded, we don't cache granular data; instead we cache aggregate data and make an ad-hoc query to the cost and usage report to get granular data resulting in slow load times but less memory consumption.
-* Learn more about how to configure this [here](https://guide.kubecost.com/hc/en-us/articles/4412369153687-Cloud-Integrations#cloud-assets).
+* Learn more about how to configure this [here](/cloud-integration.md#cloud-assets).
 
 ## Lower query concurrency
 
@@ -58,6 +58,3 @@ Kubecost can run on clusters with thousands of nodes when resource consumption i
 * This can be tuned with the Helm value:
   * `--set kubecostModel.softMemoryLimit=<Units><B, KiB, MiB, GiB>`
 * More info on this environment variable can be found [here](https://tip.golang.org/doc/gc-guide).
-
-
-<!--- {"article":"6446286863383","section":"1500002777682","permissiongroup":"1500001277122"} --->

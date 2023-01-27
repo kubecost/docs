@@ -6,8 +6,8 @@ For more details on these integrations, continue reading below. For guides on ho
 
 * [Multi-Cloud](multi-cloud.md)
 * [AWS](aws-cloud-integrations.md)
-* [GCP](https://docs.kubecost.com/install-and-configure/install/cloud-integration/gcp-out-of-cluster)
-* [Azure](https://docs.kubecost.com/install-and-configure/install/cloud-integration/azure-out-of-cluster)
+* [GCP](gcp-out-of-cluster.md)
+* [Azure](azure-out-of-cluster.md)
 
 > **Note**: Select _Amortized cost_ while setting up the cost-management-billing in Azure. GCP users should create [detailed billing export](https://cloud.google.com/billing/docs/how-to/export-data-bigquery-tables#detailed-usage-cost-data-schema) to gain access to all of Kubecost cloud integration features including [reconciliation](cloud-integration.md#reconciliation)
 
