@@ -11,14 +11,13 @@ There are three different approaches for passing custom Helm config values into 
 2. **Pass exact parameters via custom `values.yaml` file.** Similar to option #1, you can create a separate values file that contains only the parameters needed.
 
     ```bash
-    $ helm install kubecost/cost-analyzer --name kubecost --values values.yaml
-    ```
-
-    ```yaml
+    $ cat values.yaml
     kubecostProductConfigs:
       productKey: 
         key: "123"
         enabled: true
+    
+    $ helm install kubecost/cost-analyzer --name kubecost --values values.yaml
     ```
 
 3. **Use** [**values.yaml**](https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/values.yaml) **from the Kubecost Helm Chart repository.**
