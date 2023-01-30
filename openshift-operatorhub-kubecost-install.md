@@ -63,77 +63,202 @@ kubectl apply -f example-crd.yaml -n kubecost
 apiVersion: charts.kubecost.com/v1alpha1
 kind: CostAnalyzer
 metadata:
-  name: kubecost
+  name: cost-analyzer-ocp-sample
 spec:
-  # Default values copied from <project_dir>/helm-charts/cost-analyzer/values.yaml
-  openshiftDeployment: true
   affinity: {}
-  awsstore:
-    createServiceAccount: false
-    useAwsStore: false
-  clusterController:
-    enabled: false
-    image: gcr.io/kubecost1/cluster-controller:v0.1.0
-    imagePullPolicy: Always
-  extraVolumeMounts: []
-  extraVolumes: []
+  # Security Context settings for Redhat OpenShift cluster:
   kubecostProductConfigs:
-    clusterName: your-ocp-cluser
+    clusterName: YOUR_CLUSTER_NAME
+    # cloudIntegrationSecret: cloud-integration
+  kubecostDeployment:
+    podSecurityContext:
+    # Note: Un-comment these securityContext configs for OCP cluster 4.11+
+      # seccompProfile:
+      #   type: RuntimeDefault
+      runAsNonRoot: true
+  kubecostModel:
+    etlCloudAsset: true # set to true to enable kubecost to include out-of-cluster cloud resources  (uses more memory)
+    containerStatsEnabled: true
+    containerSecurityContext:
+      allowPrivilegeEscalation: false
+      readOnlyRootFilesystem: true
+      runAsNonRoot: true
+  # Note: Un-comment these securityContext configs for OCP cluster 4.11+
+      # seccompProfile:
+      #   type: RuntimeDefault
+      capabilities:
+        drop:
+          - ALL
+  kubecostFrontend:
+    containerSecurityContext:
+      allowPrivilegeEscalation: false
+      readOnlyRootFilesystem: true
+      runAsNonRoot: true
+  # Note: Un-comment these securityContext configs for OCP cluster 4.11+
+      # seccompProfile:
+      #   type: RuntimeDefault
+      capabilities:
+        drop:
+          - ALL
+  kubecostNetworkCosts:
+    securityContext: {}
+    containerSecurityContext: {}
+
   prometheus:
     nodeExporter:
       enabled: false
-    serviceAccounts:
-      nodeExporter:
-        create: false
+    kubeStateMetrics:
+      enabled: false
     kube-state-metrics:
       disabled: true
+    podSecurityPolicy:
+      enabled: false
     server:
       global:
         external_labels:
-          cluster_id: your-ocp-cluser
-  global:
-    additionalLabels: {}
-    assetReports:
-      enabled: false
-      reports:
-      - accumulate: false
-        aggregateBy: type
-        filters:
-        - property: cluster
-          value: your-ocp-cluser
-        title: Example Asset Report 0
-        window: today
+          cluster_id: YOUR_CLUSTER_NAME 
+      containerSecurityContext:
+        securityContext:
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: true
+          runAsNonRoot: true
+  # Note: Un-comment these securityContext configs for OCP cluster 4.11+
+          # seccompProfile:
+          #   type: RuntimeDefault
+          capabilities:
+            drop:
+                - ALL
+    sidecarContainers:
+      containerSecurityContext:
+        securityContext:
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: true
+          runAsNonRoot: true
+  # Note: Un-comment these securityContext configs for OCP cluster 4.11+
+          # seccompProfile:
+          #   type: RuntimeDefault
+          capabilities:
+            drop:
+              - ALL
+    configmapReload:
+      containerSecurityContext:
+        securityContext:
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: true
+          runAsNonRoot: true
+  # Note: Un-comment these securityContext configs for OCP cluster 4.11+
+          # seccompProfile:
+          #   type: RuntimeDefault
+          capabilities:
+            drop:
+              - ALL
+  grafana:
+    rbac:
+      pspEnabled: false
     grafana:
-      domainName: cost-analyzer-grafana.default.svc
+      containerSecurityContext:
+        securityContext:
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: true
+          runAsNonRoot: true
+  # Note: Un-comment these securityContext configs for OCP cluster 4.11+
+          # seccompProfile:
+          #   type: RuntimeDefault
+          capabilities:
+            drop:
+              - ALL
+    initContainers:
+      containerSecurityContext:
+        securityContext:
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: true
+          runAsNonRoot: true
+  # Note: Un-comment these securityContext configs for OCP cluster 4.11+
+          # seccompProfile:
+          #   type: RuntimeDefault
+          capabilities:
+            drop:
+              - ALL
+    sidecar:
+      containerSecurityContext:
+        securityContext:
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: true
+          runAsNonRoot: true
+  # Note: Un-comment these securityContext configs for OCP cluster 4.11+
+          # seccompProfile:
+          #   type: RuntimeDefault
+          capabilities:
+            drop:
+              - ALL
+  thanos:
+    thanosstore:
+      containerSecurityContext:
+        securityContext:
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: true
+          runAsNonRoot: true
+  # Note: Un-comment these securityContext configs for OCP cluster 4.11+
+          # seccompProfile:
+          #   type: RuntimeDefault
+          capabilities:
+            drop:
+              - ALL
+    thanosqueryfrontend:
+      containerSecurityContext:
+        securityContext:
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: true
+          runAsNonRoot: true
+  # Note: Un-comment these securityContext configs for OCP cluster 4.11+
+          # seccompProfile:
+          #   type: RuntimeDefault
+          capabilities:
+            drop:
+              - ALL
+    thanosquery:
+      containerSecurityContext:
+        securityContext:
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: true
+          runAsNonRoot: true
+  # Note: Un-comment these securityContext configs for OCP cluster 4.11+
+          # seccompProfile:
+          #   type: RuntimeDefault
+          capabilities:
+            drop:
+              - ALL
+    thanoscompact:
+      containerSecurityContext:
+        securityContext:
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: true
+          runAsNonRoot: true
+  # Note: Un-comment these securityContext configs for OCP cluster 4.11+
+          # seccompProfile:
+          #   type: RuntimeDefault
+          capabilities:
+            drop:
+              - ALL
+  # Disable Pod Security Policy (PSP)
+  # Kubecost PSP
+  podSecurityPolicy:
+      enabled: false
+  # Network Costs PSP
+  networkCosts:
+    enabled: false # if enabling network costs, also set the given cloud provider to true
+    config:
+      services:
+        amazon-web-services: false
+        google-cloud-services: false
+        azure-cloud-services: false
+    podSecurityPolicy:
+      enabled: false
+  # optional
+  global:
+    grafana:
       enabled: false
       proxy: false
-      scheme: http
-    notifications:
-      alertmanager:
-        enabled: false
-        fqdn: http://cost-analyzer-prometheus-server.default.svc
-    podAnnotations: {}
-    prometheus:
-      enabled: true
-      fqdn: http://cost-analyzer-prometheus-server.default.svc
-    savedReports:
-      enabled: false
-      reports:
-      - accumulate: false
-        aggregateBy: namespace
-        filters:
-        - property: cluster
-          value: cluster-one,cluster*
-        - property: namespace
-          value: kubecost
-        idle: separate
-        title: Example Saved Report 0
-        window: today
-      - accumulate: false
-        aggregateBy: controllerKind
-        filters:
-        - property: label
-          value: app:cost*,environment:kube*
  ```
 
 </details>
