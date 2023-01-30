@@ -25,6 +25,7 @@ The alert settings, under _global.notifications.alertConfigs_ in _cost-analyzer/
 
 * `frontendUrl` optional, your cost analyzer front end URL used for linkbacks in alert bodies
 * `globalSlackWebhookUrl` optional, a global Slack webhook used for alerts, enabled by default if provided
+* `globalMsTeamWebhookUrl` optional, a global Microsoft Teams webhook used for alerts, enabled by default if provided
 * `globalAlertEmails` a global list of emails for alerts
 
 Example Helm _values.yaml_:
@@ -35,6 +36,7 @@ notifications:
     alertConfigs:
       frontendUrl: http://localhost:9090 
       globalSlackWebhookUrl: https://hooks.slack.com/services/T00000000/B00000000/XXXXXXXXXXXXXXXXXXXXXXXX 
+      globalMsTeamsWebhookUrl: https://m365x682156.webhook.office.com
       globalAlertEmails:
         - recipient@example.com
         - additionalRecipient@example.com
@@ -46,7 +48,7 @@ notifications:
 
 ## Configuring each alert type
 
-In addition to `globalSlackWebhookUrl` and `globalAlertEmails` fields, every alert allows optional individual `ownerContact` (a list of email addresses) and `slackWebhookUrl` (if different from `globalSlackWebhookUrl`) fields. Alerts will default to the global Slack and email settings if these optional fields are not supplied.
+In addition to all `global...` fields, every alert allows optional individual `ownerContact` (a list of email addresses), `slackWebhookUrl` (if different from `globalSlackWebhookUrl`), and `msTeamsWebhookUrl` (if different from `globalMsTeamsWebhookUrl`) fields. Alerts will default to the global settings if these optional fields are not supplied.
 
 ### Type: Allocation Budget
 
@@ -292,7 +294,7 @@ Cluster health alerts occur when the cluster health score changes by a specific 
 * Out of Memory Pods
 * Failed Jobs
 
-This alert only uses Slack and Microsoft Teams, so it requires the `globalSlackWebhookUrl` field, or setting the `slackWebhookUrl` field for the alert.
+This alert only uses Slack and Microsoft Teams, so it requires the `global...WebhookUrl` field, or setting the `...WebhookUrl` field for either platform for the alert.
 
 Example Helm _values.yaml_:
 
@@ -328,7 +330,7 @@ _Optional parameters:_
 
 * `diagnostics` -- object containing specific diagnostic checks to run (default is `true` for all). See configuration example below for options:
 
-This alert only uses Slack and Microsoft Teams, so it requires the `globalSlackWebhookUrl` field, or setting the `slackWebhookUrl` field for the alert.
+This alert only uses Slack and Microsoft Teams, so it requires the `global...WebhookUrl` field, or setting the `...WebhookUrl` field for either platform for the alert.
 
 Example Helm _values.yaml_:
 
@@ -359,9 +361,7 @@ Cluster Health Alerts and Kubecost Health Alerts work differently from other ale
 
 ### Global recipients
 
-Global recipients specify a default fallback recipient for each type of message. If an alert does not define any email recipients, its messages will be sent to any emails specified in the Global Recipients email list. Likewise, if an alert does not define a webhook, its messages will be sent to the global webhook, it one is present. Alerts that do define recipients will ignore the global setting for recipients of that type.
-
-<figure><img src=".gitbook/assets/alertglobalrecip.png" alt=""><figcaption><p>Global Recipients</p></figcaption></figure>
+Global recipients specify a default fallback recipient for each type of message. If an alert does not define any email recipients, its messages will be sent to any emails specified in the Global Recipients email list. Likewise, if an alert does not define a webhook, its messages will be sent to the global webhook, if one is present. Alerts that do define recipients will ignore the global setting for recipients of that type.
 
 ### Budget, efficiency, spend change, and recurring update alerts
 
