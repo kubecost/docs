@@ -67,19 +67,17 @@ Kubecost itself is resilient to duplicate metrics, but other services or queries
       emitKsmV1Metrics: false
     ```
 
-  - The metrics that will still be emitted include:
-    - Node metrics ([code ref](https://github.com/kubecost/cost-model/blob/0a0793ec040013fe44c058ff37f032449a2f1191/pkg/metrics/nodemetrics.go#L30-L57))
+  - You will need to add this annotation in your KSM v2 config:
+
+    ```yaml
+    --metric-labels-allowlist=pods=[*],nodes=[*],namespaces=[*],persistentvolumes=[*],persistentvolumeclaims=[*]
+    ```
+
+  - The following (node) metrics will still be emitted:
       - `kube_node_status_capacity`
       - `kube_node_status_capacity_memory_bytes`
       - `kube_node_status_capacity_cpu_cores`
       - `kube_node_status_allocatable`
       - `kube_node_status_allocatable_memory_bytes`
       - `kube_node_status_allocatable_cpu_cores`
-      - `kube_node_labels`
-      - `kube_node_status_condition`
-    - Namespace metrics ([code ref](https://github.com/kubecost/cost-model/blob/0a0793ec040013fe44c058ff37f032449a2f1191/pkg/metrics/namespacemetrics.go#L121-L129))
-      - `kube_namespace_labels`
-    - Pod metrics ([code ref](https://github.com/kubecost/cost-model/blob/0a0793ec040013fe44c058ff37f032449a2f1191/pkg/metrics/podlabelmetrics.go#L51-L60))
-      - `kube_pod_labels`
-      - `kube_pod_owner`
   - If you are already running KSM v2, and have set the helm value to only emit KSM v1 metrics, you can also disable the Kubecost based KSM deployment by setting the helm value `prometheus.kube-state-metrics.disabled` to `true`.
