@@ -157,7 +157,7 @@ Example output:
 The Kubecost add-on should be available in few minutes. Run the following command to enable port-forwarding to expose the Kubecost dashboard:
 
 ```bash
-kubectl port-forward --namespace kubecost deployment/cost-analyzer 9090
+kubectl port-forward --namespace kubecost deployment/kubecost-cost-analyzer 9090
 ```
 
 ### Disable Kubecost add-on
