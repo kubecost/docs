@@ -8,7 +8,7 @@ There are a number of reasons why you may want to backup this ETL data:
 * If you would like to reduce the amount of data stored in Prometheus (15 day retention window by default) or Thanos
 * To view data in the Kubecost frontend beyond the configured `.Values.kubecostModel.etlDailyStoreDurationDays`
 
-> **Note**: Beginning in v1.101 this feature will be enabled by default if you have Thanos enabled. To opt out, set `.Values.kubecostModel.etlBucketConfigSecret=""`
+> **Note**: Beginning in v1.100 this feature will be enabled by default if you have Thanos enabled. To opt out, set `.Values.kubecostModel.etlBucketConfigSecret=""`
 
 ## Option 1: Automated durable ETL backups and monitoring
 
