@@ -12,7 +12,7 @@ http://<your-kubecost-endpoint>/model/debug/pprof/heap
 
 ## Profile
 
-To capture a application profile, visit this URL:
+To capture an application profile, visit this URL:
 
 ```
 http://<your-kubecost-endpoint>/model/debug/pprof/profile?seconds=30
