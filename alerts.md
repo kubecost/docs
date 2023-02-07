@@ -2,18 +2,18 @@
 
 ## Summary
 
-Kubecost alerts allow teams to receive updates on real-time Kubernetes spend. They are configurable via the Kubecost UI or Helm values. This resource gives an overview of how to configure Kubecost email and Slack alerts using [Kubecost Helm chart values](https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/values.yaml). Alerts are either created to monitor specific data sets and trends, or they must be toggled on or off. The following alert types are supported:
+Kubecost alerts allow teams to receive updates on real-time Kubernetes spend. They are configurable via the Kubecost UI or Helm values. This resource gives an overview of how to configure Kubecost email, Slack, and Microsoft Teams using [Kubecost Helm chart values](https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/values.yaml). Alerts are either created to monitor specific data sets and trends, or they must be toggled on or off. The following alert types are supported:
 
-1. [Allocation Budget](/alerts.md#type-allocation-budget): Sends an email and/or Slack alert when spending crosses a defined threshold
+1. [Allocation Budget](/alerts.md#type-allocation-budget): Sends an alert when spending crosses a defined threshold
 2. \[Beta] [Allocation Efficiency](/alerts.md#type-allocation-efficiency): Detects when a Kubernetes tenant is operating below a target cost-efficiency threshold
-3. [Allocation Recurring Update](/alerts.md#type-allocation-recurring-update): Sends an email and/or Slack alert with cluster spending across all or a subset of kubernetes resources.
-4. [Allocation Spend Change](/alerts.md#type-allocation-spend-change): Sends an email and/or Slack alert reporting unexpected spend increases relative to moving averages
-5. [Asset Budget](/alerts.md#type-asset-budget): sends an email and/or Slack alert when spend for a particular set of assets crosses a defined threshold.
-6. [Cloud Report](/alerts.md#type-cloud-report): sends an email and/or Slack alert with asset spend across all or a subset of cloud resources.
-7. [Monitor Cluster Health](/alerts.md#type-monitor-cluster-health): used to determine if the cluster's health score changes by a specific threshold. Can only be toggled on/off.
-8. [Monitor Kubecost Health](/alerts.md#type-monitor-kubecost-health): used for production monitoring for the health of Kubecost itself. Can only be toggled on/off.
+3. [Allocation Recurring Update](/alerts.md#type-allocation-recurring-update): Sends an alert with cluster spending across all or a subset of kubernetes resources.
+4. [Allocation Spend Change](/alerts.md#type-allocation-spend-change): Sends an alert reporting unexpected spend increases relative to moving averages
+5. [Asset Budget](/alerts.md#type-asset-budget): Sends an alert when spend for a particular set of assets crosses a defined threshold.
+6. [Cloud Report](/alerts.md#type-cloud-report): Sends an alert with asset spend across all or a subset of cloud resources.
+7. [Monitor Cluster Health](/alerts.md#type-monitor-cluster-health): Used to determine if the cluster's health score changes by a specific threshold. Can only be toggled on/off.
+8. [Monitor Kubecost Health](/alerts.md#type-monitor-kubecost-health): Used for production monitoring for the health of Kubecost itself. Can only be toggled on/off.
 
-Have questions or issues? View our [troubleshooting guide](/alerts.md#troubleshooting).
+Have questions or issues? View our [troubleshooting section](/alerts.md#troubleshooting) below.
 
 ## Configuring alerts in Helm
 
@@ -25,6 +25,7 @@ The alert settings, under _global.notifications.alertConfigs_ in _cost-analyzer/
 
 * `frontendUrl` optional, your cost analyzer front end URL used for linkbacks in alert bodies
 * `globalSlackWebhookUrl` optional, a global Slack webhook used for alerts, enabled by default if provided
+* `globalMsTeamWebhookUrl` optional, a global Microsoft Teams webhook used for alerts, enabled by default if provided
 * `globalAlertEmails` a global list of emails for alerts
 
 Example Helm _values.yaml_:
@@ -35,6 +36,7 @@ notifications:
     alertConfigs:
       frontendUrl: http://localhost:9090 
       globalSlackWebhookUrl: https://hooks.slack.com/services/T00000000/B00000000/XXXXXXXXXXXXXXXXXXXXXXXX 
+      globalMsTeamsWebhookUrl: https://m365x682156.webhook.office.com
       globalAlertEmails:
         - recipient@example.com
         - additionalRecipient@example.com
@@ -46,7 +48,7 @@ notifications:
 
 ## Configuring each alert type
 
-In addition to `globalSlackWebhookUrl` and `globalAlertEmails` fields, every alert allows optional individual `ownerContact` (a list of email addresses) and `slackWebhookUrl` (if different from `globalSlackWebhookUrl`) fields. Alerts will default to the global Slack and email settings if these optional fields are not supplied.
+In addition to all `global...` fields, every alert allows optional individual `ownerContact` (a list of email addresses), `slackWebhookUrl` (if different from `globalSlackWebhookUrl`), and `msTeamsWebhookUrl` (if different from `globalMsTeamsWebhookUrl`) fields. Alerts will default to the global settings if these optional fields are not supplied.
 
 ### Type: Allocation Budget
 
@@ -108,7 +110,7 @@ The example below sends a Slack alert when any namespace spending is running bel
 
 ### Type: Allocation Recurring Update
 
-Sends a recurring email and/or Slack alert with a summary report of cost and efficiency metrics.
+Sends a recurring alert with a summary report of cost and efficiency metrics.
 
 _Required parameters:_
 
@@ -236,7 +238,7 @@ Example Helm _values.yaml_:
 
 ### Type: Cloud Report
 
-Sends a recurring email and/or Slack alert with a cloud and/or Kubernetes assets summary report.
+Sends a recurring alert with a cloud and/or Kubernetes assets summary report.
 
 _Required parameters:_
 
@@ -292,7 +294,7 @@ Cluster health alerts occur when the cluster health score changes by a specific 
 * Out of Memory Pods
 * Failed Jobs
 
-This alert only uses Slack (email coming soon), so it requires the `globalSlackWebhookUrl` field, or setting the `slackWebhookUrl` field for the alert.
+This alert only uses Slack and Microsoft Teams, so it requires the `global...WebhookUrl` field, or setting the `...WebhookUrl` field for either platform for the alert.
 
 Example Helm _values.yaml_:
 
@@ -328,7 +330,7 @@ _Optional parameters:_
 
 * `diagnostics` -- object containing specific diagnostic checks to run (default is `true` for all). See configuration example below for options:
 
-This alert only uses Slack (email coming soon), so it requires the `globalSlackWebhookUrl` field, or setting the `slackWebhookUrl` field for the alert.
+This alert only uses Slack and Microsoft Teams, so it requires the `global...WebhookUrl` field, or setting the `...WebhookUrl` field for either platform for the alert.
 
 Example Helm _values.yaml_:
 
@@ -359,9 +361,7 @@ Cluster Health Alerts and Kubecost Health Alerts work differently from other ale
 
 ### Global recipients
 
-Global recipients specify a default fallback recipient for each type of message. If an alert does not define any email recipients, its messages will be sent to any emails specified in the Global Recipients email list. Likewise, if an alert does not define a Slack webhook, its messages will be sent to the Global Slack webhook, it one is present. Alerts that do define recipients will ignore the global setting for recipients of that type.
-
-<figure><img src=".gitbook/assets/alertglobalrecip.png" alt=""><figcaption><p>Global Recipients</p></figcaption></figure>
+Global recipients specify a default fallback recipient for each type of message. If an alert does not define any email recipients, its messages will be sent to any emails specified in the Global Recipients email list. Likewise, if an alert does not define a webhook, its messages will be sent to the global webhook, if one is present. Alerts that do define recipients will ignore the global setting for recipients of that type.
 
 ### Budget, efficiency, spend change, and recurring update alerts
 
@@ -373,7 +373,7 @@ The _+ Create Alert_ button opens a window where you can insert details about a 
 
 Alerts can also be edited, removed, and tested from the table. Editing opens a dialog similar to the alert creation dialog, for editing the chosen alert.
 
-When creating an alert, you can have these alerts sent to Slack or via email. You can customize the subject field for an email, and attach multiple recipients. Alerts sent via email will contain a PDF of your report which shows the Kubecost UI for your Allocation/Asset page(s). This can be helpful for distributing visual information to those without immediate access to Kubecost.
+When creating an alert, you can have these alerts sent through email, Slack, or Microsoft Teams. You can customize the subject field for an email, and attach multiple recipients. Alerts sent via email will contain a PDF of your report which shows the Kubecost UI for your Allocation/Asset page(s). This can be helpful for distributing visual information to those without immediate access to Kubecost.
 
 ### Testing alerts
 
@@ -443,7 +443,7 @@ If using Helm:
 
 Confirm that Kubecost product has received configuration data:
 
-* Go to `<your-kubecost-url>/alerts.html` in the Kubecost UI to view configured email and Slack settings as well as any of the alerts configured from Helm.
+* Go to `<your-kubecost-url>/alerts.html` in the Kubecost UI to view configured alert settings as well as any of the alerts configured from Helm.
   * Note that alerts setup via the UI will be overwritten by Helm `values.yaml` if the pod restarts.
 
 Additionally, confirm that the alerts scheduler has properly parsed and scheduled a next run for each alert by visiting `<your-kubecost-url>/model/alerts/status` to view individual alert parameters as well as next and last scheduled run times for individual alerts.
