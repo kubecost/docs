@@ -2,7 +2,7 @@
 
 ## Helm install Kubecost
 
-Kubecost installation is exactly same as other cloud providers with Helm 3:
+Kubecost installation is exactly same as other cloud providers with Helm v3.1+:
 
 ` helm install kubecost/cost-analyzer -n kubecost -f values.yaml`
 
