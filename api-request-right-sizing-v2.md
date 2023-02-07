@@ -2,50 +2,22 @@
 
 {% swagger method="get" path="savings/requestSizingV2" baseUrl="http://<kubecost-address>/model/" summary="Container Request Right Sizing Recommendation API (V2)" %}
 {% swagger-description %}
-The container request right sizing recommendation API provides recommendations for 
+The container request right sizing recommendation API provides recommendations for
 
 [container resource requests](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/)
 
- based on configurable parameters and estimates the savings from implementing those recommendations on a per-container, per-controller level. Of course, if the cluster-level resources stay static then you will likely not enjoy real savings from applying these recommendations until you reduce your cluster resources. Instead, your idle allocation will increase.
+based on configurable parameters and estimates the savings from implementing those recommendations on a per-container, per-controller level. Of course, if the cluster-level resources stay static then you will likely not enjoy real savings from applying these recommendations until you reduce your cluster resources. Instead, your idle allocation will increase.
 {% endswagger-description %}
 
-{% swagger-parameter in="path" name="algorithmCPU" type="string" %}
-The algorithm to be used to calculate CPU recommendations based on historical CPU usage data. Options are 
+{% swagger-parameter in="path" name="algorithmCPU" type="string" required="false" %}
+The algorithm to be used to calculate CPU recommendations based on historical CPU usage data. Options are `max` and `quantile`. Max recommendations are based on the maximum-observed usage in `window`. Quantile recommendations are based on a quantile of observed usage in `window` (requires the `qCPU` parameter to set the desired quantile). Defaults to `max`. To use the `quantile` algorithm, the
 
-`max`
+[ContainerStats Pipeline](containerstats-pipeline.md)
 
- and 
-
-`quantile`
-
-. Max recommendations are based on the maximum-observed usage in 
-
-`window`
-
-. Quantile recommendations are based on a quantile of observed usage in 
-
-`window`
-
- (requires the 
-
-`qCPU`
-
- parameter to set the desired quantile). Defaults to 
-
-`max`
-
-. To use the 
-
-`quantile`
-
- algorithm, the 
-
-[ContainerStats Pipeline](/containerstats-pipeline.md)
-
- must be enabled.
+must be enabled.
 {% endswagger-parameter %}
 
-{% swagger-parameter in="path" name="algorithmRAM" type="string" %}
+{% swagger-parameter in="path" name="algorithmRAM" type="string" required="false" %}
 Like 
 
 `algorithmCPU`
@@ -53,19 +25,13 @@ Like
 , but for RAM recommendations.
 {% endswagger-parameter %}
 
-{% swagger-parameter in="path" name="qCPU" type="float in the range (0, 1]" %}
-The desired quantile to base CPU recommendations on. Only used if 
+{% swagger-parameter in="path" name="qCPU" type="float in the range (0, 1]" required="false" %}
+The desired quantile to base CPU recommendations on. Only used if
 
-`algorithmCPU=quantile`
-
-. Note: a quantile of 
-
-`0.95`
-
- is the same as a 95th percentile.
+`algorithmCPU=quantile`. **Note**: a quantile of `0.95`is the same as a 95th percentile.
 {% endswagger-parameter %}
 
-{% swagger-parameter in="path" name="qRAM" type="float in the range (0, 1]" %}
+{% swagger-parameter in="path" name="qRAM" type="float in the range (0, 1]" required="false" %}
 Like 
 
 `qCPU`
@@ -73,64 +39,38 @@ Like
 , but for RAM recommendations.
 {% endswagger-parameter %}
 
-{% swagger-parameter in="path" name="targetCPUUtilization" type="float in the range (0, 1]" %}
-A ratio of headroom on the base recommended CPU request. If the base recommendation is 100 mCPU and this parameter is 
+{% swagger-parameter in="path" name="targetCPUUtilization" type="float in the range (0, 1]" required="false" %}
+A ratio of headroom on the base recommended CPU request. If the base recommendation is 100 mCPU and this parameter is `0.8`, the recommended CPU request will be
 
-`0.8`
+`100 / 0.8 = 125` mCPU. Defaults to `0.7`. Inputs that fail to parse (see
 
-, the recommended CPU request will be 
-
-`100 / 0.8 = 125`
-
- mCPU. Defaults to 
-
-`0.7`
-
-. Inputs that fail to parse (see 
-
-[Go docs here](https://pkg.go.dev/strconv#ParseFloat)
-
-) will default to 
-
-`0.7`
-
-.
+[Go docs here](https://pkg.go.dev/strconv#ParseFloat)) will default to `0.7`.
 {% endswagger-parameter %}
 
-{% swagger-parameter in="path" name="targetRAMUtilization" type="float in the range (0, 1]" %}
-Calculated like 
+{% swagger-parameter in="path" name="targetRAMUtilization" type="float in the range (0, 1]" required="false" %}
+Calculated like
 
-`targetCPUUtilization`
-
-.
+`targetCPUUtilization`.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="window" required="true" type="string" %}
-Required parameter. Duration of time over which to calculate usage. Supports days before the current time in the following format: 
+Required parameter. Duration of time over which to calculate usage. Supports days before the current time in the following format:
 
-`3d`
+`3d`. **Note**: Hourly windows are not currently supported. **Note**: It's recommended to provide a window greater than
 
-. Note: Hourly windows are not currently supported. Note: It's recommended to provide a window greater than 
+`2d`. See the
 
-`2d`
+[Allocation API documentation](allocation.md)
 
-. See the 
+for more a more detailed explanation of valid inputs to
 
-[Allocation API documentation](/allocation.md)
-
- for more a more detailed explanation of valid inputs to 
-
-`window`
-
-.
+`window`.
 {% endswagger-parameter %}
 
-{% swagger-parameter in="path" name="filter" type="string" %}
-A filter to reduce the set of workloads for which recommendations will be calculated. See 
+{% swagger-parameter in="path" name="filter" type="string" required="false" %}
+A filter to reduce the set of workloads for which recommendations will be calculated. See [Filter parameters](filters-api.md)
 
-[Filter parameters](filters-api.md)
-
- for syntax. V1 filters are also supported.
+for syntax. V1 filters are also supported.
 {% endswagger-parameter %}
 
 {% swagger-response status="200: OK" description="" %}
