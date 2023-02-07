@@ -12,7 +12,7 @@ See the high-level [automatic request right-sizing guide](auto-request-sizing.md
 
 ## Using 1-click request sizing
 
-1.  Select _Settings_ in the left navigation, then select _Right-size your container requests_. The Request right-sizing recommendations page opens.
+1.  Select _Savings_ in the left navigation, then select _Right-size your container requests_. The Request right-sizing recommendations page opens.
 
     <figure><img src="images/rightsizing.png" alt=""><figcaption><p>Request right-sizing recommendations Beta page</p></figcaption></figure>
 2.  Select _Customize_ to modify the request sizing settings, like profile, window, and filters, until you have a set of recommendations you are ready to apply to your cluster.
