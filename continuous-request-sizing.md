@@ -59,7 +59,9 @@ kubectl annotate -n "${NS}" deployment "${DEP}" "${AN_WINDOW}"
 ```
 
 Kubescaler will take care of the rest. It will apply the best-available
-recommended requests to the annotated controller every 11 hours.
+recommended requests to the annotated controller every 11 hours. If the
+recommended requests exceed the current limits, the update is currently
+configured to set the request to the current limit.
 
 To check current requests for your Deployments, use the following command:
 ``` sh
