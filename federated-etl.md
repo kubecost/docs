@@ -1,8 +1,29 @@
 # Federated ETL
 
+There are two primary methods to aggregate all cluster information back to a single Kubecost UI described in [Federated Clusters Overview](./federated-clusters.md).
+
+Below is the configuration guide using **Kubecost ETL Federation**
+
+> **Note**: This feature requires an Enterprise license.
+
+---
+
 Federated ETL gives teams the benefit of federating multiple Kubecost installations into one view without dependency on Thanos.
 
+For environments that already have a Prometheus instance, this ETL Federation may be preferred because the only dependency will be a single Kubecost pod for monitored cluster.
+
 ## Overview
+
+## Kubecost ETL Federation Diagram
+
+**Kubecost ETL Federation**
+![ETL Federation Overview](https://raw.githubusercontent.com/kubecost/docs/main/images/Kubecost-ETL-Federated-Architecture.png)
+
+## Sample Configurations
+
+This guide has specific detail on how ETL Configuration works and deployment options.
+
+Alternatively, a repo with the most common configurations can be found here: [https://github.com/kubecost/poc-common-configurations/tree/main/etl-federation](https://github.com/kubecost/poc-common-configurations/tree/main/etl-federation)
 
 ### Clusters
 
@@ -27,7 +48,7 @@ The Storages referred to here are an S3 (or GCP/Azure equivalent) storage bucket
 * **The Federator**: A component of the cost-model which is run on the Federator Cluster, which can be a Federated Cluster, a Primary Cluster, or neither. The Federator takes the ETL binaries from Federated Storage and merges them, adding them to Combined Storage.
 * **Federated ETL**: The pipeline containing the above components.
 
-## Example diagram
+## Federated ETL Architecture
 
 This diagram shows an example setup of the Federated ETL with:
 
@@ -80,7 +101,7 @@ prometheus:
    * If you do not set this cluster to be federated as well as primary, you will not see local data for this cluster.
    * The Primary Cluster’s local ETL will be overwritten with combined federated data.
         * This can be undone by unsetting it as a Primary Cluster and rebuilding ETL.
-        * Setting a Primary Cluster may result in a loss of the cluster’s local ETL data, so it is recommended to back up any filestore data that one would want to save to S3 before designating the cluster as primary. 
+        * Setting a Primary Cluster may result in a loss of the cluster’s local ETL data, so it is recommended to back up any filestore data that one would want to save to S3 before designating the cluster as primary.
         * Alternatively, a fresh Kubecost install can be used as a consumer of combined federated data by setting it as the Primary but not a Federated Cluster.
 
 ### Step 4: Verifying successful configuration
