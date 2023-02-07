@@ -1,5 +1,5 @@
-Federated Clusters
-==================
+Multi-Cluster Federation (Enterprise)
+=====================================
 
 There are two primary methods to aggregate all cluster information back to a single Kubecost UI:
 
