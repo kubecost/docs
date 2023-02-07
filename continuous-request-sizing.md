@@ -23,6 +23,7 @@ Kubescaler is configured on a workload-by-workload basis via annotations. Curren
 | `request.autoscaling.kubecost.com/scheduleStart` | Optional augmentation to the frequency parameter. If both are set, the workload will be resized on the scheduled frequency, aligned to the start. If frequency is 24h and the start is midnight, the workload will be rescheduled at (about) midnight every day. Formatted as RFC3339. | `2022-11-28T00:00:00Z` |
 | `cpu.request.autoscaling.kubecost.com/targetUtilization` | Target utilization  (CPU) for the recommendation algorithm. If unset, the backing recommendation service's default is used. | `0.8` |
 | `memory.request.autoscaling.kubecost.com/targetUtilization` | Target utilization (Memory/RAM) for the recommendation algorithm. If unset, the backing recommendation service's default is used. | `0.8` |
+| `request.autoscaling.kubecost.com/recommendationQueryWindow` | Value of the `window` parameter to be used when acquiring recommendations. See Request sizing API for explanation of window parameter. If setting up autoscaling for a CronJob, it is strongly recommended to set this to a value greater than the duration between Job runs. For example, if you have a weekly CronJob, this parameter should be set to a value greater than `7d` to ensure a recommendation is available. | `2d` |
 
 Notable Helm values:
 
@@ -32,7 +33,9 @@ Notable Helm values:
 
 ### Supported workload types
 Kubescaler supports:
-- Deployments
+- apps/v1 Deployments
+- apps/v1 DaemonSets
+- batch/v1 CronJobs (K8s v1.21+). No attempt will be made to autoscale a CronJob until it has run at least once.
 
 Kubescaler cannot support:
 - "Uncontrolled" Pods. Learn more [here](https://github.com/kubernetes/kubernetes/issues/24913).
@@ -46,11 +49,13 @@ export AN_ENABLE="request.autoscaling.kubecost.com/enabled=true"
 export AN_FREQ="request.autoscaling.kubecost.com/frequencyMinutes=660"
 export AN_TCPU="cpu.request.autoscaling.kubecost.com/targetUtilization=0.9"
 export AN_TMEM="memory.request.autoscaling.kubecost.com/targetUtilization=0.9"
+export AN_WINDOW="request.autoscaling.kubecost.com/recommendationQueryWindow=3d"
 
 kubectl annotate -n "${NS}" deployment "${DEP}" "${AN_ENABLE}"
 kubectl annotate -n "${NS}" deployment "${DEP}" "${AN_FREQ}"
 kubectl annotate -n "${NS}" deployment "${DEP}" "${AN_TCPU}"
 kubectl annotate -n "${NS}" deployment "${DEP}" "${AN_TMEM}"
+kubectl annotate -n "${NS}" deployment "${DEP}" "${AN_WINDOW}"
 ```
 
 Kubescaler will take care of the rest. It will apply the best-available
