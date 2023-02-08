@@ -23,15 +23,15 @@ Below is the configuration guide using **Kubecost Thanos Federation**
     or in [values-thanos.yaml](https://github.com/kubecost/cost-analyzer-helm-chart/blob/develop/cost-analyzer/values-thanos.yaml) if overriding these values from a values-thanos.yaml file supplied from command line (`helm upgrade kubecost -f values.yaml -f values-thanos.yaml`),
     or by passing these parameters directly via helm install or upgrade as follows:
 
-        ```
-          --set thanos.compact.enabled=false --set thanos.bucket.enabled=false
-        ```
+    ```
+    --set thanos.compact.enabled=false --set thanos.bucket.enabled=false
+    ```
 
     You can also optionally disable `thanos.store`, `thanos.query` and `thanos.queryFrontend` with thanos/values.yaml or with these flags:
 
-        ```
+    ```
           --set thanos.query.enabled=false --set thanos.store.enabled=false --set thanos.queryFrontend.enabled=false
-        ```
+    ```
 
 3. Ensure you provide a unique identifier for `prometheus.server.global.external_labels.cluster_id` to have additional clusters be visible in the Kubecost product, e.g. `cluster-two`.
 
