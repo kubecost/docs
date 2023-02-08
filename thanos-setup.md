@@ -1,13 +1,11 @@
 Thanos Federation
 =================
 
+> **Note**: This feature is only officially supported on Kubecost Enterprise plans.
+
 There are two primary methods to aggregate all cluster information back to a single Kubecost UI described in [Federated Clusters Overview](./federated-clusters.md).
 
-Below is the configuration guide using **Kubecost Thanos Federation**
-
-> **Note**: This feature requires an Enterprise license.
----
-
+Below is the configuration guide using **Kubecost Thanos Federation**.
 
 # Configuration
 
