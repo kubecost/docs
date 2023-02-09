@@ -21,9 +21,9 @@ Check out our [Installation options](https://guide.kubecost.com/hc/en-us/article
 
 ### Third party billing integration guides
 
-[Allocating out of cluster costs (AWS)](/aws-cloud-integrations.md)\
-[Allocating out of cluster costs (Azure)](azure-out-of-cluster.md)\
-[Allocating out of cluster costs (GCP)](gcp-out-of-cluster.md)\
+* [AWS](/aws-cloud-integrations.md)\0
+* [Azure](azure-out-of-cluster.md)\
+* [GCP](gcp-out-of-cluster.md)\
 
 ### Staying in the loop
 
