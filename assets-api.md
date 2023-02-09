@@ -424,12 +424,12 @@ Retrieve assets cost data for the past seven days, aggregated by type, and as cu
   "code": 200,
   "data": [
     {
-       "AWS/297945954695/__undefined__/Storage/__undefined__/Cloud/AmazonS3/cloud-bench-1/__undefined__": {
+       "AWS/< REDACTED >/__undefined__/Storage/__undefined__/Cloud/AmazonS3/cloud-bench-1/__undefined__": {
         "type": "Cloud",
         "properties": {
           "category": "Storage",
           "provider": "AWS",
-          "account": "297945954695",
+          "account": "< REDACTED >",
           "service": "AmazonS3",
           "providerID": "cloud-bench-1"
         },
@@ -448,12 +448,12 @@ Retrieve assets cost data for the past seven days, aggregated by type, and as cu
         "credit": 0,
         "totalCost": 9.1e-05
       },
-      "AWS/297945954695/__undefined__/Storage/__undefined__/Cloud/AmazonS3/cloud-bench-scale/__undefined__": {
+      "AWS/< REDACTED >/__undefined__/Storage/__undefined__/Cloud/AmazonS3/cloud-bench-scale/__undefined__": {
         "type": "Cloud",
         "properties": {
           "category": "Storage",
           "provider": "AWS",
-          "account": "297945954695",
+          "account": "< REDACTED >",
           "service": "AmazonS3",
           "providerID": "cloud-bench-scale"
         },
@@ -472,12 +472,12 @@ Retrieve assets cost data for the past seven days, aggregated by type, and as cu
         "credit": 0,
         "totalCost": 0.013967
       },
-      "AWS/297945954695/__undefined__/Storage/__undefined__/Cloud/AmazonS3/csv-cur-hourly-new/__undefined__": {
+      "AWS/< REDACTED >/__undefined__/Storage/__undefined__/Cloud/AmazonS3/csv-cur-hourly-new/__undefined__": {
         "type": "Cloud",
         "properties": {
           "category": "Storage",
           "provider": "AWS",
-          "account": "297945954695",
+          "account": "< REDACTED >",
           "service": "AmazonS3",
           "providerID": "csv-cur-hourly-new"
         },
