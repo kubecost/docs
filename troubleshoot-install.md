@@ -4,7 +4,7 @@ Once an installation is complete, access the Kubecost frontend to view the statu
 
 ## General troubleshooting commands
 
-These kubernetes commands can be helpful when finding issues with deployments:
+These Kubernetes commands can be helpful when finding issues with deployments:
 
 1. This command will find all events that aren't normal, with the most recent listed last. Use this if pods are not even starting:
 
