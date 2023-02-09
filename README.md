@@ -10,7 +10,7 @@ In this guide, you’ll find everything you need to set up Kubecost for your tea
 
 ### Quick installation
 
-Check out our [Installation options](https://guide.kubecost.com/hc/en-us/articles/4407601821207) to start monitoring and managing your spend in minutes.
+Check out our [Installation options](/install.md) to start monitoring and managing your spend in minutes.
 
 ### Getting started
 
@@ -21,9 +21,9 @@ Check out our [Installation options](https://guide.kubecost.com/hc/en-us/article
 
 ### Third party billing integration guides
 
-* [AWS](/aws-cloud-integrations.md)\0
-* [Azure](azure-out-of-cluster.md)\
-* [GCP](gcp-out-of-cluster.md)\
+* [AWS](/aws-cloud-integrations.md)
+* [Azure](azure-out-of-cluster.md)
+* [GCP](gcp-out-of-cluster.md)
 
 ### Staying in the loop
 
