@@ -4,7 +4,7 @@ Once an installation is complete, access the Kubecost frontend to view the statu
 
 ## General troubleshooting commands
 
-These kubernetes commands can be helpful when finding issues with deployments:
+These Kubernetes commands can be helpful when finding issues with deployments:
 
 1. This command will find all events that aren't normal, with the most recent listed last. Use this if pods are not even starting:
 
@@ -262,6 +262,25 @@ $ helm upgrade -i kubecost kubecost/cost-analyzer --namespace kubecost \
     --set prometheus.podSecurityPolicy.enabled=false \
     --set grafana.rbac.pspEnabled=false
 ```
+
+## Issue: With Kubernetes v1.25, Helm commands fail when PodSecurityPolicy CRD is missing for `kubecost-grafana` and `kubecost-cost-analyzer-psp` in existing Kubecost installs
+
+Since PodSecurityPolicy have been [removed from Kubernetes v1.25](https://kubernetes.io/docs/concepts/security/pod-security-policy/), it's possible to encounter a state where all Kubecost-related Helm commands fail after Kuberntes has been upgraded to v1.25.
+
+```bash
+$ helm upgrade kubecost kubecost/cost-analyzer
+Error: UPGRADE FAILED: unable to build kubernetes objects from current release manifest: [
+resource mapping not found for name: "kubecost-grafana" namespace: "" from "": no matches for kind "PodSecurityPolicy" in version "policy/v1beta1"
+ensure CRDs are installed first, resource mapping not found for name: "kubecost-cost-analyzer-psp" namespace: "" from "": no matches for kind "PodSecurityPolicy" in version "policy/v1beta1"
+ensure CRDs are installed first
+]
+```
+
+To prevent this Helm error state please upgrade Kubecost to at least v1.99 prior to upgrading Kubernetes to v1.25. Additionally please follow the [above](/troubleshoot-install.md#issue-podsecuritypolicy-crd-is-missing-for-kubecost-grafana-and-kubecost-cost-analyzer-psp) instructions for disabling PSP.
+
+If Kubecost PSP is not disabled prior to Kubernetes v1.25 upgrades, you may need to manually delete the Kubecost install. Prior to doing this please ensure you have [ETL backups enaabled](https://docs.kubecost.com/install-and-configure/install/etl-backup)as well as Helm values, and Prometheus/Thanos data backed up. Manual removal can be done by deleteing the Kubecost namespace.
+
+
 ## Issue: failed to download "oci://public.ecr.aws/kubecost/cost-analyzer" at version "x.xx.x"
 
 This error appears when you install Kubecost using AWS optimized version on your Amazon EKS cluster. There are a few reasons that generate this error message:
