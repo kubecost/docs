@@ -219,7 +219,7 @@ Acceptable formats for using `window` parameter include:
   * For example, `filterLabels=deployment%3Dkube%2A` will return all assets with `deployment` label value containing a `kube` prefix.
 * Invalid filters return no assets.
 
-## API example
+## API examples
 
 Retrieve assets cost data for the past seven days, aggregated by type, and as cumulative object data:
 
@@ -408,5 +408,95 @@ Retrieve assets cost data for the past seven days, aggregated by type, and as cu
     ]
 }
 ```
+{% endtab %}
+{% endtabs %}
+ 
+ Retrieve all AWS S3 assets cost data for the past seven days.
+ 
+ {% tabs %}
+{% tab title="Request" %}
+`http://localhost:9090/model/assets?window=7d&filterServices=AmazonS3"`
+{% endtab %}
+
+{% tab title="Response" %}
+```json
+{
+  "code": 200,
+  "data": [
+    {
+       "AWS/< REDACTED >/__undefined__/Storage/__undefined__/Cloud/AmazonS3/cloud-bench-1/__undefined__": {
+        "type": "Cloud",
+        "properties": {
+          "category": "Storage",
+          "provider": "AWS",
+          "account": "< REDACTED >",
+          "service": "AmazonS3",
+          "providerID": "cloud-bench-1"
+        },
+        "labels": {
+          "kubernetes_label_app": "product-test",
+          "test_tag": "test_value_mod_2"
+        },
+        "window": {
+          "start": "2023-02-01T00:00:00Z",
+          "end": "2023-02-02T00:00:00Z"
+        },
+        "start": "2023-02-01T00:00:00Z",
+        "end": "2023-02-02T00:00:00Z",
+        "minutes": 1440,
+        "adjustment": 0,
+        "credit": 0,
+        "totalCost": 9.1e-05
+      },
+      "AWS/< REDACTED >/__undefined__/Storage/__undefined__/Cloud/AmazonS3/cloud-bench-scale/__undefined__": {
+        "type": "Cloud",
+        "properties": {
+          "category": "Storage",
+          "provider": "AWS",
+          "account": "< REDACTED >",
+          "service": "AmazonS3",
+          "providerID": "cloud-bench-scale"
+        },
+        "labels": {
+          "kubernetes_label_app": "product-test",
+          "test_tag": "test_value_mod_2"
+        },
+        "window": {
+          "start": "2023-02-01T00:00:00Z",
+          "end": "2023-02-02T00:00:00Z"
+        },
+        "start": "2023-02-01T00:00:00Z",
+        "end": "2023-02-02T00:00:00Z",
+        "minutes": 1440,
+        "adjustment": 0,
+        "credit": 0,
+        "totalCost": 0.013967
+      },
+      "AWS/< REDACTED >/__undefined__/Storage/__undefined__/Cloud/AmazonS3/csv-cur-hourly-new/__undefined__": {
+        "type": "Cloud",
+        "properties": {
+          "category": "Storage",
+          "provider": "AWS",
+          "account": "< REDACTED >",
+          "service": "AmazonS3",
+          "providerID": "csv-cur-hourly-new"
+        },
+        "labels": {
+          "kubernetes_label_app": "product-test",
+          "test_tag": "test_value_mod_2"
+        },
+        "window": {
+          "start": "2023-02-01T00:00:00Z",
+          "end": "2023-02-02T00:00:00Z"
+        },
+        "start": "2023-02-01T00:00:00Z",
+        "end": "2023-02-02T00:00:00Z",
+        "minutes": 1440,
+        "adjustment": 0,
+        "credit": 0,
+        "totalCost": 0.000535
+      },
+   ...
+ ```
 {% endtab %}
 {% endtabs %}
