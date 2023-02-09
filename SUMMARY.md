@@ -20,6 +20,7 @@
       * [Creating a Google Service Account](google-service-account-thanos.md)
   * [Multi-Cluster / Long Term Storage](long-term-storage.md)
     * [Federated ETL](federated-etl.md)
+    * [Secondary Clusters Guide](secondary-clusters.md)
     * [AWS](install-and-configure/install/long-term-storage/aws/README.md)
       * [AWS Multi-Cluster Storage Configuration](long-term-storage-aws.md)
       * [Creating a Thanos IAM policy](aws-service-account-thanos.md)
@@ -66,7 +67,6 @@
 ## General
 
 * [OpenCost Product Comparison](opencost-product-comparison.md)
-* [User Metrics](user-metrics.md)
 * [Installing Agent for Kubecost Cloud (limited availability)](agent.md)
 * [Tuning Resource Consumption](resource-consumption.md)
 * [Calculating Node Pricing](node-pricing.md)
@@ -112,13 +112,12 @@
 
 * [Kubecost Core Architecture Overview](architecture.md)
 * [Kubecost Cloud Architecture Overview](kubecost-cloud-architecture.md)
+* [Kubecost Metrics](user-metrics.md)
+* [Kube-State-Metrics (KSM) Emission](ksm-metrics.md)
 * [Network Traffic Cost Allocation](network-allocation.md)
 * [Open Source](open-source-deps.md)
 * [Security and Data Protection](security.md)
 * [Ports](ports.md)
-* [Kubecost Memory Usage](app-memory.md)
-* [Secondary Clusters Guide](secondary-clusters.md)
-* [Kube-State-Metrics (KSM) Emission](ksm-metrics.md)
 * [Kubecost Release Process](release-process.md)
 * [Outages](outages.md)
 
@@ -129,6 +128,7 @@
 * [HTTP Error Troubleshooting](http-troubleshooting.md)
 * [Kubecost Diagnostics](diagnostics.md)
 * [Capture a Bug Report](bug-report.md)
+* [Kubecost Heapdump](app-memory.md)
 * [Repair Kubecost ETLs](etl-repair.md)
 * [Running a Query in Kubecost-bundled Prometheus](prometheus.md)
 * [Bug Bounty Program](bug-bounty-program.md)
