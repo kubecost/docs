@@ -59,18 +59,6 @@
   * [High Availability Kubecost](high-availability.md)
   * [Windows Node Support](windows.md)
 
-## Integrations
-
-* [Custom Webhook to Create a Kubecost Stage in Spinnaker](spinnaker-custom-webhook.md)
-* [Gluu Server with OIDC Configuration Guide](integrations/gluu-server-with-oidc-configuration-guide.md)
-
-## General
-
-* [OpenCost Product Comparison](opencost-product-comparison.md)
-* [Installing Agent for Kubecost Cloud (limited availability)](agent.md)
-* [Tuning Resource Consumption](resource-consumption.md)
-* [Calculating Node Pricing](node-pricing.md)
-
 ## Using Kubecost
 
 * [Getting Started](getting-started.md)
@@ -120,6 +108,18 @@
 * [Ports](ports.md)
 * [Kubecost Release Process](release-process.md)
 * [Outages](outages.md)
+
+## General
+
+* [OpenCost Product Comparison](opencost-product-comparison.md)
+* [Installing Agent for Kubecost Cloud (limited availability)](agent.md)
+* [Tuning Resource Consumption](resource-consumption.md)
+* [Calculating Node Pricing](node-pricing.md)
+
+## Integrations
+
+* [Custom Webhook to Create a Kubecost Stage in Spinnaker](spinnaker-custom-webhook.md)
+* [Gluu Server with OIDC Configuration Guide](integrations/gluu-server-with-oidc-configuration-guide.md)
 
 ## Troubleshooting
 
