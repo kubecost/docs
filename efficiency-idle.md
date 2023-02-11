@@ -8,7 +8,7 @@ For teams interested in reducing their Kubernetes costs, it's beneficial to firs
 
 Pod resource efficiency is defined as the resource utilization versus the resource request over a given time window. It is cost-weighted and can be expressed as follows:
 
-> *(((CPU Usage / CPU Requested) * CPU Cost) + ((RAM Usage / RAM Requested) * RAM Cost)) / (RAM Cost + CPU Cost)*
+> *(((CPU Usage / CPU Requested) * CPU Cost) + ((RAM Usage / RAM Requested) * RAM Cost))) / (RAM Cost + CPU Cost)*
 >
 > where \
 > *CPU Usage = rate(container\_cpu\_usage\_seconds\_total) over the time window* \
