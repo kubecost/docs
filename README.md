@@ -8,23 +8,22 @@ Below are frequently visited Kubecost documentation pages for both the [Commerci
 
 In this guide, you’ll find everything you need to set up Kubecost for your team.
 
-### Quick Installation
+### Quick installation
 
-Check out our [Installation options](https://guide.kubecost.com/hc/en-us/articles/4407601821207) to start monitoring and managing your spend in minutes.
+Check out our [Installation options](/install.md) to start monitoring and managing your spend in minutes.
 
-### Getting Started
+### Getting started
 
-[Troubleshooting installation](https://guide.kubecost.com/hc/en-us/articles/4407601830679)\
-[Configuring Kubecost](https://guide.kubecost.com/hc/en-us/articles/4407595947799)\
-[Understanding cost allocation](https://guide.kubecost.com/hc/en-us/articles/4407601807383)\
+[Troubleshooting installation](/troubleshoot-install.md)\
+[Configuring Kubecost](/getting-started.md)\
+[Understanding cost allocation](/cost-allocation.md)\
 [Cost monitoring best practices](http://blog.kubecost.com/blog/cost-monitoring/)
 
-### Advanced Configuration
+### Third party billing integration guides
 
-[Allocating out of cluster costs (AWS)](https://guide.kubecost.com/hc/en-us/articles/4407596810519)\
-[Allocating out of cluster costs (Azure)](https://guide.kubecost.com/hc/en-us/articles/4407595936023)\
-[Allocating out of cluster costs (GCP)](https://guide.kubecost.com/hc/en-us/articles/4407601816087)\
-[AWS Spot feed integration](/aws-spot-instances.md#spot-data-feed-integration)
+* [AWS](/aws-cloud-integrations.md)
+* [Azure](/azure-out-of-cluster.md)
+* [GCP](/gcp-out-of-cluster.md)
 
 ### Staying in the loop
 
