@@ -6,10 +6,9 @@ The network costs daemonset is an optional utility that gives Kubecost more deta
 
 When networkCost is enabled, Kubecost gathers pod-level network traffic metrics to allocate network transfer costs to the pod responsible for the traffic.
 
-See this doc for more detail on [network cost allocation methodology](./network-allocation.md).
+See this doc for more detail on [network cost allocation methodology](network-allocation.md).
 
 The network-costs metrics are collected using a daemonset (one pod per node) that uses source and destination detail to determine egress and ingress data transfers by pod and are classified as internet, cross-region and cross-zone.
-
 
 ## Usage
 
@@ -29,10 +28,10 @@ To view the raw network transfer data, Grafana dashboard that is almost ready to
 
 To enable this feature, set the following parameter in _values.yaml_ during [Helm installation](https://kubecost.com/install):
 
- ``` yaml
- networkCosts:
-   enabled: true
- ```
+```yaml
+networkCosts:
+  enabled: true
+```
 
 ## Cloud Provider Service Tagging
 
@@ -73,13 +72,13 @@ networkCosts:
 
 ## Additional configuration
 
- You can view a list of common config options [here](https://github.com/kubecost/cost-analyzer-helm-chart/blob/700cfa306c8e78bc9a1039b584769b9a0e0757d0/cost-analyzer/values.yaml#L573).
+You can view a list of common config options [here](https://github.com/kubecost/cost-analyzer-helm-chart/blob/700cfa306c8e78bc9a1039b584769b9a0e0757d0/cost-analyzer/values.yaml#L573).
 
- If using the included Prometheus instance, the scrape is automatically configured.
+If using the included Prometheus instance, the scrape is automatically configured.
 
- If you are integrating with an existing Prometheus, you can set `networkCosts.prometheusScrape=true` and the network costs service should be auto-discovered.
+If you are integrating with an existing Prometheus, you can set `networkCosts.prometheusScrape=true` and the network costs service should be auto-discovered.
 
- Alternatively a serviceMonitor is also [available](https://github.com/kubecost/cost-analyzer-helm-chart/blob/700cfa306c8e78bc9a1039b584769b9a0e0757d0/cost-analyzer/values.yaml#L716).
+Alternatively a serviceMonitor is also [available](https://github.com/kubecost/cost-analyzer-helm-chart/blob/700cfa306c8e78bc9a1039b584769b9a0e0757d0/cost-analyzer/values.yaml#L716).
 
 > **Note**: Network cost, which is disabled by default, needs to be run as a privileged pod to access the relevant networking kernel module on the host machine.
 
@@ -120,7 +119,7 @@ The primary source of network metrics is a DaemonSet Pod hosted on each of the n
 
 These classifications are important because they correlate with network costing models for most cloud providers. To see more detail on these metric classifications, you can view pod logs with the following command:
 
-```sh
+```
 kubectl logs kubecost-network-costs-<pod-identifier> -n kubecost
 ```
 
@@ -181,11 +180,9 @@ To verify this feature is functioning properly, you can complete the following s
 ### Common issues
 
 * Failed to locate network pods: Error message displayed when the Kubecost app is unable to locate the network pods, which we search for by a label that includes our release name. In particular, we depend on the label `app=<release-name>-network-costs` to locate the pods. If the app has a blank release name this issue may happen.
-
 * Resource usage is a function of unique src and dest IP/port combinations. Most deployments use a small fraction of a CPU and it is also ok to have this Pod CPU throttled. Throttling should increase parse times but should not have other impacts. The following Prometheus metrics are available in v15.3 for determining the scale and the impact of throttling:
 
-`kubecost_network_costs_parsed_entries` is the last number of conntrack entries parsed
-`kubecost_network_costs_parse_time` is the last recorded parse time
+`kubecost_network_costs_parsed_entries` is the last number of conntrack entries parsed `kubecost_network_costs_parse_time` is the last recorded parse time
 
 ## Feature limitations
 

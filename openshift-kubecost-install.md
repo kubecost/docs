@@ -1,5 +1,4 @@
-Install Kubecost on Red Hat OpenShift cluster
-==================
+# Install Kubecost on Redhat OpenShift
 
 ## Architecture overview:
 
@@ -25,8 +24,8 @@ The Grafana managed Prometheus deployment is illustrated in the following diagra
 
 ### Prerequisites:
 
-- You have an existing OpenShift cluster.
-- You have appropriate access to that OpenShift cluster to create a new project and deploy new workloads.
+* You have an existing OpenShift cluster.
+* You have appropriate access to that OpenShift cluster to create a new project and deploy new workloads.
 
 ### Installation:
 
@@ -41,7 +40,7 @@ helm upgrade --install kubecost \
 
 If you want to install Kubecost with your desired cluster name, you can use the following commands:
 
-> **Note**: Remember to replace CLUSTER_ID's value by your desired value
+> **Note**: Remember to replace CLUSTER\_ID's value by your desired value
 
 ```bash
 export CLUSTER_ID="CLUSTER_OCP"
@@ -56,7 +55,7 @@ helm upgrade --install kubecost \
 
 Wait for all pods to be ready.
 
-Create a route to the service `kubecost-cost-analyzer` on port `9090` of the `kubecost` project. You can learn more about how to do it on your OpenShift portal in this [LINK](https://docs.openshift.com/container-platform/3.11/dev_guide/routes.html#:~:text=to%20the%20router.-,Creating%20Routes,Applications%20section%20of%20the%20navigation.&text=The%20new%20route%20inherits%20the,using%20the%20%2D%2Dname%20option.)
+Create a route to the service `kubecost-cost-analyzer` on port `9090` of the `kubecost` project. You can learn more about how to do it on your OpenShift portal in this [LINK](https://docs.openshift.com/container-platform/3.11/dev\_guide/routes.html)
 
 Kubecost will be collecting data, please wait 5-15 minutes for the UI to reflect the resources in the local cluster.
 
@@ -64,26 +63,27 @@ Kubecost will be collecting data, please wait 5-15 minutes for the UI to reflect
 
 ### Prerequisites:
 
-- You have created a Grafana Cloud account and you have permissions to create Grafana Cloud API keys
-- Add required service account for grafana-agent to `hostmount-anyuid` SCC:
+* You have created a Grafana Cloud account and you have permissions to create Grafana Cloud API keys
+* Add required service account for grafana-agent to `hostmount-anyuid` SCC:
 
 ```bash
 oc adm policy add-scc-to-user hostmount-anyuid system:serviceaccount:kubecost:grafana-agent
 ```
 
 ### Installation:
-   
+
 #### Step 1: Install the Grafana Agent on your cluster.
 
 On the existing K8s cluster that you intend to install Kubecost, run the following commands to install Grafana agent to scrape the metrics from Kubecost /metrics endpoint. The script below installs Grafana agent with the necessary scraping configuration for Kubecost, you may want to add an additional scrape configuration for your setup. Please remember to replace the following values with your actual Grafana cloud's values:
 
-- REPLACE-WITH-GRAFANA-PROM-REMOTE-WRITE-ENDPOINT
-- REPLACE-WITH-GRAFANA-PROM-REMOTE-WRITE-USERNAME
-- REPLACE-WITH-GRAFANA-PROM-REMOTE-WRITE-API-KEY
-- REPLACE-WITH-YOUR-CLUSTER-NAME
+* REPLACE-WITH-GRAFANA-PROM-REMOTE-WRITE-ENDPOINT
+* REPLACE-WITH-GRAFANA-PROM-REMOTE-WRITE-USERNAME
+* REPLACE-WITH-GRAFANA-PROM-REMOTE-WRITE-API-KEY
+* REPLACE-WITH-YOUR-CLUSTER-NAME
 
 <details>
-  <summary>Click to see code</summary>
+
+<summary>Click to see code</summary>
 
 ```bash
 cat <<'EOF' |
@@ -392,9 +392,10 @@ EOF
 
 MANIFEST_URL=https://raw.githubusercontent.com/kubecost/openshift-helm-chart/main/grafana-agent-config/agent-bare.yaml NAMESPACE=kubecost /bin/sh -c "$(curl -fsSL https://raw.githubusercontent.com/grafana/agent/v0.24.2/production/kubernetes/install-bare.sh)" | kubectl apply -f -
 ```
+
 </details>
 
-To learn more about how to install and config Grafana agent as well as additional scrape configuration, please refer to [Grafana Agent for Kubernetes](https://grafana.com/docs/grafana-cloud/kubernetes/agent-k8s/k8s_agent_metrics/) section of the Grafana Cloud documentation. Or you can check Kubecost Prometheus scrape config at this [Github repository](https://github.com/kubecost/cost-analyzer-helm-chart/blob/ebe7e088debecd23f90e6dd75b425828901a246c/cost-analyzer/charts/prometheus/values.yaml#L1152)
+To learn more about how to install and config Grafana agent as well as additional scrape configuration, please refer to [Grafana Agent for Kubernetes](https://grafana.com/docs/grafana-cloud/kubernetes/agent-k8s/k8s\_agent\_metrics/) section of the Grafana Cloud documentation. Or you can check Kubecost Prometheus scrape config at this [Github repository](https://github.com/kubecost/cost-analyzer-helm-chart/blob/ebe7e088debecd23f90e6dd75b425828901a246c/cost-analyzer/charts/prometheus/values.yaml#L1152)
 
 #### Step 2: Verify if grafana-agent is scraping data successfully.
 
@@ -402,30 +403,33 @@ To learn more about how to install and config Grafana agent as well as additiona
 
 #### Step 3: Create dbsecret to allow Kubecost to query the metrics from Grafana Cloud Prometheus.
 
-- Create two files in your working directory, called `USERNAME` and `PASSWORD` respectively
-  
-```Bash
+* Create two files in your working directory, called `USERNAME` and `PASSWORD` respectively
+
+```
 export PASSWORD=<REPLACE-WITH-GRAFANA-PROM-REMOTE-WRITE-API-KEY>
 export USERNAME=<REPLACE-WITH-GRAFANA-PROM-REMOTE-WRITE-USERNAME>
 printf "${PASSWORD}" > PASSWORD
 printf "${USERNAME}" > USERNAME
 ```
-- Verify that you can run query against your Grafana Cloud Prometheus query endpoint with your API key (Optional):
 
-```Bash
+* Verify that you can run query against your Grafana Cloud Prometheus query endpoint with your API key (Optional):
+
+```
 cred="$( echo $NAME:$PASSWORD | base64 )"; curl -H "Authorization: Basic $cred" https://<REPLACE-WITH-GRAFANA-PROM-QUERY-ENDPOINT>/api/v1/query?query=up
 ```
-- Create K8s secret name dbsecret:
 
-```Bash
+* Create K8s secret name dbsecret:
+
+```
 kubectl create secret generic dbsecret \
     --namespace kubecost \
     --from-file=USERNAME \
     --from-file=PASSWORD
 ```
-- Verify if the credentials appears correctly - Optional (Any trailing space or new line etc ...)
 
-```Bash
+* Verify if the credentials appears correctly - Optional (Any trailing space or new line etc ...)
+
+```
 kubectl -n kubecost get secret dbsecret -o json | jq '.data | map_values(@base64d)'
 ```
 
@@ -436,7 +440,8 @@ To set up recording rules in Grafana Cloud, download the [cortextool CLI utility
 After installing the tool, create a file called `kubecost-rules.yaml` with the following command:
 
 <details>
-  <summary>Click to see code</summary>
+
+<summary>Click to see code</summary>
 
 ```yaml
 cat << EOF > kubecost-rules.yaml
@@ -474,11 +479,12 @@ groups:
           daemonset: "true"
 EOF
 ```
+
 </details>
 
 Make you are in the same directory as your `kubecost-rules.yaml`, then load the rules using `cortextool`. Replace the address with your Grafana Cloud’s Prometheus endpoint (Remember to omit the /api/prom path from the endpoint URL).
 
-```Bash
+```
 cortextool rules load \
 --address=<REPLACE-WITH-GRAFANA-PROM-ENDPOINT> \
 --id=<REPLACE-WITH-GRAFANA-PROM-REMOTE-WRITE-USERNAME> \
@@ -488,19 +494,20 @@ kubecost-rules.yaml
 
 Print out the rules to verify that they’ve been loaded correctly:
 
-```Bash
+```
 cortextool rules print \
 --address=<REPLACE-WITH-GRAFANA-PROM-ENDPOINT> \
 --id=<REPLACE-WITH-GRAFANA-PROM-REMOTE-WRITE-USERNAME> \
 --key=<REPLACE-WITH-GRAFANA-PROM-REMOTE-WRITE-API-KEY>
 ```
+
 #### Step 5: Install Kubecost on the cluster.
 
 Install Kubecost on your K8s cluster with Grafana Cloud Prometheus query endpoint and `dbsecret` you created in Step 4
 
-> **Note**: Remember to replace CLUSTER_ID's value by your desired value 
+> **Note**: Remember to replace CLUSTER\_ID's value by your desired value
 
-```Bash
+```
 export CLUSTER_ID="CLUSTER_OCP"
 # Replace REPLACE-WITH-GRAFANA-PROM-QUERY-ENDPOINT with your Grafana cloud value. Example: https://prometheus-prod-10-prod-us-central-0.grafana.net/api/prom/
 export GRAFANA_QUERY_ENDPOINT="REPLACE-WITH-GRAFANA-PROM-QUERY-ENDPOINT"
@@ -535,4 +542,4 @@ Optionally, you can also add our [Kubecost Dashboard for Grafana Cloud](https://
 
 ## Support
 
-For advanced setup or if you have any questions, you can contact us on [Slack](https://join.slack.com/t/kubecost/shared_invite/enQtNTA2MjQ1NDUyODE5LWFjYzIzNWE4MDkzMmUyZGU4NjkwMzMyMjIyM2E0NGNmYjExZjBiNjk1YzY5ZDI0ZTNhZDg4NjlkMGRkYzFlZTU) or email us at [support@kubecost.com](support@kubecost.com).
+For advanced setup or if you have any questions, you can contact us on [Slack](https://join.slack.com/t/kubecost/shared\_invite/enQtNTA2MjQ1NDUyODE5LWFjYzIzNWE4MDkzMmUyZGU4NjkwMzMyMjIyM2E0NGNmYjExZjBiNjk1YzY5ZDI0ZTNhZDg4NjlkMGRkYzFlZTU) or email us at [support@kubecost.com](support@kubecost.com).

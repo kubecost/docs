@@ -95,6 +95,7 @@
 
 * [Kubecost API Directory](apis-overview.md)
   * [Allocation API](allocation.md)
+  * [Allocation Trends API](apis/apis-overview/allocation-trends-api.md)
   * [Assets API](assets-api.md)
   * [Abandoned Workloads](api-abandoned-workloads.md)
   * [Container Request Recommendation "Apply" APIs](api-request-recommendation-apply.md)

@@ -1,6 +1,6 @@
 # Repair Kubecost ETLs
 
-> **Note**: Configuring [ETL Backups](./etl-backup.md) can prevent situations where you would need to repair large amounts of missing ETL data.
+> **Note**: Configuring [ETL Backups](etl-backup.md) can prevent situations where you would need to repair large amounts of missing ETL data.
 
 Kubecost's ETL is a computed cache built upon Prometheus metrics and cloud billing data, from which nearly all API requests made by the user and the Kubecost frontend currently rely upon.
 
@@ -10,7 +10,7 @@ Because each ETL pipeline builds upon the previous, you need to repair them in t
 
 ## 1. Repair Asset ETL
 
-The Asset ETL builds upon the Prometheus metrics listed [here](./user-metrics.md). It's important to ensure that you are able to [query for Prometheus or Thanos](./prometheus.md) data for the specified `window` you use. Otherwise, an absence of metrics will result in an empty ETL. Further details about this API [here](./diagnostics.md).
+The Asset ETL builds upon the Prometheus metrics listed [here](user-metrics.md). It's important to ensure that you are able to [query for Prometheus or Thanos](prometheus.md) data for the specified `window` you use. Otherwise, an absence of metrics will result in an empty ETL. Further details about this API [here](diagnostics.md).
 
 > **Note**: If the `window` parameter is within `.Values.kubecostModel.etlHourlyStoreDurationHours`, this endpoint will repair both the daily `[1d]` and hourly `[1h]` Asset ETL.
 
@@ -30,7 +30,7 @@ INF ETL: Asset[1d]: AggregatedStore.Run[fvkKR]: run: aggregated [2023-01-03T00:0
 
 ## 2. Repair CloudUsage ETL
 
-The CloudUsage ETL pulls information from your cloud billing integration. Ensure it's been configured properly, otherwise no data will be retrieved. Further details about this API [here](./cloud-integration.md).
+The CloudUsage ETL pulls information from your cloud billing integration. Ensure it's been configured properly, otherwise no data will be retrieved. Further details about this API [here](cloud-integration.md).
 
 ```bash
 # Repair
@@ -44,7 +44,7 @@ $ kubectl logs deploy/kubecost-cost-analyzer | grep CloudUsage
 
 ## 3. Run Reconciliation Pipeline
 
-The Reconciliation Pipeline reconciles the existing Asset ETL with the newly gathered data in the CloudUsage ETL, further ensuring parity between Kubecost and your cloud bill. Further details about this API [here](./cloud-integration.md).
+The Reconciliation Pipeline reconciles the existing Asset ETL with the newly gathered data in the CloudUsage ETL, further ensuring parity between Kubecost and your cloud bill. Further details about this API [here](cloud-integration.md).
 
 ```bash
 # Repair
@@ -58,7 +58,7 @@ $ kubectl logs deploy/kubecost-cost-analyzer | grep Reconciliation
 
 ## 4. Repair Allocation ETL
 
-The Allocation ETL builds upon all previous data to compute cost and resource allocations for Kubernetes entites. Further details about this API [here](./diagnostics.md).
+The Allocation ETL builds upon all previous data to compute cost and resource allocations for Kubernetes entites. Further details about this API [here](diagnostics.md).
 
 > **Note**: If the `window` parameter is within `.Values.kubecostModel.etlHourlyStoreDurationHours`, this endpoint will repair both the daily `[1d]` and hourly `[1h]` Allocation ETL.
 
@@ -80,13 +80,13 @@ INF ETL: Allocation[ETL[allocations][1d]]: Repair[rptgQ]: starting [2023-01-03T0
 
 If the ETL data looks incorrect, or you see one of the following error messages, there are several things to check:
 
-```txt
+```
 [Error] ETL: CloudAsset[*****************]: Build[******]: 
 MergeRange error: boundary error: requested [2022-03-26T00:00:00+0000, 2022-04-02T00:00:00+0000); supported [2022-03-29T00:00:00+0000, 2022-04-30T00:00:00+0000): 
 ETL: Asset[1d] is 100.0% complete
 ```
 
-```txt
+```
 WRN ETL: Asset[1h]: Repair: error: cannot repair [2022-11-05T00:00:00+0000, 2022-11-06T00:00:00+0000): coverage is [2022-12-01T21:00:00+0000, 2022-12-02T23:00:00+0000)
 ```
 

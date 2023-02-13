@@ -4,10 +4,10 @@
 
 The following steps allow Kubecost to use custom prices with a CSV pipeline. This feature allows for individual assets (e.g. nodes) to be supplied at unique prices. Common uses are for on-premise clusters, service-providers, or for external enterprise discounts.
 
-
 ## Pricing File
 
-1. Create a CSV in this [format](https://github.com/kubecost/cost-analyzer-helm-chart/blob/develop/cost-analyzer/custom-pricing.csv) (also in the below table). CSV changes are picked up hourly by default.
+1.  Create a CSV in this [format](https://github.com/kubecost/cost-analyzer-helm-chart/blob/develop/cost-analyzer/custom-pricing.csv) (also in the below table). CSV changes are picked up hourly by default.
+
     1. EndTimeStamp: currently unused
     2. InstanceID: identifier used to match asset
     3. Region filter match based on topology.kubernetes.io/region
@@ -27,19 +27,18 @@ Only required for nodes with GPUs
 
 1. The node the GPU is attached to must be matched by a CSV node price. Typically this will be matched on instance type (node.kubernetes.io/instance-type)
 2. Supported GPU labels are currently:
-    * gpu.nvidia.com/class
-    * nvidia.com/gpu_type
+   * gpu.nvidia.com/class
+   * nvidia.com/gpu\_type
 3. Verification:
-    1. Connect to the Kubecost Prometheus: `kubectl port-forward --namespace kubecost services/kubecost-cost-analyzer 9090:9090`
-    2. Run the following query: `curl localhost:9090/model/prometheusQuery?query=node_gpu_hourly_cost`
-        1. You should see output similar to this: `{instance="ip-192-168-34-166.us-east-2.compute.internal",instance_type="test.xlarge",node="ip-192-168-34-166.us-east-2.compute.internal",provider_id="aws:///us-east-2b/i-055274d3576800444",region="us-east-2"} 10 | YOUR_HOURLY_COST`
-
+   1. Connect to the Kubecost Prometheus: `kubectl port-forward --namespace kubecost services/kubecost-cost-analyzer 9090:9090`
+   2. Run the following query: `curl localhost:9090/model/prometheusQuery?query=node_gpu_hourly_cost`
+      1. You should see output similar to this: `{instance="ip-192-168-34-166.us-east-2.compute.internal",instance_type="test.xlarge",node="ip-192-168-34-166.us-east-2.compute.internal",provider_id="aws:///us-east-2b/i-055274d3576800444",region="us-east-2"} 10 | YOUR_HOURLY_COST`
 
 ## Kubecost Configuration
 
 Provide a file path for your CSV pricing data in [values.yaml](https://github.com/kubecost/cost-analyzer-helm-chart/blob/develop/cost-analyzer/values-custom-pricing.yaml). This path can reference a local PV or an S3 bucket.
 
-``` yaml
+```yaml
 pricingCsv:
   enabled: true
   location:
@@ -51,13 +50,13 @@ pricingCsv:
 
 Alternatively, mount a configmap with the CSV:
 
-``` sh
+```
 kubectl create configmap csv-pricing --from-file custom-pricing.csv
 ```
 
 Helm values:
 
-``` yaml
+```yaml
 pricingCsv:
   enabled: true
   location:
@@ -75,7 +74,7 @@ extraVolumeMounts:
 
 For S3 locations, provide file access. Required IAM permissions:
 
-``` json
+```json
 {
     "Version": "2012-10-17",
     "Statement": [
@@ -99,8 +98,6 @@ There are two options for adding the credentials to the Kubecost pod:
 1. Service key: Create an S3 service key with the permissions above, then add its ID and access key as a K8s secret:
    1. `kubectl create secret generic pricing-schema-access-secret -n kubecost --from-literal=AWS_ACCESS_KEY_ID=id --from-literal=AWS_SECRET_ACCESS_KEY=key`
    2. The name of this secret should be the same as csvAccessCredentials in values.yaml above
-
-
 2. AWS IAM (IRSA) [service account annotation](https://docs.aws.amazon.com/eks/latest/userguide/adot-iam.html)
 
 ## Pricing discounts
@@ -117,7 +114,7 @@ The following logic is used to match node prices accurately:
 
 You can check a summary of the number of nodes that have matched with the CSV by visiting /model/pricingSourceCounts. The response is a JSON object of the form:
 
-``` jsonc
+```
 {
     "code": 200,
     "status": "success",

@@ -1,5 +1,4 @@
-Installing Kubecost with Rafay
-================
+# Installing Kubecost with Rafay
 
 [Rafay](https://rafay.co) is a SaaS-first Kubernetes Operations Platform (KOP) with enterprise-class scalability, zero-trust security and interoperability for managing applications across public clouds, data centers & edge.
 
@@ -13,15 +12,15 @@ You have already [provisioned or imported](https://docs.rafay.co/learn/overview/
 
 ## Step 1: Create a repository
 
-Under *Integrations*:
+Under _Integrations_:
 
-- Select *Repositories* and create a new repository named `kubecost` of type *Helm*
-- Select *Create*
+* Select _Repositories_ and create a new repository named `kubecost` of type _Helm_
+* Select _Create_
 
 ![Create Repository](https://raw.githubusercontent.com/kubecost/docs/main/images/kubecost-repository-1.png)
 
-- Enter the endpoint value of `https://kubecost.github.io/cost-analyzer/`
-- Select *Save*
+* Enter the endpoint value of `https://kubecost.github.io/cost-analyzer/`
+* Select _Save_
 
 ## Step 2: Customize values
 
@@ -38,20 +37,20 @@ kubecostToken: 'token_string'
 
 ## Step 3: Create a namespace
 
-- Login to the [Rafay Web Console](https://console.rafay.dev/) and navigate to your Project as an _Org Admin_ or _Infrastructure Admin_
-- Under *Infrastructure*, select *Namespaces* and create a new namespace called `kubecost`, and select type *Wizard*
+* Login to the [Rafay Web Console](https://console.rafay.dev/) and navigate to your Project as an _Org Admin_ or _Infrastructure Admin_
+* Under _Infrastructure_, select _Namespaces_ and create a new namespace called `kubecost`, and select type _Wizard_
 
 ![Create Namespace](https://raw.githubusercontent.com/kubecost/docs/main/images/kubecost-namespace-1.png)
 
-- Select *Save & Go to Placement*
-- Select the cluster(s) that the namespace will be added to. Select *Save & Go To Publish*
-- Select *Publish* to publish the namespace to the selected cluster(s)
-- Once the namespace has been published, select *Exit*
-- Under *Infrastructure*, select *Clusters*
-- Select the `kubectl` button on the cluster to open a virtual terminal
-- Verify that the `kubecost` namespace has been created by running the following command:
+* Select _Save & Go to Placement_
+* Select the cluster(s) that the namespace will be added to. Select _Save & Go To Publish_
+* Select _Publish_ to publish the namespace to the selected cluster(s)
+* Once the namespace has been published, select _Exit_
+* Under _Infrastructure_, select _Clusters_
+* Select the `kubectl` button on the cluster to open a virtual terminal
+* Verify that the `kubecost` namespace has been created by running the following command:
 
-```sh
+```
 $ kubectl get ns kubecost
 
 NAME            STATUS   AGE
@@ -62,39 +61,39 @@ kubecost        Active   44m
 
 From the [Web Console](https://console.rafay.dev/):
 
-- Select *Add-ons* and *Create* a new add-on called `kubecost`
-- Select *Bring your own*
-- Select *Helm 3* for type
-- Select *Pull files from repository*
-- Select *Helm* for the repository type
-- Select `kubecost` for the namespace
-- Select *Select*
+* Select _Add-ons_ and _Create_ a new add-on called `kubecost`
+* Select _Bring your own_
+* Select _Helm 3_ for type
+* Select _Pull files from repository_
+* Select _Helm_ for the repository type
+* Select `kubecost` for the namespace
+* Select _Select_
 
 ![Create Addon](https://raw.githubusercontent.com/kubecost/docs/main/images/kubecost-addon-1.png)
 
-- Create a new version of the add-on
-- Select *New Version*
-- Provide a version name such as `v1`
-- Select `kubecost` for the repository
-- Enter `cost-analyzer` for the chart name
-- Upload the `kubecost-custom-values.yaml` file that was previously created
-- Select *Save Changes*
+* Create a new version of the add-on
+* Select _New Version_
+* Provide a version name such as `v1`
+* Select `kubecost` for the repository
+* Enter `cost-analyzer` for the chart name
+* Upload the `kubecost-custom-values.yaml` file that was previously created
+* Select _Save Changes_
 
 ## Step 5: Create a blueprint
 
 Once you've created the Kubecost add-on, use it in assembling a custom cluster blueprint. You can add other add-ons to the same custom blueprint.
 
-- Under _Infrastructure_, select *Blueprints*
-- Create a new blueprint and give it a name such as `kubecost`
-- Select *Save*
+* Under _Infrastructure_, select _Blueprints_
+* Create a new blueprint and give it a name such as `kubecost`
+* Select _Save_
 
 ![Create Blueprint](https://raw.githubusercontent.com/kubecost/docs/main/images/kubecost-blueprint-1.png)
 
-- Create a new version of the blueprint
-- Select *New Version*
-- Provide a version name such as `v1`
-- Under Add-Ons, select the `kubecost` Add-on and the version that was previously created
-- Select *Save Changes*
+* Create a new version of the blueprint
+* Select _New Version_
+* Provide a version name such as `v1`
+* Under Add-Ons, select the `kubecost` Add-on and the version that was previously created
+* Select _Save Changes_
 
 ![Create Blueprint](https://raw.githubusercontent.com/kubecost/docs/main/images/kubecost-blueprint-2.png)
 
@@ -102,9 +101,9 @@ Once you've created the Kubecost add-on, use it in assembling a custom cluster b
 
 You may now apply this custom blueprint to a cluster.
 
-- Select *Options* for the target cluster in the Web Console
-- Select *Update Blueprint* and select the `kubecost` blueprint and version you created previously
-- Select *Save and Publish*
+* Select _Options_ for the target cluster in the Web Console
+* Select _Update Blueprint_ and select the `kubecost` blueprint and version you created previously
+* Select _Save and Publish_
 
 ![Update Blueprint](https://raw.githubusercontent.com/kubecost/docs/main/images/kubecost-blueprint-3.png)
 
@@ -116,7 +115,7 @@ You can optionally verify whether the correct resources have been created on the
 
 Then, verify the pods in the `kubecost` namespace. Run `kubectl get pod -n kubecost`, and check that the output is similar to the example below.
 
-```sh
+```
 $ kubectl get pod -n kubecost
 
 NAME                                          READY   STATUS    RESTARTS   AGE
@@ -132,7 +131,7 @@ kubecost-prometheus-server-5cc6745978-z98f8   2/2     Running   0          6m23s
 
 In order to access the Kubecost UI, you'll need to enable access to the frontend application using [port-forward](https://kubernetes.io/docs/tasks/access-application-cluster/port-forward-access-application-cluster/). To do this, download and use the `Kubeconfig` with the KubeCTL CLI (`../../accessproxy/kubectl_cli/`)
 
-```sh
+```
 kubectl port-forward --namespace kubecost deployment/kubecost-cost-analyzer 9090
 
 Forwarding from 127.0.0.1:9090 -> 9090
@@ -146,7 +145,7 @@ You can now access the Kubecost UI by visiting `http://localhost:9090` on your b
 
 ![kubecost Dashboards](https://raw.githubusercontent.com/kubecost/docs/main/images/kubecost-view-1.png)
 
----
+***
 
 You have now successfully created a custom cluster blueprint with the `kubecost` add-on and applied to a cluster. Use this blueprint on as many clusters as you require.
 

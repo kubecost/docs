@@ -6,7 +6,7 @@ Secondary clusters use a minimal Kubecost deployment to send their metrics to a 
 
 This guide explains settings that can be tuned in order to run the minimum Kubecost components to run Kubecost more efficiently.
 
-See the [additional resources](#additional-resources) section below for complete examples in our GitHub repo.
+See the [additional resources](secondary-clusters.md#additional-resources) section below for complete examples in our GitHub repo.
 
 ## Kubecost Global
 
@@ -35,7 +35,7 @@ Kubecost and its accompanying Prometheus collect a reduced set of metrics that a
 
 The following configuration options further reduce resource consumption when not using the Kubecost frontend:
 
-```sh
+```
 --set prometheus.server.retention=2d
 ```
 
@@ -45,11 +45,11 @@ You can tune `prometheus.server.persistentVolume.size` depending on scale, or ou
 
 ## Thanos
 
-Disable Thanos components. These are only used for troubleshooting on secondary clusters. See this guide for [troubleshooting via kubectl logs](./long-term-storage.md#troubleshooting).
+Disable Thanos components. These are only used for troubleshooting on secondary clusters. See this guide for [troubleshooting via kubectl logs](long-term-storage.md#troubleshooting).
 
 > **Note**: Secondary clusters write to the global storage-bucket via the thanos-sidecar on the prometheus-server pod.
 
-```sh
+```
 --set thanos.compact.enabled=false
 --set thanos.bucket.enabled=false
 --set thanos.query.enabled=false
@@ -61,7 +61,7 @@ Disable Thanos components. These are only used for troubleshooting on secondary 
 
 You can disable node-exporter and the service account if cluster/node rightsizing recommendations are not required.
 
-> **Note**: node-export must be disabled if there is an existing daemonset. More info [here](./troubleshoot-install.md#issue-failedscheduling-kubecost-prometheus-node-exporter).
+> **Note**: node-export must be disabled if there is an existing daemonset. More info [here](troubleshoot-install.md#issue-failedscheduling-kubecost-prometheus-node-exporter).
 
 ## Helm values
 
@@ -112,4 +112,4 @@ thanos:
 
 You can find complete installation guides and sample files on our [repo](https://github.com/kubecost/poc-common-configurations).
 
-Additional considerations for properly tuning resource consumption is [here](/resource-consumption.md).
+Additional considerations for properly tuning resource consumption is [here](resource-consumption.md).
