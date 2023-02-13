@@ -1,22 +1,17 @@
 # Federated ETL
 
-There are two primary methods to aggregate all cluster information back to a single Kubecost UI described in [Federated Clusters Overview](./federated-clusters.md).
+There are two primary methods to aggregate all cluster information back to a single Kubecost UI described in the [Multi-Cluster](/multi-cluster.md#enterprise-federation) doc.
 
 Below is the configuration guide using **Kubecost ETL Federation**
 
 > **Note**: This feature requires an Enterprise license.
 
----
-
 Federated ETL gives teams the benefit of federating multiple Kubecost installations into one view without dependency on Thanos.
 
 For environments that already have a Prometheus instance, this ETL Federation may be preferred because the only dependency will be a single Kubecost pod for monitored cluster.
 
-## Overview
+## Kubecost ETL Federation diagram
 
-## Kubecost ETL Federation Diagram
-
-**Kubecost ETL Federation**
 ![ETL Federation Overview](https://raw.githubusercontent.com/kubecost/docs/main/images/Kubecost-ETL-Federated-Architecture.png)
 
 ## Sample Configurations
