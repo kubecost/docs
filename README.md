@@ -14,16 +14,16 @@ Check out our [Installation options](/install.md) to start monitoring and managi
 
 ### Getting started
 
-[Troubleshooting installation](https://guide.kubecost.com/hc/en-us/articles/4407601830679)\
-[Configuring Kubecost](https://guide.kubecost.com/hc/en-us/articles/4407595947799)\
-[Understanding cost allocation](https://guide.kubecost.com/hc/en-us/articles/4407601807383)\
+[Troubleshooting installation](/troubleshoot-install.md)\
+[Configuring Kubecost](/getting-started.md)\
+[Understanding cost allocation](/cost-allocation.md)\
 [Cost monitoring best practices](http://blog.kubecost.com/blog/cost-monitoring/)
 
 ### Third party billing integration guides
 
 * [AWS](/aws-cloud-integrations.md)
-* [Azure](azure-out-of-cluster.md)
-* [GCP](gcp-out-of-cluster.md)
+* [Azure](/azure-out-of-cluster.md)
+* [GCP](/gcp-out-of-cluster.md)
 
 ### Staying in the loop
 
