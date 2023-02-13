@@ -25,7 +25,7 @@ Cluster idle cost is defined as the difference between the cost of allocated res
 > where \
 > *allocation = max(request, usage)*
 
-So, idle costs can also be thought of as the cost of the space that the Kubernetes scheduler could add pods without disrupting any workloads in but is not currently.
+So, idle costs can also be thought of as the cost of the space that the Kubernetes scheduler could schedule pods, without disrupting any existing workloads, but it is not currently.
 
 ### Sharing idle
 
