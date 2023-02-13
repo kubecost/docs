@@ -30,11 +30,9 @@ For environments that already have a Prometheus instance, ETL Federation may be 
 The below diagrams highlight the two architectures:
 
 **Kubecost Thanos Federation**
+
 ![Thanos Overview](https://raw.githubusercontent.com/kubecost/docs/main/images/thanos-architecture.png)
 
-----
-
 **Kubecost ETL Federation**
-![ETL Federation Overview](https://raw.githubusercontent.com/kubecost/docs/main/images/Kubecost-ETL-Federated-Architecture.png)
----
 
+![ETL Federation Overview](https://raw.githubusercontent.com/kubecost/docs/main/images/Kubecost-ETL-Federated-Architecture.png)
