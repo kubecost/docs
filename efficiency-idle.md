@@ -14,7 +14,7 @@ Pod resource efficiency is defined as the resource utilization versus the resour
 > *CPU Usage = rate(container\_cpu\_usage\_seconds\_total) over the time window* \
 > *RAM Usage = avg(container\_memory\_working\_set\_bytes) over the time window*
 
-For example, if a pod is requesting 2CPU and 1Gb, using 500mCPU and 500MB, CPU on the node costs $10/CPU, and RAM on the node costs $1/GB, we have ((0.5/2) \* 20 + (0.5/1) \* 1) / (20 + 1) = 5.5 / 21 = 26%
+For example, if a pod is requesting 2CPU and 1GB, using 500mCPU and 500MB, CPU on the node costs $10/CPU, and RAM on the node costs $1/GB, we have ((0.5/2) \* 20 + (0.5/1) \* 1) / (20 + 1) = 5.5 / 21 = 26%
 
 ## Idle
 
@@ -25,7 +25,7 @@ Cluster idle cost is defined as the difference between the cost of allocated res
 > where \
 > *allocation = max(request, usage)*
 
-So, idle costs can also be thought of as the cost of the space that the Kubernetes scheduler could add pods without disrupting any workloads in but is not currently.
+So, idle costs can also be thought of as the cost of the space that the Kubernetes scheduler could schedule pods, without disrupting any existing workloads, but it is not currently.
 
 ### Sharing idle
 
