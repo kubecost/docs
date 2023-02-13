@@ -53,23 +53,13 @@
   * [Network Cost Configuration](network-costs-configuration.md)
   * [User Management - SSO/SAML/RBAC](user-management.md)
   * [User Management - SSO/OIDC](user-management-oidc.md)
+  * [Tuning Resource Consumption](resource-consumption.md)
   * [TurndownSchedule Migration Guide](turndown-schedule-migration-guide.md)
   * [Deploy Kubecost Staging Builds](staging.md)
   * [Cluster Controller](controller.md)
   * [High Availability Kubecost](high-availability.md)
   * [Windows Node Support](windows.md)
-
-## Integrations
-
-* [Custom Webhook to Create a Kubecost Stage in Spinnaker](spinnaker-custom-webhook.md)
-* [Gluu Server with OIDC Configuration Guide](integrations/gluu-server-with-oidc-configuration-guide.md)
-
-## General
-
-* [OpenCost Product Comparison](opencost-product-comparison.md)
 * [Installing Agent for Kubecost Cloud (limited availability)](agent.md)
-* [Tuning Resource Consumption](resource-consumption.md)
-* [Calculating Node Pricing](node-pricing.md)
 
 ## Using Kubecost
 
@@ -112,15 +102,22 @@
 ## Architecture
 
 * [Kubecost Core Architecture Overview](architecture.md)
+* [OpenCost Product Comparison](opencost-product-comparison.md)
 * [Kubecost Cloud Architecture Overview](kubecost-cloud-architecture.md)
 * [Kubecost Metrics](user-metrics.md)
 * [Kube-State-Metrics (KSM) Emission](ksm-metrics.md)
 * [Network Traffic Cost Allocation](network-allocation.md)
+* [Calculating Node Pricing](node-pricing.md)
 * [Open Source](open-source-deps.md)
 * [Security and Data Protection](security.md)
 * [Ports](ports.md)
 * [Kubecost Release Process](release-process.md)
 * [Outages](outages.md)
+
+## Integrations
+
+* [Custom Webhook to Create a Kubecost Stage in Spinnaker](spinnaker-custom-webhook.md)
+* [Gluu Server with OIDC Configuration Guide](integrations/gluu-server-with-oidc-configuration-guide.md)
 
 ## Troubleshooting
 
