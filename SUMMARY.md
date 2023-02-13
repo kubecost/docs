@@ -130,6 +130,7 @@
 * [Kubecost Diagnostics](diagnostics.md)
 * [Capture a Bug Report](bug-report.md)
 * [Kubecost Heapdump](app-memory.md)
+* [Profile an HTTP endpoint](http-profiling.md)
 * [Repair Kubecost ETLs](etl-repair.md)
 * [Running a Query in Kubecost-bundled Prometheus](prometheus.md)
 * [Bug Bounty Program](bug-bounty-program.md)
