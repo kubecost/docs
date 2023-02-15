@@ -289,12 +289,13 @@ E0215 13:33:44.225827 1 reflector.go:156] pkg/mod/k8s.io/client-go@v0.0.0-201911
 E0215 13:33:44.225870 1 reflector.go:156] pkg/mod/k8s.io/client-go@v0.0.0-20191109102209-3c0d1af94be5/tools/cache/reflector.go:108: Failed to list *v1beta1.CertificateSigningRequest: the server could not find the requested resource
 ```
 
-To resolve this error you can disable the corrosponding KSM metrics collectors by setting the following helm values to flase.
+To resolve this error you can disable the corrosponding KSM metrics collectors by setting the following Helm values to flase.
 
 - [prometheus.kube-state-metrics.collectors.ingresses=false](https://github.com/kubecost/cost-analyzer-helm-chart/blob/9f3d7974247bfd3910fbf69d0d4bd66f1335201a/cost-analyzer/charts/prometheus/charts/kube-state-metrics/values.yaml#L99|prometheus.kube-state-metrics.collectors.ingresses=false)
 - [prometheus.kube-state-metrics.collectors.certificatesigningrequests=false](https://github.com/kubecost/cost-analyzer-helm-chart/blob/9f3d7974247bfd3910fbf69d0d4bd66f1335201a/cost-analyzer/charts/prometheus/charts/kube-state-metrics/values.yaml#L92)
 
 You can verify the changes are in place by describing the KSM deployment, the collectors should no longer be present in the Container Arguments list.
+
 ```
 kubectl get deployment -n kubecost kubecost-kube-state-metrics -o yaml
 ```
