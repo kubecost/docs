@@ -31,13 +31,14 @@ Each individual filter is separated by a `+`, representing logical AND.
 ## Using filters
 
 Filters exist under the `filter=` parameter in supported APIs. Supported APIs are currently:
-* [Allocation API](/allocation.md)
-* [Request Sizing APIs](/api-request-right-sizing-v2.md) (**Note**: This is currently only supported in beta UI view.)
+
+* [Allocation API](allocation.md)
+* [Request Sizing APIs](api-request-right-sizing-v2.md) (**Note**: This is currently only supported in beta UI view.)
 
 Here are some example filters to see how the filtering language works:
 
 * `namespace:"kubecost"+container:"cost-model"` Return only results that are in the `kubecost` namespace and are for the `cost-model` container.
-* `cluster:"cluster-one"+label[app]="cost-analyzer"` Return only results in cluster `cluster-one` that are labeled with `app=cost-analyzer`.
+* `cluster:"cluster-one"+label[app]:"cost-analyzer"` Return only results in cluster `cluster-one` that are labeled with `app=cost-analyzer`.
 * `cluster!:"cluster-one"` Ignore results from cluster `cluster-one`
 * `namespace:"kubecost","kube-system"` Return only results from namespaces `kubecost` and `kube-system`.
 * `namespace!:"kubecost","kube-system"` Return results for all namespaces except `kubecost` and `kube-system`.
