@@ -65,11 +65,11 @@ Kubecost requires the following minimum versions:
         port: 9003
 ```
 
-This config needs to be added to `extraScrapeConfigs` in the Prometheus configuration. Example [extraScrapeConfigs.yaml](https://raw.githubusercontent.com/kubecost/docs/main/extraScrapeConfigs.yaml)
+This config needs to be added to `extraScrapeConfigs` in the Prometheus configuration. Example [extraScrapeConfigs.yaml](https://raw.githubusercontent.com/kubecost/docs/images/extraScrapeConfigs.yaml)
 
 To confirm this job is successfully scraped by Prometheus, you can view the Targets page in Prometheus and look for a job named `kubecost`.
 
-![Prometheus Targets](https://raw.githubusercontent.com/kubecost/docs/main/prom-targets.png)
+![Prometheus Targets](https://raw.githubusercontent.com/kubecost/docs/images/prom-targets.png)
 
 ## Node exporter metric labels
 
@@ -229,4 +229,4 @@ Good:
 
 In Kubecost, you can view basic diagnostic information for Prometheus metrics by selecting _Settings_ in the left navigation, then scrolling down to Prometheus Status, as seen below:
 
-![Prometheus status diagnostic](https://raw.githubusercontent.com/kubecost/docs/main/prom-status.png)
+![Prometheus status diagnostic](https://raw.githubusercontent.com/kubecost/docs/images/prom-status.png)
