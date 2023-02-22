@@ -69,7 +69,7 @@ This config needs to be added to `extraScrapeConfigs` in the Prometheus configur
 
 To confirm this job is successfully scraped by Prometheus, you can view the Targets page in Prometheus and look for a job named `kubecost`.
 
-![Prometheus Targets](https://raw.githubusercontent.com/kubecost/docs/images/images/prom-targets.png)
+![Prometheus Targets](./images/prom-targets.png)
 
 ## Node exporter metric labels
 
@@ -229,4 +229,4 @@ Good:
 
 In Kubecost, you can view basic diagnostic information for Prometheus metrics by selecting _Settings_ in the left navigation, then scrolling down to Prometheus Status, as seen below:
 
-![Prometheus status diagnostic](https://raw.githubusercontent.com/kubecost/docs/images/images/prom-status.png)
+![Prometheus status diagnostic](./images/prom-status.png)
