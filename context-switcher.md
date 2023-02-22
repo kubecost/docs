@@ -11,7 +11,7 @@ When adding a context directly from the frontend, Kubecost adds it locally for y
 
 1. Install Kubecost on the additional cluster you would like to view. The recommended Kubecost install path is available at [kubecost.com/install](https://www.kubecost.com/install).
 
-2. Expose port 9090 of the `kubecost-cost-analyzer` Pod. This can be done with a Kubernetes Ingress ([example](/ingress-examples.md)) or LoadBalancer ([example](https://github.com/kubecost/docs/blob/images/images/kubecost-lb.yaml)).
+2. Expose port 9090 of the `kubecost-cost-analyzer` Pod. This can be done with a Kubernetes Ingress ([example](/ingress-examples.md)) or LoadBalancer ([example](./images/kubecost-lb.yaml)).
 
    > **Note**: By default, a LoadBalancer exposes endpoints to the wide internet. Be careful about following the authentication requirements of your organization and environment.
 
