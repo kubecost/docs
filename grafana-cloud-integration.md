@@ -77,7 +77,7 @@ kubectl -n kubecost logs grafana-agent-0
 
 To learn more about how to install and config Grafana agent as well as additional scrape configuration, please refer to [Grafana Agent for Kubernetes](https://grafana.com/docs/grafana-cloud/kubernetes/agent-k8s/k8s\_agent\_metrics/) section of the Grafana Cloud documentation or you can check Kubecost Prometheus scrape config at this [GitHub repository](https://github.com/kubecost/cost-analyzer-helm-chart/blob/ebe7e088debecd23f90e6dd75b425828901a246c/cost-analyzer/charts/prometheus/values.yaml#L1152).
 
-## Step 2: Create `dbsecret` to allow Kubecots to query the metrics from Grafana Cloud Prometheus:
+## Step 2: Create `dbsecret` to allow Kubecost to query the metrics from Grafana Cloud Prometheus:
 
 Create two files in your working directory, called `USERNAME` and `PASSWORD` respectively
 
