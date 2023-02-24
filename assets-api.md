@@ -9,11 +9,11 @@ The Assets API retrieves backing cost data broken down by individual assets in y
 Dictates the applicable window for measuring historical asset cost.
 {% endswagger-parameter %}
 
-{% swagger-parameter in="path" name="aggregate" type="string" %}
+{% swagger-parameter in="path" name="aggregate" type="string" required="false" %}
 Used to consolidate cost model data. Supported aggregation types are cluster and type. Passing an empty value for this parameter, or not passing one at all, returns data by an individual asset.
 {% endswagger-parameter %}
 
-{% swagger-parameter in="path" name="accumulate" type="boolean" %}
+{% swagger-parameter in="path" name="accumulate" type="boolean" required="false" %}
 When set to 
 
 `false`
@@ -25,19 +25,13 @@ When set to
 .
 {% endswagger-parameter %}
 
-{% swagger-parameter in="path" name="disableAdjustments" type="boolean" %}
-When set to 
+{% swagger-parameter in="path" name="disableAdjustments" type="boolean" required="false" %}
+When set to `true`, zeros out all adjustments from cloud provider reconciliation, which would otherwise change the totalCost. Default value is
 
-`true`
-
-, zeros out all adjustments from cloud provider reconciliation, which would otherwise change the totalCost. Default value is 
-
-`false`
-
-.
+`false`.
 {% endswagger-parameter %}
 
-{% swagger-parameter in="path" name="format" type="string" %}
+{% swagger-parameter in="path" name="format" type="string" required="false" %}
 When set to 
 
 `csv`
@@ -45,26 +39,26 @@ When set to
 , will download an accumulated version of the asset results in CSV format. By default, results will be in JSON format.
 {% endswagger-parameter %}
 
-{% swagger-parameter in="path" name="filterAccounts" type="string" %}
-Filter results by cloud account. 
+{% swagger-parameter in="path" name="filterAccounts" type="string" required="false" %}
+Filter results by cloud account.
 
 _Requires cloud configuration._
 {% endswagger-parameter %}
 
-{% swagger-parameter in="path" name="filterCategories" type="string" %}
+{% swagger-parameter in="path" name="filterCategories" type="string" required="false" %}
 Filter results by asset category, such as 
 
 `Network`
 
-,
+, 
 
 `Management`
 
-,
+, 
 
 `Compute`
 
-,
+, 
 
 `Storage`
 
@@ -75,102 +69,58 @@ Filter results by asset category, such as
 .
 {% endswagger-parameter %}
 
-{% swagger-parameter in="path" name="filterClusters" type="string" %}
-Filter results by cluster ID, which is generated from 
+{% swagger-parameter in="path" name="filterClusters" type="string" required="false" %}
+Filter results by cluster ID, which is generated from `cluster_id`
 
-`cluster_id`
-
- provided during installation.
+provided during installation.
 {% endswagger-parameter %}
 
-{% swagger-parameter in="path" name="filterLabels" type="string" %}
-Filter results by cloud label or cloud tag. For example, appending 
+{% swagger-parameter in="path" name="filterLabels" type="string" required="false" %}
+Filter results by cloud label or cloud tag. For example, appending
 
 `&labels=deployment:kubecost-cost-analyzer`
 
- only returns assets with label 
+only returns assets with label
 
-`deployment=kubecost-cost-analyzer`
+`deployment=kubecost-cost-analyzer`. Note that subparameter `:` symbols are required to denote
 
-. Note that subparameter 
-
-`:`
-
- symbols are required to denote 
-
-`<labelKey>:<labelValue>`
-
- pairs.
+`<labelKey>:<labelValue>` pairs.
 {% endswagger-parameter %}
 
-{% swagger-parameter in="path" name="filterNames" type="string" %}
+{% swagger-parameter in="path" name="filterNames" type="string" required="false" %}
 Filter results by asset name.
 {% endswagger-parameter %}
 
-{% swagger-parameter in="path" name="filterProjects" type="string" %}
-Filter results by cloud project ID. 
+{% swagger-parameter in="path" name="filterProjects" type="string" required="false" %}
+Filter results by cloud project ID.
 
 _Requires cloud configuration._
 {% endswagger-parameter %}
 
-{% swagger-parameter in="path" name="filterProviders" type="string" %}
-Filter results by provider. For example, appending 
+{% swagger-parameter in="path" name="filterProviders" type="string" required="false" %}
+Filter results by provider. For example, appending
 
 `&filterProviders=GCP`
 
- only returns assets belonging to provider 
+only returns assets belonging to provider `GCP`. _Requires cloud configuration._
+{% endswagger-parameter %}
 
-`GCP`
-
-. 
+{% swagger-parameter in="path" name="filterProviderIDs" type="string" required="false" %}
+Filter results by provider ID individual to each cloud asset. For examples, go to the Assets page, select Breakdown by Item, and see the Provider ID column.
 
 _Requires cloud configuration._
 {% endswagger-parameter %}
 
-{% swagger-parameter in="path" name="filterProviderIDs" type="string" %}
-Filter results by provider ID individual to each cloud asset. For examples, go to the Assets page, select Breakdown by Item, and see the Provider ID column. 
+{% swagger-parameter in="path" name="filterServices" type="string" required="false" %}
+Filter results by service. Examples include
 
-_Requires cloud configuration._
+`Cloud Storage`, `Kubernetes`, `BigQuery`.
 {% endswagger-parameter %}
 
-{% swagger-parameter in="path" name="filterServices" type="string" %}
-Filter results by service. Examples include 
+{% swagger-parameter in="path" name="filterTypes" type="string" required="false" %}
+Filter results by asset type. Examples include `Cloud`, `ClusterManagement`,
 
-`Cloud Storage`
-
-, 
-
-`Kubernetes`
-
-, 
-
-`BigQuery`
-
-.
-{% endswagger-parameter %}
-
-{% swagger-parameter in="path" name="filterTypes" type="string" %}
-Filter results by asset type. Examples include 
-
-`Cloud`
-
-, 
-
-`ClusterManagement`
-
-, 
-
-`Node`
-
-, 
-
-`LoadBalancer`
-
-, and 
-
-`Disk`
-
-.
+`Node`, `LoadBalancer`, and `Disk`.
 {% endswagger-parameter %}
 
 {% swagger-response status="200: OK" description="" %}
@@ -410,10 +360,10 @@ Retrieve assets cost data for the past seven days, aggregated by type, and as cu
 ```
 {% endtab %}
 {% endtabs %}
- 
- Retrieve all AWS S3 assets cost data for the past seven days.
- 
- {% tabs %}
+
+Retrieve all AWS S3 assets cost data for the past seven days.
+
+{% tabs %}
 {% tab title="Request" %}
 `http://localhost:9090/model/assets?window=7d&filterServices=AmazonS3"`
 {% endtab %}
@@ -497,6 +447,6 @@ Retrieve assets cost data for the past seven days, aggregated by type, and as cu
         "totalCost": 0.000535
       },
    ...
- ```
+```
 {% endtab %}
 {% endtabs %}
