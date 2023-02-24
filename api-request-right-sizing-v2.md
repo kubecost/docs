@@ -2,11 +2,11 @@
 
 {% swagger method="get" path="savings/requestSizingV2" baseUrl="http://<kubecost-address>/model/" summary="Container Request Right Sizing Recommendation API (V2)" %}
 {% swagger-description %}
-The container request right sizing recommendation API provides recommendations for
+The container request right sizing recommendation API provides recommendations for 
 
 [container resource requests](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/)
 
-based on configurable parameters and estimates the savings from implementing those recommendations on a per-container, per-controller level. Of course, if the cluster-level resources stay static then you will likely not enjoy real savings from applying these recommendations until you reduce your cluster resources. Instead, your idle allocation will increase.
+ based on configurable parameters and estimates the savings from implementing those recommendations on a per-container, per-controller level. Of course, if the cluster-level resources stay static then you will likely not enjoy real savings from applying these recommendations until you reduce your cluster resources. Instead, your idle allocation will increase.
 {% endswagger-description %}
 
 {% swagger-parameter in="path" name="algorithmCPU" type="string" required="false" %}
@@ -54,17 +54,11 @@ Calculated like
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="window" required="true" type="string" %}
-Required parameter. Duration of time over which to calculate usage. Supports days before the current time in the following format:
-
-`3d`. **Note**: Hourly windows are not currently supported. **Note**: It's recommended to provide a window greater than
-
-`2d`. See the
+Required parameter. Duration of time over which to calculate usage. Supports days before the current time in the following format: `3d`. **Note**: Hourly windows are not currently supported. **Note**: It's recommended to provide a window greater than `2d`. See the
 
 [Allocation API documentation](allocation.md)
 
-for more a more detailed explanation of valid inputs to
-
-`window`.
+for more a more detailed explanation of valid inputs to `window`.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="filter" type="string" required="false" %}

@@ -48,7 +48,7 @@ Kubecost requires the following minimum versions:
       --set global.prometheus.enabled=false
     ```
 
-    **Note** The fqdn can be a full path: https://prometheus-prod-us-central-x.grafana.net/api/prom/ if you use Grafana Cloud managed Prometheus. Learn more at [Grafana Cloud Integration for Kubecost](grafana-cloud-integration.md).
+    > **Note**: The fqdn can be a full path: https://prometheus-prod-us-central-x.grafana.net/api/prom/ if you use Grafana Cloud managed Prometheus. Learn more at [Grafana Cloud Integration for Kubecost](grafana-cloud-integration.md).
 2. Have your Prometheus scrape the cost-model `/metrics` endpoint. These metrics are needed for reporting accurate pricing data. Here is an example scrape config:
 
 ```yaml
@@ -65,11 +65,11 @@ Kubecost requires the following minimum versions:
         port: 9003
 ```
 
-This config needs to be added to `extraScrapeConfigs` in the Prometheus configuration. Example [extraScrapeConfigs.yaml](https://raw.githubusercontent.com/kubecost/docs/main/extraScrapeConfigs.yaml)
+This config needs to be added to `extraScrapeConfigs` in the Prometheus configuration. Example [extraScrapeConfigs.yaml](./images/extraScrapeConfigs.yaml)
 
 To confirm this job is successfully scraped by Prometheus, you can view the Targets page in Prometheus and look for a job named `kubecost`.
 
-![Prometheus Targets](https://raw.githubusercontent.com/kubecost/docs/main/prom-targets.png)
+![Prometheus Targets](./images/prom-targets.png)
 
 ## Node exporter metric labels
 
@@ -229,4 +229,4 @@ Good:
 
 In Kubecost, you can view basic diagnostic information for Prometheus metrics by selecting _Settings_ in the left navigation, then scrolling down to Prometheus Status, as seen below:
 
-![Prometheus status diagnostic](https://raw.githubusercontent.com/kubecost/docs/main/prom-status.png)
+![Prometheus status diagnostic](./images/prom-status.png)
