@@ -94,9 +94,7 @@ config:
   endpoint: ""
 ```
 
-### Additional Storage Options
-
-### Storj
+#### Storj
 
 Because Storj is [S3 compatible](https://docs.storj.io/dcs/api-reference/s3-compatible-gateway/), it can be be used as a drop-in replacement for S3. After an S3 Compatible Access Grant has been created, an example configuration would be:
 
