@@ -52,7 +52,10 @@ kubecostMetrics:
 
 ## Disabling Individual Metrics
 
-While also not recommended, it is possible to disable individual metrics emitted by Kubecost if a more fine-grained approach is required. This can be done by setting the related [Helm chart parameter](https://github.com/kubecost/cost-analyzer-helm-chart/blob/f9a8f3326a540e1b0ece714c52f100fa085bf0b8/cost-analyzer/values.yaml#L928-L929):
+> **Warning**: Disabling individual metrics is not recommended, as disabling metrics required by Kubecost to function may lead to unexpected behavior.
+
+It is possible to disable individual metrics emitted by Kubecost if a more fine-grained approach is required. This can be done by setting the related [Helm chart parameter](https://github.com/kubecost/cost-analyzer-helm-chart/blob/f9a8f3326a540e1b0ece714c52f100fa085bf0b8/cost-analyzer/values.yaml#L928-L929):
+
 ```yaml
 kubecostProductConfigs:
   ...
@@ -62,7 +65,6 @@ kubecostProductConfigs:
       - <metric-to-be-disabled>
       etc.
 ```
-Note that this can diable metrics that Kubecost requires to function, and may lead to unexpected behavior.
 
 ## External KSM deployments resulting in duplicated metrics
 
