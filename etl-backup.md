@@ -94,6 +94,30 @@ config:
   endpoint: ""
 ```
 
+### Additional Storage Options
+
+### Storj
+
+Because Storj is [S3 compatible](https://docs.storj.io/dcs/api-reference/s3-compatible-gateway/), it can be be used as a drop-in replacement for S3. After an S3 Compatible Access Grant has been created, an example configuration would be:
+
+```yaml
+type: S3
+config:
+  bucket: "my-bucket"
+  endpoint: "gateway.storjshare.io"
+  access_key: "<STORJ_ACCESS_KEY>"
+  secret_key: "<STORJ_SECRET_KEY>"
+  insecure: false
+  signature_version2: false
+  http_config:
+    idle_conn_timeout: 90s
+    response_header_timeout: 2m
+    insecure_skip_verify: false
+  trace:
+    enable: true
+  part_size: 134217728
+```
+
 ### Step 2: Enable ETL backup in Helm values
 
 If Kubecost was installed via Helm, ensure the following value is set.
