@@ -3,7 +3,7 @@ Tuning Resource Consumption
 
 Kubecost can run on clusters with thousands of nodes when resource consumption is properly tuned. Here's a chart with some of the steps you can take to tune Kubecost, along with descriptions of each.
 
-![Memory Reduction Steps](https://user-images.githubusercontent.com/453512/171096603-0f0b600f-0452-4ae2-a001-e7c4a26e0ad5.png)
+![Memory Reduction Steps](/images/resource-consumption.png)
 
 ## On secondaries: Disabling Cloud Assets and running Kubecost in Agent Mode/With ETL and caching disabled
 
