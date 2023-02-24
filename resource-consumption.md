@@ -25,6 +25,13 @@ Kubecost can run on clusters with thousands of nodes when resource consumption i
 * This can be tuned with the [Helm value](https://github.com/kubecost/cost-analyzer-helm-chart/blob/v1.93.2/cost-analyzer/values.yaml#L272):
   * `--set kubecostModel.maxQueryConcurrency=1`
 
+## Lower query duration
+
+* Lowering query duration results in Kubecost querying for smaller windows when building ETL data. This can lead to slower ETL build times, but lower memory peaks because of the smaller datasets.
+* The default values is: `1440`
+* This can be tuned with the Helm value:
+  * `--set kubecostModel.maxPrometheusQueryDurationMinutes=300`
+
 ## Lower query resolution
 
 * Lowering query resolution will reduce memory consumption but will cause short running pods to be sampled and rounded to the nearest interval for their runtime
