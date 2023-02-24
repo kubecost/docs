@@ -28,37 +28,9 @@ INF ETL: Asset[1d]: AggregatedStore.Run[fvkKR]: run: aggregated [2023-01-02T00:0
 INF ETL: Asset[1d]: AggregatedStore.Run[fvkKR]: run: aggregated [2023-01-03T00:00:00+0000, 2023-01-04T00:00:00+0000) from 19 to 3 in 68.417µs
 ```
 
-## 2. Repair CloudUsage ETL
+## 2. Repair Allocation ETL
 
-The CloudUsage ETL pulls information from your cloud billing integration. Ensure it's been configured properly, otherwise no data will be retrieved. Further details about this API [here](cloud-integration.md).
-
-```bash
-# Repair
-# /model/etl/cloudUsage/repair?window=
-$ curl "https://kubecost.your.com/model/etl/cloudUsage/repair?window=2023-01-01T00:00:00Z,2023-01-04T00:00:00Z"
-{"code":200,"data":"Cloud Usage Repair process has begun for [2023-01-01T00:00:00+0000, 2023-01-04T00:00:00+0000) for all providers"}
-
-# Check logs to watch this job run until completion
-$ kubectl logs deploy/kubecost-cost-analyzer | grep CloudUsage
-```
-
-## 3. Run Reconciliation Pipeline
-
-The Reconciliation Pipeline reconciles the existing Asset ETL with the newly gathered data in the CloudUsage ETL, further ensuring parity between Kubecost and your cloud bill. Further details about this API [here](cloud-integration.md).
-
-```bash
-# Repair
-# /model/etl/asset/reconciliation/repair?window=
-$ curl "https://kubecost.your.com/model/etl/asset/reconciliation/repair?window=2023-01-01T00:00:00Z,2023-01-04T00:00:00Z"
-{"code":200,"data":"Reconciliation Repair process has begun for [2023-01-01T00:00:00+0000, 2023-01-04T00:00:00+0000) for all providers"}
-
-# Check logs to watch this job run until completion
-$ kubectl logs deploy/kubecost-cost-analyzer | grep Reconciliation
-```
-
-## 4. Repair Allocation ETL
-
-The Allocation ETL builds upon all previous data to compute cost and resource allocations for Kubernetes entites. Further details about this API [here](diagnostics.md).
+The Allocation ETL builds upon all previous Asset data to compute cost and resource allocations for Kubernetes entities. Further details about this API [here](diagnostics.md).
 
 > **Note**: If the `window` parameter is within `.Values.kubecostModel.etlHourlyStoreDurationHours`, this endpoint will repair both the daily `[1d]` and hourly `[1h]` Allocation ETL.
 
@@ -74,6 +46,34 @@ INF ETL: Allocation[1d]: ETLStore.Repair[rptgQ]: repairing 2023-01-01 00:00:00 +
 INF ETL: Allocation[ETL[allocations][1d]]: Repair[rptgQ]: starting [2023-01-01T00:00:00+0000, 2023-01-02T00:00:00+0000)
 INF ETL: Allocation[ETL[allocations][1d]]: Repair[rptgQ]: starting [2023-01-02T00:00:00+0000, 2023-01-03T00:00:00+0000)
 INF ETL: Allocation[ETL[allocations][1d]]: Repair[rptgQ]: starting [2023-01-03T00:00:00+0000, 2023-01-04T00:00:00+0000)
+```
+
+## 3. Repair CloudUsage ETL
+
+The CloudUsage ETL pulls information from your cloud billing integration. Ensure it's been configured properly, otherwise no data will be retrieved. Further details about this API [here](cloud-integration.md).
+
+```bash
+# Repair
+# /model/etl/cloudUsage/repair?window=
+$ curl "https://kubecost.your.com/model/etl/cloudUsage/repair?window=2023-01-01T00:00:00Z,2023-01-04T00:00:00Z"
+{"code":200,"data":"Cloud Usage Repair process has begun for [2023-01-01T00:00:00+0000, 2023-01-04T00:00:00+0000) for all providers"}
+
+# Check logs to watch this job run until completion
+$ kubectl logs deploy/kubecost-cost-analyzer | grep CloudUsage
+```
+
+## 4. Run Reconciliation Pipeline
+
+The Reconciliation Pipeline reconciles the existing ETL with the newly gathered data in the CloudUsage ETL, further ensuring parity between Kubecost and your cloud bill. Further details about this API [here](cloud-integration.md).
+
+```bash
+# Repair
+# /model/etl/asset/reconciliation/repair?window=
+$ curl "https://kubecost.your.com/model/etl/asset/reconciliation/repair?window=2023-01-01T00:00:00Z,2023-01-04T00:00:00Z"
+{"code":200,"data":"Reconciliation Repair process has begun for [2023-01-01T00:00:00+0000, 2023-01-04T00:00:00+0000) for all providers"}
+
+# Check logs to watch this job run until completion
+$ kubectl logs deploy/kubecost-cost-analyzer | grep Reconciliation
 ```
 
 ## Troubleshooting
