@@ -4,23 +4,32 @@ For teams interested in reducing their Kubernetes costs, it's beneficial to firs
 
 ![The Allocations view aggregated by namespace, which shows efficiency & idle](images/efficiency-idle.png)
 
-## Pod resource efficiency
+## Efficiency
 
-Resource efficiency over a time window is defined as the resource utilization over that time window versus the resource request over the same time window. It is cost-weighted and defined as followed:
+Pod resource efficiency is defined as the resource utilization versus the resource request over a given time window. It is cost-weighted and can be expressed as follows:
 
-* (((CPU Usage / CPU Requested) * CPU Cost) + ((RAM Usage / RAM Requested) * RAM Cost)) / (RAM Cost + CPU Cost)
-* CPU Usage = rate(container\_cpu\_usage\_seconds\_total) over the time window
-* RAM Usage = avg(container\_memory\_working\_set\_bytes) over the time window
+> *(((CPU Usage / CPU Requested) * CPU Cost) + ((RAM Usage / RAM Requested) * RAM Cost)) / (RAM Cost + CPU Cost)*
+>
+> where \
+> *CPU Usage = rate(container\_cpu\_usage\_seconds\_total) over the time window* \
+> *RAM Usage = avg(container\_memory\_working\_set\_bytes) over the time window*
 
-For example, if a pod is requesting 2 CPU and 1Gb, using 500mCPU and 500MB, CPU on the node costs $10/CPU , and RAM on the node costs $1/GB, we have ((0.5/2) \* 20 + (0.5/1) \* 1) / (20 + 1) = 5.5 / 21 = 26%
+For example, if a pod is requesting 2CPU and 1GB, using 500mCPU and 500MB, CPU on the node costs $10/CPU, and RAM on the node costs $1/GB, we have ((0.5/2) \* 20 + (0.5/1) \* 1) / (20 + 1) = 5.5 / 21 = 26%
 
-## Cluster idle costs
+## Idle
 
-Idle cost is defined as the difference between the cost of allocated resources and the cost of the hardware they run on. Allocation is defined as the max of usage and requests.
+Cluster idle cost is defined as the difference between the cost of allocated resources and the cost of the hardware they run on. Allocation is defined as the max of usage and requests. It can also be expressed as follows:
 
-So, idle costs can also be thought of as the cost of the space that the Kubernetes scheduler could add pods without disrupting any workloads in but is not currently. Idle can be charged back to pods on a cost-weighted basis or viewed as a separate line item.
+> *idle_cost = sum(node_cost) - (cpu_allocation_cost + ram_allocation_cost + gpu_allocation_cost)*
+>
+> where \
+> *allocation = max(request, usage)*
 
-As an example, consider the following representations:
+So, idle costs can also be thought of as the cost of the space that the Kubernetes scheduler could schedule pods, without disrupting any existing workloads, but it is not currently.
+
+### Sharing idle
+
+Idle can be charged back to pods on a cost-weighted basis or viewed as a separate line item. As an example, consider the following representations:
 
 * \[ ... ] = cluster
 * ( ... ) = node
@@ -35,11 +44,19 @@ In total, there are 12 units of resources, and idle can be shared as follows:
 
 * **Separate**: In this single cluster across two nodes, there are 7 total idles.
 * **Share By Node**: The first node has 4 resources used and 2 idle. The second node has 1 resource used and 5 idle. If you share idle by node, then w1-4 will share 2 idles, and w5 will get 5 idles.
-* **Share By Cluster**: The single cluster has 5 resources used and 7 idle. If you share idle by cluster, then the 5 workloads will share the 7 idles
+* **Share By Cluster**: The single cluster has 5 resources used and 7 idle. If you share idle by cluster, then w1-5 will share the 7 idles.
+
+### Distributing idle when aggregating
+
+If for example you are aggregating by namespace, idle costs will be distributed to each namespace proportional to how much that namespace costs. Specifically:
+
+> *namespace_cpu_idle_cost = (namespace_cpu_cost / (total_cpu_cost - idle_cpu_cost)) * idle_cpu_cost*
+
+This same principle applies for ram, and also applies to any aggregation that is used (e.g. Deployment, Label, Service, Team).
 
 ## Target values for efficiency and idle
 
-The most common pattern for cost reduction is to ask service owners to tune the efficiency of their pods, then reclaim space by setting target idle costs.
+The most common pattern for cost reduction is to ensure service owners tune the efficiency of their pods, and ensure cluster owners scale resources to appropriately minimize idle.
 
 Efficiency targets can depend on the SLAs of the application. See our notes on [request right-sizing](api-request-right-sizing-v2.md) for more details.
 
