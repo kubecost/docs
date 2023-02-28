@@ -33,7 +33,7 @@ eksctl create iamserviceaccount   \
     --approve \
     --role-only \
     --role-name AmazonEKS_EBS_CSI_DriverRole
-export SERVICE_ACCOUNT_ROLE_ARN=$(aws iam get-role --role-name AmazonEKS_EBS_CSI_DriverRole | jq -r '.Role.Arn')
+export SERVICE_ACCOUNT_ROLE_ARN=$(aws iam get-role --role-name AmazonEKS_EBS_CSI_DriverRole --output json | jq -r '.Role.Arn')
 ```
 
 2. Install the Amazon EBS CSI add-on for EKS using the AmazonEKS_EBS_CSI_DriverRole by issuing the following command:
