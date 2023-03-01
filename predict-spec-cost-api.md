@@ -32,19 +32,19 @@ read -r -d '' WL << EndOfMessage
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: michaelkc-cost-analyzer
-  namespace: michaelkc
+  name: kubecost-cost-analyzer
+  namespace: kubecost
   labels:
-    app: michaelkc-cost-analyzer
+    app: kubecost-cost-analyzer
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: michaelkc-cost-analyzer
+      app: kubecost-cost-analyzer
   template:
     metadata:
       labels:
-        app: michaelkc-cost-analyzer
+        app: kubecost-cost-analyzer
     spec:
       containers:
       - name: cost-model
@@ -102,9 +102,9 @@ The output:
 ```json
 [
   {
-    "namespace": "michaelkc",
+    "namespace": "kubecost",
     "controllerKind": "deployment",
-    "controllerName": "michaelkc-cost-analyzer",
+    "controllerName": "kubecost-cost-analyzer",
     "costBefore": {
       "totalMonthlyRate": 3.5397661399108418,
       "cpuMonthlyRate": 2.3273929838395513,
