@@ -27,7 +27,7 @@ can be passed via separation with the standard `---` syntax.
 ### Example
 
 Write some Kubernetes specs to a file called `/tmp/testspecs.yaml`:
-```
+```sh
 read -r -d '' WL << EndOfMessage
 apiVersion: apps/v1
 kind: Deployment
@@ -89,7 +89,7 @@ echo "${WL}" > /tmp/testspecs.yaml
 ```
 
 Call the endpoint with `curl`, passing the file in the request body:
-```
+```sh
 curl \
     -XPOST \
     'http://localhost:9090/model/prediction/speccost?clusterID=cluster-one&defaultNamespace=customdefault' \
