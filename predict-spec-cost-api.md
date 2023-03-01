@@ -26,6 +26,7 @@ can be passed via separation with the standard `---` syntax.
 
 ### Example
 
+Write some Kubernetes specs to a file called `/tmp/testspecs.yaml`:
 ```
 read -r -d '' WL << EndOfMessage
 apiVersion: apps/v1
@@ -84,36 +85,52 @@ spec:
             memory: "10Mi"
 EndOfMessage
 
-echo "${WL}" | \
-    curl \
+echo "${WL}" > /tmp/testspecs.yaml
+```
+
+Call the endpoint with `curl`, passing the file in the request body:
+```
+curl \
     -XPOST \
-    'http://localhost:9090/model/prediction/speccost?clusterID=cluster-localrun-default&defaultNamespace=customdefault' \
+    'http://localhost:9090/model/prediction/speccost?clusterID=cluster-one&defaultNamespace=customdefault' \
     -H 'Content-Type: application/yaml' \
-    --data-binary "@-" \
+    --data-binary "@/tmp/testspecs.yaml" \
     | jq
-    
+```
+
+The output:
+```json
 [
   {
     "namespace": "michaelkc",
     "controllerKind": "deployment",
     "controllerName": "michaelkc-cost-analyzer",
     "costBefore": {
-      "totalMonthlyRate": 0,
-      "cpuMonthlyRate": 0,
-      "ramMonthlyRate": 0,
-      "gpuMonthlyRate": 0
+      "totalMonthlyRate": 3.5397661399108418,
+      "cpuMonthlyRate": 2.3273929838395513,
+      "ramMonthlyRate": 1.2123731560712905,
+      "gpuMonthlyRate": 0,
+      "monthlyCPUCoreHours": 73,
+      "monthlyRAMByteHours": 304653271040,
+      "monthlyGPUHours": 0
     },
     "costAfter": {
-      "totalMonthlyRate": 0.15658546875000004,
-      "cpuMonthlyRate": 0.13848000000000005,
-      "ramMonthlyRate": 0.018105468749999992,
-      "gpuMonthlyRate": 0
+      "totalMonthlyRate": 2.623504800996625,
+      "cpuMonthlyRate": 0.6283961056366789,
+      "ramMonthlyRate": 1.9951086953599462,
+      "gpuMonthlyRate": 0,
+      "monthlyCPUCoreHours": 19.71,
+      "monthlyRAMByteHours": 501344315550,
+      "monthlyGPUHours": 0
     },
     "costChange": {
-      "totalMonthlyRate": 0.15658546875000004,
-      "cpuMonthlyRate": 0.13848000000000005,
-      "ramMonthlyRate": 0.018105468749999992,
-      "gpuMonthlyRate": 0
+      "totalMonthlyRate": -0.9162613389142167,
+      "cpuMonthlyRate": -1.6989968782028724,
+      "ramMonthlyRate": 0.7827355392886557,
+      "gpuMonthlyRate": 0,
+      "monthlyCPUCoreHours": -53.29,
+      "monthlyRAMByteHours": 196691044510,
+      "monthlyGPUHours": 0
     }
   },
   {
@@ -124,22 +141,37 @@ echo "${WL}" | \
       "totalMonthlyRate": 0,
       "cpuMonthlyRate": 0,
       "ramMonthlyRate": 0,
-      "gpuMonthlyRate": 0
+      "gpuMonthlyRate": 0,
+      "monthlyCPUCoreHours": 0,
+      "monthlyRAMByteHours": 0,
+      "monthlyGPUHours": 0
     },
     "costAfter": {
-      "totalMonthlyRate": 0.7829273437500001,
-      "cpuMonthlyRate": 0.6924000000000001,
-      "ramMonthlyRate": 0.09052734374999996,
-      "gpuMonthlyRate": 0
+      "totalMonthlyRate": 0.7896028064135204,
+      "cpuMonthlyRate": 0.6982178951518654,
+      "ramMonthlyRate": 0.09138491126165506,
+      "gpuMonthlyRate": 0,
+      "monthlyCPUCoreHours": 21.9,
+      "monthlyRAMByteHours": 22963814400,
+      "monthlyGPUHours": 0
     },
     "costChange": {
-      "totalMonthlyRate": 0.7829273437500001,
-      "cpuMonthlyRate": 0.6924000000000001,
-      "ramMonthlyRate": 0.09052734374999996,
-      "gpuMonthlyRate": 0
+      "totalMonthlyRate": 0.7896028064135204,
+      "cpuMonthlyRate": 0.6982178951518654,
+      "ramMonthlyRate": 0.09138491126165506,
+      "gpuMonthlyRate": 0,
+      "monthlyCPUCoreHours": 21.9,
+      "monthlyRAMByteHours": 22963814400,
+      "monthlyGPUHours": 0
     }
   }
 ]
 ```
 
-Note how `defaultNamespace` impacts the `default-deployment` workload.
+> Note how `defaultNamespace` impacts the `default-deployment` workload.
+
+We can see from that output that the diff (`costChange`) notices our existing
+`kubecost-cost-analyzer` Deployment in the `kubecost` namespace and is producing
+an estimated _negative_ cost difference because our request is being reduced.
+However, because historical usage is also factored in, we aren't seeing the
+expected drastic reduction from a `1m` and `1Mi` request.
