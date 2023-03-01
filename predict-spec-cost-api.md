@@ -173,5 +173,6 @@ The output:
 We can see from that output that the diff (`costChange`) notices our existing
 `kubecost-cost-analyzer` Deployment in the `kubecost` namespace and is producing
 an estimated _negative_ cost difference because our request is being reduced.
-However, because historical usage is also factored in, we aren't seeing the
-expected drastic reduction from a `1m` and `1Mi` request.
+However, because historical usage is also factored in, we aren't seeing a
+drastic cost reduction that might be initially be expected from a `1m` CPU and
+`1Mi` memory request.
