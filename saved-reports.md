@@ -44,6 +44,7 @@ The following fields apply to each map item under the `reports` key:
   * `team`
 * `chartDisplay` -- Can be one of `category`, `series`, `efficiency`, `percentage`, or `treemap`. See [Cost Allocation Charts](/cost-allocation.md#chart) for more info.
 * `idle` idle cost allocation, supports `hide`, `shareByNode`, `shareByCluster`, and `separate`
+* `rate` -- Can be one of `cumulative`, `monthly`, `daily`, `hourly`
 * `accumulate` determines whether or not to sum Allocation costs across the entire window -- equivalent to _Resolution_ in the UI, supports `true` (Entire window resolution) and `false` (Daily resolution)
 * `sharedNamespaces` -- a list containing namespaces to share costs for.
 * `sharedOverhead` -- an integer representing overhead costs to share.
@@ -68,7 +69,9 @@ The following fields apply to each map item under the `reports` key:
       - title: "Example Saved Report 0"
         window: "today"
         aggregateBy: "namespace"
+        chartDisplay: "category"
         idle: "separate"
+        rate: "cumulative"
         accumulate: false # daily resolution
         sharedNamespaces:
           - monitoring
@@ -81,7 +84,9 @@ The following fields apply to each map item under the `reports` key:
       - title: "Example Saved Report 1"
         window: "month"
         aggregateBy: "controllerKind"
+        chartDisplay: "category"
         idle: "shareByNode"
+        rate: "monthly"
         accumulate: false
         filters:
           - property: "label"
@@ -91,7 +96,9 @@ The following fields apply to each map item under the `reports` key:
       - title: "Example Saved Report 2"
         window: "2020-11-11T00:00:00Z,2020-12-09T23:59:59Z"
         aggregateBy: "service"
+        chartDisplay: "category"
         idle: "hide"
+        rate: "daily"
         accumulate: true # entire window resolution
         filters: [] # if no filters, specify empty array
 ```
