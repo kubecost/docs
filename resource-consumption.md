@@ -3,7 +3,7 @@ Tuning Resource Consumption
 
 Kubecost can run on clusters with thousands of nodes when resource consumption is properly tuned. Here's a chart with some of the steps you can take to tune Kubecost, along with descriptions of each.
 
-![Memory Reduction Steps](https://user-images.githubusercontent.com/453512/171096603-0f0b600f-0452-4ae2-a001-e7c4a26e0ad5.png)
+![Memory Reduction Steps](/images/resource-consumption.png)
 
 ## On secondaries: Disabling Cloud Assets and running Kubecost in Agent Mode/With ETL and caching disabled
 
@@ -24,6 +24,13 @@ Kubecost can run on clusters with thousands of nodes when resource consumption i
 * The default value is: `5`
 * This can be tuned with the [Helm value](https://github.com/kubecost/cost-analyzer-helm-chart/blob/v1.93.2/cost-analyzer/values.yaml#L272):
   * `--set kubecostModel.maxQueryConcurrency=1`
+
+## Lower query duration
+
+* Lowering query duration results in Kubecost querying for smaller windows when building ETL data. This can lead to slower ETL build times, but lower memory peaks because of the smaller datasets.
+* The default values is: `1440`
+* This can be tuned with the Helm value:
+  * `--set kubecostModel.maxPrometheusQueryDurationMinutes=300`
 
 ## Lower query resolution
 

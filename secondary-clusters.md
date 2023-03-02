@@ -16,7 +16,7 @@ Disable product caching and reduce query concurrency with the following paramete
 --set kubecostModel.warmCache=false
 --set kubecostModel.warmSavingsCache=false
 --set kubecostModel.etl=false
---set kubecostModel.etlCloudAsset
+--set kubecostModel.etlCloudAsset=false
 --set kubecostModel.maxQueryConcurrency=1
 ```
 
