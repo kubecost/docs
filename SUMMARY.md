@@ -98,6 +98,7 @@
   * [Asset Diff API](asset-diff.md)
   * [Audit API](audit-api.md)
   * [Events API](api-events.md)
+  * [Cost Events Audit API](cost-events-audit-api.md)
   * [Filter Parameters (v2)](filters-api.md)
 * [Deprecated APIs](apis/deprecated-apis/README.md)
   * [Container Request Right-Sizing Recommendation API (V1) - Deprecated](api-request-right-sizing.md)
