@@ -8,7 +8,7 @@ The Kubecost Prometheus deployment is optimized to not interfere with other obse
 
 Additionally, if multi-cluster metric aggregation is required, Kubecost provides a turnkey solution that is highly tuned and simple to support using the included Prometheus deployment.
 
-> **Note**: the Kubecost team provides best efforts support for free/community users when integrating with an existing Prometheus deployment.
+> **Note**: The Kubecost team provides best efforts support for free/community users when integrating with an existing Prometheus deployment.
 
 ## Disable node-exporter and kube-state-metrics (recommended)
 
@@ -102,13 +102,10 @@ Common issues include the following:
 Evidenced by the following pod error message `No valid prometheus config file at ...` and the init pods hanging. We recommend running `curl <your_prometheus_url>/api/v1/status/config` from a pod in the cluster to confirm that your [Prometheus config](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#configuration-file) is returned. Here is an example, but this needs to be updated based on your pod name and Prometheus address:
 
 ```
-kubectl exec -i -t -n kubecost \
-  $(kubectl get pod --namespace kubecost|grep analyzer -m1 |awk '{print $1}') \
-  -c cost-analyzer-frontend -- \
+kubectl exec -i -t --namespace kubecost \
+  deployment/kubecost-cost-analyzer -c cost-analyzer-frontend -- \
   curl http://<your_prometheus_url>/api/v1/status/config
 ```
-
-> **Note**: In the above example, `$(kubectl get pod --namespace kubecost|grep analyzer -m1 |awk '{print $1}')` simply finds the name of a cost analyzer pod. You can replace this with the pod name, example: `kubecost-cost-analyzer-5bc6947b94-58hmx`
 
 > **Note**: In the above example, \<your\_prometheus\_url> may include a port number and/or namespace, example: `http://prometheus-operator-kube-p-prometheus.monitoring:9090/api/v1/status/config`
 
@@ -121,9 +118,8 @@ Network policies, Mesh networks, or other security related tooling can block net
 When successful, this command should return all of the metrics that Kubecost uses. Failures may be indicative of the network traffic being blocked.
 
 ```
-kubectl exec -i -t -n kubecost \
-  $(kubectl get pod --namespace kubecost|grep analyzer -m1 |awk '{print $1}') \
-  -c cost-analyzer-frontend -- \
+kubectl exec -i -t --namespace kubecost \
+  deployment/kubecost-cost-analyzer -c cost-analyzer-frontend -- \
   curl "http://<your_prometheus_url>/metrics"
 ```
 
@@ -152,18 +148,16 @@ Ensure results are not null for both queries below.
 1. Make sure prometheus is scraping Kubecost search metrics for: `node_total_hourly_cost`
 
 ```
-kubectl exec -i -t -n kubecost \
-  $(kubectl get pod --namespace kubecost|grep analyzer -m1 |awk '{print $1}') \
-  -c cost-analyzer-frontend -- \
+kubectl exec -i -t --namespace kubecost \
+  deployment/kubecost-cost-analyzer -c cost-analyzer-frontend -- \
   curl "http://localhost:9003/prometheusQuery?query=node_total_hourly_cost"
 ```
 
 2. Ensure kube-state-metrics are available: `kube_node_status_capacity`
 
 ```
-kubectl exec -i -t -n kubecost \
-  $(kubectl get pod --namespace kubecost|grep analyzer -m1 |awk '{print $1}') \
-  -c cost-analyzer-frontend -- \
+kubectl exec -i -t --namespace kubecost \
+  deployment/kubecost-cost-analyzer -c cost-analyzer-frontend -- \
   curl "http://localhost:9003/prometheusQuery?query=kube_node_status_capacity"
 ```
 
@@ -188,23 +182,21 @@ Ensure that all clusters and nodes have values- output should be similar to the 
 1. Make sure prometheus is scraping Kubecost search metrics for: `node_total_hourly_cost`
 
 ```
-kubectl exec -i -t -n kubecost \
-  $(kubectl get pod --namespace kubecost|grep analyzer -m1 |awk '{print $1}') \
-  -c cost-analyzer-frontend -- \
+kubectl exec -i -t --namespace kubecost \
+  deployment/kubecost-cost-analyzer -c cost-analyzer-frontend -- \
   curl -G http://localhost:9003/thanosQuery \
   -d time=`date -d '1 day ago' "+%Y-%m-%dT%H:%M:%SZ"` \
   --data-urlencode "query=avg (sum_over_time(node_total_hourly_cost[1d])) by (cluster_id, node)" \
   | jq
 ```
 
-> Note on Mac OS: change `date -d '1 day ago'` to `date -v '-1d'`
+> **Note**: On Mac OS, change `date -d '1 day ago'` to `date -v '-1d'`
 
 2. Ensure kube-state-metrics are available: `kube_node_status_capacity`
 
 ```
-kubectl exec -i -t -n kubecost \
-  $(kubectl get pod --namespace kubecost|grep analyzer -m1 |awk '{print $1}') \
-  -c cost-analyzer-frontend -- \
+kubectl exec -i -t --namespace kubecost \
+  deployment/kubecost-cost-analyzer -c cost-analyzer-frontend -- \
   curl -G http://localhost:9003/thanosQuery \
   -d time=`date -d '1 day ago' "+%Y-%m-%dT%H:%M:%SZ"` \
   --data-urlencode "query=avg (sum_over_time(kube_node_status_capacity[1d])) by (cluster_id, node)" \
