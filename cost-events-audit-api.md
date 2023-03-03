@@ -4,7 +4,7 @@
 
 The Cost Events Audit API aims to offer improved visibility on recent changes at cluster level and their estimated cost impact.
 
-{% swagger method="get" path="/log" baseUrl="http://<your-kubecost-address>/model/audit/events" summary="Cost events Audit API" %}
+{% swagger method="get" path="/audit/events" baseUrl="http://<your-kubecost-address>/model" summary="Cost events Audit API" %}
 {% swagger-description %}
 Accesses the most recent cluster events and their predicted cost impact
 {% endswagger-description %}
@@ -92,15 +92,16 @@ Floating-point value representing the upper bound for the total event cost.
 
 ## Event tracking
 
-Changes at cluster level can range from actions triggered by declarative statements submitted by users (e.g. creation of a Deployment) to automated actions (e.g. cluster autoscaling) or performance events. We detect changes that would have an estimated impact on the overall cluster cost using watchers on the Kubernetes API client.
+Changes at cluster level can range from actions triggered by declarative statements submitted by users (e.g. creation of a Deployment) to automated actions (e.g. cluster autoscaling) or performance events. We detect changes that would have an impact on the overall cluster cost using watchers on the Kubernetes API client.
 
 The watchers are tracking change events across all namespaces within the local/primary cluster. (the cluster that the instance of Kubecost you are interacting with via HTTP is running on)
 
 ### Supported events
 
-> **Note**: This page will be updated as more event types are supported.
+* Deployment creation
+* Deployment deletion
 
-The only events supported at the moment are Deployment creations and deletions.
+> **Note**: This page will be updated as more event types are supported.
 
 ## Estimated cost impact
 
