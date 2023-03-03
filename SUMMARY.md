@@ -82,6 +82,7 @@
   * [Saved Reports](saved-reports.md)
   * [Advanced Reporting](advanced-reports.md)
   * [Alerts](alerts.md)
+  * [Audits](audits.md)
   * [Contexts](context-switcher.md)
 * [Kubecost Data Audit](using-kubecost/kubecost-data-audit/README.md)
   * [AWS/Kubecost Data Audit](using-kubecost/kubecost-data-audit/aws-kubecost-data-audit.md)
