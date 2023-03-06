@@ -26,6 +26,10 @@ helm install kubecost kubecost/cost-analyzer --namespace kubecost --devel
 * Staging releases are built before scheduled releases and published in [this repo](https://github.com/kubecost/staging-repo).
 * You can get the latest staging build by following the [install steps](staging.md)
 
+## Pushing Releases
+
+We never want to miss our communicated release date, but sometimes it happens. We will only push releases when we as a team feel like we're not delivering our best possible work product. Generally speaking, if we don't release on time, we have a lot more work to complete before we feel like we're putting our best foot forward. Ocassionally this happens, and when it does, we will communicate through our RC release notes what the new anticipated release date is. 
+
 ## Nightly releases
 
 A Helm chart release is created every night with the latest images. These images should be considered "bleeding edge" and may be unstable. You can get that Helm repo with the following:
