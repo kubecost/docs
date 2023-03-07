@@ -56,6 +56,7 @@ config:
   signature_version2: false
   put_user_metadata:
     "X-Amz-Acl": "bucket-owner-full-control"
+prefix: ""  # Optional. Specify a path within the bucket (e.g. "kubecost/etlbackup").
 ```
 
 #### Google Cloud Storage
@@ -78,7 +79,8 @@ config:
       "token_uri": "https://oauth2.googleapis.com/token",
       "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
       "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/kubecost%40gitpods.iam.gserviceaccount.com"
-    }    
+    }
+prefix: ""  # Optional. Specify a path within the bucket (e.g. "kubecost/etlbackup").
 ```
 
 #### Azure
@@ -92,6 +94,7 @@ config:
   storage_account_key: "<STORAGE_ACCOUNT_KEY>"
   container: "my-bucket"
   endpoint: ""
+prefix: ""  # Optional. Specify a path within the bucket (e.g. "kubecost/etlbackup").
 ```
 
 #### Storj
@@ -114,6 +117,7 @@ config:
   trace:
     enable: true
   part_size: 134217728
+prefix: ""  # Optional. Specify a path within the bucket (e.g. "kubecost/etlbackup").
 ```
 
 ### Step 2: Enable ETL backup in Helm values
