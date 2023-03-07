@@ -5,7 +5,7 @@ Kubecost's ETL is a computed cache based on Prometheus's metrics, from which the
 There are a number of reasons why you may want to backup this ETL data:
 
 * To ensure a copy of your Kubecost data exists, so that you can restore the data if needed
-* If you would like to reduce the amount of historical data stored in Prometheus/Thanos, and instead retain historical ETL data
+* To reduce the amount of historical data stored in Prometheus/Thanos, and instead retain historical ETL data
 
 > **Note**: Beginning in v1.100 this feature will be enabled by default if you have Thanos enabled. To opt out, set `.Values.kubecostModel.etlBucketConfigSecret=""`
 
