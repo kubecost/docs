@@ -28,7 +28,7 @@ helm install kubecost kubecost/cost-analyzer --namespace kubecost --devel
 
 ## Pushing Releases
 
-We never want to miss our communicated release date, but sometimes it happens. We will only push releases when we as a team feel like we're not delivering our best possible work product. Generally speaking, if we don't release on time, we have a lot more work to complete before we feel like we're putting our best foot forward. Ocassionally this happens, and when it does, we will communicate through our RC release notes what the new anticipated release date is. We will, at a minimum, have RC images available by the planned release date. We will also regularly cut RC images every few days until the anticipated launch date.
+We never want to miss our communicated release date, but sometimes it happens. We will only publish releases when we as a team feel like we're not delivering our best possible work product. Generally speaking, if we don't release on time, we have more work to complete before we feel like we're putting our best foot forward. Occasionally this happens, and when it does, we will communicate through our RC release notes what the new anticipated release date is. We will, at a minimum, have RC images available by the planned release date. We will also regularly cut RC images every few days until the anticipated launch date.
 
 ## Nightly releases
 
