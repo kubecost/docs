@@ -135,6 +135,7 @@
 * [Running a Query in Kubecost-bundled Prometheus](prometheus.md)
 * [Bug Bounty Program](bug-bounty-program.md)
 * [Getting Support](support-channels.md)
+* [Kubecost Glossary](troubleshooting/kubecost-glossary.md)
 
 ## Other Resources
 
