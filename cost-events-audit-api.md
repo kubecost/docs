@@ -2,6 +2,8 @@
 
 > **Note**: This feature is in a beta state. It has limitations. Please read the documentation carefully.
 
+> **Note**: This feature is only officially supported on Kubecost Enterprise plans.
+
 The Cost Events Audit API aims to offer improved visibility on recent changes at cluster level and their estimated cost impact.
 
 {% swagger method="get" path="/audit/events" baseUrl="http://<your-kubecost-address>/model" summary="Cost events Audit API" %}
@@ -89,6 +91,16 @@ Floating-point value representing the upper bound for the total event cost.
 ```
 {% endswagger-response %}
 {% endswagger %}
+
+## Enabling the Cost Events Audit API
+
+This API is disabled by default. It needs to be manually enabled first through Helm, using the following parameters:
+
+```
+.Values.costEventsAudit.enabled = true
+```
+
+You can also enable the Cost Events Audit API by setting the `COST_EVENTS_AUDIT_ENABLED` environment variable to `true`.
 
 ## Event tracking
 
