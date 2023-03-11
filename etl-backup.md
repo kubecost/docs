@@ -5,8 +5,7 @@ Kubecost's ETL is a computed cache based on Prometheus's metrics, from which the
 There are a number of reasons why you may want to backup this ETL data:
 
 * To ensure a copy of your Kubecost data exists, so that you can restore the data if needed
-* If you would like to reduce the amount of data stored in Prometheus (15 day retention window by default) or Thanos
-* To view data in the Kubecost frontend beyond the configured `.Values.kubecostModel.etlDailyStoreDurationDays`
+* To reduce the amount of historical data stored in Prometheus/Thanos, and instead retain historical ETL data
 
 > **Note**: Beginning in v1.100 this feature will be enabled by default if you have Thanos enabled. To opt out, set `.Values.kubecostModel.etlBucketConfigSecret=""`
 
@@ -56,6 +55,7 @@ config:
   signature_version2: false
   put_user_metadata:
     "X-Amz-Acl": "bucket-owner-full-control"
+prefix: ""  # Optional. Specify a path within the bucket (e.g. "kubecost/etlbackup").
 ```
 
 #### Google Cloud Storage
@@ -78,7 +78,8 @@ config:
       "token_uri": "https://oauth2.googleapis.com/token",
       "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
       "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/kubecost%40gitpods.iam.gserviceaccount.com"
-    }    
+    }
+prefix: ""  # Optional. Specify a path within the bucket (e.g. "kubecost/etlbackup").
 ```
 
 #### Azure
@@ -92,6 +93,7 @@ config:
   storage_account_key: "<STORAGE_ACCOUNT_KEY>"
   container: "my-bucket"
   endpoint: ""
+prefix: ""  # Optional. Specify a path within the bucket (e.g. "kubecost/etlbackup").
 ```
 
 #### Storj
@@ -114,6 +116,7 @@ config:
   trace:
     enable: true
   part_size: 134217728
+prefix: ""  # Optional. Specify a path within the bucket (e.g. "kubecost/etlbackup").
 ```
 
 ### Step 2: Enable ETL backup in Helm values
