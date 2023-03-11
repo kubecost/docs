@@ -101,6 +101,7 @@
   * [Asset Diff API](asset-diff.md)
   * [Audit API](audit-api.md)
   * [Events API](api-events.md)
+  * [Cost Events Audit API](cost-events-audit-api.md)
   * [Spec Cost Prediction API](apis/apis-overview/spec-cost-prediction-api.md)
   * [Budget API](apis/apis-overview/budget-api.md)
   * [Cloud Cost API](apis/apis-overview/cloud-cost-api.md)
