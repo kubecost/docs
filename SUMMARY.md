@@ -71,6 +71,7 @@
     * [Efficiency and Idle](efficiency-idle.md)
     * [Network Traffic Cost Allocation](network-allocation.md)
   * [Kubernetes Assets](assets.md)
+  * [Cloud Costs Explorer](using-kubecost/getting-started/cloud-costs-explorer.md)
   * [Savings](savings.md)
     * [Automatic Request Right-Sizing](auto-request-sizing.md)
       * [ContainerStats Pipeline](containerstats-pipeline.md)
@@ -81,6 +82,7 @@
   * [Cluster Health Score](cluster-health-score.md)
   * [Saved Reports](saved-reports.md)
   * [Advanced Reporting](advanced-reports.md)
+  * [Budgets](using-kubecost/getting-started/budgets.md)
   * [Alerts](alerts.md)
   * [Audits](audits.md)
   * [Contexts](context-switcher.md)
@@ -99,6 +101,9 @@
   * [Asset Diff API](asset-diff.md)
   * [Audit API](audit-api.md)
   * [Events API](api-events.md)
+  * [Spec Cost Prediction API](apis/apis-overview/spec-cost-prediction-api.md)
+  * [Budget API](apis/apis-overview/budget-api.md)
+  * [Cloud Cost API](apis/apis-overview/cloud-cost-api.md)
   * [Filter Parameters (v2)](filters-api.md)
 * [Deprecated APIs](apis/deprecated-apis/README.md)
   * [Container Request Right-Sizing Recommendation API (V1) - Deprecated](api-request-right-sizing.md)
@@ -136,6 +141,7 @@
 * [Running a Query in Kubecost-bundled Prometheus](prometheus.md)
 * [Bug Bounty Program](bug-bounty-program.md)
 * [Getting Support](support-channels.md)
+* [Kubecost Glossary](troubleshooting/kubecost-glossary.md)
 
 ## Other Resources
 
