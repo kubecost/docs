@@ -71,6 +71,7 @@
     * [Efficiency and Idle](efficiency-idle.md)
     * [Network Traffic Cost Allocation](network-allocation.md)
   * [Kubernetes Assets](assets.md)
+  * [Cloud Costs Explorer](using-kubecost/getting-started/cloud-costs-explorer.md)
   * [Savings](savings.md)
     * [Automatic Request Right-Sizing](auto-request-sizing.md)
       * [ContainerStats Pipeline](containerstats-pipeline.md)
