@@ -294,8 +294,6 @@ Cluster health alerts occur when the cluster health score changes by a specific 
 * Out of Memory Pods
 * Failed Jobs
 
-This alert only uses Slack and Microsoft Teams, so it requires the `global...WebhookUrl` field, or setting the `...WebhookUrl` field for either platform for the alert.
-
 Example Helm _values.yaml_:
 
 ```
@@ -303,6 +301,10 @@ Example Helm _values.yaml_:
 - type: health              # Alerts when health score changes by a threshold
   window: 10m
   threshold: 5              # Send Alert if health scores changes by 5 or more
+  ownerContact: # optional, overrides globalAlertEmails default
+    - owner@example.com
+    - owner2@example.com
+  slackWebhookUrl: https://hooks.slack.com/services/<different-from-global> # optional, overrides globalSlackWebhookUrl default
 ```
 
 ### Type: Monitor Kubecost Health
@@ -330,14 +332,16 @@ _Optional parameters:_
 
 * `diagnostics` -- object containing specific diagnostic checks to run (default is `true` for all). See configuration example below for options:
 
-This alert only uses Slack and Microsoft Teams, so it requires the `global...WebhookUrl` field, or setting the `...WebhookUrl` field for either platform for the alert.
-
 Example Helm _values.yaml_:
 
 ```
 # Kubecost Health Diagnostic
 - type: diagnostic
   window: 10m
+  ownerContact: # optional, overrides globalAlertEmails default
+    - owner@example.com
+    - owner2@example.com
+  slackWebhookUrl: https://hooks.slack.com/services/<different-from-global> # optional, overrides globalSlackWebhookUrl default
   diagnostics: 
     prometheusUp: true
     cAdvisor: true
@@ -353,7 +357,7 @@ Example Helm _values.yaml_:
 
 ### Cluster and Kubecost Health Alerts
 
-Cluster Health Alerts and Kubecost Health Alerts work differently from other alert types. While other alerts monitor cost data for cost or efficiency anomalies, these two montior the health of Kubecost itself, as well as the health of the cluster running Kubecost. For this reason, multiple of these alert types cannot be created. In the UI, switches for these alert types can be toggled either on or off, managing a single instance of each, and allowing the settings of these single instances to be adjusted.
+Cluster Health Alerts and Kubecost Health Alerts work differently from other alert types. While other alerts monitor cost data for cost or efficiency anomalies, these two monitor the health of Kubecost itself, as well as the health of the cluster running Kubecost. For this reason, multiple of these alert types cannot be created. In the UI, switches for these alert types can be toggled either on or off, managing a single instance of each, and allowing the settings of these single instances to be adjusted.
 
 <figure><img src=".gitbook/assets/alertshealth.png" alt=""><figcaption><p>Cluster and Kubecost Health Alerts</p></figcaption></figure>
 

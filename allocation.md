@@ -562,8 +562,7 @@ Allocation data for today unaggregated:
 {% tab title="Request" %}
 ```
 $ curl http://localhost:9090/model/allocation
--d window=lastweek
--d aggregate=cluster
+-d window=today
 -G
 ```
 {% endtab %}
