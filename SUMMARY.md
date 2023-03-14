@@ -88,6 +88,7 @@
   * [Contexts](context-switcher.md)
 * [Kubecost Data Audit](using-kubecost/kubecost-data-audit/README.md)
   * [AWS/Kubecost Data Audit](using-kubecost/kubecost-data-audit/aws-kubecost-data-audit.md)
+  * [Azure/Kubecost Data Audit](using-kubecost/kubecost-data-audit/azure-kubecost-data-audit.md)
 
 ## APIs
 
