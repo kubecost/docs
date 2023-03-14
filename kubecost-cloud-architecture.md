@@ -11,7 +11,7 @@ The agent requires two pods and an optional daemonSet:
    2. Thanos sidecar: Ships metrics to Kubecost Cloud S3 bucket every 3 hours
    3. ConfigMap-Reload: Updates prometheus when changes are made. Learn more [here](https://github.com/jimmidyson/configmap-reload).
 3. **Network costs Daemonset**
-   1. (Optional) Used to allocate costs to the workload responsible for egress costs. Learn more [here](broken-reference).
+   1. (Optional) Used to allocate costs to the workload responsible for egress costs. Learn more [here](/network-allocation.md#network-costs-daemonset).
 
 ## Architecture Overview
 
