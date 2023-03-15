@@ -10,7 +10,7 @@ Number of historical days over which network traffic should be measured.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="threshold" type="int" %}
-The threshold of traffic (bytes/second) at which a workload is determined abandoned.
+The threshold of total traffic (bytes in/out per second) at which a workload is determined abandoned.
 {% endswagger-parameter %}
 
 {% swagger-response status="200: OK" description="" %}
