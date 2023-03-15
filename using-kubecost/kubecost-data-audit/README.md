@@ -29,3 +29,14 @@ Also, keep in mind that it typically takes ~24-48hrs for cloud providers to prov
 4. Select any node to view its details.
 
     <figure><img src="../../images/data-auditing/dataaudit-step4.png" alt=""><figcaption></figcaption></figure>
+
+## Viewing detailed costs of a node in Kubecost (via API)
+
+```bash
+curl -G http://localhost:9090/model/assets \
+    -d 'window=2023-02-14T00:00:00Z,2023-02-15T00:00:00Z' \
+    -d 'filterTypes=Node' \
+    -d 'filterProviders=AWS'
+```
+
+For more configuration options, visit the [Assets API doc](/assets-api.md).
