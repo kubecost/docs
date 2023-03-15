@@ -33,6 +33,7 @@
       * [GCP Long Term Storage](long-term-storage-gcp.md)
   * [ETL Backup](etl-backup.md)
     * [Sharing ETL Backups](sharing-etl-backups.md)
+  * [Kubecost Data Status Metrics](data-status-metrics.md)
   * [Provider Installations](install-and-configure/install/provider-installations/README.md)
     * [Amazon EKS Integration](aws-eks-cost-monitoring.md)
     * [AWS Marketplace Install](aws-marketplace-install.md)
