@@ -2,7 +2,7 @@
 
 > **Note**: This feature is in a pre-release (alpha/beta) state. It has limitations. Please read the documentation carefully.
 
-Kubecost can automatically implement its [recommendations](apis/apis/api-request-right-sizing-v2/) for container [resource requests](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#requests-and-limits) if you have the [Cluster Controller](controller.md) component enabled. Using automatic request right-sizing allows you to instantly optimize resource allocation across your entire cluster, without testing excessive YAML or complicated`kubectl` commands. You can easily eliminate resource over-allocation in your cluster, which paves the way for vast savings via cluster right-sizing and other optimizations.
+Kubecost can automatically implement its [recommendations](/api-request-right-sizing-v2.md) for container [resource requests](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#requests-and-limits) if you have the [Cluster Controller](controller.md) component enabled. Using automatic request right-sizing allows you to instantly optimize resource allocation across your entire cluster, without testing excessive YAML or complicated`kubectl` commands. You can easily eliminate resource over-allocation in your cluster, which paves the way for vast savings via cluster right-sizing and other optimizations.
 
 > **Note**: Cluster Controller is disabled by default because it is the only component of Kubecost with write access to cluster resources.
 
