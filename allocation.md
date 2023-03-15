@@ -24,124 +24,32 @@ The Allocation API is the preferred way to query for costs and resources allocat
 {% endswagger-description %}
 
 {% swagger-parameter in="path" name="window" type="string" required="true" %}
-Duration of time over which to query. Accepts words like 
+Duration of time over which to query. Accepts words like `today`, `week`, `month`, `yesterday`, `lastweek`, `lastmonth`; durations like `30m`, `12h`, `7d`; comma-separated RFC3339 date pairs like
 
-`today`
-
-, 
-
-`week`
-
-, 
-
-`month`
-
-, 
-
-`yesterday`
-
-, 
-
-`lastweek`
-
-, 
-
-`lastmonth`
-
-; durations like 
-
-`30m`
-
-, 
-
-`12h`
-
-, 
-
-`7d`
-
-; comma-separated RFC3339 date pairs like 
-
-`2021-01-02T15:04:05Z,2021-02-02T15:04:05Z`
-
-; comma-separated Unix timestamp (seconds) pairs like 
-
-`1578002645,1580681045`
-
-.
+`2021-01-02T15:04:05Z,2021-02-02T15:04:05Z`; comma-separated Unix timestamp (seconds) pairs like `1578002645,1580681045`.
 {% endswagger-parameter %}
 
-{% swagger-parameter in="path" name="aggregate" type="string" %}
-Field by which to aggregate the results. Accepts: 
+{% swagger-parameter in="path" name="aggregate" type="string" required="false" %}
+Field by which to aggregate the results. Accepts:
 
-`cluster`
+`cluster`, `namespace`, `controllerKind`, `controller`, `service`, `node`, `pod`, `label:<name>`, and `annotation:<name>`. Also accepts comma-separated lists for multi-aggregation, like
 
-, 
-
-`namespace`
-
-, 
-
-`controllerKind`
-
-, 
-
-`controller`
-
-, 
-
-`service`
-
-, 
-
-`node`
-
-, 
-
-`pod`
-
-, 
-
-`label:<name>`
-
-, and 
-
-`annotation:<name>`
-
-. Also accepts comma-separated lists for multi-aggregation, like 
-
-`namespace,label:app`
-
-.
+`namespace,label:app`.
 {% endswagger-parameter %}
 
-{% swagger-parameter in="path" name="accumulate" type="boolean" %}
-If 
+{% swagger-parameter in="path" name="accumulate" type="boolean" required="false" %}
+If `true`, sum the entire range of sets into a single set. Default value is
 
-`true`
-
-, sum the entire range of sets into a single set. Default value is 
-
-`false`
-
-.
+`false`.
 {% endswagger-parameter %}
 
-{% swagger-parameter in="path" name="idle" type="boolean" %}
-If 
-
-`true`
-
-, include idle cost (i.e. the cost of the un-allocated assets) as its own allocation. (See 
-
-[special types of allocation](https://docs.kubecost.com/apis/apis-overview/allocation#special-types-of-allocation)
-
-.) Default is 
+{% swagger-parameter in="path" name="idle" type="boolean" required="false" %}
+If `true`, include idle cost (i.e. the cost of the un-allocated assets) as its own allocation. (See [special types of allocation](https://docs.kubecost.com/apis/apis-overview/allocation#special-types-of-allocation).) Default is
 
 `true.`
 {% endswagger-parameter %}
 
-{% swagger-parameter in="path" name="external" type="boolean" %}
+{% swagger-parameter in="path" name="external" type="boolean" required="false" %}
 If 
 
 `true`
@@ -157,39 +65,39 @@ If
 .
 {% endswagger-parameter %}
 
-{% swagger-parameter in="path" name="filterClusters" type="string" %}
-Comma-separated list of clusters to match; e.g. 
+{% swagger-parameter in="path" name="filterClusters" type="string" required="false" %}
+Comma-separated list of clusters to match; e.g.
 
 `cluster-one,cluster-two`
 
- will return results from only those two clusters.
+will return results from only those two clusters.
 {% endswagger-parameter %}
 
-{% swagger-parameter in="path" name="filterNodes" type="string" %}
-Comma-separated list of nodes to match; e.g. 
+{% swagger-parameter in="path" name="filterNodes" type="string" required="false" %}
+Comma-separated list of nodes to match; e.g.
 
 `node-one,node-two`
 
- will return results from only those two nodes.
+will return results from only those two nodes.
 {% endswagger-parameter %}
 
-{% swagger-parameter in="path" name="filterNamespaces" type="string" %}
-Comma-separated list of namespaces to match; e.g. 
+{% swagger-parameter in="path" name="filterNamespaces" type="string" required="false" %}
+Comma-separated list of namespaces to match; e.g.
 
 `namespace-one,namespace-two`
 
- will return results from only those two namespaces.
+will return results from only those two namespaces.
 {% endswagger-parameter %}
 
-{% swagger-parameter in="path" name="filterControllerKinds" type="string" %}
-Comma-separated list of controller kinds to match; e.g. 
+{% swagger-parameter in="path" name="filterControllerKinds" type="string" required="false" %}
+Comma-separated list of controller kinds to match; e.g.
 
 `deployment,job`
 
- will return results with only those two controller kinds.
+will return results with only those two controller kinds.
 {% endswagger-parameter %}
 
-{% swagger-parameter in="path" name="filterControllers" type="string" %}
+{% swagger-parameter in="path" name="filterControllers" type="string" required="false" %}
 Comma-separated list of controllers to match; e.g. 
 
 `deployment-one,statefulset-two`
@@ -197,79 +105,49 @@ Comma-separated list of controllers to match; e.g.
  will return results from only those two controllers.
 {% endswagger-parameter %}
 
-{% swagger-parameter in="path" name="filterPods" type="string" %}
-Comma-separated list of pods to match; e.g. 
+{% swagger-parameter in="path" name="filterPods" type="string" required="false" %}
+Comma-separated list of pods to match; e.g. `pod-one,pod-two`
 
-`pod-one,pod-two`
-
- will return results from only those two pods.
+will return results from only those two pods.
 {% endswagger-parameter %}
 
-{% swagger-parameter in="path" name="filterAnnotations" type="string" %}
-Comma-separated list of annotations to match; e.g. 
+{% swagger-parameter in="path" name="filterAnnotations" type="string" required="false" %}
+Comma-separated list of annotations to match; e.g. `name:annotation-one,name:annotation-two`
 
-`name:annotation-one,name:annotation-two`
-
- will return results with either of those two annotation key-value-pairs.
+will return results with either of those two annotation key-value-pairs.
 {% endswagger-parameter %}
 
-{% swagger-parameter in="path" name="filterLabels" type="string" %}
-Comma-separated list of annotations to match; e.g. 
+{% swagger-parameter in="path" name="filterLabels" type="string" required="false" %}
+Comma-separated list of annotations to match; e.g. `app:cost-analyzer, app:prometheus`
 
-`app:cost-analyzer, app:prometheus`
-
- will return results with either of those two label key-value-pairs.
+will return results with either of those two label key-value-pairs.
 {% endswagger-parameter %}
 
-{% swagger-parameter in="path" name="filterServices" type="string" %}
-Comma-separated list of services to match; e.g. 
+{% swagger-parameter in="path" name="filterServices" type="string" required="false" %}
+Comma-separated list of services to match; e.g. `frontend-one,frontend-two`
 
-`frontend-one,frontend-two`
-
- will return results with either of those two services.
+will return results with either of those two services.
 {% endswagger-parameter %}
 
-{% swagger-parameter in="path" name="format" type="string" %}
-Set to 
+{% swagger-parameter in="path" name="format" type="string" required="false" %}
+Set to `csv` to download an accumulated version of the allocation results in CSV format. Set to `pdf`
 
-`csv`
-
- to download an accumulated version of the allocation results in CSV format. Set to 
-
-`pdf`
-
- to download an accumulated version of the allocation results in PDF format. By default, results will be in JSON format.
+to download an accumulated version of the allocation results in PDF format. By default, results will be in JSON format.
 {% endswagger-parameter %}
 
-{% swagger-parameter in="path" name="shareIdle" type="boolean" %}
-If 
+{% swagger-parameter in="path" name="shareIdle" type="boolean" required="false" %}
+If `true`, idle cost is allocated proportionally across all non-idle allocations, per-resource. That is, idle CPU cost is shared with each non-idle allocation's CPU cost, according to the percentage of the total CPU cost represented. Default is
 
-`true`
-
-, idle cost is allocated proportionally across all non-idle allocations, per-resource. That is, idle CPU cost is shared with each non-idle allocation's CPU cost, according to the percentage of the total CPU cost represented. Default is 
-
-`false`
-
-.
+`false`.
 {% endswagger-parameter %}
 
-{% swagger-parameter in="path" name="splitIdle" type="boolean" %}
-If 
+{% swagger-parameter in="path" name="splitIdle" type="boolean" required="false" %}
+If `true`, and `shareIdle == false`, Idle Allocations are created on a per cluster or per node basis rather than being aggregated into a single "_idle_" allocation. Default is
 
-`true`
-
-, and 
-
-`shareIdle == false`
-
- Idle Allocations are created on a per cluster or per node basis rather than being aggregated into a single "_idle_" allocation. Default is 
-
-`false`
-
-.
+`false`.
 {% endswagger-parameter %}
 
-{% swagger-parameter in="path" name="idleByNode" type="boolean" %}
+{% swagger-parameter in="path" name="idleByNode" type="boolean" required="false" %}
 If 
 
 `true`
@@ -281,7 +159,7 @@ If
 .
 {% endswagger-parameter %}
 
-{% swagger-parameter in="path" name="reconcile" type="boolean" %}
+{% swagger-parameter in="path" name="reconcile" type="boolean" required="false" %}
 If 
 
 `true`
@@ -293,7 +171,7 @@ If
 .
 {% endswagger-parameter %}
 
-{% swagger-parameter in="path" name="shareTenancyCosts" type="boolean" %}
+{% swagger-parameter in="path" name="shareTenancyCosts" type="boolean" required="false" %}
 If 
 
 `true`
@@ -305,15 +183,15 @@ If
 .
 {% endswagger-parameter %}
 
-{% swagger-parameter in="path" name="shareNamespaces" type="string" %}
-Comma-separated list of namespaces to share; e.g. 
+{% swagger-parameter in="path" name="shareNamespaces" type="string" required="false" %}
+Comma-separated list of namespaces to share; e.g.
 
 `kube-system, kubecost`
 
- will share the costs of those two namespaces with the remaining non-idle, unshared allocations.
+will share the costs of those two namespaces with the remaining non-idle, unshared allocations.
 {% endswagger-parameter %}
 
-{% swagger-parameter in="path" name="shareLabels" type="string" %}
+{% swagger-parameter in="path" name="shareLabels" type="string" required="false" %}
 Comma-separated list of labels to share; e.g. 
 
 `env:staging, app:test`
@@ -321,7 +199,7 @@ Comma-separated list of labels to share; e.g.
  will share the costs of those two label values with the remaining non-idle, unshared allocations.
 {% endswagger-parameter %}
 
-{% swagger-parameter in="path" name="shareCost" type="float" %}
+{% swagger-parameter in="path" name="shareCost" type="float" required="false" %}
 Floating-point value representing a monthly cost to share with the remaining non-idle, unshared allocations; e.g. 
 
 `30.42`
@@ -335,20 +213,10 @@ Floating-point value representing a monthly cost to share with the remaining non
 `0.0.`
 {% endswagger-parameter %}
 
-{% swagger-parameter in="path" name="shareSplit" type="string" %}
-Determines how to split shared costs among non-idle, unshared allocations. By default, the split will be 
+{% swagger-parameter in="path" name="shareSplit" type="string" required="false" %}
+Determines how to split shared costs among non-idle, unshared allocations. By default, the split will be `weighted`; i.e. proportional to the cost of the allocation, relative to the total. The other option is `even`; i.e. each allocation gets an equal portion of the shared cost. Default is
 
-`weighted`
-
-; i.e. proportional to the cost of the allocation, relative to the total. The other option is 
-
-`even`
-
-; i.e. each allocation gets an equal portion of the shared cost. Default is 
-
-`weighted`
-
-.
+`weighted`.
 {% endswagger-parameter %}
 
 {% swagger-response status="200: OK" description="" %}
@@ -764,54 +632,12 @@ Computing allocation data on-demand allows for greater flexibility with respect 
 {% endswagger-description %}
 
 {% swagger-parameter in="path" name="window" type="string" required="true" %}
-Duration of time over which to query. Accepts words like 
+Duration of time over which to query. Accepts words like `today`, `week`, `month`, `yesterday`, `lastweek`, `lastmonth`; durations like `30m`, `12h`, `7d`; RFC3339 date pairs like
 
-`today`
-
-, 
-
-`week`
-
-, 
-
-`month`
-
-, 
-
-`yesterday`
-
-, 
-
-`lastweek`
-
-, 
-
-`lastmonth`
-
-; durations like 
-
-`30m`
-
-, 
-
-`12h`
-
-, 
-
-`7d`
-
-; RFC3339 date pairs like 
-
-`2021-01-02T15:04:05Z,2021-02-02T15:04:05Z`
-
-; Unix timestamps like 
-
-`1578002645,1580681045`
-
-.
+`2021-01-02T15:04:05Z,2021-02-02T15:04:05Z`; Unix timestamps like `1578002645,1580681045`.
 {% endswagger-parameter %}
 
-{% swagger-parameter in="path" name="resolution" type="string" %}
+{% swagger-parameter in="path" name="resolution" type="string" required="false" %}
 Duration to use as resolution in Prometheus queries. Smaller values (i.e. higher resolutions) will provide better accuracy, but worse performance (i.e. slower query time, higher memory use). Larger values (i.e. lower resolutions) will perform better, but at the expense of lower accuracy for short-running workloads. See 
 
 [error bounds](allocation.md#theoretical-error-bounds)
@@ -823,19 +649,13 @@ Duration to use as resolution in Prometheus queries. Smaller values (i.e. higher
 .
 {% endswagger-parameter %}
 
-{% swagger-parameter in="path" name="step" type="string" %}
-Duration of a single allocation set. If unspecified, this defaults to the 
+{% swagger-parameter in="path" name="step" type="string" required="false" %}
+Duration of a single allocation set. If unspecified, this defaults to the
 
-`window`
-
-, so that you receive exactly one set for the entire window. If specified, it works chronologically backward, querying in durations of 
-
-`step`
-
- until the full window is covered.
+`window`, so that you receive exactly one set for the entire window. If specified, it works chronologically backward, querying in durations of `step` until the full window is covered.
 {% endswagger-parameter %}
 
-{% swagger-parameter in="path" name="aggregate" type="string" %}
+{% swagger-parameter in="path" name="aggregate" type="string" required="false" %}
 Field by which to aggregate the results. Accepts: 
 
 `cluster`
@@ -871,7 +691,7 @@ Field by which to aggregate the results. Accepts:
 .
 {% endswagger-parameter %}
 
-{% swagger-parameter in="path" name="accumulate" type="boolean" %}
+{% swagger-parameter in="path" name="accumulate" type="boolean" required="false" %}
 If 
 
 `true`

@@ -80,7 +80,7 @@ Kubecost offers a set of CloudFormation templates to help set your IAM roles up.
     * Select _Next_.
     * For _Stack name_, enter a name for your template.
     * Set the following parameters:
-    * `MasterPayerAccountI`: The account ID of the master payer account where the CUR has been created
+    * `MasterPayerAccountID`: The account ID of the master payer account where the CUR has been created
     * `SpotDataFeedBucketName`: The bucket where the Spot data feed is sent from the “Setting up the Spot Data feed” step
     * Select _Next_.
     * Select _Next_.
