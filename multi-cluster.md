@@ -10,7 +10,7 @@ There are three options that Kubecost supports for environments with multiple cl
 
 3. `Kubecost Enterprise` allows for a ___single-pane-of-glass___ view into all aggregated cluster costs globally. Agents on all clusters ship metrics to a shared storage bucket. A `primary cluster` serves the Kubecost UI, API endpoints, and performs global `cloud-billing` reconciliation for all clusters.
 
-`Cloud-billing` (aka `cloud-integration`) allows Kubecost to use actual billed costs for all resources instead of relying on on-demand rates. See [Advanced Configuration](https://docs.kubecost.com/#advanced-configuration) for more detail.
+`Cloud-billing` (aka `cloud-integration`) allows Kubecost to use actual billed costs for all resources instead of relying on on-demand rates. See [Advanced Configuration](https://docs.kubecost.com/install-and-configure/advanced-configuration) for more detail.
 
 > **Note**: Kubecost Free version can now be installed on an unlimited number of individual clusters. Larger teams will benefit from one of the above subscriptions to better manage many clusters. See [pricing](https://www.kubecost.com/pricing) for more details.
 
