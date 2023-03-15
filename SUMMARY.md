@@ -120,7 +120,7 @@
 * [Kubecost Metrics](user-metrics.md)
 * [Kube-State-Metrics (KSM) Emission](ksm-metrics.md)
 * [Calculating Node Pricing](node-pricing.md)
-* [Open Source](open-source-deps.md)
+* [Open-Source](open-source-deps.md)
 * [Security and Data Protection](security.md)
 * [Ports](ports.md)
 * [Kubecost Release Process](release-process.md)
