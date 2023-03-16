@@ -15,9 +15,8 @@ When adding a context directly from the frontend, Kubecost adds it locally for y
 
    > **Note**: By default, a LoadBalancer exposes endpoints to the wide internet. Be careful about following the authentication requirements of your organization and environment.
 
-3. Select _Add new cluster_ on the Kubecost home page and provide the accessible URL (with port included) for the target Kubecost installation. Here's an example: `http://e9a706220bae04199-1639813551.us-east-2.elb.amazonaws.com:9090`
-
-![Add a context view](https://raw.githubusercontent.com/kubecost/docs/main/images/kubecost-index.png)
+3. Select _Switch Context_ in the lower left corner of the Kubecost UI. The Contexts window opens.
+4. Provide the accessible URL (with port included) for the target Kubecost installation, then select _Add_. Here's an example: `http://e9a706220bae04199-1639813551.us-east-2.elb.amazonaws.com:9090`
 
 ## Add at install-time
 
