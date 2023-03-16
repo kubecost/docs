@@ -42,6 +42,14 @@ You can adjust your displayed metrics using the date range feature, represented 
 
 You can adjust your displayed metrics by aggregating your cost by category. Supported fields are _Billing Account_, _Provider_, _Service_, and _Workspace_, as well as custom labels.
 
+| Aggregation | Description |
+| :---------: | ----------- |
+| Billing Account | The ID of the billing account your cloud provider bill comes from. (Examples: AWS Management/Payer Account ID, GCP Billing Account ID, Azure Billing Account ID) |
+| Provider        | Cloud provider (Examples: AWS, Azure, GCP) |
+| Service         | Cloud provider services (Examples: AWS - S3, Azure - microsoft.compute, GCP - BigQuery) |
+| Workspace       | Cloud provider account (Examples: AWS Account, Azure Subscription, GCP Project) |
+| Labels          | Lables/Tags on your cloud resources (Examples: AWS tags, Azure tags, GCP labels) |
+
 ### Table metrics
 
 Your cloud cost spending will be displayed across your dashboard with several key metrics:
