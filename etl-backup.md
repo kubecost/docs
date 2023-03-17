@@ -1,6 +1,6 @@
 # ETL Backup
 
-Kubecost's ETL is a computed cache based on Prometheus's metrics, from which the user can perform all possible Kubecost queries. The ETL data is stored in a `PersistentVolume` mounted to the `kubecost-cost-analyzer` pod.
+Kubecost's extract, transform, load (ETL) process is a computed cache based on Prometheus's metrics, from which the user can perform all possible Kubecost queries. The ETL data is stored in a `PersistentVolume` mounted to the `kubecost-cost-analyzer` pod.
 
 There are a number of reasons why you may want to backup this ETL data:
 
