@@ -8,7 +8,7 @@ Below is the configuration guide using **Kubecost ETL Federation**
 
 Federated ETL gives teams the benefit of federating multiple Kubecost installations into one view without dependency on Thanos.
 
-For environments that already have a Prometheus instance, this ETL Federation may be preferred because the only dependency will be a single Kubecost pod for monitored cluster.
+For environments that already have a Prometheus instance, ETL Federation may be preferred because the only dependency will be a single Kubecost pod per monitored cluster.
 
 ## Kubecost ETL Federation diagram
 
@@ -90,7 +90,10 @@ prometheus:
 
 ### Step 3: Cluster configuration (Primary)
 
+In Kubecost, the `Primary Cluster` serves the UI and API endpoints as well as reconciling cloud billing (cloud-integration).
+
 1. For the cluster that will be the Primary Cluster, set `Values.federatedETL.primaryCluster` to `true`. This cluster is now a Primary Cluster, and can also be a Federator or Federated Cluster.
+2. Cloud-integration requires `.values.federatedETL.federator.primaryClusterID` set to `values.kubecostProductConfigs.clusterName`
 
    * **Important**: If the Primary Cluster is also to be federated, please wait 2-3 hours for data to populate Federated Storage before setting a Federated Cluster to primary (i.e. set `.Values.federatedETL.federatedCluster` to `true`, then wait to set `Values.federatedETL.primaryCluster` to `true`). This allows for maximum certainty of data consistency.
    * If you do not set this cluster to be federated as well as primary, you will not see local data for this cluster.
