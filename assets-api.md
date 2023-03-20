@@ -183,8 +183,9 @@ Retrieve assets cost data for the past seven days, aggregated by type, and as cu
 {
     "code": 200,
     "data": [
-        {
+        { 
             "Cloud": {
+  // Note that cloud will move to https://docs.kubecost.com/apis/apis-overview/cloud-cost-api
                 "type": "Cloud",
                 "properties": {
                     "provider": "GCP",
