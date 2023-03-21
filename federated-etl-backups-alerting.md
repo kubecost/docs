@@ -20,6 +20,9 @@ For long term storage of Prometheus metrics, we recommend setting up a Thanos si
 
 ```yaml
 prometheus:
+  extraArgs:
+    storage.tsdb.min-block-duration: 2h
+    storage.tsdb.max-block-duration: 2h
   server:
     sidecarContainers:
     - name: thanos-sidecar
