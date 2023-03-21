@@ -22,7 +22,7 @@ When using Kubecost version 1.99 and above: Greater detail can be accessed throu
 
 ### Grafana Dashboard
 
-To view the raw network transfer data, Grafana dashboard that is almost ready to publish (just needs QA testing to verify accuracy): https://github.com/kubecost/cost-analyzer-helm-chart/blob/network-transfer-data-grafana-dashboard/cost-analyzer/network-transfer-data.json
+A Grafana dashboard is included with the Kubecost installation or can be loaded via: <https://github.com/kubecost/cost-analyzer-helm-chart/blob/network-transfer-data-grafana-dashboard/cost-analyzer/network-transfer-data.json>
 
 ## Enabling network costs
 
@@ -127,11 +127,14 @@ This will show you the top source and destination IP addresses and bytes transfe
 
 ## Overriding traffic classifications
 
-For traffic routed to addresses outside of your cluster but inside your VPC, Kubecost supports the ability to directly classify network traffic to a particular IP address or CIDR block. This feature can be configured in [_values.yaml_](https://github.com/kubecost/cost-analyzer-helm-chart/blob/ab384e2eb027e74b2c3e61a7e1733ffa1718170e/cost-analyzer/values.yaml#L288-L322) under `networkCosts.config`. Classifications are defined as follows:
+For traffic routed to addresses outside of your cluster but inside your VPC, Kubecost supports the ability to directly classify network traffic to a particular IP address or CIDR block. This feature can be configured in [_values.yaml_](https://github.com/kubecost/cost-analyzer-helm-chart/blob/v1.101/cost-analyzer/values.yaml#L669-L707) under `networkCosts.config`. Classifications are defined as follows:
+
+> Note that as of Kubecost 1.101, LoadBalancers that proxy traffic to the Internet (ingresses and gateways) can be specifically classified.
 
 * In-zone: A list of destination addresses/ranges that will be classified as an in-zone traffic, which is free for most providers.
 * In-region: A list of addresses/ranges that will be classified as the same region between source and destinations but different zones.
-* Cross-region: A list of addresses/ranges that will be classified as the different region from the source regions
+* Cross-region: A list of addresses/ranges that will be classified as the different region from the source regions.
+* Internet: By design, all IP addresses not in a specific list are considered internet. This list can include IPs that would otherwise be "in-zone" or local to be classified as Internet traffic.
 
 ```yaml
 networkCosts:
@@ -158,6 +161,14 @@ networkCosts:
       # Cross Region contains a list of address/range that will be
       # classified as non-internet egress from one region to another.
       cross-region: []
+
+      # Internet contains a list of address/range that will be
+      # classified as internet traffic. This is synonymous with traffic
+      # that cannot be classified within the cluster.
+      # NOTE: Internet classification filters are executed _after_
+      # NOTE: direct-classification, but before in-zone, in-region,
+      # NOTE: and cross-region.
+      internet: []
 
       # Direct Classification specifically maps an ip address or range
       # to a region (required) and/or zone (optional). This classification
