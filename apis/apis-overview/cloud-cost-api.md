@@ -41,11 +41,11 @@ and
 `aggregate=billingID,service`
 {% endswagger-parameter %}
 
-{% swagger-parameter in="path" name="filterAccounts" type="string" %}
+{% swagger-parameter in="path" name="filterBillingIDs" type="string" %}
 Filter for account
 {% endswagger-parameter %}
 
-{% swagger-parameter in="path" name="filterProjects" type="string" %}
+{% swagger-parameter in="path" name="filterWorkGroupIDs" type="string" %}
 Filter for project
 {% endswagger-parameter %}
 
