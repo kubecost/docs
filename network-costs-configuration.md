@@ -16,7 +16,7 @@ With the network-costs daemonset enabled, the Network column on the Allocations 
 
 ![network-cost-allocation](images/network-cost-allocation.png)
 
-When using Kubecost version 1.99 and above: Greater detail can be accessed through Allocations UI only-when aggregating by namespace and selecting the link on that namespace. This opens the namespace detail page where there is a card at the bottom.
+When using Kubecost version 1.99 and above: Greater detail can be accessed through Allocations UI only when aggregating by namespace and selecting the link on that namespace. This opens the namespace detail page where there is a card at the bottom.
 
 ![network-cost-detail](images/network-cost-detail.png)
 
@@ -129,7 +129,7 @@ This will show you the top source and destination IP addresses and bytes transfe
 
 For traffic routed to addresses outside of your cluster but inside your VPC, Kubecost supports the ability to directly classify network traffic to a particular IP address or CIDR block. This feature can be configured in [_values.yaml_](https://github.com/kubecost/cost-analyzer-helm-chart/blob/v1.101/cost-analyzer/values.yaml#L669-L707) under `networkCosts.config`. Classifications are defined as follows:
 
-> Note that as of Kubecost 1.101, LoadBalancers that proxy traffic to the Internet (ingresses and gateways) can be specifically classified.
+> **Note**: As of Kubecost 1.101, LoadBalancers that proxy traffic to the Internet (ingresses and gateways) can be specifically classified.
 
 * In-zone: A list of destination addresses/ranges that will be classified as an in-zone traffic, which is free for most providers.
 * In-region: A list of addresses/ranges that will be classified as the same region between source and destinations but different zones.
