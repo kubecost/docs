@@ -22,7 +22,7 @@ When using Kubecost version 1.99 and above: Greater detail can be accessed throu
 
 ### Grafana Dashboard
 
-A Grafana dashboard is included with the Kubecost installation or can be loaded via: <https://github.com/kubecost/cost-analyzer-helm-chart/blob/network-transfer-data-grafana-dashboard/cost-analyzer/network-transfer-data.json>
+A Grafana dashboard is included with the Kubecost installation or can be loaded via: <https://github.com/kubecost/cost-analyzer-helm-chart/blob/develop/cost-analyzer/grafana-templates/multi-cluster-network-transfer-data.json>
 
 ## Enabling network costs
 
