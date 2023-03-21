@@ -20,7 +20,7 @@
       * [Creating a Google Service Account](google-service-account-thanos.md)
   * [Multi-Cluster](multi-cluster.md)
     * [Federated ETL](federated-etl.md)
-      * [Backups and Alerting](federated-etl-dr.md)
+      * [Backups and Alerting](federated-etl-backups-alerting.md)
     * [Thanos Federation](thanos-setup.md)
       * [Configuring Thanos](long-term-storage.md)
       * [Secondary Clusters Guide](secondary-clusters.md)
