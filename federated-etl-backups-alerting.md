@@ -11,8 +11,7 @@ Kubecost can rebuild its data (ETLs) using the Prometheus metrics from each clus
 ```yaml
 prometheus:
   server:
-    extraArgs:
-      storage.tsdb.retention: 2w
+    retention: 21d
 ```
 
 ## 2. Metrics backup
