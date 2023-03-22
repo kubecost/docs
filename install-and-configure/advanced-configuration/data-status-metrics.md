@@ -2,7 +2,7 @@
 
 ## Overview
 
-The data status metrics consist of:
+The metrics listed below are emitted by Kubecost and scraped by Prometheus to help monitor the status of Kubecost data pipelines:
 
 1. `kubecost_allocation_data_status`, which presents the active allocation data's time series status
 2. `kubecost_asset_data_status`, which presents the time series status of the active asset data
