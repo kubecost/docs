@@ -6,7 +6,7 @@ This doc provides recommendations to improve the stability and recoverability of
 
 ## Option 1: Increase Prometheus retention
 
-Kubecost can rebuild its data (ETLs) using the Prometheus metrics from each cluster. It is strongly recommended to retain local cluster Prometheus metrics that meet an organization's disaster recovery requirements.
+Kubecost can rebuild its extract, transform, load (ETL) data using Prometheus metrics from each cluster. It is strongly recommended to retain local cluster Prometheus metrics that meet an organization's disaster recovery requirements.
 
 ```yaml
 prometheus:
