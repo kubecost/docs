@@ -15,7 +15,7 @@ The Cost Model both exports and consumes the following metrics.
 | `node_total_hourly_cost` | Total node cost per hour | 
 | `kubecost_load_balancer_cost` | Hourly cost of a load balancer | 
 | `kubecost_cluster_management_cost` | Hourly cost paid as a cluster management fee | 
-| `pv_hourly_cost` | Hourly cost per GP on a persistent volume | 
+| `pv_hourly_cost` | Hourly cost per Gb on a persistent volume | 
 | `node_gpu_count` | Number of GPUs available on node | 
 | `container_cpu_allocation` | Average number of CPUs requested/used over last 1m | 
 | `container_gpu_allocation` | Average number of GPUs requested over last 1m | 
