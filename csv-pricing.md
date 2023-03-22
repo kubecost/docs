@@ -61,6 +61,7 @@ pricingCsv:
   enabled: true
   location:
     URI: /var/kubecost-csv/custom-pricing.csv
+    csvAccessCredentials: ""
 
 extraVolumes:
 - name: kubecost-csv
