@@ -2,7 +2,7 @@
 
 > **Note**: Configuring [ETL Backups](etl-backup.md) can prevent situations where you would need to repair large amounts of missing ETL data.
 
-Kubecost's ETL is a computed cache built upon Prometheus metrics and cloud billing data, from which nearly all API requests made by the user and the Kubecost frontend currently rely upon.
+Kubecost's extract, transform, load (ETL) process is a computed cache built upon Prometheus metrics and cloud billing data, from which nearly all API requests made by the user and the Kubecost frontend currently rely upon.
 
 The ETL data is stored in a `PersistentVolume` mounted to the `kubecost-cost-analyzer` pod. In the event that you lose or are looking to rebuild the ETL data, the following endpoints should be used.
 
