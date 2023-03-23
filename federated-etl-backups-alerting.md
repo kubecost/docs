@@ -19,21 +19,22 @@ prometheus:
 For long term storage of Prometheus metrics, we recommend setting up a Thanos sidecar container to push Prometheus metrics to a cloud storage bucket.
 
 ```yaml
+# This is an abridged example. Full example in link below.
 prometheus:
-  extraArgs:
-    storage.tsdb.min-block-duration: 2h
-    storage.tsdb.max-block-duration: 2h
   server:
     sidecarContainers:
     - name: thanos-sidecar
-      image: thanosio/thanos:latest
+      image: thanosio/thanos:v0.29.0
       args:
         - sidecar
         - --prometheus.url=http://127.0.0.1:9090
         - --objstore.config-file=/etc/config/object-store.yaml
 ```
 
-If deploying Kubecost's bundled Prometheus, you can configure the thanos-sidecar following [this example](https://github.com/kubecost/cost-analyzer-helm-chart/blob/522c51b34121294c6f4c2f1423022938cdb14622/cost-analyzer/values-thanos.yaml#L23-L64). Additionally, ensure you [configure the `object-store.yaml`](./long-term-storage.md) so the thanos-sidecar has the necessary permissions to read/write to the cloud storage bucket.
+You can configure the thanos-sidecar following [this example](https://github.com/kubecost/cost-analyzer-helm-chart/blob/522c51b34121294c6f4c2f1423022938cdb14622/cost-analyzer/values-thanos.yaml#L14-L64). Additionally, ensure you configure the following:
+
+* [`object-store.yaml`](./long-term-storage.md) so the thanos-sidecar has permissions to read/write to the cloud storage bucket
+* [`.Values.prometheus.server.global.external_labels.cluster_id`](https://github.com/kubecost/cost-analyzer-helm-chart/blob/v1.101/cost-analyzer/values.yaml#L560-L561) so Kubecost is able to distinguish which metric belongs to which cluster in the Thanos bucket.
 
 ## Option 3: Bucket versioning
 
