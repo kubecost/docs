@@ -10,16 +10,7 @@ Federated ETL gives teams the benefit of federating multiple Kubecost installati
 
 There are two primary advantages for using ETL Federation:
 1. For environments that already have a Prometheus instance, Kubecost only requires a single pod per monitored cluster
-2. Many solutions that aggregate Prometheus metrics (like Thanos) often to not scale well in large environments
-
-### Data Recovery
-
-When using ETL Federation, there are several methods to recover Kubecost data in the invent of data loss:
-
-1. Kubecost backups: [etl-backup](etl-backup.md).
-2. Object-store bucket versioning. See each provider's documentation- [S3 for example](https://docs.aws.amazon.com/AmazonS3/latest/userguide/Versioning.html).
-3. When using tools like Thanos, Kubecost can rebuild its data (ETLs) from the Thanos data store. This store must also have each monitored cluster's Kubecost metrics.
-4. If there is no aggregated Prometheus metric store (Thanos), each cluster can retain Prometheus metrics and local rebuilds can be done.
+2. Many solutions that aggregate Prometheus metrics (like Thanos), are often expensive to scale in large environments
 
 ## Kubecost ETL Federation diagram
 
@@ -121,3 +112,9 @@ In Kubecost, the `Primary Cluster` serves the UI and API endpoints as well as re
     * To verify the entire pipeline is working, either query `Allocations/Assets` or view the respective views on the frontend. Multi-cluster data should appear after:
         * The Federator has run at least once.
         * There was data in the Federated Storage for the Federator to have combined.
+
+### Data Recovery
+
+When using ETL Federation, there are several methods to recover Kubecost data in the invent of data loss:
+
+The [backup and alerting](https://docs.kubecost.com/install-and-configure/install/multi-cluster/federated-etl/federated-etl-backups-alerting) has detail regarding the various methods.
