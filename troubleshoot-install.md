@@ -1,4 +1,4 @@
-# Troubleshooting
+# Troubleshoot Install
 
 Once an installation is complete, access the Kubecost frontend to view the status of the product. If the Kubecost UI is unavailable, review these troubleshooting resources to determine the problem:
 
@@ -6,13 +6,12 @@ Once an installation is complete, access the Kubecost frontend to view the statu
 
 These Kubernetes commands can be helpful when finding issues with deployments:
 
-1. This command will find all events that aren't normal, with the most recent listed last. Use this if pods are not even starting:
+1.  This command will find all events that aren't normal, with the most recent listed last. Use this if pods are not even starting:
 
     ```bash
     kubectl get events --sort-by=.metadata.creationTimestamp --field-selector type!=Normal
     ```
-
-2. Another option is to check for a describe command of the specific pod in question. This command will give a list of the Events specific to this pod.
+2.  Another option is to check for a describe command of the specific pod in question. This command will give a list of the Events specific to this pod.
 
     ```bash
     > kubectl -n kubecost get pods
@@ -37,13 +36,11 @@ These Kubernetes commands can be helpful when finding issues with deployments:
         <RELEVANT ERROR MESSAGES HERE>
         <RELEVANT ERROR MESSAGES HERE>
     ```
-
-3. If a pod is in CrashLoopBackOff, check its logs. Commonly it will be a misconfiguration in Helm. If the cost-analyzer pod is the issue, check the logs with:
+3.  If a pod is in CrashLoopBackOff, check its logs. Commonly it will be a misconfiguration in Helm. If the cost-analyzer pod is the issue, check the logs with:
 
     ```bash
     kubectl logs deployment/kubecost-cost-analyzer -c cost-model
     ```
-
 4. Alternatively, Lens is a great tool for diagnosing many issues in a single view. See our blog post on [using Lens with Kubecost](https://blog.kubecost.com/blog/lens-kubecost-extension/) to learn more.
 
 ## Configuring log levels
@@ -57,9 +54,9 @@ The log output can be adjusted while deploying through Helm by using the `LOG_LE
 * `error`
 * `fatal`
 
-For example, to set the log level to `debug`, add the following flag to the Helm command:  
+For example, to set the log level to `debug`, add the following flag to the Helm command:
 
-``` bash
+```bash
 --set 'kubecostModel.extraEnv[0].name=LOG_LEVEL,kubecostModel.extraEnv[0].value=debug'
 ```
 
@@ -68,13 +65,13 @@ For example, to set the log level to `debug`, add the following flag to the Helm
 * `JSON`
   * A structured logging output
   * `{"level":"info","time":"2006-01-02T15:04:05.999999999Z07:00","message":"Starting cost-model (git commit \"1.91.0-rc.0\")"}`
-
 * `pretty`
-  * A nice human readable output 
+  * A nice human readable output
   * `2006-01-02T15:04:05.999999999Z07:00 INF Starting cost-model (git commit "1.91.0-rc.0")`
 
 ### Temporarily set log level
-To temporarily set the log level without restarting the Pod, you can send a POST request to `/logs/level` with one of the valid log levels. This does not persist between Pod restarts, Helm deployments, etc. Here's an example:
+
+To temporarily set the log level without restarting the pod, you can send a POST request to `/logs/level` with one of the valid log levels. This does not persist between pod restarts, Helm deployments, etc. Here's an example:
 
 ```sh
 curl -X POST \
@@ -96,10 +93,10 @@ kubectl get storageclass
 
 You should see a storageclass name with (default) next to it as in this example.
 
-<pre>
+```
 NAME                PROVISIONER           AGE
 standard (default)  kubernetes.io/gce-pd  10d
-</pre>
+```
 
 If you see a name but no (default) next to it, run
 
@@ -114,13 +111,12 @@ Alternatively, you can deploy Kubecost without persistent storage to store by fo
 
 > **Note**: This setup is only for experimental purpose. The metric data is reset when Kubecost's pod is rescheduled.
 
-1. On your terminal, run this command to add the Kubecost Helm repository:
+1.  On your terminal, run this command to add the Kubecost Helm repository:
 
     `helm repo add kubecost https://kubecost.github.io/cost-analyzer/`
+2.  Next, run this command to deploy Kubecost without persistent storage:
 
-2. Next, run this command to deploy Kubecost without persistent storage:
-
-    ``` bash
+    ```bash
     helm upgrade -install kubecost kubecost/cost-analyzer \
     --namespace kubecost --create-namespace \
     --set persistentVolume.enabled="false" \
@@ -131,13 +127,13 @@ Alternatively, you can deploy Kubecost without persistent storage to store by fo
 
 If the PVC is in a pending state for more than 5 minutes, and the cluster is Amazon EKS 1.23+ the error message appears as the following example:
 
-``` bash
+```bash
 kubectl describe pvc cost-analyzer -n kubecost | grep "ebs.csi.aws.com"
 ```
 
 Example result:
 
-``` bash
+```bash
 Annotations:   volume.beta.kubernetes.io/storage-provisioner: ebs.csi.aws.com
                volume.kubernetes.io/storage-provisioner: ebs.csi.aws.com
                          
@@ -150,7 +146,7 @@ You need to install the [AWS EBS CSI driver](https://docs.aws.amazon.com/eks/lat
 
 Review the output of the port-forward command:
 
-``` bash
+```bash
 $ kubectl port-forward --namespace kubecost deployment/kubecost-cost-analyzer 9090
 Forwarding from 127.0.0.1:9090 -> 9090
 Forwarding from [::1]:9090 -> 9090
@@ -160,14 +156,14 @@ Forwarding from `127.0.0.1` indicates kubecost should be reachable via a browser
 
 In some cases it may be necessary for kubectl to bind to all interfaces. This can be done with the addition of the flag `--address 0.0.0.0`.
 
-``` bash
+```bash
 $ kubectl port-forward --address 0.0.0.0 --namespace kubecost deployment/kubecost-cost-analyzer 9090
 Forwarding from 0.0.0.0:9090 -> 9090
 ```
 
-Navigating to Kubecost while port-forwarding should result in "Handling connection" output in the terminal: 
+Navigating to Kubecost while port-forwarding should result in "Handling connection" output in the terminal:
 
-``` bash
+```bash
 kubectl port-forward --address 0.0.0.0 --namespace kubecost deployment/kubecost-cost-analyzer 9090
 Forwarding from 0.0.0.0:9090 -> 9090
 Handling connection for 9090
@@ -176,24 +172,24 @@ Handling connection for 9090
 
 To troubleshoot further, check the status of pods in the Kubecost namespace:
 
-``` bash
+```bash
 kubectl get pods -n kubecost`
 ```
 
 All `kubecost-*` pods should have `Running` or `Completed` status.
 
-<pre>
+```
 NAME                                                     READY   STATUS    RESTARTS   AGE
 kubecost-cost-analyzer-599bf995d4-rq8g8                  2/2     Running   0          5m
 kubecost-grafana-5cdd75755b-5s9j9                        1/1     Running   0          5m
 kubecost-prometheus-kube-state-metrics-bd985f98b-bl8xd   1/1     Running   0          5m
 kubecost-prometheus-node-exporter-24b8x                  1/1     Running   0          5m
 kubecost-prometheus-server-6fb8f99bb7-4tjwn              2/2     Running   0          5m
-</pre>
+```
 
-If the cost-analyzer or prometheus-server __pods are missing__, we recommend reinstalling with Helm using `--debug` which enables verbose output.
+If the cost-analyzer or prometheus-server **pods are missing**, we recommend reinstalling with Helm using `--debug` which enables verbose output.
 
-If any __pod is not Running__ other than cost-analyzer-checks, you can use the following command to find errors in the recent event log:
+If any **pod is not Running** other than cost-analyzer-checks, you can use the following command to find errors in the recent event log:
 
 `kubectl describe pod <pod-name> -n kubecost`
 
@@ -206,7 +202,7 @@ helm install kubecost/cost-analyzer --debug --wait --namespace kubecost --name k
     --set kubecostToken="<INSERT_YOUR_TOKEN>" \
     --set prometheus.nodeExporter.enabled=false \
     --set prometheus.serviceAccounts.nodeExporter.create=false
- ```
+```
 
 ## Issue: Unable to connect to a cluster
 
@@ -220,7 +216,7 @@ If you are using a port other than 9090 for your port-forward, try adding the ur
 
 Next, you can review messages in your browser's developer console. Any meaningful errors or warnings may indicate an unexpected response from the Kubecost server.
 
-Next, point your browser to the `/model` endpoint on your target URL. For example, visit `http://localhost:9090/model/` in the scenario shown above. You should expect to see a Prometheus config file at this endpoint. If your cluster address has changed, you can visit Settings in the Kubecost product to update or you can also [add a new](/multi-cluster.md) cluster.
+Next, point your browser to the `/model` endpoint on your target URL. For example, visit `http://localhost:9090/model/` in the scenario shown above. You should expect to see a Prometheus config file at this endpoint. If your cluster address has changed, you can visit Settings in the Kubecost product to update or you can also [add a new](multi-cluster.md) cluster.
 
 If you are unable to successfully retrieve your config file from this /model endpoint, we recommend the following:
 
@@ -232,14 +228,13 @@ If you are unable to successfully retrieve your config file from this /model end
 
 If all Kubecost pods are running and you can connect/port-forward to the kubecost-cost-analyzer pod but none of the app's UI will load, we recommend testing the following:
 
-1. Connect directly to a backend service with the following command:
-    `kubectl port-forward --namespace kubecost service/kubecost-cost-analyzer 9001`
+1. Connect directly to a backend service with the following command: `kubectl port-forward --namespace kubecost service/kubecost-cost-analyzer 9001`
 2. Ensure that `http://localhost:9001` returns the prometheus YAML file
 
 If this is true, you are likely to be hitting a CoreDNS routing issue. We recommend using local routing as a solution:
 
-1. Go to <https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/templates/cost-analyzer-frontend-config-map-template.yaml#L13>
-2. Replace ```{{ $serviceName }}.{{ .Release.Namespace }}``` with ```localhost```
+1. Go to [https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/templates/cost-analyzer-frontend-config-map-template.yaml#L13](https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/templates/cost-analyzer-frontend-config-map-template.yaml#L13)
+2. Replace `{{ $serviceName }}.{{ .Release.Namespace }}` with `localhost`
 
 ## Issue: PodSecurityPolicy CRD is missing for `kubecost-grafana` and `kubecost-cost-analyzer-psp`
 
@@ -276,7 +271,7 @@ ensure CRDs are installed first
 ]
 ```
 
-To prevent this Helm error state please upgrade Kubecost to at least v1.99 prior to upgrading Kubernetes to v1.25. Additionally please follow the [above](/troubleshoot-install.md#issue-podsecuritypolicy-crd-is-missing-for-kubecost-grafana-and-kubecost-cost-analyzer-psp) instructions for disabling PSP.
+To prevent this Helm error state please upgrade Kubecost to at least v1.99 prior to upgrading Kubernetes to v1.25. Additionally please follow the [above](troubleshoot-install.md#issue-podsecuritypolicy-crd-is-missing-for-kubecost-grafana-and-kubecost-cost-analyzer-psp) instructions for disabling PSP.
 
 If Kubecost PSP is not disabled prior to Kubernetes v1.25 upgrades, you may need to manually delete the Kubecost install. Prior to doing this please ensure you have [ETL backups enaabled](https://docs.kubecost.com/install-and-configure/install/etl-backup)as well as Helm values, and Prometheus/Thanos data backed up. Manual removal can be done by deleteing the Kubecost namespace.
 
@@ -291,8 +286,8 @@ E0215 13:33:44.225870 1 reflector.go:156] pkg/mod/k8s.io/client-go@v0.0.0-201911
 
 To resolve this error you can disable the corrosponding KSM metrics collectors by setting the following Helm values to flase.
 
-- [prometheus.kube-state-metrics.collectors.ingresses=false](https://github.com/kubecost/cost-analyzer-helm-chart/blob/9f3d7974247bfd3910fbf69d0d4bd66f1335201a/cost-analyzer/charts/prometheus/charts/kube-state-metrics/values.yaml#L99|prometheus.kube-state-metrics.collectors.ingresses=false)
-- [prometheus.kube-state-metrics.collectors.certificatesigningrequests=false](https://github.com/kubecost/cost-analyzer-helm-chart/blob/9f3d7974247bfd3910fbf69d0d4bd66f1335201a/cost-analyzer/charts/prometheus/charts/kube-state-metrics/values.yaml#L92)
+* [prometheus.kube-state-metrics.collectors.ingresses=false](https://github.com/kubecost/cost-analyzer-helm-chart/blob/9f3d7974247bfd3910fbf69d0d4bd66f1335201a/cost-analyzer/charts/prometheus/charts/kube-state-metrics/values.yaml#L99|prometheus.kube-state-metrics.collectors.ingresses=false)
+* [prometheus.kube-state-metrics.collectors.certificatesigningrequests=false](https://github.com/kubecost/cost-analyzer-helm-chart/blob/9f3d7974247bfd3910fbf69d0d4bd66f1335201a/cost-analyzer/charts/prometheus/charts/kube-state-metrics/values.yaml#L92)
 
 You can verify the changes are in place by describing the KSM deployment, the collectors should no longer be present in the Container Arguments list.
 
@@ -306,29 +301,30 @@ This error appears when you install Kubecost using AWS optimized version on your
 
 ### A. The Kubecost version that you tried to install is not available yet
 
-- Resolution: check our ECR public gallery for the latest available version at https://gallery.ecr.aws/kubecost/cost-analyzer
+* Resolution: check our ECR public gallery for the latest available version at https://gallery.ecr.aws/kubecost/cost-analyzer
 
 ### B. Your docker auth token for Amazon ECR public gallery is expired
 
-- Resolution: Try to login to the Amazon ECR public gallery again to refresh the auth token with the following commands:
+* Resolution: Try to login to the Amazon ECR public gallery again to refresh the auth token with the following commands:
 
 ```bash
 aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws
 export HELM_EXPERIMENTAL_OCI=1
 aws ecr-public get-login-password --region us-east-1 | helm registry login --username AWS --password-stdin public.ecr.aws
 ```
+
 ## Question: How can I run on Minikube?
 
-1. Edit nginx configmap ```kubectl edit cm nginx-conf -n kubecost```
+1. Edit nginx configmap `kubectl edit cm nginx-conf -n kubecost`
 2. Search for 9001 and 9003 (should find kubecost-cost-analyzer.kubecost:9001 & kubecost-cost-analyzer.kubecost:9003)
 3. Change both entries to localhost:9001 and localhost:9003
 4. Restart the kubecost-cost-analyzer pod in the kubecost namespace
 
 ## Question: What is the difference between `.Values.kubecostToken` and `Values.kubecostProductConfigs.productKey`?
 
-`.Values.kubecostToken` is primarily used to manage trial access and is provided to you when visiting <http://kubecost.com/install>.
+`.Values.kubecostToken` is primarily used to manage trial access and is provided to you when visiting [http://kubecost.com/install](http://kubecost.com/install).
 
-`.Values.kubecostProductConfigs.productKey` is used to apply a Business/Enterprise license. More info in this [doc](/add-key.md).
+`.Values.kubecostProductConfigs.productKey` is used to apply a Business/Enterprise license. More info in this [doc](add-key.md).
 
 ## Error loading metadata
 
@@ -340,4 +336,4 @@ Error example:
 gcpprovider.go Error loading metadata cluster-name: Get "http://169.254.169.254/computeMetadata/v1/instance/attributes/cluster-name": dial tcp 169.254.169.254:80: i/o timeout
 ```
 
-Have a question not answered on this page? Email us at [support@kubecost.com](support@kubecost.com) or [join the Kubecost Slack community](https://join.slack.com/t/kubecost/shared_invite/zt-1dz4a0bb4-InvSsHr9SQsT_D5PBle2rw)!
+Have a question not answered on this page? Email us at [support@kubecost.com](support@kubecost.com) or [join the Kubecost Slack community](https://join.slack.com/t/kubecost/shared\_invite/zt-1dz4a0bb4-InvSsHr9SQsT\_D5PBle2rw)!
