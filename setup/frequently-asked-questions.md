@@ -1,17 +1,17 @@
 ---
-description: 'Common Kubecost questions (faq).'
+description: Common Kubecost questions (faq).
 ---
 
 # Frequently Asked Questions
 
 Q: How can I reduce CPU or Memory resource consumption by Kubecost?\
-A: Please review our [Tuning Resource Consumption guide](/resource-consumption.md).
+A: Please review our [Tuning Resource Consumption guide](../resource-consumption.md).
 
 Q: Can I safely configure Thanos Compaction [down sampling](https://thanos.io/tip/components/compact.md/#downsampling)?\
 A: Yes, Kubecost is resilient to downsampling. However turning query concurrency is going to be most beneficial, especially during the long rebuild windows. To tune downsampling use the following Thanos subchart [values](https://github.com/kubecost/cost-analyzer-helm-chart/blob/b5b089ce217636fb2b7e6f42daed37397d28d3aa/cost-analyzer/charts/thanos/values.yaml#L525-L530).
 
 Q: Why do I receive a 403 error when trying to save reports or alerts?\
-A: This is due to the SAML user having read only RBAC permissions.&#x20;
+A: This is due to the SAML user having read only RBAC permissions.
 
 Q: What does "Share Tenancy" mean?\
 A: This enables sharing the cost of the K8s management plane for hosted Kubernetes offerings, such as EKS/AKS/GKE costs.
@@ -35,7 +35,7 @@ Q: I just enabled the CUR and AWS integration but do not see any cloud resources
 A: The AWS CUR and billing data from other cloud providers lags by 24-48 hours.
 
 Q: Why is the UI on my secondary Kubecost install broken?\
-A: This is normal if you have followed our [secondary tuning guide](/secondary-clusters.md), because its focus is reducing resource usage at the cost of breaking the secondary UI. The secondary UI should only be used for diagnostics.
+A: This is normal if you have followed our [secondary tuning guide](../secondary-clusters.md), because its focus is reducing resource usage at the cost of breaking the secondary UI. The secondary UI should only be used for diagnostics.
 
 Q: I have two standalone Kubecost clusters in an Azure subscription, each residing in their own resource group. How can I limit the billing export for each cluster to only the resource group instead of the entire subscription?\
 A: You can create two billing exports each scoped to the corresponding resource group. [Review Azure's guide on exporting date for more info.](https://learn.microsoft.com/en-us/azure/cost-management-billing/costs/tutorial-export-acm-data?tabs=azure-portal#create-a-daily-export)
@@ -59,7 +59,7 @@ Q: Does Kubecost cost efficiency calculation take GPU into consideration?\
 A: No, the reason is that we get GPU efficiency from integration with the Nvidia DCGM, which is a third-party integration that needs to be set up manually with Kubecost.
 
 Q: Should I use amortized prices when setting up my CUR or billing export?\
-A: Yes, amortized allows upfront costs of the resources to appear in Kubecost. [More info here](/cloud-integration.md#cloud-integration-configurations).
+A: Yes, amortized allows upfront costs of the resources to appear in Kubecost. [More info here](../cloud-integration.md#cloud-integration-configurations).
 
 Q: Do I need to configure the cloud integration on the secondary clusters?\
 A: No, only if you are planing on viewing the UI on the secondary. This is because the cloud reconciliation process happens after the data is shipped to the Thanos store.
@@ -83,7 +83,7 @@ Q: What regions/currencies are available for the Azure rate card integration?\
 A: Azure is very specific as to what currency can be used for each region/country. Azuew provides that information [here](https://docs.microsoft.com/en-us/azure/marketplace/marketplace-geo-availability-currencies).
 
 Q: I would like to use the node-exporter daemonSet provided with Openshift, however after disabling Kubecost-bundled Prometheus, it is unable to discover the node-exporter endpoints.\
-A: The Openshift provided node-exporter requires an additional annotation of `prometheus.io/scrape: "true"` to be added.&#x20;
+A: The Openshift provided node-exporter requires an additional annotation of `prometheus.io/scrape: "true"` to be added.
 
 ```
       annotations:
@@ -92,18 +92,18 @@ A: The Openshift provided node-exporter requires an additional annotation of `pr
         prometheus.io/port: "9100"
 ```
 
-Q: How can I disable kube-state-metrics if needed? \
-A: It can be disabled with one of two methods `prometheus.kubeStateMetrics.enabled=false` or `prometheus.kube-state-metrics.disabled=true`. We recommend disabling any 3rd party KSM instead of our bundled version. More discussion is [here].
+Q: How can I disable kube-state-metrics if needed?\
+A: It can be disabled with one of two methods `prometheus.kubeStateMetrics.enabled=false` or `prometheus.kube-state-metrics.disabled=true`. We recommend disabling any 3rd party KSM instead of our bundled version. More discussion is \[here].
 
 Q: Does increasing the `.Values.kubecostModel.etlResolutionSeconds` value cause any issues with cost accuracy?\
 A: Decreasing resolution may flatten out cost spikes but the summation of costs should not be affected.
 
 Q: Is there a way to test alerts via the API?\
-A: Yes, there is a `/alert/test` API endpoint that sends a blank test message. [Code](https://github.com/kubecost/kubecost-cost-model/blob/948c2d1e9aff42808f5458be9f557769aad1b493/pkg/cmd/costmodel/costmodel.go#L2508)\
+A: Yes, there is a `/alert/test` API endpoint that sends a blank test message. See code [here](https://github.com/kubecost/kubecost-cost-model/blob/948c2d1e9aff42808f5458be9f557769aad1b493/pkg/cmd/costmodel/costmodel.go#L2508).\
 \
-Another suggestion for testing alert filters is to create an alert with a small window and wait. The [API](/alerts.md#alerts-scheduler) will allow hours in the window.&#x20;
+Another suggestion for testing alert filters is to create an alert with a small window and wait. The [API](../alerts.md#alerts-scheduler) will allow hours in the window.
 
-Example of [test API](http://localhost:9090/model/alerts/test)\ payload:
+Example of [test API](http://localhost:9090/model/alerts/test) payload:
 
 ```
 aggregation: "namespace"
@@ -115,22 +115,22 @@ window: "1h"
 
 Q: Kubecost allows us to configure in-zone/in-region/cross-region traffic classification. After I tried to configure this and seeing that the values have been configured, I couldn’t see traffic classification allocation in the dashboard. Is this feature still supported?
 
-A: Check http://your.kubecost.com/details! From there, look for the bottom right box to view more network details. It also may be important to have the network-costs daemonSet running in your cluster.
+A: Check http://\<your-kubecost-address>/details! From there, look for the bottom right box to view more network details. It also may be important to have the network-costs daemonSet running in your cluster.
 
 Q: When cloud integration is not yet enabled, does Kubecost's usage of public pricing data take into account the region the node is on?\
 A: Yes. This can be verified by reviewing the code at [opencost/pkg/cloud](https://github.com/opencost/opencost/tree/1795bcddb1d91d3e60772030528274c4dff29185/pkg/cloud). Specifically, if you start at [GetNodeCost()](https://github.com/opencost/opencost/blob/1795bcddb1d91d3e60772030528274c4dff29185/pkg/costmodel/costmodel.go#L933) you can follow the chain of function calls. It's slightly different for each cloud provider, but it should look roughly like this: `pkg/costmodel/GetNodeCost() → pkg/cloud/NodePricing() → pkg/cloud/DownloadPricingData() → pkg/cloud/getRegionPricing()`
 
 Q: If I disable node exporter, will it affect the metrics emitted by Kubecost?\
-A: Yes you can disable node exporter as it is optional. No, it will not have an effect on Kubecost's metrics. Read about the effects of disabling the node exporter [here](/resource-consumption.md#disable-or-stop-scraping-node-exporter).
+A: Yes you can disable node exporter as it is optional. No, it will not have an effect on Kubecost's metrics. Read about the effects of disabling the node exporter [here](../resource-consumption.md#disable-or-stop-scraping-node-exporter).
 
 Q: “No Athena Bucket Configured” error on /diagnostics view?\
-A: Verify that the the AWS IAM Policy has been correctly configured (step3). Verify that the IAM role has been given to Kubecost (step4).
+A: Verify that the the AWS IAM Policy has been correctly configured (Step 3). Verify that the IAM role has been given to Kubecost (Step 4).
 
 Q: What time zone is shown by Kubecost?\
 A: All APIs and metrics will be based on and accept UTC zones. When viewing the data from your web browser, the graphs displayed will convert this UTC time to your local machine's time zone.
 
-Q: When using the `aggregate` parameter with the Allocation API `/model/allocation`, the returned line items don't always list the full set of "properties". \
-A: This happens when the values of these "properties" collide upon performing the aggregation. For example if performing the aggregation by `aggregate=label:app`, the line item `app=hello-world` may belong to multiple namespaces and Kubecost would therefore omit "properties.namespace" altogether. The most effective workaround is to perform a multiaggregation (`aggregate=namespace,label:app`) to ensure all the properties you want exist in the result. More discussion in this [Github issue](https://github.com/kubecost/cost-analyzer-helm-chart/issues/1839).
+Q: When using the `aggregate` parameter with the Allocation API (`/model/allocation`), the returned line items don't always list the full set of "properties".\
+A: This happens when the values of these "properties" collide upon performing the aggregation. For example if performing the aggregation by `aggregate=label:app`, the line item `app=hello-world` may belong to multiple namespaces and Kubecost would therefore omit "properties.namespace" altogether. The most effective workaround is to perform a multi-aggregation (`aggregate=namespace,label:app`) to ensure all the properties you want exist in the result. More discussion in this [Github issue](https://github.com/kubecost/cost-analyzer-helm-chart/issues/1839).
 
-Q: What is the difference between `.Values.kubecostToken` and `Values.kubecostProductConfigs.productKey`? \
-A: `.Values.kubecostToken` is primarily used to manage trial access and is provided to you when visiting <http://kubecost.com/install>. `.Values.kubecostProductConfigs.productKey` is used to apply a Business/Enterprise license. More info in this [doc](/add-key.md).
+Q: What is the difference between `.Values.kubecostToken` and `Values.kubecostProductConfigs.productKey`?\
+A: `.Values.kubecostToken` is primarily used to manage trial access and is provided to you when visiting [http://kubecost.com/install](http://kubecost.com/install). `.Values.kubecostProductConfigs.productKey` is used to apply a Business/Enterprise license. More info in this [doc](../add-key.md).
