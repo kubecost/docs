@@ -69,10 +69,10 @@
 ## Using Kubecost
 
 * [Getting Started](getting-started.md)
-  * [Kubernetes Cost Allocation](cost-allocation.md)
+  * [Allocation Dashboard](cost-allocation.md)
     * [Efficiency and Idle](efficiency-idle.md)
     * [Network Traffic Cost Allocation](network-allocation.md)
-  * [Kubernetes Assets](assets.md)
+  * [Assets Dashboard](assets.md)
   * [Cloud Costs Explorer](using-kubecost/getting-started/cloud-costs-explorer.md)
   * [Savings](savings.md)
     * [Automatic Request Right-Sizing](auto-request-sizing.md)
