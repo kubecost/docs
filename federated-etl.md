@@ -117,4 +117,4 @@ In Kubecost, the `Primary Cluster` serves the UI and API endpoints as well as re
 
 When using ETL Federation, there are several methods to recover Kubecost data in the invent of data loss:
 
-The [backup and alerting](/federated-etl-backups-alerting.md) has detail regarding the various methods.
+The [Backups and Alerting](/federated-etl-backups-alerting.md) doc has detail regarding the various methods.
