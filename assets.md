@@ -1,5 +1,7 @@
 # Assets Dashboard
 
+> **Warning**: Cloud data will soon be parsed through the Cloud Costs Explorer dashboard instead of through Assets. Read our announcement [here](https://blog.kubecost.com/blog/cloud-cost-install/) for more information.
+
 The Kubecost Assets dashboard shows Kubernetes cluster costs broken down by the individual backing assets in your cluster (e.g. cost by node, disk, and other assets). It’s used to identify spend drivers over time and to audit Allocation data. This view can also optionally show out-of-cluster assets by service, tag/label, etc.
 
 > **Note**: Similar to our Allocation API, the Assets API uses our ETL pipeline which aggregates data daily. This allows for enterprise-scale with much higher performance.
