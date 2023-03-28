@@ -69,7 +69,7 @@
 ## Using Kubecost
 
 * [Getting Started](getting-started.md)
-  * [Allocation Dashboard](cost-allocation.md)
+  * [Allocations Dashboard](cost-allocation.md)
     * [Efficiency and Idle](efficiency-idle.md)
     * [Network Traffic Cost Allocation](network-allocation.md)
   * [Assets Dashboard](assets.md)
