@@ -44,9 +44,9 @@ prometheus:
         subPath: ""
 ```
 
-You can configure the thanos-sidecar following [this example](https://github.com/kubecost/poc-common-configurations/blob/c604c59286f96e8ca4be3b52d6e5ef6c0142be22/etl-federation/etl-fed-and-thanos-metrics/values-prometheus-thanos-sidecar.yaml) or [this example](https://github.com/kubecost/cost-analyzer-helm-chart/blob/522c51b34121294c6f4c2f1423022938cdb14622/cost-analyzer/values-thanos.yaml#L14-L64). Additionally, ensure you configure the following:
+You can configure the Thanos sidecar following [this example](https://github.com/kubecost/poc-common-configurations/blob/c604c59286f96e8ca4be3b52d6e5ef6c0142be22/etl-federation/etl-fed-and-thanos-metrics/values-prometheus-thanos-sidecar.yaml) or [this example](https://github.com/kubecost/cost-analyzer-helm-chart/blob/522c51b34121294c6f4c2f1423022938cdb14622/cost-analyzer/values-thanos.yaml#L14-L64). Additionally, ensure you configure the following:
 
-* [`object-store.yaml`](./long-term-storage.md) so the thanos-sidecar has permissions to read/write to the cloud storage bucket
+* [`object-store.yaml`](./long-term-storage.md) so the Thanos sidecar has permissions to read/write to the cloud storage bucket
 * [`.Values.prometheus.server.global.external_labels.cluster_id`](https://github.com/kubecost/cost-analyzer-helm-chart/blob/v1.101/cost-analyzer/values.yaml#L560-L561) so Kubecost is able to distinguish which metric belongs to which cluster in the Thanos bucket.
 
 ## Option 3: Bucket versioning
