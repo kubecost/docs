@@ -11,7 +11,7 @@ Q: Can I safely configure Thanos Compaction [down sampling](https://thanos.io/ti
 A: Yes, Kubecost is resilient to downsampling. However turning query concurrency is going to be most beneficial, especially during the long rebuild windows. To tune downsampling use the following Thanos subchart [values](https://github.com/kubecost/cost-analyzer-helm-chart/blob/b5b089ce217636fb2b7e6f42daed37397d28d3aa/cost-analyzer/charts/thanos/values.yaml#L525-L530).
 
 Q: Why do I receive a 403 error when trying to save reports or alerts?\
-A: This is due to the SAML user having read only RBAC permissions.
+A: This is due to the SAML user having read-only RBAC permissions.
 
 Q: What does "Share Tenancy" mean?\
 A: This enables sharing the cost of the K8s management plane for hosted Kubernetes offerings, such as EKS/AKS/GKE costs.
