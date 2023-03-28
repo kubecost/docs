@@ -8,7 +8,9 @@ Below is the configuration guide using **Kubecost ETL Federation**.
 
 Federated extract, transform, load (ETL) gives teams the benefit of federating multiple Kubecost installations into one view without dependency on Thanos.
 
-For environments that already have a Prometheus instance, this ETL Federation may be preferred because the only dependency will be a single Kubecost pod for monitored cluster.
+There are two primary advantages for using ETL Federation:
+1. For environments that already have a Prometheus instance, Kubecost only requires a single pod per monitored cluster
+2. Many solutions that aggregate Prometheus metrics (like Thanos), are often expensive to scale in large environments
 
 ## Kubecost ETL Federation diagram
 
@@ -90,7 +92,10 @@ prometheus:
 
 ### Step 3: Cluster configuration (Primary)
 
+In Kubecost, the `Primary Cluster` serves the UI and API endpoints as well as reconciling cloud billing (cloud-integration).
+
 1. For the cluster that will be the Primary Cluster, set `Values.federatedETL.primaryCluster` to `true`. This cluster is now a Primary Cluster, and can also be a Federator or Federated Cluster.
+2. Cloud-integration requires `.values.federatedETL.federator.primaryClusterID` set to `values.kubecostProductConfigs.clusterName`
 
    * **Important**: If the Primary Cluster is also to be federated, please wait 2-3 hours for data to populate Federated Storage before setting a Federated Cluster to primary (i.e. set `.Values.federatedETL.federatedCluster` to `true`, then wait to set `Values.federatedETL.primaryCluster` to `true`). This allows for maximum certainty of data consistency.
    * If you do not set this cluster to be federated as well as primary, you will not see local data for this cluster.
@@ -107,3 +112,9 @@ prometheus:
     * To verify the entire pipeline is working, either query `Allocations/Assets` or view the respective views on the frontend. Multi-cluster data should appear after:
         * The Federator has run at least once.
         * There was data in the Federated Storage for the Federator to have combined.
+
+### Data Recovery
+
+When using ETL Federation, there are several methods to recover Kubecost data in the invent of data loss:
+
+The [backup and alerting](/federated-etl-backups-alerting.md) has detail regarding the various methods.
