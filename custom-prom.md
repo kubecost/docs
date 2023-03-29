@@ -91,6 +91,10 @@ You'll need to add the following relabel config to the job that scrapes the node
 
 Note that this does not override the source label. It creates a new label called "kubernetes\_node" and copies the value of pod into it.
 
+## Distinguishing clusters
+
+In order to distinguish between multiple clusters, such as during the setup of non-Thanos clusters, use the `.Values.kubecostModel.promClusterIDLabel` Helm flag as shown [here](https://github.com/kubecost/cost-analyzer-helm-chart/blob/develop/cost-analyzer/templates/cost-analyzer-deployment-template.yaml#L802). This flag configures cluster identifier labels.
+
 ## Troubleshooting
 
 Visiting `<your-kubecost-endpoint>/diagnostics.html` provides diagnostics info on this integration. [More details](diagnostics.md)
@@ -141,7 +145,7 @@ Make sure that [honor\_labels](https://prometheus.io/docs/prometheus/latest/conf
 
 ### Negative idle reported
 
-#### Single Cluster Tests
+#### Single cluster tests
 
 Ensure results are not null for both queries below.
 
@@ -175,7 +179,7 @@ Good:
 {"status":"success","data":{"resultType":"vector","result":[{"metric":{"__name__":"node_total_hourly_cost","instance":"aks-agentpool-81479558-vmss000001","instance_type":"Standard_B4ms","job":"kubecost","node":"aks-agentpool-81479558-vmss000001","provider_id":"azure:///.../virtualMachines/1","region":"eastus"},"value":[1673020150,"0.16599565032196045"]}]}}
 ```
 
-#### Enterprise Multi-Cluster Test
+#### Enterprise multi-cluster test
 
 Ensure that all clusters and nodes have values- output should be similar to the above Single Cluster Tests
 
