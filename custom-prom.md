@@ -93,7 +93,7 @@ Note that this does not override the source label. It creates a new label called
 
 ## Distinguishing clusters
 
-In order to distinguish between multiple clusters, such as during the setup of non-Thanos clusters, use the `.Values.kubecostModel.promClusterIDLabel` Helm flag as shown [here](https://github.com/kubecost/cost-analyzer-helm-chart/blob/develop/cost-analyzer/templates/cost-analyzer-deployment-template.yaml#L802). This flag configures cluster identifier labels.
+In order to distinguish between multiple clusters, Kubecost needs to know the label used in prometheus to identify the name. Use the .Values.kubecostModel.promClusterIDLabel. The default cluster label is cluster_id, though many environments use the key of cluster.
 
 ## Troubleshooting
 
