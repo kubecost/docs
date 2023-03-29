@@ -18,7 +18,7 @@ Once created, add an IAM policy to access this bucket ([steps](/aws-service-acco
 
 ## Method 1: Kubernetes Secret Method
 <a name="secret"></a>
-To use the Kubernetes secret method for allowing access, create a yaml file named `object-store.yaml` with contents similar to the following example. See region to endpoint mappings here: <https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region>
+To use the Kubernetes secret method for allowing access, create a yaml file named `object-store.yaml` with contents similar to the following example. See region to endpoint mappings [here](https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region).
 
 ```
 type: S3
@@ -67,10 +67,10 @@ config:
   part_size: 134217728
 ```
 
-Then, follow the guide at [https://docs.aws.amazon.com/eks/latest/userguide/enable-iam-roles-for-service-accounts.html](https://docs.aws.amazon.com/eks/latest/userguide/enable-iam-roles-for-service-accounts.html) to enable attaching IAM roles to pods.
+Then, follow (this AWS guide)[https://docs.aws.amazon.com/eks/latest/userguide/enable-iam-roles-for-service-accounts.html] to enable attaching IAM roles to pods.
 
-You can define the IAM role to associate with a service account in your cluster by creating a service account in the same namespace as kubecost and adding an annotation to it of the form `eks.amazonaws.com/role-arn: arn:aws:iam::<AWS_ACCOUNT_ID>:role/<IAM_ROLE_NAME>`
-as described here: [https://docs.aws.amazon.com/eks/latest/userguide/specify-service-account-role.html](https://docs.aws.amazon.com/eks/latest/userguide/specify-service-account-role.html)
+You can define the IAM role to associate with a service account in your cluster by creating a service account in the same namespace as Kubecost and adding an annotation to it of the form `eks.amazonaws.com/role-arn: arn:aws:iam::<AWS_ACCOUNT_ID>:role/<IAM_ROLE_NAME>`
+as described (here)[https://docs.aws.amazon.com/eks/latest/userguide/associate-service-account-role.html].
 
 Once that annotation has been created, configure the following:
 ```yaml
@@ -82,13 +82,11 @@ Once that annotation has been created, configure the following:
 
 ## Thanos Encryption With S3 and KMS
 <a name="encryption"></a>
-You can encrypt the S3 bucket where Kubecost data is stored in AWS via S3 and KMS. However, because Thanos can store potentially millions of objects, it is suggested that you use bucket-level encryption instead of object-level encryption. More details available here:
+You can encrypt the S3 bucket where Kubecost data is stored in AWS via S3 and KMS. However, because Thanos can store potentially millions of objects, it is suggested that you use bucket-level encryption instead of object-level encryption. More details available in these external docs:
 
-* <https://thanos.io/tip/thanos/storage.md/#s3>
-
-* <https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucket-key.html>
-
-* <https://docs.aws.amazon.com/AmazonS3/latest/userguide/configuring-bucket-key-object.html>
+* [Thanos S3 storage doc](https://thanos.io/tip/thanos/storage.md/#s3)
+* [Reducing the cost of SSE-KMS with Amazon S3 Bucket Keys](https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucket-key.html)
+* [Configuring an S3 Bucket Key at the Object Level](https://docs.aws.amazon.com/AmazonS3/latest/userguide/configuring-bucket-key-object.html)
 
 ## Troubleshooting
 
