@@ -25,7 +25,7 @@ helm upgrade --install kubecost \
   --set prometheus.kubeStateMetrics.enabled=false
 ```
 
-## Dependency Requirements
+## Dependency requirements
 
 Kubecost requires the following minimum versions:
 
@@ -34,11 +34,11 @@ Kubecost requires the following minimum versions:
 * cAdvisor - kubelet v1.11.0+ (May 18)
 * node-exporter - v0.16+ (May 18) \[Optional]
 
-## Steps to disable Kubecost's Prometheus Deployment (not recommended)
+## Disabling Kubecost's Prometheus deployment
 
-**Before continuing, see the note above about Kubecost's bundled prometheus**
+> **Warning**: This process is not recommended. Before continuing, see the note above about Kubecost-bundled Prometheus.
 
-1.  Pass the following parameters in your helm install:
+1.  Pass the following parameters in your Helm install:
 
     ```
     helm upgrade --install kubecost \
@@ -113,7 +113,7 @@ If the config file is not returned, this is an indication that an incorrect Prom
 
 ### Context Deadline Exceeded
 
-Network policies, Mesh networks, or other security related tooling can block network traffic between Prometheus and Kubecost which will result in the Kubecost scrape target state as being down in the Prometheus targets UI. To assist in troubleshooting this type of error you can use the `curl` command from within the cost-analyzer container to try and reach the Prometheus target. Note the "namespace" and "deployment" name in this command may need updated to match your environment, this example uses the default Kubecost Prometheus deployment.\\
+Network policies, Mesh networks, or other security related tooling can block network traffic between Prometheus and Kubecost which will result in the Kubecost scrape target state as being down in the Prometheus targets UI. To assist in troubleshooting this type of error you can use the `curl` command from within the cost-analyzer container to try and reach the Prometheus target. Note the "namespace" and "deployment" name in this command may need updated to match your environment, this example uses the default Kubecost Prometheus deployment.
 
 When successful, this command should return all of the metrics that Kubecost uses. Failures may be indicative of the network traffic being blocked.
 
@@ -141,11 +141,11 @@ Make sure that [honor\_labels](https://prometheus.io/docs/prometheus/latest/conf
 
 ### Negative idle reported
 
-#### Single Cluster Tests
+#### Single cluster tests
 
 Ensure results are not null for both queries below.
 
-1. Make sure prometheus is scraping Kubecost search metrics for: `node_total_hourly_cost`
+1. Make sure Prometheus is scraping Kubecost search metrics for: `node_total_hourly_cost`
 
 ```
 kubectl exec -i -t --namespace kubecost \
@@ -175,7 +175,7 @@ Good:
 {"status":"success","data":{"resultType":"vector","result":[{"metric":{"__name__":"node_total_hourly_cost","instance":"aks-agentpool-81479558-vmss000001","instance_type":"Standard_B4ms","job":"kubecost","node":"aks-agentpool-81479558-vmss000001","provider_id":"azure:///.../virtualMachines/1","region":"eastus"},"value":[1673020150,"0.16599565032196045"]}]}}
 ```
 
-#### Enterprise Multi-Cluster Test
+#### Enterprise multi-cluster test
 
 Ensure that all clusters and nodes have values- output should be similar to the above Single Cluster Tests
 
@@ -223,9 +223,9 @@ In Kubecost, you can view basic diagnostic information for Prometheus metrics by
 
 ![Prometheus status diagnostic](./images/prom-status.png)
 
-### Data Retention
+### Data retention
 
-By default, metric retention is 91 days, however the retention of data can be further increased with a configurable value for a property `etlDailyStoreDurationDays`
+By default, metric retention is 91 days, however the retention of data can be further increased with a configurable value for a property `etlDailyStoreDurationDays`.
 
 You can find this value (here)[https://github.com/kubecost/cost-analyzer-helm-chart/blob/9f3d7974247bfd3910fbf69d0d4bd66f1335201a/cost-analyzer/values.yaml#L340].
 
