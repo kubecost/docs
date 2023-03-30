@@ -225,8 +225,6 @@ In Kubecost, you can view basic diagnostic information for Prometheus metrics by
 
 ### Data retention
 
-By default, metric retention is 91 days, however the retention of data can be further increased with a configurable value for a property `etlDailyStoreDurationDays`.
-
-You can find this value [here](https://github.com/kubecost/cost-analyzer-helm-chart/blob/9f3d7974247bfd3910fbf69d0d4bd66f1335201a/cost-analyzer/values.yaml#L340).
+By default, metric retention is 91 days, however the retention of data can be further increased with a configurable value for a property `etlDailyStoreDurationDays`. You can find this value [here](https://github.com/kubecost/cost-analyzer-helm-chart/blob/9f3d7974247bfd3910fbf69d0d4bd66f1335201a/cost-analyzer/values.yaml#L340).
 
 > **Warning**: Increasing the default `etlDailyStorageDurationDays` value will naturally result in greater memory usage. At higher values, this can cause errors when trying to display this information in the Kubecost UI. Improved functionality is being added soon to help display larger storage durations.
