@@ -5,7 +5,7 @@ Kubecost v1.67.0+ uses Thanos 0.15.0. If you're upgrading to Kubecost v1.67.0+ f
 
 Thanos 0.15.0 has over 10x performance improvements, so this is recommended.
 
-Your _values-thanos.yaml_ needs to be updated to the new defaults (here)[https://github.com/kubecost/cost-analyzer-helm-chart/commit/752b584a520f2ff089517341ab2eca2664980dab#diff-b5f07a55b9483e6b0fc339c7a03fa08b].
+Your _values-thanos.yaml_ needs to be updated to the new defaults [here](https://github.com/kubecost/cost-analyzer-helm-chart/commit/752b584a520f2ff089517341ab2eca2664980dab#diff-b5f07a55b9483e6b0fc339c7a03fa08b).
 The PR bumps the image version, adds the [query-frontend](https://thanos.io/tip/components/query-frontend.md/) component, and increases concurrency.
 
 This is simplified if you're using our default _values-thanos.yaml_, which has the new configs already.
