@@ -91,6 +91,10 @@ You'll need to add the following relabel config to the job that scrapes the node
 
 Note that this does not override the source label. It creates a new label called "kubernetes\_node" and copies the value of pod into it.
 
+## Distinguishing clusters
+
+In order to distinguish between multiple clusters, Kubecost needs to know the label used in prometheus to identify the name. Use the `.Values.kubecostModel.promClusterIDLabel`. The default cluster label is `cluster_id`, though many environments use the key of `cluster`.
+
 ## Troubleshooting
 
 Visiting `<your-kubecost-endpoint>/diagnostics.html` provides diagnostics info on this integration. [More details](diagnostics.md)
