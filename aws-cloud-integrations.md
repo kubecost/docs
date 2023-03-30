@@ -327,6 +327,7 @@ Note that this will leave your AWS keys unencrypted in your `values.yaml.` Set t
 
 ```yaml
 kubecostProductConfigs:
+  createServiceKeySecret: true
   awsServiceKeyName: <ACCESS_KEY_ID>
   awsServiceKeyPassword: <SECRET_ACCESS_KEY>
 ```
