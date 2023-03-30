@@ -2,23 +2,15 @@
 
 Welcome to Kubecost! This page provides commonly used product configurations and feature overviews to help get you up and running after the Kubecost product has been [installed](https://kubecost.com/install).
 
-**Configuration**
+**Main Topics**
 
 * [Setting up a cloud integration](getting-started.md#cloud-integration)
-* [Product configuration at install-time](getting-started.md#install-configs)
-* [Configuring metric storage](getting-started.md#storage-config)
-* [Setting requests & limits](getting-started.md#requests-limits)
-* [Using an existing Prometheus installation](custom-prom.md)
-* [Using an existing Grafana installation](custom-grafana.md)
-* [Using an existing node exporter installation](getting-started.md#node-exporter)
-* [Exposing Kubecost with an Ingress](ingress-examples.md)
+* [Memory and storage](https://docs.kubecost.com/using-kubecost/getting-started#configuring-kubecost-during-installation)
+* [Configuring Kubecost during installation](https://docs.kubecost.com/using-kubecost/getting-started#configuring-kubecost-during-installation)
+* [Setting requests and limits](https://docs.kubecost.com/using-kubecost/getting-started#setting-requests-and-limits)
+* [Using an existing node exporter](https://docs.kubecost.com/using-kubecost/getting-started#using-an-existing-node-exporter)
 * [Deploying Kubecost without persistent volumes](getting-started.md#no-pvs)
-
-**Next steps**
-
-* [Measure cluster cost efficiency](getting-started.md#cluster-efficiency)
-* [Cost monitoring best practices](https://blog.kubecost.com/blog/cost-monitoring/)
-* [Understanding cost allocation metrics](cost-allocation.md)
+* [Resource efficiency and idle costs](https://docs.kubecost.com/using-kubecost/getting-started#resource-efficiency-and-idle-costs)
 
 ## Overview
 
@@ -26,7 +18,7 @@ There are many methods to set up Kubecost. A simple Helm install will provide mo
 
 By default, Kubecost will detect the cloud provider where it is installed and pull list prices for nodes, storage and LoadBalancers on Azure, AWS, and GCP.
 
-## Using cloud-integration(s) for accurate billing data <a href="#cloud-integration" id="cloud-integration"></a>
+## Setting up a cloud integration <a href="#cloud-integration" id="cloud-integration"></a>
 
 While the basic Helm install is useful for understanding the value Kubecost provides, most will want to deploy with an infrastructure as code (IaC) model. There are many methods to provide Kubecost with the necessary service accounts or privileges needed. Kubecost has separate documents for cloud integration with each major cloud service provider.
 
@@ -115,3 +107,15 @@ You may optionally pass the following Helm flags to install Kubecost and its bun
 To learn more about pod resource efficiency and cluster idle costs, see [Efficiency and Idle](efficiency-idle.md).
 
 </details>
+
+**See also**
+
+* [Using an existing Prometheus installation](custom-prom.md)
+* [Using an existing Grafana installation](custom-grafana.md)
+* [Exposing Kubecost with an Ingress](ingress-examples.md)
+
+**Next steps**
+
+* [Measure cluster cost efficiency](getting-started.md#cluster-efficiency)
+* [Cost monitoring best practices](https://blog.kubecost.com/blog/cost-monitoring/)
+* [Understanding cost allocation metrics](cost-allocation.md)
