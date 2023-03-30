@@ -113,9 +113,3 @@ To learn more about pod resource efficiency and cluster idle costs, see [Efficie
 * [Using an existing Prometheus installation](custom-prom.md)
 * [Using an existing Grafana installation](custom-grafana.md)
 * [Exposing Kubecost with an Ingress](ingress-examples.md)
-
-**Next steps**
-
-* [Measure cluster cost efficiency](getting-started.md#cluster-efficiency)
-* [Cost monitoring best practices](https://blog.kubecost.com/blog/cost-monitoring/)
-* [Understanding cost allocation metrics](cost-allocation.md)
