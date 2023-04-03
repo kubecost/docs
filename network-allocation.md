@@ -4,31 +4,36 @@ This document describes how Kubecost calculates network costs.
 
 ![network-costs screenshot](images/network-cost-overview.png)
 
-## Network Cost Calculation Methodology
+## Network cost calculation methodology
 
 Kubecost uses best-effort to allocate network transfer costs to the workloads generating those costs. The level of accuracy has several factors described below.
 
-There are two primary factors when determining how network costs are calculated: [**Cloud Integration**](./cloud-integration.md) and the existence of the [**network costs daemonset**](./network-costs-configuration.md).
+There are two primary factors when determining how network costs are calculated:&#x20;
 
-### Base Functionality
+1. [Network costs daemonset](https://docs.kubecost.com/install-and-configure/advanced-configuration/network-costs-configuration): Must be enabled in order to view network costs
+2. [Cloud integration](cloud-integration.md): Optional, allows for accurate cloud billing information
 
-A default installation of Kubecost will use the onDemand rates for internet egress and proportionally assign those costs by pod using the metric `container_network_transmit_bytes_total`.
+### Base functionality
 
-### Cloud Integration
+A default installation of Kubecost will use the onDemand rates for internet egress and proportionally assign those costs by pod using the metric `container_network_transmit_bytes_total`. This is not exactly the same as costs obtained via the network costs daemonset, but will be approximately similar.
 
-Kubecost uses cloud integration to pull actual cloud provider billing information.
+### Network costs daemonset
+
+When you enable the network costs daemonset, Kubecost has the ability to attribute the network-byte traffic to specific pods. This will allow the most accurate cost distribution, as Kubecost has per-pod metrics for source and destination traffic.
+
+{% hint style="info" %}
+Learn how to enable the network costs daemonset in seconds [here](https://docs.kubecost.com/install-and-configure/advanced-configuration/network-costs-configuration#enabling-network-costs).
+{% endhint %}
+
+### Cloud integration
+
+Kubecost uses cloud integration to pull actual cloud provider billing information. Without enabling cloud integration, these prices will be based on public onDemand pricing.
 
 Cloud providers allocate data transfers as line-items on a per-node basis. Kubecost will allocate network transfer costs based on each pod's share of `container_network_transmit_bytes_total` of its node.
 
 This will result in a accurate node-based costs. However, it is only estimating the actual pod/application responsible for the network-transfer costs.
 
-### Network Costs Daemonset
-
-When you enable the network costs daemonset, Kubecost has the ability to attribute the network-byte traffic to specific pods. This will allow the most accurate cost distribution, as Kubecost has per-pod metrics for source and destination traffic.
-
-Without enabling cloud-integration, these prices will be based on public onDemand pricing.
-
-### Both Cloud Integration and Network Cost Daemonset
+### Both cloud integration and network cost daemonset
 
 Enabling both cloud-integration and the networkCosts daemonset allows Kubecost to give the most accurate data transfer costs to each pod.
 
