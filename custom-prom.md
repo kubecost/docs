@@ -67,7 +67,7 @@ Kubecost requires the following minimum versions:
 
 This config needs to be added to `extraScrapeConfigs` in the Prometheus configuration. Example [extraScrapeConfigs.yaml](./images/extraScrapeConfigs.yaml)
 
-### <a name="recording-rules"></a>Recording-rules
+### Recording-rules
 Add the recording rules to reduce query load: <https://github.com/kubecost/cost-analyzer-helm-chart/blob/v1.102/kubecost.yaml#L399>
 
 Alternatively, if your environment supports serviceMonitors and prometheusRules, pass these values to your Helm install:
