@@ -12,7 +12,7 @@ Additionally, if multi-cluster metric aggregation is required, Kubecost provides
 
 ## Disable node-exporter and kube-state-metrics (recommended)
 
-If you have node-exporter and/or KSM running on your cluster, follow this step to disable the Kubecost included versions. Additional detail on [KSM requiments](ksm-metrics.md).
+If you have node-exporter and/or KSM running on your cluster, follow this step to disable the Kubecost included versions. Additional detail on [KSM requirements](ksm-metrics.md).
 
 > **Note**: In contrast to our recommendation above, we do recommend disabling the Kubecost's node-exporter and kube-state-metrics if you already have them running in your cluster.
 
@@ -66,6 +66,29 @@ Kubecost requires the following minimum versions:
 ```
 
 This config needs to be added to `extraScrapeConfigs` in the Prometheus configuration. Example [extraScrapeConfigs.yaml](./images/extraScrapeConfigs.yaml)
+
+<a name="recording-rules"></a>
+Add the recording rules to reduce query load: <https://github.com/kubecost/cost-analyzer-helm-chart/blob/v1.102/kubecost.yaml#L399>
+
+Alternatively, if your environment supports serviceMonitors and prometheusRules, pass these values to your helm install:
+
+```yaml
+global:
+  prometheus:
+    enabled: false
+serviceMonitor:
+  enabled: true
+  # additionalLabels:
+  #   label-key: label-value
+  networkCosts:
+    enabled: true
+    # additionalLabels:
+    #   label-key: label-value
+prometheusRule:
+  enabled: true
+  # additionalLabels:
+  #   label-key: label-value
+```
 
 To confirm this job is successfully scraped by Prometheus, you can view the Targets page in Prometheus and look for a job named `kubecost`.
 
