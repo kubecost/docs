@@ -94,7 +94,7 @@ helm template kubecost \
   -f your-custom-values.yaml
 ```
 
-* You can install via flat manifest. This install path is not because it has limited flexibility for managing your deployment and future upgrades.
+* You can install via flat manifest. This install path is not recommended because it has limited flexibility for managing your deployment and future upgrades.
 
 ```bash
 kubectl apply -f https://raw.githubusercontent.com/kubecost/cost-analyzer-helm-chart/develop/kubecost.yaml
