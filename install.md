@@ -91,7 +91,8 @@ helm upgrade --install kubecost \
 helm template kubecost \
   --repo https://kubecost.github.io/cost-analyzer/ cost-analyzer \
   --namespace kubecost --create-namespace \
-  -f your-custom-values.yaml
+  -f your-custom-values.yaml > kubecost.yaml
+kubectl apply -f kubecost.yaml
 ```
 
 * You can install via flat manifest. This install path is not recommended because it has limited flexibility for managing your deployment and future upgrades.
