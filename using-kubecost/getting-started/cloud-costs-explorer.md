@@ -40,15 +40,25 @@ You can adjust your displayed metrics using the date range feature, represented 
 
 ### Aggregate filters
 
-You can adjust your displayed metrics by aggregating your cost by category. Supported fields are _Billing Account_, _Provider_, _Service_, and _Workspace_, as well as custom labels.
+You can adjust your displayed metrics by aggregating your cost by category. Supported fields are _Billing Account_, _Provider_, _Service_, and _Workspace_, as well as custom labels. The Cloud Costs Explorer dashboard supports single and multi-aggregation.
 
-| Aggregation | Description |
-| :---------: | ----------- |
+|   Aggregation   | Description                                                                                                                                                      |
+| :-------------: | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Billing Account | The ID of the billing account your cloud provider bill comes from. (Examples: AWS Management/Payer Account ID, GCP Billing Account ID, Azure Billing Account ID) |
-| Provider        | Cloud provider (Examples: AWS, Azure, GCP) |
-| Service         | Cloud provider services (Examples: AWS - S3, Azure - microsoft.compute, GCP - BigQuery) |
-| Workspace       | Cloud provider account (Examples: AWS Account, Azure Subscription, GCP Project) |
-| Labels          | Lables/Tags on your cloud resources (Examples: AWS tags, Azure tags, GCP labels) |
+|     Provider    | Cloud provider (Examples: AWS, Azure, GCP)                                                                                                                       |
+|     Service     | Cloud provider services (Examples: AWS - S3, Azure - microsoft.compute, GCP - BigQuery)                                                                          |
+|    Workspace    | Cloud provider account (Examples: AWS Account, Azure Subscription, GCP Project)                                                                                  |
+|      Labels     | Labels/tags on your cloud resources (Examples: AWS tags, Azure tags, GCP labels)                                                                                 |
+
+### Add filters
+
+You can filter displayed dashboard metrics by selecting _Edit_, then adding a filter. Filters can be created for the following categories (see descriptions of each category in the Aggregate filters table above):
+
+* Service
+* Workspace
+* Billing Account
+* Provider
+* Labels
 
 ### Table metrics
 

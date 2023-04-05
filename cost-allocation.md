@@ -8,8 +8,8 @@ The Kubecost Allocations dashboard allows you to quickly see allocated spend acr
 | --------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
 | Date Range (Last 7 days)          | Will report _Last 7 days_ by default. Manually select your start and end date, or pick one of twelve preset options |
 | Aggregate By                      | Aggregate costs by one or several concepts. Add custom labels                                                       |
-| (Un)save Report                   | Save or unsave the current report                                                                                   |
-| Edit Report                       | Includes multiple filtering tools including  cost metric and shared resources                                       |
+| Save/Unsave Report                | Save or unsave the current report                                                                                   |
+| Edit Report                       | Includes multiple filtering tools including cost metric and shared resources                                        |
 | Additional options/meatballs icon | Additional options for opening and downloading reports                                                              |
 
 ## Date Range
@@ -57,7 +57,7 @@ View Allocation data in the following formats:
 2. Cost over time: Cost per aggregation broken down over days or hours depending on date range
 3. Efficiency over time: Shows resource efficiency over given date range
 4. Proportional cost: Cost per aggregate displayed as a percentage of total cost over date range
-5. Cost Treemap: Heirarchically structured view of costs in current aggregation
+5. Cost Treemap: Hierarchically structured view of costs in current aggregation
 
 You can select _Edit Report_ > _Chart_, then select _Cost over time_ from the dropdown to have your data displayed by a per-day basis. Hovering over any day's data will provide a breakdown of your spending.
 
@@ -72,15 +72,15 @@ View either cumulative or run rate costs measured over the selected time window 
 
 Costs allocations are based on the following:
 
-1. resources allocated, i.e. max of resource requests and usage
-2. the cost of each resource
-3. the amount of time resources were provisioned
+1. Resources allocated, i.e. max of resource requests and usage
+2. The cost of each resource
+3. The amount of time resources were provisioned
 
 For more information, refer to the [OpenCost spec](https://github.com/opencost/opencost/blob/develop/spec/opencost-specv01.md).
 
 ### Filters
 
-Filter resources by namespace, clusterId, and/or Kubernetes label to more closely investigate a rise in spend or key cost drivers at different aggregations such as deployments or pods. When a filter is applied, only resources with this matching value will be shown. These filters are also applied to external out-of-cluster asset tags. Supported filters are as follows:
+Filter resources by namespace, clusterID, and/or Kubernetes label to more closely investigate a rise in spend or key cost drivers at different aggregations such as deployments or pods. When a filter is applied, only resources with this matching value will be shown. These filters are also applied to external out-of-cluster asset tags. Supported filters are as follows:
 
 | Filter         | Description                                                                                                                                                              |
 | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -114,17 +114,24 @@ The three horizontal lines/meatballs icon will provide additional options for ha
 
 Cost allocation metrics are available for both in-cluster and out-of-cluster resources:
 
-| Metric                      | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
-| --------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| CPU                         | The total cost of CPU allocated to this object, e.g. namespace or deployment. The amount of CPU allocated is the greater of CPU usage and CPU requested over the measured time window. The price of allocated CPU is based on cloud billing APIs or custom pricing sheets. [Learn more](https://github.com/kubecost/cost-model#questions)                                                                                                                              |
-| GPU                         | The cost of GPUs requested by this object, as measured by [resource limits](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/). Prices are based on cloud billing prices or custom pricing sheets for on-prem deployments. [Learn more](gpu-allocation.md)                                                                                                                                                                         |
-| RAM                         | The total cost of memory allocated to this object, e.g. namespace or deployment. The amount of memory allocated is the greater of memory usage and memory requested over the measured time window. The price of allocated memory is based on cloud billing APIs or custom pricing sheets. [Learn more](https://github.com/kubecost/cost-model#questions)                                                                                                               |
-| Persistent Volume (PV) Cost | The cost of persistent storage volumes claimed by this object. Prices are based on cloud billing prices or custom pricing sheets for on-prem deployments.                                                                                                                                                                                                                                                                                                              |
-| Network                     | The cost of network traffic based on internet egress, cross-zone egress, and other billed transfer. Note: these costs must be enabled. [Learn more](/network-allocation.md). When Network Traffic Cost are not enabled, the Node network costs from the cloud service provider's [billing integration](/cloud-integration.md) will be spread proportionally based on cost weighted usage. |
-| Load Balancer (LB) cost     | The cost of cloud-service load balancer that has been allocated.                                                                                                                                                                                                                                                                                                                                                                                                       |
-| Shared                      | The cost of shared resources allocated to this tenant. This field covers shared overhead, shared namespaces, and shared labels.                                                                                                                                                                                                                                                                                                                                        |
-| Cost Efficiency             | The percentage of requested CPU & memory dollars utilized over the measured time window. Values range from 0 to above 100 percent. Workloads with no requests but with usage OR workloads with usage > request can report efficiency above 100%.                                                                                                                                                                                                                       |
+| Metric                      | Description                                                                                                                                                                                                                                                                                                                                                                             |
+| --------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| CPU                         | The total cost of CPU allocated to this object, e.g. namespace or deployment. The amount of CPU allocated is the greater of CPU usage and CPU requested over the measured time window. The price of allocated CPU is based on cloud billing APIs or custom pricing sheets. [Learn more](https://github.com/kubecost/cost-model#questions)                                               |
+| GPU                         | The cost of GPUs requested by this object, as measured by [resource limits](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/). Prices are based on cloud billing prices or custom pricing sheets for on-prem deployments. [Learn more](gpu-allocation.md)                                                                                          |
+| RAM                         | The total cost of memory allocated to this object, e.g. namespace or deployment. The amount of memory allocated is the greater of memory usage and memory requested over the measured time window. The price of allocated memory is based on cloud billing APIs or custom pricing sheets. [Learn more](https://github.com/kubecost/cost-model#questions)                                |
+| Persistent Volume (PV) Cost | The cost of persistent storage volumes claimed by this object. Prices are based on cloud billing prices or custom pricing sheets for on-prem deployments.                                                                                                                                                                                                                               |
+| Network                     | The cost of network traffic based on internet egress, cross-zone egress, and other billed transfer. Note: these costs must be enabled. [Learn more](network-allocation.md). When Network Traffic Cost are not enabled, the Node network costs from the cloud service provider's [billing integration](cloud-integration.md) will be spread proportionally based on cost weighted usage. |
+| Load Balancer (LB) cost     | The cost of cloud-service load balancer that has been allocated.                                                                                                                                                                                                                                                                                                                        |
+| Shared                      | The cost of shared resources allocated to this tenant. This field covers shared overhead, shared namespaces, and shared labels.                                                                                                                                                                                                                                                         |
+| Cost Efficiency             | The percentage of requested CPU & memory dollars utilized over the measured time window. Values range from 0 to above 100 percent. Workloads with no requests but with usage OR workloads with usage > request can report efficiency above 100%.                                                                                                                                        |
 
 ### Cost efficiency table example
 
 ![Cost Efficiency table](https://raw.githubusercontent.com/kubecost/docs/main/images/table.PNG)
+
+### Actions column
+
+The Actions column is the rightmost column in the Allocations dashboard table. It provides additional actions that can be performed on a particular namespace:
+
+* _Inspect_: Opens an advanced cost overview of the namespace in a new tab.
+* _View Right-Sizing_: Opens the [Request right-sizing recommendations](https://docs.kubecost.com/using-kubecost/getting-started/savings/auto-request-sizing) page in a new tab.
