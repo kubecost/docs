@@ -1,6 +1,6 @@
 # Installation
 
-To get started with Kubecost and OpenCost, **the recommended path is to** [**install Kubecost Commmunity Version**](https://kubecost.com/install). This installation method is available for free and leverages the Kubecost Helm Chart. It provides access to all OpenCost and Kubecost community functionality and can scale to large clusters. This will also provide a token for trialing and retaining data across different Kubecost product tiers.
+To get started with Kubecost and OpenCost, **the recommended path is to** [**install Kubecost Community Version**](https://kubecost.com/install). This installation method is available for free and leverages the Kubecost Helm Chart. It provides access to all OpenCost and Kubecost community functionality and can scale to large clusters. This will also provide a token for trialing and retaining data across different Kubecost product tiers.
 
 ## Kubecost Features
 
@@ -80,10 +80,24 @@ For larger teams and companies with more complex infrastructure, you need the ri
 * You can also install directly with the [Kubecost Helm Chart](https://github.com/kubecost/cost-analyzer-helm-chart/) with Helm v3.1+ using the following commands. This provides the same functionality as the step above but doesn't generate a product token for managing tiers or upgrade trials.
 
 ```bash
-$ helm repo add kubecost https://kubecost.github.io/cost-analyzer/
-$ helm upgrade --install kubecost kubecost/cost-analyzer --namespace kubecost --create-namespace
+helm upgrade --install kubecost \
+  --repo https://kubecost.github.io/cost-analyzer/ cost-analyzer \
+  --namespace kubecost --create-namespace
 ```
 
-* You can run [Helm Template](https://helm.sh/docs/helm/helm_template/) against the [Kubecost Helm Chart](https://github.com/kubecost/cost-analyzer-helm-chart/) to generate local YAML output. This requires extra effort when compared to directly installing the Helm Chart but is more flexible than deploying static YAML.
-* You can install via [flat manifest](https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/README.md#manifest). This install path provides less flexibility for managing your deployment and has several product limitations, e.g. Thanos is not easily enabled.
-* Lastly, you can deploy the open source OpenCost project directly as a Pod. This install path provides a subset of free functionality and is available [here](https://www.opencost.io/docs/install). Specifically, this install path deploys the underlying cost allocation model without the same UI or access to enterprise functionality, e.g. SAML support.
+* You can run [Helm Template](https://helm.sh/docs/helm/helm_template/) against the [Kubecost Helm Chart](https://github.com/kubecost/cost-analyzer-helm-chart/) to generate local YAML output. This requires extra effort when compared to directly installing the Helm Chart but is more flexible than deploying a flat manifest.
+
+```bash
+helm template kubecost \
+  --repo https://kubecost.github.io/cost-analyzer/ cost-analyzer \
+  --namespace kubecost --create-namespace \
+  -f your-custom-values.yaml
+```
+
+* You can install via flat manifest. This install path is not because it has limited flexibility for managing your deployment and future upgrades.
+
+```bash
+kubectl apply -f https://raw.githubusercontent.com/kubecost/cost-analyzer-helm-chart/develop/kubecost.yaml
+```
+
+* Lastly, you can deploy the open source OpenCost project directly as a Pod. This install path provides a subset of free functionality and is available [here](https://www.opencost.io/docs/install). Specifically, this install path deploys the underlying cost allocation model without the same UI or access to enterprise functionality: cloud provider billing integration, RBAC/SAML support and scale improvements in Kubecost.
