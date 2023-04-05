@@ -73,6 +73,7 @@
     * [Efficiency and Idle](efficiency-idle.md)
     * [Network Traffic Cost Allocation](network-allocation.md)
   * [Assets Dashboard](assets.md)
+  * [Clusters Dashboard](using-kubecost/getting-started/clusters-dashboard.md)
   * [Cloud Costs Explorer](using-kubecost/getting-started/cloud-costs-explorer.md)
   * [Savings](savings.md)
     * [Automatic Request Right-Sizing](auto-request-sizing.md)
