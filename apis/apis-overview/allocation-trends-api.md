@@ -240,9 +240,11 @@ The equation for calculating value is:
 
 Receiving a positive `value` means your more recent `totalCost` has increased compared to the previous window. A negative `value` means spending has decreased.
 
-> **Note**: It's important to recognize when a resource is not detected to exist in the previous window. This is designated by the field `IsInfinite=true`, which means the allocation could not be determined to exist. Otherwise, the cause of an unexpected or major trend change could be misattributed.
+{% hint style="warning" %}
+It's important to recognize when a resource is not detected to exist in the previous window. This is designated by the field `IsInfinite=true`, which means the allocation could not be determined to exist. Otherwise, the cause of an unexpected or major trend change could be misattributed.
+{% endhint %}
 
-In the example output below, `value` is expressed as 0.11... meaning spending has increased in the current window by 11% from the previous window.
+In the example output below, `value` is expressed as 0.11... meaning spending has increased in the current window by roughly 11% from the previous window.
 
 ```
 "etl-mount": {
@@ -263,6 +265,8 @@ Trend values are converted into percentages in the Kubecost UI. Go to the Alloca
 
 <figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
 
-> **Note**: Requests with large time intervals for `window` can result in an error. The recommended maximum interval for `window` is 7 days. A failed response will show a _N/A_ inside a gray bubble in the UI with no percentage returned.
+{% hint style="danger" %}
+Requests with large time intervals for `window` can result in an error. The recommended maximum interval for `window` is 7 days. A failed response will show a _N/A_ inside a gray bubble in the UI with no percentage returned.
+{% endhint %}
 
 The Trends API does not currently support cost comparisons besides `totalCost`.
