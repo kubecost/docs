@@ -7,7 +7,7 @@ The following guide provides the steps required for enabling OOC costs allocatio
 
 ## Step 1: Create an AWS Cost and Usage Report (CUR) and Integrate it with Kubecost
 
-[Follow our guide for cloud integrations](/aws-cloud-integrations.md).
+Follow our guide on [AWS Cloud Integration](/aws-cloud-integrations.md).
 
 ## Step 2: Tag your resources
 Kubecost utilizes AWS tagging to allocate the costs of AWS resources outside of the Kubernetes cluster to specific Kubernetes concepts, such as namespaces, pods, etc. These costs are then shown in a unified dashboard within the Kubecost interface.
@@ -32,6 +32,20 @@ More on AWS tagging [here](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/U
 
 Tags may take several hours to show up in the *Cost Allocations Tags* section described in the next step.
 
+### Custom tags mapping
+
+Tags that contain `:` in the key may be converted to `_` in the Kubecost UI due to Prometheus readability. To use AWS Label Mapping Configs, use this mapping format:
+
+```
+kubecostProdutConfigs:
+  labelMappingConfigs:
+    enabled: true
+    namespace_external_label: mycompanybilling_namespace
+    cluster_external_label: mycompanybilling_cluster
+ ```
+ 
+ To view examples of common label mapping configs, see [here](https://github.com/kubecost/cost-analyzer-helm-chart/blob/ef50e9b959e5b91890333b047830d604ec37d112/cost-analyzer/values.yaml#L947-L966).
+
 ## Step 3: Enable user-defined cost allocation tags
 
 In order to make the custom Kubecost AWS tags appear on the CURs, and therefore in Kubecost, individual cost allocation tags must be enabled. Details on which tags to enable can be found in Step 2.
@@ -52,5 +66,5 @@ Your AWS account will need to support the `organizations:ListAccounts` and `orga
 
 * Visit the Allocation view in the Kubecost product. If external costs are not shown, open your browser's Developer Tools > Console to see any reported errors.
 * Query Athena directly to ensure data is available. Note: it can take up to 6 hours for data to be written. 
-* You may need to upgrade your AWS Glue if you are running an old version https://docs.aws.amazon.com/athena/latest/ug/glue-upgrade.html
+* You may need to upgrade your AWS Glue if you are running an old version. See [Upgrading to the AWS Glue Data Catalog step-by-step](https://docs.aws.amazon.com/athena/latest/ug/glue-upgrade.html) for more info.
 * Finally, review pod logs from the `cost-model` container in the `cost-analyzer` pod and look for auth errors or Athena query results. 
