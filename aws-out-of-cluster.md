@@ -37,14 +37,11 @@ Tags may take several hours to show up in the *Cost Allocations Tags* section de
 Tags that contain `:` in the key may be converted to `_` in the Kubecost UI due to Prometheus readability. To use AWS Label Mapping Configs, use this mapping format:
 
 ```
-        helm:
-          parameters:
-            - name: kubecostProductConfigs.labelMappingConfigs.enabled
-              value: 'true'
-            - name: kubecostProductConfigs.labelMappingConfigs.namespace_external_label
-              value: 'mycompanybilling_namespace'
-            - name: kubecostProductConfigs.labelMappingConfigs.cluster_external_label
-              value: 'mycompanybilling_cluster'
+kubecostProdutConfigs:
+  labelMappingConfigs:
+    enabled: true
+    namespace_external_label: mycompanybilling_namespace
+    cluster_external_label: mycompanybilling_cluster
  ```
  
  To view examples of common label mapping configs, see [here](https://github.com/kubecost/cost-analyzer-helm-chart/blob/ef50e9b959e5b91890333b047830d604ec37d112/cost-analyzer/values.yaml#L947-L966).
