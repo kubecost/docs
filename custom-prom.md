@@ -124,7 +124,7 @@ In order to distinguish between multiple clusters, Kubecost needs to know the la
 
 ## Troubleshooting
 
-Visiting `<your-kubecost-endpoint>/diagnostics.html` provides diagnostics info on this integration. [More details](diagnostics.md)
+The Diagnostics page (_Settings > View Full Diagnostics_) provides diagnostics info on this integration. [More details here](diagnostics.md)
 
 Common issues include the following:
 
