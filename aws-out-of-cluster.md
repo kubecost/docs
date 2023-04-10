@@ -64,7 +64,7 @@ Your AWS account will need to support the `organizations:ListAccounts` and `orga
 
 ## Troubleshooting
 
-* Visit the Allocation view in the Kubecost product. If external costs are not shown, open your browser's Developer Tools > Console to see any reported errors.
+* In the Kubecost UI, view the Allocations dashboard. If external costs are not shown, open your browser's Developer Tools > Console to see any reported errors.
 * Query Athena directly to ensure data is available. Note: it can take up to 6 hours for data to be written. 
 * You may need to upgrade your AWS Glue if you are running an old version. See [Upgrading to the AWS Glue Data Catalog step-by-step](https://docs.aws.amazon.com/athena/latest/ug/glue-upgrade.html) for more info.
 * Finally, review pod logs from the `cost-model` container in the `cost-analyzer` pod and look for auth errors or Athena query results. 
