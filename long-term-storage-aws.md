@@ -67,10 +67,10 @@ config:
   part_size: 134217728
 ```
 
-Then, follow (this AWS guide)[https://docs.aws.amazon.com/eks/latest/userguide/enable-iam-roles-for-service-accounts.html] to enable attaching IAM roles to pods.
+Then, follow [this AWS guide](https://docs.aws.amazon.com/eks/latest/userguide/enable-iam-roles-for-service-accounts.html) to enable attaching IAM roles to pods.
 
 You can define the IAM role to associate with a service account in your cluster by creating a service account in the same namespace as Kubecost and adding an annotation to it of the form `eks.amazonaws.com/role-arn: arn:aws:iam::<AWS_ACCOUNT_ID>:role/<IAM_ROLE_NAME>`
-as described (here)[https://docs.aws.amazon.com/eks/latest/userguide/associate-service-account-role.html].
+as described [here](https://docs.aws.amazon.com/eks/latest/userguide/associate-service-account-role.html).
 
 Once that annotation has been created, configure the following:
 ```yaml
