@@ -37,7 +37,7 @@ Tags may take several hours to show up in the *Cost Allocations Tags* section de
 Tags that contain `:` in the key may be converted to `_` in the Kubecost UI due to Prometheus readability. To use AWS Label Mapping Configs, use this mapping format:
 
 ```
-kubecostProdutConfigs:
+kubecostProductConfigs:
   labelMappingConfigs:
     enabled: true
     namespace_external_label: mycompanybilling_namespace
