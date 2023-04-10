@@ -4,7 +4,7 @@
 
 Kubecost diagnostics run a series of tests to determine if resources necessary for accurate cost reporting are available.
 
-As of release v1.70.0, the results of these tests are displayed at `<your-kubecost-endpoint>/diagnostics.html` and are also accessible via links from _Settings_.
+You can access the Diagnostics page in the Kubecost UI by selecting _Settings_ from the left navigation, then selecting _View Full Diagnostics_.
 
 ### Cadvisor metrics available
 
