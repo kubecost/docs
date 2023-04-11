@@ -2,7 +2,7 @@
 
 > **Note**: This feature is in a pre-release (alpha/beta) state. It has limitations. Please read the documentation carefully.
 
-1-click request sizing is a feature that will instantly update [container resource requests](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#requests-and-limits) in your cluster based on Kubecost's sizing [recommendations](api-request-right-sizing.md).
+1-click request sizing is a feature that will instantly update [container resource requests](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#requests-and-limits) in your cluster based on Kubecost's sizing [recommendations](api-request-right-sizing-v2.md).
 
 If you want to learn more about the APIs that power 1-click request sizing, including their limitations, see the corresponding [API documentation](api-request-recommendation-apply.md).
 
