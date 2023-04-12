@@ -64,7 +64,6 @@
   * [Availability Tiers](availability-tiers.md)
   * [CSV Pricing](csv-pricing.md)
   * [Windows Node Support](windows.md)
-* [Installing Agent for Kubecost Cloud (Limited Availability)](agent.md)
 
 ## Using Kubecost
 

@@ -1,6 +1,6 @@
 # Kubecost Cloud Architecture Overview
 
-Kubecost Cloud uses an [agent](agent.md) to gather metrics and send them to an S3 bucket.
+Kubecost Cloud uses an agent to gather metrics and send them to the our SaaS platform.
 
 The agent requires two pods and an optional daemonSet:
 
