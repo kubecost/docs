@@ -10,7 +10,17 @@ Additionally, if multi-cluster metric aggregation is required, Kubecost provides
 
 > **Note**: The Kubecost team provides best efforts support for free/community users when integrating with an existing Prometheus deployment.
 
-## Disable node-exporter and kube-state-metrics (recommended)
+## Dependency requirements
+
+Kubecost requires the following minimum versions:
+
+* Prometheus - v2.18 (support for v2.13-2.17 with limited features.)
+* kube-state-metrics - v1.6.0+ (May 19)
+* cAdvisor - kubelet v1.11.0+ (May 18)
+* node-exporter - v0.16+ (May 18) \[Optional]
+
+## Instructions
+### Disable node-exporter and kube-state-metrics (recommended)
 
 If you have node-exporter and/or KSM running on your cluster, follow this step to disable the Kubecost included versions. Additional detail on [KSM requirements](ksm-metrics.md).
 
@@ -25,18 +35,9 @@ helm upgrade --install kubecost \
   --set prometheus.kubeStateMetrics.enabled=false
 ```
 
-## Dependency requirements
+### Disabling Kubecost's Prometheus deployment
 
-Kubecost requires the following minimum versions:
-
-* prometheus - v2.18 (support for v2.13 - v2.17 with limited features.)
-* kube-state-metrics - v1.6.0+ (May 19)
-* cAdvisor - kubelet v1.11.0+ (May 18)
-* node-exporter - v0.16+ (May 18) \[Optional]
-
-## Disabling Kubecost's Prometheus deployment
-
-> **Warning**: This process is not recommended. Before continuing, see the note above about Kubecost-bundled Prometheus.
+> **Warning**: This process is not recommended. Before continuing, see the note in `Bring your own Prometheus` section about Kubecost-bundled Prometheus.
 
 1.  Pass the following parameters in your Helm install:
 
@@ -49,6 +50,7 @@ Kubecost requires the following minimum versions:
     ```
 
     > **Note**: The fqdn can be a full path: https://prometheus-prod-us-central-x.grafana.net/api/prom/ if you use Grafana Cloud managed Prometheus. Learn more at [Grafana Cloud Integration for Kubecost](grafana-cloud-integration.md).
+
 2. Have your Prometheus scrape the cost-model `/metrics` endpoint. These metrics are needed for reporting accurate pricing data. Here is an example scrape config:
 
 ```yaml
@@ -66,6 +68,8 @@ Kubecost requires the following minimum versions:
 ```
 
 This config needs to be added to `extraScrapeConfigs` in the Prometheus configuration. Example [extraScrapeConfigs.yaml](./images/extraScrapeConfigs.yaml)
+
+3. By default, the Prometheus chart included with Kubecost (bundled-Prometheus) contains scrape configs optimized for Kubecost-required metrics. You need to add those scrape configs jobs into your existing Prometheus setup to allow Kubecost to provide more accurate cost data and optimize the required resources for your existing Prometheus. You can find the full scrape configs of our bundled-Prometheus [here](https://github.com/kubecost/cost-analyzer-helm-chart/blob/7c0a385b878829510eafaeff4ddf534196985040/cost-analyzer/charts/prometheus/values.yaml#L1160-L1416). You can check [Prometheus documentation](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#scrape_config) for more information about the scrape config, or read this [documentation](https://github.com/prometheus-operator/prometheus-operator/blob/main/Documentation/additional-scrape-config.md) if you are using Prometheus Operator.
 
 ### Recording rules
 
@@ -98,7 +102,7 @@ To confirm this job is successfully scraped by Prometheus, you can view the Targ
 
 ![Prometheus Targets](./images/prom-targets.png)
 
-## Node exporter metric labels
+### Node exporter metric labels
 
 > **Note**: This step is optional, and only impacts certain efficiency metrics. View [issue/556](https://github.com/kubecost/cost-model/issues/556) for a description of what will be missing if this step is skipped.
 
@@ -118,7 +122,7 @@ You'll need to add the following relabel config to the job that scrapes the node
 
 Note that this does not override the source label. It creates a new label called "kubernetes\_node" and copies the value of pod into it.
 
-## Distinguishing clusters
+### Distinguishing clusters
 
 In order to distinguish between multiple clusters, Kubecost needs to know the label used in prometheus to identify the name. Use the `.Values.kubecostModel.promClusterIDLabel`. The default cluster label is `cluster_id`, though many environments use the key of `cluster`.
 
@@ -142,7 +146,7 @@ kubectl exec -i -t --namespace kubecost \
 
 If the config file is not returned, this is an indication that an incorrect Prometheus address has been provided. If a config file is returned from one pod in the cluster but not the Kubecost pod, then the Kubecost pod likely has its access restricted by a network policy, service mesh, etc.
 
-### Context Deadline Exceeded
+### Context deadline exceeded
 
 Network policies, Mesh networks, or other security related tooling can block network traffic between Prometheus and Kubecost which will result in the Kubecost scrape target state as being down in the Prometheus targets UI. To assist in troubleshooting this type of error you can use the `curl` command from within the cost-analyzer container to try and reach the Prometheus target. Note the "namespace" and "deployment" name in this command may need updated to match your environment, this example uses the default Kubecost Prometheus deployment.
 
@@ -250,7 +254,7 @@ Good:
 
 ### Diagnostics
 
-In Kubecost, you can view basic diagnostic information for Prometheus metrics by selecting _Settings_ in the left navigation, then scrolling down to Prometheus Status, as seen below:
+In Kubecost, view basic diagnostic information for Prometheus metrics by selecting _Settings_ in the left navigation, then scrolling down to Prometheus Status, as seen below:
 
 ![Prometheus status diagnostic](./images/prom-status.png)
 
