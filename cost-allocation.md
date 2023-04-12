@@ -103,7 +103,7 @@ Select how shared costs set on the settings page will be shared among allocation
 
 <figure><img src=".gitbook/assets/dots.png" alt=""><figcaption><p>Additional options</p></figcaption></figure>
 
-The three horizontal lines/meatballs icon will provide additional options for handling your report:
+The three horizontal dots (meatballs icon) will provide additional options for handling your report:
 
 * _Open Report_: Allows you to open one of your saved reports without first navigating to the Reports page
 * _Alerts_: Send one of four reports routinely: recurring, efficiency, budget, and spend change
