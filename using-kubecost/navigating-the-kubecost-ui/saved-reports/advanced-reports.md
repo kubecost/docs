@@ -2,7 +2,7 @@
 
 Kubecost Advanced Reporting allows teams to sculpt and tailor custom reports to easily view the information they care about. Providing an intersection between K8s Allocation and Cloud Assets data, this tool provides insight into important cost considerations for both workload and external infrastructure costs.
 
-<figure><img src=".gitbook/assets/advancedreporting.PNG" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/advancedreporting.PNG" alt=""><figcaption></figcaption></figure>
 
 ## Report configurations
 

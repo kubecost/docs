@@ -2,7 +2,7 @@
 
 This document describes how Kubecost calculates network costs.
 
-![network-costs screenshot](images/network-cost-overview.png)
+![network-costs screenshot](../../../images/network-cost-overview.png)
 
 ## Network cost calculation methodology
 
@@ -11,7 +11,7 @@ Kubecost uses best-effort to allocate network transfer costs to the workloads ge
 There are two primary factors when determining how network costs are calculated:&#x20;
 
 1. [Network costs daemonset](https://docs.kubecost.com/install-and-configure/advanced-configuration/network-costs-configuration): Must be enabled in order to view network costs
-2. [Cloud integration](cloud-integration.md): Optional, allows for accurate cloud billing information
+2. [Cloud integration](../../../cloud-integration.md): Optional, allows for accurate cloud billing information
 
 ### Base functionality
 

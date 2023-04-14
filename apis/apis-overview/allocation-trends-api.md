@@ -263,7 +263,7 @@ In the example output below, `value` is expressed as 0.11... meaning spending ha
 
 Trend values are converted into percentages in the Kubecost UI. Go to the Allocations page, and manually apply any additional parameters. Trends will be presented in the rightmost column, next to your Total cost. The `window` parameter is determined by the date range icon in the top right of the page. The default is Last 7 days (`window=7d`). The equation `value*100` is used to provide percentages.
 
-<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
 
 {% hint style="danger" %}
 Requests with large time intervals for `window` can result in an error. The recommended maximum interval for `window` is 7 days. A failed response will show a _N/A_ inside a gray bubble in the UI with no percentage returned.

@@ -4,16 +4,16 @@
 
 Kubecost alerts allow teams to receive updates on real-time Kubernetes spend. They are configurable via the Kubecost UI or Helm values. This resource gives an overview of how to configure Kubecost email, Slack, and Microsoft Teams using [Kubecost Helm chart values](https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/values.yaml). Alerts are either created to monitor specific data sets and trends, or they must be toggled on or off. The following alert types are supported:
 
-1. [Allocation Budget](/alerts.md#type-allocation-budget): Sends an alert when spending crosses a defined threshold
-2. \[Beta] [Allocation Efficiency](/alerts.md#type-allocation-efficiency): Detects when a Kubernetes tenant is operating below a target cost-efficiency threshold
-3. [Allocation Recurring Update](/alerts.md#type-allocation-recurring-update): Sends an alert with cluster spending across all or a subset of kubernetes resources.
-4. [Allocation Spend Change](/alerts.md#type-allocation-spend-change): Sends an alert reporting unexpected spend increases relative to moving averages
-5. [Asset Budget](/alerts.md#type-asset-budget): Sends an alert when spend for a particular set of assets crosses a defined threshold.
-6. [Cloud Report](/alerts.md#type-cloud-report): Sends an alert with asset spend across all or a subset of cloud resources.
-7. [Monitor Cluster Health](/alerts.md#type-monitor-cluster-health): Used to determine if the cluster's health score changes by a specific threshold. Can only be toggled on/off.
-8. [Monitor Kubecost Health](/alerts.md#type-monitor-kubecost-health): Used for production monitoring for the health of Kubecost itself. Can only be toggled on/off.
+1. [Allocation Budget](alerts.md#type-allocation-budget): Sends an alert when spending crosses a defined threshold
+2. \[Beta] [Allocation Efficiency](alerts.md#type-allocation-efficiency): Detects when a Kubernetes tenant is operating below a target cost-efficiency threshold
+3. [Allocation Recurring Update](alerts.md#type-allocation-recurring-update): Sends an alert with cluster spending across all or a subset of kubernetes resources.
+4. [Allocation Spend Change](alerts.md#type-allocation-spend-change): Sends an alert reporting unexpected spend increases relative to moving averages
+5. [Asset Budget](alerts.md#type-asset-budget): Sends an alert when spend for a particular set of assets crosses a defined threshold.
+6. [Cloud Report](alerts.md#type-cloud-report): Sends an alert with asset spend across all or a subset of cloud resources.
+7. [Monitor Cluster Health](alerts.md#type-monitor-cluster-health): Used to determine if the cluster's health score changes by a specific threshold. Can only be toggled on/off.
+8. [Monitor Kubecost Health](alerts.md#type-monitor-kubecost-health): Used for production monitoring for the health of Kubecost itself. Can only be toggled on/off.
 
-Have questions or issues? View our [troubleshooting section](/alerts.md#troubleshooting) below.
+Have questions or issues? View our [troubleshooting section](alerts.md#troubleshooting) below.
 
 ## Configuring alerts in Helm
 
@@ -58,7 +58,7 @@ _Required parameters:_
 
 * `type: budget`
 * `threshold: <amount>` -- cost threshold in configured currency units
-* `aggregation: <agg-parameter>` -- configurable, accepts all aggregations supported by the [Allocation API](/allocation.md)
+* `aggregation: <agg-parameter>` -- configurable, accepts all aggregations supported by the [Allocation API](../../allocation.md)
 * `filter: <value>` -- configurable, accepts a single filter value (comma-separated values unsupported)
 * `window: <N>d` or `<M>h` -- configurable, (1 ≤ N ≤ 7, 1 ≤ M ≤ 24)
 
@@ -89,7 +89,7 @@ _Required parameters:_
 
 * `type: efficiency`
 * `efficiencyThreshold: <threshold>` -- efficiency threshold ranging from 0.0 to 1.0
-* `aggregation: <agg-parameter>` -- configurable, accepts all aggregations supported by the [Allocation API](/allocation.md)
+* `aggregation: <agg-parameter>` -- configurable, accepts all aggregations supported by the [Allocation API](../../allocation.md)
 * `window: <N>d` number of days for measuring efficiency
 
 _Optional parameters:_
@@ -174,7 +174,7 @@ _Required parameters:_
 
 * `type: spendChange`
 * `relativeThreshold: <N>` -- configurable, N ≥ -1
-* `aggregation: <agg-value>` -- configurable, accepts all aggregations supported by the [Allocation API](/allocation.md)
+* `aggregation: <agg-value>` -- configurable, accepts all aggregations supported by the [Allocation API](../../allocation.md)
 * `window: <N>d` or `<M>h` -- configurable, (1 ≤ N ≤ 7, 1 ≤ M ≤ 24)
 * `baselineWindow: <N>d` -- configurable, N ≥ 1
 
@@ -202,7 +202,7 @@ _Required parameters:_
 
 * `type: assetBudget`
 * `threshold: <amount>` -- cost threshold in configured currency units
-* `aggregation: <agg-parameter>` -- configurable, accepts all aggregations supported by the [Asset API](/assets-api.md)
+* `aggregation: <agg-parameter>` -- configurable, accepts all aggregations supported by the [Asset API](../../assets-api.md)
 * `filter: <value>(,<value>,...)` -- configurable, accepts any 1 or more filter values which are comma seperated values
 * `window: <N>d` or `<M>h` -- configurable, (1 ≤ N ≤ 7, 1 ≤ M ≤ 24)
 
@@ -359,7 +359,7 @@ Example Helm _values.yaml_:
 
 Cluster Health Alerts and Kubecost Health Alerts work differently from other alert types. While other alerts monitor cost data for cost or efficiency anomalies, these two monitor the health of Kubecost itself, as well as the health of the cluster running Kubecost. For this reason, multiple of these alert types cannot be created. In the UI, switches for these alert types can be toggled either on or off, managing a single instance of each, and allowing the settings of these single instances to be adjusted.
 
-<figure><img src=".gitbook/assets/alertshealth.png" alt=""><figcaption><p>Cluster and Kubecost Health Alerts</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/alertshealth.png" alt=""><figcaption><p>Cluster and Kubecost Health Alerts</p></figcaption></figure>
 
 > **Note**: There is no validation around Cluster Health Alerts. If a Health Alert configuration is invalid, it will appear to save, but will not actually take effect. Please check carefully that the alert has a Window and Threshold properly specified.
 
@@ -373,7 +373,7 @@ The remaining Alert types share some commonality: they all target a set of Cost 
 
 The _+ Create Alert_ button opens a window where you can insert details about a new alert.
 
-<figure><img src=".gitbook/assets/createalert.png" alt=""><figcaption><p>Create Alert window</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/createalert.png" alt=""><figcaption><p>Create Alert window</p></figcaption></figure>
 
 Alerts can also be edited, removed, and tested from the table. Editing opens a dialog similar to the alert creation dialog, for editing the chosen alert.
 
@@ -460,4 +460,4 @@ Common causes of misconfiguration include the following:
 
 * Unsupported csv filters: `spendChange` alerts accept `filter` as comma-separated values; other alert types do not.
 * Unsupported alert type: all alert type names are in camelCase. Check spelling and capitalization for all alert parameters.
-* Unsupported aggregation parameters: see the [Allocation API](/allocation.md) doc for details.
+* Unsupported aggregation parameters: see the [Allocation API](../../allocation.md) doc for details.

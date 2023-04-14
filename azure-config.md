@@ -1,13 +1,14 @@
-Azure Rate Card Configuration
-============
+# Azure Rate Card Configuration
 
 Kubecost needs access to the Microsoft Azure Billing Rate Card API to access accurate pricing data for your Kubernetes resources.
 
-> **Note**: You can also get this functionality plus external costs by completing the full [Azure billing integration](/azure-out-of-cluster.md).
+{% hint style="info" %}
+You can also get this functionality plus external costs by completing the full [Azure billing integration](azure-out-of-cluster.md).
+{% endhint %}
 
-## Creating a Custom Azure role
+## Creating a custom Azure role
 
-Start by creating an Azure role definition. Below is an example definition, replace `YOUR_SUBSCRIPTION_ID` with the Subscription ID where your Kubernetes Cluster lives:
+Start by creating an Azure role definition. Below is an example definition, replace `YOUR_SUBSCRIPTION_ID` with the Subscription ID where your Kubernetes cluster lives:
 
 ```json
 {
@@ -27,7 +28,7 @@ Start by creating an Azure role definition. Below is an example definition, repl
 }
 ```
 
-Save this into a file called `myrole.json`
+Save this into a file called `myrole.json`.
 
 Next, you'll want to register that role with Azure:
 
@@ -35,19 +36,19 @@ Next, you'll want to register that role with Azure:
 az role definition create --verbose --role-definition @myrole.json
 ```
 
-## Creating an Azure Service Principal
+## Creating an Azure service principal
 
-Next, create an Azure Service Principal.
+Next, create an Azure service principal.
 
 ```shell
 az ad sp create-for-rbac --name "KubecostAccess" --role "KubecostRole" --scope "/subscriptions/YOUR_SUBSCRIPTION_ID" --output json
 ```
 
-Keep this information which is used in the service-key.json below.
+Keep this information which is used in the `service-key.json` below.
 
-## Supplying Azure Service Principal details to Kubecost
+## Supplying Azure service principal details to Kubecost
 
-### Via a Kubernetes secret (Recommended)
+### Option 1: Via a Kubernetes Secret (Recommended)
 
 Create a file called [`service-key.json`](https://github.com/kubecost/poc-common-configurations/blob/main/azure/service-key.json) and update it with the Service Principal details from the above steps:
 
@@ -63,9 +64,11 @@ Create a file called [`service-key.json`](https://github.com/kubecost/poc-common
 }
 ```
 
-Next, create a secret for the Azure Service Principal
+Next, create a Secret for the Azure Service Principal
 
-> **Note**: When managing the service account key as a Kubernetes secret, the secret must reference the service account key JSON file, and that file must be named `service-key.json`.
+{% hint style="warning" %}
+When managing the service account key as a Kubernetes Secret, the secret must reference the service account key JSON file, and that file must be named `service-key.json`.
+{% endhint %}
 
 ```shell
 kubectl create secret generic azure-service-key -n kubecost --from-file=service-key.json
@@ -73,7 +76,7 @@ kubectl create secret generic azure-service-key -n kubecost --from-file=service-
 
 Finally, set the `kubecostProductConfigs.serviceKeySecretName` helm value to the name of the Kubernetes secret you created. We use the value `azure-service-key` in our examples.
 
-### Via Helm values
+### Option 2: Via Helm values
 
 In the [Helm values file](https://github.com/kubecost/cost-analyzer-helm-chart/blob/4eaaa9acef33468dd0d9fac046defe0af17811b4/cost-analyzer/values.yaml#L770-L776):
 
@@ -120,5 +123,5 @@ The following Microsoft documents are a helpful reference:
 * [Microsoft Azure Offer Details](https://azure.microsoft.com/en-us/support/legal/offer-details/)
 * [Azure Pricing FAQ](https://azure.microsoft.com/en-us/pricing/faq/)
 * [Geographic availability and currency support for the commercial marketplace](https://docs.microsoft.com/en-us/azure/marketplace/marketplace-geo-availability-currencies)
-* [Azure Portal > Cost Management + Billing > Billing Account Properties](https://portal.azure.com/#view/Microsoft_Azure_GTM/ModernBillingMenuBlade/~/Properties)
+* [Azure Portal > Cost Management + Billing > Billing Account Properties](https://portal.azure.com/#view/Microsoft\_Azure\_GTM/ModernBillingMenuBlade/\~/Properties)
 * [Understand Cost Management data](https://docs.microsoft.com/en-us/azure/cost-management-billing/costs/understand-cost-mgt-data)

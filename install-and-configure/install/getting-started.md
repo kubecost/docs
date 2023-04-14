@@ -1,6 +1,6 @@
 # Getting Started
 
-Welcome to Kubecost! This page provides commonly used product configurations and feature overviews to help get you up and running after the Kubecost product has been [installed](https://kubecost.com/install).
+This doc provides commonly used product configurations and feature overviews to help get you up and running after the Kubecost product has been [installed](https://kubecost.com/install).
 
 **Main Topics**
 
@@ -52,7 +52,7 @@ needed_disk_space = retention_time_minutes * ingested_samples_per_minutes * byte
 Where ingested samples can be measured as the average over a recent period, e.g. `sum(avg_over_time(scrape_samples_post_metric_relabeling[24h]))`. On average, Prometheus uses around 1.5-2 bytes per sample. So ingesting 100k samples per minute and retaining for 15 days would demand around 40 GB. It’s recommended to add another 20-30% capacity for headroom and WAL. More info on disk sizing [here](https://prometheus.io/docs/prometheus/latest/storage/#operational-aspects).
 
 {% hint style="warning" %}
-More than 30 days of data should not be stored in Prometheus for larger clusters. For long-term data retention, contact us at support@kubecost.com about Kubecost with durable storage enabled. [More info on Kubecost storage here](storage.md).
+More than 30 days of data should not be stored in Prometheus for larger clusters. For long-term data retention, contact us at support@kubecost.com about Kubecost with durable storage enabled. [More info on Kubecost storage here](../../storage.md).
 {% endhint %}
 
 ### More configuration
@@ -104,12 +104,12 @@ You may optionally pass the following Helm flags to install Kubecost and its bun
 
 <summary><strong>Resource efficiency and idle costs</strong></summary>
 
-To learn more about pod resource efficiency and cluster idle costs, see [Efficiency and Idle](efficiency-idle.md).
+To learn more about pod resource efficiency and cluster idle costs, see [Efficiency and Idle](../../using-kubecost/navigating-the-kubecost-ui/cost-allocation/efficiency-idle.md).
 
 </details>
 
 **See also**
 
-* [Using an existing Prometheus installation](custom-prom.md)
-* [Using an existing Grafana installation](custom-grafana.md)
-* [Exposing Kubecost with an Ingress](ingress-examples.md)
+* [Using an existing Prometheus installation](../../custom-prom.md)
+* [Using an existing Grafana installation](../../custom-grafana.md)
+* [Exposing Kubecost with an Ingress](../../ingress-examples.md)

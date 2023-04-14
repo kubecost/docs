@@ -10,7 +10,7 @@ The agent requires two pods and an optional daemonSet:
    1. Prometheus server: Short-term time-series data store (14 days or less)
    2. ConfigMap-Reload: Updates Prometheus when changes are made. Learn more [here](https://github.com/jimmidyson/configmap-reload).
 3. **Network costs Daemonset**
-   1. (Optional) Used to allocate costs to the workload responsible for egress costs. Learn more [here](network-allocation.md#network-costs-daemonset).
+   1. (Optional) Used to allocate costs to the workload responsible for egress costs. Learn more [here](using-kubecost/navigating-the-kubecost-ui/cost-allocation/network-allocation.md#network-costs-daemonset).
 
 ## Architecture Overview
 

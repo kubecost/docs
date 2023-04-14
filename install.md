@@ -42,7 +42,7 @@ For medium-sized teams and companies with more complex infrastructure you need t
     Retain spend, allocation, and efficiency data for up to 30 days. Provides custom reports saving for easily sharing across teams.
 *   **Team alerts & updates**
 
-    Kubecost alerts allow teams to receive updates on real-time Kubernetes spend. [Learn more](/alerts.md)
+    Kubecost alerts allow teams to receive updates on real-time Kubernetes spend. [Learn more](using-kubecost/navigating-the-kubecost-ui/alerts.md)
 *   **Business support**
 
     Direct engineering and product support via Slack channel, video, and phone.
@@ -59,10 +59,10 @@ For larger teams and companies with more complex infrastructure, you need the ri
     Retain data for years with various durable storage options. Provides record keeping on spend, allocation, and efficiency metrics with simple backup & restore functionality.
 *   **Access control with SSO/SAML**
 
-    Finely manage read and/or admin access by individual users or user groups. [Learn more](/user-management.md).
+    Finely manage read and/or admin access by individual users or user groups. [Learn more](user-management.md).
 *   **High availability mode**
 
-    Use multiple Kubecost replica pods with a Leader/Follower implementation to ensure one leader always exists across all replicas to run high availability mode. [Learn more](/high-availability.md).
+    Use multiple Kubecost replica pods with a Leader/Follower implementation to ensure one leader always exists across all replicas to run high availability mode. [Learn more](high-availability.md).
 *   **Advanced custom pricing**
 
     Advanced custom pricing pipelines give teams the ability to set custom per-asset pricing for resources. This is typically used for on-prem and air-gapped environments, but can also be applied to teams that want to allocate internal costs differently than cloud provider defaults.
@@ -85,7 +85,7 @@ helm upgrade --install kubecost \
   --namespace kubecost --create-namespace
 ```
 
-* You can run [Helm Template](https://helm.sh/docs/helm/helm_template/) against the [Kubecost Helm Chart](https://github.com/kubecost/cost-analyzer-helm-chart/) to generate local YAML output. This requires extra effort when compared to directly installing the Helm Chart but is more flexible than deploying a flat manifest.
+* You can run [Helm Template](https://helm.sh/docs/helm/helm\_template/) against the [Kubecost Helm Chart](https://github.com/kubecost/cost-analyzer-helm-chart/) to generate local YAML output. This requires extra effort when compared to directly installing the Helm Chart but is more flexible than deploying a flat manifest.
 
 ```bash
 helm template kubecost \

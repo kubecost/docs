@@ -6,7 +6,7 @@ The Kubecost Assets dashboard shows Kubernetes cluster costs broken down by the 
 
 > **Note**: Similar to our Allocation API, the Assets API uses our ETL pipeline which aggregates data daily. This allows for enterprise-scale with much higher performance.
 
-<figure><img src=".gitbook/assets/assets.png" alt=""><figcaption><p>Assets page</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/assets.png" alt=""><figcaption><p>Assets page</p></figcaption></figure>
 
 This user interface is available at `<your-kubecost-address>/assets.html`.
 
@@ -17,18 +17,18 @@ This is the main Kubecost Assets dashboard. In the screenshot there are multiple
 | Date Range (Last 7 days)          | Will report _Last 7 days_ by default. Manually select your start and end date, or pick one of twelve preset options |
 | Aggregate By                      | Aggregate costs by one or several concepts. Add custom labels                                                       |
 | (Un)save Report                   | Save or unsave the current report                                                                                   |
-|  Edit Report                      | Adjust cost metrics and how data is displayed                                                                       |
+| Edit Report                       | Adjust cost metrics and how data is displayed                                                                       |
 | Additional options/meatballs icon | Additional options for opening and downloading reports                                                              |
 
 ## Date Range
 
-<figure><img src=".gitbook/assets/assetsdaterange.png" alt=""><figcaption><p>Date range window</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/assetsdaterange.png" alt=""><figcaption><p>Date range window</p></figcaption></figure>
 
 Select the date range of the report by setting specific start and end dates, or using one of the preset options.
 
 ## Aggregate By filter
 
-<figure><img src=".gitbook/assets/assetsaggregate.png" alt=""><figcaption><p>Aggregate By window</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/assetsaggregate.png" alt=""><figcaption><p>Aggregate By window</p></figcaption></figure>
 
 Here you can aggregate cost by native Kubernetes concepts. While selecting Single Aggregation, you will only be able to select one concept at a time. While selecting Multi Aggregation, you will be able to filter for multiple concepts at the same time. Assets will be by default aggregated by Service.
 
@@ -36,7 +36,7 @@ Here you can aggregate cost by native Kubernetes concepts. While selecting Singl
 
 ## Edit Report
 
-<figure><img src=".gitbook/assets/assetseditreport.png" alt=""><figcaption><p>Edit Report window</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/assetseditreport.png" alt=""><figcaption><p>Edit Report window</p></figcaption></figure>
 
 The Edit report icon has additional options to filter your search.
 
@@ -57,7 +57,7 @@ Filter assets by category, service, or other means. When a filter is applied, on
 
 ## Additional options
 
-<figure><img src=".gitbook/assets/assetsoptions.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/assetsoptions.png" alt=""><figcaption></figcaption></figure>
 
 The three horizontal lines/meatballs icon will provide additional options for handling your reports:
 

@@ -2,7 +2,7 @@
 
 The Kubecost Allocations dashboard allows you to quickly see allocated spend across all native Kubernetes concepts, e.g. namespace, k8s label, and service. It also allows for allocating cost to organizational concepts like team, product/project, department, or environment. This document explains the metrics presented and describes how you can control the data displayed in this view.
 
-<figure><img src=".gitbook/assets/allocation.png" alt=""><figcaption><p>Allocations page</p></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/allocation.png" alt=""><figcaption><p>Allocations page</p></figcaption></figure>
 
 | Element                           | Description                                                                                                         |
 | --------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
@@ -14,13 +14,13 @@ The Kubecost Allocations dashboard allows you to quickly see allocated spend acr
 
 ## Date Range
 
-<figure><img src=".gitbook/assets/daterange.png" alt=""><figcaption><p>Date Range window</p></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/daterange.png" alt=""><figcaption><p>Date Range window</p></figcaption></figure>
 
 Select the date range of the report by setting specific start and end dates, or by using one of the preset options. Select _Apply_ to make changes.
 
 ## Aggregate By filters
 
-<figure><img src=".gitbook/assets/aggregateby.png" alt=""><figcaption><p>Aggregate By window</p></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/aggregateby.png" alt=""><figcaption><p>Aggregate By window</p></figcaption></figure>
 
 Here you can aggregate cost by namespace, deployment, service, and other native Kubernetes concepts. While selecting _Single Aggregation_, you will only be able to select one concept at a time. While selecting _Multi Aggregation_, you will be able to filter for multiple concepts at the same time.
 
@@ -28,7 +28,7 @@ Here you can aggregate cost by namespace, deployment, service, and other native 
 
 Costs aggregations are also visible by other meaningful organizational concepts, e.g. Team, Department, and Product. These aggregations are based on Kubernetes labels, referenced at both the pod and namespace-level, with labels at the pod-level being favored over the namespace label when both are present. The Kubernetes label name used for these concepts can be configured in Settings or in [values.yaml](https://github.com/kubecost/cost-analyzer-helm-chart/blob/19908983ed7c8d4ff1d3e62d98537a39ab61bbab/cost-analyzer/values.yaml#L427-L445) after setting `kubecostProductConfigs.labelMappingConfigs.enabled` to true. Workloads without the relevant label will be shown as `__unallocated__`.
 
-> **Note**: Kubernetes annotations can also be used for cost allocation purposes, but this requires enabling a Helm flag. [Learn more about using annotations](annotations.md). To see the annotations, you must add them to the label groupings via Settings or in [values.yaml](https://github.com/kubecost/cost-analyzer-helm-chart/blob/19908983ed7c8d4ff1d3e62d98537a39ab61bbab/cost-analyzer/values.yaml#L427-L445). Annotations will not work as one-off Labels added into reports directly, they will only work when added to the label groups in Settings or within the [values.yaml](https://github.com/kubecost/cost-analyzer-helm-chart/blob/19908983ed7c8d4ff1d3e62d98537a39ab61bbab/cost-analyzer/values.yaml#L427-L445).
+> **Note**: Kubernetes annotations can also be used for cost allocation purposes, but this requires enabling a Helm flag. [Learn more about using annotations](../../../annotations.md). To see the annotations, you must add them to the label groupings via Settings or in [values.yaml](https://github.com/kubecost/cost-analyzer-helm-chart/blob/19908983ed7c8d4ff1d3e62d98537a39ab61bbab/cost-analyzer/values.yaml#L427-L445). Annotations will not work as one-off Labels added into reports directly, they will only work when added to the label groups in Settings or within the [values.yaml](https://github.com/kubecost/cost-analyzer-helm-chart/blob/19908983ed7c8d4ff1d3e62d98537a39ab61bbab/cost-analyzer/values.yaml#L427-L445).
 
 To find what pods are not part of the relevant label set, you can either apply an `__unallocated__` label filter in this allocation view or explore variations of the following kubectl commands:
 
@@ -39,7 +39,7 @@ kubectl get pods --show-labels -n <TARGET_NAMESPACE>
 
 ## Edit report
 
-<figure><img src=".gitbook/assets/editreport.png" alt=""><figcaption><p>Edit Report window</p></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/editreport.png" alt=""><figcaption><p>Edit Report window</p></figcaption></figure>
 
 The _Edit Report_ icon has additional options to filter your search.
 
@@ -101,7 +101,7 @@ Select how shared costs set on the settings page will be shared among allocation
 
 ## Additional options
 
-<figure><img src=".gitbook/assets/dots.png" alt=""><figcaption><p>Additional options</p></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/dots.png" alt=""><figcaption><p>Additional options</p></figcaption></figure>
 
 The three horizontal dots (meatballs icon) will provide additional options for handling your report:
 
@@ -114,16 +114,16 @@ The three horizontal dots (meatballs icon) will provide additional options for h
 
 Cost allocation metrics are available for both in-cluster and out-of-cluster resources:
 
-| Metric                      | Description                                                                                                                                                                                                                                                                                                                                                                             |
-| --------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| CPU                         | The total cost of CPU allocated to this object, e.g. namespace or deployment. The amount of CPU allocated is the greater of CPU usage and CPU requested over the measured time window. The price of allocated CPU is based on cloud billing APIs or custom pricing sheets. [Learn more](https://github.com/kubecost/cost-model#questions)                                               |
-| GPU                         | The cost of GPUs requested by this object, as measured by [resource limits](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/). Prices are based on cloud billing prices or custom pricing sheets for on-prem deployments. [Learn more](gpu-allocation.md)                                                                                          |
-| RAM                         | The total cost of memory allocated to this object, e.g. namespace or deployment. The amount of memory allocated is the greater of memory usage and memory requested over the measured time window. The price of allocated memory is based on cloud billing APIs or custom pricing sheets. [Learn more](https://github.com/kubecost/cost-model#questions)                                |
-| Persistent Volume (PV) Cost | The cost of persistent storage volumes claimed by this object. Prices are based on cloud billing prices or custom pricing sheets for on-prem deployments.                                                                                                                                                                                                                               |
-| Network                     | The cost of network traffic based on internet egress, cross-zone egress, and other billed transfer. Note: these costs must be enabled. [Learn more](network-allocation.md). When Network Traffic Cost are not enabled, the Node network costs from the cloud service provider's [billing integration](cloud-integration.md) will be spread proportionally based on cost weighted usage. |
-| Load Balancer (LB) cost     | The cost of cloud-service load balancer that has been allocated.                                                                                                                                                                                                                                                                                                                        |
-| Shared                      | The cost of shared resources allocated to this tenant. This field covers shared overhead, shared namespaces, and shared labels.                                                                                                                                                                                                                                                         |
-| Cost Efficiency             | The percentage of requested CPU & memory dollars utilized over the measured time window. Values range from 0 to above 100 percent. Workloads with no requests but with usage OR workloads with usage > request can report efficiency above 100%.                                                                                                                                        |
+| Metric                      | Description                                                                                                                                                                                                                                                                                                                                                                                      |
+| --------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| CPU                         | The total cost of CPU allocated to this object, e.g. namespace or deployment. The amount of CPU allocated is the greater of CPU usage and CPU requested over the measured time window. The price of allocated CPU is based on cloud billing APIs or custom pricing sheets. [Learn more](https://github.com/kubecost/cost-model#questions)                                                        |
+| GPU                         | The cost of GPUs requested by this object, as measured by [resource limits](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/). Prices are based on cloud billing prices or custom pricing sheets for on-prem deployments. [Learn more](../../../gpu-allocation.md)                                                                                          |
+| RAM                         | The total cost of memory allocated to this object, e.g. namespace or deployment. The amount of memory allocated is the greater of memory usage and memory requested over the measured time window. The price of allocated memory is based on cloud billing APIs or custom pricing sheets. [Learn more](https://github.com/kubecost/cost-model#questions)                                         |
+| Persistent Volume (PV) Cost | The cost of persistent storage volumes claimed by this object. Prices are based on cloud billing prices or custom pricing sheets for on-prem deployments.                                                                                                                                                                                                                                        |
+| Network                     | The cost of network traffic based on internet egress, cross-zone egress, and other billed transfer. Note: these costs must be enabled. [Learn more](network-allocation.md). When Network Traffic Cost are not enabled, the Node network costs from the cloud service provider's [billing integration](../../../cloud-integration.md) will be spread proportionally based on cost weighted usage. |
+| Load Balancer (LB) cost     | The cost of cloud-service load balancer that has been allocated.                                                                                                                                                                                                                                                                                                                                 |
+| Shared                      | The cost of shared resources allocated to this tenant. This field covers shared overhead, shared namespaces, and shared labels.                                                                                                                                                                                                                                                                  |
+| Cost Efficiency             | The percentage of requested CPU & memory dollars utilized over the measured time window. Values range from 0 to above 100 percent. Workloads with no requests but with usage OR workloads with usage > request can report efficiency above 100%.                                                                                                                                                 |
 
 ### Cost efficiency table example
 

@@ -1,19 +1,18 @@
-Kubecost Core Architecture Overview
-===================================
+# Kubecost Core Architecture Overview
 
-Below are the major components deployed with the [Kubecost Helm chart](/install.md), excluding certain Enterprise components such as durable storage:
+Below are the major components deployed with the [Kubecost Helm chart](install.md), excluding certain Enterprise components such as durable storage:
 
-1. **Kubecost Cost-Analyzer Pod**  
-    a. Frontend -- runs Nginx and handles routing to Kubecost backend + Prometheus/Grafana  
-    b. Cost-model -- provides cost allocation calculations and metrics, both reads and writes to Prometheus  
-2. **Prometheus**  
-    a. Prometheus server -- time-series data store for cost & health metrics  
-    b. Kube-state-metrics -- provides Kubernetes API metrics, e.g. resource requests [Optional]  
-    c. Node-exporter -- provides metrics for reserved instance recommendations, various Kubecost Grafana dashboards, and cluster health alerts [Optional]  
-    d. Pushgateway -- provides the ability for users to push new metrics to Prometheus [Optional]  
-    e. Alertmanager -- used for custom alerts  [Optional]
-3. **Network costs** -- used for determining network egress costs [Optional] - [Learn more](/network-allocation.md)
-4. **Grafana** -- provides supporting dashboards for Kubecost product [Optional]
+1. **Kubecost Cost-Analyzer Pod**\
+   a. Frontend -- runs Nginx and handles routing to Kubecost backend + Prometheus/Grafana\
+   b. Cost-model -- provides cost allocation calculations and metrics, both reads and writes to Prometheus
+2. **Prometheus**\
+   a. Prometheus server -- time-series data store for cost & health metrics\
+   b. Kube-state-metrics -- provides Kubernetes API metrics, e.g. resource requests \[Optional]\
+   c. Node-exporter -- provides metrics for reserved instance recommendations, various Kubecost Grafana dashboards, and cluster health alerts \[Optional]\
+   d. Pushgateway -- provides the ability for users to push new metrics to Prometheus \[Optional]\
+   e. Alertmanager -- used for custom alerts \[Optional]
+3. **Network costs** -- used for determining network egress costs \[Optional] - [Learn more](using-kubecost/navigating-the-kubecost-ui/cost-allocation/network-allocation.md)
+4. **Grafana** -- provides supporting dashboards for Kubecost product \[Optional]
 
 Today, the core Kubecost product can be run with just components 1 and 2a.
 
@@ -25,13 +24,13 @@ See an overview of core components in this diagram:
 
 Kubecost interacts with provider pricing in a few different ways.
 
-- onDemand Rates (AWS, Azure, GCP, and Custom Pricing CSV)
-- Negotiated Rates (Azure, GCP, and Custom Pricing CSV)
-- Spot Data Feed (AWS)
-- [Cloud Provider Billing for Reconciliation and Out-of-Cluster Spend](/cloud-integration.md)
-  - [AWS Cost and Usage Report](/aws-cloud-integrations.md)
-  - [Azure Cost Export](/azure-out-of-cluster.md)
-  - [Google BigQuery Export](/gcp-out-of-cluster.md)
+* onDemand Rates (AWS, Azure, GCP, and Custom Pricing CSV)
+* Negotiated Rates (Azure, GCP, and Custom Pricing CSV)
+* Spot Data Feed (AWS)
+* [Cloud Provider Billing for Reconciliation and Out-of-Cluster Spend](cloud-integration.md)
+  * [AWS Cost and Usage Report](aws-cloud-integrations.md)
+  * [Azure Cost Export](azure-out-of-cluster.md)
+  * [Google BigQuery Export](gcp-out-of-cluster.md)
 
 In an Enterprise federated setup, only the Primary Kubecost Cluster needs access to the Cloud Provider Billing.
 

@@ -1,14 +1,10 @@
-Multi-Cluster Kubecost
-======================
-
+# Multi-Cluster
 
 There are three options that Kubecost supports for environments with multiple clusters:
 
 1. `Kubecost Free` gives visibility into a single cluster at time. Each cluster performs its own `cloud-billing` reconciliation.
-
-2. `Kubecost Business` gives visibility into a single cluster at time and uses a [context switcher](/context-switcher.md) to move between each cluster. Each cluster performs its own `cloud-billing` reconciliation.
-
-3. `Kubecost Enterprise` allows for a ___single-pane-of-glass___ view into all aggregated cluster costs globally. Agents on all clusters ship metrics to a shared storage bucket. A `primary cluster` serves the Kubecost UI, API endpoints, and performs global `cloud-billing` reconciliation for all clusters.
+2. `Kubecost Business` gives visibility into a single cluster at time and uses a [context switcher](using-kubecost/context-switcher.md) to move between each cluster. Each cluster performs its own `cloud-billing` reconciliation.
+3. `Kubecost Enterprise` allows for a _**single-pane-of-glass**_ view into all aggregated cluster costs globally. Agents on all clusters ship metrics to a shared storage bucket. A `primary cluster` serves the Kubecost UI, API endpoints, and performs global `cloud-billing` reconciliation for all clusters.
 
 `Cloud-billing` (aka `cloud-integration`) allows Kubecost to use actual billed costs for all resources instead of relying on on-demand rates. See [Advanced Configuration](https://docs.kubecost.com/install-and-configure/advanced-configuration) for more detail.
 
@@ -18,8 +14,8 @@ There are three options that Kubecost supports for environments with multiple cl
 
 There are two primary methods to aggregate all cluster information back to a single Kubecost UI:
 
-- [Thanos Federation](./thanos-setup.md)
-- [Kubecost ETL Federation](./federated-etl.md)
+* [Thanos Federation](thanos-setup.md)
+* [Kubecost ETL Federation](federated-etl.md)
 
 > **Note**: This feature requires an Enterprise license.
 

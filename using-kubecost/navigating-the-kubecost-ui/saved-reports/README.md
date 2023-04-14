@@ -2,7 +2,7 @@
 
 Saved reports can be managed via [`values.yaml`](https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/values.yaml), or via the Kubecost UI, or both. This reference outlines the process of configuring saved reports through a values file, and provides documentation on the required and optional parameters.
 
-<figure><img src=".gitbook/assets/savedreports.PNG" alt=""><figcaption><p>Reports page</p></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/savedreports.PNG" alt=""><figcaption><p>Reports page</p></figcaption></figure>
 
 ## Saved report parameters
 
@@ -42,7 +42,7 @@ The following fields apply to each map item under the `reports` key:
   * `service`
   * `statefulset`
   * `team`
-* `chartDisplay` -- Can be one of `category`, `series`, `efficiency`, `percentage`, or `treemap`. See [Cost Allocation Charts](/cost-allocation.md#chart) for more info.
+* `chartDisplay` -- Can be one of `category`, `series`, `efficiency`, `percentage`, or `treemap`. See [Cost Allocation Charts](../cost-allocation/#chart) for more info.
 * `idle` idle cost allocation, supports `hide`, `shareByNode`, `shareByCluster`, and `separate`
 * `rate` -- Can be one of `cumulative`, `monthly`, `daily`, `hourly`
 * `accumulate` determines whether or not to sum Allocation costs across the entire window -- equivalent to _Resolution_ in the UI, supports `true` (Entire window resolution) and `false` (Daily resolution)
