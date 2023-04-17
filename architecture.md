@@ -11,7 +11,7 @@ Below are the major components deployed with the [Kubecost Helm chart](install.m
    c. Node-exporter -- provides metrics for reserved instance recommendations, various Kubecost Grafana dashboards, and cluster health alerts \[Optional]\
    d. Pushgateway -- provides the ability for users to push new metrics to Prometheus \[Optional]\
    e. Alertmanager -- used for custom alerts \[Optional]
-3. **Network costs** -- used for determining network egress costs \[Optional] - [Learn more](using-kubecost/navigating-the-kubecost-ui/cost-allocation/network-allocation.md)
+3. **Network costs** -- used for determining network egress costs \[Optional] - [Learn more](network-allocation.md)
 4. **Grafana** -- provides supporting dashboards for Kubecost product \[Optional]
 
 Today, the core Kubecost product can be run with just components 1 and 2a.

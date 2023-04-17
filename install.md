@@ -42,7 +42,7 @@ For medium-sized teams and companies with more complex infrastructure you need t
     Retain spend, allocation, and efficiency data for up to 30 days. Provides custom reports saving for easily sharing across teams.
 *   **Team alerts & updates**
 
-    Kubecost alerts allow teams to receive updates on real-time Kubernetes spend. [Learn more](using-kubecost/navigating-the-kubecost-ui/alerts.md)
+    Kubecost alerts allow teams to receive updates on real-time Kubernetes spend. [Learn more](alerts.md)
 *   **Business support**
 
     Direct engineering and product support via Slack channel, video, and phone.

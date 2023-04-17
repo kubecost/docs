@@ -104,7 +104,7 @@ You may optionally pass the following Helm flags to install Kubecost and its bun
 
 <summary><strong>Resource efficiency and idle costs</strong></summary>
 
-To learn more about pod resource efficiency and cluster idle costs, see [Efficiency and Idle](../../using-kubecost/navigating-the-kubecost-ui/cost-allocation/efficiency-idle.md).
+To learn more about pod resource efficiency and cluster idle costs, see [Efficiency and Idle](../../efficiency-idle.md).
 
 </details>
 

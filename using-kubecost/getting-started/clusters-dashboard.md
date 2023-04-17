@@ -52,7 +52,7 @@ Efficiency is calculated as the amount of node capacity that is used, compared t
 
 Selecting any metric in a specific cluster's row will take you to a Cluster Details page for that cluster which provides more extensive metrics, including assets and namespaces associated with that cluster and their respective cost metrics.
 
-<figure><img src="../../.gitbook/assets/image (2) (1).png" alt=""><figcaption><p>Cluster Details page</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2).png" alt=""><figcaption><p>Cluster Details page</p></figcaption></figure>
 
 ### Filtering clusters
 

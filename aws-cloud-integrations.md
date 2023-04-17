@@ -1,6 +1,6 @@
 # AWS Cloud Integration
 
-By default, Kubecost pulls On-Demand asset prices from the public AWS pricing API. For more accurate pricing, this integration will allow Kubecost to reconcile your current measured Kubernetes spend with your actual AWS bill. This integration also properly accounts for Enterprise Discount Programs, Reserved Instance usage, Savings Plans, spot usage, and more.
+By default, Kubecost pulls On-Demand asset prices from the public AWS pricing API. For more accurate pricing, this integration will allow Kubecost to reconcile your current measured Kubernetes spend with your actual AWS bill. This integration also properly accounts for Enterprise Discount Programs, Reserved Instance usage, Savings Plans, Spot usage, and more.
 
 You will need permissions to create the Cost and Usage Report (CUR), and add IAM credentials for Athena and S3. Optional permission is the ability to add and execute CloudFormation templates. Kubecost does not require root access in the AWS account.
 
@@ -446,7 +446,7 @@ If you set any `kubecostProductConfigs` from the Helm chart, all changes via the
 
 > **Note**: Make sure to use only underscore as a delimiter if needed for tables and views. Using a hyphen/dash will not work even though you might be able to create it. See the [AWS docs](https://docs.aws.amazon.com/athena/latest/ug/tables-databases-columns-names.html) for more info.
 
-* If you are using a multi-account setup, you will also need to set `.Values.kubecostProductConfigs.masterPayerARN` to the Amazon Resource Number (ARN) of the role in the master payer account, e.g. `arn:aws:iam::530337586275:role/KubecostRole`.
+* If you are using a multi-account setup, you will also need to set `.Values.kubecostProductConfigs.masterPayerARN` to the Amazon Resource Number (ARN) of the role in the management account, e.g. `arn:aws:iam::530337586275:role/KubecostRole`.
 
 ## Troubleshooting
 
@@ -456,7 +456,7 @@ Once you've integrated with the CUR, you can visit _Settings_ > _View Full Diagn
 
 You can check pod logs for authentication errors by running: `kubectl get pods -n <namespace>` `kubectl logs <kubecost-pod-name> -n <namespace> -c cost-model`
 
-If you do not see any authentication errors, log in to your AWS console and visit the Athena dashboard. You should be able to find the CUR. Ensure that the database with the CUR matches the athenaTable entered in Step 4 - it likely has a prefix with `athenacurfn_` :
+If you do not see any authentication errors, log in to your AWS console and visit the Athena dashboard. You should be able to find the CUR. Ensure that the database with the CUR matches the athenaTable entered in Step 5. It likely has a prefix with `athenacurfn_` :
 
 ![Screen Shot 2020-12-06 at 9 43 31 PM](https://user-images.githubusercontent.com/453512/101319459-e6f23100-3816-11eb-8d96-1ab977cb50bd.png)
 
@@ -466,9 +466,9 @@ You can also check query history to see if any queries are failing:
 
 ### Common Athena errors
 
-#### Incorrect bucket in IAM Policy.
+#### Incorrect bucket in IAM Policy
 
-*   **Symptom:** A similar error to this will be shown on the diagnostics page under "Pricing Sources" on the "Diagnostics" page. You can search for the in the Athena "Recent queries" dashboard to find additional info about the error.
+*   **Symptom:** A similar error to this will be shown on the Diagnostics page under Pricing Sources. You can search in the Athena "Recent queries" dashboard to find additional info about the error.
 
     ```
     QueryAthenaPaginated: query execution error: no query results available for query <Athena Query ID>
@@ -481,9 +481,9 @@ You can also check query history to see if any queries are failing:
 
     This query ran against the "athenacurcfn_test" database, unless qualified by the query. Please post the error message on our forum  or contact customer support  with Query Id: <Athena Query ID>
     ```
-* **Resolution:** This error is typically caused by the incorrect (Athena results) s3 bucket being specified in the cloudformation template of step 3 from above. To resolve the issue ensure the bucket used for storing the AWS CUR report (step 1) is specified in the `S3ReadAccessToAwsBillingData` SID of the IAM policy (default: kubecost-athena-access) attached to the user or role used by Kubecost (Default: KubecostUser / KubecostRole). See the following example.
+* **Resolution:** This error is typically caused by the incorrect (Athena results) s3 bucket being specified in the CloudFormation template of Step 3 from above. To resolve the issue, ensure the bucket used for storing the AWS CUR report (Step 1) is specified in the `S3ReadAccessToAwsBillingData` SID of the IAM policy (default: kubecost-athena-access) attached to the user or role used by Kubecost (Default: KubecostUser / KubecostRole). See the following example.
 
-> **Note:** This error can also occur when master payer cross account permissions are incorrect, that solution may differ.
+> **Note:** This error can also occur when the management account cross-account permissions are incorrect, however the solution may differ.
 
 ```
         {
@@ -501,7 +501,7 @@ You can also check query history to see if any queries are failing:
 
 #### Query not supported
 
-* **Symptom:** A similar error to this will be shown on the diagnostics page under "Pricing Sources" on the "Diagnostics" page.
+* **Symptom:** A similar error to this will be shown on the Diagnostics page under Pricing Sources.
 
 ```
 QueryAthenaPaginated: start query error: operation error Athena: StartQueryExecution, https response error StatusCode: 400, RequestID: <Athena Query ID>, InvalidRequestException: Queries of this type are not supported
@@ -511,17 +511,17 @@ QueryAthenaPaginated: start query error: operation error Athena: StartQueryExecu
 
 #### HTTPS Response error
 
-* **Symptom:** A similar error to this will be shown on the diagnostics page under "Pricing Sources" on the "Diagnostics" page.
+* **Symptom:** A similar error to this will be shown on the Diagnostics page under Pricing Sources.
 
 ```
 QueryAthenaPaginated: start query error: operation error Athena: StartQueryExecution, https response error StatusCode: 400, RequestID: ********************, InvalidRequestException: Unable to verify/create output bucket aws-athena-query-results-test
 ```
 
-* **Resolution:** Previously, if you ran a query without specifying a value for Query result location, and the query result location setting was not overridden by a workgroup, Athena created a default location for you. Now, before you can run an Athena query in a region in which your account hasn't used Athena previously, you must specify a query result location, or use a workgroup that overrides the query result location setting. While Athena no longer creates a default query results location for you, previously created default aws-athena-query-results-MyAcctID-MyRegion locations remain valid and you can continue to use them. https://docs.aws.amazon.com/athena/latest/ug/querying.html#query-results-specify-location The bucket should be in the format of: `aws-athena-query-results-MyAcctID-MyRegion` It may also be required to remove and reinstall Kubecost. If doing this please remeber to backup ETL files prior or contact support for additional assistance.
+* **Resolution:** Previously, if you ran a query without specifying a value for query result location, and the query result location setting was not overridden by a workgroup, Athena created a default location for you. Now, before you can run an Athena query in a region in which your account hasn't used Athena previously, you must specify a query result location, or use a workgroup that overrides the query result location setting. While Athena no longer creates a default query results location for you, previously created default `aws-athena-query-results-MyAcctID-MyRegion` locations remain valid and you can continue to use them. The bucket should be in the format of: `aws-athena-query-results-MyAcctID-MyRegion` It may also be required to remove and reinstall Kubecost. If doing this please remeber to backup ETL files prior or contact support for additional assistance. See also this AWS doc on [specifying a query result location](https://docs.aws.amazon.com/athena/latest/ug/querying.html#query-results-specify-location).
 
 #### Missing Athena Column
 
-* **Symptom:** An error is shown under "Pricing Sources" on the "Diagnostics" page or in the Kubecost `cost-model` container logs.
+* **Symptom:** A similar error to this will be shown on the Diagnostics page under Pricing Sources or in the Kubecost `cost-model` container logs.
 
 ```
 QueryAthenaPaginated: query execution error: no query results available for query <Athena Query ID>
@@ -533,7 +533,7 @@ SYNTAX_ERROR: line 4:3: Column 'line_item_resource_id' cannot be resolved
 This query ran against the "<DB Name>" database, unless qualified by the query
 ```
 
-* **Resolution:** Verify in the AWS "Cost and Ussage" report UI that the **Resource IDs** are enabled as "Report content" for the CUR report created in Step 1. If the **Resource IDs** are not enabled you will need to re-create the report, this will require redoing Steps 1 and 2 from this page.
+* **Resolution:** Verify in AWS' Cost and Usage Reports dashboard that the Resource IDs are enabled as "Report content" for the CUR created in Step 1. If the Resource IDs are not enabled, you will need to re-create the report (this will require redoing Steps 1 and 2 from this doc).
 
 ## Summary and pricing
 

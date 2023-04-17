@@ -6,7 +6,7 @@ Cluster controller enables actions like:
 
 * Automated cluster scaledown
 * 1-click cluster right-sizing
-* [Automated request right-sizing](using-kubecost/navigating-the-kubecost-ui/savings/auto-request-sizing/)
+* [Automated request right-sizing](auto-request-sizing.md)
 
 This document shows you how to setup and enable this functionality in the Kubecost product.
 
