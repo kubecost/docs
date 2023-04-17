@@ -6,7 +6,7 @@ The Cloud Cost Explorer is a dashboard which provides visualizations of your clo
 
 ### Installation and configuration
 
-Cloud Cost will not be available in Kubecost upon fresh install like other similar dashboards. It needs to be enabled first through Helm, using the following parameters:
+Cloud Cost needs to be enabled first through Helm, using the following parameters:
 
 ```
 kubecostModel:
