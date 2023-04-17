@@ -25,7 +25,7 @@ The following images will need to be downloaded. Please substitute the appropria
 * prom/node-exporter:v0.18.1
 * prom/alertmanager:v0.23.0
 * jimmidyson/configmap-reload:v0.7.1
-* kiwigrid/k8s-sidecar:1.15.4 (can be optional if not using Grafana sidecar)
+* kiwigrid/k8s-sidecar:1.23.1 (can be optional if not using Grafana sidecar)
 
 ### Thanos - Enterprise/Durable Storage\*
 
