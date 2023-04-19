@@ -1,12 +1,12 @@
 # Installing Kubecost on Alibaba
 
-## Helm install Kubecost
+## Install Kubecost via Helm
 
 Kubecost installation is exactly same as other cloud providers with Helm v3.1+:
 
-` helm install kubecost/cost-analyzer -n kubecost -f values.yaml`
+`helm install kubecost/cost-analyzer -n kubecost -f values.yaml`
 
-With values.yaml files containing below parameters at least:
+With _values.yaml_ files containing below parameters at least:
 
 ```
 prometheus:
@@ -20,7 +20,7 @@ kubecostProductConfigs:
   serviceKeySecretName: "alibaba-service-key"
 ```
 
-`alibaba-service-key` can be create using the following command:
+The `alibaba-service-key` can be created using the following command:
 
 ```
 kubectl create secret generic alibaba-service-key -n kubecost –from-file=./example_path
@@ -34,7 +34,8 @@ Your path needs a file having Alibaba Cloud secrets. Alibaba secrets can be pass
      "alibaba_secret_access_key": “XXX"
 }
 ```
-These two can be generated in the Alibaba Cloud portal. Hover over your user account icon, then select _AccessKey Management_. A new window opens. Select _Create AccessKey_ to generate a unique access token for your Kubecost that will be used for all the activity related to Kubecost.
+
+These two can be generated in the Alibaba Cloud portal. Hover over your user account icon, then select _AccessKey Management_. A new window opens. Select _Create AccessKey_ to generate a unique access token that will be used for all the activity related to Kubecost.
 
 ## Troubleshooting
 
