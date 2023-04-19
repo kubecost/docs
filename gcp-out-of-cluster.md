@@ -2,7 +2,7 @@
 
 Kubecost provides the ability to allocate out of cluster (OOC) costs, e.g. Cloud SQL instances and Cloud Storage buckets, back to Kubernetes concepts like namespaces and deployments.
 
-Read the [Cloud Billing Integrations](cloud-integration.md) doc for more information on how Kubecost connects with vloud service providers.
+Read the [Cloud Billing Integrations](cloud-integration.md) doc for more information on how Kubecost connects with cloud service providers.
 
 The following guide provides the steps required for allocating OOC costs in GCP.
 
