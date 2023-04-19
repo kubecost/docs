@@ -35,7 +35,7 @@ The following values can be located in the Azure Portal under "Cost Management -
 * `azureContainerPath` is an optional value which should be used if there is more than one billing report that is exported to the configured container. The path provided should have only one billing export because kubecost will retrieve the most recent billing report for a given month found within the path.
 * `azureCloud` is an optional value which denotes the cloud where the storage account exist, possible values are `public` and `gov`. The default is `public`.
 
-Next, create a JSON file which **must** be named `cloud-integration.json` with the following format:
+Next, create a JSON file which **must** be named _cloud-integration.json_ with the following format:
 
 ```json
 {
@@ -75,10 +75,10 @@ Next, upgrade Kubecost via Helm:
 $ helm upgrade kubecost kubecost/cost-analyzer -n kubecost -f values.yaml
 ```
 
-You can verify a successful configuration by checking the following:
+You can verify a successful configuration by checking the following in the Kubecost UI:
 
 * The Assets dashboard will be broken down by Kubernetes assets.
-* The Assets dashboard will no longer show a banner that says "External cloud cost not configured"
+* The Assets dashboard will no longer show a banner that says "External cloud cost not configured".
 * The Diagnostics page (via _Settings_ > _View Full Diagnostics_) view will show a green checkmark under Cloud Integrations.
 
 {% hint style="info" %}
