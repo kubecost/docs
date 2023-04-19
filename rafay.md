@@ -14,17 +14,17 @@ You have already [provisioned or imported](https://docs.rafay.co/learn/overview/
 
 Under _Integrations_:
 
-* Select _Repositories_ and create a new repository named `kubecost` of type _Helm_
-* Select _Create_
+* Select _Repositories_ and create a new repository named `kubecost` of type _Helm._
+* Select _Create._
 
 ![Create Repository](https://raw.githubusercontent.com/kubecost/docs/main/images/kubecost-repository-1.png)
 
-* Enter the endpoint value of `https://kubecost.github.io/cost-analyzer/`
-* Select _Save_
+* Enter the endpoint value of `https://kubecost.github.io/cost-analyzer/`.
+* Select _Save._
 
 ## Step 2: Customize values
 
-You'll need to override the default `values.yaml` file. Create a new file called `kubecost-custom-values.yaml` with the following content:
+You'll need to override the default _values.yaml_ file. Create a new file called _kubecost-custom-values.yaml_ with the following content:
 
 ```yaml
 # Custom values for Kubecost
@@ -37,17 +37,17 @@ kubecostToken: 'token_string'
 
 ## Step 3: Create a namespace
 
-* Login to the [Rafay Web Console](https://console.rafay.dev/) and navigate to your Project as an _Org Admin_ or _Infrastructure Admin_
-* Under _Infrastructure_, select _Namespaces_ and create a new namespace called `kubecost`, and select type _Wizard_
+* Login to the [Rafay Web Console](https://console.rafay.dev/) and navigate to your Project as an _Org Admin_ or _Infrastructure Admin._
+* Under _Infrastructure_, select _Namespaces_ and create a new namespace called `kubecost`, and select type _Wizard._
 
 ![Create Namespace](https://raw.githubusercontent.com/kubecost/docs/main/images/kubecost-namespace-1.png)
 
-* Select _Save & Go to Placement_
-* Select the cluster(s) that the namespace will be added to. Select _Save & Go To Publish_
-* Select _Publish_ to publish the namespace to the selected cluster(s)
-* Once the namespace has been published, select _Exit_
-* Under _Infrastructure_, select _Clusters_
-* Select the `kubectl` button on the cluster to open a virtual terminal
+* Select _Save & Go to Placement._
+* Select the cluster(s) that the namespace will be added to. Select _Save & Go To Publish._
+* Select _Publish_ to publish the namespace to the selected cluster(s).
+* Once the namespace has been published, select _Exit._
+* Under _Infrastructure_, select _Clusters._
+* Select the _kubectl_ button on the cluster to open a virtual terminal.
 * Verify that the `kubecost` namespace has been created by running the following command:
 
 ```
@@ -61,39 +61,39 @@ kubecost        Active   44m
 
 From the [Web Console](https://console.rafay.dev/):
 
-* Select _Add-ons_ and _Create_ a new add-on called `kubecost`
-* Select _Bring your own_
-* Select _Helm 3_ for type
-* Select _Pull files from repository_
-* Select _Helm_ for the repository type
-* Select `kubecost` for the namespace
-* Select _Select_
+* Select _Add-ons_ and _Create_ a new add-on called `kubecost.`
+* Select _Bring your own._
+* Select _Helm 3_ for type.
+* Select _Pull files from repository._
+* Select _Helm_ for the repository type.
+* Select `kubecost` for the namespace.
+* Select _Select._
 
 ![Create Addon](https://raw.githubusercontent.com/kubecost/docs/main/images/kubecost-addon-1.png)
 
-* Create a new version of the add-on
-* Select _New Version_
-* Provide a version name such as `v1`
-* Select `kubecost` for the repository
-* Enter `cost-analyzer` for the chart name
-* Upload the `kubecost-custom-values.yaml` file that was previously created
-* Select _Save Changes_
+* Create a new version of the add-on.
+* Select _New Version._
+* Provide a version name such as `v1`.
+* Select `kubecost` for the repository.
+* Enter `cost-analyzer` for the chart name.
+* Upload the `kubecost-custom-values.yaml` file that was previously created.
+* Select _Save Changes._
 
 ## Step 5: Create a blueprint
 
 Once you've created the Kubecost add-on, use it in assembling a custom cluster blueprint. You can add other add-ons to the same custom blueprint.
 
-* Under _Infrastructure_, select _Blueprints_
-* Create a new blueprint and give it a name such as `kubecost`
-* Select _Save_
+* Under _Infrastructure_, select _Blueprints._
+* Create a new blueprint and give it a name such as `kubecost`.
+* Select _Save._
 
 ![Create Blueprint](https://raw.githubusercontent.com/kubecost/docs/main/images/kubecost-blueprint-1.png)
 
-* Create a new version of the blueprint
-* Select _New Version_
-* Provide a version name such as `v1`
-* Under Add-Ons, select the `kubecost` Add-on and the version that was previously created
-* Select _Save Changes_
+* Create a new version of the blueprint.
+* Select _New Version._
+* Provide a version name such as `v1`.
+* Under Add-Ons, select the `kubecost` Add-on and the version that was previously created.
+* Select _Save Changes._
 
 ![Create Blueprint](https://raw.githubusercontent.com/kubecost/docs/main/images/kubecost-blueprint-2.png)
 
@@ -101,13 +101,13 @@ Once you've created the Kubecost add-on, use it in assembling a custom cluster b
 
 You may now apply this custom blueprint to a cluster.
 
-* Select _Options_ for the target cluster in the Web Console
-* Select _Update Blueprint_ and select the `kubecost` blueprint and version you created previously
-* Select _Save and Publish_
+* Select _Options_ for the target cluster in the Web Console.
+* Select _Update Blueprint_ and select the `kubecost` blueprint and version you created previously.
+* Select _Save and Publish._
 
 ![Update Blueprint](https://raw.githubusercontent.com/kubecost/docs/main/images/kubecost-blueprint-3.png)
 
-This will start the deployment of the add-ons configured in the `kubecost` blueprint to the targeted cluster. The blueprint sync process can take a few minutes. Once complete, the cluster will display the current cluster blueprint details and whether the sync was successful or not.
+This will start the deployment of the add-ons configured in the `kubecost` blueprint to the targeted cluster. The blueprint sync process can take a few minutes. Once complete, the cluster will display the current cluster blueprint details and w.hether the sync was successful or not.
 
 ## Step 7: Verify deployment
 
@@ -129,7 +129,7 @@ kubecost-prometheus-server-5cc6745978-z98f8   2/2     Running   0          6m23s
 
 ## Step 8: Enable port forwarding
 
-In order to access the Kubecost UI, you'll need to enable access to the frontend application using [port-forward](https://kubernetes.io/docs/tasks/access-application-cluster/port-forward-access-application-cluster/). To do this, download and use the `Kubeconfig` with the KubeCTL CLI (`../../accessproxy/kubectl_cli/`)
+In order to access the Kubecost UI, you'll need to enable access to the frontend application using [port-forward](https://kubernetes.io/docs/tasks/access-application-cluster/port-forward-access-application-cluster/). To do this, download and use the `Kubeconfig` with the KubeCTL CLI (`../../accessproxy/kubectl_cli/`).
 
 ```
 kubectl port-forward --namespace kubecost deployment/kubecost-cost-analyzer 9090
@@ -141,12 +141,10 @@ Handling connection for 9090
 
 ## Step 9: View data
 
-You can now access the Kubecost UI by visiting `http://localhost:9090` on your browser.
+You can now access the Kubecost UI by visiting `http://localhost:9090` in your browser.
 
 ![kubecost Dashboards](https://raw.githubusercontent.com/kubecost/docs/main/images/kubecost-view-1.png)
 
-***
-
 You have now successfully created a custom cluster blueprint with the `kubecost` add-on and applied to a cluster. Use this blueprint on as many clusters as you require.
 
-You can find [this same guide](https://docs.rafay.co/recipes/cost/kubecost/) as well as the guides for how to create or import a cluster using the Rafay controller on the [Rafay documentation site](https://docs.rafay.co/clusters/overview/).
+You can find [Rafay's documentation](https://docs.rafay.co/recipes/cost/kubecost/) on Kubecost as well as guides for how to create or import a cluster using the Rafay controller on the [Rafay P](https://docs.rafay.co/clusters/overview/)[roduct Documentation](https://docs.rafay.co/clusters/overview/) site.
