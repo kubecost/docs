@@ -28,7 +28,7 @@ Start by creating an Azure role definition. Below is an example definition, repl
 }
 ```
 
-Save this into a file called `myrole.json`.
+Save this into a file called _myrole.json_.
 
 Next, you'll want to register that role with Azure:
 
@@ -44,13 +44,13 @@ Next, create an Azure service principal.
 az ad sp create-for-rbac --name "KubecostAccess" --role "KubecostRole" --scope "/subscriptions/YOUR_SUBSCRIPTION_ID" --output json
 ```
 
-Keep this information which is used in the `service-key.json` below.
+Keep this information which is used in the _service-key.json_ below.
 
 ## Supplying Azure service principal details to Kubecost
 
 ### Option 1: Via a Kubernetes Secret (Recommended)
 
-Create a file called [`service-key.json`](https://github.com/kubecost/poc-common-configurations/blob/main/azure/service-key.json) and update it with the Service Principal details from the above steps:
+Create a file called [_service-key.json_](https://github.com/kubecost/poc-common-configurations/blob/main/azure/service-key.json) and update it with the Service Principal details from the above steps:
 
 ```json
 {
@@ -74,7 +74,7 @@ When managing the service account key as a Kubernetes Secret, the secret must re
 kubectl create secret generic azure-service-key -n kubecost --from-file=service-key.json
 ```
 
-Finally, set the `kubecostProductConfigs.serviceKeySecretName` helm value to the name of the Kubernetes secret you created. We use the value `azure-service-key` in our examples.
+Finally, set the `kubecostProductConfigs.serviceKeySecretName` Helm value to the name of the Kubernetes secret you created. We use the value `azure-service-key` in our examples.
 
 ### Option 2: Via Helm values
 
@@ -110,13 +110,13 @@ helm upgrade --install kubecost kubecost/cost-analyzer -n kubecost \
 
 Kubecost supports querying the Azure APIs for cost data based on the region, offer durable ID, and currency defined in your Microsoft Azure offer.
 
-Those properties are configured with the following helm values:
+Those properties are configured with the following Helm values:
 
 * `kubecostProductConfigs.azureBillingRegion`
 * `kubecostProductConfigs.azureOfferDurableID`
 * `kubecostProductConfigs.currencyCode`
 
-Be sure to verify your billing information with Microsoft and update the above Helm values to reflect your bill to country, subscription offer durable id/number, and currency.
+Be sure to verify your billing information with Microsoft and update the above Helm values to reflect your bill to country, subscription offer durable ID/number, and currency.
 
 The following Microsoft documents are a helpful reference:
 
