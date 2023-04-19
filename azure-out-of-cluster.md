@@ -2,13 +2,13 @@
 
 Connecting your Azure account to Kubecost allows you to view Kubernetes metrics side-by-side with out-of-cluster (OOC) costs (e.g. Azure Database Services). Additionally, it allows Kubecost to reconcile measured Kubernetes spend with your actual Azure bill. This gives teams running Kubernetes a complete and accurate picture of costs. For more information, read [Cloud Billing Integrations](https://docs.kubecost.com/install-and-configure/install/cloud-integration) and this [blog post](https://blog.kubecost.com/blog/complete-picture-when-monitoring-kubernetes-costs/).
 
-To configure Kubecost's Azure Cloud Integration, you will need to set up daily exports of cost reports to Azure storage. Kubecost will then access your cost reports through the Azure Storage API to display your out-of-cluster cost data alongside your in-cluster costs.
+To configure Kubecost's Azure Cloud Integration, you will need to set up daily exports of cost reports to Azure storage. Kubecost will then access your cost reports through the Azure Storage API to display your OOC cost data alongside your in-cluster costs.
 
 A GitHub repository with sample files used in below instructions can be found [here](https://github.com/kubecost/poc-common-configurations/tree/main/azure).
 
 ## Step 1: Export Azure cost report
 
-Follow this [Azure guide](https://learn.microsoft.com/en-us/azure/cost-management-billing/costs/tutorial-export-acm-data) to export cost reports. Ensure you select the "Daily export of month-to-date costs" and "Amortized cost (Usage and Purchases)" options while leaving off "File Partitioning". Also take note of the "StorageAccount" and "StorageContainer" specified when choosing where to export the data to.
+Follow Azure's [Create and Manage Exported Data](https://learn.microsoft.com/en-us/azure/cost-management-billing/costs/tutorial-export-acm-data?tabs=azure-portal) tutorial to export cost reports.  For Metric, make sure you select _Amortized cost (Usage and Purchases)._ For Export type, make sure you select _Daily export of month-to-date costs._ Do not select _File Partitioning_. Also take note of the Account name and Container specified when choosing where to export the data to.
 
 Alternatively, you can follow this [Kubecost guide](https://github.com/kubecost/azure-hackfest-lab/tree/a51fad1b9640b5991e5d567941f5086eb626a83f/0\_create-azure-cost-export).
 
@@ -52,7 +52,9 @@ Next, create a JSON file which **must** be named `cloud-integration.json` with t
 }
 ```
 
-> **Note:** Additional details about the `cloud-integration.json` file can be found in our [multi-cloud integration](multi-cloud.md) doc.
+{% hint style="info" %}
+Additional details about the `cloud-integration.json` file can be found in our [multi-cloud integration](multi-cloud.md) doc.
+{% endhint %}
 
 Next, create the Secret:
 
