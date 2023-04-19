@@ -429,8 +429,8 @@ Allocation data for today unaggregated:
 {% tabs %}
 {% tab title="Request" %}
 ```
-$ curl http://localhost:9090/model/allocation
--d window=today
+$ curl http://localhost:9090/model/allocation \
+-d window=today \
 -G
 ```
 {% endtab %}
@@ -520,8 +520,8 @@ $ curl http://localhost:9090/model/allocation \
   -d aggregate=label:app \
   -d accumulate=true \
   -d shareIdle=weighted \
-  -d shareNamespaces=kube-system,kubecost
-  -d shareCost=100
+  -d shareNamespaces=kube-system,kubecost \
+  -d shareCost=100 \
   -G
 ```
 {% endtab %}
