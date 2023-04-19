@@ -79,9 +79,9 @@ You're almost done. Now it's time to configure in Kubecost to finalize your conn
 
 In Kubecost, select _Settings_ from the left navigation, and under Cloud Integrations, select _Add Cloud Integration > GCP_, then provide the relevant information in the GCP Billing Data Export Configuration window:
 
-* **GCP Service Key**: If you've connected using Workload Identity federation in Step 3, you should leave this box empty. If you've created a service account key, copy the contents of the `compute-viewer-kubecost-key.json` file and paste them here.
+* **GCP Service Key**: If you've connected using Workload Identity federation in Step 3, you should leave this box empty. If you've created a service account key, copy the contents of the _compute-viewer-kubecost-key.json_ file and paste them here.
 * **GCP Project Id**: The ID of your GCP project.
-* **GCP Billing Database:** Requires a BigQuery dataset prefix (e.g. billing\_data) in addition to the BigQuery table name. A full example is `billing_data.gcp_billing_export_v1_018AIF_74KD1D_534A2`
+* **GCP Billing Database:** Requires a BigQuery dataset prefix (e.g. `billing_data`) in addition to the BigQuery table name. A full example is `billing_data.gcp_billing_export_v1_018AIF_74KD1D_534A2`
 
 {% hint style="warning" %}
 Be careful when handling your service key! Ensure you have entered it correctly into Kubecost. Don't lose it or let it become publicly available.
@@ -89,10 +89,10 @@ Be careful when handling your service key! Ensure you have entered it correctly 
 
 ### 2. Configuring using values.yaml (recommended)
 
-It is recommended to provide the GCP details in your [`values.yaml`](https://github.com/kubecost/cost-analyzer-helm-chart/blob/c10e9475b51612d36da8f04618174a98cc62f8fd/cost-analyzer/values.yaml#L572-L574) to ensure they are retained during an upgrade or redeploy.
+It is recommended to provide the GCP details in your [_values.yaml_](https://github.com/kubecost/cost-analyzer-helm-chart/blob/c10e9475b51612d36da8f04618174a98cc62f8fd/cost-analyzer/values.yaml#L572-L574) to ensure they are retained during an upgrade or redeploy.
 
-* Set `.Values.kubecostProductConfigs.projectID = <GCP Project ID that contains the BigQuery Export>`
-* Set `.Values.kubecostProductConfigs.bigQueryBillingDataDataset = <DATASET.TABLE_NAME that contains the billing export>`
+* Set `.Values.kubecostProductConfigs.projectID` to the GCP Project ID that contains the BigQuery Export
+* Set `.Values.kubecostProductConfigs.bigQueryBillingDataDataset` to the `DATASET.TABLE_NAME` that contains the billing export
 
 If you've connected using Workload Identity federation:
 
@@ -105,9 +105,11 @@ Otherwise, if you've connected using a service account key, create a secret for 
 kubectl create secret generic gcp-secret -n kubecost --from-file=./compute-viewer-kubecost-key.json
 ```
 
-Then, set `.Values.kubecostProductConfigs.gcpSecretName = <Name of the Kubernetes secret that contains the compute-viewer-kubecost-key.json file>`
+Then, set `.Values.kubecostProductConfigs.gcpSecretName` to the name of the Kubernetes secret that contains the _compute-viewer-kubecost-key.json_ file.
 
-> **Note**: When managing the service account key as a Kubernetes secret, the secret must reference the service account key JSON file, and that file must be named `compute-viewer-kubecost-key.json`.
+{% hint style="info" %}
+When managing the service account key as a Kubernetes secret, the secret must reference the service account key JSON file, and that file must be named _compute-viewer-kubecost-key.json_.
+{% endhint %}
 
 ## Step 5: Label cloud assets
 
@@ -123,7 +125,7 @@ Daemonset:  "kubernetes_daemonset":  <daemonset>
 Container:  "kubernetes_container":  <container>
 ```
 
-To use an alternative or existing label schema for GCP cloud assets, you may supply these in your [values.yaml](https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/values.yaml) under the `kubecostProductConfigs.labelMappingConfigs.<aggregation>_external_label`.
+To use an alternative or existing label schema for GCP cloud assets, you may supply these in your [_values.yaml_](https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/values.yaml) under the `kubecostProductConfigs.labelMappingConfigs.<aggregation>_external_label`.
 
 {% hint style="info" %}
 Google generates special labels for GKE resources (e.g. "goog-gke-node", "goog-gke-volume"). Values with these labels are excluded from OOC costs because Kubecost already includes them as in-cluster assets. Thus, to make sure all cloud assets are included, we recommend installing Kubecost on each cluster where insights into costs are required.
@@ -160,7 +162,7 @@ gcloud projects add-iam-policy-binding $BIG_QUERY_PROJECT_ID --member serviceAcc
 
 Now that your service account is created, follow the normal configuration instructions.
 
-## Common configuration issues:
+## Troubleshooting
 
 #### Account labels not showing up in partitions
 
