@@ -1,10 +1,10 @@
 # AWS Marketplace Install
 
-This document provides the steps for installing the Kubecost product from the AWS marketplace. [More info on different tiers.](https://kubecost.com/pricing)
+This document provides the steps for installing the Kubecost product from the AWS marketplace. [More info pricing of different Kubecost versions](https://www.kubecost.com/pricing/).
 
 ## Step 1: Create an IAM policy
 
-To deploy Kubecost from AWS Marketplace, you need to assign an IAM policy with approriate IAM permission to a Kubernetes (K8s) service account before starting the deployment. You can either use AWS managed policy `arn:aws:iam::aws:policy/AWSMarketplaceMeteringRegisterUsage` or creating your own IAM policy. You can learn [more info on how to create a new policy](https://docs.aws.amazon.com/IAM/latest/UserGuide/tutorial\_managed-policies.html#step1-create-policy)
+To deploy Kubecost from AWS Marketplace, you need to assign an IAM policy with appropriate IAM permission to a Kubernetes service account before starting the deployment. You can either use AWS managed policy `arn:aws:iam::aws:policy/AWSMarketplaceMeteringRegisterUsage` or create your own IAM policy. You can learn more with AWS' [Create and attach your first customer managed policy ](https://docs.aws.amazon.com/IAM/latest/UserGuide/tutorial\_managed-policies.html#step1-create-policy)tutorial.
 
 Example IAM policy:
 
@@ -23,7 +23,7 @@ Example IAM policy:
 }
 ```
 
-## Step 2: Create an IAM role for service account (IRSA).
+## Step 2: Create an IAM role for service account (IRSA)
 
 We recommend doing this via [eksctl](https://docs.aws.amazon.com/eks/latest/userguide/eksctl.html). The command below helps to automate these manual steps:
 
@@ -32,7 +32,7 @@ We recommend doing this via [eksctl](https://docs.aws.amazon.com/eks/latest/user
 * Set up trust relationship between the created IAM role with awsstore-serviceaccount.
 * Modify `awsstore-serviceaccount` annotation to associate it with the created IAM role
 
-Please remember to replace `CLUSTER_NAME` with your actual Amazon EKS cluster name.
+Remember to replace `CLUSTER_NAME` with your actual Amazon EKS cluster name.
 
 ```
 eksctl create iamserviceaccount \
@@ -46,15 +46,17 @@ eksctl create iamserviceaccount \
 
 More details and how to set up the appropriate trust relationships is available [here](https://docs.aws.amazon.com/eks/latest/userguide/create-service-account-iam-policy-and-role.html).
 
-> **Note**: Your Amazon EKS cluster needs to have IAM OIDC provider enabled to set up IRSA. You can learn more on how to enable IAM OIDC provider with this [AWS documentation](https://docs.aws.amazon.com/eks/latest/userguide/enable-iam-roles-for-service-accounts.html)
+{% hint style="info" %}
+Your Amazon EKS cluster needs to have IAM OIDC provider enabled to set up IRSA. Learn more with AWS' [Creating an IAM OIDC provider for your cluster](https://docs.aws.amazon.com/eks/latest/userguide/enable-iam-roles-for-service-accounts.html) doc.
+{% endhint %}
 
 ## Step 3: Deploy Kubecost with attached IAM role
 
-* Define which available version you would like to install using this following command (you can check available version title from the AWS Marketplace product, e.g: prod-1.95.0):
+Define which available version you would like to install using this following command You can check available version title from the AWS Marketplace product, e.g: prod-1.95.0:
 
 `export IMAGETAG=<VERSION-TITLE>`
 
-* Deploy Kubecost with `Helm` using the following command:
+Deploy Kubecost with Helm using the following command:
 
 ```
 helm upgrade -i kubecost kubecost/cost-analyzer \
@@ -71,8 +73,8 @@ helm upgrade -i kubecost kubecost/cost-analyzer \
     --set prometheus.server.image.tag=v2.35.0
 ```
 
-* You can run these following commands to enable port-forwarding and access Kubecost dashboard at `http://localhost:9090`
+Run this command to enable port-forwarding and access the Kubecost UI:
 
 `kubectl port-forward --namespace kubecost deployment/kubecost-cost-analyzer 9090`
 
-You can now start monitoring your Amazon EKS cluster cost with Kubecost. For advanced setup or other questions, contact us at [support@kubecost.com](support@kubecost.com) to schedule these sessions.
+You can now start monitoring your Amazon EKS cluster cost with Kubecost by visiting `http://localhost:9090`.
