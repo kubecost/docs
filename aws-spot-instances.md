@@ -2,13 +2,11 @@
 
 ## Spot Data feed integration
 
-Kubecost will reconcile your Spot prices with Cost and Usage Reports (CURs) as they become available (usually 1-2 days), but pricing data can be pulled hourly by integrating directly with the AWS Spot feed. To enable, follow AWS' [Spot Instance data feed](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-data-feeds.html) doc.
+Kubecost will reconcile your Spot prices with Cost and Usage Reports (CURs) as they become available (usually 1-2 days), but pricing data can be pulled hourly by integrating directly with the AWS Spot feed. AWS CUR integration and Spot data feed are two methods for Kubecost to read your billing data. The CUR is updated daily, while the Spot data feed is updated hourly by only applies to Spot Instances. Reduce complexity by only integrating with one of these methods. To enable Spot data feed, follow AWS' [Spot Instance data feed](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-data-feeds.html) doc.
 
 ## Configuring the Spot data feed in Kubecost
 
 These values can either be set from the Kubecost UI or via `.Values.kubecostProductConfigs` in the Helm chart. Note that if you set any kubecostProductConfigs from the Helm chart, all changes via the frontend will be deleted on pod restart.
-
-Spot data feed provides the same functionality as AWS CUR integration. The only difference is the Spot feed data arrives hourly with the Spot feed integration. The AWS cloud integration is delayed up to 48 hours. For accurate costs across the board, you can skip the Spot feed integration.
 
 * `projectID` the Account ID of the AWS Account on which the spot nodes are running.
 * `awsSpotDataRegion` region of your spot data bucket
