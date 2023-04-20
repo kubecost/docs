@@ -2,12 +2,12 @@
 
 ## Overview
 
-Kubecost leverages the open-source Prometheus project as a time series database and post-processes the data in Prometheus to perform cost allocation calculations and provide optimization insights for your Kubernetes clusters. Prometheus is a single machine statically-resourced container, so depending on your cluster size or when your cluster scales out, it could exceed the scraping capabilities of a single Prometheus server. In this article, you can learn how Kubecost integrates with [Google Cloud Managed Service for Prometheus (GMP)](https://cloud.google.com/stackdriver/docs/managed-prometheus), a managed Prometheus-compatible monitoring service, to enable the customer to monitor Kubernetes easily cost at scale.
+Kubecost leverages the open-source Prometheus project as a time series database and post-processes the data in Prometheus to perform cost allocation calculations and provide optimization insights for your Kubernetes clusters. Prometheus is a single machine statically-resourced container, so depending on your cluster size or when your cluster scales out, your cluster could exceed the scraping capabilities of a single Prometheus server. In this doc, you will learn how Kubecost integrates with [Google Cloud Managed Service for Prometheus (GMP)](https://cloud.google.com/stackdriver/docs/managed-prometheus), a managed Prometheus-compatible monitoring service, to enable the customer to monitor Kubernetes easily cost at scale.
 
-In this integration, GMP is required to be enabled for your GKE cluster with the managed collection. Next, Kubecost is installed in your GKE cluster and leverages GMP Prometheus binary to ingest metrics into GMP database seamlessly. In this setup, Kubecost deployment also automatically creates a Prometheus proxy that allows Kubecost to query the metrics from the GMP database for cost allocation calculation.
+For this integration, GMP is required to be enabled for your GKE cluster with the managed collection. Next, Kubecost is installed in your GKE cluster and leverages GMP Prometheus binary to ingest metrics into GMP database seamlessly. In this setup, Kubecost deployment also automatically creates a Prometheus proxy that allows Kubecost to query the metrics from the GMP database for cost allocation calculation.
 
 {% hint style="info" %}
-This integration is currently in beta for customers to review
+This integration is currently in beta.
 {% endhint %}
 
 ## Reference Resources
@@ -22,7 +22,7 @@ This integration is currently in beta for customers to review
 
 * You have a GCP account/subscription.
 * You have permission to manage GKE clusters and GCP monitoring services.
-* You have an existing GKE cluster with GMP enabled. You can learn more at this [link](https://cloud.google.com/stackdriver/docs/managed-prometheus/setup-managed#enable-mgdcoll-gke)
+* You have an existing GKE cluster with GMP enabled. You can learn more [here](https://cloud.google.com/stackdriver/docs/managed-prometheus/setup-managed#enable-mgdcoll-gke).
 
 ### Installations
 
@@ -48,7 +48,7 @@ In this installation command, these additional flags are added to have Kubecost 
 
 You can find additional configurations at our main [values.yaml](https://github.com/kubecost/cost-analyzer-helm-chart/blob/develop/cost-analyzer/values.yaml) file.
 
-Your Kubecost setup now starts writing and collecting data from GMP. Data should be ready for viewing within 15 minutes.
+Your Kubecost setup now writes and collects data from GMP. Data should be ready for viewing within 15 minutes.
 
 ### Verification
 
@@ -60,7 +60,7 @@ kubectl port-forward --namespace kubecost deployment/kubecost-cost-analyzer 9090
 
 To verify that the integration is set up, go to _Settings_ in the Kubecost UI, and check the Prometheus Status section.
 
-From your [GCP Monitoring - Metrics explorer console](https://console.cloud.google.com/monitoring/metrics-explorer), You can run the following query to verify if Kubecost metrics are collected
+From your [GCP Monitoring - Metrics explorer console](https://console.cloud.google.com/monitoring/metrics-explorer), You can run the following query to verify if Kubecost metrics are collected:
 
 ```
 avg(node_cpu_hourly_cost) by (cluster_id)
