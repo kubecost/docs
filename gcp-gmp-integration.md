@@ -2,7 +2,7 @@
 
 ## Overview
 
-Kubecost leverages the open-source Prometheus project as a time series database and post-processes the data in Prometheus to perform cost allocation calculations and provide optimization insights for your Kubernetes clusters, such as Amazon Elastic Kubernetes Service (Amazon EKS). Prometheus is a single machine statically-resourced container, so depending on your cluster size or when your cluster scales out, it could exceed the scraping capabilities of a single Prometheus server. In this article, you can learn how Kubecost integrates with [Google Cloud Managed Service for Prometheus (GMP)](https://cloud.google.com/stackdriver/docs/managed-prometheus), a managed Prometheus-compatible monitoring service, to enable the customer to monitor Kubernetes easily cost at scale.
+Kubecost leverages the open-source Prometheus project as a time series database and post-processes the data in Prometheus to perform cost allocation calculations and provide optimization insights for your Kubernetes clusters. Prometheus is a single machine statically-resourced container, so depending on your cluster size or when your cluster scales out, it could exceed the scraping capabilities of a single Prometheus server. In this article, you can learn how Kubecost integrates with [Google Cloud Managed Service for Prometheus (GMP)](https://cloud.google.com/stackdriver/docs/managed-prometheus), a managed Prometheus-compatible monitoring service, to enable the customer to monitor Kubernetes easily cost at scale.
 
 In this integration, GMP is required to be enabled for your GKE cluster with the managed collection. Next, Kubecost is installed in your GKE cluster and leverages GMP Prometheus binary to ingest metrics into GMP database seamlessly. In this setup, Kubecost deployment also automatically creates a Prometheus proxy that allows Kubecost to query the metrics from the GMP database for cost allocation calculation.
 
@@ -40,6 +40,13 @@ helm upgrade -i kubecost cost-analyzer/ \
 --set prometheus.server.global.external_labels.cluster_id="${CLUSTER_NAME}" \
 --set kubecostProductConfigs.clusterName="${CLUSTER_NAME}"
 ```
+In this installation command, these additional flags are added to have Kubecost work with GMP:
+
+- `prometheus.server.image.repository` and `prometheus.server.image.tag` replace the standard Prometheus image by GMP specific image.
+- `global.gmp.enabled` and `global.gmp.gmpProxy.projectId` are for enabling the GMP integration.
+- `prometheus.server.global.external_labels.cluster_id` and `kubecostProductConfigs.clusterName` helps to set name for your Kubecost setup
+
+You can find additional configurations at our main [values.yaml](https://github.com/kubecost/cost-analyzer-helm-chart/blob/develop/cost-analyzer/values.yaml) file.
 
 Your Kubecost setup now starts writing and collecting data from GMP. Data should be ready for viewing within 15 minutes.
 
