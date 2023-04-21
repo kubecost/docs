@@ -42,9 +42,9 @@ helm upgrade -i kubecost cost-analyzer/ \
 ```
 In this installation command, these additional flags are added to have Kubecost work with GMP:
 
-- `prometheus.server.image.repository` and `prometheus.server.image.tag` replace the standard Prometheus image by GMP specific image.
+- `prometheus.server.image.repository` and `prometheus.server.image.tag` replace the standard Prometheus image with GMP specific image.
 - `global.gmp.enabled` and `global.gmp.gmpProxy.projectId` are for enabling the GMP integration.
-- `prometheus.server.global.external_labels.cluster_id` and `kubecostProductConfigs.clusterName` helps to set name for your Kubecost setup
+- `prometheus.server.global.external_labels.cluster_id` and `kubecostProductConfigs.clusterName` helps to set the name for your Kubecost setup.
 
 You can find additional configurations at our main [values.yaml](https://github.com/kubecost/cost-analyzer-helm-chart/blob/develop/cost-analyzer/values.yaml) file.
 
