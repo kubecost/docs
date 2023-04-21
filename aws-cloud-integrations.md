@@ -140,8 +140,7 @@ Attach both of the following policies to the same role or user. Use a user if yo
                  ],
                  "Resource": [
                     "arn:aws:glue:*:*:catalog",
-                    "arn:aws:glue:*:*:database/
-		    *",
+                    "arn:aws:glue:*:*:database/athenacurcfn*",
                     "arn:aws:glue:*:*:table/athenacurcfn*/*"
                  ]
               },
