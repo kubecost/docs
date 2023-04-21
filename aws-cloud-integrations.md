@@ -140,7 +140,8 @@ Attach both of the following policies to the same role or user. Use a user if yo
                  ],
                  "Resource": [
                     "arn:aws:glue:*:*:catalog",
-                    "arn:aws:glue:*:*:database/athenacurcfn*",
+                    "arn:aws:glue:*:*:database/
+		    *",
                     "arn:aws:glue:*:*:table/athenacurcfn*/*"
                  ]
               },
@@ -456,7 +457,7 @@ Once you've integrated with the CUR, you can visit _Settings_ > _View Full Diagn
 
 You can check pod logs for authentication errors by running: `kubectl get pods -n <namespace>` `kubectl logs <kubecost-pod-name> -n <namespace> -c cost-model`
 
-If you do not see any authentication errors, log in to your AWS console and visit the Athena dashboard. You should be able to find the CUR. Ensure that the database with the CUR matches the athenaTable entered in Step 5. It likely has a prefix with `athenacurfn_` :
+If you do not see any authentication errors, log in to your AWS console and visit the Athena dashboard. You should be able to find the CUR. Ensure that the database with the CUR matches the athenaTable entered in Step 5. It likely has a prefix with `athenacurcfn_` :
 
 ![Screen Shot 2020-12-06 at 9 43 31 PM](https://user-images.githubusercontent.com/453512/101319459-e6f23100-3816-11eb-8d96-1ab977cb50bd.png)
 
