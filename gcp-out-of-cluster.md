@@ -22,7 +22,7 @@ GCP users should create [detailed billing export](https://cloud.google.com/billi
 If you are using the alternative [multi-cloud integration](multi-cloud.md) method, Step 2 is not required.
 {% endhint %}
 
-If your Big Query dataset is in a different project than the one where Kubecost is installed, please see the section on [Cross-Project Service Accounts](gcp-out-of-cluster.md#cross-project-service-account-configuration)
+If your Big Query dataset is in a different project than the one where Kubecost is installed, please see the section on [Cross-Project Service Accounts](gcp-out-of-cluster.md#cross-project-service-account-configuration).
 
 Add a service account key to allocate OOC resources (e.g. storage buckets and managed databases) back to their Kubernetes owners. The service account needs the following:
 
@@ -73,7 +73,7 @@ Once the GCP service account has been connected, set up the remaining configurat
 
 ## Step 4. Configuring GCP for Kubecost
 
-You're almost done. Now it's time to configure in Kubecost to finalize your connectivity.&#x20;
+You're almost done. Now it's time to configure in Kubecost to finalize your connectivity.
 
 ### 1. Configuring via the Kubecost UI
 
@@ -166,4 +166,4 @@ Now that your service account is created, follow the normal configuration instru
 
 #### Account labels not showing up in partitions
 
-There are cases where labels applied at the account label do not show up in the date-partitioned data. If account level labels are not showing up, you can switch to querying them unpartitioned by setting an extraEnv in Kubecost: `GCP_ACCOUNT_LABELS_NOT_PARTITIONED: true`. See [here](https://github.com/kubecost/cost-analyzer-helm-chart/blob/v1.98.0-rc.1/cost-analyzer/values.yaml#L304).&#x20;
+There are cases where labels applied at the account label do not show up in the date-partitioned data. If account level labels are not showing up, you can switch to querying them unpartitioned by setting an extraEnv in Kubecost: `GCP_ACCOUNT_LABELS_NOT_PARTITIONED: true`. See [here](https://github.com/kubecost/cost-analyzer-helm-chart/blob/v1.98.0-rc.1/cost-analyzer/values.yaml#L304).
