@@ -85,6 +85,14 @@ A filter to reduce the set of workloads for which recommendations will be calcul
 for syntax. V1 filters are also supported.
 {% endswagger-parameter %}
 
+{% swagger-parameter in="query" name="sortBy" type="string" %}
+Column to sort the response by. Defaults to "totalSavings". Options are "totalSavings", "currentEfficiency", "cpuRecommended", "cpuLatest", "memoryRecommended", and "memoryLatest".
+{% endswagger-parameter %}
+
+{% swagger-parameter in="query" name="sortByOrder" type="string" %}
+Order to sort by. Defaults to "descending". Options are "descending" and "ascending".
+{% endswagger-parameter %}
+
 {% swagger-response status="200: OK" description="" %}
 ```javascript
 [
