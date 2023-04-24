@@ -1,6 +1,8 @@
 # Budgets
 
-> **Note:** The Budgets dashboard is currently in beta. Please read the documentation carefully.
+{% hint style="warning" %}
+The Budgets dashboard is currently in beta. Please read the documentation carefully.
+{% endhint %}
 
 Recurring budget rules are a way of establishing spend limits for your clusters or namespaces. They can be created in moments using the Budget dashboard.
 

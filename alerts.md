@@ -17,11 +17,13 @@ Have questions or issues? View our [troubleshooting section](alerts.md#troublesh
 
 ## Configuring alerts in Helm
 
-> **Note**: _values.yaml_ is a source of truth. Alerts set through _values.yaml_ will continually overwrite any manual alert settings set through the Kubecost UI.
+{% hint style="info" %}
+_values.yaml_ is a source of truth. Alerts set through _values.yaml_ will continually overwrite any manual alert settings set through the Kubecost UI.
+{% endhint %}
 
 ### Global alert parameters
 
-The alert settings, under _global.notifications.alertConfigs_ in _cost-analyzer/values.yaml_, accept four global fields:
+The alert settings, under `global.notifications.alertConfigs` in _cost-analyzer/values.yaml_, accept four global fields:
 
 * `frontendUrl` optional, your cost analyzer front end URL used for linkbacks in alert bodies
 * `globalSlackWebhookUrl` optional, a global Slack webhook used for alerts, enabled by default if provided
@@ -81,7 +83,9 @@ Example Helm _values.yaml_:
 
 ### Type: Allocation Efficiency
 
-> **Note**: this feature is currently in Beta.
+{% hint style="warning" %}
+This feature is currently in Beta.
+{% endhint %}
 
 Alert when Kubernetes tenants, e.g. namespaces or label sets, are running below defined cost-efficiency thresholds.
 
@@ -234,8 +238,6 @@ Example Helm _values.yaml_:
   filter: ''
 ```
 
-***
-
 ### Type: Cloud Report
 
 Sends a recurring alert with a cloud and/or Kubernetes assets summary report.
@@ -361,7 +363,9 @@ Cluster Health Alerts and Kubecost Health Alerts work differently from other ale
 
 <figure><img src=".gitbook/assets/alertshealth.png" alt=""><figcaption><p>Cluster and Kubecost Health Alerts</p></figcaption></figure>
 
-> **Note**: There is no validation around Cluster Health Alerts. If a Health Alert configuration is invalid, it will appear to save, but will not actually take effect. Please check carefully that the alert has a Window and Threshold properly specified.
+{% hint style="warning" %}
+There is no validation around Cluster Health Alerts. If a Health Alert configuration is invalid, it will appear to save, but will not actually take effect. Please check carefully that the alert has a Window and Threshold properly specified.
+{% endhint %}
 
 ### Global recipients
 

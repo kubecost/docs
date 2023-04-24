@@ -1,10 +1,14 @@
 # Assets Dashboard
 
-> **Warning**: Cloud data will soon be parsed through the Cloud Costs Explorer dashboard instead of through Assets. Read our announcement [here](https://blog.kubecost.com/blog/cloud-cost-install/) for more information.
+{% hint style="danger" %}
+Cloud data will soon be parsed through the Cloud Costs Explorer dashboard instead of through Assets. Read our announcement [here](https://blog.kubecost.com/blog/cloud-cost-install/) for more information.
+{% endhint %}
 
 The Kubecost Assets dashboard shows Kubernetes cluster costs broken down by the individual backing assets in your cluster (e.g. cost by node, disk, and other assets). It’s used to identify spend drivers over time and to audit Allocation data. This view can also optionally show out-of-cluster assets by service, tag/label, etc.
 
-> **Note**: Similar to our Allocation API, the Assets API uses our ETL pipeline which aggregates data daily. This allows for enterprise-scale with much higher performance.
+{% hint style="info" %}
+Similar to our Allocation API, the Assets API uses our ETL pipeline which aggregates data daily. This allows for enterprise-scale with much higher performance.
+{% endhint %}
 
 <figure><img src=".gitbook/assets/assets.png" alt=""><figcaption><p>Assets page</p></figcaption></figure>
 
@@ -12,17 +16,15 @@ This user interface is available at `<your-kubecost-address>/assets.html`.
 
 This is the main Kubecost Assets dashboard. In the screenshot there are multiple features to take notice of which are covered in this guide:
 
-| Element                           | Description                                                                                                         |
-| --------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
-| Date Range (Last 7 days)          | Will report _Last 7 days_ by default. Manually select your start and end date, or pick one of twelve preset options |
-| Aggregate By                      | Aggregate costs by one or several concepts. Add custom labels                                                       |
-| (Un)save Report                   | Save or unsave the current report                                                                                   |
-| Edit Report                       | Adjust cost metrics and how data is displayed                                                                       |
-| Additional options/meatballs icon | Additional options for opening and downloading reports                                                              |
+| Element                  | Description                                                                                                         |
+| ------------------------ | ------------------------------------------------------------------------------------------------------------------- |
+| Date Range (Last 7 days) | Will report _Last 7 days_ by default. Manually select your start and end date, or pick one of twelve preset options |
+| Aggregate By             | Aggregate costs by one or several concepts. Add custom labels                                                       |
+| (Un)save Report          | Save or unsave the current report                                                                                   |
+| Edit Report              | Adjust cost metrics and how data is displayed                                                                       |
+| Additional options icon  | Additional options for opening and downloading reports                                                              |
 
 ## Date Range
-
-<figure><img src=".gitbook/assets/assetsdaterange.png" alt=""><figcaption><p>Date range window</p></figcaption></figure>
 
 Select the date range of the report by setting specific start and end dates, or using one of the preset options.
 
@@ -31,8 +33,6 @@ Select the date range of the report by setting specific start and end dates, or 
 <figure><img src=".gitbook/assets/assetsaggregate.png" alt=""><figcaption><p>Aggregate By window</p></figcaption></figure>
 
 Here you can aggregate cost by native Kubernetes concepts. While selecting Single Aggregation, you will only be able to select one concept at a time. While selecting Multi Aggregation, you will be able to filter for multiple concepts at the same time. Assets will be by default aggregated by Service.
-
-> **Note**: Service in this context refers to an external cloud service.
 
 ## Edit Report
 
@@ -57,9 +57,7 @@ Filter assets by category, service, or other means. When a filter is applied, on
 
 ## Additional options
 
-<figure><img src=".gitbook/assets/assetsoptions.png" alt=""><figcaption></figcaption></figure>
-
-The three horizontal lines/meatballs icon will provide additional options for handling your reports:
+The three horizontal dots icon will provide additional options for handling your reports:
 
 * Open Report: Open one of your saved reports
 * Download CSV: Download your current report as a CSV file

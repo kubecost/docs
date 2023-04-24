@@ -1,6 +1,8 @@
 # Cloud Costs Explorer
 
-> **Note**: Cloud Cost is currently in beta. Please read the documentation carefully.
+{% hint style="warning" %}
+Cloud Cost is currently in beta. Please read the documentation carefully.
+{% endhint %}
 
 The Cloud Cost Explorer is a dashboard which provides visualizations of your cloud spending.
 
@@ -32,7 +34,9 @@ kubecostModel:
   etlCloudUsage: false
 ```
 
-> **Note**: Disabling Cloud Usage will restrict functionality of your Assets dashboard. Learn more about Cloud Usage [here](https://docs.kubecost.com/install-and-configure/install/cloud-integration#cloud-usage).
+{% hint style="danger" %}
+Disabling Cloud Usage will restrict functionality of your Assets dashboard. This is intentional. Learn more about Cloud Usage [here](https://docs.kubecost.com/install-and-configure/install/cloud-integration#cloud-usage).
+{% endhint %}
 
 ### Date range
 
