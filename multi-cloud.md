@@ -12,7 +12,7 @@ For each Cloud Account that you would like to configure you will need to make su
 
 ## Step 2: Create cloud integration secret
 
-The secret should contain a file named `cloud-integration.json` with the following format:
+The secret should contain a file named _cloud-integration.json_ with the following format:
 
 ```json
 {
@@ -28,20 +28,20 @@ This method of Cloud-Integration supports multiple configurations per cloud prov
 kubectl create secret generic <SECRET_NAME> --from-file=cloud-integration.json -n kubecost
 ```
 
-Once the secret is created, set `.Values.kubecostProductConfigs.cloudIntegrationSecret` to \<SECRET\_NAME> and upgrade Kubecost via Helm.
+Once the secret is created, set `.Values.kubecostProductConfigs.cloudIntegrationSecret` to `<SECRET_NAME>` and upgrade Kubecost via Helm.
 
-A GitHub repository with sample files required can be found here, just select [the cloud provider you are configuring](https://github.com/kubecost/poc-common-configurations/).
+A GitHub repository with sample files required can be found [here](https://github.com/kubecost/poc-common-configurations/). Select the folder with the name of the cloud service you are configuring.
 
 ### Azure
 
 The following values can be located in the Azure Portal under _Cost Management_ > _Exports_ or _Storage accounts_:
 
-* `azureSubscriptionID` is the "Subscription ID" belonging to the Storage account which stores your exported Azure cost report -ata.
+* `azureSubscriptionID` is the "Subscription ID" belonging to the Storage account which stores your exported Azure cost report data.
 * `azureStorageAccount` is the name of the Storage account where the exported Azure cost report data is being stored.
-* `azureStorageAccessKey` can be found by selecting the "Access Keys" option from the navigation sidebar then selecting "Show -eys". Using either of the two keys will work.
-* `azureStorageContainer` is the name that you chose for the exported cost report when you set it up. This is the name of the -ontainer where the CSV cost reports are saved in your Storage account.
-* `azureContainerPath` is an optional value which should be used if there is more than one billing report that is exported to the -onfigured container. The path provided should have only one billing export because kubecost will retrieve the most recent -illing report for a given month found within the path.
-* `azureCloud` is an optional value which denotes the cloud where the storage account exist, possible values are `public` and `gov`. The default is `public`.
+* `azureStorageAccessKey` can be found by selecting _Access Keys_ from the navigation sidebar then selecting _Show keys_. Using either of the two keys will work.
+* `azureStorageContainer` is the name that you chose for the exported cost report when you set it up. This is the name of the container where the CSV cost reports are saved in your Storage account.
+* `azureContainerPath` is an optional value which should be used if there is more than one billing report that is exported to the configured container. The path provided should have only one billing export because kubecost will retrieve the most recent billing report for a given month found within the path.
+* `azureCloud` is an optional value which denotes the cloud where the storage account exists. Possible values are `public` and `gov`. The default is `public`.
 
 Set these values into the following object and add them to the Azure array:
 
@@ -58,7 +58,7 @@ Set these values into the following object and add them to the Azure array:
 
 ### GCP
 
-If you don't already have a GCP service key for any of the projects you would like to configure, you can run the following commands in your command line to generate and export one. Make sure your gcloud project is where your external costs are being run.
+If you don't already have a GCP service key for any of the projects you would like to configure, you can run the following commands in your command line to generate and export one. Make sure your GCP project is where your external costs are being run.
 
 ```bash
 export PROJECT_ID=$(gcloud config get-value project)
@@ -92,7 +92,7 @@ Set these values into the following object and add it to the GCP array:
 
 ### AWS
 
-For each AWS account that you would like to configure, create an Access Key for the Kubecost user who has access to the CUR. Navigate to https://console.aws.amazon.com/iam _Access Management_ > _Users_. Find the Kubecost user and select _Security Credentials_ > _Create Access Key_. Note the Access key ID and Secret access key.
+For each AWS account that you would like to configure, create an Access Key for the Kubecost user who has access to the CUR. Navigate to [IAM Management Console dashboard](https://console.aws.amazon.com/iam), and select _Access Management_ > _Users_. Find the Kubecost user and select _Security Credentials_ > _Create Access Key_. Note the Access Key ID and Secret access key.
 
 Gather each of these values from the AWS console for each account you would like to configure.
 
@@ -122,4 +122,4 @@ Set these values into the following object and add them to the AWS array in the 
 }
 ```
 
-Additionally set the `kubecostProductConfigs.athenaProjectID` helm value to the AWS account that Kubecost is being installed in.
+Additionally set the `kubecostProductConfigs.athenaProjectID` Helm value to the AWS account that Kubecost is being installed in.
