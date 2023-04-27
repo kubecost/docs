@@ -543,7 +543,7 @@ This query ran against the "<DB Name>" database, unless qualified by the query
 QueryAthenaPaginated: start query error: operation error Athena: StartQueryExecution, https response error StatusCode: 400, RequestID: <Athena Query ID>, InvalidRequestException: outputLocation is not a valid S3 path.
 ```
 
-* **Resolution:** Verify that `s3://` was included in the bucket name when setting the `.Values.kubecostProductConfigs.athenaBucketName` helm value.
+* **Resolution:** Verify that `s3://` was included in the bucket name when setting the `.Values.kubecostProductConfigs.athenaBucketName` Helm value.
 	
 ## Summary and pricing
 
