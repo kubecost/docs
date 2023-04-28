@@ -112,8 +112,8 @@ The watchers are tracking change events across all namespaces within the local/p
 
 * Deployment creation
 * Deployment deletion
-
-> **Note**: This page will be updated as more event types are supported.
+* StatefulSet creation
+* StatefulSet deletion
 
 ## Estimated cost impact
 
