@@ -1,3 +1,7 @@
+---
+layout: landing
+---
+
 # OpenCost Product Comparison
 
 |                    |                                                                             **OpenCost**                                                                            |                                              **Kubecost Free**                                              |                                                                 **Kubecost Business**                                                                |                                                                                                                      **Kubecost Enterprise**                                                                                                                     |
