@@ -50,8 +50,8 @@ Below are the steps to generate the HAR file from the most commonly-used browser
 1. Open Safari.
 2. In Safari, go to the affected webpage.
 3. To enable Developers Tool: _Safari_ > _Preferences_ > _Advanced_, then select _Show Develop menu in menu bar_
-4. Select _Develop_ > _Show Web Inspector_ > _Select the Network tab_
-5. Within the Networks tab, select the _Preserve log_ option.
+4. Select _Develop_ > _Show Web Inspector_ > _Network._
+5. Within the Network tab, select the _Preserve log_ option.
 6. Refresh the page to replicate the error and allow Safari to record the browser-website interaction.&#x20;
 7. Once the page is loaded, select _Export_ on the top right in the window of the Network tab.
 8. Select the _Console_ tab and screen capture the errors.
