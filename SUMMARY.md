@@ -148,6 +148,7 @@
 * [Bug Bounty Program](bug-bounty-program.md)
 * [Getting Support](support-channels.md)
 * [Kubecost Glossary](troubleshooting/kubecost-glossary.md)
+* [Capture a HAR File](troubleshooting/capture-a-har-file.md)
 
 ## Other Resources
 
