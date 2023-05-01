@@ -9,6 +9,7 @@ Below is the configuration guide using **Kubecost ETL Federation**.
 Federated extract, transform, load (ETL) gives teams the benefit of federating multiple Kubecost installations into one view without dependency on Thanos.
 
 There are two primary advantages for using ETL Federation:
+
 1. For environments that already have a Prometheus instance, Kubecost only requires a single pod per monitored cluster
 2. Many solutions that aggregate Prometheus metrics (like Thanos), are often expensive to scale in large environments
 
@@ -76,30 +77,49 @@ prometheus:
 ### Step 1: Storage configuration
 
 1. For any cluster in the pipeline (Federator, Federated, Primary, or any combination of the three), create a file *federated-store.yaml* with the same format used for Thanos/S3 backup.
-2. Add a secret using that file: `kubectl create secret generic <secret_name> -n kubecost --from-file=federated-store.yaml`. Then set `kubecostModel.federatedStorageConfigSecret` to the kubernetes secret name.
 
-    * If you would like to use an existing secret already mounted/configured through `kubecostModel.etlBucketConfigSecret`, set `federatedETL.useExistingS3Config` to `true`. This will override any secret configured using the above.
-    * If using existing config, be aware that since Federated ETL clusters share an S3 bucket, it is not advised to do this for more than one of the clusters, as Kubecost S3 backup may become unreliable and cause issues with the pipeline. To avoid this, use the separate federated secret as mentioned above.
+    * [AWS](./long-term-storage-aws.md)
+    * [Azure](./long-term-storage-azure.md)
+    * [GCP](./long-term-storage-gcp.md)
+
+2. Add a secret using that file: `kubectl create secret generic <secret_name> -n kubecost --from-file=federated-store.yaml`. Then set `.Values.kubecostModel.federatedStorageConfigSecret` to the kubernetes secret name.
+
+<details>
+
+<summary>Using an existing `object-store.yaml`</summary>
+
+This method is not recommended, as it would enable the ETL Backup pipeline to run in addition to the the Federated ETL pipeline. If not configured correctly, there may be adverse effects on how ETLs are loaded into your primary.
+
+If you have an existing storage configuration set via `.Values.kubecostModel.etlBucketConfigSecret`, you can re-use that existing config by setting the following values:
+
+```yaml
+kubecostModel:
+  etlBucketConfigSecret: "my-object-store-secret"
+federatedETL:
+  useExistingS3Config: true
+  redirectS3Backup: true
+```
+
+</details>
 
 ### Step 2: Cluster configuration (Federated/Federator)
 
-1. For all clusters you want to federate together i.e. see their data on the Primary Cluster, set `.Values.federatedETL.federatedCluster` to `true`. This cluster is now a Federated Cluster, and can also be a Federator or Primary Cluster.
-
+1. For all clusters you want to federate together (i.e. see their data on the Primary Cluster), set `.Values.federatedETL.federatedCluster` to `true`. This cluster is now a Federated Cluster, and can also be a Federator or Primary Cluster.
 2. For the cluster “hosting” the Federator, set `.Values.federatedETL.federator.enabled` to `true`. This cluster is now a Federator Cluster, and can also be a Federated or Primary Cluster.
-    * Optional: If you have any Federated Clusters pushing to a store that you do not want a Federator Cluster to federate, add the cluster id under the Federator config section `.Values.federatedETL.federator.clusters`.
-    * If this parameter is empty or not set, the Federator will take all ETL files in the `/federated` directory and federate them automatically.
+
+    * Optional: If you have any Federated Clusters pushing to a store that you do not want a Federator Cluster to federate, add the cluster id under the Federator config section `.Values.federatedETL.federator.clusters`. If this parameter is empty or not set, the Federator will take all ETL files in the `/federated` directory and federate them automatically.
     * Multiple Federators federating from the same source will not break, but it’s not recommended.
 
 ### Step 3: Cluster configuration (Primary)
 
 In Kubecost, the `Primary Cluster` serves the UI and API endpoints as well as reconciling cloud billing (cloud-integration).
 
-1. For the cluster that will be the Primary Cluster, set `Values.federatedETL.primaryCluster` to `true`. This cluster is now a Primary Cluster, and can also be a Federator or Federated Cluster.
-2. Cloud-integration requires `.values.federatedETL.federator.primaryClusterID` set to `values.kubecostProductConfigs.clusterName`
+1. For the cluster that will be the Primary Cluster, set `.Values.federatedETL.primaryCluster` to `true`. This cluster is now a Primary Cluster, and can also be a Federator or Federated Cluster.
+2. Cloud-integration requires `.Values.federatedETL.federator.primaryClusterID` set to the same value used for `.Values.kubecostProductConfigs.clusterName`
 
-   * **Important**: If the Primary Cluster is also to be federated, please wait 2-3 hours for data to populate Federated Storage before setting a Federated Cluster to primary (i.e. set `.Values.federatedETL.federatedCluster` to `true`, then wait to set `Values.federatedETL.primaryCluster` to `true`). This allows for maximum certainty of data consistency.
-   * If you do not set this cluster to be federated as well as primary, you will not see local data for this cluster.
-   * The Primary Cluster’s local ETL will be overwritten with combined federated data.
+    * **Important**: If the Primary Cluster is also to be federated, please wait 2-3 hours for data to populate Federated Storage before setting a Federated Cluster to primary (i.e. set `.Values.federatedETL.federatedCluster` to `true`, then wait to set `.Values.federatedETL.primaryCluster` to `true`). This allows for maximum certainty of data consistency.
+    * If you do not set this cluster to be federated as well as primary, you will not see local data for this cluster.
+    * The Primary Cluster’s local ETL will be overwritten with combined federated data.
         * This can be undone by unsetting it as a Primary Cluster and rebuilding ETL.
         * Setting a Primary Cluster may result in a loss of the cluster’s local ETL data, so it is recommended to back up any filestore data that one would want to save to S3 before designating the cluster as primary.
         * Alternatively, a fresh Kubecost install can be used as a consumer of combined federated data by setting it as the Primary but not a Federated Cluster.
