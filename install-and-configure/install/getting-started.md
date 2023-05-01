@@ -5,12 +5,12 @@ This doc provides commonly used product configurations and feature overviews to 
 **Main Topics**
 
 * [Setting up a cloud integration](getting-started.md#cloud-integration)
-* [Memory and storage](https://docs.kubecost.com/using-kubecost/getting-started#configuring-kubecost-during-installation)
-* [Configuring Kubecost during installation](https://docs.kubecost.com/using-kubecost/getting-started#configuring-kubecost-during-installation)
-* [Setting requests and limits](https://docs.kubecost.com/using-kubecost/getting-started#setting-requests-and-limits)
-* [Using an existing node exporter](https://docs.kubecost.com/using-kubecost/getting-started#using-an-existing-node-exporter)
-* [Deploying Kubecost without persistent volumes](getting-started.md#no-pvs)
-* [Resource efficiency and idle costs](https://docs.kubecost.com/using-kubecost/getting-started#resource-efficiency-and-idle-costs)
+* [Memory and storage](https://docs.kubecost.com/install-and-configure/install/getting-started#memory-and-storage)
+* [Configuring Kubecost during installation](https://docs.kubecost.com/install-and-configure/install/getting-started#configuring-kubecost-during-installation)
+* [Setting requests and limits](https://docs.kubecost.com/install-and-configure/install/getting-started#setting-requests-and-limits)
+* [Using an existing node exporter](https://docs.kubecost.com/install-and-configure/install/getting-started#using-an-existing-node-exporter)
+* [Deploying Kubecost without persistent volumes](https://docs.kubecost.com/install-and-configure/install/getting-started#deploying-kubecost-without-persistent-volumes)
+* [Resource efficiency and idle costs](https://docs.kubecost.com/install-and-configure/install/getting-started#resource-efficiency-and-idle-costs)
 
 ## Overview
 
