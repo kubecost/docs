@@ -146,7 +146,6 @@
 * [Repair Kubecost ETLs](etl-repair.md)
 * [Running a Query in Kubecost-bundled Prometheus](prometheus.md)
 * [Bug Bounty Program](bug-bounty-program.md)
-* [Getting Support](support-channels.md)
 * [Kubecost Glossary](troubleshooting/kubecost-glossary.md)
 * [Capture a HAR File](troubleshooting/capture-a-har-file.md)
 
