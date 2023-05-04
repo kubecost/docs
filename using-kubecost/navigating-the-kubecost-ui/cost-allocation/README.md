@@ -22,8 +22,6 @@ Select the date range of the report by setting specific start and end dates, or 
 
 ### Aggregate By filters
 
-<figure><img src="../../../.gitbook/assets/image (6).png" alt=""><figcaption></figcaption></figure>
-
 Here you can aggregate cost by namespace, deployment, service, and other native Kubernetes concepts. While selecting _Single Aggregation_, you will only be able to select one concept at a time. While selecting _Multi Aggregation_, you will be able to filter for multiple concepts at the same time.
 
 {% hint style="info" %}
