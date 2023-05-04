@@ -135,3 +135,11 @@ The Actions column is the rightmost column in the Allocations dashboard table. I
 
 * _Inspect_: Opens an advanced cost overview of the namespace in a new tab.
 * _View Right-Sizing_: Opens the [Request right-sizing recommendations](https://docs.kubecost.com/using-kubecost/getting-started/savings/auto-request-sizing) page in a new tab.
+
+## Idle costs
+
+Allocating idle costs proportionately distributes slack or idle _cluster costs_ to tenants. Idle refers to resources that are provisioned but not being fully used or requested by a tenant.
+
+As an example, if your cluster is only 25% utilized, as measured by the max of resource usage and requests, applying idle costs would proportionately increase the cost of each pod/namespace/deployment by 4x. This feature can be enabled by default in Settings.
+
+More info on idle costs can be found in the [Efficiency and Idle](https://docs.kubecost.com/using-kubecost/navigating-the-kubecost-ui/cost-allocation/efficiency-idle#idle) doc.
