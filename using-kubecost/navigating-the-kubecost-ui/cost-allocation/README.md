@@ -4,6 +4,8 @@ The Kubecost Allocations dashboard allows you to quickly see allocated spend acr
 
 <figure><img src="../../../.gitbook/assets/image (2) (2).png" alt=""><figcaption></figcaption></figure>
 
+## UI overview
+
 | Element                  | Description                                                                                                         |
 | ------------------------ | ------------------------------------------------------------------------------------------------------------------- |
 | Date Range (Last 7 days) | Will report _Last 7 days_ by default. Manually select your start and end date, or pick one of twelve preset options |
@@ -12,13 +14,13 @@ The Kubecost Allocations dashboard allows you to quickly see allocated spend acr
 | Edit Report              | Includes multiple filtering tools including cost metric and shared resources                                        |
 | Additional options icon  | Additional options for opening and downloading reports                                                              |
 
-## Date Range
+### Date Range
 
 <figure><img src="../../../.gitbook/assets/daterange.png" alt=""><figcaption><p>Date Range window</p></figcaption></figure>
 
 Select the date range of the report by setting specific start and end dates, or by using one of the preset options.
 
-## Aggregate By filters
+### Aggregate By filters
 
 <figure><img src="../../../.gitbook/assets/image (6).png" alt=""><figcaption></figcaption></figure>
 
@@ -26,6 +28,10 @@ Here you can aggregate cost by namespace, deployment, service, and other native 
 
 {% hint style="info" %}
 Service in this context refers to a Kubernetes object that exposes an interface to outside consumers.
+{% endhint %}
+
+{% hint style="warning" %}
+When aggregating by namespace, the Allocations dashboard will only display namespaces which have or have had workloads running in them. If you don't see a namespace on this dashboard, you should confirm whether the namespace is running a workload.
 {% endhint %}
 
 Costs aggregations are also visible by other meaningful organizational concepts, e.g. Team, Department, and Product. These aggregations are based on Kubernetes labels, referenced at both the pod and namespace-level, with labels at the pod-level being favored over the namespace label when both are present. The Kubernetes label name used for these concepts can be configured in Settings or in [values.yaml](https://github.com/kubecost/cost-analyzer-helm-chart/blob/19908983ed7c8d4ff1d3e62d98537a39ab61bbab/cost-analyzer/values.yaml#L427-L445) after setting `kubecostProductConfigs.labelMappingConfigs.enabled` to `true`. Workloads without the relevant label will be shown as `__unallocated__`.
@@ -41,17 +47,11 @@ kubectl get pods -l 'app notin (prometheus, cost-analyzer, ...)' --all-namespace
 kubectl get pods --show-labels -n <TARGET_NAMESPACE>
 ```
 
-## Edit report
+### Edit report
 
 <figure><img src="../../../.gitbook/assets/editreport.png" alt=""><figcaption><p>Edit Report window</p></figcaption></figure>
 
 The _Edit Report_ icon has additional options to filter your search.
-
-### Idle costs
-
-Allocating idle costs proportionately distributes slack or idle _cluster costs_ to tenants. Idle refers to resources that are provisioned but not being fully used or requested by a tenant.
-
-As an example, if your cluster is only 25% utilized, as measured by the max of resource usage and requests, applying idle costs would proportionately increase the cost of each pod/namespace/deployment by 4x. This feature can be enabled by default in Settings.
 
 ### Chart
 
@@ -67,7 +67,7 @@ You can select _Edit Report_ > _Chart_, then select _Cost over time_ from the dr
 
 ![Cost over time data](https://raw.githubusercontent.com/kubecost/docs/main/images/perdaybasis.png)
 
-### Cost metric
+#### Cost metric
 
 View either cumulative or run rate costs measured over the selected time window based on the resources allocated.
 
@@ -82,7 +82,7 @@ Costs allocations are based on the following:
 
 For more information, refer to the [OpenCost spec](https://github.com/opencost/opencost/blob/develop/spec/opencost-specv01.md).
 
-### Filters
+#### Filters
 
 Filter resources by namespace, clusterID, and/or Kubernetes label to more closely investigate a rise in spend or key cost drivers at different aggregations such as deployments or pods. When a filter is applied, only resources with this matching value will be shown. These filters are also applied to external out-of-cluster asset tags. Supported filters are as follows:
 
@@ -99,7 +99,7 @@ Filter resources by namespace, clusterID, and/or Kubernetes label to more closel
 
 Comma-separated lists are supported to filter by multiple categories, e.g. namespace filter equals `kube-system,kubecost`. Wild card filters are also supported, indicated by a \* following the filter, e.g. `namespace=kube*` to return any namespace beginning with `kube`.
 
-### Shared resources
+#### Shared resources
 
 Select how shared costs set on the settings page will be shared among allocations. Pick from default shared resources, or select a custom shared resource. A custom shared resource can be selected in the Configure custom shared resources feature at the bottom of the _Edit report_ window.
 
