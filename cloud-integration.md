@@ -31,6 +31,12 @@ Cost-based metrics are based on onDemand pricing unless there is definitive data
 The reconciled Assets will inherit the labels from the corresponding items in the billing data. If there exist identical label keys between the original assets and those of the billing data items, the label value of the original asset will take precedence.
 {% endhint %}
 
+#### Visualize unreconciled costs
+
+Visit _Settings_, then toggle on _Highlight Unreconciled Costs_, then select _Save_ at the bottom of the page to apply changes. Now, when you visit your Allocations or Assets dashboards, the most recent 36 hours of data will display hatching to signify unreconciled costs.
+
+<figure><img src=".gitbook/assets/image (7).png" alt=""><figcaption><p>Allocations dashboard with highlighted unreconciled costs</p></figcaption></figure>
+
 ### Cloud Usage
 
 The Cloud Usage process allows Kubecost to pull in out-of-cluster cloud spend from your CSP's billing data. This includes any services run by the CSP in addition to compute resources OOC monitored by Kubecost. Additionally, by labeling these Cloud Usage, their cost can be distributed to Allocations as external costs. This can help teams get a better understanding of the proportion of OOC cloud spend that their in-cluster usage is dependent on. CloudUsages become available as soon as they appear in the billing data, with the 6 to 24 hour delay mentioned above, and are updated as they become more complete.

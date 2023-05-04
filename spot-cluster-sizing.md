@@ -23,7 +23,7 @@ Determining `O` and `S` is achieved by first partitioning all workloads on the c
 * The maximum CPU used by any workload
 * The maximum RAM used by any workload
 * The total CPU (sum of all individual maximums) required by non-DaemonSet workloads
-* The total RAM (sum of all indivudual maximums) required by non-DaemonSet workloads
+* The total RAM (sum of all individual maximums) required by non-DaemonSet workloads
 * The total CPU (sum of all individual maximums) required by DaemonSet workloads
 * The total RAM (sum of all individual maximums) required by DaemonSet workloads
 

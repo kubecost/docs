@@ -4,33 +4,57 @@
 The Budgets dashboard is currently in beta. Please read the documentation carefully.
 {% endhint %}
 
-Recurring budget rules are a way of establishing spend limits for your clusters or namespaces. They can be created in moments using the Budget dashboard.
+Budgets are a way of establishing spend limits for your clusters or namespaces. They can be created in moments using the Budgets dashboard.
 
-<figure><img src="../../.gitbook/assets/budgetdashboard.png" alt=""><figcaption><p>Budgets dashboard</p></figcaption></figure>
+## Creating a budget
 
-### Creating a budget
+Begin by selecting the _New Budget_ button in the top right corner of the dashboard. A new window will display from the right side of your screen.
 
-Begin by selecting the _Create New Budget Rule_ button in the top right corner of the dashboard. The Create Budget Rule window opens.
+<figure><img src="../../.gitbook/assets/image (6).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/createbudget.png" alt=""><figcaption><p>Create Budget Rule</p></figcaption></figure>
+Provide the following fields:
 
-* _Name_: The name of your budget
-* _Property Type:_ Either namespace or cluster
-* _Target_: Name of your existing namespace or cluster you want to create a budget for
-* _Time frame_: Time frame of your budget rule before it resets. Either weekly or monthly.
-* _Reset Day_: Specific day the budget rule resets, based on the selected Interval.
-* _Amount_: Amount of your budget
+### Spending cap and cadence
 
-Finalize your budget by selecting _Save_. Your recurring budget rule has been created and should appear on the dashboard.
+* _Budget name_: The name of your budget
+* Budget cap: The allotted amount of your budget per interval
 
-#### Creating budget rules for multiple clusters or namespaces
+{% hint style="info" %}
+The currency of your budget is unchangeable in the Budgets dashboard. To change currency type, go to _Settings >_ Currency. Then, select _Save_ at the bottom of the Settings page to apply changes. Changing currency type will affect cost displays across all of your Kubecost, not just the Budgets dashboard.
+{% endhint %}
 
-It's possible to create a single budget rule for multiple clusters or namespaces (must be from the same property type) by using a wildcard suffix for the _Target_ field. By adding an asterisk at the end of your input, the budget rule will affect all targets that begin with the input. For example, if the _Property Type_ is Namespace and the _Target_ input is `kube*`, the created budget rule will apply for all namespaces whose names begin with `kube`.
+Determine the length of your budget and reset date using the two dropdowns under the Budget cap text box. Budgets can be either _Weekly_ or _Monthly_, and can reset on any day of the week/month. This means you don't need to recreate your budgets and can align them with your schedules or processes.
+
+### Workloads
+
+From the first dropdown, select whether this budget will apply to a namespace or a cluster. In the second dropdown, choose the individual namespace or cluster.
+
+### **Actions**
+
+Budget Actions are an optional method of better monitoring your budgets. You can use Actions to create an alert when your budget hits a certain percentage threshold, and send out an email, Slack, and/or Microsoft Teams alert.
+
+To begin, select _New Action_. Select your _Trigger percentage_ value (leaving your _Trigger percentage_ at _100_ will only alert you once the budget has been exceeded). Then, provide any emails or webhooks where you would like to receive your alerts. Select _Save_.
+
+{% hint style="info" %}
+If you are interested in implementing additional alerts to monitor further spending or Kubecost health, read our [Alerts ](https://docs.kubecost.com/using-kubecost/navigating-the-kubecost-ui/alerts)doc.
+{% endhint %}
+
+Finalize your budget by selecting _Save_. Your budget has been created and should appear on the dashboard.
+
+## Budget options
+
+Once your budget has been created, it will immediately display your current spending. There are multiple ways of inspecting or adjusting your existing budgets.
+
+### Details
+
+Selecting _Details_ in the row of a specific budget will open a window displaying all details for your budget, including current spending, budget remaining, reset date, and any existing Actions.
+
+You can also select _View detailed breakdown_ to display an [Allocations ](https://docs.kubecost.com/using-kubecost/navigating-the-kubecost-ui/cost-allocation)query for your budgeted namespace/cluster, or _Download Budget Report_ to download your budget as a PDF file.
+
+### Editing a budget
+
+Selecting _Edit_ in the row of a specific budget will open a window allowing you to edit all details about your budget, similar to when you initially created it. All details are able to be changed here.
 
 ### Deleting a budget
 
-If you want to delete a budget, select the meatballs icon for your rule under the Actions column.
-
-Selecting _Delete_ will open the Delete Budget window. Confirm deletion by selecting _Delete_.
-
-<figure><img src="../../.gitbook/assets/deletebudget.png" alt=""><figcaption><p>Deleting a budget</p></figcaption></figure>
+Selecting _Delete_ will open the Delete Budget window. Confirm by selecting _Delete_.

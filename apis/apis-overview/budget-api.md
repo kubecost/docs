@@ -1,6 +1,8 @@
 # Budget API
 
-> **Note:** The Budget API is currently in beta. Please read the documentation carefully.
+{% hint style="warning" %}
+The Budget API is currently in beta. Please read the documentation carefully.
+{% endhint %}
 
 The Budget API allows you to create, update, and delete recurring budget rules to control your Kubernetes spending. Weekly and monthly budgets can be established to set limits on cost spend.
 
@@ -23,26 +25,6 @@ The filter (either
 `cluster`
 
 ) for the rule.
-{% endswagger-parameter %}
-
-{% swagger-parameter in="body" name="kind" type="string" %}
-The type of budget (either 
-
-`hard`
-
- or 
-
-`soft`
-
-). Defaults to 
-
-`soft`
-
-. 
-
-**Warning:**
-
- this feature is currently not in operation.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="body" name="interval" type="string" required="true" %}
@@ -167,11 +149,11 @@ ID of the recurring budget rule to be deleted
 {% endswagger-response %}
 {% endswagger %}
 
-### Formatting parameters when creating/updating budget rules
+## Formatting parameters when creating/updating budget rules
 
 Creating and updating recurring budget rules uses POST requests, which will require submitting a JSON object in the body of your request instead of adding parameters directly into the path (such as when deleting a recurring budget rule). See the Examples section below for more information on formatting your requests.
 
-### Using the \`id\` parameter
+## Using the `id` parameter
 
 The `id` parameter when using the endpoint `/setRecurringBudgetRules` is considered optional, but its use will vary depending on whether you want to create or update a budget rule.&#x20;
 
@@ -179,11 +161,7 @@ When creating a new budget rule, `id` should not be used. An ID for the budget r
 
 The `id` value of your recurring budget is needed to update or delete it. If you don't have the `id` value saved, you can retrieve it using `/getRecurringBudgetRules`, which will generate all existing budgets and their respective `id` values.
 
-### Soft and hard budget rules
-
-> **Warning:** This feature is currently not in operation. `kind` is therefore an optional parameter that will not affect your recurring budget.
-
-### Examples
+## Examples
 
 #### Create a soft recurring budget rule for my test cluster which resets every Wednesday, with a budget of $100.00 USD.
 

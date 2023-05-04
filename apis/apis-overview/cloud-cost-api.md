@@ -1,8 +1,141 @@
 # Cloud Cost API
 
-> **Warning**: The Cloud Cost API cannot be used until you have enabled Cloud Costs via Helm. See the doc on using Kubecost's Cloud Cost page [here](https://docs.kubecost.com/using-kubecost/getting-started/cloud-costs-explorer) for instructions.
+{% hint style="warning" %}
+The Cloud Cost API cannot be used until you have enabled Cloud Costs via Helm. See Kubecost's [Cloud Cost Explorer](https://docs.kubecost.com/using-kubecost/navigating-the-kubecost-ui/cloud-costs-explorer#installation-and-configuration) doc for instructions.
+{% endhint %}
 
-{% swagger method="get" path="/model/cloudCost/aggregate" baseUrl="http://<your-kubecost-address>" summary="Cloud Cost API" %}
+## Intro to Cloud Cost API
+
+The Cloud Cost API provides multiple endpoints to obtain accurate cost information from your cloud service providers (CSPs), including data available from cloud billing reports (such as AWS' Cost and Usage Report (CUR)).
+
+There are three distinct endpoints for using the Cloud Cost API. The default endpoint for querying Cloud Costs should be `/model/cloudCost/view`.
+
+{% swagger method="get" path="/model/cloudCost/view" baseUrl="http://<your-kubecost-address>" summary="Cloud Cost View API" %}
+{% swagger-description %}
+Samples full granularity of cloud costs from cloud billing report (ex. AWS' Cost and Usage Report)
+{% endswagger-description %}
+
+{% swagger-parameter in="path" name="window" required="true" %}
+Window of the query. 
+
+**Only accepts daily intervals**
+
+, example 
+
+`window=3d`
+
+.
+{% endswagger-parameter %}
+
+{% swagger-parameter in="path" name="CostMetric" %}
+Determines which cloud cost metric type will be returned. Acceptable values are 
+
+`AmortizedNetCost`
+
+, 
+
+`InvoicedCost`
+
+, 
+
+`ListCost`
+
+, and 
+
+`NetCost`
+
+.  Default is 
+
+`AmortizedNetCost`
+
+.
+{% endswagger-parameter %}
+
+{% swagger-parameter in="path" name="aggregate" %}
+Field by which to aggregate the results. Accepts: 
+
+`invoiceEntityID`
+
+, 
+
+`accountID`
+
+, 
+
+`provider`
+
+, 
+
+`service`
+
+, and 
+
+`label:<name>`
+
+. Supports multi-aggregation using comma-separated lists. Example: 
+
+`aggregate=accountID,service`
+{% endswagger-parameter %}
+
+{% swagger-parameter in="path" name="filterInvoiceEntityIDs" %}
+Filter for account
+{% endswagger-parameter %}
+
+{% swagger-parameter in="path" name="filterAccountIDs" %}
+GCP only, filter for projectID
+{% endswagger-parameter %}
+
+{% swagger-parameter in="path" name="filterProviders" %}
+Filter for cloud service provider
+{% endswagger-parameter %}
+
+{% swagger-parameter in="path" name="filterProvidersID" %}
+Filter for resource-level ID given by CSP
+{% endswagger-parameter %}
+
+{% swagger-parameter in="path" name="filterServices" %}
+Filter for cloud service
+{% endswagger-parameter %}
+
+{% swagger-parameter in="path" name="filterCategories" %}
+Filter based on object type
+{% endswagger-parameter %}
+
+{% swagger-parameter in="path" name="filterLabels" %}
+Filter for a specific label. Does not support filtering for multiple labels at once.
+{% endswagger-parameter %}
+
+{% swagger-response status="200: OK" description="" %}
+
+
+```json
+{
+    "code": 200,
+    "data": {
+        "graphData": [
+            {
+                "start": "",
+                "end": "",
+                "items": []
+            }
+        ],
+        "tableTotal": {
+            "name": "",
+            "kubernetesPercent": 0,
+            "cost": 0
+        },
+        "tableRows": []
+    }
+}
+```
+{% endswagger-response %}
+{% endswagger %}
+
+The endpoint `/model/cloudCost/top` will use all parameters of `/model/cloudCost/view` listed above, **except for** `CostMetric`. This is because `/top` samples full granularity from your cloud billing reports and will return information for all four accepted metric types (see below for more information on these types).
+
+The endpoint `/view` contains all parameters for `/model/CloudCost/aggregate`, and if your `/view` query parameters are in a subset of `/aggregate`, your payload will be pulled from `/aggregate` instead (this payload will return a larger amount of information than `/view`). Otherwise, your `/view` query will pull from `/top`.
+
+{% swagger method="get" path="/model/cloudCost/aggregate" baseUrl="http://<your-kubecost-address>" summary="Cloud Cost Aggregate API" %}
 {% swagger-description %}
 Query cloud cost aggregate data
 {% endswagger-description %}
@@ -18,7 +151,11 @@ Window of the query. Accepts all standard Kubecost window formats (See our doc o
 {% swagger-parameter in="path" name="aggregate" type="string" %}
 Field by which to aggregate the results. Accepts: 
 
-`billingID`
+`invoiceEntityID`
+
+, 
+
+`accountID`
 
 , 
 
@@ -28,25 +165,21 @@ Field by which to aggregate the results. Accepts:
 
 `service`
 
-, 
-
-`workspace`
-
-and 
+, and 
 
 `label:<name>`
 
 . Supports multi-aggregation using comma-separated lists. Example: 
 
-`aggregate=billingID,service`
+`aggregate=accountID,service`
 {% endswagger-parameter %}
 
-{% swagger-parameter in="path" name="filterBillingIDs" type="string" %}
+{% swagger-parameter in="path" name="filterInvoiceEntityIDs" type="string" %}
 Filter for account
 {% endswagger-parameter %}
 
-{% swagger-parameter in="path" name="filterWorkGroupIDs" type="string" %}
-Filter for project
+{% swagger-parameter in="path" name="filterAccountIDs" type="string" %}
+GCP only, filter for projectID
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="filterProviders" type="string" %}
@@ -57,43 +190,89 @@ Filter for cloud service provider
 Filter for cloud service
 {% endswagger-parameter %}
 
+{% swagger-parameter in="path" name="filterLabel" %}
+Filter for a specific label. Does not support filtering for multiple labels at once.
+{% endswagger-parameter %}
+
 {% swagger-response status="200: OK" description="" %}
-```
+````
+```json
 {
     "code": 200,
     "data": {
         "sets": [
             {
-                "aggregates": {
+                "cloudCosts": {
                     "": {
                         "properties": {
                             "provider": "",
-                            "workGroupID": "",
-                            "billingID": "",
-                            "service": "",
-                            "label": ""
+                            "invoiceEntityID": ""
                         },
-                        "kubernetesPercent": 0,
-                        "cost": 0,
-                        "netCost": 0
-                    },
-                    
+                        "window": {
+                            "start": "",
+                            "end": ""
+                        },
+                        "listCost": {
+                            "cost": ,
+                            "kubernetesPercent":
+                        },
+                        "netCost": {
+                            "cost": ,
+                            "kubernetesPercent":
+                        },
+                        "amortizedNetCost": {
+                            "cost": 5,
+                            "kubernetesPercent": 
+                        },
+                        "invoicedCost": {
+                            "cost": ,
+                            "kubernetesPercent": 
+                        }
+                    }
                 },
                 "window": {
-                    "start": "2023-02-26T00:00:00Z",
-                    "end": "2023-02-27T00:00:00Z"
-                }
+                    "start": "",
+                    "end": ""
+                },
+                "aggregationProperties": [
+                    ""
+                ]
             }
-        ]
+        ],
+        "window": {
+            "start": "",
+            "end": ""
+        }
     }
 }
-```
+````
 {% endswagger-response %}
 {% endswagger %}
 
-### Example
+## Using the `CostMetric` parameter
 
-**Query for cloud costs within the past three days, aggregated by cloud service, filtered for only services provided by AWS.**
+{% hint style="warning" %}
+Using the endpoint `/model/cloudCost/top` will accept all parameters of `model/cloudCost/view` **except for** `MetricCost`.
+{% endhint %}
+
+`CostMetric` values are based on and calculated following standard FinOps dimensions and metrics, as seen in detail [here](https://github.com/finopsfoundation/finops-open-cost-usage-spec/blob/main/specification\_sheet\_import.md). The four available metrics supported by the Cloud Cost API are:
+
+| CostMetric value | Description                                                                                 |
+| ---------------- | ------------------------------------------------------------------------------------------- |
+| NetCost          | Costs inclusive of discounts and credits. Will also include one-time and recurring charges. |
+| AmortizedNetCost | `NetCost` with removed cash upfront fees and amortized                                      |
+| ListCost         | CSP pricing without any discounts                                                           |
+| InvoicedCost     | Pricing based on usage during billing period                                                |
+
+Providing a value for `CostMetric` is optional, but it will default to `AmortizedNetCost` if not otherwise provided.
+
+## Understanding `kubernetesPercent`
+
+Each `CostMetric` also has a `kubernetesPercent` value. Unaggregated, this value will be 0 or 1. When you aggregate, `kubernetesPercent` is determined by multiplying the `costMetric` cost by its `kubernetesPercent` and aggregating that value as `kubernetesCost` for that `costMetric`. That `kubernetesCost` is then divided by the aggregated total costs to determine the new `kubernetesPercent`. Since this process results in unique values for each `costMetric`, this value is included as part of the cost metric.
+
+## Examples
+
+#### **Query for cloud costs within the past three days, aggregated by cloud service, filtered for only services provided by AWS**
 
 {% tabs %}
 {% tab title="Request" %}
@@ -103,798 +282,1386 @@ http://<your-kubecost-address>/model/cloudCost/aggregate?window=3d&aggregate=ser
 {% endtab %}
 
 {% tab title="Response" %}
+````
 ```json
 {
     "code": 200,
     "data": {
         "sets": [
             {
-                "aggregates": {
+                "cloudCosts": {
+                    "5hnnev4d0v7mapf09j0v8of0o2": {
+                        "properties": {
+                            "provider": "AWS",
+                            "accountID": "297945954695",
+                            "invoiceEntityID": "297945954695",
+                            "service": "5hnnev4d0v7mapf09j0v8of0o2"
+                        },
+                        "window": {
+                            "start": "2023-04-30T00:00:00Z",
+                            "end": "2023-05-01T00:00:00Z"
+                        },
+                        "listCost": {
+                            "cost": 8.207999999999997,
+                            "kubernetesPercent": 0
+                        },
+                        "netCost": {
+                            "cost": 8.207999999999997,
+                            "kubernetesPercent": 0
+                        },
+                        "amortizedNetCost": {
+                            "cost": 8.207999999999997,
+                            "kubernetesPercent": 0
+                        },
+                        "invoicedCost": {
+                            "cost": 8.207999999999997,
+                            "kubernetesPercent": 0
+                        }
+                    },
                     "AWSBackup": {
                         "properties": {
                             "provider": "AWS",
-                            "workGroupID": "297945954695",
-                            "billingID": "297945954695",
+                            "accountID": "297945954695",
+                            "invoiceEntityID": "297945954695",
                             "service": "AWSBackup",
-                            "label": ""
+                            "labels": {
+                                "name": "khand-dev"
+                            }
                         },
-                        "kubernetesPercent": 0,
-                        "cost": 4e-10,
-                        "netCost": 4e-10
+                        "window": {
+                            "start": "2023-04-30T00:00:00Z",
+                            "end": "2023-05-01T00:00:00Z"
+                        },
+                        "listCost": {
+                            "cost": 4e-10,
+                            "kubernetesPercent": 0
+                        },
+                        "netCost": {
+                            "cost": 4e-10,
+                            "kubernetesPercent": 0
+                        },
+                        "amortizedNetCost": {
+                            "cost": 4e-10,
+                            "kubernetesPercent": 0
+                        },
+                        "invoicedCost": {
+                            "cost": 4e-10,
+                            "kubernetesPercent": 0
+                        }
                     },
                     "AWSCloudTrail": {
                         "properties": {
                             "provider": "AWS",
-                            "workGroupID": "297945954695",
-                            "billingID": "297945954695",
-                            "service": "AWSCloudTrail",
-                            "label": ""
+                            "accountID": "297945954695",
+                            "invoiceEntityID": "297945954695",
+                            "service": "AWSCloudTrail"
                         },
-                        "kubernetesPercent": 0,
-                        "cost": 6.722614000000006,
-                        "netCost": 6.722614000000006
+                        "window": {
+                            "start": "2023-04-30T00:00:00Z",
+                            "end": "2023-05-01T00:00:00Z"
+                        },
+                        "listCost": {
+                            "cost": 4.9206699999999985,
+                            "kubernetesPercent": 0
+                        },
+                        "netCost": {
+                            "cost": 4.9206699999999985,
+                            "kubernetesPercent": 0
+                        },
+                        "amortizedNetCost": {
+                            "cost": 4.9206699999999985,
+                            "kubernetesPercent": 0
+                        },
+                        "invoicedCost": {
+                            "cost": 4.9206699999999985,
+                            "kubernetesPercent": 0
+                        }
                     },
                     "AWSCostExplorer": {
                         "properties": {
                             "provider": "AWS",
-                            "workGroupID": "297945954695",
-                            "billingID": "297945954695",
-                            "service": "AWSCostExplorer",
-                            "label": ""
+                            "accountID": "297945954695",
+                            "invoiceEntityID": "297945954695",
+                            "service": "AWSCostExplorer"
                         },
-                        "kubernetesPercent": 0,
-                        "cost": 0.2894083871,
-                        "netCost": 0.2894083871
+                        "window": {
+                            "start": "2023-04-30T00:00:00Z",
+                            "end": "2023-05-01T00:00:00Z"
+                        },
+                        "listCost": {
+                            "cost": 0.26426064520000003,
+                            "kubernetesPercent": 0
+                        },
+                        "netCost": {
+                            "cost": 0.26426064520000003,
+                            "kubernetesPercent": 0
+                        },
+                        "amortizedNetCost": {
+                            "cost": 0.26426064520000003,
+                            "kubernetesPercent": 0
+                        },
+                        "invoicedCost": {
+                            "cost": 0.26426064520000003,
+                            "kubernetesPercent": 0
+                        }
                     },
                     "AWSELB": {
                         "properties": {
                             "provider": "AWS",
-                            "workGroupID": "",
-                            "billingID": "297945954695",
-                            "service": "AWSELB",
-                            "label": ""
+                            "invoiceEntityID": "297945954695",
+                            "service": "AWSELB"
                         },
-                        "kubernetesPercent": 0.7817130327643118,
-                        "cost": 40.462106329800015,
-                        "netCost": 40.462106329800015
+                        "window": {
+                            "start": "2023-04-30T00:00:00Z",
+                            "end": "2023-05-01T00:00:00Z"
+                        },
+                        "listCost": {
+                            "cost": 43.00682560389998,
+                            "kubernetesPercent": 0.8073338296107909
+                        },
+                        "netCost": {
+                            "cost": 43.00682560389998,
+                            "kubernetesPercent": 0.8073338296107909
+                        },
+                        "amortizedNetCost": {
+                            "cost": 43.00682560389998,
+                            "kubernetesPercent": 0.8073338296107909
+                        },
+                        "invoicedCost": {
+                            "cost": 43.00682560389998,
+                            "kubernetesPercent": 0.8073338296107909
+                        }
                     },
                     "AWSGlue": {
                         "properties": {
                             "provider": "AWS",
-                            "workGroupID": "297945954695",
-                            "billingID": "297945954695",
-                            "service": "AWSGlue",
-                            "label": ""
+                            "accountID": "297945954695",
+                            "invoiceEntityID": "297945954695",
+                            "service": "AWSGlue"
                         },
-                        "kubernetesPercent": 0,
-                        "cost": 0.4614631999999999,
-                        "netCost": 0.4614631999999999
+                        "window": {
+                            "start": "2023-04-30T00:00:00Z",
+                            "end": "2023-05-01T00:00:00Z"
+                        },
+                        "listCost": {
+                            "cost": 0.43269115999999996,
+                            "kubernetesPercent": 0
+                        },
+                        "netCost": {
+                            "cost": 0.43269115999999996,
+                            "kubernetesPercent": 0
+                        },
+                        "amortizedNetCost": {
+                            "cost": 0.43269115999999996,
+                            "kubernetesPercent": 0
+                        },
+                        "invoicedCost": {
+                            "cost": 0.43269115999999996,
+                            "kubernetesPercent": 0
+                        }
                     },
                     "AWSLambda": {
                         "properties": {
                             "provider": "AWS",
-                            "workGroupID": "297945954695",
-                            "billingID": "297945954695",
-                            "service": "AWSLambda",
-                            "label": ""
+                            "accountID": "297945954695",
+                            "invoiceEntityID": "297945954695",
+                            "service": "AWSLambda"
                         },
-                        "kubernetesPercent": 0,
-                        "cost": 0,
-                        "netCost": 0
+                        "window": {
+                            "start": "2023-04-30T00:00:00Z",
+                            "end": "2023-05-01T00:00:00Z"
+                        },
+                        "listCost": {
+                            "cost": 0,
+                            "kubernetesPercent": 0
+                        },
+                        "netCost": {
+                            "cost": 0,
+                            "kubernetesPercent": 0
+                        },
+                        "amortizedNetCost": {
+                            "cost": 0,
+                            "kubernetesPercent": 0
+                        },
+                        "invoicedCost": {
+                            "cost": 0,
+                            "kubernetesPercent": 0
+                        }
                     },
                     "AWSQueueService": {
                         "properties": {
                             "provider": "AWS",
-                            "workGroupID": "297945954695",
-                            "billingID": "297945954695",
-                            "service": "AWSQueueService",
-                            "label": ""
+                            "accountID": "297945954695",
+                            "invoiceEntityID": "297945954695",
+                            "service": "AWSQueueService"
                         },
-                        "kubernetesPercent": 0,
-                        "cost": 0,
-                        "netCost": 0
+                        "window": {
+                            "start": "2023-04-30T00:00:00Z",
+                            "end": "2023-05-01T00:00:00Z"
+                        },
+                        "listCost": {
+                            "cost": 0,
+                            "kubernetesPercent": 0
+                        },
+                        "netCost": {
+                            "cost": 0,
+                            "kubernetesPercent": 0
+                        },
+                        "amortizedNetCost": {
+                            "cost": 0,
+                            "kubernetesPercent": 0
+                        },
+                        "invoicedCost": {
+                            "cost": 0,
+                            "kubernetesPercent": 0
+                        }
                     },
                     "AmazonAthena": {
                         "properties": {
                             "provider": "AWS",
-                            "workGroupID": "297945954695",
-                            "billingID": "297945954695",
-                            "service": "AmazonAthena",
-                            "label": ""
+                            "accountID": "297945954695",
+                            "invoiceEntityID": "297945954695",
+                            "service": "AmazonAthena"
                         },
-                        "kubernetesPercent": 0,
-                        "cost": 18.8635215,
-                        "netCost": 18.8635215
+                        "window": {
+                            "start": "2023-04-30T00:00:00Z",
+                            "end": "2023-05-01T00:00:00Z"
+                        },
+                        "listCost": {
+                            "cost": 0.10061275,
+                            "kubernetesPercent": 0
+                        },
+                        "netCost": {
+                            "cost": 0.10061275,
+                            "kubernetesPercent": 0
+                        },
+                        "amortizedNetCost": {
+                            "cost": 0.10061275,
+                            "kubernetesPercent": 0
+                        },
+                        "invoicedCost": {
+                            "cost": 0.10061275,
+                            "kubernetesPercent": 0
+                        }
                     },
                     "AmazonCloudWatch": {
                         "properties": {
                             "provider": "AWS",
-                            "workGroupID": "297945954695",
-                            "billingID": "297945954695",
-                            "service": "AmazonCloudWatch",
-                            "label": ""
+                            "accountID": "297945954695",
+                            "invoiceEntityID": "297945954695",
+                            "service": "AmazonCloudWatch"
                         },
-                        "kubernetesPercent": 0,
-                        "cost": 3.2135763941000017,
-                        "netCost": 3.2135763941000017
+                        "window": {
+                            "start": "2023-04-30T00:00:00Z",
+                            "end": "2023-05-01T00:00:00Z"
+                        },
+                        "listCost": {
+                            "cost": 0.21150513669999998,
+                            "kubernetesPercent": 0
+                        },
+                        "netCost": {
+                            "cost": 0.21150513669999998,
+                            "kubernetesPercent": 0
+                        },
+                        "amortizedNetCost": {
+                            "cost": 0.21150513669999998,
+                            "kubernetesPercent": 0
+                        },
+                        "invoicedCost": {
+                            "cost": 0.21150513669999998,
+                            "kubernetesPercent": 0
+                        }
                     },
                     "AmazonEC2": {
                         "properties": {
                             "provider": "AWS",
-                            "workGroupID": "",
-                            "billingID": "297945954695",
-                            "service": "AmazonEC2",
-                            "label": ""
+                            "invoiceEntityID": "297945954695",
+                            "service": "AmazonEC2"
                         },
-                        "kubernetesPercent": 0.8594287373045936,
-                        "cost": 409.32526533589765,
-                        "netCost": 409.32526533589765
+                        "window": {
+                            "start": "2023-04-30T00:00:00Z",
+                            "end": "2023-05-01T00:00:00Z"
+                        },
+                        "listCost": {
+                            "cost": 337.4926118030998,
+                            "kubernetesPercent": 0.6543833295809984
+                        },
+                        "netCost": {
+                            "cost": 337.4926118030998,
+                            "kubernetesPercent": 0.6543833295809984
+                        },
+                        "amortizedNetCost": {
+                            "cost": 337.4926118030998,
+                            "kubernetesPercent": 0.6543833295809984
+                        },
+                        "invoicedCost": {
+                            "cost": 337.4926118030998,
+                            "kubernetesPercent": 0.6543833295809984
+                        }
                     },
                     "AmazonECR": {
                         "properties": {
                             "provider": "AWS",
-                            "workGroupID": "297945954695",
-                            "billingID": "297945954695",
-                            "service": "AmazonECR",
-                            "label": ""
+                            "accountID": "297945954695",
+                            "invoiceEntityID": "297945954695",
+                            "service": "AmazonECR"
                         },
-                        "kubernetesPercent": 0,
-                        "cost": 0.00017718000000000006,
-                        "netCost": 0.00017718000000000006
+                        "window": {
+                            "start": "2023-04-30T00:00:00Z",
+                            "end": "2023-05-01T00:00:00Z"
+                        },
+                        "listCost": {
+                            "cost": 0.00018308879999999998,
+                            "kubernetesPercent": 0
+                        },
+                        "netCost": {
+                            "cost": 0.00018308879999999998,
+                            "kubernetesPercent": 0
+                        },
+                        "amortizedNetCost": {
+                            "cost": 0.00018308879999999998,
+                            "kubernetesPercent": 0
+                        },
+                        "invoicedCost": {
+                            "cost": 0.00018308879999999998,
+                            "kubernetesPercent": 0
+                        }
                     },
                     "AmazonECRPublic": {
                         "properties": {
                             "provider": "AWS",
-                            "workGroupID": "297945954695",
-                            "billingID": "297945954695",
-                            "service": "AmazonECRPublic",
-                            "label": ""
+                            "accountID": "297945954695",
+                            "invoiceEntityID": "297945954695",
+                            "service": "AmazonECRPublic"
                         },
-                        "kubernetesPercent": 0,
-                        "cost": 0,
-                        "netCost": 0
+                        "window": {
+                            "start": "2023-04-30T00:00:00Z",
+                            "end": "2023-05-01T00:00:00Z"
+                        },
+                        "listCost": {
+                            "cost": 0,
+                            "kubernetesPercent": 0
+                        },
+                        "netCost": {
+                            "cost": 0,
+                            "kubernetesPercent": 0
+                        },
+                        "amortizedNetCost": {
+                            "cost": 0,
+                            "kubernetesPercent": 0
+                        },
+                        "invoicedCost": {
+                            "cost": 0,
+                            "kubernetesPercent": 0
+                        }
                     },
                     "AmazonEFS": {
                         "properties": {
                             "provider": "AWS",
-                            "workGroupID": "297945954695",
-                            "billingID": "297945954695",
-                            "service": "AmazonEFS",
-                            "label": ""
+                            "accountID": "297945954695",
+                            "invoiceEntityID": "297945954695",
+                            "service": "AmazonEFS"
                         },
-                        "kubernetesPercent": 0,
-                        "cost": 5.937000000000001e-07,
-                        "netCost": 5.937000000000001e-07
+                        "window": {
+                            "start": "2023-04-30T00:00:00Z",
+                            "end": "2023-05-01T00:00:00Z"
+                        },
+                        "listCost": {
+                            "cost": 6.123e-07,
+                            "kubernetesPercent": 0
+                        },
+                        "netCost": {
+                            "cost": 6.123e-07,
+                            "kubernetesPercent": 0
+                        },
+                        "amortizedNetCost": {
+                            "cost": 6.123e-07,
+                            "kubernetesPercent": 0
+                        },
+                        "invoicedCost": {
+                            "cost": 6.123e-07,
+                            "kubernetesPercent": 0
+                        }
                     },
                     "AmazonEKS": {
                         "properties": {
                             "provider": "AWS",
-                            "workGroupID": "",
-                            "billingID": "297945954695",
-                            "service": "AmazonEKS",
-                            "label": ""
+                            "invoiceEntityID": "297945954695",
+                            "service": "AmazonEKS"
                         },
-                        "kubernetesPercent": 1,
-                        "cost": 71.09614764060001,
-                        "netCost": 71.09614764060001
+                        "window": {
+                            "start": "2023-04-30T00:00:00Z",
+                            "end": "2023-05-01T00:00:00Z"
+                        },
+                        "listCost": {
+                            "cost": 43.19999999999999,
+                            "kubernetesPercent": 1
+                        },
+                        "netCost": {
+                            "cost": 43.19999999999999,
+                            "kubernetesPercent": 1
+                        },
+                        "amortizedNetCost": {
+                            "cost": 43.19999999999999,
+                            "kubernetesPercent": 1
+                        },
+                        "invoicedCost": {
+                            "cost": 43.19999999999999,
+                            "kubernetesPercent": 1
+                        }
                     },
                     "AmazonFSx": {
                         "properties": {
                             "provider": "AWS",
-                            "workGroupID": "297945954695",
-                            "billingID": "297945954695",
-                            "service": "AmazonFSx",
-                            "label": ""
+                            "accountID": "297945954695",
+                            "invoiceEntityID": "297945954695",
+                            "service": "AmazonFSx"
                         },
-                        "kubernetesPercent": 0,
-                        "cost": 5.420359209200005,
-                        "netCost": 5.420359209200005
+                        "window": {
+                            "start": "2023-04-30T00:00:00Z",
+                            "end": "2023-05-01T00:00:00Z"
+                        },
+                        "listCost": {
+                            "cost": 5.6010275086000005,
+                            "kubernetesPercent": 0
+                        },
+                        "netCost": {
+                            "cost": 5.6010275086000005,
+                            "kubernetesPercent": 0
+                        },
+                        "amortizedNetCost": {
+                            "cost": 5.6010275086000005,
+                            "kubernetesPercent": 0
+                        },
+                        "invoicedCost": {
+                            "cost": 5.6010275086000005,
+                            "kubernetesPercent": 0
+                        }
                     },
                     "AmazonPrometheus": {
                         "properties": {
                             "provider": "AWS",
-                            "workGroupID": "297945954695",
-                            "billingID": "297945954695",
-                            "service": "AmazonPrometheus",
-                            "label": ""
+                            "accountID": "297945954695",
+                            "invoiceEntityID": "297945954695",
+                            "service": "AmazonPrometheus"
                         },
-                        "kubernetesPercent": 0,
-                        "cost": 3.12611436,
-                        "netCost": 3.12611436
+                        "window": {
+                            "start": "2023-04-30T00:00:00Z",
+                            "end": "2023-05-01T00:00:00Z"
+                        },
+                        "listCost": {
+                            "cost": 5.03357787,
+                            "kubernetesPercent": 0
+                        },
+                        "netCost": {
+                            "cost": 5.03357787,
+                            "kubernetesPercent": 0
+                        },
+                        "amortizedNetCost": {
+                            "cost": 5.03357787,
+                            "kubernetesPercent": 0
+                        },
+                        "invoicedCost": {
+                            "cost": 5.03357787,
+                            "kubernetesPercent": 0
+                        }
                     },
                     "AmazonQuickSight": {
                         "properties": {
                             "provider": "AWS",
-                            "workGroupID": "297945954695",
-                            "billingID": "297945954695",
-                            "service": "AmazonQuickSight",
-                            "label": ""
+                            "accountID": "297945954695",
+                            "invoiceEntityID": "297945954695",
+                            "service": "AmazonQuickSight"
                         },
-                        "kubernetesPercent": 0,
-                        "cost": 0.7741935359999996,
-                        "netCost": 0.7741935359999996
+                        "window": {
+                            "start": "2023-04-30T00:00:00Z",
+                            "end": "2023-05-01T00:00:00Z"
+                        },
+                        "listCost": {
+                            "cost": 0.8000000064000001,
+                            "kubernetesPercent": 0
+                        },
+                        "netCost": {
+                            "cost": 0.8000000064000001,
+                            "kubernetesPercent": 0
+                        },
+                        "amortizedNetCost": {
+                            "cost": 0.8000000064000001,
+                            "kubernetesPercent": 0
+                        },
+                        "invoicedCost": {
+                            "cost": 0.8000000064000001,
+                            "kubernetesPercent": 0
+                        }
                     },
                     "AmazonRoute53": {
                         "properties": {
                             "provider": "AWS",
-                            "workGroupID": "297945954695",
-                            "billingID": "297945954695",
-                            "service": "AmazonRoute53",
-                            "label": ""
+                            "accountID": "297945954695",
+                            "invoiceEntityID": "297945954695",
+                            "service": "AmazonRoute53"
                         },
-                        "kubernetesPercent": 0,
-                        "cost": 0.0003384000000000001,
-                        "netCost": 0.0003384000000000001
+                        "window": {
+                            "start": "2023-04-30T00:00:00Z",
+                            "end": "2023-05-01T00:00:00Z"
+                        },
+                        "listCost": {
+                            "cost": 0.0005856,
+                            "kubernetesPercent": 0
+                        },
+                        "netCost": {
+                            "cost": 0.0005856,
+                            "kubernetesPercent": 0
+                        },
+                        "amortizedNetCost": {
+                            "cost": 0.0005856,
+                            "kubernetesPercent": 0
+                        },
+                        "invoicedCost": {
+                            "cost": 0.0005856,
+                            "kubernetesPercent": 0
+                        }
                     },
                     "AmazonS3": {
                         "properties": {
                             "provider": "AWS",
-                            "workGroupID": "",
-                            "billingID": "297945954695",
-                            "service": "AmazonS3",
-                            "label": ""
+                            "invoiceEntityID": "297945954695",
+                            "service": "AmazonS3"
                         },
-                        "kubernetesPercent": 0,
-                        "cost": 59.97982600390022,
-                        "netCost": 59.97982600390022
+                        "window": {
+                            "start": "2023-04-30T00:00:00Z",
+                            "end": "2023-05-01T00:00:00Z"
+                        },
+                        "listCost": {
+                            "cost": 45.7935617916,
+                            "kubernetesPercent": 0
+                        },
+                        "netCost": {
+                            "cost": 45.7935617916,
+                            "kubernetesPercent": 0
+                        },
+                        "amortizedNetCost": {
+                            "cost": 45.7935617916,
+                            "kubernetesPercent": 0
+                        },
+                        "invoicedCost": {
+                            "cost": 45.7935617916,
+                            "kubernetesPercent": 0
+                        }
                     },
                     "AmazonSNS": {
                         "properties": {
                             "provider": "AWS",
-                            "workGroupID": "297945954695",
-                            "billingID": "297945954695",
-                            "service": "AmazonSNS",
-                            "label": ""
+                            "accountID": "297945954695",
+                            "invoiceEntityID": "297945954695",
+                            "service": "AmazonSNS"
                         },
-                        "kubernetesPercent": 0,
-                        "cost": 0,
-                        "netCost": 0
+                        "window": {
+                            "start": "2023-04-30T00:00:00Z",
+                            "end": "2023-05-01T00:00:00Z"
+                        },
+                        "listCost": {
+                            "cost": 0,
+                            "kubernetesPercent": 0
+                        },
+                        "netCost": {
+                            "cost": 0,
+                            "kubernetesPercent": 0
+                        },
+                        "amortizedNetCost": {
+                            "cost": 0,
+                            "kubernetesPercent": 0
+                        },
+                        "invoicedCost": {
+                            "cost": 0,
+                            "kubernetesPercent": 0
+                        }
                     },
                     "AmazonVPC": {
                         "properties": {
                             "provider": "AWS",
-                            "workGroupID": "297945954695",
-                            "billingID": "297945954695",
-                            "service": "AmazonVPC",
-                            "label": ""
+                            "accountID": "297945954695",
+                            "invoiceEntityID": "297945954695",
+                            "service": "AmazonVPC"
                         },
-                        "kubernetesPercent": 0,
-                        "cost": 2.880004444499996,
-                        "netCost": 2.880004444499996
+                        "window": {
+                            "start": "2023-04-30T00:00:00Z",
+                            "end": "2023-05-01T00:00:00Z"
+                        },
+                        "listCost": {
+                            "cost": 2.8800000000000017,
+                            "kubernetesPercent": 0
+                        },
+                        "netCost": {
+                            "cost": 2.8800000000000017,
+                            "kubernetesPercent": 0
+                        },
+                        "amortizedNetCost": {
+                            "cost": 2.8800000000000017,
+                            "kubernetesPercent": 0
+                        },
+                        "invoicedCost": {
+                            "cost": 2.8800000000000017,
+                            "kubernetesPercent": 0
+                        }
                     },
                     "awskms": {
                         "properties": {
                             "provider": "AWS",
-                            "workGroupID": "297945954695",
-                            "billingID": "297945954695",
-                            "service": "awskms",
-                            "label": ""
+                            "accountID": "297945954695",
+                            "invoiceEntityID": "297945954695",
+                            "service": "awskms"
                         },
-                        "kubernetesPercent": 0,
-                        "cost": 0.16129031999999963,
-                        "netCost": 0.16129031999999963
+                        "window": {
+                            "start": "2023-04-30T00:00:00Z",
+                            "end": "2023-05-01T00:00:00Z"
+                        },
+                        "listCost": {
+                            "cost": 0.23333333520000016,
+                            "kubernetesPercent": 0
+                        },
+                        "netCost": {
+                            "cost": 0.23333333520000016,
+                            "kubernetesPercent": 0
+                        },
+                        "amortizedNetCost": {
+                            "cost": 0.23333333520000016,
+                            "kubernetesPercent": 0
+                        },
+                        "invoicedCost": {
+                            "cost": 0.23333333520000016,
+                            "kubernetesPercent": 0
+                        }
                     }
                 },
                 "window": {
-                    "start": "2023-03-07T00:00:00Z",
-                    "end": "2023-03-08T00:00:00Z"
-                }
+                    "start": "2023-04-30T00:00:00Z",
+                    "end": "2023-05-01T00:00:00Z"
+                },
+                "aggregationProperties": [
+                    "service"
+                ]
             },
             {
-                "aggregates": {
+                "cloudCosts": {
+                    "5hnnev4d0v7mapf09j0v8of0o2": {
+                        "properties": {
+                            "provider": "AWS",
+                            "accountID": "297945954695",
+                            "invoiceEntityID": "297945954695",
+                            "service": "5hnnev4d0v7mapf09j0v8of0o2"
+                        },
+                        "window": {
+                            "start": "2023-05-01T00:00:00Z",
+                            "end": "2023-05-02T00:00:00Z"
+                        },
+                        "listCost": {
+                            "cost": 7.865999999999996,
+                            "kubernetesPercent": 0
+                        },
+                        "netCost": {
+                            "cost": 7.865999999999996,
+                            "kubernetesPercent": 0
+                        },
+                        "amortizedNetCost": {
+                            "cost": 7.865999999999996,
+                            "kubernetesPercent": 0
+                        },
+                        "invoicedCost": {
+                            "cost": 7.865999999999996,
+                            "kubernetesPercent": 0
+                        }
+                    },
                     "AWSCloudTrail": {
                         "properties": {
                             "provider": "AWS",
-                            "workGroupID": "297945954695",
-                            "billingID": "297945954695",
-                            "service": "AWSCloudTrail",
-                            "label": ""
+                            "accountID": "297945954695",
+                            "invoiceEntityID": "297945954695",
+                            "service": "AWSCloudTrail"
                         },
-                        "kubernetesPercent": 0,
-                        "cost": 5.656379999999999,
-                        "netCost": 5.656379999999999
+                        "window": {
+                            "start": "2023-05-01T00:00:00Z",
+                            "end": "2023-05-02T00:00:00Z"
+                        },
+                        "listCost": {
+                            "cost": 6.373088000000007,
+                            "kubernetesPercent": 0
+                        },
+                        "netCost": {
+                            "cost": 6.373088000000007,
+                            "kubernetesPercent": 0
+                        },
+                        "amortizedNetCost": {
+                            "cost": 6.373088000000007,
+                            "kubernetesPercent": 0
+                        },
+                        "invoicedCost": {
+                            "cost": 6.373088000000007,
+                            "kubernetesPercent": 0
+                        }
                     },
                     "AWSCostExplorer": {
                         "properties": {
                             "provider": "AWS",
-                            "workGroupID": "297945954695",
-                            "billingID": "297945954695",
-                            "service": "AWSCostExplorer",
-                            "label": ""
+                            "accountID": "297945954695",
+                            "invoiceEntityID": "297945954695",
+                            "service": "AWSCostExplorer"
                         },
-                        "kubernetesPercent": 0,
-                        "cost": 0.29795548390000004,
-                        "netCost": 0.29795548390000004
+                        "window": {
+                            "start": "2023-05-01T00:00:00Z",
+                            "end": "2023-05-02T00:00:00Z"
+                        },
+                        "listCost": {
+                            "cost": 0.24415709680000003,
+                            "kubernetesPercent": 0
+                        },
+                        "netCost": {
+                            "cost": 0.24415709680000003,
+                            "kubernetesPercent": 0
+                        },
+                        "amortizedNetCost": {
+                            "cost": 0.24415709680000003,
+                            "kubernetesPercent": 0
+                        },
+                        "invoicedCost": {
+                            "cost": 0.24415709680000003,
+                            "kubernetesPercent": 0
+                        }
                     },
                     "AWSELB": {
                         "properties": {
                             "provider": "AWS",
-                            "workGroupID": "",
-                            "billingID": "297945954695",
-                            "service": "AWSELB",
-                            "label": ""
+                            "invoiceEntityID": "297945954695",
+                            "service": "AWSELB"
                         },
-                        "kubernetesPercent": 0.7815670307151087,
-                        "cost": 40.45756354790004,
-                        "netCost": 40.45756354790004
+                        "window": {
+                            "start": "2023-05-01T00:00:00Z",
+                            "end": "2023-05-02T00:00:00Z"
+                        },
+                        "listCost": {
+                            "cost": 41.16003439479998,
+                            "kubernetesPercent": 0.8082905243733983
+                        },
+                        "netCost": {
+                            "cost": 41.16003439479998,
+                            "kubernetesPercent": 0.8082905243733983
+                        },
+                        "amortizedNetCost": {
+                            "cost": 41.16003439479998,
+                            "kubernetesPercent": 0.8082905243733983
+                        },
+                        "invoicedCost": {
+                            "cost": 41.16003439479998,
+                            "kubernetesPercent": 0.8082905243733983
+                        }
                     },
                     "AWSGlue": {
                         "properties": {
                             "provider": "AWS",
-                            "workGroupID": "297945954695",
-                            "billingID": "297945954695",
-                            "service": "AWSGlue",
-                            "label": ""
+                            "accountID": "297945954695",
+                            "invoiceEntityID": "297945954695",
+                            "service": "AWSGlue"
                         },
-                        "kubernetesPercent": 0,
-                        "cost": 0.42755856000000003,
-                        "netCost": 0.42755856000000003
+                        "window": {
+                            "start": "2023-05-01T00:00:00Z",
+                            "end": "2023-05-02T00:00:00Z"
+                        },
+                        "listCost": {
+                            "cost": 0.5083949200000001,
+                            "kubernetesPercent": 0
+                        },
+                        "netCost": {
+                            "cost": 0.5083949200000001,
+                            "kubernetesPercent": 0
+                        },
+                        "amortizedNetCost": {
+                            "cost": 0.5083949200000001,
+                            "kubernetesPercent": 0
+                        },
+                        "invoicedCost": {
+                            "cost": 0.5083949200000001,
+                            "kubernetesPercent": 0
+                        }
                     },
                     "AWSLambda": {
                         "properties": {
                             "provider": "AWS",
-                            "workGroupID": "297945954695",
-                            "billingID": "297945954695",
-                            "service": "AWSLambda",
-                            "label": ""
+                            "accountID": "297945954695",
+                            "invoiceEntityID": "297945954695",
+                            "service": "AWSLambda"
                         },
-                        "kubernetesPercent": 0,
-                        "cost": 0,
-                        "netCost": 0
+                        "window": {
+                            "start": "2023-05-01T00:00:00Z",
+                            "end": "2023-05-02T00:00:00Z"
+                        },
+                        "listCost": {
+                            "cost": 0,
+                            "kubernetesPercent": 0
+                        },
+                        "netCost": {
+                            "cost": 0,
+                            "kubernetesPercent": 0
+                        },
+                        "amortizedNetCost": {
+                            "cost": 0,
+                            "kubernetesPercent": 0
+                        },
+                        "invoicedCost": {
+                            "cost": 0,
+                            "kubernetesPercent": 0
+                        }
                     },
                     "AWSQueueService": {
                         "properties": {
                             "provider": "AWS",
-                            "workGroupID": "297945954695",
-                            "billingID": "297945954695",
-                            "service": "AWSQueueService",
-                            "label": ""
+                            "accountID": "297945954695",
+                            "invoiceEntityID": "297945954695",
+                            "service": "AWSQueueService"
                         },
-                        "kubernetesPercent": 0,
-                        "cost": 0,
-                        "netCost": 0
+                        "window": {
+                            "start": "2023-05-01T00:00:00Z",
+                            "end": "2023-05-02T00:00:00Z"
+                        },
+                        "listCost": {
+                            "cost": 0,
+                            "kubernetesPercent": 0
+                        },
+                        "netCost": {
+                            "cost": 0,
+                            "kubernetesPercent": 0
+                        },
+                        "amortizedNetCost": {
+                            "cost": 0,
+                            "kubernetesPercent": 0
+                        },
+                        "invoicedCost": {
+                            "cost": 0,
+                            "kubernetesPercent": 0
+                        }
                     },
                     "AmazonAthena": {
                         "properties": {
                             "provider": "AWS",
-                            "workGroupID": "297945954695",
-                            "billingID": "297945954695",
-                            "service": "AmazonAthena",
-                            "label": ""
+                            "accountID": "297945954695",
+                            "invoiceEntityID": "297945954695",
+                            "service": "AmazonAthena"
                         },
-                        "kubernetesPercent": 0,
-                        "cost": 18.85846949999999,
-                        "netCost": 18.85846949999999
+                        "window": {
+                            "start": "2023-05-01T00:00:00Z",
+                            "end": "2023-05-02T00:00:00Z"
+                        },
+                        "listCost": {
+                            "cost": 10.695624500000003,
+                            "kubernetesPercent": 0
+                        },
+                        "netCost": {
+                            "cost": 10.695624500000003,
+                            "kubernetesPercent": 0
+                        },
+                        "amortizedNetCost": {
+                            "cost": 10.695624500000003,
+                            "kubernetesPercent": 0
+                        },
+                        "invoicedCost": {
+                            "cost": 10.695624500000003,
+                            "kubernetesPercent": 0
+                        }
                     },
                     "AmazonCloudWatch": {
                         "properties": {
                             "provider": "AWS",
-                            "workGroupID": "297945954695",
-                            "billingID": "297945954695",
-                            "service": "AmazonCloudWatch",
-                            "label": ""
+                            "accountID": "297945954695",
+                            "invoiceEntityID": "297945954695",
+                            "service": "AmazonCloudWatch"
                         },
-                        "kubernetesPercent": 0,
-                        "cost": 3.2157586559000007,
-                        "netCost": 3.2157586559000007
+                        "window": {
+                            "start": "2023-05-01T00:00:00Z",
+                            "end": "2023-05-02T00:00:00Z"
+                        },
+                        "listCost": {
+                            "cost": 0.0148635813,
+                            "kubernetesPercent": 0
+                        },
+                        "netCost": {
+                            "cost": 0.0148635813,
+                            "kubernetesPercent": 0
+                        },
+                        "amortizedNetCost": {
+                            "cost": 0.0148635813,
+                            "kubernetesPercent": 0
+                        },
+                        "invoicedCost": {
+                            "cost": 0.0148635813,
+                            "kubernetesPercent": 0
+                        }
                     },
                     "AmazonEC2": {
                         "properties": {
                             "provider": "AWS",
-                            "workGroupID": "",
-                            "billingID": "297945954695",
-                            "service": "AmazonEC2",
-                            "label": ""
+                            "invoiceEntityID": "297945954695",
+                            "service": "AmazonEC2"
                         },
-                        "kubernetesPercent": 0.8594891926690086,
-                        "cost": 410.28499241199773,
-                        "netCost": 410.28499241199773
+                        "window": {
+                            "start": "2023-05-01T00:00:00Z",
+                            "end": "2023-05-02T00:00:00Z"
+                        },
+                        "listCost": {
+                            "cost": 309.4241635897003,
+                            "kubernetesPercent": 0.6593596481215193
+                        },
+                        "netCost": {
+                            "cost": 309.4241635897003,
+                            "kubernetesPercent": 0.6593596481215193
+                        },
+                        "amortizedNetCost": {
+                            "cost": 309.4241635897003,
+                            "kubernetesPercent": 0.6593596481215193
+                        },
+                        "invoicedCost": {
+                            "cost": 309.4241635897003,
+                            "kubernetesPercent": 0.6593596481215193
+                        }
                     },
                     "AmazonECR": {
                         "properties": {
                             "provider": "AWS",
-                            "workGroupID": "297945954695",
-                            "billingID": "297945954695",
-                            "service": "AmazonECR",
-                            "label": ""
+                            "accountID": "297945954695",
+                            "invoiceEntityID": "297945954695",
+                            "service": "AmazonECR"
                         },
-                        "kubernetesPercent": 0,
-                        "cost": 0.0001771800000000001,
-                        "netCost": 0.0001771800000000001
+                        "window": {
+                            "start": "2023-05-01T00:00:00Z",
+                            "end": "2023-05-02T00:00:00Z"
+                        },
+                        "listCost": {
+                            "cost": 0.00014835589999999998,
+                            "kubernetesPercent": 0
+                        },
+                        "netCost": {
+                            "cost": 0.00014835589999999998,
+                            "kubernetesPercent": 0
+                        },
+                        "amortizedNetCost": {
+                            "cost": 0.00014835589999999998,
+                            "kubernetesPercent": 0
+                        },
+                        "invoicedCost": {
+                            "cost": 0.00014835589999999998,
+                            "kubernetesPercent": 0
+                        }
                     },
                     "AmazonECRPublic": {
                         "properties": {
                             "provider": "AWS",
-                            "workGroupID": "297945954695",
-                            "billingID": "297945954695",
-                            "service": "AmazonECRPublic",
-                            "label": ""
+                            "accountID": "297945954695",
+                            "invoiceEntityID": "297945954695",
+                            "service": "AmazonECRPublic"
                         },
-                        "kubernetesPercent": 0,
-                        "cost": 0,
-                        "netCost": 0
+                        "window": {
+                            "start": "2023-05-01T00:00:00Z",
+                            "end": "2023-05-02T00:00:00Z"
+                        },
+                        "listCost": {
+                            "cost": 0,
+                            "kubernetesPercent": 0
+                        },
+                        "netCost": {
+                            "cost": 0,
+                            "kubernetesPercent": 0
+                        },
+                        "amortizedNetCost": {
+                            "cost": 0,
+                            "kubernetesPercent": 0
+                        },
+                        "invoicedCost": {
+                            "cost": 0,
+                            "kubernetesPercent": 0
+                        }
                     },
                     "AmazonEFS": {
                         "properties": {
                             "provider": "AWS",
-                            "workGroupID": "297945954695",
-                            "billingID": "297945954695",
-                            "service": "AmazonEFS",
-                            "label": ""
+                            "accountID": "297945954695",
+                            "invoiceEntityID": "297945954695",
+                            "service": "AmazonEFS"
                         },
-                        "kubernetesPercent": 0,
-                        "cost": 5.937e-07,
-                        "netCost": 5.937e-07
+                        "window": {
+                            "start": "2023-05-01T00:00:00Z",
+                            "end": "2023-05-02T00:00:00Z"
+                        },
+                        "listCost": {
+                            "cost": 5.681000000000001e-07,
+                            "kubernetesPercent": 0
+                        },
+                        "netCost": {
+                            "cost": 5.681000000000001e-07,
+                            "kubernetesPercent": 0
+                        },
+                        "amortizedNetCost": {
+                            "cost": 5.681000000000001e-07,
+                            "kubernetesPercent": 0
+                        },
+                        "invoicedCost": {
+                            "cost": 5.681000000000001e-07,
+                            "kubernetesPercent": 0
+                        }
                     },
                     "AmazonEKS": {
                         "properties": {
                             "provider": "AWS",
-                            "workGroupID": "",
-                            "billingID": "297945954695",
-                            "service": "AmazonEKS",
-                            "label": ""
+                            "invoiceEntityID": "297945954695",
+                            "service": "AmazonEKS"
                         },
-                        "kubernetesPercent": 1,
-                        "cost": 71.0962322655,
-                        "netCost": 71.0962322655
+                        "window": {
+                            "start": "2023-05-01T00:00:00Z",
+                            "end": "2023-05-02T00:00:00Z"
+                        },
+                        "listCost": {
+                            "cost": 39.6,
+                            "kubernetesPercent": 1
+                        },
+                        "netCost": {
+                            "cost": 39.6,
+                            "kubernetesPercent": 1
+                        },
+                        "amortizedNetCost": {
+                            "cost": 39.6,
+                            "kubernetesPercent": 1
+                        },
+                        "invoicedCost": {
+                            "cost": 39.6,
+                            "kubernetesPercent": 1
+                        }
                     },
                     "AmazonFSx": {
                         "properties": {
                             "provider": "AWS",
-                            "workGroupID": "297945954695",
-                            "billingID": "297945954695",
-                            "service": "AmazonFSx",
-                            "label": ""
+                            "accountID": "297945954695",
+                            "invoiceEntityID": "297945954695",
+                            "service": "AmazonFSx"
                         },
-                        "kubernetesPercent": 0,
-                        "cost": 5.420361553700005,
-                        "netCost": 5.420361553700005
+                        "window": {
+                            "start": "2023-05-01T00:00:00Z",
+                            "end": "2023-05-02T00:00:00Z"
+                        },
+                        "listCost": {
+                            "cost": 4.968756381500007,
+                            "kubernetesPercent": 0
+                        },
+                        "netCost": {
+                            "cost": 4.968756381500007,
+                            "kubernetesPercent": 0
+                        },
+                        "amortizedNetCost": {
+                            "cost": 4.968756381500007,
+                            "kubernetesPercent": 0
+                        },
+                        "invoicedCost": {
+                            "cost": 4.968756381500007,
+                            "kubernetesPercent": 0
+                        }
                     },
                     "AmazonPrometheus": {
                         "properties": {
                             "provider": "AWS",
-                            "workGroupID": "297945954695",
-                            "billingID": "297945954695",
-                            "service": "AmazonPrometheus",
-                            "label": ""
+                            "accountID": "297945954695",
+                            "invoiceEntityID": "297945954695",
+                            "service": "AmazonPrometheus"
                         },
-                        "kubernetesPercent": 0,
-                        "cost": 3.1324544100000002,
-                        "netCost": 3.1324544100000002
+                        "window": {
+                            "start": "2023-05-01T00:00:00Z",
+                            "end": "2023-05-02T00:00:00Z"
+                        },
+                        "listCost": {
+                            "cost": 1.04940423,
+                            "kubernetesPercent": 0
+                        },
+                        "netCost": {
+                            "cost": 1.04940423,
+                            "kubernetesPercent": 0
+                        },
+                        "amortizedNetCost": {
+                            "cost": 1.04940423,
+                            "kubernetesPercent": 0
+                        },
+                        "invoicedCost": {
+                            "cost": 1.04940423,
+                            "kubernetesPercent": 0
+                        }
                     },
                     "AmazonQuickSight": {
                         "properties": {
                             "provider": "AWS",
-                            "workGroupID": "297945954695",
-                            "billingID": "297945954695",
-                            "service": "AmazonQuickSight",
-                            "label": ""
+                            "accountID": "297945954695",
+                            "invoiceEntityID": "297945954695",
+                            "service": "AmazonQuickSight"
                         },
-                        "kubernetesPercent": 0,
-                        "cost": 0.7741935359999996,
-                        "netCost": 0.7741935359999996
+                        "window": {
+                            "start": "2023-05-01T00:00:00Z",
+                            "end": "2023-05-02T00:00:00Z"
+                        },
+                        "listCost": {
+                            "cost": 0.7419354719999997,
+                            "kubernetesPercent": 0
+                        },
+                        "netCost": {
+                            "cost": 0.7419354719999997,
+                            "kubernetesPercent": 0
+                        },
+                        "amortizedNetCost": {
+                            "cost": 0.7419354719999997,
+                            "kubernetesPercent": 0
+                        },
+                        "invoicedCost": {
+                            "cost": 0.7419354719999997,
+                            "kubernetesPercent": 0
+                        }
                     },
                     "AmazonRoute53": {
                         "properties": {
                             "provider": "AWS",
-                            "workGroupID": "297945954695",
-                            "billingID": "297945954695",
-                            "service": "AmazonRoute53",
-                            "label": ""
+                            "accountID": "297945954695",
+                            "invoiceEntityID": "297945954695",
+                            "service": "AmazonRoute53"
                         },
-                        "kubernetesPercent": 0,
-                        "cost": 0.00030359999999999995,
-                        "netCost": 0.00030359999999999995
+                        "window": {
+                            "start": "2023-05-01T00:00:00Z",
+                            "end": "2023-05-02T00:00:00Z"
+                        },
+                        "listCost": {
+                            "cost": 1.5010184,
+                            "kubernetesPercent": 0
+                        },
+                        "netCost": {
+                            "cost": 1.5010184,
+                            "kubernetesPercent": 0
+                        },
+                        "amortizedNetCost": {
+                            "cost": 1.5010184,
+                            "kubernetesPercent": 0
+                        },
+                        "invoicedCost": {
+                            "cost": 1.5010184,
+                            "kubernetesPercent": 0
+                        }
                     },
                     "AmazonS3": {
                         "properties": {
                             "provider": "AWS",
-                            "workGroupID": "",
-                            "billingID": "297945954695",
-                            "service": "AmazonS3",
-                            "label": ""
+                            "accountID": "297945954695",
+                            "invoiceEntityID": "297945954695",
+                            "service": "AmazonS3"
                         },
-                        "kubernetesPercent": 0,
-                        "cost": 60.10552118050003,
-                        "netCost": 60.10552118050003
+                        "window": {
+                            "start": "2023-05-01T00:00:00Z",
+                            "end": "2023-05-02T00:00:00Z"
+                        },
+                        "listCost": {
+                            "cost": 35.486366779799866,
+                            "kubernetesPercent": 0
+                        },
+                        "netCost": {
+                            "cost": 35.486366779799866,
+                            "kubernetesPercent": 0
+                        },
+                        "amortizedNetCost": {
+                            "cost": 35.486366779799866,
+                            "kubernetesPercent": 0
+                        },
+                        "invoicedCost": {
+                            "cost": 35.486366779799866,
+                            "kubernetesPercent": 0
+                        }
                     },
                     "AmazonSNS": {
                         "properties": {
                             "provider": "AWS",
-                            "workGroupID": "297945954695",
-                            "billingID": "297945954695",
-                            "service": "AmazonSNS",
-                            "label": ""
+                            "accountID": "297945954695",
+                            "invoiceEntityID": "297945954695",
+                            "service": "AmazonSNS"
                         },
-                        "kubernetesPercent": 0,
-                        "cost": 0,
-                        "netCost": 0
+                        "window": {
+                            "start": "2023-05-01T00:00:00Z",
+                            "end": "2023-05-02T00:00:00Z"
+                        },
+                        "listCost": {
+                            "cost": 0,
+                            "kubernetesPercent": 0
+                        },
+                        "netCost": {
+                            "cost": 0,
+                            "kubernetesPercent": 0
+                        },
+                        "amortizedNetCost": {
+                            "cost": 0,
+                            "kubernetesPercent": 0
+                        },
+                        "invoicedCost": {
+                            "cost": 0,
+                            "kubernetesPercent": 0
+                        }
                     },
                     "AmazonVPC": {
                         "properties": {
                             "provider": "AWS",
-                            "workGroupID": "297945954695",
-                            "billingID": "297945954695",
-                            "service": "AmazonVPC",
-                            "label": ""
+                            "accountID": "297945954695",
+                            "invoiceEntityID": "297945954695",
+                            "service": "AmazonVPC"
                         },
-                        "kubernetesPercent": 0,
-                        "cost": 2.880004457399996,
-                        "netCost": 2.880004457399996
+                        "window": {
+                            "start": "2023-05-01T00:00:00Z",
+                            "end": "2023-05-02T00:00:00Z"
+                        },
+                        "listCost": {
+                            "cost": 2.849999999999996,
+                            "kubernetesPercent": 0
+                        },
+                        "netCost": {
+                            "cost": 2.849999999999996,
+                            "kubernetesPercent": 0
+                        },
+                        "amortizedNetCost": {
+                            "cost": 2.849999999999996,
+                            "kubernetesPercent": 0
+                        },
+                        "invoicedCost": {
+                            "cost": 2.849999999999996,
+                            "kubernetesPercent": 0
+                        }
+                    },
+                    "AmazonWorkSpaces": {
+                        "properties": {
+                            "provider": "AWS",
+                            "accountID": "297945954695",
+                            "invoiceEntityID": "297945954695",
+                            "service": "AmazonWorkSpaces"
+                        },
+                        "window": {
+                            "start": "2023-05-01T00:00:00Z",
+                            "end": "2023-05-02T00:00:00Z"
+                        },
+                        "listCost": {
+                            "cost": 38,
+                            "kubernetesPercent": 0
+                        },
+                        "netCost": {
+                            "cost": 38,
+                            "kubernetesPercent": 0
+                        },
+                        "amortizedNetCost": {
+                            "cost": 38,
+                            "kubernetesPercent": 0
+                        },
+                        "invoicedCost": {
+                            "cost": 38,
+                            "kubernetesPercent": 0
+                        }
                     },
                     "awskms": {
                         "properties": {
                             "provider": "AWS",
-                            "workGroupID": "297945954695",
-                            "billingID": "297945954695",
-                            "service": "awskms",
-                            "label": ""
+                            "accountID": "297945954695",
+                            "invoiceEntityID": "297945954695",
+                            "service": "awskms"
                         },
-                        "kubernetesPercent": 0,
-                        "cost": 0.16129031999999963,
-                        "netCost": 0.16129031999999963
+                        "window": {
+                            "start": "2023-05-01T00:00:00Z",
+                            "end": "2023-05-02T00:00:00Z"
+                        },
+                        "listCost": {
+                            "cost": 0.2163978459999994,
+                            "kubernetesPercent": 0
+                        },
+                        "netCost": {
+                            "cost": 0.2163978459999994,
+                            "kubernetesPercent": 0
+                        },
+                        "amortizedNetCost": {
+                            "cost": 0.2163978459999994,
+                            "kubernetesPercent": 0
+                        },
+                        "invoicedCost": {
+                            "cost": 0.2163978459999994,
+                            "kubernetesPercent": 0
+                        }
                     }
                 },
                 "window": {
-                    "start": "2023-03-08T00:00:00Z",
-                    "end": "2023-03-09T00:00:00Z"
-                }
+                    "start": "2023-05-01T00:00:00Z",
+                    "end": "2023-05-02T00:00:00Z"
+                },
+                "aggregationProperties": [
+                    "service"
+                ]
             },
             {
-                "aggregates": {
-                    "AWSCloudTrail": {
-                        "properties": {
-                            "provider": "AWS",
-                            "workGroupID": "297945954695",
-                            "billingID": "297945954695",
-                            "service": "AWSCloudTrail",
-                            "label": ""
-                        },
-                        "kubernetesPercent": 0,
-                        "cost": 3.271654,
-                        "netCost": 3.271654
-                    },
-                    "AWSCostExplorer": {
-                        "properties": {
-                            "provider": "AWS",
-                            "workGroupID": "297945954695",
-                            "billingID": "297945954695",
-                            "service": "AWSCostExplorer",
-                            "label": ""
-                        },
-                        "kubernetesPercent": 0,
-                        "cost": 0.03,
-                        "netCost": 0.03
-                    },
-                    "AWSELB": {
-                        "properties": {
-                            "provider": "AWS",
-                            "workGroupID": "",
-                            "billingID": "297945954695",
-                            "service": "AWSELB",
-                            "label": ""
-                        },
-                        "kubernetesPercent": 0.7816112430769544,
-                        "cost": 20.21870167819999,
-                        "netCost": 20.21870167819999
-                    },
-                    "AWSGlue": {
-                        "properties": {
-                            "provider": "AWS",
-                            "workGroupID": "297945954695",
-                            "billingID": "297945954695",
-                            "service": "AWSGlue",
-                            "label": ""
-                        },
-                        "kubernetesPercent": 0,
-                        "cost": 0.20161768,
-                        "netCost": 0.20161768
-                    },
-                    "AWSLambda": {
-                        "properties": {
-                            "provider": "AWS",
-                            "workGroupID": "297945954695",
-                            "billingID": "297945954695",
-                            "service": "AWSLambda",
-                            "label": ""
-                        },
-                        "kubernetesPercent": 0,
-                        "cost": 0,
-                        "netCost": 0
-                    },
-                    "AWSQueueService": {
-                        "properties": {
-                            "provider": "AWS",
-                            "workGroupID": "297945954695",
-                            "billingID": "297945954695",
-                            "service": "AWSQueueService",
-                            "label": ""
-                        },
-                        "kubernetesPercent": 0,
-                        "cost": 0,
-                        "netCost": 0
-                    },
-                    "AmazonAthena": {
-                        "properties": {
-                            "provider": "AWS",
-                            "workGroupID": "297945954695",
-                            "billingID": "297945954695",
-                            "service": "AmazonAthena",
-                            "label": ""
-                        },
-                        "kubernetesPercent": 0,
-                        "cost": 9.43576475,
-                        "netCost": 9.43576475
-                    },
-                    "AmazonCloudWatch": {
-                        "properties": {
-                            "provider": "AWS",
-                            "workGroupID": "297945954695",
-                            "billingID": "297945954695",
-                            "service": "AmazonCloudWatch",
-                            "label": ""
-                        },
-                        "kubernetesPercent": 0,
-                        "cost": 1.8059822267000005,
-                        "netCost": 1.8059822267000005
-                    },
-                    "AmazonEC2": {
-                        "properties": {
-                            "provider": "AWS",
-                            "workGroupID": "",
-                            "billingID": "297945954695",
-                            "service": "AmazonEC2",
-                            "label": ""
-                        },
-                        "kubernetesPercent": 0.8638156396085854,
-                        "cost": 180.9191299668006,
-                        "netCost": 180.9191299668006
-                    },
-                    "AmazonECR": {
-                        "properties": {
-                            "provider": "AWS",
-                            "workGroupID": "297945954695",
-                            "billingID": "297945954695",
-                            "service": "AmazonECR",
-                            "label": ""
-                        },
-                        "kubernetesPercent": 0,
-                        "cost": 0.00008501639999999999,
-                        "netCost": 0.00008501639999999999
-                    },
-                    "AmazonECRPublic": {
-                        "properties": {
-                            "provider": "AWS",
-                            "workGroupID": "297945954695",
-                            "billingID": "297945954695",
-                            "service": "AmazonECRPublic",
-                            "label": ""
-                        },
-                        "kubernetesPercent": 0,
-                        "cost": 0,
-                        "netCost": 0
-                    },
-                    "AmazonEFS": {
-                        "properties": {
-                            "provider": "AWS",
-                            "workGroupID": "297945954695",
-                            "billingID": "297945954695",
-                            "service": "AmazonEFS",
-                            "label": ""
-                        },
-                        "kubernetesPercent": 0,
-                        "cost": 3.0720000000000005e-07,
-                        "netCost": 3.0720000000000005e-07
-                    },
-                    "AmazonEKS": {
-                        "properties": {
-                            "provider": "AWS",
-                            "workGroupID": "",
-                            "billingID": "297945954695",
-                            "service": "AmazonEKS",
-                            "label": ""
-                        },
-                        "kubernetesPercent": 1,
-                        "cost": 32.238463977100004,
-                        "netCost": 32.238463977100004
-                    },
-                    "AmazonFSx": {
-                        "properties": {
-                            "provider": "AWS",
-                            "workGroupID": "297945954695",
-                            "billingID": "297945954695",
-                            "service": "AmazonFSx",
-                            "label": ""
-                        },
-                        "kubernetesPercent": 0,
-                        "cost": 2.4844086337000006,
-                        "netCost": 2.4844086337000006
-                    },
-                    "AmazonPrometheus": {
-                        "properties": {
-                            "provider": "AWS",
-                            "workGroupID": "297945954695",
-                            "billingID": "297945954695",
-                            "service": "AmazonPrometheus",
-                            "label": ""
-                        },
-                        "kubernetesPercent": 0,
-                        "cost": 1.56778425,
-                        "netCost": 1.56778425
-                    },
-                    "AmazonQuickSight": {
-                        "properties": {
-                            "provider": "AWS",
-                            "workGroupID": "297945954695",
-                            "billingID": "297945954695",
-                            "service": "AmazonQuickSight",
-                            "label": ""
-                        },
-                        "kubernetesPercent": 0,
-                        "cost": 0.3870967679999999,
-                        "netCost": 0.3870967679999999
-                    },
-                    "AmazonRoute53": {
-                        "properties": {
-                            "provider": "AWS",
-                            "workGroupID": "297945954695",
-                            "billingID": "297945954695",
-                            "service": "AmazonRoute53",
-                            "label": ""
-                        },
-                        "kubernetesPercent": 0,
-                        "cost": 0.000056000000000000006,
-                        "netCost": 0.000056000000000000006
-                    },
-                    "AmazonS3": {
-                        "properties": {
-                            "provider": "AWS",
-                            "workGroupID": "",
-                            "billingID": "297945954695",
-                            "service": "AmazonS3",
-                            "label": ""
-                        },
-                        "kubernetesPercent": 0,
-                        "cost": 32.425120581700035,
-                        "netCost": 32.425120581700035
-                    },
-                    "AmazonVPC": {
-                        "properties": {
-                            "provider": "AWS",
-                            "workGroupID": "297945954695",
-                            "billingID": "297945954695",
-                            "service": "AmazonVPC",
-                            "label": ""
-                        },
-                        "kubernetesPercent": 0,
-                        "cost": 1.560002328400001,
-                        "netCost": 1.560002328400001
-                    },
-                    "awskms": {
-                        "properties": {
-                            "provider": "AWS",
-                            "workGroupID": "297945954695",
-                            "billingID": "297945954695",
-                            "service": "awskms",
-                            "label": ""
-                        },
-                        "kubernetesPercent": 0,
-                        "cost": 0.08064515999999997,
-                        "netCost": 0.08064515999999997
-                    }
-                },
+                "cloudCosts": {},
                 "window": {
-                    "start": "2023-03-09T00:00:00Z",
-                    "end": "2023-03-10T00:00:00Z"
-                }
+                    "start": "2023-05-02T00:00:00Z",
+                    "end": "2023-05-03T00:00:00Z"
+                },
+                "aggregationProperties": [
+                    "service"
+                ]
             }
         ],
         "window": {
-            "start": "2023-03-07T00:00:00Z",
-            "end": "2023-03-10T00:00:00Z"
+            "start": "2023-04-30T00:00:00Z",
+            "end": "2023-05-03T00:00:00Z"
         }
     }
-}http://eks.dev1.niko.kubecost.xyz:9090/model/cloudCost/aggregate?window=3d&aggregate=service&filterProviders=AWShttp://eks.dev1.niko.kubecost.xyz:9090/model/cloudCost/aggregate?window=3d&aggregate=service&filterProviders=AWShttp://eks.dev1.niko.kubecost.xyz:9090/model/cloudCost/aggregate?window=3d&aggregate=service&filterProviders=AWShttp://eks.dev1.niko.kubecost.xyz:9090/model/cloudCost/aggregate?window=3d&aggregate=service&filterProviders=AWShttp://eks.dev1.niko.kubecost.xyz:9090/model/cloudCost/aggregate?window=3d&aggregate=service&filterProviders=AWShttp://eks.dev1.niko.kubecost.xyz:9090/model/cloudCost/aggregate?window=3d&aggregate=service&filterProviders=AWS
+}
 ```
+````
+{% endtab %}
+{% endtabs %}
+
+#### Query for cloud net costs within the past two days, aggregated by accounts, filtered only for Amazon EC2 costs
+
+{% tabs %}
+{% tab title="Request" %}
+```
+http:/<your-kubecost-address>/model/cloudCost/view?window=2d&filterServices=AmazonEC2&aggregate=invoiceEntityIDhttp:/<your-kubecost-address>/model/cloudCost/view?window=2d&filterServices=AmazonEC2&aggregate=invoiceEntityIDhttp:/<your-kubecost-address>/model/cloudCost/view?window=2d&filterServices=AmazonEC2&aggregate=invoiceEntityID
+```
+{% endtab %}
+
+{% tab title="Response" %}
+````
+```json
+{
+    "code": 200,
+    "data": {
+        "graphData": [
+            {
+                "start": "2023-05-01T00:00:00Z",
+                "end": "2023-05-02T00:00:00Z",
+                "items": [
+                    {
+                        "name": "297945954695",
+                        "value": 309.4241635897003
+                    }
+                ]
+            },
+            {
+                "start": "2023-05-02T00:00:00Z",
+                "end": "2023-05-03T00:00:00Z",
+                "items": []
+            }
+        ],
+        "tableTotal": {
+            "name": "Totals",
+            "kubernetesPercent": 0.6593596481215193,
+            "cost": 309.4241635897003
+        },
+        "tableRows": [
+            {
+                "name": "297945954695",
+                "kubernetesPercent": 0.6593596481215193,
+                "cost": 309.4241635897003
+            }
+        ]
+    }
+```
+````
 {% endtab %}
 {% endtabs %}
