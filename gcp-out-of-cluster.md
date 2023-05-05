@@ -152,7 +152,7 @@ export SERVICE_ACCOUNT_NAME=<Unique name for your service account>
 Once these values have been set, this script can be run and will create the service account needed for this configuration.
 
 ```
-gcloud config set project KUBECOST_PROJECT_ID
+gcloud config set project $KUBECOST_PROJECT_ID
 gcloud iam service-accounts create $SERVICE_ACCOUNT_NAME --display-name "Cross Project CUR" --format json
 gcloud projects add-iam-policy-binding $BIG_QUERY_PROJECT_ID --member serviceAccount:$SERVICE_ACCOUNT_NAME@$KUBECOST_PROJECT_ID.iam.gserviceaccount.com --role roles/compute.viewer
 gcloud projects add-iam-policy-binding $BIG_QUERY_PROJECT_ID --member serviceAccount:$SERVICE_ACCOUNT_NAME@$KUBECOST_PROJECT_ID.iam.gserviceaccount.com --role roles/bigquery.user
