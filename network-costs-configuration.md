@@ -33,6 +33,32 @@ networkCosts:
   enabled: true
 ```
 
+## Additional configuration
+
+You can view a list of common config options [here](https://github.com/kubecost/cost-analyzer-helm-chart/blob/700cfa306c8e78bc9a1039b584769b9a0e0757d0/cost-analyzer/values.yaml#L573).
+
+### Prometheus:
+
+- If using Kubecost-bundled Prometheus instance, the scrape is automatically configured.
+- If you are integrating with an existing Prometheus, you can set `networkCosts.prometheusScrape=true` and the network costs service should be auto-discovered.
+- Alternatively a serviceMonitor is also [available](https://github.com/kubecost/cost-analyzer-helm-chart/blob/700cfa306c8e78bc9a1039b584769b9a0e0757d0/cost-analyzer/values.yaml#L716).
+
+### Log Level:
+
+- You can adjust log level using the `extraArgs` config:
+
+    ```yaml
+    networkCosts:
+      enabled: true
+      extraArgs:
+        - "-v=0"
+    ```
+
+- The levels range from 0 to 5, with 0 being the least verbose (only showing panics) and 5 being the most verbose (showing trace-level information).
+- Ref: [sig-instrumentation](https://github.com/kubernetes/community/blob/0e9fa4a1c45203527a7ce35eaff09204d6b7b331/contributors/devel/sig-instrumentation/logging.md)
+
+> **Note**: Network cost, which is disabled by default, needs to be run as a privileged pod to access the relevant networking kernel module on the host machine.
+
 ## Cloud Provider Service Tagging
 
 Service tagging allows kubecost to identify network activity between the pods and various cloud services (e.g. AWS S3, EC2, RDS, Azure Storage, Google Cloud Storage).
@@ -69,18 +95,6 @@ networkCosts:
       #      - "15.128.15.2"
       #      - "20.0.0.0/8"
 ```
-
-## Additional configuration
-
-You can view a list of common config options [here](https://github.com/kubecost/cost-analyzer-helm-chart/blob/700cfa306c8e78bc9a1039b584769b9a0e0757d0/cost-analyzer/values.yaml#L573).
-
-If using the included Prometheus instance, the scrape is automatically configured.
-
-If you are integrating with an existing Prometheus, you can set `networkCosts.prometheusScrape=true` and the network costs service should be auto-discovered.
-
-Alternatively a serviceMonitor is also [available](https://github.com/kubecost/cost-analyzer-helm-chart/blob/700cfa306c8e78bc9a1039b584769b9a0e0757d0/cost-analyzer/values.yaml#L716).
-
-> **Note**: Network cost, which is disabled by default, needs to be run as a privileged pod to access the relevant networking kernel module on the host machine.
 
 ## Resource limiting
 
