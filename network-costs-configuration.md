@@ -39,7 +39,7 @@ You can view a list of common config options [here](https://github.com/kubecost/
 
 ### Prometheus:
 
-- If using Kubecost's bundled Prometheus instance, the scrape is automatically configured.
+- If using Kubecost-bundled Prometheus instance, the scrape is automatically configured.
 - If you are integrating with an existing Prometheus, you can set `networkCosts.prometheusScrape=true` and the network costs service should be auto-discovered.
 - Alternatively a serviceMonitor is also [available](https://github.com/kubecost/cost-analyzer-helm-chart/blob/700cfa306c8e78bc9a1039b584769b9a0e0757d0/cost-analyzer/values.yaml#L716).
 
