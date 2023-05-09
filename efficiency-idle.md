@@ -20,6 +20,13 @@ For example, if a pod is requesting 2CPU and 1GB, using 500mCPU and 500MB, CPU o
 
 Cluster idle cost is defined as the difference between the cost of allocated resources and the cost of the hardware they run on. Allocation is defined as the max of usage and requests. It can also be expressed as follows:
 
+> _idle\_cost = sum(cluster\_cost) - (cpu\_allocation\_cost + ram\_allocation\_cost + gpu\_allocation\_cost)_
+>
+> where\
+> _allocation = max(request, usage)_
+
+Node idle cost can be expressed as:
+
 > _idle\_cost = sum(node\_cost) - (cpu\_allocation\_cost + ram\_allocation\_cost + gpu\_allocation\_cost)_
 >
 > where\

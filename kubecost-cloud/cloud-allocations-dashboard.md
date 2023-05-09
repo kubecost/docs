@@ -8,9 +8,35 @@ Service in this context refers to a Kubernetes object that exposes an interface 
 
 Costs aggregations are also visible by other meaningful organizational concepts, e.g. Team, Department, and Product. These aggregations are based on Kubernetes labels, referenced at both the pod and namespace-level, with labels at the pod-level being favored over the namespace label when both are present. Workloads without the relevant label will be shown as `__unallocated__`.
 
+## UI Overview
+
+### Date range
+
+You can control the window of allocation spend by selecting _Last 7 days_ (the default option), and choosing the time window you want to view spend for. When using custom dates instead of a preset, select Apply to make changes.
+
+### Aggregate By
+
+Here you can aggregate cost by namespace, deployment, service, and other native Kubernetes concepts. While selecting _Single Aggregation_, you will only be able to categorize by one concept at a time. While selecting _Multi Aggregation_, you will be able to filter for multiple concepts at the same time.
+
+{% hint style="info" %}
+Service in this context refers to a Kubernetes object that exposes an interface to outside consumers, not a cloud service.
+{% endhint %}
+
+Costs aggregations are also visible by other meaningful organizational concepts, e.g. Team, Department, and Product. These aggregations are based on Kubernetes labels, referenced at both the pod and namespace-level, with labels at the pod-level being favored over the namespace label when both are present. Workloads without the relevant label will be shown as `__unallocated__`.
+
 ### Edit Report
 
 Selecting _Edit Report_ will provide more options of filtering and visualizing your window query.
+
+#### Idle costs
+
+For an overview of what idle costs are and how they are calculated, see the [bottom of the page](https://docs.kubecost.com/kubecost-cloud/cloud-allocations-dashboard#idle).
+
+Customize how you wish idle costs to be displayed in your report chart:
+
+* Hide: Hides idle costs.
+* Separate By Cluster: Associates idle costs with the clusters they are a part of.
+* Separate By Node: Associates idle costs with the nodes they are scheduled to.
 
 #### Chart
 
@@ -62,7 +88,7 @@ The three horizontal dots icon provides additional means of handling your query 
 
 Cluster idle cost is defined as the difference between the cost of allocated resources and the cost of the hardware they run on. Allocation is defined as the max of usage and requests. It can also be expressed as follows:
 
-> _idle\_cost = sum(node\_cost) - (cpu\_allocation\_cost + ram\_allocation\_cost + gpu\_allocation\_cost)_
+> _idle\_cost = sum(cluster\_cost) - (cpu\_allocation\_cost + ram\_allocation\_cost + gpu\_allocation\_cost)_
 >
 > where\
 > _allocation = max(request, usage)_
