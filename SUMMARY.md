@@ -60,8 +60,9 @@
   * [User Management - SSO/OIDC](user-management-oidc.md)
   * [Tuning Resource Consumption](resource-consumption.md)
   * [Deploy Kubecost Staging Builds](staging.md)
-  * [Cluster Controller](install-and-configure/advanced-configuration/controller/README.md)
-    * [TurndownSchedule Migration Guide](install-and-configure/advanced-configuration/controller/turndown-schedule-migration-guide.md)
+  * [Cluster Controller](controller.md)
+    * [Cluster Turndown](install-and-configure/advanced-configuration/controller/cluster-turndown.md)
+    * [TurndownSchedule Migration Guide](turndown-schedule-migration-guide.md)
   * [Kubecost Data Status Metrics](install-and-configure/advanced-configuration/data-status-metrics.md)
   * [High Availability Kubecost](high-availability.md)
   * [Availability Tiers](availability-tiers.md)
@@ -81,7 +82,6 @@
     * [Advanced Reporting](advanced-reports.md)
   * [Alerts](alerts.md)
   * [Savings](savings.md)
-    * [Kubecost Actions](using-kubecost/navigating-the-kubecost-ui/savings/kubecost-actions.md)
     * [Automatic Request Right-Sizing](auto-request-sizing.md)
       * [ContainerStats Pipeline](containerstats-pipeline.md)
       * [1-click Request Sizing](using-kubecost/navigating-the-kubecost-ui/savings/auto-request-sizing/one-click-request-sizing.md)
@@ -122,6 +122,7 @@
 
 * [Kubecost Core Architecture Overview](architecture.md)
 * [OpenCost Product Comparison](opencost-product-comparison.md)
+* [Kubecost Cloud Architecture Overview](architecture/kubecost-cloud-architecture.md)
 * [Kubecost Metrics](user-metrics.md)
 * [Kube-State-Metrics (KSM) Emission](ksm-metrics.md)
 * [Calculating Node Pricing](node-pricing.md)
@@ -130,16 +131,6 @@
 * [Ports](ports.md)
 * [Kubecost Release Process](release-process.md)
 * [Outages](outages.md)
-
-## Kubecost Cloud
-
-* [What is Kubecost Cloud?](kubecost-cloud/what-is-kubecost-cloud.md)
-* [Kubecost Cloud Architecture Overview](kubecost-cloud-architecture.md)
-* [Cloud Installation and Onboarding](kubecost-cloud/cloud-installation-and-onboarding.md)
-* [Cloud Allocations Dashboard](kubecost-cloud/cloud-allocations-dashboard.md)
-* [Cloud Assets Dashboard](kubecost-cloud/cloud-assets-dashboard.md)
-* [Cloud Reports Dashboard](kubecost-cloud/cloud-reports-dashboard.md)
-* [Receiving Kubecost Cloud Support](kubecost-cloud/receiving-kubecost-cloud-support.md)
 
 ## Integrations
 

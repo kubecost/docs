@@ -1,6 +1,6 @@
 # Savings
 
-The Savings page, also known as the Savings Insights page, provides miscellaneous functionality to help you use resources more effectively and assess wasteful spending.
+The Savings page provides miscellaneous functionality to help you use resources more effectively and assess wasteful spending.
 
 By default, the Savings page and any displayed metrics (Estimated monthly savings available, for example) will apply to all connected clusters. You can change this by selecting the dropdown in the top right, then selecting an individual cluster.
 

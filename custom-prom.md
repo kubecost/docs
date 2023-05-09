@@ -20,6 +20,7 @@ Kubecost requires the following minimum versions:
 * node-exporter - v0.16+ (May 18) \[Optional]
 
 ## Instructions
+
 ### Disable node-exporter and kube-state-metrics (recommended)
 
 If you have node-exporter and/or KSM running on your cluster, follow this step to disable the Kubecost included versions. Additional detail on [KSM requirements](ksm-metrics.md).
@@ -45,12 +46,11 @@ helm upgrade --install kubecost \
     helm upgrade --install kubecost \
       --repo https://kubecost.github.io/cost-analyzer/ cost-analyzer \
       --namespace kubecost --create-namespace \
-      --set global.prometheus.fqdn=http://<prometheus-server-service-name>.<prometheus-server-namespace>.svc:<port> \
+      --set global.prometheus.fqdn=http://<prometheus-server-service-name>:<port>.<prometheus-server-namespace>.svc \
       --set global.prometheus.enabled=false
     ```
 
     > **Note**: The fqdn can be a full path: https://prometheus-prod-us-central-x.grafana.net/api/prom/ if you use Grafana Cloud managed Prometheus. Learn more at [Grafana Cloud Integration for Kubecost](grafana-cloud-integration.md).
-
 2. Have your Prometheus scrape the cost-model `/metrics` endpoint. These metrics are needed for reporting accurate pricing data. Here is an example scrape config:
 
 ```yaml
@@ -67,16 +67,15 @@ helm upgrade --install kubecost \
         port: 9003
 ```
 
-This config needs to be added to `extraScrapeConfigs` in the Prometheus configuration. Example [extraScrapeConfigs.yaml](./images/extraScrapeConfigs.yaml)
+This config needs to be added to `extraScrapeConfigs` in the Prometheus configuration. Example [extraScrapeConfigs.yaml](images/extraScrapeConfigs.yaml)
 
-3. By default, the Prometheus chart included with Kubecost (bundled-Prometheus) contains scrape configs optimized for Kubecost-required metrics. You need to add those scrape configs jobs into your existing Prometheus setup to allow Kubecost to provide more accurate cost data and optimize the required resources for your existing Prometheus. You can find the full scrape configs of our bundled-Prometheus [here](https://github.com/kubecost/cost-analyzer-helm-chart/blob/7c0a385b878829510eafaeff4ddf534196985040/cost-analyzer/charts/prometheus/values.yaml#L1160-L1416). You can check [Prometheus documentation](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#scrape_config) for more information about the scrape config, or read this [documentation](https://github.com/prometheus-operator/prometheus-operator/blob/main/Documentation/additional-scrape-config.md) if you are using Prometheus Operator.
+3. By default, the Prometheus chart included with Kubecost (bundled-Prometheus) contains scrape configs optimized for Kubecost-required metrics. You need to add those scrape configs jobs into your existing Prometheus setup to allow Kubecost to provide more accurate cost data and optimize the required resources for your existing Prometheus. You can find the full scrape configs of our bundled-Prometheus [here](https://github.com/kubecost/cost-analyzer-helm-chart/blob/7c0a385b878829510eafaeff4ddf534196985040/cost-analyzer/charts/prometheus/values.yaml#L1160-L1416). You can check [Prometheus documentation](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#scrape\_config) for more information about the scrape config, or read this [documentation](https://github.com/prometheus-operator/prometheus-operator/blob/main/Documentation/additional-scrape-config.md) if you are using Prometheus Operator.
 
 ### Recording rules
 
 > **Note**: This step is optional. If you do not set up Kubecost's CPU usage recording rule, Kubecost will fall back to a [PromQL subquery](https://prometheus.io/blog/2019/01/28/subquery-support/) which may put unnecessary load on your Prometheus.
 
-Kubecost-bundled Prometheus includes a recording rule used to calculate CPU usage max, a critical component of the request right-sizing recommendation functionality. 
-Add the recording rules to reduce query load [here](https://github.com/kubecost/cost-analyzer-helm-chart/blob/v1.102/kubecost.yaml#L399).
+Kubecost-bundled Prometheus includes a recording rule used to calculate CPU usage max, a critical component of the request right-sizing recommendation functionality. Add the recording rules to reduce query load [here](https://github.com/kubecost/cost-analyzer-helm-chart/blob/v1.102/kubecost.yaml#L399).
 
 Alternatively, if your environment supports serviceMonitors and prometheusRules, pass these values to your Helm install:
 
@@ -100,7 +99,7 @@ prometheusRule:
 
 To confirm this job is successfully scraped by Prometheus, you can view the Targets page in Prometheus and look for a job named `kubecost`.
 
-![Prometheus Targets](./images/prom-targets.png)
+![Prometheus Targets](images/prom-targets.png)
 
 ### Node exporter metric labels
 
@@ -256,7 +255,7 @@ Good:
 
 In Kubecost, view basic diagnostic information for Prometheus metrics by selecting _Settings_ in the left navigation, then scrolling down to Prometheus Status, as seen below:
 
-![Prometheus status diagnostic](./images/prom-status.png)
+![Prometheus status diagnostic](images/prom-status.png)
 
 ### Data retention
 
