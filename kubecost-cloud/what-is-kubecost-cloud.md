@@ -1,6 +1,6 @@
 # What is Kubecost Cloud?
 
-Kubecost Cloud is a SaaS solution that offers easier deployment and more convenient maintenance as an alternative to our on-prem product.
+Kubecost Cloud is a SaaS solution that offers easier deployment and more convenient maintenance as an alternative to our on-prem product. It is currently in Public Beta.
 
 ## Functionality
 
