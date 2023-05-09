@@ -1,10 +1,22 @@
 # AWS Cloud Integration
 
-By default, Kubecost pulls On-Demand asset prices from the public AWS pricing API. For more accurate pricing, this integration will allow Kubecost to reconcile your current measured Kubernetes spend with your actual AWS bill. This integration also properly accounts for Enterprise Discount Programs, Reserved Instance usage, Savings Plans, Spot usage, and more.
+By default, Kubecost pulls on-demand asset prices from the public AWS pricing API. For more accurate pricing, this integration will allow Kubecost to reconcile your current measured Kubernetes spend with your actual AWS bill. This integration also properly accounts for Enterprise Discount Programs, Reserved Instance usage, Savings Plans, Spot usage, and more.
 
 You will need permissions to create the Cost and Usage Report (CUR), and add IAM credentials for Athena and S3. Optional permission is the ability to add and execute CloudFormation templates. Kubecost does not require root access in the AWS account.
 
-A Github repository with sample files which follow the below instructions can be found [here](https://github.com/kubecost/poc-common-configurations/tree/main/aws).
+A GitHub repository with sample files which follow the below instructions can be found [here](https://github.com/kubecost/poc-common-configurations/tree/main/aws).
+
+## AWS terminology and overview
+
+Integrating your AWS account with Kubecost may be a complicated process if you aren’t deeply familiar with the AWS platform and how it interacts with Kubecost. This section provides an overview of some of the key terminology and AWS services that are involved in the process of integration.
+
+### Terminology
+
+**Cost and Usage Report**: AWS report which tracks cloud spending and writes to an Amazon Simple Storage Service (Amazon S3) bucket for ingestion and long term historical data. The CUR is originally formatted as a CSV, but when integrated with Athena, is converted to Parquet format.
+
+**Amazon Athena:** Analytics service which queries the CUR S3 bucket for your AWS cloud spending, then outputs data to a separate S3 bucket. Kubecost uses Athena to query for the bill data to perform [reconciliation](https://docs.kubecost.com/install-and-configure/install/cloud-integration#reconciliation). Athena is technically optional for AWS cloud integration, but as a result, Kubecost will only provide unreconciled costs (on-demand public rates).
+
+**S3 bucket:** Cloud object storage tool which both CURs and Athena output cost data to. Kubecost needs access to these buckets in order to read that data.
 
 ## Cost and Usage Report integration
 
@@ -16,13 +28,17 @@ Follow [these steps](https://docs.aws.amazon.com/cur/latest/userguide/cur-create
 * Select the checkbox to enable _Resource IDs_ in the report.
 * Select the checkbox to enable _Athena integration_ with the report.
 
+{% hint style="info" %}
+For CUR data written to an S3 bucket only accessed by Kubecost, it is safe to expire or delete the objects after seven days of retention.
+{% endhint %}
+
 Remember the name of the bucket you create for CUR data. This will be used in Step 2.
+
+AWS may take up to 24 hours to publish data. Wait until this is complete before continuing to the next step.
 
 {% hint style="warning" %}
 If you believe you have the correct permissions, but cannot access the Billing and Cost Management page, have the owner of your organization's root account follow [these instructions](https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/control-access-billing.html#ControllingAccessWebsite-Activate).
 {% endhint %}
-
-AWS may take up to 24 hours to publish data. Wait until this is complete before continuing to the next step.
 
 ### Step 2: Setting up Athena
 
@@ -41,6 +57,10 @@ Once Athena is set up with the CUR, you will need to create a new S3 bucket for 
 5. Navigate to the [Amazon Athena](https://console.aws.amazon.com/athena) dashboard.
 6. Select _Settings_, then select _Manage._ The Manage settings window opens.
 7. Set _Location of query result_ to the S3 bucket you just created, then select _Save._
+
+{% hint style="info" %}
+For Athena query results written to an S3 bucket only accessed by Kubecost, it is safe to expire or delete the objects after 1 day of retention.
+{% endhint %}
 
 ### Step 3: Setting up IAM permissions
 
@@ -425,7 +445,7 @@ To add values in the Kubecost UI, select _Settings_ from the left navigation, th
 | Athena Result Bucket | An S3 bucket to store Athena query results that you’ve created that Kubecost has permission to access |
 | AWS account ID       | The AWS account ID where the Athena CUR is, likely your management account.                           |
 
-&#x20;When you are done, select _Update_ to confirm.
+When you are done, select _Update_ to confirm.
 
 #### Option 2: Add config values via Helm
 
@@ -444,7 +464,9 @@ If you set any `kubecostProductConfigs` from the Helm chart, all changes via the
   * The table name is typically the database name with the leading `athenacurcfn_` removed (but is not available as a CloudFormation stack resource)
 * `athenaWorkgroup` The workgroup assigned to be used with Athena. If not specified, defaults to `Primary`
 
-> **Note**: Make sure to use only underscore as a delimiter if needed for tables and views. Using a hyphen/dash will not work even though you might be able to create it. See the [AWS docs](https://docs.aws.amazon.com/athena/latest/ug/tables-databases-columns-names.html) for more info.
+{% hint style="warning" %}
+Make sure to use only underscore as a delimiter if needed for tables and views. Using a hyphen/dash will not work even though you might be able to create it. See the [AWS docs](https://docs.aws.amazon.com/athena/latest/ug/tables-databases-columns-names.html) for more info.
+{% endhint %}
 
 * If you are using a multi-account setup, you will also need to set `.Values.kubecostProductConfigs.masterPayerARN` to the Amazon Resource Number (ARN) of the role in the management account, e.g. `arn:aws:iam::530337586275:role/KubecostRole`.
 
@@ -483,7 +505,9 @@ You can also check query history to see if any queries are failing:
     ```
 * **Resolution:** This error is typically caused by the incorrect (Athena results) s3 bucket being specified in the CloudFormation template of Step 3 from above. To resolve the issue, ensure the bucket used for storing the AWS CUR report (Step 1) is specified in the `S3ReadAccessToAwsBillingData` SID of the IAM policy (default: kubecost-athena-access) attached to the user or role used by Kubecost (Default: KubecostUser / KubecostRole). See the following example.
 
-> **Note:** This error can also occur when the management account cross-account permissions are incorrect, however the solution may differ.
+{% hint style="info" %}
+This error can also occur when the management account cross-account permissions are incorrect, however the solution may differ.
+{% endhint %}
 
 ```
         {
@@ -544,7 +568,7 @@ QueryAthenaPaginated: start query error: operation error Athena: StartQueryExecu
 ```
 
 * **Resolution:** Verify that `s3://` was included in the bucket name when setting the `.Values.kubecostProductConfigs.athenaBucketName` Helm value.
-	
+
 ## Summary and pricing
 
 AWS services used here are:
