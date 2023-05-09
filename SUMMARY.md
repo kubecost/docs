@@ -133,6 +133,16 @@
 * [Kubecost Release Process](release-process.md)
 * [Outages](outages.md)
 
+## Kubecost Cloud
+
+* [What is Kubecost Cloud?](kubecost-cloud/what-is-kubecost-cloud.md)
+* [Kubecost Cloud Architecture Overview](kubecost-cloud/kubecost-cloud-architecture-overview.md)
+* [Cloud Installation and Onboarding](kubecost-cloud/cloud-installation-and-onboarding.md)
+* [Cloud Allocations Dashboard](kubecost-cloud/cloud-allocations-dashboard.md)
+* [Cloud Assets Dashboard](kubecost-cloud/cloud-assets-dashboard.md)
+* [Cloud Reports Dashboard](kubecost-cloud/cloud-reports-dashboard.md)
+* [Receiving Kubecost Cloud Support](kubecost-cloud/receiving-kubecost-cloud-support.md)
+
 ## Integrations
 
 * [Custom Webhook to Create a Kubecost Stage in Spinnaker](spinnaker-custom-webhook.md)
