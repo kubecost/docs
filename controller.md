@@ -1,35 +1,60 @@
 # Cluster Controller
 
+{% hint style="warning" %}
+The Cluster Controller is currently in beta. Please read the documentation carefully.
+{% endhint %}
+
 Kubecost's Cluster Controller contains Kubecost's automation features, and thus has write permission to certain resources on your cluster.
 
-Cluster controller enables actions like:
+The Cluster Controller enables actions like:
 
-* Automated cluster scaledown
+* [Automated cluster turndown](https://docs.kubecost.com/install-and-configure/advanced-configuration/controller/cluster-turndown)
 * 1-click cluster right-sizing
 * [Automated request right-sizing](auto-request-sizing.md)
 
-This document shows you how to setup and enable this functionality in the Kubecost product.&#x20;
+This document shows you how to setup and enable this functionality in the Kubecost product.
+
+## Feature functionality
+
+The Cluster Controller can be enabled on any cluster, but certain functionality will only be enabled based on your cloud service provider (CSP) and setup:
+
+* The Controller itself and automated request right-sizing are available on all clusters and setups.
+* Cluster turndown and 1-click cluster right-sizing are only available on GKE, EKS, and Kops-on-AWS clusters, after setting up a provider service key.
+
+Therefore, the Provider service key setup section below is optional, but will limit functionality if skipped.
+
+## Provider service key setup
 
 {% hint style="warning" %}
-Cluster Controller supports GKE and EKS clusters and is currently in beta. If you are enabling the Cluster Controller for a GKE/EKS cluster, follow the specialized instructions as usual. If you aren't using a GKE/EKS cluster, skip ahead to the [Deploying ](https://docs.kubecost.com/install-and-configure/advanced-configuration/controller#deploying)section below.
+If you are enabling the Cluster Controller for a GKE/EKS/Kops AWS cluster, follow the specialized instructions for your CSP(s) below. If you aren't using a GKE/EKS Kops AWS cluster, skip ahead to the [Deploying ](https://docs.kubecost.com/install-and-configure/advanced-configuration/controller#deploying)section below.
 {% endhint %}
 
-## GKE setup
+<details>
 
-The following command performs the steps required to set up a service account. [More info](https://github.com/kubecost/cluster-turndown/blob/master/scripts/README.md)
+<summary>GKE setup</summary>
 
+
+
+The following command performs the steps required to set up a service account. [More info](https://github.com/kubecost/cluster-turndown/blob/master/scripts/README.md).
+
+{% code overflow="wrap" %}
 ```bash
 /bin/bash -c "$(curl -fsSL https://github.com/kubecost/cluster-turndown/releases/latest/download/gke-create-service-key.sh)" -- <Project ID> <Service Account Name> <Namespace> cluster-controller-service-key
 ```
+{% endcode %}
 
-To use [this setup script](https://github.com/kubecost/cluster-turndown/blob/master/scripts/gke-create-service-key.sh) supply the following required parameters:
+To use [this setup script](https://github.com/kubecost/cluster-turndown/blob/master/scripts/gke-create-service-key.sh), provide the following required parameters:
 
-* **Project ID**: The GCP project identifier you can find via: `gcloud config get-value project`
-* **Service Account Name**: The desired service account name to create, e.g. `kubecost-controller`
-* **Namespace**: This should be the namespace which Kubecost will be installed, e.g `kubecost`
+* **Project ID**: The GCP project identifier. Can be found via: `gcloud config get-value project`
+* **Namespace**: The namespace which Kubecost will be installed, e.g `kubecost`
+* **Service Account Name**: The name of the service account to be created. Should be between 6 and 20 characters, e.g. `kubecost-controller`
 * **Secret Name**: This should always be set to `cluster-controller-service-key`, which is the secret name mounted by the Kubecost Helm chart.
 
-## EKS setup
+</details>
+
+<details>
+
+<summary>EKS setup</summary>
 
 Create a new User with `AutoScalingFullAccess` permissions. Create a new file, _service-key.json_, and use the access key ID and secret access key to fill out the following template:
 
@@ -42,16 +67,128 @@ Create a new User with `AutoScalingFullAccess` permissions. Create a new file, _
 
 Then, run the following to create the secret:
 
+{% code overflow="wrap" %}
 ```bash
 $ kubectl create secret generic cluster-controller-service-key -n <NAMESPACE> --from-file=service-key.json
 ```
+{% endcode %}
+
+</details>
+
+<details>
+
+<summary>Kops-on-AWS setup</summary>
+
+For EKS cluster provisioning, if using `eksctl`, make sure that you use the `--managed` option when creating the cluster. Unmanaged node groups should be upgraded to managed. [More info](https://eksctl.io/usage/eks-managed-nodes/).
+
+Create a new user or IAM role with `AutoScalingFullAccess` permissions. JSON definition of those permissions:
+
+{% code overflow="wrap" %}
+```
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": "autoscaling:*",
+            "Resource": "*"
+        },
+        {
+            "Effect": "Allow",
+            "Action": "cloudwatch:PutMetricAlarm",
+            "Resource": "*"
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "ec2:DescribeAccountAttributes",
+                "ec2:DescribeAvailabilityZones",
+                "ec2:DescribeImages",
+                "ec2:DescribeInstanceAttribute",
+                "ec2:DescribeInstances",
+                "ec2:DescribeKeyPairs",
+                "ec2:DescribeLaunchTemplateVersions",
+                "ec2:DescribePlacementGroups",
+                "ec2:DescribeSecurityGroups",
+                "ec2:DescribeSpotInstanceRequests",
+                "ec2:DescribeSubnets",
+                "ec2:DescribeVpcClassicLink"
+            ],
+            "Resource": "*"
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "elasticloadbalancing:DescribeLoadBalancers",
+                "elasticloadbalancing:DescribeTargetGroups"
+            ],
+            "Resource": "*"
+        },
+        {
+            "Effect": "Allow",
+            "Action": "iam:CreateServiceLinkedRole",
+            "Resource": "*",
+            "Condition": {
+                "StringEquals": {
+                    "iam:AWSServiceName": "autoscaling.amazonaws.com"
+                }
+            }
+        }
+    ]
+}
+
+
+```
+{% endcode %}
+
+For EKS clusters, add the following permissions to the above policy for EKS API access:
+
+{% code overflow="wrap" %}
+```
+{
+    "Effect": "Allow",
+    "Action": [
+        "eks:ListClusters",
+        "eks:DescribeCluster",
+        "eks:DescribeNodegroup",
+        "eks:ListNodegroups",
+        "eks:CreateNodegroup",
+        "eks:UpdateClusterConfig",
+        "eks:UpdateNodegroupConfig",
+        "eks:DeleteNodegroup",
+        "eks:ListTagsForResource",
+        "eks:TagResource",
+        "eks:UntagResource"
+    ],
+    "Resource": "*"
+}
+```
+{% endcode %}
+
+Create a new file, _service-key.json_, and use the access key ID and secret access key to fill out the following template:
+
+```
+{
+    "aws_access_key_id": "<ACCESS_KEY_ID>",
+    "aws_secret_access_key": "<SECRET_ACCESS_KEY>"
+}
+```
+
+Then run the following to create the secret:
+
+{% code overflow="wrap" %}
+```
+$ kubectl create secret generic cluster-controller-service-key -n <NAMESPACE> --from-file=service-key.json
+```
+{% endcode %}
+
+</details>
 
 ## Deploying
 
-Once the secret has been successfully created containing the provider service key, you can enable the `cluster-controller` in the Helm chart by finding the `clusterController` config block and setting `enabled: true`
+You can now enable the Cluster Controller in the Helm chart by finding the `clusterController` config block and setting `enabled: true`
 
 ```yaml
-# Kubecost Cluster Controller for Right Sizing and Cluster Turndown
 clusterController:
     enabled: true
 ```
@@ -62,11 +199,10 @@ You may also enable via `--set` when running Helm install:
 --set clusterController.enabled=true
 ```
 
-## Using automated cluster scaledown
+## Verify the Cluster Controller is running
 
-Cluster Controller wraps all functionality in and provides the same interface/CRDs as https://github.com/kubecost/cluster-turndown. Follow that documentation for usage instructions. You can safely ignore the deployment instructions in that README because you have already deployed Cluster Controller.
+You can verify that the Cluster Controller is running by issuing the following:
 
-{% hint style="info" %}
-The v1 -> v2 breaking change mentioned in the cluster-turndown README also applies to Cluster Controller, but for v0.0.6 -> v0.1.0. Cluster Controller was upgraded to v0.1.0 in v1.94 of Kubecost. Follow the [migration guide](turndown-schedule-migration-guide.md) if you use turndown in a version of Kubecost earlier than v1.94 and are upgrading to v1.94+ of Kubecost.
-{% endhint %}
-
+```
+kubectl get pods -n kubecost -l app=kubecost-cluster-controller
+```

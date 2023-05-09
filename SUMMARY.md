@@ -82,6 +82,7 @@
     * [Advanced Reporting](advanced-reports.md)
   * [Alerts](alerts.md)
   * [Savings](savings.md)
+    * [Savings Actions](using-kubecost/navigating-the-kubecost-ui/savings/savings-actions.md)
     * [Automatic Request Right-Sizing](auto-request-sizing.md)
       * [ContainerStats Pipeline](containerstats-pipeline.md)
       * [1-click Request Sizing](using-kubecost/navigating-the-kubecost-ui/savings/auto-request-sizing/one-click-request-sizing.md)
