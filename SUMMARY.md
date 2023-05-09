@@ -121,7 +121,6 @@
 
 * [Kubecost Core Architecture Overview](architecture.md)
 * [OpenCost Product Comparison](opencost-product-comparison.md)
-* [Kubecost Cloud Architecture Overview](kubecost-cloud-architecture.md)
 * [Kubecost Metrics](user-metrics.md)
 * [Kube-State-Metrics (KSM) Emission](ksm-metrics.md)
 * [Calculating Node Pricing](node-pricing.md)
@@ -130,6 +129,16 @@
 * [Ports](ports.md)
 * [Kubecost Release Process](release-process.md)
 * [Outages](outages.md)
+
+## Kubecost Cloud
+
+* [What is Kubecost Cloud?](kubecost-cloud/what-is-kubecost-cloud.md)
+* [Kubecost Cloud Architecture Overview](kubecost-cloud/kubecost-cloud-architecture.md)
+* [Cloud Installation and Onboarding](kubecost-cloud/cloud-installation-and-onboarding.md)
+* [Cloud Allocations Dashboard](kubecost-cloud/cloud-allocations-dashboard.md)
+* [Cloud Assets Dashboard](kubecost-cloud/cloud-assets-dashboard.md)
+* [Cloud Reports Dashboard](kubecost-cloud/cloud-reports-dashboard.md)
+* [Receiving Kubecost Cloud Support](kubecost-cloud/receiving-kubecost-cloud-support.md)
 
 ## Integrations
 
