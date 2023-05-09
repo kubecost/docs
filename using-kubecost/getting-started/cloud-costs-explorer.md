@@ -71,7 +71,7 @@ You can filter displayed dashboard metrics by selecting _Edit_, then adding a fi
 * Provider
 * Labels
 
-**Cost Metric**
+#### **Cost Metric**
 
 The Cost Metric dropdown allows you to adjust the displayed cost data based on different calculations. Cost Metric values are based on and calculated following standard FinOps dimensions and metrics, as seen in detail [here](https://github.com/finopsfoundation/finops-open-cost-usage-spec/blob/main/specification\_sheet\_import.md). The four available metrics supported by the Cloud Cost UI are:
 
