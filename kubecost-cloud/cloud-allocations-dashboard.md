@@ -26,6 +26,16 @@ Costs aggregations are also visible by other meaningful organizational concepts,
 
 Selecting _Edit Report_ will provide more options of filtering and visualizing your window query.
 
+#### Idle costs
+
+For an overview as to what idle costs are and how they are calculated, see the [bottom of the page](https://docs.kubecost.com/kubecost-cloud/cloud-allocations-dashboard#idle).
+
+Customize how you wish idle costs to be displayed in your report chart:
+
+* Hide: Hides idle costs.
+* Separate By Cluster: Associates idle costs with the clusters they are a part of.
+* Separate By Node: Associates idle costs with the nodes they are scheduled to.
+
 #### Chart
 
 View Allocations data in the following formats:
@@ -75,6 +85,13 @@ The three horizontal dots icon provides additional means of handling your query 
 ## Idle
 
 Cluster idle cost is defined as the difference between the cost of allocated resources and the cost of the hardware they run on. Allocation is defined as the max of usage and requests. It can also be expressed as follows:
+
+> _idle\_cost = sum(cluster\_cost) - (cpu\_allocation\_cost + ram\_allocation\_cost + gpu\_allocation\_cost)_
+>
+> where\
+> _allocation = max(request, usage)_
+
+Node idle cost can be expressed as:
 
 > _idle\_cost = sum(node\_cost) - (cpu\_allocation\_cost + ram\_allocation\_cost + gpu\_allocation\_cost)_
 >
