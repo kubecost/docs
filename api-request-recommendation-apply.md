@@ -6,7 +6,7 @@ The Apply API for request recommendations takes Kubecost's calculated [container
 
 ## Requirements
 
-You must have Kubecost's Cluster Controller [enabled](controller.md). Cluster Controller contains Kubecost's automation features (including the APIs described in this document), and thus has write permission to certain resources on your cluster. Again, see the [how-to guide for 1-click request sizing](using-kubecost/navigating-the-kubecost-ui/savings/auto-request-sizing/one-click-request-sizing.md) for setup instructions.
+You must have Kubecost's Cluster Controller [enabled](install-and-configure/advanced-configuration/controller/). Cluster Controller contains Kubecost's automation features (including the APIs described in this document), and thus has write permission to certain resources on your cluster. Again, see the [how-to guide for 1-click request sizing](using-kubecost/navigating-the-kubecost-ui/savings/auto-request-sizing/one-click-request-sizing.md) for setup instructions.
 
 ## APIs
 
