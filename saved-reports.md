@@ -1,6 +1,8 @@
 # Saved Reports
 
-Saved reports can be managed via [_values.yaml_](https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/values.yaml), or via the Kubecost UI, or both. This reference outlines the process of configuring saved reports through a values file, and provides documentation on the required and optional parameters.
+Reports are saved queries from your various Monitoring dashboards which can be referenced at a later date for convenience. Aggregation, filters, and other details of your query will be saved in the report, and the report can be opened at any time. Reports are currently supported by the Allocations, Assets, and Cloud Cost Explorer dashboards.
+
+Reports can be managed via [_values.yaml_](https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/values.yaml) or the Kubecost UI. This reference outlines the process of configuring saved reports through a values file, and provides documentation on the required and optional parameters.
 
 <figure><img src=".gitbook/assets/savedreports.PNG" alt=""><figcaption><p>Reports page</p></figcaption></figure>
 
