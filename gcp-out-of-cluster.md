@@ -48,7 +48,7 @@ gcloud projects add-iam-policy-binding $PROJECT_ID --member serviceAccount:compu
 
 After creating the GCP service account, you can connect it to Kubecost in one of two ways before configuring:
 
-### 1. Connect using Workload Identity federation (recommended)
+### Option 3.1: Connect using Workload Identity federation (recommended)
 
 You can set up an [IAM policy binding](https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity#authenticating\_to) to bind a Kubernetes service account to your GCP service account as seen below, where:
 
@@ -61,7 +61,7 @@ gcloud iam service-accounts add-iam-policy-binding compute-viewer-kubecost@$PROJ
 
 You will also need to enable the [IAM Service Account Credentials API](https://cloud.google.com/iam/docs/reference/credentials/rest) in the GCP project.
 
-### 2. Connect using a service account key
+### Option 3.2: Connect using a service account key
 
 Create a service account key:
 
@@ -75,19 +75,7 @@ Once the GCP service account has been connected, set up the remaining configurat
 
 You're almost done. Now it's time to configure in Kubecost to finalize your connectivity.
 
-### 1. Configuring via the Kubecost UI
-
-In Kubecost, select _Settings_ from the left navigation, and under Cloud Integrations, select _Add Cloud Integration > GCP_, then provide the relevant information in the GCP Billing Data Export Configuration window:
-
-* **GCP Service Key**: If you've connected using Workload Identity federation in Step 3, you should leave this box empty. If you've created a service account key, copy the contents of the _compute-viewer-kubecost-key.json_ file and paste them here.
-* **GCP Project Id**: The ID of your GCP project.
-* **GCP Billing Database:** Requires a BigQuery dataset prefix (e.g. `billing_data`) in addition to the BigQuery table name. A full example is `billing_data.gcp_billing_export_v1_018AIF_74KD1D_534A2`
-
-{% hint style="warning" %}
-Be careful when handling your service key! Ensure you have entered it correctly into Kubecost. Don't lose it or let it become publicly available.
-{% endhint %}
-
-### 2. Configuring using values.yaml (recommended)
+### Option 4.1: Configuring using values.yaml (recommended)
 
 It is recommended to provide the GCP details in your [_values.yaml_](https://github.com/kubecost/cost-analyzer-helm-chart/blob/c10e9475b51612d36da8f04618174a98cc62f8fd/cost-analyzer/values.yaml#L572-L574) to ensure they are retained during an upgrade or redeploy.
 
@@ -109,6 +97,18 @@ Then, set `.Values.kubecostProductConfigs.gcpSecretName` to the name of the Kube
 
 {% hint style="info" %}
 When managing the service account key as a Kubernetes secret, the secret must reference the service account key JSON file, and that file must be named _compute-viewer-kubecost-key.json_.
+{% endhint %}
+
+### Option 4.2: Configuring via the Kubecost UI
+
+In Kubecost, select _Settings_ from the left navigation, and under Cloud Integrations, select _Add Cloud Integration > GCP_, then provide the relevant information in the GCP Billing Data Export Configuration window:
+
+* **GCP Service Key**: If you've connected using Workload Identity federation in Step 3, you should leave this box empty. If you've created a service account key, copy the contents of the _compute-viewer-kubecost-key.json_ file and paste them here.
+* **GCP Project Id**: The ID of your GCP project.
+* **GCP Billing Database:** Requires a BigQuery dataset prefix (e.g. `billing_data`) in addition to the BigQuery table name. A full example is `billing_data.gcp_billing_export_v1_018AIF_74KD1D_534A2`
+
+{% hint style="warning" %}
+Be careful when handling your service key! Ensure you have entered it correctly into Kubecost. Don't lose it or let it become publicly available.
 {% endhint %}
 
 ## Step 5: Label cloud assets
