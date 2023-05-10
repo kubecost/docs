@@ -123,7 +123,6 @@
 
 * [Kubecost Core Architecture Overview](architecture.md)
 * [OpenCost Product Comparison](opencost-product-comparison.md)
-* [Kubecost Cloud Architecture Overview](architecture/kubecost-cloud-architecture.md)
 * [Kubecost Metrics](user-metrics.md)
 * [Kube-State-Metrics (KSM) Emission](ksm-metrics.md)
 * [Calculating Node Pricing](node-pricing.md)
