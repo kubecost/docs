@@ -1,11 +1,12 @@
-User Management - SSO/SAML/RBAC
-================================
+# User Management (SSO/SAML/RBAC)
 
-> **Note**: SSO and RBAC capabilities are only included with a Kubecost Enterprise Subscription.
+{% hint style="info" %}
+SSO and RBAC are only officially supported on Kubecost Enterprise plans.
+{% endhint %}
 
 Kubecost supports Single Sign On (SSO) and Role Based Access Control (RBAC) with SAML 2.0. Kubecost works with most identity providers including Okta, Auth0, AzureAD, PingID, and KeyCloak.
 
-## Overview of features 
+## Overview of features
 
 * **User authentication (`.Values.saml`)**: SSO provides a simple mechanism to restrict application access internally and externally
 * **Pre-defined user roles (`.Values.saml.rbac`)**:
@@ -53,7 +54,7 @@ saml:
 ## SAML troubleshooting guide
 
 1. Disable SAML and confirm that the cost-analyzer pod starts.
-2. If step 1 is successful, but the pod is crashing or never enters the ready state when SAML is added, it is likely that there is panic loading or parsing SAML data.
+2.  If step 1 is successful, but the pod is crashing or never enters the ready state when SAML is added, it is likely that there is panic loading or parsing SAML data.
 
     `kubectl logs deployment/kubecost-cost-analyzer -c cost-model -n kubecost`
 
@@ -89,20 +90,21 @@ $ curl https://dev-elu2z98r.auth0.com/samlp/metadata/c6nY4M37rBP0qSO1IYIqBPPyIPx
 ```
 
 ### Common SAML error states are as follows:
+
 **The URL returns a 404 error or returning HTML**
 
 Contact your SAML admin to find the URL on your identity provider that serves the raw XML file.
- 
+
 **Returning an EntitiesDescriptor instead of an EntityDescriptor**
 
 Certain metadata URLs could potentially return an EntitiesDescriptor, instead of an EntityDescriptor. While Kubecost does not currently support using an EntitiesDescriptor, you can instead copy the EntityDescriptor into a new file you create called metadata.xml:
 
-* Download the XML from the metadata URL into a file called *metadata.xml*
+* Download the XML from the metadata URL into a file called _metadata.xml_
 * Copy all the attributes from `EntitiesDescriptor` to the `EntityDescriptor` that are not present.
 * Remove the `<EntitiesDescriptor>` tag from the beginning.
 * Remove the `</EntitiesDescriptor>` from the end of the XML file.
 
-You are left with data in a similar format to the example below: 
+You are left with data in a similar format to the example below:
 
 ```xml
 <EntityDescriptor xmlns="urn:oasis:names:tc:SAML:2.0:metadata" xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" entityID="kubecost-entity-id">
@@ -112,7 +114,7 @@ You are left with data in a similar format to the example below:
 
 Then, you can upload the EntityDescriptor to a secret in the same namespace as kubecost and use that directly.
 
-`kubectl create secret generic metadata-secret --from-file=./metadata.xml  --namespace kubecost`
+`kubectl create secret generic metadata-secret --from-file=./metadata.xml --namespace kubecost`
 
 To use this secret, in your helm values set metadataSecretName to the name of the secret created above, and set idpMetadataURL to the empty string:
 
@@ -133,10 +135,10 @@ For users who want to use CSI driver for storing SAML secret, we suggest this [g
 **InvalidNameIDPolicy format**
 
 From the following [PingIdentity article](https://support.pingidentity.com/s/article/Cannot-provide-requested-name-identifier-qualified-with-SampleNameNEW):
->An alternative solution is to add an attribute called "SAML_SP_NAME_QUALIFIER" to the connection's attribute contract with a TEXT value of the requested SPNameQualifier. When you do this, select the following for attribute name format:
-`urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified`
 
-On the PingID side: specify an attribute contract “SAML_SP_NAME_QUALIFIER” with the format `urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified`.
+> An alternative solution is to add an attribute called "SAML\_SP\_NAME\_QUALIFIER" to the connection's attribute contract with a TEXT value of the requested SPNameQualifier. When you do this, select the following for attribute name format: `urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified`
+
+On the PingID side: specify an attribute contract “SAML\_SP\_NAME\_QUALIFIER” with the format `urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified`.
 
 On the Kubecost side: in your Helm values, set `saml.nameIDFormat` to the same format set by PingID:
 

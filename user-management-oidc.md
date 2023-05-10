@@ -1,7 +1,8 @@
-User Management - SSO/OIDC
-==========================
+# User Management (SSO/OIDC)
 
-> **Note**: OIDC capabilities are only included with a Kubecost Enterprise Subscription.
+{% hint style="info" %}
+OIDC capabilities are only officially supported on Kubecost Enterprise plans.
+{% endhint %}
 
 ## Helm configuration
 
@@ -19,7 +20,9 @@ oidc:
 #  hostedDomain: "example.com" # optional, blocks access to the auth domain specified in the hd claim of the provider ID token
 ```
 
-> **Note**: `authURL` may require additional request parameters depending on the provider. Some commonly required parameters are `client_id=***` and `response_type=code`. Please check the provider documentation for more information.
+{% hint style="info" %}
+&#x20;`authURL` may require additional request parameters depending on the provider. Some commonly required parameters are `client_id=***` and `response_type=code`. Please check the provider documentation for more information.
+{% endhint %}
 
 ## Supported identity providers
 
@@ -28,15 +31,17 @@ Please refer to the following references to find out more about how to configure
 * [Auth0 docs](https://auth0.com/docs/get-started/authentication-and-authorization-flow/add-login-auth-code-flow)
 * [Azure docs](https://learn.microsoft.com/en-us/azure/active-directory/develop/v2-protocols-oidc#send-the-sign-in-request)
 * [Gluu docs](https://gluu.org/docs/gluu-server/4.0/admin-guide/openid-connect/)
-* [Keycloak (see below)](#keycloak-setup)
+* [Keycloak (see below)](user-management-oidc.md#keycloak-setup)
 * [Google OAuth 2.0 docs](https://developers.google.com/identity/openid-connect/openid-connect#authenticatingtheuser)
 * [Okta docs](https://developer.okta.com/docs/reference/api/oidc/#request-parameters)
 
-> **Note**: Auth0 does not support Introspection; therefore we can only validate the access token by calling /userinfo within our current remote token validation flow. This will cause the Kubecost UI to not function under an Auth0 integration, as it makes a large number of continuous calls to load the various components on the page and the Auth0 /userinfo endpoint is rate limited. Independent calls against Kubecost endpoints (eg. via cURL or Postman) should still be supported.
+{% hint style="info" %}
+Auth0 does not support Introspection; therefore we can only validate the access token by calling /userinfo within our current remote token validation flow. This will cause the Kubecost UI to not function under an Auth0 integration, as it makes a large number of continuous calls to load the various components on the page and the Auth0 /userinfo endpoint is rate limited. Independent calls against Kubecost endpoints (eg. via cURL or Postman) should still be supported.
+{% endhint %}
 
 ### Keycloak setup
 
-1. Create a new [Keycloak Realm](https://www.keycloak.org/getting-started/getting-started-kube#_create_a_realm).
+1. Create a new [Keycloak Realm](https://www.keycloak.org/getting-started/getting-started-kube#\_create\_a\_realm).
 2. Navigate to "Realm Settings" -> "General" -> "Endpoints" -> "OpenID Endpoint Configuration" -> "Clients".
 3. Click "Create" to add Kubecost to the list of clients. Define a `clientID`. Ensure the "Client Protocol" is set to `openid-connect`.
 4. Click on your newly created client, then go to "Settings".
@@ -77,7 +82,9 @@ The token is then validated remotely in one of two ways:
 
 ### Hosted domain
 
-> **Note**: This parameter is only supported if using the Google OAuth 2.0 identity provider
+{% hint style="info" %}
+This parameter is only supported if using the Google OAuth 2.0 identity provider
+{% endhint %}
 
 If the `hostedDomain` parameter is configured in the Helm chart, the application will deny access to users for which the identified domain is not equal to the specified domain. The domain is read from the `hd` claim in the ID token commonly returned alongside the access token.
 

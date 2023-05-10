@@ -84,7 +84,7 @@ Once cloud integrations have been set up, Each Cloud Store will have its own dia
 
 For more information about Cloud Integration and related APIs, read the [cloud-integration](cloud-integration.md) documentation.
 
-## How to Troubleshoot Missing Metrics
+## How to troubleshoot missing metrics
 
 ### Step 1. Confirm you are running the correct version of the metric exporter
 
