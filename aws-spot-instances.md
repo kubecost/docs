@@ -8,16 +8,20 @@ Kubecost will reconcile your Spot prices with Cost and Usage Reports (CURs) as t
 
 These values can either be set from the Kubecost UI or via `.Values.kubecostProductConfigs` in the Helm chart. Note that if you set any kubecostProductConfigs from the Helm chart, all changes via the frontend will be deleted on pod restart.
 
-* `projectID` the Account ID of the AWS Account on which the spot nodes are running.
-* `awsSpotDataRegion` region of your spot data bucket
-* `awsSpotDataBucket` the configured bucket for the spot data feed
-* `awsSpotDataPrefix` optional configured prefix for your spot data feed bucket
-* `spotLabel` optional Kubernetes node label name designating whether a node is a spot node. Used to provide pricing estimates until exact spot data becomes available from the CUR
-* `spotLabelValue` optional Kubernetes node label value designating a spot node. Used to provide pricing estimates until exact spot data becomes available from the CUR. For example, if your spot nodes carry a label `lifecycle:spot`, then the spotLabel would be "lifecycle" and the spotLabelValue would be "spot"
+* `projectID` the Account ID of the AWS Account on which the Spot nodes are running.
+* `awsSpotDataRegion` region of your Spot data bucket
+* `awsSpotDataBucket` the configured bucket for the Spot data feed
+* `awsSpotDataPrefix` optional configured prefix for your Spot data feed bucket
+* `spotLabel` optional Kubernetes node label name designating whether a node is a Spot node. Used to provide pricing estimates until exact Spot data becomes available from the CUR
+* `spotLabelValue` optional Kubernetes node label value designating a Spot node. Used to provide pricing estimates until exact Spot data becomes available from the CUR. For example, if your Spot nodes carry a label `lifecycle:spot`, then the `spotLabel` would be `lifecycle` and the `spotLabelValue` would be `spot`
 
 In the UI, you can access these fields via the _Settings_ page, under Cloud Cost Settings. Next to Spot Instance Configuration, select _Update,_ then fill out all fields.
 
 Spot data feeds are an account level setting, not a payer level. Every AWS Account will have its own Spot data feed. Spot data feed is not currently available in AWS GovCloud.
+
+{% hint style="info" %}
+For Spot data written to an S3 bucket only accessed by Kubecost, it is safe to delete objects after three days of retention.
+{% endhint %}
 
 ## Troubleshooting Spot data feed
 
