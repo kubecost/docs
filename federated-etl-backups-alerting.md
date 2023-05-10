@@ -12,6 +12,10 @@ Kubecost can rebuild its extract, transform, load (ETL) data using Prometheus me
 prometheus:
   server:
     retention: 21d
+  # Ensure the volume is large enough to hold all metrics
+  persistentVolume:
+    size: 32Gi
+    enabled: true
 ```
 
 ## Option 2: Metrics backup
