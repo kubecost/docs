@@ -4,7 +4,7 @@
 The Cluster Controller is currently in beta. Please read the documentation carefully.
 {% endhint %}
 
-Kubecost's Cluster Controller contains Kubecost's automation features, and thus has write permission to certain resources on your cluster.
+Kubecost's Cluster Controller contains Kubecost's automation features, and thus has write permission to certain resources on your cluster. For this reason, the Cluster Controller is disabled by default.
 
 The Cluster Controller enables actions like:
 
@@ -13,6 +13,8 @@ The Cluster Controller enables actions like:
 * [Automated request right-sizing](auto-request-sizing.md)
 
 This document shows you how to setup and enable this functionality in the Kubecost product.
+
+
 
 ## Feature functionality
 

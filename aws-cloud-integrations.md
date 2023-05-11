@@ -344,7 +344,7 @@ Then add the following trust statement to the role the policy is attached to (re
 
 ### Step 4: Attaching IAM permissions to Kubecost
 
-{% hint style="info" %}
+{% hint style="warning" %}
 If you are using the alternative [multi-cloud integration](multi-cloud.md) method, steps 4 and 5 are not required. The use of "Attach via Pod Annotation on EKS" authentication is optional.
 {% endhint %}
 
@@ -399,33 +399,97 @@ kubecostProductConfigs:
 
 <summary>Attach via Service Key in Kubecost UI</summary>
 
-* In the [AWS IAM Console](https://console.aws.amazon.com/iam), select _Access Management_ > _Users_. Find the Kubecost user and select _Security credentials_ > _Create access key_. Note the Access Key ID and Secret Access Key.
-* To add the Access Key ID and Secret Access Key in the Kubecost UI, select _Settings_ from the left navigation, then scroll to Cloud Cost Settings. Select _Update_ next to External Cloud Cost Configuration (AWS). Fill in the Service key name and Service key secret fields respectively, then select _Update_.
-* You may not be allowed to update your Billing Data Export Configuration without filling out all fields first. For explanations of your Athena/AWS-related fields, see Step 5 below.
+1. In the [AWS IAM Console](https://console.aws.amazon.com/iam), select _Access Management_ > _Users_. Find the Kubecost user and select _Security credentials_ > _Create access key_. Note the Access Key ID and Secret Access Key.
+2. To add the Access Key ID and Secret Access Key in the Kubecost UI, select _Settings_ from the left navigation, then scroll to Cloud Cost Settings. Select _Update_ next to External Cloud Cost Configuration (AWS). Fill in the Service key name and Service key secret fields respectively, then select _Update_.
+
+You may not be allowed to update your Billing Data Export Configuration without filling out all fields first. For explanations of your Athena/AWS-related fields, see Step 5 below.
 
 </details>
 
 <details>
 
-<summary>Attach via pod annotation on EKS</summary>
+<summary>Attach via pod annotation with eksctl</summary>
 
-* First, create an OIDC provider for your cluster with these [steps](https://docs.aws.amazon.com/eks/latest/userguide/enable-iam-roles-for-service-accounts.html).
-* Next, create a Role with these [steps](https://docs.aws.amazon.com/eks/latest/userguide/associate-service-account-role.html).
-  * When asked to attach policies, you’ll want to attach the policies created above in Step 3
-  * When asked for “namespace” and “serviceaccountname” use the namespace Kubecost is installed in and the name of the serviceaccount attached to the cost-analyzer pod. You can find that name by running `kubectl get pods kubecost-cost-analyzer-69689769b8-lf6nq -n <kubecost-namespace> -o yaml | grep serviceAccount`
-* Then, you need to add an annotation to that service account as described in this [AWS](https://docs.aws.amazon.com/eks/latest/userguide/associate-service-account-role.html)[ doc](https://docs.aws.amazon.com/eks/latest/userguide/associate-service-account-role.html). This annotation can be added to the Kubecost service account by setting `.Values.serviceAccount.annotations` in the Helm chart to `eks.amazonaws.com/role-arn: arn:aws:iam::<AWS_ACCOUNT_ID>:role/<IAM_ROLE_NAME>`
+**Prerequisites:**
 
-**Note**: If you see the error: `User: ***/assumed-role/<role-name>/### is not authorized to perform: sts:AssumeRole on resource...`, you can add the following to your policy permissions to allow the role the correct permissions:
+* Amazon EKS cluster set up via [eksctl](https://docs.aws.amazon.com/eks/latest/userguide/eksctl.html)
+* [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html) is installed on your device
+
+**Step 1: Update configuration**
+
+Download the following configuration files:
+
+* [_cloud-integration.json_](https://raw.githubusercontent.com/kubecost/poc-common-configurations/main/aws-attach-roles/cloud-integration.json)
+* [_kubecost-athena-policy.json_](https://raw.githubusercontent.com/kubecost/poc-common-configurations/main/aws-attach-roles/kubecost-athena-policy.json)
+
+Update the following variables in the files you downloaded:
+
+* In _cloud-integration.json_, update the following values with the information in Step 2: Setting up Athena:
+
+```json
+    "athenaBucketName": "s3://<AWS_cloud_integration_athenaBucketName>",
+    "athenaRegion": "<AWS_cloud_integration_athenaRegion>",
+    "athenaDatabase": "<AWS_cloud_integration_athenaDatabase>",
+    "athenaTable": "<AWS_cloud_integration_athenaTable>",
+    "projectID": "<AWS_account_ID>"
+```
+
+* In _kubecost-athena-policy.json_, replace `${AthenaCURBucket}` with your Athena S3 bucket name (configured in Step 2: Setting up Athena).
+
+**Step 2: Create policy**
+
+&#x20;In the same location where your downloaded configuration files are, run the following command to create the appropriate policy:
+
+{% code overflow="wrap" %}
+```
+aws iam create-policy --policy-name kubecost-athena-policy --policy-document file://kubecost-athena-policy.json
+```
+{% endcode %}
+
+**Step 3: Create OIDC provider for your cluster**
 
 ```
-    "Statement": [
-        {
-            "Action": "sts:AssumeRole",
-            "Effect": "Allow",
-            "Resource": "*"
-        }
-    ]
+kubectl create ns kubecost
+export YOUR_CLUSTER_NAME=<ENTER_YOUR_ACTUAL_CLUSTER_NAME>
+export AWS_REGION=<ENTER_YOUR_AWS_REGION>
+eksctl utils associate-iam-oidc-provider \
+    --cluster ${YOUR_CLUSTER_NAME} --region ${AWS_REGION} \
+    --approve
 ```
+
+**Step 4: Create required IAM service accounts**
+
+**Note:** Remember to replace 1234567890 with your AWS account ID number.
+
+{% code overflow="wrap" %}
+```
+eksctl create iamserviceaccount \
+    --name kubecost-serviceaccount-cur-athena-thanos \
+    --namespace kubecost \
+    --cluster ${YOUR_CLUSTER_NAME} --region ${AWS_REGION} \
+    --attach-policy-arn arn:aws:iam::1234567890:policy/kubecost-athena-policy \
+    --override-existing-serviceaccounts \
+    --approve
+```
+{% endcode %}
+
+**Step 5: Create required secret to store the configuration**
+
+{% code overflow="wrap" %}
+```
+kubectl create secret generic cloud-integration -n kubecost --from-file=cloud-integration.json
+```
+{% endcode %}
+
+**Step 6. Install Kubecost via Helm**
+
+{% code overflow="wrap" %}
+```
+helm upgrade --install kubecost --repo https://kubecost.github.io/cost-analyzer/ cost-analyzer \
+--namespace kubecost \
+-f https://raw.githubusercontent.com/kubecost/poc-common-configurations/main/aws-attach-roles/values-amazon-primary.yaml
+```
+{% endcode %}
 
 </details>
 
@@ -464,15 +528,15 @@ If you set any `kubecostProductConfigs` from the Helm chart, all changes via the
   * The table name is typically the database name with the leading `athenacurcfn_` removed (but is not available as a CloudFormation stack resource)
 * `athenaWorkgroup` The workgroup assigned to be used with Athena. If not specified, defaults to `Primary`
 
-> **Note**: Make sure to use only underscore as a delimiter if needed for tables and views. Using a hyphen/dash will not work even though you might be able to create it. See the [AWS docs](https://docs.aws.amazon.com/athena/latest/ug/tables-databases-columns-names.html) for more info.
+{% hint style="info" %}
+Make sure to use only underscore as a delimiter if needed for tables and views. Using a hyphen/dash will not work even though you might be able to create it. See the [AWS docs](https://docs.aws.amazon.com/athena/latest/ug/tables-databases-columns-names.html) for more info.
+{% endhint %}
 
 * If you are using a multi-account setup, you will also need to set `.Values.kubecostProductConfigs.masterPayerARN` to the Amazon Resource Number (ARN) of the role in the management account, e.g. `arn:aws:iam::530337586275:role/KubecostRole`.
 
 ## Troubleshooting
 
-Once you've integrated with the CUR, you can visit _Settings_ > _View Full Diagnostics_ in the UI to determine if Kubecost has been successfully integrated with your CUR. If any problems are detected, you will see a yellow warning sign under the cloud provider permissions status header:
-
-![Screen Shot 2020-12-06 at 9 37 40 PM](https://user-images.githubusercontent.com/453512/101316930-587bb080-3812-11eb-8bbc-694a894314d8.png)
+Once you've integrated with the CUR, you can visit _Settings_ > _View Full Diagnostics_ in the UI to determine if Kubecost has been successfully integrated with your CUR. If any problems are detected, you will see a yellow warning sign under the cloud provider permissions status header
 
 You can check pod logs for authentication errors by running: `kubectl get pods -n <namespace>` `kubectl logs <kubecost-pod-name> -n <namespace> -c cost-model`
 
@@ -503,7 +567,9 @@ You can also check query history to see if any queries are failing:
     ```
 * **Resolution:** This error is typically caused by the incorrect (Athena results) s3 bucket being specified in the CloudFormation template of Step 3 from above. To resolve the issue, ensure the bucket used for storing the AWS CUR report (Step 1) is specified in the `S3ReadAccessToAwsBillingData` SID of the IAM policy (default: kubecost-athena-access) attached to the user or role used by Kubecost (Default: KubecostUser / KubecostRole). See the following example.
 
-> **Note:** This error can also occur when the management account cross-account permissions are incorrect, however the solution may differ.
+{% hint style="info" %}
+This error can also occur when the management account cross-account permissions are incorrect, however the solution may differ.
+{% endhint %}
 
 ```
         {
