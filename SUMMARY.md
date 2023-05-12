@@ -77,7 +77,7 @@
     * [Network Traffic Cost Allocation](network-allocation.md)
   * [Assets Dashboard](assets.md)
   * [Clusters Dashboard](using-kubecost/getting-started/clusters-dashboard.md)
-  * [Cloud Costs Explorer](using-kubecost/getting-started/cloud-costs-explorer.md)
+  * [Cloud Cost Explorer](using-kubecost/getting-started/cloud-costs-explorer.md)
   * [Saved Reports](saved-reports.md)
     * [Advanced Reporting](advanced-reports.md)
   * [Alerts](alerts.md)

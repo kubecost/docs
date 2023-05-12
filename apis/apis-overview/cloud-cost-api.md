@@ -1,7 +1,7 @@
 # Cloud Cost API
 
 {% hint style="warning" %}
-The Cloud Cost API cannot be used until you have enabled Cloud Costs via Helm. See Kubecost's [Cloud Cost Explorer](https://docs.kubecost.com/using-kubecost/navigating-the-kubecost-ui/cloud-costs-explorer#installation-and-configuration) doc for instructions.
+The Cloud Cost API cannot be used until you have enabled Cloud Cost via Helm. See Kubecost's [Cloud Cost Explorer](https://docs.kubecost.com/using-kubecost/navigating-the-kubecost-ui/cloud-costs-explorer#installation-and-configuration) doc for instructions.
 {% endhint %}
 
 ## Intro to Cloud Cost API
