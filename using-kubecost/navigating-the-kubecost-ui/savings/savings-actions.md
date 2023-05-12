@@ -6,6 +6,10 @@ The Actions page is currently in alpha. Please read the documentation carefully.
 
 The Actions page is where you can create scheduled savings actions which Kubecost will execute for you. The Actions page currently supports creating actions for cluster turndown, request sizing, and cluster sizing.
 
+{% hint style="info" %}
+Actions are only able to be applied to your primary cluster. To use Actions on a secondary cluster, you must manually switch to that cluster via frontend.
+{% endhint %}
+
 ## Enabling Kubecost Actions
 
 The Actions page will exist inside the Savings folder in the left navigation, but must first be enabled before it appears. The two steps below which enable Kubecost Actions do not need to be performed sequentially as written.
