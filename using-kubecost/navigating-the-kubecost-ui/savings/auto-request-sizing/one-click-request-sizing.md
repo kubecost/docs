@@ -1,16 +1,18 @@
-# 1-click Request Sizing
+# 1-click Request Right-Sizing
 
-> **Note**: This feature is in a pre-release (alpha/beta) state. It has limitations. Please read the documentation carefully.
+{% hint style="warning" %}
+This feature is in beta. Please read the documentation carefully.
+{% endhint %}
 
-1-click request sizing is a feature that will instantly update [container resource requests](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#requests-and-limits) in your cluster based on Kubecost's sizing [recommendations](../../../../api-request-right-sizing-v2.md).
+1-click request right-sizing (RRS) is a feature that will instantly update [container resource requests](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#requests-and-limits) in your cluster based on Kubecost's sizing [recommendations](../../../../api-request-right-sizing-v2.md).
 
-If you want to learn more about the APIs that power 1-click request sizing, including their limitations, see the corresponding [API documentation](../../../../api-request-recommendation-apply.md).
+If you want to learn more about the APIs that power 1-click RRS, including their limitations, see the corresponding [API documentation](../../../../api-request-recommendation-apply.md).
 
 ## Setup
 
-See the high-level [automatic request right-sizing guide](../../../../auto-request-sizing.md).
+See the high-level [container request right-sizing guide](https://docs.kubecost.com/using-kubecost/navigating-the-kubecost-ui/savings/auto-request-sizing).
 
-## Using 1-click request sizing
+## Using 1-click RRS
 
 1.  Select _Savings_ in the left navigation, then select _Right-size your container requests_. The Request right-sizing recommendations page opens.
 

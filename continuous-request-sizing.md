@@ -1,8 +1,10 @@
 # Continuous Request Right-Sizing
 
-> **Note**: This feature is in a pre-release (alpha/beta) state and has limitations. Please read the documentation carefully.
+{% hint style="warning" %}
+This feature is in currently in beta. Please read the documentation carefully.
+{% endhint %}
 
-Kubecost's Kubescaler implements continuous request right-sizing: the automatic application of Kubecost's high-fidelity [recommendations](api-request-right-sizing-v2.md) to your containers' resource requests. This provides an easy way to automatically improve your allocation of cluster resources by improving efficiency.
+Kubecost's Kubescaler implements continuous request right-sizing (RRS): the automatic application of Kubecost's high-fidelity [recommendations](api-request-right-sizing-v2.md) to your containers' resource requests. This provides an easy way to automatically improve your allocation of cluster resources by improving efficiency.
 
 Kubescaler can be enabled and configured on a per-workload basis so that only the workloads you want edited will be edited.
 
@@ -63,6 +65,8 @@ Kubescaler will take care of the rest. It will apply the best-available recommen
 
 To check current requests for your Deployments, use the following command:
 
+{% code overflow="wrap" %}
 ```sh
 kubectl get deployment -n "kubecost" -o=jsonpath="{range .items[*]}"deployment/"{.metadata.name}{'\n'}{range .spec.template.spec.containers[*]}{.name}{'\t'}{.resources.requests}{'\n'}{end}{'\n'}{end}"
 ```
+{% endcode %}
