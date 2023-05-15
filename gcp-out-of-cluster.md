@@ -88,8 +88,10 @@ kubecostProductConfigs:
 If you've connected using Workload Identity federation, add these configs:
 
 ```yaml
+# Ensure Kubecost deployment runs on nodes that use Workload Identity
 nodeSelector:
   iam.gke.io/gke-metadata-server-enabled: "true"
+# Add annotations to all kubecost-related serviceaccounts
 serviceAccount:
   annotations:
     iam.gke.io/gcp-service-account: "compute-viewer-kubecost@$PROJECT_ID.iam.gserviceaccount.com"
