@@ -22,7 +22,7 @@ In order to make use of QSRs, you must first have enabled ETL backups. As of v1.
 
 After following the doc above and enabling ETL backup, you should already have set a value for the Helm flag `.Values.kubecostModel.etlBucketConfigSecret`.
 
-Next, set `kubecostDeployment.queryServiceReplicas.replicas` to a non-zero value. Perform a Helm upgrade with your updated _values.yaml._
+Next, set `kubecostDeployment.queryServiceReplicas` to a non-zero value. Perform a Helm upgrade with your updated _values.yaml._
 
 ## Usage
 
