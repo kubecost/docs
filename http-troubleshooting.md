@@ -18,7 +18,7 @@ This is usually the NGINX gateway (inside the `kubecost-cost-analyzer` pod) repo
 
 * All client requests may need increased timeouts.
 * If client requests are only timing out on Kubecost and nothing else, Kubecost may need more CPU/memory so that it can process the API requests faster.
-* A router/proxy between the client and the Kubecost service may be timing out the request too quickly.
+* A loadbalancer/router/proxy between the client and the Kubecost service may be timing out the request too quickly.
 
 ### Test command
 
