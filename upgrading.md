@@ -15,6 +15,8 @@ The below table represents best-practice. Much older agents will still provide t
 | 10-Mar-2023  | 1.101                    | 1.100         | 1.17+              |
 | 07-Feb-2023  | 1.100                    | 1.100 (1)     | 1.17+              |
 
+You can keep up with future Kubecost releases by checking out our [release notes](https://github.com/kubecost/cost-analyzer-helm-chart/releases).
+
 ## Kubernetes API version upgrades
 
 Before upgrading to Kubernetes 1.25, podSecurityPolicies must be disabled. Learn more [here](https://github.com/kubecost/poc-common-configurations/blob/main/psp-disable/disable-psps.yaml).
