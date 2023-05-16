@@ -67,3 +67,5 @@ Kubecost may hide the complex recommendation when it is more expensive than the 
 {% endhint %}
 
 Visiting the Cluster Sizing Recommendations page from the Create New Action window will immediately prompt you with a suggested recommendation which will replace your current node pools with the displayed node pools. You can select _Adopt_ to immediately resize, or select _Cancel_ if you want to continue exploring.
+
+Learn more about cluster right-sizing functionality [here](https://docs.kubecost.com/using-kubecost/navigating-the-kubecost-ui/savings/cluster-right-sizing-recommendations).

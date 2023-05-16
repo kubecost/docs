@@ -9,7 +9,7 @@ Kubecost's Cluster Controller contains Kubecost's automation features, and thus 
 The Cluster Controller enables features like:
 
 * [Automated cluster turndown](https://docs.kubecost.com/install-and-configure/advanced-configuration/controller/cluster-turndown)
-* Cluster right-sizing recommendations
+* [Cluster right-sizing recommendations](https://docs.kubecost.com/using-kubecost/navigating-the-kubecost-ui/savings/cluster-right-sizing-recommendations)
 * [Container request right-sizing (RRS) recommendations](https://docs.kubecost.com/using-kubecost/navigating-the-kubecost-ui/savings/auto-request-sizing)
 * [Kubecost Actions](https://docs.kubecost.com/using-kubecost/navigating-the-kubecost-ui/savings/savings-actions)
 
