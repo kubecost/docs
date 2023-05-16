@@ -32,6 +32,7 @@
       * [Azure Long Term Storage](long-term-storage-azure.md)
     * [GCP](install-and-configure/install/long-term-storage/gcp/README.md)
       * [GCP Long Term Storage](long-term-storage-gcp.md)
+    * [Enterprise Upgrading/Compatibility Matrix](upgrading.md)
   * [ETL Backup](etl-backup.md)
     * [Sharing ETL Backups](sharing-etl-backups.md)
   * [Provider Installations](install-and-configure/install/provider-installations/README.md)
