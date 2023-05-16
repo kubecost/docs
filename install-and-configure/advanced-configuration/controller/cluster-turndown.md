@@ -190,6 +190,10 @@ Canceling while turndown is currently scaling down or scaling up will result in 
 
 If the turndown schedule is canceled between a turndown and turn up, the turn up will occur automatically upon cancellation.
 
+## Using cluster turndown via UI
+
+Cluster turndown has limited functionality via the Kubecost UI. To access cluster turndown in the UI, you must first enable [Kubecost Actions](https://docs.kubecost.com/using-kubecost/navigating-the-kubecost-ui/savings/savings-actions#enabling-kubecost-actions). Once this is completed, you will be able to create and delete turndown schedules instantaneously for your supported clusters. Read more about turndown's UI functionality in [this section](https://docs.kubecost.com/using-kubecost/navigating-the-kubecost-ui/savings/savings-actions#cluster-turndown) of the above Kubecost Actions doc. Review the entire doc for more information on Kubecost Actions functionality and limitations.
+
 ## Limitations
 
 * The internal scheduler only allows one schedule at a time to be used. Any additional schedule resources created will fail (`kubectl get tds -o yaml` will display the status).
