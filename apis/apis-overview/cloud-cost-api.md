@@ -1621,7 +1621,7 @@ http://<your-kubecost-address>/model/cloudCost/aggregate?window=3d&aggregate=ser
 {% tabs %}
 {% tab title="Request" %}
 ```
-http:/<your-kubecost-address>/model/cloudCost/view?window=2d&filterServices=AmazonEC2&aggregate=invoiceEntityIDhttp:/<your-kubecost-address>/model/cloudCost/view?window=2d&filterServices=AmazonEC2&aggregate=invoiceEntityIDhttp:/<your-kubecost-address>/model/cloudCost/view?window=2d&filterServices=AmazonEC2&aggregate=invoiceEntityID
+http:/<your-kubecost-address>/model/cloudCost/view?window=2d&filterServices=AmazonEC2&aggregate=invoiceEntityID
 ```
 {% endtab %}
 
