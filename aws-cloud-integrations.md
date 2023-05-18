@@ -76,7 +76,7 @@ Download template files from the URLs provided below and upload them as the stac
 
 <details>
 
-<summary>My CUR exists in the same account as the management account</summary>
+<summary>My CUR exists in the same account as Kubecost or the management account</summary>
 
 * Download [this .yaml file](https://raw.githubusercontent.com/kubecost/cloudformation/master/kubecost-single-account-permissions.yaml).
 * Navigate to the [AWS Console Cloud Formation page](https://console.aws.amazon.com/cloudformation).
@@ -97,7 +97,7 @@ Download template files from the URLs provided below and upload them as the stac
 
 <details>
 
-<summary>My CUR exists in a member account different from the management account</summary>
+<summary>My CUR exists in a member account different from Kubecost or the management account</summary>
 
 **On each sub account running Kubecost:**
 
@@ -130,7 +130,7 @@ Download template files from the URLs provided below and upload them as the stac
 
 <details>
 
-<summary>My CUR exists in the same account as the management account</summary>
+<summary>My CUR exists in the same account as Kubecost or the management account</summary>
 
 Attach both of the following policies to the same role or user. Use a user if you intend to integrate via ServiceKey, and a role if via IAM annotation (see more below under Via Pod Annotation by EKS). The SpotDataAccess policy statement is optional if the Spot data feed is configured (see “Setting up the Spot Data feed” step below).
 
@@ -220,7 +220,7 @@ Attach both of the following policies to the same role or user. Use a user if yo
 
 <details>
 
-<summary>My CUR exists in a member account different from the management account</summary>
+<summary>My CUR exists in a member account different from Kubecost or the management account</summary>
 
 On each sub account running Kubecost, attach both of the following policies to the same role or user. Use a user if you intend to integrate via Service Key, and a role if via IAM annotation (see more below under Via Pod Annotation by EKS). The SpotDataAccess policy statement is optional if the Spot data feed is configured (see “Setting up the Spot Data feed” step below).
 
