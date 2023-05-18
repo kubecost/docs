@@ -12,7 +12,7 @@ Functionality for most cloud insight features only exists when _All Clusters_ is
 
 ### Kubernetes insight features
 
-* Right-size your cluster nodes
+* [Right-size your cluster nodes](https://docs.kubecost.com/using-kubecost/navigating-the-kubecost-ui/savings/cluster-right-sizing-recommendations)
 * [Right-size your container requests](https://docs.kubecost.com/using-kubecost/navigating-the-kubecost-ui/savings/auto-request-sizing/one-click-request-sizing)
 * [Remedy abandoned workloads](https://docs.kubecost.com/apis/apis-overview/api-abandoned-workloads)
 * Manage unclaimed volumes
