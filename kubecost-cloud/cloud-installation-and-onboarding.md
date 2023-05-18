@@ -43,7 +43,7 @@ If no clusters are currently under management, you will find instructions on the
 
 Choose a unique ID for your cluster. This does not need to be the same name as your cluster, but it does need to be unique within your team.
 
-Execute the following command to install Kubecost Cloud to connect your cluster:
+Execute the following command to install the Kubecost Cloud agent to your cluster:
 
 ```
 helm upgrade --install kubecost-cloud \
@@ -76,3 +76,25 @@ helm uninstall ${release} --namespace ${namespace}
 If you modified the Helm release name or namespace, you will need to update the command accordingly.
 
 After five minutes of no longer receiving data, the cluster will disappear from Manage Clusters. Any data previously received will be available for the remainder of the retention period.
+
+## Troubleshooting
+
+### GKE Autopilot rejects Kubecost Cloud agent
+
+When attempting to install the Kubecost Cloud agent on a [GKE Autopilot](https://cloud.google.com/kubernetes-engine/docs/concepts/autopilot-overview) cluster, you may receive an error related to the network costs daemonSet:
+
+{% code overflow="wrap" %}
+```
+Error: admission webhook "
+gkepolicy.common-webhooks.networking.gke.io
+" denied the request: GKE Warden rejected the request because it violates one or more constraints.
+```
+{% endcode %}
+
+To work around this problem, modify your install command to disable the network costs daemonSet. That setting change will look like this:
+
+```
+--set networkCosts.enabled=false
+```
+
+Without network costs installed, you will be missing visibility into the networking layer in your environment. Kubecost is actively working with GCP to get our agent added to [this list of autopilot partner workloads](https://cloud.google.com/kubernetes-engine/docs/resources/autopilot-partners).
