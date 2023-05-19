@@ -44,7 +44,7 @@ kubecostModel:
   # ETL Bucket Backup should be configured by passing the configuration secret name
   etlBucketConfigSecret: kubecost-bucket-secret
 
-# Used for HA mode in Business & Enterprise tier
+# Used for HA mode in Enterprise tier
 kubecostDeployment:
   # Select a number of replicas of Kubecost pods to run 
   replicas: 5

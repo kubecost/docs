@@ -2,8 +2,6 @@
 
 Kubecost supports the ability to monitor multiple **contexts** of clusters. A context refers to either a single monitored cluster, or a set of clusters that leverage [durable storage](long-term-storage.md).
 
-Below are the steps for adding additional contexts on the Kubecost Business and Enterprise tier.
-
 ## Add from frontend
 
 When adding a context directly from the frontend, Kubecost adds it locally for your browser. To make this context accessible to other users in your organization, follow the steps to [add at install-time](context-switcher.md#add-at-install-time) below.
