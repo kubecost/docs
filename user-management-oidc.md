@@ -1,7 +1,7 @@
-# User Management (SSO/OIDC)
+# User Management (SSO/OIDC/RBAC)
 
 {% hint style="info" %}
-OIDC capabilities are only officially supported on Kubecost Enterprise plans.
+OIDC and RBAC are only officially supported on Kubecost Enterprise plans.
 {% endhint %}
 
 ## Helm configuration
@@ -31,42 +31,13 @@ Please refer to the following references to find out more about how to configure
 * [Auth0 docs](https://auth0.com/docs/get-started/authentication-and-authorization-flow/add-login-auth-code-flow)
 * [Azure docs](https://learn.microsoft.com/en-us/azure/active-directory/develop/v2-protocols-oidc#send-the-sign-in-request)
 * [Gluu docs](https://gluu.org/docs/gluu-server/4.0/admin-guide/openid-connect/)
-* [Keycloak (see below)](user-management-oidc.md#keycloak-setup)
+* [Keycloak](/user-management-oidc-keycloak.md)
 * [Google OAuth 2.0 docs](https://developers.google.com/identity/openid-connect/openid-connect#authenticatingtheuser)
 * [Okta docs](https://developer.okta.com/docs/reference/api/oidc/#request-parameters)
 
 {% hint style="info" %}
 Auth0 does not support Introspection; therefore we can only validate the access token by calling /userinfo within our current remote token validation flow. This will cause the Kubecost UI to not function under an Auth0 integration, as it makes a large number of continuous calls to load the various components on the page and the Auth0 /userinfo endpoint is rate limited. Independent calls against Kubecost endpoints (eg. via cURL or Postman) should still be supported.
 {% endhint %}
-
-### Keycloak setup
-
-1. Create a new [Keycloak Realm](https://www.keycloak.org/getting-started/getting-started-kube#\_create\_a\_realm).
-2. Navigate to "Realm Settings" -> "General" -> "Endpoints" -> "OpenID Endpoint Configuration" -> "Clients".
-3. Click "Create" to add Kubecost to the list of clients. Define a `clientID`. Ensure the "Client Protocol" is set to `openid-connect`.
-4. Click on your newly created client, then go to "Settings".
-   1. Set "Access Type" to `confidential`.
-   2. Set "Valid Redirect URIs" to `http://YOUR_KUBECOST_ADDRESS/model/oidc/authorize`.
-   3. Set "Base URL" to `http://YOUR_KUBECOST_ADDRESS`.
-
-The [`.Values.oidc`](https://github.com/kubecost/cost-analyzer-helm-chart/blob/721555b6641f72f2fd0c12f737243268923430e0/cost-analyzer/values.yaml#L194-L202) for Keycloak should be as follows:
-
-```yaml
-oidc:
-  enabled: true
-  # This should be the same as the `clientID` set in step 3 above
-  clientID: "YOUR_CLIENT_ID"
-  # Find this in Keycloak UI by going to your Kubecost client, then clicking on "Credentials".
-  clientSecret: "YOUR_CLIENT_SECRET"
-  # The k8s secret where clientSecret will be stored
-  secretName: "kubecost-oidc-secret"
-  # The login endpoint for the auth server
-  authURL: "http://YOUR_KEYCLOAK_ADDRES/realms/YOUR_REALM_ID/protocol/openid-connect/auth?client_id=YOUR_CLIENT_ID&response_type=code"
-  # Redirect after authentication
-  loginRedirectURL: "http://YOUR_KUBECOST_ADDRESS/model/oidc/authorize"
-  # Navigate to "Realm Settings" -> "General" -> "Endpoints" -> "OpenID Endpoint Configuration". Set to the discovery URL shown on this page.
-  discoveryURL: "YOUR_DISCOVERY_URL"
-```
 
 ## Token validation
 
