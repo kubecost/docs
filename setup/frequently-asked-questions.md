@@ -46,7 +46,7 @@ A: Kubecost builds the allocation API from known workloads. If there are no work
 Q: Can customer logos be added to Kubecost?\
 A: Currently, this feature isn't planned. Due to technical difficulties, this may take considerable effort to implement.
 
-Q: What license do the Business and Enterprise versions of Kubecost use?\
+Q: What license does the Enterprise version of Kubecost use?\
 A: Paid Kubecost versions use our [EULA](https://www.kubecost.com/terms).
 
 Q: When configuring Spot feeds in a federated cluster, where should it be configured?\
@@ -133,4 +133,4 @@ Q: When using the `aggregate` parameter with the Allocation API (`/model/allocat
 A: This happens when the values of these "properties" collide upon performing the aggregation. For example if performing the aggregation by `aggregate=label:app`, the line item `app=hello-world` may belong to multiple namespaces and Kubecost would therefore omit "properties.namespace" altogether. The most effective workaround is to perform a multi-aggregation (`aggregate=namespace,label:app`) to ensure all the properties you want exist in the result. More discussion in this [Github issue](https://github.com/kubecost/cost-analyzer-helm-chart/issues/1839).
 
 Q: What is the difference between `.Values.kubecostToken` and `Values.kubecostProductConfigs.productKey`?\
-A: `.Values.kubecostToken` is primarily used to manage trial access and is provided to you when visiting [http://kubecost.com/install](http://kubecost.com/install). `.Values.kubecostProductConfigs.productKey` is used to apply a Business/Enterprise license. More info in this [doc](../add-key.md).
+A: `.Values.kubecostToken` is primarily used to manage trial access and is provided to you when visiting [http://kubecost.com/install](http://kubecost.com/install). `.Values.kubecostProductConfigs.productKey` is used to apply a Enterprise license. More info in this [doc](../add-key.md).

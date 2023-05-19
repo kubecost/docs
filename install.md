@@ -31,23 +31,6 @@ Kubecost provides real-time cost visibility and insights for teams using Kuberne
     Kubecost began as an open source project with a goal of giving small engineering teams access to great cost visibility. As a result, our solution is tightly integrated with the open source cloud native ecosystem, e.g. Kubernetes, Prometheus, and Grafana.
 {% endtab %}
 
-{% tab title="Business Features" %}
-For medium-sized teams and companies with more complex infrastructure you need the right features in place for efficiency, administration, and security. Kubecost Business offers even more features and control so that any team can use our products, according to your entire organization’s standards.
-
-*   **Multi-cluster visibility**
-
-    View all Kubernetes clusters by easily toggling between each individual cluster. Supports installation of Kubecost across an unlimited number of individual clusters.
-*   **Long-term metric retention & saved reports**
-
-    Retain spend, allocation, and efficiency data for up to 30 days. Provides custom reports saving for easily sharing across teams.
-*   **Team alerts & updates**
-
-    Kubecost alerts allow teams to receive updates on real-time Kubernetes spend. [Learn more](alerts.md)
-*   **Business support**
-
-    Direct engineering and product support via Slack channel, video, and phone.
-{% endtab %}
-
 {% tab title="Enterprise Features" %}
 For larger teams and companies with more complex infrastructure, you need the right features in place for efficiency, administration, and security. Kubecost Enterprise offers even more features and control so that any team can use our products, according to your entire organization’s standards.
 
