@@ -4,25 +4,44 @@
 OIDC and RBAC are only officially supported on Kubecost Enterprise plans.
 {% endhint %}
 
-## Helm configuration
+## Overview of features
 
 The OIDC integration in Kubecost is fulfilled via the `.Values.oidc` configuration parameters in the Helm chart.
 
 ```yaml
+# EXAMPLE CONFIGURATION
+# View setup guides below, for full list of Helm configuration values
 oidc:
-   enabled: true
-   clientID: "" # application/client client_id parameter obtained from provider, used to make requests to server
-   clientSecret: "" # application/client client_secret parameter obtained from provider, used to make requests to server
-   secretName: "kubecost-oidc-secret" # k8s secret where clientSecret will be stored
-   authURL: "https://my.auth.server/authorize" # endpoint for login to auth server
-   loginRedirectURL: "http://my.kubecost.url/model/oidc/authorize" # Kubecost url configured in provider for redirect after authentication
-   discoveryURL: "https://my.auth.server/.well-known/openid-configuration" # url for OIDC endpoint discovery
-#  hostedDomain: "example.com" # optional, blocks access to the auth domain specified in the hd claim of the provider ID token
+  enabled: true
+  clientID: ""
+  clientSecret: ""
+  secretName: "kubecost-oidc-secret"
+  authURL: "https://my.auth.server/authorize"
+  loginRedirectURL: "http://my.kubecost.url/model/oidc/authorize"
+  discoveryURL: "https://my.auth.server/.well-known/openid-configuration"
+  rbac:
+    enabled: false
+    groups:
+      - name: admin
+        enabled: false
+        claimName: "roles"
+        claimValues:
+          - "admin"
+          - "superusers"
+      - name: readonly
+        enabled: false
+        claimName:  "roles"
+        claimValues:
+          - "readonly"
 ```
 
 {% hint style="info" %}
 &#x20;`authURL` may require additional request parameters depending on the provider. Some commonly required parameters are `client_id=***` and `response_type=code`. Please check the provider documentation for more information.
 {% endhint %}
+
+## Setup Guides
+
+* [AzureAD setup guide](https://github.com/kubecost/poc-common-configurations/tree/main/oidc-azuread)
 
 ## Supported identity providers
 
@@ -67,3 +86,34 @@ If the domain is configured alongside the access token, then requests should con
 The JWT ID token must contain a field (claim) named `hd` with the desired domain value. We verify that the token has been properly signed (using provider certificates) and has not expired before processing the claim.
 
 To remove a previously set Helm value, you will need to set the value to an empty string: `.Values.oidc.hostedDomain = ""`. To validate that the config has been removed, you can check the `/var/configs/oidc/oidc.json` inside the cost-model container.
+
+## Troubleshooting
+
+### Option 1: Inspect all network requests made by browser
+
+Use [your browser's devtools](https://developer.chrome.com/docs/devtools/network/) to observe network requests made between you, your Identity Provider, and your Kubecost. Pay close attention to cookies, and headers.
+
+### Option 2: Review logs, and decode your JWT tokens
+
+```sh
+kubectl logs deploy/kubecost-cost-analyzer
+```
+
+* Search for `oidc` in your logs to follow events
+* Pay attention to any `WRN` related to OIDC
+* Search for `Token Response`, and try decoding both the `access_token` and `id_token` to ensure they are well formed (https://jwt.io/)
+
+### Option 3: Enable debug logs for more granularity on what is failing
+
+[Docs ref](https://github.com/kubecost/cost-analyzer-helm-chart/blob/v1.103/README.md?plain=1#L63-L75)
+
+```yaml
+kubecostModel:
+  extraEnv:
+    - name: LOG_LEVEL
+      value: debug
+```
+
+### Kubecost Support
+
+For further assistance, reach out to support@kubecost.com and provide logs, and a [HAR file](https://support.google.com/admanager/answer/10358597?hl=en).
