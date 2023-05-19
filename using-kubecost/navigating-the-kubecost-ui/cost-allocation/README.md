@@ -2,7 +2,7 @@
 
 The Kubecost Allocations dashboard allows you to quickly see allocated spend across all native Kubernetes concepts, e.g. namespace, k8s label, and service. It also allows for allocating cost to organizational concepts like team, product/project, department, or environment. This document explains the metrics presented and describes how you can control the data displayed in this view.
 
-<figure><img src="../../../.gitbook/assets/image (2) (2) (1) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (2) (2) (1) (1) (2).png" alt=""><figcaption></figcaption></figure>
 
 ## UI overview
 
@@ -47,11 +47,9 @@ kubectl get pods --show-labels -n <TARGET_NAMESPACE>
 
 ### Edit report
 
-<figure><img src="../../../.gitbook/assets/editreport.png" alt=""><figcaption><p>Edit Report window</p></figcaption></figure>
-
 The _Edit Report_ icon has additional options to filter your search.
 
-### Chart
+#### Chart
 
 View Allocation data in the following formats:
 
@@ -79,6 +77,10 @@ Costs allocations are based on the following:
 3. The amount of time resources were provisioned
 
 For more information, refer to the [OpenCost spec](https://github.com/opencost/opencost/blob/develop/spec/opencost-specv01.md).
+
+#### Step size
+
+Step size refers to the size of each bar of data displayed on your dashboard. Options are _Default_, _Daily_, and _Weekly_. When retaining long periods of data through custom configurations (such as Prometheus), consider using larger step sizes to avoid display errors.
 
 #### Filters
 
