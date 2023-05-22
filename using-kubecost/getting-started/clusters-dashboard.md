@@ -42,7 +42,7 @@ Clusters are primarily distinguished into three categories:
 * Clusters not monitored by Kubecost (yellow circle next to cluster name)
 * Inactive clusters (gray circle next to cluster name)
 
-Monitored clusters are those that have cost metrics which will appear within your other Monitoring dashboards, like Allocations and Assets. Unmonitored clusters are clusters whose existence is determined from cloud integration, but have not been added to Kubecost. Inactive clusters are clusters Kubecost once monitored, but hasn't reported data over a certain period of time. This time period is three hours for Thanos-enabled clusters, and one hour for non-Thanos clusters.
+Monitored clusters are those that have cost metrics which will appear within your other Monitoring dashboards, like Allocations and Assets. Unmonitored clusters are clusters whose existence is determined from cloud integration, but haven't been added to Kubecost. Inactive clusters are clusters Kubecost once monitored, but haven't reported data over a certain period of time. This time period is three hours for Thanos-enabled clusters, and one hour for non-Thanos clusters.
 
 Efficiency and Last Seen metrics are only provided for monitored clusters.
 
