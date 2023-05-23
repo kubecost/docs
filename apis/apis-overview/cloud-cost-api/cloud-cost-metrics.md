@@ -57,7 +57,7 @@ The current Cloud Cost schema is optimistic in that it provides space for cost m
 
 Of all billing exports and APIs, the Cost and Usage Report (CUR) has the most robust set of cost metrics, and currently has the best support. Depending on what kind of discounts or resources a user has, the schema changes, therefore many of these columns are populated dynamically to support all users. In particular, any `_net_` column will only be available if the user has a discount that causes it to exist. Additionally, Kubecost currently only considers line items that have a `line_item_line_item_type` of `Usage`, `DiscountUsage`, `SavingsPlanCoveredUsage`, `EdpDiscount`, or `PrivateRateDiscount`.
 
-More information on the columns and their definitions can be found in AWS' [Line item details](https://docs.aws.amazon.com/cur/latest/userguide/Lineitem-columns.html).
+More information on the columns and their definitions can be found in AWS' [Line item details](https://docs.aws.amazon.com/cur/latest/userguide/Lineitem-columns.html) documentation.
 
 #### List Cost
 
