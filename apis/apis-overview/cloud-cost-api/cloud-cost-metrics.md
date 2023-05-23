@@ -55,7 +55,9 @@ The current Cloud Cost schema is optimistic in that it provides space for cost m
 
 <summary>AWS cost metrics</summary>
 
-Of all billing exports and APIs, the Cost and Usage Report (CUR) has the most robust set of cost metrics, and currently has the best support. Depending on what kind of discounts or resources a user has, the schema changes, therefore many of these columns are populated dynamically to support all users. In particular, any `_net_` column will only be available if the user has a discount that causes it to exist. Additionally, Kubecost currently only considesr line items that have a `line_item_line_item_type` of `Usage`, `DiscountUsage`, `SavingsPlanCoveredUsage`, `EdpDiscount`, or `PrivateRateDiscount`. More information on the columns and their definitions can be found in the AWS' [Line item details](https://docs.aws.amazon.com/cur/latest/userguide/Lineitem-columns.html) documentation.
+Of all billing exports and APIs, the Cost and Usage Report (CUR) has the most robust set of cost metrics, and currently has the best support. Depending on what kind of discounts or resources a user has, the schema changes, therefore many of these columns are populated dynamically to support all users. In particular, any `_net_` column will only be available if the user has a discount that causes it to exist. Additionally, Kubecost currently only considers line items that have a `line_item_line_item_type` of `Usage`, `DiscountUsage`, `SavingsPlanCoveredUsage`, `EdpDiscount`, or `PrivateRateDiscount`.
+
+More information on the columns and their definitions can be found in AWS' [Line item details](https://docs.aws.amazon.com/cur/latest/userguide/Lineitem-columns.html).
 
 #### List Cost
 
@@ -93,7 +95,7 @@ Default to `line_item_unblended_cost`.
 
 <summary>GCP cost metrics</summary>
 
-Cloud Cost uses a detailed billing export accessed via BigQuery to interface with GCP. This export provides Kubecost with a Cost column with a float value in addition to an array of credit objects per item.  These credits are various discounts applied to the item being referenced.
+Cloud Cost uses a detailed billing export accessed via BigQuery to interface with GCP. This export provides Kubecost with a Cost column with a float value in addition to an array of credit objects per item. These credits are various discounts applied to the item being referenced.
 
 More details about the export can be found in GCP's [Structure of Detailed data export](https://cloud.google.com/billing/docs/how-to/export-data-bigquery-tables/detailed-usage).
 
