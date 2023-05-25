@@ -321,7 +321,7 @@ On the management account, attach this policy to a role (replace `${AthenaCURBuc
 	}
 ```
 
-Then add the following trust statement to the role the policy is attached to on the Master Payer account (replace `${aws-mgmt-account-id}` variable with account you want to allow to assume the role):
+Then add the following trust statement to the role the policy is attached to on the management account (replace the `${aws-mgmt-account-id}` variable with the account you want to assume the role):
 
 ```
 	{
