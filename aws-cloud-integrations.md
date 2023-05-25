@@ -321,7 +321,7 @@ On the management account, attach this policy to a role (replace `${AthenaCURBuc
 	}
 ```
 
-Then add the following trust statement to the role the policy is attached to (replace `${KubecostClusterID}` variable):
+Then add the following trust statement to the role the policy is attached to on the Master Payer account (replace `${aws-mgmt-account-id}` variable with account you want to allow to assume the role):
 
 ```
 	{
@@ -330,7 +330,7 @@ Then add the following trust statement to the role the policy is attached to (re
                   {
                      "Effect": "Allow",
                      "Principal": {
-                        "AWS": "arn:aws:iam::${KubecostClusterID}:root"
+                        "AWS": "arn:aws:iam::${aws-mgmt-account-id}:root"
                      },
                      "Action": [
                         "sts:AssumeRole"
