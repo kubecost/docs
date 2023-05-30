@@ -1,10 +1,10 @@
 # Query Service Replicas
 
 {% hint style="info" %}
-This feature is only supported on Kubecost Enterprise plans.&#x20;
+This feature is only supported on Kubecost Enterprise plans.
 {% endhint %}
 
-The query service replica (QSR) is a standalone query service that executes independently of Kubecost's metric emission and data model, and is able to access to Kubecost data. It allows for improved horizontal scaling by being able to handle queries for larger intervals, and multiple simultaneous queries.
+The query service replica (QSR) is a standalone query service that executes independently of Kubecost's metric emission and data model and is able to access Kubecost data. It allows for improved horizontal scaling by being able to handle queries for larger intervals, and multiple simultaneous queries.
 
 ## Overview
 
@@ -26,4 +26,4 @@ Next, set `kubecostDeployment.queryServiceReplicas` to a non-zero value. Perform
 
 ## Usage
 
-Once ETL backups and the QSR have been enabled, the process will automatically apply to all Allocations or Assets queries. You can make these queries as usual using either the Kubecost UI dashboards or direct API endpoints.
+Once ETL backups and the QSR have been enabled, the process will automatically apply to all Allocations or Assets queries. You can make these queries using either the Kubecost UI dashboards or direct API endpoints.

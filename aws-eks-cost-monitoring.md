@@ -79,7 +79,7 @@ On the Amazon EKS cluster with mixed processor architecture worker nodes (AMD64,
 Remember to replace $VERSION with the actual version number. You can find all available versions at https://gallery.ecr.aws/kubecost/cost-analyzer.
 {% endhint %}
 
-By default, the installation will include certain prerequisite software including Prometheus and kube-state-metrics. To customize your deployment, for example skipping these prerequisites if you already have them running in your cluster, you can configure any of the [available values](https://github.com/kubecost/cost-analyzer-helm-chart/blob/develop/cost-analyzer/values-eks-cost-monitoring.yaml) to modify storage, network configuration, and more.
+By default, the installation will include certain prerequisite software including Prometheus and kube-state-metrics. To customize your deployment, such as skipping these prerequisites if you already have them running in your cluster, you can configure any of the [available values](https://github.com/kubecost/cost-analyzer-helm-chart/blob/develop/cost-analyzer/values-eks-cost-monitoring.yaml) to modify storage, network configuration, and more.
 
 ### Step 2: Generate Kubecost dashboard endpoint
 
@@ -91,31 +91,29 @@ kubectl port-forward --namespace kubecost deployment/kubecost-cost-analyzer 9090
 
 ### Step 3: Access cost monitoring dashboard
 
-On your web browser, navigate to http://localhost:9090 to access the Kubecost UI.
+By visiting Kubecost's [Clusters dashboard](https://docs.kubecost.com/using-kubecost/navigating-the-kubecost-ui/clusters-dashboard), you can monitor your Amazon EKS cluster cost and efficiency. Depending on your organization’s requirements and setup, you may have different options to expose Kubecost for internal access. There are a few examples that you can use for your references:
 
-You can now start monitoring your Amazon EKS cluster cost and efficiency. Depending on your organization’s requirements and set up, you may have different options to expose Kubecost for internal access. There are few examples that you can use for your references:
-
-* You can check Kubecost documentation for [Ingress Examples](ingress-examples.md) as a reference for using Nginx ingress controller with basic auth.
-* You can also consider using AWS LoadBalancer controller to expose Kubecost and use Amazon Cognito for authentication, authorization and user management. You can learn more at [“How to use Application Load Balancer and Amazon Cognito to authenticate users for your Kubernetes web apps”](https://aws.amazon.com/blogs/containers/how-to-use-application-load-balancer-and-amazon-cognito-to-authenticate-users-for-your-kubernetes-web-apps/) AWS blog post.
+* See Kubecost's [Ingress Examples](ingress-examples.md) doc as a reference for using Nginx ingress controller with basic auth.
+* You can also consider using AWS LoadBalancer controller to expose Kubecost and use Amazon Cognito for authentication, authorization, and user management. You can learn more at [“How to use Application Load Balancer and Amazon Cognito to authenticate users for your Kubernetes web apps”](https://aws.amazon.com/blogs/containers/how-to-use-application-load-balancer-and-amazon-cognito-to-authenticate-users-for-your-kubernetes-web-apps/) AWS blog post.
 
 ## Deploying Kubecost on Amazon EKS cluster using Amazon EKS add-on
 
 ### Prerequisites:
 
-* Subscribe to Kubecost on AWS Marketplace at: https://aws.amazon.com/marketplace/pp/prodview-jatxqd2ccqvgc
-* Install the following tools: [kubectl](https://kubernetes.io/docs/tasks/tools/), [AWS CLI](https://aws.amazon.com/cli/), and optionally [eksctl](https://eksctl.io/)
-* You have access to an [Amazon EKS cluster](https://aws.amazon.com/eks/)
+* Subscribe to Kubecost on AWS Marketplace [here](https://aws.amazon.com/marketplace/pp/prodview-asiz4x22pm2n2?sr=0-1\&ref\_=beagle\&applicationId=AWSMPContessa).
+* Install the following tools: [kubectl](https://kubernetes.io/docs/tasks/tools/), [AWS CLI](https://aws.amazon.com/cli/), and optionally [eksctl](https://eksctl.io/).
+* You have access to an [Amazon EKS cluster](https://aws.amazon.com/eks/).
 
 ### Discover and enable Kubecost add-on from AWS console
 
-After subscribing to Kubecost on AWS Marketplace and following the on-screen instructions successfully, you are redirected to Amazon EKS console. To get started in the Amazon EKS console, go to your EKS clusters, and in the Add-ons tab, select _Get more add-ons_ to find Kubecost EKS add-ons in the cluster setting of your existing EKS clusters. You can use the search bar to find "Kubecost - Amazon EKS cost monitoring" and following the on-screen instructions to enable Kubecost add-on for your Amazon EKS cluster. You can learn more about direct deployment to Amazon EKS clusters from this [AWS blog post](https://aws.amazon.com/blogs/aws/new-aws-marketplace-for-containers-now-supports-direct-deployment-to-amazon-eks-clusters/).
+After subscribing to Kubecost on AWS Marketplace and following the on-screen instructions successfully, you are redirected to Amazon EKS console. To get started in the Amazon EKS console, go to your EKS clusters, and in the Add-ons tab, select _Get more add-ons_ to find Kubecost EKS add-ons in the cluster setting of your existing EKS clusters. You can use the search bar to find "Kubecost - Amazon EKS cost monitoring" and follow the on-screen instructions to enable Kubecost add-on for your Amazon EKS cluster. You can learn more about direct deployment to Amazon EKS clusters from this [AWS blog post](https://aws.amazon.com/blogs/aws/new-aws-marketplace-for-containers-now-supports-direct-deployment-to-amazon-eks-clusters/).
 
 ### Enable Kubecost add-on using AWS CLI
 
-On your workspace, run the following command to enable Kubecost add-on for your Amazon EKS cluster:
+On your workspace, run the following command to enable the Kubecost add-on for your Amazon EKS cluster:
 
 {% hint style="info" %}
-You need to replace $YOUR\_CLUSTER\_NAME, $AWS\_REGION accordingly by your actual Amazon EKS cluster name and AWS region.
+You need to replace $YOUR\_CLUSTER\_NAME, $AWS\_REGION accordingly with your actual Amazon EKS cluster name and AWS region.
 {% endhint %}
 
 {% tabs %}
@@ -176,7 +174,7 @@ aws eks describe-addon --addon-name kubecost_kubecost --cluster-name $YOUR_CLUST
 {% endtab %}
 {% endtabs %}
 
-The Kubecost add-on should be available in few minutes. Run the following command to enable port-forwarding to expose the Kubecost dashboard:
+The Kubecost add-on should be available in a few minutes. Run the following command to enable port-forwarding to expose the Kubecost dashboard:
 
 ```bash
 kubectl port-forward --namespace kubecost deployment/kubecost-cost-analyzer 9090
