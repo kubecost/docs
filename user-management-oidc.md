@@ -39,7 +39,7 @@ oidc:
 &#x20;`authURL` may require additional request parameters depending on the provider. Some commonly required parameters are `client_id=***` and `response_type=code`. Please check the provider documentation for more information.
 {% endhint %}
 
-## Setup Guides
+## Setup guides
 
 * [AzureAD setup guide](https://github.com/kubecost/poc-common-configurations/tree/main/oidc-azuread)
 
@@ -114,6 +114,6 @@ kubecostModel:
       value: debug
 ```
 
-### Kubecost Support
+### Kubecost support
 
 For further assistance, reach out to support@kubecost.com and provide logs, and a [HAR file](https://support.google.com/admanager/answer/10358597?hl=en).
