@@ -10,7 +10,7 @@ For more details on these integrations, continue reading below. For guides on ho
 * [Azure](azure-out-of-cluster.md)
 
 {% hint style="info" %}
-Select _Amortized cost_ while setting up the cost-management-billing in Azure. GCP users should create [detailed billing export](https://cloud.google.com/billing/docs/how-to/export-data-bigquery-tables#detailed-usage-cost-data-schema) for a successful integration. AWS users must select the checkbox to enable _Resource IDs_ for the CUR during set up.
+Select _Amortized cost_ while setting up the cost-management-billing in Azure. GCP users should create [detailed billing export](https://cloud.google.com/billing/docs/how-to/export-data-bigquery-tables#detailed-usage-cost-data-schema) to gain access to all of Kubecost cloud integration features including [reconciliation](cloud-integration.md#reconciliation).
 {% endhint %}
 
 ## Kubecost's cloud processes

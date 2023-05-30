@@ -14,7 +14,7 @@ A GitHub repository with sample files used in below instructions can be found [h
 
 Begin by reviewing [Google's documentation](https://cloud.google.com/billing/docs/how-to/export-data-bigquery) on exporting cloud billing data to BigQuery.
 
-GCP users must create [detailed billing export](https://cloud.google.com/billing/docs/how-to/export-data-bigquery-tables#detailed-usage-cost-data-schema) for Kubecost to properly integrate.
+GCP users should create [detailed billing export](https://cloud.google.com/billing/docs/how-to/export-data-bigquery-tables#detailed-usage-cost-data-schema) to gain access to all of Kubecost cloud integration features including [reconciliation](cloud-integration.md#reconciliation).
 
 ## Step 2: Create a GCP service account
 
