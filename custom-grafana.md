@@ -1,6 +1,9 @@
 # Grafana Configuration Guide
 
-Using an existing Grafana deployment can be accomplished with either of the following two options:
+Using an existing Grafana deployment can be accomplished through one of two options:
+
+1. Linking to an external Grafana directly
+2. Deploying with Grafana sidecar enabled
 
 ## Option 1: Directly link to an external Grafana
 
@@ -26,13 +29,19 @@ grafana:
       enabled: false
 ```
 
-For Option 2, ensure that the following flags are set in your Operator deployment:
+Ensure that the following flags are set in your Operator deployment:
 
-1. sidecar.dashboards.enabled = true
-2. sidecar.dashboards.searchNamespace isn't restrictive, use `ALL` if Kubecost runs in another namespace.
+1. `sidecar.dashboards.enabled=true`
+2. `sidecar.dashboards.searchNamespace` isn't restrictive. Use `ALL` if Kubecost runs in another namespace.
 
-Note that with Option 2, the Kubecost UI cannot link to the Grafana dashboards unless `kubecostProductConfigs.grafanaURL` is set, either via the Helm chart, or via the Settings page as described in Option 1.
+{% hint style="warning" %}
+The Kubecost UI cannot link to the Grafana dashboards unless `kubecostProductConfigs.grafanaURL` is set, either via the Helm chart, or via the Settings page, as described in Option 1.
+{% endhint %}
 
-> **Note**: When using Kubecost on a custom ingress path, you must add this path to the Grafana root\_url:
->
-> `--set grafana.grafana.ini.server.root_url: "%(protocol)s://%(domain)s:%(http_port)s/kubecost/grafana"`
+When using Kubecost on a custom ingress path, you must add this path to the Grafana `root_url`:
+
+{% code overflow="wrap" %}
+```
+--set grafana.grafana.ini.server.root_url: "%(protocol)s://%(domain)s:%(http_port)s/kubecost/grafana"
+```
+{% endcode %}
