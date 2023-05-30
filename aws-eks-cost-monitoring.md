@@ -89,9 +89,9 @@ Run the following command to enable port-forwarding to expose the Kubecost dashb
 kubectl port-forward --namespace kubecost deployment/kubecost-cost-analyzer 9090
 ```
 
-### Step 3: Access cost monitoring dashboard
+### Step 3: Access Monitoring dashboards
 
-By visiting Kubecost's [Clusters dashboard](https://docs.kubecost.com/using-kubecost/navigating-the-kubecost-ui/clusters-dashboard), you can monitor your Amazon EKS cluster cost and efficiency. Depending on your organization’s requirements and setup, you may have different options to expose Kubecost for internal access. There are a few examples that you can use for your references:
+By visiting Kubecost's UI, you can monitor your Amazon EKS cluster cost and efficiency. Depending on your organization’s requirements and setup, you may have different options to expose Kubecost for internal access. There are a few examples that you can use for your references:
 
 * See Kubecost's [Ingress Examples](ingress-examples.md) doc as a reference for using Nginx ingress controller with basic auth.
 * You can also consider using AWS LoadBalancer controller to expose Kubecost and use Amazon Cognito for authentication, authorization, and user management. You can learn more at [“How to use Application Load Balancer and Amazon Cognito to authenticate users for your Kubernetes web apps”](https://aws.amazon.com/blogs/containers/how-to-use-application-load-balancer-and-amazon-cognito-to-authenticate-users-for-your-kubernetes-web-apps/) AWS blog post.
