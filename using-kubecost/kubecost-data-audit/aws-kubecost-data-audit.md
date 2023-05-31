@@ -2,7 +2,7 @@
 
 ## Performing a data audit
 
-First, in the Kubecost UI, [view the price of a single node for a single day](/using-kubecost/kubecost-data-audit/README.md).
+First, in the Kubecost UI, [view the price of a single node for a single day](./).
 
 <figure><img src="../../images/data-auditing/dataaudit-step4.png" alt=""><figcaption></figcaption></figure>
 
@@ -20,8 +20,9 @@ If unable to _Group by -> Resource_ (because it requires enabling hourly/resourc
 
 ## Troubleshooting non-matching costs
 
-To determine what could cause a discrepancy between your instances's cost and AWS Cost Explorer, perform these troubleshooting measures:
+To determine what could cause a discrepancy between your instances' cost and AWS Cost Explorer, perform these troubleshooting measures:
+
 * Investigate Prometheus to see if the underlying metrics about the node are sporadic or missing.
 * Cost Explorer CSV export for one day filtered by account and service in AWS. Compare that to the Kubecost `/model/asset` API request for the same day.
-* Set up CUR to export as CSV file. Investigate to see whether costs in CSV file match with Kubecost Assets page.
+* Set up CUR to export as CSV file. Investigate to see whether the costs in the CSV file match with what is displayed on the Kubecost Assets page.
 * Test Athena queries.
