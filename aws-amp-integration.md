@@ -2,7 +2,7 @@
 
 ## Overview
 
-Kubecost leverages the open-source Prometheus project as a time series database and post-processes the data in Prometheus to perform cost allocation calculations and provide optimization insights for your Kubernetes clusters such as Amazon Elastic Kubernetes Service (Amazon EKS). Prometheus is a single machine statically-resourced container, so depending on your cluster size or when your cluster scales out, it could exceed the scraping capabilities of a single Prometheus server. In the collaboration with Amazon Web Services (AWS), Kubecost integrates with [Amazon Managed Service for Prometheus (AMP)](https://docs.aws.amazon.com/prometheus/index.html), a managed Prometheus-compatible monitoring service, to enable the customer to easily monitor Kubernetes cost at scale.
+Kubecost leverages the open-source Prometheus project as a time series database and post-processes the data in Prometheus to perform cost allocation calculations and provide optimization insights for your Kubernetes clusters such as Amazon Elastic Kubernetes Service (Amazon EKS). Prometheus is a single machine statically-resourced container, so depending on your cluster size or when your cluster scales out, it could exceed the scraping capabilities of a single Prometheus server. In collaboration with Amazon Web Services (AWS), Kubecost integrates with [Amazon Managed Service for Prometheus (AMP)](https://docs.aws.amazon.com/prometheus/index.html), a managed Prometheus-compatible monitoring service, to enable the customer to easily monitor Kubernetes cost at scale.
 
 ## Reference resources
 
@@ -52,7 +52,7 @@ Example output:
 }
 ```
 
-The workspace should be created in a few seconds. You can log in to [AWS AMP console](https://console.aws.amazon.com/prometheus/) to retrieve more information. You need to set `$REMOTEWRITEURL` and `$QUERYURL` for using in the integration with Kubecost later as follows:
+The workspace should be created in a few seconds. You can log in to the [AWS AMP console](https://console.aws.amazon.com/prometheus/) to retrieve more information. You need to set `$REMOTEWRITEURL` and `$QUERYURL` for use in the integration with Kubecost later as follows:
 
 * `REMOTEWRITEURL="https://aps-workspaces.us-west-2.amazonaws.com/workspaces/${AMP_WORKSPACE_ID}/api/v1/remote_write"`
 * `QUERYURL="http://localhost:8005/workspaces/${AMP_WORKSPACE_ID}"`
@@ -79,8 +79,8 @@ oci://public.ecr.aws/kubecost/cost-analyzer --version <$VERSION> \
 
 These following commands help to automate the following tasks:
 
-* Create an IAM role with the AWS managed IAM policy and trusted policy for the following service accounts: `kubecost-cost-analyzer`, `kubecost-prometheus-server`.
-* Modify current K8s service accounts with annotation to attach new IAM role.
+* Create an IAM role with the AWS-managed IAM policy and trusted policy for the following service accounts: `kubecost-cost-analyzer`, `kubecost-prometheus-server`.
+* Modify current K8s service accounts with annotation to attach the new IAM role.
 
 {% hint style="info" %}
 Remember to replace `<YOUR_CLUSTER_NAME>` and `<AWS_REGION>` with your desired values.
@@ -141,7 +141,7 @@ Next, run the following command to restart the Prometheus deployment to reload t
 kubectl rollout restart deployment/kubecost-prometheus-server -n kubecost
 ```
 
-Your Kubecost setup is now start writing and collecting data from AMP. Data should be ready for viewing within 15 minutes.
+Your Kubecost setup is now writing and collecting data from AMP. Data should be ready for viewing within 15 minutes.
 
 To verify that the integration is set up, go to _Settings_ in the Kubecost UI, and check the Prometheus Status section.
 
