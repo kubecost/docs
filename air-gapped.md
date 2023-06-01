@@ -36,7 +36,7 @@ There are two options to configure asset prices in your on-premise Kubernetes en
 
 * _Simple pipeline:_ per resource prices can be configured in a Helm values file ([reference](https://github.com/kubecost/cost-analyzer-helm-chart/blob/6c0975614b4a6854be602d1a6f9506ce8b80abdc/cost-analyzer/values.yaml#L559-L570)) or directly in the Kubecost Settings page. This allows you to directly supply the cost of a CPU month, RAM Gb month, etc.
 {% hint style="info" %}
-Use quotes if setting "0.00" for any item under ([kubecostProductConfigs.defaultModelPricing](https://github.com/kubecost/cost-analyzer-helm-chart/blob/6c0975614b4a6854be602d1a6f9506ce8b80abdc/cost-analyzer/values.yaml#L559-L570)). Failure to do so will result in the value(s) not being written to the kubecost cost-model's pv (/var/configs/default.json).
+Use quotes if setting "0.00" for any item under [`kubecostProductConfigs.defaultModelPricing`](https://github.com/kubecost/cost-analyzer-helm-chart/blob/6c0975614b4a6854be602d1a6f9506ce8b80abdc/cost-analyzer/values.yaml#L559-L570). Failure to do so will result in the value(s) not being written to the Kubecost cost-model's PV (/var/configs/default.json).
 {% endhint %}
 {% hint style="info" %}
 When setting CPU and RAM monthly prices, the values will be broken down to the hourly rate for the total monthly price set under kubecost.ProductConfigs.defaultModelPricing. The values will adjust accordingly in /var/configs/default.json in the kubecost cost-model container.
