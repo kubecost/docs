@@ -51,7 +51,6 @@
     * [Amazon Managed Service for Prometheus](aws-amp-integration.md)
     * [Grafana Cloud Integration for Kubecost](grafana-cloud-integration.md)
     * [Google Cloud Managed Service for Prometheus](gcp-gmp-integration.md)
-  * [Cost Analyzer Persistent Volume](storage.md)
 * [Additional Configuration](install-and-configure/advanced-configuration/README.md)
   * [Add Key](add-key.md)
   * [Enabling Annotation Emission](annotations.md)
