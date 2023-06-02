@@ -1,4 +1,4 @@
-# Keycloak setup
+# Configure Keycloak Identity Provider for Kubecost
 
 1. Create a new [Keycloak Realm](https://www.keycloak.org/getting-started/getting-started-kube#\_create\_a\_realm).
 2. Navigate to *Realm Settings* > *General* > *Endpoints* > *OpenID Endpoint Configuration* > *Clients*.
