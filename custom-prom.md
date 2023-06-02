@@ -9,7 +9,7 @@ The Kubecost Prometheus deployment is optimized to not interfere with other obse
 Additionally, if multi-cluster metric aggregation is required, Kubecost provides a turnkey solution that is highly tuned and simple to support using the included Prometheus deployment.
 
 {% hint style="info" %}
-The Kubecost team provides best effort support for free/community users when integrating with an existing or custom Prometheus deployment.
+This feature is accessible to all users. However, please note that comprehensive support is exclusive to those with paid support plans."
 {% endhint %}
 
 ## Dependency requirements
