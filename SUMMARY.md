@@ -58,7 +58,7 @@
   * [Network Cost Configuration](network-costs-configuration.md)
   * [User Management (SSO/SAML/RBAC)](user-management.md)
   * [User Management (SSO/OIDC)](user-management-oidc.md)
-    * [Configure KeyCloak for Kubecost](user-management-oidc-keycloak.md)
+    * [Configure Keycloak Identity Provider for Kubecost](user-management-oidc-keycloak.md)
     * [Gluu Server with OIDC Configuration Guide](integrations/gluu-server-with-oidc-configuration-guide.md)
   * [Tuning Resource Consumption](resource-consumption.md)
   * [Deploy Kubecost Staging Builds](staging.md)
