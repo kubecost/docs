@@ -25,7 +25,7 @@ In order to enable the leader/follower and HA features, the following must also 
 
 For example, using our Helm chart, the following is an acceptable configuration:
 ```bash
-helm install --name kubecost --namespace kubecost \
+helm install kubecost kubecost/cost-analyzer --namespace kubecost \
 	--set kubecostDeployment.leaderFollower.enabled=true \ 
 	--set kubecostDeployment.replicas=5 \
 	--set kubecostModel.etlBucketConfigSecret=kubecost-bucket-secret
