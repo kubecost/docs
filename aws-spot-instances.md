@@ -23,6 +23,69 @@ Spot data feeds are an account level setting, not a payer level. Every AWS Accou
 For Spot data written to an S3 bucket only accessed by Kubecost, it is safe to delete objects after three days of retention.
 {% endhint %}
 
+## Configuring IAM
+
+Kubecost requires read access to the Spot data feed bucket. The following IAM policy can be used to grant Kubecost read access to the Spot data feed bucket.
+
+```json
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+        "Sid": "SpotDataFeed",
+        "Effect": "Allow",
+        "Action": [
+          "s3:ListAllMyBuckets",
+          "s3:ListBucket",
+          "s3:HeadBucket",
+          "s3:HeadObject",
+          "s3:List*",
+          "s3:Get*"
+        ],
+        "Resource": "arn:aws:s3:::${SpotDataFeedBucketName}*"
+    }
+  ]
+}
+```
+
+To attach the IAM policy to the Kubecost service account, you can use IRSA or the account's service key.
+
+### Option 1: IRSA (IAM Roles for Service Accounts)
+
+```bash
+eksctl create iamserviceaccount \
+    --name kubecost-cost-analyzer \
+    --namespace kubecost \
+    --cluster $CLUSTER_NAME --region $REGION_NAME \
+    --attach-policy-arn arn:aws:iam::$ACCOUNT_NUMBER:policy/SpotDataFeed \
+    --override-existing-serviceaccounts \
+    --approve
+```
+
+### Option 2: Service Keys
+
+Create a `service-key.json` as shown:
+
+```json
+{
+    "aws_access_key_id": "AWS_service_key_aws_access_key_id",
+    "aws_secret_access_key": "AWS_service_key_aws_secret_access_key"
+}
+```
+
+Create a k8s secret:
+
+```bash
+$ kubectl create secret generic cloud-service-key --from-file=service-key.json
+```
+
+Set the following Helm config:
+
+```yaml
+kubecostProductConfigs:
+  serviceKeySecretName: "cloud-service-key"
+```
+
 ## Troubleshooting Spot data feed
 
 ### No Spot instances detected
