@@ -1,12 +1,23 @@
 # AWS Spot Instances
 
-## Spot Data feed integration
+## Considerations before configuring spot pricing
 
-Kubecost will reconcile your Spot prices with Cost and Usage Reports (CURs) as they become available (usually 1-2 days), but pricing data can be pulled hourly by integrating directly with the AWS Spot feed. AWS CUR integration and Spot data feed are two methods for Kubecost to read your billing data. The CUR is updated daily, while the Spot data feed is updated hourly by only applies to Spot Instances. Reduce complexity by only integrating with one of these methods. To enable Spot data feed, follow AWS' [Spot Instance data feed](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-data-feeds.html) doc.
+Kubecost uses onDemand pricing from the cloud providers until the actual cloud bill is available. This is almost always ready in 48 hours. Most users will likely prefer to configure [AWS cloud-integrations](aws-cloud-integrations.md) and skip the below setup.
+
+Kubecost will reconcile all onDemand resource prices when Cost and Usage Reports (CURs) are available (usually 1-2 days)
+
+For users that have a majority of their costs from spot nodes, the below guide can increase short-term (<48 hour) node costs. Note that all other costs will still be onDemand, which is why the below guide should be considered optional.
+
 
 ## Configuring the Spot data feed in Kubecost
 
-These values can either be set from the Kubecost UI or via `.Values.kubecostProductConfigs` in the Helm chart. Note that if you set any kubecostProductConfigs from the Helm chart, all changes via the frontend will be deleted on pod restart.
+With Kubecost spot pricing- data can be pulled hourly by integrating directly with the AWS Spot feed.
+
+First- to enable the AWS Spot data feed, follow AWS' [Spot Instance data feed](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-data-feeds.html) doc.
+
+When configuring note the settings used as these values will be needed for the Kubecost configuration.
+
+There are multiple options- this can either be set from the Kubecost UI or via `.Values.kubecostProductConfigs` in the Helm chart. Note that if you set any kubecostProductConfigs from the Helm chart, all changes via the frontend will be deleted on pod restart.
 
 * `projectID` the Account ID of the AWS Account on which the Spot nodes are running.
 * `awsSpotDataRegion` region of your Spot data bucket
