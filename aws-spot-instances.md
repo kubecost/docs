@@ -2,7 +2,7 @@
 
 ## Considerations before configuring spot pricing
 
-Kubecost uses onDemand pricing from the cloud providers until the actual cloud bill is available. This is almost always ready in 48 hours. Most users will likely prefer to configure [AWS cloud-integrations](aws-cloud-integrations.md) and skip the below setup.
+Kubecost uses public pricing from the cloud providers until the actual cloud bill is available. This is almost always ready in 48 hours. Most users will likely prefer to configure [AWS cloud-integrations](aws-cloud-integrations.md) and skip the below setup.
 
 For users that have a majority of their costs from spot nodes, the below guide can increase short-term (<48 hour) node costs. Note that all other costs will still be onDemand, which is why the below guide should be considered optional.
 
