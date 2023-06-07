@@ -1,4 +1,4 @@
-# Advanced Reporting - Beta
+# Advanced Reporting - Alpha
 
 Kubecost Advanced Reporting allows teams to sculpt and tailor custom reports to easily view the information they care about. Providing an intersection between Kubernetes allocation and cloud assets data, this tool provides insight into important cost considerations for both workload and external infrastructure costs.
 
