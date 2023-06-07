@@ -8,16 +8,17 @@ When ingesting billing data from cloud service providers (CSP), Kubecost records
 * InvoicedCost
 * AmortizedCost
 
-Each cost metric includes a `Cost` and a `KubernetesPercent` field. An unaggregated CloudCost query should have a `1` or a `0` in the `KubernetesPercent` field of all of its cost metrics. When it becomes aggregate, this value can become a percentage. It is necessary to keep track of these separately because differences in cost metrics will cause this value to diverge. For example, aggregating a Cloud Cost representing a Kubernetes node that has a reserved instance applied to it, and a non-Kubernetes node of the same type but with no reserved instance discount. See below:
+Each cost metric includes a `Cost` and a `KubernetesPercent` field. An unaggregated CloudCost query should have a `1` or a `0` in the `KubernetesPercent` field of all of its cost metrics. When it becomes aggregate, this value can become a percentage. It is necessary to keep track of these separately because differences in cost metrics will cause this value to diverge. For example, aggregating a Cloud Cost represents a Kubernetes node that has a reserved instance applied to it, and a non-Kubernetes node of the same type but with no reserved instance discount. See below:
 
-<pre><code>Node1 {
-<strong>    ListCost: {
-</strong>        Cost: 2,
+```
+Node1 {
+    ListCost: {
+        Cost: 2,
         KubernetesPercent: 1.0,
     },
-<strong>    AmortizedNetCost: {
-</strong><strong>        Cost:  1,
-</strong>        KubernetesPercent: 1.0
+    AmortizedNetCost: {
+        Cost:  1,
+        KubernetesPercent: 1.0
     },
 }
 
@@ -28,8 +29,8 @@ Node2 {
     },
     AmortizedNetCost: {
         Cost:  2,
-<strong>        KubernetesPercent: 0.0
-</strong>    },
+        KubernetesPercent: 0.0
+    },
 }
 
 agg {
@@ -37,15 +38,15 @@ agg {
         Cost: 4,
         KubernetesPercent: 0.5,
     },
-<strong>    AmortizedNetCost: {
-</strong>        Cost:  3,
+    AmortizedNetCost: {
+        Cost:  3,
         KubernetesPercent: 0.33
     },
 
 }
-</code></pre>
+```
 
-The `KubernetesPercent` on the AmortizedNetCost is calculated at 33% from $1 that was 100% Kubernetes spend and $2 that were 0% Kubernetes spend in that dimension.
+The `KubernetesPercent` on the AmortizedNetCost is calculated at 33% from $1 which was 100% Kubernetes spend and $2 that were 0% Kubernetes spend in that dimension.
 
 ## Cost metrics by CSP
 
@@ -151,14 +152,14 @@ Kubecost uses Net Cost.
 
 ## Kubernetes percent by CSP
 
-Whether or not a specific belongs is part of a Kubernetes cluster is not something that is made available in any of the billing integration, and is not something that can be determined with 100% accuracy in all situations. To populate this field at the item level, Kubecost uses heuristics based on the existence of labels, or the service that the resource originates from. These heuristics are only capable of detecting resources that belong to the managed Kubernetes offerings from each CSP.\
+Whether or not a specific resource belongs as part of a Kubernetes cluster is not something that is made available in any of the billing integrations, and is not something that can be determined with 100% accuracy in all situations. To populate this field at the item level, Kubecost uses heuristics based on the existence of labels, or the service that the resource originates from. These heuristics are only capable of detecting resources that belong to the managed Kubernetes offerings from each CSP.\
 
 
 <details>
 
 <summary>AWS</summary>
 
-The CUR only has labels that have been enabled for it, each as its own individual column rather than in a JSON object of key value pairs. Because of this, the efficacy of this heuristic is limited by the labels that it targets being enabled.
+The CUR only has labels that have been enabled for it, each as its own individual column rather than in a JSON object of key-value pairs. Because of this, the efficacy of this heuristic is limited by the labels that it targets being enabled.
 
 If `line_item_product_code` is `AmazonEKS`, or one of the following label keys is present:
 
