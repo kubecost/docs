@@ -548,7 +548,29 @@ You can also check query history to see if any queries are failing:
 
 ![Screen Shot 2020-12-06 at 9 43 50 PM](https://user-images.githubusercontent.com/453512/101319633-24ef5500-3817-11eb-9f87-55a903428936.png)
 
-### Common Athena errors
+### Common IAM/Athena errors
+
+#### Invalid AWS Access Key ID
+
+* **Symptom:** The following errors in the `cost-model` container logs.
+  
+  ```txt
+  The AWS Access Key Id you provided does not exist in our records.
+  ```
+
+  ```txt
+  The security token included in the request is invalid.
+  ```
+
+* **Resolution:** This was fixed in Kubecost v1.104, but may still affect some users. In addition to validating that your `awsServiceKeyName` and `awsServiceKeyPassword` are correct, run the following command to override the existing default, then restart the `kubecost-cost-analyzer` pod.
+  
+  ```bash
+  curl --location --request POST 'localhost:9090/model/updateAthenaInfoConfigs' \
+    --header 'Content-Type: application/json' \
+    --data-raw '{
+    "awsServiceKeyName": ""
+    }'
+  ```
 
 #### Incorrect bucket in IAM Policy
 
