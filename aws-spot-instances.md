@@ -14,7 +14,7 @@ First- to enable the AWS Spot data feed, follow AWS' [Spot Instance data feed](h
 
 When configuring note the settings used as these values will be needed for the Kubecost configuration.
 
-There are multiple options- this can either be set from the Kubecost UI or via `.Values.kubecostProductConfigs` in the Helm chart. Note that if you set any kubecostProductConfigs from the Helm chart, all changes via the frontend will be deleted on pod restart.
+There are multiple options- this can either be set from the Kubecost UI or via `.Values.kubecostProductConfigs` in the Helm chart. Note that if you set any `kubecostProductConfigs` from the Helm chart, all changes via the frontend will be deleted on pod restart.
 
 * `projectID` the Account ID of the AWS Account on which the Spot nodes are running.
 * `awsSpotDataRegion` region of your Spot data bucket
