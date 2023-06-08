@@ -2,11 +2,9 @@
 
 The Cloud Cost Explorer is a dashboard which provides visualization and filtering of your cloud spending. This dashboard includes the costs for all assets in your connected cloud accounts by pulling from those providers' Cost and Usage Reports (CURs) or other cloud billing reports.
 
-## Installation and configuration
+<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
 
-{% hint style="info" %}
-As of v1.104, Cloud Cost is enabled by default. If you are using v1.04+, you can skip the Installation and Configuration section.
-{% endhint %}
+## Installation and configuration
 
 {% hint style="info" %}
 As of v1.104, Cloud Cost is enabled by default. If you are using v1.04+, you can skip the Installation and Configuration section.
@@ -27,7 +25,7 @@ kubecostModel:
 
 Enabling Cloud Cost is required. Optional parameters include:
 
-* `labelList.labels`: Comma separated list of labels; empty string indicates that the list is disabled
+* `labelList.labels`: Comma-separated list of labels; empty string indicates that the list is disabled
 * `labelList.isIncludeList`: If true, label list is a white list; if false, it is a black list
 * `topNItems`: number of sampled "top items" to collect per day
 
@@ -42,7 +40,7 @@ kubecostModel:
 Disabling Cloud Usage will restrict functionality of your Assets dashboard. This is intentional. Learn more about Cloud Usage [here](https://docs.kubecost.com/install-and-configure/install/cloud-integration#cloud-usage).
 {% endhint %}
 
-## UI overview
+## Configuring your query
 
 ### Date range
 
@@ -87,7 +85,7 @@ The Cost Metric dropdown allows you to adjust the displayed cost data based on d
 | Invoiced Cost      | Pricing based on usage during billing period                                                |
 | Amortized          | Effective/upfront cost across the billing period                                            |
 
-### Table metrics
+## Cost table metrics
 
 Your cloud cost spending will be displayed across your dashboard with several key metrics:
 

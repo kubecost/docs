@@ -86,7 +86,7 @@
   * [Alerts](alerts.md)
   * [Savings](savings.md)
     * [Actions](using-kubecost/navigating-the-kubecost-ui/savings/savings-actions.md)
-    * [Cluster Right-Sizing](using-kubecost/navigating-the-kubecost-ui/savings/cluster-right-sizing-recommendations/README.md)
+    * [Cluster Right-Sizing](using-kubecost/navigating-the-kubecost-ui/savings/cluster-right-sizing-recommendations.md)
       * [Continuous Cluster Right-Sizing](using-kubecost/navigating-the-kubecost-ui/savings/cluster-right-sizing-recommendations/continuous-cluster-right-sizing.md)
     * [Container Request Right-Sizing](auto-request-sizing.md)
       * [1-click Request Right-Sizing](using-kubecost/navigating-the-kubecost-ui/savings/auto-request-sizing/one-click-request-sizing.md)

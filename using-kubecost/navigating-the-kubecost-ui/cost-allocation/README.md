@@ -4,15 +4,17 @@ The Kubecost Allocations dashboard allows you to quickly see allocated spend acr
 
 <figure><img src="../../../.gitbook/assets/image (2) (2) (1) (2).png" alt=""><figcaption></figcaption></figure>
 
-## UI overview
+## Configuring your query
 
-| Element                  | Description                                                                                                         |
-| ------------------------ | ------------------------------------------------------------------------------------------------------------------- |
-| Date Range (Last 7 days) | Will report _Last 7 days_ by default. Manually select your start and end date, or pick one of twelve preset options |
-| Aggregate By             | Aggregate costs by one or several concepts. Add custom labels                                                       |
-| Save/Unsave Report       | Save or unsave the current report                                                                                   |
-| Edit Report              | Includes multiple filtering tools including cost metric and shared resources                                        |
-| Additional options icon  | Additional options for opening and downloading reports                                                              |
+Kubecost provides a variety of options for configuring your allocations queries to view the information you need. Below is a table of the major configuration options, with in-depth explanations in this article for how they work.
+
+| Element                 | Description                                                                                              |
+| ----------------------- | -------------------------------------------------------------------------------------------------------- |
+| Date Range              | Will report _Last 7 days_ by default. Manually select your start and end date, or choose a preset option |
+| Aggregate By            | Aggregate costs by one or several concepts. Add custom labels                                            |
+| Save/Unsave             | Save or unsave the current report                                                                        |
+| Edit                    | Includes multiple filtering tools including cost metric and shared resources                             |
+| Additional options icon | Additional options for opening and downloading reports                                                   |
 
 ### Date Range
 
@@ -29,7 +31,7 @@ Service in this context refers to a Kubernetes object that exposes an interface 
 {% endhint %}
 
 {% hint style="warning" %}
-When aggregating by namespace, the Allocations dashboard will only display namespaces which have or have had workloads running in them. If you don't see a namespace on this dashboard, you should confirm whether the namespace is running a workload.
+When aggregating by namespace, the Allocations dashboard will only display namespaces that have or have had workloads running in them. If you don't see a namespace on this dashboard, you should confirm whether the namespace is running a workload.
 {% endhint %}
 
 Costs aggregations are also visible by other meaningful organizational concepts, e.g. Team, Department, and Product. These aggregations are based on Kubernetes labels, referenced at both the pod and namespace-level, with labels at the pod-level being favored over the namespace label when both are present. The Kubernetes label name used for these concepts can be configured in Settings or in [values.yaml](https://github.com/kubecost/cost-analyzer-helm-chart/blob/19908983ed7c8d4ff1d3e62d98537a39ab61bbab/cost-analyzer/values.yaml#L427-L445) after setting `kubecostProductConfigs.labelMappingConfigs.enabled` to `true`. Workloads without the relevant label will be shown as `__unallocated__`.
@@ -47,7 +49,22 @@ kubectl get pods --show-labels -n <TARGET_NAMESPACE>
 
 ### Edit report
 
-The _Edit Report_ icon has additional options to filter your search.
+The _Edit_ icon has additional options for configuring your query such as how to display your data, adding filters, and configuring shared resources.
+
+#### Idle Costs
+
+Allocating [idle costs](https://docs.kubecost.com/using-kubecost/navigating-the-kubecost-ui/cost-allocation/efficiency-idle#idle) proportionately distributes slack or idle _cluster costs_ to tenants. Idle refers to resources that are provisioned but not being fully used or requested by a tenant.
+
+As an example, if your cluster is only 25% utilized, as measured by the max of resource usage and requests, applying idle costs would proportionately increase the cost of each pod/namespace/deployment by 4x. This feature can be enabled by default in Settings.
+
+The idle costs dropdown allows you to choose how you wish your idle costs to be displayed:
+
+* Hide: Hide idle costs completely.
+* Separate: Idle costs appear as their own cost, visualized as a gray-colored bar in your display table.
+* Share By Cluster: Idle costs are grouped by the cluster they belong to.
+* Share By Node: Idle costs are grouped by the node they belong to.
+
+To learn more about sharing idle costs, see [here](https://docs.kubecost.com/using-kubecost/navigating-the-kubecost-ui/cost-allocation/efficiency-idle#sharing-idle).
 
 #### Chart
 
@@ -59,7 +76,7 @@ View Allocation data in the following formats:
 4. Proportional cost: Cost per aggregate displayed as a percentage of total cost over date range
 5. Cost Treemap: Hierarchically structured view of costs in current aggregation
 
-You can select _Edit Report_ > _Chart_, then select _Cost over time_ from the dropdown to have your data displayed by a per-day basis. Hovering over any day's data will provide a breakdown of your spending.
+You can select _Edit_ > _Chart_ > _Cost over time_ from the dropdown to have your data displayed on a per-day basis. Hovering over any day's data will provide a breakdown of your spending.
 
 ![Cost over time data](https://raw.githubusercontent.com/kubecost/docs/main/images/perdaybasis.png)
 
@@ -84,7 +101,7 @@ Step size refers to the size of each bar of data displayed on your dashboard. Op
 
 #### Filters
 
-Filter resources by namespace, clusterID, and/or Kubernetes label to more closely investigate a rise in spend or key cost drivers at different aggregations such as deployments or pods. When a filter is applied, only resources with this matching value will be shown. These filters are also applied to external out-of-cluster asset tags. Supported filters are as follows:
+Filter resources by namespace, clusterID, and/or Kubernetes label to more closely investigate a rise in spend or key cost drivers at different aggregations such as deployments or pods. When a filter is applied, only resources with this matching value will be shown. These filters are also applied to external out-of-cluster (OOC) asset tags. Supported filters are as follows:
 
 | Filter         | Description                                                                                                                                                              |
 | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -101,11 +118,11 @@ Comma-separated lists are supported to filter by multiple categories, e.g. names
 
 #### Shared resources
 
-Select how shared costs set on the settings page will be shared among allocations. Pick from default shared resources, or select a custom shared resource. A custom shared resource can be selected in the Configure custom shared resources feature at the bottom of the _Edit report_ window.
+Select how shared costs set on the settings page will be shared among allocations. Pick from default shared resources, or select a custom shared resource. A custom shared resource can be selected in the Configure custom shared resources feature at the bottom of the _Edit_ window.
 
-## Additional options
+### Additional options
 
-The three horizontal dots icon will provide additional options for handling your report:
+The three horizontal dots icon (directly next to _Save_) will provide additional options for handling your report:
 
 * _Open Report_: Allows you to open one of your saved reports without first navigating to the Reports page
 * _Alerts_: Send one of four reports routinely: recurring, efficiency, budget, and spend change
@@ -114,7 +131,7 @@ The three horizontal dots icon will provide additional options for handling your
 
 ## Cost metrics table
 
-Cost allocation metrics are available for both in-cluster and out-of-cluster resources:
+Cost allocation metrics are available for both in-cluster and OOC resources:
 
 | Metric                      | Description                                                                                                                                                                                                                                                                                                                                                                                               |
 | --------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -131,18 +148,10 @@ Cost allocation metrics are available for both in-cluster and out-of-cluster res
 
 ![Cost Efficiency table](https://raw.githubusercontent.com/kubecost/docs/main/images/table.PNG)
 
-### Actions column
+### Additional options column
 
-The Actions column is the rightmost column in the Allocations dashboard table. It provides additional actions that can be performed on a particular namespace:
+The rightmost column in the Allocations metrics table allows you to perform additional actions on individual line items (functionality will vary based on how you aggregate):
 
 * _Inspect_: Opens an advanced cost overview of the namespace in a new tab.
 * _Inspect Shared Costs_: Opens an advanced cost overview of your shared costs in a new tab.
 * _View Right-Sizing_: Opens the [Request right-sizing recommendations](https://docs.kubecost.com/using-kubecost/getting-started/savings/auto-request-sizing) page in a new tab.
-
-## Idle costs
-
-Allocating idle costs proportionately distributes slack or idle _cluster costs_ to tenants. Idle refers to resources that are provisioned but not being fully used or requested by a tenant.
-
-As an example, if your cluster is only 25% utilized, as measured by the max of resource usage and requests, applying idle costs would proportionately increase the cost of each pod/namespace/deployment by 4x. This feature can be enabled by default in Settings.
-
-More info on idle costs can be found in the [Efficiency and Idle](https://docs.kubecost.com/using-kubecost/navigating-the-kubecost-ui/cost-allocation/efficiency-idle#idle) doc.
