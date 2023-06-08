@@ -60,6 +60,8 @@ To attach the IAM policy to the Kubecost service account, you can use IRSA or th
 
 ### Option 1: IRSA (IAM Roles for Service Accounts)
 
+> **Note**: If your `serviceaccount/kubecost-cost-analyzer` already has IRSA annotations attached, be sure to include all policies necessary when running this command.
+
 ```bash
 eksctl create iamserviceaccount \
     --name kubecost-cost-analyzer \
