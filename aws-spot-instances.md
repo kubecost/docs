@@ -8,13 +8,13 @@ For users with most of their costs from spot nodes, the guide below can increase
 
 ## Configuring the Spot data feed in Kubecost
 
-With Kubecost spot pricing- data can be pulled hourly by integrating directly with the AWS Spot feed.
+With Kubecost, Spot pricing- data can be pulled hourly by integrating directly with the AWS Spot feed.
 
-First- to enable the AWS Spot data feed, follow AWS' [Spot Instance data feed](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-data-feeds.html) doc.
+First, to enable the AWS Spot data feed, follow AWS' [Spot Instance data feed](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-data-feeds.html) doc.
 
-When configuring note the settings used as these values will be needed for the Kubecost configuration.
+While configuring, note the settings used as these values will be needed for the Kubecost configuration.
 
-There are multiple options- this can either be set from the Kubecost UI or via `.Values.kubecostProductConfigs` in the Helm chart. Note that if you set any `kubecostProductConfigs` from the Helm chart, all changes via the frontend will be deleted on pod restart.
+There are multiple options: this can either be set from the Kubecost UI or via `.Values.kubecostProductConfigs` in the Helm chart. Note that if you set any `kubecostProductConfigs` from the Helm chart, all changes via the front end will be deleted on pod restart.
 
 * `projectID` the Account ID of the AWS Account on which the Spot nodes are running.
 * `awsSpotDataRegion` region of your Spot data bucket
@@ -23,7 +23,7 @@ There are multiple options- this can either be set from the Kubecost UI or via `
 * `spotLabel` optional Kubernetes node label name designating whether a node is a Spot node. Used to provide pricing estimates until exact Spot data becomes available from the CUR
 * `spotLabelValue` optional Kubernetes node label value designating a Spot node. Used to provide pricing estimates until exact Spot data becomes available from the CUR. For example, if your Spot nodes carry a label `lifecycle:spot`, then the `spotLabel` would be `lifecycle` and the `spotLabelValue` would be `spot`
 
-In the UI, you can access these fields via the _Settings_ page, under Cloud Cost Settings. Next to Spot Instance Configuration, select _Update,_ then fill out all fields.
+In the UI, you can access these fields via the _Settings_ page, then scrolling to Cloud Cost Settings. Next to Spot Instance Configuration, select _Update,_ then fill out all fields.
 
 Spot data feeds are an account level setting, not a payer level. Every AWS Account will have its own Spot data feed. Spot data feed is not currently available in AWS GovCloud.
 
