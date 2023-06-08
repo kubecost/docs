@@ -1,6 +1,6 @@
 # AWS Spot Instances
 
-## Considerations before configuring spot pricing
+## Considerations before configuring Spot pricing
 
 Kubecost uses public pricing from the cloud providers until the actual cloud bill is available. This is almost always ready in 48 hours. Most users will likely prefer to configure [AWS cloud-integrations](aws-cloud-integrations.md) and skip the below setup.
 
