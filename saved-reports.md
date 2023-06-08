@@ -135,17 +135,17 @@ The following fields apply to each map item under the `reports` key:
 
 ## Combining UI report management with _values.yaml_
 
-When defining reports via _values.yaml_, by setting `global.savedReports.enabled = true` in the values file, the reports defined in _values.yaml_ are created when the Kubecost pod starts. Reports can still be freely created/deleted via the UI while the pod is running. However, when the pod restarts, whatever is defined the the values file supersedes any UI changes.
+When defining reports via _values.yaml_, by setting `global.savedReports.enabled = true` in the values file, the reports defined in _values.yaml_ are created when the Kubecost pod starts. Reports can still be freely created/deleted via the UI while the pod is running. However, when the pod restarts, whatever is defined the values file supersedes any UI changes.
 
 Generally, the ConfigMap, if present, serves as the source of truth at startup.
 
-If saved reports are _not_ provided via _values.yaml_, meaning `global.savedReports.enabled = false`, reports created via the UI are saved to a persistent volume, and persist across pod restarts.
+If saved reports are _not_ provided via _values.yaml_, meaning `global.savedReports.enabled = false`, reports created via the UI are saved to a persistent volume and persist across pod restarts.
 
 ## Troubleshooting
 
 Review these steps to verify that saved reports are being passed to the Kubecost application correctly:
 
-1. xConfirm that `global.savedReports.enabled` is set to `true`
+1. Confirm that `global.savedReports.enabled` is set to `true`
 2.  Ensure that the Helm values are successfully read into the ConfigMap
 
     * Run `helm template ./cost-analyzer -n kubecost > test-saved-reports-config.yaml`
