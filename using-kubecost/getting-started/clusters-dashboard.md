@@ -1,9 +1,5 @@
 # Clusters Dashboard
 
-{% hint style="warning" %}
-The Clusters dashboard is currently a beta feature. Please read the documentation carefully.
-{% endhint %}
-
 ## Overview
 
 The Clusters dashboard provides a list of all your monitored clusters, as well as additional clusters detected in your cloud bill. The dashboard provides details about your clusters including cost, efficiency, and cloud provider. You are able to filter your list of clusters by when clusters were last seen, activity status, and by name (see below).
@@ -57,9 +53,5 @@ Selecting any metric in a specific cluster's row will take you to a Cluster Deta
 ### Filtering clusters
 
 You are able to filter clusters through a window of when all clusters were last seen (default is _Last 7 days_). Although unmonitored clusters will not provide a metric for Last Seen, they will still appear in applicable windows.
-
-{% hint style="danger" %}
-As a beta feature, certain windows may result in long load times, or may not load properly. Thank you for your patience while using this feature. Load times will be improved in future releases.
-{% endhint %}
 
 You can also filter your clusters for _Active_, _Inactive_, or _Unmonitored_ status, and search for clusters by name.

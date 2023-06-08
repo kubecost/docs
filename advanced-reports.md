@@ -1,22 +1,52 @@
 # Advanced Reporting
 
-Kubecost Advanced Reporting allows teams to sculpt and tailor custom reports to easily view the information they care about. Providing an intersection between Kubernetes allocation and cloud assets data, this tool provides insight into important cost considerations for both workload and external infrastructure costs.
+{% hint style="warning" %}
+Advanced Reporting is a beta feature. Read the documentation carefully.
+{% endhint %}
 
-<figure><img src=".gitbook/assets/advancedreporting.PNG" alt=""><figcaption></figcaption></figure>
+Advanced Reporting allows teams to sculpt and tailor custom reports to easily view the information they care about. Providing an intersection between Kubernetes allocation and cloud assets data, this tool provides insight into important cost considerations for both workload and external infrastructure costs.
 
-## Report configurations
+## Creating an advanced report
 
-A UI is provided to manage the configurations which make up a report. Advanced Reporting is accessed by selecting _Reports_ from the left navigation, then selecting _Visit the new Advanced Reporting page (Beta)_.
+Begin by accessing the Reports page. Select _Create a report_, then select _Advanced Report_. The Advanced Reporting page opens.
 
-| Configuration                         | Description                                                                                                                                                                    |
-| ------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Date Range (Last 7 days)              | Will report _Last 7 days_ by default. Manually select your start and end date, or pick one of twelve preset options.                                                           |
-| Aggregate By                          | Field by which to aggregate Allocation results. `cluster`, `namespace`, etc.                                                                                                   |
-| Cloud Breakdown                       | Filter by `Provider`, `Service`, `Account`, or use _Custom Data Mapping_ to override default label mappings                                                                    |
-| Save Report                           | Will save the report with your existing configurations and add it to the Reports page for quick access                                                                         |
-| Edit Report                           | Opens window with additional options for configuring report, including filters and shared resources                                                                            |
-| Filters                               | Accessed in _Edit Report_. Used to filter Allocation information                                                                                                               |
-| Shared resources                      | Accessed in _Edit Report_. Field to handle default and custom shared resources (adjusted on the Settings page). Configure custom shared overhead costs, namespaces, and labels |
-| Cloud Breakdown/magnifying glass icon | Compare K8s costs with out-of-cluster (OOC) costs                                                                                                                              |
+Advanced Reporting will display your Allocations data and allow for similar configuring and editing. However, that data can now also intersect your cloud service, provider, or accounts.
 
-Reports can now be saved via your organization like Allocations and Assets reports, instead of locally.
+Some line items will display a magnifying lens icon next to the name. Selecting this icon will provide a Cloud Breakdown which compares Kubernetes costs and out-of-cluster (OOC) costs. You will also see OOC costs broken down by cloud service provider (CSP).
+
+### Configuring a report
+
+The Advanced Reporting page manages the configurations which make up a report. Review the following tools which specify your query:
+
+| Configuration | Description                                                                                   |
+| ------------- | --------------------------------------------------------------------------------------------- |
+| Date Range    | Manually select your start and end date, or choose a preset option. Default is _Last 7 days_. |
+| Aggregate By  | Field by which to aggregate results, such as by _Namespace_, _Cluster_, etc.                  |
+
+{% hint style="info" %}
+The _Service_ aggregation in this context refers to a Kubernetes object that exposes an interface to outside consumers, not a CSP feature.
+{% endhint %}
+
+### Editing your report
+
+Selecting _Edit_ will open a slide panel with additional configuration options.
+
+#### Filters
+
+When a filter is applied, only results matching that value will display.
+
+#### Shared resources
+
+Field to handle default and custom shared resources (adjusted on the Settings page). Configure custom shared overhead costs, namespaces, and labels
+
+### Saving your report
+
+After completing all configurations for your report, select _Save_. A name for your report based on your configuration will be auto-generated, but you have the option to provide a custom name. Finalize by selecting _Save_.
+
+Reports can be saved via your organization like Allocations and Assets reports, instead of locally.
+
+## Cloud Breakdown
+
+Line items that possess any out-of-cluster (OOC) costs, ie. cloud costs, will display a magnifying lens icon next to their name. Selecting this icon will open a slide panel that compares your K8s and OOC costs.
+
+You can choose to aggregate those OOC costs by selecting the Cloud Breakdown button next to _Aggregate By_ then selecting from one of the available options. You can aggregate by _Provider_, _Service_, _Account_, or use _Custom Data Mapping_ to override default label mappings.

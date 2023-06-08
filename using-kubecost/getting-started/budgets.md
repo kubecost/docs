@@ -1,9 +1,5 @@
 # Budgets
 
-{% hint style="warning" %}
-The Budgets dashboard is currently in beta. Please read the documentation carefully.
-{% endhint %}
-
 Budgets are a way of establishing spend limits for your clusters or namespaces. They can be created in moments using the Budgets dashboard.
 
 ## Creating a budget

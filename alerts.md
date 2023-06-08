@@ -5,7 +5,7 @@
 Kubecost alerts allow teams to receive updates on real-time Kubernetes spend. They are configurable via the Kubecost UI or Helm values. This resource gives an overview of how to configure Kubecost email, Slack, and Microsoft Teams using [Kubecost Helm chart values](https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/values.yaml). Alerts are either created to monitor specific data sets and trends, or they must be toggled on or off. The following alert types are supported:
 
 1. [Allocation Budget](alerts.md#type-allocation-budget): Sends an alert when spending crosses a defined threshold
-2. \[Beta] [Allocation Efficiency](alerts.md#type-allocation-efficiency): Detects when a Kubernetes tenant is operating below a target cost-efficiency threshold
+2. [Allocation Efficiency](alerts.md#type-allocation-efficiency): Detects when a Kubernetes tenant is operating below a target cost-efficiency threshold
 3. [Allocation Recurring Update](alerts.md#type-allocation-recurring-update): Sends an alert with cluster spending across all or a subset of kubernetes resources.
 4. [Allocation Spend Change](alerts.md#type-allocation-spend-change): Sends an alert reporting unexpected spend increases relative to moving averages
 5. [Asset Budget](alerts.md#type-asset-budget): Sends an alert when spend for a particular set of assets crosses a defined threshold.
@@ -82,10 +82,6 @@ Example Helm _values.yaml_:
 ```
 
 ### Type: Allocation Efficiency
-
-{% hint style="warning" %}
-This feature is currently in Beta.
-{% endhint %}
 
 Alert when Kubernetes tenants, e.g. namespaces or label sets, are running below defined cost-efficiency thresholds.
 

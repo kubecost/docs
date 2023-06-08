@@ -1,14 +1,18 @@
 # Cloud Cost Explorer
 
-{% hint style="warning" %}
-Cloud Cost is currently in beta. Please read the documentation carefully.
-{% endhint %}
-
 The Cloud Cost Explorer is a dashboard which provides visualization and filtering of your cloud spending. This dashboard includes the costs for all assets in your connected cloud accounts by pulling from those providers' Cost and Usage Reports (CURs) or other cloud billing reports.
 
 ## Installation and configuration
 
-Cloud Cost needs to be enabled first through Helm, using the following parameters:
+{% hint style="info" %}
+As of v1.104, Cloud Cost is enabled by default. If you are using v1.04+, you can skip the Installation and Configuration section.
+{% endhint %}
+
+{% hint style="info" %}
+As of v1.104, Cloud Cost is enabled by default. If you are using v1.04+, you can skip the Installation and Configuration section.
+{% endhint %}
+
+For versions of Kubecost up to v1.103, Cloud Cost needs to be enabled first through Helm, using the following parameters:
 
 ```
 kubecostModel:
@@ -73,7 +77,7 @@ You can filter displayed dashboard metrics by selecting _Edit_, then adding a fi
 
 **Cost Metric**
 
-The Cost Metric dropdown allows you to adjust the displayed cost data based on different calculations. Cost Metric values are based on and calculated following standard FinOps dimensions and metrics, as seen in detail [here](https://github.com/finopsfoundation/finops-open-cost-usage-spec/blob/main/specification\_sheet\_import.md). The four available metrics supported by the Cloud Costs Explorer are:
+The Cost Metric dropdown allows you to adjust the displayed cost data based on different calculations. Cost Metric values are based on and calculated following standard FinOps dimensions and metrics, but may be calculated differently depending on your CSP. Learn more about how these metrics are calculated by CSP in the [Cloud Cost Metrics](https://docs.kubecost.com/apis/apis-overview/cloud-cost-api/cloud-cost-metrics) doc. The five available metrics supported by the Cloud Costs Explorer are:
 
 | Cost Metric        | Description                                                                                 |
 | ------------------ | ------------------------------------------------------------------------------------------- |
@@ -81,6 +85,7 @@ The Cost Metric dropdown allows you to adjust the displayed cost data based on d
 | Net Cost           | Costs inclusive of discounts and credits. Will also include one-time and recurring charges. |
 | List Cost          | CSP pricing without any discounts                                                           |
 | Invoiced Cost      | Pricing based on usage during billing period                                                |
+| Amortized          | Effective/upfront cost across the billing period                                            |
 
 ### Table metrics
 
@@ -88,6 +93,6 @@ Your cloud cost spending will be displayed across your dashboard with several ke
 
 * K8 Utilization: Percent of cost which can be traced back to Kubernetes cluster
 * Total cost: Total cloud spending
-* Sum of Sample Data: **Only when aggregating by **_**Item**_. Only lists the top cost for the timeframe selected. Displays that may not match your CUR.
+* Sum of Sample Data: Only when aggregating by _Item_. Only lists the top cost for the timeframe selected. Displays that may not match your CUR.
 
 All line items, after aggregation, should be selectable, allowing you to drill down to further analyze your spending. For example, when aggregating cloud spend by _Service_, you can select an individual cloud service (AmazonEC2, for example) and view spending, K8 utilization, and other details unique to that item.

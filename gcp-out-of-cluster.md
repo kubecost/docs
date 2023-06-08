@@ -55,9 +55,11 @@ You can set up an [IAM policy binding](https://cloud.google.com/kubernetes-engin
 * `NAMESPACE` is the namespace Kubecost is installed into
 * `KSA_NAME` is the name of the service account attributed to the Kubecost deployment
 
+{% code overflow="wrap" %}
 ```
 gcloud iam service-accounts add-iam-policy-binding compute-viewer-kubecost@$PROJECT_ID.iam.gserviceaccount.com --role roles/iam.workloadIdentityUser --member "serviceAccount:$PROJECT_ID.svc.id.goog[NAMESPACE/KSA_NAME]"
 ```
+{% endcode %}
 
 You will also need to enable the [IAM Service Account Credentials API](https://cloud.google.com/iam/docs/reference/credentials/rest) in the GCP project.
 
@@ -65,9 +67,11 @@ You will also need to enable the [IAM Service Account Credentials API](https://c
 
 Create a service account key:
 
+{% code overflow="wrap" %}
 ```
 gcloud iam service-accounts keys create ./compute-viewer-kubecost-key.json --iam-account compute-viewer-kubecost@$PROJECT_ID.iam.gserviceaccount.com
 ```
+{% endcode %}
 
 Once the GCP service account has been connected, set up the remaining configuration parameters.
 
@@ -87,6 +91,7 @@ kubecostProductConfigs:
 
 If you've connected using Workload Identity federation, add these configs:
 
+{% code overflow="wrap" %}
 ```yaml
 # Ensure Kubecost deployment runs on nodes that use Workload Identity
 nodeSelector:
@@ -96,12 +101,15 @@ serviceAccount:
   annotations:
     iam.gke.io/gcp-service-account: "compute-viewer-kubecost@$PROJECT_ID.iam.gserviceaccount.com"
 ```
+{% endcode %}
 
 Otherwise, if you've connected using a service account key, create a secret for the GCP service account key you've created and add the following configs:
 
+{% code overflow="wrap" %}
 ```sh
 kubectl create secret generic gcp-secret -n kubecost --from-file=./compute-viewer-kubecost-key.json
 ```
+{% endcode %}
 
 ```yaml
 kubecostProductConfigs:
@@ -164,6 +172,7 @@ export SERVICE_ACCOUNT_NAME=<Unique name for your service account>
 
 Once these values have been set, this script can be run and will create the service account needed for this configuration.
 
+{% code overflow="wrap" %}
 ```
 gcloud config set project $KUBECOST_PROJECT_ID
 gcloud iam service-accounts create $SERVICE_ACCOUNT_NAME --display-name "Cross Project CUR" --format json
@@ -172,6 +181,7 @@ gcloud projects add-iam-policy-binding $BIG_QUERY_PROJECT_ID --member serviceAcc
 gcloud projects add-iam-policy-binding $BIG_QUERY_PROJECT_ID --member serviceAccount:$SERVICE_ACCOUNT_NAME@$KUBECOST_PROJECT_ID.iam.gserviceaccount.com --role roles/bigquery.dataViewer
 gcloud projects add-iam-policy-binding $BIG_QUERY_PROJECT_ID --member serviceAccount:$SERVICE_ACCOUNT_NAME@$KUBECOST_PROJECT_ID.iam.gserviceaccount.com --role roles/bigquery.jobUser
 ```
+{% endcode %}
 
 Now that your service account is created, follow the normal configuration instructions.
 

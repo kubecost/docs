@@ -82,6 +82,7 @@
   * [Cloud Cost Explorer](using-kubecost/getting-started/cloud-costs-explorer.md)
   * [Saved Reports](saved-reports.md)
     * [Advanced Reporting](advanced-reports.md)
+    * [Cost Center Report](using-kubecost/navigating-the-kubecost-ui/saved-reports/cost-center-report.md)
   * [Alerts](alerts.md)
   * [Savings](savings.md)
     * [Savings Actions](using-kubecost/navigating-the-kubecost-ui/savings/savings-actions.md)

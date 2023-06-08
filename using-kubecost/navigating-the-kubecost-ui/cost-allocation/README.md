@@ -2,7 +2,7 @@
 
 The Kubecost Allocations dashboard allows you to quickly see allocated spend across all native Kubernetes concepts, e.g. namespace, k8s label, and service. It also allows for allocating cost to organizational concepts like team, product/project, department, or environment. This document explains the metrics presented and describes how you can control the data displayed in this view.
 
-<figure><img src="../../../.gitbook/assets/image (2) (2) (1) (1) (1) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (2) (2) (1) (2) (1).png" alt=""><figcaption></figcaption></figure>
 
 ## UI overview
 
@@ -124,7 +124,7 @@ Cost allocation metrics are available for both in-cluster and out-of-cluster res
 | Persistent Volume (PV) Cost | The cost of persistent storage volumes claimed by this object. Prices are based on cloud billing prices or custom pricing sheets for on-prem deployments.                                                                                                                                                                                                                                                 |
 | Network                     | The cost of network traffic based on internet egress, cross-zone egress, and other billed transfer. Note: these costs must be enabled. [Learn more](../../../network-allocation.md). When Network Traffic Cost are not enabled, the Node network costs from the cloud service provider's [billing integration](../../../cloud-integration.md) will be spread proportionally based on cost weighted usage. |
 | Load Balancer (LB) cost     | The cost of cloud-service load balancer that has been allocated.                                                                                                                                                                                                                                                                                                                                          |
-| Shared                      | The cost of shared resources allocated to this tenant. This field covers shared overhead, shared namespaces, and shared labels.                                                                                                                                                                                                                                                                           |
+| Shared                      | The cost of shared resources allocated to this tenant. This field covers shared overhead, shared namespaces, and shared labels. Can be explored further via _I_[_nspect Shared Costs_](https://docs.kubecost.com/using-kubecost/navigating-the-kubecost-ui/cost-allocation#actions-column)_._ Idle costs are not included in Shared costs.                                                                |
 | Cost Efficiency             | The percentage of requested CPU & memory dollars utilized over the measured time window. Values range from 0 to above 100 percent. Workloads with no requests but with usage OR workloads with usage > request can report efficiency above 100%.                                                                                                                                                          |
 
 ### Cost efficiency table example
@@ -136,6 +136,7 @@ Cost allocation metrics are available for both in-cluster and out-of-cluster res
 The Actions column is the rightmost column in the Allocations dashboard table. It provides additional actions that can be performed on a particular namespace:
 
 * _Inspect_: Opens an advanced cost overview of the namespace in a new tab.
+* _Inspect Shared Costs_: Opens an advanced cost overview of your shared costs in a new tab.
 * _View Right-Sizing_: Opens the [Request right-sizing recommendations](https://docs.kubecost.com/using-kubecost/getting-started/savings/auto-request-sizing) page in a new tab.
 
 ## Idle costs
