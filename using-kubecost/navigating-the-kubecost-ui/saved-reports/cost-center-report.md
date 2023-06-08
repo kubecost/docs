@@ -50,4 +50,4 @@ The Cost column per line item is the total cost of all other columns.
 
 You can also adjust the window of spend data by selecting the Time window box and choosing either a preset or entering a custom range.
 
-If you return to the Reports page, you will now see your CCR displayed amongst your other reports.
+If you return to the Reports page, you will now see your CCR displayed amongst your other reports. Selecting the three horizontal dots in the Actions column of your CCR will allow you to _Edit_ or _Delete_ the CCR.
