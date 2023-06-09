@@ -1,29 +1,33 @@
-High Availability Kubecost
-==========================
+# High Availability Kubecost
 
-Running Kubecost in high availabilit (HA) mode is a feature that relies on multiple Kubecost replica pods implementing the [ETL Bucket Backup](/etl-backup.md) feature combined with a Leader/Follower implementation which ensures that there always exists exactly one leader across all replicas.
+{% hint style="info" %}
+High availability mode is only officially supported on Kubecost Enterprise plans.
+{% endhint %}
 
-> **Note**: HA mode is only available in Kubecost Enterprise.
+Running Kubecost in high availability (HA) mode is a feature that relies on multiple Kubecost replica pods implementing the [ETL Bucket Backup](etl-backup.md) feature combined with a Leader/Follower implementation which ensures that there always exists exactly one leader across all replicas.
 
 ## Leader + Follower
 
-The Leader/Follower implementation leverages a `coordination.k8s.io/v1` `Lease` resource to manage the election of a leader when necessary. To control access of the backup from the ETL pipelines, a `RWStorageController` is implemented to ensure the following: 
+The Leader/Follower implementation leverages a `coordination.k8s.io/v1` `Lease` resource to manage the election of a leader when necessary. To control access of the backup from the ETL pipelines, a `RWStorageController` is implemented to ensure the following:
+
 * Followers block on all backup reads, and poll bucket storage for any backup reads every 30 seconds.
 * Followers no-op on any backup writes.
-* Followers which receive Queries into a backup store will not stack on pending reads, preventing external queries from blocking.
+* Followers who receive Queries in a backup store will not stack on pending reads, preventing external queries from blocking.
 * Followers promoted to Leader will drop all locks and receive write privileges.
-* Leaders behave identically to a single Kubecost install. 
+* Leaders behave identically to a single Kubecost install.
 
 ![Leader/Follower](https://raw.githubusercontent.com/kubecost/docs/main/images/leader-follower.png)
 
 ## Configuring high availability
 
 In order to enable the leader/follower and HA features, the following must also be configured:
+
 * Replicas are set to a value greater than 1
 * ETL FileStore is Enabled (enabled by default)
-* [ETL Bucket Backup](/etl-backup.md) is configured
+* [ETL Bucket Backup](etl-backup.md) is configured
 
 For example, using our Helm chart, the following is an acceptable configuration:
+
 ```bash
 helm install kubecost kubecost/cost-analyzer --namespace kubecost \
 	--set kubecostDeployment.leaderFollower.enabled=true \ 
@@ -31,7 +35,8 @@ helm install kubecost kubecost/cost-analyzer --namespace kubecost \
 	--set kubecostModel.etlBucketConfigSecret=kubecost-bucket-secret
 ```
 
-This can also be done in the `values.yaml` file within the chart: 
+This can also be done in the `values.yaml` file within the chart:
+
 ```yaml
 kubecostModel:
   image: "gcr.io/kubecost1/cost-model"

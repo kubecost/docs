@@ -2,7 +2,7 @@
 
 You can apply your product key at any time within the product UI or during an install or upgrade process. More details on both options are provided below.
 
-If you have a [multi-cluster setup](./long-term-storage.md), you only need to apply your product key on the Kubecost primary cluster, and not on any of the Kubecost secondary clusters.
+If you have a [multi-cluster setup](long-term-storage.md), you only need to apply your product key on the Kubecost primary cluster, and not on any of the Kubecost secondary clusters.
 
 {% hint style="info" %}
 `kubecostToken` is a different concept from your product key and is used for managing trial access.
@@ -24,9 +24,11 @@ To create a secret you will need to create a JSON file called _productkey.json_ 
 
 Run the following command to create the secret. Replace `<SECRET_NAME>` with a name for the secret (example: `productkeysecret`):
 
+{% code overflow="wrap" %}
 ```shell
 $ kubectl create secret generic <SECRET_NAME> -n kubecost --from-file=./productkey.json
 ```
+{% endcode %}
 
 Update your [_values.yaml_](https://github.com/kubecost/cost-analyzer-helm-chart/blob/5eedab0433445a5b8e134113beb95f4598cd5e2d/cost-analyzer/values.yaml#L714-L717) to enable the product key and specify the secret name:
 
@@ -43,9 +45,9 @@ This specific parameter can be configured under `kubecostProductConfigs.productK
 
 ## In product
 
-To apply your license key within the Kubecost UI, visit the Overview page, then select *Upgrade* in the page header.
+To apply your license key within the Kubecost UI, visit the Overview page, then select _Upgrade_ in the page header.
 
-Next, select *Add Key* in the dialog menu shown below.
+Next, select _Add Key_ in the dialog menu shown below.
 
 You can then supply your Kubecost provided license key in the input box that is now visible.
 

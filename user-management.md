@@ -15,6 +15,7 @@ Kubecost supports Single Sign On (SSO) and Role Based Access Control (RBAC) with
   * `editor`: Role can change and build alerts and reports, but cannot edit application settings and otherwise functions as read-only.
 * **Custom access roles (`filters.json`)**: Limit users based on attributes or group membership to view a set of namespaces, clusters, or other aggregations
 
+{% code overflow="wrap" %}
 ```yaml
 # EXAMPLE CONFIGURATION
 # View setup guides below, for full list of Helm configuration values
@@ -43,6 +44,7 @@ saml:
     customGroups:
       - assertionName: "kubecost_group"
 ```
+{% endcode %}
 
 ## Setup guides
 
@@ -60,6 +62,7 @@ saml:
 
 If you’re supplying the SAML from the address of an Identity Provider Server, `curl` the SAML metadata endpoint from within the Kubecost pod and ensure that a valid XML EntityDescriptor is being returned and downloaded. The response should be in this format:
 
+{% code overflow="wrap" %}
 ```bash
 $ kubectl exec deployment/kubecost-cost-analyzer -c cost-analyzer-frontend -n kubecost -it -- /bin/sh
 $ curl https://dev-elu2z98r.auth0.com/samlp/metadata/c6nY4M37rBP0qSO1IYIqBPPyIPxLS8v2
@@ -88,6 +91,7 @@ $ curl https://dev-elu2z98r.auth0.com/samlp/metadata/c6nY4M37rBP0qSO1IYIqBPPyIPx
   </IDPSSODescriptor>
 </EntityDescriptor>
 ```
+{% endcode %}
 
 ### Common SAML error states are as follows:
 
@@ -106,11 +110,13 @@ Certain metadata URLs could potentially return an EntitiesDescriptor, instead of
 
 You are left with data in a similar format to the example below:
 
+{% code overflow="wrap" %}
 ```xml
 <EntityDescriptor xmlns="urn:oasis:names:tc:SAML:2.0:metadata" xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" entityID="kubecost-entity-id">
   .... 
 </EntityDescriptor>
 ```
+{% endcode %}
 
 Then, you can upload the EntityDescriptor to a secret in the same namespace as kubecost and use that directly.
 

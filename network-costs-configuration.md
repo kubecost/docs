@@ -20,9 +20,9 @@ When using Kubecost version 1.99 and above: Greater detail can be accessed throu
 
 ![network-cost-detail](images/network-cost-detail.png)
 
-### Grafana Dashboard
+### Grafana dashboard
 
-A Grafana dashboard is included with the Kubecost installation or can be loaded via: [https://github.com/kubecost/cost-analyzer-helm-chart/blob/develop/cost-analyzer/grafana-templates/multi-cluster-network-transfer-data.json](https://github.com/kubecost/cost-analyzer-helm-chart/blob/develop/cost-analyzer/grafana-templates/multi-cluster-network-transfer-data.json)
+A Grafana dashboard is included with the Kubecost installation or can be loaded [here](https://github.com/kubecost/cost-analyzer-helm-chart/blob/develop/cost-analyzer/grafana-templates/multi-cluster-network-transfer-data.json).
 
 ## Enabling network costs
 
@@ -39,13 +39,13 @@ You can view a list of common config options [here](https://github.com/kubecost/
 
 ### Prometheus:
 
-- If using Kubecost-bundled Prometheus instance, the scrape is automatically configured.
-- If you are integrating with an existing Prometheus, you can set `networkCosts.prometheusScrape=true` and the network costs service should be auto-discovered.
-- Alternatively a serviceMonitor is also [available](https://github.com/kubecost/cost-analyzer-helm-chart/blob/700cfa306c8e78bc9a1039b584769b9a0e0757d0/cost-analyzer/values.yaml#L716).
+* If using Kubecost-bundled Prometheus instance, the scrape is automatically configured.
+* If you are integrating with an existing Prometheus, you can set `networkCosts.prometheusScrape=true` and the network costs service should be auto-discovered.
+* Alternatively, a serviceMonitor is also [available](https://github.com/kubecost/cost-analyzer-helm-chart/blob/700cfa306c8e78bc9a1039b584769b9a0e0757d0/cost-analyzer/values.yaml#L716).
 
 ### Log Level:
 
-- You can adjust log level using the `extraArgs` config:
+*   You can adjust log level using the `extraArgs` config:
 
     ```yaml
     networkCosts:
@@ -53,15 +53,14 @@ You can view a list of common config options [here](https://github.com/kubecost/
       extraArgs:
         - "-v=0"
     ```
-
-- The levels range from 0 to 5, with 0 being the least verbose (only showing panics) and 5 being the most verbose (showing trace-level information).
-- Ref: [sig-instrumentation](https://github.com/kubernetes/community/blob/0e9fa4a1c45203527a7ce35eaff09204d6b7b331/contributors/devel/sig-instrumentation/logging.md)
+* The levels range from 0 to 5, with 0 being the least verbose (only showing panics) and 5 being the most verbose (showing trace-level information).
+* Ref: [sig-instrumentation](https://github.com/kubernetes/community/blob/0e9fa4a1c45203527a7ce35eaff09204d6b7b331/contributors/devel/sig-instrumentation/logging.md)
 
 > **Note**: Network cost, which is disabled by default, needs to be run as a privileged pod to access the relevant networking kernel module on the host machine.
 
 ## Cloud Provider Service Tagging
 
-Service tagging allows kubecost to identify network activity between the pods and various cloud services (e.g. AWS S3, EC2, RDS, Azure Storage, Google Cloud Storage).
+Service tagging allows Kubecost to identify network activity between the pods and various cloud services (e.g. AWS S3, EC2, RDS, Azure Storage, Google Cloud Storage).
 
 ![network-services-card](images/network-svc-card.png)
 
@@ -71,6 +70,7 @@ To enable this, set the following Helm values:
 * Azure [`networkCosts.config.services.azure-cloud-services=true`](https://github.com/kubecost/cost-analyzer-helm-chart/blob/5787607bf307379363715a220a271e203f0207b4/cost-analyzer/values.yaml#L585)
 * GCP [`networkCosts.config.services.google-cloud-services=true`](https://github.com/kubecost/cost-analyzer-helm-chart/blob/5787607bf307379363715a220a271e203f0207b4/cost-analyzer/values.yaml#L579)
 
+{% code overflow="wrap" %}
 ```yaml
 networkCosts:
   config:
@@ -95,10 +95,11 @@ networkCosts:
       #      - "15.128.15.2"
       #      - "20.0.0.0/8"
 ```
+{% endcode %}
 
 ## Resource limiting
 
-In order to reduce resource usage, Kubecost recommends setting a CPU limit on the network-costs daemonset. This will cause a few seconds delay during peak usage and does not effect overall accuracy. This is done by default in Kubecost 1.99+.
+In order to reduce resource usage, Kubecost recommends setting a CPU limit on the network-costs daemonset. This will cause a few seconds of delay during peak usage and does not affect overall accuracy. This is done by default in Kubecost 1.99+.
 
 For existing deployments, these are the recommended values:
 
@@ -115,11 +116,11 @@ networkCosts:
 
 ### Benchmarking metrics
 
-The network-simulator was used to real-time simulate updating conntrack entries while simultaneously running a cluster simulated network-costs instance. To profile the heap, after a warmup of roughly five minutes, a heap profile of 1,000,000 conntrack entries was gathered and examined.
+The network-simulator was used to real-time simulate updating ConnTrack entries while simultaneously running a cluster simulated network-costs instance. To profile the heap, after a warmup of roughly five minutes, a heap profile of 1,000,000 ConnTrack entries was gathered and examined.
 
-Each conntrack entry is equivalent to two transport directions, so every conntrack entry is two map entries (connections).
+Each ConnTrack entry is equivalent to two transport directions, so every ConnTrack entry is two map entries (connections).
 
-After modifications were made to the network-costs to parallelize the delta and dispatch, large map comparisons were significantly lighter in memory. The same tests were performed against simulated data with the following footprint results.
+After modifications were made to the network costs to parallelize the delta and dispatch, large map comparisons were significantly lighter in memory. The same tests were performed against simulated data with the following footprint results.
 
 ![Benchmarking metrics](https://raw.githubusercontent.com/kubecost/docs/main/images/post%20optimization.PNG)
 
@@ -145,9 +146,9 @@ For traffic routed to addresses outside of your cluster but inside your VPC, Kub
 
 > **Note**: As of Kubecost 1.101, LoadBalancers that proxy traffic to the Internet (ingresses and gateways) can be specifically classified.
 
-* In-zone: A list of destination addresses/ranges that will be classified as an in-zone traffic, which is free for most providers.
+* In-zone: A list of destination addresses/ranges that will be classified as in-zone traffic, which is free for most providers.
 * In-region: A list of addresses/ranges that will be classified as the same region between source and destinations but different zones.
-* Cross-region: A list of addresses/ranges that will be classified as the different region from the source regions.
+* Cross-region: A list of addresses/ranges that will be classified as different regions from the source regions.
 * Internet: By design, all IP addresses not in a specific list are considered internet. This list can include IPs that would otherwise be "in-zone" or local to be classified as Internet traffic.
 
 ```yaml
@@ -198,19 +199,19 @@ networkCosts:
 
 To verify this feature is functioning properly, you can complete the following steps:
 
-1. Confirm the `kubecost-network-costs` Pods are Running. If these Pods are not in a Running state, _kubectl describe_ them and/or view their logs for errors.
+1. Confirm the `kubecost-network-costs` pods are Running. If these Pods are not in a Running state, _kubectl describe_ them and/or view their logs for errors.
 2. Ensure `kubecost-networking` target is Up in your Prometheus Targets list. View any visible errors if this target is not Up. You can further verify data is being scrapped by the presence of the `kubecost_pod_network_egress_bytes_total` metric in Prometheus.
 3. Verify Network Costs are available in your Kubecost Allocation view. View your browser's Developer Console on this page for any access/permissions errors if costs are not shown.
 
 ### Common issues
 
-* Failed to locate network pods: Error message displayed when the Kubecost app is unable to locate the network pods, which we search for by a label that includes our release name. In particular, we depend on the label `app=<release-name>-network-costs` to locate the pods. If the app has a blank release name this issue may happen.
+* Failed to locate network pods: Error message is displayed when the Kubecost app is unable to locate the network pods, which we search for by a label that includes our release name. In particular, we depend on the label `app=<release-name>-network-costs` to locate the pods. If the app has a blank release name this issue may happen.
 * Resource usage is a function of unique src and dest IP/port combinations. Most deployments use a small fraction of a CPU and it is also ok to have this Pod CPU throttled. Throttling should increase parse times but should not have other impacts. The following Prometheus metrics are available in v15.3 for determining the scale and the impact of throttling:
 
-`kubecost_network_costs_parsed_entries` is the last number of conntrack entries parsed `kubecost_network_costs_parse_time` is the last recorded parse time
+`kubecost_network_costs_parsed_entries` is the last number of ConnTrack entries parsed `kubecost_network_costs_parse_time` is the last recorded parse time
 
 ## Feature limitations
 
-* Today this feature is supported on Unix-based images with conntrack
+* Today this feature is supported on Unix-based images with ConnTrack
 * Actively tested against GCP, AWS, and Azure
 * Pods that use hostNetwork share the host IP address
