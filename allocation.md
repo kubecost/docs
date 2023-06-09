@@ -4,23 +4,7 @@
 
 {% swagger method="get" path="/allocation" baseUrl="http://<your-kubecost-address>/model" summary="Allocation API" %}
 {% swagger-description %}
-The Allocation API is the preferred way to query for costs and resources allocated to Kubernetes workloads and optionally aggregated by Kubernetes concepts like 
-
-`namespace`
-
-, 
-
-`controller`
-
-, and 
-
-`label`
-
-. Data is served from one of 
-
-[Kubecost's ETL pipelines](cost-model-deprecated.md#caching-overview)
-
-.
+The Allocation API is the preferred way to query for costs and resources allocated to Kubernetes workloads and optionally aggregated by Kubernetes concepts like `namespace`, `controller`, and `label`. Data is served from one of [Kubecost's ETL pipelines](cost-model-deprecated.md#caching-overview).
 {% endswagger-description %}
 
 {% swagger-parameter in="path" name="window" type="string" required="true" %}
@@ -30,193 +14,95 @@ Duration of time over which to query. Accepts words like `today`, `week`, `month
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="aggregate" type="string" required="false" %}
-Field by which to aggregate the results. Accepts:
-
-`cluster`, `namespace`, `controllerKind`, `controller`, `service`, `node`, `pod`, `label:<name>`, and `annotation:<name>`. Also accepts comma-separated lists for multi-aggregation, like
-
-`namespace,label:app`.
+Field by which to aggregate the results. Accepts: `cluster`, `namespace`, `controllerKind`, `controller`, `service`, `node`, `pod`, `label:<name>`, and `annotation:<name>`. Also accepts comma-separated lists for multi-aggregation, like `namespace,label:app`.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="accumulate" type="boolean" required="false" %}
-If `true`, sum the entire range of sets into a single set. Default value is
-
-`false`.
+If `true`, sum the entire range of sets into a single set. Default value is `false`.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="idle" type="boolean" required="false" %}
-If `true`, include idle cost (i.e. the cost of the un-allocated assets) as its own allocation. (See [special types of allocation](https://docs.kubecost.com/apis/apis-overview/allocation#special-types-of-allocation).) Default is
-
-`true.`
+If `true`, include idle cost (i.e. the cost of the un-allocated assets) as its own allocation. (See [special types of allocation](https://docs.kubecost.com/apis/apis-overview/allocation#special-types-of-allocation).) Default is `true`.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="external" type="boolean" required="false" %}
-If 
-
-`true`
-
-, include 
-
-[external costs](https://docs.kubecost.com/#advanced-configuration)
-
- in each allocation. Default is 
-
-`false`
-
-.
+If `true`, include [external costs](https://docs.kubecost.com/#advanced-configuration)in each allocation. Default is `false`.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="filterClusters" type="string" required="false" %}
-Comma-separated list of clusters to match; e.g.
-
-`cluster-one,cluster-two`
-
-will return results from only those two clusters.
+Comma-separated list of clusters to match; e.g. `cluster-one,cluster-two` will return results from only those two clusters.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="filterNodes" type="string" required="false" %}
-Comma-separated list of nodes to match; e.g.
-
-`node-one,node-two`
-
-will return results from only those two nodes.
+Comma-separated list of nodes to match; e.g. `node-one,node-two` will return results from only those two nodes.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="filterNamespaces" type="string" required="false" %}
-Comma-separated list of namespaces to match; e.g.
-
-`namespace-one,namespace-two`
-
-will return results from only those two namespaces.
+Comma-separated list of namespaces to match; e.g. `namespace-one,namespace-two` will return results from only those two namespaces.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="filterControllerKinds" type="string" required="false" %}
-Comma-separated list of controller kinds to match; e.g.
-
-`deployment,job`
-
-will return results with only those two controller kinds.
+Comma-separated list of controller kinds to match; e.g. `deployment,job` will return results with only those two controller kinds.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="filterControllers" type="string" required="false" %}
-Comma-separated list of controllers to match; e.g. 
-
-`deployment-one,statefulset-two`
-
- will return results from only those two controllers.
+Comma-separated list of controllers to match; e.g. `deployment-one,statefulset-two` will return results from only those two controllers.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="filterPods" type="string" required="false" %}
-Comma-separated list of pods to match; e.g. `pod-one,pod-two`
-
-will return results from only those two pods.
+Comma-separated list of pods to match; e.g. `pod-one,pod-two` will return results from only those two pods.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="filterAnnotations" type="string" required="false" %}
-Comma-separated list of annotations to match; e.g. `name:annotation-one,name:annotation-two`
-
-will return results with either of those two annotation key-value-pairs.
+Comma-separated list of annotations to match; e.g. `name:annotation-one,name:annotation-two` will return results with either of those two annotation key-value-pairs.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="filterLabels" type="string" required="false" %}
-Comma-separated list of annotations to match; e.g. `app:cost-analyzer, app:prometheus`
-
-will return results with either of those two label key-value-pairs.
+Comma-separated list of annotations to match; e.g. `app:cost-analyzer, app:prometheus` will return results with either of those two label key-value-pairs.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="filterServices" type="string" required="false" %}
-Comma-separated list of services to match; e.g. `frontend-one,frontend-two`
-
-will return results with either of those two services.
+Comma-separated list of services to match; e.g. `frontend-one,frontend-two` will return results with either of those two services.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="format" type="string" required="false" %}
-Set to `csv` to download an accumulated version of the allocation results in CSV format. Set to `pdf`
-
-to download an accumulated version of the allocation results in PDF format. By default, results will be in JSON format.
+Set to `csv` to download an accumulated version of the allocation results in CSV format. Set to `pdf` to download an accumulated version of the allocation results in PDF format. By default, results will be in JSON format.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="shareIdle" type="boolean" required="false" %}
-If `true`, idle cost is allocated proportionally across all non-idle allocations, per-resource. That is, idle CPU cost is shared with each non-idle allocation's CPU cost, according to the percentage of the total CPU cost represented. Default is
-
-`false`.
+If `true`, idle cost is allocated proportionally across all non-idle allocations, per-resource. That is, idle CPU cost is shared with each non-idle allocation's CPU cost, according to the percentage of the total CPU cost represented. Default is `false`.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="splitIdle" type="boolean" required="false" %}
-If `true`, and `shareIdle == false`, Idle Allocations are created on a per cluster or per node basis rather than being aggregated into a single "_idle_" allocation. Default is
-
-`false`.
+If `true`, and `shareIdle == false`, Idle Allocations are created on a per cluster or per node basis rather than being aggregated into a single "_idle_" allocation. Default is `false`.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="idleByNode" type="boolean" required="false" %}
-If 
-
-`true`
-
-, idle allocations are created on a per node basis. Which will result in different values when shared and more idle allocations when split. Default is 
-
-`false`
-
-.
+If `true`, idle allocations are created on a per node basis. Which will result in different values when shared and more idle allocations when split. Default is `false`.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="reconcile" type="boolean" required="false" %}
-If 
-
-`true`
-
-, pulls data from the Assets cache and corrects prices of Allocations according to their related Assets. The corrections from this process are stored in each cost categories cost adjustment field. If the integration with your cloud provider's billing data has been set up, this will result in the most accurate costs for Allocations. Default is 
-
-`true`
-
-.
+If `true`, pulls data from the Assets cache and corrects prices of Allocations according to their related Assets. The corrections from this process are stored in each cost categories cost adjustment field. If the integration with your cloud provider's billing data has been set up, this will result in the most accurate costs for Allocations. Default is `true`.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="shareTenancyCosts" type="boolean" required="false" %}
-If 
-
-`true`
-
-, share the cost of cluster overhead assets such as cluster management costs and node attached volumes across tenants of those resources. Results are added to the sharedCost field. As of v1.93.0 both cluster management and attached volumes are shared by cluster. Default is 
-
-`true`
-
-.
+If `true`, share the cost of cluster overhead assets such as cluster management costs and node attached volumes across tenants of those resources. Results are added to the sharedCost field. As of v1.93.0 both cluster management and attached volumes are shared by cluster. Default is `true`.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="shareNamespaces" type="string" required="false" %}
-Comma-separated list of namespaces to share; e.g.
-
-`kube-system, kubecost`
-
-will share the costs of those two namespaces with the remaining non-idle, unshared allocations.
+Comma-separated list of namespaces to share; e.g. `kube-system, kubecost` will share the costs of those two namespaces with the remaining non-idle, unshared allocations.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="shareLabels" type="string" required="false" %}
-Comma-separated list of labels to share; e.g. 
-
-`env:staging, app:test`
-
- will share the costs of those two label values with the remaining non-idle, unshared allocations.
+Comma-separated list of labels to share; e.g. `env:staging, app:test` will share the costs of those two label values with the remaining non-idle, unshared allocations.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="shareCost" type="float" required="false" %}
-Floating-point value representing a monthly cost to share with the remaining non-idle, unshared allocations; e.g. 
-
-`30.42`
-
- ($1.00/day == $30.42/month) for the query 
-
-`yesterday`
-
- (1 day) will split and distribute exactly $1.00 across the allocations. Default is 
-
-`0.0.`
+Floating-point value representing a monthly cost to share with the remaining non-idle, unshared allocations; e.g. `30.42` ($1.00/day = $30.42/month) for the query `yesterday` (1 day) will split and distribute exactly $1.00 across the allocations. Default is `0.0.`
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="shareSplit" type="string" required="false" %}
-Determines how to split shared costs among non-idle, unshared allocations. By default, the split will be `weighted`; i.e. proportional to the cost of the allocation, relative to the total. The other option is `even`; i.e. each allocation gets an equal portion of the shared cost. Default is
-
-`weighted`.
+Determines how to split shared costs among non-idle, unshared allocations. By default, the split will be `weighted`; i.e. proportional to the cost of the allocation, relative to the total. The other option is `even`; i.e. each allocation gets an equal portion of the shared cost. Default is `weighted`.
 {% endswagger-parameter %}
 
 {% swagger-response status="200: OK" description="" %}
