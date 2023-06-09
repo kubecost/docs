@@ -1,12 +1,10 @@
 # Alerts
 
-## Summary
-
 Kubecost alerts allow teams to receive updates on real-time Kubernetes spend. They are configurable via the Kubecost UI or Helm values. This resource gives an overview of how to configure Kubecost email, Slack, and Microsoft Teams using [Kubecost Helm chart values](https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/values.yaml). Alerts are either created to monitor specific data sets and trends, or they must be toggled on or off. The following alert types are supported:
 
 1. [Allocation Budget](alerts.md#type-allocation-budget): Sends an alert when spending crosses a defined threshold
 2. [Allocation Efficiency](alerts.md#type-allocation-efficiency): Detects when a Kubernetes tenant is operating below a target cost-efficiency threshold
-3. [Allocation Recurring Update](alerts.md#type-allocation-recurring-update): Sends an alert with cluster spending across all or a subset of kubernetes resources.
+3. [Allocation Recurring Update](alerts.md#type-allocation-recurring-update): Sends an alert with cluster spending across all or a subset of Kubernetes resources.
 4. [Allocation Spend Change](alerts.md#type-allocation-spend-change): Sends an alert reporting unexpected spend increases relative to moving averages
 5. [Asset Budget](alerts.md#type-asset-budget): Sends an alert when spend for a particular set of assets crosses a defined threshold.
 6. [Cloud Report](alerts.md#type-cloud-report): Sends an alert with asset spend across all or a subset of cloud resources.
@@ -25,13 +23,14 @@ _values.yaml_ is a source of truth. Alerts set through _values.yaml_ will contin
 
 The alert settings, under `global.notifications.alertConfigs` in _cost-analyzer/values.yaml_, accept four global fields:
 
-* `frontendUrl` optional, your cost analyzer front end URL used for linkbacks in alert bodies
+* `frontendUrl` optional, your cost analyzer front-end URL used for linkbacks in alert bodies
 * `globalSlackWebhookUrl` optional, a global Slack webhook used for alerts, enabled by default if provided
 * `globalMsTeamWebhookUrl` optional, a global Microsoft Teams webhook used for alerts, enabled by default if provided
 * `globalAlertEmails` a global list of emails for alerts
 
 Example Helm _values.yaml_:
 
+{% code overflow="wrap" %}
 ```yaml
 notifications:
     # Kubecost alerting configuration
@@ -47,6 +46,7 @@ notifications:
       # list of individual alerts
       # ...
 ```
+{% endcode %}
 
 ## Configuring each alert type
 
@@ -54,7 +54,7 @@ In addition to all `global...` fields, every alert allows optional individual `o
 
 ### Type: Allocation Budget
 
-Define spend budgets and alert on budget overruns.
+Defines spend budgets and alerts on budget overruns.
 
 _Required parameters:_
 
@@ -83,7 +83,7 @@ Example Helm _values.yaml_:
 
 ### Type: Allocation Efficiency
 
-Alert when Kubernetes tenants, e.g. namespaces or label sets, are running below defined cost-efficiency thresholds.
+Alerst when Kubernetes tenants, e.g. namespaces or label sets, are running below defined cost-efficiency thresholds.
 
 _Required parameters:_
 
@@ -99,6 +99,7 @@ _Optional parameters:_
 
 The example below sends a Slack alert when any namespace spending is running below 40% cost efficiency and has spent more than $100 during the last day.
 
+{% code overflow="wrap" %}
 ```
 - type: efficiency
   efficiencyThreshold: 0.4  # Alert if below this percentage cost efficiency
@@ -107,6 +108,7 @@ The example below sends a Slack alert when any namespace spending is running bel
   aggregation: namespace
   slackWebhookUrl: ‘https://hooks.slack.com/services/TE6GRBNET/BFFK0P848/jFWmsadgfjhiBJp30p’ # optional, overrides global Slack webhook 
 ```
+{% endcode %}
 
 ### Type: Allocation Recurring Update
 
@@ -149,6 +151,7 @@ Required parameters (by individual namespace):
 
 Example Helm _values.yaml_:
 
+{% code overflow="wrap" %}
 ```
 # Recurring weekly namespace update on all namespaces
 - type: recurringUpdate
@@ -165,10 +168,11 @@ Example Helm _values.yaml_:
     - owner2@example.com
   slackWebhookUrl: https://hooks.slack.com/services/<different-from-global> # optional, overrides globalSlackWebhookUrl default
 ```
+{% endcode %}
 
 ### Type: Allocation Spend change
 
-Detect unexpected spend increases/decreases relative to historical moving averages.
+Detects unexpected spend increases/decreases relative to historical moving averages.
 
 _Required parameters:_
 
@@ -184,6 +188,7 @@ _Optional parameters:_
 
 Example Helm _values.yaml_:
 
+{% code overflow="wrap" %}
 ```
 # Daily spend change alert on the 
 - type: spendChange
@@ -193,10 +198,11 @@ Example Helm _values.yaml_:
   aggregation: namespace
   filter: kubecost, default # accepts csv
 ```
+{% endcode %}
 
 ### Type: Asset Budget
 
-Define asset budgets and alert when cloud or Kubernetes assets overrun the threshold set.
+Defines asset budgets and alert when cloud or Kubernetes assets overrun the threshold set.
 
 _Required parameters:_
 
@@ -294,6 +300,7 @@ Cluster health alerts occur when the cluster health score changes by a specific 
 
 Example Helm _values.yaml_:
 
+{% code overflow="wrap" %}
 ```
 # Health Score Alert 
 - type: health              # Alerts when health score changes by a threshold
@@ -304,10 +311,11 @@ Example Helm _values.yaml_:
     - owner2@example.com
   slackWebhookUrl: https://hooks.slack.com/services/<different-from-global> # optional, overrides globalSlackWebhookUrl default
 ```
+{% endcode %}
 
 ### Type: Monitor Kubecost Health
 
-Enabling diagnostic alerts in Kubecost occur when an event impacts product uptime. This feature can be enabled in seconds from a values file. The following events are grouped into distinct categories that each result in a separate alert notification:
+Enabling diagnostic alerts in Kubecost occursthe  when an event impacts product uptime. This feature can be enabled in seconds from a values file. The following events are grouped into distinct categories that each result in a separate alert notification:
 
 * Prometheus is unreachable
 * Kubecost Metrics Availability:
@@ -371,7 +379,7 @@ Global recipients specify a default fallback recipient for each type of message.
 
 The remaining Alert types share some commonality: they all target a set of Cost Allocation data with `window`, `aggregation` and `filter` parameters, and trigger based on the target data. The table results can be filtered using the "Filter alerts" input at the top-right of the table. This input can be used to filter based on alert type, aggregation, window, and/or filter.
 
-The _+ Create Alert_ button opens a window where you can insert details about a new alert.
+Select _+ Create Alert_ to open the Create Alert window where you configure the details of your alert.
 
 <figure><img src=".gitbook/assets/createalert.png" alt=""><figcaption><p>Create Alert window</p></figcaption></figure>
 
@@ -385,7 +393,7 @@ The _Test_ arrow icons, as well as a separate _Test Alert_ button in the Edit Al
 
 ## Alerts scheduler
 
-All times in UTC. Alert send times are determined by parsing the supplied `window` parameter. Alert diagnostics with next and last scheduled run times are available via `<your-kubecost-url>/model/alerts/status`.
+All times in UTC. Alert send times are determined by parsing the supplied `window` parameter. Alert diagnostics with the next and last scheduled run times are available via `<your-kubecost-url>/model/alerts/status`.
 
 Supported: `weekly` and `daily` special cases, `<N>d`, `<M>h` (1 ≤ N ≤ 7, 1 ≤ M ≤ 24) Currently Unsupported: time zone adjustments, windows greater than `7d`, windows less than `1h`
 
@@ -417,10 +425,10 @@ Review these steps to verify alerts are being passed to the Kubecost application
 
 If using Helm:
 
-* Run `kubectl get configmap alert-configs -n kubecost -o json` to view alerts configmap.
-* Ensure that the Helm values are successfully read into the configmap under alerts.json under the `data` field.
-* Example:
+* Run `kubectl get configmap alert-configs -n kubecost -o json` to view the alerts ConfigMap.
+* Ensure that the Helm values are successfully read into the ConfigMap under _alerts.json_ under the `data` field. See below:
 
+{% code overflow="wrap" %}
 ```
 {
     "apiVersion": "v1",
@@ -442,22 +450,23 @@ If using Helm:
     }
 }
 ```
+{% endcode %}
 
-* Ensure that the JSION string is successfully mapped to the appropriate configs
+* Ensure that the .JSON string is successfully mapped to the appropriate configs
 
-Confirm that Kubecost product has received configuration data:
+Confirm that Kubecost has received configuration data:
 
 * Go to `<your-kubecost-url>/alerts.html` in the Kubecost UI to view configured alert settings as well as any of the alerts configured from Helm.
-  * Note that alerts setup via the UI will be overwritten by Helm `values.yaml` if the pod restarts.
+* Alerts set up in the UI will be overwritten by Helm `values.yaml` if the pod restarts.
 
-Additionally, confirm that the alerts scheduler has properly parsed and scheduled a next run for each alert by visiting `<your-kubecost-url>/model/alerts/status` to view individual alert parameters as well as next and last scheduled run times for individual alerts.
+Additionally, confirm that the alerts scheduler has properly parsed and scheduled the next run for each alert by visiting `<your-kubecost-url>/model/alerts/status` to view individual alert parameters as well as the next and last scheduled run times for individual alerts.
 
 Confirm that `nextRun` has been updated from "0001-01-01T00:00:00Z"
 
-If `nextRun` fails to update, or alerts are not sending at the `nextRun` time, check pod logs by running `kubectl logs $(kubectl get pods -n kubecost | awk '{print $1}' | grep "^kubecost-cost-analyzer.\{16\}") -n kubecost -c cost-model > kubecost-logs.txt`
+If `nextRun` fails to update, or alerts are not sent at the `nextRun` time, check pod logs by running `kubectl logs $(kubectl get pods -n kubecost | awk '{print $1}' | grep "^kubecost-cost-analyzer.\{16\}") -n kubecost -c cost-model > kubecost-logs.txt`
 
 Common causes of misconfiguration include the following:
 
-* Unsupported csv filters: `spendChange` alerts accept `filter` as comma-separated values; other alert types do not.
+* Unsupported CSV filters: `spendChange` alerts accept multiple `filter` values when comma-separated; other alert types do not.
 * Unsupported alert type: all alert type names are in camelCase. Check spelling and capitalization for all alert parameters.
 * Unsupported aggregation parameters: see the [Allocation API](allocation.md) doc for details.

@@ -16,7 +16,7 @@ This doc provides commonly used product configurations and feature overviews to 
 
 There are many methods to set up Kubecost. A simple Helm install will provide most functionality to understand what Kubecost can do. When you do not pass any values to the Helm install, many of the custom options below are available in _Settings_.
 
-By default, Kubecost will detect the cloud provider where it is installed and pull list prices for nodes, storage and LoadBalancers on Azure, AWS, and GCP.
+By default, Kubecost will detect the cloud provider where it is installed and pull list prices for nodes, storage, and LoadBalancers on Azure, AWS, and GCP.
 
 ## Setting up a cloud integration <a href="#cloud-integration" id="cloud-integration"></a>
 
@@ -26,7 +26,7 @@ By completing the cloud integration with each provider, Kubecost is able to reco
 
 Cloud integration also enables the ability to view Kubernetes cost metrics side-by-side with external cloud services costs, such as S3, BigQuery, and Azure Database Services.
 
-For Kubecost Enterprise plans, cloud integration is only run on the primary cluster. The file is a .JSON array where multiple accounts and providers can be configured.&#x20;
+For Kubecost Enterprise plans, cloud integration is only run on the primary cluster. The file is a .JSON array where multiple accounts and providers can be configured.
 
 * [AWS Cloud Integration](https://docs.kubecost.com/install-and-configure/install/cloud-integration/aws-cloud-integrations)
 * [Azure Cloud Integration](https://docs.kubecost.com/install-and-configure/install/cloud-integration/azure-out-of-cluster)
@@ -41,15 +41,17 @@ The remaining sections are optional and may be useful for specific use cases.
 
 ### Memory and storage
 
-The default Kubecost installation comes with a 32Gb persistent volume and a 15-day retention period for Prometheus metrics. This is enough space to retain data for roughly 300 pods, depending on your exact node and container count. See the Kubecost Helm chart [configuration options](https://github.com/kubecost/cost-analyzer-helm-chart) to adjust both retention period and storage size.
+The default Kubecost installation has a 32Gb persistent volume and a 15-day retention period for Prometheus metrics. This is enough space to retain data for roughly 300 pods, depending on your exact node and container count. See the Kubecost Helm chart [configuration options](https://github.com/kubecost/cost-analyzer-helm-chart) to adjust both the retention period and storage size.
 
 To determine the appropriate disk size, you can use this formula to approximate:
 
+{% code overflow="wrap" %}
 ```
 needed_disk_space = retention_time_minutes * ingested_samples_per_minutes * bytes_per_sample
 ```
+{% endcode %}
 
-Where ingested samples can be measured as the average over a recent period, e.g. `sum(avg_over_time(scrape_samples_post_metric_relabeling[24h]))`. On average, Prometheus uses around 1.5-2 bytes per sample. So ingesting 100k samples per minute and retaining for 15 days would demand around 40 GB. It’s recommended to add another 20-30% capacity for headroom and WAL. More info on disk sizing [here](https://prometheus.io/docs/prometheus/latest/storage/#operational-aspects).
+Where ingested samples can be measured as the average over a recent period, e.g. `sum(avg_over_time(scrape_samples_post_metric_relabeling[24h]))`. On average, Prometheus uses around 1.5-2 bytes per sample. So, ingesting 100k samples per minute and retaining them for 15 days would demand around 40 GB. It’s recommended to add another 20-30% capacity for headroom and WAL. More info on disk sizing [here](https://prometheus.io/docs/prometheus/latest/storage/#operational-aspects).
 
 {% hint style="warning" %}
 More than 30 days of data should not be stored in Prometheus for larger clusters. For long-term data retention, contact us at support@kubecost.com about Kubecost with durable storage enabled. [More info on Kubecost storage here](../../storage.md).
