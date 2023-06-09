@@ -40,7 +40,7 @@ You can delete a cost center by selecting _Delete Cost Center_ in its tab, or se
 
 ## Finalizing a CCR
 
-When you are finished adding or deleting cost centers, select _Done_ to finalize your CCR. You will be taken to a page for your reports. You can select individual cost centers for breakdowns of cloud costs and Kubernetes costs.&#x20;
+When you are finished adding or deleting cost centers, select _Done_ to finalize your CCR. You will be taken to a page for your reports. You can select individual cost centers for breakdowns of cloud costs and Kubernetes costs.
 
 {% hint style="info" %}
 A cost center name is required in order for your cost center to appear in the Report Preview. However, if you select _Done_ without giving a name to a cost center, it will appear in your Report with a blank space for a name. It can still be interacted with, but it is recommended to name all cost centers.
@@ -49,5 +49,7 @@ A cost center name is required in order for your cost center to appear in the Re
 The Cost column per line item is the total cost of all other columns.
 
 You can also adjust the window of spend data by selecting the Time window box and choosing either a preset or entering a custom range.
+
+When viewing a breakdown of your cloud costs, you may see the same aggregate repeated multiple times. These are of the same property across multiple different days. When you expand the window range, you should naturally see the number of line items increase.
 
 If you return to the Reports page, you will now see your CCR displayed amongst your other reports. Selecting the three horizontal dots in the Actions column of your CCR will allow you to _Edit_ or _Delete_ the CCR.
