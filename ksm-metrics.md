@@ -2,7 +2,7 @@
 
 Since the Kubecost cost-model depends on a number of metrics emitted by kube-state-metrics, any schema changes to the expected metrics pose a long-term reliability challenge. In order to become resilient to said changes, the cost-model emits all required kube-state-metrics by default. While the result could yield double emission for some KSM metrics, it guarantees compatibility if KSM were to branch/drop specific metrics (as seen in KSM v2).
 
-## Replicated KSM Metrics
+## KSM metrics emitted by Kubecost cost-model
 
 The following table shows all KSM metrics required by the cost-model, which are also the metrics being replicated:
 
@@ -37,17 +37,27 @@ The following table shows all KSM metrics required by the cost-model, which are 
 |                | `kube_persistentvolumeclaim_resource_requests_storage_bytes` | ✔️ |
 | **Job**        | `kube_job_status_failed` | ✔️ |
 
-## Recommendation not to disable KSM emission
+## Disabling KSM deployment
+
+> **Warning**: Disabling the KSM deployment is not recommended, and will require higher up-time on the Kubecost cost-model to ensure accuracy of Kubecost data.
 
 One of the more obvious questions here is *"If the metrics you are emitting cover all of the KSM requirements, could the KSM deployment be dropped?"* The long term plan is to drop our dependency on KSM, and while it is possible to omit the KSM deployment today, doing so would require higher up-time on the cost-model to ensure accuracy of these metrics. Part of reaching this long term goal requires the deployment of a pod responsible for all kubecost metric emission separate from the cost-model to ensure reliability and high up-time.
 
-## Disabling KSM emission
+```yaml
+prometheus:
+  kube-state-metrics:
+    disabled: true
+```
 
-While not recommended, you can disable the Kubecost cost-model's emission of KSM by setting the following Helm value, or ensuring the cost-model container's environment variable `EMIT_KSM_V1_METRICS="false"`.
+## Disabling Kubecost cost-model's KSM emission
+
+> **Warning**: While not recommended, you can disable Kubecost cost-model's emission of KSM if you are already running your own KSM.
 
 ```yaml
 kubecostMetrics:
   emitKsmV1Metrics: false
+  # If you are running KSMv2, you must set the below config as well. More details below.
+  emitKsmV1MetricsOnly: true
 ```
 
 ## Disabling Individual Metrics
@@ -79,7 +89,7 @@ Kubecost itself is resilient to duplicate metrics, but other services or queries
 
     ```yaml
     kubecostMetrics:
-      emitKsmV1MetricsOnly: true 
+      emitKsmV1MetricsOnly: true
       emitKsmV1Metrics: false
     ```
 
