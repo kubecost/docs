@@ -18,7 +18,7 @@ When set to `false`, this endpoint returns daily time series data vs cumulative 
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="disableAdjustments" type="boolean" required="false" %}
-When set to `true`, zeros out all adjustments from cloud provider reconciliation, which would otherwise change the totalCost. Default value is`false`.
+When set to `true`, zeros out all adjustments from cloud provider reconciliation, which would otherwise change the totalCost. Default value is `false`.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="format" type="string" required="false" %}
