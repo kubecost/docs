@@ -1,16 +1,8 @@
 # Grafana Cloud Integration for Kubecost
 
-This document will show you how to integrate the Grafana Cloud Prometheus metrics service with Kubecost.
-
 [Grafana Cloud](https://grafana.com/products/cloud/) is a composable observability platform, integrating metrics, traces and logs with Grafana. Customers can leverage the best open source observability software without the overhead of installing, maintaining, and scaling your observability stack.
 
-## Disclaimer
-
-Most users should consider Kubecost native federation using [ETL Federation](https://docs.kubecost.com/install-and-configure/install/multi-cluster/federated-etl) which is scalable and can be used in combination with each cluster's local Prometheus metrics.
-
-Kubecost's Grafana Cloud Integration is considered best effort support.
-
-Kubecost metrics in Grafana dashboards do not reflect actual cloud billing. The Kubecost UI/API must be used for accurate cost data.
+This document will show you how to integrate the Grafana Cloud Prometheus metrics service with Kubecost.
 
 ## Prerequisites
 
@@ -70,7 +62,7 @@ data:
             - source_labels: [__meta_kubernetes_pod_label_app]
               action: keep
               regex:  'kubecost-network-costs'
-
+  
 EOF
 (export NAMESPACE=kubecost && kubectl apply -n $NAMESPACE -f -)
 

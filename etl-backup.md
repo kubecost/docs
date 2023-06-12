@@ -31,9 +31,11 @@ This configuration secret follows the same layout documented for Thanos [here](h
 
 You will need to create a file named `object-store.yaml` using the chosen storage provider configuration (documented below), and run the following command to create the secret from this file:
 
+{% code overflow="wrap" %}
 ```bash
 kubectl create secret generic <YOUR_SECRET_NAME> -n kubecost --from-file=object-store.yaml
 ```
+{% endcode %}
 
 The file must be named _object-store.yaml_.
 
@@ -170,9 +172,11 @@ The simplest way to backup Kubecost's ETL is to copy the pod's ETL store to your
 
 To restore the backup, untar the results of the ETL backup script into the ETL directory pod.
 
+{% code overflow="wrap" %}
 ```bash
 kubectl cp -c cost-model <untarred-results-of-script> <kubecost-namespace>/<kubecost-pod-name>/var/configs/db/etl
 ```
+{% endcode %}
 
 There is also a Bash script available to restore the backup [here](https://github.com/kubecost/etl-backup/blob/main/upload-etl.sh).
 
