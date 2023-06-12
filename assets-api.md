@@ -38,7 +38,7 @@ Filter results by cluster ID, which is generated from `cluster_id` provided duri
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="filterLabels" type="string" required="false" %}
-Filter results by cloud label or cloud tag. For example, appending `&labels=deployment:kubecost-cost-analyzer` only returns assets with label`deployment=kubecost-cost-analyzer`. Note that subparameter `:` symbols are required to denote `<labelKey>:<labelValue>` pairs.
+Filter results by cloud label or cloud tag. For example, appending `&labels=deployment:kubecost-cost-analyzer` only returns assets with label `deployment=kubecost-cost-analyzer`. Note that subparameter `:` symbols are required to denote `<labelKey>:<labelValue>` pairs.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="filterNames" type="string" required="false" %}
