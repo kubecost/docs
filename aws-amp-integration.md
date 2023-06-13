@@ -26,7 +26,7 @@ The small-scale infrastructure can manage a small multi-cluster setup. The follo
 ![Quick-Start architecture](./images/aws_amp_multi_small.png)
 
 ### Federated architecture
-To support the large-scale infrastructure, Kubecost uses Amazon S3 services to improve the query performance efficiently. On top of the Amazon Prometheus Workspace, Kubecost stores the Kubecost's extract, transform, and load (ETL) data in a central S3 bucket. Kubecost's ETL data is a computed cache based on Prometheus's metrics, from which the customers can perform all possible Kubecost queries. By storing the ETL data on an S3 bucket, this integration offers resiliency to your cost allocation data, improves the performance and enables high availability architecture for your Kubecost setup. 
+To support a large-scale environment, Kubecost leverages a [Federated ETL architecture](./federated-etl.md). In addition to Amazon Prometheus Workspace, Kubecost stores its extract, transform, and load (ETL) data in a central S3 bucket. Kubecost's ETL data is a computed cache based on Prometheus's metrics, from which users can perform all possible Kubecost queries. By storing the ETL data on an S3 bucket, this integration offers resiliency to your cost allocation data, improves the performance and enables high availability architecture for your Kubecost setup. 
 
 The following architecture diagram illustrates the large-scale infrastructure setup:
 
