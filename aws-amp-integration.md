@@ -30,7 +30,7 @@ To support the large-scale infrastructure, Kubecost uses Amazon S3 services to i
 
 The following architecture diagram illustrates the large-scale infrastructure setup:
 
-![Federated architecture](https://raw.githubusercontent.com/kubecost/docs/main/images/aws_amp_multi_large.png)
+![Federated architecture](./images/aws_amp_multi_large.png)
 
 ## Instructions
 ### Prerequisites
