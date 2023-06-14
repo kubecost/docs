@@ -14,15 +14,17 @@ The diagram below demonstrates the backing architecture of this query service an
 
 <figure><img src="../../../.gitbook/assets/image (5).png" alt=""><figcaption></figcaption></figure>
 
-## Prerequisites
+## Data store
 
-There are two methods to implement QSR. For environments that have Kubecost [Federated ETL](https://docs.kubecost.com/install-and-configure/install/multi-cluster/federated-etl) enabled, the Federated ETL object-store must be used. Federated ETL is, itself, a backup mechanism.
+There are three methods to implement QSR. For environments that have Kubecost [Federated ETL](https://docs.kubecost.com/install-and-configure/install/multi-cluster/federated-etl) enabled, this store should be used.
 
-For all other environments, QSR will target the ETL backups. As of Kubecost v1.100+, this is enabled by default if you enable Thanos. To learn more about ETL backups, see the [ETL Backup](https://docs.kubecost.com/install-and-configure/install/etl-backup) doc.
+Alternatively, an object-store containing the ETL dataset to be queried can be configured using a secret `kubecostDeployment.queryServiceConfigSecret`. The file name of the secret must be `object-store.yaml`. Examples can be found [here](https://docs.kubecost.com/install-and-configure/install/multi-cluster/thanos-setup/long-term-storage#step-1-create-object-store.yaml).
+
+For all other environments, QSR will target the ETL backup store. As of Kubecost v1.100+, this is enabled by default if you enable Thanos. To learn more about ETL backups, see the [ETL Backup](https://docs.kubecost.com/install-and-configure/install/etl-backup) doc.
 
 ## Enabling QSR
 
-Once Federated ETL or ETL Backups are configured, set `kubecostDeployment.queryServiceReplicas` to a non-zero value. Perform a Helm upgrade with your updated _values.yaml._
+Once the data store is configured, set `kubecostDeployment.queryServiceReplicas` to a non-zero value and perform a Helm upgrade with your updated values.
 
 ## Usage
 
