@@ -81,7 +81,7 @@ export QUERYURL="http://localhost:8005/workspaces/${AMP_WORKSPACE_ID}"
 ```
 #### Step 2: Set up S3 bucket, IAM policy and Kubernetes secret for storing Kubecost ETL files
 
->Note: You can ignore this step 2 for the small-scale infrastructure setup
+> **Note**: You can ignore Step 2 for the small-scale infrastructure setup.
 
 **a. Create Object store S3 bucket to store Kubecost ETL metrics:**
 
@@ -170,7 +170,7 @@ kubectl create secret generic \
 #### Step 3: Set up IRSA to allow Kubecost and Prometheus to read & write metrics from Amazon Managed Service for Prometheus
 
 These following commands help to automate the following tasks:
-- Create an IAM role with the AWS managed IAM policy and trusted policy for the following service accounts: `kubecost-cost-analyzer-amp`, `kubecost-prometheus-server-amp`.
+- Create an IAM role with the AWS-managed IAM policy and trusted policy for the following service accounts: `kubecost-cost-analyzer-amp`, `kubecost-prometheus-server-amp`.
 - Modify current K8s service accounts with annotation to attach a new IAM role.
 
 Run the following command in your workspace:
@@ -201,7 +201,7 @@ eksctl create iamserviceaccount \
 For more information, you can check AWS documentation at [IAM roles for service accounts](https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html) and learn more about Amazon Managed Service for Prometheus managed policy at [Identity-based policy examples for Amazon Managed Service for Prometheus](https://docs.aws.amazon.com/prometheus/latest/userguide/security_iam_id-based-policy-examples.html)
 
 ## Integrating Kubecost with Amazon Managed Service for Prometheus
-### Prepare the configuration file
+### Preparing the configuration file
 
 Run the following command to create a file called config-values.yaml, which contains the defaults that Kubecost will use for connecting to your Amazon Managed Service for Prometheus workspace.
 
