@@ -30,7 +30,7 @@ Added in v1.105 of Kubecost:
 * `product`
 * `team`
 
-The supported filter ops in v1.96 of Kubecost are:
+The supported filter operators in v1.96 of Kubecost are:
 * `:` Equality
   * For string fields (e.g. namespace): equality
   * For slice/array fields (e.g. services): slice contains at least one value equal (equivalent to `~:`)
