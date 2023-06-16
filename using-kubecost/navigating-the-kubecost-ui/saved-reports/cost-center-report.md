@@ -1,10 +1,14 @@
 # Cost Center Report
 
 {% hint style="warning" %}
-Cost Center Report is a beta feature. Read the documentation carefully.
+Cost Center Report is a beta feature. Please share your feedback as we are in active development of this feature.
 {% endhint %}
 
-Cost center reports (CCR) combine real-time Kubernetes data with reconciled cloud provider data to create a high-level picture of your infrastructure. It provides flexibility through separate configuring of your allocation and cloud cost data, and provides custom grouping.
+Cost center reports (CCR) allows you to join your Kubernetes resource costs with cloud-native services. As an example, it allows combining the S3 or BigQuery costs with the Kubernetes Namespace that is consuming those services.
+
+The reporting is flexible in that you can have multiple types of resource matches in terms of labels/tags/accounts/k8s object names/etc.
+
+![sample-cost-center-report](../../../images/cost-centers/cost-center-report-sample.png)
 
 ## Adding a cost center
 
@@ -31,6 +35,14 @@ Your Kubernetes workload data can be read as your Kubernetes allocations. You ca
 Your cost center should automatically appear in the Report Preview. There is no need to finalize its creation; it will exist as long as all required fields have been provided. The Report Preview provides cost data for each cost center.
 
 After configuring a cost center, you can select _Collapse_ to close that configuration (this is only to condense the page view, it will not affect your overall reported data).
+
+### Tags and labels
+
+Any cloud provider tag or label can be used, be sure to follow the [respective guide](https://docs.kubecost.com/install-and-configure/install/cloud-integration) to ensure that they are included with the billing data.
+
+when using tags and labels, seperate the key and value with a `:`. Example: `owner:frontend`.
+
+![using-tags-and-labels](../../../images/cost-centers/using-tags-and-labels.png)
 
 ## Managing multiple cost centers
 
