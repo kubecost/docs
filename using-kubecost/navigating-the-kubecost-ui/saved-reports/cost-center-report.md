@@ -4,7 +4,7 @@
 Cost Center Report is a beta feature. Please share your feedback as we are in active development of this feature.
 {% endhint %}
 
-Cost center reports (CCR) allows you to join your Kubernetes resource costs with cloud-native services. As an example, it allows combining the S3 or BigQuery costs with the Kubernetes Namespace that is consuming those services.
+A Cost Center Report (CCR) allows you to join your Kubernetes resource costs with cloud-native services. As an example, it allows combining S3 and/or BigQuery costs with the Kubernetes Namespace that is consuming those services.
 
 The reporting is flexible in that you can have multiple types of resource matches in terms of labels/tags/accounts/k8s object names/etc.
 
