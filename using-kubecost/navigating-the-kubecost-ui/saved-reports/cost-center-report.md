@@ -38,7 +38,7 @@ After configuring a cost center, you can select _Collapse_ to close that configu
 
 ### Tags and labels
 
-Any cloud provider tag or label can be used, be sure to follow the [respective guide](https://docs.kubecost.com/install-and-configure/install/cloud-integration) to ensure that they are included with the billing data.
+Any cloud provider tag or label can be used, be sure to follow the [respective guide](./cloud-integration.md) to ensure that they are included with the billing data.
 
 when using tags and labels, seperate the key and value with a `:`. Example: `owner:frontend`.
 
