@@ -12,8 +12,6 @@ The query service will forward `/model/allocation` and `/model/assets` requests 
 
 The diagram below demonstrates the backing architecture of this query service and its functionality.
 
-<figure><img src="../../../.gitbook/assets/image (5).png" alt=""><figcaption></figcaption></figure>
-
 ## Requirements
 
 
@@ -30,6 +28,8 @@ There are three options that can be used for the source ETL Files:
 ### Persistent volume on Kubecost Primary instance
 
 QSR uses persistent volume storage to avoid excessive S3 transfers. Data is retrieved from S3 hourly as new ETL files are created and stored in these PVs. The `databaseVolumeSize` should be larger than the size of the data in the S3 bucket.
+
+When the pods start, data from the object-store is synced and this can take a significant time in large environments. During the sync, parts of the Kubecost UI will appear broken or have missing data. You can follow the pod logs to see when the sync is complete.
 
 The default of 100Gi is enough storage for 1M pods and 90 days of retention. This can be adjusted:
 
@@ -49,3 +49,7 @@ Once the data store is configured, set `kubecostDeployment.queryServiceReplicas`
 ## Usage
 
 Once QSR has been enabled, the new pods will automatically handle all API requests to `/model/allocation` and `/model/assets`.
+
+## Diagram
+
+<figure><img src="../../../.gitbook/assets/image (5).png" alt=""><figcaption></figcaption></figure>
