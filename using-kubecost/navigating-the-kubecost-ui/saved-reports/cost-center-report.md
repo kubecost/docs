@@ -8,7 +8,7 @@ A Cost Center Report (CCR) allows you to join your Kubernetes resource costs wit
 
 The reporting supports multiple types of resource matches in terms of labels/tags/accounts/K8s object names/etc.
 
-![sample-cost-center-report](../../../images/cost-centers/cost-center-report-sample.png)
+![sample-cost-center-report](../../../.gitbook/assets/cost-center-report-sample.png)
 
 ## Adding a cost center
 
@@ -38,11 +38,11 @@ After configuring a cost center, you can select _Collapse_ to close that configu
 
 ### Tags and labels
 
-Any cloud provider tag or label can be used, be sure to follow the [respective guide](./cloud-integration.md) to ensure that they are included with the billing data.
+Any cloud provider tag or label can be used, be sure to follow the [respective guide](cloud-integration.md) to ensure that they are included with the billing data.
 
 when using tags and labels, separate the key and value with a `:`. Example: `owner:frontend`.
 
-![using-tags-and-labels](../../../images/cost-centers/using-tags-and-labels.png)
+![using-tags-and-labels](../../../.gitbook/assets/using-tags-and-labels.png)
 
 ## Managing multiple cost centers
 

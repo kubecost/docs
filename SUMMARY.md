@@ -111,6 +111,7 @@
   * [Asset Diff API](asset-diff.md)
   * [Cloud Cost API](apis/apis-overview/cloud-cost-api.md)
     * [Cloud Cost Metrics](apis/apis-overview/cloud-cost-api/cloud-cost-metrics.md)
+  * [CloudCost Diagnostic APIs](apis/apis-overview/cloudcost-diagnostic-apis.md)
   * [Budget API](apis/apis-overview/budget-api.md)
   * [Cost Events Audit API](cost-events-audit-api.md)
   * [Spec Cost Prediction API](apis/apis-overview/spec-cost-prediction-api.md)
