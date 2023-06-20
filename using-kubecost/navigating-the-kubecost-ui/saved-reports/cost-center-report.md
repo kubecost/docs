@@ -4,9 +4,9 @@
 Cost Center Report is a beta feature. Please share your feedback as we are in active development of this feature.
 {% endhint %}
 
-A Cost Center Report (CCR) allows you to join your Kubernetes resource costs with cloud-native services. As an example, it allows combining S3 and/or BigQuery costs with the Kubernetes Namespace that is consuming those services.
+A Cost Center Report (CCR) allows you to join your Kubernetes resource costs with cloud-native services. For example, it allows combining S3 and/or BigQuery costs with the Kubernetes namespace that is consuming those services.
 
-The reporting is flexible in that you can have multiple types of resource matches in terms of labels/tags/accounts/k8s object names/etc.
+The reporting supports multiple types of resource matches in terms of labels/tags/accounts/K8s object names/etc.
 
 ![sample-cost-center-report](../../../images/cost-centers/cost-center-report-sample.png)
 
@@ -20,7 +20,7 @@ In the _Cost center name_ field, enter the desired name for your Cost Center. On
 
 ### Cloud costs
 
-You can aggregate your cloud costs by a variety of fields (default is _Service_). Single and multi-aggregation, and custom labels, are supported. Then, select the desired cloud cost metric. Cloud cost metrics are calculated differently depending on your cloud service provider(s). Learn more about how different cloud cost metrics are calculated and by cloud service provider (CSP) [here](https://docs.kubecost.com/apis/apis-overview/cloud-cost-api/cloud-cost-metrics).
+You can aggregate your cloud costs by a variety of fields (default is _Service_). Single and multi-aggregation, and custom labels, are supported. Then, select the desired cloud cost metric. Cloud cost metrics are calculated differently depending on your cloud service provider (CSP). Learn more about how different cloud cost metrics are calculated by CSP [here](https://docs.kubecost.com/apis/apis-overview/cloud-cost-api/cloud-cost-metrics).
 
 {% hint style="danger" %}
 Certain selected cloud cost metrics may produce errors forming your report preview. Use _Net Amortized Cost_, the default option, if you experience this error.
@@ -40,7 +40,7 @@ After configuring a cost center, you can select _Collapse_ to close that configu
 
 Any cloud provider tag or label can be used, be sure to follow the [respective guide](./cloud-integration.md) to ensure that they are included with the billing data.
 
-when using tags and labels, seperate the key and value with a `:`. Example: `owner:frontend`.
+when using tags and labels, separate the key and value with a `:`. Example: `owner:frontend`.
 
 ![using-tags-and-labels](../../../images/cost-centers/using-tags-and-labels.png)
 
