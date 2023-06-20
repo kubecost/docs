@@ -1,10 +1,14 @@
 # Cost Center Report
 
 {% hint style="warning" %}
-Cost Center Report is a beta feature. Read the documentation carefully.
+Cost Center Report is a beta feature. Please share your feedback as we are in active development of this feature.
 {% endhint %}
 
-Cost center reports (CCR) combine real-time Kubernetes data with reconciled cloud provider data to create a high-level picture of your infrastructure. It provides flexibility through separate configuring of your allocation and cloud cost data, and provides custom grouping.
+A Cost Center Report (CCR) allows you to join your Kubernetes resource costs with cloud-native services. For example, it allows combining S3 and/or BigQuery costs with the Kubernetes namespace that is consuming those services.
+
+The reporting supports multiple types of resource matches in terms of labels/tags/accounts/K8s object names/etc.
+
+![sample-cost-center-report](../../../images/cost-centers/cost-center-report-sample.png)
 
 ## Adding a cost center
 
@@ -16,7 +20,7 @@ In the _Cost center name_ field, enter the desired name for your Cost Center. On
 
 ### Cloud costs
 
-You can aggregate your cloud costs by a variety of fields (default is _Service_). Single and multi-aggregation, and custom labels, are supported. Then, select the desired cloud cost metric. Cloud cost metrics are calculated differently depending on your cloud service provider(s). Learn more about how different cloud cost metrics are calculated and by cloud service provider (CSP) [here](https://docs.kubecost.com/apis/apis-overview/cloud-cost-api/cloud-cost-metrics).
+You can aggregate your cloud costs by a variety of fields (default is _Service_). Single and multi-aggregation, and custom labels, are supported. Then, select the desired cloud cost metric. Cloud cost metrics are calculated differently depending on your cloud service provider (CSP). Learn more about how different cloud cost metrics are calculated by CSP [here](https://docs.kubecost.com/apis/apis-overview/cloud-cost-api/cloud-cost-metrics).
 
 {% hint style="danger" %}
 Certain selected cloud cost metrics may produce errors forming your report preview. Use _Net Amortized Cost_, the default option, if you experience this error.
@@ -31,6 +35,14 @@ Your Kubernetes workload data can be read as your Kubernetes allocations. You ca
 Your cost center should automatically appear in the Report Preview. There is no need to finalize its creation; it will exist as long as all required fields have been provided. The Report Preview provides cost data for each cost center.
 
 After configuring a cost center, you can select _Collapse_ to close that configuration (this is only to condense the page view, it will not affect your overall reported data).
+
+### Tags and labels
+
+Any cloud provider tag or label can be used, be sure to follow the [respective guide](./cloud-integration.md) to ensure that they are included with the billing data.
+
+when using tags and labels, separate the key and value with a `:`. Example: `owner:frontend`.
+
+![using-tags-and-labels](../../../images/cost-centers/using-tags-and-labels.png)
 
 ## Managing multiple cost centers
 
