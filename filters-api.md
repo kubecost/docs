@@ -9,7 +9,20 @@ operators).
 
 > **Note**: V1 filters will continue to be supported in all relevant APIs. APIs will first check for the `filter=` parameter. If it is present, v2 filters will be used. If it is not present, APIs will attempt to use v1 filters.
 
-## Filters overview
+## Using filters
+
+V2 filters can be used via the `filter=` parameter in supported APIs. Supported
+APIs are currently:
+
+* [Allocation API](allocation.md)
+* [Request Sizing APIs](api-request-right-sizing-v2.md) 
+* [Assets API](assets.md)
+
+## Filters Fields
+
+The available fields for filtering depend on the API being queried.
+
+### Allocation APIs, Request Sizing v2 API
 
 The supported filter fields in v1.96 of Kubecost are:
 * `cluster`
@@ -30,7 +43,25 @@ Added in v1.105 of Kubecost:
 * `product`
 * `team`
 
-The supported filter operators in v1.96 of Kubecost are:
+### Assets API
+
+V2 filter support was added to the `/model/assets` API in v1.105 of Kubecost.
+
+In v1.105 of Kubecost:
+* `name`
+* `assetType` (e.g. `node`, `disk`, `network`, etc.)
+* `category` (e.g. `Compute`, `Management`)
+* `cluster`
+* `project`
+* `provider`
+* `providerID`
+* `account`
+* `service`
+* `label`
+
+## Filter Operators
+
+The supported filter operators (ops) in v1.96 of Kubecost are:
 * `:` Equality
   * For string fields (e.g. namespace): equality
   * For slice/array fields (e.g. services): slice contains at least one value equal (equivalent to `~:`)
@@ -60,14 +91,6 @@ Individual filters can be joined by `+` (representing logical AND) or `|`
 (representing logical OR). To use `+` and `|` in the same filter expression,
 scope _must_ be denoted via `(` and `)`. See examples.
 
-## Using filters
-
-V2 filters can be used via the `filter=` parameter in supported APIs. Supported
-APIs are currently:
-
-* [Allocation API](allocation.md)
-* [Request Sizing APIs](api-request-right-sizing-v2.md) 
-
 ### Examples
 
 Here are some example filters to see how the filtering language works:
@@ -94,6 +117,12 @@ With `curl`:
 curl -G 'localhost:9090/model/allocation' \
     -d 'window=1d' \
     --data-urlencode 'filter=cluster:"cluster-one" + label[app]:"cost-analyzer"'
+```
+
+```sh
+curl -G 'localhost:9090/model/assets' \
+    -d 'window=3d' \
+    --data-urlencode 'filter=assetType:"disk"'
 ```
 
 ## Formal grammar and implementation
