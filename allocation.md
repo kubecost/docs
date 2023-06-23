@@ -1,106 +1,360 @@
 # Allocation API
 
-> **Note**: Throughout our API documentation, we use `localhost:9090` as the default Kubecost URL, but your Kubecost instance may be exposed by a service or ingress. To reach Kubecost at port 9090, run: `kubectl port-forward deployment/kubecost-cost-analyzer -n kubecost 9090`. When querying the cost-model container directly (ex. localhost:9003), the `/model` part of the URI should be removed.
+{% hint style="info" %}
+Throughout our API documentation, we use `localhost:9090` as the default Kubecost URL, but your Kubecost instance may be exposed by a service or ingress. To reach Kubecost at port 9090, run: `kubectl port-forward deployment/kubecost-cost-analyzer -n kubecost 9090`. When querying the cost-model container directly (ex. localhost:9003), the `/model` part of the URI should be removed.
+{% endhint %}
 
 {% swagger method="get" path="/allocation" baseUrl="http://<your-kubecost-address>/model" summary="Allocation API" %}
 {% swagger-description %}
-The Allocation API is the preferred way to query for costs and resources allocated to Kubernetes workloads and optionally aggregated by Kubernetes concepts like `namespace`, `controller`, and `label`. Data is served from one of [Kubecost's ETL pipelines](cost-model-deprecated.md#caching-overview).
+The Allocation API is the preferred way to query for costs and resources allocated to Kubernetes workloads and optionally aggregated by Kubernetes concepts like 
+
+`namespace`
+
+, 
+
+`controller`
+
+, and 
+
+`label`
+
+. Data is served from one of 
+
+[Kubecost's ETL pipelines](cost-model-deprecated.md#caching-overview)
+
+.
 {% endswagger-description %}
 
 {% swagger-parameter in="path" name="window" type="string" required="true" %}
-Duration of time over which to query. Accepts words like `today`, `week`, `month`, `yesterday`, `lastweek`, `lastmonth`; durations like `30m`, `12h`, `7d`; comma-separated RFC3339 date pairs like`2021-01-02T15:04:05Z,2021-02-02T15:04:05Z`; comma-separated Unix timestamp (seconds) pairs like `1578002645,1580681045`.
+Duration of time over which to query. Accepts words like 
+
+`today`
+
+, 
+
+`week`
+
+, 
+
+`month`
+
+, 
+
+`yesterday`
+
+, 
+
+`lastweek`
+
+, 
+
+`lastmonth`
+
+; durations like 
+
+`30m`
+
+, 
+
+`12h`
+
+, 
+
+`7d`
+
+; comma-separated RFC3339 date pairs like
+
+`2021-01-02T15:04:05Z,2021-02-02T15:04:05Z`
+
+; comma-separated Unix timestamp (seconds) pairs like 
+
+`1578002645,1580681045`
+
+.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="aggregate" type="string" required="false" %}
-Field by which to aggregate the results. Accepts: `cluster`, `namespace`, `controllerKind`, `controller`, `service`, `node`, `pod`, `label:<name>`, and `annotation:<name>`. Also accepts comma-separated lists for multi-aggregation, like `namespace,label:app`.
+Field by which to aggregate the results. Accepts: 
+
+`cluster`
+
+, 
+
+`namespace`
+
+, 
+
+`controllerKind`
+
+, 
+
+`controller`
+
+, 
+
+`service`
+
+, 
+
+`node`
+
+, 
+
+`pod`
+
+, 
+
+`label:<name>`
+
+, and 
+
+`annotation:<name>`
+
+. Also accepts comma-separated lists for multi-aggregation, like 
+
+`namespace,label:app`
+
+.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="accumulate" type="boolean" required="false" %}
-If `true`, sum the entire range of sets into a single set. Default value is `false`.
+If 
+
+`true`
+
+, sum the entire range of sets into a single set. Default value is 
+
+`false`
+
+.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="idle" type="boolean" required="false" %}
-If `true`, include idle cost (i.e. the cost of the un-allocated assets) as its own allocation. (See [special types of allocation](https://docs.kubecost.com/apis/apis-overview/allocation#special-types-of-allocation).) Default is `true.`
+If 
+
+`true`
+
+, include idle cost (i.e. the cost of the un-allocated assets) as its own allocation. (See 
+
+[special types of allocation](https://docs.kubecost.com/apis/apis-overview/allocation#special-types-of-allocation)
+
+.) Default is 
+
+`true.`
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="external" type="boolean" required="false" %}
-If `true`, include [external costs](https://docs.kubecost.com/#advanced-configuration) in each allocation. Default is `false`.
+If 
+
+`true`
+
+, include 
+
+[external costs](https://docs.kubecost.com/#advanced-configuration)
+
+ in each allocation. Default is 
+
+`false`
+
+.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="filterClusters" type="string" required="false" %}
-Comma-separated list of clusters to match; e.g. `cluster-one,cluster-two` will return results from only those two clusters.
+Comma-separated list of clusters to match; e.g. 
+
+`cluster-one,cluster-two`
+
+ will return results from only those two clusters.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="filterNodes" type="string" required="false" %}
-Comma-separated list of nodes to match; e.g. `node-one,node-two` will return results from only those two nodes.
+Comma-separated list of nodes to match; e.g. 
+
+`node-one,node-two`
+
+ will return results from only those two nodes.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="filterNamespaces" type="string" required="false" %}
-Comma-separated list of namespaces to match; e.g. `namespace-one,namespace-two` will return results from only those two namespaces.
+Comma-separated list of namespaces to match; e.g. 
+
+`namespace-one,namespace-two`
+
+ will return results from only those two namespaces.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="filterControllerKinds" type="string" required="false" %}
-Comma-separated list of controller kinds to match; e.g. `deployment, job` will return results with only those two controller kinds.
+Comma-separated list of controller kinds to match; e.g. 
+
+`deployment, job`
+
+ will return results with only those two controller kinds.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="filterControllers" type="string" required="false" %}
-Comma-separated list of controllers to match; e.g. `deployment-one,statefulset-two` will return results from only those two controllers.
+Comma-separated list of controllers to match; e.g. 
+
+`deployment-one,statefulset-two`
+
+ will return results from only those two controllers.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="filterPods" type="string" required="false" %}
-Comma-separated list of pods to match; e.g. `pod-one,pod-two` will return results from only those two pods.
+Comma-separated list of pods to match; e.g. 
+
+`pod-one,pod-two`
+
+ will return results from only those two pods.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="filterAnnotations" type="string" required="false" %}
-Comma-separated list of annotations to match; e.g. `name:annotation-one,name:annotation-two` will return results with either of those two annotation key-value-pairs.
+Comma-separated list of annotations to match; e.g. 
+
+`name:annotation-one,name:annotation-two`
+
+ will return results with either of those two annotation key-value-pairs.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="filterLabels" type="string" required="false" %}
-Comma-separated list of annotations to match; e.g. `app:cost-analyzer, app:prometheus` will return results with either of those two label key-value-pairs.
+Comma-separated list of annotations to match; e.g. 
+
+`app:cost-analyzer, app:prometheus`
+
+ will return results with either of those two label key-value-pairs.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="filterServices" type="string" required="false" %}
-Comma-separated list of services to match; e.g. `frontend-one,frontend-two` will return results with either of those two services.
+Comma-separated list of services to match; e.g. 
+
+`frontend-one,frontend-two`
+
+ will return results with either of those two services.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="format" type="string" required="false" %}
-Set to `csv` to download an accumulated version of the allocation results in CSV format. Set to `pdf` to download an accumulated version of the allocation results in PDF format. By default, results will be in JSON format.
+Set to 
+
+`csv`
+
+ to download an accumulated version of the allocation results in CSV format. Set to 
+
+`pdf`
+
+ to download an accumulated version of the allocation results in PDF format. By default, results will be in JSON format.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="shareIdle" type="boolean" required="false" %}
-If `true`, idle cost is allocated proportionally across all non-idle allocations, per-resource. That is, idle CPU cost is shared with each non-idle allocation's CPU cost, according to the percentage of the total CPU cost represented. Default is `false`.
+If 
+
+`true`
+
+, idle cost is allocated proportionally across all non-idle allocations, per-resource. That is, idle CPU cost is shared with each non-idle allocation's CPU cost, according to the percentage of the total CPU cost represented. Default is 
+
+`false`
+
+.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="splitIdle" type="boolean" required="false" %}
-If `true`, and `shareIdle == false`, Idle Allocations are created on a per cluster or per node basis rather than being aggregated into a single "_idle_" allocation. Default is `false`.
+If 
+
+`true`
+
+, and 
+
+`shareIdle == false`
+
+, Idle Allocations are created on a per cluster or per node basis rather than being aggregated into a single "
+
+_idle_
+
+" allocation. Default is 
+
+`false`
+
+.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="idleByNode" type="boolean" required="false" %}
-If `true`, idle allocations are created on a per node basis. Which will result in different values when shared and more idle allocations when split. Default is `false`.
+If 
+
+`true`
+
+, idle allocations are created on a per node basis. Which will result in different values when shared and more idle allocations when split. Default is 
+
+`false`
+
+.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="reconcile" type="boolean" required="false" %}
-If `true`, pulls data from the Assets cache and corrects prices of Allocations according to their related Assets. The corrections from this process are stored in each cost category's cost adjustment field. If the integration with your cloud provider's billing data has been set up, this will result in the most accurate costs for Allocations. Default is `true`.
+If 
+
+`true`
+
+, pulls data from the Assets cache and corrects prices of Allocations according to their related Assets. The corrections from this process are stored in each cost category's cost adjustment field. If the integration with your cloud provider's billing data has been set up, this will result in the most accurate costs for Allocations. Default is 
+
+`true`
+
+.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="shareTenancyCosts" type="boolean" required="false" %}
-If `true`, share the cost of cluster overhead assets such as cluster management costs and node attached volumes across tenants of those resources. Results are added to the sharedCost field. As of v1.93.0 both cluster management and attached volumes are shared by cluster. Default is `true`.
+If 
+
+`true`
+
+, share the cost of cluster overhead assets such as cluster management costs and node attached volumes across tenants of those resources. Results are added to the sharedCost field. As of v1.93.0 both cluster management and attached volumes are shared by cluster. Default is 
+
+`true`
+
+.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="shareNamespaces" type="string" required="false" %}
-Comma-separated list of namespaces to share; e.g. `kube-system, kubecost` will share the costs of those two namespaces with the remaining non-idle, unshared allocations.
+Comma-separated list of namespaces to share; e.g. 
+
+`kube-system, kubecost`
+
+ will share the costs of those two namespaces with the remaining non-idle, unshared allocations.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="shareLabels" type="string" required="false" %}
-Comma-separated list of labels to share; e.g. `env:staging, app:test` will share the costs of those two label values with the remaining non-idle, unshared allocations.
+Comma-separated list of labels to share; e.g. 
+
+`env:staging, app:test`
+
+ will share the costs of those two label values with the remaining non-idle, unshared allocations.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="shareCost" type="float" required="false" %}
-Floating-point value representing a monthly cost to share with the remaining non-idle, unshared allocations; e.g. `30.42` ($1.00/day == $30.42/month) for the query `yesterday` (1 day) will split and distribute exactly $1.00 across the allocations. Default is `0.0.`
+Floating-point value representing a monthly cost to share with the remaining non-idle, unshared allocations; e.g. 
+
+`30.42`
+
+ ($1.00/day == $30.42/month) for the query 
+
+`yesterday`
+
+ (1 day) will split and distribute exactly $1.00 across the allocations. Default is 
+
+`0.0.`
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="shareSplit" type="string" required="false" %}
-Determines how to split shared costs among non-idle, unshared allocations. By default, the split will be `weighted`; i.e. proportional to the cost of the allocation, relative to the total. The other option is `even`; i.e. each allocation gets an equal portion of the shared cost. Default is `weighted`.
+Determines how to split shared costs among non-idle, unshared allocations. By default, the split will be 
+
+`weighted`
+
+; i.e. proportional to the cost of the allocation, relative to the total. The other option is 
+
+`even`
+
+; i.e. each allocation gets an equal portion of the shared cost. Default is 
+
+`weighted`
+
+.
 {% endswagger-parameter %}
 
 {% swagger-response status="200: OK" description="" %}
@@ -195,50 +449,7 @@ Determines how to split shared costs among non-idle, unshared allocations. By de
 
 ## Allocation schema
 
-| Field                      | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
-| -------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| name                       | Name of each relevant Kubernetes concept described by the allocation, delimited by slashes, e.g. "cluster/node/namespace/pod/container"                                                                                                                                                                                                                                                                                                                                                      |
-| properties                 | Map of name-to-value for all relevant property fields, including: `cluster`, `node`, `namespace`, `controller`, `controllerKind`, `pod`, `container`, `labels`, `annotation`, etc. Note: Prometheus only supports underscores (`_`) in label names. Dashes (`-`) and dots (`.`), while supported by Kubernetes, will be translated to underscores by Prometheus. This may cause the merging of labels, which could result in aggregated costs being charged to a single label.               |
-| window                     | Period of time over which the allocation is defined.                                                                                                                                                                                                                                                                                                                                                                                                                                         |
-| start                      | Precise starting time of the allocation. By definition must be within the window.                                                                                                                                                                                                                                                                                                                                                                                                            |
-| end                        | Precise ending time of the allocation. By definition must be within the window.                                                                                                                                                                                                                                                                                                                                                                                                              |
-| minutes                    | Number of minutes running; i.e. the minutes from `start` until `end`.                                                                                                                                                                                                                                                                                                                                                                                                                        |
-| cpuCores                   | Average number of CPU cores allocated while running.                                                                                                                                                                                                                                                                                                                                                                                                                                         |
-| cpuCoreRequestAverage      | Average number of CPU cores requested while running.                                                                                                                                                                                                                                                                                                                                                                                                                                         |
-| cpuCoreUsageAverage        | Average number of CPU cores used while running.                                                                                                                                                                                                                                                                                                                                                                                                                                              |
-| cpuCoreHours               | Cumulative CPU core-hours allocated.                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
-| cpuCost                    | Cumulative cost of allocated CPU core-hours.                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
-| cpuCostAdjustment          | Change in cost after allocated CPUs have been reconciled with updated node cost                                                                                                                                                                                                                                                                                                                                                                                                              |
-| cpuEfficiency              | Ratio of `cpuCoreUsageAverage`-to-`cpuCoreRequestAverage`, meant to represent the fraction of requested resources that were used.                                                                                                                                                                                                                                                                                                                                                            |
-| gpuCount                   | Number of GPUs allocated to the workload.                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
-| gpuHours                   | Cumulative GPU-hours allocated.                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
-| gpuCost                    | Cumulative cost of allocated GPU-hours.                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
-| gpuCostAdjustment          | Change in cost after allocated GPUs have been reconciled with updated node cost                                                                                                                                                                                                                                                                                                                                                                                                              |
-| networkTransferBytes       | Total bytes sent from the workload                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
-| networkReceiveBytes        | Total bytes received by the workload                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
-| networkCost                | Cumulative cost of network usage.                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
-| networkCrossZoneCost       | Cumulative cost of Cross-zone network egress usage.                                                                                                                                                                                                                                                                                                                                                                                                                                          |
-| networkCrossRegionCost     | Cumulative cost of Cross-region network egress usage.                                                                                                                                                                                                                                                                                                                                                                                                                                        |
-| networkInternetCost        | Cumulative cost of internet egress usage.                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
-| networkCostAdjustment      | Updated network cost                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
-| loadBalancerCost           | Cumulative cost of allocated load balancers.                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
-| loadBalancerCostAdjustment | Updated load balancer cost.                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
-| pvBytes                    | Average number of bytes of PersistentVolumes allocated while running.                                                                                                                                                                                                                                                                                                                                                                                                                        |
-| pvByteHours                | Cumulative PersistentVolume byte-hours allocated.                                                                                                                                                                                                                                                                                                                                                                                                                                            |
-| pvCost                     | Cumulative cost of allocated PersistentVolume byte-hours.                                                                                                                                                                                                                                                                                                                                                                                                                                    |
-| pvs                        | Map of PersistentVolumeClaim costs that have been allocated to the workload                                                                                                                                                                                                                                                                                                                                                                                                                  |
-| pvCostAdjustment           | Updated persistent volume cost.                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
-| ramBytes                   | Average number of RAM bytes allocated. An allocated resource is the source of cost, according to Kubecost - regardless of if a requested resource is used.                                                                                                                                                                                                                                                                                                                                   |
-| ramByteRequestAverage      | Average of the RAM requested by the workload. Requests are a [Kubernetes tool](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#requests-and-limits) for preallocating/reserving resources for a given container.                                                                                                                                                                                                                                              |
-| ramByteUsageAverage        | Average of the RAM used by the workload. This comes from moment-to-moment measurements of live RAM byte usage of each container. This is roughly the number you see under RAM if you pull up Task Manager (Windows), top on Linux, or Activity Monitor (MacOS).                                                                                                                                                                                                                              |
-| ramByteHours               | Cumulative RAM byte-hours allocated.                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
-| ramCost                    | Cumulative cost of allocated RAM byte-hours.                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
-| ramEfficiency              | Ratio of `ramByteUsageAverage`-to-`ramByteRequestAverage`, meant to represent the fraction of requested resources that were used.                                                                                                                                                                                                                                                                                                                                                            |
-| sharedCost                 | Cumulative cost of shared resources, including shared namespaces, shared labels, shared overhead.                                                                                                                                                                                                                                                                                                                                                                                            |
-| externalCost               | Cumulative cost of external resources.                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
-| totalCost                  | Total cumulative cost                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
-| totalEfficiency            | Cost-weighted average of `cpuEfficiency` and `ramEfficiency`. In equation form: `((cpuEfficiency * cpuCost) + (ramEfficiency * ramCost)) / (cpuCost + ramCost)`                                                                                                                                                                                                                                                                                                                              |
-| rawAllocationOnly          | Object with fields `cpuCoreUsageMax` and `ramByteUsageMax`, which are the maximum usages in the `window` for the Allocation. If the Allocation query is aggregated or accumulated, this object will be null because the meaning of maximum is ambiguous in these situations. Consider aggregating by namespace: should the maximum be the maximum of each Allocation individually, or the maximum combined usage of all Allocations (at any point in time in the `window`) in the namespace? |
+<table><thead><tr><th width="270">Field</th><th>Description</th></tr></thead><tbody><tr><td>name</td><td>Name of each relevant Kubernetes concept described by the allocation, delimited by slashes, e.g. "cluster/node/namespace/pod/container"</td></tr><tr><td>properties</td><td>Map of name-to-value for all relevant property fields, including: <code>cluster</code>, <code>node</code>, <code>namespace</code>, <code>controller</code>, <code>controllerKind</code>, <code>pod</code>, <code>container</code>, <code>labels</code>, <code>annotation</code>, etc. Note: Prometheus only supports underscores (<code>_</code>) in label names. Dashes (<code>-</code>) and dots (<code>.</code>), while supported by Kubernetes, will be translated to underscores by Prometheus. This may cause the merging of labels, which could result in aggregated costs being charged to a single label.</td></tr><tr><td>window</td><td>Period of time over which the allocation is defined.</td></tr><tr><td>start</td><td>Precise starting time of the allocation. By definition must be within the window.</td></tr><tr><td>end</td><td>Precise ending time of the allocation. By definition must be within the window.</td></tr><tr><td>minutes</td><td>Number of minutes running; i.e. the minutes from <code>start</code> until <code>end</code>.</td></tr><tr><td>cpuCores</td><td>Average number of CPU cores allocated while running.</td></tr><tr><td>cpuCoreRequestAverage</td><td>Average number of CPU cores requested while running.</td></tr><tr><td>cpuCoreUsageAverage</td><td>Average number of CPU cores used while running.</td></tr><tr><td>cpuCoreHours</td><td>Cumulative CPU core-hours allocated.</td></tr><tr><td>cpuCost</td><td>Cumulative cost of allocated CPU core-hours.</td></tr><tr><td>cpuCostAdjustment</td><td>Change in cost after allocated CPUs have been reconciled with updated node cost</td></tr><tr><td>cpuEfficiency</td><td>Ratio of <code>cpuCoreUsageAverage</code>-to-<code>cpuCoreRequestAverage</code>, meant to represent the fraction of requested resources that were used.</td></tr><tr><td>gpuCount</td><td>Number of GPUs allocated to the workload.</td></tr><tr><td>gpuHours</td><td>Cumulative GPU-hours allocated.</td></tr><tr><td>gpuCost</td><td>Cumulative cost of allocated GPU-hours.</td></tr><tr><td>gpuCostAdjustment</td><td>Change in cost after allocated GPUs have been reconciled with updated node cost</td></tr><tr><td>networkTransferBytes</td><td>Total bytes sent from the workload</td></tr><tr><td>networkReceiveBytes</td><td>Total bytes received by the workload</td></tr><tr><td>networkCost</td><td>Cumulative cost of network usage.</td></tr><tr><td>networkCrossZoneCost</td><td>Cumulative cost of Cross-zone network egress usage.</td></tr><tr><td>networkCrossRegionCost</td><td>Cumulative cost of Cross-region network egress usage.</td></tr><tr><td>networkInternetCost</td><td>Cumulative cost of internet egress usage.</td></tr><tr><td>networkCostAdjustment</td><td>Updated network cost</td></tr><tr><td>loadBalancerCost</td><td>Cumulative cost of allocated load balancers.</td></tr><tr><td>loadBalancerCostAdjustment</td><td>Updated load balancer cost.</td></tr><tr><td>pvBytes</td><td>Average number of bytes of PersistentVolumes allocated while running.</td></tr><tr><td>pvByteHours</td><td>Cumulative PersistentVolume byte-hours allocated.</td></tr><tr><td>pvCost</td><td>Cumulative cost of allocated PersistentVolume byte-hours.</td></tr><tr><td>pvs</td><td>Map of PersistentVolumeClaim costs that have been allocated to the workload</td></tr><tr><td>pvCostAdjustment</td><td>Updated persistent volume cost.</td></tr><tr><td>ramBytes</td><td>Average number of RAM bytes allocated. An allocated resource is the source of cost, according to Kubecost - regardless of if a requested resource is used.</td></tr><tr><td>ramByteRequestAverage</td><td>Average of the RAM requested by the workload. Requests are a <a href="https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#requests-and-limits">Kubernetes tool</a> for preallocating/reserving resources for a given container.</td></tr><tr><td>ramByteUsageAverage</td><td>Average of the RAM used by the workload. This comes from moment-to-moment measurements of live RAM byte usage of each container. This is roughly the number you see under RAM if you pull up Task Manager (Windows), top on Linux, or Activity Monitor (MacOS).</td></tr><tr><td>ramByteHours</td><td>Cumulative RAM byte-hours allocated.</td></tr><tr><td>ramCost</td><td>Cumulative cost of allocated RAM byte-hours.</td></tr><tr><td>ramEfficiency</td><td>Ratio of <code>ramByteUsageAverage</code>-to-<code>ramByteRequestAverage</code>, meant to represent the fraction of requested resources that were used.</td></tr><tr><td>sharedCost</td><td>Cumulative cost of shared resources, including shared namespaces, shared labels, shared overhead.</td></tr><tr><td>externalCost</td><td>Cumulative cost of external resources.</td></tr><tr><td>totalCost</td><td>Total cumulative cost</td></tr><tr><td>totalEfficiency</td><td>Cost-weighted average of <code>cpuEfficiency</code> and <code>ramEfficiency</code>. In equation form: <code>((cpuEfficiency * cpuCost) + (ramEfficiency * ramCost)) / (cpuCost + ramCost)</code></td></tr><tr><td>rawAllocationOnly</td><td>Object with fields <code>cpuCoreUsageMax</code> and <code>ramByteUsageMax</code>, which are the maximum usages in the <code>window</code> for the Allocation. If the Allocation query is aggregated or accumulated, this object will be null because the meaning of maximum is ambiguous in these situations. Consider aggregating by namespace: should the maximum be the maximum of each Allocation individually, or the maximum combined usage of all Allocations (at any point in time in the <code>window</code>) in the namespace?</td></tr></tbody></table>
 
 ## Quick start
 
@@ -291,7 +502,7 @@ $ curl http://localhost:9090/model/allocation \
 {% endtab %}
 {% endtabs %}
 
-> **Note**: Querying for `window=3d` will likely return a range of four sets because the queried range will overlap with four precomputed 24-hour sets, each aligned to the configured time zone. For example, querying `window=3d` on 2021/01/04T12:00:00 will return:
+Querying for `window=3d` should return a range of four sets because the queried range will overlap with four precomputed 24-hour sets, each aligned to the configured time zone. For example, querying `window=3d` on 2021/01/04T12:00:00 will return:
 
 * 2021/01/04 00:00:00 until 2021/01/04T12:00:00 (now)
 * 2021/01/03 00:00:00 until 2021/01/04 00:00:00
@@ -506,11 +717,13 @@ Asset types that use this distribution method include:
 
 ## Querying on-demand (experimental)
 
-> **Warning:** Querying on-demand with high resolution for long windows can cause serious Prometheus performance issues, including OOM errors. Start with short windows (`1d` or less) and proceed with caution.
+{% hint style="danger" %}
+Querying on-demand with high resolution for long windows can cause serious Prometheus performance issues, including OOM errors. Start with short windows (`1d` or less) and proceed with caution.
+{% endhint %}
 
 Computing allocation data on-demand allows for greater flexibility with respect to step size and accuracy-versus-performance. (See `resolution` and [error bounds](allocation.md#theoretical-error-bounds) for details.) Unlike the standard endpoint, which can only serve results from precomputed sets with predefined step sizes (e.g. 24h aligned to the UTC time zone), asking for a "7d" query will almost certainly result in 8 sets, including "today" and the final set, which might span 6.5d-7.5d ago. With this endpoint, however, you will be computing everything on-demand, so "7d" will return exactly seven days of data, starting at the moment the query is received. (You can still use window keywords like "today" and "lastweek", of course, which should align perfectly with the same queries of the standard ETL-driven endpoint.)
 
-Additionally, unlike the standard endpoint, querying on-demand will not use [reconciled asset costs](/cloud-integration.md). Therefore, the results returned will show all adjustments (e.g. CPU, GPU, RAM) to be 0.
+Additionally, unlike the standard endpoint, querying on-demand will not use [reconciled asset costs](cloud-integration.md). Therefore, the results returned will show all adjustments (e.g. CPU, GPU, RAM) to be 0.
 
 {% swagger method="get" path="/allocation/compute" baseUrl="http://<kubecost>/model" summary="Allocation On-Demand API" %}
 {% swagger-description %}
@@ -524,11 +737,11 @@ Duration of time over which to query. Accepts words like `today`, `week`, `month
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="resolution" type="string" required="false" %}
-Duration to use as resolution in Prometheus queries. Smaller values (i.e. higher resolutions) will provide better accuracy, but worse performance (i.e. slower query time, higher memory use). Larger values (i.e. lower resolutions) will perform better, but at the expense of lower accuracy for short-running workloads. See 
+Duration to use as resolution in Prometheus queries. Smaller values (i.e. higher resolutions) will provide better accuracy, but worse performance (i.e. slower query time, higher memory use). Larger values (i.e. lower resolutions) will perform better, but at the expense of lower accuracy for short-running workloads. See
 
 [error bounds](allocation.md#theoretical-error-bounds)
 
- for details. Default is 
+for details. Default is
 
 `1m`
 
@@ -542,35 +755,35 @@ Duration of a single allocation set. If unspecified, this defaults to the
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="aggregate" type="string" required="false" %}
-Field by which to aggregate the results. Accepts: 
+Field by which to aggregate the results. Accepts:
 
 `cluster`
 
-, 
+,
 
 `namespace`
 
-, 
+,
 
 `controllerKind`
 
-, 
+,
 
 `controller`
 
-, 
+,
 
 `service`
 
-, 
+,
 
 `label:<name>`
 
-, and 
+, and
 
 `annotation:<name>`
 
-. Also accepts comma-separated lists for multi-aggregation, like 
+. Also accepts comma-separated lists for multi-aggregation, like
 
 `namespace,label:app`
 
@@ -578,11 +791,11 @@ Field by which to aggregate the results. Accepts:
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="accumulate" type="boolean" required="false" %}
-If 
+If
 
 `true`
 
-, sum the entire range of sets into a single set. Default value is 
+, sum the entire range of sets into a single set. Default value is
 
 `false`
 
@@ -743,11 +956,4 @@ Here, we provide theoretical error bounds for different resolution values given 
 * 0.83, 1.00 means that results should never be high by more than 0.5% error, but could be low by as much as 17% error
 * \-1.00, 10.00 means that the result could be as high as 1000% error (e.g. 30s pod being counted for 5m) or the pod could be missed altogether, i.e. -100% error.
 
-| resolution |    30s pod    |    5m pod    |    1h pod   |   1d pod   |   7d pod   |
-| ---------: | :-----------: | :----------: | :---------: | :--------: | :--------: |
-|         1m |  -1.00, 2.00  |  0.80, 1.00  |  0.98, 1.00 | 1.00, 1.00 | 1.00, 1.00 |
-|         2m |  -1.00, 4.00  |  0.80, 1.20  |  0.97, 1.00 | 1.00, 1.00 | 1.00, 1.00 |
-|         5m |  -1.00, 10.00 |  -1.00, 1.00 |  0.92, 1.00 | 1.00, 1.00 | 1.00, 1.00 |
-|        10m |  -1.00, 20.00 |  -1.00, 2.00 |  0.83, 1.00 | 0.99, 1.00 | 1.00, 1.00 |
-|        30m |  -1.00, 60.00 |  -1.00, 6.00 |  0.50, 1.00 | 0.98, 1.00 | 1.00, 1.00 |
-|        60m | -1.00, 120.00 | -1.00, 12.00 | -1.00, 1.00 | 0.96, 1.00 | 0.99, 1.00 |
+<table><thead><tr><th width="129" align="right">resolution</th><th align="center">30s pod</th><th align="center">5m pod</th><th align="center">1h pod</th><th align="center">1d pod</th><th align="center">7d pod</th></tr></thead><tbody><tr><td align="right">1m</td><td align="center">-1.00, 2.00</td><td align="center">0.80, 1.00</td><td align="center">0.98, 1.00</td><td align="center">1.00, 1.00</td><td align="center">1.00, 1.00</td></tr><tr><td align="right">2m</td><td align="center">-1.00, 4.00</td><td align="center">0.80, 1.20</td><td align="center">0.97, 1.00</td><td align="center">1.00, 1.00</td><td align="center">1.00, 1.00</td></tr><tr><td align="right">5m</td><td align="center">-1.00, 10.00</td><td align="center">-1.00, 1.00</td><td align="center">0.92, 1.00</td><td align="center">1.00, 1.00</td><td align="center">1.00, 1.00</td></tr><tr><td align="right">10m</td><td align="center">-1.00, 20.00</td><td align="center">-1.00, 2.00</td><td align="center">0.83, 1.00</td><td align="center">0.99, 1.00</td><td align="center">1.00, 1.00</td></tr><tr><td align="right">30m</td><td align="center">-1.00, 60.00</td><td align="center">-1.00, 6.00</td><td align="center">0.50, 1.00</td><td align="center">0.98, 1.00</td><td align="center">1.00, 1.00</td></tr><tr><td align="right">60m</td><td align="center">-1.00, 120.00</td><td align="center">-1.00, 12.00</td><td align="center">-1.00, 1.00</td><td align="center">0.96, 1.00</td><td align="center">0.99, 1.00</td></tr></tbody></table>

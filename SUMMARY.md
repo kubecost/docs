@@ -66,7 +66,7 @@
     * [TurndownSchedule Migration Guide](turndown-schedule-migration-guide.md)
   * [Kubecost Data Status Metrics](install-and-configure/advanced-configuration/data-status-metrics.md)
   * [High Availability Kubecost](high-availability.md)
-  * [Query Service Replicas](install-and-configure/advanced-configuration/query-service-replicas.md)
+  * [Query Service Replicas](install-and-configure/install/etl-backup/query-service-replicas.md)
   * [Availability Tiers](availability-tiers.md)
   * [CSV Pricing](csv-pricing.md)
   * [Windows Node Support](windows.md)

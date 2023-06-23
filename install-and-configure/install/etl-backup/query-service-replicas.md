@@ -14,15 +14,12 @@ The diagram below demonstrates the backing architecture of this query service an
 
 ## Requirements
 
-
 ### ETL datasource
 
 There are three options that can be used for the source ETL Files:
 
 1. For environments that have Kubecost [Federated ETL](https://docs.kubecost.com/install-and-configure/install/multi-cluster/federated-etl) enabled, this store will be used, no additional configuration is required.
-
 2. For single cluster environments, QSR can target the ETL backup store. To learn more about ETL backups, see the [ETL Backup](https://docs.kubecost.com/install-and-configure/install/etl-backup) doc.
-
 3. Alternatively, an object-store containing the ETL dataset to be queried can be configured using a secret `kubecostDeployment.queryServiceConfigSecret`. The file name of the secret must be `object-store.yaml`. Examples can be found [here](https://docs.kubecost.com/install-and-configure/install/multi-cluster/thanos-setup/long-term-storage#step-1-create-object-store.yaml).
 
 ### Persistent volume on Kubecost Primary instance
@@ -42,6 +39,7 @@ kubecostDeployment:
     databaseVolumeSize: 100Gi
     configVolumeSize: 1G
 ```
+
 ## Enabling QSR
 
 Once the data store is configured, set `kubecostDeployment.queryServiceReplicas` to a non-zero value and perform a Helm upgrade.
