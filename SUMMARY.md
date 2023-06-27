@@ -28,7 +28,7 @@
       * [Thanos Upgrade](thanos-upgrade.md)
     * [AWS](install-and-configure/install/long-term-storage/aws/README.md)
       * [AWS Multi-Cluster Storage Configuration](long-term-storage-aws.md)
-      * [Creating a Thanos IAM policy](aws-service-account-thanos.md)
+      * [Creating a Thanos IAM Policy](aws-service-account-thanos.md)
     * [Azure](install-and-configure/install/long-term-storage/azure/README.md)
       * [Azure Long Term Storage](long-term-storage-azure.md)
     * [GCP](install-and-configure/install/long-term-storage/gcp/README.md)

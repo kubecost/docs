@@ -56,7 +56,9 @@ You can view a list of common config options [here](https://github.com/kubecost/
 * The levels range from 0 to 5, with 0 being the least verbose (only showing panics) and 5 being the most verbose (showing trace-level information).
 * Ref: [sig-instrumentation](https://github.com/kubernetes/community/blob/0e9fa4a1c45203527a7ce35eaff09204d6b7b331/contributors/devel/sig-instrumentation/logging.md)
 
-> **Note**: Network cost, which is disabled by default, needs to be run as a privileged pod to access the relevant networking kernel module on the host machine.
+{% hint style="info" %}
+Network cost, which is disabled by default, needs to be run as a privileged pod to access the relevant networking kernel module on the host machine.
+{% endhint %}
 
 ## Cloud Provider Service Tagging
 
@@ -144,7 +146,9 @@ This will show you the top source and destination IP addresses and bytes transfe
 
 For traffic routed to addresses outside of your cluster but inside your VPC, Kubecost supports the ability to directly classify network traffic to a particular IP address or CIDR block. This feature can be configured in [_values.yaml_](https://github.com/kubecost/cost-analyzer-helm-chart/blob/v1.101/cost-analyzer/values.yaml#L669-L707) under `networkCosts.config`. Classifications are defined as follows:
 
-> **Note**: As of Kubecost 1.101, LoadBalancers that proxy traffic to the Internet (ingresses and gateways) can be specifically classified.
+{% hint style="info" %}
+As of Kubecost 1.101, LoadBalancers that proxy traffic to the Internet (ingresses and gateways) can be specifically classified.
+{% endhint %}
 
 * In-zone: A list of destination addresses/ranges that will be classified as in-zone traffic, which is free for most providers.
 * In-region: A list of addresses/ranges that will be classified as the same region between source and destinations but different zones.
@@ -207,8 +211,7 @@ To verify this feature is functioning properly, you can complete the following s
 
 * Failed to locate network pods: Error message is displayed when the Kubecost app is unable to locate the network pods, which we search for by a label that includes our release name. In particular, we depend on the label `app=<release-name>-network-costs` to locate the pods. If the app has a blank release name this issue may happen.
 * Resource usage is a function of unique src and dest IP/port combinations. Most deployments use a small fraction of a CPU and it is also ok to have this Pod CPU throttled. Throttling should increase parse times but should not have other impacts. The following Prometheus metrics are available in v15.3 for determining the scale and the impact of throttling:
-
-`kubecost_network_costs_parsed_entries` is the last number of ConnTrack entries parsed `kubecost_network_costs_parse_time` is the last recorded parse time
+  * `kubecost_network_costs_parsed_entries` is the last number of ConnTrack entries parsed `kubecost_network_costs_parse_time` is the last recorded parse time
 
 ## Feature limitations
 
