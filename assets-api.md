@@ -249,11 +249,11 @@ Acceptable formats for using `window` parameter include:
 
 ## API examples
 
-Retrieve assets cost data for the past seven days, aggregated by type, and as cumulative object data:
+Retrieve assets cost data for the past week, aggregated by type, and as cumulative object data:
 
 {% tabs %}
 {% tab title="Request" %}
-`http://localhost:9090/model/assets?window=7d&aggregate=type&accumulate=true`
+`http://localhost:9090/model/assets?window=1w&aggregate=type&accumulate=true`
 {% endtab %}
 
 {% tab title="Response" %}
@@ -440,11 +440,11 @@ Retrieve assets cost data for the past seven days, aggregated by type, and as cu
 {% endtab %}
 {% endtabs %}
 
-Retrieve all AWS S3 assets cost data for the past seven days.
+Retrieve all AWS S3 assets cost data for the past five days.
 
 {% tabs %}
 {% tab title="Request" %}
-`http://localhost:9090/model/assets?window=7d&filterServices=AmazonS3"`
+`http://localhost:9090/model/assets?window=5d&filterServices=AmazonS3`
 {% endtab %}
 
 {% tab title="Response" %}
