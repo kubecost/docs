@@ -1,17 +1,15 @@
 # Alerts
 
-Kubecost alerts allow teams to receive updates on real-time Kubernetes spend. They are configurable via the Kubecost UI or Helm values. This resource gives an overview of how to configure Kubecost email, Slack, and Microsoft Teams using [Kubecost Helm chart values](https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/values.yaml). Alerts are either created to monitor specific data sets and trends, or they must be toggled on or off. The following alert types are supported:
+Kubecost alerts allow teams to receive updates on real-time Kubernetes spend. They are configurable via the Kubecost UI or Helm values. This resource gives an overview of how to configure alerts sent through email, Slack, and Microsoft Teams using [Kubecost Helm chart values](https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/values.yaml). Alerts are either created to monitor specific data sets and trends, or they must be toggled on or off. The following alert types are supported:
 
 1. [Allocation Budget](alerts.md#type-allocation-budget): Sends an alert when spending crosses a defined threshold
 2. [Allocation Efficiency](alerts.md#type-allocation-efficiency): Detects when a Kubernetes tenant is operating below a target cost-efficiency threshold
 3. [Allocation Recurring Update](alerts.md#type-allocation-recurring-update): Sends an alert with cluster spending across all or a subset of Kubernetes resources.
 4. [Allocation Spend Change](alerts.md#type-allocation-spend-change): Sends an alert reporting unexpected spend increases relative to moving averages
 5. [Asset Budget](alerts.md#type-asset-budget): Sends an alert when spend for a particular set of assets crosses a defined threshold.
-6. [Cloud Report](alerts.md#type-cloud-report): Sends an alert with asset spend across all or a subset of cloud resources.
+6. [Asset Recurring Update](https://docs.kubecost.com/using-kubecost/navigating-the-kubecost-ui/alerts#asset-recurring-update): Sends an alert with asset spend across all or a subset of cloud resources.
 7. [Monitor Cluster Health](alerts.md#type-monitor-cluster-health): Used to determine if the cluster's health score changes by a specific threshold. Can only be toggled on/off.
 8. [Monitor Kubecost Health](alerts.md#type-monitor-kubecost-health): Used for production monitoring for the health of Kubecost itself. Can only be toggled on/off.
-
-Have questions or issues? View our [troubleshooting section](alerts.md#troubleshooting) below.
 
 ## Configuring alerts in Helm
 
@@ -52,7 +50,7 @@ notifications:
 
 In addition to all `global...` fields, every alert allows optional individual `ownerContact` (a list of email addresses), `slackWebhookUrl` (if different from `globalSlackWebhookUrl`), and `msTeamsWebhookUrl` (if different from `globalMsTeamsWebhookUrl`) fields. Alerts will default to the global settings if these optional fields are not supplied.
 
-### Type: Allocation Budget
+### Allocation Budget
 
 Defines spend budgets and alerts on budget overruns.
 
@@ -81,9 +79,9 @@ Example Helm _values.yaml_:
   filter: cluster-one
 ```
 
-### Type: Allocation Efficiency
+### Allocation Efficiency
 
-Alerst when Kubernetes tenants, e.g. namespaces or label sets, are running below defined cost-efficiency thresholds.
+Alerts when Kubernetes tenants, e.g. namespaces or label sets, are running below defined cost-efficiency thresholds.
 
 _Required parameters:_
 
@@ -110,7 +108,7 @@ The example below sends a Slack alert when any namespace spending is running bel
 ```
 {% endcode %}
 
-### Type: Allocation Recurring Update
+### Allocation Recurring Update
 
 Sends a recurring alert with a summary report of cost and efficiency metrics.
 
@@ -170,7 +168,7 @@ Example Helm _values.yaml_:
 ```
 {% endcode %}
 
-### Type: Allocation Spend change
+### Allocation Spend Change
 
 Detects unexpected spend increases/decreases relative to historical moving averages.
 
@@ -200,7 +198,7 @@ Example Helm _values.yaml_:
 ```
 {% endcode %}
 
-### Type: Asset Budget
+### Asset Budget
 
 Defines asset budgets and alert when cloud or Kubernetes assets overrun the threshold set.
 
@@ -212,7 +210,7 @@ _Required parameters:_
 * `filter: <value>(,<value>,...)` -- configurable, accepts any 1 or more filter values which are comma seperated values
 * `window: <N>d` or `<M>h` -- configurable, (1 ≤ N ≤ 7, 1 ≤ M ≤ 24)
 
-_Valid Aggregation Parameters_:
+_Valid aggregation parameters_:
 
 * `category`
 * `cluster`
@@ -240,7 +238,7 @@ Example Helm _values.yaml_:
   filter: ''
 ```
 
-### Type: Cloud Report
+### Asset Recurring Update
 
 Sends a recurring alert with a cloud and/or Kubernetes assets summary report.
 
@@ -270,6 +268,7 @@ _Valid Aggregation Parameters_:
 
 Example Helm _values.yaml_:
 
+{% code overflow="wrap" %}
 ```
 # Recurring weekly cloud update on all cluster
 - type: cloudReport
@@ -286,8 +285,9 @@ Example Helm _values.yaml_:
     - owner2@example.com
   slackWebhookUrl: https://hooks.slack.com/services/<different-from-global> # optional, overrides globalSlackWebhookUrl default
 ```
+{% endcode %}
 
-### Type: Monitor Cluster Health
+### Monitor Cluster Health
 
 Cluster health alerts occur when the cluster health score changes by a specific threshold. The health score is calculated based on the following criteria:
 
@@ -313,7 +313,7 @@ Example Helm _values.yaml_:
 ```
 {% endcode %}
 
-### Type: Monitor Kubecost Health
+### Monitor Kubecost Health
 
 Enabling diagnostic alerts in Kubecost occursthe  when an event impacts product uptime. This feature can be enabled in seconds from a values file. The following events are grouped into distinct categories that each result in a separate alert notification:
 
@@ -340,6 +340,7 @@ _Optional parameters:_
 
 Example Helm _values.yaml_:
 
+{% code overflow="wrap" %}
 ```
 # Kubecost Health Diagnostic
 - type: diagnostic
@@ -358,6 +359,7 @@ Example Helm _values.yaml_:
     cpuThrottling: true
     clusterJoinLeave: true
 ```
+{% endcode %}
 
 ## Configuring alerts in the Kubecost UI
 
