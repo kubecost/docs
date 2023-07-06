@@ -1,34 +1,41 @@
-# Container Request Recommendation "Apply" APIs
+# Container Request Recommendation Apply/Plan APIs
 
 {% hint style="warning" %}
 This feature is in beta. Please read the documentation carefully.
 {% endhint %}
 
-The Apply API for request recommendations takes Kubecost's calculated [container request recommendations](api-request-right-sizing-v2.md) and applies them to your cluster.
+The Apply/Plan APIs for request recommendations takes Kubecost's calculated [container request recommendations](api-request-right-sizing-v2.md) and applies them to your cluster.
 
-## Requirements
+## Prerequisites
 
-You must have Kubecost's Cluster Controller [enabled](controller.md). Cluster Controller contains Kubecost's automation features (including the APIs described in this document), and thus has write permission to certain resources on your cluster.
+To use the Plan/Apply APIs, you must first enable Kubecost's [Cluster Controller](https://docs.kubecost.com/install-and-configure/advanced-configuration/controller). The Cluster Controller contains Kubecost's automation features (including the APIs described in this document), and thus has write permission to certain resources on your cluster.
 
 ## APIs
 
 Apply has dry-run semantics, meaning it is a two-step process:
 
-1. Plan what will happen
-2. Execute the plan
+1. Plan what will happen (Plan API)
+2. Execute the plan (Apply API)
 
 ### Plan API
 
-The Plan API is available at `http://kubecost.example.com/cluster/requestsizer/plan`. It expects a POST request with a body that is identical to a response from the [request right-sizing recommendation API](api-request-right-sizing-v2.md).
+{% swagger method="post" path="/cluster/requestsizer/plan" baseUrl="http://<your-kubecost-address>" summary="Plan API" %}
+{% swagger-description %}
+It expects a request with a body that is identical to a response from the 
 
-Examine the curl example below. The API response can be inspected to see what Kubecost will attempt to do before running the apply step. The plan may do less than the recommendation, see [Current Limitations](https://docs.kubecost.com/apis/apis-overview/api-request-recommendation-apply#current-limitations).
+[request right-sizing recommendation API](api-request-right-sizing-v2.md)
+
+.
+{% endswagger-description %}
+{% endswagger %}
+
+Examine the cURL example below. The API response can be inspected to see what Kubecost will attempt to do before running the apply step. The plan may do less than the recommendation, see [Current Limitations](https://docs.kubecost.com/apis/apis-overview/api-request-recommendation-apply#current-limitations).
 
 {% tabs %}
 {% tab title="Request" %}
 {% code overflow="wrap" %}
 ```
-# Make to `kubectl port-forward -n kubecost service/kubecost-cost-analyzer 9090`
-# or replace 'localhost:9090' with 'kubecost.example.com'
+# Make to `kubectl port-forward -n kubecost service/kubecost-cost-analyzer 9090` or replace 'localhost:9090' with your Kubecost address
 
 curl -XGET 'http://localhost:9090/model/savings/requestSizing' \
     -d 'window=2d' \
@@ -69,7 +76,11 @@ curl -XGET 'http://localhost:9090/model/savings/requestSizing' \
 
 ### Apply API
 
-The Apply API is available at `http://kubecost.example.com/cluster/requestsizer/plan`. It expects a POST request with a body that is identical to a response from the Plan API.
+{% swagger method="get" path="/cluster/requestsizer/apply" baseUrl="http://kubecost.example.com" summary="Apply API" %}
+{% swagger-description %}
+It expects a request with a body that is identical to a response from the Plan API.
+{% endswagger-description %}
+{% endswagger %}
 
 In the cURL example below, the API response includes the original plan, plus some metadata:
 

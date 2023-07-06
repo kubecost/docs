@@ -117,7 +117,7 @@
   * [Spec Cost Prediction API](apis/apis-overview/spec-cost-prediction-api.md)
   * [Events API](api-events.md)
   * [Audit API](audit-api.md)
-  * [Container Request Recommendation "Apply" APIs](api-request-recommendation-apply.md)
+  * [Container Request Recommendation Apply/Plan APIs](api-request-recommendation-apply.md)
   * [Container Request Right Sizing Recommendation API (V2)](api-request-right-sizing-v2.md)
   * [Abandoned Workloads](api-abandoned-workloads.md)
   * [Filter Parameters (v2)](filters-api.md)
