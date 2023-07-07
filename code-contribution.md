@@ -18,7 +18,7 @@ Kubecost offers a number of open-source software projects and tools which allow 
 
 Kubecost is a growing, lively, friendly open-source community. As many open source projects often do, it depends on new people becoming members and regular contributors of new ideas and implementation. Please consider joining the discussion around Kubecost, and making your first contribution to our community today. We ask our members to join the following channels of communication so we can better support you through your onboarding journey.
 
-* [Slack community](https://join.slack.com/t/kubecost/shared_invite/zt-1dz4a0bb4-InvSsHr9SQsT_D5PBle2rw) - check out #support for any help you may need & drop your introduction in the #general channel
+* [Slack community](https://kubecost.com/join-slack) - check out #support for any help you may need & drop your introduction in the #general channel
 * [Kubecost Documentation](https://www.guide.kubecost.com/)
 * Social media & blog
     * [Twitter ](https://twitter.com/kubecost)

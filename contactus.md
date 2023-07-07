@@ -8,7 +8,7 @@ Interested in commercial Kubecost? Contact Sales at [team@kubecost.com](mailto:t
 
 You can also find us on the following platforms:
 
-* [Slack](https://join.slack.com/t/kubecost/shared\_invite/zt-1yimdty93-IydqbQFcTyVmZ8q0v8E8tw)
+* [Slack](https://kubecost.com/join-slack)
 * [LinkedIn](https://www.linkedin.com/company/kubecost/)
 * [Twitter](https://twitter.com/kubecost)
 * [YouTube](https://www.youtube.com/channel/UChIoMpeXm85T-kPCW1p9\_PA/featured)
