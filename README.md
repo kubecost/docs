@@ -29,4 +29,4 @@ Check out our [Installation options](install.md) to start monitoring and managin
 
 You can stay up to date with Kubecost by following releases on [GitHub](https://github.com/kubecost/cost-analyzer-helm-chart/releases).
 
-Contact us via email ([support@kubecost.com](mailto:support@kubecost.com)) or join us on [Slack](https://join.slack.com/t/kubecost/shared\_invite/zt-1dz4a0bb4-InvSsHr9SQsT\_D5PBle2rw) if you have questions!
+Contact us via email ([support@kubecost.com](mailto:support@kubecost.com)) or join us on [Slack](https:/kubecost.com/join-slack) if you have questions!
