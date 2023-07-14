@@ -38,10 +38,16 @@ kubectl apply -f https://raw.githubusercontent.com/kubecost/cost-analyzer-helm-c
 
 Kubecost releases are scheduled on a near-monthly basis. You can keep up to date with new Kubecost updates and patches by following our release notes [here](https://github.com/kubecost/cost-analyzer-helm-chart/releases).
 
-After installing Kubecost, you will be able to update your version with the following command:
+After installing Kubecost, you will be able to update Kubecost with the following command, which will upgrade you to the most recent version:
 
 ```
 helm repo update && helm upgrade kubecost kubecost/cost-analyzer -n kubecost
+```
+
+You can upgrade or downgrade to a specific version of Kubecost with the following command:
+
+```
+helm upgrade kubecost --repo... --version 1.XXX.X
 ```
 
 ## Deleting Kubecost
