@@ -1,10 +1,12 @@
 # Federated ETL
 
-There are two primary methods to aggregate all cluster information back to a single Kubecost UI described in the [Multi-Cluster](/multi-cluster.md#enterprise-federation) doc.
+There are two primary methods to aggregate all cluster information back to a single Kubecost UI described in the [Multi-Cluster](multi-cluster.md#enterprise-federation) doc.
 
 Below is the configuration guide using **Kubecost ETL Federation**.
 
-> **Note**: This feature requires an Enterprise license.
+{% hint style="info" %}
+Federated ETL is only officially supported on Kubecost Enterprise plans.
+{% endhint %}
 
 Federated extract, transform, load (ETL) gives teams the benefit of federating multiple Kubecost installations into one view without dependency on Thanos.
 
@@ -17,7 +19,7 @@ There are two primary advantages for using ETL Federation:
 
 ![ETL Federation Overview](https://raw.githubusercontent.com/kubecost/docs/main/images/Kubecost-ETL-Federated-Architecture.png)
 
-## Sample Configurations
+## Sample configurations
 
 This guide has specific detail on how ETL Configuration works and deployment options.
 
@@ -76,12 +78,10 @@ prometheus:
 
 ### Step 1: Storage configuration
 
-1. For any cluster in the pipeline (Federator, Federated, Primary, or any combination of the three), create a file *federated-store.yaml* with the same format used for Thanos/S3 backup.
-
-    * [AWS](./long-term-storage-aws.md)
-    * [Azure](./long-term-storage-azure.md)
-    * [GCP](./long-term-storage-gcp.md)
-
+1. For any cluster in the pipeline (Federator, Federated, Primary, or any combination of the three), create a file _federated-store.yaml_ with the same format used for Thanos/S3 backup.
+   * [AWS](long-term-storage-aws.md)
+   * [Azure](long-term-storage-azure.md)
+   * [GCP](long-term-storage-gcp.md)
 2. Add a secret using that file: `kubectl create secret generic <secret_name> -n kubecost --from-file=federated-store.yaml`. Then set `.Values.kubecostModel.federatedStorageConfigSecret` to the kubernetes secret name.
 
 <details>
@@ -106,9 +106,8 @@ federatedETL:
 
 1. For all clusters you want to federate together (i.e. see their data on the Primary Cluster), set `.Values.federatedETL.federatedCluster` to `true`. This cluster is now a Federated Cluster, and can also be a Federator or Primary Cluster.
 2. For the cluster “hosting” the Federator, set `.Values.federatedETL.federator.enabled` to `true`. This cluster is now a Federator Cluster, and can also be a Federated or Primary Cluster.
-
-    * Optional: If you have any Federated Clusters pushing to a store that you do not want a Federator Cluster to federate, add the cluster id under the Federator config section `.Values.federatedETL.federator.clusters`. If this parameter is empty or not set, the Federator will take all ETL files in the `/federated` directory and federate them automatically.
-    * Multiple Federators federating from the same source will not break, but it’s not recommended.
+   * Optional: If you have any Federated Clusters pushing to a store that you do not want a Federator Cluster to federate, add the cluster id under the Federator config section `.Values.federatedETL.federator.clusters`. If this parameter is empty or not set, the Federator will take all ETL files in the `/federated` directory and federate them automatically.
+   * Multiple Federators federating from the same source will not break, but it’s not recommended.
 
 ### Step 3: Cluster configuration (Primary)
 
@@ -116,25 +115,28 @@ In Kubecost, the `Primary Cluster` serves the UI and API endpoints as well as re
 
 1. For the cluster that will be the Primary Cluster, set `.Values.federatedETL.primaryCluster` to `true`. This cluster is now a Primary Cluster, and can also be a Federator or Federated Cluster.
 2. Cloud-integration requires `.Values.federatedETL.federator.primaryClusterID` set to the same value used for `.Values.kubecostProductConfigs.clusterName`
-
-    * **Important**: If the Primary Cluster is also to be federated, please wait 2-3 hours for data to populate Federated Storage before setting a Federated Cluster to primary (i.e. set `.Values.federatedETL.federatedCluster` to `true`, then wait to set `.Values.federatedETL.primaryCluster` to `true`). This allows for maximum certainty of data consistency.
-    * If you do not set this cluster to be federated as well as primary, you will not see local data for this cluster.
-    * The Primary Cluster’s local ETL will be overwritten with combined federated data.
-        * This can be undone by unsetting it as a Primary Cluster and rebuilding ETL.
-        * Setting a Primary Cluster may result in a loss of the cluster’s local ETL data, so it is recommended to back up any filestore data that one would want to save to S3 before designating the cluster as primary.
-        * Alternatively, a fresh Kubecost install can be used as a consumer of combined federated data by setting it as the Primary but not a Federated Cluster.
+   * **Important**: If the Primary Cluster is also to be federated, please wait 2-3 hours for data to populate Federated Storage before setting a Federated Cluster to primary (i.e. set `.Values.federatedETL.federatedCluster` to `true`, then wait to set `.Values.federatedETL.primaryCluster` to `true`). This allows for maximum certainty of data consistency.
+   * If you do not set this cluster to be federated as well as primary, you will not see local data for this cluster.
+   * The Primary Cluster’s local ETL will be overwritten with combined federated data.
+     * This can be undone by unsetting it as a Primary Cluster and rebuilding ETL.
+     * Setting a Primary Cluster may result in a loss of the cluster’s local ETL data, so it is recommended to back up any filestore data that one would want to save to S3 before designating the cluster as primary.
+     * Alternatively, a fresh Kubecost install can be used as a consumer of combined federated data by setting it as the Primary but not a Federated Cluster.
 
 ### Step 4: Verifying successful configuration
 
 1. The Federated ETL should begin functioning. On any ETL action on a Federated Cluster (Load/Put into local ETL store) the Federated Clusters will add data to Federated Storage. The Federator will run 5 minutes after the Federator Cluster startup, and then every 30 minutes after that. The data is merged into the Combined Storage, where it can be read by the Primary.
-    * To verify Federated Clusters are uploading their data correctly, check the container logs on a Federated Cluster. It should log federated uploads when ETL build steps run. The S3 bucket can also be checked to see if data is being written to the `/federated/<cluster_id>` path.
-    * To verify the Federator is functioning, check the container logs on the Federator Cluster. The S3 bucket can also be checked to verify that data is being written to `/federated/combined`.
-    * To verify the entire pipeline is working, either query `Allocations/Assets` or view the respective views on the frontend. Multi-cluster data should appear after:
-        * The Federator has run at least once.
-        * There was data in the Federated Storage for the Federator to have combined.
+   * To verify Federated Clusters are uploading their data correctly, check the container logs on a Federated Cluster. It should log federated uploads when ETL build steps run. The S3 bucket can also be checked to see if data is being written to the `/federated/<cluster_id>` path.
+   * To verify the Federator is functioning, check the container logs on the Federator Cluster. The S3 bucket can also be checked to verify that data is being written to `/federated/combined`.
+   * To verify the entire pipeline is working, either query `Allocations/Assets` or view the respective views on the frontend. Multi-cluster data should appear after:
+     * The Federator has run at least once.
+     * There was data in the Federated Storage for the Federator to have combined.
 
-### Data Recovery
+## See also
 
-When using ETL Federation, there are several methods to recover Kubecost data in the invent of data loss:
+### Data recovery
 
-The [Backups and Alerting](/federated-etl-backups-alerting.md) doc has detail regarding the various methods.
+When using ETL Federation, there are several methods to recover Kubecost data in the event of data loss. See our [Backups and Alerting](federated-etl-backups-alerting.md) doc for more details regarding these methods.
+
+### Repairing ETL
+
+In the event of missing or inaccurate data, you may need to rebuild your ETL pipelines. This is a documented procedure. See the [Repair Kubecost ETLs](https://docs.kubecost.com/troubleshooting/etl-repair) doc for information and troubleshooting steps.

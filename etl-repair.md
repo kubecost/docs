@@ -111,3 +111,15 @@ WRN ETL: Asset[1h]: Repair: error: cannot repair [2022-11-05T00:00:00+0000, 2022
 * Verify that Prometheus or Thanos metrics exist consistently during the time window you wish to repair
 * For installs using Prometheus verify retention is long enough to meet the requested repair window. By default `.Values.prometheus.server.retention` is set to 15 days.
 * For multi-cluster deployments verify the Thanos Store `--min-time` is long enough to meet the requested repair window. This is set with `.Values.thanos.store.extraArgs`.
+
+### Federation failing for Asset and Allocation data in v1.104
+
+In v1.104 of Kubecost, you may experience incorrect data display, such as costs not being adjusted or reconciliation not correcting properly. To fix this, perform the following recovery steps:
+
+1. Identify the data range for your affected data. This will be used later.
+2. Disable reconciliation by setting the Helm flag: `.Values.kubecostModel.etlAssetReconciliationEnabled: false`
+3. [Upgrade to a fixed version of Kubecost](https://docs.kubecost.com/install-and-configure/install#updating-kubecost). For best results, upgrade to the most recent version.
+4. Delete the data of the affected dates from your S3 buckets `federated/combined/etl/bingen/allocations` and `federated/combined/etl/bingen/assets.`
+5. For both Allocation and Assets, repair the affected dates on the primary cluster. This will only repair data from the primary cluster, not any secondary clusters. If repairing dates beyond your primary cluster's Prometheus retention, there may be data loss. for your primary cluster.
+6. Wait 30 minutes for federation to occur as a safeguard. Confirm data is now accurate by querying the last 7 days and observing unadjusted data.
+7. Reenable reconciliation by setting the Helm flag: `.Values.kubecostModel.etlAssetReconciliationEnabled: true`
