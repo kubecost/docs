@@ -183,7 +183,7 @@ The billing report has a Tags column which contains a Record of key values pairs
 
 * `goog-gke-volume`
 * `goog-gke-node`
-* `goog-k8s-cluster-name`\\
+* `goog-k8s-cluster-name`
 
 </details>
 
