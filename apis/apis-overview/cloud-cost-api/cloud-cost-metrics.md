@@ -60,15 +60,15 @@ Of all billing exports and APIs, the Cost and Usage Report (CUR) has the most ro
 
 More information on the columns and their definitions can be found in AWS' [Line item details](https://docs.aws.amazon.com/cur/latest/userguide/Lineitem-columns.html).
 
-#### List Cost
+**List Cost**
 
 To populate list price, Kubecost uses `pricing_public_on_demand_cost`.
 
-#### Net Cost
+**Net Cost**
 
 Kubecost uses `line_item_net_unblended_cost` if available. If not, Kubecost uses `line_item_unblended_cost.`
 
-#### Amortized Net Cost
+**Amortized Net Cost**
 
 If `_net_` is not available, Kubecost uses Amortized Cost
 
@@ -78,11 +78,11 @@ If `line_item_line_item_type` is `SavingsPlanCoveredUsage`, Kubecost uses `savin
 
 Default to `line_item_net_unblended_cost`.
 
-#### Invoiced Cost
+**Invoiced Cost**
 
 Kubecost uses Net Cost.
 
-#### Amortized Cost
+**Amortized Cost**
 
 If `line_item_line_item_type` is `DiscountUsage`, Kubecost uses `reservation_effective_cost`.
 
@@ -100,23 +100,23 @@ Cloud Cost uses a detailed billing export accessed via BigQuery to interface wit
 
 More details about the export can be found in GCP's [Structure of Detailed data export](https://cloud.google.com/billing/docs/how-to/export-data-bigquery-tables/detailed-usage).
 
-#### List Cost
+**List Cost**
 
 The Cost column for the line item.
 
-#### Net Cost
+**Net Cost**
 
 The Cost column plus the sum of all credit amounts.
 
-#### Amortized Net Cost
+**Amortized Net Cost**
 
 Kubecost uses Net Cost.
 
-#### Invoiced Cost
+**Invoiced Cost**
 
 Kubecost uses Net Cost.
 
-#### Amortized Cost
+**Amortized Cost**
 
 Kubecost uses Net Cost.
 
@@ -128,23 +128,23 @@ Kubecost uses Net Cost.
 
 The Azure billing export can be set to amortized or not amortized during creation. Depending on this, either the Net Cost Metric or Amortized Net Cost metric will be accurate. Additionally the Azure export has multiple schema depending on when it was created and what kind of account the user has. There are also localized versions of the headers.
 
-#### List Cost
+**List Cost**
 
 Kubecost uses`paygcostinbillingcurrency` if available, otherwise Kubecost uses Net Cost
 
-#### Net Cost
+**Net Cost**
 
 Kubecost uses `costinbillingcurrency`. If not available, Kubecost uses `costinbillingcurrency`, and if that isn't available, Kubecost uses `cost`.
 
-#### Amortized Net Cost
+**Amortized Net Cost**
 
 Kubecost uses Net Cost.
 
-#### Invoiced Cost
+**Invoiced Cost**
 
 Kubecost uses Net Cost.
 
-#### Amortized Cost
+**Amortized Cost**
 
 Kubecost uses Net Cost.
 
@@ -154,8 +154,7 @@ Kubecost uses Net Cost.
 
 To calculate the `K8 Utilization`, Kubecost first must determine if a resources is part of a Kubernetes cluster or not.
 
-If a tag or label in the list below is present on the billing export, Kubecost will consider those costs part of the `K8 Utilization` calculation. This will not always be 100% accurate in all situations.\
-
+If a tag or label in the list below is present on the billing export, Kubecost will consider those costs part of the `K8 Utilization` calculation. This will not always be 100% accurate in all situations.\\
 
 <details>
 
@@ -184,8 +183,7 @@ The billing report has a Tags column which contains a Record of key values pairs
 
 * `goog-gke-volume`
 * `goog-gke-node`
-* `goog-k8s-cluster-name`\
-
+* `goog-k8s-cluster-name`\\
 
 </details>
 
@@ -197,9 +195,6 @@ The billing export has a tags column with a JSON string of key values pairs. Kub
 
 * `aks-managed`
 * `kubernetes.io-created`
-* `k8s-azure-created`\
-
+* `k8s-azure-created`\\
 
 </details>
-
-\
