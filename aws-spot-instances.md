@@ -2,9 +2,9 @@
 
 ## Considerations before configuring Spot pricing
 
-Kubecost uses public pricing from cloud service providers (CSPs) until the actual cloud bill is available. This is almost always ready in 48 hours. Most users will likely prefer to configure [AWS cloud-integrations](aws-cloud-integrations.md) and skip the below setup.
+Kubecost uses public pricing from Cloud Service Providers (CSPs) to calculate costs until the actual cloud bill is available, at which point Kubecost will reconcile your Spot prices from your Cost and Usage Report (CUR). This is almost always ready in 48 hours. Most users will likely prefer to configure [AWS cloud-integrations](aws-cloud-integrations.md) instead of configuring the Spot data feed manually as demonstrated in this article.
 
-For users with most of their costs from spot nodes, the guide below can increase short-term (<48 hour) node costs. Note that all other costs will still be based on public pricing, which is why the below guide should be considered optional.
+However, if the majority of costs are due to Spot nodes, it may be useful to configure the Spot pricing data feed as it will increase accuracy for short-term (<48 hour) node costs until the Spot prices from the CUR are available. Note that all other (non-Spot) costs will still be based on public (on-demand) pricing until CUR billing data is reconciled.
 
 ## Configuring the Spot data feed in Kubecost
 
