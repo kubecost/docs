@@ -1,6 +1,6 @@
 # Assets Dashboard
 
-{% hint style="danger" %}
+{% hint style="info" %}
 As of v1.104, cloud data is parsed through the [Cloud Costs Explorer](https://docs.kubecost.com/using-kubecost/navigating-the-kubecost-ui/cloud-costs-explorer) dashboard instead of through Assets. Read our announcement [here](https://blog.kubecost.com/blog/cloud-cost-install/) for more information.
 {% endhint %}
 

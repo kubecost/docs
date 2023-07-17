@@ -224,6 +224,7 @@ Attach both of the following policies to the same role or user. Use a user if yo
 
 On each sub account running Kubecost, attach both of the following policies to the same role or user. Use a user if you intend to integrate via Service Key, and a role if via IAM annotation (see more below under Via Pod Annotation by EKS). The SpotDataAccess policy statement is optional if the Spot data feed is configured (see “Setting up the Spot Data feed” step below).
 
+{% code overflow="wrap" %}
 ```
 	{
                "Version": "2012-10-17",
@@ -256,6 +257,7 @@ On each sub account running Kubecost, attach both of the following policies to t
                ]
 	}
 ```
+{% endcode %}
 
 On the management account, attach this policy to a role (replace `${AthenaCURBucket}` variable):
 
@@ -382,9 +384,11 @@ This may be the preferred method if your Helm values are in version control and 
 
 2. Create a Kubernetes secret:
 
+{% code overflow="wrap" %}
 ```bash
 $ kubectl create secret generic <SECRET_NAME> --from-file=service-key.json --namespace <kubecost> 
 ```
+{% endcode %}
 
 3. Set the Helm value:
 
@@ -438,7 +442,7 @@ Update the following variables in the files you downloaded:
 
 **Step 2: Create policy**
 
-&#x20;In the same location where your downloaded configuration files are, run the following command to create the appropriate policy:
+In the same location where your downloaded configuration files are, run the following command to create the appropriate policy:
 
 {% code overflow="wrap" %}
 ```
@@ -459,7 +463,7 @@ eksctl utils associate-iam-oidc-provider \
 
 **Step 4: Create required IAM service accounts**
 
-**Note:** Remember to replace 1234567890 with your AWS account ID number.
+**Note:** Remember to replace `1234567890` with your AWS account ID number.
 
 {% code overflow="wrap" %}
 ```
@@ -514,7 +518,7 @@ When you are done, select _Update_ to confirm.
 #### Option 2: Add config values via Helm
 
 {% hint style="warning" %}
-If you set any `kubecostProductConfigs` from the Helm chart, all changes via the frontend will be overridden on pod restart.
+If you set any `kubecostProductConfigs` from the Helm chart, all changes via the front end will be overridden on pod restart.
 {% endhint %}
 
 * `athenaProjectID` The AWS AccountID where the Athena CUR is, likely your management account.
@@ -554,21 +558,25 @@ You can also check query history to see if any queries are failing:
 
 *   **Symptom:** A similar error to this will be shown on the Diagnostics page under Pricing Sources. You can search in the Athena "Recent queries" dashboard to find additional info about the error.
 
+    {% code overflow="wrap" %}
     ```
     QueryAthenaPaginated: query execution error: no query results available for query <Athena Query ID>
     ```
+    {% endcode %}
 
     And/or the following error will be found in the Kubecost `cost-model` container logs.
 
+    {% code overflow="wrap" %}
     ```
     Permission denied on S3 path: s3://cur-report/cur-report/cur-report/year=2022/month=8
 
     This query ran against the "athenacurcfn_test" database, unless qualified by the query. Please post the error message on our forum  or contact customer support  with Query Id: <Athena Query ID>
     ```
+    {% endcode %}
 * **Resolution:** This error is typically caused by the incorrect (Athena results) s3 bucket being specified in the CloudFormation template of Step 3 from above. To resolve the issue, ensure the bucket used for storing the AWS CUR report (Step 1) is specified in the `S3ReadAccessToAwsBillingData` SID of the IAM policy (default: kubecost-athena-access) attached to the user or role used by Kubecost (Default: KubecostUser / KubecostRole). See the following example.
 
 {% hint style="info" %}
-This error can also occur when the management account cross-account permissions are incorrect, however the solution may differ.
+This error can also occur when the management account cross-account permissions are incorrect, however, the solution may differ.
 {% endhint %}
 
 ```
@@ -589,19 +597,23 @@ This error can also occur when the management account cross-account permissions 
 
 * **Symptom:** A similar error to this will be shown on the Diagnostics page under Pricing Sources.
 
+{% code overflow="wrap" %}
 ```
 QueryAthenaPaginated: start query error: operation error Athena: StartQueryExecution, https response error StatusCode: 400, RequestID: <Athena Query ID>, InvalidRequestException: Queries of this type are not supported
 ```
+{% endcode %}
 
-* **Resolution:** While rare, this issue was caused by and Athena instance which failed to provision properly on AWS. The solution was to delete the Athena DB and deploy a new one. To verify this is needed, find the failed query ID in the Athena "Recent queries" dashboard and attempt to manually run the query.
+* **Resolution:** While rare, this issue was caused by an Athena instance that failed to provision properly on AWS. The solution was to delete the Athena DB and deploy a new one. To verify this is needed, find the failed query ID in the Athena "Recent queries" dashboard and attempt to manually run the query.
 
 #### HTTPS Response error
 
 * **Symptom:** A similar error to this will be shown on the Diagnostics page under Pricing Sources.
 
+{% code overflow="wrap" %}
 ```
 QueryAthenaPaginated: start query error: operation error Athena: StartQueryExecution, https response error StatusCode: 400, RequestID: ********************, InvalidRequestException: Unable to verify/create output bucket aws-athena-query-results-test
 ```
+{% endcode %}
 
 * **Resolution:** Previously, if you ran a query without specifying a value for query result location, and the query result location setting was not overridden by a workgroup, Athena created a default location for you. Now, before you can run an Athena query in a region in which your account hasn't used Athena previously, you must specify a query result location, or use a workgroup that overrides the query result location setting. While Athena no longer creates a default query results location for you, previously created default `aws-athena-query-results-MyAcctID-MyRegion` locations remain valid and you can continue to use them. The bucket should be in the format of: `aws-athena-query-results-MyAcctID-MyRegion` It may also be required to remove and reinstall Kubecost. If doing this please remeber to backup ETL files prior or contact support for additional assistance. See also this AWS doc on [specifying a query result location](https://docs.aws.amazon.com/athena/latest/ug/querying.html#query-results-specify-location).
 
@@ -609,6 +621,7 @@ QueryAthenaPaginated: start query error: operation error Athena: StartQueryExecu
 
 * **Symptom:** A similar error to this will be shown on the Diagnostics page under Pricing Sources or in the Kubecost `cost-model` container logs.
 
+{% code overflow="wrap" %}
 ```
 QueryAthenaPaginated: query execution error: no query results available for query <Athena Query ID>
  
@@ -618,6 +631,7 @@ SYNTAX_ERROR: line 4:3: Column 'line_item_resource_id' cannot be resolved
 
 This query ran against the "<DB Name>" database, unless qualified by the query
 ```
+{% endcode %}
 
 * **Resolution:** Verify in AWS' Cost and Usage Reports dashboard that the Resource IDs are enabled as "Report content" for the CUR created in Step 1. If the Resource IDs are not enabled, you will need to re-create the report (this will require redoing Steps 1 and 2 from this doc).
 
@@ -625,9 +639,11 @@ This query ran against the "<DB Name>" database, unless qualified by the query
 
 * **Symptom:** A similar error to this will be shown on the Diagnostics page under Pricing Sources or in the Kubecost `cost-model` container logs.
 
+{% code overflow="wrap" %}
 ```
 QueryAthenaPaginated: start query error: operation error Athena: StartQueryExecution, https response error StatusCode: 400, RequestID: <Athena Query ID>, InvalidRequestException: outputLocation is not a valid S3 path.
 ```
+{% endcode %}
 
 * **Resolution:** Verify that `s3://` was included in the bucket name when setting the `.Values.kubecostProductConfigs.athenaBucketName` Helm value.
 

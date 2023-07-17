@@ -15,6 +15,7 @@ After Kubecost installation, select _Settings_ from the left navigation and upda
 
 Passing the Grafana parameters below in your [values.yaml](https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/values.yaml) will install ConfigMaps for Grafana dashboards that will be picked up by the [Grafana sidecar](https://github.com/helm/charts/tree/master/stable/grafana#sidecar-for-dashboards) if you have Grafana with the dashboard sidecar already installed.
 
+{% code overflow="wrap" %}
 ```
 global:
   grafana:
@@ -28,6 +29,7 @@ grafana:
     datasources:
       enabled: false
 ```
+{% endcode %}
 
 Ensure that the following flags are set in your Operator deployment:
 
@@ -45,3 +47,12 @@ When using Kubecost on a custom ingress path, you must add this path to the Graf
 --set grafana.grafana.ini.server.root_url: "%(protocol)s://%(domain)s:%(http_port)s/kubecost/grafana"
 ```
 {% endcode %}
+
+## Disabling Grafana
+
+If you choose to disable Grafana, set the following Helm values to ensure successful pod startup:
+
+```
+--set global.grafana.enabled=false
+--set global.grafana.proxy=false
+```

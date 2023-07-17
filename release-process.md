@@ -24,7 +24,7 @@ helm install kubecost kubecost/cost-analyzer --namespace kubecost --devel
 ## Staging releases
 
 * Staging releases are built before scheduled releases and published in [this repo](https://github.com/kubecost/staging-repo).
-* You can get the latest staging build by following the [install steps](staging.md)
+* You can get the latest staging build by following the [install steps](staging.md).
 
 ## Delaying Releases
 
@@ -53,7 +53,7 @@ helm upgrade kubecost kubecost/cost-analyzer -n kubecost
 
 ## Getting notified when a release is created
 
-* You can watch Releases Only ([more info](https://docs.github.com/en/github/managing-subscriptions-and-notifications-on-github/viewing-your-subscriptions)) for this [helm chart repo](https://github.com/kubecost/cost-analyzer-helm-chart), or join our Slack workspace - https://kubecost.slack.com
+* You can watch Releases Only ([more info](https://docs.github.com/en/github/managing-subscriptions-and-notifications-on-github/viewing-your-subscriptions)) for this [Helm chart repo](https://github.com/kubecost/cost-analyzer-helm-chart), or join our [Slack workspace](https://kubecost.slack.com).&#x20;
 
 ## Submitting feedback on a release
 

@@ -336,4 +336,4 @@ Error example:
 gcpprovider.go Error loading metadata cluster-name: Get "http://169.254.169.254/computeMetadata/v1/instance/attributes/cluster-name": dial tcp 169.254.169.254:80: i/o timeout
 ```
 
-Have a question not answered on this page? Email us at [support@kubecost.com](support@kubecost.com) or [join the Kubecost Slack community](https://join.slack.com/t/kubecost/shared\_invite/zt-1dz4a0bb4-InvSsHr9SQsT\_D5PBle2rw)!
+Have a question not answered on this page? Email us at [support@kubecost.com](support@kubecost.com) or [join the Kubecost Slack community](https://kubecost.com/join-slack)!
