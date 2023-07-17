@@ -981,3 +981,11 @@ Here, we provide theoretical error bounds for different resolution values given 
 * \-1.00, 10.00 means that the result could be as high as 1000% error (e.g. 30s pod being counted for 5m) or the pod could be missed altogether, i.e. -100% error.
 
 <table><thead><tr><th width="129" align="right">resolution</th><th align="center">30s pod</th><th align="center">5m pod</th><th align="center">1h pod</th><th align="center">1d pod</th><th align="center">7d pod</th></tr></thead><tbody><tr><td align="right">1m</td><td align="center">-1.00, 2.00</td><td align="center">0.80, 1.00</td><td align="center">0.98, 1.00</td><td align="center">1.00, 1.00</td><td align="center">1.00, 1.00</td></tr><tr><td align="right">2m</td><td align="center">-1.00, 4.00</td><td align="center">0.80, 1.20</td><td align="center">0.97, 1.00</td><td align="center">1.00, 1.00</td><td align="center">1.00, 1.00</td></tr><tr><td align="right">5m</td><td align="center">-1.00, 10.00</td><td align="center">-1.00, 1.00</td><td align="center">0.92, 1.00</td><td align="center">1.00, 1.00</td><td align="center">1.00, 1.00</td></tr><tr><td align="right">10m</td><td align="center">-1.00, 20.00</td><td align="center">-1.00, 2.00</td><td align="center">0.83, 1.00</td><td align="center">0.99, 1.00</td><td align="center">1.00, 1.00</td></tr><tr><td align="right">30m</td><td align="center">-1.00, 60.00</td><td align="center">-1.00, 6.00</td><td align="center">0.50, 1.00</td><td align="center">0.98, 1.00</td><td align="center">1.00, 1.00</td></tr><tr><td align="right">60m</td><td align="center">-1.00, 120.00</td><td align="center">-1.00, 12.00</td><td align="center">-1.00, 1.00</td><td align="center">0.96, 1.00</td><td align="center">0.99, 1.00</td></tr></tbody></table>
+
+
+
+## Troubleshooting
+
+### Incomplete cost data for short window queries when using Thanos
+
+While using Thanos, data can delayed from 1 to 3 hours, which may result in allocation queries retrieving inaccurate or incomplete data when using short `window` intervals. Avoid using values for `window` smaller than `5h` as a best practice.
