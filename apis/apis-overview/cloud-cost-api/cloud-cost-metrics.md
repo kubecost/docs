@@ -150,19 +150,20 @@ Kubecost uses Net Cost.
 
 </details>
 
-## Kubernetes percent by CSP
+## Kubernetes Clusters
 
-Whether or not a specific resource belongs as part of a Kubernetes cluster is not something that is made available in any of the billing integrations, and is not something that can be determined with 100% accuracy in all situations. To populate this field at the item level, Kubecost uses heuristics based on the existence of labels, or the service that the resource originates from. These heuristics are only capable of detecting resources that belong to the managed Kubernetes offerings from each CSP.\
+To calculate the `K8 Utilization`, Kubecost first must determine if a resources is part of a Kubernetes cluster, or an unrelated cloud service.
+
+If a tag or label in the list below is present on the billing export, Kubecost will consider those costs part of the `K8 Utilization` calculation. This will not always be 100% accurate in all situations.\
 
 
 <details>
 
 <summary>AWS</summary>
 
-The CUR only has labels that have been enabled for it, each as its own individual column rather than in a JSON object of key-value pairs. Because of this, the efficacy of this heuristic is limited by the labels that it targets being enabled.
+In AWS, Kubecost will identify the line item in the bill as a Kubernetes resource if one of the following tags is present in the CUR.
 
-If `line_item_product_code` is `AmazonEKS`, or one of the following label keys is present:
-
+* `AmazonEKS`
 * `resource_tags_aws_eks_cluster_name`
 * `resource_tags_user_eks_cluster_name`
 * `resource_tags_user_alpha_eksctl_io_cluster_name`
