@@ -152,7 +152,7 @@ Kubecost uses Net Cost.
 
 ## Kubernetes Clusters
 
-To calculate the `K8 Utilization`, Kubecost first must determine if a resources is part of a Kubernetes cluster, or an unrelated cloud service.
+To calculate the `K8 Utilization`, Kubecost first must determine if a resources is part of a Kubernetes cluster or not.
 
 If a tag or label in the list below is present on the billing export, Kubecost will consider those costs part of the `K8 Utilization` calculation. This will not always be 100% accurate in all situations.\
 
