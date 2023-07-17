@@ -4,7 +4,20 @@ This document outlines the filtering language added to the Allocation API in v1.
 
 > **Note**: V1 filters will continue to be supported in all relevant APIs. APIs will first check for the `filter=` parameter. If it is present, V2 filters will be used. If it is not present, APIs will attempt to use V1 filters.
 
-## Filters overview
+## Using filters
+
+V2 filters can be used via the `filter=` parameter in supported APIs. Supported
+APIs are currently:
+
+* [Allocation API](allocation.md)
+* [Request Sizing APIs](api-request-right-sizing-v2.md) 
+* [Assets API](assets.md)
+
+## Filters Fields
+
+The available fields for filtering depend on the API being queried.
+
+### Allocation APIs, Request Sizing v2 API
 
 The supported filter fields as of v1.96 are:
 
@@ -19,21 +32,62 @@ The supported filter fields as of v1.96 are:
 * `label`
 * `annotation` (same syntax as label, see examples)
 
-The supported filter ops as of v1.96 are:
+Added in v1.105 of Kubecost:
+* `department`
+* `environment`
+* `owner`
+* `product`
+* `team`
 
-* `:` (equality, or "contains" if an array type)
-* `!:` (inequality, or "not contains" if an array type)
+### Assets API
 
-Filter values are strings surrounded by `"`. Multiple values can be separated by commas `,`, representing logical OR.
+V2 filter support was added to the `/model/assets` API in v1.105 of Kubecost.
 
-Each individual filter is separated by a `+`, representing logical AND.
+In v1.105 of Kubecost:
+* `name`
+* `assetType` (e.g. `node`, `disk`, `network`, etc.)
+* `category` (e.g. `Compute`, `Management`)
+* `cluster`
+* `project`
+* `provider`
+* `providerID`
+* `account`
+* `service`
+* `label`
 
-## Using filters
+## Filter Operators
 
-Filters exist under the `filter=` parameter in supported APIs. Supported APIs are currently:
+The supported filter operators (ops) in v1.96 of Kubecost are:
+* `:` Equality
+  * For string fields (e.g. namespace): equality
+  * For slice/array fields (e.g. services): slice contains at least one value equal (equivalent to `~:`)
+  * For map fields (e.g. labels): map contains key (equivalent to `~:`)
+* `!:` Inequality, or "not contains" if an array type
 
-* [Allocation API](allocation.md)
-* [Request Sizing APIs](api-request-right-sizing-v2.md) (**Note**: This is currently only supported in beta UI view.)
+Added in v1.105 of Kubecost:
+* `~:` Contains
+  * For string fields: contains
+  * For slice fields: slice contains at least one value equal (equivalent to `:`)
+  * For map fields: map contains key (equivalent to `:`)
+* `!~:` NotContains, inverse of `~:`
+* `<~:` ContainsPrefix
+  * For string fields: string starts with
+  * For slice fields: slice contains at least one value that starts with
+  * For map fields: map contains at least one key that starts with
+* `!<~:` NotContainsPrefix, inverse of `<~:`
+* `~>:` ContainsSuffix
+  * For string fields: strings ends with
+  * For slice fields: slice contains at least one value that ends with
+  * For map fields: map contains at least one key that ends with
+* `!~>:` NotContainsSuffix, inverse of `~>:`
+
+Filter values are strings surrounded by `"`. Multiple values can be separated by commas `,`.
+
+Individual filters can be joined by `+` (representing logical AND) or `|`
+(representing logical OR). To use `+` and `|` in the same filter expression,
+scope _must_ be denoted via `(` and `)`. See examples.
+
+### Examples
 
 Here are some example filters to see how the filtering language works:
 
@@ -50,6 +104,12 @@ http://localhost:9090/model/allocation?window=1d&accumulate=true&aggregate=names
 ```
 
 The format is essentially: `<filter field> <filter op> <filter value>`
+
+```sh
+curl -G 'localhost:9090/model/assets' \
+    -d 'window=3d' \
+    --data-urlencode 'filter=assetType:"disk"'
+```
 
 ## Formal grammar and implementation
 
