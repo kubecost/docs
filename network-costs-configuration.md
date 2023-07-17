@@ -57,7 +57,7 @@ You can view a list of common config options [here](https://github.com/kubecost/
 * Ref: [sig-instrumentation](https://github.com/kubernetes/community/blob/0e9fa4a1c45203527a7ce35eaff09204d6b7b331/contributors/devel/sig-instrumentation/logging.md)
 
 {% hint style="info" %}
-Network cost, which is disabled by default, needs to be run as a privileged pod to access the relevant networking kernel module on the host machine.
+Network cost, which is disabled by default, needs to be run as a privileged pod to access the relevant networking kernel module on the host machine. The pod name will be "kubecost-network-costs-xxxxxx-xxxxx" where x is the Pod ID.
 {% endhint %}
 
 ## Cloud Provider Service Tagging

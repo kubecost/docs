@@ -280,4 +280,4 @@ You can uninstall Kubecost operator by following [these instructions](https://ac
 
 ## Support
 
-For advanced setup or if you have any questions, you can contact us on [Slack](https://join.slack.com/t/kubecost/shared_invite/enQtNTA2MjQ1NDUyODE5LWFjYzIzNWE4MDkzMmUyZGU4NjkwMzMyMjIyM2E0NGNmYjExZjBiNjk1YzY5ZDI0ZTNhZDg4NjlkMGRkYzFlZTU) or email us at [support@kubecost.com](support@kubecost.com).
+For advanced setup or if you have any questions, you can contact us on [Slack](kubecost.com/join-slack) or email us at [support@kubecost.com](support@kubecost.com).

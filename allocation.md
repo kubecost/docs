@@ -357,6 +357,30 @@ Determines how to split shared costs among non-idle, unshared allocations. By de
 .
 {% endswagger-parameter %}
 
+{% swagger-parameter in="path" name="step" type="string" %}
+Duration of each individual data metric across the 
+
+`window`
+
+. Accepts 
+
+`1h`
+
+, 
+
+`1d`
+
+, or 
+
+`1w`
+
+. If left blank, defaults to longest step duration based on level of granularity of data represented by 
+
+`window`
+
+.
+{% endswagger-parameter %}
+
 {% swagger-response status="200: OK" description="" %}
 ```json
 {

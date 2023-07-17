@@ -12,7 +12,7 @@ Because each ETL pipeline builds upon the previous, you need to repair them in t
 
 ## 1. Repair Asset ETL
 
-The Asset ETL builds upon the Prometheus metrics listed [here](user-metrics.md). It's important to ensure that you are able to [query for Prometheus or Thanos](prometheus.md) data for the specified `window` you use. Otherwise, an absence of metrics will result in an empty ETL. Further details about this API [here](diagnostics.md).
+The Asset ETL builds upon the Prometheus metrics listed [here](user-metrics.md). It's important to ensure that you are able to [query for Prometheus or Thanos](prometheus.md) data for the specified `window` you use. Otherwise, an absence of metrics will result in an empty ETL. Learn more about this API in our [CloudCost Diagnostic APIs](https://docs.kubecost.com/apis/apis-overview/cloudcost-diagnostic-apis) doc.
 
 {% hint style="info" %}
 If the `window` parameter is within `.Values.kubecostModel.etlHourlyStoreDurationHours`, this endpoint will repair both the daily `[1d]` and hourly `[1h]` Asset ETL.
@@ -36,7 +36,7 @@ INF ETL: Asset[1d]: AggregatedStore.Run[fvkKR]: run: aggregated [2023-01-03T00:0
 
 ## 2. Repair Allocation ETL
 
-The Allocation ETL builds upon all previous Asset data to compute cost and resource allocations for Kubernetes entities. Further details about this API [here](diagnostics.md).
+The Allocation ETL builds upon all previous Asset data to compute cost and resource allocations for Kubernetes entities. Read our [Kubecost Diagnostics](https://docs.kubecost.com/troubleshooting/diagnostics) doc for more info.
 
 {% hint style="info" %}
 If the `window` parameter is within `.Values.kubecostModel.etlHourlyStoreDurationHours`, this endpoint will repair both the daily `[1d]` and hourly `[1h]` Allocation ETL.
@@ -60,7 +60,7 @@ INF ETL: Allocation[ETL[allocations][1d]]: Repair[rptgQ]: starting [2023-01-03T0
 
 ## 3. Repair CloudUsage ETL
 
-The CloudUsage ETL pulls information from your cloud billing integration. Ensure it's been configured properly, otherwise, no data will be retrieved. Further details about this API [here](cloud-integration.md).
+The CloudUsage ETL pulls information from your cloud billing integration. Ensure it's been configured properly, otherwise, no data will be retrieved. Review our [Cloud Billing Integrations](https://docs.kubecost.com/install-and-configure/install/cloud-integration) doc for more info.
 
 {% code overflow="wrap" %}
 ```bash
@@ -76,7 +76,7 @@ $ kubectl logs deploy/kubecost-cost-analyzer | grep CloudUsage
 
 ## 4. Run Reconciliation Pipeline
 
-The Reconciliation Pipeline reconciles the existing ETL with the newly gathered data in the CloudUsage ETL, further ensuring parity between Kubecost and your cloud bill. Further details about this API [here](cloud-integration.md).
+The Reconciliation Pipeline reconciles the existing ETL with the newly gathered data in the CloudUsage ETL, further ensuring parity between Kubecost and your cloud bill.
 
 {% code overflow="wrap" %}
 ```bash
@@ -111,3 +111,15 @@ WRN ETL: Asset[1h]: Repair: error: cannot repair [2022-11-05T00:00:00+0000, 2022
 * Verify that Prometheus or Thanos metrics exist consistently during the time window you wish to repair
 * For installs using Prometheus verify retention is long enough to meet the requested repair window. By default `.Values.prometheus.server.retention` is set to 15 days.
 * For multi-cluster deployments verify the Thanos Store `--min-time` is long enough to meet the requested repair window. This is set with `.Values.thanos.store.extraArgs`.
+
+### Federation failing for Asset and Allocation data in v1.104
+
+In v1.104 of Kubecost, you may experience incorrect data display, such as costs not being adjusted or reconciliation not correcting properly. To fix this, perform the following recovery steps:
+
+1. Identify the data range for your affected data. This will be used later.
+2. Disable reconciliation by setting the Helm flag: `.Values.kubecostModel.etlAssetReconciliationEnabled: false`
+3. [Upgrade to a fixed version of Kubecost](https://docs.kubecost.com/install-and-configure/install#updating-kubecost). For best results, upgrade to the most recent version.
+4. Delete the data of the affected dates from your S3 buckets `federated/combined/etl/bingen/allocations` and `federated/combined/etl/bingen/assets.`
+5. For both Allocation and Assets, repair the affected dates on the primary cluster. This will only repair data from the primary cluster, not any secondary clusters. If repairing dates beyond your primary cluster's Prometheus retention, there may be data loss. for your primary cluster.
+6. Wait 30 minutes for federation to occur as a safeguard. Confirm data is now accurate by querying the last 7 days and observing unadjusted data.
+7. Reenable reconciliation by setting the Helm flag: `.Values.kubecostModel.etlAssetReconciliationEnabled: true`
