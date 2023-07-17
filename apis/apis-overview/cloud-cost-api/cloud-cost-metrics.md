@@ -161,9 +161,12 @@ If a tag or label in the list below is present on the billing export, Kubecost w
 
 <summary>AWS</summary>
 
-In AWS, Kubecost will identify the line item in the bill as a Kubernetes resource if one of the following tags is present in the CUR.
+In AWS, Kubecost will identify the line item in the bill as a Kubernetes resource if
 
-* `AmazonEKS`
+* `line_item_product_code` is `AmazonEKS`
+
+or one of the following label keys is present:
+
 * `resource_tags_aws_eks_cluster_name`
 * `resource_tags_user_eks_cluster_name`
 * `resource_tags_user_alpha_eksctl_io_cluster_name`
