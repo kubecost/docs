@@ -153,6 +153,7 @@
 ## Integrations
 
 * [Custom Webhook to Create a Kubecost Stage in Spinnaker](spinnaker-custom-webhook.md)
+* [Import Kubecost Data into Microsoft Power BI](integrations/import-kubecost-data-into-microsoft-power-bi.md)
 
 ## Troubleshooting
 
