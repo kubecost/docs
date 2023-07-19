@@ -52,7 +52,7 @@ Your Amazon EKS cluster needs to have IAM OIDC provider enabled to set up IRSA. 
 
 ## Step 3: Deploy Kubecost with attached IAM role
 
-Define which available version you would like to install using this following command You can check available version titles from the AWS Marketplace product, e.g: prod-1.95.0:
+Define which available version you would like to install using this following command You can check available version titles from the [AWS Marketplace product](https://gallery.ecr.aws/kubecost/cost-analyzer), e.g: prod-1.95.0:
 
 `export IMAGETAG=<VERSION-TITLE>`
 
