@@ -113,4 +113,4 @@ curl -G 'localhost:9090/model/assets' \
 
 ## Formal grammar and implementation
 
-To see the filter language's formal grammar and lexer/parser implementation, check out OpenCost's [`pkg/filter21/allocation`](https://github.com/opencost/opencost/tree/develop/pkg/filter21/allocation).
+To see the filter language's formal grammar and lexer/parser implementation, check out OpenCost's [`pkg/filter21/ast`](https://github.com/opencost/opencost/tree/develop/pkg/filter21/ast).
