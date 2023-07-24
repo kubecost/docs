@@ -53,6 +53,22 @@ saml:
 
 > **Note**: All SAML 2.0 providers also work. The above guides can be used as templates for what is required.
 
+## Using the Kubecost API
+
+When SAML SSO is enabled in Kubecost, ports 9090 and 9003 of `service/kubecost-cost-analyzer` will require authentication. Therefore user API requests will need to be authenticated with a token. The token can be obtained by logging into the Kubecost UI and copying the token from the browser’s local storage. Alternatively, a long-term token can be issued to users from your identity provider.
+
+```sh
+curl -L 'http://kubecost.mycompany.com/model/allocation?window=1d' \
+  -H 'Cookie: token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsiYWRtaW4iLCJncm91cDprdWJlY29zdF9hZG1pbiIsImdyb3VwOmFkbWluQG15Y29tcGFueS5jb20iXSwiZXhwIjoxNjkwMzA2MjYwLjk0OTYyMX0.iLbUuMo0eYhNg0hzv_EEHLIX5Z0du4woPevX3wEnAh8'
+```
+
+For admins, Kubecost additionally exposes an unauthenticated API on port 9004 of `service/kubecost-cost-analyzer`.
+
+```sh
+kubectl port-forward service/kubecost-cost-analyzer 9004:9004
+curl -L 'localhost:9004/allocation?window=1d'
+```
+
 ## SAML troubleshooting guide
 
 1. Disable SAML and confirm that the cost-analyzer pod starts.
