@@ -6,7 +6,7 @@ You will need permissions to create the Cost and Usage Report (CUR), and add IAM
 
 A GitHub repository with sample files which follow the below instructions can be found [here](https://github.com/kubecost/poc-common-configurations/tree/main/aws).
 
-## AWS terminology and overview
+## Overview
 
 Integrating your AWS account with Kubecost may be a complicated process if you aren’t deeply familiar with the AWS platform and how it interacts with Kubecost. This section provides an overview of some of the key terminology and AWS services that are involved in the process of integration.
 
@@ -521,16 +521,16 @@ When you are done, select _Update_ to confirm.
 If you set any `kubecostProductConfigs` from the Helm chart, all changes via the front end will be overridden on pod restart.
 {% endhint %}
 
-* `athenaProjectID` The AWS AccountID where the Athena CUR is, likely your management account.
-* `athenaBucketName` An S3 bucket to store Athena query results that you’ve created that Kubecost has permission to access
+* `athenaProjectID`: The AWS AccountID where the Athena CUR is, likely your management account.
+* `athenaBucketName`: An S3 bucket to store Athena query results that you’ve created that Kubecost has permission to access
   * The name of the bucket should match `s3://aws-athena-query-results-*`, so the IAM roles defined above will automatically allow access to it
   * The bucket can have a Canned ACL of `Private` or other permissions as you see fit.
-* `athenaRegion` The AWS region Athena is running in
-* `athenaDatabase` The name of the database created by the Athena setup
+* `athenaRegion`: The AWS region Athena is running in
+* `athenaDatabase`: The name of the database created by the Athena setup
   * The athena database name is available as the value (physical id) of `AWSCURDatabase` in the CloudFormation stack created above (in [Step 2: Setting up Athena](aws-cloud-integrations.md#Step-2:-Setting-up-Athena))
-* `athenaTable` the name of the table created by the Athena setup
-  * The table name is typically the database name with the leading `athenacurcfn_` removed (but is not available as a CloudFormation stack resource)
-* `athenaWorkgroup` The workgroup assigned to be used with Athena. If not specified, defaults to `Primary`
+* `athenaTable`: the name of the table created by the Athena setup
+  * The table name is typically the database name with the leading `athenacurcfn_` removed (but is not available as a CloudFormation stack resource). Confirm the table name by visiting the Athena dashboard.
+* `athenaWorkgroup`: The workgroup assigned to be used with Athena. If not specified, defaults to `Primary`
 
 {% hint style="info" %}
 Make sure to use only underscore as a delimiter if needed for tables and views. Using a hyphen/dash will not work even though you might be able to create it. See the [AWS docs](https://docs.aws.amazon.com/athena/latest/ug/tables-databases-columns-names.html) for more info.
