@@ -35,6 +35,7 @@ roles/bigquery.jobUser
 
 If you don't already have a GCP service account with the appropriate rights, you can run the following commands in your command line to generate and export one. Make sure your GCP project is where your external costs are being run.
 
+{% code overflow="wrap" %}
 ```
 export PROJECT_ID=$(gcloud config get-value project)
 gcloud iam service-accounts create compute-viewer-kubecost --display-name "Compute Read Only Account Created For Kubecost" --format json
@@ -43,6 +44,7 @@ gcloud projects add-iam-policy-binding $PROJECT_ID --member serviceAccount:compu
 gcloud projects add-iam-policy-binding $PROJECT_ID --member serviceAccount:compute-viewer-kubecost@$PROJECT_ID.iam.gserviceaccount.com --role roles/bigquery.dataViewer
 gcloud projects add-iam-policy-binding $PROJECT_ID --member serviceAccount:compute-viewer-kubecost@$PROJECT_ID.iam.gserviceaccount.com --role roles/bigquery.jobUser
 ```
+{% endcode %}
 
 ## Step 3: Connecting GCP service account to Kubecost
 
@@ -124,7 +126,7 @@ When managing the service account key as a Kubernetes secret, the secret must re
 
 In Kubecost, select _Settings_ from the left navigation, and under Cloud Integrations, select _Add Cloud Integration > GCP_, then provide the relevant information in the GCP Billing Data Export Configuration window:
 
-* **GCP Service Key**: If you've connected using Workload Identity federation in Step 3, you should leave this box empty. If you've created a service account key, copy the contents of the _compute-viewer-kubecost-key.json_ file and paste them here.
+* **GCP Service Key**: Optional field. If you've created a service account key, copy the contents of the _compute-viewer-kubecost-key.json_ file and paste them here. If you've connected using Workload Identity federation in Step 3, you should leave this box empty.&#x20;
 * **GCP Project Id**: The ID of your GCP project.
 * **GCP Billing Database:** Requires a BigQuery dataset prefix (e.g. `billing_data`) in addition to the BigQuery table name. A full example is `billing_data.gcp_billing_export_v1_018AIF_74KD1D_534A2`
 

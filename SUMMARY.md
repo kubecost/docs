@@ -145,6 +145,7 @@
 * [What is Kubecost Cloud?](kubecost-cloud/what-is-kubecost-cloud.md)
 * [Kubecost Cloud Architecture Overview](kubecost-cloud/kubecost-cloud-architecture-overview.md)
 * [Cloud Installation and Onboarding](kubecost-cloud/cloud-installation-and-onboarding.md)
+* [Kubecost Cloud GCP Integration](kubecost-cloud/kubecost-cloud-gcp-integration.md)
 * [Cloud Allocations Dashboard](kubecost-cloud/cloud-allocations-dashboard.md)
 * [Cloud Assets Dashboard](kubecost-cloud/cloud-assets-dashboard.md)
 * [Cloud Reports Dashboard](kubecost-cloud/cloud-reports-dashboard.md)

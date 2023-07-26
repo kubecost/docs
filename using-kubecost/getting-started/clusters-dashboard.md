@@ -8,7 +8,7 @@ The Clusters dashboard provides a list of all your monitored clusters, as well a
 Monitoring of multiple clusters is only supported in [Kubecost Enterprise](https://www.kubecost.com/pricing/) plans. Learn more about Kubecost Enterprise's multi-cluster view [here](https://docs.kubecost.com/install-and-configure/install/multi-cluster).
 {% endhint %}
 
-<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption><p>Clusters dashboard</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1).png" alt=""><figcaption><p>Clusters dashboard</p></figcaption></figure>
 
 ## Enabling Clusters dashboard
 
