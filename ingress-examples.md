@@ -64,7 +64,7 @@ When deploying Grafana on a non-root URL, you also need to update your _grafana.
 
 {% code overflow="wrap" %}
 ```yaml
-apiVersion: networking.k8s.io/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: kubecost-ingress
