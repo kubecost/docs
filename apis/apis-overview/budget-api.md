@@ -157,6 +157,12 @@ When creating a new budget rule, `id` should not be used. An ID for the budget r
 
 The `id` value of your recurring budget is needed to update or delete it. If you don't have the `id` value saved, you can retrieve it using `/getRecurringBudgetRules`, which will generate all existing budgets and their respective `id` values.
 
+## Configuring currency
+
+The `amount` parameter will always be determined using your configured currency type. You can manually change your currency type in Kubecost by selecting _Settings_, then scrolling to Currency and selecting your desired currency from the dropdown (remember to confirm your choice by selecting _Save_ at the bottom of the page).
+
+Kubecost does **not** convert spending costs to other currency types; it will only change the symbol displayed in the UI next to costs. For best results, configure your currency to what matches your spend.
+
 ## Examples
 
 #### Create a soft recurring budget rule for my test cluster which resets every Wednesday, with a budget of $100.00 USD.

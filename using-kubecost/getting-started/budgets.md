@@ -16,7 +16,7 @@ Provide the following fields:
 * Budget cap: The allotted amount of your budget per interval
 
 {% hint style="info" %}
-The currency of your budget is unchangeable in the Budgets dashboard. To change currency type, go to _Settings >_ Currency. Then, select _Save_ at the bottom of the Settings page to apply changes. Changing currency type will affect cost displays across all of your Kubecost, not just the Budgets dashboard.
+The currency of your budget is unchangeable in the Budgets dashboard. To change currency type, go to _Settings >_ Currency. Then, select _Save_ at the bottom of the Settings page to apply changes. Changing currency type will affect cost displays across all of your Kubecost, not just the Budgets dashboard. Kubecost does **not** convert spending costs to other currency types; it will only change the symbol displayed next to cost. For best results, configure your currency to what matches your spend.
 {% endhint %}
 
 Determine the length of your budget and reset date using the two dropdowns under the Budget cap text box. Budgets can be either _Weekly_ or _Monthly_, and can reset on any day of the week/month. This means you don't need to recreate your budgets and can align them with your schedules or processes.
