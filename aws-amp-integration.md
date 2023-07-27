@@ -10,34 +10,38 @@ Kubecost leverages the open-source Prometheus project as a time series database 
 * [AMP IAM permissions and policies](https://docs.aws.amazon.com/prometheus/latest/userguide/AMP-and-IAM.html)
 
 ## Architecture
+
 The architecture of this integration is similar to Amazon EKS cost monitoring with Kubecost, which is described in [the previous blog post](https://aws.amazon.com/blogs/containers/aws-and-kubecost-collaborate-to-deliver-cost-monitoring-for-eks-customers/), with some enhancements as follows:
 
 In this integration, an additional AWS SigV4 container is added to the cost-analyzer pod, acting as a proxy to help query metrics from Amazon Managed Service for Prometheus using the AWS SigV4 signing process. It enables passwordless authentication to reduce the risk of exposing your AWS credentials.
 
-When the Amazon Managed Service for Prometheus integration is enabled, the bundled Prometheus server in the Kubecost Helm Chart is configured in the remote_write mode. The bundled Prometheus server sends the collected metrics to Amazon Managed Service for Prometheus using the AWS SigV4 signing process. All metrics and data are stored in Amazon Managed Service for Prometheus, and Kubecost queries the metrics directly from Amazon Managed Service for Prometheus instead of the bundled Prometheus. It helps customers not worry about maintaining and scaling the local Prometheus instance.
+When the Amazon Managed Service for Prometheus integration is enabled, the bundled Prometheus server in the Kubecost Helm Chart is configured in the remote\_write mode. The bundled Prometheus server sends the collected metrics to Amazon Managed Service for Prometheus using the AWS SigV4 signing process. All metrics and data are stored in Amazon Managed Service for Prometheus, and Kubecost queries the metrics directly from Amazon Managed Service for Prometheus instead of the bundled Prometheus. It helps customers not worry about maintaining and scaling the local Prometheus instance.
 
-There are two architectures you can deploy: 
-1. The Quick-Start architecture supports a small multi-cluster setup.
-2. The Federated architecture supports a large multi-cluster setup.
+There are two architectures you can deploy:
+
+1. The Quick-Start architecture supports a small multi-cluster setup of up to 100 clusters.
+2. The Federated architecture supports a large multi-cluster setup for over 100 clusters.
 
 ### Quick-Start architecture
-The small-scale infrastructure can manage a small multi-cluster setup. The following architecture diagram illustrates the small-scale infrastructure setup:
 
-![Quick-Start architecture](./images/aws_amp_multi_small.png)
+The infrastructure can manageup to 100 clusters. The following architecture diagram illustrates the small-scale infrastructure setup:
+
+![Quick-Start architecture](images/aws\_amp\_multi\_small.png)
 
 ### Federated architecture
-To support a large-scale environment, Kubecost leverages a [Federated ETL architecture](./federated-etl.md). In addition to Amazon Prometheus Workspace, Kubecost stores its extract, transform, and load (ETL) data in a central S3 bucket. Kubecost's ETL data is a computed cache based on Prometheus's metrics, from which users can perform all possible Kubecost queries. By storing the ETL data on an S3 bucket, this integration offers resiliency to your cost allocation data, improves the performance and enables high availability architecture for your Kubecost setup. 
+
+To support the large-scale infrastructure of over 100 clusters, Kubecost leverages a [Federated ETL architecture](federated-etl.md). In addition to Amazon Prometheus Workspace, Kubecost stores its extract, transform, and load (ETL) data in a central S3 bucket. Kubecost's ETL data is a computed cache based on Prometheus's metrics, from which users can perform all possible Kubecost queries. By storing the ETL data on an S3 bucket, this integration offers resiliency to your cost allocation data, improves the performance and enables high availability architecture for your Kubecost setup.
 
 The following architecture diagram illustrates the large-scale infrastructure setup:
 
-![Federated architecture](./images/aws_amp_multi_large.png)
+![Federated architecture](images/aws\_amp\_multi\_large.png)
 
 ## Instructions
+
 ### Prerequisites
-You have an existing AWS account.
-You have IAM credentials to create Amazon Managed Service for Prometheus and IAM roles programmatically.
-You have an existing [Amazon EKS cluster with OIDC enabled.](https://docs.aws.amazon.com/eks/latest/userguide/enable-iam-roles-for-service-accounts.html)
-Your Amazon EKS clusters have [Amazon EBS CSI](https://docs.aws.amazon.com/eks/latest/userguide/ebs-csi.html) driver installed
+
+You have an existing AWS account. You have IAM credentials to create Amazon Managed Service for Prometheus and IAM roles programmatically. You have an existing [Amazon EKS cluster with OIDC enabled.](https://docs.aws.amazon.com/eks/latest/userguide/enable-iam-roles-for-service-accounts.html) Your Amazon EKS clusters have [Amazon EBS CSI](https://docs.aws.amazon.com/eks/latest/userguide/ebs-csi.html) driver installed
+
 ### Create Amazon Managed Service for Prometheus workspace:
 
 #### Step 1: Run the following command to get the information of your current EKS cluster:
@@ -45,6 +49,7 @@ Your Amazon EKS clusters have [Amazon EBS CSI](https://docs.aws.amazon.com/eks/l
 ```bash
 kubectl config current-context
 ```
+
 The example output should be in this format:
 
 ```bash
@@ -60,38 +65,43 @@ aws amp create-workspace --alias kubecost-amp --region $AWS_REGION
 
 The Amazon Managed Service for Prometheus workspace should be created in a few seconds. Run the following command to get the workspace ID:
 
+{% code overflow="wrap" %}
 ```bash
 export AMP_WORKSPACE_ID=$(aws amp list-workspaces --region ${AWS_REGION} --output json --query 'workspaces[?alias==`kubecost-amp`].workspaceId | [0]' | cut -d'"' -f 2)
 echo $AMP_WORKSPACE_ID
 ```
+{% endcode %}
+
 ### Setting up the environment:
+
 #### Step 1: Set environment variables for integrating Kubecost with Amazon Managed Service for Prometheus
 
 Run the following command to set environment variables for integrating Kubecost with Amazon Managed Service for Prometheus:
 
+{% code overflow="wrap" %}
 ```bash
 export RELEASE="kubecost"
 export YOUR_CLUSTER_NAME=<YOUR_EKS_CLUSTER_NAME>
 export AWS_REGION=${AWS_REGION}
-export VERSION="1.103.4"
+export VERSION="{X.XXX.X}"
 export KC_BUCKET="kubecost-etl-metrics" # Remove this line if you want to set up small-scale infrastructure 
 export AWS_ACCOUNT_ID=$(aws sts get-caller-identity --query Account --output text)
 export REMOTEWRITEURL="https://aps-workspaces.${AWS_REGION}.amazonaws.com/workspaces/${AMP_WORKSPACE_ID}/api/v1/remote_write"
 export QUERYURL="http://localhost:8005/workspaces/${AMP_WORKSPACE_ID}"
 ```
+{% endcode %}
+
 #### Step 2: Set up S3 bucket, IAM policy and Kubernetes secret for storing Kubecost ETL files
 
 > **Note**: You can ignore Step 2 for the small-scale infrastructure setup.
 
-**a. Create Object store S3 bucket to store Kubecost ETL metrics:**
+**a. Create Object store S3 bucket to store Kubecost ETL metrics.** Run the following command in your workspace:
 
-Run the following command in your workspace:
-
-```bash 
+```bash
 aws s3 mb s3://${KC_BUCKET}
 ```
-**b. Create IAM Policy to grant access to the S3 bucket.** 
-The following policy is for demo purposes only. You may need to consult your security team and make appropriate changes depending on your organization's requirements.
+
+**b. Create IAM Policy to grant access to the S3 bucket.** The following policy is for demo purposes only. You may need to consult your security team and make appropriate changes depending on your organization's requirements.
 
 Run the following command in your workspace:
 
@@ -136,9 +146,7 @@ aws iam create-policy \
  --policy-document file://policy-kubecost-aws-s3.json
 ```
 
-**c. Create Kubernetes secret to allow Kubecost to write ETL files to the S3 bucket.**
-
-Run the following command in your workspace:
+**c. Create Kubernetes secret to allow Kubecost to write ETL files to the S3 bucket.** Run the following command in your workspace:
 
 ```bash
 # create manifest file for the secret
@@ -170,11 +178,13 @@ kubectl create secret generic \
 #### Step 3: Set up IRSA to allow Kubecost and Prometheus to read & write metrics from Amazon Managed Service for Prometheus
 
 These following commands help to automate the following tasks:
-- Create an IAM role with the AWS-managed IAM policy and trusted policy for the following service accounts: `kubecost-cost-analyzer-amp`, `kubecost-prometheus-server-amp`.
-- Modify current K8s service accounts with annotation to attach a new IAM role.
+
+* Create an IAM role with the AWS-managed IAM policy and trusted policy for the following service accounts: `kubecost-cost-analyzer-amp`, `kubecost-prometheus-server-amp`.
+* Modify current K8s service accounts with annotation to attach a new IAM role.
 
 Run the following command in your workspace:
 
+{% code overflow="wrap" %}
 ```bash
 eksctl create iamserviceaccount \
     --name kubecost-cost-analyzer-amp \
@@ -186,6 +196,7 @@ eksctl create iamserviceaccount \
     --override-existing-serviceaccounts \
     --approve
 ```
+{% endcode %}
 
 ```bash
 eksctl create iamserviceaccount \
@@ -198,13 +209,15 @@ eksctl create iamserviceaccount \
     --approve
 ```
 
-For more information, you can check AWS documentation at [IAM roles for service accounts](https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html) and learn more about Amazon Managed Service for Prometheus managed policy at [Identity-based policy examples for Amazon Managed Service for Prometheus](https://docs.aws.amazon.com/prometheus/latest/userguide/security_iam_id-based-policy-examples.html)
+For more information, you can check AWS documentation at [IAM roles for service accounts](https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html) and learn more about Amazon Managed Service for Prometheus managed policy at [Identity-based policy examples for Amazon Managed Service for Prometheus](https://docs.aws.amazon.com/prometheus/latest/userguide/security\_iam\_id-based-policy-examples.html)
 
 ## Integrating Kubecost with Amazon Managed Service for Prometheus
+
 ### Preparing the configuration file
 
-Run the following command to create a file called config-values.yaml, which contains the defaults that Kubecost will use for connecting to your Amazon Managed Service for Prometheus workspace.
+Run the following command to create a file called _config-values.yaml_, which contains the defaults that Kubecost will use for connecting to your Amazon Managed Service for Prometheus workspace.
 
+{% code overflow="wrap" %}
 ```bash
 cat << EOF > config-values.yaml
 global:
@@ -220,10 +233,14 @@ sigV4Proxy:
   host: aps-workspaces.${AWS_REGION}.amazonaws.com
 EOF
 ```
+{% endcode %}
+
 ### Primary cluster
 
-Run this command to install Kubecost and integrate it with the Amazon Managed Service for Prometheus workspace as the primary
+Run this command to install Kubecost and integrate it with the Amazon Managed Service for Prometheus workspace as the primary:
 
+{% code overflow="wrap" %}
+````bash
 ```bash
 helm upgrade -i ${RELEASE} \
 oci://public.ecr.aws/kubecost/cost-analyzer --version $VERSION \
@@ -240,12 +257,17 @@ oci://public.ecr.aws/kubecost/cost-analyzer --version $VERSION \
 --set serviceAccount.create=false \
 --set prometheus.serviceAccounts.server.create=false \
 --set serviceAccount.name=kubecost-cost-analyzer-amp \
---set prometheus.serviceAccounts.server.name=kubecost-prometheus-server-amp
+--set prometheus.serviceAccounts.server.name=kubecost-prometheus-server-amp \
+--set federatedETL.federator.useMultiClusterDB=true \
 ```
+````
+{% endcode %}
+
 ### Additional clusters
 
-The installation steps are similar to PRIMARY CLUSTER except you do not need to follow the steps in the section Create Amazon Managed Service for Prometheus workspace, and you need to update these environment variables below to match with your ADDITIONAL CLUSTERS. Please note that the AMP_WORKSPACE_ID and KC_BUCKET are the same as the Primary cluster
+These installation steps are similar to those for a primary cluster setup, except you do not need to follow the steps in the section "Create Amazon Managed Service for Prometheus workspace", and you need to update these environment variables below to match with your additional clusters. Please note that the `AMP_WORKSPACE_ID` and `KC_BUCKET` are the same as the primary cluster.
 
+{% code overflow="wrap" %}
 ```bash
 export RELEASE="kubecost"
 export YOUR_CLUSTER_NAME=<YOUR_EKS_CLUSTER_NAME>
@@ -256,8 +278,12 @@ export AWS_ACCOUNT_ID=$(aws sts get-caller-identity --query Account --output tex
 export REMOTEWRITEURL="https://aps-workspaces.${AWS_REGION}.amazonaws.com/workspaces/${AMP_WORKSPACE_ID}/api/v1/remote_write"
 export QUERYURL="http://localhost:8005/workspaces/${AMP_WORKSPACE_ID}"
 ```
-Run this command to install Kubecost and integrate it with the Amazon Managed Service for Prometheus workspace as  the additional cluster:
+{% endcode %}
 
+Run this command to install Kubecost and integrate it with the Amazon Managed Service for Prometheus workspace as the additional cluster:
+
+{% code overflow="wrap" %}
+````bash
 ```bash
 helm upgrade -i ${RELEASE} \
 oci://public.ecr.aws/kubecost/cost-analyzer --version $VERSION \
@@ -273,8 +299,11 @@ oci://public.ecr.aws/kubecost/cost-analyzer --version $VERSION \
 --set serviceAccount.create=false \
 --set prometheus.serviceAccounts.server.create=false \
 --set serviceAccount.name=kubecost-cost-analyzer-amp \
---set prometheus.serviceAccounts.server.name=kubecost-prometheus-server-amp
+--set prometheus.serviceAccounts.server.name=kubecost-prometheus-server-amp \
+--set federatedETL.federator.useMultiClusterDB=true \
 ```
+````
+{% endcode %}
 
 Your Kubecost setup is now writing and collecting data from AMP. Data should be ready for viewing within 15 minutes.
 
@@ -288,6 +317,7 @@ Read our [Custom Prometheus integration troubleshooting guide](custom-prom.md#tr
 
 You can add these recording rules to improve the performance. Recording rules allow you to precompute frequently needed or computationally expensive expressions and save their results as a new set of time series. Querying the precomputed result is often much faster than running the original expression every time it is needed. Follow [these instructions](https://docs.aws.amazon.com/prometheus/latest/userguide/AMP-Ruler.html) to add the following rules:
 
+{% code overflow="wrap" %}
 ```yaml
     groups:
       - name: CPU
@@ -321,3 +351,4 @@ You can add these recording rules to improve the performance. Recording rules al
             labels:
               daemonset: "true"
 ```
+{% endcode %}
