@@ -2,16 +2,6 @@
 
 This doc provides commonly used product configurations and feature overviews to help get you up and running after the Kubecost product has been [installed](https://kubecost.com/install).
 
-**Main Topics**
-
-* [Setting up a cloud integration](getting-started.md#cloud-integration)
-* [Memory and storage](https://docs.kubecost.com/install-and-configure/install/getting-started#memory-and-storage)
-* [Configuring Kubecost during installation](https://docs.kubecost.com/install-and-configure/install/getting-started#configuring-kubecost-during-installation)
-* [Setting requests and limits](https://docs.kubecost.com/install-and-configure/install/getting-started#setting-requests-and-limits)
-* [Using an existing node exporter](https://docs.kubecost.com/install-and-configure/install/getting-started#using-an-existing-node-exporter)
-* [Deploying Kubecost without persistent volumes](https://docs.kubecost.com/install-and-configure/install/getting-started#deploying-kubecost-without-persistent-volumes)
-* [Resource efficiency and idle costs](https://docs.kubecost.com/install-and-configure/install/getting-started#resource-efficiency-and-idle-costs)
-
 ## Overview
 
 There are many methods to set up Kubecost. A simple Helm install will provide most functionality to understand what Kubecost can do. When you do not pass any values to the Helm install, many of the custom options below are available in _Settings_.

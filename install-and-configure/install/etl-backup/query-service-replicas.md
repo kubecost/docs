@@ -16,7 +16,7 @@ The diagram below demonstrates the backing architecture of this query service an
 
 ## Requirements
 
-### ETL datasource
+### ETL data source
 
 There are three options that can be used for the source ETL Files:
 
@@ -24,7 +24,7 @@ There are three options that can be used for the source ETL Files:
 2. For single cluster environments, QSR can target the ETL backup store. To learn more about ETL backups, see the [ETL Backup](https://docs.kubecost.com/install-and-configure/install/etl-backup) doc.
 3. Alternatively, an object-store containing the ETL dataset to be queried can be configured using a secret `kubecostDeployment.queryServiceConfigSecret`. The file name of the secret must be `object-store.yaml`. Examples can be found [here](https://docs.kubecost.com/install-and-configure/install/multi-cluster/thanos-setup/long-term-storage#step-1-create-object-store.yaml).
 
-### Persistent volume on Kubecost Primary instance
+### Persistent volume on Kubecost primary instance
 
 QSR uses persistent volume storage to avoid excessive S3 transfers. Data is retrieved from S3 hourly as new ETL files are created and stored in these PVs. The `databaseVolumeSize` should be larger than the size of the data in the S3 bucket.
 
