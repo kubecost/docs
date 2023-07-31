@@ -119,7 +119,8 @@ In v1.104 of Kubecost, you may experience incorrect data display, such as costs 
 1. Identify the data range for your affected data. This will be used later.
 2. Disable reconciliation by setting the Helm flag: `.Values.kubecostModel.etlAssetReconciliationEnabled: false`
 3. [Upgrade to a fixed version of Kubecost](https://docs.kubecost.com/install-and-configure/install#updating-kubecost). For best results, upgrade to the most recent version.
-4. Delete the data of the affected dates from your S3 buckets `federated/combined/etl/bingen/allocations` and `federated/combined/etl/bingen/assets.`
-5. For both Allocation and Assets, repair the affected dates on the primary cluster. This will only repair data from the primary cluster, not any secondary clusters. If repairing dates beyond your primary cluster's Prometheus retention, there may be data loss. for your primary cluster.
-6. Wait 30 minutes for federation to occur as a safeguard. Confirm data is now accurate by querying the last 7 days and observing unadjusted data.
-7. Reenable reconciliation by setting the Helm flag: `.Values.kubecostModel.etlAssetReconciliationEnabled: true`
+4. For both Assets and Allocations, repair the affected dates on the primary cluster. This will only repair data from the primary cluster, not any secondary clusters. If repairing dates beyond your primary cluster's Prometheus retention, there may be data loss for your primary cluster. Refer to the instructions above for `/model/etl/asset/repair` and `/model/etl/allocation/repair`.
+5. After Asset and Allocation data has been repaired, wait an additional 30 minutes for federation to occur as a safeguard. Confirm the procedure has worked by validating some of the following:
+   1. Query the last 7 days of data and observe reasonable unadjusted data.
+   2. Check your storage bucket's `/federated/combined/etl/bingen/allocations/1d` and `/federated/combined/etl/bingen/assets/1d` directories to see that the files for impacted dates have been recently modified.
+6. Reenable reconciliation by setting the Helm flag: `.Values.kubecostModel.etlAssetReconciliationEnabled: true`
