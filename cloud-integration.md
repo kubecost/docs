@@ -10,14 +10,14 @@ As indicated above, setting up a cloud integration with your CSP allows Kubecost
 
 Reconciliation matches in-cluster assets with items found in the billing data pulled from the CSP. This allows Kubecost to display the most accurate depiction of your in-cluster spending. Additionally, the reconciliation process creates `Network` assets for in-cluster nodes based on the information in the billing data. The main drawback of this process is that the CSPs have between a 6 to 24-hour delay in releasing billing data, and reconciliation requires a complete day of cost data to reconcile with the in-cluster assets. This requires a 48-hour window between resource usage and reconciliation. If reconciliation is performed within this window, asset cost is deflated to the partially complete cost shown in the billing data.
 
-Cost-based metrics are based on On-Demand pricing unless there is definitive data from a cloud provider that the node is not On-Demand. This way estimates are as accurate as possible. If a new reserved instance is provisioned or a node joins a savings plan:
+Cost-based metrics are based on on-demand pricing unless there is definitive data from a CSP that the node is not on-demand. This way estimates are as accurate as possible. If a new reserved instance is provisioned or a node joins a savings plan:
 
-1. Kubecost continues to emit On-Demand pricing until the node is added to the cloud bill.
+1. Kubecost continues to emit on-demand pricing until the node is added to the cloud bill.
 2. Once the node is added to the cloud bill, Kubecost starts emitting something closer to the actual price.
-3. For the time period where Kubecost assumed the node was On-Demand but it was actually reserved, reconciliation fixes the price in ETL.
+3. For the time period where Kubecost assumed the node was on-demand but it was actually reserved, reconciliation fixes the price in ETL.
 
 {% hint style="info" %}
-The reconciled Assets will inherit the labels from the corresponding items in the billing data. If there exist identical label keys between the original assets and those of the billing data items, the label value of the original asset will take precedence.
+The reconciled assets will inherit the labels from the corresponding items in the billing data. If there exist identical label keys between the original assets and those of the billing data items, the label value of the original asset will take precedence.
 {% endhint %}
 
 #### Visualize unreconciled costs
