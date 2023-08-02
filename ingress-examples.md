@@ -83,9 +83,12 @@ spec:
       paths:
       # serve kubecost from demo.kubecost.io/kubecost/
       - path: /kubecost(/|$)(.*)
+        pathType: ImplementationSpecific
         backend:
-          serviceName: kubecost-cost-analyzer # should be configured if another helm name or service address is used
-          servicePort: 9090
+          service:
+            name: kubecost-cost-analyzer # should be configured if another helm name or service address is used
+            port:
+              number: 9090
 ```
 {% endcode %}
 
