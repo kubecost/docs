@@ -86,7 +86,7 @@ $ kubectl logs deploy/kubecost-cost-analyzer | grep Reconciliation
 
 ## Repairs in Federated ETL environments
 
-Note, that each individual Kubecost deployment builds its own ETL data before pushing it to the bucket. Therefore the repair commands above must be run on each affected cluster.
+In a Federated ETL environment, each individual Kubecost deployment builds its own ETL data before pushing it to the bucket. Therefore the repair commands above must be run on each affected cluster.
 
 After a repair has been completed on any cluster in your environment, the Kubecost Federator will detect the new data, re-federate the ETL data, then place the merged data into the `/federated/combined` directory in the bucket. The Federator runs 5 minutes after startup, and every 30 minutes afterwards.
 
@@ -141,5 +141,5 @@ In v1.104 of Kubecost, you may experience incorrect data display, such as costs 
 5. After Asset and Allocation data has been repaired, wait an additional 30 minutes for federation to occur as a safeguard. Confirm the procedure has worked by validating some of the following:
    1. Query the last 7 days of data and observe reasonable unadjusted data.
    2. Check your storage bucket's `/federated/combined/etl/bingen/allocations/1d` and `/federated/combined/etl/bingen/assets/1d` directories to see that the files for impacted dates have been recently modified.
-   3. Review the federator's logs. Example shown above.
+   3. Review the Federator's logs. Example shown above.
 6. Reenable reconciliation by setting the Helm flag: `.Values.kubecostModel.etlAssetReconciliationEnabled: true`
