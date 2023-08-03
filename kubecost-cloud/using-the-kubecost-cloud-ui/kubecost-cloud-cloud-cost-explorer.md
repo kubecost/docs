@@ -22,14 +22,7 @@ You can adjust your displayed metrics using the date range feature, represented 
 
 You can adjust your displayed metrics by aggregating your cost by category. Supported fields are _Account, Provider, Invoice Entity, Service_, _Item_, as well as custom labels. The Cloud Cost Explorer dashboard supports single and multi-aggregation. See the table below for descriptions of each field.
 
-|   Aggregation  | Description                                                                                                                                                |
-| :------------: | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|     Account    | The ID of the billing account your cloud provider bill comes from. (ex: AWS Management/Payer Account ID, GCP Billing Account ID, Azure Billing Account ID) |
-|    Provider    | Cloud service provider (ex: AWS, Azure, GCP)                                                                                                               |
-| Invoice Entity | Cloud provider account (ex: AWS Account, Azure Subscription, GCP Project)                                                                                  |
-|     Service    | Cloud provider services (ex: S3, microsoft.compute, BigQuery)                                                                                              |
-|      Item      | Individual items from your cloud billing report(s)                                                                                                         |
-|     Labels     | Labels/tags on your cloud resources (ex: AWS tags, Azure tags, GCP labels)                                                                                 |
+<table><thead><tr><th width="172" align="center">Aggregation</th><th>Description</th></tr></thead><tbody><tr><td align="center">Account</td><td>The ID of the billing account your cloud provider bill comes from. (ex: AWS Management/Payer Account ID, GCP Billing Account ID, Azure Billing Account ID)</td></tr><tr><td align="center">Provider</td><td>Cloud service provider (ex: AWS, Azure, GCP)</td></tr><tr><td align="center">Invoice Entity</td><td>Cloud provider account (ex: AWS Account, Azure Subscription, GCP Project)</td></tr><tr><td align="center">Service</td><td>Cloud provider services (ex: S3, microsoft.compute, BigQuery)</td></tr><tr><td align="center">Item</td><td>Individual items from your cloud billing report(s)</td></tr><tr><td align="center">Labels</td><td>Labels/tags on your cloud resources (ex: AWS tags, Azure tags, GCP labels)</td></tr></tbody></table>
 
 ### Edit
 
@@ -47,15 +40,9 @@ You can filter displayed dashboard metrics by selecting _Edit_, then adding a fi
 
 **Cost Metric**
 
-The Cost Metric dropdown allows you to adjust the displayed cost data based on different calculations. Cost Metric values are based on and calculated following standard FinOps dimensions and metrics, but may be calculated differently depending on your CSP. Learn more about how these metrics are calculated by CSP in the [Cloud Cost Metrics](https://docs.kubecost.com/apis/apis-overview/cloud-cost-api/cloud-cost-metrics) doc. The five available metrics supported by the Cloud Costs Explorer are:
+The Cost Metric dropdown allows you to adjust the displayed cost data based on different calculations. Cost Metric values are based on and calculated following standard FinOps dimensions and metrics, but may be calculated differently depending on your CSP. Learn more about how these metrics are calculated by each CSP in the [Cloud Cost Metrics](https://docs.kubecost.com/apis/apis-overview/cloud-cost-api/cloud-cost-metrics) doc. The five available metrics supported by the Cloud Costs Explorer are:
 
-| Cost Metric        | Description                                                                                 |
-| ------------------ | ------------------------------------------------------------------------------------------- |
-| Amortized Net Cost | Net Cost with removed cash upfront fees and amortized (default)                             |
-| Net Cost           | Costs inclusive of discounts and credits. Will also include one-time and recurring charges. |
-| List Cost          | CSP pricing without any discounts                                                           |
-| Invoiced Cost      | Pricing based on usage during billing period                                                |
-| Amortized Cost     | Effective/upfront cost across the billing period                                            |
+<table><thead><tr><th width="201">Cost Metric</th><th>Description</th></tr></thead><tbody><tr><td>Amortized Net Cost</td><td>Net Cost with removed cash upfront fees and amortized (default)</td></tr><tr><td>Net Cost</td><td>Costs inclusive of discounts and credits. Will also include one-time and recurring charges.</td></tr><tr><td>List Cost</td><td>CSP pricing without any discounts</td></tr><tr><td>Invoiced Cost</td><td>Pricing based on usage during billing period</td></tr><tr><td>Amortized Cost</td><td>Effective/upfront cost across the billing period</td></tr></tbody></table>
 
 ### Additional options
 
