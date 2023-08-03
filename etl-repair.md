@@ -5,10 +5,8 @@ Kubecost's extract, transform, load (ETL) process is a computed cache built upon
 The ETL data is stored in a `PersistentVolume` mounted to the `kubecost-cost-analyzer` pod. In the event that you lose or are looking to rebuild the ETL data, the following endpoints should be used.
 
 {% hint style="info" %}
-Configuring [ETL Backups](etl-backup.md) can prevent situations where you would need to repair large amounts of missing ETL data.
+Configuring [ETL Backups](etl-backup.md) can prevent situations where you would need to repair large amounts of missing ETL data. This is not required in [Federated ETL](federated-etl.md) environments.
 {% endhint %}
-
-Because each ETL pipeline builds upon the previous, you need to repair them in the following order:
 
 ## 1. Repair Asset ETL
 
@@ -20,13 +18,12 @@ If the `window` parameter is within `.Values.kubecostModel.etlHourlyStoreDuratio
 
 {% code overflow="wrap" %}
 ```bash
-# Repair
-# /model/etl/asset/repair?window=
+# Repair: /model/etl/asset/repair?window=
 $ curl "https://kubecost.your.com/model/etl/asset/repair?window=2023-01-01T00:00:00Z,2023-01-04T00:00:00Z"
 {"code":200,"data":"Repairing Asset ETL"}
 
 # Check logs to watch this job run until completion
-$ kubectl logs deploy/kubecost-cost-analyzer | grep Asset
+$ kubectl logs deploy/kubecost-cost-analyzer | grep "Asset\[1d\]"
 INF ETL: Asset[1d]: ETLStore.Repair[cfDKJ]: repairing 2023-01-01 00:00:00 +0000 UTC, 2023-01-04 00:00:00 +0000 UTC
 INF ETL: Asset[1d]: AggregatedStore.Run[fvkKR]: run: aggregated [2023-01-01T00:00:00+0000, 2023-01-02T00:00:00+0000) from 19 to 3 in 68.417µs
 INF ETL: Asset[1d]: AggregatedStore.Run[fvkKR]: run: aggregated [2023-01-02T00:00:00+0000, 2023-01-03T00:00:00+0000) from 19 to 3 in 68.417µs
@@ -44,17 +41,16 @@ If the `window` parameter is within `.Values.kubecostModel.etlHourlyStoreDuratio
 
 {% code overflow="wrap" %}
 ```bash
-# Repair
-# /model/etl/allocation/repair?window=
+# Repair: /model/etl/allocation/repair?window=
 $ curl "https://kubecost.your.com/model/etl/allocation/repair?window=2023-01-01T00:00:00Z,2023-01-04T00:00:00Z"
 {"code":200,"data":"Repairing Allocation ETL"}
 
 # Check logs to watch this job run until completion
-$ kubectl logs deploy/kubecost-cost-analyzer | grep Allocation
-INF ETL: Allocation[1d]: ETLStore.Repair[rptgQ]: repairing 2023-01-01 00:00:00 +0000 UTC, 2023-01-04 00:00:00 +0000 UTC
-INF ETL: Allocation[ETL[allocations][1d]]: Repair[rptgQ]: starting [2023-01-01T00:00:00+0000, 2023-01-02T00:00:00+0000)
-INF ETL: Allocation[ETL[allocations][1d]]: Repair[rptgQ]: starting [2023-01-02T00:00:00+0000, 2023-01-03T00:00:00+0000)
-INF ETL: Allocation[ETL[allocations][1d]]: Repair[rptgQ]: starting [2023-01-03T00:00:00+0000, 2023-01-04T00:00:00+0000)
+$ kubectl logs deploy/kubecost-cost-analyzer | grep "Allocation\[1d\]"
+INF ETL: Allocation[1d]: ETLStore.Repair[lSGre]: repairing 2023-01-01 00:00:00 +0000 UTC, 2023-01-04 00:00:00 +0000 UTC
+INF Allocation[1d]: AggregatedStoreDriver[hvfrl]: run: aggregated [2023-01-01T00:00:00+0000, 2023-01-02T00:00:00+0000) from 283 to 70 in 4.917963ms
+INF Allocation[1d]: AggregatedStoreDriver[hvfrl]: run: aggregated [2023-01-02T00:00:00+0000, 2023-01-03T00:00:00+0000) from 130 to 62 in 983.216µs
+INF Allocation[1d]: AggregatedStoreDriver[hvfrl]: run: aggregated [2023-01-03T00:00:00+0000, 2023-01-04T00:00:00+0000) from 130 to 62 in 1.462092ms
 ```
 {% endcode %}
 
@@ -64,8 +60,7 @@ The CloudUsage ETL pulls information from your cloud billing integration. Ensure
 
 {% code overflow="wrap" %}
 ```bash
-# Repair
-# /model/etl/cloudUsage/repair?window=
+# Repair: /model/etl/cloudUsage/repair?window=
 $ curl "https://kubecost.your.com/model/etl/cloudUsage/repair?window=2023-01-01T00:00:00Z,2023-01-04T00:00:00Z"
 {"code":200,"data":"Cloud Usage Repair process has begun for [2023-01-01T00:00:00+0000, 2023-01-04T00:00:00+0000) for all providers"}
 
@@ -80,13 +75,36 @@ The Reconciliation Pipeline reconciles the existing ETL with the newly gathered 
 
 {% code overflow="wrap" %}
 ```bash
-# Repair
-# /model/etl/asset/reconciliation/repair?window=
+# Repair: /model/etl/asset/reconciliation/repair?window=
 $ curl "https://kubecost.your.com/model/etl/asset/reconciliation/repair?window=2023-01-01T00:00:00Z,2023-01-04T00:00:00Z"
 {"code":200,"data":"Reconciliation Repair process has begun for [2023-01-01T00:00:00+0000, 2023-01-04T00:00:00+0000) for all providers"}
 
 # Check logs to watch this job run until completion
 $ kubectl logs deploy/kubecost-cost-analyzer | grep Reconciliation
+```
+{% endcode %}
+
+## Repairs in Federated ETL environments
+
+In a Federated ETL environment, each individual Kubecost deployment builds its own ETL data before pushing it to the bucket. Therefore the repair commands above must be run on each affected cluster.
+
+After a repair has been completed on any cluster in your environment, the Kubecost Federator will detect the new data, re-federate the ETL data, then place the merged data into the `/federated/combined` directory in the bucket. The Federator runs 5 minutes after startup, and every 30 minutes afterwards.
+
+{% code overflow="wrap" %}
+```bash
+$ kubectl logs deploy/kubecost-federator | grep '\[assets\]\[1d\]' 
+INF Federator[assets][1d]: Running Federator on 2 clusters: [kubecost-fedetl-agent kubecost-fedetl-primary]
+INF Federator[assets][1d]: Checking for modified files for cluster 'kubecost-fedetl-agent'...
+INF Federator[assets][1d]: Checking for modified files for cluster 'kubecost-fedetl-primary'...
+INF Federator[assets][1d]: Successfully merged files for '1690761600-1690848000' from federated clusters
+
+$ kubectl logs deploy/kubecost-federator | grep '\[allocations\]\[1d\]'
+INF Federator[allocations][1d]: Running Federator on 2 clusters: [kubecost-fedetl-agent kubecost-fedetl-primary]
+INF Federator[allocations][1d]: Checking for modified files for cluster 'kubecost-fedetl-agent'...
+INF Federator[allocations][1d]: Checking for modified files for cluster 'kubecost-fedetl-primary'...
+INF Federator[allocations][1d]: loading file '1690761600-1690848000' for cluster kubecost-fedetl-agent
+INF Federator[allocations][1d]: loading file '1690761600-1690848000' for cluster kubecost-fedetl-primary
+INF Federator[allocations][1d]: Successfully merged files for '1690761600-1690848000' from federated clusters
 ```
 {% endcode %}
 
@@ -123,4 +141,5 @@ In v1.104 of Kubecost, you may experience incorrect data display, such as costs 
 5. After Asset and Allocation data has been repaired, wait an additional 30 minutes for federation to occur as a safeguard. Confirm the procedure has worked by validating some of the following:
    1. Query the last 7 days of data and observe reasonable unadjusted data.
    2. Check your storage bucket's `/federated/combined/etl/bingen/allocations/1d` and `/federated/combined/etl/bingen/assets/1d` directories to see that the files for impacted dates have been recently modified.
+   3. Review the Federator's logs. Example shown above.
 6. Reenable reconciliation by setting the Helm flag: `.Values.kubecostModel.etlAssetReconciliationEnabled: true`
