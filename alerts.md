@@ -326,11 +326,13 @@ Global recipients specify a default fallback recipient for each type of message.
 
 ### Budget, efficiency, spend change, and recurring update alerts
 
-The remaining Alert types share some commonality: they all target a set of Cost Allocation data with `window`, `aggregation` and `filter` parameters, and trigger based on the target data. The table results can be filtered using the "Filter alerts" input at the top-right of the table. This input can be used to filter based on alert type, aggregation, window, and/or filter.
+The remaining alert types all target a set of allocation data with `window`, `aggregation` and `filter` parameters, and trigger based on the target data. The table results can be filtered using the _Filter alerts_ search bar next to + _Create Alert_. This input can be used to filter based on alert name, type, aggregation, window, and/or filter.
 
 Select _+ Create Alert_ to open the Create Alert window where you configure the details of your alert.
 
 <figure><img src=".gitbook/assets/createalert.png" alt=""><figcaption><p>Create Alert window</p></figcaption></figure>
+
+The fields for each alert type should resemble their corresponding Helm values in the above tables.&#x20;
 
 Alerts can also be edited, removed, and tested from the table. Editing opens a dialog similar to the alert creation dialog, for editing the chosen alert.
 
