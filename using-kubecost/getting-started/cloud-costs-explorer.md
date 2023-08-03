@@ -48,16 +48,16 @@ You can adjust your displayed metrics using the date range feature, represented 
 
 ### Aggregate filters
 
-You can adjust your displayed metrics by aggregating your cost by category. Supported fields are _Workspace, Provider, Billing Account, Service Item_, as well as custom labels. The Cloud Costs Explorer dashboard supports single and multi-aggregation. See the table below for descriptions of each field.
+You can adjust your displayed metrics by aggregating your cost by category. Supported fields are _Workspace, Provider, Billing Account, Service Item_, as well as custom labels. The Cloud Cost Explorer dashboard supports single and multi-aggregation. See the table below for descriptions of each field.
 
-|   Aggregation   | Description                                                                                                                                                |
-| :-------------: | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Billing Account | The ID of the billing account your cloud provider bill comes from. (ex: AWS Management/Payer Account ID, GCP Billing Account ID, Azure Billing Account ID) |
-|     Provider    | Cloud provider (ex: AWS, Azure, GCP)                                                                                                                       |
-|     Service     | Cloud provider services (ex: S3, microsoft.compute, BigQuery)                                                                                              |
-|    Workspace    | Cloud provider account (ex: AWS Account, Azure Subscription, GCP Project)                                                                                  |
-|       Item      | Individual items from your cloud billing report(s)                                                                                                         |
-|      Labels     | Labels/tags on your cloud resources (ex: AWS tags, Azure tags, GCP labels)                                                                                 |
+|   Aggregation  | Description                                                                                                                                                |
+| :------------: | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|     Account    | The ID of the billing account your cloud provider bill comes from. (ex: AWS Management/Payer Account ID, GCP Billing Account ID, Azure Billing Account ID) |
+|    Provider    | Cloud service provider (ex: AWS, Azure, GCP)                                                                                                               |
+| Invoice Entity | Cloud provider account (ex: AWS Account, Azure Subscription, GCP Project)                                                                                  |
+|     Service    | Cloud provider services (ex: S3, microsoft.compute, BigQuery)                                                                                              |
+|      Item      | Individual items from your cloud billing report(s)                                                                                                         |
+|     Labels     | Labels/tags on your cloud resources (ex: AWS tags, Azure tags, GCP labels)                                                                                 |
 
 ### Edit
 
@@ -68,14 +68,14 @@ Selecting the _Edit_ button will allow for additional filtering and pricing disp
 You can filter displayed dashboard metrics by selecting _Edit_, then adding a filter. Filters can be created for the following categories (see descriptions of each category in the Aggregate filters table above):
 
 * Service
-* Workspace
-* Billing Account
+* Account
+* Invoice Entity
 * Provider
 * Labels
 
 **Cost Metric**
 
-The Cost Metric dropdown allows you to adjust the displayed cost data based on different calculations. Cost Metric values are based on and calculated following standard FinOps dimensions and metrics, but may be calculated differently depending on your CSP. Learn more about how these metrics are calculated by CSP in the [Cloud Cost Metrics](https://docs.kubecost.com/apis/apis-overview/cloud-cost-api/cloud-cost-metrics) doc. The five available metrics supported by the Cloud Costs Explorer are:
+The Cost Metric dropdown allows you to adjust the displayed cost data based on different calculations. Cost Metric values are based on and calculated following standard FinOps dimensions and metrics, but may be calculated differently depending on your CSP. Learn more about how these metrics are calculated by CSP in the [Cloud Cost Metrics](https://docs.kubecost.com/apis/apis-overview/cloud-cost-api/cloud-cost-metrics) doc. The five available metrics supported by the Cloud Cost Explorer are:
 
 | Cost Metric        | Description                                                                                 |
 | ------------------ | ------------------------------------------------------------------------------------------- |
@@ -83,7 +83,7 @@ The Cost Metric dropdown allows you to adjust the displayed cost data based on d
 | Net Cost           | Costs inclusive of discounts and credits. Will also include one-time and recurring charges. |
 | List Cost          | CSP pricing without any discounts                                                           |
 | Invoiced Cost      | Pricing based on usage during billing period                                                |
-| Amortized          | Effective/upfront cost across the billing period                                            |
+| Amortized Cost     | Effective/upfront cost across the billing period                                            |
 
 ## Cost table metrics
 

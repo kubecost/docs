@@ -148,9 +148,11 @@
 * [Kubecost Cloud: Cloud Billing Integrations](kubecost-cloud/kubecost-cloud-cloud-billing-integrations/README.md)
   * [Kubecost Cloud GCP Integration](kubecost-cloud/kubecost-cloud-cloud-billing-integrations/kubecost-cloud-gcp-integration.md)
   * [Kubecost Cloud Azure Integration](kubecost-cloud/kubecost-cloud-cloud-billing-integrations/kubecost-cloud-azure-integration.md)
-* [Cloud Allocations Dashboard](kubecost-cloud/cloud-allocations-dashboard.md)
-* [Cloud Assets Dashboard](kubecost-cloud/cloud-assets-dashboard.md)
-* [Cloud Reports Dashboard](kubecost-cloud/cloud-reports-dashboard.md)
+* [Using the Kubecost Cloud UI](kubecost-cloud/using-the-kubecost-cloud-ui/README.md)
+  * [Kubecost Cloud: Allocations Dashboard](kubecost-cloud/using-the-kubecost-cloud-ui/cloud-allocations-dashboard.md)
+  * [Kubecost Cloud: Assets Dashboard](kubecost-cloud/using-the-kubecost-cloud-ui/cloud-assets-dashboard.md)
+  * [Kubecost Cloud: Cloud Cost Explorer](kubecost-cloud/using-the-kubecost-cloud-ui/kubecost-cloud-cloud-cost-explorer.md)
+  * [Kubecost Cloud: Reports Dashboard](kubecost-cloud/using-the-kubecost-cloud-ui/cloud-reports-dashboard.md)
 * [Receiving Kubecost Cloud Support](kubecost-cloud/receiving-kubecost-cloud-support.md)
 
 ## Integrations
