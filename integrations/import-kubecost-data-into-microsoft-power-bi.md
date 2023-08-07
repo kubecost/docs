@@ -1,6 +1,6 @@
-# Import Kubecost Data into Microsoft Power BI
+# Importing Kubecost Data into Microsoft Power BI
 
-Power BI is a data visualization tool which can be used for more advanced or customized analysis of your Kubecost spend data. Power BI is able to accept data retrieved from any standard Kubecost API endpoint, such as queries into your primary Monitoring dashboards (Allocation, Assets, and Cloud Costs). This document will show you how to import your Kubecost data into Power BI.
+Microsoft Power BI is a data visualization tool which can be used for more advanced or customized analysis of your Kubecost spend data. Power BI is able to accept data retrieved from any standard Kubecost API endpoint, such as queries into your primary Monitoring dashboards (Allocation, Assets, and Cloud Costs). This document will show you how to import your Kubecost data into Power BI.
 
 ## Importing your data
 

@@ -140,6 +140,12 @@
 * [Kubecost Release Process](release-process.md)
 * [Outages](outages.md)
 
+## Integrations
+
+* [Importing Kubecost Data into Microsoft Power BI](integrations/import-kubecost-data-into-microsoft-power-bi.md)
+* [Integrating Kubecost with Datadog](integrations/integrating-kubecost-with-datadog.md)
+* [Using Custom Webhook to Create a Kubecost Stage in Spinnaker](spinnaker-custom-webhook.md)
+
 ## Kubecost Cloud
 
 * [What is Kubecost Cloud?](kubecost-cloud/what-is-kubecost-cloud.md)
@@ -154,11 +160,6 @@
   * [Kubecost Cloud: Cloud Cost Explorer](kubecost-cloud/using-the-kubecost-cloud-ui/kubecost-cloud-cloud-cost-explorer.md)
   * [Kubecost Cloud: Reports Dashboard](kubecost-cloud/using-the-kubecost-cloud-ui/cloud-reports-dashboard.md)
 * [Receiving Kubecost Cloud Support](kubecost-cloud/receiving-kubecost-cloud-support.md)
-
-## Integrations
-
-* [Custom Webhook to Create a Kubecost Stage in Spinnaker](spinnaker-custom-webhook.md)
-* [Import Kubecost Data into Microsoft Power BI](integrations/import-kubecost-data-into-microsoft-power-bi.md)
 
 ## Troubleshooting
 
