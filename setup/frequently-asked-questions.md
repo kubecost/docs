@@ -1,7 +1,3 @@
----
-description: Common Kubecost questions (faq).
----
-
 # Frequently Asked Questions
 
 Q: How can I reduce CPU or Memory resource consumption by Kubecost?\
@@ -13,10 +9,10 @@ A: Yes, Kubecost is resilient to downsampling. However turning query concurrency
 Q: Why do I receive a 403 error when trying to save reports or alerts?\
 A: This is due to the SAML user having read-only RBAC permissions.
 
-Q: What does "Share Tenancy" mean?\
+Q: What does "share tenancy" mean?\
 A: This enables sharing the cost of the K8s management plane for hosted Kubernetes offerings, such as EKS/AKS/GKE costs.
 
-Q: Why is the "Network" tile on the Allocations page not showing any data?\
+Q: Why is the Network column on the Allocations page not showing any data?\
 A: This tile relies on service names, which requires one of the following [values](https://github.com/kubecost/cost-analyzer-helm-chart/blob/b5b089ce217636fb2b7e6f42daed37397d28d3aa/cost-analyzer/values.yaml#L576-L585) to be enabled.
 
 Q: How often does reconciliation run?\
