@@ -1,8 +1,10 @@
-# Spot Cluster Sizing
+# Spot Commander
 
-## Recommended cluster configuration
+Spot Commander is a Savings feature which identifies workloads where it is available and cost-effective to switch to Spot nodes, resizing the cluster in the process. Spot-readiness is determined through a [checklist](https://docs.kubecost.com/using-kubecost/navigating-the-kubecost-ui/savings/spot-checklist) which analzyes the workload and asseses the minimal cost required. It also generates CLI commands to help you implement the recommendation.
 
-The recommended spot cluster configuration uses all of the data available to Kubecost to compute a "resizing" of your cluster's nodes into a set of on-demand (standard) nodes `O` and a set of spot (preemptible) nodes `S`. This configuration is produced from applying a scheduling heuristic to the usage data for all of your workloads. This recommendation offers a more accurate picture of the savings possible from implementing spot nodes because nodes are what the cost of a cluster is made up of; once `O` and `S` have been determined, the savings are the current cost of your nodes minus the estimated cost of `O` and `S`.
+## Spot Cluster Sizing Recommendation
+
+The recommended Spot cluster configuration uses all of the data available to Kubecost to compute a "resizing" of your cluster's nodes into a set of on-demand (standard) nodes `O` and a set of spot (preemptible) nodes `S`. This configuration is produced from applying a scheduling heuristic to the usage data for all of your workloads. This recommendation offers a more accurate picture of the savings possible from implementing spot nodes because nodes are what the cost of a cluster is made up of; once `O` and `S` have been determined, the savings are the current cost of your nodes minus the estimated cost of `O` and `S`.
 
 ### Implementing the recommended configuration
 
@@ -42,7 +44,7 @@ Kubecost uses this data with a configurable target utilization (e.g., 90%) for `
 * The total CPU requirements of `R` must be satisfiable by the total CPU available in `S`
 * The total RAM requirements of `R` must be satisfiable by the total RAM available in `S`
 
-### Usage tips and caveats
+### Usage tips
 
 It is recommended to set the target utilization at or below 95% to allow resources for the operating system and the kubelet.
 
