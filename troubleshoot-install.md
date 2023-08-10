@@ -81,6 +81,27 @@ curl -X POST \
 
 A GET request can be sent to the same endpoint to retrieve the current log level.
 
+## Issue: Cost-model container Go panic on Azure AKS when using the Files Container Storage Interface (CSI) driver
+
+Some Azure AKS users have reported that the `cost-model` container in the `kubecost-cost-analyzer` pod will Panic with the following message when using the [Azure Files Container Storage Interface (CSI) driver](https://learn.microsoft.com/en-us/azure/aks/azure-files-csi).
+
+```
+goroutine 32660 [running]:
+runtime.throw({0x347c9c7?, 0x30?})
+	/usr/local/go/src/runtime/panic.go:1047 +0x5d fp=0xc01421cb70 sp=0xc01421cb40 pc=0x43919d
+runtime.sigpanic()
+	/usr/local/go/src/runtime/signal_unix.go:834 +0x125 fp=0xc01421cbd0 sp=0xc01421cb70 pc=0x44fb85
+github.com/opencost/opencost/pkg/kubecost.isBinaryTag(...)
+	/app/opencost/pkg/kubecost/kubecost_codecs.go:103
+github.com/opencost/opencost/pkg/kubecost.(*AllocationSet).UnmarshalBinary(0x40dd8a?, {0x7fa5669b5000, 0xb621c, 0xb621c})
+	/app/opencost/pkg/kubecost/kubecost_codecs.go:1932 +0x9d fp=0xc01421cc48 sp=0xc01421cbd0 pc=0xd1a5dd
+github.com/kubecost/kubecost-cost-model/pkg/core/store.(*FileStorageStrategy[...]).Load.func1()
+	/app/kubecost-cost-model/pkg/core/store/filestrategy.go:230 +0x3f fp=0xc01421cc78 sp=0xc01421cc48 pc=0x28f00df
+github.com/kubecost/kubecost-cost-model/pkg/core/sys.(*RWPageFile).Read(0xc01520b830, 0xc01421cda0)
+```
+
+To resolve this issue, please use an alternate storage class for the Kubecost `cost-analyzer` PV. For example the [Azure Disk Container Storage Interface (CSI)](https://learn.microsoft.com/en-us/azure/aks/azure-disk-csi)
+
 ## Issue: No persistent volumes available for this claim and/or no storage class is set
 
 Your clusters need a default storage class for the Kubecost and Prometheus persistent volumes to be successfully attached.
