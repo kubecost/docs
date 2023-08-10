@@ -81,9 +81,9 @@ curl -X POST \
 
 A GET request can be sent to the same endpoint to retrieve the current log level.
 
-## Issue: Cost-model container Go panic on Azure AKS when using the Files Container Storage Interface (CSI) driver
+## Issue: Cost-model container Go panic on Azure Kubernetes Service (AKS) when using the Files Container Storage Interface (CSI) driver
 
-Some Azure AKS users have reported that the `cost-model` container in the `kubecost-cost-analyzer` pod will Panic with the following message when using the [Azure Files Container Storage Interface (CSI) driver](https://learn.microsoft.com/en-us/azure/aks/azure-files-csi).
+Some AKS users have reported that the `cost-model` container in the `kubecost-cost-analyzer` pod will panic with the following message when using the [Azure Files Container Storage Interface (CSI) driver](https://learn.microsoft.com/en-us/azure/aks/azure-files-csi):
 
 ```
 goroutine 32660 [running]:
