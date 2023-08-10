@@ -5,7 +5,8 @@
 ## Install and Configure
 
 * [Installation](install.md)
-  * [Getting Started](install-and-configure/install/getting-started.md)
+  * [First Time User Guide](install-and-configure/install/first-time-user-guide.md)
+  * [Next Steps with Kubecost](install-and-configure/install/getting-started.md)
   * [Environment](install-and-configure/install/environment.md)
   * [Helm Parameters](helm-install-params.md)
   * [Ingress Examples](ingress-examples.md)
