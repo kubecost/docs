@@ -2,6 +2,8 @@
 
 After successfully installing Kubecost, new users should familiarize themselves with these onboarding steps to begin immediately realizing value. This doc will explain to you the core features and options you will have access to and direct you to other necessary docs groups that will help you get set up.
 
+While certain steps in this article may be optional depending on your setup, these are recommended best practices for seeing the most value out of Kubecost as soon as possible.
+
 ## Step 1: Integrate with your cloud provider(s)
 
 Many Kubernetes adopters may have billing with cloud service providers (CSPs) that differs from public pricing. By default, Kubecost will detect the CSP of the cluster where it is installed and pull list prices for nodes, storage, and LoadBalancers across all major CSPs: Azure, AWS, and GCP.&#x20;
