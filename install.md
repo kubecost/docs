@@ -38,6 +38,10 @@ kubectl apply -f https://raw.githubusercontent.com/kubecost/cost-analyzer-helm-c
 
 Kubecost has a number of product configuration options that you can specify at install time in order to minimize the number of settings changes required within the product UI. This makes it simple to redeploy Kubecost. These values can be configured under `kubecostProductConfigs` in our [values.yaml](https://github.com/kubecost/cost-analyzer-helm-chart/blob/bb8bcb570e6c52db2ed603f69691ac8a47ff4a26/cost-analyzer/values.yaml#L335). These parameters are passed to a ConfigMap that Kubecost detects and writes to its `/var/configs`.
 
+### Troubleshooting installation
+
+If you encounter any errors while installing Kubecost, first visit our [Troubleshoot Install](https://docs.kubecost.com/troubleshooting/troubleshoot-install) doc. If the error you are experiencing is not already documented here or a solution is not found, contact our Support team at support@kubecost.com for more help.
+
 ## Updating Kubecost
 
 Kubecost releases are scheduled on a near-monthly basis. You can keep up to date with new Kubecost updates and patches by following our release notes [here](https://github.com/kubecost/cost-analyzer-helm-chart/releases).
