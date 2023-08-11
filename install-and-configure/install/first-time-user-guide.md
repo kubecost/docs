@@ -56,4 +56,4 @@ It is recommended to complete the steps above for your primary cluster before ad
 
 ## Learning more about Kubecost
 
-After completing these primary steps, you are well on your way to being proficient in Kubecost. However, managing Kubernetes infrastructure can be complicated, and for that we have plenty more documentation to help. For advanced or optional configuration options, see our [Next Steps with Kubecost](https://docs.kubecost.com/install-and-configure/install/next-steps-with-kubecost) guide which will introduce you to additional concepts.
+After completing these primary steps, you are well on your way to being proficient in Kubecost. However, managing Kubernetes infrastructure can be complicated, and for that we have plenty more documentation to help. For advanced or optional configuration options, see our [Next Steps with Kubecost](https://docs.kubecost.com/install-and-configure/install/getting-started) guide which will introduce you to additional concepts.

@@ -86,4 +86,4 @@ After starting or restarting Cloud Usage or reconciliation, two subprocesses are
 * Resolution: The window size of the process
 * StartTime: When the Cloud Process was started
 
-For more information on APIs related to rebuilding and repairing Cloud Usage or reconciliation, see the[ CloudCost Status APIs doc](https://docs.kubecost.com/apis/apis-overview/cloudcost-status-apis).
+For more information on APIs related to rebuilding and repairing Cloud Usage or reconciliation, see the [CloudCost Diagnostic APIs](https://docs.kubecost.com/apis/apis-overview/cloudcost-diagnostic-apis) doc.

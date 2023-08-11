@@ -384,4 +384,4 @@ gcpprovider.go Error loading metadata cluster-name: Get "http://169.254.169.254/
 ```
 {% endcode %}
 
-Do you have a question not answered on this page? Email us at [support@kubecost.com](support@kubecost.com) or [join the Kubecost Slack community](https://kubecost.com/join-slack)!
+Do you have a question not answered on this page? Email us at [support@kubecost.com](mailto:support@kubecost.com) or [join the Kubecost Slack community](https://kubecost.com/join-slack)!

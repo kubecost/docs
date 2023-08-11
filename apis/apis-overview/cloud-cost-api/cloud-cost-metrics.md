@@ -1,6 +1,6 @@
 # Cloud Cost Metrics
 
-When ingesting billing data from cloud service providers (CSP), Kubecost records multiple cost metrics for each item. These cost metrics represent different pricing models which may be useful depending on what needs to be accomplished. Cloud Cost supports all the cost metrics defined in the [FOCUS Spec](https://github.com/finopsfoundation/finops-open-cost-usage-spec/blob/main/specification\_sheet\_import.md) in addition to others that are currently provided by certain CSPs. The cost metrics currently supported by Cloud Cost are:
+When ingesting billing data from cloud service providers (CSP), Kubecost records multiple cost metrics for each item. These cost metrics represent different pricing models which may be useful depending on what needs to be accomplished. The cost metrics currently supported by Cloud Cost are:
 
 * ListCost
 * NetCost
