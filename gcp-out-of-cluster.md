@@ -189,6 +189,10 @@ Now that your service account is created, follow the normal configuration instru
 
 ## Troubleshooting
 
-#### Account labels not showing up in partitions
+### Account labels not showing up in partitions
 
 There are cases where labels applied at the account label do not show up in the date-partitioned data. If account level labels are not showing up, you can switch to querying them unpartitioned by setting an extraEnv in Kubecost: `GCP_ACCOUNT_LABELS_NOT_PARTITIONED: true`. See [here](https://github.com/kubecost/cost-analyzer-helm-chart/blob/v1.98.0-rc.1/cost-analyzer/values.yaml#L304).
+
+### `InvalidQuery` 400 error for GCP integration
+
+In cases where Kubecost does not detect a connection following GCP integration, revisit Step 1 and ensure you have enabled **detailed usage cost**, not standard usage cost. Kubecost uses detailed billing cost to display your OOC spend, and if it was not configured correctly during installation, you may receive errors about your integration.
