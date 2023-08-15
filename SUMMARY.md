@@ -118,15 +118,15 @@
   * [Cost Events Audit API](cost-events-audit-api.md)
   * [Spec Cost Prediction API](apis/apis-overview/spec-cost-prediction-api.md)
   * [Events API](api-events.md)
-  * [Audit API](audit-api.md)
   * [Container Request Recommendation Apply/Plan APIs](api-request-recommendation-apply.md)
   * [Container Request Right Sizing Recommendation API (V2)](api-request-right-sizing-v2.md)
   * [Abandoned Workloads](api-abandoned-workloads.md)
   * [Filter Parameters (v2)](filters-api.md)
 * [Deprecated APIs](apis/deprecated-apis/README.md)
-  * [Container Request Right-Sizing Recommendation API (V1) - Deprecated](api-request-right-sizing.md)
-  * [costDataModel & aggregatedCostModel API - Deprecated](cost-model-deprecated.md)
+  * [Container Request Right-Sizing Recommendation API (V1)](api-request-right-sizing.md)
+  * [costDataModel & aggregatedCostModel API](cost-model-deprecated.md)
   * [Namespace Contacts](namespace-contacts.md)
+  * [Audit API](apis/deprecated-apis/audit-api.md)
 
 ## Architecture
 
