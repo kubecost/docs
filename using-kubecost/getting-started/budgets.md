@@ -29,6 +29,10 @@ From the first dropdown, select whether this budget will apply to a namespace or
 
 Budget Actions are an optional method of better monitoring your budgets. You can use Actions to create an alert when your budget hits a certain percentage threshold, and send out an email, Slack, and/or Microsoft Teams alert.
 
+{% hint style="info" %}
+Budget Actions by default check against the limits every 8 hours. If you want customized check times, you can create an image with a customized budget check cron expression in this file: [`model/kubecost-cost-model/pkg/budgets/service.go`](https://github.com/kubecost/kubecost-cost-model/blob/develop/pkg/budgets/service.go)`.`
+{% endhint %}
+
 To begin, select _New Action_. Select your _Trigger percentage_ value (leaving your _Trigger percentage_ at _100_ will only alert you once the budget has been exceeded). Then, provide any emails or webhooks where you would like to receive your alerts. Select _Save_.
 
 {% hint style="info" %}
