@@ -1,6 +1,6 @@
 # AWS Cloud Integration
 
-By default, Kubecost pulls On-Demand asset prices from the public AWS pricing API. For more accurate pricing, this integration will allow Kubecost to reconcile your current measured Kubernetes spend with your actual AWS bill. This integration also properly accounts for Enterprise Discount Programs, Reserved Instance usage, Savings Plans, Spot usage, and more.
+By default, Kubecost pulls in0demand asset prices from the public AWS pricing API. For more accurate pricing, this integration will allow Kubecost to reconcile your current measured Kubernetes spend with your actual AWS bill. This integration also properly accounts for Enterprise Discount Programs, Reserved Instance usage, Savings Plans, Spot usage, and more.
 
 You will need permissions to create the Cost and Usage Report (CUR), and add IAM credentials for Athena and S3. Optional permission is the ability to add and execute CloudFormation templates. Kubecost does not require root access in the AWS account.
 
