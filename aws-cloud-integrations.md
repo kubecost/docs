@@ -4,7 +4,11 @@ By default, Kubecost pulls On-Demand asset prices from the public AWS pricing AP
 
 You will need permissions to create the Cost and Usage Report (CUR), and add IAM credentials for Athena and S3. Optional permission is the ability to add and execute CloudFormation templates. Kubecost does not require root access in the AWS account.
 
-A GitHub repository with sample files which follow the below instructions can be found [here](https://github.com/kubecost/poc-common-configurations/tree/main/aws).
+The below guide contains multiple possible methods for connecting Kubecost to AWS billing. Because of this, the guide can be long and potentially confusing.
+
+To address this, a new, streamlined best-practice guide can be found [here](./aws-cur-setup.md). The new guide has some assumptions at the top to carefully consider.
+
+For the below guide, a GitHub repository with sample files can be found [here](https://github.com/kubecost/poc-common-configurations/tree/main/aws).
 
 ## AWS terminology and overview
 
@@ -383,7 +387,7 @@ This may be the preferred method if your Helm values are in version control and 
 2. Create a Kubernetes secret:
 
 ```bash
-$ kubectl create secret generic <SECRET_NAME> --from-file=service-key.json --namespace <kubecost> 
+$ kubectl create secret generic <SECRET_NAME> --from-file=service-key.json --namespace <kubecost>
 ```
 
 3. Set the Helm value:
@@ -611,9 +615,9 @@ QueryAthenaPaginated: start query error: operation error Athena: StartQueryExecu
 
 ```
 QueryAthenaPaginated: query execution error: no query results available for query <Athena Query ID>
- 
+
 Checking the athena logs we see a syntax error:
-   
+
 SYNTAX_ERROR: line 4:3: Column 'line_item_resource_id' cannot be resolved
 
 This query ran against the "<DB Name>" database, unless qualified by the query
