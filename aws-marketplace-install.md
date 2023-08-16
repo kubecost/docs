@@ -6,7 +6,7 @@ This document provides the steps for installing the Kubecost product from the AW
 
 To deploy Kubecost from AWS Marketplace, you need to assign an IAM policy with appropriate IAM permission to a Kubernetes service account before starting the deployment. You can either use AWS managed policy `arn:aws:iam::aws:policy/AWSMarketplaceMeteringRegisterUsage` or create your own IAM policy. You can learn more with AWS' [Create and attach your first customer managed policy ](https://docs.aws.amazon.com/IAM/latest/UserGuide/tutorial\_managed-policies.html#step1-create-policy)tutorial.
 
-Example IAM policy:
+Here's an example IAM policy:
 
 ```
 {
@@ -27,9 +27,9 @@ Example IAM policy:
 
 We recommend doing this via [eksctl](https://docs.aws.amazon.com/eks/latest/userguide/eksctl.html). The command below helps to automate these manual steps:
 
-* Create an IAM role with AWS managed IAM policy.
+* Create an IAM role with AWS-managed IAM policy.
 * Create a K8s service account name `awsstore-serviceaccount` in your Amazon EKS cluster.
-* Set up trust relationship between the created IAM role with awsstore-serviceaccount.
+* Set up a trust relationship between the created IAM role with awsstore-serviceaccount.
 * Modify `awsstore-serviceaccount` annotation to associate it with the created IAM role
 
 Remember to replace `CLUSTER_NAME` with your actual Amazon EKS cluster name.
@@ -52,7 +52,7 @@ Your Amazon EKS cluster needs to have IAM OIDC provider enabled to set up IRSA. 
 
 ## Step 3: Deploy Kubecost with attached IAM role
 
-Define which available version you would like to install using this following command You can check available version title from the AWS Marketplace product, e.g: prod-1.95.0:
+Define which available version you would like to install using this following command You can check available version titles from the AWS Marketplace product, e.g: prod-1.95.0:
 
 `export IMAGETAG=<VERSION-TITLE>`
 
@@ -75,6 +75,8 @@ helm upgrade -i kubecost kubecost/cost-analyzer \
 
 Run this command to enable port-forwarding and access the Kubecost UI:
 
-`kubectl port-forward --namespace kubecost deployment/kubecost-cost-analyzer 9090`
+```
+kubectl port-forward --namespace kubecost deployment/kubecost-cost-analyzer 9090
+```
 
 You can now start monitoring your Amazon EKS cluster cost with Kubecost by visiting `http://localhost:9090`.

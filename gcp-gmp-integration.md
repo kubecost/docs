@@ -1,4 +1,4 @@
-# Google Cloud Managed Service for Prometheus (GMP)
+# Google Cloud Managed Service for Prometheus
 
 ## Overview
 
@@ -10,7 +10,7 @@ For this integration, GMP is required to be enabled for your GKE cluster with th
 This integration is currently in beta.
 {% endhint %}
 
-## Reference Resources
+## Reference resources
 
 * [Google Cloud Managed Service for Prometheus (GMP)](https://cloud.google.com/stackdriver/docs/managed-prometheus)
 * [Get started with self-deployed collection](https://cloud.google.com/stackdriver/docs/managed-prometheus/setup-unmanaged)
@@ -40,11 +40,12 @@ helm upgrade -i kubecost cost-analyzer/ \
 --set prometheus.server.global.external_labels.cluster_id="${CLUSTER_NAME}" \
 --set kubecostProductConfigs.clusterName="${CLUSTER_NAME}"
 ```
+
 In this installation command, these additional flags are added to have Kubecost work with GMP:
 
-- `prometheus.server.image.repository` and `prometheus.server.image.tag` replace the standard Prometheus image with GMP specific image.
-- `global.gmp.enabled` and `global.gmp.gmpProxy.projectId` are for enabling the GMP integration.
-- `prometheus.server.global.external_labels.cluster_id` and `kubecostProductConfigs.clusterName` helps to set the name for your Kubecost setup.
+* `prometheus.server.image.repository` and `prometheus.server.image.tag` replace the standard Prometheus image with GMP specific image.
+* `global.gmp.enabled` and `global.gmp.gmpProxy.projectId` are for enabling the GMP integration.
+* `prometheus.server.global.external_labels.cluster_id` and `kubecostProductConfigs.clusterName` helps to set the name for your Kubecost setup.
 
 You can find additional configurations at our main [values.yaml](https://github.com/kubecost/cost-analyzer-helm-chart/blob/develop/cost-analyzer/values.yaml) file.
 
@@ -66,4 +67,4 @@ From your [GCP Monitoring - Metrics explorer console](https://console.cloud.goog
 avg(node_cpu_hourly_cost) by (cluster_id)
 ```
 
-Read our [Custom Prometheus integration troubleshooting guide](custom-prom.md#troubleshooting) if you run into any errors while setting up the integration. For support from GCP, you can submit a support request at [GCP support hub](https://cloud.google.com/support-hub).
+Read our [Custom Prometheus integration troubleshooting guide](custom-prom.md#troubleshooting) if you run into any errors while setting up the integration. For support from GCP, you can submit a support request at the [GCP support hub](https://cloud.google.com/support-hub).

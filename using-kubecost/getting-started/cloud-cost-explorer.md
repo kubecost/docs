@@ -13,7 +13,7 @@ kubecostModel:
   cloudCost:
      enabled: true
      labelList:
-       isIncludeList: false
+       IsIncludeList: false
        # format labels as comma separated string (ex. "label1,label2,label3")
        labels: ""
      topNItems: 1000

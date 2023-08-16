@@ -1,10 +1,14 @@
 # Multi-Cloud Integrations
 
-This document outlines how to set up cloud integration for accounts on multiple cloud providers, or multiple accounts on the same cloud provider. Multi-Cloud is an enterprise feature. This configuration can be used independently of or in addition to other cloud integration configurations provided by Kubecost. Once configured, Kubecost will display cloud assets for all configured accounts and perform reconciliation for all [federated clusters](long-term-storage.md) that have their respective accounts configured.
+{% hint style="info" %}
+Multi-cloud integrations are only officially supported on Kubecost Enteprise plans.
+{% endhint %}
+
+This document outlines how to set up cloud integration for accounts on multiple cloud service providers (CSPs), or multiple accounts on the same cloud provider. This configuration can be used independently of, or in addition, to other cloud integration configurations provided by Kubecost. Once configured, Kubecost will display cloud assets for all configured accounts and perform reconciliation for all [federated clusters](long-term-storage.md) that have their respective accounts configured.
 
 ## Step 1: Set up cloud cost and usage reporting
 
-For each Cloud Account that you would like to configure you will need to make sure that it is exporting cost data to its respective service to allow Kubecost to gain access to it.
+For each cloud account that you would like to configure, you will need to make sure that it is exporting cost data to its respective service to allow Kubecost to gain access to it.
 
 * Azure: Set up cost data export following this [guide](azure-out-of-cluster.md).
 * GCP: Set up BigQuery billing data exports with this [guide](https://cloud.google.com/billing/docs/how-to/export-data-bigquery).
@@ -22,11 +26,13 @@ The secret should contain a file named _cloud-integration.json_ with the followi
 }
 ```
 
-This method of Cloud-Integration supports multiple configurations per cloud provider simply by adding each cost export to their respective arrays in the .json file. The structure and required values for the configuration objects for each cloud provider are described below. Once you have filled in the configuration object use the command:
+This method of cloud integration supports multiple configurations per cloud provider simply by adding each cost export to their respective arrays in the .json file. The structure and required values for the configuration objects for each cloud provider are described below. Once you have filled in the configuration object, use the command:
 
+{% code overflow="wrap" %}
 ```bash
 kubectl create secret generic <SECRET_NAME> --from-file=cloud-integration.json -n kubecost
 ```
+{% endcode %}
 
 Once the secret is created, set `.Values.kubecostProductConfigs.cloudIntegrationSecret` to `<SECRET_NAME>` and upgrade Kubecost via Helm.
 
@@ -34,13 +40,13 @@ A GitHub repository with sample files required can be found [here](https://githu
 
 ### Azure
 
-The following values can be located in the Azure Portal under _Cost Management_ > _Exports_ or _Storage accounts_:
+The following values can be located in the Azure Portal under _Cost Management_ > _Exports_, or _Storage accounts_:
 
-* `azureSubscriptionID` is the "Subscription ID" belonging to the Storage account which stores your exported Azure cost report data.
+* `azureSubscriptionID` is the Subscription ID belonging to the Storage account which stores your exported Azure cost report data.
 * `azureStorageAccount` is the name of the Storage account where the exported Azure cost report data is being stored.
 * `azureStorageAccessKey` can be found by selecting _Access Keys_ from the navigation sidebar then selecting _Show keys_. Using either of the two keys will work.
 * `azureStorageContainer` is the name that you chose for the exported cost report when you set it up. This is the name of the container where the CSV cost reports are saved in your Storage account.
-* `azureContainerPath` is an optional value which should be used if there is more than one billing report that is exported to the configured container. The path provided should have only one billing export because kubecost will retrieve the most recent billing report for a given month found within the path.
+* `azureContainerPath` is an optional value which should be used if there is more than one billing report that is exported to the configured container. The path provided should have only one billing export because Kubecost will retrieve the most recent billing report for a given month found within the path.
 * `azureCloud` is an optional value which denotes the cloud where the storage account exists. Possible values are `public` and `gov`. The default is `public`.
 
 Set these values into the following object and add them to the Azure array:
@@ -60,6 +66,7 @@ Set these values into the following object and add them to the Azure array:
 
 If you don't already have a GCP service key for any of the projects you would like to configure, you can run the following commands in your command line to generate and export one. Make sure your GCP project is where your external costs are being run.
 
+{% code overflow="wrap" %}
 ```bash
 export PROJECT_ID=$(gcloud config get-value project)
 gcloud iam service-accounts create compute-viewer-kubecost --display-name "Compute Read Only Account Created For Kubecost" --format json
@@ -69,16 +76,17 @@ gcloud projects add-iam-policy-binding $PROJECT_ID --member serviceAccount:compu
 gcloud projects add-iam-policy-binding $PROJECT_ID --member serviceAccount:compute-viewer-kubecost@$PROJECT_ID.iam.gserviceaccount.com --role roles/bigquery.jobUser
 gcloud iam service-accounts keys create ./compute-viewer-kubecost-key.json --iam-account compute-viewer-kubecost@$PROJECT_ID.iam.gserviceaccount.com
 ```
+{% endcode %}
 
-You can then get your service account key to paste into the UI (be careful with this!):
+You can then get your service account key to paste into the UI:
 
 ```bash
 cat compute-viewer-kubecost-key.json
 ```
 
-* `<KEY_JSON>` The GCP service key created above. This value should be left as JSON when inserted into the configuration object
-* `<PROJECT_ID>` GCP Project ID should match the Project ID in the GCP service key.
-* `<BILLING_DATA_DATASET>` BigQuery dataset requires a BigQuery dataset prefix (e.g. billing\_data) in addition to the BigQuery table name. A full example is billing\_data.gcp\_billing\_export\_v1\_018AIF\_74KD1D\_534A2.
+* `<KEY_JSON>` is the GCP service key created above. This value should be left as a JSON when inserted into the configuration object
+* `<PROJECT_ID>` is the Project ID in the GCP service key.
+* `<BILLING_DATA_DATASET>` requires a BigQuery dataset prefix (e.g. `billing_data`) in addition to the BigQuery table name. A full example is `billing_data.gcp_billing_export_v1_018AIF_74KD1D_534A2`.
 
 Set these values into the following object and add it to the GCP array:
 
@@ -96,15 +104,15 @@ For each AWS account that you would like to configure, create an Access Key for 
 
 Gather each of these values from the AWS console for each account you would like to configure.
 
-* `<ACCESS_KEY_ID>` ID of the Access Key created in the previous step
-* `<ACCESS_KEY_SECRET>` Secret of the Access Key created in the
-* `<ATHENA_BUCKET_NAME>` An S3 bucket to store Athena query results that you’ve created that kubecost has permission to access The name of the bucket should match `s3://aws-athena-query-results-*`, so the IAM roles defined above will automatically allow access to it The bucket can have a Canned ACL of Private or other permissions as you see fit.
-* `<ATHENA_REGION>` The AWS region Athena is running in
-* `<ATHENA_DATABASE>` the name of the database created by the Athena setup. The Athena database name is available as the value (physical id) of AWSCURDatabase in the CloudFormation stack created above (in Step 2: Setting up the Athena of the AWS guild above)
-* `<ATHENA_TABLE>` the name of the table created by the Athena setup The table name is typically the database name with the leading athenacurcfn\_ removed (but is not available as a CloudFormation stack resource)
-* `<ATHENA_WORKGROUP>` The workgroup assigned to be used with Athena. If omitted, defaults to `Primary`.
-* `<ATHENA_PROJECT_ID>` e.g. "530337586277" # The AWS AccountID where the Athena CUR is.
-* `<MASTER_PAYER_ARN>` Is an optional value which should be set if you are using a multi-account billing set-up and are not accessing athena through the primary account. It should be set to the arn of the role in the masterpayer account, e.g. `arn:aws:iam::530337586275:role/KubecostRole`.
+* `<ACCESS_KEY_ID>` is the ID of the Access Key created in the previous step.
+* `<ACCESS_KEY_SECRET>` is the secret of the Access Key created in the
+* `<ATHENA_BUCKET_NAME>` is the S3 bucket storing Athena query results which Kubecost has permission to access. The name of the bucket should match `s3://aws-athena-query-results-*`, so the IAM roles defined above will automatically allow access to it. The bucket can have a canned ACL set to Private or other permissions as needed.
+* `<ATHENA_REGION>` is the AWS region Athena is running in
+* `<ATHENA_DATABASE>` is the name of the database created by the Athena setup. The Athena database name is available as the value (physical id) of `AWSCURDatabase` in the CloudFormation stack created above.
+* `<ATHENA_TABLE>` is the name of the table created by the Athena setup The table name is typically the database name with the leading `athenacurcfn_` removed (but is not available as a CloudFormation stack resource).
+* `<ATHENA_WORKGROUP>` is the workgroup assigned to be used with Athena. Default value is `Primary`.
+* `<ATHENA_PROJECT_ID>`is the AWS AccountID where the Athena CUR is. For example: `530337586277`.
+* `<MASTER_PAYER_ARN>` is an optional value which should be set if you are using a multi-account billing set-up and are not accessing Athena through the primary account. It should be set to the ARN of the role in the management (formerly master payer) account, for example: `arn:aws:iam::530337586275:role/KubecostRole`.
 
 Set these values into the following object and add them to the AWS array in the _cloud-integration.json_:
 

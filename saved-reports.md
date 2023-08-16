@@ -6,7 +6,39 @@ Reports can be managed via [_values.yaml_](https://github.com/kubecost/cost-anal
 
 <figure><img src=".gitbook/assets/savedreports.PNG" alt=""><figcaption><p>Reports page</p></figcaption></figure>
 
-## Saved report parameters
+## Managing reports via UI
+
+### Creating a report
+
+Begin by selecting _Create a report_. There are five report types available. Three of these correspond to Kubecost's different monitoring dashboards. The other two are specialized beta features.
+
+* Allocation Report
+* Asset Report
+* [Advanced Report](https://docs.kubecost.com/using-kubecost/getting-started/advanced-reports) (beta)
+* Cloud Cost Report
+* [Advanced Report - Cost Centers](https://docs.kubecost.com/using-kubecost/navigating-the-kubecost-ui/saved-reports/cost-center-report) (beta)
+
+Selecting a monitoring report type will take you to the respective dashboard. Provide the details of the query, then select _Save_. The report will now be saved on your Reports page for easy access.
+
+For help creating an Advanced Report (either type), select the respective hyperlink above for a step-by-step process.
+
+### Sharing reports
+
+After creating a report, you are able to share that report in recurring intervals through email or Slack as a PDF or CSV file. Shared reports replicate your saved query parameters every interval so you can view cost changes over time.
+
+{% hint style="info" %}
+Sharing reports is only available for Allocations, Assets, and Cloud Cost Reports, not either type of Advanced Report.
+{% endhint %}
+
+In the line for the report you want to share, select the three horizontal dots icon in the Actions column. Select _Share report_ from the menu. The Share Report window opens. Provide the following fields:
+
+* Interval: Interval that recurring reports will be sent out. Supports _Daily_, _Weekly_, and _Monthly_. Weekly reports default to going out Sunday at midnight. Monthly reports default to midnight on the first of the month. When selecting _Monthly_ and resetting on a day of the month not found in every month, the report will reset at the latest available day of that month. For example, if you choose to reset on the 31st, it will reset on the 30th for months with only 30 days.
+* Format: Supports _PDF_ or _CSV_.
+* Add email: Optional, email(s) to distribute the report to.
+
+Select _Apply_ to finalize. When you have created a schedule for your report, the selected interval will be displayed in the Interval column of your Reports page.
+
+## Managing reports via _values.yaml_
 
 The saved report settings, under `global.savedReports`, accept two parameters:
 
@@ -17,8 +49,8 @@ The following fields apply to each map item under the `reports` key:
 
 * `title` the title/name of your custom report; any non-empty string is accepted
 * `window` the time window the allocation report covers, the following values are supported:
-  * key words: `today`, `week` (week-to-date), `month` (month-to-date), `yesterday`, `lastweek`, `lastmonth`
-  * number of days: `{N}d` (last **N** days)
+  * keywords: `today`, `week` (week-to-date), `month` (month-to-date), `yesterday`, `lastweek`, `lastmonth`
+  * number of days: `{N}d` (last N days)
     * e.g. `30d` for the last 30 days
   * date range: `{start},{end}` (comma-separated RFC-3339 date strings or Unix timestamps)
     * e.g. `2021-01-01T00:00:00Z,2021-01-02T00:00:00Z` for the single day of 1 January 2021
@@ -62,6 +94,7 @@ The following fields apply to each map item under the `reports` key:
 
 ## Example Helm _values.yaml_ Saved Reports section
 
+{% code overflow="wrap" %}
 ```
    # Set saved report(s) accessible in reports.html
    # View configured saved reports in <front-end-url>/model/reports
@@ -104,14 +137,15 @@ The following fields apply to each map item under the `reports` key:
         accumulate: true # entire window resolution
         filters: [] # if no filters, specify empty array
 ```
+{% endcode %}
 
 ## Combining UI report management with _values.yaml_
 
-When defining reports via _values.yaml_, by setting `global.savedReports.enabled = true` in the values file, the reports defined in _values.yaml_ are created when the Kubecost pod starts. Reports can still be freely created/deleted via the UI while the pod is running. However, when the pod restarts, whatever is defined the the values file supersedes any UI changes.
+When defining reports via _values.yaml_, by setting `global.savedReports.enabled = true` in the values file, the reports defined in _values.yaml_ are created when the Kubecost pod starts. Reports can still be freely created/deleted via the UI while the pod is running. However, when the pod restarts, whatever is defined the values file supersedes any UI changes.
 
 Generally, the ConfigMap, if present, serves as the source of truth at startup.
 
-If saved reports are _not_ provided via _values.yaml_, meaning `global.savedReports.enabled = false`, reports created via the UI are saved to a persistent volume, and persist across pod restarts.
+If saved reports are _not_ provided via _values.yaml_, meaning `global.savedReports.enabled = false`, reports created via the UI are saved to a persistent volume and persist across pod restarts.
 
 ## Troubleshooting
 
@@ -125,6 +159,7 @@ Review these steps to verify that saved reports are being passed to the Kubecost
     * Find the section starting with `# Source: cost-analyzer/templates/cost-analyzer-saved-reports-configmap.yaml`
     * Ensure that the Helm values are successfully read into the ConfigMap under the `data` field. Example below.
 
+    {% code overflow="wrap" %}
     ```
     # Source: cost-analyzer/templates/cost-analyzer-saved-reports-configmap.yaml
     apiVersion: v1
@@ -141,6 +176,7 @@ Review these steps to verify that saved reports are being passed to the Kubecost
     data:
       saved-reports.json: '[{"accumulate":false,"aggregateBy":"namespace","filters":[{"property":"cluster","value":"cluster-one,cluster*"},{"property":"namespace","value":"kubecost"}],"idle":"separate","title":"Example Saved Report 0","window":"today"},{"accumulate":false,"aggregateBy":"controllerKind","filters":[{"property":"label","value":"app:cost*,environment:kube*"},{"property":"namespace","value":"kubecost"}],"idle":"shareByNode","title":"Example Saved Report 1","window":"month"},{"accumulate":true,"aggregateBy":"service","filters":[],"idle":"hide","title":"Example Saved Report 2","window":"2020-11-11T00:00:00Z,2020-12-09T23:59:59Z"}]'# Source: cost-analyzer/templates/cost-analyzer-alerts-configmap.yaml
     ```
+    {% endcode %}
 3. Ensure that the JSON string is successfully mapped to the appropriate configs
 
 Navigate to your Reports page in the Kubecost UI and ensure that the configured report parameters have been set by selecting the Report name.

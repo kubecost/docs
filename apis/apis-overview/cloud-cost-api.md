@@ -16,98 +16,96 @@ Samples full granularity of cloud costs from cloud billing report (ex. AWS' Cost
 {% endswagger-description %}
 
 {% swagger-parameter in="path" name="window" required="true" %}
-Window of the query. 
+Window of the query.
 
 **Only accepts daily intervals**
 
-, example 
+, example
 
 `window=3d`
 
 .
 {% endswagger-parameter %}
 
-{% swagger-parameter in="path" name="CostMetric" %}
-Determines which cloud cost metric type will be returned. Acceptable values are 
+{% swagger-parameter in="path" name="CostMetric" required="false" %}
+Determines which cloud cost metric type will be returned. Acceptable values are
 
 `AmortizedNetCost`
 
-, 
+,
 
 `InvoicedCost`
 
-, 
+,
 
 `ListCost`
 
-, and 
+, and
 
 `NetCost`
 
-.  Default is 
+. Default is
 
 `AmortizedNetCost`
 
 .
 {% endswagger-parameter %}
 
-{% swagger-parameter in="path" name="aggregate" %}
-Field by which to aggregate the results. Accepts: 
+{% swagger-parameter in="path" name="aggregate" required="false" %}
+Field by which to aggregate the results. Accepts:
 
 `invoiceEntityID`
 
-, 
+,
 
 `accountID`
 
-, 
+,
 
 `provider`
 
-, 
+,
 
 `service`
 
-, and 
+, and
 
 `label:<name>`
 
-. Supports multi-aggregation using comma-separated lists. Example: 
+. Supports multi-aggregation using comma-separated lists. Example:
 
 `aggregate=accountID,service`
 {% endswagger-parameter %}
 
-{% swagger-parameter in="path" name="filterInvoiceEntityIDs" %}
+{% swagger-parameter in="path" name="filterInvoiceEntityIDs" required="false" %}
 Filter for account
 {% endswagger-parameter %}
 
-{% swagger-parameter in="path" name="filterAccountIDs" %}
+{% swagger-parameter in="path" name="filterAccountIDs" required="false" %}
 GCP only, filter for projectID
 {% endswagger-parameter %}
 
-{% swagger-parameter in="path" name="filterProviders" %}
+{% swagger-parameter in="path" name="filterProviders" required="false" %}
 Filter for cloud service provider
 {% endswagger-parameter %}
 
-{% swagger-parameter in="path" name="filterProvidersID" %}
+{% swagger-parameter in="path" name="filterProvidersID" required="false" %}
 Filter for resource-level ID given by CSP
 {% endswagger-parameter %}
 
-{% swagger-parameter in="path" name="filterServices" %}
+{% swagger-parameter in="path" name="filterServices" required="false" %}
 Filter for cloud service
 {% endswagger-parameter %}
 
-{% swagger-parameter in="path" name="filterCategories" %}
+{% swagger-parameter in="path" name="filterCategories" required="false" %}
 Filter based on object type
 {% endswagger-parameter %}
 
-{% swagger-parameter in="path" name="filterLabels" %}
+{% swagger-parameter in="path" name="filterLabels" required="false" %}
 Filter for a specific label. Does not support filtering for multiple labels at once.
 {% endswagger-parameter %}
 
 {% swagger-response status="200: OK" description="" %}
-
-
 ```json
 {
     "code": 200,
@@ -141,56 +139,56 @@ Query cloud cost aggregate data
 {% endswagger-description %}
 
 {% swagger-parameter in="path" name="window" required="true" type="string" %}
-Window of the query. Accepts all standard Kubecost window formats (See our doc on using 
+Window of the query. Accepts all standard Kubecost window formats (See our doc on using
 
 [the `window` parameter](https://docs.kubecost.com/apis/apis-overview/assets-api#using-window-parameter)
 
 ).
 {% endswagger-parameter %}
 
-{% swagger-parameter in="path" name="aggregate" type="string" %}
-Field by which to aggregate the results. Accepts: 
+{% swagger-parameter in="path" name="aggregate" type="string" required="false" %}
+Field by which to aggregate the results. Accepts:
 
 `invoiceEntityID`
 
-, 
+,
 
 `accountID`
 
-, 
+,
 
 `provider`
 
-, 
+,
 
 `service`
 
-, and 
+, and
 
 `label:<name>`
 
-. Supports multi-aggregation using comma-separated lists. Example: 
+. Supports multi-aggregation using comma-separated lists. Example:
 
 `aggregate=accountID,service`
 {% endswagger-parameter %}
 
-{% swagger-parameter in="path" name="filterInvoiceEntityIDs" type="string" %}
+{% swagger-parameter in="path" name="filterInvoiceEntityIDs" type="string" required="false" %}
 Filter for account
 {% endswagger-parameter %}
 
-{% swagger-parameter in="path" name="filterAccountIDs" type="string" %}
+{% swagger-parameter in="path" name="filterAccountIDs" type="string" required="false" %}
 GCP only, filter for projectID
 {% endswagger-parameter %}
 
-{% swagger-parameter in="path" name="filterProviders" type="string" %}
+{% swagger-parameter in="path" name="filterProviders" type="string" required="false" %}
 Filter for cloud service provider
 {% endswagger-parameter %}
 
-{% swagger-parameter in="path" name="filterServices" type="string" %}
+{% swagger-parameter in="path" name="filterServices" type="string" required="false" %}
 Filter for cloud service
 {% endswagger-parameter %}
 
-{% swagger-parameter in="path" name="filterLabel" %}
+{% swagger-parameter in="path" name="filterLabel" required="false" %}
 Filter for a specific label. Does not support filtering for multiple labels at once.
 {% endswagger-parameter %}
 
@@ -255,7 +253,7 @@ Filter for a specific label. Does not support filtering for multiple labels at o
 Using the endpoint `/model/cloudCost/top` will accept all parameters of `model/cloudCost/view` **except for** `MetricCost`.
 {% endhint %}
 
-`CostMetric` values are based on and calculated following standard FinOps dimensions and metrics, as seen in detail [here](https://github.com/finopsfoundation/finops-open-cost-usage-spec/blob/main/specification\_sheet\_import.md). The four available metrics supported by the Cloud Cost API are:
+`CostMetric` values are based on and calculated following standard FinOps dimensions and metrics. The four available metrics supported by the Cloud Cost API are:
 
 | CostMetric value | Description                                                                                 |
 | ---------------- | ------------------------------------------------------------------------------------------- |
@@ -1621,7 +1619,7 @@ http://<your-kubecost-address>/model/cloudCost/aggregate?window=3d&aggregate=ser
 {% tabs %}
 {% tab title="Request" %}
 ```
-http:/<your-kubecost-address>/model/cloudCost/view?window=2d&filterServices=AmazonEC2&aggregate=invoiceEntityIDhttp:/<your-kubecost-address>/model/cloudCost/view?window=2d&filterServices=AmazonEC2&aggregate=invoiceEntityIDhttp:/<your-kubecost-address>/model/cloudCost/view?window=2d&filterServices=AmazonEC2&aggregate=invoiceEntityID
+http:/<your-kubecost-address>/model/cloudCost/view?window=2d&filterServices=AmazonEC2&aggregate=invoiceEntityID
 ```
 {% endtab %}
 

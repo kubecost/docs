@@ -40,9 +40,11 @@ az role definition create --verbose --role-definition @myrole.json
 
 Next, create an Azure service principal.
 
+{% code overflow="wrap" %}
 ```shell
 az ad sp create-for-rbac --name "KubecostAccess" --role "KubecostRole" --scope "/subscriptions/YOUR_SUBSCRIPTION_ID" --output json
 ```
+{% endcode %}
 
 Keep this information which is used in the _service-key.json_ below.
 
@@ -70,9 +72,11 @@ Next, create a Secret for the Azure Service Principal
 When managing the service account key as a Kubernetes Secret, the secret must reference the service account key JSON file, and that file must be named `service-key.json`.
 {% endhint %}
 
+{% code overflow="wrap" %}
 ```shell
 kubectl create secret generic azure-service-key -n kubecost --from-file=service-key.json
 ```
+{% endcode %}
 
 Finally, set the `kubecostProductConfigs.serviceKeySecretName` Helm value to the name of the Kubernetes secret you created. We use the value `azure-service-key` in our examples.
 

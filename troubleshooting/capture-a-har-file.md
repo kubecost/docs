@@ -16,7 +16,7 @@ Below are the steps to generate the HAR file from the most commonly-used browser
 2. Look for the vertical dots icon and select _More Tools > Developer Tools_.
 3.  From the panel that appears, select the _Network_ tab.\
     \
-    Optional: If Zendesk Customer Support requests a HAR file with WebSockets, select the _WS_ option in the Network tab. Reload your browser to start seeing the traffic over the WebSocket.\
+    Optional: If a HAR file with WebSockets is requested, select the _WS_ option in the Network tab. Reload your browser to start seeing the traffic over the WebSocket.\
 
 
     <figure><img src="https://support.zendesk.com/hc/article_attachments/5214136080922" alt=""><figcaption></figcaption></figure>

@@ -6,24 +6,22 @@ The Cluster Controller is currently in beta. Please read the documentation caref
 
 Kubecost's Cluster Controller contains Kubecost's automation features, and thus has write permission to certain resources on your cluster. For this reason, the Cluster Controller is disabled by default.
 
-The Cluster Controller enables actions like:
+The Cluster Controller enables features like:
 
 * [Automated cluster turndown](https://docs.kubecost.com/install-and-configure/advanced-configuration/controller/cluster-turndown)
-* 1-click cluster right-sizing
-* [Automated request right-sizing](auto-request-sizing.md)
-
-This document shows you how to setup and enable this functionality in the Kubecost product.
-
-
+* [Cluster right-sizing recommendations](https://docs.kubecost.com/using-kubecost/navigating-the-kubecost-ui/savings/cluster-right-sizing-recommendations)
+* [Container request right-sizing (RRS) recommendations](https://docs.kubecost.com/using-kubecost/navigating-the-kubecost-ui/savings/auto-request-sizing)
+* [Kubecost Actions](https://docs.kubecost.com/using-kubecost/navigating-the-kubecost-ui/savings/savings-actions)
 
 ## Feature functionality
 
-The Cluster Controller can be enabled on any cluster, but certain functionality will only be enabled based on your cloud service provider (CSP) and setup:
+The Cluster Controller can be enabled on any cluster type, but certain functionality will only be enabled based on your cloud service provider (CSP) and setup:
 
-* The Controller itself and automated request right-sizing are available on all clusters and setups.
-* Cluster turndown and 1-click cluster right-sizing are only available on GKE, EKS, and Kops-on-AWS clusters, after setting up a provider service key.
+* The Cluster Controller can only be enabled on your primary cluster.
+* The Controller itself and container RRS are available for all cluster types and configurations.
+* Cluster turndown, cluster right-sizing, and Kubecost Actions are only available for GKE, EKS, and Kops-on-AWS clusters, after setting up a provider service key.
 
-Therefore, the Provider service key setup section below is optional, but will limit functionality if skipped.
+Therefore, the Provider service key setup section below is optional, but will limit functionality if you choose to skip it.
 
 ## Provider service key setup
 
@@ -34,8 +32,6 @@ If you are enabling the Cluster Controller for a GKE/EKS/Kops AWS cluster, follo
 <details>
 
 <summary>GKE setup</summary>
-
-
 
 The following command performs the steps required to set up a service account. [More info](https://github.com/kubecost/cluster-turndown/blob/master/scripts/README.md).
 
@@ -58,7 +54,42 @@ To use [this setup script](https://github.com/kubecost/cluster-turndown/blob/mas
 
 <summary>EKS setup</summary>
 
-Create a new User with `AutoScalingFullAccess` permissions. Create a new file, _service-key.json_, and use the access key ID and secret access key to fill out the following template:
+For EKS cluster provisioning, if using `eksctl`, make sure that you use the `--managed` option when creating the cluster. Unmanaged node groups should be upgraded to managed. [More info](https://eksctl.io/usage/eks-managed-nodes/).
+
+Create a new User with `AutoScalingFullAccess` permissions, plus the following EKS-specific permissions:
+
+{% code overflow="wrap" %}
+```
+{
+    "Effect": "Allow",
+    "Action": [
+        "eks:ListClusters",
+        "eks:DescribeCluster",
+        "eks:DescribeNodegroup",
+        "eks:ListNodegroups",
+        "eks:CreateNodegroup",
+        "eks:UpdateClusterConfig",
+        "eks:UpdateNodegroupConfig",
+        "eks:DeleteNodegroup",
+        "eks:ListTagsForResource",
+        "eks:TagResource",
+        "eks:UntagResource"
+    ],
+    "Resource": "*"
+},
+{
+    "Effect": "Allow",
+    "Action": [
+        "iam:GetRole",
+        "iam:ListAttachedRolePolicies",
+        "iam:PassRole"
+    ],
+    "Resource": "*"
+}
+```
+{% endcode %}
+
+Create a new file, _service-key.json_, and use the access key ID and secret access key to fill out the following template:
 
 ```json
 {
@@ -75,13 +106,73 @@ $ kubectl create secret generic cluster-controller-service-key -n <NAMESPACE> --
 ```
 {% endcode %}
 
+Here is a full example of this process using the AWS CLI and a simple IAM user (requires `jq`):
+
+```
+aws iam create-user \
+    --user-name "<your user>"
+
+aws iam attach-user-policy \
+    --user-name "<your user>" \
+    --policy-arn "arn:aws:iam:$(aws sts get-caller-identity | jq -r '.Account'):aws:policy/AutoScalingFullAccess"
+
+read -r -d '' EKSPOLICY << EOM
+{
+    "Version": "2012-10-17",
+    "Statement": [
+    {
+        "Effect": "Allow",
+        "Action": [
+            "eks:ListClusters",
+            "eks:DescribeCluster",
+            "eks:DescribeNodegroup",
+            "eks:ListNodegroups",
+            "eks:CreateNodegroup",
+            "eks:UpdateClusterConfig",
+            "eks:UpdateNodegroupConfig",
+            "eks:DeleteNodegroup",
+            "eks:ListTagsForResource",
+            "eks:TagResource",
+            "eks:UntagResource"
+        ],
+        "Resource": "*"
+    },
+    {
+        "Effect": "Allow",
+        "Action": [
+            "iam:GetRole",
+            "iam:ListAttachedRolePolicies",
+            "iam:PassRole"
+        ],
+        "Resource": "*"
+    }
+    ]
+}
+EOM
+
+aws iam put-user-policy \
+    --user-name "<your user>" \
+    --policy-name "eks-permissions" \
+    --policy-document "${EKSPOLICY}"
+
+aws iam create-access-key \
+    --user-name "<your user>" \
+    > /tmp/aws-key.json
+
+AAKI="$(jq -r '.AccessKey.AccessKeyId' /tmp/aws-key.json)"
+ASAK="$(jq -r '.AccessKey.SecretAccessKey' /tmp/aws-key.json)"
+kubectl create secret generic \
+    cluster-controller-service-key \
+    -n kubecost \
+    --from-literal="service-key.json={\"aws_access_key_id\": \"${AAKI}\", \"aws_secret_access_key\": \"${ASAK}\"}"
+
+```
+
 </details>
 
 <details>
 
 <summary>Kops-on-AWS setup</summary>
-
-For EKS cluster provisioning, if using `eksctl`, make sure that you use the `--managed` option when creating the cluster. Unmanaged node groups should be upgraded to managed. [More info](https://eksctl.io/usage/eks-managed-nodes/).
 
 Create a new user or IAM role with `AutoScalingFullAccess` permissions. JSON definition of those permissions:
 
@@ -140,30 +231,6 @@ Create a new user or IAM role with `AutoScalingFullAccess` permissions. JSON def
 }
 
 
-```
-{% endcode %}
-
-For EKS clusters, add the following permissions to the above policy for EKS API access:
-
-{% code overflow="wrap" %}
-```
-{
-    "Effect": "Allow",
-    "Action": [
-        "eks:ListClusters",
-        "eks:DescribeCluster",
-        "eks:DescribeNodegroup",
-        "eks:ListNodegroups",
-        "eks:CreateNodegroup",
-        "eks:UpdateClusterConfig",
-        "eks:UpdateNodegroupConfig",
-        "eks:DeleteNodegroup",
-        "eks:ListTagsForResource",
-        "eks:TagResource",
-        "eks:UntagResource"
-    ],
-    "Resource": "*"
-}
 ```
 {% endcode %}
 

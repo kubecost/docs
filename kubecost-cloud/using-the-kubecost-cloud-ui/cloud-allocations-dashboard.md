@@ -1,7 +1,7 @@
-# Cloud Allocations Dashboard
+# Kubecost Cloud: Allocations Dashboard
 
 {% hint style="info" %}
-This documentation should only be consulted when using Kubecost Cloud! For information about the Allocations dashboard, see [here](https://docs.kubecost.com/using-kubecost/navigating-the-kubecost-ui/cost-allocation).
+This documentation should only be consulted when using Kubecost Cloud! For information about the Allocations dashboard for self-hosted Kubecost, see [here](https://docs.kubecost.com/using-kubecost/navigating-the-kubecost-ui/cost-allocation).
 {% endhint %}
 
 Here you can aggregate cost by namespace, deployment, service, and other native Kubernetes concepts. While selecting _Single Aggregation_, you will only be able to categorize by one concept at a time. While selecting _Multi Aggregation_, you will be able to filter for multiple concepts at the same time.

@@ -1,6 +1,6 @@
 # Kubecost API Directory
 
-Welcome to the Kubecost API library! This directory will show you how Kubecost APIs can assist in monitoring, maintaining, and optimizing your cloud spend. Also learn how Kubecost APIs power different features of the UI below.
+Welcome to the Kubecost API library! This directory will show you how Kubecost APIs can assist in monitoring, maintaining, and optimizing your cloud spend. Learn also how Kubecost APIs power different features of the UI below.
 
 ## Monitoring APIs
 
@@ -28,7 +28,7 @@ The Cloud Costs API retrieves cloud cost data from cloud providers by reading co
 
 ### [Budget API](https://docs.kubecost.com/apis/apis-overview/budget-api)
 
-The Budget API allows you to establish spend budget rules for your workload across clusters and namespaces to ensure you don't go over your alloted budget.
+The Budget API allows you to establish spending budget rules for your workload across clusters and namespaces to ensure you don't go over your allotted budget.
 
 ### [Cost Events Audit API](https://docs.kubecost.com/apis/apis-overview/cost-events-audit-api)
 
@@ -44,9 +44,9 @@ The Prediction API takes Kubernetes objects as input and produces an estimation 
 
 The Events API provides a log of different occurrences in your workload in order to help with troubleshooting. Logs generated with this API are helpful for submitting bug reports.
 
-### [**Audit API**](audit-api.md)
+### [**Audit API**](apis/deprecated-apis/audit-api.md)
 
-The Audit API verifies cached data sources of Kubecost for validity of the data sources and processes through a series of tests.
+The Audit API verifies cached data sources of Kubecost for the validity of the data sources and processes through a series of tests.
 
 ## Optimization APIs
 

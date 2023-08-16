@@ -8,13 +8,14 @@ Kubecost supports Single Sign On (SSO) and Role Based Access Control (RBAC) with
 
 ## Overview of features
 
-* **User authentication (`.Values.saml`)**: SSO provides a simple mechanism to restrict application access internally and externally
-* **Pre-defined user roles (`.Values.saml.rbac`)**:
+* User authentication (`.Values.saml`): SSO provides a simple mechanism to restrict application access internally and externally
+* Pre-defined user roles (`.Values.saml.rbac`):
   * `admin`: Full control with permissions to manage users, configure model inputs, and application settings.
   * `readonly`: User role with read-only permission.
   * `editor`: Role can change and build alerts and reports, but cannot edit application settings and otherwise functions as read-only.
-* **Custom access roles (`filters.json`)**: Limit users based on attributes or group membership to view a set of namespaces, clusters, or other aggregations
+* Custom access roles (_filters.json_): Limit users based on attributes or group membership to view a set of namespaces, clusters, or other aggregations
 
+{% code overflow="wrap" %}
 ```yaml
 # EXAMPLE CONFIGURATION
 # View setup guides below, for full list of Helm configuration values
@@ -43,13 +44,34 @@ saml:
     customGroups:
       - assertionName: "kubecost_group"
 ```
+{% endcode %}
 
 ## Setup guides
 
 * [AzureAD setup guide](https://github.com/kubecost/poc-common-configurations/tree/main/saml-azuread)
 * [Okta setup guide](https://github.com/kubecost/poc-common-configurations/tree/main/saml-okta)
 
-> **Note**: All SAML 2.0 providers also work. The above guides can be used as templates for what is required.
+{% hint style="info" %}
+All SAML 2.0 providers also work. The above guides can be used as templates for what is required.
+{% endhint %}
+
+## Using the Kubecost API
+
+When SAML SSO is enabled in Kubecost, ports 9090 and 9003 of `service/kubecost-cost-analyzer` will require authentication. Therefore user API requests will need to be authenticated with a token. The token can be obtained by logging into the Kubecost UI and copying the token from the browser’s local storage. Alternatively, a long-term token can be issued to users from your identity provider.
+
+{% code overflow="wrap" %}
+```sh
+curl -L 'http://kubecost.mycompany.com/model/allocation?window=1d' \
+  -H 'Cookie: token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsiYWRtaW4iLCJncm91cDprdWJlY29zdF9hZG1pbiIsImdyb3VwOmFkbWluQG15Y29tcGFueS5jb20iXSwiZXhwIjoxNjkwMzA2MjYwLjk0OTYyMX0.iLbUuMo0eYhNg0hzv_EEHLIX5Z0du4woPevX3wEnAh8'
+```
+{% endcode %}
+
+For admins, Kubecost additionally exposes an unauthenticated API on port 9004 of `service/kubecost-cost-analyzer`.
+
+```sh
+kubectl port-forward service/kubecost-cost-analyzer 9004:9004
+curl -L 'localhost:9004/allocation?window=1d'
+```
 
 ## SAML troubleshooting guide
 
@@ -60,6 +82,7 @@ saml:
 
 If you’re supplying the SAML from the address of an Identity Provider Server, `curl` the SAML metadata endpoint from within the Kubecost pod and ensure that a valid XML EntityDescriptor is being returned and downloaded. The response should be in this format:
 
+{% code overflow="wrap" %}
 ```bash
 $ kubectl exec deployment/kubecost-cost-analyzer -c cost-analyzer-frontend -n kubecost -it -- /bin/sh
 $ curl https://dev-elu2z98r.auth0.com/samlp/metadata/c6nY4M37rBP0qSO1IYIqBPPyIPxLS8v2
@@ -88,6 +111,7 @@ $ curl https://dev-elu2z98r.auth0.com/samlp/metadata/c6nY4M37rBP0qSO1IYIqBPPyIPx
   </IDPSSODescriptor>
 </EntityDescriptor>
 ```
+{% endcode %}
 
 ### Common SAML error states are as follows:
 
@@ -106,11 +130,13 @@ Certain metadata URLs could potentially return an EntitiesDescriptor, instead of
 
 You are left with data in a similar format to the example below:
 
+{% code overflow="wrap" %}
 ```xml
 <EntityDescriptor xmlns="urn:oasis:names:tc:SAML:2.0:metadata" xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" entityID="kubecost-entity-id">
   .... 
 </EntityDescriptor>
 ```
+{% endcode %}
 
 Then, you can upload the EntityDescriptor to a secret in the same namespace as kubecost and use that directly.
 
@@ -134,7 +160,7 @@ For users who want to use CSI driver for storing SAML secret, we suggest this [g
 
 **InvalidNameIDPolicy format**
 
-From the following [PingIdentity article](https://support.pingidentity.com/s/article/Cannot-provide-requested-name-identifier-qualified-with-SampleNameNEW):
+From a [PingIdentity article](https://support.pingidentity.com/s/article/Cannot-provide-requested-name-identifier-qualified-with-SampleNameNEW):
 
 > An alternative solution is to add an attribute called "SAML\_SP\_NAME\_QUALIFIER" to the connection's attribute contract with a TEXT value of the requested SPNameQualifier. When you do this, select the following for attribute name format: `urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified`
 

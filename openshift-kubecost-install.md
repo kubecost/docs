@@ -83,7 +83,7 @@ On the existing K8s cluster that you intend to install Kubecost, run the followi
 
 <details>
 
-<summary>Click to see code</summary>
+<summary>Expand to see code</summary>
 
 ```bash
 cat <<'EOF' |
@@ -395,7 +395,7 @@ MANIFEST_URL=https://raw.githubusercontent.com/kubecost/openshift-helm-chart/mai
 
 </details>
 
-To learn more about how to install and config Grafana agent as well as additional scrape configuration, please refer to [Grafana Agent for Kubernetes](https://grafana.com/docs/grafana-cloud/kubernetes/agent-k8s/k8s\_agent\_metrics/) section of the Grafana Cloud documentation. Or you can check Kubecost Prometheus scrape config at this [Github repository](https://github.com/kubecost/cost-analyzer-helm-chart/blob/ebe7e088debecd23f90e6dd75b425828901a246c/cost-analyzer/charts/prometheus/values.yaml#L1152)
+To learn more about how to install and config Grafana agent as well as additional scrape configuration, please refer to [Grafana Agent](https://grafana.com/docs/tempo/latest/configuration/grafana-agent/) documentation for Grafana Cloud. Or you can check Kubecost Prometheus scrape config at this [Github repository](https://github.com/kubecost/cost-analyzer-helm-chart/blob/ebe7e088debecd23f90e6dd75b425828901a246c/cost-analyzer/charts/prometheus/values.yaml#L1152)
 
 #### Step 2: Verify if grafana-agent is scraping data successfully.
 
@@ -539,7 +539,3 @@ helm uninstall kubecost --namespace kubecost
 The process is complete. By now, you should have successfully completed the Kubecost integration with Grafana Cloud.
 
 Optionally, you can also add our [Kubecost Dashboard for Grafana Cloud](https://grafana.com/grafana/dashboards/15714) to your organization to visualize your cloud costs in Grafana.
-
-## Support
-
-For advanced setup or if you have any questions, you can contact us on [Slack](https://join.slack.com/t/kubecost/shared\_invite/enQtNTA2MjQ1NDUyODE5LWFjYzIzNWE4MDkzMmUyZGU4NjkwMzMyMjIyM2E0NGNmYjExZjBiNjk1YzY5ZDI0ZTNhZDg4NjlkMGRkYzFlZTU) or email us at [support@kubecost.com](support@kubecost.com).

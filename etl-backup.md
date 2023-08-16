@@ -7,15 +7,19 @@ There are a number of reasons why you may want to backup this ETL data:
 * To ensure a copy of your Kubecost data exists, so that you can restore the data if needed
 * To reduce the amount of historical data stored in Prometheus/Thanos, and instead retain historical ETL data
 
-> **Note**: Beginning in v1.100 this feature is enabled by default if you have Thanos enabled. To opt out, set `.Values.kubecostModel.etlBucketConfigSecret=""`
+{% hint style="info" %}
+Beginning in v1.100, this feature is enabled by default if you have Thanos enabled. To opt out, set `.Values.kubecostModel.etlBucketConfigSecret="".`
+{% endhint %}
 
 ## Option 1: Automated durable ETL backups and monitoring
 
-We provide cloud storage backups for ETL backing storage. Backups are not the typical approach of "halt all reads/writes and dump the database." Instead, the backup system is a transparent feature that will always ensure that local ETL data is backed up, and if local data is missing, it can be retrieved from backup storage. This feature protects users from accidental data loss by ensuring that previously backed up data can be restored at runtime.
+We provide cloud storage backups for ETL backing storage. Backups are not the typical approach of "halt all reads/writes and dump the database." Instead, the backup system is a transparent feature that will always ensure that local ETL data is backed up, and if local data is missing, it can be retrieved from backup storage. This feature protects users from accidental data loss by ensuring that previously backed-up data can be restored at runtime.
 
-> **Note**: Durable backup storage functionality is only part of Kubecost Enterprise.
+{% hint style="info" %}
+Durable backup storage functionality is supported with a Kubecost Enterprise plan.
+{% endhint %}
 
-When the ETL pipeline collects data, it stores both daily and hourly (if configured) cost metrics on a configured storage. This defaults to a persistent volume based disk storage, but can be configured to use external durable storage on the following providers:
+When the ETL pipeline collects data, it stores daily and hourly (if configured) cost metrics on a configured storage. This defaults to a PV-based disk storage, but can be configured to use external durable storage on the following providers:
 
 * AWS S3
 * Azure Blob Storage
@@ -27,22 +31,31 @@ This configuration secret follows the same layout documented for Thanos [here](h
 
 You will need to create a file named `object-store.yaml` using the chosen storage provider configuration (documented below), and run the following command to create the secret from this file:
 
+{% code overflow="wrap" %}
 ```bash
 kubectl create secret generic <YOUR_SECRET_NAME> -n kubecost --from-file=object-store.yaml
 ```
+{% endcode %}
 
-> **Note**: The file must be named `object-store.yaml`
+The file must be named _object-store.yaml_.
 
-#### Existing Thanos users
+<details>
 
-If you have already configured Thanos following [this documentation](/long-term-storage.md), you can reuse the previously created bucket configuration secret.
+<summary>Existing Thanos users</summary>
 
-Setting `.Values.kubecostModel.etlBucketConfigSecret=kubecost-thanos` will enable the backup feature. This will backup all ETL data to the same bucket being used by Thanos.
+If you have already configured Thanos following [this documentation](long-term-storage.md), you can reuse the previously created bucket configuration secret.
 
-#### S3
+Setting `.Values.kubecostModel.etlBucketConfigSecret=kubecost-thanos` will enable the backup feature. This will back up all ETL data to the same bucket being used by Thanos.
+
+</details>
+
+<details>
+
+<summary>S3</summary>
 
 The configuration schema for S3 is documented [here](https://thanos.io/v0.21/thanos/storage.md#s3). For reference, here's an example:
 
+{% code overflow="wrap" %}
 ```yaml
 type: S3
 config:
@@ -57,11 +70,17 @@ config:
     "X-Amz-Acl": "bucket-owner-full-control"
 prefix: ""  # Optional. Specify a path within the bucket (e.g. "kubecost/etlbackup").
 ```
+{% endcode %}
 
-#### Google Cloud Storage
+</details>
+
+<details>
+
+<summary>Google Cloud Storage</summary>
 
 The configuration schema for Google Cloud Storage is documented [here](https://thanos.io/v0.21/thanos/storage.md/#gcs). For reference, here's an example:
 
+{% code overflow="wrap" %}
 ```yaml
 type: GCS
 config:
@@ -81,8 +100,13 @@ config:
     }
 prefix: ""  # Optional. Specify a path within the bucket (e.g. "kubecost/etlbackup").
 ```
+{% endcode %}
 
-#### Azure
+</details>
+
+<details>
+
+<summary>Azure</summary>
 
 The configuration schema for Azure is documented [here](https://thanos.io/v0.21/thanos/storage.md/#azure). For reference, here's an example:
 
@@ -96,9 +120,13 @@ config:
 prefix: ""  # Optional. Specify a path within the bucket (e.g. "kubecost/etlbackup").
 ```
 
-#### Storj
+</details>
 
-Because Storj is [S3 compatible](https://docs.storj.io/dcs/api-reference/s3-compatible-gateway/), it can be be used as a drop-in replacement for S3. After an S3 Compatible Access Grant has been created, an example configuration would be:
+<details>
+
+<summary>Storj</summary>
+
+Because Storj is [S3 compatible](https://docs.storj.io/dcs/api-reference/s3-compatible-gateway/), it can be used as a drop-in replacement for S3. After an S3 Compatible Access Grant has been created, an example configuration would be:
 
 ```yaml
 type: S3
@@ -119,6 +147,8 @@ config:
 prefix: ""  # Optional. Specify a path within the bucket (e.g. "kubecost/etlbackup").
 ```
 
+</details>
+
 ### Step 2: Enable ETL backup in Helm values
 
 If Kubecost was installed via Helm, ensure the following value is set.
@@ -132,17 +162,21 @@ kubecostModel:
 
 If you are using an existing disk storage option for your ETL data, enabling the durable backup feature will retroactively back up all previously stored data\*. This feature is also fully compatible with the existing S3 backup feature.
 
-\* _If you are using a memory store for your ETL data with a local disk backup (`kubecostModel.etlFileStoreEnabled: false`), the backup feature will simply replace the local backup. In order to take advantage of the retroactive backup feature, you will need to update to file store (`kubecostModel.etlFileStoreEnabled: true`). This option is now enabled by default in the Helm chart._
+{% hint style="info" %}
+If you are using a memory store for your ETL data with a local disk backup (`kubecostModel.etlFileStoreEnabled: false`), the backup feature will simply replace the local backup. In order to take advantage of the retroactive backup feature, you will need to update to file store (`kubecostModel.etlFileStoreEnabled: true`). This option is now enabled by default in the Helm chart.
+{% endhint %}
 
 ## Option 2: Manual backup via Bash script
 
 The simplest way to backup Kubecost's ETL is to copy the pod's ETL store to your local disk. You can then send that file to any other storage system of your choice. We provide a [script](https://github.com/kubecost/etl-backup) to do that.
 
-To restore the backup, untar the results of the etl-backup script into the ETL directory pod.
+To restore the backup, untar the results of the ETL backup script into the ETL directory pod.
 
+{% code overflow="wrap" %}
 ```bash
-kubectl cp -c cost-model <untarred-results-of-script> <kubecost-namespace>/<kubecost-pod-name>/var/configs/db/etl
+kubectl cp -c cost-model <untarred-results-of-script>/bingen <kubecost-namespace>/<kubecost-pod-name>:/var/configs/db/etl
 ```
+{% endcode %}
 
 There is also a Bash script available to restore the backup [here](https://github.com/kubecost/etl-backup/blob/main/upload-etl.sh).
 
@@ -154,4 +188,4 @@ Currently, this feature is still in development, but there is currently a status
 
 ## Troubleshooting
 
-In some scenarios like when using Memory store, setting `kubecostModel.etlHourlyStoreDurationHours` to a value of `48` hours or less will cause ETL backup files to become truncated. The current recomendation is to keep [etlHourlyStoreDurationHours](https://github.com/kubecost/cost-analyzer-helm-chart/blob/8fd5502925c28c56af38b0c4e66c4ec746761d50/cost-analyzer/values.yaml#L322) at its default of `49` hours.
+In some scenarios like when using Memory store, setting `kubecostModel.etlHourlyStoreDurationHours` to a value of `48` hours or less will cause ETL backup files to become truncated. The current recommendation is to keep [etlHourlyStoreDurationHours](https://github.com/kubecost/cost-analyzer-helm-chart/blob/8fd5502925c28c56af38b0c4e66c4ec746761d50/cost-analyzer/values.yaml#L322) at its default of `49` hours.
