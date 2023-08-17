@@ -44,10 +44,6 @@ The Prediction API takes Kubernetes objects as input and produces an estimation 
 
 The Events API provides a log of different occurrences in your workload in order to help with troubleshooting. Logs generated with this API are helpful for submitting bug reports.
 
-### [**Audit API**](apis/deprecated-apis/audit-api.md)
-
-The Audit API verifies cached data sources of Kubecost for the validity of the data sources and processes through a series of tests.
-
 ## Optimization APIs
 
 ### Savings API
