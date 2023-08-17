@@ -82,7 +82,7 @@
   * [Assets Dashboard](assets.md)
   * [Clusters Dashboard](using-kubecost/getting-started/clusters-dashboard.md)
   * [Cloud Cost Explorer](using-kubecost/getting-started/cloud-costs-explorer.md)
-  * [Saved Reports](saved-reports.md)
+  * [Reports](saved-reports.md)
     * [Advanced Reporting](advanced-reports.md)
     * [Cost Center Report](using-kubecost/navigating-the-kubecost-ui/saved-reports/cost-center-report.md)
   * [Alerts](alerts.md)

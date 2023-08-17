@@ -1,4 +1,4 @@
-# Saved Reports
+# Reports
 
 Reports are saved queries from your various Monitoring dashboards which can be referenced at a later date for convenience. Aggregation, filters, and other details of your query will be saved in the report, and the report can be opened at any time. Reports are currently supported by the Allocations, Assets, and Cloud Cost Explorer dashboards.
 
@@ -24,7 +24,7 @@ For help creating an Advanced Report (either type), select the respective hyperl
 
 ### Sharing reports
 
-After creating a report, you are able to share that report in recurring intervals through email or Slack as a PDF or CSV file. Shared reports replicate your saved query parameters every interval so you can view cost changes over time.
+After creating a report, you are able to share that report in recurring intervals via email as a PDF or CSV file. Shared reports replicate your saved query parameters every interval so you can view cost changes over time.
 
 {% hint style="info" %}
 Sharing reports is only available for Allocations, Assets, and Cloud Cost Reports, not either type of Advanced Report.
@@ -34,7 +34,7 @@ In the line for the report you want to share, select the three horizontal dots i
 
 * Interval: Interval that recurring reports will be sent out. Supports _Daily_, _Weekly_, and _Monthly_. Weekly reports default to going out Sunday at midnight. Monthly reports default to midnight on the first of the month. When selecting _Monthly_ and resetting on a day of the month not found in every month, the report will reset at the latest available day of that month. For example, if you choose to reset on the 31st, it will reset on the 30th for months with only 30 days.
 * Format: Supports _PDF_ or _CSV_.
-* Add email: Optional, email(s) to distribute the report to.
+* Add email: Email(s) to distribute the report to.
 
 Select _Apply_ to finalize. When you have created a schedule for your report, the selected interval will be displayed in the Interval column of your Reports page.
 
