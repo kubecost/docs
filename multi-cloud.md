@@ -13,6 +13,7 @@ For each cloud account that you would like to configure, you will need to make s
 * Azure: Set up cost data export following this [guide](azure-out-of-cluster.md).
 * GCP: Set up BigQuery billing data exports with this [guide](https://cloud.google.com/billing/docs/how-to/export-data-bigquery).
 * AWS: Follow steps 1-3 to set up and configure a Cost and Usage Report (CUR) in our [guide](aws-cloud-integrations.md).
+* Alibaba: Create a user account with access to the [QueryInstanceBill API](https://www.alibabacloud.com/help/en/bss-openapi/latest/api-bssopenapi-2017-12-14-queryinstancebill).
 
 ## Step 2: Create cloud integration secret
 
