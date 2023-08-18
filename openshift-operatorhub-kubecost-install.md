@@ -41,7 +41,7 @@ The installation takes 1-2 minutes to be completed. A dialog will appear as in t
 
 You can click on `View Operators` to review the details as in the following screenshot:
 
-![Installation step 1b](images/ocp-operator-installation-step-1c.png)
+![Installation step 1c](images/ocp-operator-installation-step-1c.png)
 
 Kubecost operator is now installed successfully. Next, you can start to install Kubecost using the custom resources definition (CRD)
 
