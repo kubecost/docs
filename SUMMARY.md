@@ -5,7 +5,8 @@
 ## Install and Configure
 
 * [Installation](install.md)
-  * [Getting Started](install-and-configure/install/getting-started.md)
+  * [First Time User Guide](install-and-configure/install/first-time-user-guide.md)
+  * [Next Steps with Kubecost](install-and-configure/install/getting-started.md)
   * [Environment](install-and-configure/install/environment.md)
   * [Helm Parameters](helm-install-params.md)
   * [Ingress Examples](ingress-examples.md)
@@ -28,14 +29,13 @@
       * [Thanos Upgrade](thanos-upgrade.md)
     * [AWS](install-and-configure/install/long-term-storage/aws/README.md)
       * [AWS Multi-Cluster Storage Configuration](long-term-storage-aws.md)
-      * [Creating a Thanos IAM policy](aws-service-account-thanos.md)
+      * [Creating a Thanos IAM Policy](aws-service-account-thanos.md)
     * [Azure](install-and-configure/install/long-term-storage/azure/README.md)
       * [Azure Long Term Storage](long-term-storage-azure.md)
     * [GCP](install-and-configure/install/long-term-storage/gcp/README.md)
       * [GCP Long Term Storage](long-term-storage-gcp.md)
   * [ETL Backup](etl-backup.md)
     * [Sharing ETL Backups](sharing-etl-backups.md)
-    * [Query Service Replicas](install-and-configure/install/etl-backup/query-service-replicas.md)
   * [Provider Installations](install-and-configure/install/provider-installations/README.md)
     * [Amazon EKS Integration](aws-eks-cost-monitoring.md)
     * [AWS Marketplace Install](aws-marketplace-install.md)
@@ -50,10 +50,11 @@
   * [Prometheus Configuration Guide](custom-prom.md)
     * [Amazon Managed Service for Prometheus](aws-amp-integration.md)
     * [Grafana Cloud Integration for Kubecost](grafana-cloud-integration.md)
+    * [Grafana Mimir Integration for Kubecost](grafana-mimir-integration.md)
     * [Google Cloud Managed Service for Prometheus](gcp-gmp-integration.md)
   * [Cost Analyzer Persistent Volume](storage.md)
 * [Additional Configuration](install-and-configure/advanced-configuration/README.md)
-  * [Add Key](add-key.md)
+  * [Adding a Product Key](add-key.md)
   * [Enabling Annotation Emission](annotations.md)
   * [Network Cost Configuration](network-costs-configuration.md)
   * [User Management (SSO/SAML/RBAC)](user-management.md)
@@ -61,12 +62,13 @@
     * [Configure Keycloak Identity Provider for Kubecost](user-management-oidc-keycloak.md)
     * [Gluu Server with OIDC Configuration Guide](integrations/gluu-server-with-oidc-configuration-guide.md)
   * [Tuning Resource Consumption](resource-consumption.md)
-  * [Deploy Kubecost Staging Builds](staging.md)
+  * [Deploying Kubecost Staging Builds](staging.md)
   * [Cluster Controller](controller.md)
     * [Cluster Turndown](install-and-configure/advanced-configuration/controller/cluster-turndown.md)
     * [TurndownSchedule Migration Guide](turndown-schedule-migration-guide.md)
   * [Kubecost Data Status Metrics](install-and-configure/advanced-configuration/data-status-metrics.md)
   * [High Availability Kubecost](high-availability.md)
+  * [Query Service Replicas](install-and-configure/install/etl-backup/query-service-replicas.md)
   * [Availability Tiers](availability-tiers.md)
   * [CSV Pricing](csv-pricing.md)
   * [Windows Node Support](windows.md)
@@ -80,7 +82,7 @@
   * [Assets Dashboard](assets.md)
   * [Clusters Dashboard](using-kubecost/getting-started/clusters-dashboard.md)
   * [Cloud Cost Explorer](using-kubecost/getting-started/cloud-costs-explorer.md)
-  * [Saved Reports](saved-reports.md)
+  * [Reports](saved-reports.md)
     * [Advanced Reporting](advanced-reports.md)
     * [Cost Center Report](using-kubecost/navigating-the-kubecost-ui/saved-reports/cost-center-report.md)
   * [Alerts](alerts.md)
@@ -116,15 +118,15 @@
   * [Cost Events Audit API](cost-events-audit-api.md)
   * [Spec Cost Prediction API](apis/apis-overview/spec-cost-prediction-api.md)
   * [Events API](api-events.md)
-  * [Audit API](audit-api.md)
-  * [Container Request Recommendation "Apply" APIs](api-request-recommendation-apply.md)
+  * [Container Request Recommendation Apply/Plan APIs](api-request-recommendation-apply.md)
   * [Container Request Right Sizing Recommendation API (V2)](api-request-right-sizing-v2.md)
   * [Abandoned Workloads](api-abandoned-workloads.md)
   * [Filter Parameters (v2)](filters-api.md)
 * [Deprecated APIs](apis/deprecated-apis/README.md)
-  * [Container Request Right-Sizing Recommendation API (V1) - Deprecated](api-request-right-sizing.md)
-  * [costDataModel & aggregatedCostModel API - Deprecated](cost-model-deprecated.md)
+  * [Container Request Right-Sizing Recommendation API (V1)](api-request-right-sizing.md)
+  * [costDataModel & aggregatedCostModel API](cost-model-deprecated.md)
   * [Namespace Contacts](namespace-contacts.md)
+  * [Audit API](apis/deprecated-apis/audit-api.md)
 
 ## Architecture
 
@@ -139,19 +141,27 @@
 * [Kubecost Release Process](release-process.md)
 * [Outages](outages.md)
 
+## Integrations
+
+* [Importing Kubecost Data into Microsoft Power BI](integrations/import-kubecost-data-into-microsoft-power-bi.md)
+* [Integrating Kubecost with Datadog](integrations/integrating-kubecost-with-datadog.md)
+* [Using Custom Webhook to Create a Kubecost Stage in Spinnaker](spinnaker-custom-webhook.md)
+
 ## Kubecost Cloud
 
 * [What is Kubecost Cloud?](kubecost-cloud/what-is-kubecost-cloud.md)
 * [Kubecost Cloud Architecture Overview](kubecost-cloud/kubecost-cloud-architecture-overview.md)
 * [Cloud Installation and Onboarding](kubecost-cloud/cloud-installation-and-onboarding.md)
-* [Cloud Allocations Dashboard](kubecost-cloud/cloud-allocations-dashboard.md)
-* [Cloud Assets Dashboard](kubecost-cloud/cloud-assets-dashboard.md)
-* [Cloud Reports Dashboard](kubecost-cloud/cloud-reports-dashboard.md)
+* [Kubecost Cloud: Cloud Billing Integrations](kubecost-cloud/kubecost-cloud-cloud-billing-integrations/README.md)
+  * [Kubecost Cloud AWS Integration](kubecost-cloud/kubecost-cloud-cloud-billing-integrations/kubecost-cloud-aws-integration.md)
+  * [Kubecost Cloud GCP Integration](kubecost-cloud/kubecost-cloud-cloud-billing-integrations/kubecost-cloud-gcp-integration.md)
+  * [Kubecost Cloud Azure Integration](kubecost-cloud/kubecost-cloud-cloud-billing-integrations/kubecost-cloud-azure-integration.md)
+* [Using the Kubecost Cloud UI](kubecost-cloud/using-the-kubecost-cloud-ui/README.md)
+  * [Kubecost Cloud: Allocations Dashboard](kubecost-cloud/using-the-kubecost-cloud-ui/cloud-allocations-dashboard.md)
+  * [Kubecost Cloud: Assets Dashboard](kubecost-cloud/using-the-kubecost-cloud-ui/cloud-assets-dashboard.md)
+  * [Kubecost Cloud: Cloud Cost Explorer](kubecost-cloud/using-the-kubecost-cloud-ui/kubecost-cloud-cloud-cost-explorer.md)
+  * [Kubecost Cloud: Reports Dashboard](kubecost-cloud/using-the-kubecost-cloud-ui/cloud-reports-dashboard.md)
 * [Receiving Kubecost Cloud Support](kubecost-cloud/receiving-kubecost-cloud-support.md)
-
-## Integrations
-
-* [Custom Webhook to Create a Kubecost Stage in Spinnaker](spinnaker-custom-webhook.md)
 
 ## Troubleshooting
 

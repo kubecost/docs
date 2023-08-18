@@ -253,7 +253,7 @@ Filter for a specific label. Does not support filtering for multiple labels at o
 Using the endpoint `/model/cloudCost/top` will accept all parameters of `model/cloudCost/view` **except for** `MetricCost`.
 {% endhint %}
 
-`CostMetric` values are based on and calculated following standard FinOps dimensions and metrics, as seen in detail [here](https://github.com/finopsfoundation/finops-open-cost-usage-spec/blob/main/specification\_sheet\_import.md). The four available metrics supported by the Cloud Cost API are:
+`CostMetric` values are based on and calculated following standard FinOps dimensions and metrics. The four available metrics supported by the Cloud Cost API are:
 
 | CostMetric value | Description                                                                                 |
 | ---------------- | ------------------------------------------------------------------------------------------- |

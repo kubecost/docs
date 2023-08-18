@@ -12,7 +12,7 @@ If you have a [multi-cluster setup](long-term-storage.md), you only need to appl
 
 Many Kubecost product configuration options can be specified at install-time, including your product key.
 
-### Option 1: Storing productkey in a secret
+### Option 1: Storing product key in a secret
 
 To create a secret you will need to create a JSON file called _productkey.json_ with the following format. Be sure to replace `<YOUR_PRODUCT_KEY>` with your Kubecost product key.
 
@@ -41,7 +41,9 @@ Run a `helm upgrade` to start using your product key.
 
 This specific parameter can be configured under `kubecostProductConfigs.productKey.key` in your [_values.yaml_](https://github.com/kubecost/cost-analyzer-helm-chart/blob/84dfbe4addedfee55b50af6ca44c1f62966d4457/cost-analyzer/values.yaml#L426).
 
-> **Note**: You must also set the `kubecostProductConfigs.productKey.enabled` config to `true` when using this option. That this will leave your secrets unencrypted in _values.yaml_. Use a Kubernetes secret as in the previous method to avoid this.
+{% hint style="info" %}
+You must also set the `kubecostProductConfigs.productKey.enabled` config to `true` when using this option. That this will leave your secrets unencrypted in _values.yaml_. Use a Kubernetes secret as in the previous method to avoid this.
+{% endhint %}
 
 ## In product
 

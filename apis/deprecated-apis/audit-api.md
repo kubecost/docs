@@ -1,5 +1,9 @@
 # Audit API
 
+{% hint style="danger" %}
+As of v1.106 of Kubecost, the Audit API is deprecated. This page should not be consulted.
+{% endhint %}
+
 The Audit API applies a series of tests to the various cached data sources of Kubecost to check the validity of the data sources and the processes that act upon them. Each of the Audits tests represents an invariance that should remain true despite any changes that occur to the system as a whole. Each Audit is stored in an AuditSet, which besides audits contains a window for the timeframe that the Audits it contains cover. The Audits themselves each have a timestamp for their last run, a status, a description and other audit-specific structures which contain the results of the run.
 
 {% swagger method="get" path="/audit" baseUrl="https://<your-kubecost-address>/model/etl" summary="Audit API" %}

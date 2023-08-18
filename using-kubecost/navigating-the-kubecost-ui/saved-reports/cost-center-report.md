@@ -20,7 +20,7 @@ In the _Cost center name_ field, enter the desired name for your Cost Center. On
 
 ### Cloud costs
 
-You can aggregate your cloud costs by a variety of fields (default is _Service_). Single and multi-aggregation, and custom labels, are supported. Then, select the desired cloud cost metric. Cloud cost metrics are calculated differently depending on your cloud service provider (CSP). Learn more about how different cloud cost metrics are calculated by CSP [here](https://docs.kubecost.com/apis/apis-overview/cloud-cost-api/cloud-cost-metrics).
+You can aggregate your cloud costs by a variety of fields (default is _Service_). Single and multi-aggregation, and custom labels, are supported. Then, select the desired cloud cost metric. Cloud cost metrics are calculated differently depending on your cloud service provider (CSP).
 
 {% hint style="danger" %}
 Certain selected cloud cost metrics may produce errors forming your report preview. Use _Net Amortized Cost_, the default option, if you experience this error.

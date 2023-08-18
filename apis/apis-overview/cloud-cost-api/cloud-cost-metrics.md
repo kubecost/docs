@@ -1,6 +1,6 @@
 # Cloud Cost Metrics
 
-When ingesting billing data from cloud service providers (CSP), Kubecost records multiple cost metrics for each item. These cost metrics represent different pricing models which may be useful depending on what needs to be accomplished. Cloud Cost supports all the cost metrics defined in the [FOCUS Spec](https://github.com/finopsfoundation/finops-open-cost-usage-spec/blob/main/specification\_sheet\_import.md) in addition to others that are currently provided by certain CSPs. The cost metrics currently supported by Cloud Cost are:
+When ingesting billing data from cloud service providers (CSP), Kubecost records multiple cost metrics for each item. These cost metrics represent different pricing models which may be useful depending on what needs to be accomplished. The cost metrics currently supported by Cloud Cost are:
 
 * ListCost
 * NetCost
@@ -60,15 +60,15 @@ Of all billing exports and APIs, the Cost and Usage Report (CUR) has the most ro
 
 More information on the columns and their definitions can be found in AWS' [Line item details](https://docs.aws.amazon.com/cur/latest/userguide/Lineitem-columns.html).
 
-#### List Cost
+**List Cost**
 
 To populate list price, Kubecost uses `pricing_public_on_demand_cost`.
 
-#### Net Cost
+**Net Cost**
 
 Kubecost uses `line_item_net_unblended_cost` if available. If not, Kubecost uses `line_item_unblended_cost.`
 
-#### Amortized Net Cost
+**Amortized Net Cost**
 
 If `_net_` is not available, Kubecost uses Amortized Cost
 
@@ -78,11 +78,11 @@ If `line_item_line_item_type` is `SavingsPlanCoveredUsage`, Kubecost uses `savin
 
 Default to `line_item_net_unblended_cost`.
 
-#### Invoiced Cost
+**Invoiced Cost**
 
 Kubecost uses Net Cost.
 
-#### Amortized Cost
+**Amortized Cost**
 
 If `line_item_line_item_type` is `DiscountUsage`, Kubecost uses `reservation_effective_cost`.
 
@@ -100,23 +100,23 @@ Cloud Cost uses a detailed billing export accessed via BigQuery to interface wit
 
 More details about the export can be found in GCP's [Structure of Detailed data export](https://cloud.google.com/billing/docs/how-to/export-data-bigquery-tables/detailed-usage).
 
-#### List Cost
+**List Cost**
 
 The Cost column for the line item.
 
-#### Net Cost
+**Net Cost**
 
 The Cost column plus the sum of all credit amounts.
 
-#### Amortized Net Cost
+**Amortized Net Cost**
 
 Kubecost uses Net Cost.
 
-#### Invoiced Cost
+**Invoiced Cost**
 
 Kubecost uses Net Cost.
 
-#### Amortized Cost
+**Amortized Cost**
 
 Kubecost uses Net Cost.
 
@@ -128,40 +128,43 @@ Kubecost uses Net Cost.
 
 The Azure billing export can be set to amortized or not amortized during creation. Depending on this, either the Net Cost Metric or Amortized Net Cost metric will be accurate. Additionally the Azure export has multiple schema depending on when it was created and what kind of account the user has. There are also localized versions of the headers.
 
-#### List Cost
+**List Cost**
 
 Kubecost uses`paygcostinbillingcurrency` if available, otherwise Kubecost uses Net Cost
 
-#### Net Cost
+**Net Cost**
 
 Kubecost uses `costinbillingcurrency`. If not available, Kubecost uses `costinbillingcurrency`, and if that isn't available, Kubecost uses `cost`.
 
-#### Amortized Net Cost
+**Amortized Net Cost**
 
 Kubecost uses Net Cost.
 
-#### Invoiced Cost
+**Invoiced Cost**
 
 Kubecost uses Net Cost.
 
-#### Amortized Cost
+**Amortized Cost**
 
 Kubecost uses Net Cost.
 
 </details>
 
-## Kubernetes percent by CSP
+## Kubernetes Clusters
 
-Whether or not a specific resource belongs as part of a Kubernetes cluster is not something that is made available in any of the billing integrations, and is not something that can be determined with 100% accuracy in all situations. To populate this field at the item level, Kubecost uses heuristics based on the existence of labels, or the service that the resource originates from. These heuristics are only capable of detecting resources that belong to the managed Kubernetes offerings from each CSP.\
+To calculate the `K8 Utilization`, Kubecost first must determine if a resources is part of a Kubernetes cluster or not.
 
+If a tag or label in the list below is present on the billing export, Kubecost will consider those costs part of the `K8 Utilization` calculation. This will not always be 100% accurate in all situations.\\
 
 <details>
 
 <summary>AWS</summary>
 
-The CUR only has labels that have been enabled for it, each as its own individual column rather than in a JSON object of key-value pairs. Because of this, the efficacy of this heuristic is limited by the labels that it targets being enabled.
+In AWS, Kubecost will identify the line item in the bill as a Kubernetes resource if
 
-If `line_item_product_code` is `AmazonEKS`, or one of the following label keys is present:
+* `line_item_product_code` is `AmazonEKS`
+
+or one of the following label keys is present:
 
 * `resource_tags_aws_eks_cluster_name`
 * `resource_tags_user_eks_cluster_name`
@@ -180,8 +183,7 @@ The billing report has a Tags column which contains a Record of key values pairs
 
 * `goog-gke-volume`
 * `goog-gke-node`
-* `goog-k8s-cluster-name`\
-
+* `goog-k8s-cluster-name`
 
 </details>
 
@@ -193,9 +195,6 @@ The billing export has a tags column with a JSON string of key values pairs. Kub
 
 * `aks-managed`
 * `kubernetes.io-created`
-* `k8s-azure-created`\
-
+* `k8s-azure-created`\\
 
 </details>
-
-\

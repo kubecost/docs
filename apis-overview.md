@@ -44,10 +44,6 @@ The Prediction API takes Kubernetes objects as input and produces an estimation 
 
 The Events API provides a log of different occurrences in your workload in order to help with troubleshooting. Logs generated with this API are helpful for submitting bug reports.
 
-### [**Audit API**](audit-api.md)
-
-The Audit API verifies cached data sources of Kubecost for the validity of the data sources and processes through a series of tests.
-
 ## Optimization APIs
 
 ### Savings API
@@ -61,7 +57,7 @@ Savings endpoints provide cost optimization insights. The following savings endp
 | `/projectDisks`                                                                                                                | List orphaned disks.                                                                                                     |
 | `/projectAddresses`                                                                                                            | List orphaned IP addresses.                                                                                              |
 | [`/savings/abandonedWorkloads`](api-abandoned-workloads.md)                                                                    | List abandoned workloads based on network traffic.                                                                       |
-| `/savings/clusterSizing`                                                                                                       | Provides recommendations for sizing clusters (node types and quantities).                                                |
+| `/savings/clusterSizingETL`                                                                                                    | Provides recommendations for sizing clusters (node types and quantities).                                                |
 | [Container Request Recommendation "Apply" APIs](https://docs.kubecost.com/apis/apis-overview/api-request-recommendation-apply) | Applies Kubecost's container request recommendations to your cluster.                                                    |
 
 ## Kubecost UI counterparts

@@ -8,7 +8,7 @@ The Clusters dashboard provides a list of all your monitored clusters, as well a
 Monitoring of multiple clusters is only supported in [Kubecost Enterprise](https://www.kubecost.com/pricing/) plans. Learn more about Kubecost Enterprise's multi-cluster view [here](https://docs.kubecost.com/install-and-configure/install/multi-cluster).
 {% endhint %}
 
-<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption><p>Clusters dashboard</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1).png" alt=""><figcaption><p>Clusters dashboard</p></figcaption></figure>
 
 ## Enabling Clusters dashboard
 
@@ -37,6 +37,8 @@ Clusters are primarily distinguished into three categories:
 * Clusters monitored by Kubecost (green circle next to cluster name)
 * Clusters not monitored by Kubecost (yellow circle next to cluster name)
 * Inactive clusters (gray circle next to cluster name)
+
+For detail on how Kubecost identifies clusters, see [Cloud Cost Metrics](https://docs.kubecost.com/apis/apis-overview/cloud-cost-api/cloud-cost-metrics#kubernetes-clusters).
 
 Monitored clusters are those that have cost metrics which will appear within your other Monitoring dashboards, like Allocations and Assets. Unmonitored clusters are clusters whose existence is determined from cloud integration, but haven't been added to Kubecost. Inactive clusters are clusters Kubecost once monitored, but haven't reported data over a certain period of time. This time period is three hours for Thanos-enabled clusters, and one hour for non-Thanos clusters.
 

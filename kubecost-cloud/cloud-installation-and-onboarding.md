@@ -45,6 +45,7 @@ Choose a unique ID for your cluster. This does not need to be the same name as y
 
 Execute the following command to install the Kubecost Cloud agent to your cluster:
 
+{% code overflow="wrap" %}
 ```
 helm upgrade --install kubecost-cloud \
 --repo https://kubecost.github.io/cost-analyzer/ cost-analyzer \
@@ -56,6 +57,7 @@ helm upgrade --install kubecost-cloud \
 --set cloudReportingServer="collector.app.kubecost.com:31356" \
 --set networkCosts.enabled=true
 ```
+{% endcode %}
 
 After 5-10 minutes, you should see your cluster connected. Data should automatically begin appearing in your Allocations and Assets dashboards.
 

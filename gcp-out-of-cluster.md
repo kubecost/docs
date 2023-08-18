@@ -35,6 +35,7 @@ roles/bigquery.jobUser
 
 If you don't already have a GCP service account with the appropriate rights, you can run the following commands in your command line to generate and export one. Make sure your GCP project is where your external costs are being run.
 
+{% code overflow="wrap" %}
 ```
 export PROJECT_ID=$(gcloud config get-value project)
 gcloud iam service-accounts create compute-viewer-kubecost --display-name "Compute Read Only Account Created For Kubecost" --format json
@@ -43,6 +44,7 @@ gcloud projects add-iam-policy-binding $PROJECT_ID --member serviceAccount:compu
 gcloud projects add-iam-policy-binding $PROJECT_ID --member serviceAccount:compute-viewer-kubecost@$PROJECT_ID.iam.gserviceaccount.com --role roles/bigquery.dataViewer
 gcloud projects add-iam-policy-binding $PROJECT_ID --member serviceAccount:compute-viewer-kubecost@$PROJECT_ID.iam.gserviceaccount.com --role roles/bigquery.jobUser
 ```
+{% endcode %}
 
 ## Step 3: Connecting GCP service account to Kubecost
 
@@ -124,7 +126,7 @@ When managing the service account key as a Kubernetes secret, the secret must re
 
 In Kubecost, select _Settings_ from the left navigation, and under Cloud Integrations, select _Add Cloud Integration > GCP_, then provide the relevant information in the GCP Billing Data Export Configuration window:
 
-* **GCP Service Key**: If you've connected using Workload Identity Federation in Step 3, you should leave this box empty. If you've created a service account key, copy the contents of the _compute-viewer-kubecost-key.json_ file and paste them here.
+* **GCP Service Key**: Optional field. If you've created a service account key, copy the contents of the _compute-viewer-kubecost-key.json_ file and paste them here. If you've connected using Workload Identity federation in Step 3, you should leave this box empty.&#x20;
 * **GCP Project Id**: The ID of your GCP project.
 * **GCP Billing Database:** Requires a BigQuery dataset prefix (e.g. `billing_data`) in addition to the BigQuery table name. A full example is `billing_data.gcp_billing_export_resource_v1_XXXXXX_XXXXXX_XXXXX`
 
@@ -187,6 +189,10 @@ Now that your service account is created follow the normal configuration instruc
 
 ## Troubleshooting
 
-#### Account labels not showing up in partitions
+### Account labels not showing up in partitions
 
-In some cases, labels applied at the account label do not show up in the date-partitioned data. If account level labels are not showing up, you can switch to querying them unpartitioned by setting an extraEnv in Kubecost: `GCP_ACCOUNT_LABELS_NOT_PARTITIONED: true`. See [here](https://github.com/kubecost/cost-analyzer-helm-chart/blob/v1.98.0-rc.1/cost-analyzer/values.yaml#L304).
+There are cases where labels applied at the account label do not show up in the date-partitioned data. If account level labels are not showing up, you can switch to querying them unpartitioned by setting an extraEnv in Kubecost: `GCP_ACCOUNT_LABELS_NOT_PARTITIONED: true`. See [here](https://github.com/kubecost/cost-analyzer-helm-chart/blob/v1.98.0-rc.1/cost-analyzer/values.yaml#L304).
+
+### `InvalidQuery` 400 error for GCP integration
+
+In cases where Kubecost does not detect a connection following GCP integration, revisit Step 1 and ensure you have enabled **detailed usage cost**, not standard usage cost. Kubecost uses detailed billing cost to display your OOC spend, and if it was not configured correctly during installation, you may receive errors about your integration.

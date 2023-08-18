@@ -174,7 +174,7 @@ To restore the backup, untar the results of the ETL backup script into the ETL d
 
 {% code overflow="wrap" %}
 ```bash
-kubectl cp -c cost-model <untarred-results-of-script> <kubecost-namespace>/<kubecost-pod-name>/var/configs/db/etl
+kubectl cp -c cost-model <untarred-results-of-script>/bingen <kubecost-namespace>/<kubecost-pod-name>:/var/configs/db/etl
 ```
 {% endcode %}
 

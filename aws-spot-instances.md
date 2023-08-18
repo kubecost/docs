@@ -2,19 +2,19 @@
 
 ## Considerations before configuring Spot pricing
 
-Kubecost uses public pricing from the cloud providers until the actual cloud bill is available. This is almost always ready in 48 hours. Most users will likely prefer to configure [AWS cloud-integrations](aws-cloud-integrations.md) and skip the below setup.
+Kubecost uses public pricing from Cloud Service Providers (CSPs) to calculate costs until the actual cloud bill is available, at which point Kubecost will reconcile your Spot prices from your Cost and Usage Report (CUR). This is almost always ready in 48 hours. Most users will likely prefer to configure [AWS cloud-integrations](aws-cloud-integrations.md) instead of configuring the Spot data feed manually as demonstrated in this article.
 
-For users with most of their costs from spot nodes, the guide below can increase short-term (<48 hour) node costs. Note that all other costs will still be based on public pricing, which is why the below guide should be considered optional.
+However, if the majority of costs are due to Spot nodes, it may be useful to configure the Spot pricing data feed as it will increase accuracy for short-term (<48 hour) node costs until the Spot prices from the CUR are available. Note that all other (non-Spot) costs will still be based on public (on-demand) pricing until CUR billing data is reconciled.
 
 ## Configuring the Spot data feed in Kubecost
 
-With Kubecost, Spot pricing- data can be pulled hourly by integrating directly with the AWS Spot feed.
+With Kubecost, Spot pricing data can be pulled hourly by integrating directly with the AWS Spot feed.
 
 First, to enable the AWS Spot data feed, follow AWS' [Spot Instance data feed](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-data-feeds.html) doc.
 
 While configuring, note the settings used as these values will be needed for the Kubecost configuration.
 
-There are multiple options: this can either be set from the Kubecost UI or via `.Values.kubecostProductConfigs` in the Helm chart. Note that if you set any `kubecostProductConfigs` from the Helm chart, all changes via the front end will be deleted on pod restart.
+There are multiple options: this can either be set from the Kubecost UI or via `.Values.kubecostProductConfigs` in the Helm chart. If you set any `kubecostProductConfigs` from the Helm chart, all changes via the front end will be deleted on pod restart.
 
 * `projectID` the Account ID of the AWS Account on which the Spot nodes are running.
 * `awsSpotDataRegion` region of your Spot data bucket
@@ -23,7 +23,7 @@ There are multiple options: this can either be set from the Kubecost UI or via `
 * `spotLabel` optional Kubernetes node label name designating whether a node is a Spot node. Used to provide pricing estimates until exact Spot data becomes available from the CUR
 * `spotLabelValue` optional Kubernetes node label value designating a Spot node. Used to provide pricing estimates until exact Spot data becomes available from the CUR. For example, if your Spot nodes carry a label `lifecycle:spot`, then the `spotLabel` would be `lifecycle` and the `spotLabelValue` would be `spot`
 
-In the UI, you can access these fields via the _Settings_ page, then scrolling to Cloud Cost Settings. Next to Spot Instance Configuration, select _Update,_ then fill out all fields.
+In the UI, you can access these fields via the _Settings_ page, then scroll to Cloud Cost Settings. Next to Spot Instance Configuration, select _Update,_ then fill out all fields.
 
 Spot data feeds are an account level setting, not a payer level. Every AWS Account will have its own Spot data feed. Spot data feed is not currently available in AWS GovCloud.
 
@@ -102,7 +102,7 @@ kubecostProductConfigs:
 
 ![](https://user-images.githubusercontent.com/102574445/199281977-3195b1d1-e3a5-4561-85da-eb8b24e23f27.png)
 
-Verify below points:
+Verify the below points:
 
 * Make sure data is present in the Spot data feed bucket.
 * Make sure Project ID is configured correctly. You can cross-verify the values under Helm values in bug report

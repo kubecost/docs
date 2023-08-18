@@ -1,7 +1,3 @@
----
-description: Common Kubecost questions (faq).
----
-
 # Frequently Asked Questions
 
 Q: How can I reduce CPU or Memory resource consumption by Kubecost?\
@@ -13,10 +9,10 @@ A: Yes, Kubecost is resilient to downsampling. However turning query concurrency
 Q: Why do I receive a 403 error when trying to save reports or alerts?\
 A: This is due to the SAML user having read-only RBAC permissions.
 
-Q: What does "Share Tenancy" mean?\
+Q: What does "share tenancy" mean?\
 A: This enables sharing the cost of the K8s management plane for hosted Kubernetes offerings, such as EKS/AKS/GKE costs.
 
-Q: Why is the "Network" tile on the Allocations page not showing any data?\
+Q: Why is the Network column on the Allocations page not showing any data?\
 A: This tile relies on service names, which requires one of the following [values](https://github.com/kubecost/cost-analyzer-helm-chart/blob/b5b089ce217636fb2b7e6f42daed37397d28d3aa/cost-analyzer/values.yaml#L576-L585) to be enabled.
 
 Q: How often does reconciliation run?\
@@ -113,7 +109,7 @@ type: "recurringUpdate"
 window: "1h" 
 ```
 
-Q: Kubecost allows us to configure in-zone/in-region/cross-region traffic classification. After I tried to configure this and saw that the values have been configured, I couldn’t see traffic classification allocation in the dashboard. Is this feature still supported?
+Q: Kubecost allows configuring in-zone/in-region/cross-region traffic classification. After I tried to configure this and saw that the values have been configured, I couldn’t see traffic classification allocation in the dashboard. Is this feature still supported?
 
 A: Check http://\<your-kubecost-address>/details! From there, look for the bottom right box to view more network details. It also may be important to have the network-costs daemonSet running in your cluster.
 
@@ -123,8 +119,8 @@ A: Yes. This can be verified by reviewing the code at [opencost/pkg/cloud](https
 Q: If I disable node exporter, will it affect the metrics emitted by Kubecost?\
 A: Yes you can disable node exporter as it is optional. No, it will not have an effect on Kubecost's metrics. Read about the effects of disabling the node exporter [here](../resource-consumption.md#disable-or-stop-scraping-node-exporter).
 
-Q: “No Athena Bucket Configured” error on /diagnostics view?\
-A: Verify that the the AWS IAM Policy has been correctly configured (Step 3). Verify that the IAM role has been given to Kubecost (Step 4).
+Q: Why am I receiving a “No Athena Bucket Configured” error on my Diagnostics page?\
+A: Verify that the the AWS IAM Policy has been correctly configured ([Step 3](https://docs.kubecost.com/install-and-configure/install/cloud-integration/aws-cloud-integrations#step-3-setting-up-iam-permissions)). Verify that the IAM role has been given to Kubecost ([Step 4](https://docs.kubecost.com/install-and-configure/install/cloud-integration/aws-cloud-integrations#step-4-attaching-iam-permissions-to-kubecost)).
 
 Q: What time zone is shown by Kubecost?\
 A: All APIs and metrics will be based on and accept UTC zones. When viewing the data from your web browser, the graphs displayed will convert this UTC time to your local machine's time zone.
