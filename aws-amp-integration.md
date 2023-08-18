@@ -240,7 +240,6 @@ EOF
 Run this command to install Kubecost and integrate it with the Amazon Managed Service for Prometheus workspace as the primary:
 
 {% code overflow="wrap" %}
-````bash
 ```bash
 helm upgrade -i ${RELEASE} \
 oci://public.ecr.aws/kubecost/cost-analyzer --version $VERSION \
@@ -260,7 +259,6 @@ oci://public.ecr.aws/kubecost/cost-analyzer --version $VERSION \
 --set prometheus.serviceAccounts.server.name=kubecost-prometheus-server-amp \
 --set federatedETL.federator.useMultiClusterDB=true \
 ```
-````
 {% endcode %}
 
 ### Additional clusters
