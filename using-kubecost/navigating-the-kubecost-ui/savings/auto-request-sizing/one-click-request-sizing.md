@@ -19,5 +19,5 @@ See the high-level [container request right-sizing guide](https://docs.kubecost.
     <figure><img src="../../../../images/rightsizing.png" alt=""><figcaption><p>Request right-sizing recommendations Beta page</p></figcaption></figure>
 2.  Select _Customize_ to modify the request sizing settings, like profile, window, and filters, until you have a set of recommendations you are ready to apply to your cluster.
 
-    <figure><img src="../../../../images/rightsizingcustomize (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../../../../images/rightsizingcustomize.png" alt=""><figcaption></figcaption></figure>
 3. Select _Automatically Implement Recommendations_. Select _Yes, apply the recommendation_ to confirm.
