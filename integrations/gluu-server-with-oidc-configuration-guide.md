@@ -10,13 +10,13 @@ To configure a Gluu server with OIDC, you will need to install and set up the Gl
 4. Configure the Gluu server by modifying the `/etc/gluu/conf/gluu.properties` file and setting the values for various properties, such as the hostname, LDAP bind password, and OAuth keys.
 5. Start the Gluu server by running the `/etc/init.d/gluu-serverd start` command.
 
-![Gluu dashboard](images/gluu-dashboard.png)
+    ![Gluu dashboard](images/gluu-dashboard.png)
 
-You can read [Gluu's own documentation](https://gluu.org/docs/gluu-server/) for more detailed help with these steps.
+    You can read [Gluu's own documentation](https://gluu.org/docs/gluu-server/) for more detailed help with these steps.
 
-> **Note**: Later versions of Gluu Server also support deployment to Kubernetes environments. You can read more about their Kubernetes support [here](https://gluu.org/docs/gluu-server/installation-guide/install-kubernetes/).
+    > **Note**: Later versions of Gluu Server also support deployment to Kubernetes environments. You can read more about their Kubernetes support [here](https://gluu.org/docs/gluu-server/installation-guide/install-kubernetes/).
 
-Once the Gluu server is up and running, you can connect it to a Kubecost cluster by performing the following steps:
+    Once the Gluu server is up and running, you can connect it to a Kubecost cluster by performing the following steps:
 
 6. Obtain the OIDC client ID and client secret for the Gluu server. These can be found in the `/etc/gluu/conf/gluu.properties` file under the `oxAuthClientId` and `oxAuthClientPassword` properties, respectively.
 
