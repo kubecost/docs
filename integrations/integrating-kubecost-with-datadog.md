@@ -71,6 +71,6 @@ In Datadog, select _Dashboards_ in the left navigation, then select _New Dashboa
 
 On your dashboard, select the gear icon in the top right corner, then select _Import dashboard JSON..._ Add the _Kubecostdashboard.json_ file and the dashboard should automatically import. The example dashboard gives you the overview of your cluster’s monthly cost and the costs at higher levels of granularity such as containers or namespaces. See the screenshot below depicting a successful import.
 
-<figure><img src="images/datadog-dashboard.png" alt=""><figcaption><p>Example Kubecost dashboard in Datadog</p></figcaption></figure>
+<figure><img src="/images/datadog-dashboard.png" alt=""><figcaption><p>Example Kubecost dashboard in Datadog</p></figcaption></figure>
 
 For extra help, read Datadog's [Copy, import, or export dashboard JSON](https://docs.datadoghq.com/dashboards/#copy-import-or-export-dashboard-json) documentation to learn how to import a dashboard JSON.

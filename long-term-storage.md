@@ -205,11 +205,11 @@ kubectl port-forward svc/kubecost-thanos-query-http 8080:10902 --namespace kubec
 
 Then navigate to [http://localhost:8080](http://localhost:8080) in your browser. This page should look very similar to the Prometheus console.
 
-![Thanos query editor](images/thanos-query.png)
+![Thanos query editor](/images/thanos-query.png)
 
 If you navigate to _Stores_ using the top navigation bar, you should be able to see the status of both the `thanos-store` and `thanos-sidecar` which accompanied the Prometheus server:
 
-![Thanos stores](images/thanos-store.png)
+![Thanos stores](/images/thanos-store.png)
 
 Also note that the sidecar should identify with the unique `cluster_id` provided in your _values.yaml_ in the previous step. Default value is `cluster-one`.
 

@@ -14,11 +14,11 @@ The network-costs metrics are collected using a daemonset (one pod per node) tha
 
 With the network-costs daemonset enabled, the Network column on the Allocations page will reflect the portion of network transfer costs based on the chart-level aggregation.
 
-![network-cost-allocation](images/network-cost-allocation.png)
+![network-cost-allocation](/images/network-cost-allocation.png)
 
 When using Kubecost version 1.99 and above: Greater detail can be accessed through Allocations UI only when aggregating by namespace and selecting the link on that namespace. This opens the namespace detail page where there is a card at the bottom.
 
-![network-cost-detail](images/network-cost-detail.png)
+![network-cost-detail](/images/network-cost-detail.png)
 
 ### Grafana dashboard
 
@@ -64,7 +64,7 @@ Network cost, which is disabled by default, needs to be run as a privileged pod 
 
 Service tagging allows Kubecost to identify network activity between the pods and various cloud services (e.g. AWS S3, EC2, RDS, Azure Storage, Google Cloud Storage).
 
-![network-services-card](images/network-svc-card.png)
+![network-services-card](/images/network-svc-card.png)
 
 To enable this, set the following Helm values:
 
@@ -124,7 +124,7 @@ Each ConnTrack entry is equivalent to two transport directions, so every ConnTra
 
 After modifications were made to the network costs to parallelize the delta and dispatch, large map comparisons were significantly lighter in memory. The same tests were performed against simulated data with the following footprint results.
 
-![Benchmarking metrics](images/post-optimization.png)
+![Benchmarking metrics](/images/post-optimization.png)
 
 ## Kubernetes network traffic metrics
 

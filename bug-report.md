@@ -4,7 +4,7 @@ The Kubecost bug report feature captures relevant product configuration data and
 
 To capture a bug report: select _Settings_ in the left navigation, then scroll to the bottom and select _Capture bug report_.
 
-<figure><img src="images/capturenbugreport.PNG" alt=""><figcaption><p>Settings page, Capture bug report icon</p></figcaption></figure>
+<figure><img src="/images/capturenbugreport.PNG" alt=""><figcaption><p>Settings page, Capture bug report icon</p></figcaption></figure>
 
 This downloads a bug report in text format to your local machine. You can then share this file directly with our team via email (support@kubecost.com) or directly with our team on Slack in a private message.
 

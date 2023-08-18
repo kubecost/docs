@@ -2,7 +2,7 @@
 
 The Kubecost Allocations dashboard allows you to quickly see allocated spend across all native Kubernetes concepts, e.g. namespace, k8s label, and service. It also allows for allocating cost to organizational concepts like team, product/project, department, or environment. This document explains the metrics presented and describes how you can control the data displayed in this view.
 
-<figure><img src="images/allocations-dash-overview.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="/images/allocations-dash-overview.png" alt=""><figcaption></figcaption></figure>
 
 ## Configuring your query
 
@@ -18,7 +18,7 @@ Kubecost provides a variety of options for configuring your allocations queries 
 
 ### Date Range
 
-<figure><img src="images/daterange.png" alt=""><figcaption><p>Date Range window</p></figcaption></figure>
+<figure><img src="/images/daterange.png" alt=""><figcaption><p>Date Range window</p></figcaption></figure>
 
 Select the date range of the report by setting specific start and end dates, or by using one of the preset options.
 
@@ -78,7 +78,7 @@ View Allocation data in the following formats:
 
 You can select _Edit_ > _Chart_ > _Cost over time_ from the dropdown to have your data displayed on a per-day basis. Hovering over any day's data will provide a breakdown of your spending.
 
-![Cost over time data](https://raw.githubusercontent.com/kubecost/docs/main/images/perdaybasis.png)
+![Cost over time data](/images/perdaybasis.png)
 
 #### Cost metric
 
@@ -146,7 +146,7 @@ Cost allocation metrics are available for both in-cluster and OOC resources:
 
 ### Cost efficiency table example
 
-![Cost Efficiency table](https://raw.githubusercontent.com/kubecost/docs/main/images/table.PNG)
+![Cost Efficiency table](/images/table.PNG)
 
 ### Additional options column
 

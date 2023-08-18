@@ -31,7 +31,7 @@ You can view your existing cloud integrations and their success status in the Ku
 
 Here, you can view your existing integrations. For non-successful integrations, Kubecost will display a diagnostic error message in the Status column to contextualize steps toward successful integration.
 
-<figure><img src="images/cloud-integrations-success-fail.png" alt=""><figcaption><p>Example successful and failed cloud integrations</p></figcaption></figure>
+<figure><img src="/images/cloud-integrations-success-fail.png" alt=""><figcaption><p>Example successful and failed cloud integrations</p></figcaption></figure>
 
 Select an individual integration to view a side panel that contains details about that integration. You will be able to select _Edit_ to adjust any details about your integration that were configured during the original setup.
 

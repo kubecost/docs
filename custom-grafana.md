@@ -9,7 +9,7 @@ Using an existing Grafana deployment can be accomplished through one of two opti
 
 After Kubecost installation, select _Settings_ from the left navigation and update _Grafana Address_ to a URL (e.g. http://demo.kubecost.com/grafana) that is visible to users accessing Grafana dashboards. This variable can alternatively be passed at the time you deploy Kubecost via the `kubecostProductConfigs.grafanaURL` parameter in [values.yaml](https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/values.yaml). Next, import Kubecost Grafana dashboards as JSON from this [folder](https://github.com/kubecost/cost-analyzer-helm-chart/tree/master/cost-analyzer).
 
-<figure><img src="images/grafanaaddress.PNG" alt=""><figcaption><p>Grafana Address option</p></figcaption></figure>
+<figure><img src="/images/grafanaaddress.PNG" alt=""><figcaption><p>Grafana Address option</p></figcaption></figure>
 
 ## Option 2: Deploy with Grafana sidecar enabled
 

@@ -6,11 +6,11 @@
 
 User experience diagram:
 
-![User experience](images/AWS-EKS-cost-monitoring-ux.png)
+![User experience](/images/AWS-EKS-cost-monitoring-ux.png)
 
 Amazon EKS cost monitoring with Kubecost architecture:
 
-![User experience](images/AWS-EKS-cost-monitoring-architecture.png)
+![User experience](/images/AWS-EKS-cost-monitoring-architecture.png)
 
 ## Deploying Kubecost on Amazon EKS cluster using Helm
 

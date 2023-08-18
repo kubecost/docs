@@ -4,11 +4,11 @@
 
 First, in the Kubecost UI, [view the price of a single node for a single day](./). Note, that Kubecost breaks out each VM within a Virtual Machine Scale Set (VMSS) as its own line item.
 
-<figure><img src="../../images/data-auditing/dataaudit-azure-kubecost.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="/images/data-auditing/dataaudit-azure-kubecost.png" alt=""><figcaption></figcaption></figure>
 
 Next, compare this node's costs with what is found in Azure Cost Management (Amortized). Ensure you adjust the date range, and filter for the VMSS.
 
-<figure><img src="images/dataaudit-azure-acm.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="/images/dataaudit-azure-acm.png" alt=""><figcaption></figcaption></figure>
 
 ## Troubleshooting non-matching costs
 

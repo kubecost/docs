@@ -15,7 +15,7 @@ Kubecost Cloud uses an agent to gather metrics and send them to our SaaS platfor
 
 ## Architecture overview
 
-![Architecture Diagram](https://raw.githubusercontent.com/kubecost/docs/main/images/cloudarchitecture.png)
+![Architecture Diagram](/images/cloudarchitecture.png)
 
 ## Disabling the network costs daemonSet
 

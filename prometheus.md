@@ -13,7 +13,7 @@ kubectl port-forward -n kubecost service/kubecost-prometheus-server 9003:80
 
 View `http://localhost:9003/` in your web browser. You should be presented with a UI that looks like the following:
 
-![](https://raw.githubusercontent.com/kubecost/docs/main/images/prom-ui.png)
+![](/images/prom-ui.png)
 
 If you're unable to connect, confirm that the Prometheus server pod is in a `Running` state. 
 

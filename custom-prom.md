@@ -114,7 +114,7 @@ prometheusRule:
 
 To confirm this job is successfully scraped by Prometheus, you can view the Targets page in Prometheus and look for a job named `kubecost`.
 
-![Prometheus Targets](images/prom-targets.png)
+![Prometheus Targets](/images/prom-targets.png)
 
 ### Node exporter metric labels
 
@@ -154,7 +154,7 @@ Increasing the default `etlDailyStorageDurationDays` value will naturally result
 
 The Diagnostics page (_Settings > View Full Diagnostics_) provides diagnostic info on your integration. Scroll down to Prometheus Status to verify that your configuration is successful.
 
-![Prometheus status diagnostic](images/prom-status.png)
+![Prometheus status diagnostic](/images/prom-status.png)
 
 Below you can find solutions to common Prometheus configuration problems. View the [Kubecost Diagnostics](https://docs.kubecost.com/troubleshooting/diagnostics) doc for more information.
 

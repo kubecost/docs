@@ -26,7 +26,7 @@ There are two architectures you can deploy:
 
 The infrastructure can manageup to 100 clusters. The following architecture diagram illustrates the small-scale infrastructure setup:
 
-![Quick-Start architecture](images/aws-amp-multi-small.png)
+![Quick-Start architecture](/images/aws-amp-multi-small.png)
 
 ### Federated architecture
 
@@ -34,7 +34,7 @@ To support the large-scale infrastructure of over 100 clusters, Kubecost leverag
 
 The following architecture diagram illustrates the large-scale infrastructure setup:
 
-![Federated architecture](images/aws-amp-multi-large.png)
+![Federated architecture](/images/aws-amp-multi-large.png)
 
 ## Instructions
 
@@ -305,7 +305,7 @@ Your Kubecost setup is now writing and collecting data from AMP. Data should be 
 
 To verify that the integration is set up, go to _Settings_ in the Kubecost UI, and check the Prometheus Status section.
 
-![Prometheus status screenshot](images/aws-amp-prom-status.png)
+![Prometheus status screenshot](/images/aws-amp-prom-status.png)
 
 Read our [Custom Prometheus integration troubleshooting guide](custom-prom.md#troubleshooting) if you run into any errors while setting up the integration. For support from AWS, you can submit a support request through your existing [AWS support contract](https://aws.amazon.com/contact-us/).
 

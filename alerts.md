@@ -314,7 +314,7 @@ Example Helm _values.yaml_:
 
 Cluster Health Alerts and Kubecost Health Alerts work differently from other alert types. While other alerts monitor cost data for cost or efficiency anomalies, these two monitor the health of Kubecost itself, as well as the health of the cluster running Kubecost. For this reason, multiple of these alert types cannot be created. In the UI, switches for these alert types can be toggled either on or off, managing a single instance of each, and allowing the settings of these single instances to be adjusted.
 
-<figure><img src="images/alertshealth.png" alt=""><figcaption><p>Cluster and Kubecost Health Alerts</p></figcaption></figure>
+<figure><img src="/images/alertshealth.png" alt=""><figcaption><p>Cluster and Kubecost Health Alerts</p></figcaption></figure>
 
 {% hint style="warning" %}
 There is no validation around Cluster Health Alerts. If a Health Alert configuration is invalid, it will appear to save, but will not actually take effect. Please check carefully that the alert has a Window and Threshold properly specified.
@@ -330,7 +330,7 @@ The remaining alert types all target a set of allocation data with `window`, `ag
 
 Select _+ Create Alert_ to open the Create Alert window where you configure the details of your alert.
 
-<figure><img src="images/createalert.png" alt=""><figcaption><p>Create Alert window</p></figcaption></figure>
+<figure><img src="/images/createalert.png" alt=""><figcaption><p>Create Alert window</p></figcaption></figure>
 
 The fields for each alert type should resemble their corresponding Helm values in the above tables.&#x20;
 

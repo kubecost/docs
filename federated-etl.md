@@ -17,7 +17,7 @@ There are two primary advantages for using ETL Federation:
 
 ## Kubecost ETL Federation diagram
 
-![ETL Federation Overview](images/kubecost-ETL-Federated-Architecture.png)
+![ETL Federation Overview](/images/kubecost-ETL-Federated-Architecture.png)
 
 ## Sample configurations
 
@@ -58,7 +58,7 @@ This diagram shows an example setup of the Federated ETL with:
 
 The result is 5 clusters federated together.
 
-![Federated ETL diagram](images/kubecost-ETL-Federated-diagram.png)
+![Federated ETL diagram](/images/kubecost-ETL-Federated-diagram.png)
 
 ## Setup
 

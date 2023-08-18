@@ -44,11 +44,11 @@ Kubecost requests `kube-state-metrics >= v1.6.0`. This version check is complete
 
 A diagnostic view is provided for both the Allocation and Assets pipelines and is designed to assist in diagnosing missing data found in the Allocation or Assets views. Kubecost's ETL pipelines run in the background to build a daily composition of the data required to build the cost model. For each day the data is collected, a file is written to disk containing the results. These files are used as both a cache and data backup, which the diagnostic view displays:
 
-![](https://raw.githubusercontent.com/kubecost/docs/main/images/diagnostics-etl.png)
+![](/images/diagnostics-etl.png)
 
 In the event of a problem, the diagnostic view would help you identify specific days where the ETL pipeline failed to collect data.
 
-![](https://raw.githubusercontent.com/kubecost/docs/main/images/diagnostics-etl-problem.png)
+![](/images/diagnostics-etl-problem.png)
 
 The file on `Nov 20, 2020` in the above image appears in red. This is because the data in this file has been flagged by our diagnostics page as _empty_ (failed to pass a minimum size threshold). This could happen if the database was temporarily unavailable while building that day.
 
