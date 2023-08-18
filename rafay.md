@@ -69,7 +69,7 @@ From the [Web Console](https://console.rafay.dev/):
 * Select `kubecost` for the namespace.
 * Select _Select._
 
-![Create Addon](https://raw.githubusercontent.com/kubecost/docs/main/images/kubecost-addon-1.png)
+![Create Addon](images/rafay-kubecost-addon-1.png)
 
 * Create a new version of the add-on.
 * Select _New Version._
@@ -87,7 +87,7 @@ Once you've created the Kubecost add-on, use it in assembling a custom cluster b
 * Create a new blueprint and give it a name such as `kubecost`.
 * Select _Save._
 
-![Create Blueprint](https://raw.githubusercontent.com/kubecost/docs/main/images/kubecost-blueprint-1.png)
+![Create Blueprint](images/rafay-kubecost-blueprint-1.png)
 
 * Create a new version of the blueprint.
 * Select _New Version._
@@ -95,7 +95,7 @@ Once you've created the Kubecost add-on, use it in assembling a custom cluster b
 * Under Add-Ons, select the `kubecost` Add-on and the version that was previously created.
 * Select _Save Changes._
 
-![Create Blueprint](https://raw.githubusercontent.com/kubecost/docs/main/images/kubecost-blueprint-2.png)
+![Create Blueprint](images/rafay-kubecost-blueprint-2.png)
 
 ## Step 6: Apply blueprint
 
@@ -105,9 +105,9 @@ You may now apply this custom blueprint to a cluster.
 * Select _Update Blueprint_ and select the `kubecost` blueprint and version you created previously.
 * Select _Save and Publish._
 
-![Update Blueprint](https://raw.githubusercontent.com/kubecost/docs/main/images/kubecost-blueprint-3.png)
+![Update Blueprint](images/rafay-kubecost-blueprint-3.png)
 
-This will start the deployment of the add-ons configured in the `kubecost` blueprint to the targeted cluster. The blueprint sync process can take a few minutes. Once complete, the cluster will display the current cluster blueprint details and w.hether the sync was successful or not.
+This will start the deployment of the add-ons configured in the `kubecost` blueprint to the targeted cluster. The blueprint sync process can take a few minutes. Once complete, the cluster will display the current cluster blueprint details and whether the sync was successful or not.
 
 ## Step 7: Verify deployment
 
@@ -143,7 +143,7 @@ Handling connection for 9090
 
 You can now access the Kubecost UI by visiting `http://localhost:9090` in your browser.
 
-![kubecost Dashboards](https://raw.githubusercontent.com/kubecost/docs/main/images/kubecost-view-1.png)
+![kubecost Dashboards](images/rafay-kubecost-view-1.png)
 
 You have now successfully created a custom cluster blueprint with the `kubecost` add-on and applied to a cluster. Use this blueprint on as many clusters as you require.
 
