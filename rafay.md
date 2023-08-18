@@ -17,7 +17,7 @@ Under _Integrations_:
 * Select _Repositories_ and create a new repository named `kubecost` of type _Helm._
 * Select _Create._
 
-![Create Repository](/images/rafay-kubecost-repository-1.png)
+![Create Repository](images/rafay-kubecost-repository-1.png)
 
 * Enter the endpoint value of `https://kubecost.github.io/cost-analyzer/`.
 * Select _Save._
