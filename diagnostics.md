@@ -114,7 +114,7 @@ kubectl get pod -l app.kubernetes.io/name=kube-state-metrics --all-namespaces
 
 You can see this information directly on the Kubecost Diagnostics page (screenshot below) or by visiting your Prometheus console and then Status > Targets in the top navigation bar.
 
-![](https://raw.githubusercontent.com/kubecost/docs/main/images/diagnostics-prom-targets.png)
+![](/images/diagnostics-prom-targets.png)
 
 If the necessary scrape target is not added to your Prometheus, then refer to [this resource](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#scrape\_config) to learn how to add a new job under your Prometheus `scrape_configs` block. You can visit `<your-prometheus-console-url>/config` to view the current scrape\_configs block being passed to your Prometheus.
 
