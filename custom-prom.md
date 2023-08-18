@@ -78,7 +78,7 @@ The FQDN can be a full path via `https://prometheus-prod-us-central-x.grafana.ne
         port: 9003
 ```
 
-This config needs to be added to `extraScrapeConfigs` in the Prometheus configuration. See the example [extraScrapeConfigs.yaml](images/extraScrapeConfigs.yaml).
+This config needs to be added to `extraScrapeConfigs` in the Prometheus configuration. See the example [extraScrapeConfigs.yaml](assets/extraScrapeConfigs.yaml).
 
 3. By default, the Prometheus chart included with Kubecost (bundled-Prometheus) contains scrape configs optimized for Kubecost-required metrics. You need to add those scrape configs jobs into your existing Prometheus setup to allow Kubecost to provide more accurate cost data and optimize the required resources for your existing Prometheus.
 
