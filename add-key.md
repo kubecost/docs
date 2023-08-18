@@ -53,10 +53,10 @@ Next, select _Add Key_ in the dialog menu shown below.
 
 You can then supply your Kubecost provided license key in the input box that is now visible.
 
-![Add key dialog](https://raw.githubusercontent.com/kubecost/docs/main/images/add-key-dialog.png)
+![Add key dialog](images/add-key-dialog.png)
 
 ## Verification
 
 To verify that your key is properly supplied, visit _Settings_ to confirm the final digits are as expected:
 
-![image](https://user-images.githubusercontent.com/298359/111573440-c74c9c00-8767-11eb-842c-cfa18159d1c1.png)
+![Verifying a product key](images/add-key-verification.png)
