@@ -17,7 +17,7 @@ Under _Integrations_:
 * Select _Repositories_ and create a new repository named `kubecost` of type _Helm._
 * Select _Create._
 
-![Create Repository](https://raw.githubusercontent.com/kubecost/docs/main/images/kubecost-repository-1.png)
+![Create Repository](images/rafay-kubecost-repository-1.png)
 
 * Enter the endpoint value of `https://kubecost.github.io/cost-analyzer/`.
 * Select _Save._
@@ -40,7 +40,7 @@ kubecostToken: 'token_string'
 * Login to the [Rafay Web Console](https://console.rafay.dev/) and navigate to your Project as an _Org Admin_ or _Infrastructure Admin._
 * Under _Infrastructure_, select _Namespaces_ and create a new namespace called `kubecost`, and select type _Wizard._
 
-![Create Namespace](https://raw.githubusercontent.com/kubecost/docs/main/images/kubecost-namespace-1.png)
+![Create Namespace](images/rafay-kubecost-namespace-1.png)
 
 * Select _Save & Go to Placement._
 * Select the cluster(s) that the namespace will be added to. Select _Save & Go To Publish._
