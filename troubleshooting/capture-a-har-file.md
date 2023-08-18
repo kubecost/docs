@@ -35,7 +35,7 @@ Below are the steps to generate the HAR file from the most commonly-used browser
 
 ![Save the logs as a HAR file from the Network tab](/images/har-firefox-save.png)
 
-1. You're done! Please attach the HAR file to your email or case with us so that we can assist further.
+6. You're done! Please attach the HAR file to your email or case with us so that we can assist further.
 
 ### Generate a HAR file in Safari
 
