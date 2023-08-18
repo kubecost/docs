@@ -24,7 +24,7 @@ To configure a Gluu server with OIDC, you will need to install and set up the Gl
 
 7.  In the Kubecost cluster, create a new OIDC identity provider by running `kubectl apply -f oidc-provider.yaml` command, where _oidc-provider.yaml_ is a configuration file that specifies the OIDC client ID and client secret, as well as the issuer URL and authorization and token endpoints for the Gluu server.
 
-    ![Gluu OIDC provider manifest](images/gluu-oidc.png)
+    ![Gluu OIDC provider manifest](/images/gluu-oidc.png)
 
     In this file, you will need to replace the following placeholders with the appropriate values:
 
@@ -36,7 +36,7 @@ To configure a Gluu server with OIDC, you will need to install and set up the Gl
 
 8. Set up a Kubernetes service account and bind it to the OIDC identity provider. This can be done by running the `kubectl apply -f service-account.yaml` command, where _service-account.yaml_ is a configuration file that specifies the name of the service account and the OIDC identity provider.
 
-    ![Gluu ServiceAccount and RoleBinding manifests](images/gluu-sa.png)
+    ![Gluu ServiceAccount and RoleBinding manifests](/images/gluu-sa.png)
 
     In this file, you will need to replace the following placeholders with the appropriate values:
 
