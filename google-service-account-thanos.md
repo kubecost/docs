@@ -2,19 +2,19 @@
 
 In order to create a Google service account for use with Thanos, navigate to the [Google Cloud Platform home page](https://console.cloud.google.com/getting-started) and select _IAM & Admin > Service Accounts_.
 
-![image](https://user-images.githubusercontent.com/334480/66667677-95094780-ec21-11e9-860f-fe3edcbb0d4c.png)
+![GCP IAM Service Account](images/gcp-iam-sa.png)
 
 From here, select the option _Create Service Account_.
 
-![image](https://user-images.githubusercontent.com/334480/66667734-b4a07000-ec21-11e9-9683-de7600806910.png)
+![GCP option to create Service Account](images/gcp-create-sa.png)
 
 Provide a service account name, ID, and description, then select _Create and Continue_.
 
-![image](https://user-images.githubusercontent.com/334480/66667856-faf5cf00-ec21-11e9-817d-65c2dad92af4.png)
+![GCP create Service Account wizard](images/gcp-sa-wizard.png)
 
 You should now be at the Service account permissions (optional) page. Select the first _Role_ dropdown and select _Storage Object Creator_. Select _Add Another Role_, then select _Storage Object Viewer_ from the second dropdown. Select _Continue_.
 
-![image](https://user-images.githubusercontent.com/334480/66667955-2ed0f480-ec22-11e9-90cb-b160b8170aa4.png)
+![GCP Service Account permissions editor](images/gcp-sa-perms.png)
 
 You should now be prompted to allow specific accounts access to this service account. This should be based on specific internal needs and is not a requirement. You can leave this empty and select _Done_.
 
