@@ -8,6 +8,7 @@ Integration with cloud service providers (CSPs) via their respective billing API
 
 To learn more about how Kubecost provides accurate cost data or how to manage existing cloud integrations, read below. Otherwise, see any of the following articles to get started on integrating a specific CSP:
 
+* [Kubecost Cloud AWS Integration](https://docs.kubecost.com/kubecost-cloud/kubecost-cloud-cloud-billing-integrations/kubecost-cloud-aws-integration)
 * [Kubecost Cloud GCP Integration](https://docs.kubecost.com/kubecost-cloud/kubecost-cloud-cloud-billing-integrations/kubecost-cloud-gcp-integration)
 * [Kubecost Cloud Azure Integration](https://docs.kubecost.com/kubecost-cloud/kubecost-cloud-cloud-billing-integrations/kubecost-cloud-azure-integration)
 

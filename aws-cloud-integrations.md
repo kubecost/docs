@@ -80,14 +80,14 @@ Download template files from the URLs provided below and upload them as the stac
 
 * Download [this .yaml file](https://raw.githubusercontent.com/kubecost/cloudformation/master/kubecost-single-account-permissions.yaml).
 * Navigate to the [AWS Console Cloud Formation page](https://console.aws.amazon.com/cloudformation).
-* Select _Create New Stack_ if you have never used AWS CloudFormation before. Otherwise, select _Create Stack_, and select _With new resource (standard)._
-* Under _Prepare template_, choose _Template is ready_.
-* Under _Template source_, choose _Upload a template file_. Select _Choose file_. Locate the downloaded .yaml template in your file explorer and select it, then select _Open_.
-* Select _Next_. The Specify stack details page opens.
+* Select _Create Stack_, then select _With existing resources (import resources)_ from the dropdown. On the 'Identify resources' page, select _Next._
+* Under Template source, choose _Upload a template file_.
+* Select _Choose file_, which will open your file explorer. Select the .yaml template, and then select _Open_. Then, select _Next_.
+* On the 'Identify resources' page, provide any additional resources to import. Then, select _Next_.
 * For _Stack name_, enter a name for your template.
 * Set the following parameters:
-  * `AthenaCURBucket`: The bucket where the CUR is sent from Step 1.
-  * `SpotDataFeedBucketName`: (Optional) The bucket where the Spot data feed is sent from the “Setting up the Spot Data feed” step (see below)
+  * AthenaCURBucket: The bucket where the CUR is sent from Step 1.
+  * SpotDataFeedBucketName: (Optional) The bucket where the Spot data feed is sent
 * Select _Next_. The Configure stack options page opens.
 * Configure any additional options as needed. Select _Next_. The Review stack page opens.
 * At the bottom of the page, select _I acknowledge that AWS CloudFormation might create IAM resources with custom names._
@@ -103,16 +103,14 @@ Download template files from the URLs provided below and upload them as the stac
 
 * Download [this .yaml file](https://raw.githubusercontent.com/kubecost/cloudformation/master/kubecost-sub-account-permissions.yaml).
   * Navigate to the [AWS Console Cloud Formation page](https://console.aws.amazon.com/cloudformation).
-  * Select _Create New Stack_ if you have never used AWS CloudFormation before. Otherwise, select _Create Stack_.
-  * Under _Prepare template_, select _Template is ready_.
-  * Under _Template source_, choose _Upload a template file_.
-  * Select _Choose file_.
-  * Choose the downloaded .yaml template, and then select _Open_.
-  * Select _Next_.
+  * Select _Create Stack_, then select _With existing resources (import resources)_ from the dropdown. On the 'Identify resources' page, select _Next._
+  * Under Template source, choose _Upload a template file_.
+  * Select _Choose file_, which will open your file explorer. Select the .yaml template, and then select _Open_. Then, select _Next_.
+  * On the 'Identify resources' page, provide any additional resources to import. Then, select _Next_.
   * For _Stack name_, enter a name for your template.
   * Set the following parameters:
-    * `MasterPayerAccountID`: The account ID of the management account (formerly called master payer account) where the CUR has been created
-    * `SpotDataFeedBucketName`: The bucket where the Spot data feed is sent from the “Setting up the Spot Data feed” step
+    * MasterPayerAccountID: The account ID of the management account (formerly called master payer account) where the CUR has been created
+    * SpotDataFeedBucketName: The bucket where the Spot data feed is sent
   * Select _Next_.
   * Select _Next_.
   * At the bottom of the page, select _I acknowledge that AWS CloudFormation might create IAM resources._
@@ -121,8 +119,8 @@ Download template files from the URLs provided below and upload them as the stac
 **On the management account:**
 
 * Follow the same steps to create a CloudFormation stack as above, but using [this .yaml file](https://raw.githubusercontent.com/kubecost/cloudformation/master/kubecost-masterpayer-account-permissions.yaml) instead, and with these parameters:
-  * `AthenaCURBucket`: The bucket where the CUR is set from Step 1
-  * `KubecostClusterID`: An account that Kubecost is running on that requires access to the Athena CUR.
+  * AthenaCURBucket: The bucket where the CUR is set from Step 1
+  * KubecostClusterID: An account that Kubecost is running on that requires access to the Athena CUR.
 
 </details>
 
