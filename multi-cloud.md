@@ -16,13 +16,14 @@ For each cloud account that you would like to configure, you will need to make s
 
 ## Step 2: Create cloud integration secret
 
-The secret should contain a file named _cloud-integration.json_ with the following format:
+The secret should contain a file named _cloud-integration.json_ with the following format (only containing applicable CSPs in your setup):
 
 ```json
 {
   "azure": [],
   "gcp": [],
-  "aws": []
+  "aws": [],
+  "alibaba": []
 }
 ```
 
@@ -131,3 +132,25 @@ Set these values into the following object and add them to the AWS array in the 
 ```
 
 Additionally set the `kubecostProductConfigs.athenaProjectID` Helm value to the AWS account that Kubecost is being installed in.
+
+### Alibaba
+
+Kubecost does not support complete integrations with Alibaba, but you will still be able to view accurate list prices for cloud resources. Gather these following values from the Alibaba Cloud Console for your account:
+
+* `clusterRegion` is the most used region
+* `accountID` is your Alibaba account ID
+* `serviceKeyName` is the RAM user key name
+* `serviceKeySecret` is the RAM user secret
+
+Set these values into the following object and add them to the Alibaba array in your _cloud-integration.json_:
+
+```
+"alibaba" : [
+    {
+      "clusterRegion": "",
+      "accountID": "",
+      "serviceKeyName": "",
+      "serviceKeySecret": ""
+    }
+  ]
+```
