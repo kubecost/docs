@@ -124,7 +124,7 @@ Each ConnTrack entry is equivalent to two transport directions, so every ConnTra
 
 After modifications were made to the network costs to parallelize the delta and dispatch, large map comparisons were significantly lighter in memory. The same tests were performed against simulated data with the following footprint results.
 
-![Benchmarking metrics](https://raw.githubusercontent.com/kubecost/docs/main/images/post%20optimization.PNG)
+![Benchmarking metrics](images/post-optimization.png)
 
 ## Kubernetes network traffic metrics
 
