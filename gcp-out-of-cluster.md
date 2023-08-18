@@ -73,7 +73,7 @@ gcloud iam service-accounts keys create ./compute-viewer-kubecost-key.json --iam
 ```
 {% endcode %}
 
-Once the GCP service account has been connected, you can set up the remaining configuration parameters.
+Once the GCP service account has been connected, set up the remaining configuration parameters.
 
 ## Step 4. Configuring GCP for Kubecost
 
