@@ -26,7 +26,7 @@ There are two architectures you can deploy:
 
 The infrastructure can manageup to 100 clusters. The following architecture diagram illustrates the small-scale infrastructure setup:
 
-![Quick-Start architecture](images/aws\_amp\_multi\_small.png)
+![Quick-Start architecture](images/aws-amp-multi-small.png)
 
 ### Federated architecture
 
@@ -34,7 +34,7 @@ To support the large-scale infrastructure of over 100 clusters, Kubecost leverag
 
 The following architecture diagram illustrates the large-scale infrastructure setup:
 
-![Federated architecture](images/aws\_amp\_multi\_large.png)
+![Federated architecture](images/aws-amp-multi-large.png)
 
 ## Instructions
 
@@ -283,7 +283,6 @@ export QUERYURL="http://localhost:8005/workspaces/${AMP_WORKSPACE_ID}"
 Run this command to install Kubecost and integrate it with the Amazon Managed Service for Prometheus workspace as the additional cluster:
 
 {% code overflow="wrap" %}
-````bash
 ```bash
 helm upgrade -i ${RELEASE} \
 oci://public.ecr.aws/kubecost/cost-analyzer --version $VERSION \
@@ -302,14 +301,13 @@ oci://public.ecr.aws/kubecost/cost-analyzer --version $VERSION \
 --set prometheus.serviceAccounts.server.name=kubecost-prometheus-server-amp \
 --set federatedETL.federator.useMultiClusterDB=true \
 ```
-````
 {% endcode %}
 
 Your Kubecost setup is now writing and collecting data from AMP. Data should be ready for viewing within 15 minutes.
 
 To verify that the integration is set up, go to _Settings_ in the Kubecost UI, and check the Prometheus Status section.
 
-![Prometheus status screenshot](https://user-images.githubusercontent.com/22844059/132998278-fd388e9a-8d61-4b8b-ad1c-0e52f17ca251.png)
+![Prometheus status screenshot](images/aws-amp-prom-status.png)
 
 Read our [Custom Prometheus integration troubleshooting guide](custom-prom.md#troubleshooting) if you run into any errors while setting up the integration. For support from AWS, you can submit a support request through your existing [AWS support contract](https://aws.amazon.com/contact-us/).
 
