@@ -546,11 +546,11 @@ You can check pod logs for authentication errors by running: `kubectl get pods -
 
 If you do not see any authentication errors, log in to your AWS console and visit the Athena dashboard. You should be able to find the CUR. Ensure that the database with the CUR matches the athenaTable entered in Step 5. It likely has a prefix with `athenacurcfn_` :
 
-![Athena query editor](https://user-images.githubusercontent.com/453512/101319459-e6f23100-3816-11eb-8d96-1ab977cb50bd.png)
+![Athena query editor](images/athena-query-1.png)
 
 You can also check query history to see if any queries are failing:
 
-![Screen Shot 2020-12-06 at 9 43 50 PM](https://user-images.githubusercontent.com/453512/101319633-24ef5500-3817-11eb-9f87-55a903428936.png)
+![Failed queries in Athena](images/athena-query-2.png)
 
 ### Common Athena errors
 
