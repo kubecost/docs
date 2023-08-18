@@ -20,7 +20,7 @@ To configure a Gluu server with OIDC, you will need to install and set up the Gl
 
 6. Obtain the OIDC client ID and client secret for the Gluu server. These can be found in the `/etc/gluu/conf/gluu.properties` file under the `oxAuthClientId` and `oxAuthClientPassword` properties, respectively.
 
-    <figure><img src="../.gitbook/assets/Screen Shot 2023-01-03 at 9.55.49 PM.png" alt=""><figcaption><p>Test gluu.properties file</p></figcaption></figure>
+    <figure><img src="images/gluu-properties.png" alt=""><figcaption><p>Test gluu.properties file</p></figcaption></figure>
 
 7.  In the Kubecost cluster, create a new OIDC identity provider by running `kubectl apply -f oidc-provider.yaml` command, where _oidc-provider.yaml_ is a configuration file that specifies the OIDC client ID and client secret, as well as the issuer URL and authorization and token endpoints for the Gluu server.
 

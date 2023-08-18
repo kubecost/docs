@@ -2,7 +2,7 @@
 
 The Kubecost Allocations dashboard allows you to quickly see allocated spend across all native Kubernetes concepts, e.g. namespace, k8s label, and service. It also allows for allocating cost to organizational concepts like team, product/project, department, or environment. This document explains the metrics presented and describes how you can control the data displayed in this view.
 
-<figure><img src="../../../.gitbook/assets/image (2) (2) (1) (1) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="images/allocations-dash-overview.png" alt=""><figcaption></figcaption></figure>
 
 ## Configuring your query
 
@@ -18,7 +18,7 @@ Kubecost provides a variety of options for configuring your allocations queries 
 
 ### Date Range
 
-<figure><img src="../../../.gitbook/assets/daterange.png" alt=""><figcaption><p>Date Range window</p></figcaption></figure>
+<figure><img src="images/daterange.png" alt=""><figcaption><p>Date Range window</p></figcaption></figure>
 
 Select the date range of the report by setting specific start and end dates, or by using one of the preset options.
 

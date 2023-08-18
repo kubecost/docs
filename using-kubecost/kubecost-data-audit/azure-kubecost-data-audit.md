@@ -8,7 +8,7 @@ First, in the Kubecost UI, [view the price of a single node for a single day](./
 
 Next, compare this node's costs with what is found in Azure Cost Management (Amortized). Ensure you adjust the date range, and filter for the VMSS.
 
-<figure><img src="../../.gitbook/assets/dataaudit-azure-acm.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="images/dataaudit-azure-acm.png" alt=""><figcaption></figcaption></figure>
 
 ## Troubleshooting non-matching costs
 
