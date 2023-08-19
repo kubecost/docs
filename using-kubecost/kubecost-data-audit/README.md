@@ -16,19 +16,19 @@ Also, keep in mind that it typically takes ~24-48hrs for cloud providers to prov
 
 1. Go to the Assets page, then select _Aggregate By_ > _Single Aggregation_ > _Service_.
 
-    <figure><img src="/images/data-auditing/dataaudit-step1.png" alt=""><figcaption></figcaption></figure>
+    ![Assets page with aggregation type](/images/data-auditing/dataaudit-step1.png)
 
 2. Audits are most effective when targeting small ranges of time. Select a Start and End Date which covers a window of 1 day, and is beyond 48 hours ago. Also select a date that has reconciled with the AWS Cost and Usage Report (CUR). CUR data can be delayed up to 24 hours.
 
-    <figure><img src="/images/data-auditing/dataaudit-step2.png" alt=""><figcaption></figcaption></figure>
+    ![Assets page with time range](/images/data-auditing/dataaudit-step2.png)
 
 3. Select the _Kubernetes_ service from the table underneath the NAME column, then select _Node_. You should arrive at a page like this (if your information is displayed in a bar graph, you can change the display by selecting _Edit_, then _Entire Window_ under the Resolution dropdown):
 
-    <figure><img src="/images/data-auditing/dataaudit-step3.png" alt=""><figcaption></figcaption></figure>
+    ![Asset view by node](/images/data-auditing/dataaudit-step3.png)
 
 4. Select any node to view its details.
 
-    <figure><img src="/images/data-auditing/dataaudit-step4.png" alt=""><figcaption></figcaption></figure>
+    ![Detailed node cost information](/images/data-auditing/dataaudit-step4.png)
 
 ## Viewing detailed costs of a node in Kubecost (via API)
 

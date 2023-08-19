@@ -2,7 +2,7 @@
 
 The Savings page provides miscellaneous functionality to help you use resources more effectively and assess wasteful spending. In the center of the page, you will see your estimated monthly savings available. The savings value is calculated from all enabled Savings features, across your clusters and the designated cluster profile via dropdowns in the top right of the page.
 
-<figure><img src="/images/savings-overview.png" alt=""><figcaption><p>The Savings page</p></figcaption></figure>
+![The Savings page](/images/savings-overview.png)
 
 ## Savings panel features
 

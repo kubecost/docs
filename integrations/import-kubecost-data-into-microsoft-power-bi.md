@@ -12,7 +12,7 @@ In the From Web window, select _Basic_, then in the URL box, enter the endpoint 
 
 To learn more about using Kubecost APIs, see our [API Directory](https://docs.kubecost.com/apis/apis-overview).
 
-<figure><img src="/images/from-web-box.png" alt=""><figcaption><p>From Web window with an example Allocation query</p></figcaption></figure>
+![From Web window with an example Allocation query](/images/from-web-box.png)
 
 Once you've submitted a valid endpoint, select _OK_ to confirm. Be patient while Power BI loads your data. You have now successfully imported your Kubecost data into Power BI. You can perform these steps multiple times to import multiple sets of data into the same file.
 
