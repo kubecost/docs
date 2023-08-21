@@ -19,8 +19,6 @@ Kubecost Cloud will provide you with everything you need in order to visualize y
 
 Kubecost Cloud's functionality will be quickly expanded. Here's a sneak peek at which features we plan to implement next:
 
-* Cloud Costs dashboard with cost reconciliation
-* Cloud integration
 * Clusters dashboard
 * Shared and idle costs
 * Overview homepage
