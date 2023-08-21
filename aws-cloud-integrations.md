@@ -1,16 +1,16 @@
 # AWS Cloud Integration
 
-By default, Kubecost pulls On-Demand asset prices from the public AWS pricing API. For more accurate pricing, this integration will allow Kubecost to reconcile your current measured Kubernetes spend with your actual AWS bill. This integration also properly accounts for Enterprise Discount Programs, Reserved Instance usage, Savings Plans, Spot usage, and more.
+By default, Kubecost pulls on-demand asset prices from the public AWS pricing API. For more accurate pricing, this integration will allow Kubecost to reconcile your current measured Kubernetes spend with your actual AWS bill. This integration also properly accounts for Enterprise Discount Programs, Reserved Instance usage, Savings Plans, Spot usage, and more.
 
 You will need permissions to create the Cost and Usage Report (CUR), and add IAM credentials for Athena and S3. Optional permission is the ability to add and execute CloudFormation templates. Kubecost does not require root access in the AWS account.
 
-A GitHub repository with sample files which follow the below instructions can be found [here](https://github.com/kubecost/poc-common-configurations/tree/main/aws).
+This guide contains multiple possible methods for connecting Kubecost to AWS billing, based on user environment and preference. Because of this, there may not be a straightforward approach for new users. To address this, a streamlined guide contaning best practices can be found [here](./aws-cur-setup.md). This best practices guide has some assumptions to carefully consider.
 
-## Overview
+For the below guide, a GitHub repository with sample files can be found [here](https://github.com/kubecost/poc-common-configurations/tree/main/aws).
+
+## Key AWS terminology
 
 Integrating your AWS account with Kubecost may be a complicated process if you aren’t deeply familiar with the AWS platform and how it interacts with Kubecost. This section provides an overview of some of the key terminology and AWS services that are involved in the process of integration.
-
-### Terminology
 
 **Cost and Usage Report**: AWS report which tracks cloud spending and writes to an Amazon Simple Storage Service (Amazon S3) bucket for ingestion and long term historical data. The CUR is originally formatted as a CSV, but when integrated with Athena, is converted to Parquet format.
 
@@ -384,7 +384,7 @@ This may be the preferred method if your Helm values are in version control and 
 
 {% code overflow="wrap" %}
 ```bash
-$ kubectl create secret generic <SECRET_NAME> --from-file=service-key.json --namespace <kubecost> 
+$ kubectl create secret generic <SECRET_NAME> --from-file=service-key.json --namespace <kubecost>
 ```
 {% endcode %}
 
@@ -615,16 +615,16 @@ QueryAthenaPaginated: start query error: operation error Athena: StartQueryExecu
 
 * **Resolution:** Previously, if you ran a query without specifying a value for query result location, and the query result location setting was not overridden by a workgroup, Athena created a default location for you. Now, before you can run an Athena query in a region in which your account hasn't used Athena previously, you must specify a query result location, or use a workgroup that overrides the query result location setting. While Athena no longer creates a default query results location for you, previously created default `aws-athena-query-results-MyAcctID-MyRegion` locations remain valid and you can continue to use them. The bucket should be in the format of: `aws-athena-query-results-MyAcctID-MyRegion` It may also be required to remove and reinstall Kubecost. If doing this please remeber to backup ETL files prior or contact support for additional assistance. See also this AWS doc on [specifying a query result location](https://docs.aws.amazon.com/athena/latest/ug/querying.html#query-results-specify-location).
 
-#### Missing Athena Column
+#### Missing Athena column
 
 * **Symptom:** A similar error to this will be shown on the Diagnostics page under Pricing Sources or in the Kubecost `cost-model` container logs.
 
 {% code overflow="wrap" %}
 ```
 QueryAthenaPaginated: query execution error: no query results available for query <Athena Query ID>
- 
-Checking the athena logs we see a syntax error:
-   
+
+Checking the Athena logs we see a syntax error:
+
 SYNTAX_ERROR: line 4:3: Column 'line_item_resource_id' cannot be resolved
 
 This query ran against the "<DB Name>" database, unless qualified by the query
