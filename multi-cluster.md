@@ -15,6 +15,10 @@ Kubecost Free version can now be installed on an unlimited number of individual 
 
 In an Enterprise multi-cluster setup, the UI can only be accessed through one designated primary cluster. All other clusters in the environment are secondary. The primary cluster in your environment can be manually designated or changed by setting the Helm flag `.Values.federatedETL.federator.enabled` to `true`. There will be no change in your collective display regardless of which cluster is the primary cluster, so setting it is up to personal preference.
 
+{% hint style="warning" %}
+Because the UI is only accessible through the primary cluster, Helm flags related to UI display can not be successfully applied to secondary clusters.
+{% endhint %}
+
 ## Enterprise Federation
 
 {% hint style="info" %}
