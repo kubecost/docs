@@ -16,7 +16,7 @@ The Leader/Follower implementation leverages a `coordination.k8s.io/v1` `Lease` 
 * Followers promoted to Leader will drop all locks and receive write privileges.
 * Leaders behave identically to a single Kubecost install.
 
-![Leader/Follower](https://raw.githubusercontent.com/kubecost/docs/main/images/leader-follower.png)
+![Leader/Follower](/images/leader-follower.png)
 
 ## Configuring high availability
 

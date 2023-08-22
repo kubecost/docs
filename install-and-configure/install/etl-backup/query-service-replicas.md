@@ -12,7 +12,7 @@ The query service will forward `/model/allocation` and `/model/assets` requests 
 
 The diagram below demonstrates the backing architecture of this query service and its functionality.
 
-<figure><img src="../../../.gitbook/assets/image (5).png" alt=""><figcaption></figcaption></figure>
+![Query service architecture](/images/query-service-architecture.png)
 
 ## Requirements
 

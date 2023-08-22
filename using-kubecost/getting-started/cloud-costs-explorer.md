@@ -2,7 +2,7 @@
 
 The Cloud Cost Explorer is a dashboard which provides visualization and filtering of your cloud spending. This dashboard includes the costs for all assets in your connected cloud accounts by pulling from those providers' Cost and Usage Reports (CURs) or other cloud billing reports.
 
-<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+![Cloud Cost Explorer dashboard](/images/cloud-cost-explorer-dash.png)
 
 ## Installation and configuration
 
@@ -12,7 +12,7 @@ As of v1.104, Cloud Cost is enabled by default. If you are using v1.04+, you can
 
 For versions of Kubecost up to v1.103, Cloud Cost needs to be enabled first through Helm, using the following parameters:
 
-```
+```yaml
 kubecostModel:
   cloudCost:
      enabled: true
@@ -31,7 +31,7 @@ Enabling Cloud Cost is required. Optional parameters include:
 
 While Cloud Cost is enabled, it is recommended to disable Cloud Usage, which is more memory-intensive.
 
-```
+```yaml
 kubecostModel:
   etlCloudUsage: false
 ```

@@ -6,7 +6,7 @@ Budgets are a way of establishing spend limits for your clusters or namespaces. 
 
 Begin by selecting the _New Budget_ button in the top right corner of the dashboard. A new window will display from the right side of your screen.
 
-<figure><img src="../../.gitbook/assets/image (6).png" alt=""><figcaption></figcaption></figure>
+![New budget dialog](/images/budget-dialog.png)
 
 Provide the following fields:
 

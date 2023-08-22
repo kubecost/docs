@@ -8,7 +8,7 @@ The Clusters dashboard provides a list of all your monitored clusters, as well a
 Monitoring of multiple clusters is only supported in [Kubecost Enterprise](https://www.kubecost.com/pricing/) plans. Learn more about Kubecost Enterprise's multi-cluster view [here](https://docs.kubecost.com/install-and-configure/install/multi-cluster).
 {% endhint %}
 
-<figure><img src="../../.gitbook/assets/image (1) (1).png" alt=""><figcaption><p>Clusters dashboard</p></figcaption></figure>
+![Clusters dashboard](/images/clusters-dashboard.png)
 
 ## Enabling Clusters dashboard
 
@@ -19,7 +19,7 @@ To enable the Clusters dashboard, you must perform these two steps:
 
 Enabling Cloud Costs through Helm can be done using the following parameters:
 
-```
+```yaml
 kubecostModel:
   cloudCost:
      enabled: true
@@ -50,7 +50,7 @@ Efficiency is calculated as the amount of node capacity that is used, compared t
 
 Selecting any metric in a specific cluster's row will take you to a Cluster Details page for that cluster which provides more extensive metrics, including assets and namespaces associated with that cluster and their respective cost metrics.
 
-<figure><img src="../../.gitbook/assets/image (2) (1) (1) (1).png" alt=""><figcaption><p>Cluster Details page</p></figcaption></figure>
+![Cluster Details page](/images/cluster-details-dash.png)
 
 ### Filtering clusters
 

@@ -16,7 +16,7 @@ Below are the major components deployed with the [Kubecost Helm chart](install.m
 
 Today, the core Kubecost product can be run with just components 1 and 2.1. See an overview of core components in this diagram:
 
-![Architecture Overview](https://raw.githubusercontent.com/kubecost/docs/main/images/arch.png)
+![Architecture Overview](/images/arch.png)
 
 ## Provider Pricing Architecture Overview
 
@@ -32,10 +32,10 @@ Kubecost interacts with provider pricing in a few different ways:
 
 In an Enterprise federated setup, only the Primary Kubecost Cluster needs access to the Cloud Provider Billing.
 
-![Provider Pricing Overview](https://raw.githubusercontent.com/kubecost/docs/main/images/cloud-bill-diagram.png)
+![Provider Pricing Overview](/images/cloud-bill-diagram.png)
 
 ## Enterprise Architecture Overview
 
 The most common implementation of durable storage in the Kubecost application is with [Thanos](https://thanos.io/). Below is a high-level reference for the required components. More information on each Thanos component can be found [here](https://thanos.io/tip/components/).
 
-![Thanos Overview](https://raw.githubusercontent.com/kubecost/docs/main/images/thanos-architecture.png)
+![Thanos Overview](/images/thanos-architecture.png)

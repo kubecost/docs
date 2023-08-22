@@ -41,12 +41,12 @@ There are several different ways to look at your node cost data. The default for
 
 The t2-mediums here are covered by a savings plan. Unblended, we're only being charged $0.06/day for two of them.
 
-<figure><img src="https://user-images.githubusercontent.com/453512/115825827-d229ca80-a3be-11eb-961f-6ae66f56c605.png" alt=""><figcaption></figcaption></figure>
+![Unblended node costs](/images/aws-node-price-unblended.png)
 
 When _Amortized costs_ is selected, the price jumps to $1.50/day
 
-<figure><img src="https://user-images.githubusercontent.com/453512/115826171-52e8c680-a3bf-11eb-8e47-fd62a2e9a44b.png" alt=""><figcaption></figcaption></figure>
+![Amortized node costs](/images/aws-node-price-amortized.png)
 
 This should closely match our data on the Assets page, for days where we have adjustments come in from the pricing CUR.
 
-<figure><img src="https://user-images.githubusercontent.com/453512/115825960-08ffe080-a3bf-11eb-9968-881f70d11e3c.png" alt=""><figcaption></figcaption></figure>
+![Kubecost Assets dashboard](/images/aws-node-price-assets.png)

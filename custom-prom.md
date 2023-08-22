@@ -78,7 +78,7 @@ The FQDN can be a full path via `https://prometheus-prod-us-central-x.grafana.ne
         port: 9003
 ```
 
-This config needs to be added to `extraScrapeConfigs` in the Prometheus configuration. See the example [extraScrapeConfigs.yaml](images/extraScrapeConfigs.yaml).
+This config needs to be added to `extraScrapeConfigs` in the Prometheus configuration. See the example [extraScrapeConfigs.yaml](assets/extraScrapeConfigs.yaml).
 
 3. By default, the Prometheus chart included with Kubecost (bundled-Prometheus) contains scrape configs optimized for Kubecost-required metrics. You need to add those scrape configs jobs into your existing Prometheus setup to allow Kubecost to provide more accurate cost data and optimize the required resources for your existing Prometheus.
 
@@ -114,7 +114,7 @@ prometheusRule:
 
 To confirm this job is successfully scraped by Prometheus, you can view the Targets page in Prometheus and look for a job named `kubecost`.
 
-![Prometheus Targets](images/prom-targets.png)
+![Prometheus Targets](/images/prom-targets.png)
 
 ### Node exporter metric labels
 
@@ -154,7 +154,7 @@ Increasing the default `etlDailyStorageDurationDays` value will naturally result
 
 The Diagnostics page (_Settings > View Full Diagnostics_) provides diagnostic info on your integration. Scroll down to Prometheus Status to verify that your configuration is successful.
 
-![Prometheus status diagnostic](images/prom-status.png)
+![Prometheus status diagnostic](/images/prom-status.png)
 
 Below you can find solutions to common Prometheus configuration problems. View the [Kubecost Diagnostics](https://docs.kubecost.com/troubleshooting/diagnostics) doc for more information.
 

@@ -184,7 +184,7 @@ There is also a Bash script available to restore the backup [here](https://githu
 
 Currently, this feature is still in development, but there is currently a status card available on the diagnostics page that will eventually show the status of the backup system:
 
-![Diagnostic ETL Backup Status](https://raw.githubusercontent.com/kubecost/docs/main/images/diagnostics-etl-backup-status.png)
+![Diagnostic ETL Backup Status](/images/diagnostics-etl-backup-status.png)
 
 ## Troubleshooting
 

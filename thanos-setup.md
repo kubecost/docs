@@ -43,4 +43,4 @@ Sample configurations for each cloud provider can be found [here](https://github
 
 ## Architecture diagram
 
-![Thanos Overview](https://raw.githubusercontent.com/kubecost/docs/main/images/thanos-architecture.png)
+![Thanos Overview](/images/thanos-architecture.png)

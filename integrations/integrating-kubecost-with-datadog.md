@@ -19,13 +19,13 @@ When installing your Datadog agent, you need to enable the following flags to al
 
 To do this, start by setting up your Datadog API key as an environment variable. You can get the API key after logging into your Datadog account by selecting your account > _Organization Settings_ > _API Keys_. The value of `DATADOG_API_KEY` below can be found by selecting the line item and copying your API key (do not use the value in the Key ID column).
 
-```
+```sh
 export DATADOG_API_KEY="<DATADOG_KEY_ID>"
 ```
 
 Finally, install the Datadog agent with your API key using the following command:
 
-```
+```sh
 helm repo add datadog https://helm.datadoghq.com
 helm upgrade -i datadog-agent datadog/datadog \
 --set --set datadog.site='us5.datadoghq.com' \
@@ -39,7 +39,7 @@ helm upgrade -i datadog-agent datadog/datadog \
 Install Kubecost using the following command to allow the Datadog agent to collect the metrics:
 
 {% code overflow="wrap" %}
-```
+```sh
 helm upgrade --install kubecost --namespace kubecost --create-namespace \
   --repo https://kubecost.github.io/cost-analyzer/ cost-analyzer \
   -f https://raw.githubusercontent.com/kubecost/poc-common-configurations/main/datadog/datadog-values.yaml \
@@ -71,6 +71,6 @@ In Datadog, select _Dashboards_ in the left navigation, then select _New Dashboa
 
 On your dashboard, select the gear icon in the top right corner, then select _Import dashboard JSON..._ Add the _Kubecostdashboard.json_ file and the dashboard should automatically import. The example dashboard gives you the overview of your cluster’s monthly cost and the costs at higher levels of granularity such as containers or namespaces. See the screenshot below depicting a successful import.
 
-<figure><img src="../.gitbook/assets/image (8).png" alt=""><figcaption><p>Example Kubecost dashboard in Datadog</p></figcaption></figure>
+![Example Kubecost dashboard in Datadog](/images/datadog-dashboard.png)
 
 For extra help, read Datadog's [Copy, import, or export dashboard JSON](https://docs.datadoghq.com/dashboards/#copy-import-or-export-dashboard-json) documentation to learn how to import a dashboard JSON.

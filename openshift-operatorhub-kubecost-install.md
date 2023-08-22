@@ -6,7 +6,7 @@ The OperatorHub is available via the Red Hat OpenShift Container Platform web co
 
 This document provides instructions for deploying Kubecost into Red Hat Openshift 4.9.x or higher using Red Hat Openshift platform (OCP) web console. Kubecost's operator on the [Embedded OperatorHub in OpenShift and OKD](https://github.com/redhat-openshift-ecosystem/community-operators-prod/tree/main/operators) is an alternative to [Kubecost Free version](opencost-product-comparison.md). Kubecost's operator uses an Operator pattern to deploy and manage the Kubecost deployment on the Red Hat Openshift platform.
 
-![Standard deployment](https://raw.githubusercontent.com/kubecost/docs/main/images/ocp-standard.png)
+![Standard deployment](/images/ocp-standard.png)
 
 ## Prerequisites
 
@@ -25,7 +25,7 @@ kubectl create namespace kubecost
 
 Example screenshot:
 
-![Discovery](https://raw.githubusercontent.com/kubecost/docs/main/images/ocp-operator-discovery.png)
+![Discovery](/images/ocp-operator-discovery.png)
 
 ## Deploy Kubecost
 
@@ -33,15 +33,15 @@ Example screenshot:
 
 On the OperatorHub page, find Kubecost, then click install. You will be on the Operator Installation page, which shows all related information. Select your desired version and settings, then click `Install`
 
-![Installation step 1a](https://raw.githubusercontent.com/kubecost/docs/main/images/ocp-operator-installation-step-1.png)
+![Installation step 1a](/images/ocp-operator-installation-step-1.png)
 
 The installation takes 1-2 minutes to be completed. A dialog will appear as in the following example screenshot:
 
-![Installation step 1b](https://raw.githubusercontent.com/kubecost/docs/main/images/ocp-operator-installation-step-1b.png)
+![Installation step 1b](/images/ocp-operator-installation-step-1b.png)
 
 You can click on `View Operators` to review the details as in the following screenshot:
 
-![Installation step 1b](https://raw.githubusercontent.com/kubecost/docs/main/images/ocp-operator-installation-step-1c.png)
+![Installation step 1c](/images/ocp-operator-installation-step-1c.png)
 
 Kubecost operator is now installed successfully. Next, you can start to install Kubecost using the custom resources definition (CRD)
 

@@ -2,7 +2,7 @@
 
 For teams interested in reducing their Kubernetes costs, it's beneficial to first understand how provisioned resources have been used. There are two major concepts to start with: pod resource efficiency and cluster idle costs.
 
-![The Allocations view aggregated by namespace, which shows efficiency & idle](images/efficiency-idle.png)
+![The Allocations view aggregated by namespace, which shows efficiency & idle](/images/efficiency-idle.png)
 
 ## Efficiency
 
