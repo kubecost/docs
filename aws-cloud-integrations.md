@@ -4,7 +4,7 @@ By default, Kubecost pulls on-demand asset prices from the public AWS pricing AP
 
 You will need permissions to create the Cost and Usage Report (CUR), and add IAM credentials for Athena and S3. Optional permission is the ability to add and execute CloudFormation templates. Kubecost does not require root access in the AWS account.
 
-This guide contains multiple possible methods for connecting Kubecost to AWS billing, based on user environment and preference. Because of this, there may not be a straightforward approach for new users. To address this, a streamlined guide contaning best practices can be found [here](./aws-cur-setup.md). This best practices guide has some assumptions to carefully consider.
+This guide contains multiple possible methods for connecting Kubecost to AWS billing, based on user environment and preference. Because of this, there may not be a straightforward approach for new users. To address this, a streamlined guide containing best practices can be found [here](aws-cur-setup.md). This best practices guide has some assumptions to carefully consider.
 
 For the below guide, a GitHub repository with sample files can be found [here](https://github.com/kubecost/poc-common-configurations/tree/main/aws).
 
