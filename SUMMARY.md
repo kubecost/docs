@@ -24,7 +24,7 @@
   * [Multi-Cluster](multi-cluster.md)
     * [ETL Federation (preferred)](federated-etl.md)
       * [Backups and Alerting](federated-etl-backups-alerting.md)
-    * [Thanos Federation (fully supported)](thanos-setup.md)
+    * [Thanos Federation](thanos-setup.md)
       * [Configuring Thanos](long-term-storage.md)
       * [Secondary Clusters Guide](secondary-clusters.md)
       * [Thanos Upgrade](thanos-upgrade.md)
