@@ -22,7 +22,7 @@
     * [GCP Cloud Billing Integration](gcp-out-of-cluster.md)
       * [Creating a Google Service Account](google-service-account-thanos.md)
   * [Multi-Cluster](multi-cluster.md)
-    * [Federated ETL Federation (preferred)](federated-etl.md)
+    * [ETL Federation (preferred)](federated-etl.md)
       * [Backups and Alerting](federated-etl-backups-alerting.md)
     * [Thanos Federation (fully supported)](thanos-setup.md)
       * [Configuring Thanos](long-term-storage.md)
