@@ -6,12 +6,16 @@ This feature is only officially supported on Kubecost Enterprise plans.
 
 There are two primary methods to aggregate all cluster information back to a single Kubecost UI described in [Multi-Cluster Kubecost](multi-cluster.md#enterprise-federation).
 
-Below is the configuration guide using Kubecost Thanos Federation.
+The *preferred* method for multi-cluster is [ETL Federation](federated-etl.md). The configuration guide below is for Kubecost Thanos Federation, which may not scale as well as ETL Federation in large environments.
 
 ## Configuration
 
-1. Follow steps [here](long-term-storage.md#option-b-out-of-cluster-storage-thanos) to enable Thanos durable storage on a Master cluster.
-2.  Repeat the process in Step 1 for each additional secondary cluster, with the following Thanos recommendations:
+Thanos is a tool to aggregate Prometheus metrics to a central object storage (S3 compatible) bucket. Thanos is implemented as a sidecar on the Prometheus pod on all clusters.
+
+1. Follow steps [here](long-term-storage.md#option-b-out-of-cluster-storage-thanos) to enable all required Thanos components on a Kubecost primary cluster, including the Prometheus sidecar.
+2. For each additional cluster, only the Thanos sidecar is needed.
+
+Consider the following Thanos recommendations for secondaries:
 
     * Reuse your existing storage bucket and access credentials.
     * Do not deploy multiple instances of `thanos-compact`.
