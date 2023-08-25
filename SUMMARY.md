@@ -28,7 +28,7 @@
       * [Configuring Thanos](long-term-storage.md)
       * [Secondary Clusters Guide](secondary-clusters.md)
       * [Thanos Upgrade](thanos-upgrade.md)
-    * Long-Term Storage Configuration
+    * [Long-Term Storage Configuration](install-and-configure/install/multi-cluster/long-term-storage-configuration/README.md)
       * [AWS Long-Term Storage](install-and-configure/install/long-term-storage/aws/README.md)
       * [AWS Multi-Cluster Storage Configuration](long-term-storage-aws.md)
       * [AWS Thanos IAM Policy](aws-service-account-thanos.md)

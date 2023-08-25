@@ -1,4 +1,4 @@
-# AWS Cloud Integration
+# AWS Cloud Billing Integration
 
 By default, Kubecost pulls on-demand asset prices from the public AWS pricing API. For more accurate pricing, this integration will allow Kubecost to reconcile your current measured Kubernetes spend with your actual AWS bill. This integration also properly accounts for Enterprise Discount Programs, Reserved Instance usage, Savings Plans, Spot usage, and more.
 
@@ -33,6 +33,10 @@ For CUR data written to an S3 bucket only accessed by Kubecost, it is safe to ex
 {% endhint %}
 
 Remember the name of the bucket you create for CUR data. This will be used in Step 2.
+
+{% hint style="warning" %}
+Familiarize yourself with how column name restrictions differ between CURs and Athena tables. AWS may change your CUR name when you upload your CUR to your Athena table in Step 2, documented in AWS' [Running Amazon Athena queries](https://docs.aws.amazon.com/cur/latest/userguide/cur-ate-run.html). As best practice, use all lowercase letters and only use `_` as a special character.
+{% endhint %}
 
 AWS may take up to 24 hours to publish data. Wait until this is complete before continuing to the next step.
 
@@ -544,33 +548,41 @@ You can check pod logs for authentication errors by running: `kubectl get pods -
 
 If you do not see any authentication errors, log in to your AWS console and visit the Athena dashboard. You should be able to find the CUR. Ensure that the database with the CUR matches the athenaTable entered in Step 5. It likely has a prefix with `athenacurcfn_` :
 
-![Athena query editor](/images/athena-query-1.png)
+![Athena query editor](images/athena-query-1.png)
 
 You can also check query history to see if any queries are failing:
 
-![Failed queries in Athena](/images/athena-query-2.png)
+![Failed queries in Athena](images/athena-query-2.png)
 
 ### Common Athena errors
 
 #### Incorrect bucket in IAM Policy
 
-*   **Symptom:** A similar error to this will be shown on the Diagnostics page under Pricing Sources. You can search in the Athena "Recent queries" dashboard to find additional info about the error.
+* **Symptom:** A similar error to this will be shown on the Diagnostics page under Pricing Sources. You can search in the Athena "Recent queries" dashboard to find additional info about the error.
 
-    {% code overflow="wrap" %}
-    ```
-    QueryAthenaPaginated: query execution error: no query results available for query <Athena Query ID>
-    ```
-    {% endcode %}
+{% code overflow="wrap" %}
+````
+```
+QueryAthenaPaginated: query execution error: no query results available for query <Athena Query ID>
+```
+````
+{% endcode %}
 
-    And/or the following error will be found in the Kubecost `cost-model` container logs.
+```
+And/or the following error will be found in the Kubecost `cost-model` container logs.
 
-    {% code overflow="wrap" %}
-    ```
-    Permission denied on S3 path: s3://cur-report/cur-report/cur-report/year=2022/month=8
+```
 
-    This query ran against the "athenacurcfn_test" database, unless qualified by the query. Please post the error message on our forum  or contact customer support  with Query Id: <Athena Query ID>
-    ```
-    {% endcode %}
+{% code overflow="wrap" %}
+````
+```
+Permission denied on S3 path: s3://cur-report/cur-report/cur-report/year=2022/month=8
+
+This query ran against the "athenacurcfn_test" database, unless qualified by the query. Please post the error message on our forum  or contact customer support  with Query Id: <Athena Query ID>
+```
+````
+{% endcode %}
+
 * **Resolution:** This error is typically caused by the incorrect (Athena results) s3 bucket being specified in the CloudFormation template of Step 3 from above. To resolve the issue, ensure the bucket used for storing the AWS CUR report (Step 1) is specified in the `S3ReadAccessToAwsBillingData` SID of the IAM policy (default: kubecost-athena-access) attached to the user or role used by Kubecost (Default: KubecostUser / KubecostRole). See the following example.
 
 {% hint style="info" %}
