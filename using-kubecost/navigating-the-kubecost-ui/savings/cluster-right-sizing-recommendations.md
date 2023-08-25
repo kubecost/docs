@@ -1,4 +1,4 @@
-# Cluster Right-Sizing Recommendations
+# Cluster Right-Sizing
 
 Kubecost can provide and implement recommendations for right-sizing your supported clusters to ensure they are configured in the most cost-effective way. Recommendations are available for any and all clusters. Kubecost in certain configurations is also capable of taking a recommendation and applying it directly to your cluster in one moment. These two processes should be distinguished respectively as viewing cluster recommendations vs. adopting cluster recommendations.
 

@@ -1,16 +1,16 @@
-# AWS Cloud Integration
+# AWS Cloud Billing Integration
 
-By default, Kubecost pulls On-Demand asset prices from the public AWS pricing API. For more accurate pricing, this integration will allow Kubecost to reconcile your current measured Kubernetes spend with your actual AWS bill. This integration also properly accounts for Enterprise Discount Programs, Reserved Instance usage, Savings Plans, Spot usage, and more.
+By default, Kubecost pulls on-demand asset prices from the public AWS pricing API. For more accurate pricing, this integration will allow Kubecost to reconcile your current measured Kubernetes spend with your actual AWS bill. This integration also properly accounts for Enterprise Discount Programs, Reserved Instance usage, Savings Plans, Spot usage, and more.
 
 You will need permissions to create the Cost and Usage Report (CUR), and add IAM credentials for Athena and S3. Optional permission is the ability to add and execute CloudFormation templates. Kubecost does not require root access in the AWS account.
 
-A GitHub repository with sample files which follow the below instructions can be found [here](https://github.com/kubecost/poc-common-configurations/tree/main/aws).
+This guide contains multiple possible methods for connecting Kubecost to AWS billing, based on user environment and preference. Because of this, there may not be a straightforward approach for new users. To address this, a streamlined guide containing best practices can be found [here](aws-cur-setup.md). This best practices guide has some assumptions to carefully consider.
 
-## AWS terminology and overview
+For the below guide, a GitHub repository with sample files can be found [here](https://github.com/kubecost/poc-common-configurations/tree/main/aws).
+
+## Key AWS terminology
 
 Integrating your AWS account with Kubecost may be a complicated process if you aren’t deeply familiar with the AWS platform and how it interacts with Kubecost. This section provides an overview of some of the key terminology and AWS services that are involved in the process of integration.
-
-### Terminology
 
 **Cost and Usage Report**: AWS report which tracks cloud spending and writes to an Amazon Simple Storage Service (Amazon S3) bucket for ingestion and long term historical data. The CUR is originally formatted as a CSV, but when integrated with Athena, is converted to Parquet format.
 
@@ -33,6 +33,10 @@ For CUR data written to an S3 bucket only accessed by Kubecost, it is safe to ex
 {% endhint %}
 
 Remember the name of the bucket you create for CUR data. This will be used in Step 2.
+
+{% hint style="warning" %}
+Familiarize yourself with how column name restrictions differ between CURs and Athena tables. AWS may change your CUR name when you upload your CUR to your Athena table in Step 2, documented in AWS' [Running Amazon Athena queries](https://docs.aws.amazon.com/cur/latest/userguide/cur-ate-run.html). As best practice, use all lowercase letters and only use `_` as a special character.
+{% endhint %}
 
 AWS may take up to 24 hours to publish data. Wait until this is complete before continuing to the next step.
 
@@ -80,14 +84,14 @@ Download template files from the URLs provided below and upload them as the stac
 
 * Download [this .yaml file](https://raw.githubusercontent.com/kubecost/cloudformation/master/kubecost-single-account-permissions.yaml).
 * Navigate to the [AWS Console Cloud Formation page](https://console.aws.amazon.com/cloudformation).
-* Select _Create New Stack_ if you have never used AWS CloudFormation before. Otherwise, select _Create Stack_, and select _With new resource (standard)._
-* Under _Prepare template_, choose _Template is ready_.
-* Under _Template source_, choose _Upload a template file_. Select _Choose file_. Locate the downloaded .yaml template in your file explorer and select it, then select _Open_.
-* Select _Next_. The Specify stack details page opens.
+* Select _Create Stack_, then select _With existing resources (import resources)_ from the dropdown. On the 'Identify resources' page, select _Next._
+* Under Template source, choose _Upload a template file_.
+* Select _Choose file_, which will open your file explorer. Select the .yaml template, and then select _Open_. Then, select _Next_.
+* On the 'Identify resources' page, provide any additional resources to import. Then, select _Next_.
 * For _Stack name_, enter a name for your template.
 * Set the following parameters:
-  * `AthenaCURBucket`: The bucket where the CUR is sent from Step 1.
-  * `SpotDataFeedBucketName`: (Optional) The bucket where the Spot data feed is sent from the “Setting up the Spot Data feed” step (see below)
+  * AthenaCURBucket: The bucket where the CUR is sent from Step 1.
+  * SpotDataFeedBucketName: (Optional) The bucket where the Spot data feed is sent
 * Select _Next_. The Configure stack options page opens.
 * Configure any additional options as needed. Select _Next_. The Review stack page opens.
 * At the bottom of the page, select _I acknowledge that AWS CloudFormation might create IAM resources with custom names._
@@ -103,16 +107,14 @@ Download template files from the URLs provided below and upload them as the stac
 
 * Download [this .yaml file](https://raw.githubusercontent.com/kubecost/cloudformation/master/kubecost-sub-account-permissions.yaml).
   * Navigate to the [AWS Console Cloud Formation page](https://console.aws.amazon.com/cloudformation).
-  * Select _Create New Stack_ if you have never used AWS CloudFormation before. Otherwise, select _Create Stack_.
-  * Under _Prepare template_, select _Template is ready_.
-  * Under _Template source_, choose _Upload a template file_.
-  * Select _Choose file_.
-  * Choose the downloaded .yaml template, and then select _Open_.
-  * Select _Next_.
+  * Select _Create Stack_, then select _With existing resources (import resources)_ from the dropdown. On the 'Identify resources' page, select _Next._
+  * Under Template source, choose _Upload a template file_.
+  * Select _Choose file_, which will open your file explorer. Select the .yaml template, and then select _Open_. Then, select _Next_.
+  * On the 'Identify resources' page, provide any additional resources to import. Then, select _Next_.
   * For _Stack name_, enter a name for your template.
   * Set the following parameters:
-    * `MasterPayerAccountID`: The account ID of the management account (formerly called master payer account) where the CUR has been created
-    * `SpotDataFeedBucketName`: The bucket where the Spot data feed is sent from the “Setting up the Spot Data feed” step
+    * MasterPayerAccountID: The account ID of the management account (formerly called master payer account) where the CUR has been created
+    * SpotDataFeedBucketName: The bucket where the Spot data feed is sent
   * Select _Next_.
   * Select _Next_.
   * At the bottom of the page, select _I acknowledge that AWS CloudFormation might create IAM resources._
@@ -121,8 +123,8 @@ Download template files from the URLs provided below and upload them as the stac
 **On the management account:**
 
 * Follow the same steps to create a CloudFormation stack as above, but using [this .yaml file](https://raw.githubusercontent.com/kubecost/cloudformation/master/kubecost-masterpayer-account-permissions.yaml) instead, and with these parameters:
-  * `AthenaCURBucket`: The bucket where the CUR is set from Step 1
-  * `KubecostClusterID`: An account that Kubecost is running on that requires access to the Athena CUR.
+  * AthenaCURBucket: The bucket where the CUR is set from Step 1
+  * KubecostClusterID: An account that Kubecost is running on that requires access to the Athena CUR.
 
 </details>
 
@@ -224,6 +226,7 @@ Attach both of the following policies to the same role or user. Use a user if yo
 
 On each sub account running Kubecost, attach both of the following policies to the same role or user. Use a user if you intend to integrate via Service Key, and a role if via IAM annotation (see more below under Via Pod Annotation by EKS). The SpotDataAccess policy statement is optional if the Spot data feed is configured (see “Setting up the Spot Data feed” step below).
 
+{% code overflow="wrap" %}
 ```
 	{
                "Version": "2012-10-17",
@@ -256,6 +259,7 @@ On each sub account running Kubecost, attach both of the following policies to t
                ]
 	}
 ```
+{% endcode %}
 
 On the management account, attach this policy to a role (replace `${AthenaCURBucket}` variable):
 
@@ -321,7 +325,7 @@ On the management account, attach this policy to a role (replace `${AthenaCURBuc
 	}
 ```
 
-Then add the following trust statement to the role the policy is attached to (replace `${KubecostClusterID}` variable):
+Then add the following trust statement to the role the policy is attached to on the management account (replace the `${aws-mgmt-account-id}` variable with the account you want to assume the role):
 
 ```
 	{
@@ -330,7 +334,7 @@ Then add the following trust statement to the role the policy is attached to (re
                   {
                      "Effect": "Allow",
                      "Principal": {
-                        "AWS": "arn:aws:iam::${KubecostClusterID}:root"
+                        "AWS": "arn:aws:iam::${aws-mgmt-account-id}:root"
                      },
                      "Action": [
                         "sts:AssumeRole"
@@ -382,9 +386,11 @@ This may be the preferred method if your Helm values are in version control and 
 
 2. Create a Kubernetes secret:
 
+{% code overflow="wrap" %}
 ```bash
-$ kubectl create secret generic <SECRET_NAME> --from-file=service-key.json --namespace <kubecost> 
+$ kubectl create secret generic <SECRET_NAME> --from-file=service-key.json --namespace <kubecost>
 ```
+{% endcode %}
 
 3. Set the Helm value:
 
@@ -438,7 +444,7 @@ Update the following variables in the files you downloaded:
 
 **Step 2: Create policy**
 
-&#x20;In the same location where your downloaded configuration files are, run the following command to create the appropriate policy:
+In the same location where your downloaded configuration files are, run the following command to create the appropriate policy:
 
 {% code overflow="wrap" %}
 ```
@@ -459,7 +465,7 @@ eksctl utils associate-iam-oidc-provider \
 
 **Step 4: Create required IAM service accounts**
 
-**Note:** Remember to replace 1234567890 with your AWS account ID number.
+**Note:** Remember to replace `1234567890` with your AWS account ID number.
 
 {% code overflow="wrap" %}
 ```
@@ -514,19 +520,19 @@ When you are done, select _Update_ to confirm.
 #### Option 2: Add config values via Helm
 
 {% hint style="warning" %}
-If you set any `kubecostProductConfigs` from the Helm chart, all changes via the frontend will be overridden on pod restart.
+If you set any `kubecostProductConfigs` from the Helm chart, all changes via the front end will be overridden on pod restart.
 {% endhint %}
 
-* `athenaProjectID` The AWS AccountID where the Athena CUR is, likely your management account.
-* `athenaBucketName` An S3 bucket to store Athena query results that you’ve created that Kubecost has permission to access
+* `athenaProjectID`: The AWS AccountID where the Athena CUR is, likely your management account.
+* `athenaBucketName`: An S3 bucket to store Athena query results that you’ve created that Kubecost has permission to access
   * The name of the bucket should match `s3://aws-athena-query-results-*`, so the IAM roles defined above will automatically allow access to it
   * The bucket can have a Canned ACL of `Private` or other permissions as you see fit.
-* `athenaRegion` The AWS region Athena is running in
-* `athenaDatabase` The name of the database created by the Athena setup
+* `athenaRegion`: The AWS region Athena is running in
+* `athenaDatabase`: The name of the database created by the Athena setup
   * The athena database name is available as the value (physical id) of `AWSCURDatabase` in the CloudFormation stack created above (in [Step 2: Setting up Athena](aws-cloud-integrations.md#Step-2:-Setting-up-Athena))
-* `athenaTable` the name of the table created by the Athena setup
-  * The table name is typically the database name with the leading `athenacurcfn_` removed (but is not available as a CloudFormation stack resource)
-* `athenaWorkgroup` The workgroup assigned to be used with Athena. If not specified, defaults to `Primary`
+* `athenaTable`: the name of the table created by the Athena setup
+  * The table name is typically the database name with the leading `athenacurcfn_` removed (but is not available as a CloudFormation stack resource). Confirm the table name by visiting the Athena dashboard.
+* `athenaWorkgroup`: The workgroup assigned to be used with Athena. If not specified, defaults to `Primary`
 
 {% hint style="info" %}
 Make sure to use only underscore as a delimiter if needed for tables and views. Using a hyphen/dash will not work even though you might be able to create it. See the [AWS docs](https://docs.aws.amazon.com/athena/latest/ug/tables-databases-columns-names.html) for more info.
@@ -542,33 +548,45 @@ You can check pod logs for authentication errors by running: `kubectl get pods -
 
 If you do not see any authentication errors, log in to your AWS console and visit the Athena dashboard. You should be able to find the CUR. Ensure that the database with the CUR matches the athenaTable entered in Step 5. It likely has a prefix with `athenacurcfn_` :
 
-![Screen Shot 2020-12-06 at 9 43 31 PM](https://user-images.githubusercontent.com/453512/101319459-e6f23100-3816-11eb-8d96-1ab977cb50bd.png)
+![Athena query editor](images/athena-query-1.png)
 
 You can also check query history to see if any queries are failing:
 
-![Screen Shot 2020-12-06 at 9 43 50 PM](https://user-images.githubusercontent.com/453512/101319633-24ef5500-3817-11eb-9f87-55a903428936.png)
+![Failed queries in Athena](images/athena-query-2.png)
 
 ### Common Athena errors
 
 #### Incorrect bucket in IAM Policy
 
-*   **Symptom:** A similar error to this will be shown on the Diagnostics page under Pricing Sources. You can search in the Athena "Recent queries" dashboard to find additional info about the error.
+* **Symptom:** A similar error to this will be shown on the Diagnostics page under Pricing Sources. You can search in the Athena "Recent queries" dashboard to find additional info about the error.
 
-    ```
-    QueryAthenaPaginated: query execution error: no query results available for query <Athena Query ID>
-    ```
+{% code overflow="wrap" %}
+````
+```
+QueryAthenaPaginated: query execution error: no query results available for query <Athena Query ID>
+```
+````
+{% endcode %}
 
-    And/or the following error will be found in the Kubecost `cost-model` container logs.
+```
+And/or the following error will be found in the Kubecost `cost-model` container logs.
 
-    ```
-    Permission denied on S3 path: s3://cur-report/cur-report/cur-report/year=2022/month=8
+```
 
-    This query ran against the "athenacurcfn_test" database, unless qualified by the query. Please post the error message on our forum  or contact customer support  with Query Id: <Athena Query ID>
-    ```
+{% code overflow="wrap" %}
+````
+```
+Permission denied on S3 path: s3://cur-report/cur-report/cur-report/year=2022/month=8
+
+This query ran against the "athenacurcfn_test" database, unless qualified by the query. Please post the error message on our forum  or contact customer support  with Query Id: <Athena Query ID>
+```
+````
+{% endcode %}
+
 * **Resolution:** This error is typically caused by the incorrect (Athena results) s3 bucket being specified in the CloudFormation template of Step 3 from above. To resolve the issue, ensure the bucket used for storing the AWS CUR report (Step 1) is specified in the `S3ReadAccessToAwsBillingData` SID of the IAM policy (default: kubecost-athena-access) attached to the user or role used by Kubecost (Default: KubecostUser / KubecostRole). See the following example.
 
 {% hint style="info" %}
-This error can also occur when the management account cross-account permissions are incorrect, however the solution may differ.
+This error can also occur when the management account cross-account permissions are incorrect, however, the solution may differ.
 {% endhint %}
 
 ```
@@ -589,35 +607,41 @@ This error can also occur when the management account cross-account permissions 
 
 * **Symptom:** A similar error to this will be shown on the Diagnostics page under Pricing Sources.
 
+{% code overflow="wrap" %}
 ```
 QueryAthenaPaginated: start query error: operation error Athena: StartQueryExecution, https response error StatusCode: 400, RequestID: <Athena Query ID>, InvalidRequestException: Queries of this type are not supported
 ```
+{% endcode %}
 
-* **Resolution:** While rare, this issue was caused by and Athena instance which failed to provision properly on AWS. The solution was to delete the Athena DB and deploy a new one. To verify this is needed, find the failed query ID in the Athena "Recent queries" dashboard and attempt to manually run the query.
+* **Resolution:** While rare, this issue was caused by an Athena instance that failed to provision properly on AWS. The solution was to delete the Athena DB and deploy a new one. To verify this is needed, find the failed query ID in the Athena "Recent queries" dashboard and attempt to manually run the query.
 
 #### HTTPS Response error
 
 * **Symptom:** A similar error to this will be shown on the Diagnostics page under Pricing Sources.
 
+{% code overflow="wrap" %}
 ```
 QueryAthenaPaginated: start query error: operation error Athena: StartQueryExecution, https response error StatusCode: 400, RequestID: ********************, InvalidRequestException: Unable to verify/create output bucket aws-athena-query-results-test
 ```
+{% endcode %}
 
 * **Resolution:** Previously, if you ran a query without specifying a value for query result location, and the query result location setting was not overridden by a workgroup, Athena created a default location for you. Now, before you can run an Athena query in a region in which your account hasn't used Athena previously, you must specify a query result location, or use a workgroup that overrides the query result location setting. While Athena no longer creates a default query results location for you, previously created default `aws-athena-query-results-MyAcctID-MyRegion` locations remain valid and you can continue to use them. The bucket should be in the format of: `aws-athena-query-results-MyAcctID-MyRegion` It may also be required to remove and reinstall Kubecost. If doing this please remeber to backup ETL files prior or contact support for additional assistance. See also this AWS doc on [specifying a query result location](https://docs.aws.amazon.com/athena/latest/ug/querying.html#query-results-specify-location).
 
-#### Missing Athena Column
+#### Missing Athena column
 
 * **Symptom:** A similar error to this will be shown on the Diagnostics page under Pricing Sources or in the Kubecost `cost-model` container logs.
 
+{% code overflow="wrap" %}
 ```
 QueryAthenaPaginated: query execution error: no query results available for query <Athena Query ID>
- 
-Checking the athena logs we see a syntax error:
-   
+
+Checking the Athena logs we see a syntax error:
+
 SYNTAX_ERROR: line 4:3: Column 'line_item_resource_id' cannot be resolved
 
 This query ran against the "<DB Name>" database, unless qualified by the query
 ```
+{% endcode %}
 
 * **Resolution:** Verify in AWS' Cost and Usage Reports dashboard that the Resource IDs are enabled as "Report content" for the CUR created in Step 1. If the Resource IDs are not enabled, you will need to re-create the report (this will require redoing Steps 1 and 2 from this doc).
 
@@ -625,9 +649,11 @@ This query ran against the "<DB Name>" database, unless qualified by the query
 
 * **Symptom:** A similar error to this will be shown on the Diagnostics page under Pricing Sources or in the Kubecost `cost-model` container logs.
 
+{% code overflow="wrap" %}
 ```
 QueryAthenaPaginated: start query error: operation error Athena: StartQueryExecution, https response error StatusCode: 400, RequestID: <Athena Query ID>, InvalidRequestException: outputLocation is not a valid S3 path.
 ```
+{% endcode %}
 
 * **Resolution:** Verify that `s3://` was included in the bucket name when setting the `.Values.kubecostProductConfigs.athenaBucketName` Helm value.
 

@@ -68,11 +68,11 @@ GitHub: [https://github.com/kubernetes/kube-state-metrics](https://github.com/ku
 | `kube_namespace_labels` | Kubernetes labels converted to Prometheus labels |
 | `kube_node_labels` | Kubernetes labels converted to Prometheus labels |
 | `kube_node_status_allocatable` | The allocatable for different resources of a node that are available for scheduling |
-| `kube_node_status_allocatable_cpu_cores` | Total allocatable cpu cores of the node (Depecated in ksm 2.0.0) |
-| `kube_node_status_allocatable_memory_bytes` | Total allocatable memory bytes of the node (Depecated in ksm 2.0.0) |
+| `kube_node_status_allocatable_cpu_cores` | Total allocatable cpu cores of the node (Deprecated in ksm 2.0.0) |
+| `kube_node_status_allocatable_memory_bytes` | Total allocatable memory bytes of the node (Deprecated in ksm 2.0.0) |
 | `kube_node_status_capacity` | The capacity for different resources of a node |
-| `kube_node_status_capacity_cpu_cores` | Total cpu cores available on the the node (Depecated in ksm 2.0.0) |
-| `kube_node_status_capacity_memory_bytes` | Total memory available on the node (bytes) (Depecated in ksm 2.0.0) |
+| `kube_node_status_capacity_cpu_cores` | Total cpu cores available on the the node (Deprecated in ksm 2.0.0) |
+| `kube_node_status_capacity_memory_bytes` | Total memory available on the node (bytes) (Deprecated in ksm 2.0.0) |
 | `kube_node_status_condition` | The condition of a cluster node |
 | `kube_persistentvolume_capacity_bytes` | Total capacity of a persistent volume (bytes) |
 | `kube_persistentvolume_status_phase` | Status of a persistent volume (Bound|Failed|Pending|Available|Released) |
@@ -80,8 +80,8 @@ GitHub: [https://github.com/kubernetes/kube-state-metrics](https://github.com/ku
 | `kube_persistentvolumeclaim_resource_requests_storage_bytes` | The capacity of storage requested by the persistent volume claim |
 | `kube_pod_annotations` | Kubernetes annotations converted to Prometheus labels |
 | `kube_pod_container_resource_limits` | The number of requested limit resource by a container |
-| `kube_pod_container_resource_limits_cpu_cores` | Limit on CPU cores that can be used by the container. (Depecated in ksm 2.0.0) |
-| `kube_pod_container_resource_limits_memory_bytes` | Limit on the amount of memory that can be used by the container. (Depecated in ksm 2.0.0) |
+| `kube_pod_container_resource_limits_cpu_cores` | Limit on CPU cores that can be used by the container. (Deprecated in ksm 2.0.0) |
+| `kube_pod_container_resource_limits_memory_bytes` | Limit on the amount of memory that can be used by the container. (Deprecated in ksm 2.0.0) |
 | `kube_pod_container_resource_requests` | The number of requested request resource by a container |
 | `kube_pod_container_status_restarts_total` | The number of container restarts per container |
 | `kube_pod_container_status_running` | Describes whether the container is currently in running state |

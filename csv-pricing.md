@@ -1,6 +1,8 @@
 # CSV Pricing
 
-> **Note**: This feature is only officially supported on Kubecost Enterprise plans.
+{% hint style="info" %}
+This feature is only officially supported on Kubecost Enterprise plans.
+{% endhint %}
 
 The following steps allow Kubecost to use custom prices with a CSV pipeline. This feature allows for individual assets (e.g. nodes) to be supplied at unique prices. Common uses are for on-premise clusters, service-providers, or for external enterprise discounts.
 
@@ -19,11 +21,13 @@ The following steps allow Kubecost to use custom prices with a CSV pipeline. Thi
 
     If the node label topology.kubernetes.io/region is present, it must also be in the CSV Region column.
 
-![Pricing table](https://raw.githubusercontent.com/kubecost/docs/main/images/pricing.png)
+![Pricing table](/images/pricing.png)
 
 ## GPU pricing
 
-Only required for nodes with GPUs
+{% hint style="info" %}
+This section is only required for nodes with GPUs.
+{% endhint %}
 
 1. The node the GPU is attached to must be matched by a CSV node price. Typically this will be matched on instance type (node.kubernetes.io/instance-type)
 2. Supported GPU labels are currently:
@@ -48,7 +52,7 @@ pricingCsv:
     csvAccessCredentials: pricing-schema-access-secret
 ```
 
-Alternatively, mount a configmap with the CSV:
+Alternatively, mount a ConfigMap with the CSV:
 
 ```
 kubectl create configmap csv-pricing --from-file custom-pricing.csv
@@ -98,7 +102,7 @@ There are two options for adding the credentials to the Kubecost pod:
 
 1. Service key: Create an S3 service key with the permissions above, then add its ID and access key as a K8s secret:
    1. `kubectl create secret generic pricing-schema-access-secret -n kubecost --from-literal=AWS_ACCESS_KEY_ID=id --from-literal=AWS_SECRET_ACCESS_KEY=key`
-   2. The name of this secret should be the same as csvAccessCredentials in values.yaml above
+   2. The name of this secret should be the same as csvAccessCredentials in _values.yaml_ above
 2. AWS IAM (IRSA) [service account annotation](https://docs.aws.amazon.com/eks/latest/userguide/adot-iam.html)
 
 ## Pricing discounts
@@ -109,9 +113,9 @@ Negotiated discounts are applied after cost metrics are written to Prometheus. D
 
 The following logic is used to match node prices accurately:
 
-* First, search for an exact match in CSV pipeline
-* If exact match not available, search for an existing CSV data point that matches region, instanceType, and AssetClass
-* If neither available, fallback to pricing estimates
+* First, search for an exact match in the CSV pipeline
+* If an exact match is not available, search for an existing CSV data point that matches region, instanceType, and AssetClass
+* If neither is available, fall back to pricing estimates
 
 You can check a summary of the number of nodes that have matched with the CSV by visiting /model/pricingSourceCounts. The response is a JSON object of the form:
 

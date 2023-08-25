@@ -15,9 +15,10 @@ The Cluster Controller enables features like:
 
 ## Feature functionality
 
-The Cluster Controller can be enabled on any cluster, but certain functionality will only be enabled based on your cloud service provider (CSP) and setup:
+The Cluster Controller can be enabled on any cluster type, but certain functionality will only be enabled based on your cloud service provider (CSP) and setup:
 
-* The Controller itself and container RRS are available for all clusters and configurations.
+* The Cluster Controller can only be enabled on your primary cluster.
+* The Controller itself and container RRS are available for all cluster types and configurations.
 * Cluster turndown, cluster right-sizing, and Kubecost Actions are only available for GKE, EKS, and Kops-on-AWS clusters, after setting up a provider service key.
 
 Therefore, the Provider service key setup section below is optional, but will limit functionality if you choose to skip it.
@@ -31,8 +32,6 @@ If you are enabling the Cluster Controller for a GKE/EKS/Kops AWS cluster, follo
 <details>
 
 <summary>GKE setup</summary>
-
-
 
 The following command performs the steps required to set up a service account. [More info](https://github.com/kubecost/cluster-turndown/blob/master/scripts/README.md).
 

@@ -4,7 +4,7 @@ Kubecost values your feedback when it comes to ensuring Kubecost Cloud meets you
 
 ## Submitting bug reports
 
-If you encounter a bug or performance issue with Kubecost Cloud, reach out to [cloud-support@kubecost.com](mailto:cloud@kubecost.com). You can alternatively describe the problem on our Slack in #kc-cloud-beta.
+If you encounter a bug or performance issue with Kubecost Cloud, reach out to [cloud@kubecost.com](mailto:cloud@kubecost.com). You can alternatively describe the problem on our [Slack](https://kubecost.com/join-slack) in #kc-cloud-beta.
 
 ## Checking Kubecost status
 

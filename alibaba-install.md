@@ -1,12 +1,12 @@
 # Installing Kubecost on Alibaba
 
-## Install Kubecost via Helm
+## Installing Kubecost via Helm
 
-Kubecost installation is exactly same as other cloud providers with Helm v3.1+:
+Installing Kubecost on an Alibaba cluster is the same as other cloud providers with Helm v3.1+:
 
 `helm install kubecost/cost-analyzer -n kubecost -f values.yaml`
 
-With _values.yaml_ files containing below parameters at least:
+Your _values.yaml_ files must contain the below parameters:
 
 ```
 prometheus:
@@ -22,11 +22,13 @@ kubecostProductConfigs:
 
 The `alibaba-service-key` can be created using the following command:
 
+{% code overflow="wrap" %}
 ```
 kubectl create secret generic alibaba-service-key -n kubecost –from-file=./example_path
 ```
+{% endcode %}
 
-Your path needs a file having Alibaba Cloud secrets. Alibaba secrets can be passed in a JSON file with the file in the format.
+Your path needs a file having Alibaba Cloud secrets. Alibaba secrets can be passed in a JSON file with the file in the format:
 
 ```
 {
@@ -35,7 +37,11 @@ Your path needs a file having Alibaba Cloud secrets. Alibaba secrets can be pass
 }
 ```
 
-These two can be generated in the Alibaba Cloud portal. Hover over your user account icon, then select _AccessKey Management_. A new window opens. Select _Create AccessKey_ to generate a unique access token that will be used for all the activity related to Kubecost.
+These two can be generated in the Alibaba Cloud portal. Hover over your user account icon, then select _AccessKey Management_. A new window opens. Select _Create AccessKey_ to generate a unique access token that will be used for all activities related to Kubecost.
+
+## Alibaba Cloud integration
+
+Currently, Kubecost does not support complete integration of your Alibaba billing data like for other major cloud providers. Instead, Kubecost will only support public pricing integration, which will provide proper list prices for all cloud-based resources. Features like reconciliation and savings insights are not available for Alibaba. For more information on setting up a public pricing integration, see our [Multi-Cloud Integrations ](https://docs.kubecost.com/install-and-configure/install/cloud-integration/multi-cloud)doc.
 
 ## Troubleshooting
 
@@ -45,8 +51,10 @@ While getting all the available Storage Classes that the Alibaba K8s cluster com
 
 To fix this issue, make any of the Storage Classes in the Alibaba K8s cluster as Default using the below command:
 
+{% code overflow="wrap" %}
 ```
  kubectl patch storageclass alicloud-disk-available -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}' 
 ```
+{% endcode %}
 
 Following this, installation should proceed as normal.

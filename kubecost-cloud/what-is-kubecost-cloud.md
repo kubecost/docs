@@ -8,18 +8,17 @@ Kubecost Cloud is a SaaS solution that offers easier deployment and more conveni
 
 Kubecost Cloud will provide you with everything you need in order to visualize your cost spend data and begin saving, with many more features to come soon. Kubecost Cloud currently supports:
 
-* Allocations and Assets dashboards for multiple Kubernetes clusters
+* Allocations, Assets, and Cloud Cost dashboards for multiple Kubernetes clusters
+* Cloud integration for AWS, GCP, and Azure billing
 * Savings page with container right-sizing, cluster right-sizing, and abandoned workload detection
 * SSO via Google, Microsoft, Okta, and GitHub
-* Saved reports of your Allocation and Assets data
+* Saved reports of your monitoring dashboard data
 * Team and user management
 
 ### What features are coming next?
 
 Kubecost Cloud's functionality will be quickly expanded. Here's a sneak peek at which features we plan to implement next:
 
-* Cloud Costs dashboard with cost reconciliation
-* Cloud integration
 * Clusters dashboard
 * Shared and idle costs
 * Overview homepage

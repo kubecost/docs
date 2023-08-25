@@ -2,27 +2,25 @@
 
 Below are the major components deployed with the [Kubecost Helm chart](install.md), excluding certain Enterprise components such as durable storage:
 
-1. **Kubecost Cost-Analyzer Pod**\
-   a. Frontend -- runs Nginx and handles routing to Kubecost backend + Prometheus/Grafana\
-   b. Cost-model -- provides cost allocation calculations and metrics, both reads and writes to Prometheus
-2. **Prometheus**\
-   a. Prometheus server -- time-series data store for cost & health metrics\
-   b. Kube-state-metrics -- provides Kubernetes API metrics, e.g. resource requests \[Optional]\
-   c. Node-exporter -- provides metrics for reserved instance recommendations, various Kubecost Grafana dashboards, and cluster health alerts \[Optional]\
-   d. Pushgateway -- provides the ability for users to push new metrics to Prometheus \[Optional]\
-   e. Alertmanager -- used for custom alerts \[Optional]
-3. **Network costs** -- used for determining network egress costs \[Optional] - [Learn more](network-allocation.md)
-4. **Grafana** -- provides supporting dashboards for Kubecost product \[Optional]
+1. Kubecost Cost-Analyzer Pod
+   1. Frontend: Runs Nginx and handles routing to Kubecost backend and Prometheus/Grafana
+   2. Cost-model: Provides cost allocation calculations and metrics, both reads and writes to Prometheus
+2. Prometheus
+   1. Prometheus server: Time-series data store for cost and health metrics
+   2. Kube-state-metrics (optional): Provides Kubernetes API metrics, e.g. resource requests
+   3. Node-exporter (optional): Provides metrics for reserved instance recommendations, various Kubecost Grafana dashboards, and cluster health alerts
+   4. Pushgateway (optional): Provides the ability for users to push new metrics to Prometheus
+   5. Alertmanager (optional): Used for custom alerts
+3. Network costs (optional): used for determining network egress costs. See our [Network Traffic Cost Allocation](https://www.google.com/search?q=network+traffic+cost+allocation\&oq=network+traffic+cost+allocation\&aqs=chrome..69i57j69i60.5238j0j1\&sourceid=chrome\&ie=UTF-8) doc for more information.
+4. Grafana (optional): Provides supporting dashboards for Kubecost product
 
-Today, the core Kubecost product can be run with just components 1 and 2a.
+Today, the core Kubecost product can be run with just components 1 and 2.1. See an overview of core components in this diagram:
 
-See an overview of core components in this diagram:
-
-![Architecture Overview](https://raw.githubusercontent.com/kubecost/docs/main/images/arch.png)
+![Architecture Overview](/images/arch.png)
 
 ## Provider Pricing Architecture Overview
 
-Kubecost interacts with provider pricing in a few different ways.
+Kubecost interacts with provider pricing in a few different ways:
 
 * onDemand Rates (AWS, Azure, GCP, and Custom Pricing CSV)
 * Negotiated Rates (Azure, GCP, and Custom Pricing CSV)
@@ -34,10 +32,10 @@ Kubecost interacts with provider pricing in a few different ways.
 
 In an Enterprise federated setup, only the Primary Kubecost Cluster needs access to the Cloud Provider Billing.
 
-![Provider Pricing Overview](https://raw.githubusercontent.com/kubecost/docs/main/images/cloud-bill-diagram.png)
+![Provider Pricing Overview](/images/cloud-bill-diagram.png)
 
 ## Enterprise Architecture Overview
 
 The most common implementation of durable storage in the Kubecost application is with [Thanos](https://thanos.io/). Below is a high-level reference for the required components. More information on each Thanos component can be found [here](https://thanos.io/tip/components/).
 
-![Thanos Overview](https://raw.githubusercontent.com/kubecost/docs/main/images/thanos-architecture.png)
+![Thanos Overview](/images/thanos-architecture.png)

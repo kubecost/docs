@@ -6,12 +6,14 @@ Kubecost can run on clusters with mixed Linux and Windows nodes. The Kubecost po
 
 When using a Helm install, this can be done simply with:
 
+{% code overflow="wrap" %}
 ```
 helm install kubecost \
 --repo https://kubecost.github.io/cost-analyzer/ cost-analyzer \
 --namespace kubecost --create-namespace \
 -f https://raw.githubusercontent.com/kubecost/cost-analyzer-helm-chart/develop/cost-analyzer/values-windows-node-affinity.yaml
 ```
+{% endcode %}
 
 ## Detail
 

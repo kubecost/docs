@@ -8,7 +8,7 @@ A GitHub repository with sample files used in below instructions can be found [h
 
 ## Step 1: Export Azure cost report
 
-Follow Azure's [Create and Manage Exported Data](https://learn.microsoft.com/en-us/azure/cost-management-billing/costs/tutorial-export-acm-data?tabs=azure-portal) tutorial to export cost reports.  For Metric, make sure you select _Amortized cost (Usage and Purchases)._ For Export type, make sure you select _Daily export of month-to-date costs._ Do not select _File Partitioning_. Also take note of the Account name and Container specified when choosing where to export the data to. Note that a successful cost export will require [`Microsoft.CostManagementExports`](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/azure-services-resource-providers) to be registered in your subscription.
+Follow Azure's [Create and Manage Exported Data](https://learn.microsoft.com/en-us/azure/cost-management-billing/costs/tutorial-export-acm-data?tabs=azure-portal) tutorial to export cost reports. For Metric, make sure you select _Amortized cost (Usage and Purchases)._ For Export type, make sure you select _Daily export of month-to-date costs._ Do not select _File Partitioning_. Also, take note of the Account name and Container specified when choosing where to export the data to. Note that a successful cost export will require [`Microsoft.CostManagementExports`](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/azure-services-resource-providers) to be registered in your subscription.
 
 Alternatively, you can follow this [Kubecost guide](https://github.com/kubecost/azure-hackfest-lab/tree/a51fad1b9640b5991e5d567941f5086eb626a83f/0\_create-azure-cost-export).
 
@@ -26,13 +26,13 @@ For more granular billing data it is possible to [scope Azure cost exports](http
 
 ## Step 2: Provide access to Azure Storage API
 
-The following values can be located in the Azure Portal under "Cost Management -> Exports" or "Storage accounts":
+Obtain the following values from Azure to provide to Kubecost. These values can be located in the Azure Portal by selecting _Storage Accounts_, then selecting your specific Storage account for details.
 
 * `azureSubscriptionID` is the "Subscription ID" belonging to the Storage account which stores your exported Azure cost report data.
 * `azureStorageAccount` is the name of the Storage account where the exported Azure cost report data is being stored.
-* `azureStorageAccessKey` can be found by selecting the "Access Keys" option from the navigation sidebar then selecting "Show Keys". Using either of the two keys will work.
+* `azureStorageAccessKey` can be found by selecting _Access keys_ in your Storage account left navigation under "Security + networking". Using either of the two keys will work.
 * `azureStorageContainer` is the name that you chose for the exported cost report when you set it up. This is the name of the container where the CSV cost reports are saved in your Storage account.
-* `azureContainerPath` is an optional value which should be used if there is more than one billing report that is exported to the configured container. The path provided should have only one billing export because kubecost will retrieve the most recent billing report for a given month found within the path.
+* `azureContainerPath` is an optional value which should be used if there is more than one billing report that is exported to the configured container. The path provided should have only one billing export because Kubecost will retrieve the most recent billing report for a given month found within the path.
 * `azureCloud` is an optional value which denotes the cloud where the storage account exist, possible values are `public` and `gov`. The default is `public`.
 
 Next, create a JSON file which **must** be named _cloud-integration.json_ with the following format:
@@ -58,9 +58,11 @@ Additional details about the `cloud-integration.json` file can be found in our [
 
 Next, create the Secret:
 
+{% code overflow="wrap" %}
 ```bash
 $ kubectl create secret generic <SECRET_NAME> --from-file=cloud-integration.json -n kubecost
 ```
+{% endcode %}
 
 Next, ensure the following are set in your Helm values:
 

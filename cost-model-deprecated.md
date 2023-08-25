@@ -1,6 +1,8 @@
-# costDataModel & aggregatedCostModel API - Deprecated
+# costDataModel & aggregatedCostModel API
 
-> **Warning**: These APIs are now deprecated. This page should not be consulted. Please reference the [Allocation API](allocation.md) doc for updated information.
+{% hint style="danger" %}
+These APIs are now deprecated. This page should not be consulted. Please reference the [Allocation API](allocation.md) doc for updated information.
+{% endhint %}
 
 Kubecost exposes multiple APIs to obtain cost, resource allocation, and utilization data. Below is documentation on two options: the cost model API and aggregated cost model API.
 

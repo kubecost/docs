@@ -1,16 +1,18 @@
 # Cloud Cost Explorer
 
-{% hint style="warning" %}
-Cloud Cost is currently in beta. Please read the documentation carefully.
-{% endhint %}
-
 The Cloud Cost Explorer is a dashboard which provides visualization and filtering of your cloud spending. This dashboard includes the costs for all assets in your connected cloud accounts by pulling from those providers' Cost and Usage Reports (CURs) or other cloud billing reports.
+
+![Cloud Cost Explorer dashboard](/images/cloud-cost-explorer-dash.png)
 
 ## Installation and configuration
 
-Cloud Cost needs to be enabled first through Helm, using the following parameters:
+{% hint style="info" %}
+As of v1.104, Cloud Cost is enabled by default. If you are using v1.04+, you can skip the Installation and Configuration section.
+{% endhint %}
 
-```
+For versions of Kubecost up to v1.103, Cloud Cost needs to be enabled first through Helm, using the following parameters:
+
+```yaml
 kubecostModel:
   cloudCost:
      enabled: true
@@ -23,13 +25,13 @@ kubecostModel:
 
 Enabling Cloud Cost is required. Optional parameters include:
 
-* `labelList.labels`: Comma separated list of labels; empty string indicates that the list is disabled
+* `labelList.labels`: Comma-separated list of labels; empty string indicates that the list is disabled
 * `labelList.isIncludeList`: If true, label list is a white list; if false, it is a black list
 * `topNItems`: number of sampled "top items" to collect per day
 
 While Cloud Cost is enabled, it is recommended to disable Cloud Usage, which is more memory-intensive.
 
-```
+```yaml
 kubecostModel:
   etlCloudUsage: false
 ```
@@ -38,7 +40,7 @@ kubecostModel:
 Disabling Cloud Usage will restrict functionality of your Assets dashboard. This is intentional. Learn more about Cloud Usage [here](https://docs.kubecost.com/install-and-configure/install/cloud-integration#cloud-usage).
 {% endhint %}
 
-## UI overview
+## Configuring your query
 
 ### Date range
 
@@ -46,16 +48,16 @@ You can adjust your displayed metrics using the date range feature, represented 
 
 ### Aggregate filters
 
-You can adjust your displayed metrics by aggregating your cost by category. Supported fields are _Workspace, Provider, Billing Account, Service Item_, as well as custom labels. The Cloud Costs Explorer dashboard supports single and multi-aggregation. See the table below for descriptions of each field.
+You can adjust your displayed metrics by aggregating your cost by category. Supported fields are _Workspace, Provider, Billing Account, Service Item_, as well as custom labels. The Cloud Cost Explorer dashboard supports single and multi-aggregation. See the table below for descriptions of each field.
 
-|   Aggregation   | Description                                                                                                                                                |
-| :-------------: | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Billing Account | The ID of the billing account your cloud provider bill comes from. (ex: AWS Management/Payer Account ID, GCP Billing Account ID, Azure Billing Account ID) |
-|     Provider    | Cloud provider (ex: AWS, Azure, GCP)                                                                                                                       |
-|     Service     | Cloud provider services (ex: S3, microsoft.compute, BigQuery)                                                                                              |
-|    Workspace    | Cloud provider account (ex: AWS Account, Azure Subscription, GCP Project)                                                                                  |
-|       Item      | Individual items from your cloud billing report(s)                                                                                                         |
-|      Labels     | Labels/tags on your cloud resources (ex: AWS tags, Azure tags, GCP labels)                                                                                 |
+|   Aggregation  | Description                                                                                                                                                |
+| :------------: | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|     Account    | The ID of the billing account your cloud provider bill comes from. (ex: AWS Management/Payer Account ID, GCP Billing Account ID, Azure Billing Account ID) |
+|    Provider    | Cloud service provider (ex: AWS, Azure, GCP)                                                                                                               |
+| Invoice Entity | Cloud provider account (ex: AWS Account, Azure Subscription, GCP Project)                                                                                  |
+|     Service    | Cloud provider services (ex: S3, microsoft.compute, BigQuery)                                                                                              |
+|      Item      | Individual items from your cloud billing report(s)                                                                                                         |
+|     Labels     | Labels/tags on your cloud resources (ex: AWS tags, Azure tags, GCP labels)                                                                                 |
 
 ### Edit
 
@@ -66,14 +68,14 @@ Selecting the _Edit_ button will allow for additional filtering and pricing disp
 You can filter displayed dashboard metrics by selecting _Edit_, then adding a filter. Filters can be created for the following categories (see descriptions of each category in the Aggregate filters table above):
 
 * Service
-* Workspace
-* Billing Account
+* Account
+* Invoice Entity
 * Provider
 * Labels
 
 **Cost Metric**
 
-The Cost Metric dropdown allows you to adjust the displayed cost data based on different calculations. Cost Metric values are based on and calculated following standard FinOps dimensions and metrics, as seen in detail [here](https://github.com/finopsfoundation/finops-open-cost-usage-spec/blob/main/specification\_sheet\_import.md). The four available metrics supported by the Cloud Costs Explorer are:
+The Cost Metric dropdown allows you to adjust the displayed cost data based on different calculations. Cost Metric values are based on and calculated following standard FinOps dimensions and metrics, but may be calculated differently depending on your CSP. Learn more about how these metrics are calculated by each CSP in the [Cloud Cost Metrics](https://docs.kubecost.com/apis/apis-overview/cloud-cost-api/cloud-cost-metrics) doc. The five available metrics supported by the Cloud Cost Explorer are:
 
 | Cost Metric        | Description                                                                                 |
 | ------------------ | ------------------------------------------------------------------------------------------- |
@@ -81,13 +83,14 @@ The Cost Metric dropdown allows you to adjust the displayed cost data based on d
 | Net Cost           | Costs inclusive of discounts and credits. Will also include one-time and recurring charges. |
 | List Cost          | CSP pricing without any discounts                                                           |
 | Invoiced Cost      | Pricing based on usage during billing period                                                |
+| Amortized Cost     | Effective/upfront cost across the billing period                                            |
 
-### Table metrics
+## Cost table metrics
 
 Your cloud cost spending will be displayed across your dashboard with several key metrics:
 
 * K8 Utilization: Percent of cost which can be traced back to Kubernetes cluster
 * Total cost: Total cloud spending
-* Sum of Sample Data: **Only when aggregating by **_**Item**_. Only lists the top cost for the timeframe selected. Displays that may not match your CUR.
+* Sum of Sample Data: Only when aggregating by _Item_. Only lists the top cost for the timeframe selected. Displays that may not match your CUR.
 
 All line items, after aggregation, should be selectable, allowing you to drill down to further analyze your spending. For example, when aggregating cloud spend by _Service_, you can select an individual cloud service (AmazonEC2, for example) and view spending, K8 utilization, and other details unique to that item.

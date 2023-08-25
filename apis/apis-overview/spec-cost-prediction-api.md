@@ -157,7 +157,7 @@ Call the endpoint with cURL, passing the file in the request body:
 
 {% tabs %}
 {% tab title="Request" %}
-<pre><code><strong>curl
+<pre data-overflow="wrap"><code><strong>curl
 </strong>-XPOST
 'http://localhost:9090/model/prediction/speccost?clusterID=cluster-one&#x26;defaultNamespace=customdefault'
 -H 'Content-Type: application/yaml'
@@ -238,6 +238,12 @@ Call the endpoint with cURL, passing the file in the request body:
 {% endtab %}
 {% endtabs %}
 
+The output will be broken down into three primary categories:
+
+* `costBefore`: Represents the current monthly cost. This will be `0` if the deployment is not currently running.
+* `costAfter`: The monthly cost after the change is applied.
+* `costChange`: The difference between the values of `costBefore` and `costAfter`. If the value of `costBefore` was `0`, then `costChange` should be equal to `costAfter`.
+
 Observe how `defaultNamespace` impacts the `default-deployment` workload.
 
-From that output, the diff (`costChange`) notices the existing `kubecost-cost-analyzer` deployment in the `kubecost` namespace and is producing an estimated _negative_ cost difference because the request is being reduced. However, because historical usage is also factored in, there is no drastic cost reduction which might be initially be expected from a `1m` CPU and `1Mi` memory request.
+From that output, `costChange`notices the existing `kubecost-cost-analyzer` deployment in the `kubecost` namespace and is producing an estimated _negative_ cost difference because the request is being reduced. However, because historical usage is also factored in, there is no drastic cost reduction that might be initially expected from a `1m` CPU and `1Mi` memory request.

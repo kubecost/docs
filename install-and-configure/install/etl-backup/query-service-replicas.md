@@ -1,29 +1,51 @@
 # Query Service Replicas
 
 {% hint style="info" %}
-This feature is only supported on Kubecost Enterprise plans.&#x20;
+This feature is only supported on Kubecost Enterprise plans.
 {% endhint %}
 
-The query service replica (QSR) is a standalone query service that executes independently of Kubecost's metric emission and data model, and is able to access to Kubecost data. It allows for improved horizontal scaling by being able to handle queries for larger intervals, and multiple simultaneous queries.
+The query service replica (QSR) is a scale-out query service that reduces load on the cost-model pod. It allows for improved horizontal scaling by being able to handle queries for larger intervals, and multiple simultaneous queries.
 
 ## Overview
 
-The query service will forward `/model/allocation` and `/model/assets` requests to a Deployment of Query Services and managed by a Load Balancer.
+The query service will forward `/model/allocation` and `/model/assets` requests to the Query Services StatefulSet.
 
 The diagram below demonstrates the backing architecture of this query service and its functionality.
 
-<figure><img src="../../../.gitbook/assets/image (5).png" alt=""><figcaption></figcaption></figure>
+![Query service architecture](/images/query-service-architecture.png)
 
-## Prerequisites
+## Requirements
 
-In order to make use of QSRs, you must first have enabled ETL backups. As of v1.100+ of Kubecost, this is enabled by default if you enable Thanos. To learn more about ETL backups, see the [ETL Backup](https://docs.kubecost.com/install-and-configure/install/etl-backup) doc.
+### ETL data source
+
+There are three options that can be used for the source ETL Files:
+
+1. For environments that have Kubecost [Federated ETL](https://docs.kubecost.com/install-and-configure/install/multi-cluster/federated-etl) enabled, this store will be used, no additional configuration is required.
+2. For single cluster environments, QSR can target the ETL backup store. To learn more about ETL backups, see the [ETL Backup](https://docs.kubecost.com/install-and-configure/install/etl-backup) doc.
+3. Alternatively, an object-store containing the ETL dataset to be queried can be configured using a secret `kubecostDeployment.queryServiceConfigSecret`. The file name of the secret must be `object-store.yaml`. Examples can be found [here](https://docs.kubecost.com/install-and-configure/install/multi-cluster/thanos-setup/long-term-storage#step-1-create-object-store.yaml).
+
+### Persistent volume on Kubecost primary instance
+
+QSR uses persistent volume storage to avoid excessive S3 transfers. Data is retrieved from S3 hourly as new ETL files are created and stored in these PVs. The `databaseVolumeSize` should be larger than the size of the data in the S3 bucket.
+
+When the pods start, data from the object-store is synced and this can take a significant time in large environments. During the sync, parts of the Kubecost UI will appear broken or have missing data. You can follow the pod logs to see when the sync is complete.
+
+The default of 100Gi is enough storage for 1M pods and 90 days of retention. This can be adjusted:
+
+```yaml
+kubecostDeployment:
+  queryServiceReplicas: 2
+  queryService:
+    # default storage class
+    storageClass: ""
+    databaseVolumeSize: 100Gi
+    configVolumeSize: 1G
+```
 
 ## Enabling QSR
 
-After following the doc above and enabling ETL backup, you should already have set a value for the Helm flag `.Values.kubecostModel.etlBucketConfigSecret`.
-
-Next, set `kubecostDeployment.queryServiceReplicas` to a non-zero value. Perform a Helm upgrade with your updated _values.yaml._
+Once the data store is configured, set `kubecostDeployment.queryServiceReplicas` to a non-zero value and perform a Helm upgrade.
 
 ## Usage
 
-Once ETL backups and the QSR have been enabled, the process will automatically apply to all Allocations or Assets queries. You can make these queries as usual using either the Kubecost UI dashboards or direct API endpoints.
+Once QSR has been enabled, the new pods will automatically handle all API requests to `/model/allocation` and `/model/assets`.

@@ -1,7 +1,7 @@
 # Continuous Request Right-Sizing
 
 {% hint style="warning" %}
-This feature is in currently in beta. Please read the documentation carefully.
+This feature is in currently in alpha. Please read the documentation carefully.
 {% endhint %}
 
 Kubecost's Kubescaler implements continuous request right-sizing (RRS): the automatic application of Kubecost's high-fidelity [recommendations](api-request-right-sizing-v2.md) to your containers' resource requests. This provides an easy way to automatically improve your allocation of cluster resources by improving efficiency.
