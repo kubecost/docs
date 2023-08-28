@@ -14,6 +14,7 @@ Kubecost Cloud will provide you with everything you need in order to visualize y
 * SSO via Google, Microsoft, Okta, and GitHub
 * Saved reports of your monitoring dashboard data
 * Team and user management
+* Overview homepage
 
 ### What features are coming next?
 
@@ -21,7 +22,7 @@ Kubecost Cloud's functionality will be quickly expanded. Here's a sneak peek at 
 
 * Clusters dashboard
 * Shared and idle costs
-* Overview homepage
+* RBAC
 * Expanded Savings page options
 
 ## Is Kubecost Cloud right for me?
