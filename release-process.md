@@ -4,9 +4,9 @@ A Kubecost Release is a snapshot of the source, build output, artifacts, and oth
 
 ## Production releases
 
-* Production releases are scheduled for the first Tuesday of every month.
+* Major production releases should typically go out once a month.
 * Patch releases are pushed as needed between scheduled releases.
-* Release notes published [here](https://kubecost.com/releases).
+* Release notes will be published [here](https://kubecost.com/releases).
 * Production releases are always generated from Master branches.
 * In each production release, we update each image version plus our helm chart version in lock step.
 * Historically we average one patch release between minor releases.
