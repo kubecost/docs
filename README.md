@@ -12,7 +12,7 @@ In this guide, you’ll find everything you need to set up Kubecost for your tea
 {% tab title="Kubecost Free" %}
 Kubecost provides real-time cost visibility and insights for teams using Kubernetes, helping you continuously reduce your cloud costs.
 
-*   **Cost Allocation**
+*   **Cost allocation**
 
     Flexible, customizable cost breakdown and resource allocation for accurate showbacks, [chargebacks](https://blog.kubecost.com/blog/kubernetes-chargeback), and ongoing monitoring
 *   **Unified cost monitoring**
@@ -21,7 +21,7 @@ Kubecost provides real-time cost visibility and insights for teams using Kuberne
 *   **Optimization Insights**
 
     Get customized recommendations based on your own environment and behavior patterns
-*   **Alerts & Governance**
+*   **Alerts and governance**
 
     Achieve peak application performance and improve reliability with customizable alerts, configurable Availability Tiers, and real-time updates.
 *   **Purpose-built for teams running Kubernetes**

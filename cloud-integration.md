@@ -8,7 +8,7 @@ If you are using Kubecost Cloud, do not attempt to modify your install using inf
 
 ## Kubecost's cloud processes
 
-As indicated above, setting up a cloud integration with your CSP allows Kubecost to pull in additional billing data. The two processes that incorporate this information are **reconciliation** and **Cloud Usage**.
+As indicated above, setting up a cloud integration with your CSP allows Kubecost to pull in additional billing data. The two processes that incorporate this information are **reconciliation** and **CloudCost** (formerly known as CloudUsage).
 
 ### Reconciliation
 
@@ -30,9 +30,17 @@ Visit _Settings_, then toggle on _Highlight Unreconciled Costs_, then select _Sa
 
 ![Allocations dashboard with highlighted unreconciled costs](images/allocations-dash-overview-unreconciled.png)
 
-### Cloud Usage
+### CloudCost
 
-The Cloud Usage process allows Kubecost to pull in out-of-cluster cloud spend from your CSP's billing data. This includes any services run by the CSP in addition to compute resources OOC monitored by Kubecost. Additionally, by labeling these Cloud Usage, their cost can be distributed to Allocations as external costs. This can help teams get a better understanding of the proportion of OOC cloud spend that their in-cluster usage is dependent on. Cloud Usages become available as soon as they appear in the billing data, with the 6 to 24-hour delay mentioned above, and are updated as they become more complete.
+{% hint style="info" %}
+As of v1.106 of Kubecost, CloudCost is enabled by default, and Cloud Usage is disabled. Upgrading Kubecost will not affect the UI or hinder performance relating to this.
+{% endhint %}
+
+CloudCost allows Kubecost to pull in OOC cloud spend from your CSP's billing data, including any services run by the CSP as well as compute resources. By labelling OOC costs, their value can be distributed to your Allocations data as external costs. This allows you to better understand the proportion of OOC cloud spend that your in-cluster usage depends on.
+
+Your cloud billing data is reflected in the aggregate costs of `Account`, `Provider`, `Invoice Entity`, and `Service`. Aggregating and drilling down into any of these categories will provide a subset of the entire bill, based on the Helm value `.values.cloudCosts.topNItems`, which will log 1,000 values. This subset is each days' top `n` items by cost. An optional [label list](https://github.com/kubecost/cost-analyzer-helm-chart/blob/19b26585dca160446c1535518da557dd5f43f6e3/cost-analyzer/values.yaml#L458-L461) can be used to include or exclude items to be pulled from the bill.
+
+CloudCost becomes available as soon as they appear in the billing data, with the 6 to 24-hour delay mentioned above, and are updated as they become more complete.
 
 ## Managing cloud integrations
 
