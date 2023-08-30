@@ -6,7 +6,7 @@
 
 Below are frequently visited Kubecost documentation pages for both the [Commercial Kubecost product](http://kubecost.com) and [OpenCost](https://www.opencost.io/).
 
-In this guide, you’ll find everything you need to set up Kubecost for your team.
+On this site, you’ll find everything you need to set up Kubecost for your team.
 
 {% tabs %}
 {% tab title="Kubecost Free" %}
@@ -62,24 +62,19 @@ For larger teams and companies with more complex infrastructure, you need the ri
 {% endtab %}
 {% endtabs %}
 
-### Quick installation
+## Quick installation
 
-Check out our [Installation options](install.md) to start monitoring and managing your spend in minutes.
+Check out our [Installation guide](https://docs.kubecost.com/install-and-configure/install) to review your install options and get started on your Kubecost journey. Installation and onboarding only take a few minutes.
 
-### Getting started
+## Getting started
 
-* [Troubleshooting installation](troubleshoot-install.md)
-* [Configuring Kubecost](install-and-configure/install/getting-started.md)
-* [Understanding cost allocation](using-kubecost/navigating-the-kubecost-ui/cost-allocation/)
-* [Cost monitoring best practices](http://blog.kubecost.com/blog/cost-monitoring/)
+Once Kubecost has been successfully installed, check out our [First Time User Guide](https://docs.kubecost.com/install-and-configure/install/first-time-user-guide) which will get you started with connecting to your cluster's cloud service provider, review your data, and setting up multi-cluster environments.
 
-### Third-party billing integration guides
+If your Kubecost installation was not successful, go to our [Troubleshoot Install](https://docs.kubecost.com/troubleshooting/troubleshoot-install) doc which will work you through some of the most common installation-related issues.
 
-* [AWS](aws-cloud-integrations.md)
-* [Azure](azure-out-of-cluster.md)
-* [GCP](gcp-out-of-cluster.md)
+Additionally, check out our [blog ](https://blog.kubecost.com/blog/cost-monitoring/)to learn more about best practices with Kubecost's cost monitoring.
 
-### Staying in the loop
+## Staying in the loop
 
 You can stay up to date with Kubecost by following releases on [GitHub](https://github.com/kubecost/cost-analyzer-helm-chart/releases).
 

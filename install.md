@@ -2,7 +2,9 @@
 
 ## Installing Kubecost
 
-To get started with Kubecost and OpenCost, **the recommended path is to** [**install Kubecost Community Version**](https://kubecost.com/install). This installation method is available for free and leverages the Kubecost Helm Chart. It provides access to all OpenCost and Kubecost community functionality and can scale to large clusters. This will also provide a token for trialing and retaining data across different Kubecost product tiers.
+To get started with Kubecost and OpenCost, visit our [Installation page](https://www.kubecost.com/install#show-instructions) which will take you step by step through getting Kubecost set up.
+
+This installation method is available for free and leverages the Kubecost Helm Chart. It provides access to all OpenCost and Kubecost community functionality and can scale to large clusters. This will also provide a token for trialing and retaining data across different Kubecost product tiers.
 
 ## Alternative installation methods
 
@@ -40,7 +42,7 @@ Kubecost has a number of product configuration options that you can specify at i
 
 ### Troubleshooting installation
 
-If you encounter any errors while installing Kubecost, first visit our [Troubleshoot Install](https://docs.kubecost.com/troubleshooting/troubleshoot-install) doc. If the error you are experiencing is not already documented here or a solution is not found, contact our Support team at support@kubecost.com for more help.
+If you encounter any errors while installing Kubecost, first visit our [Troubleshoot Install](https://docs.kubecost.com/troubleshooting/troubleshoot-install) doc. If the error you are experiencing is not already documented here, or a solution is not found, contact our Support team at support@kubecost.com for more help.
 
 ## Updating Kubecost
 
