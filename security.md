@@ -21,7 +21,8 @@ Industry-leading data privacy and protection.
 * Regularly scheduled data risk assessments aided by industry-leading tools.
 * Multiple product configurations to meet your organization's data privacy needs, including hosted, installed, and air-gapped environments.
 * Access to production systems is only allowed via SSH key authentication. Password access is disabled.
-* Our installed software products do not share data to our externally managed services, so we do not have access to customer or sensitive user data.
+* Our self-hosted software products require opt-in consent to share product consumption usage data to our externally managed services (e.g. Mixpanel). If no consent is granted, Kubecost will not have access to your data.
+* Our SaaS software products are powered by the collection and sharing of Kubernetes data. Product consumption usage is shared with our externally managed services (e.g. Mixpanel).
 
 ## Digital communication security
 * External Internet-exposed interfaces use default-deny policies.
