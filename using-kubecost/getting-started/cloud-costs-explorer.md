@@ -10,7 +10,7 @@ The Cloud Cost Explorer is a dashboard which provides visualization and filterin
 As of v1.104, Cloud Cost is enabled by default. If you are using v1.04+, you can skip the Installation and Configuration section.
 {% endhint %}
 
-For versions of Kubecost up to v1.103, Cloud Cost needs to be enabled first through Helm, using the following parameters:
+For versions of Kubecost up to v1.103, Cloud Cost needs to be enabled first through Helm, using [the following parameters](https://github.com/kubecost/cost-analyzer-helm-chart/blob/a9198777ecd6d1f68f38afb7e42d7cc13e17a1f8/cost-analyzer/values.yaml#L457-L463):
 
 ```yaml
 kubecostModel:
@@ -40,6 +40,10 @@ kubecostModel:
 Disabling Cloud Usage will restrict functionality of your Assets dashboard. This is intentional. Learn more about Cloud Usage [here](https://docs.kubecost.com/install-and-configure/install/cloud-integration#cloud-usage).
 {% endhint %}
 
+### Using `topNitems`
+
+Item-level data in the Cloud Cost Explorer is only a sample of the most expensive entries, determined by the Helm flag `topNitems`. This value can be increased substantially but can lead to higher memory consumption. If you receive a message in the UI "We don't have item-level data with the current filters applied" when attempting to filter, you may need to expand the value of `topNitems` (default is 1,000), or reconfigure your query.
+
 ## Configuring your query
 
 ### Date range
@@ -65,7 +69,7 @@ Selecting the _Edit_ button will allow for additional filtering and pricing disp
 
 #### Add filters
 
-You can filter displayed dashboard metrics by selecting _Edit_, then adding a filter. Filters can be created for the following categories (see descriptions of each category in the Aggregate filters table above):
+You can filter displayed dashboard metrics by selecting _Edit_, then adding a filter. Filters can be created for the following categories to view costs exclusively for items (see descriptions of each category in the [Aggregate filters](https://docs.kubecost.com/using-kubecost/navigating-the-kubecost-ui/cloud-costs-explorer#aggregate-filters) table above):
 
 * Service
 * Account
