@@ -10,7 +10,7 @@ The Cloud Cost Explorer is a dashboard which provides visualization and filterin
 As of v1.104, Cloud Cost is enabled by default. If you are using v1.04+, you can skip the Installation and Configuration section.
 {% endhint %}
 
-For versions of Kubecost up to v1.103, Cloud Cost needs to be enabled first through Helm, using the following parameters:
+For versions of Kubecost up to v1.103, Cloud Cost needs to be enabled first through Helm, using [the following parameters](https://github.com/kubecost/cost-analyzer-helm-chart/blob/a9198777ecd6d1f68f38afb7e42d7cc13e17a1f8/cost-analyzer/values.yaml#L457-L463):
 
 ```yaml
 kubecostModel:
