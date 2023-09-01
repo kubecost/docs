@@ -1,14 +1,14 @@
-# Federated ETL
+# ETL Federation (preferred)
 
 There are two primary methods to aggregate all cluster information back to a single Kubecost UI described in the [Multi-Cluster](multi-cluster.md#enterprise-federation) doc.
 
 Below is the configuration guide using **Kubecost ETL Federation**.
 
 {% hint style="info" %}
-Federated ETL is only officially supported on Kubecost Enterprise plans.
+Federated ETL is only officially supported for Kubecost Enterprise plans.
 {% endhint %}
 
-Federated extract, transform, load (ETL) gives teams the benefit of federating multiple Kubecost installations into one view without dependency on Thanos.
+Federated extract, transform, load (ETL) gives teams the benefit of combining multiple Kubecost installations into one view without dependency on Thanos.
 
 There are two primary advantages for using ETL Federation:
 
@@ -17,7 +17,7 @@ There are two primary advantages for using ETL Federation:
 
 ## Kubecost ETL Federation diagram
 
-![ETL Federation Overview](/images/kubecost-ETL-Federated-Architecture.png)
+![ETL Federation Overview](images/kubecost-ETL-Federated-Architecture.png)
 
 ## Sample configurations
 
@@ -58,7 +58,7 @@ This diagram shows an example setup of the Federated ETL with:
 
 The result is 5 clusters federated together.
 
-![Federated ETL diagram](/images/kubecost-ETL-Federated-diagram.png)
+![Federated ETL diagram](images/kubecost-ETL-Federated-diagram.png)
 
 ## Setup
 
