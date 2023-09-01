@@ -40,6 +40,10 @@ kubecostModel:
 Disabling Cloud Usage will restrict functionality of your Assets dashboard. This is intentional. Learn more about Cloud Usage [here](https://docs.kubecost.com/install-and-configure/install/cloud-integration#cloud-usage).
 {% endhint %}
 
+### Using `topNitems`
+
+Item-level data in the Cloud Cost Explorer is only a sample of the most expensive entries, determined by the Helm flag `topNitems`. This value can be increased substantially but can lead to higher memory consumption. If you receive a message in the UI "We don't have item-level data with the current filters applied" when attempting to filter, you may need to expand the value of `topNitems` (default is 1,000), or reconfigure your query.
+
 ## Configuring your query
 
 ### Date range
@@ -72,8 +76,6 @@ You can filter displayed dashboard metrics by selecting _Edit_, then adding a fi
 * Invoice Entity
 * Provider
 * Labels
-
-Item-level data in the Cloud Cost Explorer is only a sample of the most expensive entries, determined by the Helm flag `topNitems`. This value can be increased substantially but can lead to higher memory consumption (see the [Installation and Configuration](https://docs.kubecost.com/using-kubecost/navigating-the-kubecost-ui/cloud-costs-explorer#installation-and-configuration) section above for more info). If you receive a message in the UI "We don't have item-level data with the current filters applied" when attempting to filter, you may need to expand the value of `topNitems` (default is 1,000), or reconfigure your query.
 
 **Cost Metric**
 
