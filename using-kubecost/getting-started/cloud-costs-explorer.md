@@ -65,13 +65,15 @@ Selecting the _Edit_ button will allow for additional filtering and pricing disp
 
 #### Add filters
 
-You can filter displayed dashboard metrics by selecting _Edit_, then adding a filter. Filters can be created for the following categories (see descriptions of each category in the Aggregate filters table above):
+You can filter displayed dashboard metrics by selecting _Edit_, then adding a filter. Filters can be created for the following categories to view costs exclusively for items (see descriptions of each category in the [Aggregate filters](https://docs.kubecost.com/using-kubecost/navigating-the-kubecost-ui/cloud-costs-explorer#aggregate-filters) table above):
 
 * Service
 * Account
 * Invoice Entity
 * Provider
 * Labels
+
+Item-level data in the Cloud Cost Explorer is only a sample of the most expensive entries, determined by the Helm flag `topNitems`. This value can be increased substantially but can lead to higher memory consumption (see the [Installation and Configuration](https://docs.kubecost.com/using-kubecost/navigating-the-kubecost-ui/cloud-costs-explorer#installation-and-configuration) section above for more info). If you receive a message in the UI "We don't have item-level data with the current filters applied" when attempting to filter, you may need to expand the value of `topNitems` (default is 1,000), or reconfigure your query.
 
 **Cost Metric**
 
