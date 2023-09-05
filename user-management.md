@@ -73,6 +73,10 @@ kubectl port-forward service/kubecost-cost-analyzer 9004:9004
 curl -L 'localhost:9004/allocation?window=1d'
 ```
 
+## View your SAML Group
+
+You will be able to view your current SAML Group in the Kubecost UI by selecting _Settings_ from the left navigation, then scrolling to 'SAML Group'. Your access level will be displayed in the 'Current SAML Group' box.
+
 ## SAML troubleshooting guide
 
 1. Disable SAML and confirm that the cost-analyzer pod starts.
