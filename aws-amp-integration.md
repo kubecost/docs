@@ -26,7 +26,7 @@ There are two architectures you can deploy:
 
 The infrastructure can manageup to 100 clusters. The following architecture diagram illustrates the small-scale infrastructure setup:
 
-![Quick-Start architecture](images/aws-amp-multi-small.png)
+![Quick-Start architecture](images/aws\_amp\_multi\_small.png)
 
 ### Federated architecture
 
@@ -34,7 +34,7 @@ To support the large-scale infrastructure of over 100 clusters, Kubecost leverag
 
 The following architecture diagram illustrates the large-scale infrastructure setup:
 
-![Federated architecture](images/aws-amp-multi-large.png)
+![Federated architecture](images/aws\_amp\_multi\_large.png)
 
 ## Instructions
 

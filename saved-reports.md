@@ -4,7 +4,7 @@ Reports are saved queries from your various Monitoring dashboards which can be r
 
 Reports can be managed via [_values.yaml_](https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/values.yaml) or the Kubecost UI. This reference outlines the process of configuring saved reports through a values file, and provides documentation on the required and optional parameters.
 
-![Reports page](images/savedreports.PNG)
+![Reports page](.gitbook/assets/savedreports.PNG)
 
 ## Managing reports via UI
 

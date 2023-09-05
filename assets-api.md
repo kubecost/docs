@@ -202,6 +202,7 @@ Duration of each individual data metric across the
 {% endswagger-parameter %}
 
 {% swagger-response status="200: OK" description="" %}
+{% code overflow="wrap" %}
 ```javascript
   {
     cluster: "..."  // parent cluster for asset
@@ -223,6 +224,7 @@ Duration of each individual data metric across the
     type: "node" // e.g. node, disk, cluster management fee, etc
 }
 ```
+{% endcode %}
 {% endswagger-response %}
 {% endswagger %}
 
@@ -670,3 +672,12 @@ Retrieve all GCP costs, aggregated by asset type, in the past five days:
 {% endtab %}
 {% endtabs %}
 
+## Enable CPU and RAM cost breakdown
+
+As of v1.106, Prometheus queries for CPU and RAM mode breakdown are disabled by default. To receive these metrics, you must manually enable them by setting the Helm flag:
+
+```
+.Values.kubecostModel.assetModeBreakdownEnabled = true
+```
+
+This will enable fields `ramBreakdown`, `cpuBreakdown`, and `breakdown` in the output of all future Assets queries.
