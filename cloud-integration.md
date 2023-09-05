@@ -28,7 +28,7 @@ The reconciled assets will inherit the labels from the corresponding items in th
 
 Visit _Settings_, then toggle on _Highlight Unreconciled Costs_, then select _Save_ at the bottom of the page to apply changes. Now, when you visit your Allocations or Assets dashboards, the most recent 36 hours of data will display hatching to signify unreconciled costs.
 
-![Allocations dashboard with highlighted unreconciled costs](images/allocations-dash-overview-unreconciled.png)
+![Allocations dashboard with highlighted unreconciled costs](<.gitbook/assets/image (7).png>)
 
 ### CloudCost
 
@@ -46,7 +46,7 @@ CloudCost becomes available as soon as they appear in the billing data, with the
 
 You can view your existing cloud integrations and their success status in the Kubecost UI by visiting _Settings_, then scrolling to Cloud Integrations. To create a new integration or learn more about existing integrations, select _View additional details_ to go to the Cloud Integrations page.
 
-![Cloud Integrations page](images/cloudintegration.png)
+![Cloud Integrations page](.gitbook/assets/cloudintegration.png)
 
 Here, you can view your integrations and filter by successful or failed integrations. For non-successful integrations, Kubecost will display a diagnostic error message in the Status column to contextualize steps toward successful integration.
 

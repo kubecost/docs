@@ -2,7 +2,7 @@
 
 The Kubecost Allocations dashboard allows you to quickly see allocated spend across all native Kubernetes concepts, e.g. namespace, k8s label, and service. It also allows for allocating cost to organizational concepts like team, product/project, department, or environment. This document explains the metrics presented and describes how you can control the data displayed in this view.
 
-![Allocations dashboard](<../../../images/allocations-dash-overview (3).png>)
+![Allocations dashboard](<../../../.gitbook/assets/image (2) (2) (1) (1) (2) (2).png>)
 
 ## Configuring your query
 
@@ -18,7 +18,7 @@ Kubecost provides a variety of options for configuring your allocations queries 
 
 ### Date Range
 
-![Date Range window](../../../images/daterange.png)
+![Date Range window](../../../.gitbook/assets/daterange.png)
 
 Select the date range of the report by setting specific start and end dates, or by using one of the preset options.
 
@@ -47,11 +47,11 @@ kubectl get pods -l 'app notin (prometheus, cost-analyzer, ...)' --all-namespace
 kubectl get pods --show-labels -n <TARGET_NAMESPACE>
 ```
 
-### Edit report
+## Edit report
 
 The _Edit_ icon has additional options for configuring your query such as how to display your data, adding filters, and configuring shared resources.
 
-#### Idle Costs
+### Idle Costs
 
 Allocating [idle costs](https://docs.kubecost.com/using-kubecost/navigating-the-kubecost-ui/cost-allocation/efficiency-idle#idle) proportionately distributes slack or idle _cluster costs_ to tenants. Idle refers to resources that are provisioned but not being fully used or requested by a tenant.
 
@@ -66,7 +66,7 @@ The idle costs dropdown allows you to choose how you wish your idle costs to be 
 
 To learn more about sharing idle costs, see [here](https://docs.kubecost.com/using-kubecost/navigating-the-kubecost-ui/cost-allocation/efficiency-idle#sharing-idle).
 
-#### Chart
+### Chart
 
 View Allocation data in the following formats:
 
@@ -80,7 +80,7 @@ You can select _Edit_ > _Chart_ > _Cost over time_ from the dropdown to have you
 
 ![Cost over time data](../../../images/perdaybasis.png)
 
-#### Cost metric
+### Cost metric
 
 View either cumulative or run rate costs measured over the selected time window based on the resources allocated.
 
@@ -95,11 +95,11 @@ Costs allocations are based on the following:
 
 For more information, refer to the [OpenCost spec](https://github.com/opencost/opencost/blob/develop/spec/opencost-specv01.md).
 
-#### Step size
+### Step size
 
 Step size refers to the size of each bar of data displayed on your dashboard. Options are _Default_, _Daily_, and _Weekly_. When retaining long periods of data through custom configurations (such as Prometheus), consider using larger step sizes to avoid display errors.
 
-#### Filters
+### Filters
 
 Filter resources by namespace, clusterID, and/or Kubernetes label to more closely investigate a rise in spend or key cost drivers at different aggregations such as deployments or pods. When a filter is applied, only resources with this matching value will be shown. These filters are also applied to external out-of-cluster (OOC) asset tags. Supported filters are as follows:
 
@@ -116,11 +116,15 @@ Filter resources by namespace, clusterID, and/or Kubernetes label to more closel
 
 Comma-separated lists are supported to filter by multiple categories, e.g. namespace filter equals `kube-system,kubecost`. Wild card filters are also supported, indicated by a \* following the filter, e.g. `namespace=kube*` to return any namespace beginning with `kube`.
 
-#### Shared resources
+#### Advanced filtering
+
+You can also implement more advanced forms of filtering to include or exclude values including prefixes or suffixes for any of the above categories in the table. Selecting the filtering dropdown (default _Equals_) will show you all available filtering options. These are reflective of Kubecost's [v2 filtering language](https://kubecost.atlassian.net/browse/CORE-358).
+
+### Shared resources
 
 Select how shared costs set on the settings page will be shared among allocations. Pick from default shared resources, or select a custom shared resource. A custom shared resource can be selected in the Configure custom shared resources feature at the bottom of the _Edit_ window.
 
-### Additional options
+## Additional options
 
 The three horizontal dots icon (directly next to _Save_) will provide additional options for handling your report:
 

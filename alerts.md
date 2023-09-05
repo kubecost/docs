@@ -262,7 +262,7 @@ Example Helm _values.yaml_:
 
 ### Monitor Kubecost Health
 
-Enabling diagnostic alerts in Kubecost occursthe  when an event impacts product uptime. This feature can be enabled in seconds from a values file. The following events are grouped into distinct categories that each result in a separate alert notification:
+Enabling diagnostic alerts in Kubecost occursthe when an event impacts product uptime. This feature can be enabled in seconds from a values file. The following events are grouped into distinct categories that each result in a separate alert notification:
 
 * Prometheus is unreachable
 * Kubecost Metrics Availability:
@@ -314,7 +314,7 @@ Example Helm _values.yaml_:
 
 Cluster Health Alerts and Kubecost Health Alerts work differently from other alert types. While other alerts monitor cost data for cost or efficiency anomalies, these two monitor the health of Kubecost itself, as well as the health of the cluster running Kubecost. For this reason, multiple of these alert types cannot be created. In the UI, switches for these alert types can be toggled either on or off, managing a single instance of each, and allowing the settings of these single instances to be adjusted.
 
-![Cluster and Kubecost Health Alerts](/images/alertshealth.png)
+![Cluster and Kubecost Health Alerts](.gitbook/assets/alertshealth.png)
 
 {% hint style="warning" %}
 There is no validation around Cluster Health Alerts. If a Health Alert configuration is invalid, it will appear to save, but will not actually take effect. Please check carefully that the alert has a Window and Threshold properly specified.
@@ -330,9 +330,9 @@ The remaining alert types all target a set of allocation data with `window`, `ag
 
 Select _+ Create Alert_ to open the Create Alert window where you configure the details of your alert.
 
-![Create Alert window](/images/createalert.png)
+![Create Alert window](.gitbook/assets/createalert.png)
 
-The fields for each alert type should resemble their corresponding Helm values in the above tables.&#x20;
+The fields for each alert type should resemble their corresponding Helm values in the above tables.
 
 Alerts can also be edited, removed, and tested from the table. Editing opens a dialog similar to the alert creation dialog, for editing the chosen alert.
 

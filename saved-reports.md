@@ -4,7 +4,7 @@ Reports are saved queries from your various Monitoring dashboards which can be r
 
 Reports can be managed via [_values.yaml_](https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/values.yaml) or the Kubecost UI. This reference outlines the process of configuring saved reports through a values file, and provides documentation on the required and optional parameters.
 
-![Reports page](/images/savedreports.PNG)
+![Reports page](.gitbook/assets/savedreports.PNG)
 
 ## Managing reports via UI
 
@@ -152,31 +152,33 @@ If saved reports are _not_ provided via _values.yaml_, meaning `global.savedRepo
 Review these steps to verify that saved reports are being passed to the Kubecost application correctly:
 
 1. Confirm that `global.savedReports.enabled` is set to `true`
-2.  Ensure that the Helm values are successfully read into the ConfigMap
+2. Ensure that the Helm values are successfully read into the ConfigMap
+   * Run `helm template ./cost-analyzer -n kubecost > test-saved-reports-config.yaml`
+   * Open `test-saved-reports-config`
+   * Find the section starting with `# Source: cost-analyzer/templates/cost-analyzer-saved-reports-configmap.yaml`
+   * Ensure that the Helm values are successfully read into the ConfigMap under the `data` field. Example below.
 
-    * Run `helm template ./cost-analyzer -n kubecost > test-saved-reports-config.yaml`
-    * Open `test-saved-reports-config`
-    * Find the section starting with `# Source: cost-analyzer/templates/cost-analyzer-saved-reports-configmap.yaml`
-    * Ensure that the Helm values are successfully read into the ConfigMap under the `data` field. Example below.
+{% code overflow="wrap" %}
+````
+```
+# Source: cost-analyzer/templates/cost-analyzer-saved-reports-configmap.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: saved-report-configs
+  labels:
 
-    {% code overflow="wrap" %}
-    ```
-    # Source: cost-analyzer/templates/cost-analyzer-saved-reports-configmap.yaml
-    apiVersion: v1
-    kind: ConfigMap
-    metadata:
-      name: saved-report-configs
-      labels:
+    app.kubernetes.io/name: cost-analyzer
+    helm.sh/chart: cost-analyzer-1.70.0
+    app.kubernetes.io/instance: RELEASE-NAME
+    app.kubernetes.io/managed-by: Helm
+    app: cost-analyzer
+data:
+  saved-reports.json: '[{"accumulate":false,"aggregateBy":"namespace","filters":[{"property":"cluster","value":"cluster-one,cluster*"},{"property":"namespace","value":"kubecost"}],"idle":"separate","title":"Example Saved Report 0","window":"today"},{"accumulate":false,"aggregateBy":"controllerKind","filters":[{"property":"label","value":"app:cost*,environment:kube*"},{"property":"namespace","value":"kubecost"}],"idle":"shareByNode","title":"Example Saved Report 1","window":"month"},{"accumulate":true,"aggregateBy":"service","filters":[],"idle":"hide","title":"Example Saved Report 2","window":"2020-11-11T00:00:00Z,2020-12-09T23:59:59Z"}]'# Source: cost-analyzer/templates/cost-analyzer-alerts-configmap.yaml
+```
+````
+{% endcode %}
 
-        app.kubernetes.io/name: cost-analyzer
-        helm.sh/chart: cost-analyzer-1.70.0
-        app.kubernetes.io/instance: RELEASE-NAME
-        app.kubernetes.io/managed-by: Helm
-        app: cost-analyzer
-    data:
-      saved-reports.json: '[{"accumulate":false,"aggregateBy":"namespace","filters":[{"property":"cluster","value":"cluster-one,cluster*"},{"property":"namespace","value":"kubecost"}],"idle":"separate","title":"Example Saved Report 0","window":"today"},{"accumulate":false,"aggregateBy":"controllerKind","filters":[{"property":"label","value":"app:cost*,environment:kube*"},{"property":"namespace","value":"kubecost"}],"idle":"shareByNode","title":"Example Saved Report 1","window":"month"},{"accumulate":true,"aggregateBy":"service","filters":[],"idle":"hide","title":"Example Saved Report 2","window":"2020-11-11T00:00:00Z,2020-12-09T23:59:59Z"}]'# Source: cost-analyzer/templates/cost-analyzer-alerts-configmap.yaml
-    ```
-    {% endcode %}
-3. Ensure that the JSON string is successfully mapped to the appropriate configs
+3\. Ensure that the JSON string is successfully mapped to the appropriate configs
 
 Navigate to your Reports page in the Kubecost UI and ensure that the configured report parameters have been set by selecting the Report name.
