@@ -13,6 +13,7 @@ The OIDC integration in Kubecost is fulfilled via the `.Values.oidc` configurati
 # View setup guides below, for full list of Helm configuration values
 oidc:
   enabled: true
+  useIDToken: false # Set to 'true' for IdP's that use an 'id_token' cookie
   clientID: ""
   clientSecret: ""
   secretName: "kubecost-oidc-secret"
@@ -63,6 +64,7 @@ Auth0 does not support Introspection; therefore we can only validate the access 
 Once the Kubecost application has been successfully integrated with OIDC, we will expect requests to Kubecost endpoints to contain the JWT access token, either:
 
 * as a cookie named `token`, or
+* as a cookie named `id_token` (Set `.Values.oidc.useIDToken = true`), or
 * as part of the Authorization header `Bearer token`
 
 The token is then validated remotely in one of two ways:
