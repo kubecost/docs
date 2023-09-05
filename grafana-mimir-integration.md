@@ -1,6 +1,6 @@
 # Grafana Mimir Integration for Kubecost
 
-In the standard deployment of [Kubecost](https://www.kubecost.com/), Kubecost is deployed with a bundled Prometheus instance to collect and store metrics of your Kubernetes cluster. Kubecost also provides the flexibility to connect with your time series database or storage. [Grafana Mimir](https://grafana.com/oss/mimir/) Grafana Mimir is an open-source, horizontally scalable, highly available, multi-tenant TSDB for long-term storage for Prometheus.
+In the standard deployment of [Kubecost](https://www.kubecost.com/), Kubecost is deployed with a bundled Prometheus instance to collect and store metrics of your Kubernetes cluster. Kubecost also provides the flexibility to connect with your time series database or storage. [Grafana Mimir](https://grafana.com/oss/mimir/) is an open-source, horizontally scalable, highly available, multi-tenant TSDB for long-term storage for Prometheus.
 
 This document will show you how to integrate the Grafana Mimir with Kubecost for long-term metrics retention. In this setup, you need to use Grafana Agent to collect metrics from Kubecost and your Kubernetes cluster. The metrics will be re-written to your existing [Grafana Mimir setup without an authenticating reverse proxy](https://grafana.com/docs/mimir/latest/operators-guide/secure/authentication-and-authorization/#without-an-authenticating-reverse-proxy)
 
@@ -11,7 +11,7 @@ This document will show you how to integrate the Grafana Mimir with Kubecost for
 
 ## Step 1: Install the Grafana Agent on your cluster
 
-Install the Grafana Agent for Kubernetes on your cluster. On the existing K8s cluster that you intend to install Kubecost, run the following commands to install the Grafana Agent to scrape the metrics from Kubecost `/metrics` endpoint. The script below installs the Grafana Agent with the necessary scraping configuration for Kubecost, you may want to add additional scrape configuration for your setup. 
+Install the Grafana Agent for Kubernetes on your cluster. On the existing K8s cluster that you intend to install Kubecost, run the following commands to install the Grafana Agent to scrape the metrics from Kubecost `/metrics` endpoint. The script below installs the Grafana Agent with the necessary scraping configuration for Kubecost, you may want to add additional scrape configuration for your setup.
 
 {% code overflow="wrap" %}
 ```
@@ -238,18 +238,19 @@ MANIFEST_URL=https://raw.githubusercontent.com/grafana/agent/v0.24.2/production/
 ```
 {% endcode %}
 
-You can also verify if `grafana-agent` is scraping data with the following command  (optional):
+You can also verify if `grafana-agent` is scraping data with the following command (optional):
 
 ```
 kubectl -n kubecost logs grafana-agent-0
 ```
 
-To learn more about how to install and configure the Grafana agent, as well as additional scrape configuration, please refer to [Grafana Agent for Kubernetes](https://grafana.com/docs/grafana-cloud/kubernetes/agent-k8s/k8s\_agent\_metrics/) section of the Grafana Cloud documentation, or you can view the Kubecost Prometheus scrape config at this [GitHub repository](https://github.com/kubecost/cost-analyzer-helm-chart/blob/ebe7e088debecd23f90e6dd75b425828901a246c/cost-analyzer/charts/prometheus/values.yaml#L1152).
+To learn more about how to install and configure the Grafana agent, as well as additional scrape configuration, please refer to [Grafana Agent](https://grafana.com/docs/tempo/latest/configuration/grafana-agent/) documentation, or you can view the Kubecost Prometheus scrape config at this [GitHub repository](https://github.com/kubecost/cost-analyzer-helm-chart/blob/ebe7e088debecd23f90e6dd75b425828901a246c/cost-analyzer/charts/prometheus/values.yaml#L1152).
 
 ## Step 2: Deploy Kubecost
 
 Run the following command to deploy Kubecost. Please remember to update the environment variables values with your Mimir setup information.
 
+{% code overflow="wrap" %}
 ```
 export MIMIR_ENDPOINT="http://example-mimir.com/"
 export MIMIR_ORG_ID="YOUR_MIMIR_ORG_ID"
@@ -260,5 +261,6 @@ helm upgrade -i kubecost cost-analyzer/ -n kubecost --create-namespace \
 --set global.mimirProxy.mimirEndpoint=http://${MIMIR_ENDPOINT} \
 --set global.mimirProxy.orgIdentifier=${MIMIR_ORG_ID}
 ```
+{% endcode %}
 
 The process is complete. By now, you should have successfully completed the Kubecost integration with your Grafana Mimir setup.

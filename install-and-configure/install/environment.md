@@ -1,16 +1,15 @@
-Supported Environments
-======================
+# Environment
 
-Kubecost requires a Kubernetes cluster to be deployed. 
+Kubecost requires a Kubernetes cluster to be deployed.
 
 ## Supported Kubernetes versions
 
 * Kubecost runs in any Kubernetes v1.8 (Aug 2017) or greater environment.
-* Kubernetes 1.25 is officially supported as of v1.99.0
+* Kubernetes 1.27 is officially supported as of v1.105.
 
 ## Supported cluster types
 
-* Managed Kubernetes clusters (e.g. EKS, GKE, AKS) *most common*
+* Managed Kubernetes clusters (e.g. EKS, GKE, AKS) most common
 * Kubernetes distributions (e.g. OpenShift, DigitalOcean, Rancher, Tanzu)
 * Bootstrapped Kubernetes cluster
 * On-prem and air-gapped using custom [pricing sheets](https://docs.kubecost.com/install-and-configure/install/provider-installations/air-gapped#how-do-i-configure-prices-for-my-on-premise-assets)
@@ -27,4 +26,4 @@ Kubecost requires a Kubernetes cluster to be deployed.
   * All regions supported, as shown in [opencost/pkg/cloud/azureprovider.go](https://github.com/opencost/opencost/blob/0c2f063052723a65ca62a4c75be23392806b6fac/pkg/cloud/azureprovider.go#L82)
   * x86
 
-**This list is certainly not exhaustive!** This is simply a list of observations as to where our users run Kubecost based on their questions/feedback. Please [contact us](https://docs.kubecost.com/other-resources/contactus) with any questions!
+**This list is certainly not exhaustive!** This is simply a list of observations as to where our users run Kubecost based on their questions and feedback. Please [contact us](https://docs.kubecost.com/other-resources/contactus) with any questions!

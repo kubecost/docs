@@ -12,7 +12,7 @@ In the Kubecost Cloud UI, begin by selecting _Settings_ in the left navigation. 
 
 ### Step 1: Export Azure Cost Report
 
-Read [Microsoft's tutorial](https://learn.microsoft.com/en-us/azure/cost-management-billing/costs/tutorial-export-acm-data?tabs=azure-portal) for creating and managing exported data. Follow the on-screen instructions when exporting your cost report to ensure it's properly configured. Then, select _Continue_.
+Read [Microsoft's tutorial](https://learn.microsoft.com/en-us/azure/cost-management-billing/costs/tutorial-export-acm-data?tabs=azure-portal) for creating and managing exported data. Follow the on-screen instructions in the Kubecost Cloud UI when exporting your cost report to ensure it's properly configured. Then, select _Continue_.
 
 ### Step 2: Provide access to Azure Storage API
 

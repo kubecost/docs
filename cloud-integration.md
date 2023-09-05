@@ -2,9 +2,13 @@
 
 Integration with cloud service providers (CSPs) via their respective billing APIs allows Kubecost to display out-of-cluster (OOC) costs (e.g. AWS S3, Google Cloud Storage, Azure Storage Account). Additionally, it allows Kubecost to reconcile Kubecost's in-cluster predictions with actual billing data to improve accuracy.
 
+{% hint style="danger" %}
+If you are using Kubecost Cloud, do not attempt to modify your install using information from this article. You need to consult Kubecost Cloud's specific cloud integration procedures which can be found [here](https://docs.kubecost.com/kubecost-cloud/kubecost-cloud-cloud-billing-integrations).
+{% endhint %}
+
 ## Kubecost's cloud processes
 
-As indicated above, setting up a cloud integration with your CSP allows Kubecost to pull in additional billing data. The two processes that incorporate this information are **reconciliation** and **Cloud Usage**.
+As indicated above, setting up a cloud integration with your CSP allows Kubecost to pull in additional billing data. The two processes that incorporate this information are **reconciliation** and **CloudCost** (formerly known as CloudUsage).
 
 ### Reconciliation
 
@@ -24,17 +28,25 @@ The reconciled assets will inherit the labels from the corresponding items in th
 
 Visit _Settings_, then toggle on _Highlight Unreconciled Costs_, then select _Save_ at the bottom of the page to apply changes. Now, when you visit your Allocations or Assets dashboards, the most recent 36 hours of data will display hatching to signify unreconciled costs.
 
-<figure><img src=".gitbook/assets/image (7).png" alt=""><figcaption><p>Allocations dashboard with highlighted unreconciled costs</p></figcaption></figure>
+![Allocations dashboard with highlighted unreconciled costs](images/allocations-dash-overview-unreconciled.png)
 
-### Cloud Usage
+### CloudCost
 
-The Cloud Usage process allows Kubecost to pull in out-of-cluster cloud spend from your CSP's billing data. This includes any services run by the CSP in addition to compute resources OOC monitored by Kubecost. Additionally, by labeling these Cloud Usage, their cost can be distributed to Allocations as external costs. This can help teams get a better understanding of the proportion of OOC cloud spend that their in-cluster usage is dependent on. Cloud Usages become available as soon as they appear in the billing data, with the 6 to 24-hour delay mentioned above, and are updated as they become more complete.
+{% hint style="info" %}
+As of v1.106 of Kubecost, CloudCost is enabled by default, and Cloud Usage is disabled. Upgrading Kubecost will not affect the UI or hinder performance relating to this.
+{% endhint %}
+
+CloudCost allows Kubecost to pull in OOC cloud spend from your CSP's billing data, including any services run by the CSP as well as compute resources. By labelling OOC costs, their value can be distributed to your Allocations data as external costs. This allows you to better understand the proportion of OOC cloud spend that your in-cluster usage depends on.
+
+Your cloud billing data is reflected in the aggregate costs of `Account`, `Provider`, `Invoice Entity`, and `Service`. Aggregating and drilling down into any of these categories will provide a subset of the entire bill, based on the Helm value `.values.cloudCosts.topNItems`, which will log 1,000 values. This subset is each days' top `n` items by cost. An optional [label list](https://github.com/kubecost/cost-analyzer-helm-chart/blob/19b26585dca160446c1535518da557dd5f43f6e3/cost-analyzer/values.yaml#L458-L461) can be used to include or exclude items to be pulled from the bill.
+
+CloudCost becomes available as soon as they appear in the billing data, with the 6 to 24-hour delay mentioned above, and are updated as they become more complete.
 
 ## Managing cloud integrations
 
 You can view your existing cloud integrations and their success status in the Kubecost UI by visiting _Settings_, then scrolling to Cloud Integrations. To create a new integration or learn more about existing integrations, select _View additional details_ to go to the Cloud Integrations page.
 
-<figure><img src=".gitbook/assets/cloudintegration.png" alt=""><figcaption></figcaption></figure>
+![Cloud Integrations page](images/cloudintegration.png)
 
 Here, you can view your integrations and filter by successful or failed integrations. For non-successful integrations, Kubecost will display a diagnostic error message in the Status column to contextualize steps toward successful integration.
 
@@ -57,7 +69,7 @@ Select an existing cloud integration, then in the slide panel that appears, sele
 
 The Kubecost Helm chart provides values that can enable or disable each cloud process on the deployment once a cloud integration has been set up. Turning off either of these processes will disable all the benefits provided by them.
 
-<table><thead><tr><th width="302" align="right">Value</th><th width="96.33333333333331" align="center">Default</th><th>Description</th></tr></thead><tbody><tr><td align="right"><code>.Values.kubecostModel.etlAssetReconciliationEnabled</code></td><td align="center">true</td><td>Enables reconciliation processes and endpoints. This Helm value corresponds to the <code>ETL_ASSET_RECONCILIATION_ENABLED</code> environment variable.</td></tr><tr><td align="right"><code>.Values.kubecostModel.etlCloudUsage</code></td><td align="center">true</td><td>Enables Cloud Usage processes and endpoints. This Helm value corresponds to the <code>ETL_CLOUD_USAGE_ENABLED</code> environment variable.</td></tr><tr><td align="right"><code>.Values.kubecostModel.etlCloudRefreshRateHours</code></td><td align="center">6</td><td>The interval at which the run loop executes for both reconciliation and Cloud Usage. Reducing this value will decrease resource usage and billing data access costs, but will result in a larger delay in the most current data being displayed. This Helm value corresponds to the <code>ETL_CLOUD_REFRESH_RATE_HOURS</code> environment variable.</td></tr><tr><td align="right"><code>.Values.kubecostModel.etlCloudQueryWindowDays</code></td><td align="center">7</td><td>The maximum number of days that will be queried from a cloud integration in a single query. Reducing this value can help to reduce memory usage during the build process, but will also result in more queries which can drive up billing data access costs. This Helm value corresponds to the <code>ETL_CLOUD_QUERY_WINDOW_DAYS</code> environment variable.</td></tr><tr><td align="right"><code>.Values.kubecostModel.etlCloudRunWindowDays</code></td><td align="center">3</td><td>The number of days into the past each run loop will query. Reducing this value will reduce memory load, however, it can cause Kubecost to miss updates to the CUR, if this has happened the day will need to be manually repaired. This Helm value corresponds to the <code>ETL_CLOUD_RUN_WINDOW_DAYS</code> environment variable.</td></tr></tbody></table>
+<table><thead><tr><th width="281.54206128133706" align="right">Value</th><th width="88.33333333333331" align="center">Default</th><th>Description</th></tr></thead><tbody><tr><td align="right"><code>.Values.kubecostModel.etlAssetReconciliationEnabled</code></td><td align="center">true</td><td>Enables reconciliation processes and endpoints. This Helm value corresponds to the <code>ETL_ASSET_RECONCILIATION_ENABLED</code> environment variable.</td></tr><tr><td align="right"><code>.Values.kubecostModel.etlCloudUsage</code></td><td align="center">true</td><td>Enables Cloud Usage processes and endpoints. This Helm value corresponds to the <code>ETL_CLOUD_USAGE_ENABLED</code> environment variable.</td></tr><tr><td align="right"><code>.Values.kubecostModel.etlCloudRefreshRateHours</code></td><td align="center">6</td><td>The interval at which the run loop executes for both reconciliation and Cloud Usage. Reducing this value will decrease resource usage and billing data access costs, but will result in a larger delay in the most current data being displayed. This Helm value corresponds to the <code>ETL_CLOUD_REFRESH_RATE_HOURS</code> environment variable.</td></tr><tr><td align="right"><code>.Values.kubecostModel.etlCloudQueryWindowDays</code></td><td align="center">7</td><td>The maximum number of days that will be queried from a cloud integration in a single query. Reducing this value can help to reduce memory usage during the build process, but will also result in more queries which can drive up billing data access costs. This Helm value corresponds to the <code>ETL_CLOUD_QUERY_WINDOW_DAYS</code> environment variable.</td></tr><tr><td align="right"><code>.Values.kubecostModel.etlCloudRunWindowDays</code></td><td align="center">3</td><td>The number of days into the past each run loop will query. Reducing this value will reduce memory load, however, it can cause Kubecost to miss updates to the CUR, if this has happened the day will need to be manually repaired. This Helm value corresponds to the <code>ETL_CLOUD_RUN_WINDOW_DAYS</code> environment variable.</td></tr></tbody></table>
 
 ## Cloud Stores
 
@@ -86,4 +98,4 @@ After starting or restarting Cloud Usage or reconciliation, two subprocesses are
 * Resolution: The window size of the process
 * StartTime: When the Cloud Process was started
 
-For more information on APIs related to rebuilding and repairing Cloud Usage or reconciliation, see the[ CloudCost Status APIs doc](https://docs.kubecost.com/apis/apis-overview/cloudcost-status-apis).
+For more information on APIs related to rebuilding and repairing Cloud Usage or reconciliation, see the [CloudCost Diagnostic APIs](https://docs.kubecost.com/apis/apis-overview/cloudcost-diagnostic-apis) doc.

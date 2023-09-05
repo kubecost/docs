@@ -2,7 +2,9 @@
 
 ## Installing Kubecost
 
-To get started with Kubecost and OpenCost, **the recommended path is to** [**install Kubecost Community Version**](https://kubecost.com/install). This installation method is available for free and leverages the Kubecost Helm Chart. It provides access to all OpenCost and Kubecost community functionality and can scale to large clusters. This will also provide a token for trialing and retaining data across different Kubecost product tiers.
+To get started with Kubecost and OpenCost, visit our [Installation page](https://www.kubecost.com/install#show-instructions) which will take you step by step through getting Kubecost set up.
+
+This installation method is available for free and leverages the Kubecost Helm Chart. It provides access to all OpenCost and Kubecost community functionality and can scale to large clusters. This will also provide a token for trialing and retaining data across different Kubecost product tiers.
 
 ## Alternative installation methods
 
@@ -32,7 +34,15 @@ kubectl apply -f https://raw.githubusercontent.com/kubecost/cost-analyzer-helm-c
 ```
 {% endcode %}
 
-4. Lastly, you can deploy the open-source OpenCost project directly as a Pod. This install path provides a subset of free functionality and is available [here](https://www.opencost.io/docs/install). Specifically, this install path deploys the underlying cost allocation model without the same UI or access to enterprise functionality: cloud provider billing integration, RBAC/SAML support, and scale improvements in Kubecost.
+4. Lastly, you can deploy the open-source OpenCost project directly as a Pod. This install path provides a subset of free functionality and is available [here](https://www.opencost.io/docs/installation/install). Specifically, this install path deploys the underlying cost allocation model without the same UI or access to enterprise functionality: cloud provider billing integration, RBAC/SAML support, and scale improvements in Kubecost.
+
+### Configuring Kubecost at install
+
+Kubecost has a number of product configuration options that you can specify at install time in order to minimize the number of settings changes required within the product UI. This makes it simple to redeploy Kubecost. These values can be configured under `kubecostProductConfigs` in our [values.yaml](https://github.com/kubecost/cost-analyzer-helm-chart/blob/bb8bcb570e6c52db2ed603f69691ac8a47ff4a26/cost-analyzer/values.yaml#L335). These parameters are passed to a ConfigMap that Kubecost detects and writes to its `/var/configs`.
+
+### Troubleshooting installation
+
+If you encounter any errors while installing Kubecost, first visit our [Troubleshoot Install](https://docs.kubecost.com/troubleshooting/troubleshoot-install) doc. If the error you are experiencing is not already documented here, or a solution is not found, contact our Support team at support@kubecost.com for more help.
 
 ## Updating Kubecost
 
@@ -57,3 +67,7 @@ To uninstall Kubecost and its dependencies, run the following command:
 ```
 helm uninstall kubecost -n kubecost
 ```
+
+## Next steps
+
+After successfully installing Kubecost, first time users should review our [First Time User Guide](https://docs.kubecost.com/install-and-configure/install/first-time-user-guide) to start immediately seeing the benefits of the product while also ensuring their workspace is properly set up.

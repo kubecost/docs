@@ -1,19 +1,20 @@
 # Filter Parameters (v2)
 
-This document outlines the filtering language added to the Allocation API in v1.96 of Kubecost, superseding the original filtering parameters (e.g. `filterNamespaces=`). One of the primary goals of the new filter language was to introduce support for "not equals" (e.g. `namespace != kubecost`) queries while maintaining extensibility.
+This document outlines the filtering language added to the Allocation API in v1.96 of Kubecost, superseding Kubecost's original filtering parameters (e.g. `filterNamespaces=`), now referred to as v1 filters. v2 filters introduce support for "not equals" (e.g. `namespace != kubecost`) queries while maintaining extensibility.
 
-> **Note**: V1 filters will continue to be supported in all relevant APIs. APIs will first check for the `filter=` parameter. If it is present, V2 filters will be used. If it is not present, APIs will attempt to use V1 filters.
+{% hint style="info" %}
+v1 filters will continue to be supported in all relevant APIs. APIs will first check for the `filter=` parameter. If it is present, v2 filters will be used. If it is not present, APIs will attempt to use v1 filters.
+{% endhint %}
 
 ## Using filters
 
-V2 filters can be used via the `filter=` parameter in supported APIs. Supported
-APIs are currently:
+v2 filters can be used via the `filter=` parameter in supported APIs. Supported APIs are currently:
 
 * [Allocation API](allocation.md)
-* [Request Sizing APIs](api-request-right-sizing-v2.md) 
+* [Request Sizing APIs](api-request-right-sizing-v2.md)
 * [Assets API](assets.md)
 
-## Filters Fields
+## Filtering fields
 
 The available fields for filtering depend on the API being queried.
 
@@ -33,6 +34,7 @@ The supported filter fields as of v1.96 are:
 * `annotation` (same syntax as label, see examples)
 
 Added in v1.105 of Kubecost:
+
 * `department`
 * `environment`
 * `owner`
@@ -44,6 +46,7 @@ Added in v1.105 of Kubecost:
 V2 filter support was added to the `/model/assets` API in v1.105 of Kubecost.
 
 In v1.105 of Kubecost:
+
 * `name`
 * `assetType` (e.g. `node`, `disk`, `network`, etc.)
 * `category` (e.g. `Compute`, `Management`)
@@ -55,9 +58,10 @@ In v1.105 of Kubecost:
 * `service`
 * `label`
 
-## Filter Operators
+## Filter operators
 
-The supported filter operators (ops) in v1.96 of Kubecost are:
+The supported filter operators in v1.96 of Kubecost are:
+
 * `:` Equality
   * For string fields (e.g. namespace): equality
   * For slice/array fields (e.g. services): slice contains at least one value equal (equivalent to `~:`)
@@ -65,6 +69,7 @@ The supported filter operators (ops) in v1.96 of Kubecost are:
 * `!:` Inequality, or "not contains" if an array type
 
 Added in v1.105 of Kubecost:
+
 * `~:` Contains
   * For string fields: contains
   * For slice fields: slice contains at least one value equal (equivalent to `:`)
@@ -83,11 +88,9 @@ Added in v1.105 of Kubecost:
 
 Filter values are strings surrounded by `"`. Multiple values can be separated by commas `,`.
 
-Individual filters can be joined by `+` (representing logical AND) or `|`
-(representing logical OR). To use `+` and `|` in the same filter expression,
-scope _must_ be denoted via `(` and `)`. See examples.
+Individual filters can be joined by `+` (representing logical AND) or `|` (representing logical OR). To use `+` and `|` in the same filter expression, scope _must_ be denoted via `(` and `)`. See examples.
 
-### Examples
+## Examples
 
 Here are some example filters to see how the filtering language works:
 
@@ -99,9 +102,11 @@ Here are some example filters to see how the filtering language works:
 
 For example, in an Allocation query:
 
+{% code overflow="wrap" %}
 ```
 http://localhost:9090/model/allocation?window=1d&accumulate=true&aggregate=namespace&filter=cluster!:%22cluster-one%22
 ```
+{% endcode %}
 
 The format is essentially: `<filter field> <filter op> <filter value>`
 

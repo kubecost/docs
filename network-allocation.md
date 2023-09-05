@@ -2,7 +2,7 @@
 
 This document describes how Kubecost calculates network costs.
 
-![network-costs screenshot](images/network-cost-overview.png)
+![network-costs screenshot](/images/network-cost-overview.png)
 
 ## Network cost calculation methodology
 

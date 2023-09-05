@@ -22,7 +22,7 @@ kubecostModel:
 Enabling Cloud Cost is required. Optional parameters include:
 
 * `labelList.labels`: Comma separated list of labels; empty string indicates that the list is disabled
-* `labelList.isIncludeList`: If true, label list is a white list; if false, it is a black list
+* `labelList.IsIncludeList`: If true, label list is a white list; if false, it is a black list
 * `topNItems`: number of sampled "top items" to collect per day
 
 While Cloud Cost is enabled, it is recommended to disable Cloud Usage, which is more memory-intensive.

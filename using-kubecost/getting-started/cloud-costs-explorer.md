@@ -2,7 +2,7 @@
 
 The Cloud Cost Explorer is a dashboard which provides visualization and filtering of your cloud spending. This dashboard includes the costs for all assets in your connected cloud accounts by pulling from those providers' Cost and Usage Reports (CURs) or other cloud billing reports.
 
-<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+![Cloud Cost Explorer dashboard](../../images/cloud-cost-explorer-dash.png)
 
 ## Installation and configuration
 
@@ -10,14 +10,14 @@ The Cloud Cost Explorer is a dashboard which provides visualization and filterin
 As of v1.104, Cloud Cost is enabled by default. If you are using v1.04+, you can skip the Installation and Configuration section.
 {% endhint %}
 
-For versions of Kubecost up to v1.103, Cloud Cost needs to be enabled first through Helm, using the following parameters:
+For versions of Kubecost up to v1.103, Cloud Cost needs to be enabled first through Helm, using [the following parameters](https://github.com/kubecost/cost-analyzer-helm-chart/blob/a9198777ecd6d1f68f38afb7e42d7cc13e17a1f8/cost-analyzer/values.yaml#L457-L463):
 
-```
+```yaml
 kubecostModel:
   cloudCost:
      enabled: true
      labelList:
-       isIncludeList: false
+       IsIncludeList: false
        # format labels as comma separated string (ex. "label1,label2,label3")
        labels: ""
      topNItems: 1000
@@ -26,12 +26,12 @@ kubecostModel:
 Enabling Cloud Cost is required. Optional parameters include:
 
 * `labelList.labels`: Comma-separated list of labels; empty string indicates that the list is disabled
-* `labelList.isIncludeList`: If true, label list is a white list; if false, it is a black list
+* `labelList.IsIncludeList`: If true, label list is a white list; if false, it is a black list
 * `topNItems`: number of sampled "top items" to collect per day
 
 While Cloud Cost is enabled, it is recommended to disable Cloud Usage, which is more memory-intensive.
 
-```
+```yaml
 kubecostModel:
   etlCloudUsage: false
 ```
@@ -39,6 +39,10 @@ kubecostModel:
 {% hint style="danger" %}
 Disabling Cloud Usage will restrict functionality of your Assets dashboard. This is intentional. Learn more about Cloud Usage [here](https://docs.kubecost.com/install-and-configure/install/cloud-integration#cloud-usage).
 {% endhint %}
+
+### Using `topNitems`
+
+Item-level data in the Cloud Cost Explorer is only a sample of the most expensive entries, determined by the Helm flag `topNitems`. This value can be increased substantially but can lead to higher memory consumption. If you receive a message in the UI "We don't have item-level data with the current filters applied" when attempting to filter, you may need to expand the value of `topNitems` (default is 1,000), or reconfigure your query.
 
 ## Configuring your query
 
@@ -65,7 +69,7 @@ Selecting the _Edit_ button will allow for additional filtering and pricing disp
 
 #### Add filters
 
-You can filter displayed dashboard metrics by selecting _Edit_, then adding a filter. Filters can be created for the following categories (see descriptions of each category in the Aggregate filters table above):
+You can filter displayed dashboard metrics by selecting _Edit_, then adding a filter. Filters can be created for the following categories to view costs exclusively for items (see descriptions of each category in the [Aggregate filters](https://docs.kubecost.com/using-kubecost/navigating-the-kubecost-ui/cloud-costs-explorer#aggregate-filters) table above):
 
 * Service
 * Account

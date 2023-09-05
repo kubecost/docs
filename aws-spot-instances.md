@@ -100,7 +100,7 @@ kubecostProductConfigs:
 
 ### No Spot instances detected
 
-![](https://user-images.githubusercontent.com/102574445/199281977-3195b1d1-e3a5-4561-85da-eb8b24e23f27.png)
+![No spot instances are found in the Spot Data Feed](/images/aws-spot-image-none.png)
 
 Verify the below points:
 

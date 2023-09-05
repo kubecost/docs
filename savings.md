@@ -2,11 +2,13 @@
 
 The Savings page provides miscellaneous functionality to help you use resources more effectively and assess wasteful spending. In the center of the page, you will see your estimated monthly savings available. The savings value is calculated from all enabled Savings features, across your clusters and the designated cluster profile via dropdowns in the top right of the page.
 
-<figure><img src=".gitbook/assets/image (2).png" alt=""><figcaption><p>The Savings page</p></figcaption></figure>
+![The Savings page](images/savings-overview.png)
 
-## Savings panel features
+## Savings insights
 
 The Savings page provides an array of panels containing different insights capable of lowering your Kubernetes and cloud spend.
+
+The monthly savings values on this page are precomputed every hour for performance reasons, while per-cluster views of these numbers, and the numbers on each individual savings page, are computed live. This may result in some discrepancies between the Savings page and the pages of individual Savings insights.
 
 ### Kubernetes insights
 

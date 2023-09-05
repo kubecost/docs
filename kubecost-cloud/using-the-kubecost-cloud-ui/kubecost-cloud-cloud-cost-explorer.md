@@ -46,4 +46,6 @@ The Cost Metric dropdown allows you to adjust the displayed cost data based on d
 
 ### Additional options
 
-Select the three horizontal dots icon to view additional options. Selecting _Download CSV_ will download the current query as a CSV file.
+Selecting _Save_ will save your current Cloud Costs query for access on the Reports page.
+
+Select the three horizontal dots icon to view additional options. Select _Open Report_ to open any existing Cloud Costs reports. Selecting _Download CSV_ will download the current query as a CSV file.

@@ -8,8 +8,9 @@ Integration with cloud service providers (CSPs) via their respective billing API
 
 To learn more about how Kubecost provides accurate cost data or how to manage existing cloud integrations, read below. Otherwise, see any of the following articles to get started on integrating a specific CSP:
 
-* [Kubecost Cloud GCP Integration](https://docs.kubecost.com/kubecost-cloud/kubecost-cloud-cloud-billing-integration/kubecost-cloud-gcp-integration)
-* [Kubecost Cloud Azure Integration](https://docs.kubecost.com/kubecost-cloud/kubecost-cloud-cloud-billing-integration/kubecost-cloud-azure-integration)
+* [Kubecost Cloud AWS Integration](https://docs.kubecost.com/kubecost-cloud/kubecost-cloud-cloud-billing-integrations/kubecost-cloud-aws-integration)
+* [Kubecost Cloud GCP Integration](https://docs.kubecost.com/kubecost-cloud/kubecost-cloud-cloud-billing-integrations/kubecost-cloud-gcp-integration)
+* [Kubecost Cloud Azure Integration](https://docs.kubecost.com/kubecost-cloud/kubecost-cloud-cloud-billing-integrations/kubecost-cloud-azure-integration)
 
 ## Reconciliation
 
@@ -31,7 +32,7 @@ You can view your existing cloud integrations and their success status in the Ku
 
 Here, you can view your existing integrations. For non-successful integrations, Kubecost will display a diagnostic error message in the Status column to contextualize steps toward successful integration.
 
-<figure><img src="../../.gitbook/assets/Snag_d920b39.png" alt=""><figcaption><p>Example successful and failed cloud integrations</p></figcaption></figure>
+![Example successful and failed cloud integrations](../../images/cloud-integrations-success-fail.png)
 
 Select an individual integration to view a side panel that contains details about that integration. You will be able to select _Edit_ to adjust any details about your integration that were configured during the original setup.
 

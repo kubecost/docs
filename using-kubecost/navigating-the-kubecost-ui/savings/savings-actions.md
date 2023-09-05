@@ -96,7 +96,7 @@ Select _Create Schedule_ to finalize.
 
 ### Guided Sizing
 
-Guided Kubernetes Sizing provides a one-click or continuous right-sizing solution in two steps, request sizing and then cluster sizing. These implementations function exactly like Kubecost's existing [container](https://docs.kubecost.com/using-kubecost/navigating-the-kubecost-ui/savings/auto-request-sizing) and [cluster right-sizing](https://docs.kubecost.com/using-kubecost/navigating-the-kubecost-ui/savings/cluster-right-sizing) features.
+Guided Kubernetes Sizing provides a one-click or continuous right-sizing solution in two steps, request sizing and then cluster sizing. These implementations function exactly like Kubecost's existing [container](https://docs.kubecost.com/using-kubecost/navigating-the-kubecost-ui/savings/auto-request-sizing) and [cluster right-sizing](https://docs.kubecost.com/using-kubecost/navigating-the-kubecost-ui/savings/cluster-right-sizing-recommendations) features.
 
 #### 1. Request Sizing
 
@@ -122,4 +122,3 @@ Select _Enable Auto-Resizing Now_ to finalize.
 ## Managing Actions
 
 Once you have successfully created an Action, you will see it on the Actions page under Scheduled Actions. Here you will be able to view a Schedule, the Next Run, Affected Workloads, and the Status. You can select _Details_ to view more information about a specific Action, or delete the scheduled Action by selecting the trash can icon.
-

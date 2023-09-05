@@ -20,7 +20,7 @@ The metrics below depict the status of active allocation data at a point in time
 3. **Success**: Depicts the total number of successful allocationSet in each store hourly or daily at a point in time.
 4. **Warning**: Depicts the total number of warnings in all allocationSet in each store hourly or daily at a point in time.
 
-<figure><img src="https://lh5.googleusercontent.com/sU3f2ci544mZcN1m7UyuoZIUiT4SlQV8NSGbOfjSzY7BFWpADJ78AHsonNfiKTsynMCi_VZxJ9sh9Oab2D6e11NwWe-SZA1ThyvqhM_XnHv0B2qAiUYJsvCXl3y6nT7WsFnHV1ctMBU746R8Rn77FQQ" alt=""><figcaption><p>Prometheus metrics <code>kubecost_allocation_data_status</code> after port-forwarding</p></figcaption></figure>
+![Prometheus metrics kubecost_allocation_data_status after port-forwarding](/images/metric-kubecost-allocation-data-status.png)
 
 ### Asset metrics
 
@@ -31,7 +31,7 @@ The metrics below depict the status of active asset data at a point in time. The
 3. **Success**: Depicts the total number of successful assetSet in each store hourly or daily at a point in time.
 4. **Warning**: Depicts the total number of warnings in all assetSet in each store hourly or daily at a point in time.
 
-<figure><img src="https://lh4.googleusercontent.com/RJSOAkHm4_thoEKObDJ1Y1RwYqIYnA7c8me1ChdJ_rj27XklsVGBu9lMt_JaUdrvrRFnSj8uS951R7GEH-H_NPdK9qL8ttJbwUcZJvQG7FzXBOUC0O3oS3Y1lx-MQJZzaYy_NtefmX7fj1MIGmbLvDA" alt=""><figcaption><p>Prometheus metrics <code>kubecost_asset_data_status</code> after port-forwarding</p></figcaption></figure>
+![Prometheus metrics kubecost_asset_data_status after port-forwarding](/images/metric-kubecost-asset-data-status.png)
 
 ## Usage details
 

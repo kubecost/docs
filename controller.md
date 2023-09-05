@@ -4,7 +4,7 @@
 The Cluster Controller is currently in beta. Please read the documentation carefully.
 {% endhint %}
 
-Kubecost's Cluster Controller contains Kubecost's automation features, and thus has write permission to certain resources on your cluster. For this reason, the Cluster Controller is disabled by default.
+Kubecost's Cluster Controller allows you to access additional Savings features through automated processes. To function, the Cluster Controller requires write permission to certain resources on your cluster, and for this reason, the Cluster Controller is disabled by default.
 
 The Cluster Controller enables features like:
 
@@ -15,13 +15,13 @@ The Cluster Controller enables features like:
 
 ## Feature functionality
 
-The Cluster Controller can be enabled on any cluster type, but certain functionality will only be enabled based on your cloud service provider (CSP) and setup:
+The Cluster Controller can be enabled on any cluster type, but certain functionality will only be enabled based on the cloud service provider (CSP) of the cluster and its type:
 
 * The Cluster Controller can only be enabled on your primary cluster.
 * The Controller itself and container RRS are available for all cluster types and configurations.
 * Cluster turndown, cluster right-sizing, and Kubecost Actions are only available for GKE, EKS, and Kops-on-AWS clusters, after setting up a provider service key.
 
-Therefore, the Provider service key setup section below is optional, but will limit functionality if you choose to skip it.
+Therefore, the 'Provider service key setup' section below is optional depending on your cluster environment, but will limit functionality if you choose to skip it. Read the caution banner in the below section for more details.
 
 ## Provider service key setup
 
@@ -255,7 +255,7 @@ $ kubectl create secret generic cluster-controller-service-key -n <NAMESPACE> --
 
 ## Deploying
 
-You can now enable the Cluster Controller in the Helm chart by finding the `clusterController` config block and setting `enabled: true`
+You can now enable the Cluster Controller in the Helm chart by finding the `clusterController` Helm flag and setting `enabled: true`
 
 ```yaml
 clusterController:
@@ -275,3 +275,5 @@ You can verify that the Cluster Controller is running by issuing the following:
 ```
 kubectl get pods -n kubecost -l app=kubecost-cluster-controller
 ```
+
+Once the Cluster Controller has been enabled successfully, you should automatically have access to the listed Savings features.

@@ -132,14 +132,27 @@ WRN ETL: Asset[1h]: Repair: error: cannot repair [2022-11-05T00:00:00+0000, 2022
 
 ### Federation failing for Asset and Allocation data in v1.104
 
-In v1.104 of Kubecost, you may experience incorrect data display, such as costs not being adjusted or reconciliation not correcting properly. To fix this, perform the following recovery steps:
+In v1.104 of Kubecost, you may experience incorrect data display if running the [Federated ETL](/federated-etl.md) architecture. Specifically you may see that your asset prices are correct but heavily consist of "Adjustments", and that your allocation's idle costs are incorrect. To fix this, perform the following recovery steps:
 
 1. Identify the data range for your affected data. This will be used later.
-2. Disable reconciliation by setting the Helm flag: `.Values.kubecostModel.etlAssetReconciliationEnabled: false`
+2. Disable reconciliation by setting the Helm flag:
+
+   ```yaml
+   kubecostModel:
+     etlAssetReconciliationEnabled: false
+   ```
+
 3. [Upgrade to a fixed version of Kubecost](https://docs.kubecost.com/install-and-configure/install#updating-kubecost). For best results, upgrade to the most recent version.
 4. For both Assets and Allocations, repair the affected dates on the primary cluster. This will only repair data from the primary cluster, not any secondary clusters. If repairing dates beyond your primary cluster's Prometheus retention, there may be data loss for your primary cluster. Refer to the instructions above for `/model/etl/asset/repair` and `/model/etl/allocation/repair`.
-5. After Asset and Allocation data has been repaired, wait an additional 30 minutes for federation to occur as a safeguard. Confirm the procedure has worked by validating some of the following:
+5. After Asset and Allocation data has been repaired, restart the Federator pod. This will force the Federator to re-federate the data upon 5 minutes of startup. Confirm the procedure has worked by validating some of the following:
    1. Query the last 7 days of data and observe reasonable unadjusted data.
-   2. Check your storage bucket's `/federated/combined/etl/bingen/allocations/1d` and `/federated/combined/etl/bingen/assets/1d` directories to see that the files for impacted dates have been recently modified.
-   3. Review the Federator's logs. Example shown above.
-6. Reenable reconciliation by setting the Helm flag: `.Values.kubecostModel.etlAssetReconciliationEnabled: true`
+   2. Review the Federator's logs. Example shown above.
+   3. Check the following directories in your storage bucket, to see that the files for impacted dates have been recently modified. If your data has not been re-federated, you may need to manually delete the files for impacted dates and perform Step 4 again.
+      1. `/federated/combined/etl/bingen/allocations/1d`
+      2. `/federated/combined/etl/bingen/assets/1d`
+6. Reenable reconciliation by setting the Helm flag:
+
+   ```yaml
+   kubecostModel:
+     etlAssetReconciliationEnabled: true
+   ```

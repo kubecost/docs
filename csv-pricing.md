@@ -21,7 +21,7 @@ The following steps allow Kubecost to use custom prices with a CSV pipeline. Thi
 
     If the node label topology.kubernetes.io/region is present, it must also be in the CSV Region column.
 
-![Pricing table](https://raw.githubusercontent.com/kubecost/docs/main/images/pricing.png)
+![Pricing table](/images/pricing.png)
 
 ## GPU pricing
 
