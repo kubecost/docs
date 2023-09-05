@@ -6,7 +6,7 @@ The Audits dashboard cannot be used until you have enabled the Cost Events Audit
 
 The Audit dashboard provides a log of changes made to your deployment. It's powered by the [Cost Events Audit API](https://docs.kubecost.com/apis/apis-overview/cost-events-audit-api) and the [Predict API](https://docs.kubecost.com/apis/apis-overview/spec-cost-prediction-api). Supported event types include creations and deletions of Deployments and StatefulSets.
 
-![Audit dashboard](.gitbook/assets/audit.png)
+![Audit dashboard](images/audit.png)
 
 ## Estimated monthly cost impact
 

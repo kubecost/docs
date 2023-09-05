@@ -10,7 +10,7 @@ The Kubecost Assets dashboard shows Kubernetes cluster costs broken down by the 
 Similar to our Allocation API, the Assets API uses our ETL pipeline which aggregates data daily. This allows for enterprise-scale with much higher performance.
 {% endhint %}
 
-![Assets page](.gitbook/assets/assets.png)
+![Assets page](images/assets.png)
 
 ## Configuring your query
 
@@ -30,13 +30,13 @@ Select the date range of the report by setting specific start and end dates, or 
 
 ### Aggregate By filter
 
-![Aggregate By window](.gitbook/assets/assetsaggregate.png)
+![Aggregate By window](images/assetsaggregate.png)
 
 Here you can aggregate cost by native Kubernetes concepts. While selecting Single Aggregation, you will only be able to select one concept at a time. While selecting Multi Aggregation, you will be able to filter for multiple concepts at the same time. Assets will be by default aggregated by Service.
 
 ### Edit Report
 
-![Edit Report window](.gitbook/assets/assetseditreport.png)
+![Edit Report window](images/assetseditreport.png)
 
 The Edit icon has additional options to filter your search:
 
