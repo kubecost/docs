@@ -1,6 +1,6 @@
 # Spot Commander
 
-Spot Commander is a Savings feature which identifies workloads where it is available and cost-effective to switch to Spot nodes, resizing the cluster in the process. Spot-readiness is determined through a [checklist](https://docs.kubecost.com/using-kubecost/navigating-the-kubecost-ui/savings/spot-checklist) which analzyes the workload and asseses the minimal cost required. It also generates CLI commands to help you implement the recommendation.
+Spot Commander is a Savings feature which identifies workloads where it is available and cost-effective to switch to Spot nodes, resizing the cluster in the process. Spot-readiness is determined through a [checklist](/spot-checklist.md) which analyzes the workload and assesses the minimal cost required. It also generates CLI commands to help you implement the recommendation.
 
 ## Spot Cluster Sizing Recommendation
 
