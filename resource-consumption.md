@@ -1,22 +1,21 @@
-Tuning Resource Consumption
-===============
+# Tuning Resource Consumption
 
 Kubecost can run on clusters with thousands of nodes when resource consumption is properly tuned. Here's a chart with some of the steps you can take to tune Kubecost, along with descriptions of each.
 
-![Memory Reduction Steps](/images/resource-consumption.png)
+![Memory Reduction Steps](images/resource-consumption.png)
 
-## On secondaries: Disabling Cloud Assets and running Kubecost in Agent Mode/With ETL and caching disabled
+## Secondary clusters: Disabling Cloud Assets and running Kubecost in Agent Mode/With ETL and caching disabled
 
-* Cloud Assets for all accounts can be pulled in on just primaries by pointing Kubecost to one or more management accounts. You can disable Cloud Assets on secondaries by setting the following Helm value:
+* Cloud Assets for all accounts can be pulled in on your primary cluster by pointing Kubecost to one or more management accounts. You can disable Cloud Assets on secondary clusters by setting the following Helm value:
   * `--set kubecostModel.etlCloudAsset=false`
 * Secondaries can be configured strictly as metric emitters to save memory.
-* Learn more about how to best configure secondaries [here](/secondary-clusters.md).
+* Learn more about how to best configure secondary clusters [here](secondary-clusters.md).
 
 ## Exclude provider IDs in Cloud Assets
 
 * Kubecost is capable of tracking each individual cloud billing line item; however on certain accounts this can be quite large.
 * (AWS Only, GCP/Azure coming soon) If this is excluded, we don't cache granular data; instead we cache aggregate data and make an ad-hoc query to the cost and usage report to get granular data resulting in slow load times but less memory consumption.
-* Learn more about how to configure this [here](/cloud-integration.md#cloud-assets).
+* Learn more about how to configure this [here](cloud-integration.md#cloud-assets).
 
 ## Lower query concurrency
 
@@ -29,8 +28,8 @@ Kubecost can run on clusters with thousands of nodes when resource consumption i
 
 * Lowering query duration results in Kubecost querying for smaller windows when building ETL data. This can lead to slower ETL build times, but lower memory peaks because of the smaller datasets.
 * The default values is: `1440`
-* This can be tuned with the Helm value:
-  * `--set kubecostModel.maxPrometheusQueryDurationMinutes=300`
+* This can be tuned with the [Helm value](https://github.com/kubecost/cost-analyzer-helm-chart/blob/fa0b00de5a186e658ccb66792bcdc3b77c4170e9/cost-analyzer/templates/cost-analyzer-deployment-template.yaml#L817):
+  * `--set kubecostModel.ETL_MAX_PROMETHEUS_QUERY_DURATION_MINUTES=300`
 
 ## Lower query resolution
 
@@ -43,7 +42,7 @@ Kubecost can run on clusters with thousands of nodes when resource consumption i
 
 * Fewer data points scraped from Prometheus means less data to collect and store, at the cost of Kubecost making estimations that possibly miss spikes of usage or short running pods
 * The default value is: `60s`
-* This can be tuned in our [Helm values](https://github.com/kubecost/cost-analyzer-helm-chart/blob/v1.93.2/cost-analyzer/values.yaml#L389) for the  Prometheus scrape job.
+* This can be tuned in our [Helm values](https://github.com/kubecost/cost-analyzer-helm-chart/blob/v1.93.2/cost-analyzer/values.yaml#L389) for the Prometheus scrape job.
 
 ## Disable or stop scraping node exporter
 

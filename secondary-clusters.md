@@ -2,7 +2,9 @@
 
 Secondary clusters use a minimal Kubecost deployment to send their metrics to a central storage-bucket (aka durable storage) that is accessed by the primary cluster to provide a **single-pane-of-glass** view into all aggregated cluster costs globally. This aggregated cluster view is exclusive to Kubecost Enterprise.
 
-> **Note**: The UI on secondary clusters will appear broken. It is meant for troubleshooting only.
+{% hint style="warning" %}
+Kubecost's UI will appear broken when set to a secondary cluster. It should only be used for troubleshooting.
+{% endhint %}
 
 This guide explains settings that can be tuned in order to run the minimum Kubecost components to run Kubecost more efficiently.
 
@@ -61,14 +63,15 @@ Disable Thanos components. These are only used for troubleshooting on secondary 
 
 You can disable node-exporter and the service account if cluster/node rightsizing recommendations are not required.
 
-> **Note**: node-export must be disabled if there is an existing daemonset. More info [here](troubleshoot-install.md#issue-failedscheduling-kubecost-prometheus-node-exporter).
+{% hint style="info" %}
+node-export must be disabled if there is an existing DaemonSet. More info [here](troubleshoot-install.md#issue-failedscheduling-kubecost-prometheus-node-exporter).
+{% endhint %}
 
 ## Helm values
 
-For reference, this is a list of the most common settings for efficient secondary clusters:
+For reference, this `secondary-clusters.yaml` snippet is a list of the most common settings for efficient secondary clusters:
 
-`secondary-clusters.yaml`
-
+{% code overflow="wrap" %}
 ```yaml
 kubecostProductConfigs:
   clusterName: kubecostProductConfigs_clusterName
@@ -107,6 +110,7 @@ thanos:
   store:
     enabled: false
 ```
+{% endcode %}
 
 ## Additional resources
 

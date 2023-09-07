@@ -97,7 +97,7 @@
       * [Continuous Request Right-Sizing](continuous-request-sizing.md)
       * [ContainerStats Pipeline](containerstats-pipeline.md)
     * [Spot Checklist](spot-checklist.md)
-    * [Spot Cluster Sizing](spot-cluster-sizing.md)
+    * [Spot Cluster Sizing](using-kubecost/navigating-the-kubecost-ui/savings/spot-cluster-sizing.md)
   * [Cluster Health Score](cluster-health-score.md)
   * [Budgets](using-kubecost/getting-started/budgets.md)
   * [Audits](audits.md)
