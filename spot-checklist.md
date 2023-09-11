@@ -51,7 +51,7 @@ We also support manually overriding the Spot readiness of a controller by annota
 
 ## Implementing Spot nodes in your cluster
 
-The Checklist is now deployed alongside a [recommended cluster configuration](spot-cluster-sizing.md) which automatically suggests a set of Spot and on-demand nodes to use in your cluster based on the Checklist. If you do not want to use that, read the following for some important information:
+The Checklist is now deployed alongside a [recommended cluster configuration](/using-kubecost/navigating-the-kubecost-ui/savings/spot-cluster-sizing.md) which automatically suggests a set of Spot and on-demand nodes to use in your cluster based on the Checklist. If you do not want to use that, read the following for some important information:
 
 Kubecost marking a workload as Spot ready is not a guarantee. A domain expert should always carefully consider the workload before approving it to run on Spot nodes.
 
