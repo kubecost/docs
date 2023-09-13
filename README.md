@@ -76,6 +76,8 @@ Additionally, check out our [blog ](https://blog.kubecost.com/blog/cost-monitori
 
 ## Staying in the loop
 
-You can stay up to date with Kubecost by following releases on [GitHub](https://github.com/kubecost/cost-analyzer-helm-chart/releases).
+You can stay up-to-date with Kubecost by following releases on [GitHub](https://github.com/kubecost/cost-analyzer-helm-chart/releases) and the official [Kubecost blog](https://blog.kubecost.com/).
+
+Follow us on social media [here](/contactus.md).
 
 Contact us via email ([support@kubecost.com](mailto:support@kubecost.com)) or join us on [Slack](https://kubecost.com/join-slack) if you have questions!
