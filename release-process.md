@@ -1,38 +1,24 @@
 # Kubecost Release Process
 
-A Kubecost Release is a snapshot of the source, build output, artifacts, and other metadata associated with a tagged version of code.
+A Kubecost release is a snapshot of the source, build output, artifacts, and other metadata associated with a tagged code version.
 
-## Production releases
+## Kubecost (self-hosted)
 
-* Major production releases should typically go out once a month.
-* Patch releases are pushed as needed between scheduled releases.
-* Release notes will be published [here](https://kubecost.com/releases).
-* Production releases are always generated from Master branches.
-* In each production release, we update each image version plus our helm chart version in lock step.
-* Historically we average one patch release between minor releases.
-* You can target an older release of the Kubecost pod by setting `imageVersion` to the desired value, e.g. `prod-1.63.1`
+Self-hosted Kubecost, our primary product, uses [semantic versioning](https://semver.org/).
 
-## Release candidate (RC) builds
+### Production releases
 
-* Release candidates are produced between production releases for early testing
-* To pick up a release candidate, add `--devel` to your helm install/upgrade instructions. For example:
+Kubecost schedules a production release for the beginning of each fiscal quarter. We will support the most current production release plus one prior production release, which means we will patch the prior production release for any critical vulnerabilities. The most recent production release will be patched with critical security or functionality issues throughout the quarter. We anticipate several security/stability patches to be released every quarter. For example, starting with Q3 2023, we’ll release Version 1.106.0. Throughout the quarter, patch releases will be incremented on the patch version: 1.106.1, 1.106.2, etc.
 
-```
-helm install kubecost kubecost/cost-analyzer --namespace kubecost --devel
-```
+### Edge releases
 
-## Staging releases
+Kubecost schedules multiple edge releases throughout production release time frames. Building on the previous example, 1.106.2 is the current production release. If we announce a new feature to be released in 1.107.0, you can expect that all security patches in 1.106.2 will be present in 1.107.0. Once product and QA have determined the feature is ready for a production release, we will release the feature in the following production release (In this case, 1.108.0).
 
-* Staging releases are built before scheduled releases and published in [this repo](https://github.com/kubecost/staging-repo).
-* You can get the latest staging build by following the [install steps](staging.md).
+Not all features released in an edge release are guaranteed to make a production release. We intend to ensure our production releases are reserved for the highest quality of features. Our product and engineering teams will determine if a feature will be released in a production release. All releases will be treated the same from engineering.&#x20;
 
-## Delaying Releases
+### Nightly releases
 
-We never want to miss our communicated release date, but sometimes it happens. We will only delay a release when we as a team feel like we're not delivering our best possible work product. Generally speaking, if we don't release on time, we have more work to complete before we feel like we're putting our best foot forward. Occasionally this happens, and when it does, we will communicate through our RC release notes what the new anticipated release date is. We will, at a minimum, have RC images available by the planned release date. We will also regularly cut RC images every few days until the anticipated launch date.
-
-## Nightly releases
-
-A Helm chart release is created every night with the latest images. These images should be considered "bleeding edge" and may be unstable. You can get that Helm repo with the following:
+A Helm chart release is created every night with the latest images. These images should be considered "bleeding edge" and may be unstable. You can get this Helm repo with the following:
 
 ```
 helm repo add kubecost-nightly https://kubecost.github.io/nightly-helm-chart
@@ -45,19 +31,23 @@ helm repo update
 helm upgrade kubecost -n kubecost kubecost-nightly/cost-analyzer
 ```
 
-If you want to change your installation back to a production release, run the following (assuming you have a Helm repo called `kubecost` tracking the production release):
+If you want to change your installation back to a production release, run the following (only if you have a Helm repo called `kubecost` tracking the production release):
 
 ```
 helm upgrade kubecost kubecost/cost-analyzer -n kubecost
 ```
 
-## Getting notified when a release is created
+### Getting notified when a release is created
 
-* You can watch Releases Only ([more info](https://docs.github.com/en/github/managing-subscriptions-and-notifications-on-github/viewing-your-subscriptions)) for this [Helm chart repo](https://github.com/kubecost/cost-analyzer-helm-chart), or join our [Slack workspace](https://kubecost.slack.com).&#x20;
+You can receive updates for releases only ([more info](https://docs.github.com/en/github/managing-subscriptions-and-notifications-on-github/viewing-your-subscriptions)) for our c[ost-analyzer-helm-chart repo](https://github.com/kubecost/cost-analyzer-helm-chart), or join our [Slack workspace](https://kubecost.com/join-slack) to learn whenever a new update or patch goes live.
+
+## Kubecost Cloud
+
+Kubecost Cloud releases regularly throughout the week (sometimes multiple times in one day). Features and bug fixes are typically fixed and deployed in real time.
 
 ## Submitting feedback on a release
 
-We always love receiving feedback and feature requests. Please reach out to support@kubecost.com or submit an issue in the respective repo:
+We always appreciate receiving feedback and feature requests. Please reach out to support@kubecost.com or submit an issue in the respective repositories:
 
-* If you installed our Helm chart, all issues can be filed at https://github.com/kubecost/cost-analyzer-helm-chart
-* If you installed just the open source cost-model, you can file issues at https://github.com/kubecost/cost-model
+* If you installed our Helm chart, all issues can be through the [cost-analyzer-helm-chart repo](https://github.com/kubecost/cost-analyzer-helm-chart).
+* If you installed OpenCost, you can file issues through the [OpenCost GitHub repo](https://github.com/opencost/opencost/issues).
