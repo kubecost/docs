@@ -426,7 +426,7 @@ You may not be allowed to update your Billing Data Export Configuration without 
 Download the following configuration files:
 
 * [_cloud-integration.json_](https://raw.githubusercontent.com/kubecost/poc-common-configurations/main/aws-attach-roles/cloud-integration.json)
-* [_kubecost-athena-policy.json_](https://raw.githubusercontent.com/kubecost/poc-common-configurations/main/aws-attach-roles/kubecost-athena-policy.json)
+* [_kubecost-athena-policy.json_](https://github.com/kubecost/poc-common-configurations/)
 
 Update the following variables in the files you downloaded:
 
