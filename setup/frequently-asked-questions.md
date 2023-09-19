@@ -46,11 +46,11 @@ Q: What license does the Enterprise version of Kubecost use?\
 A: Paid Kubecost versions use our [EULA](https://www.kubecost.com/terms).
 
 Q: When configuring Spot feeds in a federated cluster, where should it be configured?\
-A: The Spot data feed is meant to supplement node prices before the CUR drops. Because of this, it should be configured in each cluster to give the most accurate estimates as the data needs to be written into Thanos.\
-\
+A: The Spot data feed is meant to supplement node prices before the CUR drops. Because of this, it should be configured in each cluster to give the most accurate estimates as the data needs to be written into Thanos.
+
 Q: Does the Abandoned Workloads savings report rely on the Network Traffic daemonSet?\
-A: No, it uses cAdvisor metrics.\
-\
+A: No, it uses cAdvisor metrics.
+
 Q: Does Kubecost's cost efficiency calculation take GPU into consideration?\
 A: No, the reason is that we get GPU efficiency from integration with the Nvidia DCGM, which is a third-party integration that needs to be set up manually with Kubecost.
 
