@@ -16,9 +16,9 @@ Many Kubecost product configuration options can be specified at install-time, in
 
 To create a secret you will need to create a JSON file called _productkey.json_ with the following format. Be sure to replace `<YOUR_PRODUCT_KEY>` with your Kubecost product key.
 
-```javascript
+```json
 { 
-    "key": "<YOUR_PRODUCT_KEY>"
+  "key": "<YOUR_PRODUCT_KEY>"
 }
 ```
 

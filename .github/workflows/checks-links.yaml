@@ -3,6 +3,9 @@ name: Check Links
 on:
   repository_dispatch:
   workflow_dispatch:
+  pull_request:
+    branches:
+      - main
   schedule:
     - cron: "0 0 * * *"
 
@@ -17,6 +20,8 @@ jobs:
         uses: lycheeverse/lychee-action@v1.8.0
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+        with:
+          fail: true
 
       # - name: Create Issue From File
       #   if: steps.lychee.outputs.exit_code != 0
