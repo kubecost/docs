@@ -81,11 +81,11 @@ A: Azure is very specific as to what currency can be used for each region/countr
 Q: I would like to use the node-exporter daemonSet provided with Openshift, however after disabling Kubecost-bundled Prometheus, it is unable to discover the node-exporter endpoints.\
 A: The Openshift provided node-exporter requires an additional annotation of `prometheus.io/scrape: "true"` to be added.
 
-```
-      annotations:
-        prometheus.io/scrape: "true"
-        prometheus.io/path: '/metrics'
-        prometheus.io/port: "9100"
+```yaml
+annotations:
+  prometheus.io/scrape: "true"
+  prometheus.io/path: '/metrics'
+  prometheus.io/port: "9100"
 ```
 
 Q: How can I disable kube-state-metrics if needed?\
