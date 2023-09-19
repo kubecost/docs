@@ -46,11 +46,11 @@ Q: What license does the Enterprise version of Kubecost use?\
 A: Paid Kubecost versions use our [EULA](https://www.kubecost.com/terms).
 
 Q: When configuring Spot feeds in a federated cluster, where should it be configured?\
-A: The Spot data feed is meant to supplement node prices before the CUR drops. Because of this, it should be configured in each cluster to give the most accurate estimates as the data needs to be written into Thanos.\
-\
+A: The Spot data feed is meant to supplement node prices before the CUR drops. Because of this, it should be configured in each cluster to give the most accurate estimates as the data needs to be written into Thanos.
+
 Q: Does the Abandoned Workloads savings report rely on the Network Traffic daemonSet?\
-A: No, it uses cAdvisor metrics.\
-\
+A: No, it uses cAdvisor metrics.
+
 Q: Does Kubecost's cost efficiency calculation take GPU into consideration?\
 A: No, the reason is that we get GPU efficiency from integration with the Nvidia DCGM, which is a third-party integration that needs to be set up manually with Kubecost.
 
@@ -76,25 +76,25 @@ Q: What time of the day is the Azure costs export updated?\
 A: The Azure costs export update time is relative to the time of day when it was initially created. See [Azure docs on exporting data for more](https://docs.microsoft.com/en-us/azure/cost-management-billing/costs/tutorial-export-acm-data?tabs=azure-portal#export-schedule)
 
 Q: What regions/currencies are available for the Azure rate card integration?\
-A: Azure is very specific as to what currency can be used for each region/country. Azuew provides that information [here](https://docs.microsoft.com/en-us/azure/marketplace/marketplace-geo-availability-currencies).
+A: Azure is very specific as to what currency can be used for each region/country. Azure provides that information [here](https://docs.microsoft.com/en-us/azure/marketplace/marketplace-geo-availability-currencies).
 
 Q: I would like to use the node-exporter daemonSet provided with Openshift, however after disabling Kubecost-bundled Prometheus, it is unable to discover the node-exporter endpoints.\
 A: The Openshift provided node-exporter requires an additional annotation of `prometheus.io/scrape: "true"` to be added.
 
-```
-      annotations:
-        prometheus.io/scrape: "true"
-        prometheus.io/path: '/metrics'
-        prometheus.io/port: "9100"
+```yaml
+annotations:
+  prometheus.io/scrape: "true"
+  prometheus.io/path: '/metrics'
+  prometheus.io/port: "9100"
 ```
 
 Q: How can I disable kube-state-metrics if needed?\
-A: It can be disabled with one of two methods `prometheus.kubeStateMetrics.enabled=false` or `prometheus.kube-state-metrics.disabled=true`. We recommend disabling any 3rd party KSM instead of our bundled version. More discussion is \[here].
+A: It can be disabled with one of two methods `prometheus.kubeStateMetrics.enabled=false` or `prometheus.kube-state-metrics.disabled=true`. We recommend disabling any 3rd party KSM instead of our bundled version.
 
 Q: Does increasing the `.Values.kubecostModel.etlResolutionSeconds` value cause any issues with cost accuracy?\
 A: Decreasing resolution may flatten out cost spikes but the summation of costs should not be affected.
 
-Q: Is there a way to test alerts via the API?
+Q: Is there a way to test alerts via the API?\
 A: Yes, there is a `/model/alerts/test` API endpoint that sends a blank test message. In order to use the API, first perform a GET to `/model/alerts` which will return all configured alerts. Then perform a POST to `/model/alerts/test` with the payload being that of the alert you wish to test.
 
 Alert payloads may differ in contents based on the type, but one basic example is shown below.
@@ -130,8 +130,7 @@ If the test is successful, for example if the test was for an email, content wil
 
 Another suggestion for testing alert filters is to create an alert with a small window and wait. The [API](../alerts.md#alerts-scheduler) will allow hours in the window.
 
-Q: Kubecost allows configuring in-zone/in-region/cross-region traffic classification. After I tried to configure this and saw that the values have been configured, I couldn’t see traffic classification allocation in the dashboard. Is this feature still supported?
-
+Q: Kubecost allows configuring in-zone/in-region/cross-region traffic classification. After I tried to configure this and saw that the values have been configured, I couldn’t see traffic classification allocation in the dashboard. Is this feature still supported?\
 A: Check http://\<your-kubecost-address>/details! From there, look for the bottom right box to view more network details. It also may be important to have the network-costs daemonSet running in your cluster.
 
 Q: When cloud integration is not yet enabled, does Kubecost's usage of public pricing data take into account the region the node is on?\
