@@ -8,7 +8,7 @@ When ingesting billing data from cloud service providers (CSP), Kubecost records
 * InvoicedCost
 * AmortizedCost
 
-Each cost metric includes a `Cost` and a `KubernetesPercent` field. An unaggregated CloudCost query should have a `1` or a `0` in the `KubernetesPercent` field of all of its cost metrics. When it becomes aggregate, this value can become a percentage. It is necessary to keep track of these separately because differences in cost metrics will cause this value to diverge. For example, aggregating a Cloud Cost represents a Kubernetes node that has a reserved instance applied to it, and a non-Kubernetes node of the same type but with no reserved instance discount. See below:
+Each cost metric includes a `Cost` and a `KubernetesPercent` field. An unaggregated CloudCost query should have a `1` or a `0` in the `KubernetesPercent` field of all of its cost metrics. When it becomes aggregated, this value can become a percentage. It is necessary to keep track of these separately because differences in cost metrics will cause this value to diverge. For example, aggregating a Cloud Cost representing a Kubernetes node that has a reserved instance applied to it, and a non-Kubernetes node of the same type but with no reserved instance discount. See below:
 
 ```
 Node1 {
@@ -58,7 +58,7 @@ The current Cloud Cost schema is optimistic in that it provides space for cost m
 
 Of all billing exports and APIs, the Cost and Usage Report (CUR) has the most robust set of cost metrics, and currently has the best support. Depending on what kind of discounts or resources a user has, the schema changes, therefore many of these columns are populated dynamically to support all users. In particular, any `_net_` column will only be available if the user has a discount that causes it to exist. Additionally, Kubecost currently only considers line items that have a `line_item_line_item_type` of `Usage`, `DiscountUsage`, `SavingsPlanCoveredUsage`, `EdpDiscount`, or `PrivateRateDiscount`.
 
-More information on the columns and their definitions can be found in AWS' [Line item details](https://docs.aws.amazon.com/cur/latest/userguide/Lineitem-columns.html).
+More information on the columns and their definitions can be found in AWS' [Line item details](https://docs.aws.amazon.com/cur/latest/userguide/Lineitem-columns.html) documentation.
 
 **List Cost**
 
@@ -134,7 +134,7 @@ Kubecost uses`paygcostinbillingcurrency` if available, otherwise Kubecost uses N
 
 **Net Cost**
 
-Kubecost uses `costinbillingcurrency`. If not available, Kubecost uses `costinbillingcurrency`, and if that isn't available, Kubecost uses `cost`.
+Kubecost uses `costinbillingcurrency`. If not available, Kubecost uses `pretaxcost`, and if that isn't available, Kubecost uses `cost`.
 
 **Amortized Net Cost**
 
@@ -154,7 +154,7 @@ Kubecost uses Net Cost.
 
 To calculate the `K8 Utilization`, Kubecost first must determine if a resources is part of a Kubernetes cluster or not.
 
-If a tag or label in the list below is present on the billing export, Kubecost will consider those costs part of the `K8 Utilization` calculation. This will not always be 100% accurate in all situations.\\
+If a tag or label in the list below is present on the billing export, Kubecost will consider those costs part of the `K8 Utilization` calculation. This will not always be 100% accurate in all situations.
 
 <details>
 
