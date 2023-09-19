@@ -94,7 +94,7 @@ A: It can be disabled with one of two methods `prometheus.kubeStateMetrics.enabl
 Q: Does increasing the `.Values.kubecostModel.etlResolutionSeconds` value cause any issues with cost accuracy?\
 A: Decreasing resolution may flatten out cost spikes but the summation of costs should not be affected.
 
-Q: Is there a way to test alerts via the API?
+Q: Is there a way to test alerts via the API?\
 A: Yes, there is a `/model/alerts/test` API endpoint that sends a blank test message. In order to use the API, first perform a GET to `/model/alerts` which will return all configured alerts. Then perform a POST to `/model/alerts/test` with the payload being that of the alert you wish to test.
 
 Alert payloads may differ in contents based on the type, but one basic example is shown below.
@@ -130,8 +130,7 @@ If the test is successful, for example if the test was for an email, content wil
 
 Another suggestion for testing alert filters is to create an alert with a small window and wait. The [API](../alerts.md#alerts-scheduler) will allow hours in the window.
 
-Q: Kubecost allows configuring in-zone/in-region/cross-region traffic classification. After I tried to configure this and saw that the values have been configured, I couldn’t see traffic classification allocation in the dashboard. Is this feature still supported?
-
+Q: Kubecost allows configuring in-zone/in-region/cross-region traffic classification. After I tried to configure this and saw that the values have been configured, I couldn’t see traffic classification allocation in the dashboard. Is this feature still supported?\
 A: Check http://\<your-kubecost-address>/details! From there, look for the bottom right box to view more network details. It also may be important to have the network-costs daemonSet running in your cluster.
 
 Q: When cloud integration is not yet enabled, does Kubecost's usage of public pricing data take into account the region the node is on?\
