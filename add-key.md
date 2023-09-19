@@ -10,7 +10,7 @@ If you have a [multi-cluster setup](long-term-storage.md), you only need to appl
 
 ## At install-time
 
-Many Kubecost product configuration options can be specified at install-time, including your product key [link](http://somebrokenlinkhere.net).
+Many Kubecost product configuration options can be specified at install-time, including your product key.
 
 ### Option 1: Storing product key in a secret
 
