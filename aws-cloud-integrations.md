@@ -348,10 +348,6 @@ Then add the following trust statement to the role the policy is attached to on 
 
 ### Step 4: Attaching IAM permissions to Kubecost
 
-{% hint style="warning" %}
-If you are using the alternative [multi-cloud integration](multi-cloud.md) method, steps 4 and 5 are not required.
-{% endhint %}
-
 Now that the policies have been created, attach those policies to Kubecost. We support the following methods:
 
 <details>
@@ -500,6 +496,10 @@ helm upgrade --install kubecost --repo https://kubecost.github.io/cost-analyzer/
 </details>
 
 ### Step 5: Provide CUR config values to Kubecost
+
+{% hint style="warning" %}
+If you are using the alternative [multi-cloud integration](multi-cloud.md) method, step 5 is not required.
+{% endhint %}
 
 These values can either be set from the Kubecost UI or via `.Values.kubecostProductConfigs` in the Helm chart. Values for all fields must be provided.
 
