@@ -89,7 +89,7 @@ annotations:
 ```
 
 Q: How can I disable kube-state-metrics if needed?\
-A: It can be disabled with one of two methods `prometheus.kubeStateMetrics.enabled=false` or `prometheus.kube-state-metrics.disabled=true`. We recommend disabling any 3rd party KSM instead of our bundled version. More discussion is \[here].
+A: It can be disabled with one of two methods `prometheus.kubeStateMetrics.enabled=false` or `prometheus.kube-state-metrics.disabled=true`. We recommend disabling any 3rd party KSM instead of our bundled version.
 
 Q: Does increasing the `.Values.kubecostModel.etlResolutionSeconds` value cause any issues with cost accuracy?\
 A: Decreasing resolution may flatten out cost spikes but the summation of costs should not be affected.
