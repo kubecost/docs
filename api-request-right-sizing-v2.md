@@ -14,7 +14,7 @@ Like `algorithmCPU`, but for RAM recommendations.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="query" name="qCPU" type="float in the range (0, 1]" required="false" %}
-The desired quantile to base CPU recommendations on. Only used if `algorithmCPU=quantile`. **Note**: a quantile of `0.95`is the same as a 95th percentile.
+The desired quantile to base CPU recommendations on. Only used if `algorithmCPU=quantile`. **Note**: a quantile of `0.95` is the same as a 95th percentile.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="query" name="qRAM" type="float in the range (0, 1]" required="false" %}
@@ -52,7 +52,7 @@ Column to sort the response by. Defaults to `totalSavings`. Options are `totalSa
 {% endswagger-parameter %}
 
 {% swagger-parameter in="query" name="sortByOrder" type="string" %}
-Order to sort by. Default value `descending`. Options are `descending` and `ascending`.
+Order to sort by. Defaults to `descending`. Options are `descending` and `ascending`.
 {% endswagger-parameter %}
 
 {% swagger-response status="200: OK" description="" %}
