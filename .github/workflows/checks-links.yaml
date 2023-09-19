@@ -3,6 +3,9 @@ name: Check Links
 on:
   repository_dispatch:
   workflow_dispatch:
+  pull_request:
+    branches:
+      - main
   schedule:
     - cron: "0 0 * * *"
 
