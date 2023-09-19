@@ -5,7 +5,7 @@ You can apply your product key at any time within the product UI or during an in
 If you have a [multi-cluster setup](long-term-storage.md), you only need to apply your product key on the Kubecost primary cluster, and not on any of the Kubecost secondary clusters.
 
 {% hint style="info" %}
-`kubecostToken` is a different concept from your product key and is used for managing trial access.
+`kubecostToken` is a different concept from your product key and is used for managing trial access [link](http://somebrokenlinkhere.net).
 {% endhint %}
 
 ## At install-time
