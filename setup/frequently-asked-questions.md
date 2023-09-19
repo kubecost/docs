@@ -76,7 +76,7 @@ Q: What time of the day is the Azure costs export updated?\
 A: The Azure costs export update time is relative to the time of day when it was initially created. See [Azure docs on exporting data for more](https://docs.microsoft.com/en-us/azure/cost-management-billing/costs/tutorial-export-acm-data?tabs=azure-portal#export-schedule)
 
 Q: What regions/currencies are available for the Azure rate card integration?\
-A: Azure is very specific as to what currency can be used for each region/country. Azuew provides that information [here](https://docs.microsoft.com/en-us/azure/marketplace/marketplace-geo-availability-currencies).
+A: Azure is very specific as to what currency can be used for each region/country. Azure provides that information [here](https://docs.microsoft.com/en-us/azure/marketplace/marketplace-geo-availability-currencies).
 
 Q: I would like to use the node-exporter daemonSet provided with Openshift, however after disabling Kubecost-bundled Prometheus, it is unable to discover the node-exporter endpoints.\
 A: The Openshift provided node-exporter requires an additional annotation of `prometheus.io/scrape: "true"` to be added.
