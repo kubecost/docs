@@ -96,6 +96,7 @@
       * [1-click Request Right-Sizing](using-kubecost/navigating-the-kubecost-ui/savings/auto-request-sizing/one-click-request-sizing.md)
       * [Continuous Request Right-Sizing](continuous-request-sizing.md)
       * [ContainerStats Pipeline](containerstats-pipeline.md)
+    * [Abandoned Workloads](abandoned-workloads.md)
     * [Spot Checklist](spot-checklist.md)
     * [Spot Cluster Sizing](using-kubecost/navigating-the-kubecost-ui/savings/spot-cluster-sizing.md)
   * [Cluster Health Score](cluster-health-score.md)
@@ -163,6 +164,10 @@
   * [Kubecost Cloud: Assets Dashboard](kubecost-cloud/using-the-kubecost-cloud-ui/cloud-assets-dashboard.md)
   * [Kubecost Cloud: Cloud Cost Explorer](kubecost-cloud/using-the-kubecost-cloud-ui/kubecost-cloud-cloud-cost-explorer.md)
   * [Kubecost Cloud: Reports Dashboard](kubecost-cloud/using-the-kubecost-cloud-ui/cloud-reports-dashboard.md)
+  * [Kubecost Cloud: Savings](kubecost-cloud-savings.md)
+    * [Kubecost Cloud: Cluster Right-Sizing Recommendations](kubecost-cloud-cluster-right-sizing.md)
+    * [Kubecost Cloud: Request Right-Sizing Recommendations](kubecost-cloud-request-right-sizing.md)
+    * [Kubecost Cloud: Abandoned Workloads](kubecost-cloud-abandoned-workloads.md)
 * [Receiving Kubecost Cloud Support](kubecost-cloud/receiving-kubecost-cloud-support.md)
 
 ## Troubleshooting
