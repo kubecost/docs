@@ -4,7 +4,7 @@ The Abandoned Workloads page can detect workloads which have not sent or receive
 
 You can access the Abandoned Workloads page by selecting Savings in the left navigation, then selecting Manage abandoned workloads.
 
-![Abandoned Workloads page](abandoned-workloads.png)
+![Abandoned Workloads page](/images/abandoned-workloads.png)
 
 The Abandoned Workloads page will display front and center an estimated savings amount per month based on a number of detected workloads considered abandoned, defined by two values:
 * Traffic threshold (bytes/sec): This slider will determine a meaningful rate of traffic (bytes in and out per second) to detect activity of workloads. Only workloads below the threshold will be taken into account, therefore, as you increase the threshold, you should observe the total detected workloads increase.
