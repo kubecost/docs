@@ -4,7 +4,7 @@ The Abandoned Workloads page can detect workloads which have not sent or receive
 
 You can access the Abandoned Workloads page by selecting Savings in the left navigation, then selecting Manage abandoned workloads.
 
-![Abandoned Workloads page](/images/abandoned-workloads.png)
+![Abandoned Workloads page](images/abandonedworkloads.png)
 
 The Abandoned Workloads page will display front and center an estimated savings amount per month based on a number of detected workloads considered abandoned, defined by two values:
 
