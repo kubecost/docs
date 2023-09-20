@@ -28,6 +28,6 @@ There are multiple dropdown menus to consider:
   * Production: Stable cluster activity, will provide some extra space for potential spikes in activity.
   * Development: Cluster can tolerate small amount of instability, will run cluster somewhat close to capacity.
   * High availability: Cluster should avoid instability at all costs, will size cluster with lots of extra space to account for unexpected spikes in activity.
-* In the Architecture dropdown, you should see _x86_, which is currently the only supported architecture type.
+* In the Architecture dropdown, select either _x86_ or _ARM_. You may only see x86 as an option. This is normal. At the moment, ARM architecture recommendations are only supported on AWS clusters.
 
 With this information provided, Kubecost can provide the most accurate recommendations for running your clusters efficiently.
