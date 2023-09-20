@@ -54,24 +54,28 @@ INF Allocation[1d]: AggregatedStoreDriver[hvfrl]: run: aggregated [2023-01-03T00
 ```
 {% endcode %}
 
-## 3. Repair CloudUsage ETL
+## 3. Repair CloudCost ETL
 
-The CloudUsage ETL pulls information from your cloud billing integration. Ensure it's been configured properly, otherwise, no data will be retrieved. Review our [Cloud Billing Integrations](https://docs.kubecost.com/install-and-configure/install/cloud-integration) doc for more info.
+The CloudCost ETL pulls information from your cloud billing integration. Ensure it's been configured properly, otherwise, no data will be retrieved. Review our [Cloud Billing Integrations](https://docs.kubecost.com/install-and-configure/install/cloud-integration) doc for more info.
 
 {% code overflow="wrap" %}
 ```bash
-# Repair: /model/etl/cloudUsage/repair?window=
-$ curl "https://kubecost.your.com/model/etl/cloudUsage/repair?window=2023-01-01T00:00:00Z,2023-01-04T00:00:00Z"
-{"code":200,"data":"Cloud Usage Repair process has begun for [2023-01-01T00:00:00+0000, 2023-01-04T00:00:00+0000) for all providers"}
+# Repair: /model/cloudCost/repair?window=
+$ curl "https://kubecost.your.com/model/cloudCost/repair?window=2023-01-01T00:00:00Z,2023-01-04T00:00:00Z"
+{"code":200,"data":"Rebuilding Cloud Usage For All Providers"}
 
 # Check logs to watch this job run until completion
-$ kubectl logs deploy/kubecost-cost-analyzer | grep CloudUsage
+$ kubectl logs deploy/kubecost-cost-analyzer | grep CloudCost
 ```
 {% endcode %}
 
 ## 4. Run Reconciliation Pipeline
 
 The Reconciliation Pipeline reconciles the existing ETL with the newly gathered data in the CloudUsage ETL, further ensuring parity between Kubecost and your cloud bill.
+
+{% hint style="info" %}
+Reconciliation repairs should be automatically triggered after a CloudCost repair.
+{% endhint %}
 
 {% code overflow="wrap" %}
 ```bash
