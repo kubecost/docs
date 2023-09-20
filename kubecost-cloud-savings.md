@@ -8,6 +8,7 @@ The Savings page provides miscellaneous functionality to help you use resources 
 
 ## Savings insights
 The Savings page provides an array of panels containing different insights capable of lowering your Kubernetes and cloud spend. The current list of Savings features includes:
+
 * [Right-size your cluster nodes](kubecost-cloud-cluster-right-sizing.md)
 * [Right-size your container requests](kubecost-cloud-request-right-sizing.md)
 * [Remedy abandoned workloads](kubecost-cloud-abandoned-workloads.md)
