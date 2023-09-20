@@ -13,6 +13,7 @@ The Abandoned Workloads page will display front and center an estimated savings 
 ## Filtering your abandoned workloads
 
 Beneath your total savings value and slider scale, you will see a dashboard containing all abandoned workloads. The number of total line items should be equal to the number of workloads displayed underneath your total savings value.
+
 You can filter your workloads through four dropdowns; across clusters, namespaces, owners, and owner kinds.
 
 Selecting an individual line item will expand the item, providing you with additional traffic data for that item.
