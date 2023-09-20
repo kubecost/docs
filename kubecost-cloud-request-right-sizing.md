@@ -19,7 +19,8 @@ The displayed right-sizing recommendations are calculated by taking into account
   * Production: Stable container activity, will provide some extra space for potential spikes in activity.
   * Development: Container can tolerate small amount of instability, will run somewhat close to capacity.
   * High availability: Container should avoid instability at all costs, will size container with lots of extra space to account for unexpected spikes in activity.
-* CPU/RAM target utilization: These can be set to limit recommended utilization of resources below a percentage threshold. Currently, the only CPU/RAM recommendation algorithm supported is _Percentile_.
+* CPU/RAM recommendation algorithm: The algorithm used to compute the recommendations. Currently, the only supported option is _Percentile_.
+* CPU/RAM target utilization: These can be set to limit recommended utilization of resources below a percentage threshold.
 * CPU/RAM percentile: Percentage of data points that will be sampled within your window range. Outlier data will be filtered out when determining recommendations.
 * Add Filters: Filter the table of namespaces/controllers to be equal or not equal to values of one or several different categories such as cluster, label, or pod. For example, if you want to only see namespace/cluster pairs within the namespace kube-system, select _Namespace_ from the first dropdown, select _Equals_ from the second dropdown, then provide the value "kube-system" in the text box. Select the plus icon to confirm your filter. Multiple filters can be applied.
 
