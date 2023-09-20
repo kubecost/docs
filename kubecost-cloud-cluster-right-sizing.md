@@ -13,7 +13,7 @@ You can access cluster right-sizing by selecting *Savings* in the left navigatio
 Kubecost will offer two recommendations: simple (uses one node type) and complex (uses two or more node types). Kubecost may hide the complex recommendation when it is more expensive than the simple recommendation, and present a single recommendation instead. These recommendations and their metrics will be displayed in a chart next to your existing configuration in order to compare values like total cost, node count, and usage.
 
 {% hint style="info" %}
-You may see the Total cost of the simple and complex recommendations are both larger than your current cost. This is because when Kubecost Cloud attempts to find the cheapest configuration of nodes to support the existing cluster workload, it does not read the current cost and attempt to minimize it. In this case, Kubecost Cloud is unable to provide an optimized recommendation for your current workload.
+You may see the Total cost of the Simple or Complex recommendations being larger than your current cost. This is because when Kubecost Cloud attempts to find the cheapest configuration of nodes to support the existing cluster workload, it does not read the current cost and attempt to minimize it. In this case, Kubecost Cloud is unable to provide an optimized recommendation for your current workload.
 {% endhint %}
 
 You can toggle on _Show advanced metrics_ to view more details about your cluster resource consumption.
