@@ -69,7 +69,7 @@ $ kubectl logs deploy/kubecost-cost-analyzer | grep CloudCost
 ```
 {% endcode %}
 
-By default, all users v1.106+ no longer have [CloudUsage ETL](https://github.com/kubecost/cost-analyzer-helm-chart/blob/63dea06ae1ea771a8622e786b22f6f6625a49349/cost-analyzer/templates/cost-analyzer-deployment-template.yaml#L788-L794) enabled. If you are using CloudUsage ETL, use the commands below:
+By default, all users v1.106+ no longer have CloudUsage ETL enabled (`.Values.kubecostModel.etlCloudUsage`, `.Values.kubecostModel.etlCloudAsset`). If you are using CloudUsage ETL, use the commands below:
 
 {% code overflow="wrap" %}
 ```bash
