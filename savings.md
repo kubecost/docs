@@ -12,9 +12,9 @@ The monthly savings values on this page are precomputed every hour for performan
 
 ### Kubernetes insights
 
-* [Right-size your cluster nodes](https://docs.kubecost.com/using-kubecost/navigating-the-kubecost-ui/savings/cluster-right-sizing-recommendations)
-* [Right-size your container requests](https://docs.kubecost.com/using-kubecost/navigating-the-kubecost-ui/savings/auto-request-sizing/one-click-request-sizing)
-* [Remedy abandoned workloads](https://docs.kubecost.com/apis/apis-overview/api-abandoned-workloads)
+* [Right-size your cluster nodes](using-kubecost/navigating-the-kubecost-ui/savings/cluster-right-sizing-recommendations.md)
+* [Right-size your container requests](auto-request-sizing.md)
+* [Remedy abandoned workloads](abandoned-workloads.md)
 * Manage unclaimed volumes
 * Resize local disks
 * Manage underutilized nodes
