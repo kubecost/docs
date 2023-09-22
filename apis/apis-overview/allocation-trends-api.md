@@ -6,195 +6,59 @@ Analyzes change in total cost of allocations relative to a previous window of th
 {% endswagger-description %}
 
 {% swagger-parameter in="path" name="window" required="true" type="string" %}
-Duration of time over which to query. Compares cost usage of window to cost usage window of equal size directly preceding it. Accepts all standard Kubecost window formats (See our doc on using
-
-[the `window` parameter](https://docs.kubecost.com/apis/apis-overview/assets-api#using-window-parameter)
-
-).
+Duration of time over which to query. Compares cost usage of window to cost usage window of equal size directly preceding it. Accepts all standard Kubecost window formats (See our doc on using [the `window` parameter](https://docs.kubecost.com/apis/apis-overview/assets-api#using-window-parameter)).
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="aggregate" type="string" required="false" %}
-Field by which to aggregate the results. Accepts:
-
-`cluster`
-
-,
-
-`namespace`
-
-,
-
-`controllerKind`
-
-,
-
-`controller`
-
-,
-
-`service`
-
-,
-
-`node`
-
-,
-
-`pod`
-
-,
-
-`label:<name>`
-
-, and
-
-`annotation:<name>`
-
-. Also accepts comma-separated lists for multi-aggregation, like
-
-`namespace,label:app`
-
-.
+Field by which to aggregate the results. Accepts: `cluster`, `namespace`, `controllerKind`, `controller`, `service`, `node`, `pod`, `label:<name>`, and `annotation:<name>`. Also accepts comma-separated lists for multi-aggregation, like `namespace,label:app`.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="external" type="string" required="false" %}
-If
-
-`true`
-
-, include external costs in each allocation. Default is
-
-`false`
-
-.
+If `true`, include external costs in each allocation. Default is `false`.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="idle" type="boolean" required="false" %}
-If
-
-`true`
-
-, include idle cost (i.e. the cost of the un-allocated assets) as its own allocation. Default is
-
-`true.`
+If `true`, include idle cost (i.e. the cost of the un-allocated assets) as its own allocation. Default is `true`.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="filterNamespaces" type="string" required="false" %}
-Comma-separated list of namespaces to match; e.g.
-
-`namespace-one,namespace-two`
-
-will return results from only those two namespaces.
+Comma-separated list of namespaces to match; e.g. `namespace-one,namespace-two` will return results from only those two namespaces.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="shareIdle" type="boolean" required="false" %}
-If
-
-`true`
-
-, and
-
-`shareIdle == false`
-
-Idle Allocations are created on a per cluster or per node basis rather than being aggregated into a single "_idle_" allocation. Default is
-
-`false`
-
-.
+If `true`, and `shareIdle == false`, idle allocations are created on a per cluster or per node basis rather than being aggregated into a single idle allocation. Default is `false`.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="shareNamespaces" type="string" required="false" %}
-Comma-separated list of namespaces to share; e.g.
-
-`kube-system, kubecost`
-
-will share the costs of those two namespaces with the remaining non-idle, unshared allocations.
+Comma-separated list of namespaces to share; e.g. `kube-system, kubecost` will share the costs of those two namespaces with the remaining non-idle, unshared allocations.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="shareLabels" type="string" required="false" %}
-Comma-separated list of labels to share; e.g.
-
-`env:staging, app:test`
-
-will share the costs of those two label values with the remaining non-idle, unshared allocations.
+Comma-separated list of labels to share; e.g. `env:staging, app:test` will share the costs of those two label values with the remaining non-idle, unshared allocations.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="shareCost" type="float" required="false" %}
-Floating-point value representing a monthly cost to share with the remaining non-idle, unshared allocations; e.g.
-
-`30.42`
-
-($1.00/day == $30.42/month) for the query
-
-`yesterday`
-
-(1 day) will split and distribute exactly $1.00 across the allocations. Default is
-
-`0.0.`
+Floating-point value representing a monthly cost to share with the remaining non-idle, unshared allocations; e.g. `30.42` ($1.00/day == $30.42/month) for the query `yesterday` (1 day) will split and distribute exactly $1.00 across the allocations. Default is `0.0.`
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="shareTenancyCosts" type="boolean" required="false" %}
-If
-
-`true`
-
-, share the cost of cluster overhead assets such as cluster management costs and node attached volumes across tenants of those resources. Results are added to the sharedCost field. Both cluster management and attached volumes are shared by cluster. Default is
-
-`true`
-
-.
+If `true`, share the cost of cluster overhead assets such as cluster management costs and node attached volumes across tenants of those resources. Results are added to the sharedCost field. Both cluster management and attached volumes are shared by cluster. Default is `true`.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="idleByNode" type="boolean" required="false" %}
-If
-
-`true`
-
-, idle allocations are created on a per node basis, which will result in different values when shared and more idle allocations when split. Default is
-
-`false`
-
-.
+If `true`, idle allocations are created on a per node basis, which will result in different values when shared and more idle allocations when split. Default is `false`.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="splitIdle" type="boolean" required="false" %}
-If
-
-`true`
-
-, and
-
-`shareIdle == false`
-
-Idle Allocations are created on a per cluster or per node basis rather than being aggregated into a single "_idle_" allocation. Default is
-
-`false`
-
-.
+If `true`, and `shareIdle == false`, idle allocations are created on a per cluster or per node basis rather than being aggregated into a single idle allocation. Default is `false`.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="reconcile" type="boolean" required="false" %}
-If
-
-`true`
-
-, pulls data from the Assets cache and corrects prices of Allocations according to their related Assets. The corrections from this process are stored in each cost categories cost adjustment field. If the integration with your cloud provider's billing data has been set up, this will result in the most accurate costs for Allocations. Default is
-
-`true`
-
-.
+If `true`, pulls data from the Assets cache and corrects prices of Allocations according to their related Assets. The corrections from this process are stored in each cost categories cost adjustment field. If the integration with your cloud provider's billing data has been set up, this will result in the most accurate costs for Allocations. Default is `true`.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="step" type="string" required="false" %}
-Duration of a single allocation set. If unspecified, this defaults to the
-
-`window`
-
-, so that you receive exactly one set for the entire window. If specified, it works chronologically backward, querying in durations of
-
-`step`
-
-until the full window is covered.
+Duration of a single allocation set. If unspecified, this defaults to the `window`, so that you receive exactly one set for the entire window. If specified, it works chronologically backward, querying in durations of `step` until the full window is covered.
 {% endswagger-parameter %}
 
 {% swagger-response status="200: OK" description="" %}
