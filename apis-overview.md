@@ -50,27 +50,22 @@ The Events API provides a log of different occurrences in your workload in order
 
 Savings endpoints provide cost optimization insights. The following savings endpoints are available at `http://<kubecost-address>/model/ENDPOINT`:
 
-| Endpoint                                                                                                                       | Brief description                                                                                                        |
-| ------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ |
-| `/savings`                                                                                                                     | Provides cluster-level potential savings estimates based on specific savings opportunities available in other endpoints. |
-| [`/savings/requestSizingV2`](https://docs.kubecost.com/apis/apis-overview/api-request-right-sizing-v2)                         | Provides recommendations for setting container resource requests.                                                        |
-| `/projectDisks`                                                                                                                | List orphaned disks.                                                                                                     |
-| `/projectAddresses`                                                                                                            | List orphaned IP addresses.                                                                                              |
-| [`/savings/abandonedWorkloads`](api-abandoned-workloads.md)                                                                    | List abandoned workloads based on network traffic.                                                                       |
-| `/savings/clusterSizingETL`                                                                                                    | Provides recommendations for sizing clusters (node types and quantities).                                                |
-| [Container Request Recommendation "Apply" APIs](https://docs.kubecost.com/apis/apis-overview/api-request-recommendation-apply) | Applies Kubecost's container request recommendations to your cluster.                                                    |
+<table><thead><tr><th width="342">Endpoint</th><th>Brief description</th></tr></thead><tbody><tr><td><code>/savings</code></td><td>Provides cluster-level potential savings estimates based on specific savings opportunities available in other endpoints.</td></tr><tr><td><code>/savings/clusterSizingETL</code></td><td>Provides recommendations for sizing clusters (node types and quantities).</td></tr><tr><td><a href="https://docs.kubecost.com/apis/apis-overview/api-request-right-sizing-v2"><code>/savings/requestSizingV2</code></a></td><td>Provides recommendations for setting container resource requests.</td></tr><tr><td><a href="api-abandoned-workloads.md"><code>/savings/abandonedWorkloads</code></a></td><td>List abandoned workloads based on network traffic.</td></tr><tr><td><a href="https://docs.kubecost.com/apis/apis-overview/api-request-recommendation-apply"><code>/cluster/requestsizer/planV2</code></a></td><td>Applies Kubecost's container request recommendations to your cluster.</td></tr><tr><td><code>/projectDisks</code></td><td>List orphaned disks.</td></tr><tr><td><code>/projectAddresses</code></td><td>List orphaned IP addresses.</td></tr></tbody></table>
 
 ## Kubecost UI counterparts
 
 Many, but not all, Kubecost APIs power different features in the Kubecost UI. The UI counterpart may not fully reflect all functionality of the corresponding API. Please consult the original API docs for complete details.
 
-| API Name              | UI Equivalent                                                                                                                                    |
-| --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Allocation API        | [Allocations dashboard](https://docs.kubecost.com/using-kubecost/getting-started/cost-allocation)                                                |
-| Allocation Trends API | Allocations dashboard, Total cost column percentage                                                                                              |
-| Assets API            | [Assets dashboard](https://docs.kubecost.com/using-kubecost/getting-started/assets)                                                              |
-| Cloud Cost API        | [Cloud Costs Explorer dashboard](https://docs.kubecost.com/using-kubecost/getting-started/cloud-costs-explorer)                                  |
-| Budget API            | [Budgets dashboard](https://docs.kubecost.com/using-kubecost/getting-started/budgets)                                                            |
-| Cost Events Audit API | [Audits dashboard](https://docs.kubecost.com/using-kubecost/getting-started/audits)                                                              |
-| Predict API           | [Audits dashboard, Estimated monthly cost impact](https://docs.kubecost.com/using-kubecost/getting-started/audits#estimated-monthly-cost-impact) |
-| Savings API           | Savings dashboard                                                                                                                                |
+| API Name                                          | UI Equivalent                                                                                                                                    |
+| ------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Allocation API                                    | [Allocations dashboard](https://docs.kubecost.com/using-kubecost/getting-started/cost-allocation)                                                |
+| Allocation Trends API                             | Allocations dashboard, Total cost column percentage                                                                                              |
+| Assets API                                        | [Assets dashboard](https://docs.kubecost.com/using-kubecost/getting-started/assets)                                                              |
+| Cloud Cost API                                    | [Cloud Costs Explorer dashboard](https://docs.kubecost.com/using-kubecost/getting-started/cloud-costs-explorer)                                  |
+| Budget API                                        | [Budgets dashboard](https://docs.kubecost.com/using-kubecost/getting-started/budgets)                                                            |
+| Cost Events Audit API                             | [Audits dashboard](https://docs.kubecost.com/using-kubecost/getting-started/audits)                                                              |
+| Predict API                                       | [Audits dashboard, Estimated monthly cost impact](https://docs.kubecost.com/using-kubecost/getting-started/audits#estimated-monthly-cost-impact) |
+| Savings API                                       | [Savings dashboard](savings.md)                                                                                                                  |
+| Cluster Right Sizing Recommendation API           | [Cluster Sizing Recommendations page](kubecost-cloud-cluster-right-sizing.md)                                                                    |
+| Container Request Right Sizing Recommendation API | [Request right sizing recommendations page](auto-request-sizing.md)                                                                              |
+| Abandoned Workloads API                           | [Abandoned Workloads page](abandoned-workloads.md)                                                                                               |
