@@ -26,7 +26,7 @@ Comma-separated list of namespaces to match; e.g. `namespace-one,namespace-two` 
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="shareIdle" type="boolean" required="false" %}
-If `true`, and `shareIdle == false`, idle allocations are created on a per cluster or per node basis rather than being aggregated into a single idle allocation. Default is `false`.
+If true, idle cost is allocated proportionally across all non-idle allocations, per-resource. That is, idle CPU cost is shared with each non-idle allocation's CPU cost, according to the percentage of the total CPU cost represented. Default is false.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="shareNamespaces" type="string" required="false" %}
