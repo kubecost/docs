@@ -16,65 +16,15 @@ Samples full granularity of cloud costs from cloud billing report (ex. AWS' Cost
 {% endswagger-description %}
 
 {% swagger-parameter in="path" name="window" required="true" %}
-Window of the query.
-
-**Only accepts daily intervals**
-
-, example
-
-`window=3d`
-
-.
+Window of the query. **Only accepts daily intervals**, example `window=3d`.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="CostMetric" required="false" %}
-Determines which cloud cost metric type will be returned. Acceptable values are
-
-`AmortizedNetCost`
-
-,
-
-`InvoicedCost`
-
-,
-
-`ListCost`
-
-, and
-
-`NetCost`
-
-. Default is
-
-`AmortizedNetCost`
-
-.
+Determines which cloud cost metric type will be returned. Acceptable values are `AmortizedNetCost`, `InvoicedCost`, `ListCost`, and `NetCost`. Default is `AmortizedNetCost`.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="aggregate" required="false" %}
-Field by which to aggregate the results. Accepts:
-
-`invoiceEntityID`
-
-,
-
-`accountID`
-
-,
-
-`provider`
-
-,
-
-`service`
-
-, and
-
-`label:<name>`
-
-. Supports multi-aggregation using comma-separated lists. Example:
-
-`aggregate=accountID,service`
+Field by which to aggregate the results. Accepts: `invoiceEntityID`, `accountID`, `provider`, `service`, and `label:<name>`. Supports multi-aggregation using comma-separated lists. Example: `aggregate=accountID,service`
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="filterInvoiceEntityIDs" required="false" %}
@@ -139,37 +89,11 @@ Query cloud cost aggregate data
 {% endswagger-description %}
 
 {% swagger-parameter in="path" name="window" required="true" type="string" %}
-Window of the query. Accepts all standard Kubecost window formats (See our doc on using
-
-[the `window` parameter](https://docs.kubecost.com/apis/apis-overview/assets-api#using-window-parameter)
-
-).
+Window of the query. Accepts all standard Kubecost window formats (See our doc on using [the `window` parameter](https://docs.kubecost.com/apis/apis-overview/assets-api#using-window-parameter)).
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="aggregate" type="string" required="false" %}
-Field by which to aggregate the results. Accepts:
-
-`invoiceEntityID`
-
-,
-
-`accountID`
-
-,
-
-`provider`
-
-,
-
-`service`
-
-, and
-
-`label:<name>`
-
-. Supports multi-aggregation using comma-separated lists. Example:
-
-`aggregate=accountID,service`
+Field by which to aggregate the results. Accepts: `invoiceEntityID`, `accountID`, `provider`, `service`, and `label:<name>`. Supports multi-aggregation using comma-separated lists. Example: `aggregate=accountID,service`
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="filterInvoiceEntityIDs" type="string" required="false" %}

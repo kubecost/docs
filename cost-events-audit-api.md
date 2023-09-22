@@ -16,35 +16,15 @@ Number of events to return. If unspecified, it returns all events available.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="filterNamespaces" type="string" required="false" %}
-Comma-separated list of namespaces to match; e.g.
-
-`namespace-one,namespace-two`
-
-will return change events that have occurred only in those two namespaces.
+Comma-separated list of namespaces to match; e.g. `namespace-one,namespace-two` will return change events that have occurred only in those two namespaces.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="filterEventTypes" type="string" required="false" %}
-Filter query by event type. Currently, only
-
-`add`
-
-and
-
-`delete`
-
-are accepted. (more types coming soon) Also accepts comma-separated lists, like
-
-`add,delete`
-
-.
+Filter query by event type. Currently, only `add` and `delete` are accepted. (more types coming soon) Also accepts comma-separated lists, like `add,delete`.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="filterResourceTypes" type="string" required="false" %}
-Resource type. Currently, only
-
-`deployment`
-
-is accepted. (more types coming soon)
+Resource type. Currently, only `deployment` is accepted. (more types coming soon)
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="filterTotalCostLowerBound" type="float" required="false" %}
