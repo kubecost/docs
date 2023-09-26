@@ -13,6 +13,6 @@ You can filter your table of resources using two dropdowns:
 * The Resource dropdown will allow you to filter by resource type (*Disk* or *IP Address*).
 * The Region dropdown will filter by the region associated with the resource. Resources with the region “Global” cannot be filtered, and will only display when *All* has been selected.
 
-Above your table will be an estimated monthly savings value. This value is the sum of all resources’ savings. As you filter your table of resources, this value will naturally adjust.
+Above your table will be an estimated monthly savings value. This value is the sum of all displayed resources’ savings. As you filter your table of resources, this value will naturally adjust.
 
 For cross-functional convenience, you can copy the name of any resource by selecting the copy icon next to it.
