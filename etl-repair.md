@@ -69,6 +69,19 @@ $ kubectl logs deploy/kubecost-cost-analyzer | grep CloudCost
 ```
 {% endcode %}
 
+By default, Kubecost v1.106+ no longer has CloudUsage ETL enabled (`.Values.kubecostModel.etlCloudUsage`, `.Values.kubecostModel.etlCloudAsset`). If you are using CloudUsage ETL, use the commands below:
+
+{% code overflow="wrap" %}
+```bash
+# Repair: /model/etl/cloudUsage/repair?window=
+$ curl "https://kubecost.your.com/model/etl/cloudUsage/repair?window=2023-01-01T00:00:00Z,2023-01-04T00:00:00Z"
+{"code":200,"data":"Cloud Usage Repair process has begun for [2023-01-01T00:00:00+0000, 2023-01-04T00:00:00+0000) for all providers"}
+
+# Check logs to watch this job run until completion
+$ kubectl logs deploy/kubecost-cost-analyzer | grep CloudUsage
+```
+{% endcode %}
+
 ## 4. Run Reconciliation Pipeline
 
 The Reconciliation Pipeline reconciles the existing ETL with the newly gathered data in the CloudUsage ETL, further ensuring parity between Kubecost and your cloud bill.
