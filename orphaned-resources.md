@@ -2,7 +2,7 @@
 
 Kubecost displays all disks and IP addresses that are not utilized by any cluster. These may still incur charges, and so you should consider these orphaned resources for deletion.
 
-You can access the Orphaned Resources page by selecting *Settings* in the left navigation, then selecting *Manage orphaned resources*.
+You can access the Orphaned Resources page by selecting *Savings* in the left navigation, then selecting *Manage orphaned resources*.
 
 ![Orphaned Resources](/images/orphanedresources.png)
 
