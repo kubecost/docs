@@ -1,25 +1,30 @@
-# Kubecost Cloud GCP Marketplace Install
+# Kubecost Cloud GCP Marketplace Licensing
 
-Kubecost Cloud is [available on GCP Marketplace](https://console.cloud.google.com/marketplace/product/kubecost-public/kubecost-cloud) and can be installed in minutes. This guide will take you through the installation and getting set up on Kubecost Cloud.
+Kubecost Cloud is [available for licensing on GCP Marketplace](https://console.cloud.google.com/marketplace/product/kubecost-public/kubecost-cloud) and can be installed in minutes. This guide will take you through licensing through GCP Marketplace, and next steps for setting up Kubecost Cloud.
+
+Kubecost currently offers 30 days of Kubecost Cloud free without licensing fees.
 
 ## Prerequisites
 
-* Set up a Google Cloud account
-* Have a Project with at least one GCP cluster and a [billing account](https://cloud.google.com/billing/docs/how-to/create-billing-account).
+* Set up a Google Cloud account with an attached [billing account](https://cloud.google.com/billing/docs/how-to/create-billing-account).
 * [Set up a Kubecost Cloud account](kubecost-cloud/cloud-installation-and-onboarding.md#creating-a-user-account)
 
-## GCP Marketplace install guide
+## GCP Marketplace licensing guide
 
-On the [Product details page for Kubecost](https://console.cloud.google.com/marketplace/product/kubecost-public/kubecost-cloud), select _Get Started_. You will be taken to the Agreements page. Confirm the Project you want Kubecost Cloud associated with, then agree to the terms and agreements. After agreeing to terms, you can return to the product page or select _Deploy_ to begin installation.
+On the [Product details page for Kubecost](https://console.cloud.google.com/marketplace/product/kubecost-public/kubecost-cloud), select _Subscribe_. You will be taken to an Order Summary page.
 
-### Deploying Kubecost on GKE
+Under "1. Select Plan", the default plan should be Cloud Pro, and the default usage fee should be USD 0.167 per node per day. You can use the Pricing Calculator in the right sidebar to determine estimated costs by providing estimated timeframe of usage from 1 day to 1 year, and total node count.
 
-Provide all necessary details about your environment for Kubecost to install successfully:
+Under "2. Purchase Details", select the billing account you wish to associate Kubecost Cloud with from the dropdown.
 
-* Existing Kubernetes Cluster: Select an existing cluster in your Project from the dropdown, or create a new cluster. Kubecost Cloud supports multi-cluster environments, however you must first choose a singular cluster on which to install Kubecost Cloud.
-* Namespace: Select a namespace from the dropdown in which to deploy the application.
-* App instance name: Provide a name for the application instance to be created within the above namespace.
+Under "3. Terms", read and agree to the terms and conditions, which include Google Cloud Marketplace Terms of Service as well as the Kubecost Terms of Service. Then, select _Subscribe_. Wait a moment while your order request is processed. Select _Go to Product Page_ in the pop-up which should appear once the order has been sent to Kubecost. If you have not already, select _Sign up with provider_ on the product page and provide all necessary user info to get your Kubecost Cloud account set up. Purchase orders should be automatically processed. Refresh the product page until you see _Manage on Provider_. Selecting this will take you from GCP Marketplace to the Kubecost Cloud login page.
 
-There are checkboxes below for optional configuration. All features are disabled by default, and should only be enabled based on your environment needs. Enter names for both a Prometheus Service Account and Cost-analyzer Service Account to be created (set to _default_). Finally, select _Deploy_.
+You should now have access to the Kubecost Cloud dashboard.
 
-You will be taken to the Applications page of GCP's Kubernetes Engine while Kubecost Cloud install. Be patient will it loads. Select _Manage on Provider_ on the Kubecost Cloudonce the option becomes available. This will take you to the Kubecost Cloud home page. Log in with your Kubecost Cloud account.
+## Next steps
+
+After having licensed Kubecost Cloud, you are able to install the Kubecost Cloud Agent onto all clusters you want to receive cost metrics for. See our existing [Kubecost Cloud Installation and Onboarding](/kubecost-cloud/cloud-installation-and-onboarding.md) guide for help getting started.
+
+Note that licensing of Kubecost Cloud through GCP Marketplace will not directly integrate GCP into your Kubecost Cloud environment. For more information, see our [GCP Cloud Integration guide](/kubecost-cloud/kubecost-cloud-cloud-billing-integrations/kubecost-cloud-gcp-integration.md).
+
+
