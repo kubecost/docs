@@ -15,7 +15,7 @@ The monthly savings values on this page are precomputed every hour for performan
 * [Right-size your cluster nodes](using-kubecost/navigating-the-kubecost-ui/savings/cluster-right-sizing-recommendations.md)
 * [Right-size your container requests](auto-request-sizing.md)
 * [Remedy abandoned workloads](abandoned-workloads.md)
-* Manage unclaimed volumes
+* [Manage unclaimed volumes](unclaimed-volumes.md)
 * Resize local disks
 * Manage underutilized nodes
 * Right-size your persistent volumes
@@ -23,8 +23,8 @@ The monthly savings values on this page are precomputed every hour for performan
 ### Cloud insights:
 
 * Reserve instances
-* Delete unassigned resources
-* [Spot Instances](https://docs.kubecost.com/using-kubecost/navigating-the-kubecost-ui/savings/spot-checklist)
+* [Manage orphaned resources](orphaned-resources.md)
+* [Spot Instances](spot-checklist.md)
 
 ## Archiving Savings insights
 
