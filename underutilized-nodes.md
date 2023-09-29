@@ -1,7 +1,8 @@
 # Underutilized Nodes
 
 Kubecost displays all nodes with both low CPU/RAM utilization, indicating they may need to be turned down or resized, while providing checks to ensure safe drainage can be performed.
-You can access the Underutilized Nodes page by selecting *Settings* in the left navigation, then selecting *Manage underutilized nodes*.
+
+You can access the Underutilized Nodes page by selecting *Savings* in the left navigation, then selecting *Manage underutilized nodes*.
 
 ![Underutilized Nodes](/images/underutilizednodes.png)
 
