@@ -76,7 +76,7 @@ The token is then validated remotely in one of two ways:
 If `skipOnlineTokenValidation` is set to true, Kubecost will skip accessing the OIDC introspection endpoint for online token validation and will instead attempt to locally validate the JWT claims.
 
 {% hint style="danger" %}
-It is important to note that setting `skipOnlineTokenValidation` to true will not allow for tokens to be manually revoked.
+Setting `skipOnlineTokenValidation` to `true` will prevent tokens from being manually revoked.
 {% endhint %}
 
 ### Hosted domain
