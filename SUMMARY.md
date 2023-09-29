@@ -98,6 +98,7 @@
       * [ContainerStats Pipeline](containerstats-pipeline.md)
     * [Abandoned Workloads](abandoned-workloads.md)
     * [Unclaimed Volumes](unclaimed-volumes.md)
+    * [Underutilized Nodes](underutilized-nodes.md)
     * [Orphaned Resources](orphaned-resources.md)
     * [Spot Checklist](spot-checklist.md)
     * [Spot Cluster Sizing](using-kubecost/navigating-the-kubecost-ui/savings/spot-cluster-sizing.md)
