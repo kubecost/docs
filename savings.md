@@ -8,7 +8,7 @@ The Savings page provides miscellaneous functionality to help you use resources 
 
 The Savings page provides an array of panels containing different insights capable of lowering your Kubernetes and cloud spend.
 
-The monthly savings values on this page are precomputed every hour for performance reasons, while per-cluster views of these numbers, and the numbers on each individual savings page, are computed live. This may result in some discrepancies between the Savings page and the pages of individual Savings insights.
+The monthly savings values on this page are precomputed every hour for performance reasons, while per-cluster views of these numbers, and the numbers on each individual Savings insight page, are computed live. This may result in some discrepancies between estimated savings values of the Savings page and the pages of individual Savings insights.
 
 ### Kubernetes insights
 
@@ -17,7 +17,7 @@ The monthly savings values on this page are precomputed every hour for performan
 * [Remedy abandoned workloads](abandoned-workloads.md)
 * [Manage unclaimed volumes](unclaimed-volumes.md)
 * Resize local disks
-* Manage underutilized nodes
+* [Manage underutilized nodes](underutilized-nodes.md)
 * Right-size your persistent volumes
 
 ### Cloud insights:
