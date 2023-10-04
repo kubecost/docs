@@ -1,4 +1,4 @@
-# User Management (SSO/OIDC/RBAC)
+# User Management (SSO/OIDC)
 
 {% hint style="info" %}
 OIDC and RBAC are only officially supported on Kubecost Enterprise plans.
@@ -37,21 +37,21 @@ oidc:
 ```
 
 {% hint style="info" %}
-&#x20;`authURL` may require additional request parameters depending on the provider. Some commonly required parameters are `client_id=***` and `response_type=code`. Please check the provider documentation for more information.
+`authURL` may require additional request parameters depending on the provider. Some commonly required parameters are `client_id=***` and `response_type=code`. Please check the provider documentation for more information.
 {% endhint %}
 
 ## Setup guides
 
-* [AzureAD setup guide](https://github.com/kubecost/poc-common-configurations/tree/main/oidc-azuread)
+* [Microsoft Entra ID (formerly Azure AD) guide](https://github.com/kubecost/poc-common-configurations/tree/main/oidc-azuread)
 
 ## Supported identity providers
 
-Please refer to the following references to find out more about how to configure the Helm parameters to suit each OIDC identiy provider integration.
+Please refer to the following references to find out more about how to configure the Helm parameters to suit each OIDC identity provider integration.
 
 * [Auth0 docs](https://auth0.com/docs/get-started/authentication-and-authorization-flow/add-login-auth-code-flow)
 * [Azure docs](https://learn.microsoft.com/en-us/azure/active-directory/develop/v2-protocols-oidc#send-the-sign-in-request)
 * [Gluu docs](https://gluu.org/docs/gluu-server/4.0/admin-guide/openid-connect/)
-* [Keycloak](/user-management-oidc-keycloak.md)
+* [Keycloak](user-management-oidc-keycloak.md)
 * [Google OAuth 2.0 docs](https://developers.google.com/identity/openid-connect/openid-connect#authenticatingtheuser)
 * [Okta docs](https://developer.okta.com/docs/reference/api/oidc/#request-parameters)
 
@@ -63,9 +63,9 @@ Auth0 does not support Introspection; therefore we can only validate the access 
 
 Once the Kubecost application has been successfully integrated with OIDC, we will expect requests to Kubecost endpoints to contain the JWT access token, either:
 
-* as a cookie named `token`, or
-* as a cookie named `id_token` (Set `.Values.oidc.useIDToken = true`), or
-* as part of the Authorization header `Bearer token`
+* As a cookie named `token`,
+* As a cookie named `id_token` (Set `.Values.oidc.useIDToken = true`),
+* Or as part of the Authorization header `Bearer token`
 
 The token is then validated remotely in one of two ways:
 
@@ -82,8 +82,8 @@ If the `hostedDomain` parameter is configured in the Helm chart, the application
 
 If the domain is configured alongside the access token, then requests should contain the JWT ID token, either:
 
-* as a cookie named `id_token`, or
-* as part of an `Identification` header.
+* As a cookie named `id_token`
+* As part of an `Identification` header
 
 The JWT ID token must contain a field (claim) named `hd` with the desired domain value. We verify that the token has been properly signed (using provider certificates) and has not expired before processing the claim.
 
@@ -107,7 +107,7 @@ kubectl logs deploy/kubecost-cost-analyzer
 
 ### Option 3: Enable debug logs for more granularity on what is failing
 
-[Docs ref](https://github.com/kubecost/cost-analyzer-helm-chart/blob/v1.103/README.md?plain=1#L63-L75)
+Code reference for the below example can be found [here](https://github.com/kubecost/cost-analyzer-helm-chart/blob/v1.103/README.md?plain=1#L63-L75).
 
 ```yaml
 kubecostModel:
@@ -116,6 +116,4 @@ kubecostModel:
       value: debug
 ```
 
-### Kubecost support
-
-For further assistance, reach out to support@kubecost.com and provide logs, and a [HAR file](https://support.google.com/admanager/answer/10358597?hl=en).
+For further assistance, reach out to support@kubecost.com and provide both logs and a [HAR file](https://support.google.com/admanager/answer/10358597?hl=en).

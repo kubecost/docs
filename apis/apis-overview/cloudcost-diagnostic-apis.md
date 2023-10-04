@@ -12,19 +12,11 @@ Restarts Cloud Usage pipeline. This operation ends the currently running Cloud U
 {% endswagger-description %}
 
 {% swagger-parameter in="path" name="commit" type="boolean" required="true" %}
-Flag that acts as a safety precaution. These can be long-running processes so this endpoint should not be run arbitrarily. 
-
-`true`
-
- will restart the process.
+Flag that acts as a safety precaution. These can be long-running processes so this endpoint should not be run arbitrarily. `true` will restart the process.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="provider" type="string" %}
-Optional parameter for the 
-
-`ProviderKey`
-
- of your CSP. If included, only the specified Cloud Store will run the operation. If not included, all Cloud Stores in the ETL will run the operation.
+Optional parameter for the `ProviderKey` of your CSP. If included, only the specified Cloud Store will run the operation. If not included, all Cloud Stores in the ETL will run the operation.
 {% endswagger-parameter %}
 
 {% swagger-response status="200: OK" description="" %}
@@ -43,19 +35,11 @@ Reruns queries for Cloud Usages in the given window for the given Cloud Store or
 {% endswagger-description %}
 
 {% swagger-parameter in="path" name="window" required="true" %}
-The applicable window for repair by the Cloud Store. See 
-
-[Using `window` parameter](https://docs.kubecost.com/apis/apis-overview/assets-api#using-window-parameter)
-
- for more details.
+The applicable window for repair by the Cloud Store. See [Using `window` parameter](https://docs.kubecost.com/apis/apis-overview/assets-api#using-window-parameter) for more details.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="provider" type="string" %}
-Optional parameter for the 
-
-`ProviderKey`
-
- of your CSP. If included, only the specified Cloud Store will run the operation. If not included, all Cloud Stores in the ETL will run the operation.
+Optional parameter for the `ProviderKey` of your CSP. If included, only the specified Cloud Store will run the operation. If not included, all Cloud Stores in the ETL will run the operation.
 {% endswagger-parameter %}
 
 {% swagger-response status="200: OK" description="" %}
@@ -78,19 +62,11 @@ Completely restart reconciliation pipeline. This operation ends the currently ru
 {% endswagger-description %}
 
 {% swagger-parameter in="path" type="boolean" name="commit" required="true" %}
-Flag that acts as a safety precaution. These can be long-running processes so this endpoint should not be run arbitrarily. 
-
-`true`
-
- will restart the process.
+Flag that acts as a safety precaution. These can be long-running processes so this endpoint should not be run arbitrarily. `true` will restart the process.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="provider" %}
-Optional parameter for the 
-
-`ProviderKey`
-
- of your CSP. If included, only the specified Cloud Store will run the operation. If not included, all Cloud Stores in the ETL will run the operation.
+Optional parameter for the `ProviderKey` of your CSP. If included, only the specified Cloud Store will run the operation. If not included, all Cloud Stores in the ETL will run the operation.
 {% endswagger-parameter %}
 
 {% swagger-response status="200: OK" description="" %}
@@ -109,19 +85,11 @@ Reruns queries for reconciliation in the given window for the given Cloud Store 
 {% endswagger-description %}
 
 {% swagger-parameter in="path" name="window" required="true" type="string" %}
-The applicable window for repair by the Cloud Store. See 
-
-[Using `window` parameter](https://docs.kubecost.com/apis/apis-overview/assets-api#using-window-parameter)
-
- for more details.
+The applicable window for repair by the Cloud Store. See [Using `window` parameter](https://docs.kubecost.com/apis/apis-overview/assets-api#using-window-parameter) for more details.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="provider" type="string" %}
-Optional parameter for the 
-
-`ProviderKey`
-
- of your CSP. If included, only the specified Cloud Store will run the operation. If not included, all Cloud Stores in the ETL will run the operation.
+Optional parameter for the `ProviderKey` of your CSP. If included, only the specified Cloud Store will run the operation. If not included, all Cloud Stores in the ETL will run the operation.
 {% endswagger-parameter %}
 
 {% swagger-response status="200: OK" description="" %}
@@ -140,19 +108,7 @@ Optional parameter for the
 
 {% swagger method="get" path="/etl/status" baseUrl="http://<kubecost-address>/model" summary="ETL Status API" %}
 {% swagger-description %}
-Returns a status object for the ETL. This includes sections for 
-
-`allocation`
-
-, 
-
-`assets`
-
-, and 
-
-`cloud`
-
-.
+Returns a status object for the ETL. This includes sections for `allocation`, `assets`, and `cloud`.
 {% endswagger-description %}
 
 {% swagger-response status="200: OK" description="" %}

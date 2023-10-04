@@ -6,11 +6,7 @@ The Predict API takes Kubernetes API objects ("workloads") as input and produces
 {% endswagger-description %}
 
 {% swagger-parameter in="query" name="clusterID" type="string" required="true" %}
-The Kubecost cluster ID of the cluster in which the workloads will be deployed. Currently, this must be the same as the cluster ID of the Kubecost installation which is serving the 
-
-`/speccost`
-
- endpoint. Support for multi-cluster is planned.
+The Kubecost cluster ID of the cluster in which the workloads will be deployed. Currently, this must be the same as the cluster ID of the Kubecost installation which is serving the `/speccost` endpoint. Support for multi-cluster is planned.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="query" required="true" name="defaultNamespace" type="string" %}
@@ -18,23 +14,11 @@ The namespace in which namespace-scoped objects will be "deployed" to if no name
 {% endswagger-parameter %}
 
 {% swagger-parameter in="query" name="window" type="string" %}
-The Kubecost data window used for determining resource costs fed into the cost prediction. Accepts all standard Kubecost window formats (See our doc on using 
-
-[the `window` parameter](https://docs.kubecost.com/apis/apis-overview/assets-api#using-window-parameter)
-
-). Default is 
-
-`2d`
-
-.
+The Kubecost data window used for determining resource costs fed into the cost prediction. Accepts all standard Kubecost window formats (See our doc on using [the `window` parameter](https://docs.kubecost.com/apis/apis-overview/assets-api#using-window-parameter)). Default is `2d`.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="query" name="noUsage" type="boolean" %}
-Set to 
-
-`true`
-
- to ignore historical usage data (if it exists) when making the prediction. This is equivalent to making a prediction using only requests.
+Set to `true` to ignore historical usage data (if it exists) when making the prediction. This is equivalent to making a prediction using only requests.
 {% endswagger-parameter %}
 
 {% swagger-response status="200: OK" description="" %}

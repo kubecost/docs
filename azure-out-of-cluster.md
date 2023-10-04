@@ -1,4 +1,4 @@
-# Azure Cloud Integration
+# Azure Cloud Billing Integration
 
 Connecting your Azure account to Kubecost allows you to view Kubernetes metrics side-by-side with out-of-cluster (OOC) costs (e.g. Azure Database Services). Additionally, it allows Kubecost to reconcile measured Kubernetes spend with your actual Azure bill. This gives teams running Kubernetes a complete and accurate picture of costs. For more information, read [Cloud Billing Integrations](https://docs.kubecost.com/install-and-configure/install/cloud-integration) and this [blog post](https://blog.kubecost.com/blog/complete-picture-when-monitoring-kubernetes-costs/).
 
@@ -93,15 +93,7 @@ Kubecost utilizes Azure tagging to allocate the costs of Azure resources outside
 
 To allocate external Azure resources to a Kubernetes concept, use the following tag naming scheme:
 
-| Kubernetes Concept | Azure Tag Key             | Azure Tag Value |
-| ------------------ | ------------------------- | --------------- |
-| Cluster            | kubernetes\_cluster       | cluster-name    |
-| Namespace          | kubernetes\_namespace     | namespace-name  |
-| Deployment         | kubernetes\_deployment    | deployment-name |
-| Label              | kubernetes\_label\_NAME\* | label-value     |
-| DaemonSet          | kubernetes\_daemonset     | daemonset-name  |
-| Pod                | kubernetes\_pod           | pod-name        |
-| Container          | kubernetes\_container     | container-name  |
+<table><thead><tr><th width="227.33333333333331">Kubernetes Concept</th><th>Azure Tag Key</th><th>Azure Tag Value</th></tr></thead><tbody><tr><td>Cluster</td><td><code>kubernetes_cluster</code></td><td><code>cluster-name</code></td></tr><tr><td>Namespace</td><td><code>kubernetes_namespace</code></td><td><code>namespace-name</code></td></tr><tr><td>Deployment</td><td><code>kubernetes_deployment</code></td><td><code>deployment-name</code></td></tr><tr><td>Label</td><td><code>kubernetes_label_NAME*</code></td><td><code>label-value</code></td></tr><tr><td>DaemonSet</td><td><code>kubernetes_daemonset</code></td><td><code>daemonset-name</code></td></tr><tr><td>Pod</td><td><code>kubernetes_pod</code></td><td><code>pod-name</code></td></tr><tr><td>Container</td><td><code>kubernetes_container</code></td><td><code>container-name</code></td></tr></tbody></table>
 
 In the `kubernetes_label_NAME` tag key, the NAME portion should appear exactly as the tag appears inside of Kubernetes. For example, for the tag `app.kubernetes.io/name`, this tag key would appear as `kubernetes_label_app.kubernetes.io/name.`
 

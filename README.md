@@ -46,7 +46,7 @@ For larger teams and companies with more complex infrastructure, you need the ri
     Retain data for years with various durable storage options. Provides record keeping on spend, allocation, and efficiency metrics with simple backup & restore functionality.
 *   **Access control with SSO/SAML**
 
-    Finely manage read and/or admin access by individual users or user groups. [Learn more](user-management.md).
+    Finely manage read and/or admin access by individual users or user groups. [Learn more](install-and-configure/advanced-configuration/user-management/).
 *   **High availability mode**
 
     Use multiple Kubecost replica pods with a Leader/Follower implementation to ensure one leader always exists across all replicas to run high availability mode. [Learn more](high-availability.md).
@@ -78,6 +78,6 @@ Additionally, check out our [blog ](https://blog.kubecost.com/blog/cost-monitori
 
 You can stay up-to-date with Kubecost by following releases on [GitHub](https://github.com/kubecost/cost-analyzer-helm-chart/releases) and the official [Kubecost blog](https://blog.kubecost.com/).
 
-Follow us on social media [here](/contactus.md).
+Follow us on social media [here](contactus.md).
 
 Contact us via email ([support@kubecost.com](mailto:support@kubecost.com)) or join us on [Slack](https://kubecost.com/join-slack) if you have questions!

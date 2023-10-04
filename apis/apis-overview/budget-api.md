@@ -12,63 +12,19 @@ Name of the budget rule
 {% endswagger-parameter %}
 
 {% swagger-parameter in="body" name="filter" type="string" %}
-The filter (either 
-
-`namespace`
-
- or 
-
-`cluster`
-
-) for the rule.
+The filter (either `namespace` or `cluster`) for the rule.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="body" name="interval" type="string" required="true" %}
-The interval that the budget will reset with (either 
-
-`weekly`
-
- or 
-
-`monthly`
-
-).
+The interval that the budget will reset with (either `weekly` or `monthly`).
 {% endswagger-parameter %}
 
 {% swagger-parameter in="body" name="intervalDay" type="int" %}
-The day the budget will reset. When 
-
-`interval=weekly`
-
-, 
-
-`intervalDay`
-
- is the day of the week, with 
-
-`intervalDay=0`
-
- for Sunday, 
-
-`intervalDay=1`
-
- for Monday, etc. When 
-
-`interval=monthly`
-
-, 
-
-`intervalDay`
-
- corresponds with the day of the month.
+The day the budget will reset. When `interval=weekly`, `intervalDay` is the day of the week, with `intervalDay=0` for Sunday, `intervalDay=1` for Monday, etc. When `interval=monthly`, `intervalDay` corresponds with the day of the month.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="body" name="amount" type="string" %}
-The budget limit value. Currency can be configured in 
-
-_Settings >_
-
- Cloud Cost Settings > Currency dropdown.
+The budget limit value. Currency can be configured in _Settings >_ Cloud Cost Settings > Currency dropdown.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="body" name="id" type="string" %}
@@ -126,9 +82,7 @@ Lists all existing recurring budget rules
 
 {% swagger method="delete" path="/model/budget/recurring/delete" baseUrl="https://<your-kubecost-address>" summary="Delete recurring budget rule" %}
 {% swagger-description %}
-Deletes a budget rule defined by 
-
-`id`
+Deletes a budget rule defined by `id`
 {% endswagger-description %}
 
 {% swagger-parameter in="path" name="id" type="string" %}

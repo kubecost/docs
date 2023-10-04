@@ -21,11 +21,7 @@ Apply has dry-run semantics, meaning it is a two-step process:
 
 {% swagger method="post" path="/cluster/requestsizer/planV2" baseUrl="http://<your-kubecost-address>" summary="Plan API" %}
 {% swagger-description %}
-It expects a request with a body that is identical to a response from the 
-
-[request right-sizing recommendation API](api-request-right-sizing-v2.md)
-
-.
+It expects a request with a body that is identical to a response from the [request right-sizing recommendation API](api-request-right-sizing-v2.md).
 {% endswagger-description %}
 {% endswagger %}
 

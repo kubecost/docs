@@ -14,97 +14,31 @@ Used to consolidate cost model data. Supported aggregation types are cluster and
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="accumulate" type="boolean" required="false" %}
-When set to 
-
-`false`
-
-, this endpoint returns daily time series data vs cumulative data. Default value is 
-
-`false`
-
-.
+When set to `false`, this endpoint returns daily time series data vs cumulative data. Default value is `false`.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="disableAdjustments" type="boolean" required="false" %}
-When set to 
-
-`true`
-
-, zeros out all adjustments from cloud provider reconciliation, which would otherwise change the 
-
-`totalCost`
-
-. Default value is 
-
-`false`
-
-.
+When set to `true`, zeros out all adjustments from cloud provider reconciliation, which would otherwise change the `totalCost`. Default value is `false`.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="format" type="string" required="false" %}
-When set to 
-
-`csv`
-
-, will download an accumulated version of the asset results in CSV format. By default, results will be in JSON format.
+When set to `csv`, will download an accumulated version of the asset results in CSV format. By default, results will be in JSON format.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="filterAccounts" type="string" required="false" %}
-Filter results by cloud account. 
-
-_Requires cloud configuration._
+Filter results by cloud account. _Requires cloud configuration._
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="filterCategories" type="string" required="false" %}
-Filter results by asset category, such as 
-
-`Network`
-
-, 
-
-`Management`
-
-, 
-
-`Compute`
-
-, 
-
-`Storage`
-
-, or 
-
-`Other`
-
-.
+Filter results by asset category, such as `Network`, `Management`, `Compute`, `Storage`, or `Other`.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="filterClusters" type="string" required="false" %}
-Filter results by cluster ID, which is generated from 
-
-`cluster_id`
-
- provided during installation.
+Filter results by cluster ID, which is generated from `cluster_id` provided during installation.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="filterLabels" type="string" required="false" %}
-Filter results by cloud label or cloud tag. For example, appending 
-
-`&labels=deployment:kubecost-cost-analyzer`
-
- only returns assets with label 
-
-`deployment=kubecost-cost-analyzer`
-
-. Note that subparameter 
-
-`:`
-
- symbols are required to denote 
-
-`<labelKey>:<labelValue>`
-
- pairs.
+Filter results by cloud label or cloud tag. For example, appending `&labels=deployment:kubecost-cost-analyzer` only returns assets with label `deployment=kubecost-cost-analyzer`. Note that subparameter `:` symbols are required to denote `<labelKey>:<labelValue>` pairs.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="filterNames" type="string" required="false" %}
@@ -112,93 +46,27 @@ Filter results by asset name.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="filterProjects" type="string" required="false" %}
-Filter results by cloud project ID. 
-
-_Requires cloud configuration._
+Filter results by cloud project ID. _Requires cloud configuration._
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="filterProviders" type="string" required="false" %}
-Filter results by provider. For example, appending 
-
-`&filterProviders=GCP`
-
- only returns assets belonging to provider 
-
-`GCP`
-
-. 
-
-_Requires cloud configuration._
+Filter results by provider. For example, appending `&filterProviders=GCP` only returns assets belonging to provider `GCP`. _Requires cloud configuration._
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="filterProviderIDs" type="string" required="false" %}
-Filter results by provider ID individual to each cloud asset. For examples, go to the Assets page, select Breakdown by Item, and see the Provider ID column. 
-
-_Requires cloud configuration._
+Filter results by provider ID individual to each cloud asset. For examples, go to the Assets page, select Breakdown by Item, and see the Provider ID column. _Requires cloud configuration._
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="filterServices" type="string" required="false" %}
-Filter results by service. Examples include 
-
-`Cloud Storage`
-
-, 
-
-`Kubernetes`
-
-, 
-
-`BigQuery`
-
-.
+Filter results by service. Examples include `Cloud Storage`, `Kubernetes`, `BigQuery`.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="filterTypes" type="string" required="false" %}
-Filter results by asset type. Examples include 
-
-`Cloud`
-
-, 
-
-`ClusterManagement`
-
-, 
-
-`Node`
-
-, 
-
-`LoadBalancer`
-
-, and 
-
-`Disk`
-
-.
+Filter results by asset type. Examples include `Cloud`, `ClusterManagement`, `Node`, `LoadBalancer`, and `Disk`.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="step" type="string" %}
-Duration of each individual data metric across the 
-
-`window`
-
-. Accepts 
-
-`1h`
-
-, 
-
-`1d`
-
-, or 
-
-`1w`
-
-. If left blank, defaults to longest step duration available based on level of granularity of data represented by 
-
-`window`
-
-.
+Duration of each individual data metric across the `window`. Accepts `1h`, `1d`, or `1w`. If left blank, defaults to longest step duration available based on level of granularity of data represented by `window`.
 {% endswagger-parameter %}
 
 {% swagger-response status="200: OK" description="" %}

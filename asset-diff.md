@@ -6,83 +6,15 @@ The Asset Diff API provides a diff of two windows that returns all the added, re
 {% endswagger-description %}
 
 {% swagger-parameter in="path" name="before" required="true" type="String" %}
-Duration in time of the past. Supports hours or days before the current time in the following format: 
-
-`2h`
-
- or 
-
-`3d`
-
-. See the 
-
-[Allocation API documentation](allocation.md#querying)
-
- for more a more detailed explanation of valid inputs to 
-
-`window`
-
-. Important note: 
-
-`before`
-
- must be further in the past than 
-
-`after`
-
- (e.g. 
-
-`after=1d`
-
-, 
-
-`before=1d offset 1d`
-
-)
+Duration in time of the past. Supports hours or days before the current time in the following format: `2h` or `3d`. See the [Allocation API documentation](allocation.md#querying) for more a more detailed explanation of valid inputs to `window`. Important note: `before` must be further in the past than `after` (e.g. `after=1d`, `before=1d offset 1d`)
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="after" required="true" type="String" %}
-Duration in time closest to now. Supports hours or days before the current time in the following format: 
-
-`2h`
-
- or 
-
-`3d`
-
-. See the 
-
-[Allocation API documentation](allocation.md#querying)
-
- for more a more detailed explanation of valid inputs to 
-
-`window`
-
-. Important note: 
-
-`after`
-
- must be closer to now than 
-
-`before`
-
- (e.g. 
-
-`before=1d offset 7d`
-
-, 
-
-`after=1d offset 3d`
-
-)
+Duration in time closest to now. Supports hours or days before the current time in the following format: `2h` or `3d`. See the [Allocation API documentation](allocation.md#querying) for more a more detailed explanation of valid inputs to `window`. Important note: `after` must be closer to now than `before` (e.g. `before=1d offset 7d`, `after=1d offset 3d`)
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="costChangeRatio" type="float64" %}
-Changes the ratio of cost changes when displaying 'Changed' types. e.g. 
-
-`costChangeRatio=0.1`
-
- will display all assets that had a cost change of 0.1 (10%) or more. Defaults to 0.05 (5%).
+Changes the ratio of cost changes when displaying 'Changed' types. e.g. `costChangeRatio=0.1` will display all assets that had a cost change of 0.1 (10%) or more. Defaults to 0.05 (5%).
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="aggregate" type="String" %}
@@ -90,83 +22,43 @@ Used to consolidate cost model data. Passing an empty value for this parameter, 
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="filterClusters" type="String" %}
-Comma-separated list of clusters to match; e.g. 
-
-`cluster-one,cluster-two`
-
- will return results from only those two clusters.
+Comma-separated list of clusters to match; e.g. `cluster-one,cluster-two` will return results from only those two clusters.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="filterNodes" type="String" %}
-Comma-separated list of nodes to match; e.g. 
-
-`node-one,node-two`
-
- will return results from only those two nodes.
+Comma-separated list of nodes to match; e.g. `node-one,node-two` will return results from only those two nodes.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="filterNamespaces" type="String" %}
-Comma-separated list of namespaces to match; e.g. 
-
-`namespace-one,namespace-two`
-
- will return results from only those two namespaces.
+Comma-separated list of namespaces to match; e.g. `namespace-one,namespace-two` will return results from only those two namespaces.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="filterLabels" type="String" %}
-Comma-separated list of annotations to match; e.g. 
-
-`app:cost-analyzer, app:prometheus`
-
- will return results with either of those two label key-value-pairs.
+Comma-separated list of annotations to match; e.g. `app:cost-analyzer, app:prometheus` will return results with either of those two label key-value-pairs.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="filterServices" type="String" %}
-Comma-separated list of services to match; e.g. 
-
-`frontend-one,frontend-two`
-
- will return results from only those two services.
+Comma-separated list of services to match; e.g. `frontend-one,frontend-two` will return results from only those two services.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="filterControllerKinds" type="String" %}
-Comma-separated list of controller kinds to match; e.g. 
-
-`deployment,job`
-
- will return results with only those two controller kinds.
+Comma-separated list of controller kinds to match; e.g. `deployment,job` will return results with only those two controller kinds.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="filterControllers" type="String" %}
-Comma-separated list of controllers to match; e.g. 
-
-`deployment-one,statefulset-two`
-
- will return results from only those two controllers.
+Comma-separated list of controllers to match; e.g. `deployment-one,statefulset-two` will return results from only those two controllers.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="filterPods" type="String" %}
-Comma-separated list of pods to match; e.g. 
-
-`pod-one,pod-two`
-
- will return results from only those two pods.
+Comma-separated list of pods to match; e.g. `pod-one,pod-two` will return results from only those two pods.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="filterAnnotations" type="String" %}
-Comma-separated list of annotations to match; e.g. 
-
-`name:annotation-one,name:annotation-two`
-
- will return results with either of those two annotation key-value-pairs.
+Comma-separated list of annotations to match; e.g. `name:annotation-one,name:annotation-two` will return results with either of those two annotation key-value-pairs.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="filterContainers" type="String" %}
-Comma-separated list of containers to match; e.g. 
-
-`container-one,container-two`
-
- will return results from only those containers.
+Comma-separated list of containers to match; e.g. `container-one,container-two` will return results from only those containers.
 {% endswagger-parameter %}
 
 {% swagger-response status="200: OK" description="" %}

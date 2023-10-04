@@ -4,7 +4,7 @@
 SSO and RBAC are only officially supported on Kubecost Enterprise plans.
 {% endhint %}
 
-Kubecost supports Single Sign On (SSO) and Role Based Access Control (RBAC) with SAML 2.0. Kubecost works with most identity providers including Okta, Auth0, AzureAD, PingID, and KeyCloak.
+Kubecost supports single sign-on (SSO) and role-based access control (RBAC) with SAML 2.0. Kubecost works with most identity providers including Okta, Auth0, Microsoft Entra ID ([formerly Azure AD](https://learn.microsoft.com/en-us/azure/active-directory/fundamentals/new-name)), PingID, and KeyCloak.
 
 ## Overview of features
 
@@ -48,8 +48,12 @@ saml:
 
 ## Setup guides
 
-* [AzureAD setup guide](https://github.com/kubecost/poc-common-configurations/tree/main/saml-azuread)
+* [Microsoft Entra ID (formerly Azure AD) setup guide](https://github.com/kubecost/poc-common-configurations/tree/main/saml-azuread)
 * [Okta setup guide](https://github.com/kubecost/poc-common-configurations/tree/main/saml-okta)
+
+{% hint style="info" %}
+All SAML 2.0 providers also work. The above guides can be used as templates for what is required.
+{% endhint %}
 
 {% hint style="info" %}
 All SAML 2.0 providers also work. The above guides can be used as templates for what is required.

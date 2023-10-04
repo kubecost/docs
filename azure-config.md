@@ -58,10 +58,10 @@ Create a file called [_service-key.json_](https://github.com/kubecost/poc-common
 {
     "subscriptionId": "<Azure Subscription ID>",
     "serviceKey": {
-        "appId": "<Azure AD App ID>",
+        "appId": "<Entra ID App ID>",
         "displayName": "KubecostAccess",
-        "password": "<Azure AD Client Secret>",
-        "tenant": "<Azure AD Tenant ID>"
+        "password": "<Entra ID Client Secret>",
+        "tenant": "<Entra Tenant ID>"
     }
 }
 ```
@@ -87,9 +87,9 @@ In the [Helm values file](https://github.com/kubecost/cost-analyzer-helm-chart/b
 ```yaml
 kubecostProductConfigs:
   azureSubscriptionID: <Azure Subscription ID>
-  azureClientID: <Azure AD App ID>
-  azureTenantID: <Azure AD Tenant ID>
-  azureClientPassword: <Azure AD Client Secret>
+  azureClientID: <Entra ID App ID>
+  azureTenantID: <Entra Tenant ID>
+  azureClientPassword: <Entra ID Client Secret>
   azureOfferDurableID: MS-AZR-0003P
   azureBillingRegion: US
   currencyCode: USD
@@ -101,9 +101,9 @@ Or at the command line:
 ```shell
 helm upgrade --install kubecost kubecost/cost-analyzer -n kubecost \
   --set kubecostProductConfigs.azureSubscriptionID=<Azure Subscription ID> \
-  --set kubecostProductConfigs.azureClientID=<Azure AD App ID> \
-  --set kubecostProductConfigs.azureTenantID=<Azure AD Tenant ID> \
-  --set kubecostProductConfigs.azureClientPassword=<Azure AD Client Secret> \
+  --set kubecostProductConfigs.azureClientID=<Entra ID App ID> \
+  --set kubecostProductConfigs.azureTenantID=<Entra Tenant ID> \
+  --set kubecostProductConfigs.azureClientPassword=<Entra ID Client Secret> \
   --set kubecostProductConfigs.azureOfferDurableID=MS-AZR-0003P \
   --set kubecostProductConfigs.azureBillingRegion=US
   --set kubecostProductConfigs.currencyCode=USD
@@ -121,6 +121,8 @@ Those properties are configured with the following Helm values:
 * `kubecostProductConfigs.currencyCode`
 
 Be sure to verify your billing information with Microsoft and update the above Helm values to reflect your bill to country, subscription offer durable ID/number, and currency.
+
+## See also
 
 The following Microsoft documents are a helpful reference:
 
