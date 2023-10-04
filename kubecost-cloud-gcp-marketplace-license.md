@@ -19,6 +19,8 @@ Under "2. Purchase Details", select the billing account you wish to associate Ku
 
 Under "3. Terms", read and agree to the terms and conditions, which include Google Cloud Marketplace Terms of Service as well as the Kubecost Terms of Service. Then, select _Subscribe_. Wait a moment while your order request is processed. Select _Go to Product Page_ in the pop-up which should appear once the order has been sent to Kubecost. If you have not already, select _Sign up with provider_ on the product page and provide all necessary user info to get your Kubecost Cloud account set up. Purchase orders should be automatically processed. Refresh the product page until you see _Manage on Provider_. Selecting this will take you from GCP Marketplace to the Kubecost Cloud login page.
 
+![Kubecost Cloud product page](/images/kc-cloud-gcp.png)
+
 You should now have access to the Kubecost Cloud dashboard.
 
 ## Next steps
