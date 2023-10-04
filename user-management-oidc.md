@@ -20,6 +20,7 @@ oidc:
   authURL: "https://my.auth.server/authorize"
   loginRedirectURL: "http://my.kubecost.url/model/oidc/authorize"
   discoveryURL: "https://my.auth.server/.well-known/openid-configuration"
+  skipOnlineTokenValidation: false # Set to 'true' to skip online token validation and attempt to locally validate JWT claims
   rbac:
     enabled: false
     groups:
@@ -71,6 +72,12 @@ The token is then validated remotely in one of two ways:
 
 1. POST request to Introspect URL configured by identity provider
 2. If no Introspect URL configured, GET request to /userinfo configured by identity provider
+
+If `skipOnlineTokenValidation` is set to true, Kubecost will skip accessing the OIDC introspection endpoint for online token validation and will instead attempt to locally validate the JWT claims.
+
+{% hint style="danger" %}
+Setting `skipOnlineTokenValidation` to `true` will prevent tokens from being manually revoked.
+{% endhint %}
 
 ### Hosted domain
 
