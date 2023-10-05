@@ -16,7 +16,7 @@ The monthly savings values on this page are precomputed every hour for performan
 * [Right-size your container requests](auto-request-sizing.md)
 * [Remedy abandoned workloads](abandoned-workloads.md)
 * [Manage unclaimed volumes](unclaimed-volumes.md)
-* Resize local disks
+* [Manage local disks](local-disks.md)
 * [Manage underutilized nodes](underutilized-nodes.md)
 * Right-size your persistent volumes
 
