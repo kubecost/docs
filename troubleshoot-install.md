@@ -4,7 +4,7 @@ Once an installation is complete, access the Kubecost UI to view the status of t
 
 ## General troubleshooting commands
 
-These Kubernetes commands can be helpful when finding issues with deployments:
+These Kubernetes commands can be helpful when finding issues with deployments.
 
 This command will find all events that aren't normal, with the most recent listed last. Use this if pods are not even starting:
 
@@ -88,6 +88,10 @@ curl -X POST \
 A GET request can be sent to the same endpoint to retrieve the current log level.
 
 ## Other issues
+
+### Failed to download cost-analyzer Helm chart
+
+If your Kubecost installation fails and you are unable to download the cost-analyzer Helm chart from GitHub chart repository, run `helm repo update`, then run your install command again. The install should run successfully.
 
 ### Cost-model container Go panic on Azure Kubernetes Service (AKS) when using the Files Container Storage Interface (CSI) driver
 
