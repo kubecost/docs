@@ -159,6 +159,7 @@
 * [What is Kubecost Cloud?](kubecost-cloud/what-is-kubecost-cloud.md)
 * [Kubecost Cloud Architecture Overview](kubecost-cloud/kubecost-cloud-architecture-overview.md)
 * [Cloud Installation and Onboarding](kubecost-cloud/cloud-installation-and-onboarding.md)
+  * [Kubecost Cloud GCP Marketplace Licensing](kubecost-cloud-gcp-marketplace-license.md)
 * [Kubecost Cloud: Cloud Billing Integrations](kubecost-cloud/kubecost-cloud-cloud-billing-integrations/README.md)
   * [Kubecost Cloud AWS Integration](kubecost-cloud/kubecost-cloud-cloud-billing-integrations/kubecost-cloud-aws-integration.md)
   * [Kubecost Cloud GCP Integration](kubecost-cloud/kubecost-cloud-cloud-billing-integrations/kubecost-cloud-gcp-integration.md)
