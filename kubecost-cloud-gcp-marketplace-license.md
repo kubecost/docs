@@ -31,6 +31,6 @@ You should now have access to the Kubecost Cloud dashboard.
 
 After having licensed Kubecost Cloud, you are able to install the Kubecost Cloud Agent onto all clusters you want to receive cost metrics for. See our existing [Kubecost Cloud Installation and Onboarding](/kubecost-cloud/cloud-installation-and-onboarding.md) guide for help getting started.
 
-Note that licensing of Kubecost Cloud through GCP Marketplace will not directly integrate GCP into your Kubecost Cloud environment. For more information, see our [GCP Cloud Integration guide](/kubecost-cloud/kubecost-cloud-cloud-billing-integrations/kubecost-cloud-gcp-integration.md).
+Licensing Kubecost Cloud through GCP Marketplace will not directly integrate your GCP billing data into your Kubecost Cloud environment. For more information, see our [GCP Cloud Integration guide](/kubecost-cloud/kubecost-cloud-cloud-billing-integrations/kubecost-cloud-gcp-integration.md).
 
 
