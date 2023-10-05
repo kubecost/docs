@@ -93,11 +93,26 @@ cat compute-viewer-kubecost-key.json
 Set these values into the following object and add it to the GCP array:
 
 ```json
-{
-    "key": "<KEY_JSON>",
-    "projectID": "<PROJECT_ID>",
-    "billingDataDataset": "<BILLING_DATA_DATASET>"
-}
+"key": {
+    "type": "service_account",
+    "project_id": "GCP_cloud_integration_project_id",
+    "private_key_id": "GCP_cloud_integration_private_key_id",
+    "private_key": "GCP_cloud_integration_private_KEY",
+    "client_email": "GCP_cloud_integration_client_email",
+    "client_id": "GCP_cloud_integration_client_id",
+    "auth_uri": "https://gcp_auth_uri/",
+    "token_uri": "https://gcp_token_uri/",
+    "auth_provider_x509_cert_url": "https://gcp_auth_provider_x509_cert_url/",
+    "client_x509_cert_url": "https://gcp_client_x509_cert_url/"
+},
+"projectID": "GCP_cloud_integration_project_id",
+"billingDataDataset": "GCP_cloud_integration_billingDataDataset"
+```
+
+Many of these values in this config can be generated using the following command:
+
+```
+gcloud iam service-accounts keys create ./compute-viewer-kubecost-key.json --iam-account compute-viewer-kubecost@$PROJECT_ID.iam.gserviceaccount.com
 ```
 
 ### AWS
