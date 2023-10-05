@@ -1,8 +1,10 @@
 # Kubecost Cloud GCP Marketplace Licensing
 
-Kubecost Cloud is [available for licensing on GCP Marketplace](https://console.cloud.google.com/marketplace/product/kubecost-public/kubecost-cloud) and can be installed in minutes. This guide will take you through licensing through GCP Marketplace, and next steps for setting up Kubecost Cloud.
+Kubecost Cloud is [available for licensing on GCP Marketplace](https://console.cloud.google.com/marketplace/product/kubecost-public/kubecost-cloud) and can be installed in minutes. This guide will take you through licensing through GCP Marketplace, and next steps for setting up Kubecost Cloud. Kubecost currently offers 30 days of Kubecost Cloud free without licensing fees.
 
-Kubecost currently offers 30 days of Kubecost Cloud free without licensing fees.
+{% hint style="info" %}
+Licensing Kubecost Cloud through GCP Marketplace will not directly integrate your GCP billing data into your Kubecost Cloud environment. For more information, see our [GCP Cloud Integration guide](/kubecost-cloud/kubecost-cloud-cloud-billing-integrations/kubecost-cloud-gcp-integration.md).
+{% endhint %}
 
 ## Prerequisites
 
@@ -30,7 +32,5 @@ You should now have access to the Kubecost Cloud dashboard.
 ## Next steps
 
 After having licensed Kubecost Cloud, you are able to install the Kubecost Cloud Agent onto all clusters you want to receive cost metrics for. See our existing [Kubecost Cloud Installation and Onboarding](/kubecost-cloud/cloud-installation-and-onboarding.md) guide for help getting started.
-
-Licensing Kubecost Cloud through GCP Marketplace will not directly integrate your GCP billing data into your Kubecost Cloud environment. For more information, see our [GCP Cloud Integration guide](/kubecost-cloud/kubecost-cloud-cloud-billing-integrations/kubecost-cloud-gcp-integration.md).
 
 
