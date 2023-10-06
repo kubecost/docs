@@ -22,7 +22,7 @@ The Asset Diff API compares two asset sets between two windows of the same durat
 
 ### [Cloud Costs API](https://docs.kubecost.com/apis/apis-overview/cloud-cost-api)
 
-The Cloud Costs API retrieves cloud cost data from cloud providers by reading cost and usage reports. Unlike the Allocation and Asset APIs, it must be manually enabled.
+The Cloud Costs API retrieves cloud cost data from cloud providers by reading cost and usage reports.
 
 ## Governance APIs
 
