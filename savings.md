@@ -18,7 +18,7 @@ The monthly savings values on this page are precomputed every hour for performan
 * [Manage unclaimed volumes](unclaimed-volumes.md)
 * [Manage local disks](local-disks.md)
 * [Manage underutilized nodes](underutilized-nodes.md)
-* Right-size your persistent volumes
+* [Right-size your persistent volumes](using-kubecost/navigating-the-kubecost-ui/savings/pv-right-sizing-rec.md)
 
 ### Cloud insights:
 
