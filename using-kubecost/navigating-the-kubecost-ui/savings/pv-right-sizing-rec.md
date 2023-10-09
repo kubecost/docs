@@ -2,7 +2,7 @@
 
 Kubecost is able to provide recommendations for resizing your PVs by comparing their average usage to their maximum capacity, and can recommend sizing down to smaller storage sizes.
 
-To access the Persistent Volume Right-Sizing Recommendations page, select *Settings* from the left navigation, then select *Right-size persistent volumes*.
+To access the Persistent Volume Right-Sizing Recommendations page, select *Savings* from the left navigation, then select *Right-size persistent volumes*.
 
 ![Table](/images/rightsizingpv.png)
 
