@@ -103,6 +103,7 @@
     * [Orphaned Resources](orphaned-resources.md)
     * [Spot Checklist](spot-checklist.md)
     * [Spot Cluster Sizing](using-kubecost/navigating-the-kubecost-ui/savings/spot-cluster-sizing.md)
+    * [Persistent Volume Right-Sizing Recommendations](using-kubecost/navigating-the-kubecost-ui/savings/pv-right-sizing-rec.md)
   * [Cluster Health Score](cluster-health-score.md)
   * [Budgets](using-kubecost/getting-started/budgets.md)
   * [Audits](audits.md)
