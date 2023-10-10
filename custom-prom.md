@@ -53,7 +53,7 @@ This process is not recommended. Before continuing, review the [Bring your own P
     helm upgrade --install kubecost \
       --repo https://kubecost.github.io/cost-analyzer/ cost-analyzer \
       --namespace kubecost --create-namespace \
-      --set global.prometheus.fqdn=http://<prometheus-server-service-name>:<port>.<prometheus-server-namespace>.svc \
+      --set global.prometheus.fqdn=http://<prometheus-server-service-name>.<prometheus-server-namespace>.svc:<port> \
       --set global.prometheus.enabled=false
     ```
     {% endcode %}
