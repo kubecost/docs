@@ -40,7 +40,7 @@ Users will be responsible for managing their cloud or on-prem environment, insta
 
 ## Submitting bug reports
 
-If you encounter a bug or performance issue with Kubecost Cloud, reach out to [cloud-support@kubecost.com](mailto:cloud-support@kubecost.com). You can alternatively describe the problem on our [Slack](https://kubecost.com/join-slack) in #kc-cloud-support.
+If you encounter a bug or performance issue with Kubecost Cloud, reach out to [cloud-support@kubecost.com](mailto:cloud-support@kubecost.com). You can alternatively describe the problem on our [Slack](https://kubecost.com/join-slack) in #support.
 
 ## Checking Kubecost status
 
