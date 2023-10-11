@@ -38,7 +38,8 @@ helm upgrade -i kubecost cost-analyzer/ \
 --set global.gmp.enabled="true" \
 --set global.gmp.gmpProxy.projectId="${GCP_PROJECT_ID}" \
 --set prometheus.server.global.external_labels.cluster_id="${CLUSTER_NAME}" \
---set kubecostProductConfigs.clusterName="${CLUSTER_NAME}"
+--set kubecostProductConfigs.clusterName="${CLUSTER_NAME}" \
+--set federatedETL.federator.useMultiClusterDB=true
 ```
 
 In this installation command, these additional flags are added to have Kubecost work with GMP:
