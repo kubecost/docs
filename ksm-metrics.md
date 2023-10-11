@@ -1,10 +1,10 @@
 # Kube-State-Metrics (KSM) Emission
 
-Since the Kubecost cost-model depends on a number of metrics emitted by kube-state-metrics, any schema changes to the expected metrics pose a long-term reliability challenge. In order to become resilient to said changes, the cost-model emits all required kube-state-metrics by default. While the result could yield double emission for some KSM metrics, it guarantees compatibility if KSM were to branch/drop specific metrics (as seen in KSM v2).
+The default Kubecost installation no longer includes a bundled [KSM deployment](https://github.com/kubernetes/kube-state-metrics). Instead, Kubecost calculates and emits all required KSM metrics.
 
-## KSM metrics emitted by Kubecost cost-model
+## KSM metrics emitted by Kubecost
 
-The following table shows all KSM metrics required by and implemented in the cost-model, which are also the metrics being replicated:
+The following table shows all KSM metrics required by and implemented in Kubecost. Note, that the below metrics & labels follow conventions of KSMv1, not KSMv2.
 
 | Category       | KSM Metric                                                   |
 | -------------- | ------------------------------------------------------------ |
@@ -37,20 +37,19 @@ The following table shows all KSM metrics required by and implemented in the cos
 |                | `kube_persistentvolumeclaim_resource_requests_storage_bytes` |
 | **Job**        | `kube_job_status_failed`                                     |
 
-## Disabling Kubecost-based KSM deployment
+## Enabling Kubecost-based KSM deployment
 
-{% hint style="warning" %}
-Disabling the KSM deployment is not recommended, and will require higher up-time on the Kubecost cost-model to ensure accuracy of Kubecost data.
-{% endhint %}
-
-One of the more obvious questions here is: _"If the metrics you are emitting cover all of the KSM requirements, could the KSM deployment be dropped?"_ The long-term plan is to drop our dependency on KSM, and while it is possible to omit the KSM deployment today, doing so would require higher up-time on the cost-model to ensure the accuracy of these metrics. Part of reaching this long-term goal requires the deployment of a pod responsible for all Kubecost metric emissions separate from the cost-model to ensure reliability and high uptime.&#x20;
+It interested in enabling the KSM bundled in Kubecost's Helm chart, perform the below config changes. Re-enabling KSM has the added advantage of high availability. Specifically, if the `kubecost-cost-analyzer` deployment had downtime, the `kube-state-metrics` may still be available to emit metrics for Prometheus to scrape.
 
 ```yaml
-prometheus.kube-state-metrics:
+prometheus:
+  kubeStateMetrics:
+    enabled: true
+  kube-state-metrics:
     disabled: false
 ```
 
-## Disabling Kubecost cost-model's KSM emission
+## Disabling Kubecost's KSM emission
 
 {% hint style="warning" %}
 While not recommended, you can disable Kubecost cost-model's emission of KSM if you are already running your own KSM.
@@ -58,6 +57,11 @@ While not recommended, you can disable Kubecost cost-model's emission of KSM if 
 
 {% code overflow="wrap" %}
 ```yaml
+prometheus:
+  kubeStateMetrics:
+    enabled: false
+  kube-state-metrics:
+    disabled: true
 kubecostMetrics:
   emitKsmV1Metrics: false
   # If you are running KSMv2, you must set the below config as well. More details below.
@@ -92,7 +96,7 @@ Kubecost itself is resilient to duplicate metrics, but other services or queries
 * Remove the external KSM from the cluster. If you do this, only the Kubecost-emitted metrics listed above should be available. However, This could cause other services that depend on KSM metrics to fail.
 * Rewrite queries that cannot handle duplicate metrics to include a filter on `job=<external-KSM-scrape-job>` or to be generally resilient to duplication using query functions like `avg_over_time`.
 * Run a separate Prometheus for Kubecost alone (the default installation behavior of Kubecost) and disable the scraping of Kubecost's metrics in your other Prometheus configurations.
-*   We support reducing some duplication from Kubecost via config. To reduce the emission of metrics that overlap with metrics provided by KSM v2 you can set the following Helm values ([code ref](https://github.com/kubecost/cost-model/blob/0a0793ec040013fe44c058ff37f032449a2f1191/pkg/metrics/kubemetrics.go#L110-L123)):
+* We support reducing some duplication from Kubecost via config. To reduce the emission of metrics that overlap with metrics provided by KSM v2 you can set the following Helm values ([code ref](https://github.com/kubecost/cost-model/blob/0a0793ec040013fe44c058ff37f032449a2f1191/pkg/metrics/kubemetrics.go#L110-L123)):
 
     ```yaml
     kubecostMetrics:
