@@ -85,7 +85,7 @@
   * [Assets Dashboard](assets.md)
   * [Clusters Dashboard](using-kubecost/getting-started/clusters-dashboard.md)
   * [Cloud Cost Explorer](using-kubecost/getting-started/cloud-costs-explorer.md)
-  * [Reports](saved-reports.md)
+  * [Reports](reports.md)
     * [Advanced Reporting](advanced-reports.md)
     * [Cost Center Report](using-kubecost/navigating-the-kubecost-ui/saved-reports/cost-center-report.md)
   * [Alerts](alerts.md)
@@ -115,7 +115,7 @@
 ## APIs
 
 * [Kubecost API Directory](apis-overview.md)
-  * [Allocation API](allocation.md)
+  * [Allocation API](api-allocation.md)
   * [Allocation Trends API](apis/apis-overview/allocation-trends-api.md)
   * [Assets API](assets-api.md)
   * [Asset Diff API](asset-diff.md)

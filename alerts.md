@@ -420,4 +420,4 @@ Common causes of misconfiguration include the following:
 
 * Unsupported CSV filters: `spendChange` alerts accept multiple `filter` values when comma-separated; other alert types do not.
 * Unsupported alert type: all alert type names are in camelCase. Check spelling and capitalization for all alert parameters.
-* Unsupported aggregation parameters: see the [Allocation API](allocation.md) doc for details.
+* Unsupported aggregation parameters: see the [Allocation API](api-allocation.md) doc for details.

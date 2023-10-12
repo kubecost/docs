@@ -10,7 +10,7 @@ v1 filters will continue to be supported in all relevant APIs. APIs will first c
 
 v2 filters can be used via the `filter=` parameter in supported APIs. Supported APIs are currently:
 
-* [Allocation API](allocation.md)
+* [Allocation API](api-allocation.md)
 * [Request Sizing APIs](api-request-right-sizing-v2.md)
 * [Assets API](assets.md)
 

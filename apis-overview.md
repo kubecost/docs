@@ -4,7 +4,7 @@ Welcome to the Kubecost API library! This directory will show you how Kubecost A
 
 ## Monitoring APIs
 
-### [**Allocation API**](allocation.md)
+### [**Allocation API**](api-allocation.md)
 
 The Allocation API retrieves cost allocation information for any Kubernetes concept, e.g. cost by namespace, label, deployment, service, and more. This API is directly integrated with the Kubecost ETL caching layer and CSV pipeline so it can scale for large clusters.
 

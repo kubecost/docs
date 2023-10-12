@@ -261,7 +261,7 @@ Querying for `window=3d` should return a range of four sets because the queried 
 * 2021/01/02 00:00:00 until 2021/01/03 00:00:00
 * 2021/01/01 00:00:00 until 2021/01/02 00:00:00
 
-See [Querying](allocation.md#querying) for the full list of arguments and [Examples](allocation.md#query-examples) for more example queries.
+See [Querying](api-allocation.md#querying) for the full list of arguments and [Examples](api-allocation.md#query-examples) for more example queries.
 
 ## Special types of allocation
 
@@ -473,7 +473,7 @@ Asset types that use this distribution method include:
 Querying on-demand with high resolution for long windows can cause serious Prometheus performance issues, including OOM errors. Start with short windows (`1d` or less) and proceed with caution.
 {% endhint %}
 
-Computing allocation data on-demand allows for greater flexibility with respect to step size and accuracy-versus-performance. (See `resolution` and [error bounds](allocation.md#theoretical-error-bounds) for details.) Unlike the standard endpoint, which can only serve results from precomputed sets with predefined step sizes (e.g. 24h aligned to the UTC time zone), asking for a "7d" query will almost certainly result in 8 sets, including "today" and the final set, which might span 6.5d-7.5d ago. With this endpoint, however, you will be computing everything on-demand, so "7d" will return exactly seven days of data, starting at the moment the query is received. (You can still use window keywords like "today" and "lastweek", of course, which should align perfectly with the same queries of the standard ETL-driven endpoint.)
+Computing allocation data on-demand allows for greater flexibility with respect to step size and accuracy-versus-performance. (See `resolution` and [error bounds](api-allocation.md#theoretical-error-bounds) for details.) Unlike the standard endpoint, which can only serve results from precomputed sets with predefined step sizes (e.g. 24h aligned to the UTC time zone), asking for a "7d" query will almost certainly result in 8 sets, including "today" and the final set, which might span 6.5d-7.5d ago. With this endpoint, however, you will be computing everything on-demand, so "7d" will return exactly seven days of data, starting at the moment the query is received. (You can still use window keywords like "today" and "lastweek", of course, which should align perfectly with the same queries of the standard ETL-driven endpoint.)
 
 Additionally, unlike the standard endpoint, querying on-demand will not use [reconciled asset costs](cloud-integration.md). Therefore, the results returned will show all adjustments (e.g. CPU, GPU, RAM) to be 0.
 
@@ -491,7 +491,7 @@ Duration of time over which to query. Accepts words like `today`, `week`, `month
 {% swagger-parameter in="path" name="resolution" type="string" required="false" %}
 Duration to use as resolution in Prometheus queries. Smaller values (i.e. higher resolutions) will provide better accuracy, but worse performance (i.e. slower query time, higher memory use). Larger values (i.e. lower resolutions) will perform better, but at the expense of lower accuracy for short-running workloads. See
 
-[error bounds](allocation.md#theoretical-error-bounds)
+[error bounds](api-allocation.md#theoretical-error-bounds)
 
 for details. Default is
 

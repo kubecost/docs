@@ -6,11 +6,11 @@ The Asset Diff API provides a diff of two windows that returns all the added, re
 {% endswagger-description %}
 
 {% swagger-parameter in="path" name="before" required="true" type="String" %}
-Duration in time of the past. Supports hours or days before the current time in the following format: `2h` or `3d`. See the [Allocation API documentation](allocation.md#querying) for more a more detailed explanation of valid inputs to `window`. Important note: `before` must be further in the past than `after` (e.g. `after=1d`, `before=1d offset 1d`)
+Duration in time of the past. Supports hours or days before the current time in the following format: `2h` or `3d`. See the [Allocation API documentation](api-allocation.md#querying) for more a more detailed explanation of valid inputs to `window`. Important note: `before` must be further in the past than `after` (e.g. `after=1d`, `before=1d offset 1d`)
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="after" required="true" type="String" %}
-Duration in time closest to now. Supports hours or days before the current time in the following format: `2h` or `3d`. See the [Allocation API documentation](allocation.md#querying) for more a more detailed explanation of valid inputs to `window`. Important note: `after` must be closer to now than `before` (e.g. `before=1d offset 7d`, `after=1d offset 3d`)
+Duration in time closest to now. Supports hours or days before the current time in the following format: `2h` or `3d`. See the [Allocation API documentation](api-allocation.md#querying) for more a more detailed explanation of valid inputs to `window`. Important note: `after` must be closer to now than `before` (e.g. `before=1d offset 7d`, `after=1d offset 3d`)
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="costChangeRatio" type="float64" %}
