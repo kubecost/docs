@@ -147,7 +147,6 @@
 * [Security and Data Protection](security.md)
 * [Ports](ports.md)
 * [Kubecost Release Process](release-process.md)
-* [Outages](outages.md)
 
 ## Integrations
 
