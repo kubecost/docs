@@ -22,7 +22,7 @@ If `true`, sum the entire range of sets into a single set. Default value is `fal
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="idle" type="boolean" required="false" %}
-If `true`, include idle cost (i.e. the cost of the un-allocated assets) as its own allocation. (See [special types of allocation](https://docs.kubecost.com/apis/apis-overview/allocation#special-types-of-allocation).) Default is `true.`
+If `true`, include idle cost (i.e. the cost of the un-allocated assets) as its own allocation. (See [special types of allocation](#special-types-of-allocation).) Default is `true.`
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="external" type="boolean" required="false" %}
