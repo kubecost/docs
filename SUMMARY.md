@@ -66,7 +66,7 @@
     * [Gluu Server with OIDC Configuration Guide](integrations/gluu-server-with-oidc-configuration-guide.md)
   * [Tuning Resource Consumption](resource-consumption.md)
   * [Deploying Kubecost Staging Builds](staging.md)
-  * [Cluster Controller](controller.md)
+  * [Cluster Controller](cluster-controller.md)
     * [Cluster Turndown](install-and-configure/advanced-configuration/controller/cluster-turndown.md)
     * [TurndownSchedule Migration Guide](turndown-schedule-migration-guide.md)
   * [Kubecost Data Status Metrics](install-and-configure/advanced-configuration/data-status-metrics.md)
@@ -74,7 +74,7 @@
   * [Query Service Replicas](install-and-configure/install/etl-backup/query-service-replicas.md)
   * [Availability Tiers](availability-tiers.md)
   * [CSV Pricing](csv-pricing.md)
-  * [Windows Node Support](windows.md)
+  * [Windows Node Support](windows-node-support.md)
 
 ## Using Kubecost
 
