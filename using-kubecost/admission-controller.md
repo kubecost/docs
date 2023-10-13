@@ -14,7 +14,7 @@ Before installing the Admission Controller, make sure you have [`kubectl`](https
 
 ### Installation
 
-The following command will install the Admission Controller to your existing Kubecost application:
+The following command will enable the Admission Controller in your existing Kubecost application:
 
 ```
 helm upgrade --install kubecost \
