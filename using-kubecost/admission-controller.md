@@ -27,7 +27,7 @@ You may need to wait several minutes for the controller to activate. You can che
 
 ## Using the Admission Controller
 
-When a deployment is updated, the Kubernetes API will send requests containing deployment information to the Kubecost pod, which will then be read for number of replicas, CPU requests, and RAM requests to calculate a monthly estimate. That estimate will be reported back to the client making the update. If the Kubecost pod is unable to respond to this request, the deployment will be added to the cluster without any information being sent back.
+When a Deployment is updated, the Kubernetes API will send requests containing Deployment information to the Kubecost pod, which will then be read for number of replicas, CPU requests, and RAM requests to calculate a monthly cost estimate. That estimate will be reported back to the client making the update. If the Kubecost pod is unable to respond to this request, the deployment will be added to the cluster without any information being sent back.
 
 To validate, you can run `kubectl edit deployment -n kubecost`, which should open a text file containing your deployment. Modify the CPU or RAM requests as desired, then save the file. In your terminal, your output will display CPU/RAM unit hours, total cost, and the cost difference (`diff` column).
 
