@@ -1,6 +1,6 @@
 # Kubecost Core Architecture Overview
 
-Below are the major components deployed with the [Kubecost Helm chart](install.md), excluding certain Enterprise components such as durable storage:
+Below are the major components deployed with the [Kubecost Helm chart](/install.md), excluding certain Enterprise components such as durable storage:
 
 1. Kubecost Cost-Analyzer Pod
    1. Frontend: Runs Nginx and handles routing to Kubecost backend and Prometheus/Grafana
@@ -25,10 +25,10 @@ Kubecost interacts with provider pricing in a few different ways:
 * onDemand Rates (AWS, Azure, GCP, and Custom Pricing CSV)
 * Negotiated Rates (Azure, GCP, and Custom Pricing CSV)
 * Spot Data Feed (AWS)
-* [Cloud Provider Billing for Reconciliation and Out-of-Cluster Spend](cloud-integration.md)
-  * [AWS Cost and Usage Report](aws-cloud-integrations.md)
-  * [Azure Cost Export](azure-out-of-cluster.md)
-  * [Google BigQuery Export](gcp-out-of-cluster.md)
+* [Cloud Provider Billing for Reconciliation and Out-of-Cluster Spend](/cloud-integration.md)
+  * [AWS Cost and Usage Report](/aws-cloud-integrations.md)
+  * [Azure Cost Export](/azure-out-of-cluster.md)
+  * [Google BigQuery Export](/gcp-out-of-cluster.md)
 
 In an Enterprise federated setup, only the Primary Kubecost Cluster needs access to the Cloud Provider Billing.
 

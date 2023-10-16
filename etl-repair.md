@@ -10,7 +10,7 @@ Configuring [ETL Backups](etl-backup.md) can prevent situations where you would 
 
 ## 1. Repair Asset ETL
 
-The Asset ETL builds upon the Prometheus metrics listed [here](user-metrics.md). It's important to ensure that you are able to [query for Prometheus or Thanos](prometheus.md) data for the specified `window` you use. Otherwise, an absence of metrics will result in an empty ETL. Learn more about this API in our [CloudCost Diagnostic APIs](https://docs.kubecost.com/apis/apis-overview/cloudcost-diagnostic-apis) doc.
+The Asset ETL builds upon the Prometheus metrics listed [here](/architecture/user-metrics.md). It's important to ensure that you are able to [query for Prometheus or Thanos](prometheus.md) data for the specified `window` you use. Otherwise, an absence of metrics will result in an empty ETL. Learn more about this API in our [CloudCost Diagnostic APIs](https://docs.kubecost.com/apis/apis-overview/cloudcost-diagnostic-apis) doc.
 
 {% hint style="info" %}
 If the `window` parameter is within `.Values.kubecostModel.etlHourlyStoreDurationHours`, this endpoint will repair both the daily `[1d]` and hourly `[1h]` Asset ETL.
