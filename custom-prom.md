@@ -25,7 +25,7 @@ Kubecost requires the following minimum versions:
 
 ### Disable node-exporter and kube-state-metrics (recommended)
 
-If you have node-exporter and/or KSM running on your cluster, follow this step to disable the Kubecost included versions. Additional detail on [KSM requirements](ksm-metrics.md).
+If you have node-exporter and/or KSM running on your cluster, follow this step to disable the Kubecost included versions. Additional detail on [KSM requirements](architecture/ksm-metrics.md).
 
 {% hint style="info" %}
 In contrast to our recommendation above, we do recommend disabling the Kubecost's node-exporter and kube-state-metrics if you already have them running in your cluster.
