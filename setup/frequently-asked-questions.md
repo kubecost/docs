@@ -150,3 +150,6 @@ A: This happens when the values of these "properties" collide upon performing th
 
 Q: What is the difference between `.Values.kubecostToken` and `Values.kubecostProductConfigs.productKey`?\
 A: `.Values.kubecostToken` is primarily used to manage trial access and is provided to you when visiting [http://kubecost.com/install](http://kubecost.com/install). `.Values.kubecostProductConfigs.productKey` is used to apply an Enterprise license. More info in this [doc](../add-key.md).
+
+Q: When attempting to view certain Savings Insights in my GCP-managed environment, I receive this error message: "Failed to load resources. Check that you have a valid service key and the cost analyzer API is running, then refresh." This is a 403 error which reasons `"ACCESS_TOKEN_SCOPE_INSUFFICIENT"`. How do I get access?\
+A. To receive access to these features, you need to properly configure Workload Identity for your service account. To learn more about this, see our [Accessing Kubecost with GCP Workload Identity](../install-and-configure/install/cloud-integration/gcp-out-of-cluster/accessing-kubecost-with-gcp-workload-identity.md) article for a step-by-step tutorial.

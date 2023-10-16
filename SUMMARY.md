@@ -21,6 +21,7 @@
       * [Azure Rate Card Configuration](azure-config.md)
     * [GCP Cloud Billing Integration](gcp-out-of-cluster.md)
       * [Creating a Google Service Account](google-service-account-thanos.md)
+      * [Accessing Kubecost with GCP Workload Identity](install-and-configure/install/cloud-integration/gcp-out-of-cluster/accessing-kubecost-with-gcp-workload-identity.md)
   * [Multi-Cluster](multi-cluster.md)
     * [ETL Federation (preferred)](federated-etl.md)
       * [Backups and Alerting](federated-etl-backups-alerting.md)
