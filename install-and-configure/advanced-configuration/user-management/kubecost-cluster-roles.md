@@ -4,7 +4,7 @@ Kubecost requires read only RBAC permissions on most cluster resources in order 
 
 `cluster-admin` is required to install Kubecost. However, this role is not required to modify the deployment afterwards.
 
-Below are the rules of ClusterRoles associated with Kubecost's cost-analyzer. The source of these rules comes from [Kubecost's cluster role template](https://github.com/kubecost/cost-analyzer-helm-chart/blob/develop/cost-analyzer/templates/cost-analyzer-cluster-role-template.yaml).
+Below are the rules of ClusterRoles associated with Kubecost's cost-analyzer. The source of these rules comes from [Kubecost's ClusterRole template](https://github.com/kubecost/cost-analyzer-helm-chart/blob/develop/cost-analyzer/templates/cost-analyzer-cluster-role-template.yaml).
 
 {% code overflow="wrap" %}
 ```yaml
