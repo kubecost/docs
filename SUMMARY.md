@@ -139,15 +139,15 @@
 
 ## Architecture
 
-* [Kubecost Core Architecture Overview](architecture.md)
-* [OpenCost Product Comparison](opencost-product-comparison.md)
-* [Kubecost Metrics](user-metrics.md)
-* [Kube-State-Metrics (KSM) Emission](ksm-metrics.md)
-* [Calculating Node Pricing](node-pricing.md)
-* [Open-Source](open-source-deps.md)
-* [Security and Data Protection](security.md)
-* [Ports](ports.md)
-* [Kubecost Release Process](release-process.md)
+* [Kubecost Core Architecture Overview](architecture/architecture.md)
+* [OpenCost Product Comparison](architecture/opencost-product-comparison.md)
+* [Kubecost Metrics](architecture/user-metrics.md)
+* [Kube-State-Metrics (KSM) Emission](architecture/ksm-metrics.md)
+* [Calculating Node Pricing](architecture/node-pricing.md)
+* [Open-Source](architecture/open-source-deps.md)
+* [Security and Data Protection](architecture/security.md)
+* [Ports](architecture/ports.md)
+* [Kubecost Release Process](architecture/release-process.md)
 
 ## Integrations
 
