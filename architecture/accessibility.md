@@ -8,6 +8,6 @@ Kubecost is Level AA compliant with [WCAG accessibility standards](https://www.w
 
 A legend is also provided when hovering over individual graph items which allows users to better visualize their cost data. This legend defines every color displayed by the line item it represents, and provides the cost value and the data and time associated with the graph item.
 
-![Legend](legend.png)
+![Legend](/images/legend.png)
 
 To ensure you are using the most up-to-date form of Kubecost's UI, go to _Settings_, then make sure _Use Classic UI_ is toggled off.
