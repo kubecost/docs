@@ -5,12 +5,12 @@ Kubecost's extract, transform, load (ETL) process is a computed cache built upon
 The ETL data is stored in a `PersistentVolume` mounted to the `kubecost-cost-analyzer` pod. In the event that you lose or are looking to rebuild the ETL data, the following endpoints should be used.
 
 {% hint style="info" %}
-Configuring [ETL Backups](etl-backup.md) can prevent situations where you would need to repair large amounts of missing ETL data. This is not required in [Federated ETL](federated-etl.md) environments.
+Configuring [ETL Backups](/etl-backup.md) can prevent situations where you would need to repair large amounts of missing ETL data. This is not required in [Federated ETL](/federated-etl.md) environments.
 {% endhint %}
 
 ## 1. Repair Asset ETL
 
-The Asset ETL builds upon the Prometheus metrics listed [here](user-metrics.md). It's important to ensure that you are able to [query for Prometheus or Thanos](prometheus.md) data for the specified `window` you use. Otherwise, an absence of metrics will result in an empty ETL. Learn more about this API in our [CloudCost Diagnostic APIs](https://docs.kubecost.com/apis/apis-overview/cloudcost-diagnostic-apis) doc.
+The Asset ETL builds upon the Prometheus metrics listed [here](/user-metrics.md). It's important to ensure that you are able to [query for Prometheus or Thanos](prometheus.md) data for the specified `window` you use. Otherwise, an absence of metrics will result in an empty ETL. Learn more about this API in our [CloudCost Diagnostic APIs](/apis/apis-overview/cloudcost-diagnostic-apis.md) doc.
 
 {% hint style="info" %}
 If the `window` parameter is within `.Values.kubecostModel.etlHourlyStoreDurationHours`, this endpoint will repair both the daily `[1d]` and hourly `[1h]` Asset ETL.

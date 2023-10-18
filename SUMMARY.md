@@ -189,7 +189,7 @@
 * [Profile an HTTP Endpoint](troubleshooting/http-profiling.md)
 * [Repair Kubecost ETLs](troubleshooting/etl-repair.md)
 * [Running a Query in Kubecost-bundled Prometheus](troubleshooting/prometheus.md)
-* [Bug Bounty Program](bug-bounty-program.md)
+* [Bug Bounty Program](troubleshooting/bug-bounty-program.md)
 * [Kubecost Glossary](troubleshooting/kubecost-glossary.md)
 * [Capture a HAR File](troubleshooting/capture-a-har-file.md)
 
