@@ -3,7 +3,7 @@
 Enabling external access to the Kubecost product requires exposing access to port 9090 on the `kubecost-cost-analyzer` pod. Exposing this endpoint will handle routing to Grafana as well. There are multiple ways to do this, including Ingress or Service definitions.
 
 {% hint style="warning" %}
-You should be cautious about exposing endpoints. Consult your organization's internal recommendations.
+Please exercise caution when exposing Kubecost via an Ingress controller especially if there is no authentication in use. Consult your organization's internal recommendations.
 {% endhint %}
 
 Common samples below and others can be found on our [GitHub repository](https://github.com/kubecost/poc-common-configurations/tree/main/ingress-examples).
