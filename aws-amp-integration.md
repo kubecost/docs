@@ -372,9 +372,9 @@ kubectl exec -i -t -n $KUBECOST_NAMESPACE \
  |jq
 ```
 
-Output should contain a json entry similar to the following.
+The output should contain a JSON entry similar to the following.
 
-Note the cluster_id should match the value of `kubecostProductConfigs.clusterName`)
+The value of `cluster_id` should match the value of `kubecostProductConfigs.clusterName`.
 
 ```json
 {
@@ -416,7 +416,7 @@ kubectl exec -i -t -n $KUBECOST_NAMESPACE \
  |jq
 ```
 
-Output should contain a json entry similar to:
+The output should contain a JSON entry similar to:
 
 ```json
 {
@@ -446,7 +446,7 @@ Output should contain a json entry similar to:
 
 If the above queries fail, check the following:
 
-1. Check logs of the sigv4proxy container (may be Kubecost deployment or Prometheus Server deployment depending on your setup):
+1. Check logs of the `sigv4proxy` container (may be the Kubecost deployment or Prometheus Server deployment depending on your setup):
 
 ```bash
 kubectl logs deployments/$KUBECOST_DEPLOYMENT -c sigv4proxy --tail -1
