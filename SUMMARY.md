@@ -113,6 +113,8 @@
   * [AWS/Kubecost Data Audit](using-kubecost/kubecost-data-audit/aws-kubecost-data-audit.md)
   * [Azure/Kubecost Data Audit](using-kubecost/kubecost-data-audit/azure-kubecost-data-audit.md)
  * [Admission Controller](using-kubecost/admission-controller.md)
+ * [Accessibility](using-kubecost/accessibility.md)
+
 
 ## APIs
 
