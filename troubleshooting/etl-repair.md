@@ -149,7 +149,7 @@ WRN ETL: Asset[1h]: Repair: error: cannot repair [2022-11-05T00:00:00+0000, 2022
 
 ### Federation failing for Asset and Allocation data in v1.104
 
-In v1.104 of Kubecost, you may experience incorrect data display if running the [Federated ETL](federated-etl.md) architecture. Specifically you may see that your asset prices are correct but heavily consist of "Adjustments", and that your allocation's idle costs are incorrect. To fix this, perform the following recovery steps:
+In v1.104 of Kubecost, you may experience incorrect data display if running the [Federated ETL](/federated-etl.md) architecture. Specifically you may see that your asset prices are correct but heavily consist of "Adjustments", and that your allocation's idle costs are incorrect. To fix this, perform the following recovery steps:
 
 1. Identify the data range for your affected data. This will be used later.
 2.  Disable reconciliation by setting the Helm flag:

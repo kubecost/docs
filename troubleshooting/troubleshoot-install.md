@@ -260,7 +260,7 @@ If you are using a port other than 9090 for your port-forward, try adding the UR
 
 Next, you can review messages in your browser's developer console. Any meaningful errors or warnings may indicate an unexpected response from the Kubecost server.
 
-Next, point your browser to the `/model` endpoint on your target URL. For example, visit `http://localhost:9090/model/` in the scenario shown above. You should expect to see a Prometheus config file at this endpoint. If your cluster address has changed, you can visit Settings in the Kubecost product to update or you can also [add a new](multi-cluster.md) cluster.
+Next, point your browser to the `/model` endpoint on your target URL. For example, visit `http://localhost:9090/model/` in the scenario shown above. You should expect to see a Prometheus config file at this endpoint. If your cluster address has changed, you can visit Settings in the Kubecost product to update or you can also [add a new cluster](/multi-cluster.md).
 
 If you are unable to successfully retrieve your config file from this `/model` endpoint, we recommend the following:
 
@@ -376,7 +376,7 @@ aws ecr-public get-login-password --region us-east-1 | helm registry login --use
 
 `.Values.kubecostToken` is primarily used to manage trial access and is provided to you when visiting [http://kubecost.com/install](http://kubecost.com/install).
 
-`.Values.kubecostProductConfigs.productKey` is used to apply a Enterprise license. More info in this [doc](add-key.md).
+`.Values.kubecostProductConfigs.productKey` is used to apply a Enterprise license. More info in this [doc](/add-key.md).
 
 ### Error loading metadata
 
