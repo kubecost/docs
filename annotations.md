@@ -1,6 +1,6 @@
 # Enabling Annotation Emission
 
-If interested in filtering or aggregating by [Kubernetes Annotations](https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/) when using the [Allocation API](api-allocation.md), you will need to enable annotation emission. This will configure your Kubecost installation to generate the `kube_pod_annotations` and `kube_namespace_annotations` metrics as listed [here](architecture/user-metrics.md).
+If interested in filtering or aggregating by [Kubernetes Annotations](https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/) when using the [Allocation API](api-allocation.md), you will need to enable annotation emission. This will configure your Kubecost installation to generate the `kube_pod_annotations` and `kube_namespace_annotations` metrics as listed [here](user-metrics.md).
 
 You can enable it in your `values.yaml`:
 

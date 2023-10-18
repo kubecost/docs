@@ -25,7 +25,7 @@ Kubecost requires the following minimum versions:
 
 ### Disable node-exporter and kube-state-metrics (recommended)
 
-If you have node-exporter and/or KSM running on your cluster, follow this step to disable the Kubecost included versions. Additional detail on [KSM requirements](architecture/ksm-metrics.md).
+If you have node-exporter and/or KSM running on your cluster, follow this step to disable the Kubecost included versions. Additional detail on [KSM requirements](ksm-metrics.md).
 
 {% hint style="info" %}
 In contrast to our recommendation above, we do recommend disabling the Kubecost's node-exporter and kube-state-metrics if you already have them running in your cluster.
@@ -46,17 +46,19 @@ helm upgrade --install kubecost \
 This process is not recommended. Before continuing, review the [Bring your own Prometheus](https://docs.kubecost.com/install-and-configure/install/custom-prom#bring-your-own-prometheus) section if you haven't already.
 {% endhint %}
 
-1.  Pass the following parameters in your Helm install:
+1. Pass the following parameters in your Helm install:
 
-    {% code overflow="wrap" %}
-    ```
-    helm upgrade --install kubecost \
-      --repo https://kubecost.github.io/cost-analyzer/ cost-analyzer \
-      --namespace kubecost --create-namespace \
-      --set global.prometheus.fqdn=http://<prometheus-server-service-name>.<prometheus-server-namespace>.svc:<port> \
-      --set global.prometheus.enabled=false
-    ```
-    {% endcode %}
+{% code overflow="wrap" %}
+````
+```
+helm upgrade --install kubecost \
+  --repo https://kubecost.github.io/cost-analyzer/ cost-analyzer \
+  --namespace kubecost --create-namespace \
+  --set global.prometheus.fqdn=http://<prometheus-server-service-name>.<prometheus-server-namespace>.svc:<port> \
+  --set global.prometheus.enabled=false
+```
+````
+{% endcode %}
 
 {% hint style="info" %}
 The FQDN can be a full path via `https://prometheus-prod-us-central-x.grafana.net/api/prom/` if you use Grafana Cloud-managed Prometheus. Learn more in the [Grafana Cloud Integration for Kubecost](grafana-cloud-integration.md) doc.
@@ -114,7 +116,7 @@ prometheusRule:
 
 To confirm this job is successfully scraped by Prometheus, you can view the Targets page in Prometheus and look for a job named `kubecost`.
 
-![Prometheus Targets](/images/prom-targets.png)
+![Prometheus Targets](images/prom-targets.png)
 
 ### Node exporter metric labels
 
@@ -154,7 +156,7 @@ Increasing the default `etlDailyStorageDurationDays` value will naturally result
 
 The Diagnostics page (_Settings > View Full Diagnostics_) provides diagnostic info on your integration. Scroll down to Prometheus Status to verify that your configuration is successful.
 
-![Prometheus status diagnostic](/images/prom-status.png)
+![Prometheus status diagnostic](images/prom-status.png)
 
 Below you can find solutions to common Prometheus configuration problems. View the [Kubecost Diagnostics](https://docs.kubecost.com/troubleshooting/diagnostics) doc for more information.
 
