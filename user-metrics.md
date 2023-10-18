@@ -96,9 +96,7 @@ GitHub: [https://github.com/kubernetes/kube-state-metrics](https://github.com/ku
 
 ## Node exporter
 
-Prometheus exporter for hardware and OS metrics exposed by \*NIX kernels, written in Go with pluggable metric collectors.
-
-GitHub: [https://github.com/prometheus/node\_exporter](https://github.com/prometheus/node\_exporter)
+[Prometheus node exporter](https://github.com/prometheus/node_exporter) for hardware and OS metrics exposed by \*NIX kernels, written in Go with pluggable metric collectors.
 
 | Metric                              | Description                                                             |
 | ----------------------------------- | ----------------------------------------------------------------------- |
