@@ -100,6 +100,32 @@ kubectl exec -i -t -n $KUBECOST_NAMESPACE \
  |jq
 ```
 
+You should receive an output similar to:
+
+```
+{
+  "status": "success",
+  "data": {
+    "resultType": "vector",
+    "result": [
+      {
+        "metric": {
+          "__name__": "",
+          "cluster": "",
+          "id": "/",
+          "instance": "",
+          "job": "kubelet",
+          "location": "",
+          "node": "",
+          "project_id": ""
+        },
+        "value": [
+          1697627020,
+          "2358820864"
+        ]
+      },
+```
+
 If the above queries fail, check the following:
 
 1. Check logs of the `sigv4proxy` container (may be the Kubecost deployment or Prometheus Server deployment depending on your setup):
