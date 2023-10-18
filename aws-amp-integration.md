@@ -84,7 +84,7 @@ export RELEASE="kubecost"
 export YOUR_CLUSTER_NAME=<YOUR_EKS_CLUSTER_NAME>
 export AWS_REGION=${AWS_REGION}
 export VERSION="{X.XXX.X}"
-export KC_BUCKET="kubecost-etl-metrics" # Remove this line if you want to set up small-scale infrastructure 
+export KC_BUCKET="kubecost-etl-metrics" # Remove this line if you want to set up small-scale infrastructure
 export AWS_ACCOUNT_ID=$(aws sts get-caller-identity --query Account --output text)
 export REMOTEWRITEURL="https://aps-workspaces.${AWS_REGION}.amazonaws.com/workspaces/${AMP_WORKSPACE_ID}/api/v1/remote_write"
 export QUERYURL="http://localhost:8005/workspaces/${AMP_WORKSPACE_ID}"
@@ -168,7 +168,7 @@ config:
     enable: true
   part_size: 134217728
 EOF
-# create Kubecost namespace and the secret from the manifest file 
+# create Kubecost namespace and the secret from the manifest file
 kubectl create namespace ${RELEASE}
 kubectl create secret generic \
   kubecost-object-store -n ${RELEASE} \
@@ -192,7 +192,7 @@ eksctl create iamserviceaccount \
     --cluster ${YOUR_CLUSTER_NAME} --region ${AWS_REGION} \
     --attach-policy-arn arn:aws:iam::aws:policy/AmazonPrometheusQueryAccess \
     --attach-policy-arn arn:aws:iam::aws:policy/AmazonPrometheusRemoteWriteAccess \
-   --attach-policy-arn arn:aws:iam::${AWS_ACCOUNT_ID}:policy/kubecost-s3-federated-policy-${YOUR_CLUSTER_NAME} \ # Remove this line if you want to set up small-scale infrastructure 
+   --attach-policy-arn arn:aws:iam::${AWS_ACCOUNT_ID}:policy/kubecost-s3-federated-policy-${YOUR_CLUSTER_NAME} \ # Remove this line if you want to set up small-scale infrastructure
     --override-existing-serviceaccounts \
     --approve
 ```
@@ -246,13 +246,13 @@ oci://public.ecr.aws/kubecost/cost-analyzer --version $VERSION \
 --namespace ${RELEASE} --create-namespace \
 -f https://tinyurl.com/kubecost-amazon-eks \
 -f config-values.yaml \
--f https://raw.githubusercontent.com/kubecost/poc-common-configurations/main/etl-federation/primary-federator.yaml \ # Remove this line if you want to set up small-scale infrastructure 
+-f https://raw.githubusercontent.com/kubecost/poc-common-configurations/main/etl-federation/primary-federator.yaml \ # Remove this line if you want to set up small-scale infrastructure
 --set global.amp.prometheusServerEndpoint=${QUERYURL} \
 --set global.amp.remoteWriteService=${REMOTEWRITEURL} \
 --set kubecostProductConfigs.clusterName=${YOUR_CLUSTER_NAME} \
 --set kubecostProductConfigs.projectID=${AWS_ACCOUNT_ID} \
 --set prometheus.server.global.external_labels.cluster_id=${YOUR_CLUSTER_NAME} \
---set federatedETL.federator.primaryClusterID=${YOUR_CLUSTER_NAME} \ # Remove this line if you want to set up small-scale infrastructure 
+--set federatedETL.federator.primaryClusterID=${YOUR_CLUSTER_NAME} \ # Remove this line if you want to set up small-scale infrastructure
 --set serviceAccount.create=false \
 --set prometheus.serviceAccounts.server.create=false \
 --set serviceAccount.name=kubecost-cost-analyzer-amp \
@@ -287,7 +287,7 @@ oci://public.ecr.aws/kubecost/cost-analyzer --version $VERSION \
 --namespace ${RELEASE}  --create-namespace \
 -f https://tinyurl.com/kubecost-amazon-eks \
 -f config-values.yaml \
--f https://raw.githubusercontent.com/kubecost/poc-common-configurations/main/etl-federation/agent-federated.yaml \ # Remove this line if you want to set up small-scale infrastructure 
+-f https://raw.githubusercontent.com/kubecost/poc-common-configurations/main/etl-federation/agent-federated.yaml \ # Remove this line if you want to set up small-scale infrastructure
 --set global.amp.prometheusServerEndpoint=${QUERYURL} \
 --set global.amp.remoteWriteService=${REMOTEWRITEURL} \
 --set kubecostProductConfigs.clusterName=${YOUR_CLUSTER_NAME} \
@@ -297,7 +297,7 @@ oci://public.ecr.aws/kubecost/cost-analyzer --version $VERSION \
 --set prometheus.serviceAccounts.server.create=false \
 --set serviceAccount.name=kubecost-cost-analyzer-amp \
 --set prometheus.serviceAccounts.server.name=kubecost-prometheus-server-amp \
---set federatedETL.federator.useMultiClusterDB=true \
+--set federatedETL.useMultiClusterDB=true
 ```
 {% endcode %}
 
@@ -348,3 +348,128 @@ You can add these recording rules to improve the performance. Recording rules al
               daemonset: "true"
 ```
 {% endcode %}
+
+### Troubleshooting
+
+The below queries must return data for Kubecost to calculate costs correctly.
+
+For the queries below to work, set the environment variables:
+
+```bash
+KUBECOST_NAMESPACE=kubecost
+KUBECOST_DEPLOYMENT=kubecost-cost-analyzer
+CLUSTER_ID=YOUR_CLUSTER_NAME
+```
+
+1. Verify connection to AMP and that the metric for `container_memory_working_set_bytes` is available:
+
+If you have set `kubecostModel.promClusterIDLabel`, you will need to change the query (`CLUSTER_ID`) to match the label (typically `cluster` or `alpha_eksctl_io_cluster_name`).
+
+```bash
+kubectl exec -i -t -n $KUBECOST_NAMESPACE \
+  deployments/$KUBECOST_DEPLOYMENT -c cost-analyzer-frontend \
+  -- curl "0:9090/model/prometheusQuery?query=container_memory_working_set_bytes\{CLUSTER_ID=\"$CLUSTER_ID\"\}" \
+ |jq
+```
+
+Output should contain a json entry similar to the following.
+
+Note the cluster_id should match the value of `kubecostProductConfigs.clusterName`)
+
+```json
+{
+  "status": "success",
+  "data": {
+    "resultType": "vector",
+    "result": [
+      {
+        "metric": {
+          "__name__": "container_memory_working_set_bytes",
+          "cluster_id": "qa-eks1",
+          "alpha_eksctl_io_cluster_name": "qa-eks1",
+          "alpha_eksctl_io_nodegroup_name": "qa-eks1-nodegroup",
+          "beta_kubernetes_io_arch": "amd64",
+          "beta_kubernetes_io_instance_type": "t3.medium",
+          "beta_kubernetes_io_os": "linux",
+          "eks_amazonaws_com_capacityType": "ON_DEMAND",
+          "eks_amazonaws_com_nodegroup": "qa-eks1-nodegroup",
+          "id": "/",
+          "instance": "ip-10-10-8-66.us-east-2.compute.internal",
+          "job": "kubernetes-nodes-cadvisor"
+        },
+        "value": [
+          1697630036,
+          "3043811328"
+        ]
+      }
+    ]
+  }
+}
+```
+
+2. Verify Kubecost metrics are available in AMP:
+
+```bash
+kubectl exec -i -t -n $KUBECOST_NAMESPACE \
+  deployments/$KUBECOST_DEPLOYMENT -c cost-analyzer-frontend \
+  -- curl "0:9090/model/prometheusQuery?query=node_total_hourly_cost\{CLUSTER_ID=\"$CLUSTER_ID\"\}" \
+ |jq
+```
+
+Output should contain a json entry similar to:
+
+```json
+{
+  "status": "success",
+  "data": {
+    "resultType": "vector",
+    "result": [
+      {
+        "metric": {
+          "__name__": "node_total_hourly_cost",
+          "cluster_id": "qa-eks1",
+          "alpha_eksctl_io_cluster_name": "qa-eks1",
+          "arch": "amd64",
+          "instance": "ip-192-168-47-226.us-east-2.compute.internal",
+          "instance_type": "t3.medium",
+          "job": "kubecost"
+        },
+        "value": [
+          1697630306,
+          "0.04160104542160034"
+        ]
+      }
+    ]
+  }
+}
+```
+
+If the above queries fail, check the following:
+
+1. Check logs of the sigv4proxy container (may be Kubecost deployment or Prometheus Server deployment depending on your setup):
+
+```bash
+kubectl logs deployments/$KUBECOST_DEPLOYMENT -c sigv4proxy --tail -1
+```
+
+In a working `sigv4proxy`, there will be very few logs.
+
+Correctly working log output:
+
+```log
+time="2023-09-21T17:40:15Z" level=info msg="Stripping headers []" StripHeaders="[]"
+time="2023-09-21T17:40:15Z" level=info msg="Listening on :8005" port=":8005"
+```
+
+2. Check logs in the `cost-model`` container for Prometheus connection issues:
+
+```bash
+kubectl logs deployments/$KUBECOST_DEPLOYMENT -c cost-model --tail -1 |grep -i err
+```
+
+Example errors:
+
+```log
+ERR CostModel.ComputeAllocation: pod query 1 try 2 failed: avg(kube_pod_container_status_running...
+Prometheus communication error: 502 (Bad Gateway) ...
+```
