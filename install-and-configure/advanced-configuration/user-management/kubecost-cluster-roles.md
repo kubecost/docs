@@ -4,46 +4,6 @@ Kubecost requires read only RBAC permissions on most cluster resources in order 
 
 `cluster-admin` is required to install Kubecost. However, this role is not required to modify the deployment afterwards.
 
-Below are the rules of ClusterRoles associated with Kubecost's cost-analyzer. The source of these rules comes from [Kubecost's ClusterRole template](https://github.com/kubecost/cost-analyzer-helm-chart/blob/develop/cost-analyzer/templates/cost-analyzer-cluster-role-template.yaml).
+Kubecost requires `get`, `list`, and `watch` permissions over many common Kubernetes pod and pod controller resources such as pods, deployments, StatefulSets as well as other resources which factor into to cost analysis such as namespaces, nodes, events, etc.
 
-{% code overflow="wrap" %}
-```yaml
-apiVersion: rbac.authorization.k8s.io/v1
-kind: ClusterRole
-metadata:
-  name: {{ template "cost-analyzer.serviceAccountName" . }}
-  labels:
-    {{ include "cost-analyzer.commonLabels" . | nindent 4 }}
-rules:
-  - apiGroups: [""]
-    resources: [“configmaps”, “deployments”, “nodes”, “pods”, “events”, “services”, “resourcequotas”, “replicationcontrollers”, “limitranges”, “persistentvolumeclaims”, “persistentvolumes”, “namespaces”, “endpoints”]
-    verbs: [“get”, “list”, “watch”]
-  - apiGroups: [extensions]
-    resources: ["daemonsets", "deployments", "replicasets"]
-    verbs: [“get”, “list”, “watch”]
-{{- $isLeaderFollowerEnabled := include "cost-analyzer.leaderFollowerEnabled" . }}
-{{- if $isLeaderFollowerEnabled }}
-  - apiGroups: ["coordination.k8s.io"]
-    resources: ["leases"]
-    verbs: ['*']
-{{- end }}
-  - apiGroups: ["apps"]
-    resources: ["statefulsets", "deployments", "daemonsets", "replicasets"]
-    verbs: [“list”, “watch”]
-  - apiGroups: ["batch"]
-    resources: "cronjobs", "jobs"
-    verbs: [“get”, “list”, “watch”]
-  - apiGroups: ["autoscaling"]
-    resources: ["horizontalpodautoscalers"]
-    verbs: [“get”, “list”, “watch”]
-  - apiGroups: ["policy"]
-    resources: ["poddisruptionbudgets"]
-    verbs: [“get”, “list”, “watch”]
-  - apiGroups: ["storage.k8s.io"]
-    resources: ["storageclasses"]
-    verbs: [“get”, “list”, “watch”]
-  - apiGroups: ["events.k8s.io"]
-    resources: ["events"]
-    verbs: [“get”, “list”, “watch”]
-```yaml
-{% endcode %}
+The source of these rules can be found in [Kubecost's ClusterRole template](https://github.com/kubecost/cost-analyzer-helm-chart/blob/develop/cost-analyzer/templates/cost-analyzer-cluster-role-template.yaml).
