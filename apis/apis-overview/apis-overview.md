@@ -8,7 +8,7 @@ Welcome to the Kubecost API library! This directory will show you how Kubecost A
 
 The Allocation API retrieves cost allocation information for any Kubernetes concept, e.g. cost by namespace, label, deployment, service, and more. This API is directly integrated with the Kubecost ETL caching layer and CSV pipeline so it can scale for large clusters.
 
-### [Allocation Trends API](https://docs.kubecost.com/apis/apis-overview/allocation-trends-api)
+### [Allocation Trends API](allocation-trends-api.md)
 
 The Trends API compares cost usage between two windows of the same duration and presents a percentage value showing the change in cost.
 
@@ -16,25 +16,25 @@ The Trends API compares cost usage between two windows of the same duration and 
 
 The Assets API retrieves the backing cost data broken down by individual Kubernetes assets (e.g. node, disk, etc.), and provides various aggregations of this data. Optionally provides the ability to integrate with external cloud assets.
 
-### [Asset Diff API](https://docs.kubecost.com/apis/apis-overview/asset-diff)
+### [Asset Diff API](asset-diff.md)
 
 The Asset Diff API compares two asset sets between two windows of the same duration and accumulates the results.
 
-### [Cloud Costs API](https://docs.kubecost.com/apis/apis-overview/cloud-cost-api)
+### [Cloud Costs API](cloud-cost-api)
 
 The Cloud Costs API retrieves cloud cost data from cloud providers by reading cost and usage reports.
 
 ## Governance APIs
 
-### [Budget API](https://docs.kubecost.com/apis/apis-overview/budget-api)
+### [Budget API](budget-api.md)
 
 The Budget API allows you to establish spending budget rules for your workload across clusters and namespaces to ensure you don't go over your allotted budget.
 
-### [Cost Events Audit API](https://docs.kubecost.com/apis/apis-overview/cost-events-audit-api)
+### [Cost Events Audit API](cost-events-audit-api.md)
 
 The Cost Events Audit API presents recent changes at the cluster level.
 
-### [Predict API](https://docs.kubecost.com/apis/apis-overview/spec-cost-prediction-api)
+### [Predict API](spec-cost-prediction-api.md)
 
 The Prediction API takes Kubernetes objects as input and produces an estimation of the cost impact when making changes to your workload.
 
@@ -50,7 +50,7 @@ The Events API provides a log of different occurrences in your workload in order
 
 Savings endpoints provide cost optimization insights. The following savings endpoints are available at `http://<kubecost-address>/model/ENDPOINT`:
 
-<table><thead><tr><th width="342">Endpoint</th><th>Brief description</th></tr></thead><tbody><tr><td><code>/savings</code></td><td>Provides cluster-level potential savings estimates based on specific savings opportunities available in other endpoints.</td></tr><tr><td><code>/savings/clusterSizingETL</code></td><td>Provides recommendations for sizing clusters (node types and quantities).</td></tr><tr><td><a href="https://docs.kubecost.com/apis/apis-overview/api-request-right-sizing-v2"><code>/savings/requestSizingV2</code></a></td><td>Provides recommendations for setting container resource requests.</td></tr><tr><td><a href="api-abandoned-workloads.md"><code>/savings/abandonedWorkloads</code></a></td><td>List abandoned workloads based on network traffic.</td></tr><tr><td><a href="https://docs.kubecost.com/apis/apis-overview/api-request-recommendation-apply"><code>/cluster/requestsizer/planV2</code></a></td><td>Applies Kubecost's container request recommendations to your cluster.</td></tr><tr><td><code>/projectDisks</code></td><td>List orphaned disks.</td></tr><tr><td><code>/projectAddresses</code></td><td>List orphaned IP addresses.</td></tr></tbody></table>
+<table><thead><tr><th width="342">Endpoint</th><th>Brief description</th></tr></thead><tbody><tr><td><code>/savings</code></td><td>Provides cluster-level potential savings estimates based on specific savings opportunities available in other endpoints.</td></tr><tr><td><code>/savings/clusterSizingETL</code></td><td>Provides recommendations for sizing clusters (node types and quantities).</td></tr><tr><td><a href="api-request-right-sizing-v2.md"><code>/savings/requestSizingV2</code></a></td><td>Provides recommendations for setting container resource requests.</td></tr><tr><td><a href="api-abandoned-workloads.md"><code>/savings/abandonedWorkloads</code></a></td><td>List abandoned workloads based on network traffic.</td></tr><tr><td><a href="api-request-recommendation-apply.md"><code>/cluster/requestsizer/planV2</code></a></td><td>Applies Kubecost's container request recommendations to your cluster.</td></tr><tr><td><code>/projectDisks</code></td><td>List orphaned disks.</td></tr><tr><td><code>/projectAddresses</code></td><td>List orphaned IP addresses.</td></tr></tbody></table>
 
 ## Kubecost UI counterparts
 
@@ -58,14 +58,14 @@ Many, but not all, Kubecost APIs power different features in the Kubecost UI. Th
 
 | API Name                                          | UI Equivalent                                                                                                                                    |
 | ------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Allocation API                                    | [Allocations dashboard](https://docs.kubecost.com/using-kubecost/getting-started/cost-allocation)                                                |
+| Allocation API                                    | [Allocations dashboard](/using-kubecost/navigating-the-kubecost-ui/cost-allocation/README.md)                                                |
 | Allocation Trends API                             | Allocations dashboard, Total cost column percentage                                                                                              |
-| Assets API                                        | [Assets dashboard](https://docs.kubecost.com/using-kubecost/getting-started/assets)                                                              |
-| Cloud Cost API                                    | [Cloud Costs Explorer dashboard](https://docs.kubecost.com/using-kubecost/getting-started/cloud-costs-explorer)                                  |
-| Budget API                                        | [Budgets dashboard](https://docs.kubecost.com/using-kubecost/getting-started/budgets)                                                            |
-| Cost Events Audit API                             | [Audits dashboard](https://docs.kubecost.com/using-kubecost/getting-started/audits)                                                              |
-| Predict API                                       | [Audits dashboard, Estimated monthly cost impact](https://docs.kubecost.com/using-kubecost/getting-started/audits#estimated-monthly-cost-impact) |
-| Savings API                                       | [Savings dashboard](savings.md)                                                                                                                  |
-| Cluster Right Sizing Recommendation API           | [Cluster Sizing Recommendations page](kubecost-cloud-cluster-right-sizing.md)                                                                    |
-| Container Request Right Sizing Recommendation API | [Request right sizing recommendations page](auto-request-sizing.md)                                                                              |
-| Abandoned Workloads API                           | [Abandoned Workloads page](abandoned-workloads.md)                                                                                               |
+| Assets API                                        | [Assets dashboard](/assets.md)                                                              |
+| Cloud Cost API                                    | [Cloud Costs Explorer dashboard](/using-kubecost/getting-started/cloud-costs-explorer.md)                                  |
+| Budget API                                        | [Budgets dashboard](/using-kubecost/getting-started/budgets.md)                                                            |
+| Cost Events Audit API                             | [Audits dashboard](/audits.md)                                                              |
+| Predict API                                       | [Audits dashboard, Estimated monthly cost impact](/audits.md#estimated-monthly-cost-impact) |
+| Savings API                                       | [Savings dashboard](/using-kubecost/navigating-the-kubecost-ui/savings.md)                                                                                                                  |
+| Cluster Right Sizing Recommendation API           | [Cluster Sizing Recommendations page](/using-kubecost/navigating-the-kubecost-ui/savings/cluster-right-sizing-recommendations.md)                                                                    |
+| Container Request Right Sizing Recommendation API | [Request right sizing recommendations page](/auto-request-sizing.md)                                                                              |
+| Abandoned Workloads API                           | [Abandoned Workloads page](/using-kubecost/navigating-the-kubecost-ui/savings/abandoned-workloads.md)                                                                                               |

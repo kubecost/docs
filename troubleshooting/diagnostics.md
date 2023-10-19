@@ -88,7 +88,7 @@ Once cloud integrations have been set up, Each Cloud Store will have its own dia
 * Resolution: The size of the assets being retrieved
 * StartTime: When the Cloud Process was started
 
-For more information about Cloud Integration and related APIs, read the [cloud-integration](cloud-integration.md) documentation.
+For more information about Cloud Integration and related APIs, read the [cloud-integration](/cloud-integration.md) documentation.
 
 ## Troubleshooting missing metrics
 

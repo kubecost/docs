@@ -12,7 +12,7 @@ v2 filters can be used via the `filter=` parameter in supported APIs. Supported 
 
 * [Allocation API](api-allocation.md)
 * [Request Sizing APIs](api-request-right-sizing-v2.md)
-* [Assets API](assets.md)
+* [Assets API](assets-api.md)
 
 ## Filtering fields
 

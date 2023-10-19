@@ -163,7 +163,7 @@
 * [What is Kubecost Cloud?](kubecost-cloud/what-is-kubecost-cloud.md)
 * [Kubecost Cloud Architecture Overview](kubecost-cloud/kubecost-cloud-architecture-overview.md)
 * [Cloud Installation and Onboarding](kubecost-cloud/cloud-installation-and-onboarding.md)
-  * [Kubecost Cloud GCP Marketplace Licensing](kubecost-cloud-gcp-marketplace-license.md)
+  * [Kubecost Cloud GCP Marketplace Licensing](kubecost-cloud/kubecost-cloud-gcp-marketplace-license.md)
 * [Kubecost Cloud: Cloud Billing Integrations](kubecost-cloud/kubecost-cloud-cloud-billing-integrations/README.md)
   * [Kubecost Cloud AWS Integration](kubecost-cloud/kubecost-cloud-cloud-billing-integrations/kubecost-cloud-aws-integration.md)
   * [Kubecost Cloud GCP Integration](kubecost-cloud/kubecost-cloud-cloud-billing-integrations/kubecost-cloud-gcp-integration.md)
@@ -190,7 +190,7 @@
 * [Profile an HTTP Endpoint](troubleshooting/http-profiling.md)
 * [Repair Kubecost ETLs](troubleshooting/etl-repair.md)
 * [Running a Query in Kubecost-bundled Prometheus](troubleshooting/prometheus.md)
-* [Bug Bounty Program](bug-bounty-program.md)
+* [Bug Bounty Program](troubleshooting/bug-bounty-program.md)
 * [Kubecost Glossary](troubleshooting/kubecost-glossary.md)
 * [Capture a HAR File](troubleshooting/capture-a-har-file.md)
 

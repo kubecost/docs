@@ -65,7 +65,7 @@ This same principle applies for ram, and also applies to any aggregation that is
 
 The most common pattern for cost reduction is to ensure service owners tune the efficiency of their pods, and ensure cluster owners scale resources to appropriately minimize idle.
 
-Efficiency targets can depend on the SLAs of the application. See our notes on [request right-sizing](api-request-right-sizing-v2.md) for more details.
+Efficiency targets can depend on the SLAs of the application. See our notes on [request right-sizing](apis/apis-overview/api-request-right-sizing-v2.md) for more details.
 
 It's recommended to target idle in the following ranges:
 

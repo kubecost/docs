@@ -9,7 +9,7 @@ Licensing Kubecost Cloud through GCP Marketplace will not directly integrate you
 ## Prerequisites
 
 * Set up a Google Cloud account with an attached [billing account](https://cloud.google.com/billing/docs/how-to/create-billing-account).
-* [Set up a Kubecost Cloud account](kubecost-cloud/cloud-installation-and-onboarding.md#creating-a-user-account)
+* [Set up a Kubecost Cloud account](/kubecost-cloud/cloud-installation-and-onboarding.md#creating-a-user-account)
 
 ## GCP Marketplace licensing guide
 

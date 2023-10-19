@@ -6,7 +6,7 @@ Throughout our API documentation, we use `localhost:9090` as the default Kubecos
 
 {% swagger method="get" path="/allocation" baseUrl="http://<your-kubecost-address>/model" summary="Allocation API" %}
 {% swagger-description %}
-The Allocation API is the preferred way to query for costs and resources allocated to Kubernetes workloads and optionally aggregated by Kubernetes concepts like `namespace`, `controller`, and `label`. Data is served from one of [Kubecost's ETL pipelines](cost-model-deprecated.md#caching-overview).
+The Allocation API is the preferred way to query for costs and resources allocated to Kubernetes workloads and optionally aggregated by Kubernetes concepts like `namespace`, `controller`, and `label`. Data is served from one of [Kubecost's ETL pipelines](/apis/deprecated-apis/cost-model-deprecated.md#caching-overview).
 {% endswagger-description %}
 
 {% swagger-parameter in="path" name="window" type="string" required="true" %}
@@ -26,7 +26,7 @@ If `true`, include idle cost (i.e. the cost of the un-allocated assets) as its o
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="external" type="boolean" required="false" %}
-If `true`, include [external costs](https://docs.kubecost.com/#advanced-configuration) in each allocation. Default is `false`.
+If `true`, include [external, or out-of-cluster costs](/cloud-integration.md) in each allocation. Default is `false`.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="filterClusters" type="string" required="false" %}
@@ -426,7 +426,7 @@ $ curl http://localhost:9090/model/allocation \
 {% endtab %}
 {% endtabs %}
 
-Allocation data for today, aggregated by annotation. See [Enabling Annotation Emission](annotations.md) to enable annotations.
+Allocation data for today, aggregated by annotation. See [Enabling Annotation Emission](/annotations.md) to enable annotations.
 
 {% tabs %}
 {% tab title="Request" %}
@@ -475,7 +475,7 @@ Querying on-demand with high resolution for long windows can cause serious Prome
 
 Computing allocation data on-demand allows for greater flexibility with respect to step size and accuracy-versus-performance. (See `resolution` and [error bounds](api-allocation.md#theoretical-error-bounds) for details.) Unlike the standard endpoint, which can only serve results from precomputed sets with predefined step sizes (e.g. 24h aligned to the UTC time zone), asking for a "7d" query will almost certainly result in 8 sets, including "today" and the final set, which might span 6.5d-7.5d ago. With this endpoint, however, you will be computing everything on-demand, so "7d" will return exactly seven days of data, starting at the moment the query is received. (You can still use window keywords like "today" and "lastweek", of course, which should align perfectly with the same queries of the standard ETL-driven endpoint.)
 
-Additionally, unlike the standard endpoint, querying on-demand will not use [reconciled asset costs](cloud-integration.md). Therefore, the results returned will show all adjustments (e.g. CPU, GPU, RAM) to be 0.
+Additionally, unlike the standard endpoint, querying on-demand will not use [reconciled asset costs](/cloud-integration.md#Reconciliation). Therefore, the results returned will show all adjustments (e.g. CPU, GPU, RAM) to be 0.
 
 {% swagger method="get" path="/allocation/compute" baseUrl="http://<kubecost>/model" summary="Allocation On-Demand API" %}
 {% swagger-description %}
