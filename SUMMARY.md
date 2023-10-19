@@ -112,7 +112,7 @@
 * [Kubecost Data Audit](using-kubecost/kubecost-data-audit/README.md)
   * [AWS/Kubecost Data Audit](using-kubecost/kubecost-data-audit/aws-kubecost-data-audit.md)
   * [Azure/Kubecost Data Audit](using-kubecost/kubecost-data-audit/azure-kubecost-data-audit.md)
-* [Admission Controller](using-kubecost/admission-controller.md)
+ * [Admission Controller](using-kubecost/admission-controller.md)
 
 ## APIs
 
@@ -128,7 +128,6 @@
   * [Cost Events Audit API](cost-events-audit-api.md)
   * [Spec Cost Prediction API](apis/apis-overview/spec-cost-prediction-api.md)
   * [Events API](api-events.md)
-  * [Cluster Right Sizing Recommendation API](apis/apis-overview/cluster-right-sizing-recommendation-api.md)
   * [Container Request Right Sizing Recommendation API (V2)](api-request-right-sizing-v2.md)
   * [Container Request Recommendation Apply/Plan APIs](api-request-recommendation-apply.md)
   * [Abandoned Workloads API](api-abandoned-workloads.md)
@@ -142,14 +141,14 @@
 ## Architecture
 
 * [Kubecost Core Architecture Overview](architecture/architecture.md)
-* [OpenCost Product Comparison](opencost-product-comparison.md)
-* [Kubecost Metrics](user-metrics.md)
-* [Kube-State-Metrics (KSM) Emission](ksm-metrics.md)
-* [Calculating Node Pricing](node-pricing.md)
-* [Open-Source](open-source-deps.md)
-* [Security and Data Protection](security.md)
-* [Ports](ports.md)
-* [Kubecost Release Process](release-process.md)
+* [OpenCost Product Comparison](architecture/opencost-product-comparison.md)
+* [Kubecost Metrics](architecture/user-metrics.md)
+* [Kube-State-Metrics (KSM) Emission](architecture/ksm-metrics.md)
+* [Calculating Node Pricing](architecture/node-pricing.md)
+* [Open-Source](architecture/open-source-deps.md)
+* [Security and Data Protection](architecture/security.md)
+* [Ports](architecture/ports.md)
+* [Kubecost Release Process](architecture/release-process.md)
 
 ## Integrations
 
