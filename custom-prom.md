@@ -147,7 +147,7 @@ In order to distinguish between multiple clusters, Kubecost needs to know the la
 By default, metric retention is 91 days, however the retention of data can be further increased with a configurable value for a property `etlDailyStoreDurationDays`. You can find this value [here](https://github.com/kubecost/cost-analyzer-helm-chart/blob/9f3d7974247bfd3910fbf69d0d4bd66f1335201a/cost-analyzer/values.yaml#L340).
 
 {% hint style="warning" %}
-Increasing the default `etlDailyStorageDurationDays` value will naturally result in greater memory usage. At higher values, this can cause errors when trying to display this information in the Kubecost UI. You can remedy this by increasing the [Step size](https://docs.kubecost.com/troubleshooting/diagnostics) when using the Allocations dashboard.
+Increasing the default `etlDailyStorageDurationDays` value will naturally result in greater memory usage. At higher values, this can cause errors when trying to display this information in the Kubecost UI. You can remedy this by increasing the [Step size](/troubleshooting/diagnostics.md) when using the Allocations dashboard.
 {% endhint %}
 
 ## Troubleshooting
@@ -156,7 +156,7 @@ The Diagnostics page (_Settings > View Full Diagnostics_) provides diagnostic in
 
 ![Prometheus status diagnostic](/images/prom-status.png)
 
-Below you can find solutions to common Prometheus configuration problems. View the [Kubecost Diagnostics](https://docs.kubecost.com/troubleshooting/diagnostics) doc for more information.
+Below you can find solutions to common Prometheus configuration problems. View the [Kubecost Diagnostics](/troubleshooting/diagnostics.md) doc for more information.
 
 ### Misconfigured Prometheus FQDN
 

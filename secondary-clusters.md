@@ -8,7 +8,7 @@ Kubecost's UI will appear broken when set to a secondary cluster. It should only
 
 This guide explains settings that can be tuned in order to run the minimum Kubecost components to run Kubecost more efficiently.
 
-See the [additional resources](secondary-clusters.md#additional-resources) section below for complete examples in our GitHub repo.
+See the [Additional resources](secondary-clusters.md#additional-resources) section below for complete examples in our GitHub repo.
 
 ## Kubecost Global
 
@@ -64,7 +64,7 @@ Disable Thanos components. These are only used for troubleshooting on secondary 
 You can disable node-exporter and the service account if cluster/node rightsizing recommendations are not required.
 
 {% hint style="info" %}
-node-export must be disabled if there is an existing DaemonSet. More info [here](troubleshoot-install.md#issue-failedscheduling-kubecost-prometheus-node-exporter).
+node-export must be disabled if there is an existing DaemonSet. More info [here](/troubleshooting/troubleshoot-install.md#issue-failedscheduling-kubecost-prometheus-node-exporter).
 {% endhint %}
 
 ## Helm values

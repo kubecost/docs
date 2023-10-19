@@ -54,7 +54,7 @@ Optional request parameters include the following:
 
 ## Aggregated cost model API
 
-> NOTE: this API is actively being replaced by the [Kubecost Allocation API](api-allocation.md). That is the recommended API for querying historical and run-rate cost allocation metrics.
+> NOTE: this API is actively being replaced by the [Allocation API](/apis/apis-overview/api-allocation.md). That is the recommended API for querying historical and run-rate cost allocation metrics.
 
 The aggregated cost model API retrieves data similar to the Kubecost Allocation frontend view (e.g. cost by namespace, label, deployment, and more) and is available at the following endpoint:
 
