@@ -1,7 +1,7 @@
 # costDataModel & aggregatedCostModel API
 
 {% hint style="danger" %}
-These APIs are now deprecated. This page should not be consulted. Please reference the [Allocation API](api-allocation.md) doc for updated information.
+These APIs are now deprecated. This page should not be consulted. Please reference the [Allocation API](/apis/apis-overview/api-allocation.md) doc for updated information.
 {% endhint %}
 
 Kubecost exposes multiple APIs to obtain cost, resource allocation, and utilization data. Below is documentation on two options: the cost model API and aggregated cost model API.
@@ -54,7 +54,7 @@ Optional request parameters include the following:
 
 ## Aggregated cost model API
 
-> NOTE: this API is actively being replaced by the [Kubecost Allocation API](api-allocation.md). That is the recommended API for querying historical and run-rate cost allocation metrics.
+> NOTE: this API is actively being replaced by the [Allocation API](/apis/apis-overview/api-allocation.md). That is the recommended API for querying historical and run-rate cost allocation metrics.
 
 The aggregated cost model API retrieves data similar to the Kubecost Allocation frontend view (e.g. cost by namespace, label, deployment, and more) and is available at the following endpoint:
 

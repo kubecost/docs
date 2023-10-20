@@ -21,7 +21,7 @@ The pipeline will return an error response if a requested time range of data con
 
 ### Request right-sizing recommendation (v2)
 
-The primary user of ContainerStats pipeline data is v2 of the request right- sizing recommendation API. ContainerStats data is used for quantile-based recommendations. Review the doc for this feature [here](api-request-right-sizing-v2.md).
+The primary user of ContainerStats pipeline data is v2 of the request right- sizing recommendation API. ContainerStats data is used for quantile-based recommendations. Review the doc for this feature [here](/apis/apis-overview/api-request-right-sizing-v2.md).
 
 ### Debugging
 

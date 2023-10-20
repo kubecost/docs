@@ -2,13 +2,13 @@
 
 Kubecost alerts allow teams to receive updates on real-time Kubernetes spend. They are configurable via the Kubecost UI or Helm values. This resource gives an overview of how to configure alerts sent through email, Slack, and Microsoft Teams using [Kubecost Helm chart values](https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/values.yaml). Alerts are either created to monitor specific data sets and trends, or they must be toggled on or off. The following alert types are supported:
 
-1. [Allocation Budget](https://docs.kubecost.com/using-kubecost/navigating-the-kubecost-ui/alerts#allocation-budget): Sends an alert when spending crosses a defined threshold
-2. [Allocation Efficiency](https://docs.kubecost.com/using-kubecost/navigating-the-kubecost-ui/alerts#allocation-efficiency): Detects when a Kubernetes tenant is operating below a target cost-efficiency threshold
-3. [Allocation Recurring Update](https://docs.kubecost.com/using-kubecost/navigating-the-kubecost-ui/alerts#allocation-recurring-update): Sends an alert with cluster spending across all or a subset of Kubernetes resources.
-4. [Allocation Spend Change](https://docs.kubecost.com/using-kubecost/navigating-the-kubecost-ui/alerts#allocation-spend-change): Sends an alert reporting unexpected spend increases relative to moving averages
-5. [Asset Budget](https://docs.kubecost.com/using-kubecost/navigating-the-kubecost-ui/alerts#asset-budget): Sends an alert when spend for a particular set of assets crosses a defined threshold.
-6. [Asset Recurring Update](https://docs.kubecost.com/using-kubecost/navigating-the-kubecost-ui/alerts#asset-recurring-update): Sends an alert with asset spend across all or a subset of cloud resources.
-7. [Cloud Cost Budget](https://docs.kubecost.com/using-kubecost/navigating-the-kubecost-ui/alerts#cloud-cost-budget): Sends an alert when the total cost of cloud spend goes over a set budget limit.
+1. [Allocation Budget](/alerts.md#allocation-budget): Sends an alert when spending crosses a defined threshold
+2. [Allocation Efficiency](/alerts.md#allocation-efficiency): Detects when a Kubernetes tenant is operating below a target cost-efficiency threshold
+3. [Allocation Recurring Update](/alerts.md#allocation-recurring-update): Sends an alert with cluster spending across all or a subset of Kubernetes resources.
+4. [Allocation Spend Change](/alerts.md#allocation-spend-change): Sends an alert reporting unexpected spend increases relative to moving averages
+5. [Asset Budget](/alerts.md#asset-budget): Sends an alert when spend for a particular set of assets crosses a defined threshold.
+6. [Asset Recurring Update](/alerts#asset-recurring-update): Sends an alert with asset spend across all or a subset of cloud resources.
+7. [Cloud Cost Budget](/alerts.md#cloud-cost-budget): Sends an alert when the total cost of cloud spend goes over a set budget limit.
 8. [Monitor Cluster Health](alerts.md#type-monitor-cluster-health): Used to determine if the cluster's health score changes by a specific threshold. Can only be toggled on/off.
 9. [Monitor Kubecost Health](alerts.md#type-monitor-kubecost-health): Used for production monitoring for the health of Kubecost itself. Can only be toggled on/off.
 
@@ -59,7 +59,7 @@ Defines spend budgets and alerts on budget overruns.
 | ------------- | --------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
 | `type`        | `budget`              | Alert type.                                                                                                                        |
 | `window`      | `<N>d` or `<M>h`      | The date range over which to query items. Configurable where 1 ≤ N ≤ 7, or 1 ≤ M ≤ 24.                                             |
-| `aggregation` | `<agg-parameter>`     | Configurable, accepts all aggregations supported by the [Allocation API](api-allocation.md). |
+| `aggregation` | `<agg-parameter>`     | Configurable, accepts all aggregations supported by the [Allocation API](/apis/apis-overview/api-allocation.md). |
 | `filter`      | `<value>,<value2>...` | Optional. Configurable, accepts any 1 or more values of aggregate type as comma-separated values.                                  |
 | `threshold`   | `<amount>`            | Cost threshold in configured currency units.                                                                                       |
 
@@ -84,7 +84,7 @@ Example Helm _values.yaml_:
 
 Alerts when Kubernetes tenants, e.g. namespaces or label sets, are running below defined cost-efficiency thresholds.
 
-<table><thead><tr><th>Parameter</th><th width="251.33333333333331">Value(s)</th><th>Description</th></tr></thead><tbody><tr><td><code>type</code></td><td><code>efficiency</code></td><td>Alert type.</td></tr><tr><td><code>window</code></td><td><code>&#x3C;N>d</code> or <code>&#x3C;M>h</code></td><td>The date range over which to query items. Configurable where 1 ≤ N ≤ 7, or 1 ≤ M ≤ 24.</td></tr><tr><td><code>aggregation</code></td><td><code>&#x3C;agg-parameter></code></td><td>Configurable, accepts all aggregations supported by the <a href="https://docs.kubecost.com/apis/apis-overview/api-allocation">Allocation API</a>.</td></tr><tr><td><code>filter</code></td><td><code>&#x3C;value>,&#x3C;value2>...</code></td><td>Optional. Configurable, accepts any 1 or more values of aggregate type as comma-separated values.</td></tr><tr><td><code>efficiencyThreshold</code></td><td><code>&#x3C;value></code></td><td>Optional. Efficiency threshold ranging from 0.0 to 1.0.</td></tr><tr><td><code>spendThreshold</code></td><td><code>&#x3C;amount></code></td><td>The cost threshold (ie. budget) in configured currency units.</td></tr></tbody></table>
+<table><thead><tr><th>Parameter</th><th width="251.33333333333331">Value(s)</th><th>Description</th></tr></thead><tbody><tr><td><code>type</code></td><td><code>efficiency</code></td><td>Alert type.</td></tr><tr><td><code>window</code></td><td><code>&#x3C;N>d</code> or <code>&#x3C;M>h</code></td><td>The date range over which to query items. Configurable where 1 ≤ N ≤ 7, or 1 ≤ M ≤ 24.</td></tr><tr><td><code>aggregation</code></td><td><code>&#x3C;agg-parameter></code></td><td>Configurable, accepts all aggregations supported by the <a href="/apis/apis-overview/api-allocation.md">Allocation API</a>.</td></tr><tr><td><code>filter</code></td><td><code>&#x3C;value>,&#x3C;value2>...</code></td><td>Optional. Configurable, accepts any 1 or more values of aggregate type as comma-separated values.</td></tr><tr><td><code>efficiencyThreshold</code></td><td><code>&#x3C;value></code></td><td>Optional. Efficiency threshold ranging from 0.0 to 1.0.</td></tr><tr><td><code>spendThreshold</code></td><td><code>&#x3C;amount></code></td><td>The cost threshold (ie. budget) in configured currency units.</td></tr></tbody></table>
 
 The example below sends a Slack alert when any namespace spending is running below 40% cost efficiency and has spent more than $100 during the last day.
 
@@ -107,7 +107,7 @@ Sends a recurring alert with a summary report of cost and efficiency metrics.
 | ------------- | --------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
 | `type`        | `recurringUpdate`     | Alert type.                                                                                                                        |
 | `window`      | `<N>d` or `<M>h`      | The date range over which to query items. Configurable where 1 ≤ N ≤ 7, or 1 ≤ M ≤ 24.                                             |
-| `aggregation` | `<agg-parameter>`     | Configurable, accepts all aggregations supported by the [Allocation API](api-allocation.md). |
+| `aggregation` | `<agg-parameter>`     | Configurable, accepts all aggregations supported by the [Allocation API](/apis/apis-overview/api-allocation.md). |
 | `filter`      | `<value>,<value2>...` | Optional. Configurable, accepts any 1 or more values of aggregate type as comma-separated values                                   |
 
 #### Additional `window` values:
@@ -146,7 +146,7 @@ This example sends a recurring alert for allocation data for all namespaces ever
 
 Detects unexpected spend increases/decreases relative to historical moving averages.
 
-<table><thead><tr><th width="224.33333333333331">Parameter</th><th width="226">Value(s)</th><th>DEscription</th></tr></thead><tbody><tr><td><code>type</code></td><td><code>spendChange</code></td><td>Alert type.</td></tr><tr><td><code>window</code></td><td><code>&#x3C;N>d</code> or <code>&#x3C;M>h</code></td><td>The date range over which to query items. Configurable where 1 ≤ N ≤ 7, or 1 ≤ M ≤ 24.</td></tr><tr><td><code>aggregation</code></td><td><code>&#x3C;agg-parameter></code></td><td>Configurable, accepts all aggregations supported by the <a href="https://docs.kubecost.com/apis/apis-overview/api-allocation">Allocation API</a>.</td></tr><tr><td><code>filter</code></td><td><code>&#x3C;value>,&#x3C;value2>...</code></td><td>Optional. Configurable, accepts any 1 or more values of aggregate type as comma-separated values.</td></tr><tr><td><code>baselineWindow</code></td><td><code>&#x3C;N>d</code></td><td>Collect data from N days prior to queried items to establish cost baseline. Configurable, where N ≥ 1.</td></tr><tr><td><code>relativeThreshold</code></td><td><code>&#x3C;N></code></td><td>Percentage of change from the baseline (positive or negative) which will trigger the alert. Configurable where N ≥ -1.</td></tr></tbody></table>
+<table><thead><tr><th width="224.33333333333331">Parameter</th><th width="226">Value(s)</th><th>DEscription</th></tr></thead><tbody><tr><td><code>type</code></td><td><code>spendChange</code></td><td>Alert type.</td></tr><tr><td><code>window</code></td><td><code>&#x3C;N>d</code> or <code>&#x3C;M>h</code></td><td>The date range over which to query items. Configurable where 1 ≤ N ≤ 7, or 1 ≤ M ≤ 24.</td></tr><tr><td><code>aggregation</code></td><td><code>&#x3C;agg-parameter></code></td><td>Configurable, accepts all aggregations supported by the <a href="/apis/apis-overview/api-allocation.md">Allocation API</a>.</td></tr><tr><td><code>filter</code></td><td><code>&#x3C;value>,&#x3C;value2>...</code></td><td>Optional. Configurable, accepts any 1 or more values of aggregate type as comma-separated values.</td></tr><tr><td><code>baselineWindow</code></td><td><code>&#x3C;N>d</code></td><td>Collect data from N days prior to queried items to establish cost baseline. Configurable, where N ≥ 1.</td></tr><tr><td><code>relativeThreshold</code></td><td><code>&#x3C;N></code></td><td>Percentage of change from the baseline (positive or negative) which will trigger the alert. Configurable where N ≥ -1.</td></tr></tbody></table>
 
 Example Helm _values.yaml_:
 
@@ -166,7 +166,7 @@ Example Helm _values.yaml_:
 
 Defines asset budgets and alerts when Kubernetes assets overrun the threshold set.
 
-<table><thead><tr><th>Parameter</th><th width="253.33333333333331">Value(s)</th><th>Description</th></tr></thead><tbody><tr><td><code>type</code></td><td><code>assetBudget</code></td><td>Alert type</td></tr><tr><td><code>window</code></td><td><code>&#x3C;N>d</code> or <code>&#x3C;M>h</code></td><td>The date range over which to query items. Configurable where 1 ≤ N ≤ 7, or 1 ≤ M ≤ 24.</td></tr><tr><td><code>aggregation</code></td><td><code>&#x3C;agg-parameter></code></td><td>Configurable, accepts all aggregations supported by the <a href="assets-api.md">Asset API</a>.</td></tr><tr><td><code>filter</code></td><td><code>&#x3C;value>,&#x3C;value2>...</code></td><td>Optional. Configurable, accepts any 1 or more values of aggregate type as comma-separated values</td></tr><tr><td><code>threshold</code></td><td><code>&#x3C;amount></code></td><td>The cost threshold (ie. budget) in configured currency units.</td></tr></tbody></table>
+<table><thead><tr><th>Parameter</th><th width="253.33333333333331">Value(s)</th><th>Description</th></tr></thead><tbody><tr><td><code>type</code></td><td><code>assetBudget</code></td><td>Alert type</td></tr><tr><td><code>window</code></td><td><code>&#x3C;N>d</code> or <code>&#x3C;M>h</code></td><td>The date range over which to query items. Configurable where 1 ≤ N ≤ 7, or 1 ≤ M ≤ 24.</td></tr><tr><td><code>aggregation</code></td><td><code>&#x3C;agg-parameter></code></td><td>Configurable, accepts all aggregations supported by the <a href="/apis/apis-overview/assets-api.md">Asset API</a>.</td></tr><tr><td><code>filter</code></td><td><code>&#x3C;value>,&#x3C;value2>...</code></td><td>Optional. Configurable, accepts any 1 or more values of aggregate type as comma-separated values</td></tr><tr><td><code>threshold</code></td><td><code>&#x3C;amount></code></td><td>The cost threshold (ie. budget) in configured currency units.</td></tr></tbody></table>
 
 Example Helm _values.yaml_:
 
@@ -193,7 +193,7 @@ Sends a recurring alert with a Kubernetes assets summary report.
 | ------------- | --------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
 | `type`        | `cloudReport`         | Alert type                                                                                                                     |
 | `window`      | `<N>d` or `<M>h`      | The date range over which to query items. Configurable where 1 ≤ N ≤ 7, or 1 ≤ M ≤ 24.                                         |
-| `aggregation` | `<agg-parameter>`     | Configurable, accepts all aggregations supported by the [Assets API](https://docs.kubecost.com/apis/apis-overview/assets-api). |
+| `aggregation` | `<agg-parameter>`     | Configurable, accepts all aggregations supported by the [Assets API](apis/apis-overview/assets-api.md). |
 | `filter`      | `<value>,<value2>...` | Optional. Configurable, accepts any 1 or more values of aggregate type as comma-separated values                               |
 
 #### Additional `window` values:
@@ -420,4 +420,4 @@ Common causes of misconfiguration include the following:
 
 * Unsupported CSV filters: `spendChange` alerts accept multiple `filter` values when comma-separated; other alert types do not.
 * Unsupported alert type: all alert type names are in camelCase. Check spelling and capitalization for all alert parameters.
-* Unsupported aggregation parameters: see the [Allocation API](api-allocation.md) doc for details.
+* Unsupported aggregation parameters: see the [Allocation API](/apis/apis-overview/api-allocation.md) doc for details.
