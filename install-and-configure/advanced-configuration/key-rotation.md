@@ -32,3 +32,8 @@ Thanos federation makes use of the `kubecost-thanos` kubernetes secret as descri
 
 
 ## ETL-Backup keys
+ETL backups rely on the secret defined by the Helm value `.Values.kubecostModel.etlBucketConfigSecret`. More details can be found on the [ETL backup page](https://docs.kubecost.com/install-and-configure/install/etl-backup).
+
+1. Modify the appropriate Kubernetes secret.
+2. Restart the Kubecost `cost-analyzer` pod.
+3. Verify the backups are are still being written to the object storage.
