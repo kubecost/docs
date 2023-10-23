@@ -26,12 +26,13 @@ Remember to provide your correct agent key, cluster name, and reporting server i
 {% endhint %}
 
 ```sh
-helm upgrade kubecost cost-analyzer \
---repo https://kubecost.github.io/cost-analyzer/ \
---namespace kubecost-cloud \
+helm upgrade --install kubecost-cloud \
+--repo https://kubecost.github.io/kubecost-cloud-agent/ kubecost-cloud-agent \
+--namespace kubecost-cloud --create-namespace \
+-f https://raw.githubusercontent.com/kubecost/kubecost-cloud-agent/main/values-cloud-agent.yaml \
+--set imageVersion="lunar-sandwich.v0.1.2" \
 --set cloudAgentKey="AGENTKEY" \
---set cloudAgentClusterId="CLUSTER_NAME" \
---set cloudReportingServer="REPORTING_SERVER" \
---set networkCosts.enabled=false \
--f values-cloud-agent.yaml
+--set cloudAgentClusterId="cluster-1" \
+--set cloudReportingServer="collector.app.kubecost.com:31357" \
+--set networkCosts.enabled=false
 ```

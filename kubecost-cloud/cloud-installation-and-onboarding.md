@@ -48,13 +48,13 @@ Execute the following command to install the Kubecost Cloud agent to your cluste
 {% code overflow="wrap" %}
 ```
 helm upgrade --install kubecost-cloud \
---repo https://kubecost.github.io/cost-analyzer/ cost-analyzer \
+--repo https://kubecost.github.io/kubecost-cloud-agent/ kubecost-cloud-agent \
 --namespace kubecost-cloud --create-namespace \
--f https://raw.githubusercontent.com/kubecost/cost-analyzer-helm-chart/develop/cost-analyzer/values-cloud-agent.yaml  \
---set imageVersion="lunar-sandwich.v0.0.11" \
+-f https://raw.githubusercontent.com/kubecost/kubecost-cloud-agent/main/values-cloud-agent.yaml \
+--set imageVersion="lunar-sandwich.v0.1.2" \
 --set cloudAgentKey="AGENTKEY" \
 --set cloudAgentClusterId="cluster-1" \
---set cloudReportingServer="collector.app.kubecost.com:31356" \
+--set cloudReportingServer="collector.app.kubecost.com:31357" \
 --set networkCosts.enabled=true
 ```
 {% endcode %}
