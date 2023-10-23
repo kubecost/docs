@@ -22,7 +22,7 @@ Kubecost Cloud uses an agent to gather metrics and send them to our SaaS platfor
 The network costs daemonSet will be installed to your Kubecost Cloud by default, however you can manually disable it by running this Helm upgrade command:
 
 {% hint style="info" %}
-Remember to provide your correct agent key, cluster name, and reporting server in the below example code block.
+Remember to provide your correct agent key and cluster ID in the below example code block.
 {% endhint %}
 
 ```sh

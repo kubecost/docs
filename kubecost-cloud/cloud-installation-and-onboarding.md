@@ -43,7 +43,7 @@ If no clusters are currently under management, you will find instructions on the
 
 Choose a unique ID for your cluster. This does not need to be the same name as your cluster, but it does need to be unique within your team.
 
-Execute the following command to install the Kubecost Cloud agent to your cluster:
+Execute the following command to install the Kubecost Cloud agent to your cluster. The agent key will be pre-populated in the install command in the Kubecost Cloud UI.
 
 {% code overflow="wrap" %}
 ```
