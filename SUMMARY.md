@@ -77,6 +77,7 @@
   * [Availability Tiers](availability-tiers.md)
   * [CSV Pricing](csv-pricing.md)
   * [Windows Node Support](windows-node-support.md)
+  * [Service Key rotation](install-and-configure/advanced-configuration/key-rotation.md)
 
 ## Using Kubecost
 
