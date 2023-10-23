@@ -25,4 +25,4 @@ SevereErrorPenalty is applied:
 
 ### Alert
 
-The [Cluster Health](alerts.md#type-cluster-health) alert is based on a threshold of change. For example, an alert on 14 would alert anytime an Error penalty was applied.
+The [Cluster Health alert](alerts.md#type-cluster-health) is based on a threshold of change. For example, an alert on 14 would alert anytime an Error penalty was applied.

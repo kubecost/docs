@@ -6,7 +6,7 @@ The network costs daemonset is an optional utility that gives Kubecost more deta
 
 When networkCost is enabled, Kubecost gathers pod-level network traffic metrics to allocate network transfer costs to the pod responsible for the traffic.
 
-See this doc for more detail on [network cost allocation methodology](network-allocation.md).
+See this doc for more detail on [network cost allocation methodology](/using-kubecost/navigating-the-kubecost-ui/cost-allocation/network-allocation.md).
 
 The network-costs metrics are collected using a daemonset (one pod per node) that uses source and destination detail to determine egress and ingress data transfers by pod and are classified as internet, cross-region and cross-zone.
 

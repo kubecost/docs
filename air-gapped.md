@@ -14,7 +14,7 @@ The following images will need to be downloaded. Please substitute the appropria
 #### Kubecost: Optional
 
 
-* NetworkCosts: gcr.io/kubecost1/kubecost-network-costs:v16.6 (used for [network-allocation](network-allocation.md))
+* NetworkCosts: gcr.io/kubecost1/kubecost-network-costs:v16.6 (used for [network-allocation](/using-kubecost/navigating-the-kubecost-ui/cost-allocation/network-allocation.md))
 * BusyBox: registry.hub.docker.com/library/busybox:latest (only for NFS)
 * Cluster controller: gcr.io/kubecost1/cluster-controller:v0.9.0 (used for write actions)
 * Grafana Dashboards: grafana/grafana:9.4.7
