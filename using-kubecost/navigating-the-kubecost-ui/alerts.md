@@ -193,7 +193,7 @@ Sends a recurring alert with a Kubernetes assets summary report.
 | ------------- | --------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
 | `type`        | `cloudReport`         | Alert type                                                                                                                     |
 | `window`      | `<N>d` or `<M>h`      | The date range over which to query items. Configurable where 1 ≤ N ≤ 7, or 1 ≤ M ≤ 24.                                         |
-| `aggregation` | `<agg-parameter>`     | Configurable, accepts all aggregations supported by the [Assets API](apis/apis-overview/assets-api.md). |
+| `aggregation` | `<agg-parameter>`     | Configurable, accepts all aggregations supported by the [Assets API](/apis/apis-overview/assets-api.md). |
 | `filter`      | `<value>,<value2>...` | Optional. Configurable, accepts any 1 or more values of aggregate type as comma-separated values                               |
 
 #### Additional `window` values:

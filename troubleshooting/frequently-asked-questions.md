@@ -128,7 +128,7 @@ If the test is successful, for example if the test was for an email, content wil
 }
 ```
 
-Another suggestion for testing alert filters is to create an alert with a small window and wait. The [API](../alerts.md#alerts-scheduler) will allow hours in the window.
+Another suggestion for testing alert filters is to create an alert with a small window and wait. The [API](/using-kubecost/navigating-the-kubecost-ui/alerts.md#alerts-scheduler) will allow hours in the window.
 
 Q: Kubecost allows configuring in-zone/in-region/cross-region traffic classification. After I tried to configure this and saw that the values have been configured, I couldn’t see traffic classification allocation in the dashboard. Is this feature still supported?\
 A: Check http://\<your-kubecost-address>/details! From there, look for the bottom right box to view more network details. It also may be important to have the network-costs daemonSet running in your cluster.
