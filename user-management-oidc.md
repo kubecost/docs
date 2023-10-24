@@ -96,6 +96,16 @@ The JWT ID token must contain a field (claim) named `hd` with the desired domain
 
 To remove a previously set Helm value, you will need to set the value to an empty string: `.Values.oidc.hostedDomain = ""`. To validate that the config has been removed, you can check the `/var/configs/oidc/oidc.json` inside the cost-model container.
 
+## Readonly mode
+
+Kubecost's OIDC supports readonly mode. This leverages OIDC for authentication, then assigns all authenticated users as readonly users.
+
+```yaml
+oidc:
+  enabled: true
+readonly: true
+```
+
 ## Troubleshooting
 
 ### Option 1: Inspect all network requests made by browser
