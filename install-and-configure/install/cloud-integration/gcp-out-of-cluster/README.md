@@ -2,7 +2,7 @@
 
 Kubecost provides the ability to allocate out-of-cluster (OOC) costs, e.g. Cloud SQL instances and Cloud Storage buckets, back to Kubernetes concepts like namespaces and deployments.
 
-Read the [Cloud Billing Integrations](cloud-integration.md) doc for more information on how Kubecost connects with cloud service providers.
+Read the [Cloud Billing Integrations](/install-and-configure/install/cloud-integration/README.md) doc for more information on how Kubecost connects with cloud service providers.
 
 The following guide provides the steps required for allocating OOC costs in GCP.
 
@@ -19,10 +19,10 @@ GCP users must create a [detailed billing export](https://cloud.google.com/billi
 ## Step 2: Create a GCP service account
 
 {% hint style="info" %}
-If you are using the alternative [multi-cloud integration](multi-cloud.md) method, Step 2 is not required.
+If you are using the alternative [multi-cloud integration](/install-and-configure/install/cloud-integration/multi-cloud.md) method, Step 2 is not required.
 {% endhint %}
 
-If your Big Query dataset is in a different project than the one where Kubecost is installed, please see the section on [Cross-Project Service Accounts](gcp-out-of-cluster.md#cross-project-service-account-configuration).
+If your Big Query dataset is in a different project than the one where Kubecost is installed, please see the section on [Cross-Project Service Accounts](README.md#cross-project-service-account-configuration).
 
 Add a service account key to allocate OOC resources (e.g. storage buckets and managed databases) back to their Kubernetes owners. The service account needs the following:
 

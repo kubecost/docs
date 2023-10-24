@@ -3,7 +3,7 @@
 Integration with cloud service providers (CSPs) via their respective billing APIs allows Kubecost to display out-of-cluster (OOC) costs (e.g. AWS S3, Google Cloud Storage, Azure Storage Account). Additionally, it allows Kubecost to reconcile Kubecost's in-cluster predictions with actual billing data to improve accuracy.
 
 {% hint style="danger" %}
-If you are using Kubecost Cloud, do not attempt to modify your install using information from this article. You need to consult Kubecost Cloud's specific cloud integration procedures which can be found [here](https://docs.kubecost.com/kubecost-cloud/kubecost-cloud-cloud-billing-integrations).
+If you are using Kubecost Cloud, do not attempt to modify your install using information from this article. You need to consult Kubecost Cloud's specific cloud integration procedures which can be found [here](/kubecost-cloud/kubecost-cloud-cloud-billing-integrations/README.md).
 {% endhint %}
 
 ## Kubecost's cloud processes
@@ -28,7 +28,7 @@ The reconciled assets will inherit the labels from the corresponding items in th
 
 Visit _Settings_, then toggle on _Highlight Unreconciled Costs_, then select _Save_ at the bottom of the page to apply changes. Now, when you visit your Allocations or Assets dashboards, the most recent 36 hours of data will display hatching to signify unreconciled costs.
 
-![Allocations dashboard with highlighted unreconciled costs](<.gitbook/assets/image (7).png>)
+![Allocations dashboard with highlighted unreconciled costs](/.gitbook/assets/image (7).png)
 
 ### CloudCost
 
@@ -46,7 +46,7 @@ CloudCost becomes available as soon as they appear in the billing data, with the
 
 You can view your existing cloud integrations and their success status in the Kubecost UI by visiting _Settings_, then scrolling to Cloud Integrations. To create a new integration or learn more about existing integrations, select _View additional details_ to go to the Cloud Integrations page.
 
-![Cloud Integrations page](.gitbook/assets/cloudintegration.png)
+![Cloud Integrations page](/.gitbook/assets/cloudintegration.png)
 
 Here, you can view your integrations and filter by successful or failed integrations. For non-successful integrations, Kubecost will display a diagnostic error message in the Status column to contextualize steps toward successful integration.
 
@@ -57,9 +57,9 @@ Select an individual integration to view a side panel that contains the most rec
 You can add a new cloud integration by selecting _Add Integration._ For guides on how to set up an integration for a specific CSP, follow these links to helpful Kubecost documentation:
 
 * [Multi-Cloud](multi-cloud.md)
-* [AWS](aws-cloud-integrations.md)
-* [GCP](gcp-out-of-cluster.md)
-* [Azure](azure-out-of-cluster.md)
+* [AWS](aws-cloud-integrations/aws-cloud-integrations.md)
+* [GCP](gcp-out-of-cluster/README.md)
+* [Azure](azure-out-of-cluster/azure-out-of-cluster.md)
 
 ### Deleting a cloud integration
 
@@ -98,4 +98,4 @@ After starting or restarting Cloud Usage or reconciliation, two subprocesses are
 * Resolution: The window size of the process
 * StartTime: When the Cloud Process was started
 
-For more information on APIs related to rebuilding and repairing Cloud Usage or reconciliation, see the [CloudCost Diagnostic APIs](https://docs.kubecost.com/apis/apis-overview/cloudcost-diagnostic-apis) doc.
+For more information on APIs related to rebuilding and repairing Cloud Usage or reconciliation, see the [CloudCost Diagnostic APIs](/apis/apis-overview/cloudcost-diagnostic-apis.md) doc.

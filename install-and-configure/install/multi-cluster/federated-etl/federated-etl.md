@@ -1,6 +1,6 @@
 # ETL Federation (preferred)
 
-There are two primary methods to aggregate all cluster information back to a single Kubecost UI described in the [Multi-Cluster](multi-cluster.md#enterprise-federation) doc.
+There are two primary methods to aggregate all cluster information back to a single Kubecost UI described in the [Multi-Cluster](/install-and-configure/install/multi-cluster/multi-cluster.md#enterprise-federation) doc.
 
 Below is the configuration guide using **Kubecost ETL Federation**.
 
@@ -17,7 +17,7 @@ There are two primary advantages for using ETL Federation:
 
 ## Kubecost ETL Federation diagram
 
-![ETL Federation Overview](images/kubecost-ETL-Federated-Architecture.png)
+![ETL Federation Overview](/images/kubecost-ETL-Federated-Architecture.png)
 
 ## Sample configurations
 
@@ -58,7 +58,7 @@ This diagram shows an example setup of the Federated ETL with:
 
 The result is 5 clusters federated together.
 
-![Federated ETL diagram](images/kubecost-ETL-Federated-diagram.png)
+![Federated ETL diagram](/images/kubecost-ETL-Federated-diagram.png)
 
 ## Setup
 
@@ -79,9 +79,9 @@ prometheus:
 ### Step 1: Storage configuration
 
 1. For any cluster in the pipeline (Federator, Federated, Primary, or any combination of the three), create a file _federated-store.yaml_ with the same format used for Thanos/S3 backup.
-   * [AWS](long-term-storage-aws.md)
-   * [Azure](long-term-storage-azure.md)
-   * [GCP](long-term-storage-gcp.md)
+   * [AWS](/install-and-configure/install/multi-cluster/long-term-storage-configuration/long-term-storage-aws.md)
+   * [Azure](/install-and-configure/install/multi-cluster/long-term-storage-configuration/long-term-storage-azure.md)
+   * [GCP](/install-and-configure/install/multi-cluster/long-term-storage-configuration/long-term-storage-gcp.md)
 2. Add a secret using that file: `kubectl create secret generic <secret_name> -n kubecost --from-file=federated-store.yaml`. Then set `.Values.kubecostModel.federatedStorageConfigSecret` to the kubernetes secret name.
 
 <details>

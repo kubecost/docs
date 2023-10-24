@@ -26,15 +26,15 @@ There are two architectures you can deploy:
 
 The infrastructure can manageup to 100 clusters. The following architecture diagram illustrates the small-scale infrastructure setup:
 
-![Quick-Start architecture](images/aws\_amp\_multi\_small.png)
+![Quick-Start architecture](/images/aws\_amp\_multi\_small.png)
 
 ### Federated architecture
 
-To support the large-scale infrastructure of over 100 clusters, Kubecost leverages a [Federated ETL architecture](federated-etl.md). In addition to Amazon Prometheus Workspace, Kubecost stores its extract, transform, and load (ETL) data in a central S3 bucket. Kubecost's ETL data is a computed cache based on Prometheus's metrics, from which users can perform all possible Kubecost queries. By storing the ETL data on an S3 bucket, this integration offers resiliency to your cost allocation data, improves the performance and enables high availability architecture for your Kubecost setup.
+To support the large-scale infrastructure of over 100 clusters, Kubecost leverages a [Federated ETL architecture](/install-and-configure/install/multi-cluster/federated-etl/federated-etl.md). In addition to Amazon Prometheus Workspace, Kubecost stores its extract, transform, and load (ETL) data in a central S3 bucket. Kubecost's ETL data is a computed cache based on Prometheus's metrics, from which users can perform all possible Kubecost queries. By storing the ETL data on an S3 bucket, this integration offers resiliency to your cost allocation data, improves the performance and enables high availability architecture for your Kubecost setup.
 
 The following architecture diagram illustrates the large-scale infrastructure setup:
 
-![Federated architecture](images/aws\_amp\_multi\_large.png)
+![Federated architecture](/images/aws\_amp\_multi\_large.png)
 
 ## Instructions
 
@@ -305,7 +305,7 @@ Your Kubecost setup is now writing and collecting data from AMP. Data should be 
 
 To verify that the integration is set up, go to _Settings_ in the Kubecost UI, and check the Prometheus Status section.
 
-![Prometheus status screenshot](images/aws-amp-prom-status.png)
+![Prometheus status screenshot](/images/aws-amp-prom-status.png)
 
 Read our [Custom Prometheus integration troubleshooting guide](custom-prom.md#troubleshooting) if you run into any errors while setting up the integration. For support from AWS, you can submit a support request through your existing [AWS support contract](https://aws.amazon.com/contact-us/).
 

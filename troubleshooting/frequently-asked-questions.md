@@ -31,7 +31,7 @@ Q: I just enabled the CUR and AWS integration but do not see any cloud resources
 A: The AWS CUR and billing data from other cloud providers lag by 24-48 hours.
 
 Q: Why is the UI on my secondary Kubecost install broken?\
-A: This is normal if you have followed our [secondary tuning guide](../secondary-clusters.md) because its focus is reducing resource usage at the cost of breaking the secondary UI. The secondary UI should only be used for diagnostics.
+A: This is normal if you have followed our [Secondary Clusters](/install-and-configure/install/multi-cluster/secondary-clusters.md) guide, because its focus is reducing resource usage at the cost of breaking the secondary UI. The secondary UI should only be used for diagnostics.
 
 Q: I have two standalone Kubecost clusters in an Azure subscription, each residing in its own resource group. How can I limit the billing export for each cluster to only the resource group instead of the entire subscription?\
 A: You can create two billing exports each scoped to the corresponding resource group. [Review Azure's guide on exporting dates for more info.](https://learn.microsoft.com/en-us/azure/cost-management-billing/costs/tutorial-export-acm-data?tabs=azure-portal#create-a-daily-export)
@@ -55,7 +55,7 @@ Q: Does Kubecost's cost efficiency calculation take GPU into consideration?\
 A: No, the reason is that we get GPU efficiency from integration with the Nvidia DCGM, which is a third-party integration that needs to be set up manually with Kubecost.
 
 Q: Should I use amortized prices when setting up my CUR or billing export?\
-A: Yes, amortized allows upfront costs of the resources to appear in Kubecost. [More info here](../cloud-integration.md#cloud-integration-configurations).
+A: Yes, amortized allows upfront costs of the resources to appear in Kubecost. [More info here](/install-and-configure/install/cloud-integration/README.md#cloud-integration-configurations).
 
 Q: Do I need to configure the cloud integration on the secondary clusters?\
 A: No, only if you are planning on viewing the UI on the secondary. This is because the cloud reconciliation process happens after the data is shipped to the Thanos store.
@@ -137,10 +137,10 @@ Q: When cloud integration is not yet enabled, does Kubecost's usage of public pr
 A: Yes. This can be verified by reviewing the code at [opencost/pkg/cloud](https://github.com/opencost/opencost/tree/1795bcddb1d91d3e60772030528274c4dff29185/pkg/cloud). Specifically, if you start at [GetNodeCost()](https://github.com/opencost/opencost/blob/1795bcddb1d91d3e60772030528274c4dff29185/pkg/costmodel/costmodel.go#L933) you can follow the chain of function calls. It's slightly different for each cloud provider, but it should look roughly like this: `pkg/costmodel/GetNodeCost() → pkg/cloud/NodePricing() → pkg/cloud/DownloadPricingData() → pkg/cloud/getRegionPricing()`
 
 Q: If I disable node exporter, will it affect the metrics emitted by Kubecost?\
-A: Yes you can disable node exporter as it is optional. No, it will not have an effect on Kubecost's metrics. Read about the effects of disabling the node exporter [here](../resource-consumption.md#disable-or-stop-scraping-node-exporter).
+A: Yes you can disable node exporter as it is optional. No, it will not have an effect on Kubecost's metrics. Read about the effects of disabling the node exporter [here](/install-and-configure/advanced-configuration/resource-consumption.md#disable-or-stop-scraping-node-exporter).
 
 Q: Why am I receiving a “No Athena Bucket Configured” error on my Diagnostics page?\
-A: Verify that the the AWS IAM Policy has been correctly configured ([Step 3](https://docs.kubecost.com/install-and-configure/install/cloud-integration/aws-cloud-integrations#step-3-setting-up-iam-permissions)). Verify that the IAM role has been given to Kubecost ([Step 4](https://docs.kubecost.com/install-and-configure/install/cloud-integration/aws-cloud-integrations#step-4-attaching-iam-permissions-to-kubecost)).
+A: Verify that the the AWS IAM Policy has been correctly configured ([Step 3](/install-and-configure/install/cloud-integration/aws-cloud-integrations/aws-cloud-integrations.md#step-3-setting-up-iam-permissions)). Verify that the IAM role has been given to Kubecost ([Step 4](/install-and-configure/install/cloud-integration/aws-cloud-integrations/aws-cloud-integrations.md#step-4-attaching-iam-permissions-to-kubecost)).
 
 Q: What time zone is shown by Kubecost?\
 A: All APIs and metrics will be based on and accept UTC zones. When viewing the data from your web browser, the graphs displayed will convert this UTC time to your local machine's time zone.
@@ -149,7 +149,7 @@ Q: When using the `aggregate` parameter with the Allocation API (`/model/allocat
 A: This happens when the values of these "properties" collide upon performing the aggregation. For example if performing the aggregation by `aggregate=label:app`, the line item `app=hello-world` may belong to multiple namespaces and Kubecost would therefore omit "properties.namespace" altogether. The most effective workaround is to perform a multi-aggregation (`aggregate=namespace,label:app`) to ensure all the properties you want will exist in the result. More discussion in this GitHub[ issue](https://github.com/kubecost/cost-analyzer-helm-chart/issues/1839).
 
 Q: What is the difference between `.Values.kubecostToken` and `Values.kubecostProductConfigs.productKey`?\
-A: `.Values.kubecostToken` is primarily used to manage trial access and is provided to you when visiting [http://kubecost.com/install](http://kubecost.com/install). `.Values.kubecostProductConfigs.productKey` is used to apply an Enterprise license. More info in this [doc](../add-key.md).
+A: `.Values.kubecostToken` is primarily used to manage trial access and is provided to you when visiting [http://kubecost.com/install](http://kubecost.com/install). `.Values.kubecostProductConfigs.productKey` is used to apply an Enterprise license. More info in this [doc](/install-and-configure/advanced-configuration/add-key.md).
 
 Q: When attempting to view certain Savings Insights in my GCP-managed environment, I receive this error message: "Failed to load resources. Check that you have a valid service key and the cost analyzer API is running, then refresh." This is a 403 error which reasons `"ACCESS_TOKEN_SCOPE_INSUFFICIENT"`. How do I get access?\
-A. To receive access to these features, you need to properly configure Workload Identity for your service account. To learn more about this, see our [Accessing Kubecost with GCP Workload Identity](../install-and-configure/install/cloud-integration/gcp-out-of-cluster/accessing-kubecost-with-gcp-workload-identity.md) article for a step-by-step tutorial.
+A. To receive access to these features, you need to properly configure Workload Identity for your service account. To learn more about this, see our [Accessing Kubecost with GCP Workload Identity](/install-and-configure/install/cloud-integration/gcp-out-of-cluster/accessing-kubecost-with-gcp-workload-identity.md) article for a step-by-step tutorial.

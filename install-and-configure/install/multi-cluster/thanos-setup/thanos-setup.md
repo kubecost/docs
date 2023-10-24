@@ -4,9 +4,9 @@
 This feature is only officially supported on Kubecost Enterprise plans.
 {% endhint %}
 
-There are two primary methods to aggregate all cluster information back to a single Kubecost UI described in [Multi-Cluster Kubecost](multi-cluster.md#enterprise-federation).
+There are two primary methods to aggregate all cluster information back to a single Kubecost UI described in our [Multi-Cluster](/install-and-configure/install/multi-cluster/multi-cluster.md#enterprise-federation) article.
 
-The *preferred* method for multi-cluster is [ETL Federation](federated-etl.md). The configuration guide below is for Kubecost Thanos Federation, which may not scale as well as ETL Federation in large environments.
+The *preferred* method for multi-cluster is [ETL Federation](/install-and-configure/install/multi-cluster/federated-etl/federated-etl.md). The configuration guide below is for Kubecost Thanos Federation, which may not scale as well as ETL Federation in large environments.
 
 ## Configuration
 

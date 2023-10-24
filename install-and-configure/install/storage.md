@@ -1,6 +1,6 @@
 # Cost Analyzer Persistent Volume
 
-As of v1.67, the persistent volume attached to Kubecost's primary pod (cost-analyzer) contains [ETL cache data](apis/deprecated-apis/cost-model-deprecated.md#caching-overview) as well as product configuration data. While it's technically optional (because all configurations can be set via ConfigMap), it dramatically reduces the load against your Prometheus/Thanos installations on pod restart/redeploy. For this reason, it's strongly encouraged on larger clusters.
+As of v1.67, the persistent volume attached to Kubecost's primary pod (cost-analyzer) contains [ETL cache data](/apis/deprecated-apis/cost-model-deprecated.md#caching-overview) as well as product configuration data. While it's technically optional (because all configurations can be set via ConfigMap), it dramatically reduces the load against your Prometheus/Thanos installations on pod restart/redeploy. For this reason, it's strongly encouraged on larger clusters.
 
 **If you are creating a new installation of Kubecost:**
 

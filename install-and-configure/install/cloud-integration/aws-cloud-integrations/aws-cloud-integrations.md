@@ -349,7 +349,7 @@ Then add the following trust statement to the role the policy is attached to on 
 ### Step 4: Attaching IAM permissions to Kubecost
 
 {% hint style="warning" %}
-If you are using the alternative [multi-cloud integration](multi-cloud.md) method, steps 4 and 5 are not required.
+If you are using the alternative [multi-cloud integration](/install-and-configure/install/cloud-integration/multi-cloud.md) method, steps 4 and 5 are not required.
 {% endhint %}
 
 Now that the policies have been created, attach those policies to Kubecost. We support the following methods:
@@ -548,11 +548,11 @@ You can check pod logs for authentication errors by running: `kubectl get pods -
 
 If you do not see any authentication errors, log in to your AWS console and visit the Athena dashboard. You should be able to find the CUR. Ensure that the database with the CUR matches the athenaTable entered in Step 5. It likely has a prefix with `athenacurcfn_` :
 
-![Athena query editor](images/athena-query-1.png)
+![Athena query editor](/images/athena-query-1.png)
 
 You can also check query history to see if any queries are failing:
 
-![Failed queries in Athena](images/athena-query-2.png)
+![Failed queries in Athena](/images/athena-query-2.png)
 
 ### Common Athena errors
 

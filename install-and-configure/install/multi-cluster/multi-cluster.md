@@ -2,10 +2,10 @@
 
 There are two options that Kubecost supports for environments with multiple clusters:
 
-1. Kubecost Free gives visibility into a single cluster at a time, and requires the [Context Switcher](https://docs.kubecost.com/using-kubecost/context-switcher) to change your display to a different cluster. Each cluster performs its own cloud-billing reconciliation.
+1. Kubecost Free gives visibility into a single cluster at a time, and requires the [Context Switcher](/using-kubecost/context-switcher.md) to change your display to a different cluster. Each cluster performs its own cloud-billing reconciliation.
 2. Kubecost Enterprise allows for a single-pane-of-glass view, which combines costs of all clusters in your environment into a single display. An agent on each cluster ships metrics to a shared storage bucket. A primary cluster serves the Kubecost UI, API endpoints, and performs global cloud-billing reconciliation for all clusters.
 
-Cloud billing allows Kubecost to use actual billed costs for all resources instead of relying on on-demand rates. Learn more about Kubecost's cloud billing processes [here](https://docs.kubecost.com/install-and-configure/install/cloud-integration#kubecosts-cloud-processes).
+Cloud billing allows Kubecost to use actual billed costs for all resources instead of relying on on-demand rates. Learn more about Kubecost's cloud billing processes [here](/install-and-configure/install/cloud-integration/README.md#kubecosts-cloud-processes).
 
 {% hint style="info" %}
 Kubecost Free can now be installed on an unlimited number of individual clusters. Larger teams will benefit from using Kubecost Enterprise to better manage many clusters. See [pricing](https://www.kubecost.com/pricing) for more details.
@@ -27,8 +27,8 @@ This feature is only supported for Kubecost Enterprise.
 
 There are two primary methods to aggregate all cluster information back to a single Kubecost UI:
 
-* [Kubecost ETL Federation (preferred)](federated-etl.md)
-* [Thanos Federation](thanos-setup.md)
+* [Kubecost ETL Federation (preferred)](/install-and-configure/install/multi-cluster/federated-etl/federated-etl.md)
+* [Thanos Federation](/install-and-configure/install/multi-cluster/thanos-setup/thanos-setup.md)
 
 Both methods allow for greater compute efficiency by running the most resource-intensive workloads on a single primary cluster, and a lightweight agent on all other monitored clusters.
 
@@ -42,4 +42,4 @@ The below diagrams highlight the two architectures:
 
 **Kubecost Thanos Federation**
 
-![Thanos Overview](images/thanos-architecture.png)
+![Thanos Overview](/images/thanos-architecture.png)

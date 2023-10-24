@@ -17,7 +17,7 @@ This guide is a one-time setup per AWS Payer Account and is typically one per or
 
 <summary>Basic diagram when the below steps are complete:</summary>
 
-![cur-diagram](images/aws-cur/kubecost-cross-account-cur-diagram.png)
+![cur-diagram](/images/aws-cur/kubecost-cross-account-cur-diagram.png)
 
 </details>
 
@@ -63,10 +63,10 @@ Follow the [AWS documentation](https://docs.aws.amazon.com/cur/latest/userguide/
 
 <summary>Screenshots from select CUR creation in the above AWS documentation</summary>
 
-![CUR-export-config](images/aws-cur/1-cur-nav.png)
-![resource-ids](images/aws-cur/2-cur-create-step1.png)
-![bucket-permissions](images/aws-cur/3-cur-s3-bucket.png)
-![delivery-options](images/aws-cur/4-delivery-options.png)
+![CUR-export-config](/images/aws-cur/1-cur-nav.png)
+![resource-ids](/images/aws-cur/2-cur-create-step1.png)
+![bucket-permissions](/images/aws-cur/3-cur-s3-bucket.png)
+![delivery-options](/images/aws-cur/4-delivery-options.png)
 </details>
 
 {% hint style="info" %}
@@ -103,8 +103,8 @@ Navigate to Athena in the AWS Console, be sure it is in the region used in the s
 
 <summary>Screenshots from Athena</summary>
 
-![CUR-Config](images/aws-cur/6-cur-config.png)
-![athena-output-bucket](images/aws-cur/8-upload-cfn-template.png)
+![CUR-Config](/images/aws-cur/6-cur-config.png)
+![athena-output-bucket](/images/aws-cur/8-upload-cfn-template.png)
 </details>
 
 {% hint style="info" %}

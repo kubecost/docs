@@ -64,7 +64,7 @@ Disable Thanos components. These are only used for troubleshooting on secondary 
 You can disable node-exporter and the service account if cluster/node rightsizing recommendations are not required.
 
 {% hint style="info" %}
-node-export must be disabled if there is an existing DaemonSet. More info [here](/troubleshooting/troubleshoot-install.md#issue-failedscheduling-kubecost-prometheus-node-exporter).
+node-export must be disabled if there is an existing DaemonSet. More info [here](/troubleshooting/troubleshoot-install.md#failedscheduling-kubecost-prometheus-node-exporter).
 {% endhint %}
 
 ## Helm values
@@ -116,4 +116,4 @@ thanos:
 
 You can find complete installation guides and sample files on our [repo](https://github.com/kubecost/poc-common-configurations).
 
-Additional considerations for properly tuning resource consumption is [here](resource-consumption.md).
+Additional considerations for properly tuning resource consumption is [here](/install-and-configure/advanced-configuration/resource-consumption.md).

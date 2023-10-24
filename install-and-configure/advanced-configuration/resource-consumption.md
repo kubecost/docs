@@ -2,20 +2,20 @@
 
 Kubecost can run on clusters with thousands of nodes when resource consumption is properly tuned. Here's a chart with some of the steps you can take to tune Kubecost, along with descriptions of each.
 
-![Memory Reduction Steps](images/resource-consumption.png)
+![Memory Reduction Steps](/images/resource-consumption.png)
 
 ## Secondary clusters: Disabling Cloud Assets and running Kubecost in Agent Mode/With ETL and caching disabled
 
 * Cloud Assets for all accounts can be pulled in on your primary cluster by pointing Kubecost to one or more management accounts. You can disable Cloud Assets on secondary clusters by setting the following Helm value:
   * `--set kubecostModel.etlCloudAsset=false`
 * Secondaries can be configured strictly as metric emitters to save memory.
-* Learn more about how to best configure secondary clusters [here](secondary-clusters.md).
+* Learn more about how to best configure secondary clusters [here](/install-and-configure/install/multi-cluster/secondary-clusters.md).
 
 ## Exclude provider IDs in Cloud Assets
 
 * Kubecost is capable of tracking each individual cloud billing line item; however on certain accounts this can be quite large.
 * (AWS Only, GCP/Azure coming soon) If this is excluded, we don't cache granular data; instead we cache aggregate data and make an ad-hoc query to the cost and usage report to get granular data resulting in slow load times but less memory consumption.
-* Learn more about how to configure this [here](cloud-integration.md#cloud-assets).
+* Learn more about how to configure this [here](/install-and-configure/install/cloud-integration/README.md#cloud-assets).
 
 ## Lower query concurrency
 

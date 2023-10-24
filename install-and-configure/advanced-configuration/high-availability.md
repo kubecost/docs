@@ -24,7 +24,7 @@ In order to enable the leader/follower and HA features, the following must also 
 
 * Replicas are set to a value greater than 1
 * ETL FileStore is Enabled (enabled by default)
-* [ETL Bucket Backup](etl-backup.md) is configured
+* [ETL Bucket Backup](/install-and-configure/install/etl-backup/etl-backup.md) is configured
 
 For example, using our Helm chart, the following is an acceptable configuration:
 

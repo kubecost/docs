@@ -1,7 +1,7 @@
 # ETL Backup
 
 {% hint style="warning" %}
-We do not recommend enabling ETL Backup in conjunction with [Federated ETL](./federated-etl.md).
+We do not recommend enabling ETL Backup in conjunction with [Federated ETL](/install-and-configure/install/multi-cluster/federated-etl/federated-etl.md).
 {% endhint %}
 
 Kubecost's extract, transform, load (ETL) data is a computed cache based on Prometheus's metrics, from which the user can perform all possible Kubecost queries. The ETL data is stored in a `PersistentVolume` mounted to the `kubecost-cost-analyzer` pod.
@@ -47,7 +47,7 @@ The file must be named _object-store.yaml_.
 
 <summary>Existing Thanos users</summary>
 
-If you have already configured Thanos following [this documentation](long-term-storage.md), you can reuse the previously created bucket configuration secret.
+If you have already followed our [Configuring Thanos](/install-and-configure/install/multi-cluster/thanos-setup/configuring-thanos.md) guide, you can reuse the previously created bucket configuration secret.
 
 Setting `.Values.kubecostModel.etlBucketConfigSecret=kubecost-thanos` will enable the backup feature. This will back up all ETL data to the same bucket being used by Thanos.
 
@@ -225,7 +225,7 @@ There is also a Bash script available to restore the backup [here](https://githu
 
 Currently, this feature is still in development, but there is currently a status card available on the diagnostics page that will eventually show the status of the backup system:
 
-![Diagnostic ETL Backup Status](images/diagnostics-etl-backup-status.png)
+![Diagnostic ETL Backup Status](/images/diagnostics-etl-backup-status.png)
 
 ## Troubleshooting
 

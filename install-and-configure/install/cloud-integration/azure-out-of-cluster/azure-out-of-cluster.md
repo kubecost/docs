@@ -21,7 +21,7 @@ If you have sensitive data in an existing Azure Storage account, it is recommend
 {% endhint %}
 
 {% hint style="info" %}
-For more granular billing data it is possible to [scope Azure cost exports](https://learn.microsoft.com/en-us/azure/cost-management-billing/costs/understand-work-scopes) to resource groups, management groups, departments, or enrollments. AKS clusters will create their own resource groups which can be used. This functionality can then be combined with Kubecost [multi-cloud](multi-cloud.md) to ingest multiple scoped billing exports.
+For more granular billing data it is possible to [scope Azure cost exports](https://learn.microsoft.com/en-us/azure/cost-management-billing/costs/understand-work-scopes) to resource groups, management groups, departments, or enrollments. AKS clusters will create their own resource groups which can be used. This functionality can then be combined with Kubecost [multi-cloud](/install-and-configure/install/cloud-integration/multi-cloud.md) to ingest multiple scoped billing exports.
 {% endhint %}
 
 ## Step 2: Provide access to Azure Storage API
@@ -53,7 +53,7 @@ Next, create a JSON file which **must** be named _cloud-integration.json_ with t
 ```
 
 {% hint style="info" %}
-Additional details about the `cloud-integration.json` file can be found in our [multi-cloud integration](multi-cloud.md) doc.
+Additional details about the `cloud-integration.json` file can be found in our [multi-cloud integration](/install-and-configure/install/cloud-integration/multi-cloud.md) doc.
 {% endhint %}
 
 Next, create the Secret:
