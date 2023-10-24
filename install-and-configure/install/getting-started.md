@@ -61,7 +61,7 @@ You may optionally pass the following Helm flags to install Kubecost and its bun
 
 ## **Resource efficiency and idle costs**
 
-Efficiency and idle costs can teach you more about the cost-value of your Kubernetes spend by showing you how efficiently your resources are used. To learn more about pod resource efficiency and cluster idle costs, see [Efficiency and Idle](../../efficiency-idle.md).
+Efficiency and idle costs can teach you more about the cost-value of your Kubernetes spend by showing you how efficiently your resources are used. To learn more about pod resource efficiency and cluster idle costs, see [Efficiency and Idle](/using-kubecost/navigating-the-kubecost-ui/cost-allocation/efficiency-idle.md).
 
 ## **See also**
 

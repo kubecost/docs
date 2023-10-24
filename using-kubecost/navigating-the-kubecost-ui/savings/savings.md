@@ -2,7 +2,7 @@
 
 The Savings page provides miscellaneous functionality to help you use resources more effectively and assess wasteful spending. In the center of the page, you will see your estimated monthly savings available. The savings value is calculated from all enabled Savings features, across your clusters and the designated cluster profile via dropdowns in the top right of the page.
 
-![The Savings page](<.gitbook/assets/image (2) (1).png>)
+![The Savings page](/images/savings.png)
 
 ## Savings insights
 
@@ -12,13 +12,13 @@ The monthly savings values on this page are precomputed every hour for performan
 
 ### Kubernetes insights
 
-* [Right-size your cluster nodes](using-kubecost/navigating-the-kubecost-ui/savings/cluster-right-sizing-recommendations.md)
-* [Right-size your container requests](auto-request-sizing.md)
+* [Right-size your cluster nodes](cluster-right-sizing-recommendations/cluster-right-sizing-recommendations.md)
+* [Right-size your container requests](auto-request-sizing/auto-request-sizing.md)
 * [Remedy abandoned workloads](abandoned-workloads.md)
 * [Manage unclaimed volumes](unclaimed-volumes.md)
 * [Manage local disks](local-disks.md)
 * [Manage underutilized nodes](underutilized-nodes.md)
-* [Right-size your persistent volumes](using-kubecost/navigating-the-kubecost-ui/savings/pv-right-sizing-rec.md)
+* [Right-size your persistent volumes](pv-right-sizing-rec.md)
 
 ### Cloud insights:
 

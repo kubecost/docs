@@ -4,7 +4,7 @@ Reports are saved queries from your various Monitoring dashboards which can be r
 
 Reports can be managed via [_values.yaml_](https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/values.yaml) or the Kubecost UI. This reference outlines the process of configuring saved reports through a values file, and provides documentation on the required and optional parameters.
 
-![Reports page](.gitbook/assets/savedreports.PNG)
+![Reports page](/.gitbook/assets/savedreports.PNG)
 
 ## Managing reports via UI
 
@@ -14,9 +14,9 @@ Begin by selecting _Create a report_. There are five report types available. Thr
 
 * Allocation Report
 * Asset Report
-* [Advanced Report](https://docs.kubecost.com/using-kubecost/getting-started/advanced-reports) (beta)
+* [Advanced Report](advanced-reports.md) (beta)
 * Cloud Cost Report
-* [Advanced Report - Cost Centers](https://docs.kubecost.com/using-kubecost/navigating-the-kubecost-ui/saved-reports/cost-center-report) (beta)
+* [Advanced Report - Cost Centers](cost-center-report.md) (beta)
 
 Selecting a monitoring report type will take you to the respective dashboard. Provide the details of the query, then select _Save_. The report will now be saved on your Reports page for easy access.
 
@@ -76,7 +76,7 @@ The following fields apply to each map item under the `reports` key:
   * `service`
   * `statefulset`
   * `team`
-* `chartDisplay` -- Can be one of `category`, `series`, `efficiency`, `percentage`, or `treemap`. See [Cost Allocation Charts](using-kubecost/navigating-the-kubecost-ui/cost-allocation/#chart) for more info.
+* `chartDisplay` -- Can be one of `category`, `series`, `efficiency`, `percentage`, or `treemap`. See [Cost Allocation Charts](/using-kubecost/navigating-the-kubecost-ui/cost-allocation/README.md/#chart) for more info.
 * `idle` idle cost allocation, supports `hide`, `shareByNode`, `shareByCluster`, and `separate`
 * `rate` -- Can be one of `cumulative`, `monthly`, `daily`, `hourly`
 * `accumulate` determines whether or not to sum Allocation costs across the entire window -- equivalent to _Resolution_ in the UI, supports `true` (Entire window resolution) and `false` (Daily resolution)
