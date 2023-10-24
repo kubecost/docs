@@ -47,7 +47,7 @@ You can tune `prometheus.server.persistentVolume.size` depending on scale, or ou
 
 ## Thanos
 
-Disable Thanos components. These are only used for troubleshooting on secondary clusters. See this guide for [troubleshooting via kubectl logs](long-term-storage.md#troubleshooting).
+Disable Thanos components. These are only used for troubleshooting on secondary clusters. See this guide for [troubleshooting via kubectl logs](/install-and-configure/install/multi-cluster/thanos-setup/configuring-thanos.md#troubleshooting).
 
 > **Note**: Secondary clusters write to the global storage-bucket via the thanos-sidecar on the prometheus-server pod.
 
