@@ -12,7 +12,7 @@ The *preferred* method for multi-cluster is [ETL Federation](/install-and-config
 
 Thanos is a tool to aggregate Prometheus metrics to a central object storage (S3 compatible) bucket. Thanos is implemented as a sidecar on the Prometheus pod on all clusters.
 
-1. Follow steps [here](long-term-storage.md#option-b-out-of-cluster-storage-thanos) to enable all required Thanos components on a Kubecost primary cluster, including the Prometheus sidecar.
+1. Follow steps [here](configuring-thanos.md) to enable all required Thanos components on a Kubecost primary cluster, including the Prometheus sidecar.
 2. For each additional cluster, only the Thanos sidecar is needed.
 
 Consider the following Thanos recommendations for secondaries:

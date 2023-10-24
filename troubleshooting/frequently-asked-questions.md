@@ -1,7 +1,7 @@
 # Frequently Asked Questions
 
 Q: How can I reduce CPU or Memory resource consumption by Kubecost?\
-A: Please review our [Tuning Resource Consumption guide](../resource-consumption.md).
+A: Please review our [Tuning Resource Consumption guide](/install-and-configure/advanced-configuration/resource-consumption.md).
 
 Q: Can I safely configure Thanos Compaction [down sampling](https://thanos.io/tip/components/compact.md/#downsampling)?\
 A: Yes, Kubecost is resilient to downsampling. However turning query concurrency is going to be most beneficial, especially during the long rebuild windows. To tune downsampling use the following Thanos subchart [values](https://github.com/kubecost/cost-analyzer-helm-chart/blob/b5b089ce217636fb2b7e6f42daed37397d28d3aa/cost-analyzer/charts/thanos/values.yaml#L525-L530).
