@@ -100,7 +100,6 @@ Lists all existing recurring budget rules
             "spendLimit": ,
             "actions": [
                 {
-                    "amount": 0,
                     "percentage": 1,
                     "slackWebhooks": [],
                     "msTeamsWebhooks": [],
@@ -158,64 +157,83 @@ The `id` value of your recurring budget is needed to update or delete it. If you
 
 You can configure greater visibility towards tracking your budgets using the `actions` parameter, which will allow you to create alerts for when your budget spend has passed a specified percentage threshold, and send those alerts to you or your team via email, Slack, or Microsoft Teams.
 
+When providing values for `actions`, `percentage` refers to the percentage of `spendLimit` which will result in an alert. For example, if `"spendLimit": 2000` is configured for a weekly budget rule and `"percentage": 50` is configured, an alert will be sent to all listed emails/webhooks if spending surpasses $1000 USD for the week.
+
+```
+"actions" : [
+            {
+                "percentage": 100,
+                "slackWebhooks": [
+                    "<example Slack webhook>"
+                ],
+                "emails": [
+                    "foo@kubecost.com",
+                    "bar@kubecost.com"
+                ],
+                "msTeamsWebhooks": [
+                    "<example Teams webhook>"
+                ]
+            }
+        ]
+```
+
 ## Configuring currency
 
-The `amount` parameter will always be determined using your configured currency type. You can manually change your currency type in Kubecost by selecting _Settings_, then scrolling to Currency and selecting your desired currency from the dropdown (remember to confirm your choice by selecting _Save_ at the bottom of the page).
+The `spendLimit` parameter will always be determined using your configured currency type. You can manually change your currency type in Kubecost by selecting _Settings_, then scrolling to Currency and selecting your desired currency from the dropdown (remember to confirm your choice by selecting _Save_ at the bottom of the page).
 
 Kubecost does **not** convert spending costs to other currency types; it will only change the symbol displayed in the UI next to costs. For best results, configure your currency to what matches your spend.
 
 ## Examples
 
-#### Create a recurring budget rule for my test cluster which resets every Wednesday, with a budget of $100.00 USD.
+**Create a recurring budget rule for my test cluster which resets every Wednesday with a budget of $100.00 USD, and will send an alert via email when spending has exceeded 75% of the spend limit.**
 
 ```
-{
-  "name": "example-test",
-  "property": "cluster",
-  "values": [
-    "test"
-  ],
-  "kind": "soft",
-  "interval": "weekly",
-  "intervalDay": 3,
-  "amount": 100
-}
-```
-
-#### Get all existing recurring budget rules in place
-
-{% tabs %}
-{% tab title="Request" %}
-```
-http://<your-kubecost-address>/model/getRecurringBudgetRules
-```
-{% endtab %}
-
-{% tab title="Response" %}
-```json
-{
-    "code": 200,
-    "data": [
-        {
-            "name": "example-rule-1",
-            "id": "e18c936b-6f24-4a21-a4a6-8b764e62e039",
-            "filter": "namespace",
-            "kind": "soft",
-            "interval": "weekly",
-            "intervalDay": 2,
-            "amount": 25
+curl --location '<your-kubecost-address>/model/budget' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+        "name": "budget-rule",
+        "values": {
+            "cluster":["test"]
         },
-        {
-            "name": "example-rule-2",
-            "id": "9487dc23-46a6-4477-8e81-9530fa23fdea",
-            "filter": "cluster",
-            "kind": "hard",
-            "interval": "monthly",
-            "intervalDay": 15,
-            "amount": 50
-        }
-    ]
-}
+        "kind": "soft",
+        "interval": "weekly",
+        "intervalDay": 3,
+        "spendLimit": 100,
+        "actions" : [
+            {
+                "amount": 75,
+                "emails": [
+                    "foo@kubecost.com",
+                ]
+            }
+        ]
+}'
 ```
-{% endtab %}
-{% endtabs %}
+
+**Create a recurring budget rule for my `kubecost` namespace which resets on the 1st of every month with a budget of $400.00 USD, and will send an alert via Slack and Microsoft Teams when spending has exceeded $100.00 of the spend limit.**
+
+```
+curl --location '<your-kubecost-address>/model/budget' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+        "name": "budget-rule-2",
+        "values": {
+            "namespace":["kubecost"]
+        },
+        "kind": "soft",
+        "interval": "monthly",
+        "intervalDay": 1,
+        "spendLimit": 400,
+        "actions" : [
+             {
+                "percentage": 100,
+                "slackWebhooks": [
+                    "<example Slack webhook>"
+                ],
+                "msTeamsWebhooks": [
+                    "<example Teams webhook>"
+                ]
+            }
+        ]
+}'
+```
