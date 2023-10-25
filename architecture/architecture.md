@@ -1,6 +1,6 @@
 # Kubecost Core Architecture Overview
 
-Below are the major components deployed with the [Kubecost Helm chart](../install-and-configure/install/install.md), excluding certain Enterprise components such as durable storage:
+Below are the major components deployed with the [Kubecost Helm chart](/install.md), excluding certain Enterprise components such as durable storage:
 
 1. Kubecost Cost-Analyzer Pod
    1. Frontend: Runs Nginx and handles routing to Kubecost backend and Prometheus/Grafana
@@ -16,7 +16,7 @@ Below are the major components deployed with the [Kubecost Helm chart](../instal
 
 Today, the core Kubecost product can be run with just components 1 and 2.1. See an overview of core components in this diagram:
 
-![Architecture Overview](../images/arch.png)
+![Architecture Overview](/images/arch.png)
 
 ## Provider Pricing Architecture Overview
 
@@ -25,17 +25,17 @@ Kubecost interacts with provider pricing in a few different ways:
 * onDemand Rates (AWS, Azure, GCP, and Custom Pricing CSV)
 * Negotiated Rates (Azure, GCP, and Custom Pricing CSV)
 * Spot Data Feed (AWS)
-* [Cloud Provider Billing for Reconciliation and Out-of-Cluster Spend](../install-and-configure/install/cloud-integration/)
-  * [AWS Cost and Usage Report](../install-and-configure/install/cloud-integration/aws-cloud-integrations/aws-cloud-integrations.md)
-  * [Azure Cost Export](../install-and-configure/install/cloud-integration/azure-out-of-cluster/azure-out-of-cluster.md)
-  * [Google BigQuery Export](../install-and-configure/install/cloud-integration/gcp-out-of-cluster/)
+* [Cloud Provider Billing for Reconciliation and Out-of-Cluster Spend](/cloud-integration.md)
+  * [AWS Cost and Usage Report](/aws-cloud-integrations.md)
+  * [Azure Cost Export](/azure-out-of-cluster.md)
+  * [Google BigQuery Export](/gcp-out-of-cluster.md)
 
 In an Enterprise federated setup, only the Primary Kubecost Cluster needs access to the Cloud Provider Billing.
 
-![Provider Pricing Overview](../images/cloud-bill-diagram.png)
+![Provider Pricing Overview](/images/cloud-bill-diagram.png)
 
 ## Enterprise Architecture Overview
 
 The most common implementation of durable storage in the Kubecost application is with [Thanos](https://thanos.io/). Below is a high-level reference for the required components. More information on each Thanos component can be found [here](https://thanos.io/tip/components/).
 
-![Thanos Overview](../images/thanos-architecture.png)
+![Thanos Overview](/images/thanos-architecture.png)

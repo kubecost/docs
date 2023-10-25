@@ -5,12 +5,12 @@ Kubecost's extract, transform, load (ETL) process is a computed cache built upon
 The ETL data is stored in a `PersistentVolume` mounted to the `kubecost-cost-analyzer` pod. In the event that you lose or are looking to rebuild the ETL data, the following endpoints should be used.
 
 {% hint style="info" %}
-Configuring [ETL Backups](../install-and-configure/install/etl-backup/etl-backup.md) can prevent situations where you would need to repair large amounts of missing ETL data. This is not required in [Federated ETL](../install-and-configure/install/multi-cluster/federated-etl/federated-etl.md) environments.
+Configuring [ETL Backups](/etl-backup.md) can prevent situations where you would need to repair large amounts of missing ETL data. This is not required in [Federated ETL](/federated-etl.md) environments.
 {% endhint %}
 
 ## 1. Repair Asset ETL
 
-The Asset ETL builds upon the Prometheus metrics listed [here](../architecture/user-metrics.md). It's important to ensure that you are able to [query for Prometheus or Thanos](prometheus.md) data for the specified `window` you use. Otherwise, an absence of metrics will result in an empty ETL. Learn more about this API in our [CloudCost Diagnostic APIs](https://docs.kubecost.com/apis/apis-overview/cloudcost-diagnostic-apis) doc.
+The Asset ETL builds upon the Prometheus metrics listed [here](/architecture/user-metrics.md). It's important to ensure that you are able to [query for Prometheus or Thanos](prometheus.md) data for the specified `window` you use. Otherwise, an absence of metrics will result in an empty ETL. Learn more about this API in our [CloudCost Diagnostic APIs](https://docs.kubecost.com/apis/apis-overview/cloudcost-diagnostic-apis) doc.
 
 {% hint style="info" %}
 If the `window` parameter is within `.Values.kubecostModel.etlHourlyStoreDurationHours`, this endpoint will repair both the daily `[1d]` and hourly `[1h]` Asset ETL.
@@ -56,7 +56,7 @@ INF Allocation[1d]: AggregatedStoreDriver[hvfrl]: run: aggregated [2023-01-03T00
 
 ## 3. Repair CloudCost ETL
 
-The CloudCost ETL pulls information from your cloud billing integration. Ensure it's been configured properly, otherwise, no data will be retrieved. Review our [Cloud Billing Integrations](../install-and-configure/install/cloud-integration/) doc for more info.
+The CloudCost ETL pulls information from your cloud billing integration. Ensure it's been configured properly, otherwise, no data will be retrieved. Review our [Cloud Billing Integrations](/cloud-integration.md) doc for more info.
 
 {% code overflow="wrap" %}
 ```bash
@@ -149,16 +149,17 @@ WRN ETL: Asset[1h]: Repair: error: cannot repair [2022-11-05T00:00:00+0000, 2022
 
 ### Federation failing for Asset and Allocation data in v1.104
 
-In v1.104 of Kubecost, you may experience incorrect data display if running the [Federated ETL](../install-and-configure/install/multi-cluster/federated-etl/federated-etl.md) architecture. Specifically you may see that your asset prices are correct but heavily consist of "Adjustments", and that your allocation's idle costs are incorrect. To fix this, perform the following recovery steps:
+In v1.104 of Kubecost, you may experience incorrect data display if running the [Federated ETL](/federated-etl.md) architecture. Specifically you may see that your asset prices are correct but heavily consist of "Adjustments", and that your allocation's idle costs are incorrect. To fix this, perform the following recovery steps:
 
 1. Identify the data range for your affected data. This will be used later.
-2.  Disable reconciliation by setting the Helm flag:
+2. Disable reconciliation by setting the Helm flag:
 
-    ```yaml
-    kubecostModel:
-      etlAssetReconciliationEnabled: false
-    ```
-3. [Upgrade to a fixed version of Kubecost](../install-and-configure/install/install.md#updating-kubecost). For best results, upgrade to the most recent version.
+   ```yaml
+   kubecostModel:
+     etlAssetReconciliationEnabled: false
+   ```
+
+3. [Upgrade to a fixed version of Kubecost](/install.md#updating-kubecost). For best results, upgrade to the most recent version.
 4. For both Assets and Allocations, repair the affected dates on the primary cluster. This will only repair data from the primary cluster, not any secondary clusters. If repairing dates beyond your primary cluster's Prometheus retention, there may be data loss for your primary cluster. Refer to the instructions above for `/model/etl/asset/repair` and `/model/etl/allocation/repair`.
 5. After Asset and Allocation data has been repaired, restart the Federator pod. This will force the Federator to re-federate the data upon 5 minutes of startup. Confirm the procedure has worked by validating some of the following:
    1. Query the last 7 days of data and observe reasonable unadjusted data.
@@ -166,9 +167,9 @@ In v1.104 of Kubecost, you may experience incorrect data display if running the 
    3. Check the following directories in your storage bucket, to see that the files for impacted dates have been recently modified. If your data has not been re-federated, you may need to manually delete the files for impacted dates and perform Step 4 again.
       1. `/federated/combined/etl/bingen/allocations/1d`
       2. `/federated/combined/etl/bingen/assets/1d`
-6.  Reenable reconciliation by setting the Helm flag:
+6. Reenable reconciliation by setting the Helm flag:
 
-    ```yaml
-    kubecostModel:
-      etlAssetReconciliationEnabled: true
-    ```
+   ```yaml
+   kubecostModel:
+     etlAssetReconciliationEnabled: true
+   ```

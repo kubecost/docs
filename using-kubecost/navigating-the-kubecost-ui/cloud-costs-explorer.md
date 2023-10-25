@@ -5,7 +5,7 @@ The Cloud Cost Explorer is a dashboard which provides visualization and filterin
 ![Cloud Cost Explorer dashboard](<../../.gitbook/assets/image (1) (1).png>)
 
 {% hint style="info" %}
-If you haven't performed a successful billing integration with a cloud service provider, the Cloud Cost Explorer won't have cost data to display. Before using the Cloud Cost Explorer, make sure to read our [Cloud Billing Integrations](../../install-and-configure/install/cloud-integration/) guide to get started, then see our [specific articles](../../install-and-configure/install/cloud-integration/#adding-a-cloud-integration) for the cloud service providers you want to integrate with.
+If you haven't performed a successful billing integration with a cloud service provider, the Cloud Cost Explorer won't have cost data to display. Before using the Cloud Cost Explorer, make sure to read our [Cloud Billing Integrations](/cloud-integration.md) guide to get started, then see our [specific articles](/cloud-integration.md#adding-a-cloud-integration) for the cloud service providers you want to integrate with.
 {% endhint %}
 
 ## Installation and configuration

@@ -1,14 +1,14 @@
-# Kubecost Cloud: Cluster Right-Sizing Recommendations
+# Kubecost Cloud: Cluster Sizing Recommendations
 
 {% hint style="info" %}
-This documentation should only be consulted when using Kubecost Cloud! For information about cluster sizing recommendations for self-hosted Kubecost, see [here](../../using-kubecost/navigating-the-kubecost-ui/savings/cluster-right-sizing-recommendations/cluster-right-sizing-recommendations.md).
+This documentation should only be consulted when using Kubecost Cloud! For information about cluster sizing recommendations for self-hosted Kubecost, see [here](/using-kubecost/navigating-the-kubecost-ui/savings/cluster-right-sizing-recommendations.md).
 {% endhint %}
 
 Kubecost Cloud can provide recommendations for right-sizing your clusters to ensure they are configured in the most cost-effective way. Recommendations are available for any and all clusters.
 
 ## Viewing cluster recommendations
 
-You can access cluster right-sizing by selecting _Savings_ in the left navigation, then select the _Right-size your cluster nodes_ panel.
+You can access cluster right-sizing by selecting *Savings* in the left navigation, then select the *Right-size your cluster nodes* panel.
 
 Kubecost will offer two recommendations: simple (uses one node type) and complex (uses two or more node types). Kubecost may hide the complex recommendation when it is more expensive than the simple recommendation, and present a single recommendation instead. These recommendations and their metrics will be displayed in a chart next to your existing configuration in order to compare values like total cost, node count, and usage.
 
@@ -23,7 +23,6 @@ You can toggle on _Show advanced metrics_ to view more details about your cluste
 Kubecost Cloud provides its right-sizing recommendations based on the characteristics of your cluster. You have the option to edit certain properties to generate relevant recommendations. Select _Filter_ to configure your settings in the Cluster Sizing Settings window.
 
 There are multiple dropdown menus to consider:
-
 * In the Cluster dropdown, you can select the individual cluster you wish to apply right-sizing recommendations to.
 * In the Profile dropdown, select the most relevant category of your cluster. You can select _Production_, _Development_, or _High Availability_.
   * Production: Stable cluster activity, will provide some extra space for potential spikes in activity.

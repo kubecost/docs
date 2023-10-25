@@ -44,11 +44,11 @@ Kubecost requests `kube-state-metrics >= v1.6.0`. This version check is complete
 
 A diagnostic view is provided for both the Allocation and Assets pipelines and is designed to assist in diagnosing missing data found in the Allocation or Assets views. Kubecost's ETL pipelines run in the background to build a daily composition of the data required to build the cost model. For each day the data is collected, a file is written to disk containing the results. These files are used as both a cache and data backup, which the diagnostic view displays:
 
-![ETL Allocation Status with cache files](../images/diagnostics-etl.png)
+![ETL Allocation Status with cache files](/images/diagnostics-etl.png)
 
 In the event of a problem, the diagnostic view would help you identify specific days where the ETL pipeline failed to collect data.
 
-![ETL Allocation Status with collection failures](../images/diagnostics-etl-problem.png)
+![ETL Allocation Status with collection failures](/images/diagnostics-etl-problem.png)
 
 The file on `Nov 20, 2020` in the above image appears in red. This is because the data in this file has been flagged by our diagnostics page as _empty_ (failed to pass a minimum size threshold). This could happen if the database was temporarily unavailable while building that day.
 
@@ -88,7 +88,7 @@ Once cloud integrations have been set up, Each Cloud Store will have its own dia
 * Resolution: The size of the assets being retrieved
 * StartTime: When the Cloud Process was started
 
-For more information about Cloud Integration and related APIs, read the [cloud-integration](../install-and-configure/install/cloud-integration/) documentation.
+For more information about Cloud Integration and related APIs, read the [cloud-integration](/cloud-integration.md) documentation.
 
 ## Troubleshooting missing metrics
 
@@ -114,7 +114,7 @@ kubectl get pod -l app.kubernetes.io/name=kube-state-metrics --all-namespaces
 
 You can see this information directly on the Kubecost Diagnostics page (screenshot below) or by visiting your Prometheus console and then Status > Targets in the top navigation bar.
 
-![Kubecost Diagnostics page](../images/diagnostics-prom-targets.png)
+![Kubecost Diagnostics page](/images/diagnostics-prom-targets.png)
 
 If the necessary scrape target is not added to your Prometheus, then refer to [this resource](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#scrape\_config) to learn how to add a new job under your Prometheus `scrape_configs` block. You can visit `<your-prometheus-console-url>/config` to view the current scrape\_configs block being passed to your Prometheus.
 
