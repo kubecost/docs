@@ -2,15 +2,15 @@
 
 Kubecost alerts allow teams to receive updates on real-time Kubernetes spend. They are configurable via the Kubecost UI or Helm values. This resource gives an overview of how to configure alerts sent through email, Slack, and Microsoft Teams using [Kubecost Helm chart values](https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/values.yaml). Alerts are either created to monitor specific data sets and trends, or they must be toggled on or off. The following alert types are supported:
 
-1. [Allocation Budget](/alerts.md#allocation-budget): Sends an alert when spending crosses a defined threshold
-2. [Allocation Efficiency](/alerts.md#allocation-efficiency): Detects when a Kubernetes tenant is operating below a target cost-efficiency threshold
-3. [Allocation Recurring Update](/alerts.md#allocation-recurring-update): Sends an alert with cluster spending across all or a subset of Kubernetes resources.
-4. [Allocation Spend Change](/alerts.md#allocation-spend-change): Sends an alert reporting unexpected spend increases relative to moving averages
-5. [Asset Budget](/alerts.md#asset-budget): Sends an alert when spend for a particular set of assets crosses a defined threshold.
-6. [Asset Recurring Update](/alerts#asset-recurring-update): Sends an alert with asset spend across all or a subset of cloud resources.
-7. [Cloud Cost Budget](/alerts.md#cloud-cost-budget): Sends an alert when the total cost of cloud spend goes over a set budget limit.
-8. [Monitor Cluster Health](alerts.md#type-monitor-cluster-health): Used to determine if the cluster's health score changes by a specific threshold. Can only be toggled on/off.
-9. [Monitor Kubecost Health](alerts.md#type-monitor-kubecost-health): Used for production monitoring for the health of Kubecost itself. Can only be toggled on/off.
+1. [Allocation Budget](alerts.md#allocation-budget): Sends an alert when spending crosses a defined threshold
+2. [Allocation Efficiency](alerts.md#allocation-efficiency): Detects when a Kubernetes tenant is operating below a target cost-efficiency threshold
+3. [Allocation Recurring Update](alerts.md#allocation-recurring-update): Sends an alert with cluster spending across all or a subset of Kubernetes resources.
+4. [Allocation Spend Change](alerts.md#allocation-spend-change): Sends an alert reporting unexpected spend increases relative to moving averages
+5. [Asset Budget](alerts.md#asset-budget): Sends an alert when spend for a particular set of assets crosses a defined threshold.
+6. [Asset Recurring Update](alerts.md#asset-recurring-update): Sends an alert with asset spend across all or a subset of cloud resources.
+7. [Cloud Cost Budget](alerts.md#cloud-cost-budget): Sends an alert when the total cost of cloud spend goes over a set budget limit.
+8. [Monitor Cluster Health](alerts.md#monitor-cluster-health): Used to determine if the cluster's health score changes by a specific threshold. Can only be toggled on/off.
+9. [Monitor Kubecost Health](alerts.md#monitor-kubecost-health): Used for production monitoring for the health of Kubecost itself. Can only be toggled on/off.
 
 ## Configuring alerts in Helm
 
