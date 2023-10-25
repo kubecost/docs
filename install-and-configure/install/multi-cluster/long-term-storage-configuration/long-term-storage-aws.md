@@ -90,4 +90,4 @@ You can encrypt the S3 bucket where Kubecost data is stored in AWS via S3 and KM
 
 ## Troubleshooting
 
-Visit the [**Multi-Cluster / Long Term Storage**](/long-term-storage.md#troubleshooting) article for troubleshooting help.
+Visit the [Configuring Thanos](/install-and-configure/install/multi-cluster/thanos-setup/configuring-thanos.md#troubleshooting) doc for troubleshooting help.
