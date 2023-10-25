@@ -1,6 +1,6 @@
 # Spot Commander
 
-Spot Commander is a Savings feature which identifies workloads where it is available and cost-effective to switch to Spot nodes, resizing the cluster in the process. Spot-readiness is determined through a [checklist](/spot-checklist.md) which analyzes the workload and assesses the minimal cost required. It also generates CLI commands to help you implement the recommendation.
+Spot Commander is a Savings feature which identifies workloads where it is available and cost-effective to switch to Spot nodes, resizing the cluster in the process. Spot-readiness is determined through a [checklist](spot-checklist.md) which analyzes the workload and assesses the minimal cost required. It also generates CLI commands to help you implement the recommendation.
 
 ## Spot Cluster Sizing Recommendation
 
@@ -10,9 +10,9 @@ The recommended Spot cluster configuration uses all of the data available to Kub
 
 The recommended configuration assumes that all workloads considered spot-ready by the [Spot Checklist](spot-checklist.md) will be schedulable on spot nodes and that workloads considered not spot-ready will only be schedulable on on-demand nodes. Kubernetes has [taints and tolerations](https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/) for achieving this behavior. Cloud providers usually have guides for using spot nodes with taints and tolerations in your managed cluster:
 
-* [AWS (EKS)](https://docs.aws.amazon.com/eks/latest/userguide/managed-node-groups.html#managed-node-group-capacity-types)&#x20;
+* [AWS (EKS)](https://docs.aws.amazon.com/eks/latest/userguide/managed-node-groups.html#managed-node-group-capacity-types)
 * [GCP (GKE)](https://cloud.google.com/kubernetes-engine/docs/how-to/preemptible-vms)
-* [Azure (AKS)](https://docs.microsoft.com/en-us/azure/aks/spot-node-pool)&#x20;
+* [Azure (AKS)](https://docs.microsoft.com/en-us/azure/aks/spot-node-pool)
 
 Different cloud providers have different guarantees on shutdown windows and automatic draining of spot nodes that are about to be removed. Consult your provider’s documentation before introducing spot nodes to your cluster.
 

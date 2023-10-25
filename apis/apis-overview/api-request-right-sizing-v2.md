@@ -6,7 +6,7 @@ The container request right sizing recommendation API provides recommendations f
 {% endswagger-description %}
 
 {% swagger-parameter in="query" name="algorithmCPU" type="string" required="false" %}
-The algorithm to be used to calculate CPU recommendations based on historical CPU usage data. Options are `max` and `quantile`. Max recommendations are based on the maximum-observed usage in `window`. Quantile recommendations are based on a quantile of observed usage in `window` (requires the `qCPU` parameter to set the desired quantile). Defaults to `max`. To use the `quantile` algorithm, the [ContainerStats Pipeline](/containerstats-pipeline.md) must be enabled.
+The algorithm to be used to calculate CPU recommendations based on historical CPU usage data. Options are `max` and `quantile`. Max recommendations are based on the maximum-observed usage in `window`. Quantile recommendations are based on a quantile of observed usage in `window` (requires the `qCPU` parameter to set the desired quantile). Defaults to `max`. To use the `quantile` algorithm, the [ContainerStats Pipeline](../../using-kubecost/navigating-the-kubecost-ui/savings/auto-request-sizing/containerstats-pipeline.md) must be enabled.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="query" name="algorithmRAM" type="string" required="false" %}

@@ -29,7 +29,7 @@ This is usually the NGINX gateway (inside the `kubecost-cost-analyzer` pod) repo
 
 ## HTTP 504 Gateway timeout
 
-Almost always because the `cost-model` container in the `kubecost-cost-analyzer` pod is down. If the pods are consistently restarting, this could be due to OOM (Out of Memory) errors. As noted in our [AWS Cloud Integration](/aws-cloud-integrations.md) doc:
+Almost always because the `cost-model` container in the `kubecost-cost-analyzer` pod is down. If the pods are consistently restarting, this could be due to OOM (Out of Memory) errors. As noted in our [AWS Cloud Integration](../install-and-configure/install/cloud-integration/aws-cloud-integrations/aws-cloud-integrations.md) doc:
 
 > Kubecost’s `cost-model` requires roughly 2 CPU and 10 GB of RAM per 50,000 pods monitored. The backing Prometheus database requires roughly 2 CPU and 25 GB per million metrics ingested per minute. You can pick the EC2 instances necessary to run Kubecost accordingly. Kubecost can write its cache to disk. Roughly 32 GB per 100,000 pods monitored is sufficient.
 
