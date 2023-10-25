@@ -136,6 +136,7 @@
   * [Abandoned Workloads API](apis/apis-overview/api-abandoned-workloads.md)
   * [Filter Parameters (v2)](apis/apis-overview/filters-api.md)
 * [Deprecated APIs](apis/deprecated-apis/README.md)
+  * [Budgets API (deprecated)](apis/deprecated-apis/budgets-api-retired.md)
   * [Container Request Right-Sizing Recommendation API (V1)](apis/deprecated-apis/api-request-right-sizing.md)
   * [costDataModel & aggregatedCostModel API](apis/deprecated-apis/cost-model-deprecated.md)
   * [Namespace Contacts](apis/deprecated-apis/namespace-contacts.md)
