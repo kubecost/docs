@@ -98,7 +98,7 @@ To remove a previously set Helm value, you will need to set the value to an empt
 
 ## Read-only mode
 
-Kubecost's OIDC supports readonly mode. This leverages OIDC for authentication, then assigns all authenticated users as readonly users.
+Kubecost's OIDC supports read-only mode. This leverages OIDC for authentication, then assigns all authenticated users as read-only users.
 
 ```yaml
 oidc:
