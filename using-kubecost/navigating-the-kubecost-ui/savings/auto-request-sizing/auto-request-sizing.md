@@ -4,7 +4,7 @@ Kubecost can automatically implement its [recommendations](/apis/apis-overview/a
 
 ## Setup
 
-To access RRS, you must first enable the Cluster Controller. Learn more by visiting the [Cluster Controller](/cluster-controller.md) documentation. If you have a GKE/EKS/AWS Kops cluster and want full Cluster Controller functionality, you must perform the [provider service key setup](/install-and-configure/advanced-configuration/controller/cluster-controller.md#provider-service-key-setup). If you are using a different cluster type or do not need other Cluster Controller functionality, you can skip ahead to the [Deploying](/install-and-configure/advanced-configuration/controller/cluster-controller.md#deploying) section.
+To access RRS, you must first enable the Cluster Controller. Learn more by visiting the [Cluster Controller](/cluster-controller.md) documentation. If you have a GKE/EKS/AKS Kops cluster and want full Cluster Controller functionality, you must perform the [provider service key setup](/install-and-configure/advanced-configuration/controller/cluster-controller.md#provider-service-key-setup). If you are using a different cluster type or do not need other Cluster Controller functionality, you can skip ahead to the [Deploying](/install-and-configure/advanced-configuration/controller/cluster-controller.md#deploying) section.
 
 ## Usage
 
