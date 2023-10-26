@@ -4,10 +4,14 @@ Cloud provider service keys can be used in various aspects of the Kubecost insta
 
 ## Adding cloud provider keys
 
-There are multiple methods for adding cloud provider keys to Kubecost when configuring a cloud integration. The preferred and most common is via the multi-cloud _cloud-integration.json_ Kubernetes secret. The second method is to define the appropriate secret in Kubecost's [_values.yaml_](https://github.com/kubecost/cost-analyzer-helm-chart/blob/develop/cost-analyzer/values.yaml). The final method to configure keys is via the Kubecost Settings page. Be sure to use the same method that was used during the initial installation of Kubecost when rotating keys.
+There are multiple methods for adding cloud provider keys to Kubecost when configuring a cloud integration. This article will cover all three procedures. Be sure to use the same method that was used during the initial installation of Kubecost when rotating keys.
 See the [Cloud Integrations](/install-and-configure/install/cloud-integration/README.md) doc for additional details.
 
-The sequence for setting up your key is:
+1. The preferred and most common is via the multi-cloud _cloud-integration.json_ Kubernetes secret.
+2. The second method is to define the appropriate secret in Kubecost's [_values.yaml_](https://github.com/kubecost/cost-analyzer-helm-chart/blob/develop/cost-analyzer/values.yaml).
+3. The final method to configure keys is via the Kubecost Settings page. 
+
+The primary sequence for setting up your key is:
 
 1. Modify the appropriate Kubernetes secret, Helm value, or update via the Settings page.
 2. Restart the Kubecost `cost-analyzer` pod.
