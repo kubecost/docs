@@ -22,7 +22,7 @@ jobs:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
         with:
           fail: true
-          args: --verbose --no-progress '/*.md'
+          args: --verbose --no-progress './*.md' './**/*.md' './*.html' './**/*.html'
 
       # - name: Create Issue From File
       #   if: steps.lychee.outputs.exit_code != 0
