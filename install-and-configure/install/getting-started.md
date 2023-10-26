@@ -17,7 +17,7 @@ needed_disk_space = retention_time_minutes * ingested_samples_per_minutes * byte
 Where ingested samples can be measured as the average over a recent period, e.g. `sum(avg_over_time(scrape_samples_post_metric_relabeling[24h]))`. On average, Prometheus uses around 1.5-2 bytes per sample. So, ingesting 100k samples per minute and retaining them for 15 days would demand around 40 GB. It’s recommended to add another 20-30% capacity for headroom and WAL. More info on disk sizing [here](https://prometheus.io/docs/prometheus/latest/storage/#operational-aspects).
 
 {% hint style="warning" %}
-More than 30 days of data should not be stored in Prometheus for larger clusters. For long-term data retention, contact us at support@kubecost.com about Kubecost with durable storage enabled. [More info on Kubecost storage here](../../storage.md).
+More than 30 days of data should not be stored in Prometheus for larger clusters. For long-term data retention, contact us at support@kubecost.com about Kubecost with durable storage enabled. [More info on Kubecost storage here](storage.md).
 {% endhint %}
 
 ## Setting requests and limits
@@ -34,7 +34,7 @@ To broaden usage to other teams or departments within your Kubecost environment,
 
 ### Ingress controller
 
-Establishing an ingress controller will allow for control of access for your workspace. Learn more about enabling external access in Kubecost with our [Ingress Examples](https://docs.kubecost.com/install-and-configure/install/ingress-examples) doc.
+Establishing an ingress controller will allow for control of access for your workspace. Learn more about enabling external access in Kubecost with our [Ingress Examples](/install-and-configure/install/ingress-examples.md) doc.
 
 ### SSO/SAML/RBAC
 
@@ -42,7 +42,7 @@ Establishing an ingress controller will allow for control of access for your wor
 SSO/SAML/RBAC are only officially supported on Kubecost Enterprise plans.
 {% endhint %}
 
-SSO/SAML/RBAC is able to be configured on a separate baseline deployment, which will not only shorten the deployment time of security features, but it will also avoid unwanted access denial. This is helpful when using only one developer deployment. See our [User Management](https://docs.kubecost.com/install-and-configure/advanced-configuration/user-management) doc to learn more.
+SSO/SAML/RBAC is able to be configured on a separate baseline deployment, which will not only shorten the deployment time of security features, but it will also avoid unwanted access denial. This is helpful when using only one developer deployment. See our [User Management](/install-and-configure/advanced-configuration/user-management/README.md) doc to learn more.
 
 ## Using an existing node exporter
 
@@ -61,10 +61,10 @@ You may optionally pass the following Helm flags to install Kubecost and its bun
 
 ## **Resource efficiency and idle costs**
 
-Efficiency and idle costs can teach you more about the cost-value of your Kubernetes spend by showing you how efficiently your resources are used. To learn more about pod resource efficiency and cluster idle costs, see [Efficiency and Idle](../../efficiency-idle.md).
+Efficiency and idle costs can teach you more about the cost-value of your Kubernetes spend by showing you how efficiently your resources are used. To learn more about pod resource efficiency and cluster idle costs, see [Efficiency and Idle](/using-kubecost/navigating-the-kubecost-ui/cost-allocation/efficiency-idle.md).
 
 ## **See also**
 
-* [Using an existing Prometheus installation](../../custom-prom.md)
-* [Using an existing Grafana installation](../../custom-grafana.md)
-* [Exposing Kubecost with an Ingress](../../ingress-examples.md)
+* [Using an existing Prometheus installation](custom-prom/custom-prom.md)
+* [Using an existing Grafana installation](custom-grafana.md)
+* [Exposing Kubecost with an Ingress](ingress-examples.md)
