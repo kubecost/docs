@@ -153,3 +153,6 @@ A: `.Values.kubecostToken` is primarily used to manage trial access and is provi
 
 Q: When attempting to view certain Savings Insights in my GCP-managed environment, I receive this error message: "Failed to load resources. Check that you have a valid service key and the cost analyzer API is running, then refresh." This is a 403 error which reasons `"ACCESS_TOKEN_SCOPE_INSUFFICIENT"`. How do I get access?\
 A. To receive access to these features, you need to properly configure Workload Identity for your service account. To learn more about this, see our [Accessing Kubecost with GCP Workload Identity](/install-and-configure/install/cloud-integration/gcp-out-of-cluster/accessing-kubecost-with-gcp-workload-identity.md) article for a step-by-step tutorial.
+
+Q: How can I configure node-exporter to use an internal cluster IP instead of the node network?\
+A: Set the following Helm value: `prometheus.nodeExporter.hostNetwork=false`.
