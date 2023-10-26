@@ -4,6 +4,8 @@
 This documentation should only be consulted when using Kubecost Cloud! For information about the Abandoned Workloads for self-hosted Kubecost, see [here](/foo.md).
 {% endhint %}
 
+This documentation should only be consulted when using Kubecost Cloud! For information about the Abandoned Workloads for self-hosted Kubecost, see [here](/bar.md).
+
 The Abandoned Workloads page can detect workloads which have not sent or received a meaningful rate of traffic over a configurable duration.
 
 You can access the Abandoned Workloads page by selecting _Savings_ in the left navigation, then selecting _Remedy abandoned workloads_.
