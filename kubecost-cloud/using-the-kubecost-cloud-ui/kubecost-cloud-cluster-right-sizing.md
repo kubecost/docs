@@ -1,7 +1,7 @@
 # Kubecost Cloud: Cluster Sizing Recommendations
 
 {% hint style="info" %}
-This documentation should only be consulted when using Kubecost Cloud! For information about cluster sizing recommendations for self-hosted Kubecost, see [here](/using-kubecost/navigating-the-kubecost-ui/savings/cluster-right-sizing-recommendations.md).
+This documentation should only be consulted when using Kubecost Cloud! For information about cluster sizing recommendations for self-hosted Kubecost, see [here](/using-kubecost/navigating-the-kubecost-ui/savings/cluster-right-sizing-recommendations/cluster-right-sizing-recommendations.md).
 {% endhint %}
 
 Kubecost Cloud can provide recommendations for right-sizing your clusters to ensure they are configured in the most cost-effective way. Recommendations are available for any and all clusters.
