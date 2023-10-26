@@ -23,7 +23,7 @@ jobs:
         with:
           fail: true
           debug: true
-          args: --verbose --no-progress '/*.md' './*.md' './**/*.md' './*.html' './**/*.html'
+          args: --verbose --no-progress '*.md' '/*.md' './*.md' './**/*.md' './*.html' './**/*.html'
 
       # - name: Create Issue From File
       #   if: steps.lychee.outputs.exit_code != 0
