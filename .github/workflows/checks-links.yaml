@@ -22,6 +22,7 @@ jobs:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
         with:
           fail: true
+          debug: true
           args: --verbose --no-progress './*.md' './**/*.md' './*.html' './**/*.html'
 
       # - name: Create Issue From File
