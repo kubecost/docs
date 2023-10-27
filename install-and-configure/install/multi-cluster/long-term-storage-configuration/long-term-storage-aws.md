@@ -42,10 +42,6 @@ config:
   part_size: 134217728
 ```
 
-{% hint style="info" %}
-Because this is a .yaml file, it requires the specific displayed indention.
-{% endhint %}
-
 ## Method 2: Attach IAM role to Service Account Method
 <a name="attach-role"></a>
 Instead of using a secret key in a file, many will want to use this method.
