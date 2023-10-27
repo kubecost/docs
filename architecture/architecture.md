@@ -1,6 +1,6 @@
 # Kubecost Core Architecture Overview
 
-Below are the major components deployed with the [Kubecost Helm chart](/install.md), excluding certain Enterprise components such as durable storage:
+Below are the major components deployed with the [Kubecost Helm chart](/install-and-configure/install//install.md), excluding certain Enterprise components such as durable storage:
 
 1. Kubecost Cost-Analyzer Pod
    1. Frontend: Runs Nginx and handles routing to Kubecost backend and Prometheus/Grafana
@@ -11,7 +11,7 @@ Below are the major components deployed with the [Kubecost Helm chart](/install.
    3. Node-exporter (optional): Provides metrics for reserved instance recommendations, various Kubecost Grafana dashboards, and cluster health alerts
    4. Pushgateway (optional): Provides the ability for users to push new metrics to Prometheus
    5. Alertmanager (optional): Used for custom alerts
-3. Network costs (optional): used for determining network egress costs. See our [Network Traffic Cost Allocation](https://docs.kubecost.com/using-kubecost/navigating-the-kubecost-ui/cost-allocation/network-allocation) doc for more information.
+3. Network costs (optional): used for determining network egress costs. See our [Network Traffic Cost Allocation](/using-kubecost/navigating-the-kubecost-ui/cost-allocation/network-allocation.md) doc for more information.
 4. Grafana (optional): Provides supporting dashboards for Kubecost product
 
 Today, the core Kubecost product can be run with just components 1 and 2.1. See an overview of core components in this diagram:
@@ -25,10 +25,10 @@ Kubecost interacts with provider pricing in a few different ways:
 * onDemand Rates (AWS, Azure, GCP, and Custom Pricing CSV)
 * Negotiated Rates (Azure, GCP, and Custom Pricing CSV)
 * Spot Data Feed (AWS)
-* [Cloud Provider Billing for Reconciliation and Out-of-Cluster Spend](/cloud-integration.md)
-  * [AWS Cost and Usage Report](/aws-cloud-integrations.md)
-  * [Azure Cost Export](/azure-out-of-cluster.md)
-  * [Google BigQuery Export](/gcp-out-of-cluster.md)
+* [Cloud Provider Billing for Reconciliation and Out-of-Cluster Spend](/install-and-configure/install/cloud-integration/README.md)
+  * [AWS Cost and Usage Report](/install-and-configure/install/cloud-integration/aws-cloud-integrations/aws-cloud-integrations.md)
+  * [Azure Cost Export](/install-and-configure/install/cloud-integration/azure-out-of-cluster/azure-out-of-cluster.md)
+  * [Google BigQuery Export](/install-and-configure/install/cloud-integration/gcp-out-of-cluster/README.md)
 
 In an Enterprise federated setup, only the Primary Kubecost Cluster needs access to the Cloud Provider Billing.
 
