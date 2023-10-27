@@ -26,7 +26,7 @@ If `true`, include idle cost (i.e. the cost of the un-allocated assets) as its o
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="external" type="boolean" required="false" %}
-If `true`, include [external, or out-of-cluster costs](/cloud-integration.md) in each allocation. Default is `false`.
+If `true`, include [external, or out-of-cluster costs](/install-and-configure/install/cloud-integration/README.md) in each allocation. Default is `false`.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="filterClusters" type="string" required="false" %}
