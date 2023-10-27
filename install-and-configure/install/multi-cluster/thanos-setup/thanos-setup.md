@@ -4,13 +4,13 @@
 This feature is only officially supported on Kubecost Enterprise plans.
 {% endhint %}
 
-There are two primary methods to aggregate all cluster information back to a single Kubecost UI described in our [Multi-Cluster](/install-and-configure/install/multi-cluster/multi-cluster.md#enterprise-federation) article.
+Thanos is a tool to aggregate Prometheus metrics to a central object storage (S3 compatible) bucket. Thanos is implemented as a sidecar on the Prometheus pod on all clusters. Thanos Federation is one of two primary methods to aggregate all cluster information back to a single view as described in our [Multi-Cluster](/install-and-configure/install/multi-cluster/multi-cluster.md#enterprise-federation) article.
 
 The *preferred* method for multi-cluster is [ETL Federation](/install-and-configure/install/multi-cluster/federated-etl/federated-etl.md). The configuration guide below is for Kubecost Thanos Federation, which may not scale as well as ETL Federation in large environments.
 
-## Configuration
+This guide will cover how to enable Thanos on your primary cluster, and on any additional secondary clusters.
 
-Thanos is a tool to aggregate Prometheus metrics to a central object storage (S3 compatible) bucket. Thanos is implemented as a sidecar on the Prometheus pod on all clusters.
+## Configuration
 
 1. Follow steps [here](configuring-thanos.md) to enable all required Thanos components on a Kubecost primary cluster, including the Prometheus sidecar.
 2. For each additional cluster, only the Thanos sidecar is needed.
