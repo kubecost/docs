@@ -14,7 +14,7 @@ Integrating your AWS account with Kubecost may be a complicated process if you a
 
 **Cost and Usage Report**: AWS report which tracks cloud spending and writes to an Amazon Simple Storage Service (Amazon S3) bucket for ingestion and long term historical data. The CUR is originally formatted as a CSV, but when integrated with Athena, is converted to Parquet format.
 
-**Amazon Athena:** Analytics service which queries the CUR S3 bucket for your AWS cloud spending, then outputs data to a separate S3 bucket. Kubecost uses Athena to query for the bill data to perform [reconciliation](https://docs.kubecost.com/install-and-configure/install/cloud-integration#reconciliation). Athena is technically optional for AWS cloud integration, but as a result, Kubecost will only provide unreconciled costs (on-demand public rates).
+**Amazon Athena:** Analytics service which queries the CUR S3 bucket for your AWS cloud spending, then outputs data to a separate S3 bucket. Kubecost uses Athena to query for the bill data to perform [reconciliation](/install-and-configure/install/cloud-integration/README.md#reconciliation). Athena is technically optional for AWS cloud integration, but as a result, Kubecost will only provide unreconciled costs (on-demand public rates).
 
 **S3 bucket:** Cloud object storage tool which both CURs and Athena output cost data to. Kubecost needs access to these buckets in order to read that data.
 
