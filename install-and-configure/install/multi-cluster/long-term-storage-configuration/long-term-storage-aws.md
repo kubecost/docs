@@ -14,7 +14,7 @@ Both methods require an S3 bucket. Our example bucket is named `kc-thanos-store`
 
 This is a simple S3 bucket with all public access blocked. No other bucket configuration changes should be required.
 
-Once created, add an IAM policy to access this bucket. This is covered in our [AWS Thanos IAM Policy](/aws-service-account-thanos.md) doc.
+Once created, add an IAM policy to access this bucket. See our [AWS Thanos IAM Policy](aws-service-account-thanos.md) doc for instructions.
 
 ## Method 1: Kubernetes Secret Method
 <a name="secret"></a>

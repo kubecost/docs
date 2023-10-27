@@ -10,7 +10,7 @@ If you want to learn more about the APIs that power 1-click RRS, including their
 
 ## Setup
 
-See the high-level [container request right-sizing guide](/auto-request-sizing.md).
+See the high-level [container request right-sizing guide](auto-request-sizing.md).
 
 ## Using 1-click RRS
 
