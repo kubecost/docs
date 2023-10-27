@@ -48,12 +48,8 @@ saml:
 
 ## Setup guides
 
-* [Microsoft Entra ID (formerly Azure AD) setup guide](/install-and-configure/advanced-configuration/user-management/microsoft-entra-id-sso-integration-for-kubecost.md)
+* [Microsoft Entra ID (formerly Azure AD) setup guide](microsoft-entra-id-sso-integration-for-kubecost.md)
 * [Okta setup guide](https://github.com/kubecost/poc-common-configurations/tree/main/saml-okta)
-
-{% hint style="info" %}
-All SAML 2.0 providers also work. The above guides can be used as templates for what is required.
-{% endhint %}
 
 {% hint style="info" %}
 All SAML 2.0 providers also work. The above guides can be used as templates for what is required.
@@ -83,7 +79,7 @@ You will be able to view your current SAML Group in the Kubecost UI by selecting
 
 ## SAML troubleshooting guide
 
-1. Disable SAML and confirm that the cost-analyzer pod starts.
+1. Disable SAML and confirm that the `cost-analyzer` pod starts.
 2.  If step 1 is successful, but the pod is crashing or never enters the ready state when SAML is added, it is likely that there is panic loading or parsing SAML data.
 
     `kubectl logs deployment/kubecost-cost-analyzer -c cost-model -n kubecost`
@@ -121,7 +117,7 @@ $ curl https://dev-elu2z98r.auth0.com/samlp/metadata/c6nY4M37rBP0qSO1IYIqBPPyIPx
 ```
 {% endcode %}
 
-### Common SAML error states are as follows:
+### Common SAML errors
 
 **The URL returns a 404 error or returning HTML**
 

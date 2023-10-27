@@ -19,19 +19,20 @@ Kubecost Cloud uses an agent to gather metrics and send them to our SaaS platfor
 
 ## Disabling the network costs daemonSet
 
-The network costs daemonSet will be installed to your Kubecost Cloud by default, however you can manually disable it by adjusting the Helm value, shown [here](https://github.com/kubecost/cost-analyzer-helm-chart/blob/fed60664f67ed5ef7b9e5947e7c28a9bde366cde/cost-analyzer/values.yaml#L682), or running this Helm upgrade command:
+The network costs daemonSet will be installed to your Kubecost Cloud by default, however you can manually disable it by running this Helm upgrade command:
 
 {% hint style="info" %}
-Remember to provide your correct agent key, cluster name, and reporting server in the below example code block.
+Remember to provide your correct agent key and cluster ID in the below example code block.
 {% endhint %}
 
 ```sh
-helm upgrade kubecost cost-analyzer \
---repo https://kubecost.github.io/cost-analyzer/ \
---namespace kubecost-cloud \
+helm upgrade --install kubecost-cloud \
+--repo https://kubecost.github.io/kubecost-cloud-agent/ kubecost-cloud-agent \
+--namespace kubecost-cloud --create-namespace \
+-f https://raw.githubusercontent.com/kubecost/kubecost-cloud-agent/main/values-cloud-agent.yaml \
+--set imageVersion="lunar-sandwich.v0.1.2" \
 --set cloudAgentKey="AGENTKEY" \
---set cloudAgentClusterId="CLUSTER_NAME" \
---set cloudReportingServer="REPORTING_SERVER" \
---set networkCosts.enabled=false \
--f values-cloud-agent.yaml
+--set cloudAgentClusterId="cluster-1" \
+--set cloudReportingServer="collector.app.kubecost.com:31357" \
+--set networkCosts.enabled=false
 ```

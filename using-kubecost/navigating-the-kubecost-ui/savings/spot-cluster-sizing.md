@@ -1,2 +1,0 @@
-# Spot Cluster Sizing
-
