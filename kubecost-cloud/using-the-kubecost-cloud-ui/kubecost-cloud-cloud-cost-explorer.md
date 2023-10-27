@@ -1,7 +1,7 @@
 # Kubecost Cloud: Cloud Cost Explorer
 
 {% hint style="info" %}
-This documentation should only be consulted when using Kubecost Cloud! For information about the Cloud Cost Explorer dashboard for self-hosted Kubecost, see [here](https://docs.kubecost.com/using-kubecost/navigating-the-kubecost-ui/assets).
+This documentation should only be consulted when using Kubecost Cloud! For information about the Cloud Cost Explorer dashboard for self-hosted Kubecost, see [here](/using-kubecost/navigating-the-kubecost-ui/cloud-costs-explorer.md).
 {% endhint %}
 
 The Cloud Cost Explorer is a dashboard which provides visualization and filtering of your cloud spending. This dashboard includes the costs for all assets in your connected cloud accounts by pulling from those providers' Cost and Usage Reports (CURs) or other cloud billing reports.
