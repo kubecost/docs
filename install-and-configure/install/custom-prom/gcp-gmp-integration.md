@@ -126,6 +126,15 @@ You should receive an output similar to:
       },
 ```
 
+{% hint style="info" %}
+If `id` returns as a blank value, you can set the following Helm flah to force set `cluster` as the Prometheus cluster ID label:
+
+```
+kubecostModel:
+promClusterIDLabel: cluster
+```
+{% endhint %}
+
 If the above queries fail, check the following:
 
 1. Check logs of the `sigv4proxy` container (may be the Kubecost deployment or Prometheus Server deployment depending on your setup):
@@ -155,4 +164,4 @@ Example errors:
 ERR CostModel.ComputeAllocation: pod query 1 try 2 failed: avg(kube_pod_container_status_running...
 Prometheus communication error: 502 (Bad Gateway) ...
 
-Additionally, read our [Custom Prometheus integration troubleshooting guide](custom-prom.md#troubleshooting) if you run into any errors while setting up the integration. For support from GCP, you can submit a support request at the [GCP support hub](https://cloud.google.com/support-hub).
+Additionally, read our [Custom Prometheus integration troubleshooting guide](custom-prom.md#troubleshooting) if you run into any other errors while setting up the integration. For support from GCP, you can submit a support request at the [GCP support hub](https://cloud.google.com/support-hub).
