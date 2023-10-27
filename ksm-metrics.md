@@ -4,7 +4,7 @@ The default Kubecost installation no longer includes a bundled [KSM deployment](
 
 ## KSM metrics emitted by Kubecost
 
-The following table shows all KSM metrics required by and implemented in Kubecost. Note, that the below metrics & labels follow conventions of KSMv1, not KSMv2.
+The following table shows all KSM metrics required by and implemented in Kubecost. The below metrics and labels follow conventions of KSMv1, not KSMv2.
 
 | Category       | KSM Metric                                                   |
 | -------------- | ------------------------------------------------------------ |
