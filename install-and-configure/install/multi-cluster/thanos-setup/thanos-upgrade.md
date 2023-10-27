@@ -10,7 +10,9 @@ The PR bumps the image version, adds the [query-frontend](https://thanos.io/tip/
 
 This is simplified if you're using our default _values-thanos.yaml_, which has the new configs already.
 
-> **Note**: For the Thanos Secret you're using, the "encrypt-sse" line needs to be removed. Everything else should stay the same.
+{% hint style="info" %}
+For the Thanos Secret you're using, the `encrypt-sse` line needs to be removed. Everything else should stay the same.
+{% endhint %}
 
 For example, view this sample config:
 
@@ -23,7 +25,7 @@ config:
   access_key: ${your_access_key}
   insecure: false
   signature_version2: false
-  #encrypt_sse: false <--- THIS LINE NEEDS TO BE DELETED
+  #encrypt_sse: false <= Remove this line!
   secret_key: ${your_secret_here}
   put_user_metadata:
       "X-Amz-Acl": "bucket-owner-full-control"
