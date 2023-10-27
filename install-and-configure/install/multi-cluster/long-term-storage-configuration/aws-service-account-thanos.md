@@ -9,7 +9,8 @@ In order to create an AWS IAM policy for use with Thanos:
 3. Add the following JSON in the policy editor:
 
 {% hint style="info" %}
-Make sure to replace `<your-bucket-name>` with the name of your newly created S3 bucket
+Make sure to replace `<your-bucket-name>` with the name of your newly-created S3 bucket.
+
 {% endhint %}
 
     ```
