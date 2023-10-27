@@ -60,10 +60,10 @@ GitHub: [https://github.com/google/cadvisor](https://github.com/google/cadvisor)
 ## Kube-State-Metrics (KSM)
 =======
 ## Kube-State-Metrics
-The following KSM metrics are both consumed and emitted by the Kubecost installation. The `cost-model` replicates all of these metrics such that a KSM installation is not actually required. Read more [here](ksm-metrics.md).
+The following KSM metrics are both consumed and emitted by the Kubecost installation. The `cost-model` replicates all of these metrics such that a KSM installation is not actually required. Read more in our [KSM Metrics](ksm-metrics.md) doc.
 >>>>>>> main:architecture/user-metrics.md
 
-Although the default Kubecost installation does not include a [KSM deployment](https://github.com/kubernetes/kube-state-metrics), Kubecost does calculate & emit the below metrics. Note, that the below metrics & labels follow conventions of KSMv1, not KSMv2. Further details [here](/ksm-metrics.md).
+Although the default Kubecost installation does not include a [KSM deployment](https://github.com/kubernetes/kube-state-metrics), Kubecost does calculate & emit the below metrics. The below metrics and labels follow conventions of KSMv1, not KSMv2.
 
 | Metric                          | Description              |
 | ------------------------------- | ------------------------ |
