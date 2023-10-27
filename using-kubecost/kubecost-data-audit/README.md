@@ -1,12 +1,12 @@
 # Kubecost Data Audit
 
-When configuring the [Cloud Billing Integration](/cloud-integration.md), Kubecost is able to reconcile its predictions (which leverage public pricing APIs) with actual billing data to improve accuracy. After Kubecost ingests and reconciles against your cloud billing data, it's able to provide 95%+ accuracy for Kubernetes costs, and 99%+ accuracy for out-of-cluster costs.
+When configuring the [Cloud Billing Integration](/install-and-configure/install/cloud-integration/README.md), Kubecost is able to reconcile its predictions (which leverage public pricing APIs) with actual billing data to improve accuracy. After Kubecost ingests and reconciles against your cloud billing data, it's able to provide 95%+ accuracy for Kubernetes costs, and 99%+ accuracy for out-of-cluster costs.
 
 This doc provides guidance on how to validate the prices in Kubecost match that of your cloud provider's cost management dashboard.
 
 ## Prerequisite
 
-Before comparing costs between Kubecost and your cloud provider's cost management dashboard, ensure your Kubecost deployment has configured [Cloud Billing Integrations](/cloud-integration.md).
+Before comparing costs between Kubecost and your cloud provider's cost management dashboard, ensure your Kubecost deployment has configured [Cloud Billing Integrations](/install-and-configure/install/cloud-integration/README.md).
 
 ## Viewing detailed costs of a node in Kubecost
 
@@ -39,4 +39,4 @@ curl -G http://localhost:9090/model/assets \
     -d 'filterProviders=AWS'
 ```
 
-For more configuration options, visit the [Assets API doc](/assets-api.md).
+For more configuration options, visit the [Assets API doc](/apis/apis-overview/assets-api.md).
