@@ -68,11 +68,12 @@
   * [Cluster Controller](install-and-configure/advanced-configuration/controller/cluster-controller.md)
     * [Cluster Turndown](install-and-configure/advanced-configuration/controller/cluster-turndown.md)
     * [TurndownSchedule Migration Guide](install-and-configure/advanced-configuration/controller/turndown-schedule-migration-guide.md)
-  * [Kubecost Data Status Metrics](install-and-configure/advanced-configuration/data-status-metrics.md)
   * [High Availability Kubecost](install-and-configure/advanced-configuration/high-availability.md)
   * [Availability Tiers](install-and-configure/advanced-configuration/availability-tiers.md)
   * [CSV Pricing](install-and-configure/advanced-configuration/csv-pricing.md)
   * [Windows Node Support](install-and-configure/advanced-configuration/windows-node-support.md)
+  * [Kubecost Data Status Metrics](install-and-configure/advanced-configuration/data-status-metrics.md)
+  * [Service Key rotation](install-and-configure/advanced-configuration/key-rotation.md)
 
 ## Using Kubecost
 
