@@ -20,7 +20,8 @@ Once created, add an IAM policy to access this bucket. This is covered in our [A
 <a name="secret"></a>
 To use the Kubernetes secret method for allowing access, create a .yaml file named `object-store.yaml` with contents similar to the following example. See region to endpoint mappings [here](https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region).
 
-```
+```yaml
+
 type: S3
 config:
   bucket: "kc-thanos-store"
