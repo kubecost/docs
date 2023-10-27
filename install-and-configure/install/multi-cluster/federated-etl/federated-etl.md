@@ -1,14 +1,10 @@
 # ETL Federation (preferred)
 
-There are two primary methods to aggregate all cluster information back to a single Kubecost UI described in the [Multi-Cluster](/install-and-configure/install/multi-cluster/multi-cluster.md#enterprise-federation) doc.
-
-Below is the configuration guide using **Kubecost ETL Federation**.
-
 {% hint style="info" %}
 Federated ETL is only officially supported for Kubecost Enterprise plans.
 {% endhint %}
 
-Federated extract, transform, load (ETL) gives teams the benefit of combining multiple Kubecost installations into one view without dependency on Thanos.
+Federated extract, transform, load (ETL) is one of two methods to aggregate all cluster information back to a single display described in our [Multi-Cluster](/install-and-configure/install/multi-cluster/multi-cluster.md#enterprise-federation) doc. Federated ETL gives teams the benefit of combining multiple Kubecost installations into one view without dependency on Thanos.
 
 There are two primary advantages for using ETL Federation:
 
@@ -23,7 +19,7 @@ There are two primary advantages for using ETL Federation:
 
 This guide has specific detail on how ETL Configuration works and deployment options.
 
-Alternatively, a repo with the most common configurations can be found [here](https://github.com/kubecost/poc-common-configurations/tree/main/etl-federation).
+Alternatively, the most common configurations can be found in our [poc-common-configurations](https://github.com/kubecost/poc-common-configurations/tree/main/etl-federation) repo.
 
 ### Clusters
 
@@ -48,7 +44,7 @@ The Storages referred to here are an S3 (or GCP/Azure equivalent) storage bucket
 * **The Federator**: A component of the cost-model which is run on the Federator Cluster, which can be a Federated Cluster, a Primary Cluster, or neither. The Federator takes the ETL binaries from Federated Storage and merges them, adding them to Combined Storage.
 * **Federated ETL**: The pipeline containing the above components.
 
-## Federated ETL Architecture
+## Federated ETL architecture
 
 This diagram shows an example setup of the Federated ETL with:
 
@@ -139,4 +135,4 @@ When using ETL Federation, there are several methods to recover Kubecost data in
 
 ### Repairing ETL
 
-In the event of missing or inaccurate data, you may need to rebuild your ETL pipelines. This is a documented procedure. See the [Repair Kubecost ETLs](https://docs.kubecost.com/troubleshooting/etl-repair) doc for information and troubleshooting steps.
+In the event of missing or inaccurate data, you may need to rebuild your ETL pipelines. This is a documented procedure. See the [Repair Kubecost ETLs](/troubleshooting/etl-repair.md) doc for information and troubleshooting steps.
