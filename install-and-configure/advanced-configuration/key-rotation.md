@@ -22,7 +22,7 @@ The primary sequence for setting up your key is:
 There are two methods for enabling multi-clustering in Kubecost:
 
 1. [ETL Federation](/install-and-configure/install/multi-cluster/federated-etl/federated-etl.md)
-2. [Thanos](/install-and-configure/install/multi-cluster/thanos-setup/README.md)
+2. [Thanos](/install-and-configure/install/multi-cluster/thanos-setup/thanos-setup.md)
 
 Depending on which method you are using, the key rotation process differs.
 
