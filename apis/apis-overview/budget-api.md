@@ -147,11 +147,11 @@ Creating and updating recurring budget rules uses POST requests, which will requ
 
 ## Using the `id` parameter
 
-The `id` parameter when using the endpoint `/setRecurringBudgetRules` is considered optional, but its use will vary depending on whether you want to create or update a budget rule.&#x20;
+The `id` parameter when using the endpoint `/budget` is considered optional, but its use will vary depending on whether you want to create or update a budget rule.
 
 When creating a new budget rule, `id` should not be used. An ID for the budget rule will then be randomly generated in the response. When updating an existing budget rule, `id` needs to be used to identify which budget rule you want to modify, even if you only have one existing rule.
 
-The `id` value of your recurring budget is needed to update or delete it. If you don't have the `id` value saved, you can retrieve it using `/getRecurringBudgetRules`, which will generate all existing budgets and their respective `id` values.
+The `id` value of your recurring budget is needed to update or delete it. If you don't have the `id` value saved, you can retrieve it using `/budgets`, which will generate all existing budgets and their respective `id` values.
 
 ## Using Budget Actions
 
@@ -201,7 +201,7 @@ curl --location '<your-kubecost-address>/model/budget' \
         "spendLimit": 100,
         "actions" : [
             {
-                "amount": 75,
+                "percentage": 75,
                 "emails": [
                     "foo@kubecost.com",
                 ]
@@ -226,7 +226,7 @@ curl --location '<your-kubecost-address>/model/budget' \
         "spendLimit": 400,
         "actions" : [
              {
-                "percentage": 100,
+                "percentage": 25,
                 "slackWebhooks": [
                     "<example Slack webhook>"
                 ],
