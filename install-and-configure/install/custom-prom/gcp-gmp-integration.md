@@ -131,7 +131,7 @@ If `id` returns as a blank value, you can set the following Helm value to force 
 
 ```
 kubecostModel:
-promClusterIDLabel: cluster
+  promClusterIDLabel: cluster
 ```
 {% endhint %}
 
