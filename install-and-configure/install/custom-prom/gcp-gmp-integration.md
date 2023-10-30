@@ -85,7 +85,7 @@ CLUSTER_ID=YOUR_CLUSTER_NAME
 If you have set `kubecostModel.promClusterIDLabel` in the Helm chart, you will need to change the query (`CLUSTER_ID`) to match the label.
 
 ```bash
-kubectl exec -i -t -n $KUBECOST_NAMESPACE \
+kubectl exec -it -n $KUBECOST_NAMESPACE \
   deployments/$KUBECOST_DEPLOYMENT -c cost-analyzer-frontend \
   -- curl "0:9090/model/prometheusQuery?query=container_memory_working_set_bytes\{CLUSTER_ID=\"$CLUSTER_ID\"\}" \
  |jq
