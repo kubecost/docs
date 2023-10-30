@@ -163,5 +163,6 @@ Example errors:
 ```log
 ERR CostModel.ComputeAllocation: pod query 1 try 2 failed: avg(kube_pod_container_status_running...
 Prometheus communication error: 502 (Bad Gateway) ...
+```
 
 Additionally, read our [Custom Prometheus integration troubleshooting guide](custom-prom.md#troubleshooting) if you run into any other errors while setting up the integration. For support from GCP, you can submit a support request at the [GCP support hub](https://cloud.google.com/support-hub).
