@@ -155,7 +155,7 @@ time="2023-09-21T17:40:15Z" level=info msg="Listening on :8005" port=":8005"
 2. Check logs in the `cost-model` container for Prometheus connection issues:
 
 ```bash
-kubectl logs deployments/$KUBECOST_DEPLOYMENT -c cost-model --tail -1 |grep -i err
+kubectl logs deployments/$KUBECOST_DEPLOYMENT -c cost-model --tail -1 | grep -i err
 ```
 
 Example errors:
