@@ -82,7 +82,7 @@ CLUSTER_ID=YOUR_CLUSTER_NAME
 
 1. Verify connection to GMP and that the metric for `container_memory_working_set_bytes` is available:
 
-If you have set `kubecostModel.promClusterIDLabel`, you will need to change the query (`CLUSTER_ID`) to match the label.
+If you have set `kubecostModel.promClusterIDLabel` in the Helm chart, you will need to change the query (`CLUSTER_ID`) to match the label.
 
 ```bash
 kubectl exec -i -t -n $KUBECOST_NAMESPACE \
