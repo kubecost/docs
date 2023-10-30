@@ -94,7 +94,7 @@ kubectl exec -it -n $KUBECOST_NAMESPACE \
 2. Verify Kubecost metrics are available in GMP:
 
 ```bash
-kubectl exec -i -t -n $KUBECOST_NAMESPACE \
+kubectl exec -it -n $KUBECOST_NAMESPACE \
   deployments/$KUBECOST_DEPLOYMENT -c cost-analyzer-frontend \
   -- curl "0:9090/model/prometheusQuery?query=node_total_hourly_cost\{CLUSTER_ID=\"$CLUSTER_ID\"\}" \
  |jq
