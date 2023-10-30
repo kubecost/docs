@@ -88,7 +88,7 @@ If you have set `kubecostModel.promClusterIDLabel` in the Helm chart, you will n
 kubectl exec -it -n $KUBECOST_NAMESPACE \
   deployments/$KUBECOST_DEPLOYMENT -c cost-analyzer-frontend \
   -- curl "0:9090/model/prometheusQuery?query=container_memory_working_set_bytes\{CLUSTER_ID=\"$CLUSTER_ID\"\}" \
- |jq
+ | jq
 ```
 
 2. Verify Kubecost metrics are available in GMP:
