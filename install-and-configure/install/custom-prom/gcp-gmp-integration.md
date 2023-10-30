@@ -129,7 +129,7 @@ You should receive an output similar to:
 {% hint style="info" %}
 If `id` returns as a blank value, you can set the following Helm value to force set `cluster` as the Prometheus cluster ID label:
 
-```
+```yaml
 kubecostModel:
   promClusterIDLabel: cluster
 ```
