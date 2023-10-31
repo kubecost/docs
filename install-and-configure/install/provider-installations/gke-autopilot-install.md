@@ -1,6 +1,6 @@
-# Installing Kubecost on GKE Autopilot
+# Installing Kubecost on Google Kubernetes Engine Autopilot Clusters
 
-## Installing Kubecost via Helm
+## Installing Kubecost for GKE Autopilot via Helm
 
 Installing Kubecost on an GKE Autopilot cluster is the same as other cloud providers with Helm v3.1+, with a few changes. Autopilot requires the use of Google Managed Prometheus service, which generates additional costs within your Google Cloud account. 
 
