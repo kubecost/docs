@@ -47,12 +47,12 @@ You can view a list of common config options [here](https://github.com/kubecost/
 
 * You can adjust log level using the `extraArgs` config:
 
-```yaml
-networkCosts:
-  enabled: true
-  extraArgs:
-    - "-v=0"
-    ```
+  ```yaml
+  networkCosts:
+    enabled: true
+    extraArgs:
+      - "-v=0"
+  ```
 
 * The levels range from 0 to 5, with 0 being the least verbose (only showing panics) and 5 being the most verbose (showing trace-level information).
 * Ref: [sig-instrumentation](https://github.com/kubernetes/community/blob/0e9fa4a1c45203527a7ce35eaff09204d6b7b331/contributors/devel/sig-instrumentation/logging.md)
