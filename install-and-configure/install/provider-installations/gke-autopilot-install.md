@@ -1,4 +1,4 @@
-# Installing Kubecost on Google Kubernetes Engine Autopilot Clusters
+# Installing Kubecost on GKE Autopilot Clusters
 
 ## Installing Kubecost for GKE Autopilot via Helm
 
