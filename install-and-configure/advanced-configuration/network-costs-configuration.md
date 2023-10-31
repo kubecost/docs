@@ -8,11 +8,11 @@ When networkCost is enabled, Kubecost gathers pod-level network traffic metrics 
 
 See this doc for more detail on [network cost allocation methodology](/using-kubecost/navigating-the-kubecost-ui/cost-allocation/network-allocation.md).
 
-The network-costs metrics are collected using a daemonset (one pod per node) that uses source and destination detail to determine egress and ingress data transfers by pod and are classified as internet, cross-region and cross-zone.
+The network costs metrics are collected using a daemonset (one pod per node) that uses source and destination detail to determine egress and ingress data transfers by pod and are classified as internet, cross-region and cross-zone.
 
 ## Usage
 
-With the network-costs daemonset enabled, the Network column on the Allocations page will reflect the portion of network transfer costs based on the chart-level aggregation.
+With the network costs daemonset enabled, the Network column on the Allocations page will reflect the portion of network transfer costs based on the chart-level aggregation.
 
 ![network-cost-allocation](/images/network-cost-allocation.png)
 
@@ -98,7 +98,7 @@ networkCosts:
 
 ## Resource limiting
 
-In order to reduce resource usage, Kubecost recommends setting a CPU limit on the network-costs daemonset. This will cause a few seconds of delay during peak usage and does not affect overall accuracy. This is done by default in Kubecost 1.99+.
+In order to reduce resource usage, Kubecost recommends setting a CPU limit on the network costs daemonset. This will cause a few seconds of delay during peak usage and does not affect overall accuracy. This is done by default in Kubecost 1.99+.
 
 For existing deployments, these are the recommended values:
 
@@ -115,7 +115,7 @@ networkCosts:
 
 ### Benchmarking metrics
 
-The network-simulator was used to real-time simulate updating ConnTrack entries while simultaneously running a cluster simulated network-costs instance. To profile the heap, after a warmup of roughly five minutes, a heap profile of 1,000,000 ConnTrack entries was gathered and examined.
+The network-simulator was used to real-time simulate updating ConnTrack entries while simultaneously running a cluster simulated network costs instance. To profile the heap, after a warmup of roughly five minutes, a heap profile of 1,000,000 ConnTrack entries was gathered and examined.
 
 Each ConnTrack entry is equivalent to two transport directions, so every ConnTrack entry is two map entries (connections).
 
@@ -196,11 +196,11 @@ networkCosts:
       #     - "10.0.0.0/24"
 ```
 
-## Permissions required
+## Permissions
 
-The network-costs daemonset requires a privileged [`spec.containers[*].securityContext`](https://kubernetes.io/docs/concepts/security/pod-security-standards/) and `hostNetwork: true` in order to leverage an underlying kernel module to capture network data.
+The network costs daemonset requires a privileged [`spec.containers[*].securityContext`](https://kubernetes.io/docs/concepts/security/pod-security-standards/) and `hostNetwork: true` in order to leverage an underlying kernel module to capture network data.
 
-Additionally, the network-costs daemonset mounts to the following directories on the host filesytem. It needs both read & write access. The network-costs daemonset will only write to the filesystem to enable `conntrack` ([docs ref](https://www.kernel.org/doc/Documentation/networking/nf_conntrack-sysctl.txt))
+Additionally, the network costs daemonset mounts to the following directories on the host filesytem. It needs both read & write access. The network costs daemonset will only write to the filesystem to enable `conntrack` ([docs ref](https://www.kernel.org/doc/Documentation/networking/nf_conntrack-sysctl.txt))
 
 * `/proc/net/`
 * `/proc/sys/net/netfilter`
