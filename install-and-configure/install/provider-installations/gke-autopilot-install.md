@@ -2,14 +2,13 @@
 
 ## Installing Kubecost for GKE Autopilot via Helm
 
-Installing Kubecost on an GKE Autopilot cluster is the same as other cloud providers with Helm v3.1+, with a few changes. Autopilot requires the use of Google Managed Prometheus service, which generates additional costs within your Google Cloud account. 
+Installing Kubecost on a GKE Autopilot cluster is similar to other cloud providers with Helm v3.1+, with a few changes. Autopilot requires the use of [Google Managed Prometheus](/install-and-configure/install/custom-prom/gcp-gmp-integration.md) service, which generates additional costs within your Google Cloud account.
 
 `helm install kubecost/cost-analyzer -n kubecost -f values.yaml`
 
 Your _values.yaml_ files must contain the below parameters. Resources are specified for each section of the Kubecost deployment, and Pod Security Policies are disabled.
 
 ```
-
 kubecostProductConfigs:
   clusterName: "<clusterName>" # used for display in Kubecost UI
 
@@ -89,6 +88,7 @@ Open the OperatorConfig on your Autopilot Cluster resource for editing:
 ```
 kubectl -n gmp-public edit operatorconfig config
 ```
+
 Add the following collection section to the resource:
 
 ```
@@ -102,11 +102,4 @@ collection:
     interval: 30s
 ```
 
-Save the file and close the editor.
-
-After a short time, the Kubelet metric endpoints will be scraped and the metrics become available for querying in Managed Service for Prometheus.
-
-## Conclusion
-
-Congrats! You will now have a working deployment of Kubecost for GKE Autipilot that uses metrics from Google Manage Prometheus.
-
+Save the file and close the editor. After a short time, the Kubelet metric endpoints will be scraped and the metrics become available for querying in Managed Service for Prometheus.
