@@ -6,7 +6,7 @@ Kubecost requires a Kubernetes cluster to be deployed.
 
 * Users should be running Kubernetes 1.20+.
 * Kubernetes 1.28 is officially supported as of v1.105.
-* Older versions than supported of Kubernetes may work, but may rely on individual configurations. Use at your own risk.
+* Versions outside of the stated compatibility range may work, depending on individual configurations, but are untested.
 * 
 ## Supported cluster types
 
