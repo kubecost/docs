@@ -106,4 +106,7 @@ Save the file and close the editor.
 
 After a short time, the Kubelet metric endpoints will be scraped and the metrics become available for querying in Managed Service for Prometheus.
 
+## Conclusion
+
+Congrats! You will now have a working deployment of Kubecost for GKE Autipilot that uses metrics from Google Manage Prometheus.
 
