@@ -47,11 +47,11 @@ You can view a list of common config options [here](https://github.com/kubecost/
 
 * You can adjust log level using the `extraArgs` config:
 
-    ```yaml
-    networkCosts:
-      enabled: true
-      extraArgs:
-        - "-v=0"
+```yaml
+networkCosts:
+  enabled: true
+  extraArgs:
+    - "-v=0"
     ```
 
 * The levels range from 0 to 5, with 0 being the least verbose (only showing panics) and 5 being the most verbose (showing trace-level information).
