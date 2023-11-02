@@ -8,11 +8,11 @@ When networkCost is enabled, Kubecost gathers pod-level network traffic metrics 
 
 See this doc for more detail on [network cost allocation methodology](/using-kubecost/navigating-the-kubecost-ui/cost-allocation/network-allocation.md).
 
-The network-costs metrics are collected using a daemonset (one pod per node) that uses source and destination detail to determine egress and ingress data transfers by pod and are classified as internet, cross-region and cross-zone.
+The network costs metrics are collected using a daemonset (one pod per node) that uses source and destination detail to determine egress and ingress data transfers by pod and are classified as internet, cross-region and cross-zone.
 
 ## Usage
 
-With the network-costs daemonset enabled, the Network column on the Allocations page will reflect the portion of network transfer costs based on the chart-level aggregation.
+With the network costs daemonset enabled, the Network column on the Allocations page will reflect the portion of network transfer costs based on the chart-level aggregation.
 
 ![network-cost-allocation](/images/network-cost-allocation.png)
 
@@ -37,28 +37,25 @@ networkCosts:
 
 You can view a list of common config options [here](https://github.com/kubecost/cost-analyzer-helm-chart/blob/700cfa306c8e78bc9a1039b584769b9a0e0757d0/cost-analyzer/values.yaml#L573).
 
-### Prometheus:
+### Prometheus
 
 * If using Kubecost-bundled Prometheus instance, the scrape is automatically configured.
 * If you are integrating with an existing Prometheus, you can set `networkCosts.prometheusScrape=true` and the network costs service should be auto-discovered.
 * Alternatively, a serviceMonitor is also [available](https://github.com/kubecost/cost-analyzer-helm-chart/blob/700cfa306c8e78bc9a1039b584769b9a0e0757d0/cost-analyzer/values.yaml#L716).
 
-### Log Level:
+### Log Level
 
-*   You can adjust log level using the `extraArgs` config:
+* You can adjust log level using the `extraArgs` config:
 
-    ```yaml
-    networkCosts:
-      enabled: true
-      extraArgs:
-        - "-v=0"
-    ```
+  ```yaml
+  networkCosts:
+    enabled: true
+    extraArgs:
+      - "-v=0"
+  ```
+
 * The levels range from 0 to 5, with 0 being the least verbose (only showing panics) and 5 being the most verbose (showing trace-level information).
 * Ref: [sig-instrumentation](https://github.com/kubernetes/community/blob/0e9fa4a1c45203527a7ce35eaff09204d6b7b331/contributors/devel/sig-instrumentation/logging.md)
-
-{% hint style="info" %}
-Network cost, which is disabled by default, needs to be run as a privileged pod to access the relevant networking kernel module on the host machine. The pod name will be "kubecost-network-costs-xxxxxx-xxxxx" where x is the Pod ID.
-{% endhint %}
 
 ## Cloud Provider Service Tagging
 
@@ -101,7 +98,7 @@ networkCosts:
 
 ## Resource limiting
 
-In order to reduce resource usage, Kubecost recommends setting a CPU limit on the network-costs daemonset. This will cause a few seconds of delay during peak usage and does not affect overall accuracy. This is done by default in Kubecost 1.99+.
+In order to reduce resource usage, Kubecost recommends setting a CPU limit on the network costs daemonset. This will cause a few seconds of delay during peak usage and does not affect overall accuracy. This is done by default in Kubecost 1.99+.
 
 For existing deployments, these are the recommended values:
 
@@ -118,7 +115,7 @@ networkCosts:
 
 ### Benchmarking metrics
 
-The network-simulator was used to real-time simulate updating ConnTrack entries while simultaneously running a cluster simulated network-costs instance. To profile the heap, after a warmup of roughly five minutes, a heap profile of 1,000,000 ConnTrack entries was gathered and examined.
+The network-simulator was used to real-time simulate updating ConnTrack entries while simultaneously running a cluster simulated network costs instance. To profile the heap, after a warmup of roughly five minutes, a heap profile of 1,000,000 ConnTrack entries was gathered and examined.
 
 Each ConnTrack entry is equivalent to two transport directions, so every ConnTrack entry is two map entries (connections).
 
@@ -198,6 +195,15 @@ networkCosts:
       #   ips:
       #     - "10.0.0.0/24"
 ```
+
+## Permissions
+
+The network costs daemonset requires a privileged [`spec.containers[*].securityContext`](https://kubernetes.io/docs/concepts/security/pod-security-standards/) and `hostNetwork: true` in order to leverage an underlying kernel module to capture network data.
+
+Additionally, the network costs daemonset mounts to the following directories on the host filesytem. It needs both read & write access. The network costs daemonset will only write to the filesystem to enable `conntrack` ([docs ref](https://www.kernel.org/doc/Documentation/networking/nf_conntrack-sysctl.txt))
+
+* `/proc/net/`
+* `/proc/sys/net/netfilter`
 
 ## Troubleshooting
 
