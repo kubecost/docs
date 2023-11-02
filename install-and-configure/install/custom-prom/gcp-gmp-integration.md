@@ -102,7 +102,7 @@ kubectl exec -it -n $KUBECOST_NAMESPACE \
 
 You should receive an output similar to:
 
-```
+```json
 {
   "status": "success",
   "data": {
