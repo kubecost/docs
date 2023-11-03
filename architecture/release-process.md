@@ -39,7 +39,7 @@ helm upgrade kubecost kubecost/cost-analyzer -n kubecost
 
 ### Getting notified when a release is created
 
-You can receive updates for releases only ([more info](https://docs.github.com/en/github/managing-subscriptions-and-notifications-on-github/viewing-your-subscriptions)) for our c[ost-analyzer-helm-chart repo](https://github.com/kubecost/cost-analyzer-helm-chart), or join our [Slack workspace](https://kubecost.com/join-slack) to learn whenever a new update or patch goes live.
+You can receive updates for releases only ([more info](https://docs.github.com/en/github/managing-subscriptions-and-notifications-on-github/viewing-your-subscriptions)) for our [cost-analyzer-helm-chart repo](https://github.com/kubecost/cost-analyzer-helm-chart), or join our [Slack workspace](https://kubecost.com/join-slack) to learn whenever a new update or patch goes live.
 
 ## Kubecost Cloud
 
