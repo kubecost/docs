@@ -1,7 +1,7 @@
-User Metrics 
-============
+# Kubecost Metrics
 
 ## Kubecost Cost Model
+
 The Cost Model both exports and consumes the following metrics.
 
 | Metric                          | Description              |
@@ -27,7 +27,8 @@ The Cost Model both exports and consumes the following metrics.
 | `statefulSet_match_labels` | StatefulSet Match Labels | 
 | `kubecost_cluster_memory_working_set_bytes` | (Created by recording rule) | 
 
-## Kubecost Network Costs 
+## Kubecost Network Costs
+
 The Kubecost network-costs daemonset collects node network data and exports the egress, ingress, and performance statistics. 
 
 | Metric                          | Description              |
@@ -37,8 +38,9 @@ The Kubecost network-costs daemonset collects node network data and exports the 
 | `kubecost_network_costs_parsed_entries` | total parsed conntrack entries |
 | `kubecost_network_costs_parse_time` | total time in milliseconds it took to parse conntrack entries |
 
-## cAdvisor 
-cAdvisor (Container Advisor) provides container users an understanding of the resource usage and performance characteristics of their running containers. It is a running daemon that collects, aggregates, processes, and exports information about running containers. 
+## cAdvisor
+
+cAdvisor (Container Advisor) provides container users an understanding of the resource usage and performance characteristics of their running containers. It is a running daemon that collects, aggregates, processes, and exports information about running containers.
 
 GitHub: [https://github.com/google/cadvisor](https://github.com/google/cadvisor)
 
@@ -54,10 +56,14 @@ GitHub: [https://github.com/google/cadvisor](https://github.com/google/cadvisor)
 | `container_cpu_cfs_periods_total` | Number of elapsed enforcement period intervals |
 | `container_cpu_cfs_throttled_periods_total` | Number of throttled period intervals |
 
+<<<<<<< HEAD:user-metrics.md
+## Kube-State-Metrics (KSM)
+=======
 ## Kube-State-Metrics
-The following KSM metrics are both consumed and emitted by the Kubecost installation. The `cost-model` replicates all of these metrics such that a KSM installation is not actually required. Read more [here](ksm-metrics.md).
+The following KSM metrics are both consumed and emitted by the Kubecost installation. The `cost-model` replicates all of these metrics such that a KSM installation is not actually required. Read more in our [KSM Metrics](ksm-metrics.md) doc.
+>>>>>>> main:architecture/user-metrics.md
 
-GitHub: [https://github.com/kubernetes/kube-state-metrics](https://github.com/kubernetes/kube-state-metrics)
+Although the default Kubecost installation does not include a [KSM deployment](https://github.com/kubernetes/kube-state-metrics), Kubecost does calculate & emit the below metrics. The below metrics and labels follow conventions of KSMv1, not KSMv2.
 
 | Metric                          | Description              |
 | ------------------------------- | ------------------------ |
@@ -91,7 +97,8 @@ GitHub: [https://github.com/kubernetes/kube-state-metrics](https://github.com/ku
 | `kube_pod_status_phase` | The pods current phase (Pending|Running|Succeeded|Failed|Unknown) |
 | `kube_replicaset_owner` | Information about the ReplicaSet's owner |
 
-## Node exporter 
+## Node exporter
+
 Prometheus exporter for hardware and OS metrics exposed by *NIX kernels, written in Go with pluggable metric collectors. 
 
 GitHub: [https://github.com/prometheus/node_exporter](https://github.com/prometheus/node_exporter)
@@ -111,8 +118,8 @@ GitHub: [https://github.com/prometheus/node_exporter](https://github.com/prometh
 | `node_memory_MemTotal_bytes` | Memory information field MemTotal_bytes |
 | `node_network_transmit_bytes_total` | Network device statistic transmit_bytes |
 
+## Prometheus
 
-## Prometheus 
 Prometheus emits metrics which are used by Kubecost for diagnostic purposes: 
 
 | Metric                          | Description              |
@@ -121,6 +128,7 @@ Prometheus emits metrics which are used by Kubecost for diagnostic purposes:
 | `prometheus_target_interval_length_seconds` | Amount of time between target scrapes |
 
 ## NVIDIA K8s Device Plugin (GPU)
+
 NVIDIA GPU monitoring support can be explained in more detail on the [Kubecost Blog: Monitoring NVIDIA GPU Usage in Kubernetes with Prometheus](https://blog.kubecost.com/blog/nvidia-gpu-usage/). The following metrics are consumed:
 
 GitHub: [https://github.com/NVIDIA/k8s-device-plugin](https://github.com/NVIDIA/k8s-device-plugin)
