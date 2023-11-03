@@ -55,6 +55,10 @@ Column to sort the response by. Defaults to `totalSavings`. Options are `totalSa
 Order to sort by. Defaults to `descending`. Options are `descending` and `ascending`.
 {% endswagger-parameter %}
 
+{% swagger-parameter in="query" name="includeLabelsAndAnnotations" type="boolean" required="false" %}
+Displays all labels and annotations associated with each container request when set to `true`. Default is `false`.
+{% endswagger-parameter %}
+
 {% swagger-response status="200: OK" description="" %}
 ```javascript
 [

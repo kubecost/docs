@@ -40,6 +40,7 @@
   * [Provider Installations](install-and-configure/install/provider-installations/README.md)
     * [Amazon EKS Integration](install-and-configure/install/provider-installations/aws-eks-cost-monitoring.md)
     * [AWS Marketplace Install](install-and-configure/install/provider-installations/aws-marketplace-install.md)
+    * [Installing Kubecost on GKE Autopilot Clusters](install-and-configure/install/provider-installations/gke-autopilot-install.md)
     * [Installing Kubecost on Alibaba](install-and-configure/install/provider-installations/alibaba-install.md)
     * [Installation Kubecost with Istio (Rancher)](install-and-configure/install/provider-installations/istio-rancher.md)
     * [Installing Kubecost with Rafay](install-and-configure/install/provider-installations/rafay.md)
