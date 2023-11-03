@@ -19,7 +19,7 @@ Samples full granularity of cloud costs from cloud billing report (ex. AWS' Cost
 Window of the query. **Only accepts daily intervals**, example `window=3d`.
 {% endswagger-parameter %}
 
-{% swagger-parameter in="path" name="CostMetric" required="false" %}
+{% swagger-parameter in="path" name="costMetric" required="false" %}
 Determines which cloud cost metric type will be returned. Acceptable values are `AmortizedNetCost`, `InvoicedCost`, `ListCost`, and `NetCost`. Default is `AmortizedNetCost`.
 {% endswagger-parameter %}
 

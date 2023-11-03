@@ -16,7 +16,7 @@ User experience diagram:
 
 Amazon EKS cost monitoring with Kubecost architecture:
 
-![User experience]/(images/AWS-EKS-cost-monitoring-architecture.png)
+![User experience](/images/AWS-EKS-cost-monitoring-architecture.png)
 
 ## Deploying Kubecost on an Amazon EKS cluster using Amazon EKS add-on
 
@@ -208,7 +208,7 @@ kubectl port-forward --namespace kubecost deployment/kubecost-cost-analyzer 9090
 You can now access Kubecost's UI by visiting `http://localhost:9090` in your local web browser. Here, you can monitor your Amazon EKS cluster cost and efficiency. Depending on your organization’s requirements and setup, you may have different options to expose Kubecost for internal access. There are a few examples that you can use for your references:
 
 * See Kubecost's [Ingress Examples](/install-and-configure/install/ingress-examples.md) doc as a reference for using Nginx ingress controller with basic auth.
-* You can also consider using AWS LoadBalancer controller to expose Kubecost and use Amazon Cognito for authentication, authorization, and user management. You can learn more via the AWS blog post [How to use Application Load Balancer and Amazon Cognito to authenticate users for your Kubernetes web apps](https://aws.amazon.com/blogs/containers/how-to-use-application-load-balancer-and-amazon-cognito-to-authenticate-users-for-your-kubernetes-web-apps/).
+* You can also consider using AWS LoadBalancer controller to expose Kubecost and use Amazon Cognito for authentication, authorization, and user management. You can learn more via the AWS blog post [Authenticate Kubecost Users with Application Load Balancer and Amazon Cognito](https://aws.amazon.com/blogs/apn/authenticate-kubecost-users-with-application-load-balancer-and-amazon-cognito/).
 
 ## Deploying Kubecost on an EKS Anywhere cluster using Helm
 
