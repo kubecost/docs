@@ -3,24 +3,26 @@ AWS Multi-Cluster Storage Configuration
 
 ## AWS/S3 Federation
 <a name="overview"></a>
-Kubecost uses a shared storage bucket to store metrics from clusters (aka `durable storage`) in order to provide a single-pane-of-glass for viewing cost across many clusters. Multi-cluster is an enterprise feature of Kubecost.
+Kubecost uses a shared storage bucket to store metrics from clusters, known as durable storage, in order to provide a single-pane-of-glass for viewing cost across many clusters. Multi-cluster is an enterprise feature of Kubecost.
 
 There are multiple methods to provide Kubecost access to an S3 bucket. This guide has two examples:
 
 1. Using a Kubernetes secret
-1. Attaching an AWS Identity and Access Management (IAM) role to the service account used by Prometheus
+2. Attaching an AWS Identity and Access Management (IAM) role to the service account used by Prometheus
 
 Both methods require an S3 bucket. Our example bucket is named `kc-thanos-store`.
 
 This is a simple S3 bucket with all public access blocked. No other bucket configuration changes should be required.
 
-Once created, add an IAM policy to access this bucket See our [AWS Thanos IAM Policy](aws-service-account-thanos.md) doc for instructions.
+Once created, add an IAM policy to access this bucket. See our [AWS Thanos IAM Policy](aws-service-account-thanos.md) doc for instructions.
 
 ## Method 1: Kubernetes Secret Method
 <a name="secret"></a>
-To use the Kubernetes secret method for allowing access, create a yaml file named `object-store.yaml` with contents similar to the following example. See region to endpoint mappings [here](https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region).
+To use the Kubernetes secret method for allowing access, create a YAML file named `object-store.yaml` with contents similar to the following example. See region to endpoint mappings [here](https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region).
 
-```
+
+```yaml
+
 type: S3
 config:
   bucket: "kc-thanos-store"
@@ -40,7 +42,6 @@ config:
     enable: true
   part_size: 134217728
 ```
-> **Note:** Because this is a YAML, it requires this specific indention.
 
 ## Method 2: Attach IAM role to Service Account Method
 <a name="attach-role"></a>
@@ -73,6 +74,7 @@ You can define the IAM role to associate with a service account in your cluster 
 as described [here](https://docs.aws.amazon.com/eks/latest/userguide/associate-service-account-role.html).
 
 Once that annotation has been created, configure the following:
+
 ```yaml
 .Values.prometheus.serviceAccounts.server.create: false
 .Values.prometheus.serviceAccounts.server.name: serviceAccount # to the name of your created service account
