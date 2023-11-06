@@ -28,7 +28,7 @@ The reconciled assets will inherit the labels from the corresponding items in th
 
 Visit _Settings_, then toggle on _Highlight Unreconciled Costs_, then select _Save_ at the bottom of the page to apply changes. Now, when you visit your Allocations or Assets dashboards, the most recent 36 hours of data will display hatching to signify unreconciled costs.
 
-![Allocations dashboard with highlighted unreconciled costs](/.gitbook/assets/image (7).png)
+![Allocations dashboard with highlighted unreconciled costs](/images/unreconciled.png)
 
 ### CloudCost
 

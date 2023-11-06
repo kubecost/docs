@@ -18,9 +18,13 @@ Kubecost provides a variety of options for configuring your allocations queries 
 
 ### Date Range
 
-![Date Range window](../../../.gitbook/assets/daterange.png)
+![Date Range window](/images/date-range.png)
 
-Select the date range of the report by setting specific start and end dates, or by using one of the preset options.
+Select the date range of the report, called the window, by setting specific start and end dates, or by using one of the preset options. You can use _Select Start_ and _Select End_ to establish custom date ranges as well.
+
+#### Step size
+
+Step size refers to the length of time of each group of data displayed on your dashboard across the window. Options are _Default_, _Daily_, _Weekly_, _Monthly_, and _Quarterly_. When retaining long periods of data through custom configurations (such as Prometheus), consider using larger step sizes to avoid potential display errors. The step size when selecting _Default_ is dependent on the size of your window.
 
 ### Aggregate By filters
 
@@ -94,10 +98,6 @@ Costs allocations are based on the following:
 3. The amount of time resources were provisioned
 
 For more information, refer to the [OpenCost spec](https://github.com/opencost/opencost/blob/develop/spec/opencost-specv01.md).
-
-### Step size
-
-Step size refers to the size of each bar of data displayed on your dashboard. Options are _Default_, _Daily_, and _Weekly_. When retaining long periods of data through custom configurations (such as Prometheus), consider using larger step sizes to avoid display errors.
 
 ### Filters
 
