@@ -1,43 +1,39 @@
 # Helm Parameters
 
-Often while using and configuring Kubecost, our documentation may ask you to pass certain Helm flag values. There are three different approaches for passing custom Helm values into your Kubecost product, which are explained in this doc. In these examples, we are updating the `kubecostProductConfigs.productKey.key` Helm value which enables Kubecost Enterprise, however these methods will work for all other Helm flags.
+There are three different approaches for passing custom Helm config values into the Kubecost project:
 
-### **Method 1: Pass exact parameters via `--set` command line flags**
+1.  **Pass exact parameters via `--set` command-line flags.** For example, you can only pass a product key if that is all you need to configure.
 
-For example, you can only pass a product key if that is all you need to configure.
+    ```bash
+    $ helm install kubecost cost-analyzer \
+        --repo https://kubecost.github.io/cost-analyzer/ \
+        --namespace kubecost --create-namespace \
+        --set kubecostProductConfigs.productKey.key="123"
+        ...
+    ```
+2.  **Pass exact parameters via custom `values` file.** Similar to option #1, you can create a separate values file that contains only the parameters needed.
 
-```bash
-$ helm install kubecost cost-analyzer \
-    --repo https://kubecost.github.io/cost-analyzer/ \
-    --namespace kubecost --create-namespace \
-    --set kubecostProductConfigs.productKey.key="123"
-    ...
-```
+    ```bash
+    $ helm install kubecost cost-analyzer \
+        --repo https://kubecost.github.io/cost-analyzer/ \
+        --namespace kubecost --create-namespace \
+        --values values.yaml
+    ```
 
-### **Method 2: Pass exact parameters via custom **_**values.yaml**_** file.**
+    _values.yaml:_
 
-Similar to Method 1, you can create a separate values file that contains only the parameters needed.
+    ```yaml
+    kubecostProductConfigs:
+      productKey: 
+        key: "123"
+        enabled: true
+    ```
+3. **Use** [**values.yaml**](https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/values.yaml) **from the Kubecost Helm Chart repository.**
 
-Your _values.yaml_ should look like this:
-
-```yaml
-kubecostProductConfigs:
-  productKey: 
-    key: "123"
-    enabled: true
-```
-
-Then run your install command:
-
-```bash
-$ helm install kubecost cost-analyzer \
-    --repo https://kubecost.github.io/cost-analyzer/ \
-    --namespace kubecost --create-namespace \
-    --values values.yaml
-```
-
-### **Method 3: Use** [_**values.yaml**_](https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/values.yaml) **from the Kubecost Helm Chart repository**
-
+{% hint style="info" %}
 Taking this approach means you may need to sync with the repo to use the latest release.
+{% endhint %}
 
+{% hint style="info" %}
 Be careful when applying certain Helm values related to your UI configuration to your secondary clusters. For more information, see this section in our Multi-Cluster doc about [primary and secondary clusters](https://docs.kubecost.com/install-and-configure/install/multi-cluster#primary-and-secondary-clusters).
+{% endhint %}
