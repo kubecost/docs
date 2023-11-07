@@ -10,9 +10,9 @@ For example, you can only pass a product key if that is all you need to configur
 $ helm install kubecost cost-analyzer \
     --repo https://kubecost.github.io/cost-analyzer/ \
     --namespace kubecost --create-namespace \
-    --set kubecostProductConfigs.productKey.key="123"
+    --set kubecostProductConfigs.productKey.key="123" \
+    --set kubecostProductConfigs.productKey.enabled=true
     ...
-```
 ## Method 2: Pass exact parameters via custom `values` file
 
 Similar to Method 1, you can create a separate values file that contains only the parameters needed.
