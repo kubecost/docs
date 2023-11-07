@@ -29,7 +29,7 @@ The Cost Model both exports and consumes the following metrics.
 
 ## Kubecost Network Costs
 
-The Kubecost network-costs daemonset collects node network data and exports the egress, ingress, and performance statistics. 
+The Kubecost network-costs daemonset collects node network data and exports the egress, ingress, and performance statistics.
 
 | Metric                          | Description              |
 | ------------------------------- | ------------------------ |
@@ -56,12 +56,7 @@ GitHub: [https://github.com/google/cadvisor](https://github.com/google/cadvisor)
 | `container_cpu_cfs_periods_total` | Number of elapsed enforcement period intervals |
 | `container_cpu_cfs_throttled_periods_total` | Number of throttled period intervals |
 
-<<<<<<< HEAD:user-metrics.md
 ## Kube-State-Metrics (KSM)
-=======
-## Kube-State-Metrics
-The following KSM metrics are both consumed and emitted by the Kubecost installation. The `cost-model` replicates all of these metrics such that a KSM installation is not actually required. Read more in our [KSM Metrics](ksm-metrics.md) doc.
->>>>>>> main:architecture/user-metrics.md
 
 Although the default Kubecost installation does not include a [KSM deployment](https://github.com/kubernetes/kube-state-metrics), Kubecost does calculate & emit the below metrics. The below metrics and labels follow conventions of KSMv1, not KSMv2.
 
