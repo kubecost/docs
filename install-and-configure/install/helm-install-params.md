@@ -17,7 +17,7 @@ For example, you can only pass a product key if that is all you need to configur
 
 Similar to Method 1, you can create a separate values file that contains only the parameters needed.
 
-Your values.yaml should look like this:
+Your _values.yaml_ should look like this:
 
 ```
 kubecostProductConfigs:
