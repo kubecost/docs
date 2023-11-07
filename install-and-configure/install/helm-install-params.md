@@ -6,13 +6,13 @@ Often while using and configuring Kubecost, our documentation may ask you to pas
 
 For example, you can only pass a product key if that is all you need to configure.
 
-    ```bash
-    $ helm install kubecost cost-analyzer \
-        --repo https://kubecost.github.io/cost-analyzer/ \
-        --namespace kubecost --create-namespace \
-        --set kubecostProductConfigs.productKey.key="123"
-        ...
-    ```
+```bash
+$ helm install kubecost cost-analyzer \
+    --repo https://kubecost.github.io/cost-analyzer/ \
+    --namespace kubecost --create-namespace \
+    --set kubecostProductConfigs.productKey.key="123"
+    ...
+```
 ## Method 2: Pass exact parameters via custom `values` file
 
 Similar to Method 1, you can create a separate values file that contains only the parameters needed.
