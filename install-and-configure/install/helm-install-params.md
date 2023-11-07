@@ -13,6 +13,8 @@ $ helm install kubecost cost-analyzer \
     --set kubecostProductConfigs.productKey.key="123" \
     --set kubecostProductConfigs.productKey.enabled=true
     ...
+```
+
 ## Method 2: Pass exact parameters via custom `values` file
 
 Similar to Method 1, you can create a separate values file that contains only the parameters needed.
