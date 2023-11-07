@@ -74,7 +74,7 @@
   * [CSV Pricing](install-and-configure/advanced-configuration/csv-pricing.md)
   * [Windows Node Support](install-and-configure/advanced-configuration/windows-node-support.md)
   * [Kubecost Data Status Metrics](install-and-configure/advanced-configuration/data-status-metrics.md)
-  * [Service Key rotation](install-and-configure/advanced-configuration/key-rotation.md)
+  * [Service Key Rotation](install-and-configure/advanced-configuration/key-rotation.md)
 
 ## Using Kubecost
 
