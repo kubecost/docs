@@ -185,16 +185,17 @@
 ## Troubleshooting
 
 * [Frequently Asked Questions](troubleshooting/frequently-asked-questions.md)
+* [Kubecost Glossary](troubleshooting/kubecost-glossary.md)
 * [Troubleshoot Install](troubleshooting/troubleshoot-install.md)
 * [HTTP Error Troubleshooting](troubleshooting/http-troubleshooting.md)
 * [Kubecost Diagnostics](troubleshooting/diagnostics.md)
-* [Capture a Bug Report](troubleshooting/bug-report.md)
 * [Kubecost Heapdump](troubleshooting/app-memory.md)
 * [Profile an HTTP Endpoint](troubleshooting/http-profiling.md)
 * [Repair Kubecost ETLs](troubleshooting/etl-repair.md)
 * [Running a Query in Kubecost-bundled Prometheus](troubleshooting/prometheus.md)
+* [Creating a Kubecost Support Ticket in Slack](troubleshooting/creating-a-support-ticket.md)
+* [Capture a Bug Report](troubleshooting/bug-report.md)
 * [Bug Bounty Program](troubleshooting/bug-bounty-program.md)
-* [Kubecost Glossary](troubleshooting/kubecost-glossary.md)
 * [Capture a HAR File](troubleshooting/capture-a-har-file.md)
 
 ## Other Resources
