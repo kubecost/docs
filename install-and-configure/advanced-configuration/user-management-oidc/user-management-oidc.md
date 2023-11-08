@@ -43,7 +43,7 @@ oidc:
 
 ## Setup guides
 
-* [Microsoft Entra ID (formerly Azure AD) guide](https://github.com/kubecost/poc-common-configurations/tree/main/oidc-azuread)
+* [Microsoft Entra ID (formerly Azure AD) guide](/install-and-configure/advanced-configuration/user-management-oidc/microsoft-entra-id-oidc-integration-for-kubecost.md)
 
 ## Supported identity providers
 
