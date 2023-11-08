@@ -1,4 +1,4 @@
-# Microsoft Entra ID SSO Integration for Kubecost
+# Microsoft Entra ID SAML Integration for Kubecost
 
 {% hint style="info" %}
 SSO and RBAC are only officially supported on Kubecost Enterprise plans.
