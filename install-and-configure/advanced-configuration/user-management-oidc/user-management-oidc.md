@@ -44,6 +44,8 @@ oidc:
 ## Setup guides
 
 * [Microsoft Entra ID (formerly Azure AD) guide](/install-and-configure/advanced-configuration/user-management-oidc/microsoft-entra-id-oidc-integration-for-kubecost.md)
+* [Configure Keycloak Identity Provider for Kubecost](/install-and-configure/advanced-configuration/user-management-oidc/user-management-oidc-keycloak.md)
+* [Gluu Server with OIDC Configuration Guide](/install-and-configure/advanced-configuration/user-management-oidc/gluu-server-with-oidc-configuration-guide.md)
 
 ## Supported identity providers
 
