@@ -127,6 +127,100 @@ In Kubecost, the `Primary Cluster` serves the UI and API endpoints as well as re
      * The Federator has run at least once.
      * There was data in the Federated Storage for the Federator to have combined.
 
+## Setup with internal certificate authority
+
+If you are using an internal certificate authority (CA), follow this tutorial instead of the above Setup section.
+
+Begin by creating a ConfigMap with the certificate provided by the CA on every agent, including the Federated Agent and Federator.
+
+```
+apiVersion: v1
+data:
+  ca-certificates.crt: |-
+    # CA Cert
+    -----BEGIN CERTIFICATE-----
+    abc . . . . . . . . . . . . . .
+    . . . . . . . . . . . . . . . .
+    . . . . . . . . . . . . . . . .
+    -----END CERTIFICATE-----
+
+    # Root Cert
+    -----BEGIN CERTIFICATE-----
+    xyz . . . . . . . . . . . . . .
+    . . . . . . . . . . . . . . . .
+    . . . . . . . . . . . . . . . .
+    -----END CERTIFICATE-----
+
+kind: ConfigMap
+  name: kubecost-federator-certs
+  namespace: kubecost
+```
+
+Now run the following command:
+
+`kubectl create cm kubecost-federator-certs`
+
+Mount the cert on all federated agents and federator via the _values.yaml_/manifest:
+
+```
+extraVolumes:
+  - name: kubecost-federator-certs
+    configMap:
+      name: kubecost-federator-certs
+extraVolumeMounts:
+  - name: kubecost-federator-certs
+    mountPath: /path/to/ca-certificates.crt
+    subPath: ca-certificates.crt
+
+federatedETL:
+  federator:
+    extraVolumes:
+      - name: kubecost-federator-certs
+        configMap:
+          name: kubecost-federator-certs
+    extraVolumeMounts:
+      - name: kubecost-federator-certs
+        mountPath: /path/to/ca-certificates.crt
+        subPath: ca-certificates.crt
+```
+
+Create a file _federated-store.yaml_, which will go on each cluster (federated agent and federator), using the following values:
+
+```
+type: S3
+config:
+  bucket: "kubecost-storage"
+  endpoint: <S3 endpoint>
+  region: <region>
+  aws_sdk_auth: true                                      
+  insecure: false
+  signature_version2: false
+  put_user_metadata:
+    "X-Amz-Acl": "bucket-owner-full-control"
+  http_config:
+    idle_conn_timeout: 90s
+    response_header_timeout: 2m
+    insecure_skip_verify: false
+    tls_config:                                          
+      ca_file: "/path/to/ca-certificates.crt"            
+      cert_file: "CERT.pem"                              
+      key_file: "KEY.PEM"                                 
+      insecure_skip_verify: false                         
+  trace:
+    enable: true
+  part_size: 134217728          
+  sts_endpoint: <STS endpoint>  
+```
+
+Now run the following command:
+
+```
+kubectl create namespace kubecost
+kubectl create secret generic \
+  kubecost-object-store -n kubecost \
+  --from-file federated-store.yaml  
+```
+
 ## See also
 
 ### Data recovery
