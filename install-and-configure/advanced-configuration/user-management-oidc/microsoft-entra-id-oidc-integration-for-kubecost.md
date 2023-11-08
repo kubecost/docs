@@ -18,7 +18,7 @@ Before following this guide, ensure that:
 
 ### Step 1: Registering your application in Entra ID
 
-1. In the [Microsoft Entra admin center](https://entra.microsoft.com/#home), select _Azure Active Directory_.
+1. In the [Microsoft Entra admin center](https://entra.microsoft.com/#home), select _Microsoft Entra ID (Azure AD)_.
 2. In the left navigation, select _Applications_ > _App registrations_. Then, on the App registrations page, select _New registration_.
 3. Select an appropriate name, and provide supported account types for your app.
 4. To configure `Redirect URI`, select _Web_ from the dropdown, then provide the URI as _https://{your-kubecost-address}/model/oidc/authorize_.
@@ -77,9 +77,9 @@ oidc:
       - name: admin
         # If admin is disabled, all authenticated users will be able to make configuration changes to the kubecost frontend
         enabled: true
-        # SET THIS EXACT VALUE FOR AZUREAD. This is the string Azure AD uses in its OIDC tokens.
+        # SET THIS EXACT VALUE FOR ENTRA ID. This is the string Entra ID uses in its OIDC tokens.
         claimName: "roles"
-        # These strings need to exactly match with the App roles created in AzureAD
+        # These strings need to exactly match with the app roles created in Entra ID
         claimValues:
           - "admins"
           - "superusers"
