@@ -46,9 +46,9 @@ saml:
 ```
 {% endcode %}
 
-## Setup guides
+## SAML setup guides
 
-* [Microsoft Entra ID (formerly Azure AD) setup guide](microsoft-entra-id-sso-integration-for-kubecost.md)
+* [Microsoft Entra ID (formerly Azure AD) SAML Integration for Kubecost](microsoft-entra-id-saml-integration-for-kubecost.md)
 * [Okta setup guide](https://github.com/kubecost/poc-common-configurations/tree/main/saml-okta)
 
 {% hint style="info" %}
