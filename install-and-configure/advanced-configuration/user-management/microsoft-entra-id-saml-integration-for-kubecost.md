@@ -12,7 +12,7 @@ Kubecost supports SAML 2.0 providers for:
 
 This guide uses Microsoft Entra ID ([formerly Azure Active Directory](https://learn.microsoft.com/en-us/azure/active-directory/fundamentals/new-name)) as an example, but the concepts apply to other providers as well.
 
-## Entra ID SSO configuration
+## Entra ID SAML configuration
 
 ### Step 1: Create an enterprise application in Microsoft Entra ID for Kubecost
 
