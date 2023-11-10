@@ -123,9 +123,11 @@ As an example, we will configure the following:
 
 1. Go to the Okta admin dashboard (https://[your-subdomain]okta.com/admin/dashboard) and select _Directory_ > _Groups_ from the left navigation. On the Groups page, select _Add group_.
 
-2. Create groups for _kubecost_users_, _kubecost_admin_ and _kubecost_dev-namespaces_. Add all users to the _kubecost_users_ group and the appropriate users to each of the other groups for testing. Kubecost admins will be part of both the read only _kubecost_users_ and _kubecost_admin groups_. Kubecost will assign the most rights if there are conflicts.
+2. Create groups for *kubecost_users*, *kubecost_admin* and *kubecost_dev-namespaces* by providing each value as the name with an optional description, then select _Save_. You will need to perform this step three times, one for each group.
 
-In the kubecost_users group>Application tab, assign the Kubecost application. You do not need to assign the other kubecost_ groups to the Kubecost application because all users already have access in the kubecost_users` group.
+3. Go to *Directory* > *People*, and add all users to the *kubecost_users* group and the appropriate users to each of the other groups for testing. You can do this by selecting users, then providing the relevant groups in the _Groups_ tab. Select _Save_ to confirm edits to a user. Kubecost admins will be part of both the read only *kubecost_users* and *kubecost_admin groups*. Kubecost will assign the most rights if there are conflicts.
+
+4. Return to the Groups page. In *kubecost_users* > Application tab, assign the Kubecost application. You do not need to assign the other *kubecost_* groups to the Kubecost application because all users already have access in the *kubecost_users* group.
 
 Modify filters.json as depicted above.
 
