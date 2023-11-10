@@ -4,13 +4,7 @@
 SSO and RBAC are only officially supported on Kubecost Enterprise plans.
 {% endhint %}
 
-Kubecost supports SAML 2.0 providers for:
-
-1. Single sign on (SSO)
-2. Role Based Access Control (RBAC): controlling read-only or admin access to Kubecost configuration within the UI (optional)
-3. Filtering namespaces and clusters based on group membership (optional)
-
-This guide uses Microsoft Entra ID ([formerly Azure Active Directory](https://learn.microsoft.com/en-us/azure/active-directory/fundamentals/new-name)) as an example, but the concepts apply to other providers as well.
+This guide will show you how to configure Kubecost integrations for SAML and RBAC with Microsoft Entra ID.
 
 ## Entra ID SAML configuration
 
