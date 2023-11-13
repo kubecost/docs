@@ -131,7 +131,7 @@ In Kubecost, the `Primary Cluster` serves the UI and API endpoints as well as re
 
 If you are using an internal certificate authority (CA), follow this tutorial instead of the above Setup section.
 
-Begin by creating a ConfigMap with the certificate provided by the CA on every agent, including the Federated Agent and Federator.
+Begin by creating a ConfigMap with the certificate provided by the CA on every agent, including the Federated Agent and Federator, and name the file _kubecost-federator-certs.yaml_.
 
 ```
 apiVersion: v1
@@ -156,11 +156,11 @@ kind: ConfigMap
   namespace: kubecost
 ```
 
-Now run the following command:
+Now run the following command, making sure you specify the location for the ConfigMap you created:
 
-`kubectl create cm kubecost-federator-certs`
+`kubectl create cm kubecost-federator-certs --from-kubecost-federator-certs.yaml=/path/to/kubecost-federator-certs`
 
-Mount the cert on all federated agents and federator via the _values.yaml_/manifest:
+Mount the certification on all federated agents and federator by passing these Helm flags to your _values.yaml_/manifest:
 
 ```
 extraVolumes:
@@ -184,7 +184,7 @@ federatedETL:
         subPath: ca-certificates.crt
 ```
 
-Create a file _federated-store.yaml_, which will go on each cluster (federated agent and federator), using the following values:
+Create a file _federated-store.yaml_, which will go on each cluster (federated agent and federator):
 
 ```
 type: S3
