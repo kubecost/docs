@@ -84,7 +84,7 @@ Filtering is configured very similarly to the admin/readonly above. The same gro
       - assertionName: "kubecost_group"
 ```
 
-The array of groups obtained during the auth request will be matched to the subject key in the filters.json:
+The array of groups obtained during the authorization request will be matched to the subject key in the *filters.json*:
 
 ```
 {
@@ -125,15 +125,94 @@ As an example, we will configure the following:
 
 2. Create groups for *kubecost_users*, *kubecost_admin* and *kubecost_dev-namespaces* by providing each value as the name with an optional description, then select _Save_. You will need to perform this step three times, one for each group.
 
-3. Go to *Directory* > *People*, and add all users to the *kubecost_users* group and the appropriate users to each of the other groups for testing. You can do this by selecting users, then providing the relevant groups in the _Groups_ tab. Select _Save_ to confirm edits to a user. Kubecost admins will be part of both the read only *kubecost_users* and *kubecost_admin groups*. Kubecost will assign the most rights if there are conflicts.
+3. Select each group, then select *Assign people* and add the appropriate users for testing. Select _Done_ to confirm edits to a group. Kubecost admins will be part of both the read only *kubecost_users* and *kubecost_admin groups*. Kubecost will assign the most rights if there are conflicts.
 
-4. Return to the Groups page. In *kubecost_users* > Application tab, assign the Kubecost application. You do not need to assign the other *kubecost_* groups to the Kubecost application because all users already have access in the *kubecost_users* group.
+4. Return to the Groups page. Select *kubecost_users*, then in the _Applications_ tab, assign the Kubecost application. You do not need to assign the other *kubecost_* groups to the Kubecost application because all users already have access in the *kubecost_users* group.
 
-Modify filters.json as depicted above.
+5. Modify filters.json as depicted above.
 
-Create the configmap:
+6. Create the ConfigMap using the following command:
 
+```
 kubectl create configmap group-filters --from-file filters.json -n kubecost
-Note: that you can modify the configmap without restarting any pods.
+```
 
+You can modify the ConfigMap without restarting any pods.
+
+```
 kubectl delete configmap -n kubecost group-filters && kubectl create configmap -n kubecost group-filters --from-file filters.json
+```
+
+## Encrypted SAML claims
+
+1. Generate an X509 certificate and private key. Below is an example using OpenSSL:
+
+`openssl genpkey -algorithm RSA -out saml-encryption-key.pem -pkeyopt rsa_keygen_bits:2048`
+
+2. Generate a certificate signing request (CSR)
+
+`openssl req -new -key saml-encryption-key.pem -out request.csr`
+
+3. Request your organization's domain owner to sign the certificate, or generate a self-signed certificate:
+
+`openssl x509 -req -days 365 -in request.csr -signkey saml-encryption-key.pem -out saml-encryption-cert.cer`
+
+4. Go to your application, then under the _General_ tab, edit the following SAML Settings:
+
+* Assertion Encryption: _Encrypted_
+* In the Encryption Algorithm box that appears, select _AES256-CBC_.
+* Select _Browse Files_ in the Encryption Certificate field and upload an image file of your certifcate.
+
+5. Create a secret with the certificate. The file name **must** be *saml-encryption-cert.cer*.
+
+`kubectl create secret generic kubecost-saml-cert --from-file saml-encryption-cert.cer --namespace kubecost`
+
+6. Create a secret with the private key. The file name **must** be *saml-encryption-key.pem*.
+
+`kubectl create secret generic kubecost-saml-decryption-key --from-file saml-encryption-key.pem --namespace kubecost`
+
+7. Pass the following values via Helm into your *values.yaml*:
+
+```
+saml:
+   encryptionCertSecret: "kubecost-saml-cert"
+   decryptionKeySecret: "kubecost-saml-decryption-key"
+```
+
+## Troubleshooting
+
+You can view the logs on the cost-model container. In this example, the assumption is that the prefix for Kubecost groups is `kubecost_`. This script is currently a work in progress.
+
+`kubectl logs deployment/kubecost-cost-analyzer -c cost-model --follow |grep -v -E 'resourceGroup|prometheus-server'|grep -i -E 'group|xmlname|saml|login|audience|kubecost_'`
+
+When the group has been matched, you will see:
+
+```
+auth.go:167] AUDIENCE: [readonly group:readonly@kubecost.com]
+auth.go:167] AUDIENCE: [admin group:admin@kubecost.com]
+```
+
+```
+configwatchers.go:69] ERROR UPDATING group-filters CONFIG: []map[string]string: ReadMapCB: expect }, but found l, error found in #10 byte of ...|el": "{ "label": "ap|..., bigger context ...|nFilters": [
+         {
+            "label": "{ "label": "app", "value": "nginx" }"
+         }
+     |...
+```
+
+This is what you should expect to see:
+
+```
+I0330 14:48:20.556725       1 costmodel.go:3421]   kubecost_user_type: {XMLName:{Space:urn:oasis:names:tc:SAML:2.0:assertion Local:Attribute} FriendlyName: Name:kubecost_user_type NameFormat:urn:oasis:names:tc:SAML:2.0:attrname-format:basic Values:[{XMLName:{Space:urn:oasis:names:tc:SAML:2.0:assertion Local:AttributeValue} Type: Value:}]}
+I0330 14:48:20.556767       1 costmodel.go:3421]   firstname: {XMLName:{Space:urn:oasis:names:tc:SAML:2.0:assertion Local:Attribute} FriendlyName: Name:firstname NameFormat:urn:oasis:names:tc:SAML:2.0:attrname-format:basic Values:[{XMLName:{Space:urn:oasis:names:tc:SAML:2.0:assertion Local:AttributeValue} Type: Value:cost_admin}]}
+I0330 14:48:20.556776       1 costmodel.go:3421]   kubecost_group: {XMLName:{Space:urn:oasis:names:tc:SAML:2.0:assertion Local:Attribute} FriendlyName: Name:kubecost_group NameFormat:urn:oasis:names:tc:SAML:2.0:attrname-format:basic Values:[{XMLName:{Space:urn:oasis:names:tc:SAML:2.0:assertion Local:AttributeValue} Type: Value:kubecost_admin}]}
+I0330 14:48:20.556788       1 log.go:47] [Info] Adding authorizations '[admin group:admin@kubecost.com]' for user
+I0330 14:48:20.556802       1 log.go:47] [Info] Token expiration set to 2022-03-31 14:48:20.556796875 +0000 UTC m=+86652.635776798
+I0330 14:48:20.589730       1 log.go:47] [Info] Login called
+I0330 14:48:20.619630       1 log.go:47] [Info] Attempting to authenticate saml...
+I0330 14:48:20.619839       1 costmodel.go:813] Authenticated saml
+I0330 14:48:20.702125       1 log.go:47] [Info] Attempting to authenticate saml...
+I0330 14:48:20.702229       1 costmodel.go:813] Authenticated saml
+...
+I0330 14:48:21.011787       1 auth.go:167] AUDIENCE: [admin group:admin@kubecost.com]
+```
