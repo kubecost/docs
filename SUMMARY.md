@@ -60,8 +60,9 @@
   * [Enabling Annotation Emission](install-and-configure/advanced-configuration/annotations.md)
   * [Network Cost Configuration](install-and-configure/advanced-configuration/network-costs-configuration.md)
   * [User Management (SSO/SAML/RBAC)](install-and-configure/advanced-configuration/user-management/README.md)
-    * [Microsoft Entra ID SSO Integration for Kubecost](install-and-configure/advanced-configuration/user-management/microsoft-entra-id-sso-integration-for-kubecost.md)
+    * [Microsoft Entra ID SAML Integration for Kubecost](install-and-configure/advanced-configuration/user-management/microsoft-entra-id-saml-integration-for-kubecost.md)
   * [User Management (SSO/OIDC)](install-and-configure/advanced-configuration/user-management-oidc/user-management-oidc.md)
+    * [Microsoft Entra ID OIDC Integration for Kubecost](install-and-configure/advanced-configuration/user-management-oidc/microsoft-entra-id-oidc-integration-for-kubecost.md)
     * [Configure Keycloak Identity Provider for Kubecost](install-and-configure/advanced-configuration/user-management-oidc/user-management-oidc-keycloak.md)
     * [Gluu Server with OIDC Configuration Guide](install-and-configure/advanced-configuration/user-management-oidc/gluu-server-with-oidc-configuration-guide.md)
   * [Tuning Resource Consumption](install-and-configure/advanced-configuration/resource-consumption.md)
@@ -185,16 +186,17 @@
 ## Troubleshooting
 
 * [Frequently Asked Questions](troubleshooting/frequently-asked-questions.md)
+* [Kubecost Glossary](troubleshooting/kubecost-glossary.md)
 * [Troubleshoot Install](troubleshooting/troubleshoot-install.md)
 * [HTTP Error Troubleshooting](troubleshooting/http-troubleshooting.md)
 * [Kubecost Diagnostics](troubleshooting/diagnostics.md)
-* [Capture a Bug Report](troubleshooting/bug-report.md)
 * [Kubecost Heapdump](troubleshooting/app-memory.md)
 * [Profile an HTTP Endpoint](troubleshooting/http-profiling.md)
 * [Repair Kubecost ETLs](troubleshooting/etl-repair.md)
 * [Running a Query in Kubecost-bundled Prometheus](troubleshooting/prometheus.md)
+* [Creating a Kubecost Support Ticket in Slack](troubleshooting/creating-a-support-ticket.md)
+* [Capture a Bug Report](troubleshooting/bug-report.md)
 * [Bug Bounty Program](troubleshooting/bug-bounty-program.md)
-* [Kubecost Glossary](troubleshooting/kubecost-glossary.md)
 * [Capture a HAR File](troubleshooting/capture-a-har-file.md)
 
 ## Other Resources

@@ -7,9 +7,9 @@ Kubecost is available as direct install with Plural, and it synergizes very well
 
 ## Getting started
 
-First, create an account on [https://app.plural.sh](https://app.plural.sh). This is only to track your installations and allow for the delivery of automated upgrades. You will not be asked to provide any infrastructure credentials or sensitive information.
+First, create an account on [Plural](https://app.plural.sh). This is only to track your installations and allow for the delivery of automated upgrades. You will not be asked to provide any infrastructure credentials or sensitive information.
 
-Next, install the Plural CLI by following steps 1-3 of [these instructions](https://docs.plural.sh/getting-started).
+Next, install the Plural CLI by following steps 1-3 of [Plural's CLI Quickstart guide](https://docs.plural.sh/getting-started).
 
 You'll need a Git repository to store your Plural configuration. This will contain the Helm charts, Terraform config, and Kubernetes manifests that Plural will autogenerate for you.
 
@@ -35,7 +35,7 @@ plural bundle install kubecost kubecost-aws
 
 Plural's Kubecost distribution has support for AWS, GCP, and Azure, so feel free to pick whichever best fits your infrastructure.
 
-The CLI will prompt you to choose whether you want to use Plural OIDC. [OIDC](https://openid.net/connect/) allows you to login to the applications you host on Plural with your login to [app.plural.sh](https://app.plural.sh), acting as an SSO provider. 
+The CLI will prompt you to choose whether you want to use Plural OIDC. [OIDC](https://openid.net/connect/) allows you to log in to the applications you host on Plural with your [login](https://app.plural.sh) acting as an SSO provider. 
 
 To generate the configuration and deploy your infrastructure, run:
 
@@ -88,4 +88,4 @@ If you'd like to request any new features for our Kubecost installation, feel fr
 
 ## Further reading
 
-To learn more about what you can do with Plural and more advanced uses of the platform, feel free to dive deeper into our docs [here.](https://docs.plural.sh)
+To learn more about what you can do with Plural and more advanced uses of the platform, feel free to dive deeper into [Plural's docs](https://docs.plural.sh).
