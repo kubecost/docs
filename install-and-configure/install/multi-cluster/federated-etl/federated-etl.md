@@ -158,7 +158,7 @@ kind: ConfigMap
 
 Now run the following command, making sure you specify the location for the ConfigMap you created:
 
-`kubectl create cm kubecost-federator-certs --from-kubecost-federator-certs.yaml=/path/to/kubecost-federator-certs`
+`kubectl create cm kubecost-federator-certs --from-file=/path/to/kubecost-federator-certs.yaml`
 
 Mount the certification on the Federator and any federated clusters by passing these Helm flags to your _values.yaml_/manifest:
 
