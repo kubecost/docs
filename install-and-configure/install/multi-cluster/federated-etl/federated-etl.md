@@ -133,7 +133,7 @@ If you are using an internal certificate authority (CA), follow this tutorial in
 
 Begin by creating a ConfigMap with the certificate provided by the CA on every agent, including the Federator and any federated clusters, and name the file _kubecost-federator-certs.yaml_.
 
-```
+```yaml
 apiVersion: v1
 data:
   ca-certificates.crt: |-
