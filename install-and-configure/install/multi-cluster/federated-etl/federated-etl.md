@@ -214,7 +214,7 @@ config:
 
 Now run the following command:
 
-```
+```sh
 kubectl create namespace kubecost
 kubectl create secret generic \
   kubecost-object-store -n kubecost \
