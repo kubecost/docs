@@ -162,7 +162,7 @@ Now run the following command, making sure you specify the location for the Conf
 
 Mount the certification on the Federator and any federated clusters by passing these Helm flags to your _values.yaml_/manifest:
 
-```
+```yaml
 extraVolumes:
   - name: kubecost-federator-certs
     configMap:
