@@ -212,7 +212,7 @@ config:
   sts_endpoint: <STS endpoint>  
 ```
 
-Now run the following command:
+Now run the following command (omit `kubectl create namespace kubecost` if your `kubecost` namespace already exists, or this command will fail):
 
 ```sh
 kubectl create namespace kubecost
