@@ -218,7 +218,7 @@ Now run the following command:
 kubectl create namespace kubecost
 kubectl create secret generic \
   kubecost-object-store -n kubecost \
-  --from-file federated-store.yaml  
+  --from-file=federated-store.yaml  
 ```
 
 ## See also
