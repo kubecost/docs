@@ -186,7 +186,7 @@ federatedETL:
 
 Create a file _federated-store.yaml_, which will go on all clusters:
 
-```
+```yaml
 type: S3
 config:
   bucket: "kubecost-storage"
