@@ -22,7 +22,7 @@ When using Kubecost version 1.99 and above: Greater detail can be accessed throu
 
 ### Grafana dashboard
 
-A Grafana dashboard is included with the Kubecost installation or can be loaded [here](https://github.com/kubecost/cost-analyzer-helm-chart/blob/develop/cost-analyzer/grafana-templates/multi-cluster-network-transfer-data.json).
+A Grafana dashboard is included with the Kubecost installation, but you can also find it in our [cost-analyzer-helm-chart repository](https://github.com/kubecost/cost-analyzer-helm-chart/blob/develop/cost-analyzer/grafana-templates/multi-cluster-network-transfer-data.json).
 
 ## Enabling network costs
 
@@ -35,7 +35,7 @@ networkCosts:
 
 ## Additional configuration
 
-You can view a list of common config options [here](https://github.com/kubecost/cost-analyzer-helm-chart/blob/700cfa306c8e78bc9a1039b584769b9a0e0757d0/cost-analyzer/values.yaml#L573).
+You can view a list of common config options in this [_values.yaml_](https://github.com/kubecost/cost-analyzer-helm-chart/blob/700cfa306c8e78bc9a1039b584769b9a0e0757d0/cost-analyzer/values.yaml#L573) template.
 
 ### Prometheus
 
