@@ -8,7 +8,7 @@ If you have a [multi-cluster setup](/install-and-configure/install/multi-cluster
 `kubecostToken` is a different concept from your product key and is used for managing trial access.
 {% endhint %}
 
-## At install-time
+## Option 1: Apply your product key at install
 
 Many Kubecost product configuration options can be specified at install-time, including your product key.
 
@@ -32,20 +32,20 @@ $ kubectl create secret generic <SECRET_NAME> -n kubecost --from-file=./productk
 
 Update your [_values.yaml_](https://github.com/kubecost/cost-analyzer-helm-chart/blob/5eedab0433445a5b8e134113beb95f4598cd5e2d/cost-analyzer/values.yaml#L714-L717) to enable the product key and specify the secret name:
 
-* `kubecostProductConfigs.productKey.enabled = true`
-* `kubecostProductConfigs.productKey.secretname = <SECRET_NAME>`
+* `kubecostProductConfigs.productKey.enabled=true`
+* `kubecostProductConfigs.productKey.secretname=<SECRET_NAME>`
 
-Run a `helm upgrade` to start using your product key.
+Run a `helm upgrade` command to start using your product key.
 
-### Option 2: Specifying product key in _values.yaml_
+### Option 2: Apply your product key to _values.yaml_ and upgrade Kubecost
 
 This specific parameter can be configured under `kubecostProductConfigs.productKey.key` in your [_values.yaml_](https://github.com/kubecost/cost-analyzer-helm-chart/blob/84dfbe4addedfee55b50af6ca44c1f62966d4457/cost-analyzer/values.yaml#L426).
 
 {% hint style="info" %}
-You must also set the `kubecostProductConfigs.productKey.enabled` config to `true` when using this option. That this will leave your secrets unencrypted in _values.yaml_. Use a Kubernetes secret as in the previous method to avoid this.
+You must also set the `kubecostProductConfigs.productKey.enabled=true` when using this option. That this will leave your secrets unencrypted in _values.yaml_. Use a Kubernetes secret as in the previous method to avoid this.
 {% endhint %}
 
-## In product
+## Option 3: Apply your product key in the Kubecost UI
 
 To apply your license key within the Kubecost UI, visit the Overview page, then select _Upgrade_ in the page header.
 
@@ -57,6 +57,6 @@ You can then supply your Kubecost provided license key in the input box that is 
 
 ## Verification
 
-To verify that your key is properly supplied, visit _Settings_ to confirm the final digits are as expected:
+To verify that your key has been applied successfully, visit _Settings_ to confirm the final digits are as expected:
 
 ![Verifying a product key](/images/add-key-verification.png)
