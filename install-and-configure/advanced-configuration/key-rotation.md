@@ -1,4 +1,4 @@
-# Service Key rotation
+# Service Key Rotation
 
 Cloud provider service keys can be used in various aspects of the Kubecost installation. This includes configuring [integrating your cloud provider billing data with Kubecost](/install-and-configure/install/cloud-integration/README.md), [setting up multi-cluster environments](/install-and-configure/install/multi-cluster/multi-cluster.md), and [backing up ETL data](/install-and-configure/install/etl-backup/etl-backup.md). While automated IAM authentication via a Kubernetes service account like AWS IRSA is recommended, there are some scenarios where key-based authentication is preferred. When this method is used, rotating the keys at a pre-defined interval is a security best practice. Combinations of these features can be used, and therefore you may need to follow one or more of the below steps.
 
