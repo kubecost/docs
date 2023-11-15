@@ -29,7 +29,7 @@ The Cost Model both exports and consumes the following metrics.
 
 ## Kubecost Network Costs
 
-The Kubecost network-costs daemonset collects node network data and exports the egress, ingress, and performance statistics.
+The Kubecost network-costs DaemonSet collects node network data and exports the egress, ingress, and performance statistics.
 
 | Metric                          | Description              |
 | ------------------------------- | ------------------------ |
