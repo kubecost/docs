@@ -98,9 +98,7 @@ Duration of a single allocation set. If unspecified, this defaults to the `windo
 
 The Trends API determines changes in resource cost usage over time based on the interval set `window` parameter and provides that information via the schema field `value`. Cost usage for the current window sampled will be compared with the previous window, the window directly before the current window of the same size interval. For example, for `window=3d`, Kubecost will output cost usage for the past three days compared to cost usage of the three days before the start of the window. This means a total of six days of allocation are sampled in order to provide an accurate value.
 
-The equation for calculating value is:
-
-`value=current/previous - 1`
+The equation for calculating `value` is: `value=current/previous - 1`
 
 Receiving a positive `value` means your more recent `totalCost` has increased compared to the previous window. A negative `value` means spending has decreased.
 
@@ -108,7 +106,7 @@ Receiving a positive `value` means your more recent `totalCost` has increased co
 It's important to recognize when a resource is not detected to exist in the previous window. This is designated by the field `IsInfinite=true`, which means the allocation could not be determined to exist. Otherwise, the cause of an unexpected or major trend change could be misattributed.
 {% endhint %}
 
-In the example output below, `value` is expressed as 0.11... meaning spending has increased in the current window by roughly 11% from the previous window.
+In the example output below, `value` is expressed as `0.11...`, meaning spending has increased in the current window by roughly 11% from the previous window.
 
 ```json
 "etl-mount": {
@@ -125,7 +123,7 @@ In the example output below, `value` is expressed as 0.11... meaning spending ha
             },
 ```
 
-Trend values are converted into percentages in the Kubecost UI. Go to the Allocations page, and manually apply any additional parameters. Trends will be presented in the rightmost column, next to your Total cost. The `window` parameter is determined by the date range icon in the top right of the page. The default is Last 7 days (`window=7d`). The equation `value*100` is used to provide percentages.
+Trend values are converted into percentages in the Kubecost Allocations page, calcualted based on your current query. Trends will be presented in the rightmost column, next to your Total cost. The `window` parameter is determined by your selected date range in the top right of the page. The default is Last 7 days (`window=7d`). The equation `value*100` is used to provide percentages.
 
 ![Total cost column](<../../.gitbook/assets/image (2) (1) (1).png>)
 
