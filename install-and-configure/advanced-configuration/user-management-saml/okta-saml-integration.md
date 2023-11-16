@@ -173,7 +173,7 @@ kubectl delete configmap -n kubecost group-filters && kubectl create configmap -
 
 7. Pass the following values via Helm into your *values.yaml*:
 
-```
+```yaml
 saml:
    encryptionCertSecret: "kubecost-saml-cert"
    decryptionKeySecret: "kubecost-saml-decryption-key"
