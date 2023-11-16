@@ -79,7 +79,7 @@ These filters can be configured using groups or user attributes in your Okta dir
 
 Filtering is configured very similarly to the admin/readonly above. The same group pattern match (kubecost_group) can be used for both, as is the case in this example:
 
-```
+```yaml
     customGroups: # not needed for simple admin/readonly RBAC
       - assertionName: "kubecost_group"
 ```
