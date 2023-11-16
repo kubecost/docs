@@ -50,7 +50,7 @@ The simplest form of RBAC in Kubecost is to have two groups: `admin` and `readon
 
 The [values-saml.yaml](https://github.com/kubecost/poc-common-configurations/blob/main/saml-okta/values-saml.yaml) file contains the `admin` and `readonly` groups in the RBAC section:
 
-```
+```yaml
   rbac:
     enabled: true
     groups:
