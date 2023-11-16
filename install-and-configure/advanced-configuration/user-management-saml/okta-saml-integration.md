@@ -133,7 +133,7 @@ As an example, we will configure the following:
 
 6. Create the ConfigMap using the following command:
 
-```
+```shell
 kubectl create configmap group-filters --from-file filters.json -n kubecost
 ```
 
