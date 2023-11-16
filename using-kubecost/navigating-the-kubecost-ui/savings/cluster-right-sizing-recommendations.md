@@ -41,7 +41,11 @@ With this information provided, Kubecost can provide the most accurate recommend
 
 ### Prerequisites
 
-To adopt cluster right-sizing recommendations, you must first:
+To receive cluster right-sizing recommendations, you must first:
+
+* Have a GKE/EKS/AWS Kops cluster
+
+To adopt cluster right-sizing recommendations, you must:
 
 * Have a GKE/EKS/AWS Kops cluster
 * Enable the [Cluster Controller](https://docs.kubecost.com/install-and-configure/advanced-configuration/controller) on that cluster and perform the [provider service key setup](https://docs.kubecost.com/install-and-configure/advanced-configuration/controller#provider-service-key-setup)
