@@ -86,7 +86,7 @@ Filtering is configured very similarly to the admin/readonly above. The same gro
 
 The array of groups obtained during the authorization request will be matched to the subject key in the *filters.json*:
 
-```
+```json
 {
    "kubecost_admin":{
       "allocationFilters":[
