@@ -46,6 +46,14 @@ oidc:
   discoveryURL: "https://login.microsoftonline.com/{YOUR_TENANT_ID}/v2.0/.well-known/openid-configuration"
 ```
 
+{% hint style="info" %}
+If you are using one Entra ID app to authenticate multiple Kubecost endpoints, you must to pass an additional `redirect_uri` parameter in your `authURL` as shown in below example, which will include the URI you configured in Step 1.4. Otherwise, Entra ID may redirect to an incorrect endpoint. You can read more about this in Microsoft Entra ID's [troubleshooting docs](https://learn.microsoft.com/en-us/troubleshoot/azure/active-directory/reply-url-redirected-to-localhost).
+{% endhint %}
+
+```
+  authURL: "https://login.microsoftonline.com/{YOUR_TENANT_ID}/oauth2/v2.0/authorize?client_id={YOUR_CLIENT_ID}&response_type=code&scope=openid&nonce=123456&redirect_uri=https://{YOUR_KUBECOST_DOMAIN}/model/oidc/authorize"
+```
+
 ### Step 3 (optional): Configuring RBAC
 
 First, you need to configure an admin role for your app. For more information on this step, see [Microsoft's documentation](https://learn.microsoft.com/en-us/entra/identity-platform/howto-add-app-roles-in-apps).
