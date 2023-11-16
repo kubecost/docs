@@ -50,7 +50,7 @@ If you are using one Entra ID app to authenticate multiple Kubecost endpoints, y
 {% endhint %}
 
 ```
-  authURL: "https://login.microsoftonline.com/{YOUR_TENANT_ID}/oauth2/v2.0/authorize?client_id={YOUR_CLIENT_ID}&response_type=code&scope=openid&nonce=123456&redirect_uri=%3A%2F%2F{YOUR_KUBECOST_DOMAIN}/model/oidc/authorize"
+  authURL: "https://login.microsoftonline.com/{YOUR_TENANT_ID}/oauth2/v2.0/authorize?client_id={YOUR_CLIENT_ID}&response_type=code&scope=openid&nonce=123456&redirect_uri=https%3A%2F%2F{YOUR_KUBECOST_DOMAIN}/model/oidc/authorize"
 ```
 
 ### Step 3 (optional): Configuring RBAC
