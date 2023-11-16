@@ -181,7 +181,8 @@ saml:
 
 ## Troubleshooting
 
-You can view the logs on the cost-model container. In this example, the assumption is that the prefix for Kubecost groups is `kubecost_`. This script is currently a work in progress.
+You can view the logs on the cost-model container. In this example, the assumption is that the prefix for Kubecost groups is `kubecost_`. This command is currently a work in progress.
+
 
 `kubectl logs deployment/kubecost-cost-analyzer -c cost-model --follow |grep -v -E 'resourceGroup|prometheus-server'|grep -i -E 'group|xmlname|saml|login|audience|kubecost_'`
 
