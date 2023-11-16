@@ -60,7 +60,7 @@ Here is a [second basic auth example](https://kubernetes.github.io/ingress-nginx
 
 ## Non-root path example
 
-When deploying Grafana on a non-root URL, you also need to update your _grafana.ini_ to reflect this. [More info](https://github.com/kubecost/cost-analyzer-helm-chart/blob/cae42c28e12ecf8f1ad13ee17be8ce6633380b96/cost-analyzer/values.yaml#L335-L339).
+When deploying Grafana on a non-root URL, you also need to update your _grafana.ini_ to reflect this. More info can be found in [_values.yaml_](https://github.com/kubecost/cost-analyzer-helm-chart/blob/cae42c28e12ecf8f1ad13ee17be8ce6633380b96/cost-analyzer/values.yaml#L335-L339).
 
 {% code overflow="wrap" %}
 ```yaml
