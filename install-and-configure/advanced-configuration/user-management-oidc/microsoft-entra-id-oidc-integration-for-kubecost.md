@@ -45,6 +45,11 @@ oidc:
   loginRedirectURL: "https://{YOUR_KUBECOST_DOMAIN}/model/oidc/authorize"
   discoveryURL: "https://login.microsoftonline.com/{YOUR_TENANT_ID}/v2.0/.well-known/openid-configuration"
 ```
+7. **Note**: When you use single Entra ID app to authenticate multiple kubecost endpoints, you must to pass additional redirect_uri parameter in your authURL as shown in below example; otherwise it is possible Entra ID app will Redirect you to to incorrect endpoint. read more at [Microsoft Entra ID is sending the token to an incorrect reply URL endpoint or localhost](https://learn.microsoft.com/en-us/troubleshoot/azure/active-directory/reply-url-redirected-to-localhost)
+
+```
+  authURL: "https://login.microsoftonline.com/{YOUR_TENANT_ID}/oauth2/v2.0/authorize?client_id={YOUR_CLIENT_ID}&response_type=code&scope=openid&nonce=123456&redirect_uri=%3A%2F%2F{YOUR_KUBECOST_DOMAIN}/model/oidc/authorize"
+```
 
 ### Step 3 (optional): Configuring RBAC
 
