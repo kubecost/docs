@@ -139,7 +139,7 @@ kubectl create configmap group-filters --from-file filters.json -n kubecost
 
 You can modify the ConfigMap without restarting any pods.
 
-```
+```shell
 kubectl delete configmap -n kubecost group-filters && kubectl create configmap -n kubecost group-filters --from-file filters.json
 ```
 
