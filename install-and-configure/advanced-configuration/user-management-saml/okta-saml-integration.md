@@ -35,7 +35,7 @@ For configuring single app logout, read [Okta's documentation](https://help.okta
 10. Use this [Okta document](https://help.okta.com/en-us/content/topics/apps/apps-manage-assignments.htm) to assign individuals or groups access to your Kubecost application.
 11. Finally, add `-f values-saml.yaml` to your Kubecost Helm upgrade command:
 
-```
+```shell
 helm upgrade --install kubecost \
   --repo https://kubecost.github.io/cost-analyzer/ cost-analyzer \
   --namespace kubecost --create-namespace \
