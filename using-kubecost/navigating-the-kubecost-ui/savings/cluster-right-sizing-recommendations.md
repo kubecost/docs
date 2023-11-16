@@ -2,9 +2,13 @@
 
 Kubecost can provide and implement recommendations for right-sizing your supported clusters to ensure they are configured in the most cost-effective way. Recommendations are available for any and all clusters. Kubecost in certain configurations is also capable of taking a recommendation and applying it directly to your cluster in one moment. These two processes should be distinguished respectively as viewing cluster recommendations vs. adopting cluster recommendations.
 
+Kubecost is also able to implement cluster sizing recommendations on a user-scheduled interval, known as continuous cluster right-sizing.
+
 ## Viewing cluster recommendations
 
 You can access cluster right-sizing by selecting _Savings_ in the left navigation, then select the _Right-size your cluster nodes_ panel.
+
+![Cluster Sizing](/images/clusterrightsizing.png)
 
 Kubecost will offer two recommendations: simple (uses one node type) and complex (uses two or more node types). Kubecost may hide the complex recommendation when it is more expensive than the simple recommendation, and present a single recommendation instead. These recommendations and their metrics will be displayed in a chart next to your existing configuration in order to compare values like total cost, node count, and usage.
 
@@ -35,16 +39,14 @@ With this information provided, Kubecost can provide the most accurate recommend
 
 ## Adopting cluster recommendations
 
-{% hint style="warning" %}
-Adoption of cluster right-sizing recommendations is only available for clusters on GKE, EKS, or Kops-on-AWS with the Cluster Controller enabled. This is because, in order for Kubecost to apply a recommendation, it needs write access to your cluster. Write access to your cluster is enabled with the Cluster Controller.
-{% endhint %}
-
 ### Prerequisites
 
 To adopt cluster right-sizing recommendations, you must first:
 
 * Have a GKE/EKS/AWS Kops cluster
 * Enable the [Cluster Controller](https://docs.kubecost.com/install-and-configure/advanced-configuration/controller) on that cluster and perform the [provider service key setup](https://docs.kubecost.com/install-and-configure/advanced-configuration/controller#provider-service-key-setup)
+
+In order for Kubecost to apply a recommendation, it needs write access to your cluster. Write access to your cluster is enabled with the Cluster Controller.
 
 ### Usage
 
@@ -55,3 +57,29 @@ If you have [Kubecost Actions](https://docs.kubecost.com/using-kubecost/navigati
 {% hint style="info" %}
 Recommendations via Kubecost Actions can only be adopted on your primary cluster. To adopt recommendations on a secondary cluster via Kubecost Actions, you must first manually switch to that cluster's Kubecost frontend.
 {% endhint %}
+
+## Continuous cluster right-sizing
+
+### Prerequisites
+
+Continuous cluster right-sizing has the same requirements needed as implementing any cluster right-sizing recommendations. See above for a complete description of prerequisites.
+
+### Usage
+
+
+
+### Guided Sizing
+
+Continuous Cluster Right-Sizing is accessible via [Actions](https://docs.kubecost.com/using-kubecost/navigating-the-kubecost-ui/savings/savings-actions), then select Guided Sizing. This feature implements both cluster right-sizing and [container right-sizing](/using-kubecost/navigating-the-kubecost-ui/savings/cluster-right-sizing-recommendations/cluster-right-sizing-recommendations.md).
+
+For a tutorial on using Guided Sizing, see [here](/using-kubecost/navigating-the-kubecost-ui/savings/savings-actions.md#guided-sizing).
+
+## Troubleshooting
+
+### EBS-related scheduling challenges on EKS
+
+If you are using Persistent Volumes (PVs) with AWS's Elastic Block Store (EBS) Container Storage Interface (CSI), you may run into a problem post-resize where pods are in a Pending state because of a "volume node affinity conflict". This may be because the pod needs to mount an already-created PV which is in an Availability Zone (AZ) without node capacity for the pod. This is a limitation of the EBS CSI.
+
+Kubecost mitigates this problem by ensuring continuous cluster right-sizing creates at least one node per AZ by forcing NodeGroups to have a node count greater than or equal to the number of AZs of the EKS cluster. This will also prevent you from setting a minimum node count for your recommendation below the number of AZs for your cluster. If the EBS CSI continues to be problematic, you can consider switching your CSI to services like Elastic File System (EFS) or FSx for Lustre.
+
+Using Cluster Autoscaler on AWS may result in a similar error. See more [here](https://github.com/kubernetes/autoscaler/blob/master/cluster-autoscaler/cloudprovider/aws/README.md#common-notes-and-gotchas).
