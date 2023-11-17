@@ -11,12 +11,14 @@ The diagnostics pod is enabled by default when Federated-ETL or Thanos is enable
 The aggregated diagnostics can be accessed through the Kubecost UI or API.
 
 The health checks include:
-1. whether Kubecost is emitting metrics
-2. whether Kubecost is being scraped by Prometheus
-3. whether Kubecost has healthy ETL files
+1. Kubecost is emitting metrics
+2. Kubecost is being scraped by Prometheus
+3. Prometheus has required metrics
+4. Kubecost has healthy ETL files
+
+All of these items are required for Kubecost to accurately report costs.
 
 ## Diagnostics configuration
-
 
 The diagnostics pod can be configured with the following Helm values:
 
