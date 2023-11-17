@@ -15,7 +15,7 @@ The health checks include:
 2. whether Kubecost is being scraped by Prometheus
 3. whether Kubecost has healthy ETL files
 
-## Diagnostics Configuration
+## Diagnostics configuration
 
 
 The diagnostics pod can be configured with the following Helm values:
@@ -31,11 +31,9 @@ diagnostics:
   collectHelmValues: false
 ```
 
-Additional configuration options can found in the [values.yaml](https://github.com/kubecost/cost-analyzer-helm-chart/blob/develop/cost-analyzer/values.yaml) under `diagnostics:`.
+Additional configuration options can found in the [*values.yaml*](https://github.com/kubecost/cost-analyzer-helm-chart/blob/develop/cost-analyzer/values.yaml) under `diagnostics:`.
 
-
-
-## Diagnostics Architecture
+## Diagnostics architecture
 
 {% hint style="info" %}
 In the below diagram, the arrows originate from the the pod initiating the request and point to the resource that receives the request.
