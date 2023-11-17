@@ -37,6 +37,11 @@ Additional configuration options can found in the [values.yaml](https://github.c
 
 ## Diagnostics Architecture
 
+{% hint style="info" %}
+In the below diagram, the arrows originate from the the pod initiating the request and point to the resource that receives the request.
+This diagram is specific to the requests required for diagnostics only. For additional diagrams, see the [multi-cluster guide](multi-cluster.md).
+{% endhint %}
+
 ![Kubecost-Agent-Diagnostics](/images/daigrams/Agent-Diagnostics-Architecture.png)
 
 ## Diagnostics API
