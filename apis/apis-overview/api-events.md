@@ -120,35 +120,29 @@ You can also view all substrings between Allocations or Assets. For example, the
 http://<your-kubecost-address>/model/etl/log?kind=AssetSet
 ```
 
+Allocation outputs should be interpreted as:
+
 * `AllocationSetSaved` describes a saved AllocationSet
-  * size: number of records in the set
-  * window: window of the set
 * `AllocationSetLoaded` describes a loaded AllocationSet
-  * size: number of records in the set
-  * window: window of the set
 * `AllocationSetAggregated` describes aggregating an AllocationSet
-  * size: number of records in the set
-  * window: window of the set
 * `AllocationSetTotaled` describes totaling an AllocationSet
-  * window: window of the set
 * `AllocationSetReconciled` describes reconciling an AllocationSet
-  * window: window of the set
 * `AllocationSetComputeError` describes an error in computation
 * `AllocationSetReconcileError` describes an error in reconciliation
-* `AssetSetSaved` described a saved AssetSet
-  * size: number of records in the set
-  * window: window of the set
-* `AssetSetLoaded` described a loaded AssetSet
-  * size: number of records in the set
-  * window: window of the set
-* `AssetSetAggregated` described aggregating an AssetSet
-  * size: number of records in the set
-  * window: window of the set
-* `AssetSetTotaled` described totaling an AssetSet
-  * window: window of the set
-* `AssetSetReconciled` described reconciling an AssetSet
-  * window: window of the set
-* `AssetSetComputeError` described an error in computation
-* `AssetSetReconcileError` described an error in reconciliation
+
+Assets outputs should be interepreted as:
+
+* `AssetSetSaved` describes a saved AssetSet
+* `AssetSetLoaded` describes a loaded AssetSet
+* `AssetSetAggregated` describes aggregating an AssetSet
+* `AssetSetTotaled` describes totaling an AssetSet
+* `AssetSetReconciled` describes reconciling an AssetSet
+* `AssetSetComputeError` describes an error in computation
+* `AssetSetReconcileError` describes an error in reconciliation
+
+Underneath each event `kind`, you should see `size` and/or `window` returned, which are:
+ 
+  * `size`: number of records in the set
+  * `window`: window of the set
 
 This log will additionally be appended to bug reports.

@@ -48,7 +48,7 @@ Kubecost Cloud has been tested with deployments of up to 1,000 nodes. Please rea
 * In a small Kube cluster (less than 20 nodes), the Kubecost Cloud Agent total resource usage is approximately:
   * 2 GiB RAM
   * .5 CPUs
-* The network costs daemonSet will add a per node resource usage at:
+* The network costs DaemonSet will add a per node resource usage at:
   * 20 MiB RAM
   * .05 CPU
 
