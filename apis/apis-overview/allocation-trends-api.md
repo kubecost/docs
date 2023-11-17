@@ -123,7 +123,7 @@ In the example output below, `value` is expressed as `0.11...`, meaning spending
             },
 ```
 
-Trend values are converted into percentages in the Kubecost Allocations page, calcualted based on your current query. Trends will be presented in the rightmost column, next to your Total cost. The `window` parameter is determined by your selected date range in the top right of the page. The default is Last 7 days (`window=7d`). The equation `value*100` is used to provide percentages.
+Trend values are converted into percentages in the Kubecost Allocations page, calculated based on your current query. Trends will be presented in the rightmost column, next to your Total cost. The `window` parameter is determined by your selected date range in the top right of the page. The default is Last 7 days (`window=7d`). The equation `value*100` is used to provide percentages.
 
 ![Total cost column](<../../.gitbook/assets/image (2) (1) (1).png>)
 
