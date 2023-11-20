@@ -1,4 +1,4 @@
-# Container Request Right-Sizing
+# Container Request Right-Sizing Recommendations
 
 {% hint style="warning" %}
 This feature is in beta. Please read the documentation carefully.
@@ -15,11 +15,11 @@ To receive container right-sizing recommendations, you must first:
 To adopt container right-sizing recommendations, you must:
 
 * Have a GKE/EKS/AWS Kops cluster
-* Enable the [Cluster Controller](https://docs.kubecost.com/install-and-configure/advanced-configuration/controller) on that cluster and perform the [provider service key setup](https://docs.kubecost.com/install-and-configure/advanced-configuration/controller#provider-service-key-setup) if necessary
+* Enable the [Cluster Controller](/install-and-configure/advanced-configuration/controller/cluster-controller.md) on that cluster and perform the [provider service key setup](/install-and-configure/advanced-configuration/controller/cluster-controller.md#provider-service-key-setup) if necessary
 
 In order for Kubecost to apply a recommendation, it needs write access to your cluster. Write access to your cluster is enabled with the Cluster Controller.
 
-## Configuring recommendations
+## Configuring RRS recommendations
 
 Select _Savings_ in the left navigation, then select _Right-size your container requests_. The Request right-sizing recommendations page opens.
 
@@ -35,11 +35,23 @@ Select _Customize_ to modify the right-sizing settings. Your customization setti
 
 When finished, select *Save*.
 
-## One-click right-sizing
+Your configured recommendations can also be downloaded as a CSV file by selecting the three dots button > _Download CSV_.
 
-To apply RRS as you configured, select *Resize Requests Now* > *Yes, apply the recommendation*.
+## Adopting RRS recommendations
 
-## Autoscaling
+There are several ways to adopt Kubecost's container RRS recommendations, depending on how frequently you wish to utilize this feature for your container requests.
+
+### One-click right-sizing
+
+To apply RRS as you configured in one instance, select *Resize Requests Now* > *Yes, apply the recommendation*.
+
+### Autoscaling
 
 Also referred to as continuous container RRS, autoscaling allows you to configure a schedule to routinely apply RRS to your deployments. You can configure this by selecting *Enable Autoscaling*, selecting your Start Date and schedule, then confirming with *Apply*.
 
+### Savings Actions
+
+Both one-click and continuous container RRS can be configured via Savings [Actions](/using-kubecost/navigating-the-kubecost-ui/savings/savings-actions.md). On the Actions page, select _Create Action_, then select either:
+
+* _Request Sizing_: Will open the Container RRS page with the schedule window open to configure and apply.
+* _Guided Sizing_: Will open the Guided Sizing page and allow you to apply both one-click RRS, then continous [cluster sizing](/using-kubecost/navigating-the-kubecost-ui/savings/cluster-right-sizing-recommendations.md)
