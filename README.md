@@ -46,7 +46,7 @@ For larger teams and companies with more complex infrastructure, you need the ri
     Retain data for years with various durable storage options. Provides record keeping on spend, allocation, and efficiency metrics with simple backup & restore functionality.
 *   **Access control with SSO/SAML**
 
-    Finely manage read and/or admin access by individual users or user groups. [Learn more](install-and-configure/advanced-configuration/user-management/).
+    Finely manage read and/or admin access by individual users or user groups. Learn more about [configuring user management]](install-and-configure/advanced-configuration/user-management-saml/README.md).
 *   **High availability mode**
 
     Use multiple Kubecost replica pods with a Leader/Follower implementation to ensure one leader always exists across all replicas to run high availability mode. [Learn more](/install-and-configure/advanced-configuration/high-availability.md).

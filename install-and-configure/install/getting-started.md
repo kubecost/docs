@@ -36,13 +36,16 @@ To broaden usage to other teams or departments within your Kubecost environment,
 
 Establishing an ingress controller will allow for control of access for your workspace. Learn more about enabling external access in Kubecost with our [Ingress Examples](/install-and-configure/install/ingress-examples.md) doc.
 
-### SSO/SAML/RBAC
+### SSO/SAML/RBAC/OIDC
 
 {% hint style="info" %}
-SSO/SAML/RBAC are only officially supported on Kubecost Enterprise plans.
+SSO/SAML/RBAC/OIDC are only officially supported on Kubecost Enterprise plans.
 {% endhint %}
 
-SSO/SAML/RBAC is able to be configured on a separate baseline deployment, which will not only shorten the deployment time of security features, but it will also avoid unwanted access denial. This is helpful when using only one developer deployment. See our [User Management](/install-and-configure/advanced-configuration/user-management/README.md) doc to learn more.
+You can configure SSO and RBAC on a separate baseline deployment, which will not only shorten the deployment time of security features, but it will also avoid unwanted access denial. This is helpful when using only one developer deployment. See our user management guides below:
+
+* [SAML](/install-and-configure/advanced-configuration/user-management-saml/README.md)
+* [OIDC](/install-and-configure/advanced-configuration/user-management-oidc/user-management-oidc.md)
 
 ## Using an existing node exporter
 
