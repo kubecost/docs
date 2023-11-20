@@ -33,7 +33,7 @@ Whenever there exists at least one NodePool with the `cluster-autoscaler` enable
 1. Resize all non-autoscaling nodepools to 0
 2. Schedule the turndown on one of the autoscaler nodepool nodes
 3. Once it is brought back up (rescheduled to the selected node), the turndown pod will start a process called "flattening" which attempts to set deployment replicas to 0, turn off jobs, and annotate pods with labels that allow the autoscaler to do the rest of the work. Flattening persists pre-turndown values in the annotations of Kubernetes objects. The GKE autoscaler behavior is expected to handle the rest: removing now-unneeded nodes from the node pools. A limitation of this strategy is that the autoscaled node pools won't go below their configured minimum node count.
-4. When turn up occurs, deployments and daemonSets are "expanded" to their original sizes/replicas.
+4. When turn up occurs, deployments and DaemonSets are "expanded" to their original sizes/replicas.
 
 There are four annotations that can be applied for this process:
 

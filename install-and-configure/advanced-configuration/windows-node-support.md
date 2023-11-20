@@ -17,9 +17,9 @@ helm install kubecost \
 
 ## Detail
 
-The cluster must have at least 1 Linux node for the Kubecost pods to run on:
+The cluster must have at least one Linux node for the Kubecost pods to run on:
 
-*   Use a nodeSelector for all Kubecost deployments:
+Use a nodeSelector for all Kubecost deployments:
 
     ```
     spec:
@@ -27,7 +27,7 @@ The cluster must have at least 1 Linux node for the Kubecost pods to run on:
         kubernetes.io/os: linux
       containers:
     ```
-*   For DaemonSets, set the affinity to only allow scheduling on Windows nodes:
+For DaemonSets, set the affinity to only allow scheduling on Windows nodes:
 
     ```
       affinity:
@@ -41,7 +41,7 @@ The cluster must have at least 1 Linux node for the Kubecost pods to run on:
                 - linux
     ```
 
-See the list of all deployments and DaemonSets [here](https://github.com/kubecost/cost-analyzer-helm-chart/blob/develop/cost-analyzer/values-windows-node-affinity.yaml).
+See the list of all deployments and DaemonSets in this [*values-windows-node-affinity.yaml*](https://github.com/kubecost/cost-analyzer-helm-chart/blob/develop/cost-analyzer/values-windows-node-affinity.yaml) file.
 
 ## Metrics
 

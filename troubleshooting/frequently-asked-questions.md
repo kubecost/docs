@@ -78,7 +78,7 @@ A: The Azure costs export update time is relative to the time of day when it was
 Q: What regions/currencies are available for the Azure rate card integration?\
 A: Azure is very specific as to what currency can be used for each region/country. Azure provides that information [here](https://docs.microsoft.com/en-us/azure/marketplace/marketplace-geo-availability-currencies).
 
-Q: I would like to use the node-exporter daemonSet provided with Openshift, however after disabling Kubecost-bundled Prometheus, it is unable to discover the node-exporter endpoints.\
+Q: I would like to use the node-exporter DaemonSet provided with Openshift, however after disabling Kubecost-bundled Prometheus, it is unable to discover the node-exporter endpoints.\
 A: The Openshift provided node-exporter requires an additional annotation of `prometheus.io/scrape: "true"` to be added.
 
 ```yaml
@@ -131,7 +131,7 @@ If the test is successful, for example if the test was for an email, content wil
 Another suggestion for testing alert filters is to create an alert with a small window and wait. The [API](/using-kubecost/navigating-the-kubecost-ui/alerts.md#alerts-scheduler) will allow hours in the window.
 
 Q: Kubecost allows configuring in-zone/in-region/cross-region traffic classification. After I tried to configure this and saw that the values have been configured, I couldn’t see traffic classification allocation in the dashboard. Is this feature still supported?\
-A: Check http://\<your-kubecost-address>/details! From there, look for the bottom right box to view more network details. It also may be important to have the network-costs daemonSet running in your cluster.
+A: Check http://\<your-kubecost-address>/details! From there, look for the bottom right box to view more network details. It also may be important to have the network-costs DaemonSet running in your cluster.
 
 Q: When cloud integration is not yet enabled, does Kubecost's usage of public pricing data take into account the region the node is on?\
 A: Yes. This can be verified by reviewing the code at [opencost/pkg/cloud](https://github.com/opencost/opencost/tree/1795bcddb1d91d3e60772030528274c4dff29185/pkg/cloud). Specifically, if you start at [GetNodeCost()](https://github.com/opencost/opencost/blob/1795bcddb1d91d3e60772030528274c4dff29185/pkg/costmodel/costmodel.go#L933) you can follow the chain of function calls. It's slightly different for each cloud provider, but it should look roughly like this: `pkg/costmodel/GetNodeCost() → pkg/cloud/NodePricing() → pkg/cloud/DownloadPricingData() → pkg/cloud/getRegionPricing()`

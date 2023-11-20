@@ -237,7 +237,7 @@ kubectl describe pod <pod-name> -n kubecost
 
 ### FailedScheduling kubecost-prometheus-node-exporter
 
-If there is an existing node-exporter daemonset, the Kubecost Helm chart may timeout due to a conflict. You can disable the installation of node-exporter by passing the following parameters to the Helm install.
+If there is an existing node-exporter DaemonSet, the Kubecost Helm chart may timeout due to a conflict. You can disable the installation of node-exporter by passing the following parameters to the Helm install.
 
 {% code overflow="wrap" %}
 ```bash

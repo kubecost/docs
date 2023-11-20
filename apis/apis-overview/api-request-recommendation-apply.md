@@ -128,6 +128,6 @@ curl -XGET 'http://localhost:9090/model/savings/requestSizing' \
 ## Current Limitations
 
 * The Apply APIs only "size down," i.e. they will never increase a container requests, only lower them. This is currently done out of an abundance of caution while the APIs are being tested. This is to prevent a well-running cluster to scale up and run out of capacity, even if setting the requests to a higher level would provide better availability guarantees.
-* The Apply APIs only support some controller kinds (Deployments, daemonSets, StatefulSets, ReplicaSets) at the moment. This is planned to increase soon and is subject to change.
+* The Apply APIs only support some controller kinds (Deployments, DaemonSets, StatefulSets, ReplicaSets) at the moment. This is planned to increase soon and is subject to change.
 * The Apply APIs do not support sizing pods without a controller. This is also planned to change.
 * The Apply APIs do not support clusters other than the "local" cluster (the cluster that the instance of Kubecost you are interacting with via HTTP is running on).
