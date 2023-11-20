@@ -8,8 +8,6 @@ Kubecost is also able to implement cluster sizing recommendations on a user-sche
 
 You can access cluster right-sizing by selecting _Savings_ in the left navigation, then select the _Right-size your cluster nodes_ panel.
 
-![Cluster Sizing](/images/clusterrightsizing.png)
-
 Kubecost will offer two recommendations: simple (uses one node type) and complex (uses two or more node types). Kubecost may hide the complex recommendation when it is more expensive than the simple recommendation, and present a single recommendation instead. These recommendations and their metrics will be displayed in a chart next to your existing configuration in order to compare values like total cost, node count, and usage.
 
 ### Configuring your cluster right-sizing recommendations

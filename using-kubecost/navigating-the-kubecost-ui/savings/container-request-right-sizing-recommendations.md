@@ -23,8 +23,6 @@ In order for Kubecost to apply a recommendation, it needs write access to your c
 
 Select _Savings_ in the left navigation, then select _Right-size your container requests_. The Request right-sizing recommendations page opens.
 
-![Request right-sizing recommendations Beta page](../../../../images/rightsizing.png)
-
 Select _Customize_ to modify the right-sizing settings. Your customization settings will tell Kubecost how to calculate its recommendations, so make sure it properly represents your environment and activity:
 
 * Window: Duration of deployment activity Kubecost should observe
