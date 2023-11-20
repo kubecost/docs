@@ -66,6 +66,8 @@ Set to `true` to ignore historical usage data (if it exists) when making the pre
 
 The API requires that workloads be passed in the request body in YAML format and that the `Content-Type` header be set to `application/yaml`. Multiple workloads can be passed via separation with the standard `---` syntax.
 
+The API requires that workloads be passed in the request body in YAML or JSON format. If using YAML, multiple workloads can be passed via separation with the standard `---` syntax. If using JSON, multiple workloads can be passed via the standard "list" format used by Kubernetes (e.g. `kubectl get deployment -A -o json`).
+
 Currently supported workload types:
 
 * Deployments
