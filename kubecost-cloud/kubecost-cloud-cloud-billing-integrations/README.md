@@ -1,7 +1,7 @@
 # Kubecost Cloud: Cloud Billing Integrations
 
 {% hint style="info" %}
-This documentation should only be consulted when using Kubecost Cloud. For information about the configuring cloud integrations with self-hosted Kubecost, see [here](https://docs.kubecost.com/install-and-configure/install/cloud-integration).
+This documentation should only be consulted when using Kubecost Cloud. For information about configuring cloud integrations with self-hosted Kubecost, see [here](https://docs.kubecost.com/install-and-configure/install/cloud-integration).
 {% endhint %}
 
 Integration with cloud service providers (CSPs) via their respective billing APIs allows Kubecost to display out-of-cluster (OOC) costs (e.g. AWS S3, Google Cloud Storage, Azure Storage Account). Additionally, it allows Kubecost to reconcile Kubecost's in-cluster estimates with actual billing data to improve accuracy.

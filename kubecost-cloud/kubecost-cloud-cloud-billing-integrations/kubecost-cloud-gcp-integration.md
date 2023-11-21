@@ -1,7 +1,7 @@
 # Kubecost Cloud GCP Integration
 
 {% hint style="info" %}
-This documentation should only be consulted when using Kubecost Cloud. For information about the configuring a GCP integration with self-hosted Kubecost, see [here](https://docs.kubecost.com/install-and-configure/install/cloud-integration/gcp-out-of-cluster).
+This documentation should only be consulted when using Kubecost Cloud. For information about configuring a GCP integration with self-hosted Kubecost, see [here](https://docs.kubecost.com/install-and-configure/install/cloud-integration/gcp-out-of-cluster).
 {% endhint %}
 
 Kubecost Cloud provides the ability to allocate out of cluster (OOC) costs back to Kubernetes concepts like namespaces and deployments. The following guide provides the steps required for allocating OOC costs in GCP.
