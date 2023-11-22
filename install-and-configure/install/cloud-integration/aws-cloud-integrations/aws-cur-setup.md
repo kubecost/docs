@@ -112,7 +112,7 @@ For Athena query results written to an S3 bucket only accessed by Kubecost, it i
 
 ### Step 3: Download configuration templates
 
-The policy documents required can be cloned in our [poc-common-config repo](https://github.com/kubecost/poc-common-configurations/tree/main/aws-attach-roles). You will need the following files:
+The policy documents required can be cloned from our [poc-common-config repo](https://github.com/kubecost/poc-common-configurations/tree/main/aws-attach-roles). You will need the following files from this folder:
 *    _iam-payer-account-cur-athena-glue-s3-access.json_
 *    _iam-payer-account-trust-primary-account.json_
 *    *iam-access-cur-in-payer-account.json*
