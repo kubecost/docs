@@ -115,6 +115,7 @@ For Athena query results written to an S3 bucket only accessed by Kubecost, it i
 The policy documents required can be cloned in our [poc-common-config repo](https://github.com/kubecost/poc-common-configurations/tree/main/aws-attach-roles). You will need the following files:
 *    _iam-payer-account-cur-athena-glue-s3-access.json_
 *    _iam-payer-account-trust-primary-account.json_
+*    *iam-access-cur-in-payer-account.json*
 
 ### Step 4: Setting up Payer Account IAM permissions
 
@@ -124,7 +125,7 @@ In _iam-payer-account-cur-athena-glue-s3-access.json_, replace all `ATHENA_RESUL
 
 In *iam-payer-account-trust-primary-account.json*, replace `SUB_ACCOUNT_222222222` with the account number of the account where the Kubecost primary cluster will run.
 
-In the same location where your downloaded configuration files are, run the following command to create the appropriate policy (`jq` is not required):
+In the same location as your downloaded configuration files, run the following command to create the appropriate policy (`jq` is not required):
 
 {% code overflow="wrap" %}
 ```sh
@@ -156,11 +157,15 @@ aws iam put-role-policy --role-name kubecost-cur-access \
 ```
 {% endcode %}
 
+Now we can obtain the last value `masterPayerARN` for *cloud-integration.json* as the ARN associated with the newly-created IAM role, as seen below in the AWS console:
+
+![ARN](/images/masterPayerARN.png)
+
 ### Step 5: Setting up IAM permissions for the primary cluster
 
 **From the AWS Account where the Kubecost primary cluster will run**
 
-Update `PAYER_ACCOUNT_11111111111` with the AWS account number of the Payer Account and create a policy allowing Kubecost to assumeRole in the Payer Account:
+In *iam-access-cur-in-payer-account.json*, update `PAYER_ACCOUNT_11111111111` with the AWS account number of the Payer Account and create a policy allowing Kubecost to assumeRole in the Payer Account:
 
 ```sh
 aws iam create-policy --policy-name kubecost-access-cur-in-payer-account \
@@ -168,12 +173,12 @@ aws iam create-policy --policy-name kubecost-access-cur-in-payer-account \
   --output json |jq -r .Policy.Arn
 ```
 
-Note the output ARN (used in the iamserviceaccount --attach-policy-arn below):
+Note the output ARN (used in the `iamserviceaccount --attach-policy-arn` below):
 ```
 arn:aws:iam::SUB_ACCOUNT_222222222:policy/kubecost-access-cur-in-payer-account
 ```
 
-Create namespace and set environment variables:
+Create a namespace and set environment variables:
 
 ```sh
 kubectl create ns kubecost
@@ -191,7 +196,7 @@ eksctl utils associate-iam-oidc-provider \
 
 Create the Kubernetes service account, attaching the assumeRole policy:
 
-**Note:** Replace `SUB_ACCOUNT_222222222` with AWS account number where the primary Kubecost cluster will run.
+**Note:** Replace `SUB_ACCOUNT_222222222` with the AWS account number where the primary Kubecost cluster will run.
 
 {% code overflow="wrap" %}
 ```sh
