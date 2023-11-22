@@ -24,11 +24,13 @@ To allocate external AWS resources to a Kubernetes concept, use the following ta
 | Pod | kubernetes_pod	    | pod-name     |
 | Container | kubernetes_container	| container-name |
 
-> **Note**: In the `kubernetes_label_NAME` tag key, the `NAME` portion should appear exactly as the tag appears inside of Kubernetes. For example, for the tag `app.kubernetes.io/name`, this tag key would appear as `kubernetes_label_app.kubernetes.io/name`.
+{% hint style="info" %}
+In the `kubernetes_label_NAME` tag key, the `NAME` portion should appear exactly as the tag appears inside of Kubernetes. For example, for the tag `app.kubernetes.io/name`, this tag key would appear as `kubernetes_label_app.kubernetes.io/name`.
+{% endhint %}
 
-To use an alternative or existing AWS tag schema, you may supply these in your [values.yaml](https://github.com/kubecost/cost-analyzer-helm-chart/blob/v1.73.0/cost-analyzer/values.yaml#L589) under the `kubecostProductConfigs.labelMappingConfigs.\<aggregation\>\_external_label`. Also be sure to set `kubecostProductConfigs.labelMappingConfigs.enabled = true`.
+To use an alternative or existing AWS tag schema, you may supply these in your [*values.yaml*](https://github.com/kubecost/cost-analyzer-helm-chart/blob/v1.73.0/cost-analyzer/values.yaml#L589) under `kubecostProductConfigs.labelMappingConfigs.\<aggregation\>\_external_label`. Also be sure to set `kubecostProductConfigs.labelMappingConfigs.enabled=true`.
 
-More on AWS tagging [here](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html).
+For more information, consult AWS' [Tag your Amazon EC2 resources](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html).
 
 Tags may take several hours to show up in the *Cost Allocations Tags* section described in the next step.
 
@@ -50,7 +52,7 @@ kubecostProductConfigs:
 
 In order to make the custom Kubecost AWS tags appear on the CURs, and therefore in Kubecost, individual cost allocation tags must be enabled. Details on which tags to enable can be found in Step 2.
 
-Instructions for enabling user-defined cost allocation tags [here](https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/activating-tags.html)
+For instructions on enabling user-defined cost allocation tags, consult AWS' [Activating user-defined cost allocation tags](https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/activating-tags.html)
 
 ### Viewing account-level tags
 
