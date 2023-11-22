@@ -1,16 +1,16 @@
-# Continuous Request Right-Sizing
+# Kubescaler
 
 {% hint style="warning" %}
 This feature is in currently in alpha. Please read the documentation carefully.
 {% endhint %}
 
-Kubecost's Kubescaler implements continuous request right-sizing (RRS): the automatic application of Kubecost's high-fidelity [recommendations](/apis/apis-overview/api-request-right-sizing-v2.md) to your containers' resource requests. This provides an easy way to automatically improve your allocation of cluster resources by improving efficiency.
+Kubecost's Kubescaler implements continuous request right-sizing: the automatic application of Kubecost's high-fidelity [recommendations](/apis/apis-overview/api-request-right-sizing-v2.md) to your containers' resource requests. This provides an easy way to automatically improve your allocation of cluster resources by improving efficiency.
 
 Kubescaler can be enabled and configured on a per-workload basis so that only the workloads you want edited will be edited.
 
 ## Setup
 
-See the high-level [automatic request right-sizing guide](auto-request-sizing.md). Kubescaler is part of Cluster Controller.
+Kubescaler is part of [Cluster Controller](/install-and-configure/advanced-configuration/controller/cluster-controller.md), and should be configured after the Cluster Controller is enabled.
 
 ## Usage
 
