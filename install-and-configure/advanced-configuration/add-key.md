@@ -26,7 +26,7 @@ Run the following command to create the secret. Replace `<SECRET_NAME>` with a n
 
 {% code overflow="wrap" %}
 ```shell
-$ kubectl create secret generic <SECRET_NAME> -n kubecost --from-file=./productkey.json
+$ kubectl create secret generic <SECRET_NAME> -n kubecost --from-file=productkey.json
 ```
 {% endcode %}
 
