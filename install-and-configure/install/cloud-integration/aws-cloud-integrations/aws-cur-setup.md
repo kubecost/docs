@@ -114,8 +114,6 @@ Navigate to Athena in the AWS Console. Be sure the region matches the one used i
 * `athenaRegion`: the AWS region value where your Athena query is configured
 * `athenaTable`: the partitioned value found in the Table list
 
-Update your *iam-payer-account-cur-athena-glue-s3-access.json* file by providing the value for `ATHENA_RESULTS_BUCKET_NAME` as the name of the Athena bucket you created in this step.
-
 {% hint style="info" %}
 For Athena query results written to an S3 bucket only accessed by Kubecost, it is safe to expire or delete the objects after one day of retention.
 {% endhint %}
