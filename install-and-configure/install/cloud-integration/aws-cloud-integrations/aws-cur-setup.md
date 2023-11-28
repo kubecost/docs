@@ -83,7 +83,7 @@ AWS may take up to 24 hours to publish data. Wait until this is complete before 
 While you wait, update the following configuration files:
 
 * Update your *cloud-integration.json* file by providing a `projectID` value, which will be the AWS payer account number where the CUR is located and where the Kubecost primary cluster is running.
-* Update your *iam-payer-account-cur-athena-glue-s2-access.json* file by replacing all instances of `CUR_BUCKET_NAME` to he name of the bucket you created for CUR data.
+* Update your *iam-payer-account-cur-athena-glue-s2-access.json* file by replacing all instances of `CUR_BUCKET_NAME` to the name of the bucket you created for CUR data.
 
 ### Step 3: Setting up Athena
 
