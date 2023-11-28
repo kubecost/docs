@@ -25,8 +25,8 @@ Integrating your AWS account with Kubecost may be a complicated process if you a
 Follow [these steps](https://docs.aws.amazon.com/cur/latest/userguide/cur-create.html) to set up a CUR using the settings below.
 
 * For time granularity, select _Daily_.
-* Select the checkbox to enable _Resource IDs_ in the report.
-* Select the checkbox to enable _Athena integration_ with the report.
+* Under 'Additional content', select the _Enable resource IDs_ checkbox.
+* Under 'Report data integration' select the _Amazon Athena_ checkbox.
 
 {% hint style="info" %}
 For CUR data written to an S3 bucket only accessed by Kubecost, it is safe to expire or delete the objects after seven days of retention.
@@ -49,7 +49,7 @@ If you believe you have the correct permissions, but cannot access the Billing a
 As part of the CUR creation process, Amazon also creates a CloudFormation template that is used to create the Athena integration. It is created in the CUR S3 bucket under `s3-path-prefix/cur-name` and typically has the filename `crawler-cfn.yml`. This .yml is your necessary CloudFormation template. You will need it in order to complete the CUR Athena integration. You can read more about this [here](https://docs.aws.amazon.com/cur/latest/userguide/use-athena-cf.html).
 
 {% hint style="info" %}
-Your S3 path prefix can be found by going to your AWS Cost and Usage Reports dashboard and selecting your bucket's report. In the Report details tab, you will find the S3 path prefix.
+Your S3 path prefix can be found by going to your AWS Cost and Usage Reports dashboard and selecting your newly-created CUR. In the 'Report details' tab, you will find the S3 path prefix.
 {% endhint %}
 
 Once Athena is set up with the CUR, you will need to create a new S3 bucket for Athena query results.
