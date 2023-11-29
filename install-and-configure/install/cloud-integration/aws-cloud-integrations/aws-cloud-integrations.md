@@ -84,11 +84,11 @@ If you’re new to provisioning IAM roles, we suggest downloading our templates 
 * Select _Create Stack_, then select _With existing resources (import resources)_ from the dropdown. On the 'Identify resources' page, select _Next._
 * Under Template source, choose _Upload a template file_.
 * Select _Choose file_, which will open your file explorer. Select the .yaml template, and then select _Open_. Then, select _Next_.
-* On the 'Identify resources' page, provide any additional resources to import. Then, select _Next_.
+* On the 'Identify resources' page, provide any necessary identifying values for your imported resource. Then, select _Next_.
 * For _Stack name_, enter a name for your template.
 * Set the following parameters:
-  * AthenaCURBucket: The bucket where the CUR is sent from Step 1.
-  * SpotDataFeedBucketName: (Optional) The bucket where the Spot data feed is sent
+  * AthenaCURBucket: The bucket where the CUR data is sent to, which was created in Step 1
+  * SpotDataFeedBucketName: (Optional, skip if you have not configured Spot data) The bucket where the Spot data feed is sent
 * Select _Next_. The Configure stack options page opens.
 * Configure any additional options as needed. Select _Next_. The Review stack page opens.
 * At the bottom of the page, select _I acknowledge that AWS CloudFormation might create IAM resources with custom names._
