@@ -56,11 +56,11 @@ Selecting _Cluster Turndown_ from the Create new action window will take you to 
 
 You can delete an existing turndown schedule by selecting the trash can icon.
 
-Learn more about cluster turndown's advanced functionality [here](https://docs.kubecost.com/install-and-configure/advanced-configuration/controller/cluster-turndown).
+Learn more about cluster turndown's advanced functionality [here](/install-and-configure/advanced-configuration/controller/cluster-turndown.md).
 
 ### Request Sizing
 
-See the existing documentation on [Automatic Request Right-Sizing](https://docs.kubecost.com/using-kubecost/navigating-the-kubecost-ui/savings/auto-request-sizing) to learn more about this feature. If you have successfully enabled the Cluster Controller, you can skip the Setup section of that article.
+See the existing documentation on [Automatic Request Right-Sizing](/using-kubecost/navigating-the-kubecost-ui/savings/container-request-right-sizing-recommendations.md) to learn more about this feature. If you have successfully enabled the Cluster Controller, you can skip the Setup section of that article.
 
 ### Cluster Sizing
 
@@ -72,7 +72,7 @@ Kubecost may hide the complex recommendation when it is more expensive than the 
 
 Visiting the Cluster Sizing Recommendations page from the Create New Action window will immediately prompt you with a suggested recommendation that will replace your current node pools with the displayed node pools. You can select _Adopt_ to immediately resize, or select _Cancel_ if you want to continue exploring.
 
-Learn more about cluster right-sizing functionality [here](https://docs.kubecost.com/using-kubecost/navigating-the-kubecost-ui/savings/cluster-right-sizing-recommendations).
+Learn more about cluster right-sizing functionality [here](/using-kubecost/navigating-the-kubecost-ui/savings/cluster-right-sizing-recommendations.md).
 
 ### Namespace Turndown
 
@@ -96,7 +96,7 @@ Select _Create Schedule_ to finalize.
 
 ### Guided Sizing
 
-Guided Kubernetes Sizing provides a one-click or continuous right-sizing solution in two steps, request sizing and then cluster sizing. These implementations function exactly like Kubecost's existing [container](https://docs.kubecost.com/using-kubecost/navigating-the-kubecost-ui/savings/auto-request-sizing) and [cluster right-sizing](https://docs.kubecost.com/using-kubecost/navigating-the-kubecost-ui/savings/cluster-right-sizing-recommendations) features.
+Guided Kubernetes Sizing provides a one-click or continuous right-sizing solution in two steps, request sizing and then cluster sizing. These implementations function exactly like Kubecost's existing [container](/using-kubecost/navigating-the-kubecost-ui/savings/container-request-right-sizing-recommendations.md) and [cluster right-sizing](/using-kubecost/navigating-the-kubecost-ui/savings/cluster-right-sizing-recommendations.md) features.
 
 #### 1. Request Sizing
 

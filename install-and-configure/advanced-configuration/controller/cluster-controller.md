@@ -8,10 +8,10 @@ Kubecost's Cluster Controller allows you to access additional Savings features t
 
 The Cluster Controller enables features like:
 
-* [Automated cluster turndown](https://docs.kubecost.com/install-and-configure/advanced-configuration/controller/cluster-turndown)
-* [Cluster right-sizing recommendations](https://docs.kubecost.com/using-kubecost/navigating-the-kubecost-ui/savings/cluster-right-sizing-recommendations)
-* [Container request right-sizing (RRS) recommendations](https://docs.kubecost.com/using-kubecost/navigating-the-kubecost-ui/savings/auto-request-sizing)
-* [Kubecost Actions](https://docs.kubecost.com/using-kubecost/navigating-the-kubecost-ui/savings/savings-actions)
+* [Automated cluster turndown](/install-and-configure/advanced-configuration/controller/cluster-turndown.md)
+* [Cluster right-sizing recommendations](/using-kubecost/navigating-the-kubecost-ui/savings/cluster-right-sizing-recommendations.md)
+* [Container request right-sizing (RRS) recommendations](/using-kubecost/navigating-the-kubecost-ui/savings/container-request-right-sizing-recommendations.md)
+* [Kubecost Actions](/using-kubecost/navigating-the-kubecost-ui/savings/savings-actions.md)
 
 ## Feature functionality
 
