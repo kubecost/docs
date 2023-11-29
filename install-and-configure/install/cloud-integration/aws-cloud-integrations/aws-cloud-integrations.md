@@ -46,7 +46,7 @@ If you believe you have the correct permissions, but cannot access the Billing a
 
 ### Step 2: Setting up Athena
 
-As part of the CUR creation process, Amazon also creates a CloudFormation template that is used to create the Athena integration. It is created in the CUR S3 bucket under `s3-path-prefix/cur-name` and typically has the filename `crawler-cfn.yml`. This .yml is your necessary CloudFormation template. You will need it in order to complete the CUR Athena integration. You can read more about this [here](https://docs.aws.amazon.com/cur/latest/userguide/use-athena-cf.html).
+As part of the CUR creation process, Amazon also creates a CloudFormation template that is used to create the Athena integration. It is created in the CUR S3 bucket, listed in the *Objects* tab in the path `s3-path-prefix/cur-name` and typically has the filename `crawler-cfn.yml`. This .yml is your necessary CloudFormation template. You will need it in order to complete the CUR Athena integration. For more information, see the AWS doc [Setting up Athena using AWS CloudFormation templates](https://docs.aws.amazon.com/cur/latest/userguide/use-athena-cf.html).
 
 {% hint style="info" %}
 Your S3 path prefix can be found by going to your AWS Cost and Usage Reports dashboard and selecting your newly-created CUR. In the 'Report details' tab, you will find the S3 path prefix.
@@ -56,11 +56,11 @@ Once Athena is set up with the CUR, you will need to create a new S3 bucket for 
 
 1. Navigate to the [S3 Management Console](https://console.aws.amazon.com/s3/home?region=us-east-2).
 2. Select _Create bucket._ The Create Bucket page opens.
-3. Use the same region used for the CUR bucket and pick a name that follows the format `aws-athena-query-results-*.`
+3. Use the same region used for the CUR bucket and pick a name that follows the format *aws-athena-query-results-*.
 4. Select _Create bucket_ at the bottom of the page.
 5. Navigate to the [Amazon Athena](https://console.aws.amazon.com/athena) dashboard.
 6. Select _Settings_, then select _Manage._ The Manage settings window opens.
-7. Set _Location of query result_ to the S3 bucket you just created, then select _Save._
+7. Set _Location of query result_ to the S3 bucket you just created, which will look like _s3://aws-athena-query-results..._, then select _Save._
 
 {% hint style="info" %}
 For Athena query results written to an S3 bucket only accessed by Kubecost, it is safe to expire or delete the objects after 1 day of retention.
@@ -73,10 +73,7 @@ For Athena query results written to an S3 bucket only accessed by Kubecost, it i
 Kubecost offers a set of CloudFormation templates to help set your IAM roles up.
 
 {% hint style="info" %}
-If you’re new to provisioning IAM roles, we suggest downloading our templates and using the CloudFormation wizard to set these up, as explained [here](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cfn-console-create-stack.html).
-{% endhint %}
-
-Download template files from the URLs provided below and upload them as the stack template in the Creating a stack > Selecting a stack template step.
+If you’re new to provisioning IAM roles, we suggest downloading our templates and using the CloudFormation wizard to set these up. You can learn how to do this in AWS' [Creating a stack on the AWS CloudFormation console](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cfn-console-create-stack.html) doc. Open the step below which represents your CUR and management account arrangement, download the .yaml file listed, and upload them as the stack template in the 'Creating a stack' > 'Selecting a stack template' step.
 
 <details>
 
