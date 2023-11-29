@@ -26,7 +26,7 @@ Therefore, the 'Provider service key setup' section below is optional depending 
 ## Provider service key setup
 
 {% hint style="warning" %}
-If you are enabling the Cluster Controller for a GKE/EKS/Kops AWS cluster, follow the specialized instructions for your CSP(s) below. If you aren't using a GKE/EKS Kops AWS cluster, skip ahead to the [Deploying ](https://docs.kubecost.com/install-and-configure/advanced-configuration/controller#deploying)section below.
+If you are enabling the Cluster Controller for a GKE/EKS/Kops AWS cluster, follow the specialized instructions for your CSP(s) below. If you aren't using a GKE/EKS Kops AWS cluster, skip ahead to the [Deploying ](/install-and-configure/advanced-configuration/controller#deploying)section below.
 {% endhint %}
 
 <details>

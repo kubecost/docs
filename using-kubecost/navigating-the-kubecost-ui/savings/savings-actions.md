@@ -24,8 +24,6 @@ Because the Actions page is currently a beta feature, it does not appear as part
 
 ### Step 2. Enable the Cluster Controller
 
-Write access to your cluster is also required to access Kubecost Actions. To enable the Cluster Controller, see our [Cluster Controller](https://docs.kubecost.com/install-and-configure/advanced-configuration/controller) doc for full instructions. Once you have completed this, you should have full accessibility.
-
 {% hint style="warning" %}
 Some features included in Kubecost Actions are only available in GKE/EKS environments. See the Cluster Controller doc for more clarity on which features you will have access to after enabling the Cluster Controller.
 {% endhint %}
