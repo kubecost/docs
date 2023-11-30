@@ -1,34 +1,50 @@
 # Installing in Air-gapped Environments
 
-This doc is the primary reference for installing Kubecost in an air-gapped environment.
+This doc is the primary reference for installing Kubecost in an air-gapped environment with a user managed container registry.
 
-### I have to put container images into a private registry to use them in my cluster. What images do I need?
+### Kubecost images
 
-The following images will need to be downloaded. Please substitute the appropriate version for prod-x.xx.x. [Latest releases can be found here](https://github.com/kubecost/cost-analyzer-helm-chart/releases).
+The following images required an optional images are used depending on the specific configuration needed.
+
+Please substitute the appropriate version for prod-x.xx.x. [Latest releases can be found here](https://github.com/kubecost/cost-analyzer-helm-chart/releases).
+
+To find the exact images used for each Kubecost release, a command such as this can be used:
+
+```sh
+helm template kubecost --repo https://kubecost.github.io/cost-analyzer cost-analyzer \
+  --namespace kubecost \
+  --set networkCosts.enabled=true \
+  --set clusterController.enabled=true \
+  |grep image:
+```
+
+** Note that the alpine/k8s image is not used in real deployments. It is only in the Helm chart for QA testing purposes **
 
 #### Kubecost: Required
 
-* Frontend: gcr.io/kubecost1/frontend:prod-x.xx.x
-* CostModel: gcr.io/kubecost1/cost-model:prod-x.xx.x
+* Frontend: gcr.io/kubecost1/frontend
+* CostModel: gcr.io/kubecost1/cost-model
 
 #### Kubecost: Optional
 
-
-* NetworkCosts: gcr.io/kubecost1/kubecost-network-costs:v16.6 (used for [network-allocation](/using-kubecost/navigating-the-kubecost-ui/cost-allocation/network-allocation.md))
-* BusyBox: registry.hub.docker.com/library/busybox:latest (only for NFS)
+* NetworkCosts: gcr.io/kubecost1/kubecost-network-costs (used for [network-allocation](/using-kubecost/navigating-the-kubecost-ui/cost-allocation/network-allocation.md))
 * Cluster controller: gcr.io/kubecost1/cluster-controller:v0.9.0 (used for write actions)
-* Grafana Dashboards: grafana/grafana:9.4.7
+* BusyBox: registry.hub.docker.com/library/busybox:latest (only for NFS)
 
 #### Prometheus: Required when bundled
 
-* prom/prometheus:v2.35.0
-* prom/node-exporter:v1.5.0
-* jimmidyson/configmap-reload:v0.7.1
-* kiwigrid/k8s-sidecar:1.23.1 (optional if not using Grafana sidecar)
+* quay.io/prometheus/prometheus
+* prom/node-exporter
+* quay.io/prometheus-operator/prometheus-config-reloader
 
-### Thanos - Enterprise/Durable Storage\*
+#### Grafana: Optional
 
-* thanosio/thanos:v0.29.0
+* grafana/grafana
+* kiwigrid/k8s-sidecar
+
+### Thanos: Optional
+
+* thanosio/thanos
 
 ### How do I configure prices for my on-premise Assets?
 
