@@ -39,7 +39,7 @@ The following table shows all KSM metrics required by and implemented in Kubecos
 
 ## Enabling Kubecost-based KSM deployment
 
-It interested in enabling the KSM bundled in Kubecost's Helm chart, perform the below config changes. Re-enabling KSM has the added advantage of high availability. Specifically, if the `kubecost-cost-analyzer` deployment had downtime, the `kube-state-metrics` may still be available to emit metrics for Prometheus to scrape.
+If interested in enabling the KSM bundled in Kubecost's Helm chart, perform the below config changes. Re-enabling KSM has the added advantage of high availability. Specifically, if the `kubecost-cost-analyzer` deployment had downtime, the `kube-state-metrics` may still be available to emit metrics for Prometheus to scrape.
 
 ```yaml
 prometheus:
