@@ -81,17 +81,14 @@ If you’re new to provisioning IAM roles, we suggest downloading our templates 
 
 * Download [this .yaml file](https://raw.githubusercontent.com/kubecost/cloudformation/master/kubecost-single-account-permissions.yaml).
 * Navigate to the [AWS Console Cloud Formation page](https://console.aws.amazon.com/cloudformation).
-* Select _Create Stack_, then select _With existing resources (import resources)_ from the dropdown. On the 'Identify resources' page, select _Next._
-* Under Template source, choose _Upload a template file_.
-* Select _Choose file_, which will open your file explorer. Select the .yaml template, and then select _Open_. Then, select _Next_.
-* On the 'Identify resources' page, provide any necessary identifying values for your imported resource. Then, select _Next_.
-* For _Stack name_, enter a name for your template.
-* Set the following parameters:
-  * AthenaCURBucket: The bucket where the CUR data is sent to, which was created in Step 1
+* Select _Create Stack_, then select _With new resources (standard)_ from the dropdown.
+* On the 'Create stack' page, under 'Prerequisite - Prepare Template', make sure *Template is ready* has been preselected. Under 'Specify Template', select *Upload a template file*. Select *Choose file*, then select your downloaded .yaml file from your file explorer. Select *Next*.
+* On the 'Specify stack details' page, enter a name for your stack, then provide the following parameters:
+  * AthenaCURBucket: The name of the Athena CUR bucket you created in Step 2.
   * SpotDataFeedBucketName: (Optional, skip if you have not configured Spot data) The bucket where the Spot data feed is sent
-* Select _Next_. The Configure stack options page opens.
-* Configure any additional options as needed. Select _Next_. The Review stack page opens.
-* At the bottom of the page, select _I acknowledge that AWS CloudFormation might create IAM resources with custom names._
+* Select _Next_.
+* On the 'Configure stack options' page opens, configure any additional options as needed. Select _Next_.
+* On the 'Review stack' page, confirm all information, then select _I acknowledge that AWS CloudFormation might create IAM resources with custom names._
 * Select _Submit._
 
 </details>
