@@ -55,7 +55,7 @@ Filter your results by a particular category or value. For example, when to only
 
 ## Calculating trend value
 
-The Trends API determines changes in resource cost usage over time based on the interval set `window` parameter and provides that information via the schema field `value`. Cost usage for the current window sampled will be compared with the previous window, the window directly before the current window of the same size interval. For example, for `window=3d`, Kubecost will output cost usage for the past three days compared to cost usage of the three days before the start of the window. This means a total of six days of allocation are sampled in order to provide an accurate value.
+The Trends API determines changes in resource cost usage over time based on the interval set `window` parameter and provides that information via the schema field `value`. Cost usage for the current `window` sampled will be compared with `comparisonWindow`, the window directly before the current window of the same size interval. For example, for `window=3d`, Kubecost will output cost usage for the past three days compared to cost usage of the three days before the start of the window. This means a total of six days of cloud cost data are sampled in order to provide an accurate value.
 
 The equation for calculating `value` is: `value=window/comparisonWindow - 1`
 
@@ -65,7 +65,7 @@ Receiving a positive `value` means your `window` has increased compared to `comp
 It's important to recognize when a resource is not detected to exist in the previous window. This is designated by the field `IsInfinite=true`, which means the allocation could not be determined to exist. Otherwise, the cause of an unexpected or major trend change could be misattributed. The field `isNaN`, meaning not a number, refers to if the `value` is unreal. If so, `isNan` should return `true`, which means there was an error during calculation. Both fields should return `false` during a successful query.
 {% endhint %}
 
-In the example output below, `value` is expressed as `-0.147`, meaning spending has decreased in the current window by roughly 14.7% from the previous window.
+In the example output below, `value` is expressed as `-0.147`, meaning spending has decreased for `project-123` by roughly 14.7% from the current week compared to the week before.
 
 ```json
         "trends": {
