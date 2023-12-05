@@ -71,6 +71,20 @@ The Kubecost Helm chart provides values that can enable or disable each cloud pr
 
 <table><thead><tr><th width="281.54206128133706" align="right">Value</th><th width="88.33333333333331" align="center">Default</th><th>Description</th></tr></thead><tbody><tr><td align="right"><code>.Values.kubecostModel.etlAssetReconciliationEnabled</code></td><td align="center">true</td><td>Enables reconciliation processes and endpoints. This Helm value corresponds to the <code>ETL_ASSET_RECONCILIATION_ENABLED</code> environment variable.</td></tr><tr><td align="right"><code>.Values.kubecostModel.etlCloudUsage</code></td><td align="center">true</td><td>Enables Cloud Usage processes and endpoints. This Helm value corresponds to the <code>ETL_CLOUD_USAGE_ENABLED</code> environment variable.</td></tr><tr><td align="right"><code>.Values.kubecostModel.etlCloudRefreshRateHours</code></td><td align="center">6</td><td>The interval at which the run loop executes for both reconciliation and Cloud Usage. Reducing this value will decrease resource usage and billing data access costs, but will result in a larger delay in the most current data being displayed. This Helm value corresponds to the <code>ETL_CLOUD_REFRESH_RATE_HOURS</code> environment variable.</td></tr><tr><td align="right"><code>.Values.kubecostModel.etlCloudQueryWindowDays</code></td><td align="center">7</td><td>The maximum number of days that will be queried from a cloud integration in a single query. Reducing this value can help to reduce memory usage during the build process, but will also result in more queries which can drive up billing data access costs. This Helm value corresponds to the <code>ETL_CLOUD_QUERY_WINDOW_DAYS</code> environment variable.</td></tr><tr><td align="right"><code>.Values.kubecostModel.etlCloudRunWindowDays</code></td><td align="center">3</td><td>The number of days into the past each run loop will query. Reducing this value will reduce memory load, however, it can cause Kubecost to miss updates to the CUR, if this has happened the day will need to be manually repaired. This Helm value corresponds to the <code>ETL_CLOUD_RUN_WINDOW_DAYS</code> environment variable.</td></tr></tbody></table>
 
+## Generating readable cloud account names
+
+Often an integrated cloud account name may be a series of random letter and numbers which do not reflect the account's owner, team, or function. Kubecost allows you to rename cloud accounts to create more readable cloud metrics in your Kubecost UI. After you have successfully integrated your cloud account (see above), you need to manually edit your *values.yaml* and provide the original account name and your intended rename:
+
+```
+kubecostProductConfigs:
+  cloudAccountMapping:
+    guestbook-123456: "Guestbook"
+```
+
+You will see these changes reflected in Kubecost's UI on the Overview page under Cloud Costs Breakdown. These example accounts could benefit from being renamed:
+
+![Cloud Costs Breakdown](/images/cloudcostsbreakdown.png)
+
 ## Cloud Stores
 
 The ETL contains a Map of Cloud Stores, each representing an integration with a CSP. Each Cloud Store is responsible for the Cloud Usage and reconciliation pipelines which add OOC costs and adjust Kubecost's estimated cost respectively by cost and usage data pulled from the CSP. Each Cloud Store has a unique identifier called the `ProviderKey` which varies depending on which CSP is being connected to and ensures that duplicate configurations are not introduced into the ETL. The value of the `ProviderKey` is the following for each CSP at a scope that the billing data is being for:
