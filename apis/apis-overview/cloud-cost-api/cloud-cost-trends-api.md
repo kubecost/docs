@@ -9,7 +9,7 @@ Duration of time over which to query. Compares cost usage of window to cost usag
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="Names" required="true" type="string" %}
-Determines order sequence of queried items via comma-separated list. Dependent on the value of `aggregateBy` to list items. See more [below](/cloud-cost-trends-api.md#using-the-names-parameter).
+Determines order sequence of queried items via comma-separated list. Dependent on the value of `aggregateBy` to list items. See more [below](cloud-cost-trends-api.md#using-the-names-parameter).
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="AggregateBy" type="string" required="false" %}
