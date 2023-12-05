@@ -90,7 +90,7 @@ You can find the full scrape configs of our bundled-Prometheus [here](https://gi
 This step is optional. If you do not set up Kubecost's CPU usage recording rule, Kubecost will fall back to a [PromQL subquery](https://prometheus.io/blog/2019/01/28/subquery-support/) which may put unnecessary load on your Prometheus.
 {% endhint %}
 
-Kubecost-bundled Prometheus includes a recording rule used to calculate CPU usage max, a critical component of the request right-sizing recommendation functionality. Add the recording rules to reduce query load [here](https://github.com/kubecost/cost-analyzer-helm-chart/blob/v1.102/kubecost.yaml#L399).
+Kubecost-bundled Prometheus includes a recording rule used to calculate CPU usage max, a critical component of the request right-sizing recommendation functionality. Add the recording rules to reduce query load [here](https://github.com/kubecost/cost-analyzer-helm-chart/blob/v1.106/kubecost.yaml#L398-L413).
 
 Alternatively, if your environment supports `serviceMonitors` and `prometheusRules`, pass these values to your Helm install:
 

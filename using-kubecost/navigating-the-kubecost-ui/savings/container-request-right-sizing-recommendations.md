@@ -8,11 +8,7 @@ Kubecost can automatically implement its [recommendations](/apis/apis-overview/a
 
 ## Prerequisites
 
-To receive container right-sizing recommendations, you must first:
-
-* Have a GKE/EKS/AWS Kops cluster
-
-To adopt container right-sizing recommendations, you must:
+There are no restrictions to receive container RRS recommendations, however, to adopt these recommendations, you must:
 
 * Have a GKE/EKS/AWS Kops cluster
 * Enable the [Cluster Controller](/install-and-configure/advanced-configuration/controller/cluster-controller.md) on that cluster

@@ -159,3 +159,4 @@ The rightmost column in the Allocations metrics table allows you to perform addi
 * _Inspect_: Opens an advanced cost overview of the namespace in a new tab.
 * _Inspect Shared Costs_: Opens an advanced cost overview of your shared costs in a new tab.
 * _View Right-Sizing_: Opens the [Container Request Right-Sizing Recommendations](/using-kubecost/navigating-the-kubecost-ui/savings/container-request-right-sizing-recommendations.md) page in a new tab.
+

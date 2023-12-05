@@ -60,7 +60,9 @@ To attach the IAM policy to the Kubecost service account, you can use IRSA or th
 
 ### Option 1: IRSA (IAM Roles for Service Accounts)
 
-> **Note**: If your `serviceaccount/kubecost-cost-analyzer` already has IRSA annotations attached, be sure to include all policies necessary when running this command.
+{% hint style="info" %}
+If your `serviceaccount/kubecost-cost-analyzer` already has IRSA annotations attached, be sure to include all policies necessary when running this command.
+{% endhint %}
 
 ```bash
 eksctl create iamserviceaccount \
@@ -74,7 +76,7 @@ eksctl create iamserviceaccount \
 
 ### Option 2: Service Keys
 
-Create a `service-key.json` as shown:
+Create a _service-key.json_ as shown:
 
 ```json
 {
@@ -83,7 +85,7 @@ Create a `service-key.json` as shown:
 }
 ```
 
-Create a k8s secret:
+Create a K8s secret:
 
 ```bash
 $ kubectl create secret generic cloud-service-key --from-file=service-key.json
@@ -100,7 +102,7 @@ kubecostProductConfigs:
 
 ### No Spot instances detected
 
-![No spot instances are found in the Spot Data Feed](/images/aws-spot-image-none.png)
+![No spot instances are found in the Spot Data Feed](../../../../images/aws-spot-image-none.png)
 
 Verify the below points:
 
