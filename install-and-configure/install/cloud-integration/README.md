@@ -78,10 +78,10 @@ Often an integrated cloud account name may be a series of random letter and numb
 ```
 kubecostProductConfigs:
   cloudAccountMapping:
-    guestbook-123456: "Guestbook"
+    ACCOUNT_ID: "ACCOUNT_NAME"
 ```
 
-You will see these changes reflected in Kubecost's UI on the Overview page under Cloud Costs Breakdown. These example accounts could benefit from being renamed:
+You will see these changes reflected in Kubecost's UI on the Overview page under Cloud Costs Breakdown. These example account IDs could benefit from being renamed:
 
 ![Cloud Costs Breakdown](/images/cloudcostsbreakdown.png)
 
