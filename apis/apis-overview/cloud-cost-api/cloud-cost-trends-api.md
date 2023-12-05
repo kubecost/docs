@@ -8,7 +8,7 @@
 Duration of time over which to query. Compares cost usage of window to cost usage window of equal size directly preceding it. Accepts all standard Kubecost window formats (See our doc on using [the `window` parameter](https://docs.kubecost.com/apis/apis-overview/assets-api#using-window-parameter)).
 {% endswagger-parameter %}
 
-{% swagger-parameter in="path" name="Names" required="true" type="string" %}
+{% swagger-parameter in="path" name="names" required="true" type="string" %}
 Determines order sequence of queried items via comma-separated list. Dependent on the value of `aggregateBy` to list items. See more [below](cloud-cost-trends-api.md#using-the-names-parameter).
 {% endswagger-parameter %}
 
