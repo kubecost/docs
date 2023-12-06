@@ -13,10 +13,10 @@ This document provides instructions for deploying Kubecost into Red Hat Openshif
 * You need to have an existing OCP cluster version 4.9.x or higher.
 * You have appropriate access to that OpenShift cluster to create a new project and deploy new workloads.
 
-## Discover Kubecost operator
+## Discovering Kubecost operator
 
 1. Log in to your OCP cluster web console.
-2. Select Operators > OperatorHub > Enter Kubecost in the search box.
+2. Select _Operators_ > _OperatorHub_ > Enter Kubecost in the search box.
 3. Create a namespace named Kubecost:
 
 ```bash
@@ -27,11 +27,11 @@ Example screenshot:
 
 ![Discovery](/images/ocp-operator-discovery.png)
 
-## Deploy Kubecost
+## Deploying Kubecost
 
-### **Step 1:** Install Kubecost operator
+### Step 1: Install Kubecost operator
 
-On the OperatorHub page, find Kubecost, then click install. You will be on the Operator Installation page, which shows all related information. Select your desired version and settings, then click `Install`
+On the OperatorHub page, find Kubecost, then select _Install_. You will be on the Operator Installation page, which shows all related information. Select your desired version and settings, then select *Install*.
 
 ![Installation step 1a](/images/ocp-operator-installation-step-1.png)
 
@@ -39,7 +39,7 @@ The installation takes 1-2 minutes to be completed. A dialog will appear as in t
 
 ![Installation step 1b](/images/ocp-operator-installation-step-1b.png)
 
-You can click on `View Operators` to review the details as in the following screenshot:
+You can select _Operators_ > _Installed Operators_ to review the details as in the following screenshot:
 
 ![Installation step 1c](/images/ocp-operator-installation-step-1c.png)
 
@@ -58,7 +58,7 @@ kubectl apply -f example-crd.yaml -n kubecost
 
 <details>
 
-<summary>Click to see code</summary>
+<summary>Expand to see code</summary>
 
 ```yaml
 apiVersion: charts.kubecost.com/v1alpha1
@@ -264,13 +264,13 @@ spec:
 
 </details>
 
-Kubecost operator will automatically detect the CRD resources and deploy Kubecost to the Kubecost namespace.
+Kubecost operator will automatically detect the CRD resources and deploy Kubecost to the `kubecost` namespace.
 
-To expose Kubecost and access Kubecost dashboard, you can create a route to the service `kubecost-cost-analyzer` on port `9090` of the `kubecost` project. You can learn more about how to do it on your OpenShift portal in this [LINK](https://docs.openshift.com/container-platform/3.11/dev\_guide/routes.html)
+To expose Kubecost and access Kubecost dashboard, you can create a route to the service `kubecost-cost-analyzer` on port `9090` of the `kubecost` project. You can learn more about how to do it on your OpenShift portal using [OpenShift's documentation](https://docs.openshift.com/container-platform/3.11/dev\_guide/routes.html).
 
-Kubecost will be collecting data; please wait 5-15 minutes for the UI to reflect the resources in the local cluster.
+Kubecost will start collecting data. Please wait 5-15 minutes for the UI to reflect the resources in the local cluster.
 
-## Clean up
+## Finishing up
 
 You can uninstall Kubecost from your cluster with the following command.
 
@@ -278,4 +278,4 @@ You can uninstall Kubecost from your cluster with the following command.
 kubectl delete-f example-crd.yaml -n kubecost
 ```
 
-You can uninstall Kubecost operator by following [these instructions](https://access.redhat.com/documentation/en-us/openshift\_container\_platform/4.2/html/operators/olm-deleting-operators-from-a-cluster).
+You can uninstall the Kubecost operator by following [these instructions](https://access.redhat.com/documentation/en-us/openshift\_container\_platform/4.2/html/operators/olm-deleting-operators-from-a-cluster).
