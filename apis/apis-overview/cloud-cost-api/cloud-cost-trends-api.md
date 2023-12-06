@@ -12,7 +12,7 @@ Duration of time over which to query. Compares cost usage of window to cost usag
 Determines order sequence of queried items via comma-separated list. Dependent on the value of `aggregateBy` to list items. See more [below](cloud-cost-trends-api.md#using-the-names-parameter).
 {% endswagger-parameter %}
 
-{% swagger-parameter in="path" name="AggregateBy" type="string" required="false" %}
+{% swagger-parameter in="path" name="aggregate" type="string" required="false" %}
 Field by which to aggregate the results. Accepts: `invoiceEntityID`, `accountID`, `provider`, `service`, and `label:<name>`. Supports multi-aggregation using comma-separated lists, such as `aggregate=accountID,service`. Defaults to `service`.
 {% endswagger-parameter %}
 
@@ -59,14 +59,13 @@ The Trends API determines changes in resource cost usage over time based on the 
 
 The equation for calculating `value` is: `value=window/comparisonWindow - 1`
 
-Receiving a positive `value` means your `window` has increased compared to `comparisonWindow`. A negative `value` means spending has decreased.
+Receiving a positive `value` means spending has increased in the current `window` when compared to `comparisonWindow`. A negative `value` means spending has decreased.
 
 {% hint style="warning" %}
 It's important to recognize when a resource is not detected to exist in the previous window. This is designated by the field `IsInfinite=true`, which means the allocation could not be determined to exist. Otherwise, the cause of an unexpected or major trend change could be misattributed. The field `isNaN`, meaning not a number, refers to if the `value` is unreal. If so, `isNan` should return `true`, which means there was an error during calculation. Both fields should return `false` during a successful query.
 {% endhint %}
 
-In the example output below, `value` is expressed as `-0.147`, meaning spending has decreased for `project-123` by roughly 14.7% from the current week compared to the week before.
-
+In the example output below, `value` is expressed as `-0.147`, meaning spending has decreased for `project-123` by roughly 14.7%.
 ```json
         "trends": {
             "project-123": {
@@ -89,4 +88,4 @@ Trend values are converted into percentages in the Kubecost Cloud Costs Explorer
 
 ## Using the `names` parameter
 
-`names` is a mandatory parameter which determines the sequence of items returned, based on whatever the query is aggregating by. For example, when `aggregateBy=provider`, the user should provide a comma-separated list of all items they which to see trend values for in this category. In this case, they should provide `names=AWS,GCP,Azure` to receive a list of trend values for all three providers. `service` is the default value for `AggregateBy`, so if the user does not provide a value for `aggregateBy`, they must still use the names parameter to list all services requested. For example, `names=AmazonEC2,AmazonS3,Microsoft.Compute...`.
+`names` is a mandatory parameter which determines the sequence of items returned, based on whatever the query is aggregating by. For example, when using `aggregate=provider`, the user should provide a comma-separated list of all providers they wish to see trend values for in this category. In this case, they should provide `names=AWS,GCP,Azure` to receive a list of trend values for all three providers. `service` is the default value for `Aggregate`, so if the user does not provide a value for `aggregate`, they must still use the names parameter to list all services requested. For example, `names=AmazonEC2,AmazonS3,Microsoft.Compute...`.
