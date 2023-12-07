@@ -13,7 +13,7 @@ Determines order sequence of queried items via comma-separated list. Dependent o
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="aggregate" type="string" required="false" %}
-Field by which to aggregate the results. Accepts: `invoiceEntityID`, `accountID`, `provider`, `service`, and `label:<name>`. Supports multi-aggregation using comma-separated lists, such as `aggregate=accountID,service`. Defaults to `service`.
+Field by which to aggregate the results. Accepts: `invoiceEntityID`, `accountID`, `provider`, `service`, and `label:<name>`. Supports multi-aggregation using comma-separated lists, such as `aggregate=accountID,service`. When no value is provided, the query will aggregate by individual items.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="accumulate" type="boolean" required="false" %}
@@ -88,4 +88,4 @@ Trend values are converted into percentages in the Kubecost Cloud Costs Explorer
 
 ## Using the `names` parameter
 
-`names` is a mandatory parameter which determines the sequence of items returned, based on whatever the query is aggregating by. For example, when using `aggregate=provider`, the user should provide a comma-separated list of all providers they wish to see trend values for in this category. In this case, they should provide `names=AWS,GCP,Azure` to receive a list of trend values for all three providers. `service` is the default value for `Aggregate`, so if the user does not provide a value for `aggregate`, they must still use the names parameter to list all services requested. For example, `names=AmazonEC2,AmazonS3,Microsoft.Compute...`.
+`names` is a mandatory parameter which determines the sequence of items returned, based on whatever the query is aggregating by. For example, when using `aggregate=provider`, the user should provide a comma-separated list of all providers they wish to see trend values for in this category. In this case, they should provide `names=AWS,GCP,Azure` to receive a list of trend values for all three providers. If the user does not provide a value for `aggregate`, they must still use the names parameter to list all line items requested.
