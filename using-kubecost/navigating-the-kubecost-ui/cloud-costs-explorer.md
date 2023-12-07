@@ -2,7 +2,7 @@
 
 The Cloud Cost Explorer is a dashboard which provides visualization and filtering of your cloud spending. This dashboard includes the costs for all assets in your connected cloud accounts by pulling from those providers' Cost and Usage Reports (CURs) or other cloud billing reports.
 
-![Cloud Cost Explorer dashboard](<../../.gitbook/assets/image (1) (1).png>)
+![Cloud Cost Explorer dashboard](/.gitbook/assets/cloud-cost-explorer.png)
 
 {% hint style="info" %}
 If you haven't performed a successful billing integration with a cloud service provider, the Cloud Cost Explorer won't have cost data to display. Before using the Cloud Cost Explorer, make sure to read our [Cloud Billing Integrations](/install-and-configure/install/cloud-integration/README.md) guide to get started, then see our [specific articles](/install-and-configure/install/cloud-integration/README.md#adding-a-cloud-integration) for the cloud service providers you want to integrate with.

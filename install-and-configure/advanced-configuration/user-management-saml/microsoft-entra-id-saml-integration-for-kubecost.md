@@ -22,12 +22,12 @@ This guide will show you how to configure Kubecost integrations for SAML and RBA
 3. Select _Users and groups_ in the left navigation. Assign any users or groups you want to have access to Kubecost, then select _Assign._
 4. Select _Single sign-on_ from the left navigation. In the 'Basic SAML Configuration' box, select _Edit_. Populate both the Identifier and Reply URL with the URL of your Kubecost environment _without a trailing slash_ (ex: http://localhost:9090), then select _Save_. If your application is using OpenId Connect and OAuth, most of the SSO configuration will have already been completed.
 
-<figure><img src="../../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="/.gitbook/assets/okta-saml-1.png" alt=""><figcaption></figcaption></figure>
 
 5. (Optional) If you intend to use RBAC, you also need to add a group claim. Without leaving the SAML-based Sign-on page, select _Edit_ next to Attributes & Claims. Select _Add a group claim._ Configure your group association, then select _Save_. The claim name will be used as the `assertionName` value in the [_values-saml.yaml_](https://github.com/kubecost/poc-common-configurations/blob/main/saml-azuread/values-saml.yaml) file.
 6. On the SAML-based Sign-on page, in the SAML Certificates box, copy the login of 'App Federation Metadata Url' and add it to your _values-saml.yaml_ as the value of `idpMetadataURL`.
 
-<figure><img src="../../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="/.gitbook/assets/okta-saml-2.png" alt=""><figcaption></figcaption></figure>
 
 7. In the SAML Certificates box, select the _Download_ link next to Certificate (Base64) to download the X.509 cert. Name the file _myservice.cert_.
 8. Create a secret using the cert with the following command:
