@@ -275,7 +275,7 @@ Kubecost will start collecting data. Please wait 5-15 minutes for the UI to refl
 You can uninstall Kubecost from your cluster with the following command.
 
 ```bash
-kubectl delete-f example-crd.yaml -n kubecost
+kubectl delete -f example-crd.yaml -n kubecost
 ```
 
 You can uninstall the Kubecost operator by following [these instructions](https://access.redhat.com/documentation/en-us/openshift\_container\_platform/4.2/html/operators/olm-deleting-operators-from-a-cluster).
