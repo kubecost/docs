@@ -64,7 +64,7 @@ After installation, wait for all pods to be ready. Kubecost will begin collectin
 
 ### Overview
 
-Kubecost offers a Red Hat community operator which can be found in the Operator Hub catalog of the OpenShift web console. When using this deployment method, the operator is installed and a Kubecost Custom Resource is installed which then triggers the operator to deploy the Helm chart. The chart deployed by the community operator is the same chart which is referenced in the standard deployment.
+Kubecost offers a Red Hat community operator which can be found in the Operator Hub catalog of the OpenShift web console. When using this deployment method, the operator is installed and a Kubernetes [Custom Resource](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/) is created which then triggers the operator to deploy the Helm chart. The chart deployed by the community operator is the same chart which is referenced in the standard deployment.
 
 ### Prerequisites
 
@@ -95,7 +95,7 @@ You can also select _Operators_ > _Installed Operators_ to review the details as
 
 ![Installation step 1c](/images/ocp-operator-installation-step-1c.png)
 
-Once the namespace has been created, create the CostAnalyzer Custom Resource (CR) with the desired values for your installation. The CostAnalyzer CR represents the total Helm values used to deploy Kubecost and any of its components. This may either be created in the OperatorHub portal or via the `oc` CLI.
+Once the namespace has been created, create the CostAnalyzer Custom Resource (CR) with the desired values for your installation. The CostAnalyzer CR represents the total Helm values used to deploy Kubecost and any of its components. This may either be created in the OperatorHub portal or via the `oc` CLI. The default CostAnalyzer sample provided is pre-configured for a basic installation of Kubecost.
 
 To create the CostAnalyzer resource from OperatorHub, from the installed Kubecost operator page, click on the CostAnalyzer tab and click the Create CostAnalyzer button.
 
