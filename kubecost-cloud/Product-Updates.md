@@ -5,7 +5,7 @@
 ### New features:
 
 * Alerts page
-    * Get alerted when there is a significant change in your spending.
+    * Get alerted when there is a significant change in your spending
 * Auto-send reports
     * Schedule .csv or .pdf reports directly to your email
 * Support for OpenShift Clusters
