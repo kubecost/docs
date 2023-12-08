@@ -13,7 +13,7 @@
 ### Bug fixes:
 
 * Fixed issue where applying multiple filters in the Cloud Cost Explorer Page resulted in only the last filter being applied
-* Updated the Savings page so that an error with one of the savings insights does not block access to the whole page.
+* Fixed issue where an error with one of the savings insights would block access to the entire Savings page
 * Fixed issue where Cloud Cost Reports with certain properties could not be saved correctly
 * Fixed issue where Azure non-compute cloud items were not returned on the Cloud Cost Explorer page
 * Fixed issue where the Assets page would fail to load due to NaN costs
