@@ -47,7 +47,6 @@
     * [Installing Kubecost with Plural](install-and-configure/install/provider-installations/install-on-plural.md)
     * [Installing in Air-gapped Environments](install-and-configure/install/provider-installations/air-gapped.md)
     * [Install Kubecost on Red Hat OpenShift](install-and-configure/install/provider-installations/openshift-kubecost-install.md)
-    * [Deploy Kubecost from Red Hat Openshift’s OperatorHub](install-and-configure/install/provider-installations/openshift-operatorhub-kubecost-install.md)
   * [Grafana Configuration Guide](install-and-configure/install/custom-grafana.md)
   * [Prometheus Configuration Guide](install-and-configure/install/custom-prom/custom-prom.md)
     * [Amazon Managed Service for Prometheus](install-and-configure/install/custom-prom/aws-amp-integration.md)
