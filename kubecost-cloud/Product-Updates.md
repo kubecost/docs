@@ -2,20 +2,18 @@
 
 ## 12/8/23
 
-<span style="text-decoration:underline;">New Features:</span>
+### New features:
 
-
-
-* Alerts Page
+* Alerts page
     * Get alerted when there is a significant change in your spending.
 * Auto-send reports
     * Schedule .csv or .pdf reports directly to your email
-* Support for Openshift Clusters
+* Support for OpenShift Clusters
 
-<span style="text-decoration:underline;">Bug Fixes:</span>
+### Bug fixes:
 
-* Fixed issue where applying multiple filters in the Cloud Costs Page resulted in only the last filter being applied
+* Fixed issue where applying multiple filters in the Cloud Cost Explorer Page resulted in only the last filter being applied
 * Updated the Savings page so that an error with one of the savings insights does not block access to the whole page.
 * Fixed issue where Cloud Cost Reports with certain properties could not be saved correctly
-* Fixed issue where Azure non-compute cloud items were not returned on the Cloud Costs page
+* Fixed issue where Azure non-compute cloud items were not returned on the Cloud Cost Explorer page
 * Fixed issue where the Assets page would fail to load due to NaN costs
