@@ -24,7 +24,7 @@ Determine the length of your budget and reset date using the two dropdowns under
 From the first dropdown, select whether this budget will apply to a namespace, cluster, or a label. In the second dropdown, choose the individual item in that category. When _Namespace_ or _Cluster_ has been selected, the dropdown menu should attempt to autocomplete by searching for all potential items.
 
 {% hint style="info" %}
-Labels need to be provided in a key:value format that describes where the object the budget applies to.
+Labels need to be provided in a key:value format that describes the object where the budget applies to.
 {% endhint %}
 
 ### **Actions**
@@ -38,7 +38,7 @@ Budget Actions by default check against the limits every 8 hours.
 To begin, select _New Action_. Select your _Trigger percentage_ value (leaving your _Trigger percentage_ at _100_ will only alert you once the budget has been exceeded). Then, provide any emails or webhooks where you would like to receive your alerts. Select _Save_.
 
 {% hint style="info" %}
-If you are interested in implementing additional alerts to monitor further spending or Kubecost health, read our [Alerts ](https://docs.kubecost.com/using-kubecost/navigating-the-kubecost-ui/alerts)doc.
+If you are interested in implementing additional alerts to monitor further spending or Kubecost health, read our [Alerts](https://docs.kubecost.com/using-kubecost/navigating-the-kubecost-ui/alerts) doc.
 {% endhint %}
 
 Finalize your budget by selecting _Save_. Your budget has been created and should appear on the dashboard.
