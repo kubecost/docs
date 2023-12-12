@@ -113,9 +113,13 @@ There is no baseline for what is considered a larger deployment, which will be d
 
 Once you’ve configured your *aggregator.yaml*, create secrets using the following commands:
 
-`kubectl create secret generic cloud-integration -n kubecost --from-file=aggregator.yaml`
+```
+kubectl create secret generic cloud-integration -n kubecost --from-file=aggregator.yaml
+```
 
-`kubectl create secret generic federated-storage -n kubecost --from-file=aggregator.yaml`
+```
+kubectl create secret generic federated-storage -n kubecost --from-file=aggregator.yaml
+```
 
 Finally, upgrade your existing Kubecost installation. This command will install Kubecost if it does not already exist:
 
