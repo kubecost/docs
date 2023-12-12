@@ -113,18 +113,22 @@ There is no baseline for what is considered a larger deployment, which will be d
 
 Once you’ve configured your *aggregator.yaml*, create secrets using the following commands:
 
+{% code overflow="wrap" %}
 ```
 kubectl create secret generic cloud-integration -n kubecost --from-file=aggregator.yaml
 ```
+{% endcode %}
 
+{% code overflow="wrap" %}
 ```
 kubectl create secret generic federated-storage -n kubecost --from-file=aggregator.yaml
 ```
+{% endcode %}
 
 Finally, upgrade your existing Kubecost installation. This command will install Kubecost if it does not already exist:
 
 {% hint style="warning" %}
-Upgrading your existing Kubecost using your configured Aggregator .yaml file above will reset all existing Helm values configured in your *values.yaml*. If you wish to preserve any of those changes, append your *values.yaml* by adding the contents of your *aggregator.yaml* file into it, then replacing `aggregator.yaml` with `values.yaml` in the upgrade command below:
+Upgrading your existing Kubecost using your configured *aggregator.yaml* file above will reset all existing Helm values configured in your *values.yaml*. If you wish to preserve any of those changes, append your *values.yaml* by adding the contents of your *aggregator.yaml* file into it, then replacing `aggregator.yaml` with `values.yaml` in the upgrade command below:
 {% endhint %}
 
 ```
