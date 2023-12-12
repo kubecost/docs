@@ -68,9 +68,6 @@ kubecostAggregator:
   env:
     # governs parallelism of derivation step
     # more threads speeds derivation, but requires significantly more 
-    # disk space for WAL storage
-    # default: 6
-    NUM_DERIVER_THREADS: 6
     # log level
     # default: info
     LOG_LEVEL: debug
