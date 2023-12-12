@@ -142,4 +142,4 @@ helm upgrade --install "kubecost-primary" \
 
 ### Validating Aggregator pod is running successfully
 
-When first enabled, the aggregator pod will ingest the last 90 days of ETL data from the federated-store. This may take several hours. Because the combined folder is ignored, the federator pod is not used here, but can still run if needed. You can run `kubectl get pods` and ensure the `aggregator` pod is running, but should still wait for all data to be ingested.
+When first enabled, the aggregator pod will ingest the last three years (if applicable) of ETL data from the federated-store. This may take several hours. Because the combined folder is ignored, the federator pod is not used here, but can still run if needed. You can run `kubectl get pods` and ensure the `aggregator` pod is running, but should still wait for all data to be ingested.
