@@ -18,6 +18,14 @@ The health checks include:
 
 All of these items are required for Kubecost to accurately report costs.
 
+## Usage
+
+{% hint style="info" %}
+As of Kubecost 1.108.0, this utility is not exposed in the UI. This will be added in the next version.
+{% endhint %}
+
+Today, the API can be accessed from the Kubecost Primary UI via the shortcut json endpoint: `/model/mcd` (Multi-Cluster-Diagnostics)
+
 ## Diagnostics configuration
 
 The diagnostics pod can be configured with the following Helm values:
@@ -26,13 +34,15 @@ The diagnostics pod can be configured with the following Helm values:
 diagnostics:
   enabled: true
   ## How frequently to run & push diagnostics. Defaults to 5 minutes.
-  pollingInterval: "300"
-  ## Creates a new Diagnostic file in the bucket for every run
-  keepDiagnosticHistory: true
-  ## Pushes the cluster's Kubecost Helm Values to the bucket
-  ## This may contain sensitive information
-  ## It will consume additional storage and network transfer data. The file is roughly 30kb per cluster.
+  pollingInterval: "300s"
+  ## Creates a new Diagnostic file in the bucket for every run.
+  keepDiagnosticHistory: false
+  ## Pushes the cluster's Kubecost Helm Values to the bucket once upon startup.
+  ## This may contain sensitive information and is roughly 30kb per cluster.
   collectHelmValues: false
+  ## The primary aggregates all diagnostic data and serves HTTP queries.
+  isDiagnosticsPrimary:
+    enabled: false
 ```
 
 Additional configuration options can found in the [*values.yaml*](https://github.com/kubecost/cost-analyzer-helm-chart/blob/develop/cost-analyzer/values.yaml) under `diagnostics:`.
@@ -48,7 +58,7 @@ This diagram is specific to the requests required for diagnostics only. For addi
 
 ## Diagnostics API
 
-The diagnostics API can be accessed through `/model/multi-cluster-diagnostics`
+The diagnostics API can be accessed through `/model/multi-cluster-diagnostics?window=2d` (or `/model/mcd` for short)
 
 The `window` query parameter is required, which will return all diagnostics within the specified time window.
 
