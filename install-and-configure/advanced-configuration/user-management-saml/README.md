@@ -1,4 +1,4 @@
-# User Management (SSO/SAML/RBAC)
+# User Management (SAML)
 
 {% hint style="info" %}
 SSO and RBAC are only officially supported on Kubecost Enterprise plans.
@@ -49,7 +49,7 @@ saml:
 ## SAML setup guides
 
 * [Microsoft Entra ID (formerly Azure AD) SAML Integration for Kubecost](microsoft-entra-id-saml-integration-for-kubecost.md)
-* [Okta setup guide](https://github.com/kubecost/poc-common-configurations/tree/main/saml-okta)
+* [Okta setup guide](okta-saml-integration.md)
 
 {% hint style="info" %}
 All SAML 2.0 providers also work. The above guides can be used as templates for what is required.

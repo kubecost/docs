@@ -1,7 +1,7 @@
 # Kubecost Cloud: Request Right-Sizing Recommendations
 
 {% hint style="info" %}
-This documentation should only be consulted when using Kubecost Cloud! For information about request right-sizing recommendations for self-hosted Kubecost, see [here](https://docs.kubecost.com/using-kubecost/navigating-the-kubecost-ui/savings/auto-request-sizing).
+This documentation should only be consulted when using Kubecost Cloud! For information about request right-sizing recommendations for self-hosted Kubecost, see [here](/using-kubecost/navigating-the-kubecost-ui/savings/container-request-right-sizing-recommendations.md).
 {% endhint %}
 
 Kubecost Cloud is able to provide recommendations for right-sizing your container requests to ensure they are as cost-effective as possible. Recommendations are provided for all namespaces within your cluster.
@@ -10,7 +10,7 @@ Kubecost Cloud is able to provide recommendations for right-sizing your containe
 
 You can access request right-sizing by selecting _Savings_ in the left navigation, then select the _Right-size your container requests_ panel.
 
-On the Request Right-sizing Recommendations page, you will see a table containing all namespaces/controller pairs and the cluster and container associated with each. You will also see the requested and recommended RAM/CPU, the current efficiency, and finally estimated monthly savings by adopting recommendations.
+On the Container Request Right-sizing Recommendations page, you will see a table containing all namespaces/controller pairs and the cluster and container associated with each. You will also see the requested and recommended RAM/CPU, the current efficiency, and finally estimated monthly savings by adopting recommendations.
 
 ### Configuring your recommendations
 
