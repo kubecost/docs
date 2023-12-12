@@ -5,7 +5,7 @@ Kubecost Aggregator is a beta feature.
 {% endhint %}
 
 Aggregator is a new, experimental backend for Kubecost. It is used in a [Federated ETL](/install-and-configure/install/multi-cluster/federated-etl/federated-etl.md) configuration without Thanos, replacing the [Federator](/install-and-configure/install/multi-cluster/federated-etl/federated-etl.md#other-components) component.
-Aggregator serves a critical subset of Kubecost APIs, but will eventually be the default model for Kubecost and serve all APIs. Currently, Aggregator all major monitoring and savings APIs, and also budgets and reporting.
+Aggregator serves a critical subset of Kubecost APIs, but will eventually be the default model for Kubecost and serve all APIs. Currently, Aggregator supports all major monitoring and savings APIs, and also budgets and reporting.
 
 {% hint style="info" %}
 Existing documentation for Kubecost APIs will use endpoints for non-Aggregator environments unless otherwise specified, but will still be compatible after configuring Aggregator.
