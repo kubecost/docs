@@ -25,7 +25,7 @@ Aggregator is free for all users to configure, and is always able to be rolled b
 
 ### Tutorial
 
-Configuring Aggregator requires the configuration of a .yaml file. Select from one of the two templates below and save the content as *aggregator.yaml*:
+Select from one of the two templates below and save the content as *aggregator.yaml*. This will be your configuration template required to set up Aggregator.
 
 Basic configuration:
 
@@ -109,7 +109,7 @@ serviceAccount:
   name: kubecost-irsa-sa
 ```
 
-There is no baseline for what is considered a larger deployment, and will be dependent on load times in your Kubecost environment.
+There is no baseline for what is considered a larger deployment, which will be dependent on load times in your Kubecost environment.
 
 Once you’ve configured your *aggregator.yaml*, create secrets using the following commands:
 
@@ -117,7 +117,7 @@ Once you’ve configured your *aggregator.yaml*, create secrets using the follow
 
 `kubectl create secret generic federated-storage -n kubecost --from-file=aggregator.yaml`
 
-Finally, upgrade your existing Kubecost installation. This command will install Kubecost if it does not exist:
+Finally, upgrade your existing Kubecost installation. This command will install Kubecost if it does not already exist:
 
 {% hint style="warning" %}
 Upgrading your existing Kubecost using your configured Aggregator .yaml file above will reset all existing Helm values configured in your *values.yaml*. If you wish to preserve any of those changes, append your *values.yaml* by adding the contents of your *aggregator.yaml* file into it, then replacing `aggregator.yaml` with `values.yaml` in the upgrade command below:
