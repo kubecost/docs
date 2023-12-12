@@ -1,140 +1,236 @@
-# Agent Diagnostics
+# Multi-Cluster Diagnostics (beta)
 
 {% hint style="info" %}
-Kubecost Diagnostics is performed by an independent pod that sends health data to the shared object-store used by [Federated-ETL or Thanos](multi-cluster.md).
+This feature was introduced as beta in Kubecost v1.108. It is enabled by default.
 {% endhint %}
 
-## Diagnostics Overview
+The Multi-Cluster Diagnostics feature offers a single view into the health of all the clusters you currently monitor with Kubecost.
 
-The diagnostics pod is enabled by default when Federated-ETL or Thanos is enabled.
+Health checks include, but are not limited to:
 
-The aggregated diagnostics can be accessed through the Kubecost UI or API.
+1. Whether Kubecost is correctly emitting metrics
+2. Whether Kubecost is being scraped by Prometheus
+3. Whether Prometheus has scraped the required metrics
+4. Whether Kubecost's ETL files are healthy
 
-The health checks include:
-1. Kubecost is emitting metrics
-2. Kubecost is being scraped by Prometheus
-3. Prometheus has required metrics
-4. Kubecost has healthy ETL files
-
-All of these items are required for Kubecost to accurately report costs.
-
-## Usage
-
-{% hint style="info" %}
-As of Kubecost 1.108.0, this utility is not exposed in the UI. This will be added in the next version.
-{% endhint %}
-
-Today, the API can be accessed from the Kubecost Primary UI via the shortcut json endpoint: `/model/mcd` (Multi-Cluster-Diagnostics)
-
-## Diagnostics configuration
-
-The diagnostics pod can be configured with the following Helm values:
+## Configuration
 
 ```yaml
+# This is an abridged example. Full example in link below.
 diagnostics:
   enabled: true
-  ## How frequently to run & push diagnostics. Defaults to 5 minutes.
-  pollingInterval: "300s"
-  ## Creates a new Diagnostic file in the bucket for every run.
-  keepDiagnosticHistory: false
-  ## Pushes the cluster's Kubecost Helm Values to the bucket once upon startup.
-  ## This may contain sensitive information and is roughly 30kb per cluster.
-  collectHelmValues: false
-  ## The primary aggregates all diagnostic data and serves HTTP queries.
   isDiagnosticsPrimary:
-    enabled: false
+    enabled: true  # Only enable this on your primary cluster
+
+# Ensure you have configured a unique CLUSTER_ID.
+prometheus:
+  server:
+    global:
+      external_labels:
+        cluster_id: YOUR_CLUSTER_ID
+
+# Ensure you have configured a storage config secret. Using `.Values.thanos.storeSecretName` would also work here.
+kubecostModel:
+  federatedStorageConfigSecret: federated-store
 ```
 
-Additional configuration options can found in the [*values.yaml*](https://github.com/kubecost/cost-analyzer-helm-chart/blob/develop/cost-analyzer/values.yaml) under `diagnostics:`.
+Additional configuration options can found in the [`values.yaml`](https://github.com/kubecost/cost-analyzer-helm-chart/blob/develop/cost-analyzer/values.yaml) under `diagnostics:`.
 
-## Diagnostics architecture
+## Architecture
 
-{% hint style="info" %}
-In the below diagram, the arrows originate from the the pod initiating the request and point to the resource that receives the request.
-This diagram is specific to the requests required for diagnostics only. For additional diagrams, see the [multi-cluster guide](multi-cluster.md).
-{% endhint %}
+The multi-cluster diagnostics feature is run as an independent deployment (i.e. `deployment/kubecost-diagnostics`). Each diagnostics deployment monitors the health of Kubecost and sends that health data to the central object store at the `/diagnostics` filepath.
+
+The below diagram depicts these interactions. Note, that this diagram is specific to the requests required for diagnostics only. For additional diagrams, see the [multi-cluster guide](multi-cluster.md).
 
 ![Kubecost-Agent-Diagnostics](/images/daigrams/Agent-Diagnostics-Architecture.png)
 
-## Diagnostics API
+## API usage
 
 The diagnostics API can be accessed through `/model/multi-cluster-diagnostics?window=2d` (or `/model/mcd` for short)
 
 The `window` query parameter is required, which will return all diagnostics within the specified time window.
 
-<details>
+{% swagger method="get" path="/multi-cluster-diagnostics" baseUrl="http://<your-kubecost-address>/model" summary="Multi-cluster Diagnostics API" %}
+{% swagger-description %}
+The Multi-cluster Diagnostics API provides a single view into the health of all the clusters you currently monitor with Kubecost.
+{% endswagger-description %}
 
-<summary>Example output</summary>
+{% swagger-parameter in="path" name="window" type="string" required="true" %}
+Duration of time over which to query. Accepts words like `today`, `week`, `month`, `yesterday`, `lastweek`, `lastmonth`; durations like `30m`, `12h`, `7d`; comma-separated RFC3339 date pairs like `2021-01-02T15:04:05Z,2021-02-02T15:04:05Z`; comma-separated Unix timestamp (seconds) pairs like `1578002645,1580681045`.
+{% endswagger-parameter %}
 
+{% swagger-response status="200: OK" description="" %}
 ```json
 {
     "code": 200,
     "data": {
         "overview": {
             "kubecostEmittingMetricDiagnosticPassed": true,
-            "prometheusHasKubecostMetricDiagnosticPassed": false,
-            "prometheusHasCadvisorMetricDiagnosticPassed": false,
-            "prometheusHasKSMMetricDiagnosticPassed": false,
-            "dailyAllocationEtlHealthyDiagnosticPassed": false,
-            "dailyAssetEtlHealthyDiagnosticPassed": false,
-            "kubecostPodsNotOOMKilledDiagnosticPassed": false,
+            "prometheusHasKubecostMetricDiagnosticPassed": true,
+            "prometheusHasCadvisorMetricDiagnosticPassed": true,
+            "prometheusHasKSMMetricDiagnosticPassed": true,
+            "dailyAllocationEtlHealthyDiagnosticPassed": true,
+            "dailyAssetEtlHealthyDiagnosticPassed": true,
+            "kubecostPodsNotOOMKilledDiagnosticPassed": true,
             "kubecostPodsNotPendingDiagnosticPassed": false
         },
         "clusters": {
-            "production-us-west1": {
-                "latestRun": "2023-11-17T01:54:29Z",
+            "cluster_one": {
+                "latestRun": "2023-12-12T22:42:32Z",
                 "kubecostEmittingMetric": {
                     "diagnosticPassed": true,
                     "numFailures": 0,
                     "firstFailureDate": "",
-                    "diagnosticOutput": "checkKubecostEmittingMetrics: http://localhost:9003/metrics"
+                    "diagnosticOutput": ""
                 },
                 "prometheusHasKubecostMetric": {
-                    "diagnosticPassed": false,
-                    "numFailures": 1,
-                    "firstFailureDate": "2023-11-17T01:56:10Z",
-                    "diagnosticOutput": "RunDiagnostic: checkPrometheusHasKubecostMetric: queryPrometheus: Get \"http://localhost:9003/prometheusQuery?query=absent_over_time%28node_total_hourly_cost%5B5m%5D%29\": read tcp [::1]:55137->[::1]:9003: read: connection reset by peer"
+                    "diagnosticPassed": true,
+                    "numFailures": 0,
+                    "firstFailureDate": "",
+                    "diagnosticOutput": ""
                 },
                 "prometheusHasCadvisorMetric": {
-                    "diagnosticPassed": false,
-                    "numFailures": 1,
-                    "firstFailureDate": "2023-11-17T01:56:10Z",
-                    "diagnosticOutput": "RunDiagnostic: checkPrometheusHasCadvisorMetric: queryPrometheus: Get \"http://localhost:9003/prometheusQuery?query=absent_over_time%28container_memory_working_set_bytes%7Bcontainer%3D%27cost-model%27%2C+container%21%3D%27POD%27%2C+instance%21%3D%27%27%7D%5B5m%5D%29\": read tcp [::1]:55142->[::1]:9003: read: connection reset by peer"
+                    "diagnosticPassed": true,
+                    "numFailures": 0,
+                    "firstFailureDate": "",
+                    "diagnosticOutput": ""
                 },
                 "prometheusHasKSMMetric": {
-                    "diagnosticPassed": false,
-                    "numFailures": 1,
-                    "firstFailureDate": "2023-11-17T01:56:10Z",
-                    "diagnosticOutput": "RunDiagnostic: checkPrometheusHasKSMMetric: queryPrometheus: Get \"http://localhost:9003/prometheusQuery?query=absent_over_time%28kube_pod_container_resource_requests%7Bresource%3D%27memory%27%2C+unit%3D%27byte%27%7D%5B5m%5D%29\": read tcp [::1]:55146->[::1]:9003: read: connection reset by peer"
+                    "diagnosticPassed": true,
+                    "numFailures": 0,
+                    "firstFailureDate": "",
+                    "diagnosticOutput": ""
                 },
                 "dailyAllocationEtlHealthy": {
-                    "diagnosticPassed": false,
-                    "numFailures": 1,
-                    "firstFailureDate": "2023-11-17T01:56:10Z",
-                    "diagnosticOutput": "RunDiagnostic: checkDailyAllocationEtlHealth: queryPrometheus: Get \"http://localhost:9003/prometheusQuery?query=kubecost_allocation_data_status%7Bresolution%3D%27daily%27%2C+status%3D%27error%27%7D+%3E+0\": dial tcp [::1]:9003: connect: connection refused"
+                    "diagnosticPassed": true,
+                    "numFailures": 0,
+                    "firstFailureDate": "",
+                    "diagnosticOutput": ""
                 },
                 "dailyAssetEtlHealthy": {
-                    "diagnosticPassed": false,
-                    "numFailures": 1,
-                    "firstFailureDate": "2023-11-17T01:56:10Z",
-                    "diagnosticOutput": "RunDiagnostic: checkDailyAssetEtlHealth: queryPrometheus: Get \"http://localhost:9003/prometheusQuery?query=kubecost_asset_data_status%7Bresolution%3D%27daily%27%2C+status%3D%27error%27%7D+%3E+0\": dial tcp [::1]:9003: connect: connection refused"
+                    "diagnosticPassed": true,
+                    "numFailures": 0,
+                    "firstFailureDate": "",
+                    "diagnosticOutput": ""
                 },
                 "kubecostPodsNotOOMKilled": {
-                    "diagnosticPassed": false,
-                    "numFailures": 1,
-                    "firstFailureDate": "2023-11-17T01:56:10Z",
-                    "diagnosticOutput": "RunDiagnostic: checkKubecostPodNotOOMKilled: queryPrometheus: Get \"http://localhost:9003/prometheusQuery?query=kube_pod_container_status_terminated_reason%7Bnamespace%3D%27kubecost%27%2C+reason%3D%27OOMKilled%27%7D+%3E+0\": dial tcp [::1]:9003: connect: connection refused"
+                    "diagnosticPassed": true,
+                    "numFailures": 0,
+                    "firstFailureDate": "",
+                    "diagnosticOutput": ""
+                },
+                "kubecostPodsNotPending": {
+                    "diagnosticPassed": true,
+                    "numFailures": 0,
+                    "firstFailureDate": "",
+                    "diagnosticOutput": ""
+                }
+            },
+            "cluster_two": {
+                "latestRun": "2023-12-12T22:40:17Z",
+                "kubecostEmittingMetric": {
+                    "diagnosticPassed": true,
+                    "numFailures": 0,
+                    "firstFailureDate": "",
+                    "diagnosticOutput": ""
+                },
+                "prometheusHasKubecostMetric": {
+                    "diagnosticPassed": true,
+                    "numFailures": 0,
+                    "firstFailureDate": "",
+                    "diagnosticOutput": ""
+                },
+                "prometheusHasCadvisorMetric": {
+                    "diagnosticPassed": true,
+                    "numFailures": 0,
+                    "firstFailureDate": "",
+                    "diagnosticOutput": ""
+                },
+                "prometheusHasKSMMetric": {
+                    "diagnosticPassed": true,
+                    "numFailures": 0,
+                    "firstFailureDate": "",
+                    "diagnosticOutput": ""
+                },
+                "dailyAllocationEtlHealthy": {
+                    "diagnosticPassed": true,
+                    "numFailures": 0,
+                    "firstFailureDate": "",
+                    "diagnosticOutput": ""
+                },
+                "dailyAssetEtlHealthy": {
+                    "diagnosticPassed": true,
+                    "numFailures": 0,
+                    "firstFailureDate": "",
+                    "diagnosticOutput": ""
+                },
+                "kubecostPodsNotOOMKilled": {
+                    "diagnosticPassed": true,
+                    "numFailures": 0,
+                    "firstFailureDate": "",
+                    "diagnosticOutput": ""
                 },
                 "kubecostPodsNotPending": {
                     "diagnosticPassed": false,
-                    "numFailures": 1,
-                    "firstFailureDate": "2023-11-17T01:56:10Z",
-                    "diagnosticOutput": "RunDiagnostic: checkKubecostPodsNotPending: queryPrometheus: Get \"http://localhost:9003/prometheusQuery?query=sum%28kube_pod_status_phase%7Bnamespace%3D%27kubecost%27%2C+phase%3D%27Pending%27%7D%29+by+%28pod%2Cnamespace%29+%3E+0\": dial tcp [::1]:9003: connect: connection refused"
+                    "numFailures": 52,
+                    "firstFailureDate": "2023-12-12T18:25:09Z",
+                    "diagnosticOutput": "RunDiagnostic: checkKubecostPodsNotPending: queryPrometheusCheckResultEmpty: the following query returned a non-empty result sum(kube_pod_status_phase{namespace='kubecost-etl-fed', phase='Pending'}) by (pod,namespace) > 0"
+                }
+            },
+            "cluster_three": {
+                "latestRun": "2023-12-12T22:40:15Z",
+                "kubecostEmittingMetric": {
+                    "diagnosticPassed": true,
+                    "numFailures": 0,
+                    "firstFailureDate": "",
+                    "diagnosticOutput": ""
+                },
+                "prometheusHasKubecostMetric": {
+                    "diagnosticPassed": true,
+                    "numFailures": 0,
+                    "firstFailureDate": "",
+                    "diagnosticOutput": ""
+                },
+                "prometheusHasCadvisorMetric": {
+                    "diagnosticPassed": true,
+                    "numFailures": 0,
+                    "firstFailureDate": "",
+                    "diagnosticOutput": ""
+                },
+                "prometheusHasKSMMetric": {
+                    "diagnosticPassed": true,
+                    "numFailures": 0,
+                    "firstFailureDate": "",
+                    "diagnosticOutput": ""
+                },
+                "dailyAllocationEtlHealthy": {
+                    "diagnosticPassed": true,
+                    "numFailures": 0,
+                    "firstFailureDate": "",
+                    "diagnosticOutput": ""
+                },
+                "dailyAssetEtlHealthy": {
+                    "diagnosticPassed": true,
+                    "numFailures": 0,
+                    "firstFailureDate": "",
+                    "diagnosticOutput": ""
+                },
+                "kubecostPodsNotOOMKilled": {
+                    "diagnosticPassed": true,
+                    "numFailures": 0,
+                    "firstFailureDate": "",
+                    "diagnosticOutput": ""
+                },
+                "kubecostPodsNotPending": {
+                    "diagnosticPassed": false,
+                    "numFailures": 52,
+                    "firstFailureDate": "2023-12-12T18:24:42Z",
+                    "diagnosticOutput": "RunDiagnostic: checkKubecostPodsNotPending: queryPrometheusCheckResultEmpty: the following query returned a non-empty result sum(kube_pod_status_phase{namespace='kubecost-etl-fed', phase='Pending'}) by (pod,namespace) > 0"
                 }
             }
         }
     }
 }
 ```
-
-</details>
+{% endswagger-response %}
+{% endswagger %}
