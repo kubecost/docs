@@ -111,17 +111,19 @@ serviceAccount:
 
 There is no baseline for what is considered a larger deployment, which will be dependent on load times in your Kubecost environment.
 
-Once you’ve configured your *aggregator.yaml*, create secrets using the following commands:
-
-{% code overflow="wrap" %}
-```
-kubectl create secret generic cloud-integration -n kubecost --from-file=aggregator.yaml
-```
-{% endcode %}
+Once you’ve configured your *aggregator.yaml*, create a secret using the following command:
 
 {% code overflow="wrap" %}
 ```
 kubectl create secret generic federated-storage -n kubecost --from-file=aggregator.yaml
+```
+{% endcode %}
+
+Next, you will need to create an additional `cloud-integration` secret. Follow this tutorial on [creating cloud integration secrets](/install-and-configure/install/cloud-integration/multi-cloud.md#step-2-create-cloud-integration-secret) to generate your *cloud-integration.json* file, then run the following command:
+
+{% code overflow="wrap" %}
+```
+kubectl create secret generic cloud-integration -n kubecost --from-file=cloud-integration.json
 ```
 {% endcode %}
 
