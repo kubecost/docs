@@ -1,10 +1,10 @@
-# Multi-Cluster Diagnostics (beta)
+# Multi-Cluster Diagnostics
 
 {% hint style="info" %}
-This feature was introduced as beta in Kubecost v1.108. It is enabled by default.
+This feature is currently in beta. It is enabled by default.
 {% endhint %}
 
-The Multi-Cluster Diagnostics feature offers a single view into the health of all the clusters you currently monitor with Kubecost.
+Multi-Cluster Diagnostics offers a single view into the health of all the clusters you currently monitor with Kubecost.
 
 Health checks include, but are not limited to:
 
@@ -34,13 +34,13 @@ kubecostModel:
   federatedStorageConfigSecret: federated-store
 ```
 
-Additional configuration options can found in the [`values.yaml`](https://github.com/kubecost/cost-analyzer-helm-chart/blob/develop/cost-analyzer/values.yaml) under `diagnostics:`.
+Additional configuration options can found in the [*values.yaml*](https://github.com/kubecost/cost-analyzer-helm-chart/blob/develop/cost-analyzer/values.yaml) under `diagnostics:`.
 
 ## Architecture
 
 The multi-cluster diagnostics feature is run as an independent deployment (i.e. `deployment/kubecost-diagnostics`). Each diagnostics deployment monitors the health of Kubecost and sends that health data to the central object store at the `/diagnostics` filepath.
 
-The below diagram depicts these interactions. Note, that this diagram is specific to the requests required for diagnostics only. For additional diagrams, see the [multi-cluster guide](multi-cluster.md).
+The below diagram depicts these interactions. This diagram is specific to the requests required for diagnostics only. For additional diagrams, see our  [multi-cluster guide](multi-cluster.md).
 
 ![Kubecost-Agent-Diagnostics](/images/daigrams/Agent-Diagnostics-Architecture.png)
 
