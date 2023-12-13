@@ -11,7 +11,8 @@ Aggregator serves a critical subset of Kubecost APIs, but will eventually be the
 Existing documentation for Kubecost APIs will use endpoints for non-Aggregator environments unless otherwise specified, but will still be compatible after configuring Aggregator.
 {% endhint %}
 
-AAggregator is designed to accommodate queries of large-scale datasets by improving API load times and reducing UI errors. It is not designed to introduce new functionality; it is meant to improve functionality at scale.
+Aggregator is designed to accommodate queries of large-scale datasets by improving API load times and reducing UI errors. It is not designed to introduce new functionality; it is meant to improve functionality at scale.
+
 
 Aggregator is currently free for all Enterprise users to configure, and is always able to be rolled back.
 
