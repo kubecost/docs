@@ -77,13 +77,6 @@ kubecostAggregator:
     # ensure disk is specd high enough, and check for bottlenecks
     # default: 128Gi
     storageRequest: 128Gi
-  # tracing, starts embedded jaeger pod
-  # port forward to 16686 on the pod to access jaeger UI 
-  # provides instrumented traces used for troubleshooting performance issues
-  jaeger:
-    enabled: true
-    image: jaegertracing/all-in-one
-    imageVersion: latest
 federatedETL:
   federatedCluster: true
 kubecostModel:
