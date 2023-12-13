@@ -39,6 +39,8 @@ federatedETL:
   federatedCluster: true
 kubecostModel:
   containerStatsEnabled: true
+  cloudCost:
+    enabled: false
   federatedStorageConfigSecret: federated-store
 kubecostProductConfigs:
   clusterName: YOUR_CLUSTER_NAME
