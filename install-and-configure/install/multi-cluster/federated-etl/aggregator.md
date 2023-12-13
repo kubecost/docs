@@ -73,7 +73,7 @@ kubecostAggregator:
     # more threads speeds derivation, but requires significantly more 
     # log level
     # default: info
-    LOG_LEVEL: debug
+    LOG_LEVEL: info
   aggregatorDbStorage:
     # governs storage size of aggregator DB storage
     # !!NOTE!! disk performance is _critically important_ to aggregator performance
