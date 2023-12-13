@@ -19,8 +19,8 @@ Select _Savings_ in the left navigation, then select _Right-size your container 
 Select _Customize_ to modify the right-sizing settings. Your customization settings will tell Kubecost how to calculate its recommendations, so make sure it properly represents your environment and activity:
 
 * Window: Duration of deployment activity Kubecost should observe
-* Profile: Select from _Development_, _Production_, or High Availability\*, which come with preconfigured values for CPu/RAM target utilization fields. Selecting _Custom_ will allow you to manually configure these fields.
-* CPU/RAM recommendation algorithm: Alwayus configured to _Max_.
+* Profile: Select from _Development_, _Production_, or High Availability\*, which come with preconfigured values for CPU/RAM target utilization fields. Selecting _Custom_ will allow you to manually configure these fields.
+* CPU/RAM recommendation algorithm: Always configured to _Max_.
 * CPU/RAM target utilization: Refers to the percentage of used resources over total resources available.
 * Add Filters: Optional configuration to limit the deployments which will have right-sizing recommendations applied. This will provide greater flexibility in optimizing your environment. Ensure you select the plus icon next to the filter value text box to add the filter. Multiple filters can be added.
 
@@ -45,4 +45,4 @@ Also referred to as continuous container RRS, autoscaling allows you to configur
 Both one-click and continuous container RRS can be configured via Savings [Actions](savings-actions.md). On the Actions page, select _Create Action_, then select either:
 
 * _Request Sizing_: Will open the Container RRS page with the schedule window open to configure and apply.
-* _Guided Sizing_: Will open the Guided Sizing page and allow you to apply both one-click RRS, then continous [cluster sizing](cluster-right-sizing-recommendations.md)
+* _Guided Sizing_: Will open the Guided Sizing page and allow you to apply both one-click RRS, then continuous [cluster sizing](cluster-right-sizing-recommendations.md).

@@ -3,8 +3,8 @@
 There are many ways to integrate your AWS Cost and Usage Report (CUR) with Kubecost. This tutorial is intended as the best-practice method for users whose environments meet the following assumptions:
 
 1. Kubecost will run in a different account than the AWS Payer Account
-1. The IAM permissions will utilize AWS [IRSA](https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html) to avoid shared secrets
-1. The configuration of Kubecost will be done using a *cloud-integration.json* file, and not via Kubecost UI (following infrastructure as code practices)
+2. The IAM permissions will utilize AWS [IRSA](https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html) to avoid shared secrets
+3. The configuration of Kubecost will be done using a _cloud-integration.json_ file, and not via Kubecost UI (following infrastructure as code practices)
 
 If this is not an accurate description of your environment, see our [AWS Cloud Integration](aws-cloud-integrations.md) doc for more options.
 
@@ -16,7 +16,7 @@ This guide is a one-time setup per AWS payer account and is typically one per or
 
 <summary>Basic diagram when the below steps are complete:</summary>
 
-![cur-diagram](/images/aws-cur/kubecost-cross-account-cur-diagram.png)
+<img src="../../../../images/aws-cur/kubecost-cross-account-cur-diagram.png" alt="cur-diagram" data-size="original">
 
 </details>
 
@@ -35,7 +35,7 @@ To begin, download the recommended configuration template files from our [poc-co
 * _iam-payer-account-trust-primary-account.json_
 * _iam-access-cur-in-payer-account.json_
 
-Begin by opening *cloud_integration.json*, which should look like this:
+Begin by opening _cloud\_integration.json_, which should look like this:
 
 ```json
 {
@@ -68,10 +68,8 @@ Follow the [AWS documentation](https://docs.aws.amazon.com/cur/latest/userguide/
 
 <summary>Screenshots from select CUR creation in the above AWS documentation</summary>
 
-![CUR-export-config](/images/aws-cur/1-cur-nav.png)
-![resource-ids](/images/aws-cur/2-cur-create-step1.png)
-![bucket-permissions](/images/aws-cur/3-cur-s3-bucket.png)
-![delivery-options](/images/aws-cur/4-delivery-options.png)
+<img src="../../../../images/aws-cur/1-cur-nav.png" alt="CUR-export-config" data-size="original"><img src="../../../../images/aws-cur/2-cur-create-step1.png" alt="resource-ids" data-size="original"><img src="../../../../images/aws-cur/3-cur-s3-bucket.png" alt="bucket-permissions" data-size="original"><img src="../../../../images/aws-cur/4-delivery-options.png" alt="delivery-options" data-size="original">
+
 </details>
 
 {% hint style="info" %}
@@ -82,32 +80,32 @@ AWS may take up to 24 hours to publish data. Wait until this is complete before 
 
 While you wait, update the following configuration files:
 
-* Update your *cloud-integration.json* file by providing a `projectID` value, which will be the AWS payer account number where the CUR is located and where the Kubecost primary cluster is running.
-* Update your *iam-payer-account-cur-athena-glue-s2-access.json* file by replacing all instances of `CUR_BUCKET_NAME` to the name of the bucket you created for CUR data.
+* Update your _cloud-integration.json_ file by providing a `projectID` value, which will be the AWS payer account number where the CUR is located and where the Kubecost primary cluster is running.
+* Update your _iam-payer-account-cur-athena-glue-s2-access.json_ file by replacing all instances of `CUR_BUCKET_NAME` to the name of the bucket you created for CUR data.
 
 ### Step 3: Setting up Athena
 
-As part of the CUR creation process, Amazon creates a CloudFormation template that is used to create the Athena integration. It is created in the CUR S3 bucket under `s3-path-prefix/cur-name` and typically has the filename *crawler-cfn.yml*. This .yml is your CloudFormation template. You will need it in order to complete the CUR Athena integration. You can read more about this [here](https://docs.aws.amazon.com/cur/latest/userguide/use-athena-cf.html).
+As part of the CUR creation process, Amazon creates a CloudFormation template that is used to create the Athena integration. It is created in the CUR S3 bucket under `s3-path-prefix/cur-name` and typically has the filename _crawler-cfn.yml_. This .yml is your CloudFormation template. You will need it in order to complete the CUR Athena integration. You can read more about this [here](https://docs.aws.amazon.com/cur/latest/userguide/use-athena-cf.html).
 
-![athena-output-bucket](/images/aws-cur/8-upload-cfn-template.png)
+![athena-output-bucket](../../../../images/aws-cur/8-upload-cfn-template.png)
 
 {% hint style="info" %}
 Your S3 path prefix can be found by going to your AWS Cost and Usage Reports dashboard and selecting your bucket's report. In the Report details tab, you will find the S3 path prefix.
 {% endhint %}
 
-Once Athena is set up with the CUR, you will need to create a *new* S3 bucket for Athena query results. The bucket used for the CUR cannot be used for the Athena output.
+Once Athena is set up with the CUR, you will need to create a _new_ S3 bucket for Athena query results. The bucket used for the CUR cannot be used for the Athena output.
 
 1. Navigate to the [S3 Management Console](https://console.aws.amazon.com/s3/home?region=us-east-2).
 2. Select _Create bucket._ The Create Bucket page opens.
-3. Provide a name for your bucket. This is the value for `athenaBucketName` in your *cloud-integration.json* file. Use the same region used for the CUR bucket. 
+3. Provide a name for your bucket. This is the value for `athenaBucketName` in your _cloud-integration.json_ file. Use the same region used for the CUR bucket.
 4. Select _Create bucket_ at the bottom of the page.
 5. Navigate to the [Amazon Athena](https://console.aws.amazon.com/athena) dashboard.
 6. Select _Settings_, then select _Manage._ The Manage settings window opens.
 7. Set _Location of query result_ to the S3 bucket you just created, then select _Save._
 
-Navigate to Athena in the AWS Console. Be sure the region matches the one used in the steps above. Update your *cloud-integration.json* file with the following values. Use the screenshots below for help.
+Navigate to Athena in the AWS Console. Be sure the region matches the one used in the steps above. Update your _cloud-integration.json_ file with the following values. Use the screenshots below for help.
 
-![CUR-Config](/images/aws-cur/6-cur-config.png)
+![CUR-Config](../../../../images/aws-cur/6-cur-config.png)
 
 * `athenaBucketName`: the name of the Athena bucket your created in this step
 * `athenaDatabase`: the value in the Database dropdown
@@ -124,7 +122,7 @@ For Athena query results written to an S3 bucket only accessed by Kubecost, it i
 
 In _iam-payer-account-cur-athena-glue-s3-access.json_, replace all `ATHENA_RESULTS_BUCKET_NAME` instances with your Athena S3 bucket name (the default will look like `aws-athena-query-results-xxxx`).
 
-In *iam-payer-account-trust-primary-account.json*, replace `SUB_ACCOUNT_222222222` with the account number of the account where the Kubecost primary cluster will run.
+In _iam-payer-account-trust-primary-account.json_, replace `SUB_ACCOUNT_222222222` with the account number of the account where the Kubecost primary cluster will run.
 
 In the same location as your downloaded configuration files, run the following command to create the appropriate policy (`jq` is not required):
 
@@ -134,43 +132,21 @@ aws iam create-role --role-name kubecost-cur-access \
   --assume-role-policy-document file://iam-payer-account-trust-primary-account.json \
   --output json | jq -r .Role.Arn
 ```
-
-The output is the value for the `PAYER_ACCOUNT_ROLE_ARN`:
-
-```
-arn:aws:iam::PAYER_ACCOUNT_11111111111:role/kubecost-cur-access
-```
-
-Update the placeholders (everything with a `_` ex. `ATHENA_DATABASE`) in *iam-payer-account-cur-athena-glue-s3-access.json* and attach the required policies to the new role:
-
-```sh
-aws iam put-role-policy --role-name kubecost-cur-access \
-  --policy-name kubecost-payer-account-cur-athena-glue-s3-access \
-  --policy-document file://iam-payer-account-cur-athena-glue-s3-access.json
-```
-
-Then allow Kubecost to read account tags:
-
-```sh
-aws iam put-role-policy --role-name kubecost-cur-access \
-  --policy-name kubecost-payer-account-list-tags-policy \
-  --policy-document file://iam-payer-account-list-tags-policy.json
-```
 {% endcode %}
 
-Now we can obtain the last value `masterPayerARN` for *cloud-integration.json* as the ARN associated with the newly-created IAM role, as seen below in the AWS console:
+Now we can obtain the last value `masterPayerARN` for _cloud-integration.json_ as the ARN associated with the newly-created IAM role, as seen below in the AWS console:
 
-![ARN](/images/masterPayerARN.png)
+![ARN](../../../../images/masterPayerARN.png)
 
 ### Step 5: Setting up IAM permissions for the primary cluster
 
 {% hint style="warning" %}
-By arriving at this step, you should have been able to provide all values to your *cloud-integration.json* file. If any values are missing, reread the tutorial and follow any steps needed to obtain those values.
+By arriving at this step, you should have been able to provide all values to your _cloud-integration.json_ file. If any values are missing, reread the tutorial and follow any steps needed to obtain those values.
 {% endhint %}
 
 **From the AWS Account where the Kubecost primary cluster will run**
 
-In *iam-access-cur-in-payer-account.json*, update `PAYER_ACCOUNT_11111111111` with the AWS account number of the payer account and create a policy allowing Kubecost to assumeRole in the payer account:
+In _iam-access-cur-in-payer-account.json_, update `PAYER_ACCOUNT_11111111111` with the AWS account number of the payer account and create a policy allowing Kubecost to assumeRole in the payer account:
 
 ```sh
 aws iam create-policy --policy-name kubecost-access-cur-in-payer-account \
@@ -179,6 +155,7 @@ aws iam create-policy --policy-name kubecost-access-cur-in-payer-account \
 ```
 
 Note the output ARN (used in the `iamserviceaccount --attach-policy-arn` below):
+
 ```
 arn:aws:iam::SUB_ACCOUNT_222222222:policy/kubecost-access-cur-in-payer-account
 ```
@@ -234,11 +211,11 @@ helm install kubecost \
 ```
 {% endcode %}
 
-
 ## Validation
 
 It can take over an hour to process the billing data for large AWS accounts. In the short-term, follow the logs and look for a message similar to `(7.7 complete)`, which should grow gradually to `(100.0 complete)`. Some errors (ERR) are expected, as seen below.
 
+{% code overflow="wrap" %}
 ```
 kubectl logs -l app=cost-analyzer --tail -1 --follow |grep -i athena
 ------------------
@@ -256,6 +233,7 @@ Defaulted container "cost-model" out of: cost-model, cost-analyzer-frontend
 2023-05-24T19:41:34.588661972Z INF ETL: CloudUsage[440082503234/s3://aws-athena-query-results-]: Run[JkSYH]: QueryCloudUsage [2023-05-21T00:00:00+0000, 2023-05-25T00:00:00+0000)
 2023-05-24T19:41:50.528544821Z INF ETL: CloudUsage[440082503234/s3://aws-athena-query-results-]: Build[XPQMa]: coverage [2023-05-18T00:00:00+0000, 2023-05-25T00:00:00+0000) (7.7 complete)
 ```
+{% endcode %}
 
 ## Troubleshooting
 
