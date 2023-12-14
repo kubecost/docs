@@ -9,7 +9,7 @@ Kubecost Free can now be installed on an unlimited number of individual clusters
 In an Enterprise multi-cluster setup, the UI is accessed through a designated primary cluster. All other clusters in the environment send metrics to a central object-store with a lightweight agent (aka secondary clusters). The primary cluster is designated by setting the Helm flag `.Values.federatedETL.primaryCluster=true`, which instructs this cluster to read from the `combined` folder that was processed by the federator. This cluster will consume additional resources to run the Kubecost UI and backend.
 
 {% hint style="info" %}
-As of Kubecost 1.108, agent health is monitored by a [diagnostic pod](diagnostics.md) that collects information from the local cluster and sends it to an object-store. This data is then processed by the Primary cluster and accessed via the UI and API.
+As of Kubecost 1.108, agent health is monitored by a [diagnostic pod](multi-cluster-diagnostics.md) that collects information from the local cluster and sends it to an object-store. This data is then processed by the Primary cluster and accessed via the UI and API.
 {% endhint %}
 
 {% hint style="warning" %}
