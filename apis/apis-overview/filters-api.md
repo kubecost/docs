@@ -13,6 +13,7 @@ v2 filters can be used via the `filter=` parameter in supported APIs. Supported 
 * [Allocation API](api-allocation.md)
 * [Request Sizing APIs](api-request-right-sizing-v2.md)
 * [Assets API](assets-api.md)
+* [Allocation/Cloud Cost Trends API](cloud-cost-api/cloud-cost-trends-api.md) (Kubecost Aggregator only)
 
 ## Filtering fields
 
