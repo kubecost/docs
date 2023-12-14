@@ -75,6 +75,7 @@ Duration of a single allocation set. If unspecified, this defaults to the `windo
                                 "totalCost": {
                                     "relativeChange": {
                                         "isInfinite": false,
+                                        "isNaN": false,
                                         "value": -0.023189249723331362
                                     }
                                 }
@@ -103,7 +104,7 @@ The equation for calculating `value` is: `value=current/previous - 1`
 Receiving a positive `value` means your more recent `totalCost` has increased compared to the previous window. A negative `value` means spending has decreased.
 
 {% hint style="warning" %}
-It's important to recognize when a resource is not detected to exist in the previous window. This is designated by the field `IsInfinite=true`, which means the allocation could not be determined to exist. Otherwise, the cause of an unexpected or major trend change could be misattributed.
+It's important to recognize when a resource is not detected to exist in the previous window. This is designated by the field `IsInfinite=true`, which means the allocation could not be determined to exist. Otherwise, the cause of an unexpected or major trend change could be misattributed. The field `isNaN`, meaning not a number, refers to if the `value` is unreal. If so, `isNan` should return `true`, which means there was an error during calculation. Both fields should return `false` during a successful query.
 {% endhint %}
 
 In the example output below, `value` is expressed as `0.11...`, meaning spending has increased in the current window by roughly 11% from the previous window.
@@ -115,6 +116,7 @@ In the example output below, `value` is expressed as `0.11...`, meaning spending
                         "totalCost": {
                             "relativeChange": {
                                 "isInfinite": false,
+                                "isNaN": false,
                                 "value": 0.11111005449714528
                             }
                         }
