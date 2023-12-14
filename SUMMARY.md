@@ -33,7 +33,7 @@
       * [AWS Thanos IAM Policy](install-and-configure/install/multi-cluster/long-term-storage-configuration/aws-service-account-thanos.md)
       * [Azure Long-Term Storage](install-and-configure/install/multi-cluster/long-term-storage-configuration/long-term-storage-azure.md)
       * [GCP Long-Term Storage](install-and-configure/install/multi-cluster/long-term-storage-configuration/long-term-storage-gcp.md)
-   * [Diagnostics](install-and-configure/install/multi-cluster/diagnostics.md)
+   * [Mulit-Cluster Diagnostics](install-and-configure/install/multi-cluster/multi-cluster-diagnostics.md)
     * [Secondary Clusters Guide](install-and-configure/install/multi-cluster/secondary-clusters.md)
   * [ETL Backup](install-and-configure/install/etl-backup/etl-backup.md)
     * [Sharing ETL Backups](install-and-configure/install/etl-backup/sharing-etl-backups.md)
