@@ -1,6 +1,6 @@
 # Budgets
 
-Budgets are a way of establishing spend limits for your clusters or namespaces. They can be created in moments using the Budgets dashboard.
+Budgets are a way of establishing spend limits for your clusters, namespaces, or labels. They can be created in moments using the Budgets dashboard.
 
 ## Creating a budget
 
@@ -10,8 +10,6 @@ Begin by selecting the _New Budget_ button in the top right corner of the dashbo
 
 Provide the following fields:
 
-### Spending cap and cadence
-
 * _Budget name_: The name of your budget
 * Budget cap: The allotted amount of your budget per interval
 
@@ -19,11 +17,15 @@ Provide the following fields:
 The currency of your budget is unchangeable in the Budgets dashboard. To change currency type, go to _Settings >_ Currency. Then, select _Save_ at the bottom of the Settings page to apply changes. Changing currency type will affect cost displays across all of your Kubecost, not just the Budgets dashboard. Kubecost does **not** convert spending costs to other currency types; it will only change the symbol displayed next to cost. For best results, configure your currency to what matches your spend.
 {% endhint %}
 
-Determine the length of your budget and reset date using the two dropdowns under the Budget cap text box. Budgets can be either _Weekly_ or _Monthly_, and can reset on any day of the week/month. This means you don't need to recreate your budgets and can align them with your schedules or processes.
+Determine the length of your budget and reset date using the two dropdowns under the Budget cap text box. Budgets can be either _Weekly_ or _Monthly_, and can reset on any day of the week/month. This means you don't need to recreate your budgets repeatedly and can align them with your schedules or processes.
 
 ### Workloads
 
-From the first dropdown, select whether this budget will apply to a namespace or a cluster. In the second dropdown, choose the individual namespace or cluster.
+From the first dropdown, select whether this budget will apply to a namespace, cluster, or a label. In the second dropdown, choose the individual item in that category. When _Namespace_ or _Cluster_ has been selected, the dropdown menu should attempt to autocomplete by searching for all potential items.
+
+{% hint style="info" %}
+Labels need to be provided in a key:value format that describes the object where the budget applies to.
+{% endhint %}
 
 ### **Actions**
 
@@ -36,7 +38,7 @@ Budget Actions by default check against the limits every 8 hours.
 To begin, select _New Action_. Select your _Trigger percentage_ value (leaving your _Trigger percentage_ at _100_ will only alert you once the budget has been exceeded). Then, provide any emails or webhooks where you would like to receive your alerts. Select _Save_.
 
 {% hint style="info" %}
-If you are interested in implementing additional alerts to monitor further spending or Kubecost health, read our [Alerts ](https://docs.kubecost.com/using-kubecost/navigating-the-kubecost-ui/alerts)doc.
+If you are interested in implementing additional alerts to monitor further spending or Kubecost health, read our [Alerts](https://docs.kubecost.com/using-kubecost/navigating-the-kubecost-ui/alerts) doc.
 {% endhint %}
 
 Finalize your budget by selecting _Save_. Your budget has been created and should appear on the dashboard.
@@ -49,7 +51,7 @@ Once your budget has been created, it will immediately display your current spen
 
 Selecting _Details_ in the row of a specific budget will open a window displaying all details for your budget, including current spending, budget remaining, reset date, and any existing Actions.
 
-You can also select _View detailed breakdown_ to display an [Allocations ](https://docs.kubecost.com/using-kubecost/navigating-the-kubecost-ui/cost-allocation)query for your budgeted namespace/cluster, or _Download Budget Report_ to download your budget as a PDF file.
+You can also select _View detailed breakdown_ to display an [Allocations](https://docs.kubecost.com/using-kubecost/navigating-the-kubecost-ui/cost-allocation) query for your budgeted item, or _Download Budget Report_ to download your budget as a PDF file.
 
 ### Editing a budget
 
