@@ -11,7 +11,7 @@ redirects:
     hc/en-us/articles/10018767892119: user-management-oidc.md
     hc/en-us/articles/10066023188119: api-persistent-volume-right-sizing.md
     hc/en-us/articles/10071917787159: containerstats-pipeline.md
-    hc/en-us/articles/10248765796375: openshift-operatorhub-kubecost-install.md
+    hc/en-us/articles/10248765796375: openshift-kubecost-install.md
     hc/en-us/articles/10330083197975: continuous-request-sizing.md
     hc/en-us/articles/4407595912983: add-key.md
     hc/en-us/articles/4407595915543: allocation-api.md
@@ -113,7 +113,7 @@ redirects:
     hc/en-us/articles/10018767892119-User-Management-SSO-OIDC: user-management-oidc.md
     hc/en-us/articles/10066023188119-Persistent-Volume-Right-Sizing-API: api-persistent-volume-right-sizing.md
     hc/en-us/articles/10071917787159--ContainerStats-Pipeline: containerstats-pipeline.md
-    hc/en-us/articles/10248765796375-Deploy-Kubecost-from-Red-Hat-Openshift-s-OperatorHub-: openshift-operatorhub-kubecost-install.md
+    hc/en-us/articles/10248765796375-Deploy-Kubecost-from-Red-Hat-Openshift-s-OperatorHub-: openshift-kubecost-install.md
     hc/en-us/articles/10330083197975-Continuous-Request-Right-Sizing-with-Kubecost-s-Kubescaler: continuous-request-sizing.md
     hc/en-us/articles/4407595912983-Add-Key: add-key.md
     hc/en-us/articles/4407595915543-Kubecost-APIs: allocation-api.md
