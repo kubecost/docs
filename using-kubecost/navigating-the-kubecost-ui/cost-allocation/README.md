@@ -2,7 +2,7 @@
 
 The Kubecost Allocations dashboard allows you to quickly see allocated spend across all native Kubernetes concepts, e.g. namespace, k8s label, and service. It also allows for allocating cost to organizational concepts like team, product/project, department, or environment. This document explains the metrics presented and describes how you can control the data displayed in this view.
 
-![Allocations dashboard](<../../../.gitbook/assets/image (2) (2) (1) (1) (2) (2) (3).png>)
+![Allocations dashboard](/.gitbook/assets/allocations.png)
 
 ## Configuring your query
 
