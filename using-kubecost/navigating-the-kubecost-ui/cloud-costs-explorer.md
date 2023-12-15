@@ -97,8 +97,8 @@ The Cost Metric dropdown allows you to adjust the displayed cost data based on d
 
 Your cloud cost spending will be displayed across your dashboard with several key metrics:
 
-* K8 Utilization: Percent of cost which can be traced back to Kubernetes cluster
+* K8s Utilization: Percent of cost which can be traced back to Kubernetes cluster
 * Total cost: Total cloud spending
 * Sum of Sample Data: Only when aggregating by _Item_. Only lists the top cost for the timeframe selected. Displays that may not match your CUR.
 
-All line items, after aggregation, should be selectable, allowing you to drill down to further analyze your spending. For example, when aggregating cloud spend by _Service_, you can select an individual cloud service (AmazonEC2, for example) and view spending, K8 utilization, and other details unique to that item.
+All line items, after aggregation, should be selectable, allowing you to drill down to further analyze your spending. For example, when aggregating cloud spend by _Service_, you can select an individual cloud service (AmazonEC2, for example) and view spending, K8s utilization, and other details unique to that item.
