@@ -1,6 +1,7 @@
 # Cloud Cost Trends API
 
-{% hint style="warning" %} This feature is only available in [Kubecost Aggregator](/install-and-configure/install/multi-cluster/federated-etl/aggregator.md). {% endhint %}
+{% hint style="warning" %} This feature is only available in [Kubecost Aggregator](../../../install-and-configure/install/multi-cluster/federated-etl/aggregator.md).
+{% endhint %}
 
 {% swagger method="get" path="/cloudCost/view/trends" baseUrl="http://<your-kubecost-address>/model" summary="Trends API" %} {% swagger-description %} Analyzes change in cloud costs relative to a previous window of the same size {% endswagger-description %}
 
