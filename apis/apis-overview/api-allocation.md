@@ -209,7 +209,8 @@ Duration of each individual data metric across the `window`. Accepts `1h`, `1d`,
 
 {% swagger method="get" path="/allocation" baseUrl="http://<your-kubecost-address>/model" summary="Allocation API (Aggregator only)" %}
 {% swagger-description %}
-The Allocation API is the preferred way to query for costs and resources allocated to Kubernetes workloads and optionally aggregated by Kubernetes concepts like `namespace`, `controller`, and `label`. Data is served from one of [Kubecost's ETL pipelines](/apis/deprecated-apis/cost-model-deprecated.md#caching-overview). This Allocation API should only be consulted for users who have configured [Kubecost Aggregator](/install-and-configure/install/multi-cluster/federated-etl/aggregator.md).
+The Allocation API is the preferred way to query for costs and resources allocated to Kubernetes workloads and optionally aggregated by Kubernetes concepts like `namespace`, `controller`, and `label`. This Allocation API should only be consulted for users who have configured [Kubecost Aggregator](/install-and-configure/install/multi-cluster/federated-etl/aggregator.md).
+
 {% endswagger-description %}
 
 {% swagger-parameter in="path" name="window" type="string" required="true" %}
