@@ -198,7 +198,6 @@ If `true`, pulls data from the Assets cache and corrects prices of Allocations a
 {% endswagger-response %}
 {% endswagger %}
 
-
 ## Calculating trend value
 
 The Allocation Trends API determines changes in resource cost usage over time based on the interval set `window` parameter and provides that information via the schema field `value`. Cost usage for the current window sampled will be compared with the previous window, the window directly before the current window of the same size interval. For example, for `window=3d`, Kubecost will output cost usage for the past three days compared to cost usage of the three days before the start of the window. This means a total of six days of allocation data must be available and sampled in order to provide an accurate value.
