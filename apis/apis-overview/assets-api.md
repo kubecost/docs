@@ -10,7 +10,7 @@ Dictates the applicable window for measuring historical asset cost.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="aggregate" type="string" required="false" %}
-Used to consolidate cost model data. Supported aggregation types are cluster and type. Passing an empty value for this parameter, or not passing one at all, returns data by an individual asset.
+Used to consolidate cost model data. Supported values are `account`, `cluster`, `project`, `providerid`, `provider`, and `type`. Passing an empty value for this parameter or none at all returns data by an individual asset. Supports multi-aggregation (aggregation fo multiple categories) in a comma separated list, such as `aggregate=account,project`.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="accumulate" type="boolean" required="false" %}
@@ -25,48 +25,76 @@ When set to `true`, zeros out all adjustments from cloud provider reconciliation
 When set to `csv`, will download an accumulated version of the asset results in CSV format. By default, results will be in JSON format.
 {% endswagger-parameter %}
 
-{% swagger-parameter in="path" name="filterAccounts" type="string" required="false" %}
-Filter results by cloud account. _Requires cloud configuration._
-{% endswagger-parameter %}
-
-{% swagger-parameter in="path" name="filterCategories" type="string" required="false" %}
-Filter results by asset category, such as `Network`, `Management`, `Compute`, `Storage`, or `Other`.
-{% endswagger-parameter %}
-
-{% swagger-parameter in="path" name="filterClusters" type="string" required="false" %}
-Filter results by cluster ID, which is generated from `cluster_id` provided during installation.
-{% endswagger-parameter %}
-
-{% swagger-parameter in="path" name="filterLabels" type="string" required="false" %}
-Filter results by cloud label or cloud tag. For example, appending `&labels=deployment:kubecost-cost-analyzer` only returns assets with label `deployment=kubecost-cost-analyzer`. Note that subparameter `:` symbols are required to denote `<labelKey>:<labelValue>` pairs.
-{% endswagger-parameter %}
-
-{% swagger-parameter in="path" name="filterNames" type="string" required="false" %}
-Filter results by asset name.
-{% endswagger-parameter %}
-
-{% swagger-parameter in="path" name="filterProjects" type="string" required="false" %}
-Filter results by cloud project ID. _Requires cloud configuration._
-{% endswagger-parameter %}
-
-{% swagger-parameter in="path" name="filterProviders" type="string" required="false" %}
-Filter results by provider. For example, appending `&filterProviders=GCP` only returns assets belonging to provider `GCP`. _Requires cloud configuration._
-{% endswagger-parameter %}
-
-{% swagger-parameter in="path" name="filterProviderIDs" type="string" required="false" %}
-Filter results by provider ID individual to each cloud asset. For examples, go to the Assets page, select Breakdown by Item, and see the Provider ID column. _Requires cloud configuration._
-{% endswagger-parameter %}
-
-{% swagger-parameter in="path" name="filterServices" type="string" required="false" %}
-Filter results by service. Examples include `Cloud Storage`, `Kubernetes`, `BigQuery`.
-{% endswagger-parameter %}
-
-{% swagger-parameter in="path" name="filterTypes" type="string" required="false" %}
-Filter results by asset type. Examples include `Cloud`, `ClusterManagement`, `Node`, `LoadBalancer`, and `Disk`.
+{% swagger-parameter in="path" name="filter" type="string" required="false" %}
+Filter your results by any category which you can aggregate by, can support multiple filterable items in the same category in a comma-separated list. For example, to filter results by clusters A and B, use `filter=cluster:clusterA,clusterB` See our [Filter Parameters](/apis/apis-overview/filters-api.md) doc for a complete explanation of how to use filters and what categories are supported.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="step" type="string" %}
 Duration of each individual data metric across the `window`. Accepts `1h`, `1d`, or `1w`. If left blank, defaults to longest step duration available based on level of granularity of data represented by `window`.
+{% endswagger-parameter %}
+
+{% swagger-response status="200: OK" description="" %}
+{% code overflow="wrap" %}
+```javascript
+  {
+    cluster: "..."  // parent cluster for asset
+    cpuCores: 1  // number of CPUs, given this is a node asset type
+    cpuCost: 0.00 // cumulative cost of CPU measured over time window
+    discount: 0.0 // discount applied to asset cost
+    end: "2020-08-21T00:00:00+0000" // end of measured time window
+    gpuCost: 0
+    key: "..."
+    name: "..."
+    nodeType: "..."
+    preemptible: 0
+    providerID: "..."
+    ramBytes: 0
+    ramCost: 0.00
+    start: "2020-08-20T00:00:00+0000"
+    adjustment: 0.00 // amount added to totalCost during reconciliation with cloud provider data
+    totalCost: 0.00 // total asset cost after applied discount
+    type: "node" // e.g. node, disk, cluster management fee, etc
+}
+```
+{% endcode %}
+{% endswagger-response %}
+{% endswagger %}
+
+{% swagger method="get" path="/assets" baseUrl="http://<your-kubecost-address>/model" summary="Assets API (Aggregator only)" %}
+{% swagger-description %}
+The Assets API retrieves backing cost data broken down by individual assets in your cluster but also provides various aggregations of this data. This version of the Assets API should only be consulted for users who have configured [Kubecost Aggregator](/install-and-configure/install/multi-cluster/federated-etl/aggregator.md)
+{% endswagger-description %}
+
+{% swagger-parameter in="path" name="window" required="true" type="string" %}
+Dictates the applicable window for measuring historical asset cost.
+{% endswagger-parameter %}
+
+{% swagger-parameter in="path" name="aggregate" type="string" required="false" %}
+Used to consolidate cost model data. Supported values are `account`, `cluster`, `project`, `providerid`, `provider`, and `type`. Passing an empty value for this parameter or none at all returns data by an individual asset. Supports multi-aggregation (aggregation fo multiple categories) in a comma separated list, such as `aggregate=account,project`.
+{% endswagger-parameter %}
+
+{% swagger-parameter in="path" name="accumulate" type="boolean" required="false" %}
+When set to `false`, this endpoint returns daily time series data vs cumulative data. Default value is `false`.
+{% endswagger-parameter %}
+
+{% swagger-parameter in="path" name="disableAdjustments" type="boolean" required="false" %}
+When set to `true`, zeros out all adjustments from cloud provider reconciliation, which would otherwise change the `totalCost`. Default value is `false`.
+{% endswagger-parameter %}
+
+{% swagger-parameter in="path" name="format" type="string" required="false" %}
+When set to `csv`, will download an accumulated version of the asset results in CSV format. By default, results will be in JSON format.
+{% endswagger-parameter %}
+
+{% swagger-parameter in="path" name="offset" type="int" required="false" %}
+Refers to the number of pages you are searching through which will increase by integers for the amount of pages you want to skip. Starting value is `0`, representing the first page of results.
+{% endswagger-parameter %}
+
+{% swagger-parameter in="path" name="limit" type="int" required="false" %}
+Refers to the number of line items per page. Pair with the `offset` parameter to filter your payload to specific sections of line items. You should also set `accumulate=true` to obtain a single list of line items, otherwise you will receive a group of line items per interval of time being sampled. Paginates by all five item types, and will provide lists for all five types.
+{% endswagger-parameter %}
+
+{% swagger-parameter in="path" name="filter" type="string" required="false" %}
+Filter your results by any category which you can aggregate by, can support multiple filterable items in the same category in a comma-separated list. For example, to filter results by clusters A and B, use `filter=cluster:clusterA,clusterB` See our [Filter Parameters](/apis/apis-overview/filters-api.md) doc for a complete explanation of how to use filters and what categories are supported.
 {% endswagger-parameter %}
 
 {% swagger-response status="200: OK" description="" %}
@@ -104,18 +132,6 @@ Acceptable formats for using `window` parameter include:
 * "today", "yesterday", "week", "month", "lastweek", "lastmonth"
 * "1586822400,1586908800", etc. (start and end unix timestamps)
 * "2020-04-01T00:00:00Z,2020-04-03T00:00:00Z", etc. (start and end UTC RFC3339 pairs)
-
-### Using filter parameters:
-
-* Optional filter parameters take the format of `&<filter>=<value>`.
-* Some filters require cloud configuration, which can be set at `<your-kubecost-address>/keyinstructions.html`
-* Multiple filter selections evaluate as ANDs. Each filter selection accepts comma-separated values that evaluate as ORs.
-  * For example, including both `filterClusters=cluster-one` and `filterNames=name1,name2` logically evaluates as `(cluster == cluster-one) && (name == name1 || name == name2)`
-* All filters are case-sensitive except for `filterTypes`
-* All filters accept wildcard filters denoted by a URL-encoded `*` suffix, except for `filterTypes` and the label key in `filterLabels`
-  * For example, `filterProviderIDs=gke%2A` will return all assets with a `gke` string prefix in its Provider ID.
-  * For example, `filterLabels=deployment%3Dkube%2A` will return all assets with `deployment` label value containing a `kube` prefix.
-* Invalid filters return no assets.
 
 ## API examples
 
@@ -539,6 +555,20 @@ Retrieve all GCP costs, aggregated by asset type, in the past five days:
 {% endcode %}
 {% endtab %}
 {% endtabs %}
+
+## Querying with `/topline` endpoint to view cost totals across query (Aggregator only)
+
+`/topline` is an optional API endpoint which can be added to your Assets query via `.../model/assets/topline?window=...` to provide a condensed overview of your total cost metrics including all line items sampled. You will receive a single list which sums the values per all items queried (`totalCost`), where `numResults` displays the total number of items sampled. 
+
+```
+    "code": 200,
+    "data": {
+        "totalCost": ,
+        "adjustment": ,
+        "numResults": 
+    }
+}
+```
 
 ## Enable CPU and RAM cost breakdown
 
