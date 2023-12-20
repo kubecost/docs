@@ -163,9 +163,7 @@ If `true`, pulls data from the Assets cache and corrects prices of Allocations a
 
 {% swagger-response status="200: OK" description="" %}
 <pre class="language-json"><code class="lang-json"><strong>{
-</strong>    
-{
-    "code": 200,
+</strong>    "code": 200,
     "data": {
         "step": ,
         "sets": [
