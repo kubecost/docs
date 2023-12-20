@@ -14,7 +14,7 @@ The Allocation API retrieves cost allocation information for any Kubernetes conc
 
 ### [Allocation Trends API](allocation-trends-api.md)
 
-The Trends API compares cost usage between two windows of the same duration and presents a percentage value showing the change in cost.
+The Allocation Trends API compares cost usage between two windows of the same duration and presents a percentage value showing the change in cost.
 
 ### [**Assets API**](assets-api.md)
 
@@ -27,6 +27,10 @@ The Asset Diff API compares two asset sets between two windows of the same durat
 ### [Cloud Costs API](cloud-cost-api.md)
 
 The Cloud Costs API retrieves cloud cost data from cloud providers by reading cost and usage reports.
+
+### [Cloud Cost Trends API](cloud-cost-api/cloud-cost-trends-api.md)
+
+The Cloud Cost Trends API compares cost usage between two windows of the same duration and presents a percentage value showing the change in cloud costs.
 
 ## Governance APIs
 
