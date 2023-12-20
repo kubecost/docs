@@ -71,7 +71,8 @@ Dictates the applicable window for measuring historical asset cost.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="aggregate" type="string" required="false" %}
-Used to consolidate cost model data. Supported values are `account`, `cluster`, `project`, `providerid`, `provider`, and `type`. Passing an empty value for this parameter or none at all returns data by an individual asset. Supports multi-aggregation (aggregation fo multiple categories) in a comma separated list, such as `aggregate=account,project`.
+Used to consolidate cost model data. Supported values are `account`, `cluster`, `project`, `providerid`, `provider`, and `type`. Passing an empty value for this parameter or none at all returns data by an individual asset. Supports multi-aggregation (aggregation of multiple categories) in a comma separated list, such as `aggregate=account,project`.
+
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="accumulate" type="boolean" required="false" %}
