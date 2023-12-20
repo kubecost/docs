@@ -2,6 +2,10 @@
 
 Welcome to the Kubecost API library! This directory will show you how Kubecost APIs can assist in monitoring, maintaining, and optimizing your cloud spend. Learn also how Kubecost APIs power different features of the UI below.
 
+{% hint style="info" %}
+Throughout our API documentation, you may see two separate endpoints for the same API, with one labeled 'Aggrgegator-only', or a subsection in an article for Aggregator-only parameters. Those endpoints or parameters are only for users who have configured [Kubecost Aggregator](/install-and-configure/install/multi-cluster/federated-etl/aggregator.md). If you do not have Aggregator configured in your environment, do not use those Aggregator endpoints or parameters.
+{% endhint %}
+
 ## Monitoring APIs
 
 ### [**Allocation API**](api-allocation.md)
@@ -59,7 +63,7 @@ Many, but not all, Kubecost APIs power different features in the Kubecost UI. Th
 | API Name                                          | UI Equivalent                                                                                                                                    |
 | ------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
 | Allocation API                                    | [Allocations dashboard](/using-kubecost/navigating-the-kubecost-ui/cost-allocation/README.md)                                                |
-| Allocation Trends API                             | Allocations dashboard, Total cost column percentage                                                                                              |
+| Allocation/Cloud Cost Explorer Trends API         | Allocations/Cloud Cost Explorer dashboards, Total cost column percentage                                                                                              |
 | Assets API                                        | [Assets dashboard](/using-kubecost/navigating-the-kubecost-ui/assets.md)                                                              |
 | Cloud Cost API                                    | [Cloud Costs Explorer dashboard](/using-kubecost/navigating-the-kubecost-ui/cloud-costs-explorer.md)                                  |
 | Budget API                                        | [Budgets dashboard](/using-kubecost/navigating-the-kubecost-ui/budgets.md)                                                            |
