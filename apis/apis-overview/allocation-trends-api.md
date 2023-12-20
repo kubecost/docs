@@ -113,7 +113,7 @@ Determines order sequence of queried items via comma-separated list. Dependent o
 Field by which to aggregate the results. Accepts: `cluster`, `namespace`, `controllerKind`, `controller`, `service`, `node`, `pod`, `label:<name>`, and `annotation:<name>`. Also accepts comma-separated lists for multi-aggregation, like `namespace,label:app`.
 {% endswagger-parameter %}
 
-% swagger-parameter in="path" name="accumulate" type="boolean" required="false" %}
+{% swagger-parameter in="path" name="accumulate" type="boolean" required="false" %}
 When set to `false`, returns daily time series data vs. cumulative data. Default is `true`.
 {% endswagger-parameter %}
 
