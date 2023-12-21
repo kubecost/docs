@@ -11,7 +11,7 @@ Creates a recurring budget rule or updates a recurring budget rule when provided
 Name of the budget rule
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="values" type="map[string][]string" required="true" %}
+{% swagger-parameter in="body" name="values" type="string" required="true" %}
 Used for specifying the group and name where the budget rule is applied to in the form of two linked values. Accepts `namespace` and `cluster` for the first value, followed by the individual item. For example, when applying a budget rule to a namespace named `kubecost`, this parameter is configured as `values=namespace:kubecost`.
 {% endswagger-parameter %}
 
@@ -28,10 +28,10 @@ The budget limit value. Currency can be configured in _Settings >_ Cloud Cost Se
 {% endswagger-parameter %}
 
 {% swagger-parameter in="body" name="id" type="string" %}
-Only should be used when updating a budget rule, ID of the budget rule being modified. For more info, see the [Using the `id` parameter](budget-api.md#using-the-ip-parameter) section below.
+Only should be used when updating a budget rule; ID of the budget rule being modified. For more info, see the [Using the `id` parameter](budget-api.md#using-the-ip-parameter) section below.
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="action" type="[]*BudgetAction" required="false" %} Optional configurations for providing visibility when your budget exceeds a specified percentage threshold. This parameter can generate emails, and Slack or Microsoft Teams messages to suit your work environment. For more information, see the [Using Budget Actions](budget-api.md#Using Budget Actions) section below.
+{% swagger-parameter in="body" name="action" type="string" required="false" %} Optional configurations for providing visibility when your budget exceeds a specified percentage threshold. This parameter can generate emails, and Slack or Microsoft Teams messages to suit your work environment. For more information, see the [Using Budget Actions](budget-api.md#using-budget-actions) section below.
 {% endswagger-parameter %}
 
 {% swagger-response status="200: OK" description="" %}
@@ -61,10 +61,6 @@ Only should be used when updating a budget rule, ID of the budget rule being mod
                     "lastFired": ""
                 }
             ],
-            "resources": {
-                "namespaces": [],
-                "clusters": []
-            },
             "window": {
                 "start": "",
                 "end": ""
@@ -107,10 +103,6 @@ Lists all existing recurring budget rules
                     "lastFired": ""
                 }
             ],
-            "resources": {
-                "namespaces": [],
-                "clusters": []
-            },
             "window": {
                 "start": "",
                 "end": ""

@@ -17,6 +17,7 @@ Aggregator is currently free for all Enterprise users to configure, and is alway
 * Aggregator can only be configured in a Federated ETL environment
 * Must be using v1.107.0 of Kubecost or newer
 * Your _values.yaml_ file must have set `kubecostDeployment.queryServiceReplicas` to its default value `0`.
+* You must have your context set to your primary cluster. Kubecost Aggregator cannot be deployed on secondary clusters.
 
 ### Tutorial
 
