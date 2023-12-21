@@ -1,6 +1,6 @@
 # Budget API (v2)
 
-The Budget API allows you to create, update, and delete recurring budget rules to control your Kubernetes spending. Weekly and monthly budgets can be established to set limits on cost spend, with the option to configure alerts for reaching specified budget thresholds via email, Slack, or Microsoft Teams.
+The Budget API allows you to create, update, and delete recurring budget rules to control your Kubernetes spending. Weekly and monthly budgets can be established on namespaces, clusters, and labels to set limits on cost spend, with the option to configure alerts for reaching specified budget thresholds via email, Slack, or Microsoft Teams.
 
 {% swagger method="post" path="/model/budget" baseUrl="http://<your-kubecost-address>" summary="Set recurring budget rule or update existing rule" %}
 {% swagger-description %}
@@ -12,7 +12,7 @@ Name of the budget rule
 {% endswagger-parameter %}
 
 {% swagger-parameter in="body" name="values" type="string" required="true" %}
-Used for specifying the group and name where the budget rule is applied to in the form of two linked values. Accepts `namespace` and `cluster` for the first value, followed by the individual item. For example, when applying a budget rule to a namespace named `kubecost`, this parameter is configured as `values=namespace:kubecost`.
+Used for specifying the group and name where the budget rule is applied to in the form of a key-value pair. Accepts `namespace`, `cluster`, or `label` for the first value, followed by the corresponding item. For example, when applying a budget rule to a namespace named `kubecost`, this parameter is configured as `values=namespace:kubecost`.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="body" name="interval" type="string" required="true" %}
