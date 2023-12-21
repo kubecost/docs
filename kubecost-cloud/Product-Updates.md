@@ -1,5 +1,19 @@
 # Kubecost Cloud Product Updates
 
+## 12/21/23
+
+### New Features:
+* Cluster Status Alerts: get notified when a Kubecost Cloud agent stops reporting
+* New filtering options added on the Allocations page: Department/Environment/Owner/Product/Team. Filtering by any of the properties listed above is equivalent to filtering by the following allocation label names: “department”, “env”, “owner”, “app”, “team”. The label names are not customizable at the moment.
+
+### Bug Fixes:
+* Fixed issue where Cloud Cost reports could not be created directly from the Reports page
+* Fixed issue where Allocation aggregation by Service would not return the expected results
+* Fixed issue where Allocation aggregation by Department/Environment/Owner/Product/Team would not return the expected results. The aggregation options listed above will now aggregate by the following allocation label names: “department”, “env”, “owner”, “app”, “team”. The label names are not customizable at the moment.
+
+
+
+
 ## 12/8/23
 
 ### New features:
