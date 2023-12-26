@@ -22,9 +22,10 @@ Integrating your AWS account with Kubecost may be a complicated process if you a
 
 ### Step 1: Setting up a CUR
 
-Follow [these steps](https://docs.aws.amazon.com/cur/latest/userguide/cur-create.html) to set up a CUR using the settings below.
+Follow [these steps](https://docs.aws.amazon.com/cur/latest/userguide/cur-create.html) to set up a Legacy CUR using the settings below.
 
-* For time granularity, select _Daily_.
+* Select the _Legacy CUR export_ type.
+*  For time granularity, select _Daily_.
 * Select the checkbox to enable _Resource IDs_ in the report.
 * Select the checkbox to enable _Athena integration_ with the report.
 
