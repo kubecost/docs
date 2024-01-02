@@ -44,7 +44,7 @@ Required parameter. Duration of time over which to calculate usage. Supports day
 {% endswagger-parameter %}
 
 {% swagger-parameter in="query" name="filter" type="string" required="false" %}
-A filter to reduce the set of workloads for which recommendations will be calculated. See [Filter parameters](filters-api.md) for syntax. V1 filters are also supported.
+A filter to reduce the set of workloads for which recommendations will be calculated. See our [Filter Parameters](filters-api.md) doc for syntax. v1 filters are also supported.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="query" name="sortBy" type="string" required="false" %}
@@ -105,6 +105,18 @@ curl -G \
   -d 'window=3d' \
   --data-urlencode 'filter=namespace:"kubecost"+container:"cost-model"' \
   ${KUBECOST_ADDRESS}/savings/requestSizingV2
+```
+
+## Querying with `/topline` endpoint to view cost totals across query (Aggregator only)
+
+`/topline` is an optional API endpoint which can be added to your right-sizing query via `.../savings/RequestSizingV2/topline...` to provide a condensed overview of all items sampled. `TotalMonthlySavings` is the total estimated savings value from adopting right-sizing recommendations. `Count` refers to the number of items sampled. `Recommendations` should return `null`, as it is unable to provide a universal right-sizing recommendation.
+
+```
+{
+    "TotalMonthlySavings": ,
+    "Count": ,
+    "Recommendations": null 
+}
 ```
 
 ## Recommendation methodology

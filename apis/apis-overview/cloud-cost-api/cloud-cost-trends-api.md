@@ -3,14 +3,14 @@
 {% hint style="warning" %} This feature is only available in [Kubecost Aggregator](../../../install-and-configure/install/multi-cluster/federated-etl/aggregator.md).
 {% endhint %}
 
-{% swagger method="get" path="/cloudCost/view/trends" baseUrl="http://<your-kubecost-address>/model" summary="Trends API" %} {% swagger-description %} Analyzes change in cloud costs relative to a previous window of the same size {% endswagger-description %}
+{% swagger method="get" path="/cloudCost/view/trends" baseUrl="http://<your-kubecost-address>/model" summary="Cloud Cost Trends API" %} {% swagger-description %} Analyzes change in cloud costs relative to a previous window of the same size {% endswagger-description %}
 
 {% swagger-parameter in="path" name="window" required="true" type="string" %}
 Duration of time over which to query. Compares cost usage of window to cost usage window of equal size directly preceding it. Accepts all standard Kubecost window formats (See our doc on using [the `window` parameter](https://docs.kubecost.com/apis/apis-overview/assets-api#using-window-parameter)).
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="names" required="true" type="string" %}
-Determines order sequence of queried items via comma-separated list. Dependent on the value of `aggregateBy` to list items. See more [below](cloud-cost-trends-api.md#using-the-names-parameter).
+Determines order sequence of queried items via comma-separated list. Dependent on the value of `aggregate` to list items. See more [below](cloud-cost-trends-api.md#using-the-names-parameter).
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="aggregate" type="string" required="false" %}
