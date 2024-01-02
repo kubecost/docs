@@ -182,7 +182,7 @@
     * [Kubecost Cloud: Cluster Right-Sizing Recommendations](kubecost-cloud/using-the-kubecost-cloud-ui/kubecost-cloud-cluster-right-sizing.md)
     * [Kubecost Cloud: Request Right-Sizing Recommendations](kubecost-cloud/using-the-kubecost-cloud-ui/kubecost-cloud-request-right-sizing.md)
     * [Kubecost Cloud: Abandoned Workloads](kubecost-cloud/using-the-kubecost-cloud-ui/kubecost-cloud-abandoned-workloads.md)
-* [Kubecost Cloud Product Updates](kubecost/docs/kubecost-cloud/product-updates.md)
+* [Kubecost Cloud Product Updates](kubecost-cloud/product-updates.md)
 * [Receiving Kubecost Cloud Support](kubecost-cloud/receiving-kubecost-cloud-support.md)
 
 ## Troubleshooting
