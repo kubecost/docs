@@ -21,25 +21,42 @@ The queries make use of the following columns from Athena:
 
 ### On-Demand/Savings plan query
 
-This query is grouped by six columns: `line_item_usage_start_date`, `line_item_usage_end_date`, `line_item_resource_id`, `line_item_line_item_type`, `line_item_usage_type` and `line_item_product_code`. The columns `line_item_unblended_cost` and `savings_plan_savings_plan_effective_cost` are summed on this grouping. Finally, the query filters out rows that are not within a given date range, have a missing `line_item_resource_id`, and have a `line_item_product_code` not equal to "AmazonEC2". The grouping has three important aspects, the timeframe of the line items, the resource as defined by the resource id, and the usage type, which is later used to determine the proper cost of the resources as it was used. This means that line items are grouped according to the resource, the time frame of the usage, and the rate at which the usage was charged.
+This query is grouped by six columns:
+
+1. `line_item_usage_start_date`
+2. `line_item_usage_end_date`
+3. `line_item_resource_id`
+4. `line_item_line_item_type`
+5. `line_item_usage_type`
+6. `line_item_product_code`
+
+The columns `line_item_unblended_cost` and `savings_plan_savings_plan_effective_cost` are summed on this grouping. Finally, the query filters out rows that are not within a given date range, have a missing `line_item_resource_id`, and have a `line_item_product_code` not equal to "AmazonEC2". The grouping has three important aspects, the timeframe of the line items, the resource as defined by the resource id, and the usage type, which is later used to determine the proper cost of the resources as it was used. This means that line items are grouped according to the resource, the time frame of the usage, and the rate at which the usage was charged.
 
 ### Reservation query
 
-The reservation query is grouped on five columns: `line_item_usage_start_date`, `line_item_usage_end_date`, `reservation_reservation_a_r_n`, `line_item_resource_id` and `line_item_product_code`. The query is summed on the `reservation_effective_cost` and filtered by the date window, for missing `reservation_reservation_a_r_n` values and also removes line items with `line_item_product_code` not equal to "AmazonEC2". This grouping is affectively on resource id by timeframe removing all non-reservation line items
+The reservation query is grouped on five columns:
+
+1. `line_item_usage_start_date`
+2. `line_item_usage_end_date`
+3. `reservation_reservation_a_r_n`
+4. `line_item_resource_id`
+5. `line_item_product_code`
+
+The query is summed on the `reservation_effective_cost` and filtered by the date window, for missing `reservation_reservation_a_r_n` values and also removes line items with `line_item_product_code` not equal to "AmazonEC2". This grouping is on resource id by timeframe removing all non-reservation line items.
 
 ## Processing query results
 
 The on-demand query is categorized into different resource types: compute, network, storage, and others. The network is identified by the presence of the "byte" in the `line_item_usage_type`. Compute and storage are identified by the presence of "i-" and "vol-" prefixes in `line_item_resource_id` respectively. Non compute values are removed from the results. Out of the two costs aggregated by this query the correct one to use is determined by the `line_item_line_item_type`, if it has a value of "SavingsPlanCoveredUsage", then the `savings_plan_savings_plan_effective_cost` is used as the cost, and if not then the `line_item_unblended_cost` is used.
 
-In the reservation query, all of the results are of the compute category and there is only the `reservation_effective_cost` to use as a cost
+In the reservation query, all of the results are of the compute category and there is only the `reservation_effective_cost` to use as a cost.
 
 These results are then merged into one set, with the provider id used to associate the cost with other information about the resource.
 
 ## Why doesn't this match the AWS Cost Explorer?
 
-There are several different ways to look at your node cost data. The default for the cost explorer is "unblended" but it makes the most sense from an allocation perspective to use the "amortized" rates. Be sure "amortized" is selected when looking at cost data. Here's an example of how they can vary dramatically on our test cluster.
+There are several different ways to look at your node cost data. The default for the cost explorer is _Unblended_" but it makes the most sense from an allocation perspective to use the amortized rates. Be sure _Amortized costs_ is selected when looking at cost data. Here's an example of how they can vary dramatically on our test cluster.
 
-The t2-mediums here are covered by a savings plan. Unblended, we're only being charged $0.06/day for two of them.
+The t2-mediums here are covered by a savings plan. Unblended, the cost is only $0.06/day for two.
 
 ![Unblended node costs](/images/aws-node-price-unblended.png)
 
