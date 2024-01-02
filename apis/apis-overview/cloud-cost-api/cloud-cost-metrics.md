@@ -150,21 +150,17 @@ Kubecost uses Net Cost.
 
 </details>
 
-## Kubernetes Clusters
+## Kubernetes clusters
 
-To calculate the `K8 Utilization`, Kubecost first must determine if a resources is part of a Kubernetes cluster or not.
+To calculate the 'K8s Utilization', Kubecost must first determine if a resources is part of a Kubernetes cluster or not.
 
-If a tag or label in the list below is present on the billing export, Kubecost will consider those costs part of the `K8 Utilization` calculation. This will not always be 100% accurate in all situations.
+If a tag or label in the list below is present on the billing export, Kubecost will consider those costs part of the 'K8s Utilization' calculation. This will not always be 100% accurate in all situations.
 
 <details>
 
 <summary>AWS</summary>
 
-In AWS, Kubecost will identify the line item in the bill as a Kubernetes resource if
-
-* `line_item_product_code` is `AmazonEKS`
-
-or one of the following label keys is present:
+In AWS, Kubecost will identify the line item in the bill as a Kubernetes resource if `line_item_product_code` is `AmazonEKS`, or one of the following label keys is present:
 
 * `resource_tags_aws_eks_cluster_name`
 * `resource_tags_user_eks_cluster_name`
@@ -195,6 +191,6 @@ The billing export has a tags column with a JSON string of key values pairs. Kub
 
 * `aks-managed`
 * `kubernetes.io-created`
-* `k8s-azure-created`\\
+* `k8s-azure-created`
 
 </details>

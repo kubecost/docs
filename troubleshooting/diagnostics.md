@@ -29,7 +29,7 @@ Node exporter metrics are used for the following features:
 These metrics are not used in the core Assets and Allocation and therefore can be considered optional. Learn how to disable [here](https://docs.kubecost.com/using-kubecost/getting-started#using-an-existing-node-exporter).
 
 {% hint style="warning" %}
-If any of the above diagnostic tests fail, view the [How to Troubleshoot Missing Metrics](diagnostics.md#how-to-troubleshoot-missing-metrics) section below.
+If any of the above diagnostic tests fail, view the [How to Troubleshoot Missing Metrics](diagnostics.md#troubleshooting-missing-metrics) section below.
 {% endhint %}
 
 #### Expected kube-state-metrics version found
@@ -104,11 +104,7 @@ cAdvisor - kubelet v1.11.0 (May 18)
 
 ### Step 2: Confirm pod(s) are currently running
 
-Confirm that each pod is in a `Running` state for the particular metric exporter. For example, you can confirm that a `kube-state-metrics` pod is Running with the following command:
-
-```bash
-kubectl get pod -l app.kubernetes.io/name=kube-state-metrics --all-namespaces
-```
+Confirm that each pod is in a `Running` state for the particular metric exporter.
 
 ### Step 3: Confirm the required Prometheus Targets are available
 

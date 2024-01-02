@@ -2,7 +2,7 @@
 
 The Cloud Cost Explorer is a dashboard which provides visualization and filtering of your cloud spending. This dashboard includes the costs for all assets in your connected cloud accounts by pulling from those providers' Cost and Usage Reports (CURs) or other cloud billing reports.
 
-![Cloud Cost Explorer dashboard](<../../.gitbook/assets/image (1) (1).png>)
+![Cloud Cost Explorer dashboard](/.gitbook/assets/cloud-cost-explorer.png)
 
 {% hint style="info" %}
 If you haven't performed a successful billing integration with a cloud service provider, the Cloud Cost Explorer won't have cost data to display. Before using the Cloud Cost Explorer, make sure to read our [Cloud Billing Integrations](/install-and-configure/install/cloud-integration/README.md) guide to get started, then see our [specific articles](/install-and-configure/install/cloud-integration/README.md#adding-a-cloud-integration) for the cloud service providers you want to integrate with.
@@ -97,8 +97,8 @@ The Cost Metric dropdown allows you to adjust the displayed cost data based on d
 
 Your cloud cost spending will be displayed across your dashboard with several key metrics:
 
-* K8 Utilization: Percent of cost which can be traced back to Kubernetes cluster
+* K8s Utilization: Percent of cost which can be traced back to Kubernetes cluster
 * Total cost: Total cloud spending
 * Sum of Sample Data: Only when aggregating by _Item_. Only lists the top cost for the timeframe selected. Displays that may not match your CUR.
 
-All line items, after aggregation, should be selectable, allowing you to drill down to further analyze your spending. For example, when aggregating cloud spend by _Service_, you can select an individual cloud service (AmazonEC2, for example) and view spending, K8 utilization, and other details unique to that item.
+All line items, after aggregation, should be selectable, allowing you to drill down to further analyze your spending. For example, when aggregating cloud spend by _Service_, you can select an individual cloud service (AmazonEC2, for example) and view spending, K8s utilization, and other details unique to that item.

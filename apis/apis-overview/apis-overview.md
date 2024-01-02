@@ -2,6 +2,10 @@
 
 Welcome to the Kubecost API library! This directory will show you how Kubecost APIs can assist in monitoring, maintaining, and optimizing your cloud spend. Learn also how Kubecost APIs power different features of the UI below.
 
+{% hint style="info" %}
+Throughout our API documentation, you may see two separate endpoints for the same API, with one labeled 'Aggrgegator-only', or a subsection in an article for Aggregator-only parameters. Those endpoints or parameters are only for users who have configured [Kubecost Aggregator](/install-and-configure/install/multi-cluster/federated-etl/aggregator.md). If you do not have Aggregator configured in your environment, do not use those Aggregator endpoints or parameters.
+{% endhint %}
+
 ## Monitoring APIs
 
 ### [**Allocation API**](api-allocation.md)
@@ -10,7 +14,7 @@ The Allocation API retrieves cost allocation information for any Kubernetes conc
 
 ### [Allocation Trends API](allocation-trends-api.md)
 
-The Trends API compares cost usage between two windows of the same duration and presents a percentage value showing the change in cost.
+The Allocation Trends API compares cost usage between two windows of the same duration and presents a percentage value showing the change in cost.
 
 ### [**Assets API**](assets-api.md)
 
@@ -23,6 +27,10 @@ The Asset Diff API compares two asset sets between two windows of the same durat
 ### [Cloud Costs API](cloud-cost-api.md)
 
 The Cloud Costs API retrieves cloud cost data from cloud providers by reading cost and usage reports.
+
+### [Cloud Cost Trends API](cloud-cost-api/cloud-cost-trends-api.md)
+
+The Cloud Cost Trends API compares cost usage between two windows of the same duration and presents a percentage value showing the change in cloud costs.
 
 ## Governance APIs
 
@@ -59,7 +67,7 @@ Many, but not all, Kubecost APIs power different features in the Kubecost UI. Th
 | API Name                                          | UI Equivalent                                                                                                                                    |
 | ------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
 | Allocation API                                    | [Allocations dashboard](/using-kubecost/navigating-the-kubecost-ui/cost-allocation/README.md)                                                |
-| Allocation Trends API                             | Allocations dashboard, Total cost column percentage                                                                                              |
+| Allocation/Cloud Cost Explorer Trends API         | Allocations/Cloud Cost Explorer dashboards, Total cost column percentage                                                                                              |
 | Assets API                                        | [Assets dashboard](/using-kubecost/navigating-the-kubecost-ui/assets.md)                                                              |
 | Cloud Cost API                                    | [Cloud Costs Explorer dashboard](/using-kubecost/navigating-the-kubecost-ui/cloud-costs-explorer.md)                                  |
 | Budget API                                        | [Budgets dashboard](/using-kubecost/navigating-the-kubecost-ui/budgets.md)                                                            |
