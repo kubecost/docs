@@ -6,7 +6,7 @@ Kubecost Free can now be installed on an unlimited number of individual clusters
 
 ## Primary and secondary clusters
 
-In an Enterprise multi-cluster setup, the UI is accessed through a designated primary cluster. All other clusters in the environment send metrics to a central object-store with a lightweight agent (aka secondary clusters). The primary cluster is designated by setting the Helm flag `.Values.federatedETL.primaryCluster=true`, which instructs this cluster to read from the `combined` folder that was processed by the federator. This cluster will consume additional resources to run the Kubecost UI and backend.
+In an Enterprise multi-cluster setup, the UI is accessed through a designated primary cluster. All other clusters in the environment send metrics to a central object-store with a lightweight agent (aka secondary clusters). The primary cluster is the one running [Aggregator](/install-and-configure/install/multi-cluster/federated-etl/aggregator.md). This cluster will consume additional resources to run the Kubecost UI and backend.
 
 {% hint style="info" %}
 As of Kubecost 1.108, agent health is monitored by a [diagnostic pod](multi-cluster-diagnostics.md) that collects information from the local cluster and sends it to an object-store. This data is then processed by the Primary cluster and accessed via the UI and API.
@@ -22,10 +22,9 @@ Because the UI is only accessible through the primary cluster, Helm flags relate
 This feature is only supported for Kubecost Enterprise.
 {% endhint %}
 
-There are two primary methods to aggregate all cluster information back to a single Kubecost UI:
-
-* [Kubecost ETL Federation (preferred)](/install-and-configure/install/multi-cluster/federated-etl/federated-etl.md)
-* [Thanos Federation](/install-and-configure/install/multi-cluster/thanos-setup/thanos-setup.md)
+There are two methods to aggregate all cluster information back to a single Kubecost UI:
+* Preferred: [Kubecost ETL Federation](/install-and-configure/install/multi-cluster/federated-etl/federated-etl.md)
+* Deprecated: [Thanos Federation](/install-and-configure/install/multi-cluster/thanos-setup/thanos-setup.md)
 
 Both methods allow for greater compute efficiency by running the most resource-intensive workloads on a single primary cluster.
 
@@ -35,8 +34,10 @@ The below diagrams highlight the two architectures:
 
 **Kubecost ETL Federation (Preferred)**
 
+TODO: Update this diagram
 ![ETL Federation Overview](/images/kubecost-ETL-Federated-Architecture.png)
 
 **Kubecost Thanos Federation**
 
+TODO: Update this diagram
 ![Thanos Overview](/images/thanos-architecture.png)
