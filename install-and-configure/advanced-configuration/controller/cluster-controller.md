@@ -46,7 +46,7 @@ To use [this setup script](https://github.com/kubecost/cluster-turndown/blob/mas
 * **Project ID**: The GCP project identifier. Can be found via: `gcloud config get-value project`
 * **Namespace**: The namespace which Kubecost will be installed, e.g `kubecost`
 * **Service Account Name**: The name of the service account to be created. Should be between 6 and 20 characters, e.g. `kubecost-controller`
-* **Secret Name**: This should always be set to `cluster-controller-service-key`, which is the secret name mounted by the Kubecost Helm chart.
+* **Secret Name**: The Kubecost will automatically look for a secret called `cluster-controller-service-key`. This can be changed by setting `.Values.clusterController.secretName`.
 
 </details>
 
@@ -59,7 +59,7 @@ For EKS cluster provisioning, if using `eksctl`, make sure that you use the `--m
 Create a new User with `AutoScalingFullAccess` permissions, plus the following EKS-specific permissions:
 
 {% code overflow="wrap" %}
-```
+```json
 {
     "Effect": "Allow",
     "Action": [
@@ -108,13 +108,14 @@ $ kubectl create secret generic cluster-controller-service-key -n <NAMESPACE> --
 
 Here is a full example of this process using the AWS CLI and a simple IAM user (requires `jq`):
 
-```
+```bash
+NEW_IAM_USER
 aws iam create-user \
-    --user-name "<your user>"
+    --user-name $NEW_IAM_USER
 
 aws iam attach-user-policy \
-    --user-name "<your user>" \
-    --policy-arn "arn:aws:iam:$(aws sts get-caller-identity | jq -r '.Account'):aws:policy/AutoScalingFullAccess"
+    --user-name $NEW_IAM_USER \
+    --policy-arn arn:aws:iam::aws:policy/AutoScalingFullAccess
 
 read -r -d '' EKSPOLICY << EOM
 {
@@ -151,12 +152,12 @@ read -r -d '' EKSPOLICY << EOM
 EOM
 
 aws iam put-user-policy \
-    --user-name "<your user>" \
+    --user-name $NEW_IAM_USER \
     --policy-name "eks-permissions" \
     --policy-document "${EKSPOLICY}"
 
 aws iam create-access-key \
-    --user-name "<your user>" \
+    --user-name $NEW_IAM_USER --output json \
     > /tmp/aws-key.json
 
 AAKI="$(jq -r '.AccessKey.AccessKeyId' /tmp/aws-key.json)"
@@ -177,7 +178,7 @@ kubectl create secret generic \
 Create a new user or IAM role with `AutoScalingFullAccess` permissions. JSON definition of those permissions:
 
 {% code overflow="wrap" %}
-```
+```json
 {
     "Version": "2012-10-17",
     "Statement": [
@@ -236,7 +237,7 @@ Create a new user or IAM role with `AutoScalingFullAccess` permissions. JSON def
 
 Create a new file, _service-key.json_, and use the access key ID and secret access key to fill out the following template:
 
-```
+```json
 {
     "aws_access_key_id": "<ACCESS_KEY_ID>",
     "aws_secret_access_key": "<SECRET_ACCESS_KEY>"
@@ -259,7 +260,7 @@ You can now enable the Cluster Controller in the Helm chart by finding the `clus
 
 ```yaml
 clusterController:
-    enabled: true
+  enabled: true
 ```
 
 You may also enable via `--set` when running Helm install:
