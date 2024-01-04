@@ -29,7 +29,7 @@ Alternatively, the most common configurations can be found in our [poc-common-co
 The federated ETL is composed of three types of clusters.
 
 * **Federated Clusters**: The clusters which are being federated (clusters whose data will be combined and viewable at the end of the federated ETL pipeline). These clusters upload their ETL files after they have built them to Federated Storage.
-* **Primary Cluster**: A cluster where you can see the total Federated data that was combined from your Federated Clusters. These clusters use [Aggregator](/install-and-configure/install/multi-cluster/aggregator.md) to read from combined storage and serve queries on the combined data.
+* **Primary Cluster**: A cluster where you can see the total Federated data that was combined from your Federated Clusters. These clusters use [Aggregator](/install-and-configure/install/multi-cluster/federated-etl/aggregator.md) to read from combined storage and serve queries on the combined data.
 
 These cluster designations can overlap, in that some clusters may be several types at once. A cluster that is a Federated Cluster and Primary Cluster will perform the following functions:
 
@@ -107,7 +107,7 @@ federatedETL:
 
 In Kubecost, the `Primary Cluster` serves the UI and API endpoints as well as reconciling cloud billing (cloud-integration).
 
-1. Aggregator must be set up in a [different configuration](/install-and-configure/install/multi-cluster/aggregator.md) than the default.
+1. Aggregator must be set up in a [different configuration](/install-and-configure/install/multi-cluster/federated-etl/aggregator.md) than the default.
 
 ### Step 4: Verifying successful configuration
 
