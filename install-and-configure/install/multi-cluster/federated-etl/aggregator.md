@@ -2,7 +2,7 @@
 
 Aggregator is the primary query backend for Kubecost. It is enabled in all
 configurations of Kubecost. In a default installation, it runs within the
-cost-analyzer Pod, but in a multi-cluster installation of Kubecost some settings
+cost-analyzer pod, but in a multi-cluster installation of Kubecost, some settings
 must be changed. Multi-cluster Kubecost uses the [Federated
 ETL](federated-etl.md) configuration without Thanos (replacing the
 [Federator](federated-etl.md#other-components) component).
