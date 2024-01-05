@@ -32,6 +32,6 @@ You can define global recipients by selecting _Edit_ in the Global Recipients bo
 
 ## Cluster Status Alerts
 
-Cluster Status Alerts are unique and easy-to-generate alerts which will provide notice if there as a detected error with data coming from your cluster(s) to Kubecost.
+Cluster Status notifications, if enabled, provide notice if and when the cluster agent(s) installed have stopped reporting data to Kubecost Cloud. 
 
 To configure, select _Add_ in the Cluster Status Alerts box. The 'Cluster Status' slide panel opens. Provide any Slack/Microsoft Teams webhooks or email addresses to which you want the alert sent. Confirm by selecting _Enable_.
