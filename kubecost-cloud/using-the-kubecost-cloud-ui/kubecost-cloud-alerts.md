@@ -19,7 +19,7 @@ To begin, select _Create Alert_. The 'Create New Alert' slide panel opens. Provi
 * Cost Threshold (%): Percent change to trigger alert. Must be configured as a negative value to detect sudden decreases in spend.
 * Aggregation: The Kubernetes object type to monitor spend for.
 * Filter: Optional, filter to a specific selected Kubernetes object.
-* Recipients: Choose which platform(s) you want your alert sent through. Kubecost Alerts can be sent via Slack/Microsoft Teams webhook URLs, or by email. All three platforms do not need values provided for them, but may trigger [global recipients](#global-recipients) if left blank (see below).
+* Recipients: Choose which platform(s) you want your alert sent through. Kubecost Alerts can be sent via Slack/Microsoft Teams webhook URLs, or by email. All three platforms do not need values provided for them, but may trigger global recipients if left blank (see below).
 
 Before you finalize your alert, you can select _Test Alert_, which will send a test alert across the provided webhooks/emails. This is useful for ensuring your alert has been configured correctly. If the alert was sent successfully, you can finalize your changes by selecting _Submit_. Your alert will now appear on the Alerts page, and can be tested, edited, or deleted at any time by selecting the corresponding icons in your alert's line.
 
