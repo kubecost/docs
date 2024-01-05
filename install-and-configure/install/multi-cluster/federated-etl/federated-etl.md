@@ -6,7 +6,7 @@ a version of Kubecost before v2.0, please refer to a version of this
 documentation before January, 2024.
 {% endhint %}
 
-Federated extract, transform, load (ETL) the method to aggregate all cluster information back to a single display described in our [Multi-Cluster](/install-and-configure/install/multi-cluster/multi-cluster.md#enterprise-federation) doc. Federated ETL gives teams the benefit of combining multiple Kubecost installations into one view.
+Federated extract, transform, load (ETL) is Kubecost's method to aggregate all cluster information back to a single display described in our [Multi-Cluster](/install-and-configure/install/multi-cluster/multi-cluster.md#enterprise-federation) doc. Federated ETL gives teams the benefit of combining multiple Kubecost installations into one view.
 
 There are two primary advantages for using ETL Federation:
 
