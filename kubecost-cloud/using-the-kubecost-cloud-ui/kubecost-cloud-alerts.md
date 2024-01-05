@@ -27,7 +27,8 @@ Before you finalize your alert, you can select _Test Alert_, which will send a t
 
 Global recipients specify a default fallback recipient for each type of message. If an alert does not define any email recipients, its messages will be sent to any emails specified in the Global Recipients email list. Likewise, if an alert does not define a webhook, its messages will be sent to the webhook, if one is present. Alerts that do define recipients will ignore the global setting for recipients of that type.
 
-You can define global recipients by selecting _Edit_ in the Global Recipients box, then selecting the desired platform type and providing a corresponding vlaue. Confirm by selecing _Save_. You can only provide one webhook per platform as a global recipient.
+You can define global recipients by selecting _Edit_ in the Global Recipients box, then selecting the desired platform type and providing a corresponding value. Confirm by selecting _Save_. You can only provide one webhook per platform as a global recipient.
+
 
 ## Cluster Status Alerts
 
