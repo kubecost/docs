@@ -1,9 +1,5 @@
 # Actions
 
-{% hint style="warning" %}
-Actions is currently in beta. Please read the documentation carefully.
-{% endhint %}
-
 {% hint style="info" %}
 Actions is only available with a Kubecost Enterprise plan.
 {% endhint %}
