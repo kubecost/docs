@@ -12,11 +12,17 @@ Actions are only able to be applied to your primary cluster. To use Actions on a
 
 ## Enabling Kubecost Actions
 
+### Enable the Cluster Controller
+
 Before you can perform any Actions, you need to enable Kubecost's [Cluster Controller](/install-and-configure/advanced-configuration/controller/cluster-controller.md). See the Cluster Controller doc for a complete tutorial, then Kubecost Actions should be fully functional.
 
 {% hint style="warning" %}
 Some features included in Kubecost Actions are only available in GKE/EKS environments. See the Cluster Controller doc for more clarity on which features you will have access to after enabling the Cluster Controller.
 {% endhint %}
+
+### Enable experimental features
+
+In order to receive access to two specific Kubecost Actions, Guided Sizing and Cluster Sizing, you must manually enable them. This is because these two features are still considered in beta. To access them, you must first go to _Settings_, then toggle on 'Enable experimental features' at the bottom of the page. Select _Save_ to confirm.
 
 ## Creating an Action
 
@@ -66,6 +72,10 @@ Select _Create Action_ to finalize.
 
 ### Cluster Sizing
 
+{% hint style="info" %}
+Cluster Sizing is a beta feature.
+{% endhint %}
+
 Cluster Sizing will provide right-sizing recommendations for your cluster by determining the cluster's needs based on the type of work running, and the resource requirements. You will receive a simple (uses one node type) and a complex (uses two or more node types) recommendation.
 
 {% hint style="info" %}
@@ -101,6 +111,10 @@ Select _Preview_ to view a list of all namespaces that will be turned down. This
 Select _Create Action_ to finalize.
 
 ### Guided Sizing
+
+{% hint style="info" %}
+Guided Sizing is a beta feature.
+{% endhint %}
 
 Guided Kubernetes Sizing provides a one-click or continuous right-sizing solution in two steps, request sizing and then cluster sizing. These implementations function exactly like Kubecost's existing [container](/using-kubecost/navigating-the-kubecost-ui/savings/container-request-right-sizing-recommendations.md) and [cluster right-sizing](/using-kubecost/navigating-the-kubecost-ui/savings/cluster-right-sizing-recommendations.md) features.
 

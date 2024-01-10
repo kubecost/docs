@@ -66,9 +66,6 @@ A: `rebuild` is a legacy command and `repair` should be used instead, as it buil
 Q: For GCP, I'm unable to see the GCP Project on the Allocations page.\
 A: You can only filter by project in Assets. A workaround for this is naming their clusters with a naming convention that includes the project name or number.
 
-Q: How can I add TLS to the Kubecost-bundled Prometheus?\
-A: See the following [Helm values](https://github.com/kubecost/cost-analyzer-helm-chart/blob/develop/cost-analyzer/charts/prometheus/values.yaml#L686).
-
 Q: Does Kubecost change labels/tags that include a `-` dash to an `_` underscore?\
 A: Yes, this is due to limitations in how Prometheus handles labels.
 
