@@ -20,8 +20,7 @@ Existing documentation for Kubecost APIs will use endpoints for non-Aggregator e
 
 ### Tutorial
 
-Select from one of the two templates below and save the content as _aggregator.yaml_. This will be your configuration for your primary installation
-of Kubecost.
+Select from one of the two templates below and save the content as _aggregator.yaml_. This will be your configuration for your primary installation of Kubecost.
 
 Basic configuration:
 
