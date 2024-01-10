@@ -14,7 +14,7 @@ Actions are only able to be applied to your primary cluster. To use Actions on a
 
 ### Enable the Cluster Controller
 
-Before you can perform any Actions, you need to enable Kubecost's [Cluster Controller](/install-and-configure/advanced-configuration/controller/cluster-controller.md). See the Cluster Controller doc for a complete tutorial, then Kubecost Actions should be fully functional.
+Before you can perform any Actions, you need to enable Kubecost's [Cluster Controller](/install-and-configure/advanced-configuration/controller/cluster-controller.md). This is because Kubecost requires write access to clusters in order to perform Actions, which is granted by the Controller. See the Cluster Controller doc for a complete tutorial, then Kubecost Actions should be fully functional.
 
 {% hint style="warning" %}
 Some features included in Kubecost Actions are only available in GKE/EKS environments. See the Cluster Controller doc for more clarity on which features you will have access to after enabling the Cluster Controller.
@@ -90,6 +90,10 @@ Learn more about cluster right-sizing functionality [here](/using-kubecost/navig
 
 Namespace turndown allows you to take action to delete your abandoned workloads. Instead of requiring the user to manually size down or delete their unused workloads, Kubecost can delete namespaces full of idle pods in one moment or on a continual basis. This can be helpful for routine cleanup of neglected resources. Namespace turndown is supported on all cluster types.
 
+{% hint style="warning" %}
+When turning down namespaces, Kubecost will perform a `helm uninstall` command to remove itself from the namespace before it is deleted. Take precaution when using this feature to avoid irreversible changes being made to your environment.
+{% endhint %}
+
 Selecting _Namespace Turndown_ from the 'Create New Action' window will open the Namespace Turndown page.
 
 Begin by providing a name for your Action in the 'Action Name' field.
@@ -104,7 +108,7 @@ For 'Namespace turndown type', select _Scheduled_ or _Smart_ from the dropdown.
 Then you can provide optional values for the following fields:
 
 * 'Namespaces to ignore': Filter out namespaces you don't want turned down. Namespace turndown will ignore namespaces named `kube-*`, the `default` namespace, and the namespace the Cluster Controller is enabled on. Allows multiple namespaces to be ignored in one Action.
-* 'Namespace labels to ignore': Filter out key-alue labels that you don't want turned down.
+* 'Namespace labels to ignore': Filter out key-value labels that you don't want turned down.
 
 Select _Preview_ to view a list of all namespaces that will be turned down. This list is configurable; you can manually check individual namespaces you wish to be ignored.
 
