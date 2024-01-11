@@ -69,7 +69,7 @@ Comma-separated list of services to match; e.g. `frontend-one,frontend-two` will
 Set to `csv` to download an accumulated version of the allocation results in CSV format. Set to `pdf` to download an accumulated version of the allocation results in PDF format. By default, results will be in JSON format.
 {% endswagger-parameter %}
 
-{% swagger-parameter in="path" name="format" type="string" required="false" %}
+{% swagger-parameter in="path" name="costUnit" type="string" required="false" %}
 Cost metric format. Learn about cost metric calculations in our [Allocations Dashboard](/using-kubecost/navigating-the-kubecost-ui/cost-allocation/README.md) doc. Supports `cumulative`, `hourly`, `daily`, and `monthly`. Default is `cumulative`.
 {% endswagger-parameter %}
 
