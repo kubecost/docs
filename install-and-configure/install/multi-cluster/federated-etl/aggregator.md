@@ -74,7 +74,7 @@ kubecostAggregator:
     # !!NOTE!! disk performance is _critically important_ to aggregator performance
     # ensure disk is specd high enough, and check for bottlenecks
     # default: 128Gi
-    storageRequest: 128Gi
+    storageRequest: 512Gi
 federatedETL:
   federatedCluster: true
 kubecostModel:
