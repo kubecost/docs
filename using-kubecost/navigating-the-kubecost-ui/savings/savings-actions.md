@@ -1,9 +1,5 @@
 # Actions
 
-{% hint style="warning" %}
-Actions is currently in beta. Please read the documentation carefully.
-{% endhint %}
-
 {% hint style="info" %}
 Actions is only available with a Kubecost Enterprise plan.
 {% endhint %}
@@ -11,30 +7,30 @@ Actions is only available with a Kubecost Enterprise plan.
 The Actions page is where you can create scheduled savings actions that Kubecost will execute for you. The Actions page supports creating actions for multiple turndown and right-sizing features.
 
 {% hint style="info" %}
-Actions are only able to be applied to your primary cluster. To use Actions on a secondary cluster, you must manually switch to that cluster via front end.
+Actions are only able to be applied to your primary cluster. To use Actions on a secondary cluster, you must manually switch to that cluster context via the Settings page.
 {% endhint %}
 
 ## Enabling Kubecost Actions
 
-The Actions page will exist inside the Savings folder in the left navigation, but must first be enabled before it appears. The two steps below which enable Kubecost Actions do not need to be performed sequentially as written.
+### Enable the Cluster Controller
 
-### Step 1. Enable experimental features
-
-Because the Actions page is currently a beta feature, it does not appear as part of Kubecost's base functionality. To enable alpha features, select _Settings_ from the left navigation. Then toggle on the _Enable experimental features_ switch. Select _Save_ at the bottom of the Settings page to confirm your changes. The Actions page will now appear in your left navigation, but you will not be able to perform any actions until you've enabled the Cluster Controller (see below).
-
-### Step 2. Enable the Cluster Controller
+Before you can perform any Actions, you need to enable Kubecost's [Cluster Controller](/install-and-configure/advanced-configuration/controller/cluster-controller.md). This is because Kubecost requires write access to clusters in order to perform Actions, which is granted by the Controller. See the Cluster Controller doc for a complete tutorial, then Kubecost Actions should be fully functional.
 
 {% hint style="warning" %}
 Some features included in Kubecost Actions are only available in GKE/EKS environments. See the Cluster Controller doc for more clarity on which features you will have access to after enabling the Cluster Controller.
 {% endhint %}
 
+### Enable experimental features
+
+In order to receive access to two specific Kubecost Actions, Guided Sizing and Cluster Sizing, you must manually enable them. This is because these two features are still considered in beta. To access them, you must first go to _Settings_, then toggle on 'Enable experimental features' at the bottom of the page. Select _Save_ to confirm.
+
 ## Creating an Action
 
-On the Actions page, select _Create Action_ in the top right. The Create New Action window opens.
+On the Actions page, select _Create Action_ in the top right (if no Action exists, you can select _Create a new action_ in the middle of your page. The 'Create New Action' window opens.
 
 You will have the option to perform one of several available Actions:
 
-* Cluster Turndown: Schedule clusters to spin down when unused and back up when needed&#x20;
+* Cluster Turndown: Schedule clusters to spin down when unused and back up when needed
 * Request Sizing: Ensure your containers aren't over-provisioned
 * Cluster Sizing: Configure your cluster in the most cost-effective way
 * Namespace Turndown: Schedule unused workloads to spin down
@@ -56,11 +52,29 @@ You can delete an existing turndown schedule by selecting the trash can icon.
 
 Learn more about cluster turndown's advanced functionality [here](/install-and-configure/advanced-configuration/controller/cluster-turndown.md).
 
-### Request Sizing
+### Automated Request Sizing
 
-See the existing documentation on [Automatic Request Right-Sizing](/using-kubecost/navigating-the-kubecost-ui/savings/container-request-right-sizing-recommendations.md) to learn more about this feature. If you have successfully enabled the Cluster Controller, you can skip the Setup section of that article.
+Kubecost offers a condensed version of [Automatic Request Right-Sizing](/using-kubecost/navigating-the-kubecost-ui/savings/container-request-right-sizing-recommendations.md) via Actions, which allows to right-size your deployments on a recurring schedule.
+
+Selecting _Automated Request Sizing_ from the 'Create New Action' window will open the Automated Request Sizing page.
+
+#### Schedule
+
+For 'Cadence', select your desired schedule (how often you want Kubecost to right-size your selected deployments), _Daily_, _Weekly_, or _Monthly_. Then select the start date for when you wish your desired cadence to begin occurring.
+
+#### Deployments to right size
+
+Kubecost supports custom filtering for you to specify which deployments you wish to right-size.
+
+Select _Preview_ to view a list of all requests that will be right-sized, and their estimated monthly costs. This list is configurable; you can manually remove individual requests you don't wish to right-size.
+
+Select _Create Action_ to finalize.
 
 ### Cluster Sizing
+
+{% hint style="info" %}
+Cluster Sizing is a beta feature.
+{% endhint %}
 
 Cluster Sizing will provide right-sizing recommendations for your cluster by determining the cluster's needs based on the type of work running, and the resource requirements. You will receive a simple (uses one node type) and a complex (uses two or more node types) recommendation.
 
@@ -74,25 +88,37 @@ Learn more about cluster right-sizing functionality [here](/using-kubecost/navig
 
 ### Namespace Turndown
 
-Namespace turndown allows you to take action to delete your abandoned workloads. Instead of requiring the user to manually size down or delete their unused workloads, Kubecost can delete namespaces full of idle pods in one moment or on a continual basis. This can be helpful for routine cleanup of neglected resources. Namespace turndown is supported on all cluster types.&#x20;
+Namespace turndown allows you to take action to delete your abandoned workloads. Instead of requiring the user to manually size down or delete their unused workloads, Kubecost can delete namespaces full of idle pods in one moment or on a continual basis. This can be helpful for routine cleanup of neglected resources. Namespace turndown is supported on all cluster types.
 
-Selecting _Namespace Turndown_ from the Create new action window will open the Namespace Turndown page.
+{% hint style="warning" %}
+When turning down namespaces, Kubecost will perform a `helm uninstall` command to remove itself from the namespace before it is deleted. Take precaution when using this feature to avoid irreversible changes being made to your environment.
+{% endhint %}
 
-Begin by providing a name for your Action in the Job Name field. For the schedule, provide a cron string that determines when the turndown occurs (leave this field as `0 0 * * *` by default to perform turndown every night at midnight).
+Selecting _Namespace Turndown_ from the 'Create New Action' window will open the Namespace Turndown page.
 
-For schedule type, select _Scheduled_ or _Smart_ from the dropdown.
+Begin by providing a name for your Action in the 'Action Name' field.
+
+For 'Namespace turndown type', select _Scheduled_ or _Smart_ from the dropdown.
 
 * Scheduled turndown will delete all non-ignored namespaces.
 * Smart turndown will confirm that all workloads in the namespace are idle before deleting.
 
+'Schedule' determines how often Kubecost will check for unused workloads. It supports _Daily_, _Weekly_, or _Custom_, which will require you to provide a cron string that determines when the turndown occurs (leave this field as `0 0 * * *` by default to perform turndown every night at midnight). Namespaces can have multiple schedules applied to them (but will require separate Actions to be created for them).
+
 Then you can provide optional values for the following fields:
 
-* Ignore Targets: Filter out namespaces you don't want turned down. Supports "wildcard" filtering: by ending your filter with `*`, you can filter for multiple namespaces which include that filter. For example, entering `kube*` will prevent any namespace featuring `kube` from being turned down. Namespace turndown will ignore namespaces named `kube-*`, the `default` namespace, and the namespace the Cluster Controller is enabled on.
-* Ignore labels: Filter out key-alue labels that you don't want turned down.
+* 'Namespaces to ignore': Filter out namespaces you don't want turned down. Namespace turndown will ignore namespaces named `kube-*`, the `default` namespace, and the namespace the Cluster Controller is enabled on. Allows multiple namespaces to be ignored in one Action.
+* 'Namespace labels to ignore': Filter out key-value labels that you don't want turned down.
 
-Select _Create Schedule_ to finalize.
+Select _Preview_ to view a list of all namespaces that will be turned down. This list is configurable; you can manually check individual namespaces you wish to be ignored.
+
+Select _Create Action_ to finalize.
 
 ### Guided Sizing
+
+{% hint style="info" %}
+Guided Sizing is a beta feature.
+{% endhint %}
 
 Guided Kubernetes Sizing provides a one-click or continuous right-sizing solution in two steps, request sizing and then cluster sizing. These implementations function exactly like Kubecost's existing [container](/using-kubecost/navigating-the-kubecost-ui/savings/container-request-right-sizing-recommendations.md) and [cluster right-sizing](/using-kubecost/navigating-the-kubecost-ui/savings/cluster-right-sizing-recommendations.md) features.
 
