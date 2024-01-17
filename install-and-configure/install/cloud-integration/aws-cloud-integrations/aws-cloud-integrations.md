@@ -609,7 +609,7 @@ Connection test failed for cloud integration config: Fetch error: cloud billing 
 ```
 {% endcode %}
 
-* **Resolution:** Please verify that the prefix `s3://` was used when setting the `athenaBucketName` helm value or when configuring the bucket name in the Kubecost UI.
+* **Resolution:** Please verify that the prefix `s3://` was used when setting the `athenaBucketName` Helm value or when configuring the bucket name in the Kubecost UI.
 
 #### Query not supported
 
