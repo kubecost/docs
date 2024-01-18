@@ -154,11 +154,21 @@ kubectl delete configmap -n kubecost group-filters && kubectl create configmap -
 
 ## Troubleshooting
 
-You can look at the logs on the cost-model container. This script is currently a work in progress.
+You can look at the logs on the aggregator and cost-model containers. This script is currently a work in progress.
+
+If `kubecostAggregator.enabled` is `true` or unspecified in `values.yaml`:
 
 {% code overflow="wrap" %}
 ```
 kubectl logs deployment/kubecost-cost-analyzer -c cost-model --follow |grep -v -E 'resourceGroup|prometheus-server'|grep -i -E 'group|xmlname|saml|login|audience'
+```
+{% endcode %}
+
+If `kubecostAggregator.enabled` is `false` in `values.yaml`:
+
+{% code overflow="wrap" %}
+```
+kubectl logs services/kubecost-aggregator --follow |grep -v -E 'resourceGroup|prometheus-server'|grep -i -E 'group|xmlname|saml|login|audience'
 ```
 {% endcode %}
 
