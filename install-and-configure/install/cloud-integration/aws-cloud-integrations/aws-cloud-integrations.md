@@ -599,6 +599,18 @@ This error can also occur when the management account cross-account permissions 
     }
 ```
 
+#### outputLocation is not a valid S3 path
+
+* **Symptom:** A similar error to this will be shown on the Diagnostics page under Pricing Sources.
+
+{% code overflow="wrap" %}
+```
+Connection test failed for cloud integration config: Fetch error: cloud billing data fetch error: GetCloudCost: error getting Athena columns: QueryAthenaPaginated: start query error: operation error Athena: StartQueryExecution, https response error StatusCode: 400, RequestID: a6059220-5ac8-4c24-97d2-401a2dbfd421, InvalidRequestException: outputLocation is not a valid S3 path.
+```
+{% endcode %}
+
+* **Resolution:** Please verify that the prefix `s3://` was used when setting the `athenaBucketName` Helm value or when configuring the bucket name in the Kubecost UI.
+
 #### Query not supported
 
 * **Symptom:** A similar error to this will be shown on the Diagnostics page under Pricing Sources.
