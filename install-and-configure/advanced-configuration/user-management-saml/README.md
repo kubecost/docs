@@ -59,7 +59,7 @@ All SAML 2.0 providers also work. The above guides can be used as templates for 
 
 When SAML SSO is enabled in Kubecost, the following ports will require authentication:
 - `service/kubecost-cost-analzyer`: ports 9003 and 9090
-- `statefulset/kubecost-aggregator` or `service/kubecost-aggregator`: ports 9004 and 9090
+- `statefulset/kubecost-aggregator` or `service/kubecost-aggregator`: port 9004
 
 {% code overflow="wrap" %}
 ```sh
@@ -68,24 +68,18 @@ curl -L 'http://kubecost.mycompany.com/model/allocation?window=1d' \
 ```
 {% endcode %}
 
-For admins, Kubecost additionally exposes an unauthenticated APIs.
+For admins, Kubecost additionally exposes unauthenticated APIs.
 
-`service/kubecost-cost-analyzer`: port 9004
+`service/kubecost-cost-analyzer`: port 9007
 ```sh
-kubectl port-forward service/kubecost-cost-analyzer 9004:9004
-curl -L 'localhost:9004/allocation?window=1d'
+kubectl port-forward service/kubecost-cost-analyzer 9007:9007
+curl -L 'localhost:9007/allocation?window=1d'
 ```
 
-If `kubecostAggregator.enabled` is `true` or unspecified in `values.yaml`:
+`service/kubecost-aggregator`: port 9008
 ```sh
-kubectl port-forward service/kubecost-aggregator 9005:9005
-curl -L 'localhost:9005/allocation?window=1d'
-```
-
-If `kubecostAggregator.enabled` is `false` in `values.yaml`:
-```sh
-kubectl port-forward service/kubecost-aggregator 9005:9005
-curl -L 'localhost:9005/allocation?window=1d'
+kubectl port-forward service/kubecost-aggregator 9008:9008
+curl -L 'localhost:9008/allocation?window=1d'
 ```
 
 ## View your SAML Group
