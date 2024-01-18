@@ -68,7 +68,7 @@ curl -L 'http://kubecost.mycompany.com/model/allocation?window=1d' \
 ```
 {% endcode %}
 
-For admins, Kubecost additionally exposes an unauthenticated APIs.
+For admins, Kubecost additionally exposes unauthenticated APIs:
 
 `service/kubecost-cost-analyzer`: port 9004
 ```sh
