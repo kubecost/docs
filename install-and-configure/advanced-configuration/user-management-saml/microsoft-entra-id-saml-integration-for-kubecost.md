@@ -156,7 +156,7 @@ kubectl delete configmap -n kubecost group-filters && kubectl create configmap -
 
 You can look at the logs on the aggregator and cost-model containers. This script is currently a work in progress.
 
-If `kubecostAggregator.enabled` is `true` or unspecified in `values.yaml`:
+If `kubecostAggregator.enabled` is `true` or unspecified in _values.yaml_:
 
 {% code overflow="wrap" %}
 ```
@@ -164,7 +164,7 @@ kubectl logs deployment/kubecost-cost-analyzer -c cost-model --follow |grep -v -
 ```
 {% endcode %}
 
-If `kubecostAggregator.enabled` is `false` in `values.yaml`:
+If `kubecostAggregator.enabled` is `false` in _values.yaml_:
 
 {% code overflow="wrap" %}
 ```
