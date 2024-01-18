@@ -208,7 +208,6 @@ kubectl logs services/kubecost-aggregator --follow |grep -v -E 'resourceGroup|pr
 {% endcode %}
 
 When the group has been matched, you will see:
-When the group has been matched, you will see:
 
 ```
 auth.go:167] AUDIENCE: [readonly group:readonly@kubecost.com]
