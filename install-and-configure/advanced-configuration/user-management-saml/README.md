@@ -68,7 +68,7 @@ curl -L 'http://kubecost.mycompany.com/model/allocation?window=1d' \
 ```
 {% endcode %}
 
-For admins, Kubecost additionally exposes unauthenticated APIs.
+For admins, Kubecost additionally exposes unauthenticated APIs:
 
 `service/kubecost-cost-analyzer`: port 9007
 ```sh
@@ -88,12 +88,12 @@ You will be able to view your current SAML Group in the Kubecost UI by selecting
 
 ## SAML troubleshooting guide
 
-1. Disable SAML and confirm that the cost-analyzer pod starts. If kubecostAggregator.enabled is unspecified or true in the values.yaml file, confirm that the aggregator pod starts.
-2.  If step 1 is successful, but the pod is crashing or never enters the ready state when SAML is added, it is likely that there is panic loading or parsing SAML data.
-    - If kubecostAggregator.enabled is true or unspecified in values.yaml, run `kubectl logs statefulsets/kubecost-aggregator` and `kubectl logs deploy/kubecost-cost-analyzer`
-    - If kubecostAggregator.enabled is false in values.yaml, run `kubectl logs services/kubecost-aggregator` and `kubectl logs deploy/kubecost-cost-analyzer`
+1. Disable SAML and confirm the `cost-analyzer` pod starts. If `kubecostAggregator.enabled` is unspecified or `true` in the _values.yaml_ file, confirm that the `aggregator` pod starts.
+2.  If Step 1 is successful, but the pod is crashing or never enters the ready state when SAML is added, it is likely there is panic when loading or parsing SAML data.
+    - If `kubecostAggregator.enabled` is `true` or unspecified in _values.yaml_, run `kubectl logs statefulsets/kubecost-aggregator` and `kubectl logs deploy/kubecost-cost-analyzer`
+    - If `kubecostAggregator.enabled` is `false` in _values.yaml_, run `kubectl logs services/kubecost-aggregator` and `kubectl logs deploy/kubecost-cost-analyzer`
 
-If you’re supplying the SAML from the address of an Identity Provider Server, `curl` the SAML metadata endpoint from within the Kubecost pod and ensure that a valid XML EntityDescriptor is being returned and downloaded. The response should be in this format:
+If you’re supplying the SAML from the address of an Identity Provider Server, `curl` the SAML metadata endpoint from within the `kubecost` pod and ensure that a valid XML EntityDescriptor is being returned and downloaded. The response should be in this format:
 
 {% code overflow="wrap" %}
 ```bash
