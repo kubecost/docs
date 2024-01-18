@@ -191,7 +191,7 @@ kubectl logs deployment/kubecost-cost-analyzer -c cost-model --follow |grep -v -
 ```
 {% endcode %}
 
-If `kubecostAggregator.enabled` is `true` or unspecified in `values.yaml`:
+If `kubecostAggregator.enabled` is `true` or unspecified in _values.yaml_:
 
 {% code overflow="wrap" %}
 ```
@@ -199,7 +199,7 @@ kubectl logs statefulsets/kubecost-aggregator --follow |grep -v -E 'resourceGrou
 ```
 {% endcode %}
 
-If `kubecostAggregator.enabled` is `false` in `values.yaml`:
+If `kubecostAggregator.enabled` is `false` in _values.yaml_:
 
 {% code overflow="wrap" %}
 ```
