@@ -56,11 +56,11 @@ Learn more about cluster turndown's advanced functionality [here](/install-and-c
 
 Kubecost offers a condensed version of [Automatic Request Right-Sizing](/using-kubecost/navigating-the-kubecost-ui/savings/container-request-right-sizing-recommendations.md) via Actions, which allows to right-size your deployments on a recurring schedule.
 
-Selecting _Automated Request Sizing_ from the 'Create New Action' window will open the Automated Request Sizing page.
+Selecting  _Request Sizing_ from the 'Create New Action' window will open the Automated Request Sizing page. Here, you can immediately begin configuring your plan for right-sizing using a schedule and a filtering plan to determine the affected deployments.
 
 #### Schedule
 
-For 'Cadence', select your desired schedule (how often you want Kubecost to right-size your selected deployments), _Daily_, _Weekly_, or _Monthly_. Then select the start date for when you wish your desired cadence to begin occurring.
+For 'Cadence', select your desired schedule (how often you want Kubecost to right-size your selected deployments), _Daily_, _Weekly_, _Monthly_, or _Quarterly_. Then, select the start date for when you wish your desired cadence to begin occurring.
 
 #### Deployments to right size
 
@@ -68,7 +68,19 @@ Kubecost supports custom filtering for you to specify which deployments you wish
 
 Select _Preview_ to view a list of all requests that will be right-sized, and their estimated monthly costs. This list is configurable; you can manually remove individual requests you don't wish to right-size.
 
-Select _Create Action_ to finalize.
+#### Configuring recommendations
+
+Finally, you can provide Kubecost with more details about your ideal environment so Kubecost can estimate average resources needed to be allocated:
+
+* Window: Time duration of activity of your deployments to sample. Default is _Last 48h_.
+* Profile: Environment profile with preset CPU/RAM recommendations and target utilizations. Includes _Development_, _Production_, and _High Availability_ with preset options, or _Custom_ which will allow you configure subsequent fields manually.
+* CPU/RAM recommendation algorithm: Set to _Max_ unless Profile is set to _Custom_. Allows CPU/RAM recommendation algorithms to be separately formatted as a percentile when set to _Percentile_.
+* CPU/RAM target utilization: Percentage utilization written as a decimal (for 60% utilization, value should be 0.6). Will keep resource utilization below the provided value. Can only be manually configured when Profile is set to _Custom_.
+* CPU/RAM percentile: Only configurable when Profile is set to _Custom_ and their corresponding CPU/RAM recommendation algorithm is configured as _Percentile_.
+
+Select _Save_ to confirm your configuration.
+
+After making changes, the table of deployments should update to show which will be affected. Select _Create Action_ to finalize.
 
 ### Cluster Sizing
 
