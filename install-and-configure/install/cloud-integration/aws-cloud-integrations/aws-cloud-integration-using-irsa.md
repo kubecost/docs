@@ -1,6 +1,6 @@
-# AWS Cloud Integration using IAM Roles for Service Accounts (IRSA)
+# AWS Cloud Integration Using IAM Roles for Service Accounts (IRSA)
 
-There are many ways to integrate your AWS Cost and Usage Report (CUR) with Kubecost. This tutorial is intended as the quick start method for users whose environments meet the following assumptions:
+There are many ways to integrate your AWS Cost and Usage Report (CUR) with Kubecost. This tutorial is intended as the best-practice method for users whose environments meet the following assumptions:
 
 1. Kubecost will run in a different account than the AWS Payer Account
 1. The IAM permissions will utilize AWS [IRSA](https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html) to avoid shared secrets
