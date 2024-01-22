@@ -28,4 +28,4 @@ After having added items to your collection, selecting _Costs in Collection_ wil
 
 ## Managing collections
 
-The Collections page will list all existing collections with a chart displaying cost over time and total cost. You can begin editing a collection by selecting it. Selecting the three vertical dots in the top right of the collection tile will allow you to delete it. You can also adjust your Collections display by adjusting the window of time, aggregating, or filtering.
+The Collections page will list all existing collections with a chart displaying cost over time and total cost. You can begin editing a collection by selecting it. Selecting the three vertical dots in the top right of the collection tile will allow you to delete it. You can also adjust your Collections display by adjusting the window of time, aggregating by item or kind, or filtering.
