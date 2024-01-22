@@ -1,10 +1,14 @@
-# Advanced Networking
+# Networking Monitoring
 
 {% hint style="info" %}
-Advanced Networking is only officially supported on Kubecost Enterprise plans.
+Network Monitoring is currently in beta. Please read the documentation carefully.
 {% endhint %}
 
-Advanced Networking is a monitoring page which helps visualize your [network costs](/using-kubecost/navigating-the-kubecost-ui/cost-allocation/network-allocation.md). You will be able to analyze network costs by their connection to your pods, namespaces, or clusters. This may be beneficial for larger teams or teams with complex environments hoping to better understand their network costs.
+{% hint style="info" %}
+Network Monitoring is only officially supported on Kubecost Enterprise plans.
+{% endhint %}
+
+Network Monitoring is a monitoring page which helps visualize your [network costs](/using-kubecost/navigating-the-kubecost-ui/cost-allocation/network-allocation.md). You will be able to analyze network costs by their connection to your pods, namespaces, or clusters. This may be beneficial for larger teams or teams with complex environments hoping to better understand their network costs.
 
 The Advanced Networking page is a web of draggable icons which represent your network cost sources, as well as all pods/namespaces/clusters connected to them. Green-border icons represent network costs, while blue-border icons represent your Kubernetes objects that are driving spending. Arrows connecting icons together are colored to represent internal and external spend. Icons are equally-sized; they are not proportionate to spend values.
 
