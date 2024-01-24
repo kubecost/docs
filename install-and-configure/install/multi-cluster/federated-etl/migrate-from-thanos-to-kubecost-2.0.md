@@ -37,7 +37,7 @@ This tutorial is intended to help our users migrate from the legacy Thanos feder
 * All steps are done on the primary except for step 8.
 * Nothing needs to be done on the secondary clusters for the migration to be successful. The Thanos sidecar on the secondary clusters will have no impact on the migration or functionality.
 * Once Aggregator is enabled, all queries hit the Aggregator container and NOT cost-model via the reverse proxy.
-* ETL Utils does not destory the Thanos data, it creates additional directories in the object store.
+* ETL Utils does not destroy the Thanos data, it creates additional directories in the object store.
 * For larger environments, the StorageClass must have 1GBPS throughput.
 * Having enough storage is important and will vary based on environment.
 
