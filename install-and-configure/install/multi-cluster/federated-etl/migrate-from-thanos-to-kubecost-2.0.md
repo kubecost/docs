@@ -11,7 +11,7 @@ This tutorial is intended to help our users migrate from the legacy Thanos feder
    * Data no longer queried directly from bingen files
    * Substantial query speed improvements even when pagination not in effect
 * Data ingested into independent component (Aggregator)
-* Idle (sharing), Cluster Management sharing, Network are computed a prior
+* Idle (sharing), Cluster Management sharing, and Network are computed a priori
 * Distributed tracing integrated into core workflows
 * No more pre-computed "agg stores"
    * Request-level caching still in effect
