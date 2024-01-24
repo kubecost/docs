@@ -61,7 +61,7 @@ kubecostModel:
 
 ### Step 3: Validate that an `/etl` directory is present in the object store
 
-There should be ETL data present in the following directories. CloudCosts will only have ETL data if cloud integration is enabled.
+There should be ETL data present in the following directories. CloudCosts will only have ETL data if at least one cloud integration is enabled.
 
 * `/etl/bingen/allocations`
 * `/etl/bingen/assets/`
