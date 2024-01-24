@@ -1,19 +1,19 @@
 # Migration from Thanos to Kubecost 2.0 (Aggregator)
 
-This tutorial is intended to help our users migrate from the legacy Thanos federation architecture to Kubecost 2.0 (Aggregator). There are a few requirements in order to successfully migrate to Kubecost 2.0. This new version of Kubecost includes a new backend (Aggregator) which handles the ETL data built from source metrics more efficiently. Kubecost 2.0 will provide more features and optimze the Kubecost primary UI.
+This tutorial is intended to help our users migrate from the legacy Thanos federation architecture to Kubecost 2.0 (Aggregator). There are a few requirements in order to successfully migrate to Kubecost 2.0. This new version of Kubecost includes a new backend (Aggregator) which handles the ETL data built from source metrics more efficiently. Kubecost 2.0 will provide new features,optimze the Kubecost primary UI and enhance the user experience.
 
 ## Key Changes
-1. Assets and Allocations are now paginated
+* Assets and Allocations are now paginated
    * FE/API users never have full set of information
    * Use offset/limit to govern pagination
-2. New data available for querying every 2 hours (can be adjusted)
-3. Embedded DuckDB database serves queries
+* New data available for querying every 2 hours (can be adjusted)
+* Embedded DuckDB database serves queries
    * Data no longer queried directly from bingen files
    * Substantial query speed improvements even when pagination not in effect
-4. Data ingested into independent component (Aggregator)
-5. Idle (sharing), Cluster Management sharing, Network are computed a prior
-6. Distributed tracing integrated into core workflows
-7. No more pre-computed "agg stores"
+* Data ingested into independent component (Aggregator)
+* Idle (sharing), Cluster Management sharing, Network are computed a prior
+* Distributed tracing integrated into core workflows
+* No more pre-computed "agg stores"
    * Request-level caching still in effect
 
 <details>
@@ -30,14 +30,16 @@ This tutorial is intended to help our users migrate from the legacy Thanos feder
 
 <summary>Diagram of Aggregator:</summary>
 
-![miagration-diagram](/images/aggregator/migration-diagram.png)
+![migration-diagram](/images/aggregator/migration-diagram.png)
 
 </details>
 
-1. All steps are done on the primary except for step 8.
-2. Nothing needs to be done on the secondary clusters for the migration to be successful. The Thanos sidecar on the secondary clusters will have no impact on the migration or functionality.
-3. Once Aggregator is enabled, all queries hit the Aggregator container and NOT cost-model via the reverse proxy.
-4. ETL Utils does not destory the Thanos data, it creates additional directories in the object store.
+* All steps are done on the primary except for step 8.
+* Nothing needs to be done on the secondary clusters for the migration to be successful. The Thanos sidecar on the secondary clusters will have no impact on the migration or functionality.
+* Once Aggregator is enabled, all queries hit the Aggregator container and NOT cost-model via the reverse proxy.
+* ETL Utils does not destory the Thanos data, it creates additional directories in the object store.
+* For larger environments, the StorageClass must have 1GBPS throughput.
+* Having enough storage is important and will vary based on environment.
 
 ## Action Steps
 
