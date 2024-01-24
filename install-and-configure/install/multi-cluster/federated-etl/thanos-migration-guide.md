@@ -1,16 +1,16 @@
-# Migration from Thanos to Kubecost 2.0 (Aggregator)
+# Migration Guide from Thanos to Kubecost 2.0 (Aggregator)
 
-This tutorial is intended to help our users migrate from the legacy Thanos federation architecture to Kubecost 2.0 (Aggregator). There are a few requirements in order to successfully migrate to Kubecost 2.0. This new version of Kubecost includes a new backend (Aggregator) which handles the ETL data built from source metrics more efficiently. Kubecost 2.0 will provide new features, optimize the Kubecost primary UI and enhance the user experience.
+This tutorial is intended to help our users migrate from the legacy Thanos federation architecture to [Kubecost 2.0 (Aggregator)](aggregator.md). There are a few requirements in order to successfully migrate to Kubecost 2.0. This new version of Kubecost includes a new backend Aggregator which handles the ETL data built from source metrics more efficiently. Kubecost 2.0 will provide new features, optimize the Kubecost's UI performance, and enhance the user experience.
 
-## Key Changes
+## Key changes
 * Assets and Allocations are now paginated
-   * FE/API users never have full set of information
-   * Use offset/limit to govern pagination
+   * Frontend/API users never have full set of information
+   * Use `offset`/`limit` parameters to govern pagination
 * New data available for querying every 2 hours (can be adjusted)
 * Embedded DuckDB database serves queries
    * Data no longer queried directly from bingen files
    * Substantial query speed improvements even when pagination not in effect
-* Data ingested into independent component (Aggregator)
+* Data ingested into independent Aggregator component
 * Idle (sharing), Cluster Management sharing, and Network are computed a priori
 * Distributed tracing integrated into core workflows
 * No more pre-computed "agg stores"
@@ -41,12 +41,11 @@ This tutorial is intended to help our users migrate from the legacy Thanos feder
 * For larger environments, the StorageClass must have 1GBPS throughput.
 * Having enough storage is important and will vary based on environment.
 
-## Action Steps
+## Prerequisites
 
-To migrate from Thanos multi-cluster federated architecture to aggregator, the following *MUST* be completed:
+To migrate from Thanos multi-cluster federated architecture to Aggregator, users *must* complete the following steps:
 
-
-### Step 1: Use the existing thanos object store or create a new dedicated object store. 
+### Step 1: Use the existing Thanos object store or create a new dedicated object store
 
 This object store is where the ETL backups will be pushed to from the primary Kubecost instance.
 
@@ -59,29 +58,37 @@ kubecostModel:
   etlBucketConfigSecret: <YOUR_SECRET_NAME>
 ```
 
-### Step 3: Validate that an /etl directory is present in the object store.
+### Step 3: Validate that an `/etl` directory is present in the object store
 
-There should be ETL data present in the following directories. CloudCosts will only have etl data if cloud integration is enabled.
+There should be ETL data present in the following directories. CloudCosts will only have ETL data if cloud integration is enabled.
 
-* /etl/bingen/allocations
-* /etl/bingen/assets/
-* /cloudcosts/
+* `/etl/bingen/allocations`
+* `/etl/bingen/assets/`
+* `/cloudcosts/`
 
 
-### Step 4: Create a new secret for the federated store. 
+### Step 4: Create a new secret for the federated store
 
 This will point to the existing thanos object store or the new one created in Step 1.
-#### Important: The name of the yaml file used to create the secret *MUST* be named federated-store.yaml or Aggregator will not start.
+
+{% hint style="warning" %}
+The name of the .yaml file used to create the secret *must* be named _federated-store.yaml_ or Aggregator will not start.
+{% endhint %}
+
 
 ```
 kubectl create secret generic federated-store --from-file=federated-store.yaml -n kubecost
 ```
 
-### Step 5: Set Aggregator and ETL Utils in values.yaml on Primary Kubecost Instance.
+### Step 5: Set Aggregator and ETL Utils in *values.yaml* on Primary Kubecost Instance.
+
+{% hint style="warning" %}
+*Do not* disable Thanos during this step. This will not negatively impact the source data. Thanos will be disabled in a later step.
+{% endhint %}
 
 * [Enable Aggregator (primary kubecost instance only)](https://docs.kubecost.com/install-and-configure/install/multi-cluster/federated-etl/aggregator). 
 
-Note: *DO NOT* disable thanos during this step. Do this in parallel with Thanos. This will not negatively impact the source data. Thanos will be disabled in a later step. 
+Note:  
 
 * ETL Utils
 ```

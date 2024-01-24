@@ -1,7 +1,11 @@
 # Configuring Thanos
 
+{% hint style="warning" %}
+As of Kubecost v2.0, support for Thanos is deprecated. Consider [transitioning to our Aggregator architecture](/install-and-configure/install/multi-cluster/federated-etl/thanos-migration-guide.md) if you plan to upgrade.
+{% endhint %}
+
 {% hint style="info" %}
-This feature is only officially supported on [Kubecost Enterprise plans](https://www.kubecost.com/pricing/).
+This feature is only offically available on [Kubecost Enterprise plans](https://www.kubecost.com/pricing/).
 {% endhint %}
 
 Kubecost leverages Thanos and durable storage for three different purposes:
