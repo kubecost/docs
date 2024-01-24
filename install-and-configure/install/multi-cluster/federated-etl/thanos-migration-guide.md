@@ -35,7 +35,7 @@ This tutorial is intended to help our users migrate from the legacy Thanos feder
 
 * All steps are done on the primary cluster except for step 8.
 * Nothing needs to be done on the secondary clusters for the migration to be successful. The Thanos sidecar on the secondary clusters will have no impact on the migration or functionality.
-* Once Aggregator is enabled, all queries hit the Aggregator container and NOT cost-model via the reverse proxy.
+* Once Aggregator is enabled, all queries hit the Aggregator container and *not* cost-model via the reverse proxy.
 * ETL Utils does not destroy the Thanos data, it creates additional directories in the object store.
 * For larger environments, the StorageClass must have 1GBPS throughput.
 * Having enough storage is critically important and will vary based on environment. Bias towards a larger value for `aggregatorDBStorage.storageRequest` at the beginning and cut it down if persistent low utilization is observed.  
@@ -47,8 +47,6 @@ To migrate from Thanos multi-cluster federated architecture to Aggregator, users
 ### Step 1: Use the existing Thanos object store or create a new dedicated object store
 
 This object store will be where the ETL backups will be pushed to from the primary cluster's cost-model. If you are using a metric Federation tool which does not require an object store, or otherwise do noy want to use an existing Thanos object store, you will have to create a new one.
-
-
 
 ### Step 2: Enable ETL backups on the *primary cluster only*
 
@@ -70,7 +68,7 @@ There should be ETL data present in the following directories. CloudCosts will o
 
 ### Step 4: Create a new secret for the federated store
 
-This will point to the existing Thanos object store or the new one created in Step 1.
+This will point to the existing Thanos object store or the new object store created in Step 1.
 
 {% hint style="warning" %}
 The name of the .yaml file used to create the secret *must* be named _federated-store.yaml_ or Aggregator will not start.
@@ -87,11 +85,8 @@ kubectl create secret generic federated-store --from-file=federated-store.yaml -
 *Do not* disable Thanos during this step. This will not negatively impact the source data. Thanos will be disabled in a later step.
 {% endhint %}
 
-* [Enable Aggregator for the primary cluster](https://docs.kubecost.com/install-and-configure/install/multi-cluster/federated-etl/aggregator). 
+* [Enable Aggregator](https://docs.kubecost.com/install-and-configure/install/multi-cluster/federated-etl/aggregator) for the primary cluster. Your ETL Utils configuration should look like:
 
-Note:  
-
-* ETL Utils
 ```
 etlUtils:
   thanosSourceBucketSecret: kubecost-thanos
@@ -123,7 +118,7 @@ This can take some time depending on how many unique containers are running in t
 * The ETL Utils image is building the directory structure in the object store needed by Aggregator to pull the ETL data. 
 * SQL tables are building.
 
-Ensure all data loads into the UI before moving onto Step 7.
+Ensure all data loads into the Kubecost UI before moving onto Step 7.
 
 ### Step 7: Remove Thanos sidecar from secondary clusters
 
