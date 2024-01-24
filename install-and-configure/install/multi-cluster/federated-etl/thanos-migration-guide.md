@@ -48,7 +48,7 @@ To migrate from Thanos multi-cluster federated architecture to Aggregator, users
 
 ### Step 1: Use the existing Thanos object store or create a new dedicated object store
 
-This object store is where the ETL backups will be pushed to from the primary cluster.
+This object store is where the ETL backups will be pushed to from the primary cluster's cost-model.
 
 ### Step 2: Enable [ETL Backups](https://docs.kubecost.com/install-and-configure/install/etl-backup#google-cloud-storage) on the *primary cluster only*. 
 
