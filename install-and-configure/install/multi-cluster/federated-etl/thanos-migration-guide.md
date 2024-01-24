@@ -52,7 +52,7 @@ This object store is where the ETL backups will be pushed to from the primary cl
 
 ### Step 2: Enable [ETL Backups](https://docs.kubecost.com/install-and-configure/install/etl-backup#google-cloud-storage) on the *primary cluster only*. 
 
-This will ensure we have all historical data in durable storage and it will create the directory the ETL Utils container needs in order to create the directory structure needed for Aggregator to pull the ETL from each respective cluster.
+This ensures we persist historical data in durable storage (outside of Thanos) and stores the data in a format consumable by the ETL Utils container. The ETL Utils container transforms that data and writes it to a separate location in the object store for consumption by Aggregator.
 
 ```
 kubecostModel:
