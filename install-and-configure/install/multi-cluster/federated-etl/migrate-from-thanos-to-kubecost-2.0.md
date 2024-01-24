@@ -81,7 +81,7 @@ kubectl create secret generic federated-store --from-file=federated-store.yaml -
 
 * [Enable Aggregator (primary kubecost instance only)](https://docs.kubecost.com/install-and-configure/install/multi-cluster/federated-etl/aggregator). 
 
-Note: *DO NOT* disable thanos during this step. Do this in parallel with Thanos. This will not negatively impact the source data Thanos will be disabled in a later step. 
+Note: *DO NOT* disable thanos during this step. Do this in parallel with Thanos. This will not negatively impact the source data. Thanos will be disabled in a later step. 
 
 * ETL Utils
 ```
@@ -110,10 +110,10 @@ kubecost-forecasting-6cf4dd7b98-7z8f5          1/1     Running   0             6
 kubecost-etl-utils-6cdd489596-5dl75           1/1     Running   0          6d20h
 ```
 
-This can take some time depending on how many unique containers are running in the environment and how much ETL data is in the object store. Once the changes are applied and Aggregator is deployed, a couple importants steps are happening in the backend:
+This can take some time depending on how many unique containers are running in the environment and how much ETL data is in the object store. A couple importants steps are happening in the background which take time to complete.
 
 * The ETL Utils image is building the directory structure in the object store needed by Aggregator to pull the ETL data. 
-* SQL tables are building
+* SQL tables are building.
 
 Ensure all data loads into the UI before moving onto step 7.
 
