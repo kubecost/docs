@@ -4,9 +4,7 @@ This tutorial is intended to help our users migrate from the legacy Thanos feder
 
 ## Key changes
 
-* Assets and Allocations are now paginated
-   * Frontend/API users never have full set of information
-   * Use `offset`/`limit` parameters to govern pagination
+* Assets and Allocations are now paginated using `offset`/`limit` parameters
 * New data available for querying every 2 hours (can be adjusted)
 * Embedded DuckDB database serves queries
    * Data no longer queried directly from bingen files
@@ -14,7 +12,7 @@ This tutorial is intended to help our users migrate from the legacy Thanos feder
 * Data ingested into independent Aggregator component
 * Idle (sharing), Cluster Management sharing, and Network are computed a priori
 * Distributed tracing integrated into core workflows
-* No more pre-computed "agg stores"
+* No more pre-computed "AggStores"; this reduces the memory footprint of Kubecost  
    * Request-level caching still in effect
 
 <details>
@@ -40,19 +38,21 @@ This tutorial is intended to help our users migrate from the legacy Thanos feder
 * Once Aggregator is enabled, all queries hit the Aggregator container and NOT cost-model via the reverse proxy.
 * ETL Utils does not destroy the Thanos data, it creates additional directories in the object store.
 * For larger environments, the StorageClass must have 1GBPS throughput.
-* Having enough storage is important and will vary based on environment.
+* Having enough storage is critically important and will vary based on environment. Bias towards a larger value for `aggregatorDBStorage.storageRequest` at the beginning and cut it down if persistent low utilization is observed.  
 
-## Prerequisites
+## Transition process
 
 To migrate from Thanos multi-cluster federated architecture to Aggregator, users *must* complete the following steps:
 
 ### Step 1: Use the existing Thanos object store or create a new dedicated object store
 
-This object store is where the ETL backups will be pushed to from the primary cluster's cost-model.
+This object store will be where the ETL backups will be pushed to from the primary cluster's cost-model. If you are using a metric Federation tool which does not require an object store, or otherwise do noy want to use an existing Thanos object store, you will have to create a new one.
 
-### Step 2: Enable [ETL Backups](https://docs.kubecost.com/install-and-configure/install/etl-backup#google-cloud-storage) on the *primary cluster only*. 
 
-This ensures we persist historical data in durable storage (outside of Thanos) and stores the data in a format consumable by the ETL Utils container. The ETL Utils container transforms that data and writes it to a separate location in the object store for consumption by Aggregator.
+
+### Step 2: Enable ETL backups on the *primary cluster only*
+
+Enabling [ETL backups](/install-and-configure/install/etl-backup/etl-backup.md#google-cloud-storage) ensures Kubecost persists historical data in durable storage (outside of Thanos) and stores the data in a format consumable by the ETL Utils container. The ETL Utils container transforms that data and writes it to a separate location in the object store for consumption by Aggregator.
 
 ```
 kubecostModel:
