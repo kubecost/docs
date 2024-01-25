@@ -90,17 +90,11 @@ kubectl create secret generic federated-store --from-file=federated-store.yaml -
 ```
 etlUtils:
   thanosSourceBucketSecret: kubecost-thanos
-  affinity: {}
   enabled: true
-  env:
-    LOG_LEVEL: debug
   fullImageName: gcr.io/kubecost1/cost-model-etl-utils:0.2
-  nodeSelector:
-    kubernetes.io/arch: amd64
   resources: {}
-  tolerations: {}
 kubecostModel:
-  federatedStorageConfigSecret: kubecost-thanos
+  federatedStorageConfigSecret: federated-store
 ```
 
 ### Step 6: Apply the changes and wait for data to populate in the UI. 
