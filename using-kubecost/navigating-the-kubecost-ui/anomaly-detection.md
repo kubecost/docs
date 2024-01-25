@@ -4,7 +4,7 @@
 Anomaly Detection is currently in beta. Please read the documentation carefully.
 {% endhint %}
 
-Anomaly Detection is a governance tool which detects when cloud services significantly deviate from their projected spend. Kubecost predicts future spend using its forecasting feature.
+Anomaly Detection is a governance tool which detects when cloud services significantly deviate from their projected spend. This feature, as well as [Forecasting](anomaly-detection.md#forecasting), are powered by the Anomaly Detection Container, which is enabled in Kubecost by default. Kubecost samples spend data from the last seven days to determine of a service's spend has become anomalous.
 
 ![Anomaly detection](/images/anomalydetection.png)
 
@@ -19,3 +19,5 @@ Forecasting can be accessed from any of these dashboards by selecting *Edit* > *
 ## Managing anomalies
 
 Selecting an anomaly will open the Cloud Cost Explorer with a filter for that specific service, allowing you to observe more cost metrics for that service.
+
+You can edit the window of time of detected anomalies by selecting the date range picker in the top right of the page (default *Last 7 days*).
