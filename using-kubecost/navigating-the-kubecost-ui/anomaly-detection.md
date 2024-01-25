@@ -14,8 +14,6 @@ Forecasting is a predictive cost monitoring tool which can visualize cost foreca
 
 Forecasting can be accessed from any of these dashboards by selecting *Edit* > *Chart* > *Cost Forecast*. You can then choose your desired window of projected spend from the date range picker. Projected spend is visualized with a margin of error. Hovering over the projected spend will provide you the projected cost and confidence interval.
 
-![Cost forecast](/images/costforecast.png)
-
 ## Managing anomalies
 
 Selecting an anomaly will open the Cloud Cost Explorer with a filter for that specific service, allowing you to observe more cost metrics for that service.
