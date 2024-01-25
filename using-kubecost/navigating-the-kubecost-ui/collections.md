@@ -20,7 +20,7 @@ All Kubernetes and cloud spend sources will appear on this page under one of two
 
 Costs are then divided into two categories: _Kubernetes_ and _Cloud_ (see above for an explanation of these costs). You can toggle between the two groups using the Domain dropdown on the left of the page. For each group, you will see a total cost value displayed on the right of the page, above your cost table.
 
-Costs are organized in a table, listed in descending order starting with the highest values. To add an individual item, hover your cursor over the item until you see a green _Add_ button visible on the right of the page. Select _Add_ to include that cost into your collection. You can add all your Kubernetes or cloud costs into a collection by selecting _Add All_, displayed next to your total cost. Once an item has been added to the collection, changes will be automatically saved.
+Costs are organized in a table, listed in descending order starting with the highest values. To add an individual item, hover your cursor over the item until you see a green _Add_ button visible on the right of the page. Select _Add_ to include that cost into your collection. You can add all your listed Kubernetes or cloud costs into a collection by selecting _Add All_, displayed next to your total cost. This is only available once you've added at least one filter. Once an item has been added to the collection, changes will be automatically saved.
 
 You can filter and recategorize your cost table using _Aggregate By_ and _Add Filters_. _Aggregate By_ allows you to organize your costs by a listed category, and supports single and multi-aggregation. _Add Filters_ allows for flexible filtering of your table items, including filtering by custom labels.
 
