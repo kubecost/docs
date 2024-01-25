@@ -108,6 +108,7 @@
   * [Cluster Health Score](using-kubecost/navigating-the-kubecost-ui/cluster-health-score.md)
   * [Budgets](using-kubecost/navigating-the-kubecost-ui/budgets.md)
   * [Audits](using-kubecost/navigating-the-kubecost-ui/audits.md)
+  * [Teams](using-kubecost/navigating-the-kubecost-ui/teams.md)
 * [Contexts](using-kubecost/context-switcher.md)
 * [Kubecost Data Audit](using-kubecost/kubecost-data-audit/README.md)
   * [AWS/Kubecost Data Audit](using-kubecost/kubecost-data-audit/aws-kubecost-data-audit.md)
