@@ -59,9 +59,21 @@ helm upgrade -i kubecost kubecost/cost-analyzer \
 
 The members of your team are now able to add new members, or create new teams.
 
-### Method 3: Implement SAML RBAC through *values-saml.yaml*
+### Method 3: Implement SAML RBAC through *values.yaml*
 
-Following along with RBAC configuratio in [this Kubecost documentation](/install-and-configure/advanced-configuration/user-management-saml/okta-saml-integration.md#okta-rbac-configuration-admin-readonly), create an admin group which contains a Kubecost group and an attached group from the SAML provider
+In the *values.yaml* where your SAML RBAC is configured, modify your values to include your admin group, where `assertionValues` matches the group configured with your SAML provider. Do not modify the `assertionName` value.
+```
+rbac:
+    enabled: true
+    groups:
+      - name: admin
+        enabled: true
+        assertionName: "kubecost_group"
+        assertionValues:
+          - "kubecost_admin"
+```
+
+Now access the Teams page and reconfigure your admin team by selecting it from the table. See below for editing teams. Then, delete the admin group from your *values.yaml* and delete/detach the group from your SAML provider. The members of your team are now able to add new members, or create new teams.
 
 ## Adding a team
 
@@ -87,7 +99,9 @@ Authentication is handled by the cost-model and Aggregator pods.
 
 For help with troubleshooting, follow this guide for diagnostic assistance:
 
-1. Opne your browser's devtools.
+1. Opne your browser's developer tools.
 2. Access Cookies (Select *Storage* in Firefox, or *Application* in Google Chrome).
 3. Look for the `token` cookie.
-4. Copy and paste the token into jwt.io.
+4. Copy and paste the token value into jwt.io.
+5. The last group is the username.
+6. Omit `group:` to find the username Kubecost requires for teams.
