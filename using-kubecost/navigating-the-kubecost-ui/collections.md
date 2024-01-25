@@ -10,7 +10,7 @@ Cloud costs, also referred to as out-of-cluster or external costs, refer to spen
 ## Creating a new collection
 
 To begin, select _Add a new Collection_ in the top right. If you have not created any collections yet, you should see a _Add a Collection_ icon in the middle of your screen. You can select this instead. The ‘New Collection’ page opens.
-The headline for your page should be an auto-generated title. This will be the name of your collection, which you can change by selecting the pencil icon. You can provide a name and also a kind for your collection. Kind is a custom label you can add to multiple collections to allow for filtering of that label, if multiple collections are intended for the same team or function. Name and kind can always be edited later.
+The headline for your page should be an auto-generated title. This will be the name of your collection, which you can change by selecting the pencil icon. You can provide a name and a category for your collection. Categories are custom labels you can add to multiple collections to allow for filtering of that category, if multiple collections are intended for the same team or function. Name and category can always be edited later.
 
 Once you are satisfied with the name of your collection, you can add Kubernetes and cloud costs.
 
