@@ -7,13 +7,13 @@ This tutorial is intended to help our users migrate from the legacy Thanos feder
 * Assets and Allocations are now paginated using `offset`/`limit` parameters
 * New data available for querying every 2 hours (can be adjusted)
 * Embedded DuckDB database serves queries
-   * Data no longer queried directly from bingen files
-   * Substantial query speed improvements even when pagination not in effect
+  * Data no longer queried directly from bingen files
+  * Substantial query speed improvements even when pagination not in effect
 * Data ingested into independent Aggregator component
 * Idle (sharing), Cluster Management sharing, and Network are computed a priori
 * Distributed tracing integrated into core workflows
 * No more pre-computed "AggStores"; this reduces the memory footprint of Kubecost  
-   * Request-level caching still in effect
+  * Request-level caching still in effect
 
 <details>
 
@@ -23,7 +23,7 @@ This tutorial is intended to help our users migrate from the legacy Thanos feder
 
 </details>
 
-## Migration path 
+## Migration path
 
 <details>
 
@@ -46,13 +46,19 @@ To migrate from Thanos multi-cluster federated architecture to Aggregator, users
 
 ### Step 1: Use the existing Thanos object store or create a new dedicated object store
 
-This object store will be where the ETL backups will be pushed to from the primary cluster's cost-model. If you are using a metric Federation tool which does not require an object store, or otherwise do noy want to use an existing Thanos object store, you will have to create a new one.
+This object store will be where the ETL backups will be pushed to from the primary cluster's cost-model. If you are using a metric Federation tool which does not require an object store, or otherwise do not want to use an existing Thanos object store, you will have to create a new one.
+
+If this is your first time setting up an object store, refer to these docs:
+
+* [AWS](/install-and-configure/install/multi-cluster/long-term-storage-configuration/long-term-storage-aws.md)
+* [Azure](/install-and-configure/install/multi-cluster/long-term-storage-configuration/long-term-storage-azure.md)
+* [GCP](/install-and-configure/install/multi-cluster/long-term-storage-configuration/long-term-storage-gcp.md)
 
 ### Step 2: Enable ETL backups on the *primary cluster only*
 
-Enabling [ETL backups](/install-and-configure/install/etl-backup/etl-backup.md#google-cloud-storage) ensures Kubecost persists historical data in durable storage (outside of Thanos) and stores the data in a format consumable by the ETL Utils container. The ETL Utils container transforms that data and writes it to a separate location in the object store for consumption by Aggregator.
+Enabling [ETL backups](/install-and-configure/install/etl-backup/etl-backup.md) ensures Kubecost persists historical data in durable storage (outside of Thanos) and stores the data in a format consumable by the ETL Utils container. The ETL Utils container transforms that data and writes it to a separate location in the object store for consumption by Aggregator.
 
-```
+```yaml
 kubecostModel:
   etlBucketConfigSecret: <YOUR_SECRET_NAME>
 ```
@@ -65,21 +71,19 @@ There should be ETL data present in the following directories. CloudCosts will o
 * `/etl/bingen/assets/`
 * `/cloudcosts/`
 
+### Step 4: Create a new federated-store secret
 
-### Step 4: Create a new secret for the federated store
-
-This will point to the existing Thanos object store or the new object store created in Step 1.
+This will point to the existing Thanos object store or the new object store created in Step 1. The secret should be identical to your `object-store.yaml`, with the exception that this new secret *must* be named `federated-store.yaml`.
 
 {% hint style="warning" %}
-The name of the .yaml file used to create the secret *must* be named _federated-store.yaml_ or Aggregator will not start.
+The name of the .yaml file used to create the secret *must* be named *federated-store.yaml* or Aggregator will not start.
 {% endhint %}
 
-
-```
+```sh
 kubectl create secret generic federated-store --from-file=federated-store.yaml -n kubecost
 ```
 
-### Step 5: Set Aggregator and ETL Utils in *values.yaml* on the primary cluster.
+### Step 5: Set Aggregator and ETL Utils in *values.yaml* on the primary cluster
 
 {% hint style="warning" %}
 *Do not* disable Thanos during this step. This will not negatively impact the source data. Thanos will be disabled in a later step.
@@ -87,7 +91,7 @@ kubectl create secret generic federated-store --from-file=federated-store.yaml -
 
 * [Enable Aggregator](https://docs.kubecost.com/install-and-configure/install/multi-cluster/federated-etl/aggregator) for the primary cluster. Your ETL Utils configuration should look like:
 
-```
+```yaml
 etlUtils:
   thanosSourceBucketSecret: kubecost-thanos
   enabled: true
