@@ -116,7 +116,7 @@ Ensure all data loads into the Kubecost UI before moving onto Step 7.
 
 ### Step 7: Upgrade your secondary clusters to build and push ETL data
 
-Using the same `federated-store.yaml` created in Step 4, create this secret and add it to the *values.yaml* file for all secondary clusters.
+Using the same *federated-store.yaml* created in Step 4, create this secret and add it to the *values.yaml* file for all secondary clusters.
 
 ```sh
 kubectl create secret generic federated-store --from-file=federated-store.yaml -n kubecost
@@ -139,7 +139,7 @@ Optionally, you can remove the [Thanos sidecar](https://raw.githubusercontent.co
 
 * Remove the [Thanos manifest](https://raw.githubusercontent.com/kubecost/cost-analyzer-helm-chart/v1.108.1/cost-analyzer/values-thanos.yaml)
 
-* Remove Thanos values in the values.yaml
+* Remove Thanos values in the *values.yaml*
 
 ## Troubeshooting
 
