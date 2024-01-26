@@ -131,13 +131,17 @@ Optionally, you can remove the [Thanos sidecar](https://raw.githubusercontent.co
 
 ### Step 8: Remove Thanos configuration from the primary cluster
 
-* Remove the [Thanos manifest](https://raw.githubusercontent.com/kubecost/cost-analyzer-helm-chart/v1.108.1/cost-analyzer/values-thanos.yaml)
-
-* Remove Thanos values in the *values.yaml*
+Remove [Thanos configurations](https://raw.githubusercontent.com/kubecost/cost-analyzer-helm-chart/v1.108.1/cost-analyzer/values-thanos.yaml) from your primary cluster since it is no longer included in the Helm chart in 2.0. Your Kubecost installation is now configured to query the Aggregator for multi-cluster data, instead of Thanos.
 
 ### Step 9: Upgrade to Kubecost 2.0
 
-You can now upgrade to Kubecost 2.0 using your standard upgrade process.
+You can now upgrade to Kubecost 2.0 using your standard upgrade process. If using Helm, it will look something like this:
+
+```sh
+helm upgrade kubecost cost-analyzer --repo https://kubecost.github.io/cost-analyzer/ \
+  --namespace kubecost \
+  -f values.yaml
+```
 
 ## Troubeshooting
 
