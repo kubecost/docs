@@ -4,13 +4,15 @@
 This feature is in beta. Please read the documentation carefully.
 {% endhint %}
 
-Kubecost can automatically implement its [recommendations](../../../apis/apis-overview/api-request-right-sizing-v2.md) for container [resource requests](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#requests-and-limits) if you have the [Cluster Controller](../../../install-and-configure/advanced-configuration/controller/cluster-controller.md) component enabled. Using container request right-sizing (RRS) allows you to instantly optimize resource allocation across your entire cluster. You can easily eliminate resource over-allocation in your cluster, which paves the way for vast savings via cluster right-sizing and other optimizations.
+Kubecost can automatically implement its [recommendations](/apis/apis-overview/api-request-right-sizing-v2.md) for container [resource requests](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#requests-and-limits) if you have the [Cluster Controller](/install-and-configure/advanced-configuration/controller/cluster-controller.md) component enabled. Using container request right-sizing (RRS) allows you to instantly optimize resource allocation across your entire cluster. You can easily eliminate resource over-allocation in your cluster, which paves the way for vast savings via cluster right-sizing and other optimizations.
+
+![Container Request Right-Sizing Recommendations](/images/crss.png)
 
 ## Prerequisites
 
-There are no restrictions to receive container RRS recommendations.&#x20;
+There are no restrictions to receive container RRS recommendations.
 
-To adopt these recommendations, you must enable the [Cluster Controller](../../../install-and-configure/advanced-configuration/controller/cluster-controller.md) on that cluster. In order for Kubecost to apply a recommendation, it needs write access to your cluster, which is enabled with the Cluster Controller.
+To adopt these recommendations, you must enable the [Cluster Controller](/install-and-configure/advanced-configuration/controller/cluster-controller.md) on that cluster. In order for Kubecost to apply a recommendation, it needs write access to your cluster, which is enabled with the Cluster Controller.
 
 ## Configuring RRS recommendations
 
@@ -19,8 +21,8 @@ Select _Savings_ in the left navigation, then select _Right-size your container 
 Select _Customize_ to modify the right-sizing settings. Your customization settings will tell Kubecost how to calculate its recommendations, so make sure it properly represents your environment and activity:
 
 * Window: Duration of deployment activity Kubecost should observe
-* Profile: Select from _Development_, _Production_, or High Availability\*, which come with preconfigured values for CPu/RAM target utilization fields. Selecting _Custom_ will allow you to manually configure these fields.
-* CPU/RAM recommendation algorithm: Always configured to _Max_.
+* Profile: Select from _Development_, _Production_, or _High Availability_, which come with preconfigured values for CPU/RAM target utilization fields. Selecting _Custom_ will allow you to manually configure these fields.
+* CPU/RAM recommendation algorithm: Alwayus configured to _Max_.
 * CPU/RAM target utilization: Refers to the percentage of used resources over total resources available.
 * Add Filters: Optional configuration to limit the deployments which will have right-sizing recommendations applied. This will provide greater flexibility in optimizing your environment. Ensure you select the plus icon next to the filter value text box to add the filter. Multiple filters can be added.
 

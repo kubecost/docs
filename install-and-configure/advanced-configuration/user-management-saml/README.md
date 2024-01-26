@@ -57,7 +57,9 @@ All SAML 2.0 providers also work. The above guides can be used as templates for 
 
 ## Using the Kubecost API
 
-When SAML SSO is enabled in Kubecost, ports 9090 and 9003 of `service/kubecost-cost-analyzer` will require authentication. Therefore user API requests will need to be authenticated with a token. The token can be obtained by logging into the Kubecost UI and copying the token from the browser’s local storage. Alternatively, a long-term token can be issued to users from your identity provider.
+When SAML SSO is enabled in Kubecost, the following ports will require authentication:
+- `service/kubecost-cost-analzyer`: ports 9003 and 9090
+- `statefulset/kubecost-aggregator` or `service/kubecost-aggregator`: port 9004
 
 {% code overflow="wrap" %}
 ```sh
@@ -66,11 +68,18 @@ curl -L 'http://kubecost.mycompany.com/model/allocation?window=1d' \
 ```
 {% endcode %}
 
-For admins, Kubecost additionally exposes an unauthenticated API on port 9004 of `service/kubecost-cost-analyzer`.
+For admins, Kubecost additionally exposes unauthenticated APIs:
 
+`service/kubecost-cost-analyzer`: port 9007
 ```sh
-kubectl port-forward service/kubecost-cost-analyzer 9004:9004
-curl -L 'localhost:9004/allocation?window=1d'
+kubectl port-forward service/kubecost-cost-analyzer 9007:9007
+curl -L 'localhost:9007/allocation?window=1d'
+```
+
+`service/kubecost-aggregator`: port 9008
+```sh
+kubectl port-forward service/kubecost-aggregator 9008:9008
+curl -L 'localhost:9008/allocation?window=1d'
 ```
 
 ## View your SAML Group
@@ -79,12 +88,12 @@ You will be able to view your current SAML Group in the Kubecost UI by selecting
 
 ## SAML troubleshooting guide
 
-1. Disable SAML and confirm that the `cost-analyzer` pod starts.
-2.  If step 1 is successful, but the pod is crashing or never enters the ready state when SAML is added, it is likely that there is panic loading or parsing SAML data.
+1. Disable SAML and confirm the `cost-analyzer` pod starts. If `kubecostAggregator.enabled` is unspecified or `true` in the _values.yaml_ file, confirm that the `aggregator` pod starts.
+2.  If Step 1 is successful, but the pod is crashing or never enters the ready state when SAML is added, it is likely there is panic when loading or parsing SAML data.
+    - If `kubecostAggregator.enabled` is `true` or unspecified in _values.yaml_, run `kubectl logs statefulsets/kubecost-aggregator` and `kubectl logs deploy/kubecost-cost-analyzer`
+    - If `kubecostAggregator.enabled` is `false` in _values.yaml_, run `kubectl logs services/kubecost-aggregator` and `kubectl logs deploy/kubecost-cost-analyzer`
 
-    `kubectl logs deployment/kubecost-cost-analyzer -c cost-model -n kubecost`
-
-If you’re supplying the SAML from the address of an Identity Provider Server, `curl` the SAML metadata endpoint from within the Kubecost pod and ensure that a valid XML EntityDescriptor is being returned and downloaded. The response should be in this format:
+If you’re supplying the SAML from the address of an Identity Provider Server, `curl` the SAML metadata endpoint from within the `kubecost` pod and ensure that a valid XML EntityDescriptor is being returned and downloaded. The response should be in this format:
 
 {% code overflow="wrap" %}
 ```bash
