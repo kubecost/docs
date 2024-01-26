@@ -6,10 +6,8 @@ This tutorial is intended to help our users migrate from the legacy Thanos feder
 
 * Assets and Allocations are now paginated using `offset`/`limit` parameters
 * New data available for querying every 2 hours (can be adjusted)
-* Embedded DuckDB database serves queries
-  * Data no longer queried directly from bingen files
-  * Substantial query speed improvements even when pagination not in effect
-* Data ingested into independent Aggregator component
+* Substantial query speed improvements even when pagination not in effect
+* Data ingested into and queried from Aggregator component instead of directly from bingen files
 * Idle (sharing), Cluster Management sharing, and Network are computed a priori
 * Distributed tracing integrated into core workflows
 * No more pre-computed "AggStores"; this reduces the memory footprint of Kubecost  
