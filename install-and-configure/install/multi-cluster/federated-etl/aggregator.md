@@ -15,8 +15,9 @@ Existing documentation for Kubecost APIs will use endpoints for non-Aggregator e
 
 ### Prerequisites
 
-* Multi-cluster Aggregator can only be configured in a Federated ETL environment
-* This documentation is for Kubecost v2.0 and higher. If using v1.107 or v1.108, please refer to a version of this documentation before January 2024.
+* Multi-cluster Aggregator can only be configured in a federated ETL environment
+* This documentation is for Kubecost v2.0 and higher.
+* To upgrade from a Thanos multi-cluster environment to Aggregator, see our [transition doc](/install-and-configure/install/multi-cluster/federated-etl/thanos-migration-guide.md).
 
 ### Tutorial
 

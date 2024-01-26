@@ -1,9 +1,7 @@
 # ETL Federation (preferred)
 
 {% hint style="info" %}
-Federated ETL is only supported for Kubecost Enterprise plans. If you are using
-a version of Kubecost before v2.0, please refer to a version of this
-documentation before January, 2024.
+Federated ETL is only supported for Kubecost Enterprise plans.
 {% endhint %}
 
 Federated extract, transform, load (ETL) is Kubecost's method to aggregate all cluster information back to a single display described in our [Multi-Cluster](/install-and-configure/install/multi-cluster/multi-cluster.md#enterprise-federation) doc. Federated ETL gives teams the benefit of combining multiple Kubecost installations into one view.
@@ -15,7 +13,6 @@ There are two primary advantages for using ETL Federation:
 
 ## Kubecost ETL Federation diagram
 
-TODO: Update this diagram
 ![ETL Federation Overview](/images/kubecost-ETL-Federated-Architecture.png)
 
 ## Sample configurations
@@ -53,7 +50,6 @@ This diagram shows an example setup of the Federated ETL with:
 
 The result is 4 clusters federated together.
 
-TODO: Update this diagram
 ![Federated ETL diagram](/images/kubecost-ETL-Federated-diagram.png)
 
 ## Setup
@@ -74,7 +70,7 @@ prometheus:
 
 ### Step 1: Storage configuration
 
-1. For any cluster in the pipeline (Federated or Primary), create a file _federated-store.yaml_ with the same format used for Thanos/S3 backup.
+1. For any cluster in the pipeline (federated or primary), create a file _federated-store.yaml_ with the same format used for Thanos/S3 backup.
    * [AWS](/install-and-configure/install/multi-cluster/long-term-storage-configuration/long-term-storage-aws.md)
    * [Azure](/install-and-configure/install/multi-cluster/long-term-storage-configuration/long-term-storage-azure.md)
    * [GCP](/install-and-configure/install/multi-cluster/long-term-storage-configuration/long-term-storage-gcp.md)
@@ -111,11 +107,11 @@ In Kubecost, the `Primary Cluster` serves the UI and API endpoints as well as re
 
 ### Step 4: Verifying successful configuration
 
-1. The Federated ETL should begin functioning. On any ETL action on a Federated Cluster (Load/Put into local ETL store) the Federated Clusters will add data to Federated Storage. 
+1. The Federated ETL should begin functioning. On any ETL action on a federated cluster (Load/Put into local ETL store) the Federated Clusters will add data to Federated Storage. 
    * To verify Federated Clusters are uploading their data correctly, check the container logs on a Federated Cluster. It should log federated uploads when ETL build steps run. The S3 bucket can also be checked to see if data is being written to the `/federated/<cluster_id>` path.
-   * In a default configuration, Aggregator will ingest new data from Federated Clusters every ten minutes, but new data may not be available for as much as multiple hours in extremely high-scale deployment. Check the Aggregator logs for information.
+   * In a default configuration, Aggregator will ingest new data from federated clusters every ten minutes, but new data may not be available for as much as multiple hours in extremely high-scale deployment. Check the Aggregator logs for information.
    * To verify the entire pipeline is working, either query `Allocations/Assets` or view the respective views on the frontend. Multi-cluster data should appear after:
-     * Federated Clusters have uploaded data to storage.
+     * Federated clusters have uploaded data to storage.
      * Aggregator has completed a full ingest and derive loop after the upload.
 
 ## Setup with internal certificate authority

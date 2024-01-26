@@ -4,8 +4,8 @@
 This feature is only officially supported on [Kubecost Enterprise plans](https://www.kubecost.com/pricing/).
 {% endhint %}
 
-{% hint style="info" %}
-Thanos-backed configurations are deprecated starting in v2.0 of Kubecost.
+{% hint style="warning" %}
+Thanos-backed configurations are deprecated as of Kubecost v2.0.
 {% endhint %}
 
 Kubecost leverages Thanos and durable storage for three different purposes:

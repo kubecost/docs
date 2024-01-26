@@ -34,10 +34,8 @@ The below diagrams highlight the two architectures:
 
 **Kubecost ETL Federation (Preferred)**
 
-TODO: Update this diagram
 ![ETL Federation Overview](/images/kubecost-ETL-Federated-Architecture.png)
 
 **Kubecost Thanos Federation**
 
-TODO: Update this diagram
 ![Thanos Overview](/images/thanos-architecture.png)
