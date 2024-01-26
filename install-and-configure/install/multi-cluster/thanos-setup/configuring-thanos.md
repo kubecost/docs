@@ -8,6 +8,10 @@ As of Kubecost v2.0, support for Thanos is deprecated. Consider [transitioning t
 This feature is only offically available on [Kubecost Enterprise plans](https://www.kubecost.com/pricing/).
 {% endhint %}
 
+{% hint style="warning" %}
+Thanos-backed configurations are deprecated as of Kubecost v2.0.
+{% endhint %}
+
 Kubecost leverages Thanos and durable storage for three different purposes:
 
 1. Centralize metric data for a global multi-cluster view into Kubernetes costs via a Prometheus sidecar
