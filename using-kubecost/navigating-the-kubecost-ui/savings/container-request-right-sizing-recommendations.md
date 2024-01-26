@@ -20,8 +20,7 @@ Select _Savings_ in the left navigation, then select _Right-size your container 
 
 Select _Customize_ to modify the right-sizing settings. Your customization settings will tell Kubecost how to calculate its recommendations, so make sure it properly represents your environment and activity:
 
-* Window: Duration of deployment activity Kubecost should observe
-
+* Window: Duration of deployment activity Kubecost will observe
 * Profile: Select from _Development_, _Production_, or High Availability\*, which come with preconfigured values for CPu/RAM target utilization fields. Selecting _Custom_ will allow you to manually configure these fields.
 * CPU/RAM recommendation algorithm: Always configured to _Max_.
 * CPU/RAM target utilization: Refers to the percentage of used resources over total resources available.

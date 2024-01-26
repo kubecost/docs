@@ -1,5 +1,4 @@
-GCP Long Term Storage
-=====================
+# GCP Long Term Storage
 
 Start by [creating a new Google Cloud Storage bucket](https://cloud.google.com/storage/docs/creating-buckets). The following example uses a bucket named `thanos-bucket`. Next, download a service account JSON file from Google's service account manager ([steps](/install-and-configure/install/cloud-integration/gcp-out-of-cluster/google-service-account-thanos.md)).
 
@@ -23,6 +22,7 @@ config:
       "client_x509_cert_url": ""
     }
 ```
+
 > **Note:** Because this is a YAML file, it requires this specific indention.
 
 > **Warning**: Do not apply a retention policy to your Thanos bucket, as it will prevent Thanos compaction from completing.
