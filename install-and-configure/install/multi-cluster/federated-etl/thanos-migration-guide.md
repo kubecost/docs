@@ -1,6 +1,13 @@
 # Migration Guide from Thanos to Kubecost 2.0 (Aggregator)
 
-This tutorial is intended to help our users migrate from the legacy Thanos federation architecture to [Kubecost 2.0 (Aggregator)](aggregator.md). There are a few requirements in order to successfully migrate to Kubecost 2.0. This new version of Kubecost includes a new backend Aggregator which handles the ETL data built from source metrics more efficiently. Kubecost 2.0 provides new features, optimizes UI performance, and enhances the user experience.
+This tutorial is intended to help our users migrate from the legacy Thanos federation architecture to [Kubecost v2.0's Aggregator](aggregator.md). There are a few requirements in order to successfully migrate to Kubecost 2.0. This new version of Kubecost includes a new backend Aggregator which handles the ETL data built from source metrics more efficiently. Kubecost 2.0 provides new features, optimizes UI performance, and enhances the user experience. This tutorial is meant to be performed before the user upgrades from an older version of Kubecost to v2.0.
+
+Important notes for the migration process:
+
+* Once Aggregator is enabled, all queries hit the Aggregator container and *not* cost-model via the reverse proxy.
+* The ETL-Utils container only creates additional files in the object store. It does not delete any data/metrics.
+* For larger environments, the StorageClass must have 1GBPS throughput.
+* Having enough storage is critically important and will vary based on environment. Bias towards a larger value for `aggregatorDBStorage.storageRequest` at the beginning and cut it down if persistent low utilization is observed.  
 
 ## Key changes
 
@@ -13,17 +20,9 @@ This tutorial is intended to help our users migrate from the legacy Thanos feder
 * No more pre-computed "AggStores"; this reduces the memory footprint of Kubecost  
   * Request-level caching still in effect
 
-## Aggregator Architecture
+## Aggregator architecture
 
 ![aggregator-diagram](/images/aggregator/aggregator-diagram.png)
-
-Important notes for the migration process:
-
-* The goal of this doc is to gradually migrate off Thanos (it is no longer supported in the Kubecost 2.0 helm chart), towards Federated ETL, then finally Aggregator.
-* Once Aggregator is enabled, all queries hit the Aggregator container and *not* cost-model via the reverse proxy.
-* The ETL-Utils container only creates additional files in the object store, it does not delete any data/metrics.
-* For larger environments, the StorageClass must have 1GBPS throughput.
-* Having enough storage is critically important and will vary based on environment. Bias towards a larger value for `aggregatorDBStorage.storageRequest` at the beginning and cut it down if persistent low utilization is observed.  
 
 ## Migration process
 
