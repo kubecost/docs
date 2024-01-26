@@ -63,10 +63,10 @@ Secondary clusters write to the global storage-bucket via the thanos-sidecar on 
 
 ## Node-Exporter
 
-You can disable node-exporter and the service account if cluster/node rightsizing recommendations are not required.
+Node-exporter is disabled by default. You should keep it this way if cluster/node right-sizing recommendations are not required.
 
 {% hint style="info" %}
-node-export must be disabled if there is an existing DaemonSet. More info [here](/troubleshooting/troubleshoot-install.md#failedscheduling-kubecost-prometheus-node-exporter).
+Node-exporter must remain disabled if there is an existing DaemonSet. More info [here](/troubleshooting/troubleshoot-install.md#failedscheduling-kubecost-prometheus-node-exporter).
 {% endhint %}
 
 ## Helm values

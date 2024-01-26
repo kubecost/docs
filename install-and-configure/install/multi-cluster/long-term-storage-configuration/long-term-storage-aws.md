@@ -1,8 +1,7 @@
-AWS Multi-Cluster Storage Configuration
-=======================================
+# AWS Multi-Cluster Storage Configuration
 
 ## AWS/S3 Federation
-<a name="overview"></a>
+
 Kubecost uses a shared storage bucket to store metrics from clusters, known as durable storage, in order to provide a single-pane-of-glass for viewing cost across many clusters. Multi-cluster is an enterprise feature of Kubecost.
 
 There are multiple methods to provide Kubecost access to an S3 bucket. This guide has two examples:
@@ -17,12 +16,10 @@ This is a simple S3 bucket with all public access blocked. No other bucket confi
 Once created, add an IAM policy to access this bucket. See our [AWS Thanos IAM Policy](aws-service-account-thanos.md) doc for instructions.
 
 ## Method 1: Kubernetes Secret Method
-<a name="secret"></a>
+
 To use the Kubernetes secret method for allowing access, create a YAML file named `object-store.yaml` with contents similar to the following example. See region to endpoint mappings [here](https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region).
 
-
 ```yaml
-
 type: S3
 config:
   bucket: "kc-thanos-store"
@@ -44,12 +41,12 @@ config:
 ```
 
 ## Method 2: Attach IAM role to Service Account Method
-<a name="attach-role"></a>
+
 Instead of using a secret key in a file, many will want to use this method.
 
 Attach the policy to the Thanos pods service accounts. Your `object-store.yaml` should follow the format below when using this option, which does not contain the secret_key and access_key fields.
 
-```
+```yaml
 type: S3
 config:
   bucket: "kc-thanos-store"
@@ -83,7 +80,7 @@ Once that annotation has been created, configure the following:
 ```
 
 ## Thanos Encryption With S3 and KMS
-<a name="encryption"></a>
+
 You can encrypt the S3 bucket where Kubecost data is stored in AWS via S3 and KMS. However, because Thanos can store potentially millions of objects, it is suggested that you use bucket-level encryption instead of object-level encryption. More details available in these external docs:
 
 * [Thanos S3 storage doc](https://thanos.io/tip/thanos/storage.md/#s3)

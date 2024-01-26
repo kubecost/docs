@@ -1,5 +1,9 @@
 # High Availability Kubecost
 
+{% hint style="warning" %}
+High availability mode is no longer supported as of Kubecost 2.0.
+{% endhint %}
+
 {% hint style="info" %}
 High availability mode is only officially supported on Kubecost Enterprise plans.
 {% endhint %}
@@ -15,8 +19,6 @@ The Leader/Follower implementation leverages a `coordination.k8s.io/v1` `Lease` 
 * Followers who receive Queries in a backup store will not stack on pending reads, preventing external queries from blocking.
 * Followers promoted to Leader will drop all locks and receive write privileges.
 * Leaders behave identically to a single Kubecost install.
-
-![Leader/Follower](/images/leader-follower.png)
 
 ## Configuring high availability
 
