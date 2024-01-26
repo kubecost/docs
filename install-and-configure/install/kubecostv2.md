@@ -16,7 +16,7 @@ Upon upgrading, you should see the following pods running:
 
 ## (Enterprise) Federated ETL users
 
-As a FederatedETL user, there should be minimal changes. Crucially, Kubecost 2.0 deprecates the Federator and instead introduces the Aggregator. When upgrading to Kubecost 2.0, ensure you've disabled the following components via the *values.yaml* file:
+As a FederatedETL user, the following changes to your *values.yaml* will need to be made to primary clusters:
 
 ```yaml
 federatedETL:
@@ -24,11 +24,23 @@ federatedETL:
   primaryCluster: false
   federator:
     enabled: false
+kubecostAggregator:
+  deployMethod: "statefulset"
 ```
 
-It is important that `.Values.federatedETL.federatedCluster=true` in all your deployments. Each cluster is still responsible for building & pushing ETL files to the object store.
+And the following changes will need to be made to your secondary clusters:
 
-When upgrading to Kubecost 2.0, the Aggregator should be automatically deployed. No additional values need to be set, however additional details can be found [here](/install-and-configure/install/multi-cluster/federated-etl/aggregator.md).
+```yaml
+federatedETL:
+  federatedCluster: true
+  primaryCluster: false
+  federator:
+    enabled: false
+kubecostAggregator:
+  deployMethod: "disabled"
+```
+
+Crucially, Kubecost 2.0 deprecates the Federator and instead introduces the Aggregator. It's still important that `.Values.federatedETL.federatedCluster=true` in all your deployments. Each cluster is still responsible for building & pushing ETL files to the object store. Visit the [Aggregator docs](/install-and-configure/install/multi-cluster/federated-etl/aggregator.md) to learn more.
 
 ## (Enterprise) Thanos users
 
