@@ -31,10 +31,8 @@ This tutorial is intended to help our users migrate from the legacy Thanos feder
 
 </details>
 
-* All steps are done on the primary cluster except for step 8.
-* Nothing needs to be done on the secondary clusters for the migration to be successful. The Thanos sidecar on the secondary clusters will have no impact on the migration or functionality.
 * Once Aggregator is enabled, all queries hit the Aggregator container and *not* cost-model via the reverse proxy.
-* ETL Utils does not destroy the Thanos data, it creates additional directories in the object store.
+* The ETL-Utils container only creates additional files in the object store, it does not delete any data/metrics.
 * For larger environments, the StorageClass must have 1GBPS throughput.
 * Having enough storage is critically important and will vary based on environment. Bias towards a larger value for `aggregatorDBStorage.storageRequest` at the beginning and cut it down if persistent low utilization is observed.  
 
@@ -69,7 +67,7 @@ There should be ETL data present in the following directories. CloudCosts will o
 * `/etl/bingen/assets/`
 * `/cloudcosts/`
 
-### Step 4: Create a new federated-store secret
+### Step 4: Create a new federated-store secret on the primary cluster
 
 This will point to the existing Thanos object store or the new object store created in Step 1. The secret should be identical to your `object-store.yaml`, with the exception that this new secret *must* be named `federated-store.yaml`.
 
@@ -91,19 +89,19 @@ kubectl create secret generic federated-store --from-file=federated-store.yaml -
 
 ```yaml
 etlUtils:
-  thanosSourceBucketSecret: kubecost-thanos
   enabled: true
+  thanosSourceBucketSecret: kubecost-thanos
   fullImageName: gcr.io/kubecost1/cost-model-etl-utils:0.2
   resources: {}
 kubecostModel:
   federatedStorageConfigSecret: federated-store
 ```
 
-### Step 6: Apply the changes and wait for data to populate in the UI. 
+### Step 6: Apply the changes and wait for data to populate in the UI
 
 Ensure all pods and containers are running:
 
- ```
+```txt
 kubecost-cost-analyzer-685fd8f677-k652h        4/4     Running   2 (12m ago)   3h2m
 kubecost-forecasting-6cf4dd7b98-7z8f5          1/1     Running   0             66m
 kubecost-etl-utils-6cdd489596-5dl75           1/1     Running   0          6d20h
@@ -116,24 +114,26 @@ This can take some time depending on how many unique containers are running in t
 
 Ensure all data loads into the Kubecost UI before moving onto Step 7.
 
-### Step 7: Remove Thanos sidecar from secondary clusters
+### Step 7: Upgrade your secondary clusters to build and push ETL data
 
-* Use the same federated-store secret created in Step 4 and add the following to the _values.yaml_ for the secondary clusters:
+Using the same `federated-store.yaml` created in Step 4, create this secret and add it to the *values.yaml* file for all secondary clusters.
 
+```sh
+kubectl create secret generic federated-store --from-file=federated-store.yaml -n kubecost
 ```
+
+```yaml
 federatedETL:
-  useExistingS3Config: false
-  primaryCluster: false
   federatedCluster: true
 kubecostModel:
   containerStatsEnabled: true
   federatedStorageConfigSecret: federated-store
+  etl: true
   warmCache: false
   warmSavingsCache: false
 ```
 
-* Remove the [Thanos manifest](https://raw.githubusercontent.com/kubecost/cost-analyzer-helm-chart/v1.108.1/cost-analyzer/values-thanos.yaml)
-
+Optionally, you can remove the [Thanos sidecar](https://raw.githubusercontent.com/kubecost/cost-analyzer-helm-chart/v1.108.1/cost-analyzer/values-thanos.yaml) running on this secondary cluster. If left on, this secondary cluster will continue to push Prometheus metrics to the object store which can be used as a backup.
 
 ### Step 8: Remove Thanos configuration from the primary cluster
 
