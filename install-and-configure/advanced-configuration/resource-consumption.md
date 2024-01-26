@@ -40,12 +40,12 @@ Lowering query resolution will reduce memory consumption but will cause short ru
 
 Fewer data points scraped from Prometheus means less data to collect and store, at the cost of Kubecost making estimations that possibly miss spikes of usage or short running pods. The default value is: `60s`. This can be tuned in our [Helm values](https://github.com/kubecost/cost-analyzer-helm-chart/blob/v1.93.2/cost-analyzer/values.yaml#L389) for the Prometheus scrape job.
 
-## Disable or stop scraping node exporter
+## Keep node exporter disabled
 
-Node-exporter is optional. Some health alerts will be disabled if node-exporter is disabled, but savings recommendations and core cost allocation will function normally. This can be disabled with the following [Helm values](https://github.com/kubecost/cost-analyzer-helm-chart/blob/v1.93.2/cost-analyzer/values.yaml#L442):
+Node-exporter is disabled by default, and is an optional feature. Some health alerts will be disabled if node-exporter is disabled, but savings recommendations and core cost allocation will function normally. You can enable node-exporter with the following [Helm values](https://github.com/kubecost/cost-analyzer-helm-chart/blob/v1.93.2/cost-analyzer/values.yaml#L442):
 
-* `--set prometheus.server.nodeExporter.enabled=false`
-* `--set prometheus.serviceAccounts.nodeExporter.create=false`
+* `--set prometheus.server.nodeExporter.enabled=true`
+* `--set prometheus.serviceAccounts.nodeExporter.create=true`
 
 ## Soft memory limit field
 
