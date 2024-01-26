@@ -116,7 +116,15 @@ Use [your browser's devtools](https://developer.chrome.com/docs/devtools/network
 
 ### Option 2: Review logs, and decode your JWT tokens
 
+If `kubecostAggregator.enabled` is `true` or unspecified in `values.yaml`:
 ```sh
+kubectl logs statefulsets/kubecost-aggregator
+kubectl logs deploy/kubecost-cost-analyzer
+```
+
+If `kubecostAggregator.enabled` is `false` in `values.yaml`:
+```sh
+kubectl logs services/kubecost-aggregator
 kubectl logs deploy/kubecost-cost-analyzer
 ```
 
@@ -130,6 +138,10 @@ Code reference for the below example can be found [here](https://github.com/kube
 
 ```yaml
 kubecostModel:
+  extraEnv:
+    - name: LOG_LEVEL
+      value: debug
+kubecostAggregator:
   extraEnv:
     - name: LOG_LEVEL
       value: debug

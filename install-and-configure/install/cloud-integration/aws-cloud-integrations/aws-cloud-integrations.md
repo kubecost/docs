@@ -4,9 +4,9 @@ By default, Kubecost pulls on-demand asset prices from the public AWS pricing AP
 
 You will need permissions to create the Cost and Usage Report (CUR), and add IAM credentials for Athena and S3. Optional permission is the ability to add and execute CloudFormation templates. Kubecost does not require root access in the AWS account.
 
-This guide contains multiple possible methods for connecting Kubecost to AWS billing, based on user environment and preference. Because of this, there may not be a straightforward approach for new users. To address this, a streamlined guide containing best practices can be found [here](aws-cur-quick-start.md). This best practices guide has some assumptions to carefully consider.
+## Quick Start for IRSA
 
-For the below guide, a GitHub repository with sample files can be found [here](https://github.com/kubecost/poc-common-configurations/tree/main/aws).
+This guide contains multiple possible methods for connecting Kubecost to AWS billing, based on user environment and preference. Because of this, there may not be a straightforward approach for new users. To address this, a streamlined guide containing best practices can be found [here](aws-cloud-integration-using-irsa.md) for IRSA environments. This quick start guide has some assumptions to carefully consider, and may not be applicable for all users. See prerequisites in the linked article.
 
 ## Key AWS terminology
 
@@ -19,6 +19,8 @@ Integrating your AWS account with Kubecost may be a complicated process if you a
 **S3 bucket:** Cloud object storage tool which both CURs and Athena output cost data to. Kubecost needs access to these buckets in order to read that data.
 
 ## Cost and Usage Report integration
+
+For the below guide, a GitHub repository with sample files can be found [here](https://github.com/kubecost/poc-common-configurations/tree/main/aws).
 
 ### Step 1: Setting up a CUR
 
@@ -596,6 +598,18 @@ This error can also occur when the management account cross-account permissions 
         "Sid": "S3ReadAccessToAwsBillingData"
     }
 ```
+
+#### outputLocation is not a valid S3 path
+
+* **Symptom:** A similar error to this will be shown on the Diagnostics page under Pricing Sources.
+
+{% code overflow="wrap" %}
+```
+Connection test failed for cloud integration config: Fetch error: cloud billing data fetch error: GetCloudCost: error getting Athena columns: QueryAthenaPaginated: start query error: operation error Athena: StartQueryExecution, https response error StatusCode: 400, RequestID: a6059220-5ac8-4c24-97d2-401a2dbfd421, InvalidRequestException: outputLocation is not a valid S3 path.
+```
+{% endcode %}
+
+* **Resolution:** Please verify that the prefix `s3://` was used when setting the `athenaBucketName` Helm value or when configuring the bucket name in the Kubecost UI.
 
 #### Query not supported
 

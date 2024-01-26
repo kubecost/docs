@@ -181,10 +181,31 @@ saml:
 
 ## Troubleshooting
 
-You can view the logs on the cost-model container. In this example, the assumption is that the prefix for Kubecost groups is `kubecost_`. This command is currently a work in progress.
-
+You can look at the logs on the aggregator and cost-model containers. In this example, the assumption is that the prefix for Kubecost groups is `kubecost_`. This script is currently a work in progress.
 
 `kubectl logs deployment/kubecost-cost-analyzer -c cost-model --follow |grep -v -E 'resourceGroup|prometheus-server'|grep -i -E 'group|xmlname|saml|login|audience|kubecost_'`
+
+{% code overflow="wrap" %}
+```
+kubectl logs deployment/kubecost-cost-analyzer -c cost-model --follow |grep -v -E 'resourceGroup|prometheus-server'|grep -i -E 'group|xmlname|saml|login|audience|kubecost_'
+```
+{% endcode %}
+
+If `kubecostAggregator.enabled` is `true` or unspecified in _values.yaml_:
+
+{% code overflow="wrap" %}
+```
+kubectl logs statefulsets/kubecost-aggregator --follow |grep -v -E 'resourceGroup|prometheus-server'|grep -i -E 'group|xmlname|saml|login|audience|kubecost_'
+```
+{% endcode %}
+
+If `kubecostAggregator.enabled` is `false` in _values.yaml_:
+
+{% code overflow="wrap" %}
+```
+kubectl logs services/kubecost-aggregator --follow |grep -v -E 'resourceGroup|prometheus-server'|grep -i -E 'group|xmlname|saml|login|audience|kubecost_'
+```
+{% endcode %}
 
 When the group has been matched, you will see:
 
