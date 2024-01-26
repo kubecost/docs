@@ -1,5 +1,9 @@
 # High Availability Kubecost
 
+{% hint style="warning" %}
+High availability mode is no longer supported as of Kubecost 2.0.
+{% endhint %}
+
 {% hint style="info" %}
 High availability mode is only officially supported on Kubecost Enterprise plans.
 {% endhint %}
