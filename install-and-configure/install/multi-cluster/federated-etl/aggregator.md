@@ -21,7 +21,11 @@ Existing documentation for Kubecost APIs will use endpoints for non-Aggregator e
 
 ### Tutorial
 
-Select from one of the two templates below and save the content as _aggregator.yaml_. This will be your configuration for your primary installation of Kubecost.
+Select from one of the two templates below and save the content as _federated-store.yaml_. This will be your configuration template required to set up Aggregator.
+
+{% hint style="warning" %}
+The name of the .yaml file used to create the secret must be named _federated-store.yaml_ or Aggregator will not start.
+{% endhint %}
 
 Basic configuration:
 
@@ -102,11 +106,11 @@ serviceAccount:
 
 There is no baseline for what is considered a larger deployment, which will be dependent on load times in your Kubecost environment.
 
-Once you’ve configured your _aggregator.yaml_, create a secret using the following command:
+Once you’ve configured your _federated-store_.yaml_, create a secret using the following command:
 
 {% code overflow="wrap" %}
 ```
-kubectl create secret generic federated-storage -n kubecost --from-file=aggregator.yaml
+kubectl create secret generic federated-storage -n kubecost --from-file=federated-store.yaml
 ```
 {% endcode %}
 
@@ -121,7 +125,7 @@ kubectl create secret generic cloud-integration -n kubecost --from-file=cloud-in
 Finally, upgrade your existing Kubecost installation. This command will install Kubecost if it does not already exist:
 
 {% hint style="warning" %}
-Upgrading your existing Kubecost using your configured _aggregator.yaml_ file above will reset all existing Helm values configured in your _values.yaml_. If you wish to preserve any of those changes, append your _values.yaml_ by adding the contents of your _aggregator.yaml_ file into it, then replacing `aggregator.yaml` with `values.yaml` in the upgrade command below:
+Upgrading your existing Kubecost using your configured _federated-store_.yaml_ file above will reset all existing Helm values configured in your _values.yaml_. If you wish to preserve any of those changes, append your _values.yaml_ by adding the contents of your _federated-store.yaml_ file into it, then replacing `federated-store.yaml` with `values.yaml` in the upgrade command below:
 {% endhint %}
 
 ```
