@@ -24,8 +24,9 @@ For the below guide, a GitHub repository with sample files can be found [here](h
 
 ### Step 1: Setting up a CUR
 
-Follow [these steps](https://docs.aws.amazon.com/cur/latest/userguide/cur-create.html) to set up a CUR using the settings below.
+Follow [these steps](https://docs.aws.amazon.com/cur/latest/userguide/cur-create.html) to set up a Legacy CUR using the settings below.
 
+* Select the _Legacy CUR export_ type.
 * For time granularity, select _Daily_.
 * Under 'Additional content', select the _Enable resource IDs_ checkbox.
 * Under 'Report data integration' select the _Amazon Athena_ checkbox.
