@@ -25,7 +25,7 @@
   * [Multi-Cluster](install-and-configure/install/multi-cluster/multi-cluster.md)
     * [ETL Federation (preferred)](install-and-configure/install/multi-cluster/federated-etl/federated-etl.md)
       * [Kubecost Aggregator](install-and-configure/install/multi-cluster/federated-etl/aggregator.md)
-      * [Migration Guide from Thanos to Kubecost 2.0 (Aggregator)](install-and-configure/install/multi-cluster/federated-etl/thanos-migration-guide.md.md)
+      * [Migration Guide from Thanos to Kubecost 2.0 (Aggregator)](install-and-configure/install/multi-cluster/federated-etl/thanos-migration-guide.md)
       * [Backups and Alerting](install-and-configure/install/multi-cluster/federated-etl/federated-etl-backups-alerting.md)
     * [Thanos Federation](install-and-configure/install/multi-cluster/thanos-setup/thanos-setup.md)
       * [Configuring Thanos](install-and-configure/install/multi-cluster/thanos-setup/configuring-thanos.md)
