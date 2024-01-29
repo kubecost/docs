@@ -462,7 +462,9 @@ eksctl utils associate-iam-oidc-provider \
 
 **Step 4: Create required IAM service accounts**
 
-**Note:** Remember to replace `1234567890` with your AWS account ID number.
+{% hint style="info" %}
+Remember to replace `1234567890` with your AWS account ID number.
+{% endhint %}
 
 {% code overflow="wrap" %}
 ```

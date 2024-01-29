@@ -106,7 +106,7 @@ serviceAccount:
 
 There is no baseline for what is considered a larger deployment, which will be dependent on load times in your Kubecost environment.
 
-Once you’ve configured your _federated-store_.yaml_, create a secret using the following command:
+Once you’ve configured your _federated-store.yaml_, create a secret using the following command:
 
 {% code overflow="wrap" %}
 ```
