@@ -56,3 +56,17 @@ To upgrade to Kubecost 2.x, please add the following helm value to your existing
 upgrade:
   toV2: true
 ```
+
+## Troubleshooting
+
+If you encounter any issues during the upgrade process, please refer to the section below, our [general troubleshooting guide](/troubleshooting/troubleshoot-install.md), or reach out to support@kubecost.com.
+
+### Running Aggregator in v1.107 or v1.108
+
+```txt
+ERROR:
+An existing Aggregator StatefulSet was found in your namespace.
+Before upgrading to Kubecost 2.x, please `kubectl delete` this Statefulset.
+```
+
+If you were running the Aggregator in v1.107 or v1.108, you will need to manually run `kubectl delete sts/kubecost-aggregator` before upgrading to v2.0. This is due to a breaking change in the StatefulSet template, specifically a removal of one of the Aggregator's PVs,which Helm does not allow.
