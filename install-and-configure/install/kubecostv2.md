@@ -69,4 +69,4 @@ An existing Aggregator StatefulSet was found in your namespace.
 Before upgrading to Kubecost 2.x, please `kubectl delete` this Statefulset.
 ```
 
-If you were running the Aggregator in v1.107 or v1.108, you will need to manually run `kubectl delete sts/kubecost-aggregator` before upgrading to v2.0. This is due to a breaking change in the StatefulSet template, specifically a removal of one of the Aggregator's PVs,which Helm does not allow.
+If you were running the Aggregator in v1.107 or v1.108, you will need to manually run `kubectl delete sts/kubecost-aggregator` before upgrading to v2.0. This is due to a breaking change in the StatefulSet template, specifically a removal of one of the Aggregator's PVs, which Helm does not allow an upgrade.
