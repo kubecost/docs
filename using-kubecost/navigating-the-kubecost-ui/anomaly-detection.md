@@ -20,4 +20,4 @@ Forecasting can be accessed from any of these dashboards by selecting *Edit* > *
 
 Selecting an anomaly will open the Cloud Cost Explorer with a filter for that specific service, allowing you to observe more cost metrics for that service.
 
-You can edit the window of time of detected anomalies by selecting the date range picker in the top right of the page (default *Last 7 days*).
+ANomaly detection is determined by the provided window of time of data for Kubecost to sample (default *Last 7 days*). This range establishes how much acitvity Kubecost will sample per service to detect anomalies, and will only display anomalies detecting in that window.
