@@ -1,6 +1,6 @@
 # Migration Guide from Thanos to Kubecost 2.0 (Aggregator)
 
-This tutorial is intended to help our users migrate from the legacy Thanos federation architecture to [Kubecost v2.0's Aggregator](aggregator.md). There are a few requirements in order to successfully migrate to Kubecost 2.0. This new version of Kubecost includes a new backend Aggregator which handles the ETL data built from source metrics more efficiently. Kubecost 2.0 provides new features, optimizes UI performance, and enhances the user experience. This tutorial is meant to be performed before the user upgrades from an older version of Kubecost to v2.0.
+This tutorial is intended to help our users migrate from the legacy Thanos federation architecture to [Kubecost v2.0's Aggregator](aggregator.md). There are a few requirements in order to successfully migrate to Kubecost v2.0. This new version of Kubecost includes a new backend Aggregator which handles the ETL data built from source metrics more efficiently. Kubecost v2.0 provides new features, optimizes UI performance, and enhances the user experience. This tutorial is meant to be performed before the user upgrades from an older version of Kubecost to v2.0.
 
 Important notes for the migration process:
 
@@ -22,11 +22,11 @@ Important notes for the migration process:
 
 ## Aggregator architecture
 
-![aggregator-diagram](/images/aggregator/aggregator-diagram.png)
+![Aggrgeator diagram](/images/aggregator/aggregator-diagram.png)
 
 ## Migration process
 
-All of these steps should be performed on Kubecost 1.108.1. Only at the end, will you upgrade to Kubecost 2.0. The goal of this doc is to gradually migrate off Thanos (it is no longer supported in the Kubecost 2.0 helm chart), towards Federated ETL, then finally Aggregator.
+All of these steps should be performed on Kubecost v1.108.1. Only at the end, will you upgrade to Kubecost 2.0. The goal of this doc is to gradually migrate off Thanos (it is no longer supported in the Kubecost v2.0 Helm chart), towards Federated ETL, then finally Aggregator.
 
 ### Step 1: Use the existing Thanos object store or create a new dedicated object store
 
@@ -57,7 +57,7 @@ There should be ETL data present in the following directories. CloudCosts will o
 
 ### Step 4: Create a new federated-store secret on the primary cluster
 
-This will point to the existing Thanos object store or the new object store created in Step 1. The secret should be identical to your `object-store.yaml`, with the exception that this new secret *must* be named `federated-store.yaml`.
+This will point to the existing Thanos object store or the new object store created in Step 1. The secret should be identical to your *object-store.yaml*, with the exception that this new secret *must* be named *federated-store.yaml*.
 
 {% hint style="warning" %}
 The name of the .yaml file used to create the secret *must* be named *federated-store.yaml* or Aggregator will not start.
@@ -135,7 +135,7 @@ Remove [Thanos configurations](https://raw.githubusercontent.com/kubecost/cost-a
 
 ### Step 9: Upgrade to Kubecost 2.0
 
-You can now upgrade to Kubecost 2.0 using your standard upgrade process. If using Helm, it will look something like this:
+You can now upgrade to Kubecost 2.0 using your standard upgrade process. If upgrading via Helm, your upgrade command will look like:
 
 ```sh
 helm upgrade kubecost cost-analyzer --repo https://kubecost.github.io/cost-analyzer/ \
@@ -145,4 +145,4 @@ helm upgrade kubecost cost-analyzer --repo https://kubecost.github.io/cost-analy
 
 ## Troubeshooting
 
-* Check the Aggregator container logs for query failures or SQL table failures.
+To help diagnose problems with Aggregator, check the Aggregator container logs for query failures or SQL table failures. If you have additional questions, contact Kubecost support at [support@kubecost.com](mailto:support@kubecost.com).

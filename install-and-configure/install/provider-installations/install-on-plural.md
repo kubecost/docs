@@ -77,8 +77,9 @@ To bring your entire Plural deployment down, run:
 ```bash
 plural destroy
 ```
-
-> **Note:** Only do this if you're absolutely sure you want to bring down all associated resources with this repository.
+{% hint style="info" %}
+Only do this if you're absolutely sure you want to bring down all associated resources with this repository.
+{% endhint %}
 
 ## Troubleshooting
 
