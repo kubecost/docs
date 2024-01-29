@@ -111,6 +111,7 @@
   * [Cluster Health Score](using-kubecost/navigating-the-kubecost-ui/cluster-health-score.md)
   * [Budgets](using-kubecost/navigating-the-kubecost-ui/budgets.md)
   * [Audits](using-kubecost/navigating-the-kubecost-ui/audits.md)
+  * [Anomaly Detection](using-kubecost/navigating-the-kubecost-ui/anomaly-detection.md)
   * [Teams](using-kubecost/navigating-the-kubecost-ui/teams.md)
 * [Contexts](using-kubecost/context-switcher.md)
 * [Kubecost Data Audit](using-kubecost/kubecost-data-audit/README.md)
