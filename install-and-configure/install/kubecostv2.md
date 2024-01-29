@@ -1,6 +1,6 @@
 # Kubecost 2.x Install/Upgrade
 
-Kubecost v2.0 introduced massive functionality changes including changes to backend architecture which may require additional changes to be made to your environment before upgrading an older version of Kubecost to 2.x. This article reviews several different common configurations and explains any necessary steps to take.
+Kubecost v2.0 introduced massive functionality changes including changes to the backend architecture. This may require additional changes be made to your environment before upgrading from an older version of Kubecost to 2.x. This article reviews several different common configurations and explains any necessary steps to take.
 
 ## Single cluster users
 
@@ -9,11 +9,19 @@ If you have a single cluster installation of Kubecost (i.e. one primary Kubecost
 If you are using Helm, it may look something like this:
 
 ```sh
+$ helm upgrade kubecost --repo https://kubecost.github.io/cost-analyzer/ cost-analyzer \
+    --namespace kubecost \
+    -f values.yaml
 ```
 
 Upon upgrading, you should see the following pods running:
 
 ```sh
+$ kubectl get pods -n kubecost
+NAME                                          READY   STATUS    RESTARTS   AGE
+kubecost-cost-analyzer-866d7964fc-8jxr2       4/4     Running   0          108s
+kubecost-grafana-cf6c67ff8-tsbcn              2/2     Running   0          108s
+kubecost-prometheus-server-697c5f5675-mc4tm   1/1     Running   0          108s
 ```
 
 ## (Enterprise) Federated ETL users
@@ -40,8 +48,7 @@ Importantly, Kubecost 2.x removes support for Thanos via its Helm chart. For det
 
 ## (Enterprise) Single Sign On (SSO)/RBAC users
 
-Kubecost 2.x has significant architectural changes that may impact RBAC. This should be tested before giving end-users access to the UI.
-Kubecost has tested various configurations and believe that 2.x will be 100% compatible with existing configurations.
+Kubecost 2.x has significant architectural changes that may impact RBAC. This should be tested before giving end-users access to the UI. Kubecost has tested various configurations and believe that 2.x will be 100% compatible with existing configurations.
 
 To upgrade to Kubecost 2.x, please add the following helm value to your existing configuration:
 

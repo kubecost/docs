@@ -29,7 +29,7 @@ The name of the .yaml file used to create the secret must be named _federated-st
 
 Basic configuration:
 
-```
+```yaml
 kubecostAggregator:
   replicas: 1
   deployMethod: statefulset
@@ -61,7 +61,7 @@ serviceAccount:
 
 Advanced configuration (for larger deployments):
 
-```
+```yaml
 kubecostAggregator:
   replicas: 1
   deployMethod: statefulset
@@ -109,7 +109,7 @@ There is no baseline for what is considered a larger deployment, which will be d
 Once you’ve configured your _federated-store_.yaml_, create a secret using the following command:
 
 {% code overflow="wrap" %}
-```
+```sh
 kubectl create secret generic federated-storage -n kubecost --from-file=federated-store.yaml
 ```
 {% endcode %}
@@ -117,7 +117,7 @@ kubectl create secret generic federated-storage -n kubecost --from-file=federate
 Next, you will need to create an additional `cloud-integration` secret. Follow this tutorial on [creating cloud integration secrets](../../cloud-integration/multi-cloud.md#step-2-create-cloud-integration-secret) to generate your _cloud-integration.json_ file, then run the following command:
 
 {% code overflow="wrap" %}
-```
+```sh
 kubectl create secret generic cloud-integration -n kubecost --from-file=cloud-integration.json
 ```
 {% endcode %}
@@ -128,11 +128,11 @@ Finally, upgrade your existing Kubecost installation. This command will install 
 Upgrading your existing Kubecost using your configured _federated-store_.yaml_ file above will reset all existing Helm values configured in your _values.yaml_. If you wish to preserve any of those changes, append your _values.yaml_ by adding the contents of your _federated-store.yaml_ file into it, then replacing `federated-store.yaml` with `values.yaml` in the upgrade command below:
 {% endhint %}
 
-```
+```sh
 helm upgrade --install "kubecost-primary" \
---namespace kubecost-primary \
---repo https://kubecost.github.io/cost-analyzer/ cost-analyzer \
--f aggregator.yaml
+  --namespace kubecost-primary \
+  --repo https://kubecost.github.io/cost-analyzer/ cost-analyzer \
+  -f aggregator.yaml
 ```
 
 ### Validating Aggregator pod is running successfully
