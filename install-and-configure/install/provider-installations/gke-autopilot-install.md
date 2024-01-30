@@ -2,7 +2,7 @@
 
 ## Installing Kubecost for GKE Autopilot via Helm
 
-Installing Kubecost on a GKE Autopilot cluster is similar to other cloud providers with Helm v3.1+, with a few changes. Autopilot requires the use of [Google Managed Prometheus](/install-and-configure/install/custom-prom/gcp-gmp-integration.md) service, which generates additional costs within your Google Cloud account.
+Installing Kubecost on a GKE Autopilot cluster is similar to other cloud providers with Helm v3.1+, with a few changes. Autopilot requires the use of [Google Managed Prometheus](/install-and-configure/advanced-configuration/custom-prom/gcp-gmp-integration.md) service, which generates additional costs within your Google Cloud account.
 
 `helm install kubecost/cost-analyzer -n kubecost -f values.yaml`
 

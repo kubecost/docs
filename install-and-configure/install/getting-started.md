@@ -57,6 +57,6 @@ Efficiency and idle costs can teach you more about the cost-value of your Kubern
 
 ## **See also**
 
-* [Using an existing Prometheus installation](custom-prom/custom-prom.md)
-* [Using an existing Grafana installation](custom-grafana.md)
+* [Using an existing Prometheus installation](/install-and-configure/advanced-configuration/custom-prom/custom-prom.md)
+* [Using an existing Grafana installation](/install-and-configure/advanced-configuration/custom-grafana.md)
 * [Exposing Kubecost with an Ingress](ingress-examples.md)
