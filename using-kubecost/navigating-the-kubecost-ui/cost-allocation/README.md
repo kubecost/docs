@@ -26,7 +26,7 @@ Select the date range of the report, called the window, by setting specific star
 
 Step size refers to the length of time of each group of data displayed on your dashboard across the window. Options are _Default_, _Daily_, _Weekly_, _Monthly_, and _Quarterly_. When retaining long periods of data through custom configurations (such as Prometheus), consider using larger step sizes to avoid potential display errors. The step size when selecting _Default_ is dependent on the size of your window.
 
-### Aggregate By filters
+### Aggregate BY
 
 Here you can aggregate cost by namespace, deployment, service, and other native Kubernetes concepts. While selecting _Single Aggregation_, you will only be able to select one concept at a time. While selecting _Multi Aggregation_, you will be able to filter for multiple concepts at the same time.
 
@@ -51,11 +51,15 @@ kubectl get pods -l 'app notin (prometheus, cost-analyzer, ...)' --all-namespace
 kubectl get pods --show-labels -n <TARGET_NAMESPACE>
 ```
 
-## Edit report
+### Filters
+
+Filter allocation data by all available aggregation categories. When a filter is applied, only resources with this matching value will be shown. Supports advanced filtering options as well.
+
+### Edit report
 
 The _Edit_ icon has additional options for configuring your query such as how to display your data, adding filters, and configuring shared resources.
 
-### Idle Costs
+#### Idle Costs
 
 Allocating [idle costs](https://docs.kubecost.com/using-kubecost/navigating-the-kubecost-ui/cost-allocation/efficiency-idle#idle) proportionately distributes slack or idle _cluster costs_ to tenants. Idle refers to resources that are provisioned but not being fully used or requested by a tenant.
 
@@ -70,12 +74,13 @@ The idle costs dropdown allows you to choose how you wish your idle costs to be 
 
 To learn more about sharing idle costs, see [here](https://docs.kubecost.com/using-kubecost/navigating-the-kubecost-ui/cost-allocation/efficiency-idle#sharing-idle).
 
-### Chart
+#### Chart
 
 View Allocation data in the following formats:
 
-1. Cost: Total cost per aggregation over date range
-2. Cost over time: Cost per aggregation broken down over days or hours depending on date range
+1. Cost over time: Cost per aggregation broken down over days or hours depending on date range
+2. [Cost Forecast](/using-kubecost/navigating-the-kubecost-ui/anomaly-detection.md#forecasting): Cost over time with additional projected spend
+3. Cost: Total cost per aggregation over date range
 3. Efficiency over time: Shows resource efficiency over given date range
 4. Proportional cost: Cost per aggregate displayed as a percentage of total cost over date range
 5. Cost Treemap: Hierarchically structured view of costs in current aggregation
@@ -84,7 +89,7 @@ You can select _Edit_ > _Chart_ > _Cost over time_ from the dropdown to have you
 
 ![Cost over time data](../../../images/perdaybasis.png)
 
-### Cost metric
+#### Cost metric
 
 View either cumulative or run rate costs measured over the selected time window based on the resources allocated.
 
@@ -99,32 +104,11 @@ Costs allocations are based on the following:
 
 For more information, refer to the [OpenCost spec](https://github.com/opencost/opencost/blob/develop/spec/opencost-specv01.md).
 
-### Filters
-
-Filter resources by namespace, clusterID, and/or Kubernetes label to more closely investigate a rise in spend or key cost drivers at different aggregations such as deployments or pods. When a filter is applied, only resources with this matching value will be shown. These filters are also applied to external out-of-cluster (OOC) asset tags. Supported filters are as follows:
-
-| Filter         | Description                                                                                                                                                              |
-| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Cluster        | Limit results to workloads in a set of clusters with matching IDs. Note: clusterID is passed in _values_ at install-time.                                                |
-| Node           | Limit results to workloads where the node name is filtered for.                                                                                                          |
-| Namespace      | Limit results to workloads in a set of Kubernetes namespaces.                                                                                                            |
-| Label          | Limit results to workloads with matching Kubernetes labels. Namespace labels are applied to all of its workloads. Supports filtering by `__unallocated__` field as well. |
-| Service        | Limit results to workloads based on Kubernetes service name.                                                                                                             |
-| Controller     | Limit results to workloads based on Kubernetes controller name.                                                                                                          |
-| Controllerkind | Limit results to workloads based on Kubernetes controller (Daemonset, Deployment, Job, Statefulset, Replicaset, etc) type.                                               |
-| Pod            | Limit results to workloads where the Kubernetes pod name is filtered for.                                                                                                |
-
-Comma-separated lists are supported to filter by multiple categories, e.g. namespace filter equals `kube-system,kubecost`. Wild card filters are also supported, indicated by a \* following the filter, e.g. `namespace=kube*` to return any namespace beginning with `kube`.
-
-#### Advanced filtering
-
-You can also implement more advanced forms of filtering to include or exclude values including prefixes or suffixes for any of the above categories in the table. Selecting the filtering dropdown (default _Equals_) will show you all available filtering options. These are reflective of Kubecost's [v2 filtering language](https://kubecost.atlassian.net/browse/CORE-358).
-
-### Shared resources
+#### Shared resources
 
 Select how shared costs set on the settings page will be shared among allocations. Pick from default shared resources, or select a custom shared resource. A custom shared resource can be selected in the Configure custom shared resources feature at the bottom of the _Edit_ window.
 
-## Additional options
+### Additional options
 
 The three horizontal dots icon (directly next to _Save_) will provide additional options for handling your report:
 

@@ -1,5 +1,9 @@
 # Query Service Replicas
 
+{% hint style="warning" %}
+Query service replicas are no longer supported as of Kubecost v2.0.
+{% endhint %}
+
 {% hint style="info" %}
 This feature is only supported on Kubecost Enterprise plans.
 {% endhint %}

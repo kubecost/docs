@@ -1,7 +1,11 @@
 # Configuring Thanos
 
+{% hint style="warning" %}
+As of Kubecost v2.0, support for Thanos is deprecated. Consider [transitioning to our Aggregator architecture](/install-and-configure/install/multi-cluster/federated-etl/thanos-migration-guide.md) if you plan to upgrade.
+{% endhint %}
+
 {% hint style="info" %}
-This feature is only officially supported on [Kubecost Enterprise plans](https://www.kubecost.com/pricing/).
+This feature is only offically available on [Kubecost Enterprise plans](https://www.kubecost.com/pricing/).
 {% endhint %}
 
 Kubecost leverages Thanos and durable storage for three different purposes:
@@ -54,7 +58,7 @@ prometheus:
 
 The Thanos subchart includes `thanos-bucket`, `thanos-query`, `thanos-store`, `thanos-compact`, and service discovery for `thanos-sidecar`. These components are recommended when deploying Thanos on the primary cluster.
 
-These values can be adjusted under the `thanos` block in _values-thanos.yaml_. Available options are here: [thanos/values.yaml](https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/charts/thanos/values.yaml)
+These values can be adjusted under the `thanos` block in _values-thanos.yaml_.
 
 {% code overflow="wrap" %}
 ```shell

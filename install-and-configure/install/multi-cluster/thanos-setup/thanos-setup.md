@@ -1,7 +1,11 @@
 # Thanos Federation
 
+{% hint style="warning" %}
+As of Kubecost v2.0, support for Thanos is deprecated. Consider [transitioning to our Aggregator architecture](/install-and-configure/install/multi-cluster/federated-etl/thanos-migration-guide.md) if you plan to upgrade.
+{% endhint %}
+
 {% hint style="info" %}
-This feature is only officially supported on Kubecost Enterprise plans.
+This feature is only officially available on Kubecost Enterprise plans.
 {% endhint %}
 
 Thanos is a tool to aggregate Prometheus metrics to a central object storage (S3 compatible) bucket. Thanos is implemented as a sidecar on the Prometheus pod on all clusters. Thanos Federation is one of two primary methods to aggregate all cluster information back to a single view as described in our [Multi-Cluster](/install-and-configure/install/multi-cluster/multi-cluster.md#enterprise-federation) article.

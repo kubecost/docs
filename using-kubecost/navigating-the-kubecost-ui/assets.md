@@ -28,11 +28,15 @@ Kubecost provides a variety of options for configuring your assets queries to vi
 
 Select the date range of the report by setting specific start and end dates, or using one of the preset options.
 
-### Aggregate By filter
+### Aggregate By
 
 ![Aggregate By window](/.gitbook/assets/assetsaggregate.png)
 
-Here you can aggregate cost by native Kubernetes concepts. While selecting Single Aggregation, you will only be able to select one concept at a time. While selecting Multi Aggregation, you will be able to filter for multiple concepts at the same time. Assets will be by default aggregated by Service.
+Here you can aggregate cost by native Kubernetes concepts. While selecting Single Aggregation, you will only be able to select one concept at a time. While selecting Multi Aggregation, you will be able to filter for multiple concepts at the same time. Assets will be by default aggregated by *Type*.
+
+### Filters
+
+Filter assets by all available aggregation categories. When a filter is applied, only resources with this matching value will be shown. Supports advanced filtering options as well.
 
 ### Edit Report
 
@@ -51,9 +55,14 @@ View either cumulative or run rate costs measured over the selected time window 
 * Cumulative Cost: represents the actual/historical spend captured by the Kubecost agent over the selected time window
 * Rate metrics: Monthly, daily, or hourly “run rate” cost, also used for projected cost figures, based on samples in the selected time window
 
-#### Filters
+#### Chart
 
-Filter assets by category, service, or other means. When a filter is applied, only resources with this matching value will be shown.
+View Assets data in the following formats:
+
+1. Cost over time: Cost per aggregation broken down over days or hours depending on date range
+2. [Cost forecast](/using-kubecost/navigating-the-kubecost-ui/anomaly-detection.md#forecasting): Cost over time with additional projected spend
+
+
 
 ### Additional options
 

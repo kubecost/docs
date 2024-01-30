@@ -1,5 +1,4 @@
-Azure Long Term Storage
-=======================
+# Azure Long Term Storage
 
 To use Azure Storage as Thanos object store, you need to precreate a storage account from Azure portal or using Azure CLI. Follow the instructions from the [Azure Storage Documentation](https://docs.microsoft.com/en-us/azure/storage/common/storage-quickstart-create-account).
 
