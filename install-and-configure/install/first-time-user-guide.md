@@ -44,7 +44,7 @@ Similar to most systems, monitoring health is vital.  For this, we offer several
 
 The [Health](https://docs.kubecost.com/using-kubecost/navigating-the-kubecost-ui/cluster-health-score) page will display an overall cluster health score which assesses how reliably and efficiently your infrastructure is performing. Scores start at 100 and decrease based on how severe  any present errors are.
 
-## Step 4: Multi-cluster and Federated setups
+## Step 4: Multi-cluster and federated setups
 
 Kubecost has multiple ways of supporting multi-cluster environments, which vary based on your Kubecost product tier.
 
@@ -53,6 +53,10 @@ Kubecost Free will only allow you to view a single cluster at a time in the Kube
 Kubecost Enterprise provides a "single-pane-of-glass" view which combines metrics across all clusters into a shared storage bucket. One cluster is designated as the primary cluster from which you view the UI, with all other clusters considered secondary. Attempting to view the UI through a secondary cluster will not display metrics across your entire environment.
 
 It is recommended to complete the steps above for your primary cluster before adding any secondary clusters. To learn more about advanced multi-cluster/Federated configurations, see our [Multi-Cluster](https://docs.kubecost.com/install-and-configure/install/multi-cluster) doc.
+
+## Step 5: Explore Kubecost functionality through the UI
+
+Port forward with `kubectl port-forward --namespace kubecost deployment/kubecost-cost-analyzer 9090`, then access `http://localhost:9090` in your web browser to see Kubecost's UI. There are plenty of monitoring, savings, and governance tools at your disposal, each with dedicated documentation. See our [Navigating the Kubecost UI](/using-kubecost/navigating-the-kubecost-ui/README.md) section for a complete overview of these features.
 
 ## Learning more about Kubecost
 

@@ -51,23 +51,12 @@ You can configure SSO and RBAC on a separate baseline deployment, which will not
 
 For teams already running node exporter on the default port, our bundled node exporter may remain in a `Pending` state. You can optionally use an existing node exporter DaemonSet by setting the `prometheus.nodeExporter.enabled` and `prometheus.serviceAccounts.nodeExporter.create` Kubecost Helm chart config options to `false`. This requires your existing node exporter endpoint to be visible from the namespace where Kubecost is installed. More configs options shown [here](https://github.com/kubecost/cost-analyzer-helm-chart).
 
-## Deploying Kubecost without persistent volumes
-
-You may optionally pass the following Helm flags to install Kubecost and its bundled dependencies without any persistent volumes. However, any time the Prometheus server pod is restarted, **all historical billing data will be lost** unless Thanos or other long-term storage is enabled in the Kubecost product.
-
-```
---set prometheus.alertmanager.persistentVolume.enabled=false
---set prometheus.pushgateway.persistentVolume.enabled=false
---set prometheus.server.persistentVolume.enabled=false
---set persistentVolume.enabled=false
-```
-
 ## **Resource efficiency and idle costs**
 
 Efficiency and idle costs can teach you more about the cost-value of your Kubernetes spend by showing you how efficiently your resources are used. To learn more about pod resource efficiency and cluster idle costs, see [Efficiency and Idle](/using-kubecost/navigating-the-kubecost-ui/cost-allocation/efficiency-idle.md).
 
 ## **See also**
 
-* [Using an existing Prometheus installation](custom-prom/custom-prom.md)
-* [Using an existing Grafana installation](custom-grafana.md)
+* [Using an existing Prometheus installation](/install-and-configure/advanced-configuration/custom-prom/custom-prom.md)
+* [Using an existing Grafana installation](/install-and-configure/advanced-configuration/custom-grafana.md)
 * [Exposing Kubecost with an Ingress](ingress-examples.md)

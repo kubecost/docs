@@ -93,7 +93,7 @@ The Cost Metric dropdown allows you to adjust the displayed cost data based on d
 View Cloud Cost data in the following formats:
 
 1. Cost over time: Cost per aggregation broken down over days or hours depending on date range
-2. [Cost Forecast](/using-kubecost/navigating-the-kubecost-ui/anomaly-detection.md#forecasting): Cost over time with additional projected spend
+2. [Cost Forecast](/using-kubecost/forecasting.md): Cost over time with additional projected spend
 
 ## Cost table metrics
 

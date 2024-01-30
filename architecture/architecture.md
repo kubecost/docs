@@ -36,6 +36,6 @@ In an Enterprise federated setup, only the Primary Kubecost Cluster needs access
 
 ## Enterprise Architecture Overview
 
-The most common implementation of durable storage in the Kubecost application is with [Thanos](https://thanos.io/). Below is a high-level reference for the required components. More information on each Thanos component can be found [here](https://thanos.io/tip/components/).
+As of Kubecost v2.0, Aggregator is the primary query backend for Kubecost using a federated ETL setup. Below is a high-level reference for the required components. More detail about these components can be found in our [Federated ETL](/install-and-configure/install/multi-cluster/federated-etl/federated-etl.md) documentation.
 
-![Thanos Overview](/images/thanos-architecture.png)
+![Architecture Overview](/images/kubecost-ETL-Federated-Architecture.png)

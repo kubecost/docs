@@ -79,7 +79,7 @@ To learn more about sharing idle costs, see [here](https://docs.kubecost.com/usi
 View Allocation data in the following formats:
 
 1. Cost over time: Cost per aggregation broken down over days or hours depending on date range
-2. [Cost Forecast](/using-kubecost/navigating-the-kubecost-ui/anomaly-detection.md#forecasting): Cost over time with additional projected spend
+2. [Cost Forecast](/using-kubecost/forecasting.md): Cost over time with additional projected spend
 3. Cost: Total cost per aggregation over date range
 3. Efficiency over time: Shows resource efficiency over given date range
 4. Proportional cost: Cost per aggregate displayed as a percentage of total cost over date range

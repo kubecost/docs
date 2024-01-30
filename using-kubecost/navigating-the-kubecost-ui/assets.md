@@ -60,7 +60,7 @@ View either cumulative or run rate costs measured over the selected time window 
 View Assets data in the following formats:
 
 1. Cost over time: Cost per aggregation broken down over days or hours depending on date range
-2. [Cost forecast](/using-kubecost/navigating-the-kubecost-ui/anomaly-detection.md#forecasting): Cost over time with additional projected spend
+2. [Cost forecast](/using-kubecost/forecasting.md): Cost over time with additional projected spend
 
 
 
