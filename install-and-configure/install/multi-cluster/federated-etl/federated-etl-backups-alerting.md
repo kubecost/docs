@@ -1,4 +1,4 @@
-# Backups and Alerting
+# Federated ETL Backups and Alerting
 
 {% hint style="info" %}
 Federated ETL Architecture is only officially supported on Kubecost Enterprise plans.

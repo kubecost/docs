@@ -1,4 +1,4 @@
-Thanos Upgrade
+Thanos Upgrade (Deprecated)
 ==============
 
 {% hint style="warning" %}
