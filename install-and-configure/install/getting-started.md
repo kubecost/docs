@@ -39,7 +39,7 @@ Establishing an ingress controller will allow for control of access for your wor
 ### SSO/SAML/RBAC/OIDC
 
 {% hint style="info" %}
-SSO/SAML/RBAC/OIDC are only officially supported on Kubecost Enterprise plans.
+SAML/RBAC/OIDC are only officially supported on Kubecost Enterprise plans.
 {% endhint %}
 
 You can configure SSO and RBAC on a separate baseline deployment, which will not only shorten the deployment time of security features, but it will also avoid unwanted access denial. This is helpful when using only one developer deployment. See our user management guides below:
