@@ -2,6 +2,10 @@
 
 Kubecost v2.0 introduced massive functionality changes including changes to the backend architecture. This may require additional changes be made to your environment before upgrading from an older version of Kubecost to 2.x. This article reviews several different common configurations and explains any necessary steps to take.
 
+{% hint style="danger" %}
+Mlti-cluster Prometheus configurations (Amazon/Google Managed Prometheus, Mimir, etc.) are temporarily blocked from upgrading to Kubecost 2.0. Single-cluster Prometheus configurations must set the Helm flag `` to continue.
+{% endhint %}
+
 ## Single cluster users
 
 If you have a single cluster installation of Kubecost (i.e. one primary Kubecost instance on each cluster), then you can follow the standard upgrade process for Kubecost 2.x.

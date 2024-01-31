@@ -1,5 +1,9 @@
 # Google Cloud Managed Service for Prometheus
 
+{% hint style="danger" %}
+Mlti-cluster Prometheus configurations, including GMP, are temporarily blocked from upgrading to Kubecost 2.0.
+{% endhint %}
+
 ## Overview
 
 Kubecost leverages the open-source Prometheus project as a time series database and post-processes the data in Prometheus to perform cost allocation calculations and provide optimization insights for your Kubernetes clusters. Prometheus is a single machine statically-resourced container, so depending on your cluster size or when your cluster scales out, your cluster could exceed the scraping capabilities of a single Prometheus server. In this doc, you will learn how Kubecost integrates with [Google Cloud Managed Service for Prometheus (GMP)](https://cloud.google.com/stackdriver/docs/managed-prometheus), a managed Prometheus-compatible monitoring service, to enable the customer to monitor Kubernetes costs at scale easily.

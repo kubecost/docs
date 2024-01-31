@@ -1,5 +1,9 @@
 # Grafana Mimir Integration for Kubecost
 
+{% hint style="danger" %}
+Mlti-cluster Prometheus configurations, including Mimir integration, are temporarily blocked from upgrading to Kubecost 2.0.
+{% endhint %}
+
 In the standard deployment of [Kubecost](https://www.kubecost.com/), Kubecost is deployed with a bundled Prometheus instance to collect and store metrics of your Kubernetes cluster. Kubecost also provides the flexibility to connect with your time series database or storage. [Grafana Mimir](https://grafana.com/oss/mimir/) is an open-source, horizontally scalable, highly available, multi-tenant TSDB for long-term storage for Prometheus.
 
 This document will show you how to integrate the Grafana Mimir with Kubecost for long-term metrics retention. In this setup, you need to use Grafana Agent to collect metrics from Kubecost and your Kubernetes cluster. The metrics will be re-written to your existing [Grafana Mimir setup without an authenticating reverse proxy](https://grafana.com/docs/mimir/latest/operators-guide/secure/authentication-and-authorization/#without-an-authenticating-reverse-proxy)

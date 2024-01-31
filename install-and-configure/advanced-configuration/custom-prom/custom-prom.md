@@ -1,5 +1,9 @@
 # Prometheus Configuration Guide
 
+{% hint style="danger" %}
+Mlti-cluster Prometheus configurations are temporarily blocked from upgrading to Kubecost 2.0.
+{% endhint %}
+
 ## Bring your own Prometheus
 
 There are several considerations when disabling the Kubecost included Prometheus deployment. Kubecost _strongly_ recommends installing Kubecost with the bundled Prometheus in most environments.
