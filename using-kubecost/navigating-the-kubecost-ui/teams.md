@@ -1,5 +1,9 @@
 # Teams
 
+{% hint style="info" %}
+RBAC is only officially supported on Kubecost Enterprise plans.
+{% endhint %}
+
 Teams is a page which allows for RBAC configuration using Kubecost's UI. 
 
 ## Prerequisites
