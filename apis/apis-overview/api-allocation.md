@@ -6,7 +6,7 @@ Throughout our API documentation, we use `localhost:9090` as the default Kubecos
 
 {% swagger method="get" path="/allocation" baseUrl="http://<your-kubecost-address>/model" summary="Allocation API" %}
 {% swagger-description %}
-The Allocation API is the preferred way to query for costs and resources allocated to Kubernetes workloads and optionally aggregated by Kubernetes concepts like `namespace`, `controller`, and `label`. Data is served from one of [Kubecost's ETL pipelines](/apis/deprecated-apis/cost-model-deprecated.md#caching-overview).
+The Allocation API is the preferred way to query for costs and resources allocated to Kubernetes workloads and optionally aggregated by Kubernetes concepts like `namespace`, `controller`, and `label`. Data is served from one of Kubecost's ETL pipelines.
 {% endswagger-description %}
 
 {% swagger-parameter in="path" name="window" type="string" required="true" %}
@@ -221,7 +221,7 @@ Duration of time over which to query. Accepts words like `today`, `week`, `month
 Field by which to aggregate the results. Accepts: `cluster`, `namespace`, `controllerKind`, `controller`, `service`, `node`, `pod`, `label:<name>`, and `annotation:<name>`. Also accepts comma-separated lists for multi-aggregation, like `namespace,label:app`.
 {% endswagger-parameter %}
 
-{% swagger-parameter in="path" name="accumulate" type="string" required="false" %}
+{% swagger-parameter in="path" name="accumulate" type="boolean" required="false" %}
 If `true`, sum the entire range of time intervals into a single set. Default value is `false`. Also supports accumulation by specific intervals of time including `hour`, `day`, and `week`. Does not accumulate idle costs, which must be configured separately.
 {% endswagger-parameter %}
 
@@ -444,8 +444,6 @@ Querying for `window=3d` should return a range of four sets because the queried 
 * 2021/01/03 00:00:00 until 2021/01/04 00:00:00
 * 2021/01/02 00:00:00 until 2021/01/03 00:00:00
 * 2021/01/01 00:00:00 until 2021/01/02 00:00:00
-
-See [Querying](api-allocation.md#querying) for the full list of arguments and [Examples](api-allocation.md#query-examples) for more example queries.
 
 ## Special types of allocation
 
