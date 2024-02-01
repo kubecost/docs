@@ -1,5 +1,9 @@
 # Microsoft Entra ID OIDC Integration for Kubecost
 
+{% hint style="info" %}
+OIDC is only officially supported on Kubecost Enterprise plans.
+{% endhint %}
+
 This guide will take you through configuring OIDC for Kubecost using a Microsoft Entra ID (formerly Azure AD) integration for SSO and RBAC.
 
 ## Prerequisites
