@@ -19,7 +19,7 @@ Existing documentation for Kubecost APIs will use endpoints for non-Aggregator e
 * This documentation is for Kubecost v2.0 and higher.
 * To upgrade from a Thanos multi-cluster environment to Aggregator, see our [transition doc](/install-and-configure/install/multi-cluster/federated-etl/thanos-migration-guide.md).
 
-### Tutorial
+### Configuration
 
 Select from one of the two templates below and save the content as _federated-store.yaml_. This will be your configuration template required to set up Aggregator.
 
@@ -27,7 +27,7 @@ Select from one of the two templates below and save the content as _federated-st
 The name of the .yaml file used to create the secret must be named _federated-store.yaml_ or Aggregator will not start.
 {% endhint %}
 
-Basic configuration:
+#### Basic configuration
 
 ```yaml
 kubecostAggregator:
@@ -59,17 +59,20 @@ serviceAccount:
   name: kubecost-irsa-sa
 ```
 
-Advanced configuration (for larger deployments):
+#### Advanced configuration
+
+For larger deployments of Kubecost, Aggregator can be tuned.
+The settings below are in addition to the basic configuration above.
 
 ```yaml
 kubecostAggregator:
-  replicas: 1
-  deployMethod: statefulset
-  cloudCost:
-    enabled: true
   env:
+    # Aggregator pulls data from federated store and promotes this write data on a schedule
+    # this interval governs how often aggregator will refresh its data
+    # if it is set below the time it takes to ingest data, it less efficient
+    DB_BUCKET_REFRESH_INTERVAL: 1h
     # governs parallelism of derivation step
-    # more threads speeds derivation, but requires significantly more 
+    # more threads speeds derivation, but requires significantly more
     # log level
     # default: info
     LOG_LEVEL: info
@@ -82,26 +85,13 @@ kubecostAggregator:
     # ensure disk is specd high enough, and check for bottlenecks
     # default: 128Gi
     storageRequest: 512Gi
-federatedETL:
-  federatedCluster: true
-kubecostModel:
-  containerStatsEnabled: true
-  federatedStorageConfigSecret: federated-store
-kubecostProductConfigs:
-  clusterName: YOUR_CLUSTER_NAME
-  cloudIntegrationSecret: cloud-integration
-  productKey:
-    enabled: true
-    key: YOUR_KEY
-prometheus:
-  server:
-    global:
-      external_labels:
-        cluster_id: YOUR_CLUSTER_NAME
-# when using managed identity/irsa, set the service account accordingly:
-serviceAccount:
-  create: false
-  name: kubecost-irsa-sa
+  resources:
+    requests:
+      cpu: 1000m
+      memory: 1Gi
+    limits:
+      # cpu: 2000m
+      memory: 16Gi
 ```
 
 There is no baseline for what is considered a larger deployment, which will be dependent on load times in your Kubecost environment.
