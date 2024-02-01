@@ -1,5 +1,9 @@
 # User Management (SSO/OIDC)
 
+{% hint style="info" %}
+OIDC is only officially supported on Kubecost Enterprise plans.
+{% endhint %}
+
 ## Overview of features
 
 The OIDC integration in Kubecost is fulfilled via the `.Values.oidc` configuration parameters in the Helm chart.
