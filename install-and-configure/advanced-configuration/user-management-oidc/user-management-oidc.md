@@ -1,7 +1,7 @@
 # User Management (SSO/OIDC)
 
 {% hint style="info" %}
-OIDC and RBAC are only officially supported on Kubecost Enterprise plans.
+OIDC is only officially supported on Kubecost Enterprise plans.
 {% endhint %}
 
 ## Overview of features
