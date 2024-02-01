@@ -66,7 +66,7 @@ For larger deployments of Kubecost, Aggregator can be tuned.
 {% hint style="warning" %}
 Aggregator is a memory and disk-intensive process. Ensure that your cluster has enough resources to support the configuration below.
 
-Because the Aggregator PV is relatively small, the least expensive performance gain will be to move the storage class to a faster SSD this varies by provider, the terms used are gp3/extreme/premium/etc.
+Because the Aggregator PV is relatively small, the least expensive performance gain will be to move the storage class to a faster SSD. The storageClass name varies by provider, the terms used are gp3/extreme/premium/etc.
 {% endhint %}
 
 {% hint style="warning" %}
