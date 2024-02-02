@@ -38,15 +38,15 @@ Here you can aggregate cost by native Kubernetes concepts. While selecting Singl
 
 Filter assets by all available aggregation categories. When a filter is applied, only resources with this matching value will be shown. Supports advanced filtering options as well.
 
-### Edit Report
+### Edit
 
 ![Edit Report window](/.gitbook/assets/assetseditreport.png)
 
 The Edit icon has additional options to filter your search:
 
-#### Resolution
+#### Step size
 
-Change the display of your recent assets by service. _Daily_ provides a day-by-day breakdown of assets. _Entire window_ creates a semicircle that shows each asset as a sizable portion based on total cost within the displayed time frame.
+Change the display of assets window. _Daily_ provides a day-by-day breakdown of assets. _Entire window_ creates a semicircle that shows each asset as a sizable portion based on total cost within the displayed time frame.
 
 #### Cost metric
 

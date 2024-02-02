@@ -45,8 +45,6 @@ Kubecost requires read access to the Spot data feed bucket. The following IAM po
         "Action": [
           "s3:ListAllMyBuckets",
           "s3:ListBucket",
-          "s3:HeadBucket",
-          "s3:HeadObject",
           "s3:List*",
           "s3:Get*"
         ],

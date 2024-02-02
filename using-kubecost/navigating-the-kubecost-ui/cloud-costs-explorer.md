@@ -95,6 +95,10 @@ View Cloud Cost data in the following formats:
 1. Cost over time: Cost per aggregation broken down over days or hours depending on date range
 2. [Cost Forecast](/using-kubecost/forecasting.md): Cost over time with additional projected spend
 
+#### Step size
+
+Step size refers to the length of time of each group of data displayed on your dashboard across the window. Options are _Default_, _Daily_, _Weekly_, _Monthly_, and _Quarterly_.
+
 ## Cost table metrics
 
 Your cloud cost spending will be displayed across your dashboard with several key metrics:

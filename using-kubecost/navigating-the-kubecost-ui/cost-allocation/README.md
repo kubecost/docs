@@ -26,7 +26,7 @@ Select the date range of the report, called the window, by setting specific star
 
 Step size refers to the length of time of each group of data displayed on your dashboard across the window. Options are _Default_, _Daily_, _Weekly_, _Monthly_, and _Quarterly_. When retaining long periods of data through custom configurations (such as Prometheus), consider using larger step sizes to avoid potential display errors. The step size when selecting _Default_ is dependent on the size of your window.
 
-### Aggregate BY
+### Aggregate By
 
 Here you can aggregate cost by namespace, deployment, service, and other native Kubernetes concepts. While selecting _Single Aggregation_, you will only be able to select one concept at a time. While selecting _Multi Aggregation_, you will be able to filter for multiple concepts at the same time.
 

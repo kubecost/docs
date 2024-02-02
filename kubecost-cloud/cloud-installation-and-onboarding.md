@@ -4,11 +4,6 @@ This doc will show you how to register for Kubecost Cloud, invite members to and
 
 ## Accessing Kubecost Cloud
 
-### Install prerequisites
-
-* [kubectl](https://kubernetes.io/docs/tasks/tools/)
-* [Helm v3.1+](https://helm.sh/docs/intro/quickstart/)
-
 ### Creating a user account
 
 You can create a new user account in moments. On the [login page](http://app.kubecost.com), provide a Name, Email, and Password to register. You can also register using an active Google, Microsoft, Okta, or GitHub account via SSO.
@@ -39,11 +34,20 @@ If you are a member of multiple teams, you will see a green checkmark icon next 
 
 ### Adding a cluster
 
+#### Install prerequisites
+
+* [kubectl](https://kubernetes.io/docs/tasks/tools/)
+* [Helm v3.1+](https://helm.sh/docs/intro/quickstart/)
+
+#### Agent install
+
 If no clusters are currently under management, you will find instructions on the Allocations page for installing the Kubecost Agent on your cluster. You can also find these instructions in _Settings_ > _Add Cluster_.
 
 Choose a unique ID for your cluster. This does not need to be the same name as your cluster, but it does need to be unique within your team.
 
 Execute the following command to install the Kubecost Cloud agent to your cluster. The agent key will be pre-populated in the install command in the Kubecost Cloud UI.
+
+{% hint style="info" %} Using an existing Prometheus deployment is not currently supported. {% endhint %}
 
 {% code overflow="wrap" %}
 ```
