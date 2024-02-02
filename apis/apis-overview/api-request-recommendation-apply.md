@@ -8,7 +8,7 @@ The Apply/Plan APIs for request recommendations takes Kubecost's calculated [con
 
 ## Prerequisites
 
-To use the Plan/Apply APIs, you must first enable Kubecost's [Cluster Controller](https://docs.kubecost.com/install-and-configure/advanced-configuration/controller). The Cluster Controller contains Kubecost's automation features (including the APIs described in this document), and thus has write permission to certain resources on your cluster.
+To use the Plan/Apply APIs, you must first enable Kubecost's [Cluster Controller](/install-and-configure/advanced-configuration/controller/cluster-controller.md). The Cluster Controller contains Kubecost's automation features (including the APIs described in this document), and thus has write permission to certain resources on your cluster.
 
 ## APIs
 
