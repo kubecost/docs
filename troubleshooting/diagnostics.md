@@ -26,7 +26,7 @@ Node exporter metrics are used for the following features:
 * Showing a compute 'breakdown' on Overview's Resource Efficiency graph, i.e. system vs idle vs user. The Compute bar on this graph will appear as a single solid-colored bar when this diagnostic is failing.
 * Various Kubecost Grafana dashboards
 
-These metrics are not used in the core Assets and Allocation and therefore can be considered optional. Learn how to disable [here](https://docs.kubecost.com/using-kubecost/getting-started#using-an-existing-node-exporter).
+These metrics are not used in the core Assets and Allocation and therefore can be considered optional. Learn how to disable [here](/install-and-configure/install/getting-started.md#using-an-existing-node-exporter).
 
 {% hint style="warning" %}
 If any of the above diagnostic tests fail, view the [How to Troubleshoot Missing Metrics](diagnostics.md#troubleshooting-missing-metrics) section below.
