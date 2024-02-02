@@ -114,7 +114,7 @@ kubectl create secret generic federated-storage -n kubecost --from-file=federate
 ```
 {% endcode %}
 
-Next, you will need to create an additional `cloud-integration` secret. Follow this tutorial on [creating cloud integration secrets](../../cloud-integration/multi-cloud.md#step-2-create-cloud-integration-secret) to generate your _cloud-integration.json_ file, then run the following command:
+Next, you will need to create an additional `cloud-integration` secret. Follow this tutorial on [creating cloud integration secrets](/install-and-configure//install/cloud-integration/multi-cloud.md#step-2-create-cloud-integration-secret) to generate your _cloud-integration.json_ file, then run the following command:
 
 {% code overflow="wrap" %}
 ```sh

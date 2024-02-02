@@ -16,10 +16,6 @@ needed_disk_space = retention_time_minutes * ingested_samples_per_minutes * byte
 
 Where ingested samples can be measured as the average over a recent period, e.g. `sum(avg_over_time(scrape_samples_post_metric_relabeling[24h]))`. On average, Prometheus uses around 1.5-2 bytes per sample. So, ingesting 100k samples per minute and retaining them for 15 days would demand around 40 GB. It’s recommended to add another 20-30% capacity for headroom and WAL. More info on disk sizing [here](https://prometheus.io/docs/prometheus/latest/storage/#operational-aspects).
 
-{% hint style="warning" %}
-More than 30 days of data should not be stored in Prometheus for larger clusters. For long-term data retention, contact us at support@kubecost.com about Kubecost with durable storage enabled. [More info on Kubecost storage here](storage.md).
-{% endhint %}
-
 ## Setting requests and limits
 
 Users should set and/or update resource requests and limits before taking Kubecost into production at scale. These inputs can be configured in the Kubecost [values.yaml](https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/values.yaml) for Kubecost modules and subcharts.
