@@ -1,7 +1,7 @@
 # Kubecost Cloud: Reports Dashboard
 
 {% hint style="info" %}
-This documentation should only be consulted when using Kubecost Cloud! For information about the Reports dashboard for self-hosted Kubecost, see [here](https://docs.kubecost.com/using-kubecost/navigating-the-kubecost-ui/saved-reports).
+This documentation should only be consulted when using Kubecost Cloud! For information about the Reports dashboard for self-hosted Kubecost, see [here](/using-kubecost/navigating-the-kubecost-ui/saved-reports/reports.md)).
 {% endhint %}
 
 The Reports dashboard allows you to save defined queries across your different monitoring dashboards, including Allocations, Assets, and Cloud Costs, for quick access. All saved reports will display their type, window duration, and what they aggregate by.

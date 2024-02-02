@@ -156,7 +156,7 @@ Google generates special labels for GKE resources (e.g. "goog-gke-node", "goog-g
 
 ### Viewing project-level labels
 
-Project-level labels are applied to all the Assets built from resources defined under a given GCP project. You can filter GCP resources in the Kubecost [Cloud Costs Explorer](https://docs.kubecost.com/using-kubecost/getting-started/cloud-costs-explorer) (or [API](https://docs.kubecost.com/apis/apis-overview/cloud-cost-api)).
+Project-level labels are applied to all the Assets built from resources defined under a given GCP project. You can filter GCP resources in the Kubecost [Cloud Costs Explorer](/using-kubecost/navigating-the-kubecost-ui/cloud-costs-explorer.md) (or [API](/apis/apis-overview/cloud-cost-api.md)).
 
 If a resource has a label with the same name as a project-level label, the resource label value will take precedence.
 
