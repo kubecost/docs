@@ -51,7 +51,6 @@
   * [ETL Backup](install-and-configure/install/etl-backup/etl-backup.md)
     * [Sharing ETL Backups](install-and-configure/install/etl-backup/sharing-etl-backups.md)
     * [Query Service Replicas](install-and-configure/install/etl-backup/query-service-replicas.md)
-  * [Cost Analyzer Persistent Volume](install-and-configure/install/storage.md)
 * [Additional Configuration](install-and-configure/advanced-configuration/README.md)
   * [Adding a Product Key](install-and-configure/advanced-configuration/add-key.md)
   * [Enabling Annotation Emission](install-and-configure/advanced-configuration/annotations.md)
