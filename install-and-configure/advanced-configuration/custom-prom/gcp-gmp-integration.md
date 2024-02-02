@@ -1,7 +1,7 @@
 # Google Cloud Managed Service for Prometheus
 
 {% hint style="danger" %}
-Mlti-cluster Prometheus configurations, including GMP, are temporarily blocked from upgrading to Kubecost 2.0.
+Multi-cluster Prometheus configurations, including GMP, are temporarily blocked from upgrading to Kubecost 2.0.
 {% endhint %}
 
 ## Overview

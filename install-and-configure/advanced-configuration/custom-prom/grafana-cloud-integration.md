@@ -1,7 +1,7 @@
 # Grafana Cloud Integration for Kubecost
 
 {% hint style="danger" %}
-Mlti-cluster Prometheus configurations, including Grafana integrations, are temporarily blocked from upgrading to Kubecost 2.0.
+Multi-cluster Prometheus configurations, including Grafana integrations, are temporarily blocked from upgrading to Kubecost 2.0.
 {% endhint %}
 
 [Grafana Cloud](https://grafana.com/products/cloud/) is a composable observability platform, integrating metrics, traces and logs with Grafana. Customers can leverage the best open source observability software without the overhead of installing, maintaining, and scaling your observability stack.
