@@ -8,10 +8,6 @@ Kubecost Free can now be installed on an unlimited number of individual clusters
 
 In an Enterprise multi-cluster setup, the UI is accessed through a designated primary cluster. All other clusters in the environment send metrics to a central object-store with a lightweight agent (aka secondary clusters). The primary cluster is the one running [Aggregator](/install-and-configure/install/multi-cluster/federated-etl/aggregator.md). This cluster will consume additional resources to run the Kubecost UI and backend.
 
-{% hint style="info" %}
-As of Kubecost 1.108, agent health is monitored by a [diagnostic pod](multi-cluster-diagnostics.md) that collects information from the local cluster and sends it to an object-store. This data is then processed by the Primary cluster and accessed via the UI and API.
-{% endhint %}
-
 {% hint style="warning" %}
 Because the UI is only accessible through the primary cluster, Helm flags related to UI display are not applied to secondary clusters.
 {% endhint %}
@@ -23,6 +19,7 @@ This feature is only supported for Kubecost Enterprise.
 {% endhint %}
 
 There are two methods to aggregate all cluster information back to a single Kubecost UI:
+
 * Preferred: [Kubecost ETL Federation](/install-and-configure/install/multi-cluster/federated-etl/federated-etl.md)
 * Deprecated: [Thanos Federation](/install-and-configure/install/multi-cluster/thanos-setup/thanos-setup.md)
 
@@ -36,7 +33,7 @@ The below diagrams highlight the two architectures:
 
 ![ETL Federation Overview](/images/kubecost-ETL-Federated-Architecture.png)
 
-**Kubecost Thanos Federation**
+**Kubecost Thanos Federation (Deprecated)**
 
 {% hint style="warning" %}
 As of Kubecost v2.0, support for Thanos is deprecated. Consider [transitioning to our Aggregator architecture](/install-and-configure/install/multi-cluster/federated-etl/thanos-migration-guide.md) if you plan to upgrade.

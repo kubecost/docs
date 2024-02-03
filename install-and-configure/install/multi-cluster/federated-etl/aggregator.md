@@ -15,19 +15,13 @@ Existing documentation for Kubecost APIs will use endpoints for non-Aggregator e
 
 ### Prerequisites
 
-* Multi-cluster Aggregator can only be configured in a federated ETL environment
+* Multi-cluster Aggregator can only be configured in a Federated ETL environment
+* All clusters in your Federated ETL environment must be configured to build & push ETL files to the object store via `.Values.federatedETL.federatedCluster` and `.Values.kubecostModel.federatedStorageConfigSecret`. See our [Federated ETL](federated-etl.md) doc for more details.
+* If you've enabled Cloud Integration, it _must_ be configured via the cloud integration secret. Other methods are now deprecated. See our [Cloud Integration](/install-and-configure/install/cloud-integration/multi-cloud.md) doc for more details.
 * This documentation is for Kubecost v2.0 and higher.
 * To upgrade from a Thanos multi-cluster environment to Aggregator, see our [transition doc](/install-and-configure/install/multi-cluster/federated-etl/thanos-migration-guide.md).
 
-### Configuration
-
-Select from one of the two templates below and save the content as _federated-store.yaml_. This will be your configuration template required to set up Aggregator.
-
-{% hint style="warning" %}
-The name of the .yaml file used to create the secret must be named _federated-store.yaml_ or Aggregator will not start.
-{% endhint %}
-
-#### Basic configuration
+### Basic configuration
 
 ```yaml
 kubecostAggregator:
@@ -59,7 +53,7 @@ serviceAccount:
   name: kubecost-irsa-sa
 ```
 
-#### Aggregator Optimizations
+### Aggregator Optimizations
 
 For larger deployments of Kubecost, Aggregator can be tuned.
 
@@ -106,15 +100,15 @@ kubecostAggregator:
 
 There is no baseline for what is considered a larger deployment, which will be dependent on load times in your Kubecost environment.
 
-Once you’ve configured your _federated-store.yaml_, create a secret using the following command:
+### Running the upgrade
+
+If you have not already, create the required Kubernetes secrets. Refer to the Federated ETL doc and Cloud Integration doc for more details.
 
 {% code overflow="wrap" %}
 ```sh
-kubectl create secret generic federated-storage -n kubecost --from-file=federated-store.yaml
+kubectl create secret generic federated-store -n kubecost --from-file=federated-store.yaml
 ```
 {% endcode %}
-
-Next, you will need to create an additional `cloud-integration` secret. Follow this tutorial on [creating cloud integration secrets](/install-and-configure/install/cloud-integration/multi-cloud.md#step-2-create-cloud-integration-secret) to generate your _cloud-integration.json_ file, then run the following command:
 
 {% code overflow="wrap" %}
 ```sh
@@ -122,16 +116,16 @@ kubectl create secret generic cloud-integration -n kubecost --from-file=cloud-in
 ```
 {% endcode %}
 
-Finally, upgrade your existing Kubecost installation. This command will install Kubecost if it does not already exist:
+Finally, upgrade your existing Kubecost installation. This command will install Kubecost if it does not already exist.
 
 {% hint style="warning" %}
-Upgrading your existing Kubecost using your configured _federated-store_.yaml_ file above will reset all existing Helm values configured in your _values.yaml_. If you wish to preserve any of those changes, append your _values.yaml_ by adding the contents of your _federated-store.yaml_ file into it, then replacing `federated-store.yaml` with `values.yaml` in the upgrade command below:
+If you are upgrading from an existing installation, make sure to append your existing `values.yaml` configurations to the ones described above.
 {% endhint %}
 
 ```sh
-helm upgrade --install "kubecost-primary" \
-  --namespace kubecost-primary \
+helm upgrade --install "kubecost" \
   --repo https://kubecost.github.io/cost-analyzer/ cost-analyzer \
+  --namespace kubecost \
   -f aggregator.yaml
 ```
 
