@@ -102,7 +102,7 @@ There is no baseline for what is considered a larger deployment, which will be d
 
 ### Running the upgrade
 
-If you have not already, create the required Kubernetes secrets. Refer to the Federated ETL doc and Cloud Integration doc for more details.
+If you have not already, create the required Kubernetes secrets. Refer to the [Federated ETL doc](/install-and-configure/install/multi-cluster/federated-etl/federated-etl.md) and [Cloud Integration doc](/install-and-configure/install/cloud-integration/multi-cloud.md) for more details.
 
 {% code overflow="wrap" %}
 ```sh
