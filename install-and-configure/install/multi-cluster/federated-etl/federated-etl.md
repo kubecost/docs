@@ -67,13 +67,13 @@ prometheus:
 
 ### Step 1: Storage configuration
 
-For all monitored clusters (federated or primary), create a file `federated-store.yaml` with the same format used for Thanos/S3 backup:
+For all monitored clusters (federated or primary), create a file *federated-store.yaml* with the same format used for Thanos/S3 backup:
 
 * [AWS](/install-and-configure/install/multi-cluster/long-term-storage-configuration/long-term-storage-aws.md)
 * [Azure](/install-and-configure/install/multi-cluster/long-term-storage-configuration/long-term-storage-azure.md)
 * [GCP](/install-and-configure/install/multi-cluster/long-term-storage-configuration/long-term-storage-gcp.md)
 
-The file _must_ be named named `federated-store.yaml`. then set the following configs:
+The file _must_ be named named *federated-store.yaml*. then set the following configs:
 
 ```sh
 kubectl create secret generic federated-store -n kubecost --from-file=federated-store.yaml
@@ -102,7 +102,7 @@ kubeCostAggregator:
 
 ### Step 3: Cluster configuration (Primary)
 
-In Kubecost, the `Primary Cluster` serves the UI and API endpoints as well as reconciling cloud billing (cloud-integration). Follow the instructions on the [Aggregator doc](/install-and-configure/install/multi-cluster/federated-etl/aggregator.md) to set up the primary cluster.
+In Kubecost, the primary cluster serves the UI and API endpoints as well as reconciling cloud billing (cloud integrations). Follow the instructions on the [Aggregator doc](/install-and-configure/install/multi-cluster/federated-etl/aggregator.md) to set up the primary cluster.
 
 ### Step 4: Verifying successful configuration
 
@@ -206,4 +206,4 @@ When using ETL Federation, there are several methods to recover Kubecost data in
 
 ### Repairing ETL
 
-In the event of missing or inaccurate data, you may need to rebuild your ETL pipelines. This is a documented procedure. See the [Repair Kubecost ETLs](/troubleshooting/etl-repair.md) doc for information and troubleshooting steps.
+In the event of missing or inaccurate data, you may need to rebuild your ETL pipelines. See the [Repair Kubecost ETLs](/troubleshooting/etl-repair.md) doc for information and troubleshooting steps.
