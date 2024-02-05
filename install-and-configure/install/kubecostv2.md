@@ -73,6 +73,6 @@ If you were running the Aggregator in v1.107 or v1.108, you will need to manuall
 
 ### Cloud integration working in v1.x, but not in v2.x
 
-Firstly, ensure that you are on the latest version of 2.x. There were patches released to fix miscellaneous cloud integration issues. You can find release notes [here](https://github.com/kubecost/cost-analyzer-helm-chart/releases).
+First, ensure you have upgraded Kubecost to the latest version of 2.x. Patches have been released to fix miscellaneous cloud integration issues. You can learn more about what's been fixed in our [release notes](https://github.com/kubecost/cost-analyzer-helm-chart/releases).
 
-Next, ensure that you are configuring the cloud integration via the `cloud-integration` secret and `.Values.kubecostProductConfigs.cloudIntegrationSecret` Helm value. This is now the only supported way of configuring your Cloud Integration.
+Next, ensure that you are configuring the cloud integration via the `cloud-integration` secret and `.Values.kubecostProductConfigs.cloudIntegrationSecret` Helm value. This is now the only supported way of configuring your cloud integration
