@@ -32,7 +32,7 @@ As a FederatedETL user, there should be minimal changes. Be aware that Kubecost 
 Ensure you have set the Helm flag `.Values.federatedETL.federatedCluster=true` in all your deployments. Each cluster is still responsible for building & pushing ETL files to the object store.
 {% endhint %}
 
-When upgrading to Kubecost 2.0, the Aggregator should be automatically deployed. No additional values need to be set, however additional details can be found in our [Aggregator](/install-and-configure/install/multi-cluster/federated-etl/aggregator.md) doc.
+When upgrading to Kubecost 2.0, the Aggregator should be automatically deployed. No additional values need to be set, however additional details can be found in our [Aggregator](/install-and-configure/install/multi-cluster/federated-etl/aggregator.md) doc. It is recommended to upgrade your primary cluster first, then secondary clusters.
 
 ## (Enterprise) Thanos users
 
@@ -70,3 +70,9 @@ Before upgrading to Kubecost 2.x, please `kubectl delete` this Statefulset.
 ```
 
 If you were running the Aggregator in v1.107 or v1.108, you will need to manually run `kubectl delete sts/kubecost-aggregator` before upgrading to v2.0. This is due to a breaking change in the StatefulSet template, specifically a removal of one of the Aggregator's PVs, which Helm does not allow an upgrade.
+
+### Cloud integration working in v1.x, but not in v2.x
+
+First, ensure you have upgraded Kubecost to the latest version of 2.x. Patches have been released to fix miscellaneous cloud integration issues. You can learn more about what's been fixed in our [release notes](https://github.com/kubecost/cost-analyzer-helm-chart/releases).
+
+Next, ensure that you are configuring the cloud integration via the `cloud-integration` secret and `.Values.kubecostProductConfigs.cloudIntegrationSecret` Helm value. This is now the only supported way of configuring your cloud integration
