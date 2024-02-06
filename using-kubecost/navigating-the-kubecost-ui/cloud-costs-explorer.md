@@ -8,46 +8,6 @@ The Cloud Cost Explorer is a dashboard which provides visualization and filterin
 If you haven't performed a successful billing integration with a cloud service provider, the Cloud Cost Explorer won't have cost data to display. Before using the Cloud Cost Explorer, make sure to read our [Cloud Billing Integrations](/install-and-configure/install/cloud-integration/README.md) guide to get started, then see our [specific articles](/install-and-configure/install/cloud-integration/README.md#adding-a-cloud-integration) for the cloud service providers you want to integrate with.
 {% endhint %}
 
-## Installation and configuration
-
-{% hint style="info" %}
-As of v1.104, Cloud Cost is enabled by default. If you are using v1.04+, you can skip the Installation and Configuration section.
-{% endhint %}
-
-For versions of Kubecost up to v1.103, Cloud Cost needs to be enabled first through Helm, using [the following parameters](https://github.com/kubecost/cost-analyzer-helm-chart/blob/a9198777ecd6d1f68f38afb7e42d7cc13e17a1f8/cost-analyzer/values.yaml#L457-L463):
-
-```yaml
-kubecostModel:
-  cloudCost:
-     enabled: true
-     labelList:
-       IsIncludeList: false
-       # format labels as comma separated string (ex. "label1,label2,label3")
-       labels: ""
-     topNItems: 1000
-```
-
-Enabling Cloud Cost is required. Optional parameters include:
-
-* `labelList.labels`: Comma-separated list of labels; empty string indicates that the list is disabled
-* `labelList.IsIncludeList`: If true, label list is a white list; if false, it is a black list
-* `topNItems`: number of sampled "top items" to collect per day
-
-While Cloud Cost is enabled, it is recommended to disable Cloud Usage, which is more memory-intensive.
-
-```yaml
-kubecostModel:
-  etlCloudUsage: false
-```
-
-{% hint style="danger" %}
-Disabling Cloud Usage will restrict functionality of your Assets dashboard. This is intentional. Learn more about Cloud Usage [here](https://docs.kubecost.com/install-and-configure/install/cloud-integration#cloud-usage).
-{% endhint %}
-
-### Using `topNitems`
-
-Item-level data in the Cloud Cost Explorer is only a sample of the most expensive entries, determined by the Helm flag `topNitems`. This value can be increased substantially but can lead to higher memory consumption. If you receive a message in the UI "We don't have item-level data with the current filters applied" when attempting to filter, you may need to expand the value of `topNitems` (default is 1,000), or reconfigure your query.
-
 ## Configuring your query
 
 ### Date range
