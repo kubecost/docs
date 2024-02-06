@@ -15,6 +15,14 @@ Used to determine the peak number of monitored cores in the window.
 | --- | --- | --- |
 | `window` | `2d` | The window of data to find the peak cores of |
 
+#### `/model/diagnostic/containersPerDay`
+
+Used to determine the container rows per daily window, including max and min.
+
+#### `/model/diagnostic/cloudCostsPerDay`
+
+Used to determine the Cloud Cost rows per daily window, including max and min.
+
 #### `/model/diagnostic/containerWithoutMatchingNode`
 
 Used to determine if, in each window, there is container data without matching node data (matched on Provider ID).
