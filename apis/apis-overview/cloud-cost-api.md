@@ -1,11 +1,5 @@
 # Cloud Cost API
 
-{% hint style="warning" %}
-The Cloud Cost API cannot be used until you have enabled Cloud Cost via Helm. See Kubecost's [Cloud Cost Explorer](https://docs.kubecost.com/using-kubecost/navigating-the-kubecost-ui/cloud-costs-explorer#installation-and-configuration) doc for instructions.
-{% endhint %}
-
-## Intro to Cloud Cost API
-
 The Cloud Cost API provides multiple endpoints to obtain accurate cost information from your cloud service providers (CSPs), including data available from cloud billing reports (such as AWS' Cost and Usage Report (CUR)).
 
 There are three distinct endpoints for using the Cloud Cost API. The default endpoint for querying Cloud Costs should be `/model/cloudCost/view`.
