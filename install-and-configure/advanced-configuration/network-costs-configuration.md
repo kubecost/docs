@@ -16,10 +16,6 @@ With the network costs DaemonSet enabled, the Network column on the Allocations 
 
 ![network-cost-allocation](/images/network-cost-allocation.png)
 
-When using Kubecost version 1.99 and above: Greater detail can be accessed through Allocations UI only when aggregating by namespace and selecting the link on that namespace. This opens the namespace detail page where there is a card at the bottom.
-
-![network-cost-detail](/images/network-cost-detail.png)
-
 ### Grafana dashboard
 
 A Grafana dashboard is included with the Kubecost installation, but you can also find it in our [cost-analyzer-helm-chart repository](https://github.com/kubecost/cost-analyzer-helm-chart/blob/develop/cost-analyzer/grafana-templates/multi-cluster-network-transfer-data.json).
