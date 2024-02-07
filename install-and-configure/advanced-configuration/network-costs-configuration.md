@@ -16,6 +16,14 @@ With the network costs DaemonSet enabled, the Network column on the Allocations 
 
 ![network-cost-allocation](/images/network-cost-allocation.png)
 
+For an in-depth cost breakdown of your network costs, you can scroll down on the Overview page to your Network Costs Breakdown, where you can select individual namespaces and view cloud service traffic destinations.
+
+![Network Costs Breakdown](/images/networkcostbreakdown.png)
+
+Selecting a namespace or adding `/network` to your Kubecost address will open the 'Allocation / Network costs' page, lists key metrics such as egress and cross-zone costs.
+
+![Network Costs page](/images/networkcostpage.png)
+
 ### Grafana dashboard
 
 A Grafana dashboard is included with the Kubecost installation, but you can also find it in our [cost-analyzer-helm-chart repository](https://github.com/kubecost/cost-analyzer-helm-chart/blob/develop/cost-analyzer/grafana-templates/multi-cluster-network-transfer-data.json).
