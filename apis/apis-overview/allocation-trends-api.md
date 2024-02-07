@@ -6,7 +6,7 @@ Analyzes change in total cost of allocations relative to a previous window of th
 {% endswagger-description %}
 
 {% swagger-parameter in="path" name="window" required="true" type="string" %}
-Duration of time over which to query. Compares cost usage of window to cost usage window of equal size directly preceding it. Accepts all standard Kubecost window formats (See our doc on using [the `window` parameter]/apis/apis-overview/assets-api.md#using-window-parameter)).
+Duration of time over which to query. Compares cost usage of window to cost usage window of equal size directly preceding it. Accepts all standard Kubecost window formats (See our doc on using [the `window` parameter](/apis/apis-overview/assets-api.md#using-window-parameter)).
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="aggregate" type="string" required="false" %}
