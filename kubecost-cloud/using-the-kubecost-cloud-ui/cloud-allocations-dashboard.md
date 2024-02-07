@@ -22,10 +22,6 @@ You can control the window of allocation spend by selecting _Last 7 days_ (the d
 
 Here you can aggregate cost by namespace, deployment, service, and other native Kubernetes concepts. While selecting _Single Aggregation_, you will only be able to categorize by one concept at a time. While selecting _Multi Aggregation_, you will be able to filter for multiple concepts at the same time.
 
-{% hint style="info" %}
-Service in this context refers to a Kubernetes object that exposes an interface to outside consumers, not a cloud service.
-{% endhint %}
-
 Costs aggregations are also visible by other meaningful organizational concepts, e.g. Team, Department, and Product. These aggregations are based on Kubernetes labels, referenced at both the pod and namespace-level, with labels at the pod-level being favored over the namespace label when both are present. Workloads without the relevant label will be shown as `__unallocated__`.
 
 ### Edit Report
