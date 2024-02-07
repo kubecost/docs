@@ -13,7 +13,7 @@ Kubecost requires a Kubernetes cluster to be deployed.
 * Managed Kubernetes clusters (e.g. EKS, GKE, AKS) most common
 * Kubernetes distributions (e.g. OpenShift, DigitalOcean, Rancher, Tanzu)
 * Bootstrapped Kubernetes cluster
-* On-prem and air-gapped using custom [pricing sheets](https://docs.kubecost.com/install-and-configure/install/provider-installations/air-gapped#how-do-i-configure-prices-for-my-on-premise-assets)
+* On-prem and air-gapped using custom [pricing sheets](/install-and-configure/install/provider-installations/air-gapped.md#how-do-i-configure-prices-for-my-on-premise-assets)
 
 ## Supported Cloud Providers
 
@@ -27,4 +27,4 @@ Kubecost requires a Kubernetes cluster to be deployed.
   * All regions supported, as shown in [opencost/pkg/cloud/azureprovider.go](https://github.com/opencost/opencost/blob/0c2f063052723a65ca62a4c75be23392806b6fac/pkg/cloud/azureprovider.go#L82)
   * x86
 
-**This list is certainly not exhaustive!** This is simply a list of observations as to where our users run Kubecost based on their questions and feedback. Please [contact us](https://docs.kubecost.com/other-resources/contactus) with any questions!
+**This list is certainly not exhaustive!** This is simply a list of observations as to where our users run Kubecost based on their questions and feedback. Please [contact us](/contactus.md) with any questions!

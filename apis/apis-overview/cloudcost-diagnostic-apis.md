@@ -1,8 +1,8 @@
 # CloudCost Diagnostic APIs
 
-These APIs are designed to help troubleshoot and provide diagnostics for Kubecost's cloud integration features like Cloud Usage and reconciliation. For an explanation of these integration features, review Kubecost's [cloud processes](https://docs.kubecost.com/install-and-configure/install/cloud-integration#kubecosts-cloud-processes).
+These APIs are designed to help troubleshoot and provide diagnostics for Kubecost's cloud integration features like Cloud Usage and reconciliation. For an explanation of these integration features, review Kubecost's [cloud processes](/install-and-configure/install/cloud-integration/README.md#kubecosts-cloud-processes).
 
-To review the `provider` parameter for rebuild/run APIs, see [Cloud Stores](https://docs.kubecost.com/install-and-configure/install/cloud-integration#cloud-stores).
+To review the `provider` parameter for rebuild/run APIs, see [Cloud Stores](/install-and-configure/install/cloud-integration.md#cloud-stores).
 
 ## Cloud Usage APIs
 
@@ -35,7 +35,7 @@ Reruns queries for Cloud Usages in the given window for the given Cloud Store or
 {% endswagger-description %}
 
 {% swagger-parameter in="path" name="window" required="true" %}
-The applicable window for repair by the Cloud Store. See [Using `window` parameter](https://docs.kubecost.com/apis/apis-overview/assets-api#using-window-parameter) for more details.
+The applicable window for repair by the Cloud Store. See [Using `window` parameter](/apis/apis-overview/assets-api.md#using-window-parameter) for more details.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="provider" type="string" %}
@@ -85,7 +85,7 @@ Reruns queries for reconciliation in the given window for the given Cloud Store 
 {% endswagger-description %}
 
 {% swagger-parameter in="path" name="window" required="true" type="string" %}
-The applicable window for repair by the Cloud Store. See [Using `window` parameter](https://docs.kubecost.com/apis/apis-overview/assets-api#using-window-parameter) for more details.
+The applicable window for repair by the Cloud Store. See [Using `window` parameter](/apis/apis-overview/assets-api.md#using-window-parameter) for more details.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="provider" type="string" %}

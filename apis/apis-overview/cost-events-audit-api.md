@@ -97,7 +97,7 @@ The watchers are tracking change events across all namespaces within the local/p
 
 ## Estimated cost impact
 
-Cost implications of cluster events are handled by passing the Kubernetes spec inferred from the change event to the Kubecost [Predict API](https://docs.kubecost.com/apis/apis-overview/spec-cost-prediction-api).
+Cost implications of cluster events are handled by passing the Kubernetes spec inferred from the change event to the Kubecost [Predict API](/apis/apis-overview/spec-cost-prediction-api.md).
 
 ## Current limitations
 

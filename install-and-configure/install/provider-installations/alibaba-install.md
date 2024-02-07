@@ -41,7 +41,7 @@ These two can be generated in the Alibaba Cloud portal. Hover over your user acc
 
 ## Alibaba Cloud integration
 
-Currently, Kubecost does not support complete integration of your Alibaba billing data like for other major cloud providers. Instead, Kubecost will only support public pricing integration, which will provide proper list prices for all cloud-based resources. Features like reconciliation and savings insights are not available for Alibaba. For more information on setting up a public pricing integration, see our [Multi-Cloud Integrations ](https://docs.kubecost.com/install-and-configure/install/cloud-integration/multi-cloud)doc.
+Currently, Kubecost does not support complete integration of your Alibaba billing data like for other major cloud providers. Instead, Kubecost will only support public pricing integration, which will provide proper list prices for all cloud-based resources. Features like reconciliation and savings insights are not available for Alibaba. For more information on setting up a public pricing integration, see our [Multi-Cloud Integrations](/install-and-configure/install/cloud-integration/multi-cloud.md) doc.
 
 ## Troubleshooting
 

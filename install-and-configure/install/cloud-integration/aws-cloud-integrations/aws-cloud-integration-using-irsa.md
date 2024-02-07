@@ -22,7 +22,7 @@ This guide is a one-time setup per AWS payer account and is typically one per or
 
 Kubecost supports multiple AWS payer accounts as well as multiple cloud providers from a single Kubecost primary cluster. For multiple payer accounts, create additional entries inside the array below.
 
-Detail for multiple cloud provider setups is [here](https://docs.kubecost.com/install-and-configure/install/cloud-integration/multi-cloud#aws).
+Detail for multiple cloud provider setups is [here](/install-and-configure/install/cloud-integration/multi-cloud.md#aws).
 
 ## Configuration
 
@@ -259,4 +259,4 @@ Defaulted container "cost-model" out of: cost-model, cost-analyzer-frontend
 
 ## Troubleshooting
 
-For help with troubleshooting, see the section in our original [AWS integration guide](https://docs.kubecost.com/install-and-configure/install/cloud-integration/aws-cloud-integrations#troubleshooting).
+For help with troubleshooting, see the section in our original [AWS integration guide](/install-and-configure/install/cloud-integration/aws-cloud-integrations.md#troubleshooting).

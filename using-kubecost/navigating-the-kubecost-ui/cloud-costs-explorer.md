@@ -38,7 +38,7 @@ Selecting the _Edit_ button will allow for additional filtering and pricing disp
 
 #### Cost Metric
 
-The Cost Metric dropdown allows you to adjust the displayed cost data based on different calculations. Cost Metric values are based on and calculated following standard FinOps dimensions and metrics, but may be calculated differently depending on your CSP. Learn more about how these metrics are calculated by each CSP in the [Cloud Cost Metrics](https://docs.kubecost.com/apis/apis-overview/cloud-cost-api/cloud-cost-metrics) doc. The five available metrics supported by the Cloud Cost Explorer are:
+The Cost Metric dropdown allows you to adjust the displayed cost data based on different calculations. Cost Metric values are based on and calculated following standard FinOps dimensions and metrics, but may be calculated differently depending on your CSP. Learn more about how these metrics are calculated by each CSP in the [Cloud Cost Metrics](/apis/apis-overview/cloud-cost-api/cloud-cost-metrics.md) doc. The five available metrics supported by the Cloud Cost Explorer are:
 
 | Cost Metric        | Description                                                                                 |
 | ------------------ | ------------------------------------------------------------------------------------------- |
