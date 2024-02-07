@@ -259,4 +259,4 @@ Defaulted container "cost-model" out of: cost-model, cost-analyzer-frontend
 
 ## Troubleshooting
 
-For help with troubleshooting, see the section in our original [AWS integration guide](/install-and-configure/install/cloud-integration/aws-cloud-integrations.md#troubleshooting).
+For help with troubleshooting, see the section in our original [AWS integration guide](/install-and-configure/install/cloud-integration/aws-cloud-integrations/aws-cloud-integrations.md#troubleshooting).

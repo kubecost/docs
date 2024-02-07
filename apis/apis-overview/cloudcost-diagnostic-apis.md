@@ -2,7 +2,7 @@
 
 These APIs are designed to help troubleshoot and provide diagnostics for Kubecost's cloud integration features like Cloud Usage and reconciliation. For an explanation of these integration features, review Kubecost's [cloud processes](/install-and-configure/install/cloud-integration/README.md#kubecosts-cloud-processes).
 
-To review the `provider` parameter for rebuild/run APIs, see [Cloud Stores](/install-and-configure/install/cloud-integration.md#cloud-stores).
+To review the `provider` parameter for rebuild/run APIs, see [Cloud Stores](/install-and-configure/install/cloud-integration/README.md#cloud-stores).
 
 ## Cloud Usage APIs
 

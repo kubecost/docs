@@ -30,7 +30,7 @@ It's important to take precautions to ensure your billing data is preserved, and
 
 Metrics reside in Prometheus, but extracting information for either the UI or through API responses directly from this store is not performant at scale.  For this reason, the data is optimized and stored in a structure is called extract, transform, load, or ETL. Kubecost's definition of ETL usually will refer to this ETL process.
 
-Like any other system, backup of critical data is a must, and backing up ETL is no exception. To address this, we offer a number of different options based on your product tier. Descriptions and instructions for our backup functionalities can be found in our [ETL Backup](/install-and-configure/install/etl-backup.md) doc.
+Like any other system, backup of critical data is a must, and backing up ETL is no exception. To address this, we offer a number of different options based on your product tier. Descriptions and instructions for our backup functionalities can be found in our [ETL Backup](/install-and-configure/install/etl-backup/etl-backup.md) doc.
 
 ### Alerts and Health
 

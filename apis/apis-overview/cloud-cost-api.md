@@ -83,7 +83,7 @@ Query cloud cost aggregate data
 {% endswagger-description %}
 
 {% swagger-parameter in="path" name="window" required="true" type="string" %}
-Window of the query. Accepts all standard Kubecost window formats (See our doc on using [the `window` parameter](/apis/apis-overview/assets-api#using-window-parameter.md)).
+Window of the query. Accepts all standard Kubecost window formats (See our doc on using [the `window` parameter](/apis/apis-overview/assets-api.md#using-window-parameter)).
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="aggregate" type="string" required="false" %}
