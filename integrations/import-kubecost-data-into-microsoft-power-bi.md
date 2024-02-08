@@ -10,7 +10,7 @@ In the From Web window, select _Basic_, then in the URL box, enter the endpoint 
 
 `http://<your-kubecost-address>/model/allocation?window=3d&aggregate=namespace`
 
-To learn more about using Kubecost APIs, see our [API Directory](https://docs.kubecost.com/apis/apis-overview).
+To learn more about using Kubecost APIs, see our [API Directory](/apis/apis-overview/apis-overview.md).
 
 ![From Web window with an example Allocation query](/.gitbook/assets/from-web.png)
 

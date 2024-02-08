@@ -6,7 +6,7 @@ Analyzes change in total cost of allocations relative to a previous window of th
 {% endswagger-description %}
 
 {% swagger-parameter in="path" name="window" required="true" type="string" %}
-Duration of time over which to query. Compares cost usage of window to cost usage window of equal size directly preceding it. Accepts all standard Kubecost window formats (See our doc on using [the `window` parameter](https://docs.kubecost.com/apis/apis-overview/assets-api#using-window-parameter)).
+Duration of time over which to query. Compares cost usage of window to cost usage window of equal size directly preceding it. Accepts all standard Kubecost window formats (See our doc on using [the `window` parameter](/apis/apis-overview/assets-api.md#using-window-parameter)).
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="aggregate" type="string" required="false" %}
@@ -102,7 +102,7 @@ Duration of a single allocation set. If unspecified, this defaults to the `windo
 {% swagger method="get" path="/allocation/trends" baseUrl="http://<your-kubecost-address>/model" summary="Allocation Trends API (Aggregator only)" %} {% swagger-description %} Analyzes change in allocated costs relative to a previous window of the same size. This Allocation Trends API should only be consulted for users who have configured [Kubecost Aggregator](/install-and-configure/install/multi-cluster/federated-etl/aggregator.md). {% endswagger-description %}
 
 {% swagger-parameter in="path" name="window" required="true" type="string" %}
-Duration of time over which to query. Compares cost usage of window to cost usage window of equal size directly preceding it. Accepts all standard Kubecost window formats (See our doc on using [the `window` parameter](https://docs.kubecost.com/apis/apis-overview/assets-api#using-window-parameter)).
+Duration of time over which to query. Compares cost usage of window to cost usage window of equal size directly preceding it. Accepts all standard Kubecost window formats (See our doc on using [the `window` parameter](/apis/apis-overview/assets-api.md#using-window-parameter)).
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="names" required="true" type="string" %}

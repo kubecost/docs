@@ -69,13 +69,13 @@ For larger teams and companies with more complex infrastructure, you need the ri
 
 ## Quick installation
 
-Check out our [Installation guide](https://docs.kubecost.com/install-and-configure/install) to review your install options and get started on your Kubecost journey. Installation and onboarding only take a few minutes.
+Check out our [Installation guide](/install-and-configure/install/install.md) to review your install options and get started on your Kubecost journey. Installation and onboarding only take a few minutes.
 
 ## Getting started
 
-Once Kubecost has been successfully installed, check out our [First Time User Guide](https://docs.kubecost.com/install-and-configure/install/first-time-user-guide) which will get you started with connecting to your cluster's cloud service provider, review your data, and setting up multi-cluster environments.
+Once Kubecost has been successfully installed, check out our [First Time User Guide](/install-and-configure/install/first-time-user-guide.md) which will get you started with connecting to your cluster's cloud service provider, review your data, and setting up multi-cluster environments.
 
-If your Kubecost installation was not successful, go to our [Troubleshoot Install](https://docs.kubecost.com/troubleshooting/troubleshoot-install) doc which will work you through some of the most common installation-related issues.
+If your Kubecost installation was not successful, go to our [Troubleshoot Install](/troubleshooting/troubleshoot-install.md) doc which will work you through some of the most common installation-related issues.
 
 Additionally, check out our [blog ](https://blog.kubecost.com/blog/cost-monitoring/)to learn more about best practices with Kubecost's cost monitoring.
 
