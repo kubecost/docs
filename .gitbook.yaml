@@ -17,7 +17,7 @@ redirects:
     api-abandoned-workloads: apis/apis-overview/api-abandoned-workloads.md
     alerts: using-kubecost/navigating-the-kubecost-ui/alerts.md
     cost-allocation: using-kubecost/navigating-the-kubecost-ui/cost-allocation/README.md
-    multi-cluster: main/install-and-configure/install/multi-cluster/multi-cluster.md
+    multi-cluster: install-and-configure/install/multi-cluster/multi-cluster.md
     enterprise: install-and-configure/install/install.md
     gcp-out-of-cluster.html: install-and-configure/install/cloud-integration/gcp-out-of-cluster/README.md
     enterprise.html: install.md
