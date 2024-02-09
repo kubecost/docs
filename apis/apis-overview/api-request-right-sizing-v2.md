@@ -107,7 +107,7 @@ curl -G \
   ${KUBECOST_ADDRESS}/savings/requestSizingV2
 ```
 
-## Querying with `/topline` endpoint to view cost totals across query (Aggregator only)
+## Querying with `/topline` endpoint to view cost totals across query
 
 `/topline` is an optional API endpoint which can be added to your right-sizing query via `.../savings/RequestSizingV2/topline...` to provide a condensed overview of all items sampled. `TotalMonthlySavings` is the total estimated savings value from adopting right-sizing recommendations. `Count` refers to the number of items sampled. `Recommendations` should return `null`, as it is unable to provide a universal right-sizing recommendation.
 
