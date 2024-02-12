@@ -57,14 +57,9 @@ While not recommended, you can disable Kubecost cost-model's emission of KSM if 
 
 {% code overflow="wrap" %}
 ```yaml
-prometheus:
-  kubeStateMetrics:
-    enabled: false
-  kube-state-metrics:
-    disabled: true
 kubecostMetrics:
   emitKsmV1Metrics: false
-  # If you are running KSMv2, you must set the below config as well. More details below.
+  # If you are running KSMv2, you must also set the below config. More details below.
   emitKsmV1MetricsOnly: true
 ```
 {% endcode %}
@@ -98,25 +93,24 @@ Kubecost itself is resilient to duplicate metrics, but other services or queries
 * Run a separate Prometheus for Kubecost alone (the default installation behavior of Kubecost) and disable the scraping of Kubecost's metrics in your other Prometheus configurations.
 * We support reducing some duplication from Kubecost via config. To reduce the emission of metrics that overlap with metrics provided by KSM v2 you can set the following Helm values ([code ref](https://github.com/kubecost/cost-model/blob/0a0793ec040013fe44c058ff37f032449a2f1191/pkg/metrics/kubemetrics.go#L110-L123)):
 
-    ```yaml
-    kubecostMetrics:
-      emitKsmV1MetricsOnly: true
-      emitKsmV1Metrics: false
-    ```
+  ```yaml
+  kubecostMetrics:
+    emitKsmV1Metrics: false
+    emitKsmV1MetricsOnly: true
+  ```
 
-    * The metrics that will still be emitted include:
-      * Node metrics ([code ref](https://github.com/kubecost/cost-model/blob/0a0793ec040013fe44c058ff37f032449a2f1191/pkg/metrics/nodemetrics.go#L30-L57))
-        * `kube_node_status_capacity`
-        * `kube_node_status_capacity_memory_bytes`
-        * `kube_node_status_capacity_cpu_cores`
-        * `kube_node_status_allocatable`
-        * `kube_node_status_allocatable_memory_bytes`
-        * `kube_node_status_allocatable_cpu_cores`
-        * `kube_node_labels`
-        * `kube_node_status_condition`
-      * Namespace metrics ([code ref](https://github.com/kubecost/cost-model/blob/0a0793ec040013fe44c058ff37f032449a2f1191/pkg/metrics/namespacemetrics.go#L121-L129))
-        * `kube_namespace_labels`
-      * Pod metrics ([code ref](https://github.com/kubecost/cost-model/blob/0a0793ec040013fe44c058ff37f032449a2f1191/pkg/metrics/podlabelmetrics.go#L51-L60))
-        * `kube_pod_labels`
-        * `kube_pod_owner`
-    * If you are already running KSM v2, and have set the helm value to only emit KSM v1 metrics, you can also disable the Kubecost-based KSM deployment by setting the helm value `prometheus.kube-state-metrics.disabled` to `true`.
+  * The metrics that will still be emitted include:
+    * Node metrics ([code ref](https://github.com/kubecost/cost-model/blob/0a0793ec040013fe44c058ff37f032449a2f1191/pkg/metrics/nodemetrics.go#L30-L57))
+      * `kube_node_status_capacity`
+      * `kube_node_status_capacity_memory_bytes`
+      * `kube_node_status_capacity_cpu_cores`
+      * `kube_node_status_allocatable`
+      * `kube_node_status_allocatable_memory_bytes`
+      * `kube_node_status_allocatable_cpu_cores`
+      * `kube_node_labels`
+      * `kube_node_status_condition`
+    * Namespace metrics ([code ref](https://github.com/kubecost/cost-model/blob/0a0793ec040013fe44c058ff37f032449a2f1191/pkg/metrics/namespacemetrics.go#L121-L129))
+      * `kube_namespace_labels`
+    * Pod metrics ([code ref](https://github.com/kubecost/cost-model/blob/0a0793ec040013fe44c058ff37f032449a2f1191/pkg/metrics/podlabelmetrics.go#L51-L60))
+      * `kube_pod_labels`
+      * `kube_pod_owner`
