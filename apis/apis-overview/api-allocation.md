@@ -4,7 +4,7 @@
 Throughout our API documentation, we use `localhost:9090` as the default Kubecost URL, but your Kubecost instance may be exposed by a service or ingress. To reach Kubecost at port 9090, run: `kubectl port-forward deployment/kubecost-cost-analyzer -n kubecost 9090`. When querying the cost-model container directly (ex. localhost:9003), the `/model` part of the URI should be removed.
 {% endhint %}
 
-{% swagger method="get" path="/allocation" baseUrl="http://<your-kubecost-address>/model" summary="Allocation API
+{% swagger method="get" path="/allocation" baseUrl="http://<your-kubecost-address>/model" summary="Allocation API" %}
 {% swagger-description %}
 The Allocation API is the preferred way to query for costs and resources allocated to Kubernetes workloads and optionally aggregated by Kubernetes concepts like `namespace`, `controller`, and `label`.
 
