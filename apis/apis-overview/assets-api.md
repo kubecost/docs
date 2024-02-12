@@ -80,7 +80,9 @@ Retrieve assets cost data for the past week, aggregated by type, and as cumulati
 
 {% tabs %}
 {% tab title="Request" %}
-`http://localhost:9090/model/assets?window=1w&aggregate=type&accumulate=true`
+```
+http://localhost:9090/model/assets?window=1w&aggregate=type&accumulate=true
+```
 {% endtab %}
 
 {% tab title="Response" %}
@@ -290,7 +292,9 @@ Retrieve all GCP costs, aggregated by asset type, in the past five days:
 
 {% tabs %}
 {% tab title="Request" %}
-`http://localhost:9090/model/assets?window=5d&aggregate=type&filterProviders=GCP`
+```
+http://localhost:9090/model/assets?window=5d&aggregate=type&filterProviders=GCP
+```
 {% endtab %}
 
 {% tab title="Response" %}
