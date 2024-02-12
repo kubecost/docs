@@ -77,11 +77,11 @@ First, ensure you have upgraded Kubecost to the latest version of 2.x. Patches h
 
 Next, ensure that you are configuring the cloud integration via the `cloud-integration` secret and `.Values.kubecostProductConfigs.cloudIntegrationSecret` Helm value. This is now the only supported way of configuring your cloud integration
 
-### Resetting Aggregator StatefulSet Data
+### Resetting Aggregator StatefulSet data
 
-When deploying the Aggregator as a StatefulSet, it is possible to perform a reset of the aggregator data. The aggregator itself doesn't store any data, and relies on object storage. As such, a reset involves removing that Aggregator's local storage, and allowing it to re-ingest data from the object store. The procedure is as follows:
+When deploying the Aggregator as a StatefulSet, it is possible to perform a reset of the Aggregator data. The Aggregator itself doesn't store any data, and relies on object storage. As such, a reset involves removing that Aggregator's local storage, and allowing it to re-ingest data from the object store. The procedure is as follows:
 
 1. Scale down the Aggregator StatefulSet to 0
-2. When the aggregator pod is gone, delete the aggregator-db-storage-xxx-0 PVC
+2. When the Aggregator pod is gone, delete the `aggregator-db-storage-xxx-0` PVC
 3. Scale the Aggregator StatefulSet back to 1. This will re-create the PVC, empty. 
 4. Wait for Kubecost to re-ingest data from the object store. This could take from several minutes to several hours, depending on your data size and retention settings.
