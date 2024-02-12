@@ -4,7 +4,22 @@ structure:
     summary: SUMMARY.md
 
 redirects:
-    gcp-out-of-cluster.html: gcp-out-of-cluster.md
+    using-kubecost/getting-started/cloud-costs-explorer: using-kubecost/navigating-the-kubecost-ui/cloud-costs-explorer.md
+    using-kubecost/getting-started/alerts: using-kubecost/navigating-the-kubecost-ui/alerts.md
+    using-kubecost/getting-started/audits: using-kubecost/navigating-the-kubecost-ui/audits.md
+    controller: install-and-configure/advanced-configuration/controller/cluster-controller.md
+    gcp-out-of-cluster: install-and-configure/install/cloud-integration/gcp-out-of-cluster/README.md
+    architecture/network-allocation: using-kubecost/navigating-the-kubecost-ui/cost-allocation/network-allocation.md
+    using-kubecost/getting-started/saved-reports: using-kubecost/navigating-the-kubecost-ui/saved-reports/reports.md
+    saved-reports: using-kubecost/navigating-the-kubecost-ui/saved-reports/reports.md
+    using-kubecost/navigating-the-kubecost-ui/savings/auto-request-sizing/containerstats-pipeline: architecture/containerstats-pipeline.md
+    install-and-configure/advanced-configuration/controller: install-and-configure/advanced-configuration/controller/cluster-controller.md
+    api-abandoned-workloads: apis/apis-overview/api-abandoned-workloads.md
+    alerts: using-kubecost/navigating-the-kubecost-ui/alerts.md
+    cost-allocation: using-kubecost/navigating-the-kubecost-ui/cost-allocation/README.md
+    multi-cluster: install-and-configure/install/multi-cluster/multi-cluster.md
+    enterprise: install-and-configure/install/install.md
+    gcp-out-of-cluster.html: install-and-configure/install/cloud-integration/gcp-out-of-cluster/README.md
     enterprise.html: install.md
     alerts.html: alerts.md
     hc/en-us/articles/10015110616599: federated-etl.md
