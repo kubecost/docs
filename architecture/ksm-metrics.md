@@ -100,7 +100,7 @@ Kubecost itself is resilient to duplicate metrics, but other services or queries
   ```
 
   * The metrics that will still be emitted include:
-    * Node metrics ([code ref](https://github.com/kubecost/cost-model/blob/0a0793ec040013fe44c058ff37f032449a2f1191/pkg/metrics/nodemetrics.go#L30-L57))
+    * [Node metrics](https://github.com/kubecost/cost-model/blob/0a0793ec040013fe44c058ff37f032449a2f1191/pkg/metrics/nodemetrics.go#L30-L57)
       * `kube_node_status_capacity`
       * `kube_node_status_capacity_memory_bytes`
       * `kube_node_status_capacity_cpu_cores`
@@ -109,8 +109,8 @@ Kubecost itself is resilient to duplicate metrics, but other services or queries
       * `kube_node_status_allocatable_cpu_cores`
       * `kube_node_labels`
       * `kube_node_status_condition`
-    * Namespace metrics ([code ref](https://github.com/kubecost/cost-model/blob/0a0793ec040013fe44c058ff37f032449a2f1191/pkg/metrics/namespacemetrics.go#L121-L129))
+    * [Namespace metrics](https://github.com/kubecost/cost-model/blob/0a0793ec040013fe44c058ff37f032449a2f1191/pkg/metrics/namespacemetrics.go#L121-L129)
       * `kube_namespace_labels`
-    * Pod metrics ([code ref](https://github.com/kubecost/cost-model/blob/0a0793ec040013fe44c058ff37f032449a2f1191/pkg/metrics/podlabelmetrics.go#L51-L60))
+    * [Pod metrics](https://github.com/kubecost/cost-model/blob/0a0793ec040013fe44c058ff37f032449a2f1191/pkg/metrics/podlabelmetrics.go#L51-L60)
       * `kube_pod_labels`
       * `kube_pod_owner`
