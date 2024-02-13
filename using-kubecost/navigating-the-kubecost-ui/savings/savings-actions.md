@@ -163,7 +163,7 @@ You can also optionally configure Actions (except for Guided Sizing) via your Ku
 actionConfigs:
 
     clusterTurndown: []
-      # - name: my-schedule
+       - name: my-schedule
       #   start: "2024-02-09T00:00:00Z"
       #   end: "2024-02-09T12:00:00Z"
       #   repeat: daily
