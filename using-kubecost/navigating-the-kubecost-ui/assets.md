@@ -91,6 +91,6 @@ While cloud adjustments typically lag by roughly a day, there are certain adjust
 
 The Assets page allows you to view a dedicated breakdown of node costs. To do so, you must first filter for AssetType=Node, which will unnaggregate the page and display all nodes with associated costs. Selecting an indivudal line item will open a window containing cost metrics including hours running, hourly cost rate, overhead cost, and total cost. You can even view these costs broken down by CPU, GPU, and RAM:
 
-![Node Costs](images/nodecosts.png)
+![Node Costs](/images/nodecosts.png)
 
-Overhead costs refer to the capacity costs minus allocatable costs. This includes Kubelet, container runtime, and node operating systems and software. It does not include Prometheus, DNS, cert-manager, kube-system, or pods running with Kubernetes.
+Overhead costs refer to the capacity costs minus allocatable costs. This includes Kubelet, container runtime, and node operating systems and software. It does not include Prometheus, DNS, cert-manager, kube-system, or pods running with Kubernetes. To learn more about overhead costs, watch [Node Size Matters](https://www.youtube.com/watch?v=6vNI_O6sdvY), a presentation by Kubecost engineers from KubeCon 2023.
