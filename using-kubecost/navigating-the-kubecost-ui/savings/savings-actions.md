@@ -155,6 +155,70 @@ In the second collapsible tab, you can configure continuous cluster sizing.
 
 Select _Enable Auto-Resizing Now_ to finalize.
 
+## Creating an action via *values.yaml*
+
+You can also optionally configure Actions via your Kubecost [*values.yaml*](/install-and-configure/install/helm-install-params.md) file. Configure the following section as needed for any actions you wish to set up. For more information of any action-specific field, see the individual UI configuration sections above for more information.
+
+```
+actionConfigs:
+    # this configures the Kubecost Cluster Turndown action
+    # for more details, see documentation at https://github.com/kubecost/cluster-turndown/tree/develop?tab=readme-ov-file#setting-a-turndown-schedule
+    clusterTurndown: []
+      # - name: my-schedule
+      #   start: "2024-02-09T00:00:00Z"
+      #   end: "2024-02-09T12:00:00Z"
+      #   repeat: daily
+      # - name: my-schedule2
+      #   start: "2024-02-09T00:00:00Z"
+      #   end: "2024-02-09T01:00:00Z"
+      #   repeat: weekly
+    # this configures the Kubecost Namespace Turndown action
+    # for more details, see documentation at https://docs.kubecost.com/using-kubecost/navigating-the-kubecost-ui/savings/savings-actions#namespace-turndown
+    namespaceTurndown:
+      # - name: my-ns-turndown-action
+      #   dryRun: false
+      #   schedule: "0 0 * * *"
+      #   type: Scheduled
+      #   targetObjs:
+      #     - namespace
+      #   keepPatterns:
+      #     - ignorednamespace
+      #   keepLabels:
+      #     turndown: ignore
+      #   params:
+      #     minNamespaceAge: 4h
+    # this configures the Kubecost Cluster Sizing action
+    # for more details, see documentation at https://docs.kubecost.com/using-kubecost/navigating-the-kubecost-ui/savings/savings-actions#cluster-sizing
+    clusterRightsize:
+        # startTime: '2024-01-02T15:04:05Z'
+        # frequencyMinutes: 1440
+        # lastCompleted: ''
+        # recommendationParams:
+        #   window: 48h
+        #   architecture: ''
+        #   targetUtilization: 0.8
+        #   minNodeCount: 1
+        #   allowSharedCore: false
+        # allowCostIncrease: false
+        # recommendationType: ''
+    # this configures the Kubecost Request Sizing action
+    # for more details, see documentation at https://docs.kubecost.com/using-kubecost/navigating-the-kubecost-ui/savings/savings-actions#automated-request-sizing
+    containerRightsize:
+      #  workloads:
+      #   - clusterID: cluster-one
+      #     namespace: my-namespace
+      #     controllerKind: deployment
+      #     controllerName: my-controller
+      #  schedule:
+      #   start: "2024-01-30T15:04:05Z"
+      #   frequencyMinutes: 5
+      #   recommendationQueryWindow: "48h"
+      #   lastModified: ''
+      #   targetUtilizationCPU: 0.8
+      #   targetUtilizationMemory: 0.8
+
+```
+
 ## Managing Actions
 
 Once you have successfully created an Action, you will see it on the Actions page under Scheduled Actions. Here you will be able to view a Schedule, the Next Run, Affected Workloads, and the Status. You can select _Details_ to view more information about a specific Action, or delete the scheduled Action by selecting the trash can icon.
