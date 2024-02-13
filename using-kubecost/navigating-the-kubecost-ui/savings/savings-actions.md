@@ -164,51 +164,51 @@ actionConfigs:
 
     clusterTurndown: 
        - name: my-schedule
-      #   start: "2024-02-09T00:00:00Z"
-      #   end: "2024-02-09T12:00:00Z"
-      #   repeat: daily
-      # - name: my-schedule2
-      #   start: "2024-02-09T00:00:00Z"
-      #   end: "2024-02-09T01:00:00Z"
+         start: "2024-02-09T00:00:00Z"
+         end: "2024-02-09T12:00:00Z"
+         repeat: daily
+       - name: my-schedule2
+         start: "2024-02-09T00:00:00Z"
+         end: "2024-02-09T01:00:00Z"
          repeat: weekly
     namespaceTurndown:
-      # - name: my-ns-turndown-action
-      #   dryRun: false
-      #   schedule: "0 0 * * *"
-      #   type: Scheduled
-      #   targetObjs:
-      #     - namespace
-      #   keepPatterns:
-      #     - ignorednamespace
-      #   keepLabels:
-      #     turndown: ignore
-      #   params:
-      #     minNamespaceAge: 4h
+       - name: my-ns-turndown-action
+         dryRun: false
+         schedule: "0 0 * * *"
+         type: Scheduled
+         targetObjs:
+           - namespace
+         keepPatterns:
+           - ignorednamespace
+         keepLabels:
+           turndown: ignore
+         params:
+           minNamespaceAge: 4h
     clusterRightsize:
-        # startTime: '2024-01-02T15:04:05Z'
-        # frequencyMinutes: 1440
-        # lastCompleted: ''
-        # recommendationParams:
-        #   window: 48h
-        #   architecture: ''
-        #   targetUtilization: 0.8
-        #   minNodeCount: 1
-        #   allowSharedCore: false
-        # allowCostIncrease: false
-        # recommendationType: ''
+         startTime: '2024-01-02T15:04:05Z'
+         frequencyMinutes: 1440
+         lastCompleted: ''
+         recommendationParams:
+           window: 48h
+           architecture: ''
+           targetUtilization: 0.8
+           minNodeCount: 1
+           allowSharedCore: false
+         allowCostIncrease: false
+         recommendationType: ''
     containerRightsize:
-      #  workloads:
-      #   - clusterID: cluster-one
-      #     namespace: my-namespace
-      #     controllerKind: deployment
-      #     controllerName: my-controller
-      #  schedule:
-      #   start: "2024-01-30T15:04:05Z"
-      #   frequencyMinutes: 5
-      #   recommendationQueryWindow: "48h"
-      #   lastModified: ''
-      #   targetUtilizationCPU: 0.8
-      #   targetUtilizationMemory: 0.8
+        workloads:
+         - clusterID: cluster-one
+           namespace: my-namespace
+           controllerKind: deployment
+           controllerName: my-controller
+        schedule:
+         start: "2024-01-30T15:04:05Z"
+         frequencyMinutes: 5
+         recommendationQueryWindow: "48h"
+         lastModified: ''
+         targetUtilizationCPU: 0.8
+         targetUtilizationMemory: 0.8
 ```
 
 ## Managing Actions
