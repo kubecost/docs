@@ -6,11 +6,13 @@ Federated ETL is only supported for Kubecost Enterprise plans.
 
 Federated extract, transform, load (ETL) is Kubecost's method to aggregate all cluster information back to a single display described in our [Multi-Cluster](/install-and-configure/install/multi-cluster/multi-cluster.md#enterprise-federation) doc. Federated ETL gives teams the benefit of combining multiple Kubecost installations into one view.
 
-There are two primary advantages for using ETL federation:
+There are several primary advantages for using ETL federation:
 
 1. For environments that already have a Prometheus instance, Kubecost only requires a single pod per monitored cluster
 2. Many solutions that aggregate Prometheus metrics (like Thanos), are often expensive to scale in large environments
 3. With [Aggregator](/install-and-configure/install/multi-cluster/federated-etl/aggregator.md) as of Kubecost v2.0, ETL federation is more scalable.
+
+As of Kubecost v2.0, a multi-cluster setup will also require running the [Aggregator](/install-and-configure/install/multi-cluster/federated-etl/aggregator.md) on the primary cluster.
 
 ## Kubecost ETL Federation diagram
 
@@ -18,13 +20,13 @@ There are two primary advantages for using ETL federation:
 
 ## Sample configurations
 
-This guide has specific detail on how ETL Configuration works and deployment options.
+This guide has specific details on how ETL Configuration works and deployment options.
 
 Alternatively, the most common configurations can be found in our [poc-common-configurations](https://github.com/kubecost/poc-common-configurations/tree/main/etl-federation) repo.
 
 ### Clusters
 
-The federated ETL is composed of three types of clusters.
+Federated ETL is composed of two types of clusters.
 
 * **Federated Clusters**: The clusters which are being federated (clusters whose data will be combined and viewable at the end of the federated ETL pipeline). These clusters upload their ETL files after they have built them to Federated Storage.
 * **Primary Cluster**: A cluster where you can see the total Federated data that was combined from your Federated Clusters. These clusters use [Aggregator](/install-and-configure/install/multi-cluster/federated-etl/aggregator.md) to read from combined storage and serve queries on the combined data.
@@ -71,49 +73,53 @@ prometheus:
 
 ### Step 1: Storage configuration
 
-1. For any cluster in the pipeline (federated or primary), create a file _federated-store.yaml_ with the same format used for Thanos/S3 backup.
-   * [AWS](/install-and-configure/install/multi-cluster/long-term-storage-configuration/long-term-storage-aws.md)
-   * [Azure](/install-and-configure/install/multi-cluster/long-term-storage-configuration/long-term-storage-azure.md)
-   * [GCP](/install-and-configure/install/multi-cluster/long-term-storage-configuration/long-term-storage-gcp.md)
-2. Add a secret using that file: `kubectl create secret generic <secret_name> -n kubecost --from-file=federated-store.yaml`. Then set `.Values.kubecostModel.federatedStorageConfigSecret` to the kubernetes secret name.
+For all monitored clusters (federated or primary), create a file *federated-store.yaml* with the same format used for Thanos/S3 backup:
 
-<details>
+* [AWS](/install-and-configure/install/multi-cluster/long-term-storage-configuration/long-term-storage-aws.md)
+* [Azure](/install-and-configure/install/multi-cluster/long-term-storage-configuration/long-term-storage-azure.md)
+* [GCP](/install-and-configure/install/multi-cluster/long-term-storage-configuration/long-term-storage-gcp.md)
 
-<summary>Using an existing `object-store.yaml`</summary>
+The file _must_ be named named *federated-store.yaml*. then set the following configs:
 
-This method is not recommended, as it would enable the ETL Backup pipeline to run in addition to the the Federated ETL pipeline. If not configured correctly, there may be adverse effects on how ETLs are loaded into your primary.
-
-If you have an existing storage configuration set via `.Values.kubecostModel.etlBucketConfigSecret`, you can re-use that existing config by setting the following values:
+```sh
+kubectl create secret generic federated-store -n kubecost --from-file=federated-store.yaml
+```
 
 ```yaml
 kubecostModel:
-  etlBucketConfigSecret: "my-object-store-secret"
-federatedETL:
-  useExistingS3Config: true
-  redirectS3Backup: true
+  federatedStorageConfigSecret: "federated-store"
 ```
-
-</details>
 
 ### Step 2: Cluster configuration (Federated)
 
-1. For all clusters you want to federate together (i.e. see their data on the Primary Cluster), set `.Values.federatedETL.federatedCluster` to `true`. This cluster is now a Federated Cluster, and can also be a Federator or Primary Cluster.
-2. For non-primary clusters (clusters not running Aggregator and serving the main Kubecost frontend), set `.Values.kubecostAggregator.deployMethod` to `disabled`.
+For all monitored clusters, set the following configs:
+
+```yaml
+federatedETL:
+  federatedCluster: true
+```
+
+If it is not the primary cluster, additionally set the following:
+
+```yaml
+kubeCostAggregator:
+  deployMethod: disabled
+```
 
 ### Step 3: Cluster configuration (Primary)
 
-In Kubecost, the `Primary Cluster` serves the UI and API endpoints as well as reconciling cloud billing (cloud-integration).
-
-1. Aggregator must be set up in a [different configuration](/install-and-configure/install/multi-cluster/federated-etl/aggregator.md) than the default.
+In Kubecost, the primary cluster serves the UI and API endpoints as well as reconciling cloud billing (cloud integrations). Follow the instructions on the [Aggregator doc](/install-and-configure/install/multi-cluster/federated-etl/aggregator.md) to set up the primary cluster.
 
 ### Step 4: Verifying successful configuration
 
-1. The Federated ETL should begin functioning. On any ETL action on a federated cluster (Load/Put into local ETL store) the Federated Clusters will add data to Federated Storage. 
-   * To verify Federated Clusters are uploading their data correctly, check the container logs on a Federated Cluster. It should log federated uploads when ETL build steps run. The S3 bucket can also be checked to see if data is being written to the `/federated/<cluster_id>` path.
-   * In a default configuration, Aggregator will ingest new data from federated clusters every ten minutes, but new data may not be available for as much as multiple hours in extremely high-scale deployment. Check the Aggregator logs for information.
-   * To verify the entire pipeline is working, either query `Allocations/Assets` or view the respective views on the frontend. Multi-cluster data should appear after:
-     * Federated clusters have uploaded data to storage.
-     * Aggregator has completed a full ingest and derive loop after the upload.
+After some time, you should see multi-cluster data in your bucket and in your Kubecost UI. If not, you can proceed to verify the following:
+
+* Check the object-store to see if data is being written to the `/federated/<cluster_id>` path.
+* Check the container logs on a Federated Cluster. It should log federated uploads when ETL build steps run.
+* In a default configuration, Aggregator will ingest new data from federated clusters every ten minutes, but new data may not be available for as much as multiple hours in extremely high-scale deployment. Check the Aggregator logs for information.
+* To verify the entire pipeline is working, either query `Allocations/Assets` or view the respective views on the frontend. Multi-cluster data should appear after:
+  * Federated clusters have uploaded data to storage.
+  * Aggregator has completed a full ingest and derive loop after the upload.
 
 ## Setup with internal certificate authority
 
@@ -206,4 +212,4 @@ When using ETL Federation, there are several methods to recover Kubecost data in
 
 ### Repairing ETL
 
-In the event of missing or inaccurate data, you may need to rebuild your ETL pipelines. This is a documented procedure. See the [Repair Kubecost ETLs](/troubleshooting/etl-repair.md) doc for information and troubleshooting steps.
+In the event of missing or inaccurate data, you may need to rebuild your ETL pipelines. See the [Repair Kubecost ETLs](/troubleshooting/etl-repair.md) doc for information and troubleshooting steps.

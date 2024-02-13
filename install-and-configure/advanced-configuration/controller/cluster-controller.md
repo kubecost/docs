@@ -54,7 +54,7 @@ To use [this setup script](https://github.com/kubecost/cluster-turndown/blob/mas
 
 <summary>EKS setup</summary>
 
-For EKS cluster provisioning, if using `eksctl`, make sure that you use the `--managed` option when creating the cluster. Unmanaged node groups should be upgraded to managed. [More info](https://eksctl.io/usage/eks-managed-nodes/).
+For EKS cluster provisioning, if using `eksctl`, make sure that you use the `--managed` option when creating the cluster. Unmanaged node groups should be upgraded to managed. [More info](https://eksctl.io/usage/nodegroup-managed/).
 
 Create a new User with `AutoScalingFullAccess` permissions, plus the following EKS-specific permissions:
 

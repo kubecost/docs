@@ -1,7 +1,7 @@
 # Kubecost Cloud AWS Integration
 
 {% hint style="info" %}
-This documentation should only be consulted when using Kubecost Cloud. For information about the configuring an AWS integration with self-hosted Kubecost, see [here](https://docs.kubecost.com/install-and-configure/install/cloud-integration/aws-cloud-integrations).
+This documentation should only be consulted when using Kubecost Cloud. For information about the configuring an AWS integration with self-hosted Kubecost, see [here](/install-and-configure/install/cloud-integration/aws-cloud-integrations/aws-cloud-integrations.md).
 {% endhint %}
 
 Kubecost Cloud provides the ability to allocate out of cluster (OOC) costs back to Kubernetes concepts like namespaces and deployments. The following guide provides the steps required for allocating OOC costs in AWS.

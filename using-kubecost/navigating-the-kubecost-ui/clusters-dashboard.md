@@ -5,7 +5,7 @@
 The Clusters dashboard provides a list of all your monitored clusters, as well as additional clusters detected in your cloud bill. The dashboard provides details about your clusters including cost, efficiency, and cloud provider. You are able to filter your list of clusters by when clusters were last seen, activity status, and by name (see below).
 
 {% hint style="info" %}
-Monitoring of multiple clusters is only supported in [Kubecost Enterprise](https://www.kubecost.com/pricing/) plans. Learn more about Kubecost Enterprise's multi-cluster view [here](https://docs.kubecost.com/install-and-configure/install/multi-cluster).
+Monitoring of multiple clusters is only supported in [Kubecost Enterprise](https://www.kubecost.com/pricing/) plans. Learn more about Kubecost Enterprise's multi-cluster view [here](/install-and-configure/install/multi-cluster/multi-cluster.md).
 {% endhint %}
 
 ![Clusters dashboard](/.gitbook/assets/clusters.png)
@@ -14,7 +14,7 @@ Monitoring of multiple clusters is only supported in [Kubecost Enterprise](https
 
 To enable the Clusters dashboard, you must perform these two steps:
 
-1. Enable [cloud integration](https://docs.kubecost.com/install-and-configure/install/cloud-integration) for any and all cloud service providers you wish to view clusters with
+1. Enable [cloud integration](/install-and-configure/install/cloud-integration/README.md) for any and all cloud service providers you wish to view clusters with
 2. Enable Cloud Costs
 
 Enabling Cloud Costs through Helm can be done using the following parameters:
@@ -38,7 +38,7 @@ Clusters are primarily distinguished into three categories:
 * Clusters not monitored by Kubecost (yellow circle next to cluster name)
 * Inactive clusters (gray circle next to cluster name)
 
-For detail on how Kubecost identifies clusters, see [Cloud Cost Metrics](https://docs.kubecost.com/apis/apis-overview/cloud-cost-api/cloud-cost-metrics#kubernetes-clusters).
+For detail on how Kubecost identifies clusters, see [Cloud Cost Metrics](/apis/apis-overview/cloud-cost-api/cloud-cost-metrics.md#kubernetes-clusters).
 
 Monitored clusters are those that have cost metrics which will appear within your other Monitoring dashboards, like Allocations and Assets. Unmonitored clusters are clusters whose existence is determined from cloud integration, but haven't been added to Kubecost. Inactive clusters are clusters Kubecost once monitored, but haven't reported data over a certain period of time. This time period is three hours for Thanos-enabled clusters, and one hour for non-Thanos clusters.
 

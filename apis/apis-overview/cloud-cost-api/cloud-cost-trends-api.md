@@ -6,7 +6,7 @@
 {% swagger method="get" path="/cloudCost/view/trends" baseUrl="http://<your-kubecost-address>/model" summary="Cloud Cost Trends API" %} {% swagger-description %} Analyzes change in cloud costs relative to a previous window of the same size {% endswagger-description %}
 
 {% swagger-parameter in="path" name="window" required="true" type="string" %}
-Duration of time over which to query. Compares cost usage of window to cost usage window of equal size directly preceding it. Accepts all standard Kubecost window formats (See our doc on using [the `window` parameter](https://docs.kubecost.com/apis/apis-overview/assets-api#using-window-parameter)).
+Duration of time over which to query. Compares cost usage of window to cost usage window of equal size directly preceding it. Accepts all standard Kubecost window formats (See our doc on using [the `window` parameter](/apis/apis-overview/assets-api.md#using-window-parameter)).
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="names" required="true" type="string" %}
@@ -26,7 +26,7 @@ Determines which cloud cost metric type will be returned. Acceptable values are 
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="filter" type="string" required="false" %}
-Filter your results by a particular category or value. For example, when to only see trends in AWS spend, set this parameter to `filter=provider:"AWS"`. Supports [Filter Parameters (v2)](https://docs.kubecost.com/apis/apis-overview/filters-api) language.
+Filter your results by a particular category or value. For example, when to only see trends in AWS spend, set this parameter to `filter=provider:"AWS"`. Supports [Filter Parameters (v2)](/apis/apis-overview/filters-api.md) language.
 {% endswagger-parameter %}
 
 {% swagger-response status="200: OK" description="" %}
