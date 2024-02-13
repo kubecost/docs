@@ -170,7 +170,7 @@ actionConfigs:
       # - name: my-schedule2
       #   start: "2024-02-09T00:00:00Z"
       #   end: "2024-02-09T01:00:00Z"
-      #   repeat: weekly
+         repeat: weekly
     namespaceTurndown:
       # - name: my-ns-turndown-action
       #   dryRun: false
