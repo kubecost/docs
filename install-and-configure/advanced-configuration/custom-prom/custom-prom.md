@@ -1,7 +1,7 @@
 # Prometheus Configuration Guide
 
 {% hint style="danger" %}
-Multi-cluster Prometheus configurations are temporarily blocked from upgrading to Kubecost 2.0.
+Multi-cluster Prometheus configurations are temporarily blocked from upgrading to Kubecost 2.0. You must set up a dedicated object store as described in Step 1 of our [Aggregator migration guide](/install-and-configure/install/multi-cluster/federated-etl/thanos-migration-guide.md#step-1-use-the-existing-thanos-object-store-or-create-a-new-dedicated-object-store).
 {% endhint %}
 
 ## Bring your own Prometheus
