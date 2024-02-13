@@ -157,12 +157,11 @@ Select _Enable Auto-Resizing Now_ to finalize.
 
 ## Creating an action via *values.yaml*
 
-You can also optionally configure Actions via your Kubecost [*values.yaml*](/install-and-configure/install/helm-install-params.md) file. Configure the following section as needed for any actions you wish to set up. For more information of any action-specific field, see the individual UI configuration sections above for more information.
+You can also optionally configure Actions (except for Guided Sizing) via your Kubecost [*values.yaml*](/install-and-configure/install/helm-install-params.md) file. Configure the following section as needed for any actions you wish to set up (leave unconfigured actions as is). For more information of any action-specific field, see the individual UI configuration sections above for more information.
 
 ```
 actionConfigs:
-    # this configures the Kubecost Cluster Turndown action
-    # for more details, see documentation at https://github.com/kubecost/cluster-turndown/tree/develop?tab=readme-ov-file#setting-a-turndown-schedule
+
     clusterTurndown: []
       # - name: my-schedule
       #   start: "2024-02-09T00:00:00Z"
@@ -172,8 +171,6 @@ actionConfigs:
       #   start: "2024-02-09T00:00:00Z"
       #   end: "2024-02-09T01:00:00Z"
       #   repeat: weekly
-    # this configures the Kubecost Namespace Turndown action
-    # for more details, see documentation at https://docs.kubecost.com/using-kubecost/navigating-the-kubecost-ui/savings/savings-actions#namespace-turndown
     namespaceTurndown:
       # - name: my-ns-turndown-action
       #   dryRun: false
@@ -187,8 +184,6 @@ actionConfigs:
       #     turndown: ignore
       #   params:
       #     minNamespaceAge: 4h
-    # this configures the Kubecost Cluster Sizing action
-    # for more details, see documentation at https://docs.kubecost.com/using-kubecost/navigating-the-kubecost-ui/savings/savings-actions#cluster-sizing
     clusterRightsize:
         # startTime: '2024-01-02T15:04:05Z'
         # frequencyMinutes: 1440
@@ -201,8 +196,6 @@ actionConfigs:
         #   allowSharedCore: false
         # allowCostIncrease: false
         # recommendationType: ''
-    # this configures the Kubecost Request Sizing action
-    # for more details, see documentation at https://docs.kubecost.com/using-kubecost/navigating-the-kubecost-ui/savings/savings-actions#automated-request-sizing
     containerRightsize:
       #  workloads:
       #   - clusterID: cluster-one
@@ -216,7 +209,6 @@ actionConfigs:
       #   lastModified: ''
       #   targetUtilizationCPU: 0.8
       #   targetUtilizationMemory: 0.8
-
 ```
 
 ## Managing Actions
