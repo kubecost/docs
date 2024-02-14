@@ -1,88 +1,65 @@
-# Welcome to the Docs!
+# What is Kubecost Cloud?
 
-## Welcome!
+Kubecost Cloud is a SaaS solution that offers easier deployment and more convenient maintenance as an alternative to our on-prem product. You can get started with a free trial [here](http://app.kubecost.com/signup).
 
-**Kubecost helps you monitor and manage cost and capacity in Kubernetes environments.** We integrate with your infrastructure to help your team track, manage, and reduce spend.
+## Functionality
 
-{% hint style="info" %}
-Kubecost v2.0 is live! Read about all new functionality in our [blog post](https://blog.kubecost.com/blog/introducing-kubecost-2.0/). For current users interested in upgrading, please follow our [transition doc](/install-and-configure/install/kubecostv2.md) to ensure all architecture changes are successful.
-{% endhint %}
+### What features are currently available?
 
+Kubecost Cloud will provide you with everything you need in order to visualize your cost spend data and begin saving, with many more features to come soon. Kubecost Cloud currently supports:
 
-Below are frequently visited Kubecost documentation pages for both the [Commercial Kubecost product](http://kubecost.com) and [OpenCost](https://www.opencost.io/).
+* Allocations, Assets, and Cloud Cost dashboards for multiple Kubernetes clusters
+* Cloud integration for AWS, GCP, and Azure billing
+* Savings page with container right-sizing, cluster right-sizing, and abandoned workload detection
+* SSO via Google, Microsoft, Okta, and GitHub
+* Saved reports of your monitoring dashboard data
+* Team and user management
+* Overview homepage
 
-On this site, you’ll find everything you need to set up Kubecost for your team.
+### What features are coming next?
 
-{% tabs %}
-{% tab title="Kubecost Free" %}
-Kubecost provides real-time cost visibility and insights for teams using Kubernetes, helping you continuously reduce your cloud costs.
+Kubecost Cloud's functionality will be quickly expanded. Here's a sneak peek at which features we plan to implement next:
 
-*   **Cost allocation**
+* Clusters dashboard
+* Shared and idle costs
+* RBAC
+* Expanded Savings page options
 
-    Flexible, customizable cost breakdown and resource allocation for accurate showbacks, [chargebacks](https://blog.kubecost.com/blog/kubernetes-chargeback), and ongoing monitoring
-*   **Unified cost monitoring**
+## Is Kubecost Cloud right for me?
 
-    See all of your Kubernetes and out-of-cluster spend in one place, with full cloud service billing integration
-*   **Optimization Insights**
+Kubecost Cloud can help teams oversee cloud spend like our existing product, but there are more reasons this hosted version can be advantageous:
 
-    Get customized recommendations based on your own environment and behavior patterns
-*   **Alerts and governance**
+* Simplicity: Kubecost will handle your upgrades, scaling, and maintenance.
+* Cost effective: Kubecost Cloud will empower users to think big, start small, and scale quickly. Save on team time when you don’t host on-prem.
+* Security: We take responsibility for ensuring information on our servers is secure and private.
 
-    Achieve peak application performance and improve reliability with customizable alerts, configurable Availability Tiers, and real-time updates.
-*   **Purpose-built for teams running Kubernetes**
+## Requirements
 
-    Running containers on Kubernetes requires a new approach for visualizing and optimizing spend. Kubecost is designed from the ground up for Kubernetes and the Cloud Native ecosystem.
-*   **Own & control all of your own data**
+Kubecost Cloud has been tested with deployments of up to 1,000 nodes.
 
-    Kubecost is fully deployed in your infrastructure—we don’t require you to egress any data to a remote service. It’s deeply important to us that users are able to retain and control access to their own private information, e.g. sensitive cloud spend data.
-*   **Built on open source**
+### Environments supported
 
-    Kubecost began as an open source project with a goal of giving small engineering teams access to great cost visibility. As a result, our solution is tightly integrated with the open source cloud native ecosystem, e.g. Kubernetes, Prometheus, and Grafana.
-{% endtab %}
+* Kubernetes 1.8+
+* Helm 3.1+
+* Does not support air-gapped environments
 
-{% tab title="Kubecost Enterprise" %}
-For larger teams and companies with more complex infrastructure, you need the right features in place for efficiency, administration, and security. Kubecost Enterprise offers even more features and control so that any team can use our products, according to your entire organization’s standards.
+### Resource requirements
 
-*   **Unified visibility across all Kubernetes clusters**
+* In a small Kube cluster (less than 20 nodes), the Kubecost Cloud Agent total resource usage is approximately:
+  * 2 GiB RAM
+  * .5 CPUs
+* The network costs DaemonSet will add a per node resource usage at:
+  * 20 MiB RAM
+  * .05 CPU
 
-    View aggregate spend allocation across all environments by cluster, namespace, label, team, service, etc. As an example, this functionality allows you to see the cost of a namespace or set of labels across all of your clusters. An unlimited number of clusters is supported.
-*   **Long-term metric retention**
+### **Cluster requirements:**
 
-    Retain data for years with various durable storage options. Provides record keeping on spend, allocation, and efficiency metrics with simple backup & restore functionality.
-*   **Access control with SSO/SAML**
+* Supports all major cloud Kubernetes services (EKS, AKS, GKE)
+* Supports on-prem Kubernetes clusters
+* Supports self-managed clusters on AWS, GCP, and Azure.&#x20;
 
-    Finely manage read and/or admin access by individual users or user groups. Learn more about [configuring user management]](install-and-configure/advanced-configuration/user-management-saml/README.md).
-*   **High availability mode**
+## Using existing Kubecost documentation
 
-    Use multiple Kubecost replica pods with a Leader/Follower implementation to ensure one leader always exists across all replicas to run high availability mode. [Learn more](/install-and-configure/advanced-configuration/high-availability.md).
-*   **Advanced custom pricing**
+Kubecost Cloud brings lots of the same functionality from our existing on-prem product, but there are several distinct differences in their composition that may prevent you from consulting standard Kubecost documentation for assistance. We do not recommend you consult our other live documentation resources for help, and instead contact us directly at [cloud-support@kubecost.com](mailto:cloud-support@kubecost.com) with questions. Hyperlinks embedded in this group of docs may take you to live Kubecost web properties for additional information where relevant.
 
-    Advanced custom pricing pipelines give teams the ability to set custom per-asset pricing for resources. This is typically used for on-prem and air-gapped environments, but can also be applied to teams that want to allocate internal costs differently than cloud provider defaults.
-*   **Advanced integrations**
-
-    Connect internal alerting, monitoring, and BI solutions to Kubecost metrics and reporting.
-*   **Enterprise Support**
-
-    Dedicated SRE support via private Slack channel and video calls. Expert technical support and guidance based on your specific goals.
-{% endtab %}
-{% endtabs %}
-
-## Quick installation
-
-Check out our [Installation guide](/install-and-configure/install/install.md) to review your install options and get started on your Kubecost journey. Installation and onboarding only take a few minutes.
-
-## Getting started
-
-Once Kubecost has been successfully installed, check out our [First Time User Guide](/install-and-configure/install/first-time-user-guide.md) which will get you started with connecting to your cluster's cloud service provider, review your data, and setting up multi-cluster environments.
-
-If your Kubecost installation was not successful, go to our [Troubleshoot Install](/troubleshooting/troubleshoot-install.md) doc which will work you through some of the most common installation-related issues.
-
-Additionally, check out our [blog ](https://blog.kubecost.com/blog/cost-monitoring/)to learn more about best practices with Kubecost's cost monitoring.
-
-## Staying in the loop
-
-You can stay up-to-date with Kubecost by following releases on [GitHub](https://github.com/kubecost/cost-analyzer-helm-chart/releases) and the official [Kubecost blog](https://blog.kubecost.com/).
-
-Follow us on social media [here](contactus.md).
-
-Contact us via email ([support@kubecost.com](mailto:support@kubecost.com)) or join us on [Slack](https://kubecost.com/join-slack) if you have questions!
+All information found in this group of docs will be applicable for your installation and experience. Over time, we hope to expand this group to assist with troubleshooting and support.
