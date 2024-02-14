@@ -163,29 +163,6 @@
 * [Integrating Kubecost with Datadog](integrations/integrating-kubecost-with-datadog.md)
 * [Using Custom Webhook to Create a Kubecost Stage in Spinnaker](integrations/spinnaker-custom-webhook.md)
 
-## Kubecost Cloud
-
-* [What is Kubecost Cloud?](kubecost-cloud/what-is-kubecost-cloud.md)
-* [Kubecost Cloud Architecture Overview](kubecost-cloud/kubecost-cloud-architecture-overview.md)
-* [Cloud Installation and Onboarding](kubecost-cloud/cloud-installation-and-onboarding.md)
-  * [Kubecost Cloud GCP Marketplace Licensing](kubecost-cloud/kubecost-cloud-gcp-marketplace-license.md)
-* [Kubecost Cloud: Cloud Billing Integrations](kubecost-cloud/kubecost-cloud-cloud-billing-integrations/README.md)
-  * [Kubecost Cloud AWS Integration](kubecost-cloud/kubecost-cloud-cloud-billing-integrations/kubecost-cloud-aws-integration.md)
-  * [Kubecost Cloud GCP Integration](kubecost-cloud/kubecost-cloud-cloud-billing-integrations/kubecost-cloud-gcp-integration.md)
-  * [Kubecost Cloud Azure Integration](kubecost-cloud/kubecost-cloud-cloud-billing-integrations/kubecost-cloud-azure-integration.md)
-* [Using the Kubecost Cloud UI](kubecost-cloud/using-the-kubecost-cloud-ui/README.md)
-  * [Kubecost Cloud: Allocations Dashboard](kubecost-cloud/using-the-kubecost-cloud-ui/cloud-allocations-dashboard.md)
-  * [Kubecost Cloud: Assets Dashboard](kubecost-cloud/using-the-kubecost-cloud-ui/cloud-assets-dashboard.md)
-  * [Kubecost Cloud: Cloud Cost Explorer](kubecost-cloud/using-the-kubecost-cloud-ui/kubecost-cloud-cloud-cost-explorer.md)
-  * [Kubecost Cloud: Reports Dashboard](kubecost-cloud/using-the-kubecost-cloud-ui/cloud-reports-dashboard.md)
-  * [Kubecost Cloud: Savings](kubecost-cloud/using-the-kubecost-cloud-ui/kubecost-cloud-savings.md)
-    * [Kubecost Cloud: Cluster Right-Sizing Recommendations](kubecost-cloud/using-the-kubecost-cloud-ui/kubecost-cloud-cluster-right-sizing.md)
-    * [Kubecost Cloud: Request Right-Sizing Recommendations](kubecost-cloud/using-the-kubecost-cloud-ui/kubecost-cloud-request-right-sizing.md)
-    * [Kubecost Cloud: Abandoned Workloads](kubecost-cloud/using-the-kubecost-cloud-ui/kubecost-cloud-abandoned-workloads.md)
-  * [Kubecost Cloud: Alerts](kubecost-cloud/using-the-kubecost-cloud-ui/kubecost-cloud-alerts.md)
-* [Kubecost Cloud Product Updates](kubecost-cloud/product-updates.md)
-* [Receiving Kubecost Cloud Support](kubecost-cloud/receiving-kubecost-cloud-support.md)
-
 ## Troubleshooting
 
 * [Frequently Asked Questions](troubleshooting/frequently-asked-questions.md)
