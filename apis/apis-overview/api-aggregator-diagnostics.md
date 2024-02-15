@@ -7,6 +7,15 @@ APIs exposed by Kubecost Aggregator for troubleshooting without inspecting the P
 
 Returns current state of the Orchestrator, which governs what state Aggregator is currently in.
 
+#### `/model/diagnostic/tableWindowCount`
+
+Used to determine the number of unique WindowStart/WindowEnd pairs exist in the
+table.
+
+| Parameter | Default | Description |
+| --- | --- | --- |
+| `table` |  | Required. The table containing container data to consider. Try `container_1d`. |
+
 #### `/model/diagnostic/coreCount`
 
 Used to determine the peak number of monitored cores in the window.
@@ -19,9 +28,23 @@ Used to determine the peak number of monitored cores in the window.
 
 Used to determine the container rows per daily window, including max and min.
 
+#### `/model/diagnostic/nodesPerDay`
+
+Used to determine the node rows per daily window, including max and min.
+
 #### `/model/diagnostic/cloudCostsPerDay`
 
 Used to determine the Cloud Cost rows per daily window, including max and min.
+
+#### `/model/diagnostic/containerLabelStats`
+
+Used to determine data scale of labels on containers. Returns min, avg, and max
+label count for all containers.
+
+#### `/model/diagnostic/containerAnnotationStats`
+
+Used to determine data scale of annotations on containers. Returns min, avg, and
+max annotation count for all containers.
 
 #### `/model/diagnostic/containerWithoutMatchingNode`
 
