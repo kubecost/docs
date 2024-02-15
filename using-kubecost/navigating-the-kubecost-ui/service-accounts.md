@@ -14,7 +14,7 @@ Service keys can be created at any time, but will only be checked if SAML or OID
 
 Select _Teams_ from the left navigation. You will see a warning at the top of the page if you have not configured SAML or OIDC yet, and will be linked to relevant documentation. Otherwise, continue by selecting the *Service Accounts* header.
 
-Select *Add Service Account*. Provide a name for your service account (this cannot be changed later). Confirm by selecting *Create*. Your service account will be automatically created and added to the Service Accounts page. After selecting *Create*, Kubecost will generate an API Key. Make sure you save this value before closing the Service Account slide panel, as it will be unretrievable in the future. Kubecost will not store this key value internally. Once the key has been saved, you can close out of the panel.
+Select *Add Service Account*. Provide a name for your service account (this cannot be changed later). Confirm by selecting *Create*. Your service account will be automatically created and added to the Service Accounts page. After selecting *Create*, Kubecost will generate an API Key. Make sure you save this value by selecting the copy icon before closing the Service Account slide panel, as the key will be unretrievable in the future. Kubecost will not store this key value internally. Once the key has been saved, you can close out of the panel.
 
 ## Using a Service Account key
 
