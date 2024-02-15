@@ -8,7 +8,7 @@ Service Accounts are a way to allow programmatic access to the Kubecost API whil
 
 ![Service Accounts](/images/serviceaccounts.png)
 
-Service keys can be created at any time, but will only be checked if SAML or OIDC is enabled. See [SAML documentation](user-management-saml) or [OIDC documentation](user-management-oidc) if you have not configured one yet.
+Service keys can be created at any time, but will only be checked if SAML or OIDC is enabled. See [SAML documentation](/install-and-configure/advanced-configuration/user-management-saml/README.md) or [OIDC documentation](/install-and-configure/advanced-configuration/user-management-oidc/user-management-oidc.md) if you have not configured one yet.
 
 ## Creating a Service Account key
 
