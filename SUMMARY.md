@@ -113,6 +113,7 @@
   * [Audits](using-kubecost/navigating-the-kubecost-ui/audits.md)
   * [Anomaly Detection](using-kubecost/navigating-the-kubecost-ui/anomaly-detection.md)
   * [Teams](using-kubecost/navigating-the-kubecost-ui/teams.md)
+  * [Service Accounts](using-kubecost/navigating-the-kubecost-ui/service-accounts.md)
 * [Forecasting](using-kubecost/forecasting.md)
 * [Contexts](using-kubecost/context-switcher.md)
 * [Kubecost Data Audit](using-kubecost/kubecost-data-audit/README.md)
