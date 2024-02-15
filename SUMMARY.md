@@ -153,7 +153,7 @@
 
 * [Kubecost Core Architecture Overview](architecture/architecture.md)
 * [OpenCost Product Comparison](architecture/opencost-product-comparison.md)
-* [Open-Source](architecture/open-source-deps.md)
+* [Open Source](architecture/open-source-deps.md)
 * [Kubecost Metrics](architecture/user-metrics.md)
 * [Kube-State-Metrics (KSM) Emission](architecture/ksm-metrics.md)
 * [ContainerStats Pipeline](architecture/containerstats-pipeline.md)
