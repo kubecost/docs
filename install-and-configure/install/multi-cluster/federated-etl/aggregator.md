@@ -156,7 +156,7 @@ When deploying the Aggregator as a StatefulSet, it is possible to perform a rese
 
 ### Aggregator not displaying any data to frontend after several hours
 
-One reason you may not see data in the frontend yet is because the Aggregator is still in the process of reading all data from the federated store bucket, and processing the data into SQL tables.
+One reason you may not see data in the frontend yet is because the Aggregator is processing all your ETL files in the federated store bucket into SQL tables.
 
 If you are seeing a lot of the following logs, it could be an indicator that your `.Values.kubecostAggregator.env.DB_BUCKET_REFRESH_INTERVAL` may be set too low, causing the Aggregator to continuously restart its data ingestion process:
 
