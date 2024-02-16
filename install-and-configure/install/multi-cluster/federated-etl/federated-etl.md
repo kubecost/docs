@@ -6,12 +6,6 @@ Federated ETL is only supported for Kubecost Enterprise plans.
 
 Federated extract, transform, load (ETL) is Kubecost's method to aggregate all cluster information back to a single display described in our [Multi-Cluster](/install-and-configure/install/multi-cluster/multi-cluster.md#enterprise-federation) doc. Federated ETL gives teams the benefit of combining multiple Kubecost installations into one view.
 
-There are several primary advantages for using ETL federation:
-
-1. For environments that already have a Prometheus instance, Kubecost only requires a single pod per monitored cluster
-2. Many solutions that aggregate Prometheus metrics (like Thanos), are often expensive to scale in large environments
-3. With [Aggregator](/install-and-configure/install/multi-cluster/federated-etl/aggregator.md) as of Kubecost v2.0, ETL federation is more scalable.
-
 As of Kubecost v2.0, a multi-cluster setup will also require running the [Aggregator](/install-and-configure/install/multi-cluster/federated-etl/aggregator.md) on the primary cluster.
 
 ## Kubecost ETL Federation diagram
