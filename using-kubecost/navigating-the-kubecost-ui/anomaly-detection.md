@@ -16,7 +16,8 @@ The Forecasting Container can be disabled by setting the Helm flag:
 
 ```
 forecasting:
-        enabled: false
+  enabled: false
+
 ```
 
 ## Managing anomalies
