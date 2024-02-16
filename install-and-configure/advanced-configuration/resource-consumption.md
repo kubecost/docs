@@ -4,9 +4,9 @@ Kubecost can run on clusters with thousands of nodes when resource consumption i
 
 ![Memory Reduction Steps](/images/resource-consumption.png)
 
-## Disable CloudCost on secondary clusters
+## Disable Cloud Costs on secondary clusters
 
-[CloudCost](/install-and-configure/install/cloud-integration/README.md#cloudcost) allows Kubecost to pull in spend data from your integrated cloud service providers.
+[Cloud Costs](/install-and-configure/install/cloud-integration/README.md#cloudcost) allow Kubecost to pull in spend data from your integrated cloud service providers.
 
 Cloud cost metrics for all accounts can be pulled in on your primary cluster by pointing Kubecost to one or more management accounts. Therefore, you can disable CloudCost on secondary clusters by setting the following Helm value:
 
