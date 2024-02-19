@@ -7,7 +7,7 @@ Actions is only available with a Kubecost Enterprise plan.
 The Actions page is where you can create scheduled savings actions that Kubecost will execute for you. The Actions page supports creating actions for multiple turndown and right-sizing features.
 
 {% hint style="warning" %}
-Extreme caution should be used when enabling this feature. Kubecost will have write access to your cluster (Kubeocost is otherwise read-only). The controller can perform irreversible actions. Always ensure you have a backup of your data before enabling this feature.
+Extreme caution should be used when enabling this feature. Kubecost will have write access to your cluster (Kubecost is otherwise read-only). The controller can perform irreversible actions. Always ensure you have a backup of your data before enabling this feature.
 {% endhint %}
 
 {% hint style="info" %}
