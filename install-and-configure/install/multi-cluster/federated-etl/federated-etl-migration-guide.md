@@ -1,6 +1,6 @@
-# Migration Guide from Federated ETK to Kubecost v2.0 (Aggregator)
+# Migration Guide from Federated ETL to Kubecost v2.0 (Aggregator)
 
-This tutorial is intended to help our users migrate from the Kubecost Federate ETL federation architecture to using Kubecost Federated ETL with Kubecost v2.0's Aggregator. There are a few requirements in order to successfully migrate to Kubecost v2.0. This new version of Kubecost includes a new backend Aggregator which handles the ETL data built from source metrics more efficiently. Kubecost v2.0 provides new features, optimizes UI performance, and enhances the user experience. This tutorial is meant to be performed before the user upgrades from an older version of Kubecost to v2.0.
+This tutorial is intended to help our users migrate from an existing federated ETL setup to Kubecost v2.0's Aggregator. There are a few requirements in order to successfully migrate to Kubecost v2.0. This new version of Kubecost includes a new backend Aggregator which handles the ETL data built from source metrics more efficiently. Kubecost v2.0 provides new features, optimizes UI performance, and enhances the user experience. This tutorial is meant to be performed before the user upgrades from an older version of Kubecost to v2.0.
 
 ![Aggregator Architecture](/images/aggregator-architecture.png)
 
@@ -117,7 +117,7 @@ See this [example .yaml](https://github.com/kubecost/poc-common-configurations/b
 Upgrade Kubecost on the primary cluster via Helm:
 
 ```
-helm upgrade --install "kubecost" --repo https://kubecost.github.io/cost-analyzer/ cost-analyzer --namespace kubecost
+helm upgrade --install "kubecost" --repo https://kubecost.github.io/cost-analyzer/ cost-analyzer --namespace kubecost -f values.yaml
 ```
 
 Once the Helm upgrade is complete, Aggregator will start processing data. This process can take as long as 24 hours depending on the size of the ETL dataset being processed. As the data is processed, it will generate in the Kubecost UI.
@@ -147,5 +147,5 @@ See this [example .yaml](https://github.com/kubecost/poc-common-configurations/b
 Finally, upgrade Kubecost on the secondary cluster(s) via Helm:
 
 ```
-helm upgrade --install "kubecost" --repo https://kubecost.github.io/cost-analyzer/ cost-analyzer --namespace kubecost
+helm upgrade --install "kubecost" --repo https://kubecost.github.io/cost-analyzer/ cost-analyzer --namespace kubecost -f values.yaml
 ```
