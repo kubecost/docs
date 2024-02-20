@@ -13,7 +13,7 @@ Service keys can be created at any time, but will only be checked if SAML or OID
 ## Creating a Service Account key
 
 {% hint style="info" %}
-If RBAC through SAML or OIDC is enabled, you must be an admin user to create a service account. See our [Teams](/teams.md) article for configuring roles in the UI, or our user management guides for [SAML](/install-and-configure/advanced-configuration/user-management-saml/README.md) or [OIDC](/install-and-configure/advanced-configuration/user-management-oidc/user-management-oidc.md) for more information.
+If RBAC through SAML or OIDC is enabled, you must be an admin user to create a service account. See our [Teams](/using-kubecost/navigating-the-kubecost-ui/teams.md) article for configuring roles in the UI, or our user management guides for [SAML](/install-and-configure/advanced-configuration/user-management-saml/README.md) or [OIDC](/install-and-configure/advanced-configuration/user-management-oidc/user-management-oidc.md) for more information.
 {% endhint %}
 
 Select _Teams_ from the left navigation. You will see a warning at the top of the page if you have not configured SAML or OIDC yet, and will be linked to relevant documentation. Otherwise, continue by selecting the *Service Accounts* header.
