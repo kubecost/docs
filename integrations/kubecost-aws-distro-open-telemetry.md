@@ -4,7 +4,7 @@
 
 This guide will walk you through the steps to deploy Kubecost with [AWS Distro for Open Telemetry (ADOT)](https://aws-otel.github.io/) to collect metrics from your Kubernetes cluster.
 
-![Architecture Diagram](multi-cluster-prometheus-kubecost-architecture.png)
+![Architecture Diagram](/images/adot-architecture.png)
 
 ## Prerequisites
 
@@ -58,7 +58,7 @@ Alternatively, you can add these items to your [existing ConfigMap](example-conf
     --override-existing-serviceaccounts --approve --profile admin
     ```
 
-1. Create the Kubecost federated s3 object store secret.
+1. Create the Kubecost federated S3 object store secret.
 
     Copy the output from:
 
@@ -77,7 +77,7 @@ Alternatively, you can add these items to your [existing ConfigMap](example-conf
         -f values-kubecost-s3-federated-store.yaml
     ```
 
-### Kubecost Primary Installation
+### Kubecost primary installation
 
 This assumes you have created the policies above. If using multiple AWS accounts, you will need to create the policies in each account.
 
@@ -108,6 +108,6 @@ This assumes you have created the policies above. If using multiple AWS accounts
         -f values-kubecost-s3-federated-store.yaml
     ```
 
-## ADOT Daemonset Easy Install
+## ADOT Daemonset quick install
 
-[All in one ADOT DS config](example-configs/prometheus-daemonset.yaml)
+See this [example .yaml file](example-configs/prometheus-daemonset.yaml) for an all-in-one ADOT DS config.
