@@ -75,9 +75,18 @@ The settings below are in addition to the basic configuration above.
 ```yaml
 kubecostAggregator:
   env:
-    # Aggregator pulls data from federated store and promotes this write data on a schedule
-    # this interval governs how often aggregator will refresh its data
-    # if it is set below the time it takes to ingest data, it less efficient
+    # This interval defines how long the Aggregator spends ingesting ETL data
+    # from the federated store bucket into SQL tables, before cancelling its job
+    # and starting over to pull newer data from the bucket. If set too low for
+    # large scale users, this may inadvertantly cause the Aggregator to spend
+    # longer time ingesting data. If set too high, there will be a delay in data
+    # between the Kubecost Agents and the Aggregator.
+    # 
+    # Note, that the default value is set to 10m to optimize for the 
+    # first-install experience of Kubecost (i.e. it prioritizes small data
+    # becoming available more quickly).
+    # 
+    # default: 10m
     DB_BUCKET_REFRESH_INTERVAL: 1h
     # governs parallelism of derivation step
     # more threads speeds derivation, but requires significantly more
@@ -142,3 +151,33 @@ As `ETL_DAILY_STORE_DURATION_DAYS` increases, the amount of time it will take
 for Aggregator to make data available will increase. You can run `kubectl get
 pods` and ensure the `aggregator` pod is running, but should still wait for all
 data to be ingested.
+
+## Troubleshooting Aggregator
+
+### Resetting Aggregator StatefulSet data
+
+When deploying the Aggregator as a StatefulSet, it is possible to perform a reset of the Aggregator data. The Aggregator itself doesn't store any data, and relies on object storage. As such, a reset involves removing that Aggregator's local storage, and allowing it to re-ingest data from the object store. The procedure is as follows:
+
+1. Scale down the Aggregator StatefulSet to 0
+2. When the Aggregator pod is gone, delete the `aggregator-db-storage-xxx-0` PVC
+3. Scale the Aggregator StatefulSet back to 1. This will re-create the PVC, empty.
+4. Wait for Kubecost to re-ingest data from the object store. This could take from several minutes to several hours, depending on your data size and retention settings.
+
+### Aggregator not displaying any data to frontend after several hours
+
+One reason you may not see data in the frontend yet is because the Aggregator is processing all your ETL files in the federated store bucket into SQL tables.
+
+If you are seeing a lot of the following logs, it could be an indicator that your `.Values.kubecostAggregator.env.DB_BUCKET_REFRESH_INTERVAL` may be set too low, causing the Aggregator to continuously restart its data ingestion process:
+
+```txt
+INF asset worker context cancelled: context canceled
+INF allocation worker context cancelled: context canceled
+```
+
+To fix, try continuously increasing the environment variable's value, until the errors no longer appear. We recommend starting with `1h`. More details about the environment variable described above.
+
+```yaml
+kubecostAggregator:
+  env:
+    DB_BUCKET_REFRESH_INTERVAL: 1h
+```
