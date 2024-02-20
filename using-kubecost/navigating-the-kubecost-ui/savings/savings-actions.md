@@ -6,10 +6,6 @@ Actions is only available with a Kubecost Enterprise plan.
 
 The Actions page is where you can create scheduled savings actions that Kubecost will execute for you. The Actions page supports creating actions for multiple turndown and right-sizing features.
 
-{% hint style="warning" %}
-Extreme caution should be used when enabling this feature. Kubecost will have write access to your cluster (Kubecost is otherwise read-only). The controller can perform irreversible actions. Always ensure you have a backup of your data before enabling this feature.
-{% endhint %}
-
 {% hint style="info" %}
 Actions are only able to be applied to your primary cluster. To use Actions on a secondary cluster (agents), you must login to the UI directly on that cluster.
 {% endhint %}
@@ -19,6 +15,10 @@ Actions are only able to be applied to your primary cluster. To use Actions on a
 ### Enable the Cluster Controller
 
 Before you can perform any Actions, you need to enable Kubecost's [Cluster Controller](/install-and-configure/advanced-configuration/controller/cluster-controller.md). When enabled, Kubecost wil have administrative access to that cluster in order to perform Actions.
+
+{% hint style="warning" %}
+Users should exercise caution when enabling this feature. Kubecost will have write access to your cluster (Kubecost is otherwise read-only). The controller can perform irreversible actions. Always ensure you have a backup of your data before enabling this feature.
+{% endhint %}
 
 {% hint style="warning" %}
 Some features included in Kubecost Actions are only available in GKE/EKS environments. See the Cluster Controller doc for more clarity on which features you will have access to after enabling the Cluster Controller.
