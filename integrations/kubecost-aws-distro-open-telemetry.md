@@ -24,7 +24,7 @@ There are many options for deploying the ADOT daemonSet. At a minimum, Kubecost 
 kubectl apply -f example-configs/prometheus-daemonset.yaml
 ```
 
-Alternatively, you can add these items to your [existing ConfigMap](example-configs/kubecost-adot-scrape-config.yaml).
+Alternatively, you can add these items to your [existing ConfigMap](https://github.com/kubecost/poc-common-configurations/blob/main/aws-amp/adot/example-configs/kubecost-adot-scrape-config.yaml).
 
 ### Kubecost Agent installation
 
@@ -110,4 +110,4 @@ This assumes you have created the policies above. If using multiple AWS accounts
 
 ## ADOT Daemonset quick install
 
-See this [example .yaml file](example-configs/prometheus-daemonset.yaml) for an all-in-one ADOT DS config.
+See this [example .yaml file](https://github.com/kubecost/poc-common-configurations/blob/main/aws-amp/adot/example-configs/prometheus-daemonset.yaml) for an all-in-one ADOT DS config.
