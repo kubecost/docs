@@ -38,7 +38,7 @@ Budget Actions by default check against the limits every 8 hours.
 To begin, select _New Action_. Select your _Trigger percentage_ value (leaving your _Trigger percentage_ at _100_ will only alert you once the budget has been exceeded). Then, provide any emails or webhooks where you would like to receive your alerts. Select _Save_.
 
 {% hint style="info" %}
-If you are interested in implementing additional alerts to monitor further spending or Kubecost health, read our [Alerts](https://docs.kubecost.com/using-kubecost/navigating-the-kubecost-ui/alerts) doc.
+If you are interested in implementing additional alerts to monitor further spending or Kubecost health, read our [Alerts](/using-kubecost/navigating-the-kubecost-ui/alerts.md) doc.
 {% endhint %}
 
 Finalize your budget by selecting _Save_. Your budget has been created and should appear on the dashboard.
@@ -51,7 +51,7 @@ Once your budget has been created, it will immediately display your current spen
 
 Selecting _Details_ in the row of a specific budget will open a window displaying all details for your budget, including current spending, budget remaining, reset date, and any existing Actions.
 
-You can also select _View detailed breakdown_ to display an [Allocations](https://docs.kubecost.com/using-kubecost/navigating-the-kubecost-ui/cost-allocation) query for your budgeted item, or _Download Budget Report_ to download your budget as a PDF file.
+You can also select _View detailed breakdown_ to display an [Allocations](/using-kubecost/navigating-the-kubecost-ui/cost-allocation/README.md) query for your budgeted item, or _Download Budget Report_ to download your budget as a PDF file.
 
 ### Editing a budget
 

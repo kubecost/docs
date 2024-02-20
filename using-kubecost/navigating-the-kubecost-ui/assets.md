@@ -1,9 +1,5 @@
 # Assets Dashboard
 
-{% hint style="info" %}
-As of v1.104, cloud data is parsed through the [Cloud Costs Explorer](https://docs.kubecost.com/using-kubecost/navigating-the-kubecost-ui/cloud-costs-explorer) dashboard instead of through Assets. Read our announcement [here](https://blog.kubecost.com/blog/cloud-cost-install/) for more information.
-{% endhint %}
-
 The Kubecost Assets dashboard shows Kubernetes cluster costs broken down by the individual backing assets in your cluster (e.g. cost by node, disk, and other assets). It’s used to identify spend drivers over time and to audit Allocation data. This view can also optionally show out-of-cluster assets by service, tag/label, etc.
 
 {% hint style="info" %}
@@ -63,7 +59,6 @@ View Assets data in the following formats:
 2. [Cost forecast](/using-kubecost/forecasting.md): Cost over time with additional projected spend
 
 
-
 ### Additional options
 
 The three horizontal dots icon will provide additional options for handling your reports:
@@ -91,3 +86,11 @@ You can select an aggregate asset to view all individual assets comprising it. E
 After granting Kubecost permission to access cloud billing data, Kubecost adjusts its asset prices once cloud billing data becomes available, e.g. AWS Cost and Usage Report and the spot data feed. Until this data is available from cloud providers, Kubecost uses data from public cloud APIs to determine cost, or alternatively custom pricing sheets. This allows teams to have highly accurate estimates of asset prices in real-time and then become even more precise once cloud billing data becomes available, which is often 1-2 hours for spot nodes and up to a day for reserved instances/savings plans.
 
 While cloud adjustments typically lag by roughly a day, there are certain adjustments, e.g. credits, that may continue to come in over the course of the month, and in some cases at the very end of the month, so reconciliation adjustments may continue to update over time.
+
+## Node costs breakdown
+
+The Assets page allows you to view a dedicated breakdown of node costs. To do so, you must first filter for AssetType=Node, which will unnaggregate the page and display all nodes with associated costs. Selecting an indivudal line item will open a window containing cost metrics including hours running, hourly cost rate, overhead cost, and total cost. You can even view these costs broken down by CPU, GPU, and RAM:
+
+![Node Costs](/images/nodecosts.png)
+
+Overhead costs refer to the capacity costs minus allocatable costs. This includes Kubelet, container runtime, and node operating systems and software. It does not include Prometheus, DNS, cert-manager, kube-system, or pods running with Kubernetes. To learn more about overhead costs, watch [Node Size Matters](https://www.youtube.com/watch?v=6vNI_O6sdvY), a presentation by Kubecost engineers from KubeCon 2023.

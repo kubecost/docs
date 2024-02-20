@@ -213,13 +213,13 @@ You can now access Kubecost's UI by visiting `http://localhost:9090` in your loc
 ## Deploying Kubecost on an EKS Anywhere cluster using Helm
 
 {% hint style="warning" %}
-Deploying Kubecost on EKS Anywhere via Helm is not the officially recommended method by Kubecost or AWS. The recommended method is via EKS add-on ([see above](https://docs.kubecost.com/install-and-configure/install/provider-installations/aws-eks-cost-monitoring#deploying-kubecost-on-amazon-eks-cluster-using-amazon-eks-add-on)).
+Deploying Kubecost on EKS Anywhere via Helm is not the officially recommended method by Kubecost or AWS. The recommended method is via EKS add-on ([see above](/install-and-configure/install/provider-installations/aws-eks-cost-monitoring.md#deploying-kubecost-on-amazon-eks-cluster-using-amazon-eks-add-on)).
 {% endhint %}
 
 [Amazon EKS Anywhere](https://aws.amazon.com/eks/eks-anywhere/) (EKS-A) is an alternate deployment of EKS which allows you to create and configure on-premises clusters, including on your own virtual machines. It is possible to deploy Kubecost on EKS-A clusters to monitor spend data.
 
 {% hint style="info" %}
-Deploying Kubecost on an EKS-A cluster should function similarly at the cluster level, such as when retrieving Allocations or Assets data. However, because on-prem servers wouldn't be visible in a CUR (as the billing source is managed outside AWS), certain features like the [Cloud Cost Explorer](https://docs.kubecost.com/using-kubecost/navigating-the-kubecost-ui/cloud-costs-explorer) will not be accessible.&#x20;
+Deploying Kubecost on an EKS-A cluster should function similarly at the cluster level, such as when retrieving Allocations or Assets data. However, because on-prem servers wouldn't be visible in a CUR (as the billing source is managed outside AWS), certain features like the [Cloud Cost Explorer](/using-kubecost/navigating-the-kubecost-ui/cloud-costs-explorer.md) will not be accessible.&#x20;
 {% endhint %}
 
 ### Prerequisites:

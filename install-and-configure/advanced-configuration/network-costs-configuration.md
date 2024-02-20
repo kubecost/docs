@@ -14,11 +14,15 @@ The network costs metrics are collected using a DaemonSet (one pod per node) tha
 
 With the network costs DaemonSet enabled, the Network column on the Allocations page will reflect the portion of network transfer costs based on the chart-level aggregation.
 
-![network-cost-allocation](/images/network-cost-allocation.png)
+![Allocation dashboard Network column](/images/allocation-network-costs.png)
 
-When using Kubecost version 1.99 and above: Greater detail can be accessed through Allocations UI only when aggregating by namespace and selecting the link on that namespace. This opens the namespace detail page where there is a card at the bottom.
+For an in-depth cost breakdown of your network costs, you can scroll down on the Overview page to your Network Costs Breakdown, where you can select individual namespaces and view cloud service traffic destinations.
 
-![network-cost-detail](/images/network-cost-detail.png)
+![Network Costs Breakdown](/images/networkcostbreakdown.png)
+
+Selecting a namespace or adding `/network` to your Kubecost address will open the 'Allocation / Network costs' page, lists key metrics such as egress and cross-zone costs.
+
+![Network Costs page](/images/networkcostpage.png)
 
 ### Grafana dashboard
 

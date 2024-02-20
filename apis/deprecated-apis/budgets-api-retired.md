@@ -1,7 +1,7 @@
 # Budget API (Deprecated)
 
 {% hint style="danger" %}
-As of v1.107 of Kubecost, this version of the Budget API is now deprecated. This page should not be consulted. Please reference the current [Budget API](/apis/apis-overview/budget-api.md) doc for updated information.
+This version of the Budget API is deprecated and this doc should no longer be consulted. Please reference the current [Budget API](/apis/apis-overview/budget-api.md) doc for updated information.
 {% endhint %}
 
 The Budget API allows you to create, update, and delete recurring budget rules to control your Kubernetes spending. Weekly and monthly budgets can be established to set limits on cost spend.

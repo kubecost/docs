@@ -42,7 +42,7 @@ Kubecost has a number of product configuration options that you can specify at i
 
 ### Troubleshooting installation
 
-If you encounter any errors while installing Kubecost, first visit our [Troubleshoot Install](https://docs.kubecost.com/troubleshooting/troubleshoot-install) doc. If the error you are experiencing is not already documented here, or a solution is not found, contact our Support team at support@kubecost.com for more help.
+If you encounter any errors while installing Kubecost, first visit our [Troubleshoot Install](/troubleshooting/troubleshoot-install.md) doc. If the error you are experiencing is not already documented here, or a solution is not found, contact our Support team at support@kubecost.com for more help.
 
 ## Updating Kubecost
 
@@ -70,4 +70,4 @@ helm uninstall kubecost -n kubecost
 
 ## Next steps
 
-After successfully installing Kubecost, first time users should review our [First Time User Guide](https://docs.kubecost.com/install-and-configure/install/first-time-user-guide) to start immediately seeing the benefits of the product while also ensuring their workspace is properly set up.
+After successfully installing Kubecost, first time users should review our [First Time User Guide](/install-and-configure/install/first-time-user-guide.md) to start immediately seeing the benefits of the product while also ensuring their workspace is properly set up.

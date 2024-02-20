@@ -6,10 +6,6 @@ The following requirements are given:
 * Use of an existing Prometheus and Grafana (Kubecost will be installed without Prometheus and Grafana)
 * Istio with gateway and sidecar for deployments
 
-{% hint style="info" %}
-Kubecost v1.85.0+ includes changes to support cAdvisor metrics without the `container_name` rewrite rule.
-{% endhint %}
-
 ## Activation of Istio
 
 1. Istio is activated by editing the namespace. To do this, execute the command `kubectl edit namespace kubecost` and insert the label `istio-injection: enabled`

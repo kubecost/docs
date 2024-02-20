@@ -61,7 +61,7 @@ The _Edit_ icon has additional options for configuring your query such as how to
 
 #### Idle Costs
 
-Allocating [idle costs](https://docs.kubecost.com/using-kubecost/navigating-the-kubecost-ui/cost-allocation/efficiency-idle#idle) proportionately distributes slack or idle _cluster costs_ to tenants. Idle refers to resources that are provisioned but not being fully used or requested by a tenant.
+Allocating [idle costs](/using-kubecost/navigating-the-kubecost-ui/cost-allocation/efficiency-idle.md#idle) proportionately distributes slack or idle _cluster costs_ to tenants. Idle refers to resources that are provisioned but not being fully used or requested by a tenant.
 
 As an example, if your cluster is only 25% utilized, as measured by the max of resource usage and requests, applying idle costs would proportionately increase the cost of each pod/namespace/deployment by 4x. This feature can be enabled by default in Settings.
 
@@ -72,7 +72,7 @@ The idle costs dropdown allows you to choose how you wish your idle costs to be 
 * Share By Cluster: Idle costs are grouped by the cluster they belong to.
 * Share By Node: Idle costs are grouped by the node they belong to.
 
-To learn more about sharing idle costs, see [here](https://docs.kubecost.com/using-kubecost/navigating-the-kubecost-ui/cost-allocation/efficiency-idle#sharing-idle).
+To learn more about sharing idle costs, see [here](/using-kubecost/navigating-the-kubecost-ui/cost-allocation/efficiency-idle.md#sharing-idle).
 
 #### Chart
 

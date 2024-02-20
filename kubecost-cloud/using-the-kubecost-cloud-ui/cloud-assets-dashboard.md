@@ -1,7 +1,7 @@
 # Kubecost Cloud: Assets Dashboard
 
 {% hint style="info" %}
-This documentation should only be consulted when using Kubecost Cloud! For information about the Assets dashboard for self-hosted Kubecost, see [here](https://docs.kubecost.com/using-kubecost/navigating-the-kubecost-ui/assets).
+This documentation should only be consulted when using Kubecost Cloud! For information about the Assets dashboard for self-hosted Kubecost, see [here](/using-kubecost/navigating-the-kubecost-ui/assets.md).
 {% endhint %}
 
 The Kubecost Assets dashboard shows Kubernetes cluster costs broken down by the individual backing assets in your cluster (e.g. cost by node, disk, and other assets). It’s used to identify spend drivers over time and to audit Allocation data. This view can also optionally show out-of-cluster assets by service, tag/label, etc.

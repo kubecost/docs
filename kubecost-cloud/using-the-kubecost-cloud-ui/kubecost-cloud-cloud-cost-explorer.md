@@ -8,9 +8,9 @@ The Cloud Cost Explorer is a dashboard which provides visualization and filterin
 
 For help on integrating one or several cloud service providers (CSPs), see the corresponding documentation:
 
-* [Kubecost Cloud: Cloud Billing Integrations](https://docs.kubecost.com/kubecost-cloud/kubecost-cloud-cloud-billing-integrations)
-* [Kubecost Cloud GCP Integration](https://docs.kubecost.com/kubecost-cloud/kubecost-cloud-cloud-billing-integrations/kubecost-cloud-gcp-integration)
-* [Kubecost Cloud Azure Integration](https://docs.kubecost.com/kubecost-cloud/kubecost-cloud-cloud-billing-integrations/kubecost-cloud-azure-integration)
+* [Kubecost Cloud AWS Integration](/kubecost-cloud/kubecost-cloud-cloud-billing-integrations/kubecost-cloud-aws-integration.md)
+* [Kubecost Cloud GCP Integration](/kubecost-cloud/kubecost-cloud-cloud-billing-integrations/kubecost-cloud-gcp-integration.md)
+* [Kubecost Cloud Azure Integration](/kubecost-cloud/kubecost-cloud-cloud-billing-integrations/kubecost-cloud-azure-integration.md)
 
 ## UI Overview
 
@@ -40,7 +40,7 @@ You can filter displayed dashboard metrics by selecting _Edit_, then adding a fi
 
 **Cost Metric**
 
-The Cost Metric dropdown allows you to adjust the displayed cost data based on different calculations. Cost Metric values are based on and calculated following standard FinOps dimensions and metrics, but may be calculated differently depending on your CSP. Learn more about how these metrics are calculated by each CSP in the [Cloud Cost Metrics](https://docs.kubecost.com/apis/apis-overview/cloud-cost-api/cloud-cost-metrics) doc. The five available metrics supported by the Cloud Costs Explorer are:
+The Cost Metric dropdown allows you to adjust the displayed cost data based on different calculations. Cost Metric values are based on and calculated following standard FinOps dimensions and metrics, but may be calculated differently depending on your CSP. Learn more about how these metrics are calculated by each CSP in the [Cloud Cost Metrics](/apis/apis-overview/cloud-cost-api/cloud-cost-metrics.md) doc. The five available metrics supported by the Cloud Costs Explorer are:
 
 <table><thead><tr><th width="201">Cost Metric</th><th>Description</th></tr></thead><tbody><tr><td>Amortized Net Cost</td><td>Net Cost with removed cash upfront fees and amortized (default)</td></tr><tr><td>Net Cost</td><td>Costs inclusive of discounts and credits. Will also include one-time and recurring charges.</td></tr><tr><td>List Cost</td><td>CSP pricing without any discounts</td></tr><tr><td>Invoiced Cost</td><td>Pricing based on usage during billing period</td></tr><tr><td>Amortized Cost</td><td>Effective/upfront cost across the billing period</td></tr></tbody></table>
 

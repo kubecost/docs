@@ -136,4 +136,4 @@ After providing you with right sizing recommendations, Kubecost can additionally
 
 ## Savings projection methodology
 
-See [V1 docs](https://docs.kubecost.com/apis/deprecated-apis/api-request-right-sizing).
+See [V1 docs](/apis/deprecated-apis/api-request-right-sizing.md).

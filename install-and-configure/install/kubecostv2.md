@@ -59,7 +59,7 @@ upgrade:
 
 ## Troubleshooting
 
-If you encounter any issues during the upgrade process, please refer to the section below, our [general troubleshooting guide](/troubleshooting/troubleshoot-install.md), or reach out to support@kubecost.com.
+If you encounter any issues during the upgrade process, please refer to the section below, our [Aggregator troubleshooting guide](/install-and-configure/install/multi-cluster/federated-etl/aggregator.md#troubleshooting-aggregator), our [general troubleshooting guide](/troubleshooting/troubleshoot-install.md), or reach out to support@kubecost.com.
 
 ### Running Aggregator in v1.107 or v1.108
 

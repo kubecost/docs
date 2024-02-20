@@ -68,14 +68,6 @@ http://<kubecost-url>:<port>/model/etl/allocation/repair?window=2020-11-20T00:00
 ```
 {% endcode %}
 
-Previous versions of Kubecost (1.81.0 and prior) provided a similar repair feature under the `/rebuild` endpoint by passing a window:
-
-{% code overflow="wrap" %}
-```
-http://<kubecost-url>:<port>/model/etl/[allocation|assets]/rebuild?window=<RFC3339-start>,<RFC3339-end>&commit=true
-```
-{% endcode %}
-
 ### Kubecost ETL pipeline cloud metrics
 
 Once cloud integrations have been set up, Each Cloud Store will have its own diagnostic view which will include its provider key in the title. This view will include the Cloud Connection Status and metrics for the Reconciliation and Cloud Asset Processes of that provider including:
