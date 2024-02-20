@@ -14,6 +14,8 @@ Service keys can be created at any time, but will only be checked if SAML or OID
 
 Select _Teams_ from the left navigation. You will see a warning at the top of the page if you have not configured SAML or OIDC yet, and will be linked to relevant documentation. Otherwise, continue by selecting the *Service Accounts* header.
 
+If RBAC through SAML or OIDC is enabled, you must be an admin user to create a service account.
+
 Select *Add Service Account*. Provide a name for your service account (this cannot be changed later). Confirm by selecting *Create*. Your service account will be automatically created and added to the Service Accounts page. After selecting *Create*, Kubecost will generate an API Key. Make sure you save this value by selecting the copy icon before closing the Service Account slide panel, as the key will be unretrievable in the future. Kubecost will not store this key value internally. Once the key has been saved, you can close out of the panel.
 
 ## Using a Service Account key
@@ -23,5 +25,5 @@ To use the generated key, you must send a `X-API-KEY` header with every request 
 ### Example with cURL
 
 ```shell
-curl -H "X-API-Key:exampleAPIKey" "https:/kubecost.example.com/model/allocation?window=1d"
+curl -H "X-API-KEY:exampleAPIKey" "https:/kubecost.example.com/model/allocation?window=1d"
 ```
