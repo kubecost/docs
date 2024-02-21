@@ -141,6 +141,7 @@
   * [Container Request Right Sizing Recommendation API (V2)](apis/apis-overview/api-request-right-sizing-v2.md)
   * [Container Request Recommendation Apply/Plan APIs](apis/apis-overview/api-request-recommendation-apply.md)
   * [Abandoned Workloads API](apis/apis-overview/api-abandoned-workloads.md)
+  * [Aggregator Diagnostic APIs](apis/apis-overview/api-aggregator-diagnostics.md)
   * [Filter Parameters (v2)](apis/apis-overview/filters-api.md)
 * [Deprecated APIs](apis/deprecated-apis/README.md)
   * [Budgets API (deprecated)](apis/deprecated-apis/budgets-api-retired.md)
