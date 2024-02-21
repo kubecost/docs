@@ -7,14 +7,18 @@ Actions is only available with a Kubecost Enterprise plan.
 The Actions page is where you can create scheduled savings actions that Kubecost will execute for you. The Actions page supports creating actions for multiple turndown and right-sizing features.
 
 {% hint style="info" %}
-Actions are only able to be applied to your primary cluster. To use Actions on a secondary cluster, you must manually switch to that cluster context via the Settings page.
+Actions are only able to be applied to your primary cluster. To use Actions on a secondary cluster (agents), you must login to the UI directly on that cluster.
 {% endhint %}
 
 ## Enabling Kubecost Actions
 
 ### Enable the Cluster Controller
 
-Before you can perform any Actions, you need to enable Kubecost's [Cluster Controller](/install-and-configure/advanced-configuration/controller/cluster-controller.md). This is because Kubecost requires write access to clusters in order to perform Actions, which is granted by the Controller. See the Cluster Controller doc for a complete tutorial, then Kubecost Actions should be fully functional.
+Before you can perform any Actions, you need to enable Kubecost's [Cluster Controller](/install-and-configure/advanced-configuration/controller/cluster-controller.md). When enabled, Kubecost wil have administrative access to that cluster in order to perform Actions.
+
+{% hint style="warning" %}
+Users should exercise caution when enabling this feature. Kubecost will have write access to your cluster (Kubecost is otherwise read-only). The controller can perform irreversible actions. Always ensure you have a backup of your data before enabling this feature.
+{% endhint %}
 
 {% hint style="warning" %}
 Some features included in Kubecost Actions are only available in GKE/EKS environments. See the Cluster Controller doc for more clarity on which features you will have access to after enabling the Cluster Controller.
@@ -22,7 +26,7 @@ Some features included in Kubecost Actions are only available in GKE/EKS environ
 
 ### Enable experimental features
 
-In order to receive access to two specific Kubecost Actions, Guided Sizing and Cluster Sizing, you must manually enable them. This is because these two features are still considered in beta. To access them, you must first go to _Settings_, then toggle on 'Enable experimental features' at the bottom of the page. Select _Save_ to confirm.
+In order to access experimental Kubecost Actions for Guided Container-Sizing and Cluster Sizing, you must manually enable them. These features are still considered alpha. To access them, you must first go to _Settings_, then toggle on 'Enable experimental features' at the bottom of the page. Select _Save_ to confirm.
 
 ## Creating an Action
 
@@ -32,9 +36,9 @@ You will have the option to perform one of several available Actions:
 
 * Cluster Turndown: Schedule clusters to spin down when unused and back up when needed
 * Request Sizing: Ensure your containers aren't over-provisioned
-* Cluster Sizing: Configure your cluster in the most cost-effective way
 * Namespace Turndown: Schedule unused workloads to spin down
-* Guided Sizing: Continuous container and node right-sizing
+* Guided Sizing: Continuous container and node right-sizing (experimental)
+* Cluster Sizing: Configure your cluster in the most cost-effective way (experimental)
 
 Selecting one of these Actions will take you off the Actions page to a Action-specific page which will allow to perform the action in moments.
 
@@ -103,7 +107,7 @@ Learn more about cluster right-sizing functionality [here](/using-kubecost/navig
 Namespace turndown allows you to take action to delete your abandoned workloads. Instead of requiring the user to manually size down or delete their unused workloads, Kubecost can delete namespaces full of idle pods in one moment or on a continual basis. This can be helpful for routine cleanup of neglected resources. Namespace turndown is supported on all cluster types.
 
 {% hint style="warning" %}
-When turning down namespaces, Kubecost will perform a `helm uninstall` command to remove itself from the namespace before it is deleted. Take precaution when using this feature to avoid irreversible changes being made to your environment.
+When turning down namespaces, Kubecost will perform a `helm uninstall` command to remove the release(s) from the namespace before it is deleted. Take precaution when using this feature to avoid irreversible changes being made to your environment.
 {% endhint %}
 
 Selecting _Namespace Turndown_ from the 'Create New Action' window will open the Namespace Turndown page.
@@ -119,7 +123,7 @@ For 'Namespace turndown type', select _Scheduled_ or _Smart_ from the dropdown.
 
 Then you can provide optional values for the following fields:
 
-* 'Namespaces to ignore': Filter out namespaces you don't want turned down. Namespace turndown will ignore namespaces named `kube-*`, the `default` namespace, and the namespace the Cluster Controller is enabled on. Allows multiple namespaces to be ignored in one Action.
+* 'Namespaces to ignore': Filter out namespaces you don't want turned down. Namespace turndown will ignore namespaces named `kube-*`, the `default` namespace, and the namespace the Cluster Controller is enabled on. Allows multiple namespaces to be ignored in one Action. Note that there are, almost certainly, other critical namespaces that should be ignored.
 * 'Namespace labels to ignore': Filter out key-value labels that you don't want turned down.
 
 Select _Preview_ to view a list of all namespaces that will be turned down. This list is configurable; you can manually check individual namespaces you wish to be ignored.
@@ -154,6 +158,62 @@ In the second collapsible tab, you can configure continuous cluster sizing.
 * Start Time: Determines the day, and time of day, that auto-resizing will begin occurring. Will default to the current date and time if left blank.
 
 Select _Enable Auto-Resizing Now_ to finalize.
+
+## Creating an action via *values.yaml*
+
+You can also optionally configure Actions (except for Guided Sizing) via your Kubecost [*values.yaml*](/install-and-configure/install/helm-install-params.md) file. Configure the following section as needed for any actions you wish to set up (leave unconfigured actions as is). For more information of any action-specific field, see the individual UI configuration sections above for more information.
+
+```
+actionConfigs:
+
+    clusterTurndown:
+       - name: my-schedule
+         start: "2024-02-09T00:00:00Z"
+         end: "2024-02-09T12:00:00Z"
+         repeat: daily
+       - name: my-schedule2
+         start: "2024-02-09T00:00:00Z"
+         end: "2024-02-09T01:00:00Z"
+         repeat: weekly
+    namespaceTurndown:
+       - name: my-ns-turndown-action
+         dryRun: false
+         schedule: "0 0 * * *"
+         type: Scheduled
+         targetObjs:
+           - namespace
+         keepPatterns:
+           - ignorednamespace
+         keepLabels:
+           turndown: ignore
+         params:
+           minNamespaceAge: 4h
+    clusterRightsize:
+         startTime: '2024-01-02T15:04:05Z'
+         frequencyMinutes: 1440
+         lastCompleted: ''
+         recommendationParams:
+           window: 48h
+           architecture: ''
+           targetUtilization: 0.8
+           minNodeCount: 1
+           allowSharedCore: false
+         allowCostIncrease: false
+         recommendationType: ''
+    containerRightsize:
+        workloads:
+         - clusterID: cluster-one
+           namespace: my-namespace
+           controllerKind: deployment
+           controllerName: my-controller
+        schedule:
+         start: "2024-01-30T15:04:05Z"
+         frequencyMinutes: 5
+         recommendationQueryWindow: "48h"
+         lastModified: ''
+         targetUtilizationCPU: 0.8
+         targetUtilizationMemory: 0.8
+```
 
 ## Managing Actions
 
