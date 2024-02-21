@@ -10,7 +10,7 @@ This is most likely due to a user authenticating to Kubecost or performing an ac
 
 * Review the Helm values used to determine if SAML, OIDC, and RBAC are being used which could lead to the 403 error.
 * Verify if the 403 error occurs when port forwarding to the cost-analyzer frontend. This will allow you to determine if the error is being introduced by an external service.
-* Ensure that [readonly has not been set to `true`](https://github.com/kubecost/cost-analyzer-helm-chart/blob/develop/cost-analyzer/values.yaml#L888)in your values.yaml file
+* Ensure that [readonly has not been set to `true`](https://github.com/kubecost/cost-analyzer-helm-chart/blob/develop/cost-analyzer/values.yaml#L888) in your *values.yaml* file
 
 ## HTTP 499 Client closed connection
 
@@ -22,9 +22,9 @@ This is usually the NGINX gateway (inside the `kubecost-cost-analyzer` pod) repo
 
 ### Test command
 
-> **Note**: The following test command can be used for troubleshooting both 499 and 504 errors.
+The following test command can be used for troubleshooting both 499 and 504 errors.
 
-* If running the following command fails or hangs when the pod is ready, the error is likely due to intermittent DNS:
+* reIf running the following command fails or hangs when the pod is ready, the error is likely due to intermittent DNS:
   * `kubectl exec -i -t -n kubecost kubecost-cost-analyzer-55c45d9d95-8m2sq -c cost-analyzer-frontend -- curl kubecost-cost-analyzer.kubecost:9090/model/clusterInfo`
 
 ## HTTP 504 Gateway timeout
