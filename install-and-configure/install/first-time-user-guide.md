@@ -32,7 +32,7 @@ Metrics reside in Prometheus, but extracting information for either the UI or th
 
 Like any other system, backup of critical data is a must, and backing up ETL is no exception. To address this, we offer a number of different options based on your product tier. Descriptions and instructions for our backup functionalities can be found in our [ETL Backup](/install-and-configure/install/etl-backup/etl-backup.md) doc.
 
-### Alerts and Health
+### Monitor and budget to better control your spend
 
 Similar to most systems, monitoring health is vital.  For this, we offer several means of monitoring the health of both Kubecost and the host cluster.
 
@@ -40,9 +40,9 @@ Similar to most systems, monitoring health is vital.  For this, we offer several
 
 [Alerts](/using-kubecost/navigating-the-kubecost-ui/alerts.md#configuring-alerts-in-the-kubecost-ui) can be configured to enable a proactive approach to monitoring your spend, and can be distributed across different workplace communication tools including email, Slack, and Microsoft Teams. Alerts can establish budgets for your different types of spend and cost-efficiency, and warn you if those budgets are reached. These Alerts are able to be configured via Helm or directly in your Kubecost UI.
 
-#### Health
+#### Anomaly Detection
 
-The [Health](/using-kubecost/navigating-the-kubecost-ui/cluster-health-score.md) page will display an overall cluster health score which assesses how reliably and efficiently your infrastructure is performing. Scores start at 100 and decrease based on how severe  any present errors are.
+[Anomaly Detection](/using-kubecost/navigating-the-kubecost-ui/anomaly-detection.md) can detect when spending for any integrated cloud services begins deviating outside an expected range. Detected anomalies will be reported and can be investigated to determine causes of excessive spend.
 
 ## Step 4: Multi-cluster and federated setups
 
