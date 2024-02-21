@@ -1,4 +1,4 @@
-# CloudCost Diagnostic APIs
+# Cloud Cost Diagnostic APIs
 
 These APIs are designed to help troubleshoot and provide diagnostics for Kubecost's cloud integration features like Cloud Usage and reconciliation. For an explanation of these integration features, review Kubecost's [cloud processes](/install-and-configure/install/cloud-integration/README.md#kubecosts-cloud-processes).
 

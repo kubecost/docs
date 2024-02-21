@@ -22,38 +22,38 @@ Alternatively, the most common configurations can be found in our [poc-common-co
 
 Federated ETL is composed of two types of clusters.
 
-* **Federated Clusters**: The clusters which are being federated (clusters whose data will be combined and viewable at the end of the federated ETL pipeline). These clusters upload their ETL files after they have built them to Federated Storage.
-* **Primary Cluster**: A cluster where you can see the total Federated data that was combined from your Federated Clusters. These clusters use [Aggregator](/install-and-configure/install/multi-cluster/federated-etl/aggregator.md) to read from combined storage and serve queries on the combined data.
+* Federated cluster: The clusters which are being federated (clusters whose data will be combined and viewable at the end of the federated ETL pipeline). These clusters upload their ETL files after they have built them to Federated Storage.
+* Primary cluster: A cluster where you can see the total Federated data that was combined from your federated clusters. These clusters use [Aggregator](/install-and-configure/install/multi-cluster/federated-etl/aggregator.md) to read from combined storage and serve queries on the combined data.
 
-These cluster designations can overlap, in that some clusters may be several types at once. A cluster that is a Federated Cluster and Primary Cluster will perform the following functions:
+These cluster designations can overlap, in that some clusters may be several types at once. A cluster that is a federated cluster and primary cluster will perform the following functions:
 
-* As a Federated Cluster, push local cluster cost data from its local ETL build pipeline.
-* As a Primary Cluster, run the Aggregator to pull cluster data from storage and serve it via Kubecost APIs and the Kubecost frontend.
+* As a federated cluster, push local cluster cost data from its local ETL build pipeline.
+* As a primary cluster, run the Aggregator to pull cluster data from storage and serve it via Kubecost APIs and the Kubecost frontend.
 
 ### Other components
 
 The Storages referred to here are an S3 (or GCP/Azure equivalent) storage bucket which acts as remote storage for the Federated ETL Pipeline.
 
-* **Federated Storage**: A set of folders on paths `<bucket>/federated/<cluster id>` which are essentially ETL backup data, holding a “copy” of Federated Cluster data. Federated Clusters push this data to Federated Storage to be combined by the Federator. Federated Clusters write this data, and the Federator reads this data.
+* **Federated Storage**: A set of folders on paths `<bucket>/federated/<cluster id>` which are essentially ETL backup data, holding a “copy” of federated cluster data. Federated clusters push this data to Federated Storage to be combined by the Aggregator. Federated clusters write this data, and the Aggregator reads this data.
 * **Federated ETL**: The pipeline containing the above components.
-* **Aggregator**: The component running on the Primary Cluster which serves queries based on data in Federated Storage.
+* **Aggregator**: The component running on the primary cluster which serves queries based on data in Federated Storage.
 
 ## Federated ETL architecture
 
 This diagram shows an example setup of the Federated ETL with:
 
-* Three pure Federated Clusters (not classified as any other cluster type): Cluster 1, Cluster 2, and Cluster 3
-* One Primary Cluster that is also a Federated Cluster: Cluster 0
+* Three pure federated clusters (not classified as any other cluster type): Cluster 1, Cluster 2, and Cluster 3
+* One primary cluster that is also a federated cluster: Cluster 0
 
-The result is 4 clusters federated together.
+The result is four clusters federated together.
 
 ![Federated ETL diagram](/images/kubecost-ETL-Federated-diagram.png)
 
 ## Setup
 
-### Step 0: Ensure unique cluster IDs
+### Prerequisites
 
-Ensure each federated cluster has a unique `clusterName` and `cluster_id`:
+Before starting, ensure each federated cluster has a unique `clusterName` and `cluster_id`:
 
 ```yaml
 kubecostProductConfigs:
@@ -102,7 +102,7 @@ kubeCostAggregator:
 
 ### Step 3: Cluster configuration (Primary)
 
-In Kubecost, the primary cluster serves the UI and API endpoints as well as reconciling cloud billing (cloud integrations). Follow the instructions on the [Aggregator doc](/install-and-configure/install/multi-cluster/federated-etl/aggregator.md) to set up the primary cluster.
+In Kubecost, the primary cluster serves the UI and API endpoints as well as reconciling cloud billing (cloud integrations). Follow the instructions in our [Aggregator doc](/install-and-configure/install/multi-cluster/federated-etl/aggregator.md) to set up the primary cluster.
 
 ### Step 4: Verifying successful configuration
 

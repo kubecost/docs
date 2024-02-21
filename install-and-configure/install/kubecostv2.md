@@ -63,7 +63,7 @@ upgrade:
 
 ## Troubleshooting
 
-If you encounter any issues during the upgrade process, please refer to the section below, our [general troubleshooting guide](/troubleshooting/troubleshoot-install.md), or reach out to support@kubecost.com.
+If you encounter any issues during the upgrade process, please refer to the section below, our [Aggregator troubleshooting guide](/install-and-configure/install/multi-cluster/federated-etl/aggregator.md#troubleshooting-aggregator), our [general troubleshooting guide](/troubleshooting/troubleshoot-install.md), or reach out to support@kubecost.com.
 
 ### Running Aggregator in v1.107 or v1.108
 
@@ -80,12 +80,3 @@ If you were running the Aggregator in v1.107 or v1.108, you will need to manuall
 First, ensure you have upgraded Kubecost to the latest version of 2.x. Patches have been released to fix miscellaneous cloud integration issues. You can learn more about what's been fixed in our [release notes](https://github.com/kubecost/cost-analyzer-helm-chart/releases).
 
 Next, ensure that you are configuring the cloud integration via the `cloud-integration` secret and `.Values.kubecostProductConfigs.cloudIntegrationSecret` Helm value. This is now the only supported way of configuring your cloud integration
-
-### Resetting Aggregator StatefulSet data
-
-When deploying the Aggregator as a StatefulSet, it is possible to perform a reset of the Aggregator data. The Aggregator itself doesn't store any data, and relies on object storage. As such, a reset involves removing that Aggregator's local storage, and allowing it to re-ingest data from the object store. The procedure is as follows:
-
-1. Scale down the Aggregator StatefulSet to 0
-2. When the Aggregator pod is gone, delete the `aggregator-db-storage-xxx-0` PVC
-3. Scale the Aggregator StatefulSet back to 1. This will re-create the PVC, empty. 
-4. Wait for Kubecost to re-ingest data from the object store. This could take from several minutes to several hours, depending on your data size and retention settings.
