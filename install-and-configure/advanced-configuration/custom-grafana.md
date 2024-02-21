@@ -1,5 +1,7 @@
 # Grafana Configuration Guide
 
+
+
 Using an existing Grafana deployment can be accomplished through one of two options:
 
 1. Linking to an external Grafana directly
