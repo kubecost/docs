@@ -153,7 +153,9 @@ If saved reports are _not_ provided via _values.yaml_, meaning `global.savedRepo
 
 ## Troubleshooting
 
-Review these steps to verify that saved reports are being passed to the Kubecost application correctly:
+### Reports not being passed to Kubecost correctly
+
+Review these steps to verify reports are being passed to the Kubecost application correctly:
 
 1. Confirm that `global.savedReports.enabled` is set to `true`
 2. Ensure that the Helm values are successfully read into the ConfigMap
@@ -183,6 +185,10 @@ data:
 ````
 {% endcode %}
 
-3\. Ensure that the JSON string is successfully mapped to the appropriate configs
+3. Ensure that the JSON string is successfully mapped to the appropriate configs
 
-Navigate to your Reports page in the Kubecost UI and ensure that the configured report parameters have been set by selecting the Report name.
+Navigate to the Reports page and ensure that the configured report parameters have been set by selecting the Report name.
+
+### Reports configured in the UI do not display properly after upgrading to v2.0+
+
+
