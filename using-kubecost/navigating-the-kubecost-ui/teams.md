@@ -14,7 +14,7 @@ Before using the Teams page, make sure you have configured [SAML RBAC](/install-
 Teams is currently *not* compatible with [OIDC RBAC](/install-and-configure/advanced-configuration/user-management-oidc/user-management-oidc.md).
 {% endhint %}
 
-Users must also have the PVs Helm flag enabled. This will be enabled in Kubecost by default, and so no action is needed unless you have previously disabled it. To renable PVs, use the following command:
+Users must also have the persistent volumes Helm flag enabled. This will be enabled in Kubecost by default, and so no action is needed unless you have previously disabled it. To renable PVs, use the following command:
 
 ```
 helm upgrade -i kubecost kubecost/cost-analyzer \
@@ -103,7 +103,7 @@ Authentication is handled by the cost-model and Aggregator pods.
 
 For help with troubleshooting, follow this guide for diagnostic assistance:
 
-1. Opne your browser's developer tools.
+1. Open your browser's developer tools.
 2. Access Cookies (Select *Storage* in Firefox, or *Application* in Google Chrome).
 3. Look for the `token` cookie.
 4. Copy and paste the token value into jwt.io.
