@@ -3,7 +3,7 @@
 Integration with cloud service providers (CSPs) via their respective billing APIs allows Kubecost to display out-of-cluster (OOC) costs (e.g. AWS S3, Google Cloud Storage, Azure Storage Account). Additionally, it allows Kubecost to reconcile Kubecost's in-cluster predictions with actual billing data to improve accuracy.
 
 {% hint style="danger" %}
-If you are using Kubecost Cloud, do not attempt to modify your install using information from this article. You need to consult Kubecost Cloud's specific cloud integration procedures which can be found [here](/kubecost-cloud/kubecost-cloud-cloud-billing-integrations/README.md).
+If you are using Kubecost Cloud, do not attempt to modify your install using information from this article. You need to consult Kubecost Cloud's specific cloud integration procedures which can be found [here](https://docs.kubecost.com/v/kubecost-cloud/cloud-billing-integrations/cloud-billing-integrations).
 {% endhint %}
 
 ## Kubecost's cloud processes
