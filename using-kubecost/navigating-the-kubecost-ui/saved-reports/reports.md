@@ -191,4 +191,73 @@ Navigate to the Reports page and ensure that the configured report parameters ha
 
 ### Reports configured in the UI do not display properly after upgrading to v2.0+
 
+If your reports do not display properly after upgrading to v2.0+ from v1.x, you will need to manually copy your reports from a JSON file to from your KCM's `persistent-configs` PVC and move them into your `peristent-configs-aggregator-aggregator-0` PVCs.
 
+1. Check for old report files with this command: `kubectl exec -it -n kubecost $(kubectl get pod -n kubecost -l app=cost-analyzer -o jsonpath='{.items[0].metadata.name}') -c cost-model -- ls -lh /var/configs`
+
+An example of listed reports will look like:
+
+```
+total 96K
+drwxr-sr-x 2 1001 1001 4.0K Feb 22 14:32 alerts
+-rw-r--r-- 1 1001 1001  528 Feb 22 14:32 apiconfig.json
+-rw-r--r-- 1 1001 1001   93 Feb 22 21:48 asset-reports.json
+drwx--S--- 3 1001 1001 4.0K Feb 22 14:33 audit-events
+-rw-r--r-- 1 1001 1001    2 Feb 22 14:32 budgets.json
+-rw-r--r-- 1 1001 1001 3.8K Feb 22 14:32 cloud-configurations.json
+-rw-r--r-- 1 1001 1001    2 Feb 22 14:32 cloud-cost-reports.json
+drwxrwsrwt 3 root 1001  100 Feb 22 14:32 cloud-integration
+-rw-r--r-- 1 1001 1001    2 Feb 22 14:32 collections.json
+drwxr-sr-x 5 1001 1001 4.0K Feb 22 14:33 db
+drwxrwsrwt 3 root 1001  100 Feb 22 14:32 etl
+-rw------- 1 1001 1001 1.3K Feb 22 14:32 gcp.json
+-rw-r--r-- 1 1001 1001 2.3K Feb 22 14:33 REDACTED-detailedbilling.gcp_billing_export_resource_REDACTED.json
+-rw-r--r-- 1 1001 1001 2.3K Feb 22 14:32 key.json
+drwx--S--- 4 1001 1001 4.0K Feb 22 14:32 localBucket
+drwxrws--- 2 root 1001  16K Feb 22 14:32 lost+found
+-rw-r--r-- 1 1001 1001   57 Feb 22 14:32 productkey.json
+-rw-r--r-- 1 1001 1001    2 Feb 22 14:32 recurring-budget-rules.json
+-rw-r--r-- 1 1001 1001    2 Feb 22 14:32 reports.json
+-rw-r--r-- 1 1001 1001    2 Feb 22 14:32 serviceAccounts.json
+-rw-r--r-- 1 1001 1001    2 Feb 22 14:32 teams.json
+-rw-r--r-- 1 1001 1001    2 Feb 22 14:32 users.json
+drwxr-sr-x 4 1001 1001 4.0K Feb 22 14:34 waterfowl
+```
+
+2. Check for report files (created following v2.0+ upgrade) with this command: `kubectl exec -it -n kubecost $(kubectl get pod -n kubecost -l app=aggregator -o jsonpath='{.items[0].metadata.name}') -c aggregator -- ls -lh /var/configs`
+
+```
+total 72K
+-rw-r--r-- 1 1001 1001    2 Feb 17 14:02 advanced-reports.json
+-rw-r--r-- 1 1001 1001    2 Feb 22 21:21 asset-reports.json
+-rw-r--r-- 1 1001 1001  221 Feb 22 21:21 budgets.json
+-rw-r--r-- 1 1001 1001    2 Feb 22 21:21 cloud-cost-reports.json
+-rw-r--r-- 1 1001 1001 6.1K Feb 21 19:16 collections.json
+drwxrwsrwt 3 root 1001  100 Feb 22 21:21 etl
+-rw-r--r-- 1 1001 1001    2 Feb  1 23:31 group-reports.json
+drwxrws--- 2 root 1001  16K Jan 31 03:46 lost+found
+-rw-r--r-- 1 1001 1001    2 Feb 22 21:21 recurring-budget-rules.json
+-rw-r--r-- 1 1001 1001    2 Feb 22 21:21 reports.json
+-rw-r--r-- 1 1001 1001  173 Feb 22 21:21 serviceAccounts.json
+-rw-r--r-- 1 1001 1001    2 Feb 22 21:21 teams.json
+-rw-r--r-- 1 1001 1001   45 Feb 12 22:20 trialuser.kc
+-rw-r--r-- 1 1001 1001    2 Feb 22 21:21 users.json
+drwxrwsrwx 4 root 1001 4.0K Feb 22 21:37 waterfowl
+```
+
+The listed results may be different, including the file sizes of files displayed in both lists. Files post-upgrade with a file size of 2 are empty.  Compare both instances of `asset-reports.json`, which has a reduced file size post-upgrade, meaning it is not displaying properly in Kubecost's UI. Follow along this process of copying this example file with any affected reports.
+
+3. Check out pre-upgrade file(s): `kubectl exec -it -n kubecost $(kubectl get pod -n kubecost -l app=cost-analyzer -o jsonpath='{.items[0].metadata.name}') -c cost-model -- ls -lh /var/configs/asset-reports.json`
+
+4. Check out file we are copying pre-upgrade file(s) to: `kubectl exec -it -n kubecost $(kubectl get pod -n kubecost -l app=aggregator -o jsonpath='{.items[0].metadata.name}') -c aggregator -- ls -lh /var/configs/asset-reports.json
+-rw-r--r-- 1 1001 1001 2 Feb 22 21:21 /var/configs/asset-reports.json`
+
+5. Download pre-upgrade report file(s): `kubectl cp kubecost/$(kubectl get pod -n kubecost -l app=cost-analyzer -o jsonpath='{.items[0].metadata.name}'):/var/configs/asset-reports.json /tmp/asset-reports.json -c cost-model`
+
+6. Check downloaded pre-upgrade file(s): `ls -alh /tmp/asset-reports.json -rw-r--r-- 1 delta delta 93 Feb 22 14:13 /tmp/asset-reports.json``
+
+The resulting filze size should match.
+
+7. Upload the downloaded pre-upgrade file to the new reports location in Aggregator: `kubectl cp /tmp/asset-reports.json kubecost/$(kubectl get pod -n kubecost -l app=aggregator -o jsonpath='{.items[0].metadata.name}'):/var/configs/asset-reports.json -c aggregator`
+
+8. Check that the new location has a file of the expected size: `kubectl exec -it -n kubecost $(kubectl get pod -n kubecost -l app=aggregator -o jsonpath='{.items[0].metadata.name}') -c aggregator -- ls -lh /var/configs/asset-reports.json -rw-r--r-- 1 1001 1001 93 Feb 22 22:14 /var/configs/asset-reports.json`
