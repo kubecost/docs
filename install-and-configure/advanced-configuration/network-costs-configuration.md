@@ -49,18 +49,7 @@ You can view a list of common config options in this [_values.yaml_](https://git
 
 ### Log Level
 
-* You can adjust log level using the `extraArgs` config:
-
-  ```yaml
-  networkCosts:
-    enabled: true
-    extraArgs:
-      - "-v=0"
-  ```
-  
-{% hint style="info" %}
-For kubecost-network-costs:v0.17.0+, `LOG_LEVEL` is the env var for setting log level. Valid inputs are `error`, `warn`, `info`, `debug`, and `trace`.
-{% endhint %}
+`LOG_LEVEL` is the env var for setting log level. Valid inputs are `error`, `warn`, `info`, `debug`, and `trace`.
 
 Edit the `kubecost-network-costs` daemonSet by adding the lines below:
 
