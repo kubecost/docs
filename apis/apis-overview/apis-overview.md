@@ -2,10 +2,6 @@
 
 Welcome to the Kubecost API library! This directory will show you how Kubecost APIs can assist in monitoring, maintaining, and optimizing your cloud spend. Learn also how Kubecost APIs power different features of the UI below.
 
-{% hint style="info" %}
-Throughout our API documentation, you may see two separate endpoints for the same API, with one labeled 'Aggrgegator-only', or a subsection in an article for Aggregator-only parameters. Those endpoints or parameters are only for users who have configured [Kubecost Aggregator](/install-and-configure/install/multi-cluster/federated-etl/aggregator.md). If you do not have Aggregator configured in your environment, do not use those Aggregator endpoints or parameters.
-{% endhint %}
-
 ## Monitoring APIs
 
 ### [**Allocation API**](api-allocation.md)
