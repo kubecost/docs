@@ -210,7 +210,7 @@ In the event of missing or inaccurate data, you may need to rebuild your ETL pip
 
 ## Setup with Azure workload Identites
 
-For an environment using Azure Workload Identities, the following configuration must be included in the Kubecost Deployment in the helm values file on both the primary and secondary clusters:
+For an environment using Azure Workload Identities, the following configuration must be included in the Kubecost Deployment in the Helm values file on both the primary and secondary clusters:
 
 ```yaml
 kubecostDeployment:
