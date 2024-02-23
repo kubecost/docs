@@ -30,7 +30,7 @@ After having added items to your collection, selecting _Costs in Collection_ wil
 Percentage spends refers to the total Kubernetes/Cloud cost within the collection to all Kubernetes/Cloud costs within your environment respectively, not the percentage of total spend within the collection. For example, if a collection contains $20 of Kubernetes spend and the total allocation data in that same window is $50, the percentage of Kubernetes spend will be 40%.
 {% endhint %}
 
-In the event there is cost overlap from conflicting Kubernetes and cloud costs, they will be reflected in a special Overlap category. Kubecost automatically subtracts the overlapping costs so that the totals seen for the collection are accurate and do not contain duplicate costs. Currently, overlap is only considered for CPU/GPU/RAM and Network costs. It does not apply to PV/LB and shared costs.
+In the event there is cost overlap from conflicting Kubernetes and cloud costs, they will be reflected in a special Overlap category. Kubecost automatically subtracts the overlapping costs so that the totals seen for the collection are accurate and do not contain duplicate costs. Currently, overlap is not considered for shared costs and Load Balancer costs coming from workloads running on Azure and GCP clusters.
 
 ## Managing collections
 
