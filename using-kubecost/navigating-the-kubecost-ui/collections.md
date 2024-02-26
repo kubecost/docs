@@ -24,7 +24,11 @@ Costs are organized in a table, listed in descending order starting with the hig
 
 You can filter and recategorize your cost table using _Aggregate By_ and _Add Filters_. _Aggregate By_ allows you to organize your costs by a listed category, and supports single and multi-aggregation. _Add Filters_ allows for flexible filtering of your table items, including filtering by custom labels.
 
-After having added items to your collection, selecting _Costs in Collection_ will provide a complete list of all items, as well as key cost metrics including total and percentage costs of both Kubernetes and cloud items. Note: Your cloud provider may not provide a Resource ID for all cloud 'items'. Cloud costs without an associated resource ID are not supported today.
+After having added items to your collection, selecting _Costs in Collection_ will provide a complete list of all items, as well as key cost metrics including total and percentage costs of both Kubernetes and cloud items.
+
+{% hint style="info" %}
+Your cloud provider may not provide a Resource ID for all cloud 'items'. Cloud costs without an associated resource ID are not supported currently.
+{% endhint %}
 
 {% hint style="info" %}
 Percentage spends refers to the total Kubernetes/Cloud cost within the collection to all Kubernetes/Cloud costs within your environment respectively, not the percentage of total spend within the collection. For example, if a collection contains $20 of Kubernetes spend and the total allocation data in that same window is $50, the percentage of Kubernetes spend will be 40%.
