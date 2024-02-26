@@ -191,7 +191,7 @@ Navigate to the Reports page and ensure that the configured report parameters ha
 
 ### Reports configured in the UI do not display properly after upgrading to v2.0+
 
-If your reports do not display properly after upgrading to v2.0+ from v1.x, you will need to manually copy your reports from a JSON file to from your KCM's `persistent-configs` PVC and move them into your `peristent-configs-aggregator-aggregator-0` PVCs.
+If your reports do not display properly after upgrading to v2.0+ from v1.x, you will need to manually copy your reports from a JSON file to from your KCM's `persistent-configs` PVC and move them into your `peristent-configs-aggregator-aggregator-0` PVC.
 
 1. Check for old report files with this command: `kubectl exec -it -n kubecost $(kubectl get pod -n kubecost -l app=cost-analyzer -o jsonpath='{.items[0].metadata.name}') -c cost-model -- ls -lh /var/configs`
 
