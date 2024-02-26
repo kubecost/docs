@@ -1,5 +1,11 @@
 # Kubecost Cloud Product Updates
 
+## 2/26/24
+
+### New Features:
+* Kubecost Collections - create a single report containing both Kubernetes and Cloud Costs
+* Updated Nav Bar - change color pallete and move dashboards under 'Monitor'
+
 ## 12/21/23
 
 ### New Features:
