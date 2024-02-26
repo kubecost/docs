@@ -2,6 +2,10 @@
 
 Kubecost v2.0 introduced massive functionality changes including changes to the backend architecture. This may require additional changes be made to your environment before upgrading from an older version of Kubecost to 2.x. This article reviews several different common configurations and explains any necessary steps to take.
 
+{% hint style="danger" %}
+Multi-cluster Prometheus configurations (Amazon/Google Managed Prometheus, Mimir, etc.) are temporarily blocked from upgrading to Kubecost 2.0. You must set up a dedicated object store as described in Step 1 of our [Aggregator migration guide](/install-and-configure/install/multi-cluster/federated-etl/thanos-migration-guide.md#step-1-use-the-existing-thanos-object-store-or-create-a-new-dedicated-object-store).
+{% endhint %}
+
 ## Single cluster users
 
 If you have a single cluster installation of Kubecost (i.e. one primary Kubecost instance on each cluster), then you can follow the standard upgrade process for Kubecost 2.x.
