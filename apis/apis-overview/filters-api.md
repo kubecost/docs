@@ -11,9 +11,9 @@ v1 filters will continue to be supported in all relevant APIs. APIs will first c
 v2 filters can be used via the `filter=` parameter in supported APIs. Supported APIs are currently:
 
 * [Allocation API](api-allocation.md)
-* [Request Sizing APIs](api-request-right-sizing-v2.md)
+* [Request Sizing API](api-request-right-sizing-v2.md)
 * [Assets API](assets-api.md)
-* [Allocation/Cloud Cost Trends API](cloud-cost-api/cloud-cost-trends-api.md) (Kubecost Aggregator only)
+* [Allocation/Cloud Cost Trends API](cloud-cost-api/cloud-cost-trends-api.md)
 
 ## Filtering fields
 
