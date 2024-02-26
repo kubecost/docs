@@ -45,22 +45,6 @@ Potentially reducing retention even further, metrics are sent to the storage-buc
 
 You can tune `prometheus.server.persistentVolume.size` depending on scale, or outright disable persistent storage.
 
-## Thanos
-
-Disable Thanos components. These are only used for troubleshooting on secondary clusters. See this guide for [troubleshooting via kubectl logs](/install-and-configure/install/multi-cluster/thanos-setup/configuring-thanos.md#troubleshooting).
-
-{% hint style="info" %}
-Secondary clusters write to the global storage-bucket via the thanos-sidecar on the prometheus-server pod.
-{% endhint %}
-
-```
---set thanos.compact.enabled=false
---set thanos.bucket.enabled=false
---set thanos.query.enabled=false
---set thanos.queryFrontend.enabled=false
---set thanos.store.enabled=false
-```
-
 ## Node-Exporter
 
 Node-exporter is disabled by default. You should keep it this way if cluster/node right-sizing recommendations are not required.
