@@ -4,7 +4,7 @@
 
 The network costs DaemonSet is an optional utility that gives Kubecost more detail to attribute costs to the correct pods.
 
-When networkCost is enabled, Kubecost gathers pod-level network traffic metrics to allocate network transfer costs to the pod responsible for the traffic.
+When `networkCost` is enabled, Kubecost gathers pod-level network traffic metrics to allocate network transfer costs to the pod responsible for the traffic.
 
 See this doc for more detail on [network cost allocation methodology](/using-kubecost/navigating-the-kubecost-ui/cost-allocation/network-allocation.md).
 
@@ -49,14 +49,15 @@ You can view a list of common config options in this [_values.yaml_](https://git
 
 ### Log Level
 
-* You can adjust log level using the `extraArgs` config:
+`LOG_LEVEL` is the env var for setting log level. Valid inputs are `error`, `warn`, `info`, `debug`, and `trace`.
 
-  ```yaml
-  networkCosts:
-    enabled: true
-    extraArgs:
-      - "-v=0"
-  ```
+Edit the `kubecost-network-costs` daemonSet by adding the lines below:
+
+```
+- env:
+        - name: LOG_LEVEL
+          value: info
+```
 
 * The levels range from 0 to 5, with 0 being the least verbose (only showing panics) and 5 being the most verbose (showing trace-level information).
 * Ref: [sig-instrumentation](https://github.com/kubernetes/community/blob/0e9fa4a1c45203527a7ce35eaff09204d6b7b331/contributors/devel/sig-instrumentation/logging.md)

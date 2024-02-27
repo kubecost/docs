@@ -1,4 +1,4 @@
-# ETL Federation (preferred)
+# ETL Federation
 
 {% hint style="info" %}
 Federated ETL is only supported for Kubecost Enterprise plans.
