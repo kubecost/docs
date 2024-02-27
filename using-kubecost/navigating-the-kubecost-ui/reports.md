@@ -10,7 +10,7 @@ Reports can be managed via [_values.yaml_](https://github.com/kubecost/cost-anal
 
 ### Creating a report
 
-Begin by selecting _Create a report_. There are five report types available. Three of these correspond to Kubecost's different monitoring dashboards. The other two are specialized beta features.
+Begin by selecting _Create a report_. There are five report types available. Three of these correspond to Kubecost's different monitoring dashboards.
 
 {% hint style="warning" %}
 As of Kubecost v2.0, Advanced Reports and Cloud Cost Reports have been removed and replaced with [Collections](/using-kubecost/navigating-the-kubecost-ui/collections.md). See the documentation for more info.
@@ -18,13 +18,9 @@ As of Kubecost v2.0, Advanced Reports and Cloud Cost Reports have been removed a
 
 * Allocation Report
 * Asset Report
-* [Advanced Report](advanced-reports.md) (beta)
 * Cloud Cost Report
-* [Advanced Report - Cost Centers](cost-center-report.md) (beta)
 
 Selecting a monitoring report type will take you to the respective dashboard. Provide the details of the query, then select _Save_. The report will now be saved on your Reports page for easy access.
-
-For help creating an Advanced Report (either type), select the respective hyperlink above for a step-by-step process.
 
 ### Sharing reports
 
