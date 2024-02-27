@@ -42,7 +42,7 @@ When upgrading to Kubecost 2.0, the Aggregator should be automatically deployed.
 
 This section applies to all users who use a multi-cluster Prometheus deployment. This includes architectures such as Thanos, Amazon Managed Prometheus, and Google Managed Prometheus.
 
-As of Kubecost 2.0, Kubecost requires a central object store which all Kubecost instances can write to.
+As of Kubecost v2.0, Kubecost requires a central object store which all Kubecost instances can write to.
 
 {% hint style="warning" %}
 A future release will add support for multi-cluster Prometheus without requiring external object-storage.

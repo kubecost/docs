@@ -148,7 +148,7 @@ This will show you the top source and destination IP addresses and bytes transfe
 For traffic routed to addresses outside of your cluster but inside your VPC, Kubecost supports the ability to directly classify network traffic to a particular IP address or CIDR block. This feature can be configured in [_values.yaml_](https://github.com/kubecost/cost-analyzer-helm-chart/blob/v1.101/cost-analyzer/values.yaml#L669-L707) under `networkCosts.config`. Classifications are defined as follows:
 
 {% hint style="info" %}
-As of Kubecost 1.101, LoadBalancers that proxy traffic to the Internet (ingresses and gateways) can be specifically classified.
+Load Balancers that proxy traffic to the internet (ingresses and gateways) can be specifically classified.
 {% endhint %}
 
 * In-zone: A list of destination addresses/ranges that will be classified as in-zone traffic, which is free for most providers.
