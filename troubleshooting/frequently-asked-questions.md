@@ -31,7 +31,7 @@ Q: I just enabled the CUR and AWS integration but do not see any cloud resources
 A: The AWS CUR and billing data from other cloud providers lag by 24-48 hours.
 
 Q: Why is the UI on my secondary Kubecost install broken?\
-A: This is normal if you have followed our [Secondary Clusters](/install-and-configure/install/multi-cluster/thanos-setup/secondary-clusters.md) guide, because its focus is reducing resource usage at the cost of breaking the secondary UI. The secondary UI should only be used for diagnostics.
+A: This is normal if you have followed our [Secondary Clusters](/secondary-clusters.md) guide, because its focus is reducing resource usage at the cost of breaking the secondary UI. The secondary UI should only be used for diagnostics.
 
 Q: I have two standalone Kubecost clusters in an Azure subscription, each residing in its own resource group. How can I limit the billing export for each cluster to only the resource group instead of the entire subscription?\
 A: You can create two billing exports each scoped to the corresponding resource group. [Review Azure's guide on exporting dates for more info.](https://learn.microsoft.com/en-us/azure/cost-management-billing/costs/tutorial-export-acm-data?tabs=azure-portal#create-a-daily-export)
