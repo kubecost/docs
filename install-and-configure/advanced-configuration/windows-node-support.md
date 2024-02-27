@@ -78,7 +78,7 @@ grafana:
 
 ## Metrics
 
-* Collecting data about Windows nodes is supported by Kubecost as of v1.93.0.
+* Collecting data about Windows nodes is supported by Kubecost
 * Accurate node and pod data exists by default, since they come from the Kubernetes API.
 * Kubecost requires cAdvisor for pod utilization data to determine costs at the container level.
 * Currently, for pods on Windows nodes: pods will be billed based on request size.

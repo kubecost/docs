@@ -2,10 +2,6 @@
 
 Cluster turndown is an automated scale down and scaleup of a Kubernetes cluster's backing nodes based on a custom schedule and turndown criteria. This feature can be used to reduce spend during down hours and/or reduce surface area for security reasons. The most common use case is to scale non-production (prod) environments (e.g. development (dev) clusters) to zero during off hours.
 
-{% hint style="danger" %}
-If you are upgrading from a pre-1.94 version of the Kubecost Helm chart, you will have to migrate your custom resources. `turndownschedules.kubecost.k8s.io` has been changed to `turndownschedules.kubecost.com` and `finalizers.kubecost.k8s.io` has been changed to `finalizers.kubecost.com`. See the [TurndownSchedule Migration Guide](turndown-schedule-migration-guide.md) for an explanation.
-{% endhint %}
-
 ## How it works
 
 {% hint style="warning" %}

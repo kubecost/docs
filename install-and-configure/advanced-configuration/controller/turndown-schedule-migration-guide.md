@@ -24,7 +24,7 @@ kubectl get turndownschedules.kubecost.k8s.io
 
 This situation is easy! You can do nothing, and turndown should continue to behave correctly because `kubectl get turndownschedule` and related commands will correctly default to the new `turndownschedules.kubecost.com/v1alpha1` CRD after you upgrade to Kubecost v1.94 or higher.
 
-If you would like to be fastidious and clean up the old CRD, simply run `kubectl delete crd turndownschedules.kubecost.k8s.io` after upgrading Kubecost to v1.94 or higher.
+If you would like to clean up the old CRD, simply run `kubectl delete crd turndownschedules.kubecost.k8s.io` after upgrading Kubecost to v1.94 or higher.
 
 ## Scenario 2: You currently use turndown
 

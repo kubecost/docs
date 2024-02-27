@@ -8,7 +8,7 @@ Kubecost's UI will appear broken when set to a secondary cluster. It should only
 
 This guide explains settings that can be tuned in order to run the minimum Kubecost components to run Kubecost more efficiently.
 
-See the [Additional resources](secondary-clusters.md#additional-resources) section below for complete examples in our GitHub repo.
+See the [Additional resources](/install-and-configure/install/multi-cluster/secondary-clusters.md) section below for complete examples in our GitHub repo.
 
 ## Kubecost Global
 
@@ -44,22 +44,6 @@ The following configuration options further reduce resource consumption when not
 Potentially reducing retention even further, metrics are sent to the storage-bucket every 2 hours.
 
 You can tune `prometheus.server.persistentVolume.size` depending on scale, or outright disable persistent storage.
-
-## Thanos
-
-Disable Thanos components. These are only used for troubleshooting on secondary clusters. See this guide for [troubleshooting via kubectl logs](/install-and-configure/install/multi-cluster/thanos-setup/configuring-thanos.md#troubleshooting).
-
-{% hint style="info" %}
-Secondary clusters write to the global storage-bucket via the thanos-sidecar on the prometheus-server pod.
-{% endhint %}
-
-```
---set thanos.compact.enabled=false
---set thanos.bucket.enabled=false
---set thanos.query.enabled=false
---set thanos.queryFrontend.enabled=false
---set thanos.store.enabled=false
-```
 
 ## Node-Exporter
 

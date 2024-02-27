@@ -9,11 +9,7 @@ Kubecost's extract, transform, load (ETL) data is a computed cache based on Prom
 There are a number of reasons why you may want to backup this ETL data:
 
 * To ensure a copy of your Kubecost data exists, so you can restore the data if needed
-* To reduce the amount of historical data stored in Prometheus/Thanos, and instead retain historical ETL data
-
-{% hint style="info" %}
-Beginning in v1.100, this feature is enabled by default if you have Thanos enabled. To opt out, set `.Values.kubecostModel.etlBucketConfigSecret="".`
-{% endhint %}
+* To reduce the amount of historical data stored in Prometheus, and instead retain historical ETL data
 
 ## Option 1: Automated durable ETL backups and monitoring
 

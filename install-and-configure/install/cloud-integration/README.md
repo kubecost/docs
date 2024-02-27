@@ -3,7 +3,7 @@
 Integration with cloud service providers (CSPs) via their respective billing APIs allows Kubecost to display out-of-cluster (OOC) costs (e.g. AWS S3, Google Cloud Storage, Azure Storage Account). Additionally, it allows Kubecost to reconcile Kubecost's in-cluster predictions with actual billing data to improve accuracy.
 
 {% hint style="danger" %}
-If you are using Kubecost Cloud, do not attempt to modify your install using information from this article. You need to consult Kubecost Cloud's specific cloud integration procedures which can be found [here](/kubecost-cloud/kubecost-cloud-cloud-billing-integrations/README.md).
+If you are using Kubecost Cloud, do not attempt to modify your install using information from this article. You need to consult Kubecost Cloud's specific cloud integration procedures which can be found [here](https://docs.kubecost.com/v/kubecost-cloud/cloud-billing-integrations/cloud-billing-integrations).
 {% endhint %}
 
 ## Kubecost's cloud processes
@@ -31,10 +31,6 @@ Visit _Settings_, then toggle on _Highlight Unreconciled Costs_, then select _Sa
 ![Allocations dashboard with highlighted unreconciled costs](/images/unreconciled.png)
 
 ### Cloud Costs
-
-{% hint style="info" %}
-As of v1.106 of Kubecost, Cloud Costs are enabled by default, and Cloud Usage is disabled. Upgrading Kubecost will not affect the UI or hinder performance relating to this.
-{% endhint %}
 
 Cloud Costs allow Kubecost to pull in OOC cloud spend from your CSP's billing data, including any services run by the CSP as well as compute resources. By labelling OOC costs, their value can be distributed to your Allocations data as external costs. This allows you to better understand the proportion of OOC cloud spend that your in-cluster usage depends on.
 
