@@ -153,6 +153,8 @@ If saved reports are _not_ provided via _values.yaml_, meaning `global.savedRepo
 
 ## Troubleshooting
 
+### Saved reports are not being passed to Kubecost correctly
+
 Review these steps to verify that saved reports are being passed to the Kubecost application correctly:
 
 1. Confirm that `global.savedReports.enabled` is set to `true`
@@ -186,3 +188,13 @@ data:
 3\. Ensure that the JSON string is successfully mapped to the appropriate configs
 
 Navigate to your Reports page in the Kubecost UI and ensure that the configured report parameters have been set by selecting the Report name.
+
+### Saved reports not appearing in Kubecost UI after upgrading to v2.x
+
+After upgrading Kubecost to v2.0+, saved reports may not properly display in the Kubecost UI. To properly transfer over saved reports, download this [`copy-reports.sh` file](https://github.com/kubecost/kubecost-utilities/blob/main/copy-reports/copy-reports.sh), then run the following command:
+
+```
+bash copy-reports.sh
+```
+
+Saved reports should then populate in your upgraded Kubecost version.
