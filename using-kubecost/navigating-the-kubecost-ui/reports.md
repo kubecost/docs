@@ -10,7 +10,7 @@ Reports can be managed via [_values.yaml_](https://github.com/kubecost/cost-anal
 
 ### Creating a report
 
-Begin by selecting _Create a report_. There are five report types available. Three of these correspond to Kubecost's different monitoring dashboards. The other two are specialized beta features.
+Begin by selecting _Create a report_. There are five report types available. Three of these correspond to Kubecost's different monitoring dashboards.
 
 {% hint style="warning" %}
 As of Kubecost v2.0, Advanced Reports and Cloud Cost Reports have been removed and replaced with [Collections](/using-kubecost/navigating-the-kubecost-ui/collections.md). See the documentation for more info.
@@ -18,13 +18,9 @@ As of Kubecost v2.0, Advanced Reports and Cloud Cost Reports have been removed a
 
 * Allocation Report
 * Asset Report
-* [Advanced Report](advanced-reports.md) (beta)
 * Cloud Cost Report
-* [Advanced Report - Cost Centers](cost-center-report.md) (beta)
 
 Selecting a monitoring report type will take you to the respective dashboard. Provide the details of the query, then select _Save_. The report will now be saved on your Reports page for easy access.
-
-For help creating an Advanced Report (either type), select the respective hyperlink above for a step-by-step process.
 
 ### Sharing reports
 
@@ -153,6 +149,8 @@ If saved reports are _not_ provided via _values.yaml_, meaning `global.savedRepo
 
 ## Troubleshooting
 
+### Saved reports are not being passed to Kubecost correctly
+
 Review these steps to verify that saved reports are being passed to the Kubecost application correctly:
 
 1. Confirm that `global.savedReports.enabled` is set to `true`
@@ -186,3 +184,13 @@ data:
 3\. Ensure that the JSON string is successfully mapped to the appropriate configs
 
 Navigate to your Reports page in the Kubecost UI and ensure that the configured report parameters have been set by selecting the Report name.
+
+### Saved reports not appearing in Kubecost UI after upgrading to v2.x
+
+After upgrading Kubecost to v2.0+, saved reports may not properly display in the Kubecost UI. To properly transfer over saved reports, download this [`copy-reports.sh` file](https://github.com/kubecost/kubecost-utilities/blob/main/copy-reports/copy-reports.sh), then run the following command:
+
+```
+bash copy-reports.sh
+```
+
+Saved reports should then populate in your upgraded Kubecost version.
