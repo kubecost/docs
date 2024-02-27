@@ -32,10 +32,6 @@ Visit _Settings_, then toggle on _Highlight Unreconciled Costs_, then select _Sa
 
 ### Cloud Costs
 
-{% hint style="info" %}
-As of v1.106 of Kubecost, Cloud Costs are enabled by default, and Cloud Usage is disabled. Upgrading Kubecost will not affect the UI or hinder performance relating to this.
-{% endhint %}
-
 Cloud Costs allow Kubecost to pull in OOC cloud spend from your CSP's billing data, including any services run by the CSP as well as compute resources. By labelling OOC costs, their value can be distributed to your Allocations data as external costs. This allows you to better understand the proportion of OOC cloud spend that your in-cluster usage depends on.
 
 Your cloud billing data is reflected in the aggregate costs of `Account`, `Provider`, `Invoice Entity`, and `Service`. Aggregating and drilling down into any of these categories will provide a subset of the entire bill, based on the Helm value `.values.cloudCost.topNItems`, which will log 1,000 values. This subset is each days' top `n` items by cost. An optional [label list](https://github.com/kubecost/cost-analyzer-helm-chart/blob/19b26585dca160446c1535518da557dd5f43f6e3/cost-analyzer/values.yaml#L458-L461) can be used to include or exclude items to be pulled from the bill.

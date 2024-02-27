@@ -71,7 +71,7 @@ If `true`, pulls data from the Assets cache and corrects prices of Allocations a
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="shareTenancyCosts" type="boolean" required="false" %}
-If `true`, share the cost of cluster overhead assets such as cluster management costs and node attached volumes across tenants of those resources. Results are added to the sharedCost field. As of v1.93.0 both cluster management and attached volumes are shared by cluster. Default is `true`.
+If `true`, share the cost of cluster overhead assets such as cluster management costs and node attached volumes across tenants of those resources. Results are added to the sharedCost field. Cluster management and attached volumes are shared by cluster. Default is `true`.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="shareNamespaces" type="string" required="false" %}

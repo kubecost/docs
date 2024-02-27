@@ -517,7 +517,7 @@ http://localhost:9090/model/assets?window=5d&aggregate=type&filterProviders=GCP
 
 ## Enable CPU and RAM cost breakdown
 
-As of v1.106, Prometheus queries for CPU and RAM mode breakdown are disabled by default. To receive these metrics, you must manually enable them by setting the Helm flag:
+Prometheus queries for CPU and RAM mode breakdown are disabled by default. To receive these metrics, you must manually enable them by setting the Helm flag:
 
 ```
 .Values.kubecostModel.assetModeBreakdownEnabled = true

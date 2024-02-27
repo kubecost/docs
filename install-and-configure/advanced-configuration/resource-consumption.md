@@ -12,7 +12,7 @@ Cloud cost metrics for all accounts can be pulled in on your primary cluster by 
 
 `-- cloudCost.enabled=false`
 
-Secondary clusters can be configured strictly as metric emitters to save memory. Learn more about how to best configure them in our [Secondary Clusters Guide](/install-and-configure/install/multi-cluster/thanos-setup/secondary-clusters.md).
+Secondary clusters can be configured strictly as metric emitters to save memory. Learn more about how to best configure them in our [Secondary Clusters Guide](/install-and-configure/install/multi-cluster/secondary-clusters.md).
 
 ## Exclude provider IDs in Cloud Assets
 

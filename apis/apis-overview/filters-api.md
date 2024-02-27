@@ -1,6 +1,6 @@
 # Filter Parameters (v2)
 
-This document outlines the filtering language added to the Allocation API in v1.96 of Kubecost, superseding Kubecost's original filtering parameters (e.g. `filterNamespaces=`), now referred to as v1 filters. v2 filters introduce support for "not equals" (e.g. `namespace != kubecost`) queries while maintaining extensibility.
+This document outlines the filtering language added to certain Kubecost APIs, superseding Kubecost's original filtering parameters (e.g. `filterNamespaces=`), now referred to as v1 filters. v2 filters introduce support for "not equals" (e.g. `namespace != kubecost`) queries while maintaining extensibility.
 
 {% hint style="info" %}
 v1 filters will continue to be supported in all relevant APIs. APIs will first check for the `filter=` parameter. If it is present, v2 filters will be used. If it is not present, APIs will attempt to use v1 filters.
@@ -21,7 +21,7 @@ The available fields for filtering depend on the API being queried.
 
 ### Allocation APIs, Request Sizing v2 API
 
-The supported filter fields as of v1.96 are:
+The supported filter fields are:
 
 * `cluster`
 * `node`
@@ -33,9 +33,6 @@ The supported filter fields as of v1.96 are:
 * `services`
 * `label`
 * `annotation` (same syntax as label, see examples)
-
-Added in v1.105 of Kubecost:
-
 * `department`
 * `environment`
 * `owner`
@@ -44,9 +41,7 @@ Added in v1.105 of Kubecost:
 
 ### Assets API
 
-V2 filter support was added to the `/model/assets` API in v1.105 of Kubecost.
-
-In v1.105 of Kubecost:
+v2 filter support for `/model/assets`:
 
 * `name`
 * `assetType` (e.g. `node`, `disk`, `network`, etc.)
@@ -61,16 +56,13 @@ In v1.105 of Kubecost:
 
 ## Filter operators
 
-The supported filter operators in v1.96 of Kubecost are:
+The supported filter operators are:
 
 * `:` Equality
   * For string fields (e.g. namespace): equality
   * For slice/array fields (e.g. services): slice contains at least one value equal (equivalent to `~:`)
   * For map fields (e.g. labels): map contains key (equivalent to `~:`)
 * `!:` Inequality, or "not contains" if an array type
-
-Added in v1.105 of Kubecost:
-
 * `~:` Contains
   * For string fields: contains
   * For slice fields: slice contains at least one value equal (equivalent to `:`)
