@@ -7,7 +7,7 @@ Multi-cluster Prometheus configurations (Amazon/Google Managed Prometheus, Mimir
 {% endhint %}
 
 {% hint style="danger" %}
-After upgrading to v2.x, it's possible saved reports may not properly display in the Kubecost UI. Follow [this solution](/using-kubecost/navigating-the-kubecost-ui/reports.md#saved-reports-not-appearing-in-kubecost-ui-after-upgrading-to-v2x) if you experience this problem.
+After upgrading to v2.x, it's possible saved reports may not properly display in the Kubecost UI. Follow [this solution](/using-kubecost/navigating-the-kubecost-ui/reports.md#saved-reports-not-appearing-in-kubecost-ui-after-upgrading-to-v2.x) if you experience this problem.
 {% endhint %}
 
 ## Single cluster users
