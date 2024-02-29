@@ -148,5 +148,6 @@ A. To receive access to these features, you need to properly configure Workload 
 Q: How can I configure node-exporter to use an internal cluster IP instead of the node network?\
 A: Set the following Helm value: `prometheus.nodeExporter.hostNetwork=false`.
 
-Q: How cna I configure my displayed currency type?/
+Q: How can I configure my displayed currency type?/
+
 A: Kubecost supports multiple different currency types for display purposes, but does not perform direct currency conversion. This must be configured via your *values.yaml* with the flag `kubecostProductConfigs.currencyCode`.
