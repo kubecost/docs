@@ -1,4 +1,4 @@
-# # Kubecost with AWS Distro for OpenTelemetry (ADOT)
+# Kubecost with AWS Distro for OpenTelemetry (ADOT)
 
 ## Overview
 
