@@ -78,14 +78,14 @@ kubecostAggregator:
     # This interval defines how long the Aggregator spends ingesting ETL data
     # from the federated store bucket into SQL tables, before cancelling its job
     # and starting over to pull newer data from the bucket. If set too low for
-    # large scale users, this may inadvertantly cause the Aggregator to spend
+    # large scale users, this may inadvertently cause the Aggregator to spend
     # longer time ingesting data. If set too high, there will be a delay in data
     # between the Kubecost Agents and the Aggregator.
-    # 
-    # Note, that the default value is set to 10m to optimize for the 
+    #
+    # Note, that the default value is set to 10m to optimize for the
     # first-install experience of Kubecost (i.e. it prioritizes small data
     # becoming available more quickly).
-    # 
+    #
     # default: 10m
     DB_BUCKET_REFRESH_INTERVAL: 1h
     # governs parallelism of derivation step
