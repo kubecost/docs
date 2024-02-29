@@ -41,7 +41,40 @@ For DaemonSets, set the affinity to only allow scheduling on Windows nodes:
                 - linux
     ```
 
-See the list of all deployments and DaemonSets in this [*values-windows-node-affinity.yaml*](https://github.com/kubecost/cost-analyzer-helm-chart/blob/develop/cost-analyzer/values-windows-node-affinity.yaml) file.
+See the list of all deployments and DaemonSets in this [*values-windows-node-affinity.yaml*](https://github.com/kubecost/cost-analyzer-helm-chart/blob/develop/cost-analyzer/values-windows-node-affinity.yaml) file:
+
+```
+kubecostMetrics:
+  exporter:
+    nodeSelector:
+      kubernetes.io/os: linux
+
+nodeSelector:
+  kubernetes.io/os: linux
+
+networkCosts:
+  nodeSelector:
+    kubernetes.io/os: linux
+
+prometheus:
+  server:
+    nodeSelector:
+      kubernetes.io/os: linux
+  nodeExporter:
+    enabled: true
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+            - matchExpressions:
+              - key: kubernetes.io/os
+                operator: In
+                values:
+                - linux
+grafana:
+  nodeSelector:
+    kubernetes.io/os: linux
+```
 
 ## Metrics
 
