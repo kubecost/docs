@@ -3,9 +3,6 @@
 Q: How can I reduce CPU or Memory resource consumption by Kubecost?\
 A: Please review our [Tuning Resource Consumption guide](/install-and-configure/advanced-configuration/resource-consumption.md).
 
-Q: Can I safely configure Thanos Compaction [down sampling](https://thanos.io/tip/components/compact.md/#downsampling)?\
-A: Yes, Kubecost is resilient to downsampling. However turning query concurrency is going to be most beneficial, especially during the long rebuild windows. To tune downsampling use the following Thanos subchart [values](https://github.com/kubecost/cost-analyzer-helm-chart/blob/b5b089ce217636fb2b7e6f42daed37397d28d3aa/cost-analyzer/charts/thanos/values.yaml#L525-L530).
-
 Q: Why do I receive a 403 error when trying to save reports or alerts?\
 A: This is due to the SAML user having read-only RBAC permissions.
 
@@ -46,7 +43,7 @@ Q: What license does the Enterprise version of Kubecost use?\
 A: Paid Kubecost versions use our [EULA](https://www.kubecost.com/terms).
 
 Q: When configuring Spot feeds in a federated cluster, where should it be configured?\
-A: The Spot data feed is meant to supplement node prices before the CUR drops. Because of this, it should be configured in each cluster to give the most accurate estimates as the data needs to be written into Thanos.
+A: The Spot data feed is meant to supplement node prices before the CUR drops. Because of this, it should be configured in each cluster to give the most accurate estimates.
 
 Q: Does the Abandoned Workloads savings report rely on the Network Traffic daemonSet?\
 A: No, it uses cAdvisor metrics.
@@ -56,9 +53,6 @@ A: No, the reason is that we get GPU efficiency from integration with the Nvidia
 
 Q: Should I use amortized prices when setting up my CUR or billing export?\
 A: Yes, amortized allows upfront costs of the resources to appear in Kubecost. [More info here](/install-and-configure/install/cloud-integration/README.md#cloud-integration-configurations).
-
-Q: Do I need to configure the cloud integration on the secondary clusters?\
-A: No, only if you are planning on viewing the UI on the secondary. This is because the cloud reconciliation process happens after the data is shipped to the Thanos store.
 
 Q: What is the difference between `rebuild` and `repair` commands?\
 A: `rebuild` is a legacy command and `repair` should be used instead, as it builds on top of the existing ETL instead of wiping it completely. (Use `repair` command when possible.)
@@ -153,3 +147,6 @@ A. To receive access to these features, you need to properly configure Workload 
 
 Q: How can I configure node-exporter to use an internal cluster IP instead of the node network?\
 A: Set the following Helm value: `prometheus.nodeExporter.hostNetwork=false`.
+
+Q: How cna I configure my displayed currency type?/
+A: Kubecost supports multiple different currency types for display purposes, but does not perform direct currency conversion. This must be configured via your *values.yaml* with the flag `kubecostProductConfigs.currencyCode`.
