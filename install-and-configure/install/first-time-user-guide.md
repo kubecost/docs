@@ -20,7 +20,7 @@ Now that your base install and CSP integrations are complete, it's time to deter
 
 You can also configure your currency display type. Kubecost supports the following currency types: USD, AUD, BRL, CAD, CHF, CNY, DKK, EUR, GBP, IDR, INR, JPY, NOK, PLN, and SEK. Kubecost does *not* perform any currency conversion when switching currency types; it is for display purposes, therefore you should ideally match your currency type to the type in your original cloud bill(s).
 
-Currency type can only be changed via a [`helm` upgrade to your *values.yaml*](/install-and-configure/install/helm-install-params.md), using the flag `KubecostProductConfigs.currencyCode`. For example, if you needed to convert your currency type to EUR, you would add the following to your `helm` command:
+Currency type can only be changed via a [`helm` upgrade to your *values.yaml*](/install-and-configure/install/helm-install-params.md), using the flag `.Values.kubecostProductConfigs.currencyCode`. For example, if you needed to convert your currency type to EUR, you would add the following to your `helm` command:
 
 ```
 --set kubecostProductConfigs.currencyCode=EUR
