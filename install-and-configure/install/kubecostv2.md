@@ -6,6 +6,10 @@ Kubecost v2.0 introduced massive functionality changes including changes to the 
 Multi-cluster Prometheus configurations (Amazon/Google Managed Prometheus, Mimir, etc.) are temporarily blocked from upgrading to Kubecost 2.0. You must set up a dedicated object store as described in Step 1 of our [Aggregator migration guide](/install-and-configure/install/multi-cluster/federated-etl/thanos-migration-guide.md#step-1-use-the-existing-thanos-object-store-or-create-a-new-dedicated-object-store).
 {% endhint %}
 
+{% hint style="danger" %}
+After upgrading to v2.x, it's possible saved reports may not properly display in the Kubecost UI. Follow [this solution](/using-kubecost/navigating-the-kubecost-ui/reports.md#saved-reports-not-appearing-in-kubecost-ui-after-upgrading-to-v2.x) if you experience this problem.
+{% endhint %}
+
 ## Single cluster users
 
 If you have a single cluster installation of Kubecost (i.e. one primary Kubecost instance on each cluster), then you can follow the standard upgrade process for Kubecost 2.x.
