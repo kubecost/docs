@@ -23,7 +23,7 @@ You can also configure your currency display type. Kubecost supports the followi
 Currency type can only be changed via a [`helm` upgrade to your *values.yaml*](/install-and-configure/install/helm-install-params.md), using the flag `KubecostProductConfigs.currencyCode`. For example, if you needed to convert your currency type to EUR, you would add the following to your `helm` command:
 
 ```
---set KubecostProductConfigs.currencyCode=EUR
+--set kubecostProductConfigs.currencyCode=EUR
 ```
 
 ### Monitoring your cost billing
