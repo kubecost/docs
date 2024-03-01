@@ -8,7 +8,7 @@ Important notes for the migration process:
 * Once Aggregator is enabled, all queries hit the Aggregator container and *not* cost-model via the reverse proxy.
 * The ETL-Utils container only creates additional files in the object store. It does not delete any data/metrics.
 * For larger environments, the StorageClass must have 1GBPS throughput.
-* Having enough storage is critically important and will vary based on environment. Bias towards a larger value for `aggregatorDBStorage.storageRequest` at the beginning and cut it down if persistent low utilization is observed.  
+* Having enough storage is critically important and will vary based on environment. Bias towards a larger value for `aggregatorDBStorage.storageRequest` at the beginning and cut it down if persistent low utilization is observed.
 
 ## Key changes
 
@@ -17,12 +17,12 @@ Important notes for the migration process:
 * Substantial query speed improvements even when pagination not in effect
 * Data ingested into and queried from Aggregator component instead of directly from bingen files
 * Distributed tracing integrated into core workflows
-* No more pre-computed "AggStores"; this reduces the memory footprint of Kubecost  
+* No more pre-computed "AggStores"; this reduces the memory footprint of Kubecost
   * Request-level caching still in effect
 
 ## Aggregator architecture
 
-![Aggrgeator diagram](/images/aggregator/aggregator-diagram.png)
+![Aggregator diagram](/images/aggregator/aggregator-diagram.png)
 
 ## Migration process
 
@@ -87,6 +87,8 @@ etlUtils:
   thanosSourceBucketSecret: kubecost-thanos
   fullImageName: gcr.io/kubecost1/cost-model-etl-utils:latest
   resources: {}
+  env:
+    LOG_LEVEL: debug # debug isn't all that verbose and is recommended
 kubecostAggregator:
   enabled: true
   replicas: 1
