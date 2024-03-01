@@ -1,18 +1,31 @@
-# Kubecost with AWS Distro for OpenTelemetry (ADOT)
+# Multi-Cluster Kubecost with AWS Distro for OpenTelemetry (ADOT)
 
 ## Overview
 
-This guide will walk you through the steps to deploy Kubecost with [AWS Distro for Open Telemetry (ADOT)](https://aws-otel.github.io/) to collect metrics from your Kubernetes cluster.
+This guide will walk you through the steps to deploy Kubecost with [AWS Distro for Open Telemetry (ADOT)](https://aws-otel.github.io/) to collect metrics from your Kubernetes clusters.
+
+* Note: Kubecost free allows for 15 days of query history. Unlock unlimited history with a [Kubecost subscription](https://www.kubecost.com/pricing).
 
 ![Architecture Diagram](/images/adot-architecture.png)
 
 ## Prerequisites
+
+1. An AWS Managed Prometheus Workspace is required to use ADOT
+2. AWS IAM permissions to add permissions for Kubecost to read from the workspace
+3. An s3 bucket is required for multi-cluster Kubecost for Kubecost to store its metrics (ETL files)
 
 Before following this guide, make sure you've reviewed AWS' doc on [installing the ADOT daemonset](https://docs.aws.amazon.com/prometheus/latest/userguide/AMP-onboard-ingest-metrics-OpenTelemetry.html). Update all configuration files in this folder that contain `YOUR_*` with your values.
 
 This guide assumes that the Kubecost Helm release name and the Kubecost namespace have the same value (usually this will be `kubecost`), which allows a global find and replace on `YOUR_NAMESPACE`.
 
 ## Configuration
+
+Clone this [repository](https://github.com/kubecost/poc-common-configurations/tree/main/aws-amp/adot) that contains all of the configuration files you will need to deploy Kubecost with ADOT.
+
+```bash
+git clone https://github.com/kubecost/poc-common-configurations.git
+cd poc-common-configurations/aws-amp/adot
+```
 
 Update all configuration files with your cluster name (replace all instances of `YOUR_CLUSTER_NAME_HERE`). The examples use `cluster` for the cluster name. You can use any key you want, but you will need to update the ConfigMap and deployment files to match. A simplified version of the ADOT DS installation is below.
 
@@ -53,8 +66,8 @@ Alternatively, you can add these items to your [existing ConfigMap](https://gith
     --name kubecost-sa \
     --namespace YOUR_NAMESPACE \
     --cluster qa-serverless2 --region YOUR_REGION \
-    --attach-policy-arn arn:aws:iam::297945954695:policy/kubecost-read-amp-metrics \
-    --attach-policy-arn arn:aws:iam::297945954695:policy/kubecost-bucket-policy \
+    --attach-policy-arn arn:aws:iam::AWS_ACCOUNT_NUMBER:policy/kubecost-read-amp-metrics \
+    --attach-policy-arn arn:aws:iam::AWS_ACCOUNT_NUMBER:policy/kubecost-bucket-policy \
     --override-existing-serviceaccounts --approve --profile admin
     ```
 
@@ -94,8 +107,8 @@ This assumes you have created the policies above. If using multiple AWS accounts
         --name kubecost-sa \
         --namespace YOUR_NAMESPACE \
         --cluster YOUR_PRIMARY_CLUSTER_NAME --region YOUR_REGION \
-        --attach-policy-arn arn:aws:iam::297945954695:policy/kubecost-read-amp-metrics \
-        --attach-policy-arn arn:aws:iam::297945954695:policy/kubecost-bucket-policy \
+        --attach-policy-arn arn:aws:iam::AWS_ACCOUNT_NUMBER:policy/kubecost-read-amp-metrics \
+        --attach-policy-arn arn:aws:iam::AWS_ACCOUNT_NUMBER:policy/kubecost-bucket-policy \
         --override-existing-serviceaccounts --approve --profile admin
     ```
 
