@@ -52,7 +52,7 @@ In this installation command, these additional flags are added to have Kubecost 
 * `global.gmp.enabled` and `global.gmp.gmpProxy.projectId` are for enabling the GMP integration.
 * `prometheus.server.global.external_labels.cluster_id` and `kubecostProductConfigs.clusterName` helps to set the name for your Kubecost setup.
 
-You can find additional configurations at our main [values.yaml](https://github.com/kubecost/cost-analyzer-helm-chart/blob/develop/cost-analyzer/values.yaml) file.
+You can find additional configurations at our main [*values.yaml*](https://github.com/kubecost/cost-analyzer-helm-chart/blob/develop/cost-analyzer/values.yaml) file.
 
 Your Kubecost setup now writes and collects data from GMP. Data should be ready for viewing within 15 minutes.
 

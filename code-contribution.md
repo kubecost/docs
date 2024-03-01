@@ -11,4 +11,4 @@ Kubecost offers a number of open-source software projects and tools which allow 
 * [kubectl-cost](https://github.com/kubecost/kubectl-cost)
 * [Cluster Turndown](https://github.com/kubecost/cluster-turndown)
 
-The core of Kubecost is based on the open source CNCF project [OpenCost](https://www.opencost.io/). For contribution guidelines to OpenCost, please see [here](https://github.com/opencost/opencost/blob/develop/CONTRIBUTING.md).
+The core of Kubecost is based on the open source CNCF project [OpenCost](https://www.opencost.io/). Read OpenCost's [contribution guide](https://github.com/opencost/opencost/blob/develop/CONTRIBUTING.md) for more info.

@@ -18,6 +18,14 @@ Due to the frequency of updates from providers, it can take anywhere from 24 to 
 
 Now that your base install and CSP integrations are complete, it's time to determine the accuracy against your cloud bill. Based on different methods of cost aggregation, Kubecost should assess your billing data within a 3-5% margin of error.
 
+You can also configure your currency display type. Kubecost supports the following currency types: USD, AUD, BRL, CAD, CHF, CNY, DKK, EUR, GBP, IDR, INR, JPY, NOK, PLN, and SEK. Kubecost does *not* perform any currency conversion when switching currency types; it is for display purposes, therefore you should ideally match your currency type to the type in your original cloud bill(s).
+
+Currency type can only be changed via a [`helm` upgrade to your *values.yaml*](/install-and-configure/install/helm-install-params.md), using the flag `.Values.kubecostProductConfigs.currencyCode`. For example, if you needed to convert your currency type to EUR, you would add the following to your `helm` command:
+
+```
+--set kubecostProductConfigs.currencyCode=EUR
+```
+
 ### Monitoring your cost billing
 
 After enabling port-forwarding, you should have access to the Kubecost UI. Explore the different pages in the left navigation, starting with the Monitor dashboards. These pages, including Allocations, Assets, Clusters, and Cloud Costs, are comprised of different categories of cost spending, and allow you to apply customized queries for specific billing data. These queries can then be saved in the form of reports for future quick access. Each page of the Kubecost UI has more dedicated information in the [Navigating the Kubecost UI](/using-kubecost/navigating-the-kubecost-ui/README.md) group.
