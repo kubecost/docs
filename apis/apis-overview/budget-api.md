@@ -171,9 +171,13 @@ When providing values for `actions`, `percentage` refers to the percentage of `s
 
 ## Configuring currency
 
-The `spendLimit` parameter will always be determined using your configured currency type. You can manually change your currency type in Kubecost by selecting _Settings_, then scrolling to Currency and selecting your desired currency from the dropdown (remember to confirm your choice by selecting _Save_ at the bottom of the page).
+Kubecost supports configuration of the following currency types: USD, AUD, BRL, CAD, CHF, CNY, DKK, EUR, GBP, IDR, INR, JPY, NOK, PLN, and SEK. Kubecost does *not* perform any currency conversion when switching currency types; it is for display purposes, therefore you should ideally match your currency type to the type in your original cloud bill(s).
 
-Kubecost does **not** convert spending costs to other currency types; it will only change the symbol displayed in the UI next to costs. For best results, configure your currency to what matches your spend.
+Currency type can only be changed via a [`helm` upgrade to your *values.yaml*](/install-and-configure/install/helm-install-params.md), using the flag `.Values.kubecostProductConfigs.currencyCode`. For example, if you needed to convert your currency type to EUR, you would add the following to your `helm` command:
+
+```
+--set kubecostProductConfigs.currencyCode=EUR
+```
 
 ## Examples
 
