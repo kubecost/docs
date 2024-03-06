@@ -19,8 +19,8 @@ Health checks include, but are not limited to:
 # This is an abridged example. Full example in link below.
 diagnostics:
   enabled: true
-  isDiagnosticsPrimary:
-    enabled: true  # Only enable this on your primary cluster
+  primary:
+    enabled: true  # Only enable this on your primary Kubecost cluster
 
 # Ensure you have configured a unique CLUSTER_ID.
 prometheus:
@@ -29,7 +29,7 @@ prometheus:
       external_labels:
         cluster_id: YOUR_CLUSTER_ID
 
-# Ensure you have configured a storage config secret. Using `.Values.thanos.storeSecretName` would also work here.
+# Ensure you have configured a storage config secret.
 kubecostModel:
   federatedStorageConfigSecret: federated-store
 ```
@@ -38,15 +38,15 @@ Additional configuration options can found in the [*values.yaml*](https://github
 
 ## Architecture
 
-The multi-cluster diagnostics feature is run as an independent deployment (i.e. `deployment/kubecost-diagnostics`). Each diagnostics deployment monitors the health of Kubecost and sends that health data to the central object store at the `/diagnostics` filepath.
+The Multi-Cluster Diagnostics feature is a process run within the `kubecost-cost-analyzer` deployment. It has the option to be run as an independent deployment for higher availability via `.Values.diagnostics.deployment.enabled`.
 
-The below diagram depicts these interactions. This diagram is specific to the requests required for diagnostics only. For additional diagrams, see our  [multi-cluster guide](multi-cluster.md).
+When run in each Kubecost deployment, it monitors the health of Kubecost and sends that health data to the central object store at the `/diagnostics` filepath. The below diagram depicts these interactions. This diagram is specific to the requests required for diagnostics only. For additional diagrams, see our [multi-cluster guide](multi-cluster.md).
 
 ![Kubecost-Agent-Diagnostics](/images/daigrams/Agent-Diagnostics-Architecture.png)
 
 ## API usage
 
-The diagnostics API can be accessed through `/model/multi-cluster-diagnostics?window=2d` (or `/model/mcd` for short)
+The diagnostics API can be accessed via `/model/diagnostics/multicluster?window=1d`.
 
 The `window` query parameter is required, which will return all diagnostics within the specified time window.
 
@@ -74,9 +74,11 @@ Duration of time over which to query. Accepts words like `today`, `week`, `month
             "kubecostPodsNotOOMKilledDiagnosticPassed": true,
             "kubecostPodsNotPendingDiagnosticPassed": false
         },
-        "clusters": {
-            "cluster_one": {
-                "latestRun": "2023-12-12T22:42:32Z",
+        "clusters": [
+            {
+                "clusterId": "cluster_one",
+                "latestRun": "2024-03-01T22:42:32Z",
+                "kubecostVersion": "v2.1",
                 "kubecostEmittingMetric": {
                     "diagnosticPassed": true,
                     "numFailures": 0,
@@ -126,8 +128,10 @@ Duration of time over which to query. Accepts words like `today`, `week`, `month
                     "diagnosticOutput": ""
                 }
             },
-            "cluster_two": {
-                "latestRun": "2023-12-12T22:40:17Z",
+            {
+                "clusterId": "cluster_two",
+                "latestRun": "2024-03-01T22:40:17Z",
+                "kubecostVersion": "v2.1",
                 "kubecostEmittingMetric": {
                     "diagnosticPassed": true,
                     "numFailures": 0,
@@ -173,12 +177,14 @@ Duration of time over which to query. Accepts words like `today`, `week`, `month
                 "kubecostPodsNotPending": {
                     "diagnosticPassed": false,
                     "numFailures": 52,
-                    "firstFailureDate": "2023-12-12T18:25:09Z",
+                    "firstFailureDate": "2024-03-01T18:25:09Z",
                     "diagnosticOutput": "RunDiagnostic: checkKubecostPodsNotPending: queryPrometheusCheckResultEmpty: the following query returned a non-empty result sum(kube_pod_status_phase{namespace='kubecost-etl-fed', phase='Pending'}) by (pod,namespace) > 0"
                 }
             },
-            "cluster_three": {
-                "latestRun": "2023-12-12T22:40:15Z",
+            {
+                "clusterId": "cluster_three",
+                "latestRun": "2024-03-01T22:42:32Z",
+                "kubecostVersion": "v2.1",
                 "kubecostEmittingMetric": {
                     "diagnosticPassed": true,
                     "numFailures": 0,
@@ -224,11 +230,11 @@ Duration of time over which to query. Accepts words like `today`, `week`, `month
                 "kubecostPodsNotPending": {
                     "diagnosticPassed": false,
                     "numFailures": 52,
-                    "firstFailureDate": "2023-12-12T18:24:42Z",
+                    "firstFailureDate": "2024-03-01T18:24:42Z",
                     "diagnosticOutput": "RunDiagnostic: checkKubecostPodsNotPending: queryPrometheusCheckResultEmpty: the following query returned a non-empty result sum(kube_pod_status_phase{namespace='kubecost-etl-fed', phase='Pending'}) by (pod,namespace) > 0"
                 }
             }
-        }
+        ]
     }
 }
 ```
