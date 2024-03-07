@@ -69,9 +69,9 @@ For example, to set the log level to `debug`, add the following flag to the Helm
 ```
 {% endcode %}
 
-You can set LOG\_LEVEL to generate two different outputs.
+You can set `LOG_LEVEL to generate two different outputs.
 
-Setting it to JSON will generate a structured logging output: `{"level":"info","time":"2006-01-02T15:04:05.999999999Z07:00","message":"Starting cost-model (git commit \"1.91.0-rc.0\")"}`
+Setting it to `JSON` will generate a structured logging output: `{"level":"info","time":"2006-01-02T15:04:05.999999999Z07:00","message":"Starting cost-model (git commit \"1.91.0-rc.0\")"}`
 
 Setting `LOG_LEVEL` to `pretty` will generate a nice human-readable output: `2006-01-02T15:04:05.999999999Z07:00 INF Starting cost-model (git commit "1.91.0-rc.0")`
 
