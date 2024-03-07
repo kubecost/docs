@@ -70,16 +70,6 @@ Next, ensure the following are set in your Helm values:
 kubecostProductConfigs:
   cloudIntegrationSecret: <SECRET_NAME>
 ```
-If using Azure Workload Identities (supported as of v2.1), add the following to the Kubecost deployment in your Helm values:
-
-```yaml
-kubecostDeployment:
-  labels:
-    azure.workload.identity/use: "true"
-serviceAccount:
-  annotations:
-    azure.workload.identity/client-id: <azure_client_id>
-```
 
 Next, upgrade Kubecost via Helm:
 
