@@ -1,6 +1,6 @@
 # Azure Cloud Integration using Azure Workload Identity
 
-As of v.2.1.1, Kubecost supports Cloud Integration via Azure Workload Identity. Refer to the [Microsoft documentation](https://learn.microsoft.com/en-us/azure/aks/workload-identity-deploy-cluster) to learn more about how to set up Azure Workload Identity in AKS. For this tutorial, you will need to have the cluster name, resource group, federated identity credential name provided by Azure.
+As of v.2.1.1, Kubecost supports Cloud Integration via Azure Workload Identity. Refer to the [Microsoft documentation](https://learn.microsoft.com/en-us/azure/aks/workload-identity-deploy-cluster) to learn more about how to set up Azure Workload Identity in AKS. For this tutorial, you will need to have the cluster name, resource group, federated identity credential name and the Managed Identity Object ID.
 
 
 ### 1. Validate that OIDC is enabled on the Azure Cluster
@@ -10,26 +10,19 @@ $ export AKS_OIDC_ISSUER="$(az aks show -n $CLUSTER_NAME -g "${RESOURCE_GROUP}" 
 https://westus.oic.<redacted>.azure.com/<redacted>
 ```
 
-### 2. Create the federated credential between the managed identity and kubecos-cost-analyzer service account:
+### 2. Assign the Storage Blob Data Contibutor Role to the Managed Identity and scope it to the storage blob container resource that has the cost export.
+
+#### Example:
+
+```bash
+az role assignment create --assignee "55555555-5555-5555-5555-555555555555" --role "Storage Blob Data Contributor" --scope "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/Example-Storage-rg/providers/Microsoft.Storage/storageAccounts/storage12345"
+```
+
+### 3. Create the federated credential between the managed identity and kubecost-cost-analyzer service account:
 
 ```bash
 az identity federated-credential create --name ${FEDERATED_IDENTITY_CREDENTIAL_NAME} --identity-name ${USER_ASSIGNED_IDENTITY_NAME} --resource-group ${RESOURCE_GROUP} --issuer ${AKS_OIDC_ISSUER} --subject system:serviceaccount:${KUBECOST_NAMESPACE}:kubecost-cost-analyzer
 ```
-
-### 3. Add to cost-analyzer deployment in values.yaml
-
-```yaml
-kubecostDeployment:
-  labels:
-    azure.workload.identity/use: "true"
-serviceAccount:
-  annotations:
-    azure.workload.identity/client-id: $AZURE_CLIENT_ID
-```
-
-From here, run a helm upgrade to apply the values. You should now have access to all expected Kubecost functionality through your service account with Identity Workload.
-
-
 
 ### 4. Create a JSON file which **must** be named _cloud-integration.json_ with the following format:
 
@@ -51,22 +44,28 @@ From here, run a helm upgrade to apply the values. You should now have access to
    }
 }
 ```
+
 ### 5. Create the Secret:
 
 {% code overflow="wrap" %}
 ```bash
 $ kubectl create secret generic <SECRET_NAME> --from-file=cloud-integration.json -n kubecost
 ```
-{% endcode %}
 
-Next, ensure the following are set in your Helm values:
+
+### 6. Update the helm values.yaml with the following and apply changes:
+
 
 ```yaml
 kubecostProductConfigs:
   cloudIntegrationSecret: <SECRET_NAME>
+kubecostDeployment:
+  labels:
+    azure.workload.identity/use: "true"
+serviceAccount:
+  annotations:
+    azure.workload.identity/client-id: $AZURE_CLIENT_ID
 ```
-
-### 6. Apply the changes above by upgrading Kubecost via helm:
 
 ```bash
 helm upgrade --install kubecost --repo https://kubecost.github.io/cost-analyzer cost-analyzer --namespace kubecost -f values.yaml
