@@ -12,7 +12,7 @@ The Kubecost support team offers several channels for creating support tickets. 
 
    <img width="761" alt="slack_reply" src="https://github.com/kubecost/docs/assets/17748044/3de780bc-6dc4-4a13-ae9a-1c2a2b2c3f29">
 
-3. Now that the Thena bot has been invited to your conversation a new Support ticket can be created by clicking the “New Tech Support Ticket” button.
+3. Now that the Thena bot has been invited to your conversation a new Support ticket can be created by selecting *New Tech Support Ticket* button.
 
    <img width="415" alt="slack_ticket_thread" src="https://github.com/kubecost/docs/assets/17748044/222c955b-17e8-46e5-9130-dd591a651ca7">
 
