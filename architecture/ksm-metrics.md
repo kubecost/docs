@@ -4,38 +4,56 @@ The default Kubecost installation no longer includes a bundled [KSM deployment](
 
 ## KSM metrics emitted by Kubecost
 
-The following table shows all KSM metrics required by and implemented in Kubecost. The below metrics and labels follow conventions of KSMv1, not KSMv2.
+The following table shows all KSM metrics required by and implemented in Kubecost. The below metrics and labels follow conventions of KSMv1, not KSMv2.                          |
 
-| Category       | KSM Metric                                                   |
-| -------------- | ------------------------------------------------------------ |
-| **Node**       | `kube_node_status_condition`                                 |
-|                | `kube_node_status_capacity`                                  |
-|                | `kube_node_status_capacity_memory_bytes`                     |
-|                | `kube_node_status_capacity_cpu_cores`                        |
-|                | `kube_node_status_allocatable`                               |
-|                | `kube_node_status_allocatable_cpu_cores`                     |
-|                | `kube_node_status_allocatable_memory_bytes`                  |
-|                | `kube_node_labels`                                           |
-| **Namespace**  | `kube_namespace_labels`                                      |
-|                | `kube_namespace_annotations`                                 |
-| **Deployment** | `kube_deployment_spec_replicas`                              |
-|                | `kube_deployment_status_replicas_available`                  |
-| **Pod**        | `kube_pod_owner`                                             |
-|                | `kube_pod_labels`                                            |
-|                | `kube_pod_container_status_running`                          |
-|                | `kube_pod_container_resource_requests`                       |
-|                | `kube_pod_annotations`                                       |
-|                | `kube_pod_status_phase`                                      |
-|                | `kube_pod_container_status_terminated_reason`                |
-|                | `kube_pod_container_status_restarts_total`                   |
-|                | `kube_pod_container_resource_limits`                         |
-|                | `kube_pod_container_resource_limits_cpu_cores`               |
-|                | `kube_pod_container_resource_limits_memory_bytes`            |
-| **PV**         | `kube_persistentvolume_capacity_bytes`                       |
-|                | `kube_persistentvolume_status_phase`                         |
-| **PVC**        | `kube_persistentvolumeclaim_info`                            |
-|                | `kube_persistentvolumeclaim_resource_requests_storage_bytes` |
-| **Job**        | `kube_job_status_failed`                                     |
+### Node metrics
+
+* `kube_node_status_condition`
+* `kube_node_status_capacity`
+* `kube_node_status_capacity_memory_bytes`
+* `kube_node_status_capacity_cpu_cores`
+* `kube_node_status_allocatable`
+* `kube_node_status_allocatable_cpu_cores`
+* `kube_node_status_allocatable_memory_bytes`
+* `kube_node_labels`
+
+### Namespace metrics
+
+* `kube_namespace_labels`
+* `kube_namespace_annotations`
+
+### Deployment metrics
+
+* `kube_deployment_spec_replicas`
+* `kube_deployment_status_replicas_available`
+
+### Pod metrics
+
+* `kube_pod_owner`
+* `kube_pod_labels`
+* `kube_pod_container_status_running`
+* `kube_pod_container_resource_requests`
+* `kube_pod_annotations`
+* `kube_pod_status_phase`
+* `kube_pod_container_status_terminated_reason`
+* `kube_pod_container_status_restarts_total`
+* `kube_pod_container_resource_limits`
+* `kube_pod_container_resource_limits_cpu_cores`
+* `kube_pod_container_resource_limits_memory_bytes`
+
+### PV metrics
+
+* `kube_persistentvolume_capacity_bytes`
+* `kube_persistentvolume_status_phase`      
+
+### PVC metrics
+
+* `kube_persistentvolumeclaim_info`
+* `kube_persistentvolumeclaim_resource_requests_storage_bytes`
+
+### Job metrics
+
+* `kube_job_status_failed`
 
 ## Enabling Kubecost-based KSM deployment
 
