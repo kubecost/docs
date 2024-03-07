@@ -28,6 +28,8 @@ prometheus:
     global:
       external_labels:
         cluster_id: YOUR_CLUSTER_ID
+kubecostProductConfigs:
+  clusterName: YOUR_CLUSTER_ID
 
 # Ensure you have configured a storage config secret.
 kubecostModel:
@@ -46,7 +48,7 @@ When run in each Kubecost deployment, it monitors the health of Kubecost and sen
 
 ## API usage
 
-The diagnostics API can be accessed via `/model/diagnostics/multicluster?window=1d`.
+The diagnostics API can be accessed on the `primary` via `/model/diagnostics/multicluster?window=1d`.
 
 The `window` query parameter is required, which will return all diagnostics within the specified time window.
 
