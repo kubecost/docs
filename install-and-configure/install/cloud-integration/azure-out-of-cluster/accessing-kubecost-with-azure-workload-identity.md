@@ -19,6 +19,7 @@ https://westus.oic.<redacted>.azure.com/<redacted>
 az role assignment create --assignee "55555555-5555-5555-5555-555555555555" --role "Storage Blob Data Contributor" --scope "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/Example-Storage-rg/providers/Microsoft.Storage/storageAccounts/storage12345"
 ```
 
+
 3. Create the federated credential between the Managed Identity and kubecost-cost-analyzer service account:
 
 ```bash
@@ -53,7 +54,6 @@ $ kubectl create secret generic <SECRET_NAME> --from-file=cloud-integration.json
 ```
 
 6. Update the Helm *values.yaml* with the following and apply changes:
-
 
 ```yaml
 kubecostProductConfigs:
