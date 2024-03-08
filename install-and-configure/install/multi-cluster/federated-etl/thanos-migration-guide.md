@@ -118,7 +118,7 @@ Ensure all data loads into the Kubecost UI before moving onto Step 7.
 
 ### Step 7: Upgrade your secondary clusters to build and push ETL data
 
-For this step, the secondary clusters DO NOT need to be on v2.0.  However, you must be running a version of Kubecost that supports Federated ETL.  >v1.99.0.
+For this step, the secondary clusters **DO NOT** need to be on v2.0. However, you must be running a version of Kubecost that supports Federated ETL (greater than v1.99.0).
 
 If you are not on a Federated ETL supported version, please upgrade to a supported version on your secondaries before completing this step.  We recommend v1.106.x, 1.107.x or 1.108.1
 
