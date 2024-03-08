@@ -33,7 +33,7 @@ Please upgrade your primary cluster to v1.108.1 before completing any of the fol
 ```
 helm upgrade --install kubecost \
   --repo https://kubecost.github.io/cost-analyzer/ cost-analyzer \
-  --namespace kubecost --create-namespace \
+  --namespace kubecost \
   --version 1.108.1
 ```
 
