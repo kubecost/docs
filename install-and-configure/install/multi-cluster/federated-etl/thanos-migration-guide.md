@@ -157,7 +157,9 @@ helm upgrade kubecost cost-analyzer --repo https://kubecost.github.io/cost-analy
 
 ### Step 10: Upgrade Secondary Clusters to Kubecost 2.0 (Optional)(Recommended)
 
-*While not absolutely necessary to upgrade secondary clusters to 2.0 immediately, we do recommend doing so as soon as possible
+{% hint style="info" %}
+While not absolutely necessary to upgrade secondary clusters to 2.0 immediately, we recommend doing so as soon as possible.
+{% endhint %}
 
 You can upgrade the Secondary Kubecost clusters to Kubecost 2.0 using your standard upgrade process. Prior to upgrading set value below in your values.yaml if using helm.
 
