@@ -28,7 +28,7 @@ Important notes for the migration process:
 
 All of these steps should be performed on Kubecost v1.108.1 on the Primary Kubecost cluster. Only at the end, will you upgrade all Kubecost clusters to Kubecost 2.0. The goal of this doc is to gradually migrate off Thanos (it is no longer supported in the Kubecost v2.0 Helm chart), towards Federated ETL, then finally Aggregator.
 
-Please upgrade to v1.108.1 on the Primary before completing any of the following steps. v1.108.1 ships with various utilities necessary to complete the upgrade to v2.0
+Please upgrade to v1.108.1 on the Primary before completing any of the following steps. v1.108.1 ships with various utilities necessary to complete the upgrade to v2.0.
 
 ### Step 1: Use the existing Thanos object store or create a new dedicated object store
 
