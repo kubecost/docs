@@ -46,14 +46,14 @@ redirects:
     hc/en-us/articles/4407595938327: controller.md
     hc/en-us/articles/4407595941015: custom-prom.md
     hc/en-us/articles/4407595942679: diagnostics.md
-    hc/en-us/articles/4407595946135: multi-cluster.md
+    hc/en-us/articles/4407595946135: install-and-configure/install/multi-cluster/multi-cluster.md
     hc/en-us/articles/4407595947799: getting-started.md
     hc/en-us/articles/4407595950359: index.md
     hc/en-us/articles/4407595952151: long-term-storage-aws.md
     hc/en-us/articles/4407595954327: long-term-storage-azure.md
     hc/en-us/articles/4407595964695: long-term-storage.md
     hc/en-us/articles/4407595968919: multi-cloud.md
-    hc/en-us/articles/4407595970711: multi-cluster.md
+    hc/en-us/articles/4407595970711: install-and-configure/install/multi-cluster/multi-cluster.md
     hc/en-us/articles/4407595972119: namespace-contacts.md
     hc/en-us/articles/4407595973527: network-allocation.md
     hc/en-us/articles/4407595974679: open-source-deps.md
@@ -148,14 +148,14 @@ redirects:
     hc/en-us/articles/4407595938327-Cluster-Controller: controller.md
     hc/en-us/articles/4407595941015-Custom-Prometheus: custom-prom.md
     hc/en-us/articles/4407595942679-Kubecost-Diagnostics: diagnostics.md
-    hc/en-us/articles/4407595946135-Federated-Clusters: multi-cluster.md
+    hc/en-us/articles/4407595946135-Federated-Clusters: install-and-configure/install/multi-cluster/multi-cluster.md
     hc/en-us/articles/4407595947799-Getting-Started: getting-started.md
     hc/en-us/articles/4407595950359-Welcome: index.md
     hc/en-us/articles/4407595952151-AWS-Multi-Cluster-Storage-Configuration: long-term-storage-aws.md
     hc/en-us/articles/4407595954327-Azure-Long-Term-Storage: long-term-storage-azure.md
     hc/en-us/articles/4407595964695-Long-Term-Storage: long-term-storage.md
     hc/en-us/articles/4407595968919-Setting-Up-Cloud-Integrations: multi-cloud.md
-    hc/en-us/articles/4407595970711-Multi-cluster: multi-cluster.md
+    hc/en-us/articles/4407595970711-Multi-cluster: install-and-configure/install/multi-cluster/multi-cluster.md
     hc/en-us/articles/4407595972119-Namespace-Contacts: namespace-contacts.md
     hc/en-us/articles/4407595973527-Network-Traffic-Cost-Allocation: network-allocation.md
     hc/en-us/articles/4407595974679-Open-Source: open-source-deps.md
