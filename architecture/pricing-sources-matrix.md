@@ -28,9 +28,9 @@ Kubecost supports the following pricing sources:
 
 ### Custom Pricing
 
-Set via the UI or in your *values-kubecost.yaml*:
+Set via your *values-kubecost.yaml*, or in the Kubecost UI by going to *Settings*, then under 'Pricing', toggling on 'Enable Custom Pricing', then making adjustments per group:
 
-![UI Custom Pricing Screenshot](../images/custom-pricing.png)
+![UI Custom Pricing Screenshot](/images/custompricing.png)
 
 Prices are monthly. `storage` and miscellaneous network metrics are all per GB.
 
