@@ -15,6 +15,11 @@ Kubecost supports the following pricing sources:
 | [Cloud Provider-Billing Integrated](/install-and-configure/install/cloud-integration/README.md) | Kubecost pulls cloud provider billing every 6 hours<br>When billing becomes available Kubecost reconciles the previously-estimated costs | Extremely accurate<br>Little maintenance<br>All cloud billing can be imported<br>Out-of-cluster costs can be combined with Kubernetes resources | Kubecost requires access to the billing account<br>This setup can take time, especially if the team deploying Kubecost does not have access to the billing account. |
 | [CSV Pricing](../install-and-configure/advanced-configuration/csv-pricing.md) | Kubecost uses a user-provided CSV with granular resource prices. | Does not require cloud provider access<br>Works for on-prem clusters<br>Completely air-gapped for highly-secure environements | Mapping labels in the CSV can be tedious |
 
+
+## Diagram
+
+![Cloud Provider Billing Integrated](../images/cloud-bill-diagram.png)
+
 ## Examples
 
 - Cloud Provider OnDemand API: [AWS EC2](https://pricing.us-east-1.amazonaws.com/offers/v1.0/aws/AmazonEC2/current/us-east-2/index.json)
@@ -44,7 +49,6 @@ Kubecost supports the following pricing sources:
     ```
 
 - Cloud Provider Billing Integrated:
-    ![Cloud Provider Billing Integrated](../images/cloud-bill-diagram.png)
     Configuration guides:
   - [Cloud Provider Billing for Reconciliation and Out-of-Cluster Spend](/install-and-configure/install/cloud-integration/README.md)
     - [AWS Cost and Usage Report](/install-and-configure/install/cloud-integration/aws-cloud-integrations/aws-cloud-integrations.md)
