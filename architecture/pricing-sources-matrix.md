@@ -30,10 +30,11 @@ Kubecost supports the following pricing sources:
 
 ### Cloud Provider OnDemand API
 
+Kubecost will attempt to identify the provider of the cluster and pull pricing data from the public API. Alibaba and Azure have their own specific pricing sources.
+
 - [Alibaba](../install-and-configure/install/provider-installations/alibaba-install.md)
-- [AWS EC2](https://pricing.us-east-1.amazonaws.com/offers/v1.0/aws/AmazonEC2/current/us-east-2/index.json)
 - [Azure Rate Card](../install-and-configure/install/cloud-integration/azure-out-of-cluster/azure-config.md)
-- [GCP Cloud Billing - On-Demand VMs](https://cloud.google.com/billing/docs/reference/rest/v1/services.skus/list)
+
 ### Custom Pricing
 
 Set the following Helm values via your *values-kubecost.yaml*, or in the Kubecost UI by going to *Settings*, then under 'Pricing', toggling on 'Enable Custom Pricing', then making adjustments per group:
@@ -66,12 +67,8 @@ kubecostProductConfigs:
   - [Azure Cost Export](/install-and-configure/install/cloud-integration/azure-out-of-cluster/azure-out-of-cluster.md)
   - [Google BigQuery Export](/install-and-configure/install/cloud-integration/gcp-out-of-cluster/README.md)
 
-### CSV Pricing
+### OnDemand pricing references
 
-[CSV Pricing](../install-and-configure/advanced-configuration/csv-pricing.md):
-
-![CSV Pricing Table](/images/pricing.png)
-
-### Spot data feed
-
-[AWS Spot Data Feed](../install-and-configure/install/cloud-integration/aws-cloud-integrations/aws-spot-instances.md)
+- [AWS EC2 pricing](https://pricing.us-east-1.amazonaws.com/offers/v1.0/aws/AmazonEC2/current/us-east-2/index.json)
+- [Azure Retail Prices](https://learn.microsoft.com/en-us/rest/api/cost-management/retail-prices/azure-retail-prices)
+- [GCP Cloud Billing - On-Demand VMs](https://cloud.google.com/billing/docs/reference/rest/v1/services.skus/list)
