@@ -11,9 +11,9 @@ Kubecost supports the following pricing sources:
 | Source | Detail | Pros | Cons |
 |--|--|--|--|
 | Cloud Provider OnDemand API | On by default<br>Kubecost looks up public pricing APIs. | No configuration<br>No maintenance | For users with significant discounts, Kubecost costs will be significantly higher than actual billing. |
-| Custom Pricing | Manually set monhtly costs for: CPU, RAM, Storage, GPU, spot CPU, spot RAM | Simple configuration<br>Does not require cloud provider access<br>Works for on-prem clusters<br>Completely air-gapped for highly-secure environements  | Accuracy dependent on value provided. Single rate per resource- no flexibility per node/storage types. |
-| Cloud Provider Integrated (cloud-integration) | Kubecost pulls cloud provider billing every 6 hours<br>When billing becomes available Kubecost reconciles the previously-estimated costs | Extremely accurate<br>Little maintenance | Kubecost requires access to the billing account<br>This setup can take time, especially if the team deploying Kubecost does not have access to the billing account. |
-| CSV Pricing | Kubecost uses a user-provided CSV with granular resource prices. | Does not require cloud provider access<br>Works for on-prem clusters<br>Completely air-gapped for highly-secure environements | Mapping labels in the CSV can be tedious |
+| Custom Pricing | Manually set monhtly costs for: CPU, RAM, storage, GPU, network, spot CPU, spot RAM | Simple configuration<br>Does not require cloud provider access<br>Works for on-prem clusters<br>Completely air-gapped for highly-secure environements  | Accuracy dependent on value provided. Single rate per resource- no flexibility per node/storage types. |
+| Cloud Provider Integrated (cloud-integration) | Kubecost pulls cloud provider billing every 6 hours<br>When billing becomes available Kubecost reconciles the previously-estimated costs | Extremely accurate<br>Little maintenance<br>Out-of-cluster costs included<br>Out-of-cluster costs can be combined with Kubernetes resources | Kubecost requires access to the billing account<br>This setup can take time, especially if the team deploying Kubecost does not have access to the billing account. |
+| [CSV Pricing](../install-and-configure/advanced-configuration/csv-pricing.md) | Kubecost uses a user-provided CSV with granular resource prices. | Does not require cloud provider access<br>Works for on-prem clusters<br>Completely air-gapped for highly-secure environements | Mapping labels in the CSV can be tedious |
 
 ## Examples
 
@@ -21,10 +21,35 @@ Kubecost supports the following pricing sources:
 
 - Custom Pricing:
 
+    Set via the UI or in your values-kubecost.yaml:
+
     ![UI Custom Pricing Screenshot](../images/custom-pricing.png)
 
-- Cloud Provider Integrated:
+    Prices are monthly. Storage is per GB. Network is per GB.
 
+    ```yaml
+    kubecostProductConfigs:
+    defaultModelPricing:
+        enabled: true
+        CPU: 28.0
+        spotCPU: 4.86
+        RAM: 3.09
+        spotRAM: 0.65
+        GPU: 693.50
+        spotGPU: 225.0
+        storage: 0.04
+        zoneNetworkEgress: 0.01
+        regionNetworkEgress: 0.01
+        internetNetworkEgress: 0.12
+    ```
+
+- Cloud Provider Billing Integrated:
+    ![Cloud Provider Billing Integrated](../images/cloud-bill-diagram.png)
+    Configuration guides:
+  - [Cloud Provider Billing for Reconciliation and Out-of-Cluster Spend](/install-and-configure/install/cloud-integration/README.md)
+    - [AWS Cost and Usage Report](/install-and-configure/install/cloud-integration/aws-cloud-integrations/aws-cloud-integrations.md)
+    - [Azure Cost Export](/install-and-configure/install/cloud-integration/azure-out-of-cluster/azure-out-of-cluster.md)
+    - [Google BigQuery Export](/install-and-configure/install/cloud-integration/gcp-out-of-cluster/README.md)
 - CSV Pricing:
 
     ![CSV Pricing Table](/images/pricing.png)
