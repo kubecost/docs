@@ -4,7 +4,7 @@
 
 There are multiple ways that Kubecost can be configured to pull in pricing data. This document outlines the different options and how to configure them.
 
-## Detail
+## Pricing Sources Matrix
 
 Kubecost supports the following pricing sources:
 
@@ -12,15 +12,15 @@ Kubecost supports the following pricing sources:
 |--|--|--|--|
 | Cloud Provider OnDemand API | On by default<br>Kubecost looks up public pricing APIs. | No configuration<br>No maintenance | For users with significant discounts, Kubecost costs will be significantly higher than actual billing. |
 | Custom Pricing | Manually set monhtly costs for: CPU, RAM, storage, GPU, network, spot CPU, spot RAM | Simple configuration<br>Does not require cloud provider access<br>Works for on-prem clusters<br>Completely air-gapped for highly-secure environements  | Accuracy dependent on value provided. Single rate per resource- no flexibility per node/storage types. |
-| [Cloud Provider-Billing Integrated](/install-and-configure/install/cloud-integration/README.md) | Kubecost pulls cloud provider billing every 6 hours<br>When billing becomes available Kubecost reconciles the previously-estimated costs | Extremely accurate<br>Little maintenance<br>All cloud billing can be imported<br>Out-of-cluster costs can be combined with Kubernetes resources | Kubecost requires access to the billing account<br>This setup can take time, especially if the team deploying Kubecost does not have access to the billing account. |
+| [Cloud Provider-Billing Integrated](/install-and-configure/install/cloud-integration/README.md) | Kubecost pulls cloud provider billing every 6 hours<br>When billing becomes available Kubecost reconciles the previously-estimated costs | Extremely accurate<br>Little maintenance<br>All cloud billing can be imported<br>Out-of-cluster costs can be [combined with Kubernetes resources](navigating-the-kubecost-ui/collections.md) | Kubecost requires access to the billing account<br>This setup can take time, especially if the team deploying Kubecost does not have access to the billing account. |
 | [CSV Pricing](../install-and-configure/advanced-configuration/csv-pricing.md) | Kubecost uses a user-provided CSV with granular resource prices. | Does not require cloud provider access<br>Works for on-prem clusters<br>Completely air-gapped for highly-secure environements | Mapping labels in the CSV can be tedious |
-
+| [AWS Spot Data Feed](../install-and-configure/install/cloud-integration/aws-cloud-integrations/aws-spot-instances.md) | Kubecost pulls spot prices from a custom feed | Especially useful if majority of costs are due to Spot nodes<>More accurate costs in the short-term (48 hours) | Limited value if billing-integration is configured<br>Requires additional setup with AWS |
 
 ## Diagram
 
 ![Cloud Provider Billing Integrated](../images/cloud-bill-diagram.png)
 
-## Examples
+## Detail
 
 - Cloud Provider OnDemand API: [AWS EC2](https://pricing.us-east-1.amazonaws.com/offers/v1.0/aws/AmazonEC2/current/us-east-2/index.json)
 
@@ -48,12 +48,11 @@ Kubecost supports the following pricing sources:
         internetNetworkEgress: 0.12
     ```
 
-- Cloud Provider Billing Integrated:
-    Configuration guides:
-  - [Cloud Provider Billing for Reconciliation and Out-of-Cluster Spend](/install-and-configure/install/cloud-integration/README.md)
-    - [AWS Cost and Usage Report](/install-and-configure/install/cloud-integration/aws-cloud-integrations/aws-cloud-integrations.md)
-    - [Azure Cost Export](/install-and-configure/install/cloud-integration/azure-out-of-cluster/azure-out-of-cluster.md)
-    - [Google BigQuery Export](/install-and-configure/install/cloud-integration/gcp-out-of-cluster/README.md)
-- CSV Pricing:
+- [Cloud Provider Billing for Reconciliation and Out-of-Cluster Spend](/install-and-configure/install/cloud-integration/README.md)
+  - [AWS Cost and Usage Report](/install-and-configure/install/cloud-integration/aws-cloud-integrations/aws-cloud-integrations.md)
+  - [Azure Cost Export](/install-and-configure/install/cloud-integration/azure-out-of-cluster/azure-out-of-cluster.md)
+  - [Google BigQuery Export](/install-and-configure/install/cloud-integration/gcp-out-of-cluster/README.md)
+- [CSV Pricing](../install-and-configure/advanced-configuration/csv-pricing.md):
 
     ![CSV Pricing Table](/images/pricing.png)
+- [AWS Spot Data Feed](../install-and-configure/install/cloud-integration/aws-cloud-integrations/aws-spot-instances.md)
