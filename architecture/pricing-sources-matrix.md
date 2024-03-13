@@ -62,12 +62,16 @@ kubecostProductConfigs:
 
 ### Cloud Provider-Billing Integrated
 
+See the following Kubecost documentation for assistance with configuring your cloud provider services:
+
 - [Cloud Provider Billing for Reconciliation and Out-of-Cluster Spend](/install-and-configure/install/cloud-integration/README.md)
   - [AWS Cost and Usage Report](/install-and-configure/install/cloud-integration/aws-cloud-integrations/aws-cloud-integrations.md)
   - [Azure Cost Export](/install-and-configure/install/cloud-integration/azure-out-of-cluster/azure-out-of-cluster.md)
   - [Google BigQuery Export](/install-and-configure/install/cloud-integration/gcp-out-of-cluster/README.md)
 
 ### OnDemand pricing references
+
+The below files/resources are the onDemand prices used by Kubecost:
 
 - [AWS EC2 pricing](https://pricing.us-east-1.amazonaws.com/offers/v1.0/aws/AmazonEC2/current/us-east-2/index.json)
 - [Azure Retail Prices](https://learn.microsoft.com/en-us/rest/api/cost-management/retail-prices/azure-retail-prices)
