@@ -149,6 +149,7 @@
 * [ContainerStats Pipeline](architecture/containerstats-pipeline.md)
 * [GPU Allocation](architecture/gpu-allocation.md)
 * [Kubecost Cluster Roles](architecture/kubecost-cluster-roles.md)
+* [Pricing Sources Matrix](architecture/pricing-sources-matrix.md)
 * [Calculating Node Pricing](architecture/node-pricing.md)
 * [Ports](architecture/ports.md)
 * [Security and Data Protection](architecture/security.md)
