@@ -107,5 +107,3 @@ After starting or restarting Cloud Usage or reconciliation, two subprocesses are
 * RefreshRate: The interval that the periodic subprocess runs
 * Resolution: The window size of the process
 * StartTime: When the Cloud Process was started
-
-For more information on APIs related to rebuilding and repairing Cloud Usage or reconciliation, see the [Cloud Cost Diagnostic APIs](/apis/apis-overview/cloudcost-diagnostic-apis.md) doc.

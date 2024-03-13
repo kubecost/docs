@@ -15,7 +15,7 @@ Kubecost alerts allow teams to receive updates on real-time Kubernetes spend. Th
 ## Configuring alerts in Helm
 
 {% hint style="info" %}
-_values.yaml_ is a source of truth. Alerts set through _values.yaml_ will continually overwrite any manual alert settings set through the Kubecost UI.
+_values.yaml_ is the definitive source of truth. Alerts set through _values.yaml_ will overwrite any alerts manually configured through the Kubecost UI. Alerts can be configured both ways, but make sure there are no conflicts.
 {% endhint %}
 
 ### Global alert parameters
