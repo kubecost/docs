@@ -29,6 +29,7 @@
       * [AWS Spot Instances](install-and-configure/install/cloud-integration/aws-cloud-integrations/aws-spot-instances.md)
       * [AWS Node Price Reconciliation Methodology](install-and-configure/install/cloud-integration/aws-cloud-integrations/aws-node-price-reconcilitation-methodology.md)
     * [Azure Cloud Billing Integration](install-and-configure/install/cloud-integration/azure-out-of-cluster/azure-out-of-cluster.md)
+      * [Accessing Kubecost with Azure Workload Identity](install-and-configure/install/cloud-integration/azure-out-of-cluster/azure-integration-with-azure-workload-identity.md)
       * [Azure Rate Card Configuration](install-and-configure/install/cloud-integration/azure-out-of-cluster/azure-config.md)
     * [GCP Cloud Billing Integration](install-and-configure/install/cloud-integration/gcp-out-of-cluster/README.md)
       * [Creating a Google Service Account](install-and-configure/install/cloud-integration/gcp-out-of-cluster/google-service-account-thanos.md)
