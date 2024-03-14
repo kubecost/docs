@@ -40,11 +40,11 @@ Lower bound, in bytes, of the RAM recommendation. Defaults to 20MiB (20 \* 1024 
 {% swagger-parameter in="query" name="window" required="true" type="string" %}
 Required parameter. Duration of time over which to calculate usage. Supports days before the current time in the following format:
 
-`3d`. **Note**: Hourly windows are not currently supported. **Note**: It's recommended to provide a window greater than `2d`. See the [Allocation API documentation](api-allocation.md) for more a more detailed explanation of valid inputs to `window`.
+`3d`. **Note**: Hourly windows are not currently supported. **Note**: It's recommended to provide a window greater than `2d`. See the [Allocation API documentation](/apis/monitoring-apis/api-allocation.md) for more a more detailed explanation of valid inputs to `window`.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="query" name="filter" type="string" required="false" %}
-A filter to reduce the set of workloads for which recommendations will be calculated. See our [Filter Parameters](filters-api.md) doc for syntax. v1 filters are also supported.
+A filter to reduce the set of workloads for which recommendations will be calculated. See our [Filter Parameters](/apis/filters-api.md) doc for syntax. v1 filters are also supported.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="query" name="sortBy" type="string" required="false" %}

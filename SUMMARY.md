@@ -121,7 +121,7 @@
 
 ## APIs
 
-* [Kubecost API Directory](apis/apis-overview/apis-overview.md)
+* [Kubecost API Directory](apis/apis-overview.md)
 * [Monitoring APIs](apis/monitoring-apis/README.md)
   * [Allocation API](apis/monitoring-apis/api-allocation.md)
   * [Allocation Trends API](apis/monitoring-apis/allocation-trends-api.md)
@@ -130,9 +130,9 @@
   * [Cloud Cost API](apis/monitoring-apis/cloud-cost-api.md)
   * [Cloud Cost Trends API](apis/monitoring-apis/cloud-cost-trends-api.md)
 * [Governance APIs](apis/governance-apis/README.md)
-  * [Budget API](apis/apis-overview/budget-api.md)
-  * [Cost Events Audit API](apis/apis-overview/cost-events-audit-api.md)
-  * [Spec Cost Prediction API](apis/apis-overview/spec-cost-prediction-api.md)
+  * [Budget API](apis/governance-apis/budget-api.md)
+  * [Cost Events Audit API](apis/governance-apis/cost-events-audit-api.md)
+  * [Spec Cost Prediction API](apis/governance-apis/spec-cost-prediction-api.md)
 * [Diagnostic APIs](apis/diagnostics-apis/README.md)
   * [Events API](apis/diagnostics-apis/api-events.md)
   * [Aggregator Diagnostic APIs](apis/diagnostics-apis/api-aggregator-diagnostics.md)
