@@ -24,7 +24,7 @@ The Asset Diff API compares two asset sets between two windows of the same durat
 
 The Cloud Costs API retrieves cloud cost data from cloud providers by reading cost and usage reports.
 
-### [Cloud Cost Trends API](monitoring-apis/cloud-cost-api/cloud-cost-trends-api.md)
+### [Cloud Cost Trends API](monitoring-apis/cloud-cost-trends-api.md)
 
 The Cloud Cost Trends API compares cost usage between two windows of the same duration and presents a percentage value showing the change in cloud costs.
 
@@ -63,7 +63,7 @@ Many, but not all, Kubecost APIs power different features in the Kubecost UI. Th
 | Allocation API                                    | [Allocations dashboard](/using-kubecost/navigating-the-kubecost-ui/cost-allocation/README.md)                                                |
 | Allocation/Cloud Cost Explorer Trends API         | Allocations/Cloud Cost Explorer dashboards, Total cost column percentage                                                                                              |
 | Assets API                                        | [Assets dashboard](/using-kubecost/navigating-the-kubecost-ui/assets.md)                                                              |
-| Cloud Cost API                                    | [Cloud Costs Explorer dashboard](/using-kubecost/navigating-the-kubecost-ui/cloud-costs-explorer.md)                                  |
+| Cloud Cost API                                    | [Cloud Costs Explorer dashboard](/using-kubecost/navigating-the-kubecost-ui/cloud-costs-explorer/cloud-costs-explorer.md)                                  |
 | Budget API                                        | [Budgets dashboard](/using-kubecost/navigating-the-kubecost-ui/budgets.md)                                                            |
 | Cost Events Audit API                             | [Audits dashboard](/using-kubecost/navigating-the-kubecost-ui/audits.md)                                                              |
 | Predict API                                       | [Audits dashboard, Estimated monthly cost impact](/using-kubecost/navigating-the-kubecost-ui/audits.md#estimated-monthly-cost-impact) |
