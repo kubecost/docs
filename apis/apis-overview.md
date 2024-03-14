@@ -48,9 +48,7 @@ The Prediction API takes Kubernetes objects as input and produces an estimation 
 
 The Events API provides a log of different occurrences in your workload in order to help with troubleshooting. Logs generated with this API are helpful for submitting bug reports.
 
-## Optimization APIs
-
-### Savings API
+## Savings API
 
 Savings endpoints provide cost optimization insights. The following savings endpoints are available at `http://<kubecost-address>/model/ENDPOINT`:
 

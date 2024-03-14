@@ -1,4 +1,4 @@
-# Container Request Right Sizing Recommendation API (v2)
+# Container Request Right Sizing Recommendation API
 
 {% swagger method="get" path="savings/requestSizingV2" baseUrl="http://<kubecost-address>/model/" summary="Container Request Right Sizing Recommendation API (V2)" %}
 {% swagger-description %}
