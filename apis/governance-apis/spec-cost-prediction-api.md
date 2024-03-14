@@ -14,7 +14,7 @@ The namespace in which namespace-scoped objects will be "deployed" to if no name
 {% endswagger-parameter %}
 
 {% swagger-parameter in="query" name="window" type="string" %}
-The Kubecost data window used for determining resource costs fed into the cost prediction. Accepts all standard Kubecost window formats (See our doc on using [the `window` parameter](/apis/apis-overview/assets-api.md#using-window-parameter)). Default is `2d`.
+The Kubecost data window used for determining resource costs fed into the cost prediction. Accepts all standard Kubecost window formats (See our doc on using [the `window` parameter](/apis/monitoring-apis/assets-api.md#using-window-parameter)). Default is `2d`.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="query" name="noUsage" type="boolean" %}
