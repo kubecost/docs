@@ -105,6 +105,9 @@ etlUtils:
 kubecostAggregator:
   enabled: true
   replicas: 1
+  extraEnv:
+    - name: DB_BUCKET_REFRESH_INTERVAL
+      value: 2h
 ```
 
 ### Step 6: Apply the changes and wait for data to populate in the UI of the primary cluster
