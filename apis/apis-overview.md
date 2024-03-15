@@ -4,7 +4,7 @@ Welcome to the Kubecost API library! This directory will show you how Kubecost A
 
 ## Monitoring APIs
 
-### [**Allocation API**](monitoring-apis/api-allocation.md)
+### [Allocation API](monitoring-apis/api-allocation.md)
 
 The Allocation API retrieves cost allocation information for any Kubernetes concept, e.g. cost by namespace, label, deployment, service, and more. This API is directly integrated with the Kubecost ETL caching layer and CSV pipeline so it can scale for large clusters.
 
@@ -12,7 +12,7 @@ The Allocation API retrieves cost allocation information for any Kubernetes conc
 
 The Allocation Trends API compares cost usage between two windows of the same duration and presents a percentage value showing the change in cost.
 
-### [**Assets API**](monitoring-apis/assets-api.md)
+### [Assets API](monitoring-apis/assets-api.md)
 
 The Assets API retrieves the backing cost data broken down by individual Kubernetes assets (e.g. node, disk, etc.), and provides various aggregations of this data. Optionally provides the ability to integrate with external cloud assets.
 
@@ -44,9 +44,13 @@ The Prediction API takes Kubernetes objects as input and produces an estimation 
 
 ## Diagnostic APIs
 
-### [**Events API**](diagnostic-apis/api-events.md)
+### [Events API](diagnostic-apis/api-events.md)
 
 The Events API provides a log of different occurrences in your workload in order to help with troubleshooting. Logs generated with this API are helpful for submitting bug reports.
+
+#### [Aggregator Diagnostic APIs](diagnostic-apis/api-aggregator-diagnostics.md)
+
+These diagnostic APIs for [Aggregator](/install-and-configure/install/multi-cluster/federated-etl/aggregator.md) are designed to assist in troubleshooting without inspecting the PV directly.
 
 ## Savings API
 
@@ -71,3 +75,25 @@ Many, but not all, Kubecost APIs power different features in the Kubecost UI. Th
 | Cluster Right Sizing Recommendation API           | [Cluster Sizing Recommendations page](/using-kubecost/navigating-the-kubecost-ui/savings/cluster-right-sizing-recommendations.md)                                                                    |
 | Container Request Right Sizing Recommendation API | [Request right sizing recommendations page](/using-kubecost/navigating-the-kubecost-ui/savings/container-request-right-sizing-recommendations.md)                                                                              |
 | Abandoned Workloads API                           | [Abandoned Workloads page](/using-kubecost/navigating-the-kubecost-ui/savings/abandoned-workloads.md)                                                                                               |
+
+### Using the `window` parameter:
+
+Several Kubecost APIs use the `window` parameter to establish the duration of time Kubecost should sample to provide cost metrics, right-sizing recommendations, or other savings information. The following APIs accept `window` as parameter:
+
+* Allocation API
+* Allocation Trends API
+* Assets API
+* Cloud Cost API
+* Cloud Cost Trends API
+* Spec Cost Prediction API
+* Events API
+* Aggregator Diagnostic APIs
+* Cluster Right-Sizing Recommendation API
+* Container Request Right-Sizing Recommendation API
+
+Acceptable formats for using `window` parameter include:
+
+* Common units of time: "15m", "24h", "7d", "48h", etc.
+* Relative units of time: "today", "yesterday", "week", "month", "lastweek", "lastmonth"
+* Start and end unix timestamps: "1586822400,1586908800"
+* Start and end UTC RFC3339 pairs: "2020-04-01T00:00:00Z,2020-04-03T00:00:00Z"

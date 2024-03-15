@@ -3,8 +3,7 @@
 {% swagger method="get" path="/allocation/trends" baseUrl="http://<your-kubecost-address>/model" summary="Allocation Trends API" %} {% swagger-description %} Analyzes change in allocated costs relative to a previous window of the same size.
 
 {% swagger-parameter in="path" name="window" required="true" type="string" %}
-Duration of time over which to query. Compares cost usage of window to cost usage window of equal size directly preceding it. Accepts all standard Kubecost window formats (See our doc on using [the `window` parameter](/apis/monitoring-apis/assets-api.md#using-window-parameter)).
-{% endswagger-parameter %}
+Duration of time over which to query. Compares cost usage of window to cost usage window of equal size directly preceding it. Accepts multiple different formats of time (see this [Using the `window` parameter](/apis/apis-overview.md#using-the-window-parameter) section for more info)).
 
 {% swagger-parameter in="path" name="names" required="true" type="string" %}
 Determines order sequence of queried items via comma-separated list. Dependent on the value of `aggregate` to list items. See more [below](allocation-trends-api.md#using-the-names-parameter).

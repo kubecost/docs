@@ -3,7 +3,7 @@
 {% swagger method="get" path="/cloudCost/view/trends" baseUrl="http://<your-kubecost-address>/model" summary="Cloud Cost Trends API" %} {% swagger-description %} Analyzes change in cloud costs relative to a previous window of the same size {% endswagger-description %}
 
 {% swagger-parameter in="path" name="window" required="true" type="string" %}
-Duration of time over which to query. Compares cost usage of window to cost usage window of equal size directly preceding it. Accepts all standard Kubecost window formats (See our doc on using [the `window` parameter](/apis/monitoring-apis/assets-api.md#using-window-parameter)).
+Duration of time over which to query. Compares cost usage of window to cost usage window of equal size directly preceding it. Accepts multiple different formats of time (see this [Using the `window` parameter](/apis/apis-overview.md#using-the-window-parameter) section for more info)).
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="names" required="true" type="string" %}

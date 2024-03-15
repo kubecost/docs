@@ -5,8 +5,8 @@
 The Assets API retrieves backing cost data broken down by individual assets in your cluster but also provides various aggregations of this data.
 {% endswagger-description %}
 
-{% swagger-parameter in="path" name="window" required="true" type="string" %}
-Dictates the applicable window for measuring historical asset cost.
+{% swagger-parameter in="path" name="window" type="string" required="true" %}
+Duration of time over which to query. Accepts multiple different formats of time (see this [Using the `window` parameter](/apis/apis-overview.md#using-the-window-parameter) section for more info).
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="aggregate" type="string" required="false" %}
@@ -64,15 +64,6 @@ Filter your results by any category which you can aggregate by, can support mult
 {% endcode %}
 {% endswagger-response %}
 {% endswagger %}
-
-### Using `window` parameter:
-
-Acceptable formats for using `window` parameter include:
-
-* "15m", "24h", "7d", "48h", etc.
-* "today", "yesterday", "week", "month", "lastweek", "lastmonth"
-* "1586822400,1586908800", etc. (start and end unix timestamps)
-* "2020-04-01T00:00:00Z,2020-04-03T00:00:00Z", etc. (start and end UTC RFC3339 pairs)
 
 ## API examples
 
