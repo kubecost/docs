@@ -2,15 +2,15 @@
 
 The Cloud Cost API provides multiple endpoints to obtain accurate cost information from your cloud service providers (CSPs), including data available from cloud billing reports (such as AWS' Cost and Usage Report (CUR)).
 
-There are three distinct endpoints for using the Cloud Cost API. The default endpoint for querying Cloud Costs should be `/model/cloudCost/view`.
+There are three distinct endpoints for using the Cloud Cost API. The default endpoint for querying Cloud Costs should be `/model/cloudCost`.
 
-{% swagger method="get" path="/model/cloudCost/view" baseUrl="http://<your-kubecost-address>" summary="Cloud Cost View API" %}
+{% swagger method="get" path="/model/cloudCost" baseUrl="http://<your-kubecost-address>" summary="Cloud Cost querying API" %}
 {% swagger-description %}
 Samples full granularity of cloud costs from cloud billing report (ex. AWS' Cost and Usage Report)
 {% endswagger-description %}
 
 {% swagger-parameter in="path" name="window" required="true" %}
-Window of the query. **Only accepts daily intervals**, example `window=3d`.
+Duration of time over which to query. Accepts multiple different formats of time (see this [Using the `window` parameter](/apis/apis-overview.md#using-the-window-parameter) section for more info).
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="costMetric" required="false" %}
@@ -73,9 +73,9 @@ Filter for a specific label. Does not support filtering for multiple labels at o
 {% endswagger-response %}
 {% endswagger %}
 
-The endpoint `/model/cloudCost/top` will use all parameters of `/model/cloudCost/view` listed above, **except for** `CostMetric`. This is because `/top` samples full granularity from your cloud billing reports and will return information for all four accepted metric types (see below for more information on these types).
+The endpoint `/model/cloudCost/top` will use all parameters of `/model/cloudCost` listed above, **except for** `CostMetric`. This is because `/top` samples full granularity from your cloud billing reports and will return information for all four accepted metric types (see below for more information on these types).
 
-The endpoint `/view` contains all parameters for `/model/CloudCost/aggregate`, and if your `/view` query parameters are in a subset of `/aggregate`, your payload will be pulled from `/aggregate` instead (this payload will return a larger amount of information than `/view`). Otherwise, your `/view` query will pull from `/top`.
+The endpoint `/view` contains all parameters for `/model/cloudCost/aggregate`, and if your `/view` query parameters are in a subset of `/aggregate`, your payload will be pulled from `/aggregate` instead (this payload will return a larger amount of information than `/view`). Otherwise, your `/view` query will pull from `/top`.
 
 {% swagger method="get" path="/model/cloudCost/aggregate" baseUrl="http://<your-kubecost-address>" summary="Cloud Cost Aggregate API" %}
 {% swagger-description %}
@@ -83,7 +83,7 @@ Query cloud cost aggregate data
 {% endswagger-description %}
 
 {% swagger-parameter in="path" name="window" required="true" type="string" %}
-Window of the query. Accepts all standard Kubecost window formats (See our doc on using [the `window` parameter](/apis/monitoring-apis/assets-api.md#using-window-parameter)).
+Duration of time over which to query. Accepts multiple different formats of time (see this [Using the `window` parameter](/apis/apis-overview.md#using-the-window-parameter) section for more info).
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="aggregate" type="string" required="false" %}
@@ -168,7 +168,7 @@ Filter for a specific label. Does not support filtering for multiple labels at o
 ## Using the `CostMetric` parameter
 
 {% hint style="warning" %}
-Using the endpoint `/model/cloudCost/top` will accept all parameters of `model/cloudCost/view` **except for** `MetricCost`.
+Using the endpoint `/model/cloudCost/top` will accept all parameters of `model/cloudCost` **except for** `MetricCost`.
 {% endhint %}
 
 `CostMetric` values are based on and calculated following standard FinOps dimensions and metrics. The four available metrics supported by the Cloud Cost API are:
@@ -1537,7 +1537,7 @@ http://<your-kubecost-address>/model/cloudCost/aggregate?window=3d&aggregate=ser
 {% tabs %}
 {% tab title="Request" %}
 ```
-http:/<your-kubecost-address>/model/cloudCost/view?window=2d&filterServices=AmazonEC2&aggregate=invoiceEntityID
+http:/<your-kubecost-address>/model/cloudCost?window=2d&filterServices=AmazonEC2&aggregate=invoiceEntityID
 ```
 {% endtab %}
 

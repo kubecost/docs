@@ -5,6 +5,10 @@
 The container request right sizing recommendation API provides recommendations for [container resource requests](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/) based on configurable parameters and estimates the savings from implementing those recommendations on a per-container, per-controller level. If the cluster-level resources stay static, then there may not be significant savings from applying Kubecost's recommendations until you reduce your cluster resources. Instead, your idle allocation will increase.
 {% endswagger-description %}
 
+{% swagger-parameter in="query" name="window" required="true" type="string" %}
+Duration of time over which to query. Accepts multiple different formats of time (see this [Using the `window` parameter](/apis/apis-overview.md#using-the-window-parameter) section for more info). It's recommended to provide a window greater than `2d` for accurate sampling.
+{% endswagger-parameter %}
+
 {% swagger-parameter in="query" name="algorithmCPU" type="string" required="false" %}
 The algorithm to be used to calculate CPU recommendations based on historical CPU usage data. Options are `max` and `quantile`. Max recommendations are based on the maximum-observed usage in `window`. Quantile recommendations are based on a quantile of observed usage in `window` (requires the `qCPU` parameter to set the desired quantile). Defaults to `max`. To use the `quantile` algorithm, the [ContainerStats Pipeline](/architecture/containerstats-pipeline.md) must be enabled.
 {% endswagger-parameter %}
@@ -35,10 +39,6 @@ Lower bound, in millicores, of the CPU recommendation. Defaults to 10. Be carefu
 
 {% swagger-parameter in="query" name="minRecRAMBytes" type="float" required="false" %}
 Lower bound, in bytes, of the RAM recommendation. Defaults to 20MiB (20 \* 1024 \* 1024).
-{% endswagger-parameter %}
-
-{% swagger-parameter in="query" name="window" required="true" type="string" %}
-Duration of time over which to query. Accepts multiple different formats of time (see this [Using the `window` parameter](/apis/apis-overview.md#using-the-window-parameter) section for more info). Hourly windows are not currently supported. It's recommended to provide a window greater than `2d`.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="query" name="filter" type="string" required="false" %}
