@@ -11,9 +11,10 @@ v1 filters will continue to be supported in all relevant APIs. APIs will first c
 v2 filters can be used via the `filter=` parameter in supported APIs. Supported APIs are currently:
 
 * [Allocation API](/apis/monitoring-apis/api-allocation.md)
-* [Request Sizing API](/apis/savings-apis/api-request-right-sizing-v2.md)
 * [Assets API](/apis/monitoring-apis/assets-api.md)
-* [Allocation/Cloud Cost Trends API](/apis/monitoring-apis/cloud-cost-trends-api.md)
+* [Allocation Trends API](/apis/monitoring-apis/allocation-trends-api.md)
+* [Cloud Cost Trends API](/apis/monitoring-apis/cloud-cost-trends-api.md)
+* [Request Sizing API](/apis/savings-apis/api-request-right-sizing-v2.md)
 
 ## Filtering fields
 

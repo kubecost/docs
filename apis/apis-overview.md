@@ -78,7 +78,7 @@ Many, but not all, Kubecost APIs power different features in the Kubecost UI. Th
 | Container Request Right Sizing Recommendation API | [Request right sizing recommendations page](/using-kubecost/navigating-the-kubecost-ui/savings/container-request-right-sizing-recommendations.md)                                                                              |
 | Abandoned Workloads API                           | [Abandoned Workloads page](/using-kubecost/navigating-the-kubecost-ui/savings/abandoned-workloads.md)                                                                                               |
 
-## Using the `window` parameter:
+## Using the `window` parameter
 
 Several Kubecost APIs use the `window` parameter to establish the duration of time Kubecost should sample to provide cost metrics, right-sizing recommendations, or other savings information. The following APIs accept `window` as parameter:
 
