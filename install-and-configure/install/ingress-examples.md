@@ -1,9 +1,9 @@
 # Ingress Examples
 
-Enabling external access to the Kubecost product requires exposing access to port 9090 on the `kubecost-cost-analyzer` service. There are multiple ways to do this, including Ingress or port-forwarding.
+Enabling external access to the Kubecost UI requires exposing access to port 9090 on the `kubecost-cost-analyzer` service. There are multiple ways to do this, including Ingress or port-forwarding.
 
 {% hint style="warning" %}
-Please exercise caution when exposing Kubecost via an Ingress controller especially if there is no authentication in use. Consult your organization's internal security recommendations.
+Please exercise caution when exposing Kubecost via an Ingress controller especially if there is no authentication in use. Consult your organization's internal security practices.
 {% endhint %}
 
 Common samples below and others can be found on our [GitHub repository](https://github.com/kubecost/poc-common-configurations/tree/main/ingress-examples).
