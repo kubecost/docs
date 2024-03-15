@@ -2,7 +2,7 @@
 
 Carbon Costs is a cost metric added to both [Allocation](/using-kubecost/navigating-the-kubecost-ui/cost-allocation/README.md) and [Assets](/using-kubecost/navigating-the-kubecost-ui/assets.md) dashboards. Carbon Costs are measured in KG CO2e (metric tons carbon dioxide emission).
 
-![Carbon Costs column](images/carboncosts.png)
+![Carbon Costs column](/images/carboncosts.png)
 
 ## Enabling Carbon Costs
 
