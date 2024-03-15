@@ -99,3 +99,21 @@ Acceptable formats for using `window` parameter include:
 * Relative units of time: "today", "yesterday", "week", "month", "lastweek", "lastmonth"
 * Start and end unix timestamps: "1586822400,1586908800"
 * Start and end UTC RFC3339 pairs: "2020-04-01T00:00:00Z,2020-04-03T00:00:00Z"
+
+## Using the `/topline` endpoint
+
+Several Kubecost  APIs have an additional `/topline` endpoint which will function the same as any normal query, but will total all costs by category. These categories should mirror cost metric column totals found across various Kubecost UI dashboards. The following APIs accept `/topline` as an endpoint:
+
+* Allocation API
+* Assets API
+* Cloud Cost API
+* Request Right-Sizing Recommendation API
+* Abandoned Workloads API
+
+An example of using `/topline` to view total costs for Assets data would look like:
+
+GET `http://<your-kubecost-address>/model/assets/topline?window=...`
+
+When querying for Allocation data, you must add a `/summary` before `topline`, and the query for that will look like:
+
+GET `http://<your-kubecost-address>/model/allocation/summary/topline?window=...`
