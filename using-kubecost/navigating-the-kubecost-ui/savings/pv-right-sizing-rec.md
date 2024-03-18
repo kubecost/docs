@@ -18,4 +18,6 @@ You can also adjust Kubecost’s average recommended capacity size using the Pro
 
 For example, for a PV with a max usage of 2 GiB, and a selected Production Profile (which requires 50% excess capacity), the overhead will be calculated as 2 * .5, then added to the max usage, resulting in a minimum recommended capacity of 3 GiB. This will then be converted to approximately 3.2 GB for the final recommendation.
 
-Kubecost does not directly assist with resizing your PVs.
+## Auto-sizing
+
+Kubecost has the ability to apply right-sizing to your persistent volumes by selecting *Resize Volumes Now*. This will apply Kubecost's recommended capacity to each PV.
