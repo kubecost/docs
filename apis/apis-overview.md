@@ -102,7 +102,7 @@ Acceptable formats for using `window` parameter include:
 * Start and end unix timestamps: "1586822400,1586908800"
 * Start and end UTC RFC3339 pairs: "2020-04-01T00:00:00Z,2020-04-03T00:00:00Z"
 
-### Using the `/topline` endpoint
+### Using the `/topline` endpoint to summarize costs
 
 Several Kubecost  APIs have an additional `/topline` endpoint which will accept all parameters for corresponding APIs, but will total all costs by category. These categories should mirror cost metric column totals found across various Kubecost UI dashboards. The following APIs accept `/topline` as an endpoint:
 
@@ -110,6 +110,8 @@ Several Kubecost  APIs have an additional `/topline` endpoint which will accept 
 * Assets API
 * Request Right-Sizing Recommendation API
 * Abandoned Workloads API
+
+You must still provide a value for `window` when querying a `/topline` endpoint.
 
 An example of using `/topline` to view total costs for Assets data would look like:
 
@@ -121,7 +123,7 @@ When querying for Allocation data, you must add a `/summary` before `topline`, a
 
 ### Using `offset` and `limit` parameters to parse payload results
 
-The `offset` and `limit` parameters apply to multiple querying APIs to introduce pagination to your results. Similar to how Kubecost's UI pages display your queried items in limited amounts per page across multiple pages, these two parameters allow your to filter your displayed results. These following APIs accept `offset` and `limit` as parameters:
+The `offset` and `limit` parameters apply to multiple querying APIs to introduce pagination to your results in order to avoid lengthy payloads. Similar to how Kubecost's UI pages display your queried items in limited amounts per page across multiple pages, these two parameters allow your to filter your displayed results. These following APIs accept `offset` and `limit` as parameters:
 
 * Allocation API
 * Assets API
