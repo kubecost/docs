@@ -1,6 +1,6 @@
 # First Time User Guide
 
-After installing Kubecost, the following guide will detail steps to complete the setup and configuration of Kubecost.
+After installing Kubecost, the following guide will detail steps to complete the configuration of Kubecost.
 
 While certain steps in this article may be optional depending on your setup, the steps below are `recommended best practices` for most users.
 
@@ -40,7 +40,7 @@ By default, Kubecost stores its data in a native file format called `ETL` and it
 
 [Anomaly Detection](/using-kubecost/navigating-the-kubecost-ui/anomaly-detection.md) can detect when spending for any integrated cloud services begins deviating outside an expected range. Detected anomalies will be reported and can be investigated to determine causes of excessive spend.
 
-## Step 4: Multi-cluster and federated setups
+## Multi-cluster and federated setups
 
 Kubecost has multiple ways of supporting multi-cluster environments, which vary based on your Kubecost product tier.
 
