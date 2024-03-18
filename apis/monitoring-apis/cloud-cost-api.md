@@ -2,8 +2,6 @@
 
 The Cloud Cost API provides multiple endpoints to obtain accurate cost information from your cloud service providers (CSPs), including data available from cloud billing reports (such as AWS' Cost and Usage Report (CUR)).
 
-There are three distinct endpoints for using the Cloud Cost API. The default endpoint for querying Cloud Costs should be `/model/cloudCost`.
-
 {% swagger method="get" path="/model/cloudCost" baseUrl="http://<your-kubecost-address>" summary="Cloud Cost querying API" %}
 {% swagger-description %}
 Samples full granularity of cloud costs from cloud billing report (ex. AWS' Cost and Usage Report)
@@ -19,6 +17,18 @@ Determines which cloud cost metric type will be returned. Acceptable values are 
 
 {% swagger-parameter in="path" name="aggregate" required="false" %}
 Field by which to aggregate the results. Accepts: `invoiceEntityID`, `accountID`, `provider`, `service`, and `label:<name>`. Supports multi-aggregation using comma-separated lists. Example: `aggregate=accountID,service`
+{% endswagger-parameter %}
+
+{% swagger-parameter in="path" name="accumulate" type="boolean" required="false" %}
+When set to `false`, this endpoint returns daily time series data vs cumulative data. Default value is `false`.
+{% endswagger-parameter %}
+
+{% swagger-parameter in="path" name="offset" type="int" required="false" %}
+Refers to the number of line items you are offsetting. Pairs with `limit`. See the section on [Using `offset` and `limit` parameters to parse payload results](/apis/apis-overview.md#using-offset-and-limit-parameters-to-parse-payload-results) for more info.
+{% endswagger-parameter %}
+
+{% swagger-parameter in="path" name="limit" type="int" required="false" %}
+Refers to the number of line items per page. Pair with the `offset` parameter to filter your payload to specific pages of line items. You should also set `accumulate=true` to obtain a single list of line items, otherwise you will receive a group of line items per interval of time being sampled.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="filterInvoiceEntityIDs" required="false" %}

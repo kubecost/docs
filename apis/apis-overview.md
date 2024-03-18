@@ -78,7 +78,9 @@ Many, but not all, Kubecost APIs power different features in the Kubecost UI. Th
 | Container Request Right Sizing Recommendation API | [Request right sizing recommendations page](/using-kubecost/navigating-the-kubecost-ui/savings/container-request-right-sizing-recommendations.md)                                                                              |
 | Abandoned Workloads API                           | [Abandoned Workloads page](/using-kubecost/navigating-the-kubecost-ui/savings/abandoned-workloads.md)                                                                                               |
 
-## Using the `window` parameter
+## API usage
+
+### Using the `window` parameter to query data rnage
 
 Several Kubecost APIs use the `window` parameter to establish the duration of time Kubecost should sample to provide cost metrics, right-sizing recommendations, or other savings information. The following APIs accept `window` as parameter:
 
@@ -100,20 +102,33 @@ Acceptable formats for using `window` parameter include:
 * Start and end unix timestamps: "1586822400,1586908800"
 * Start and end UTC RFC3339 pairs: "2020-04-01T00:00:00Z,2020-04-03T00:00:00Z"
 
-## Using the `/topline` endpoint
+### Using the `/topline` endpoint
 
-Several Kubecost  APIs have an additional `/topline` endpoint which will function the same as any normal query, but will total all costs by category. These categories should mirror cost metric column totals found across various Kubecost UI dashboards. The following APIs accept `/topline` as an endpoint:
+Several Kubecost  APIs have an additional `/topline` endpoint which will accept all parameters for corresponding APIs, but will total all costs by category. These categories should mirror cost metric column totals found across various Kubecost UI dashboards. The following APIs accept `/topline` as an endpoint:
 
 * Allocation API
 * Assets API
-* Cloud Cost API
 * Request Right-Sizing Recommendation API
 * Abandoned Workloads API
 
 An example of using `/topline` to view total costs for Assets data would look like:
 
-GET `http://<your-kubecost-address>/model/assets/topline?window=...`
+`GET` `http://<your-kubecost-address>/model/assets/topline?window=...`
 
 When querying for Allocation data, you must add a `/summary` before `topline`, and the query for that will look like:
 
-GET `http://<your-kubecost-address>/model/allocation/summary/topline?window=...`
+`GET` `http://<your-kubecost-address>/model/allocation/summary/topline?window=...`
+
+### Using `offset` and `limit` parameters to parse payload results
+
+The `offset` and `limit` parameters apply to multiple querying APIs to introduce pagination to your results. Similar to how Kubecost's UI pages display your queried items in limited amounts per page across multiple pages, these two parameters allow your to filter your displayed results. These following APIs accept `offset` and `limit` as parameters:
+
+* Allocation API
+* Assets API
+* Cloud Cost API
+
+ Both parameters must be formatted as integers. `offset` refers to how many line items you'd like to offset. `limit` controls how many results per page you would like to see. This means when `offset` is equal to `limit`, you will be offsetting an entire page of line items. You can multiply your `limit` value by the number of pages you'd like to offset to obtain an `offset` value. When using `limit`, you **must** also set the parameter `accumulate` to `true` when possible in order to receive a single list of line items. The order of items across all pages is determined by total cost, where the largest costs are presented first.
+
+ An example of using these parameters in an Allocation query to see results starting from the third page of line items:
+
+`GET` `http://<your-kubecost-address>/model/allocation?window=3d&offset=20&limit=10&accumulate=true`

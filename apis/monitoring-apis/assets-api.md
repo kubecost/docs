@@ -27,11 +27,11 @@ When set to `csv`, will download an accumulated version of the asset results in 
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="offset" type="int" required="false" %}
-Refers to the number of pages you are searching through which will increase by integers for the amount of pages you want to skip. Starting value is `0`, representing the first page of results.
+Refers to the number of line items you are offsetting. Pairs with `limit`. See the section on [Using `offset` and `limit` parameters to parse payload results](/apis/apis-overview.md#using-offset-and-limit-parameters-to-parse-payload-results) for more info.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="limit" type="int" required="false" %}
-Refers to the number of line items per page. Pair with the `offset` parameter to filter your payload to specific sections of line items. You should also set `accumulate=true` to obtain a single list of line items, otherwise you will receive a group of line items per interval of time being sampled. Paginates by all five item types, and will provide lists for all five types.
+Refers to the number of line items per page. Pair with the `offset` parameter to filter your payload to specific pages of line items. You should also set `accumulate=true` to obtain a single list of line items, otherwise you will receive a group of line items per interval of time being sampled.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="filter" type="string" required="false" %}
