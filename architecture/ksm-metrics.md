@@ -4,7 +4,7 @@ The Kubecost no longer includes a bundled [KSM deployment](https://github.com/ku
 
 ## KSM metrics emitted by Kubecost
 
-The following table shows all KSM metrics required by and implemented in Kubecost. The below metrics and labels follow conventions of KSMv1, not KSMv2.                          |
+The following table shows all KSM metrics required by and implemented in Kubecost. The below metrics and labels follow conventions of KSMv1, not KSMv2.
 
 ### Node metrics
 
