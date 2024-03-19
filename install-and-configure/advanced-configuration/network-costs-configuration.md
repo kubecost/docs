@@ -30,11 +30,22 @@ A Grafana dashboard is included with the Kubecost installation, but you can also
 
 ## Enabling network costs
 
-To enable this feature, set the following parameter in _values.yaml_ during or after [Helm installation](https://kubecost.com/install):
+To enable this feature, set the following parameters in your values file following the [Helm installation](https://kubecost.com/install) guide:
 
 ```yaml
 networkCosts:
   enabled: true
+  config:
+    services:
+      # google-cloud-services: when set to true, enables labeling traffic metrics with google cloud
+      # service endpoints
+      google-cloud-services: false
+      # amazon-web-services: when set to true, enables labeling traffic metrics with amazon web service
+      # endpoints.
+      amazon-web-services: false
+      # azure-cloud-services: when set to true, enables labeling traffic metrics with azure cloud service
+      # endpoints
+      azure-cloud-services: false
 ```
 
 ## Additional configuration
