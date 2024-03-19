@@ -88,7 +88,7 @@ redirects:
     hc/en-us/articles/4407601826839: spinnaker-custom-webhook.md
     hc/en-us/articles/4407601828247: staging.md
     hc/en-us/articles/4407601829655: thanos-upgrade.md
-    hc/en-us/articles/4407601830679: troubleshoot-install.md
+    hc/en-us/articles/4407601830679: trouble-install.md
     hc/en-us/articles/4407604999447: markdown.md
     hc/en-us/articles/4407763013271: readme.md
     hc/en-us/articles/4408095797911: ksm-metrics.md
@@ -190,7 +190,7 @@ redirects:
     hc/en-us/articles/4407601826839-Custom-Webhook-to-Create-a-Kubecost-stage-in-Spinnaker: spinnaker-custom-webhook.md
     hc/en-us/articles/4407601828247-Deploy-Kubecost-Staging-Builds: staging.md
     hc/en-us/articles/4407601829655-Thanos-Upgrade: thanos-upgrade.md
-    hc/en-us/articles/4407601830679-shoot-Install: shoot-install.md
+    hc/en-us/articles/4407601830679-Troubleshoot-Install: troubleshoot-install.md
     hc/en-us/articles/4407604999447-Contributing-and-Markdown-Style-Guide: markdown.md
     hc/en-us/articles/4407763013271-Kubecost-Documentation: readme.md
     hc/en-us/articles/4408095797911-Kube-State-Metrics-KSM-Emission: ksm-metrics.md
