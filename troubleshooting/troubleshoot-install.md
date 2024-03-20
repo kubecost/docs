@@ -169,7 +169,7 @@ Example result:
 ```bash
 Annotations:   volume.beta.kubernetes.io/storage-provisioner: ebs.csi.aws.com
                volume.kubernetes.io/storage-provisioner: ebs.csi.aws.com
-                         
+
 Normal  ExternalProvisioning  69s (x82 over 21m)  persistentvolume-controller  waiting for a volume to be created, either by external provisioner "ebs.csi.aws.com" or manually created by system administrator
 ```
 {% endcode %}
@@ -296,13 +296,28 @@ Error: INSTALLATION FAILED: unable to build kubernetes objects from release mani
 
 To disable PSP in your deployment:
 
+1. Backup your helm values with `helm get values kubecost > kubecost-values.yaml`
+2. Open `kubecost-values.yaml` and delete any references to `podSecurityPolicy` or `psp`
+3. Delete all helm secrets in the Kubecost namespace:
+
+    {% code overflow="wrap" %}
+    ```bash
+    # Get the list of secrets
+    kubectl get secrets -n kubecost
+    # Backup secrets to a file
+    kubectl get secrets -n kubecost -o yaml > kubecost-secrets.yaml
+    # Delete any secret with the helm values, which look like: sh.helm.release.v1.aggregator.vX
+    kubectl delete secrets -n kubecost SECRET_NAME
+    ```
+    {% endcode %}
+
+4. Upgrade Kubecost as you normally would, be absolutely certain to pass the -f flag with your values file:
+
+{% code overflow="wrap" %}
 ```bash
-$ helm upgrade -i kubecost kubecost/cost-analyzer --namespace kubecost \
-    --set podSecurityPolicy.enabled=false \
-    --set networkCosts.podSecurityPolicy.enabled=false \
-    --set prometheus.podSecurityPolicy.enabled=false \
-    --set grafana.rbac.pspEnabled=false
+helm upgrade kubecost kubecost/cost-analyzer --namespace kubecost -f kubecost-values.yaml
 ```
+{% endcode %}
 
 ### With Kubernetes v1.25, Helm commands fail when PodSecurityPolicy CRD is missing for `kubecost-grafana` and `kubecost-cost-analyzer-psp` in existing Kubecost installs
 
