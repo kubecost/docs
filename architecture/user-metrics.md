@@ -94,7 +94,17 @@ Although the default Kubecost installation does not include a [KSM deployment](h
 
 ## Node exporter
 
-Prometheus exporter for hardware and OS metrics exposed by *NIX kernels, written in Go with pluggable metric collectors. 
+Prometheus exporter for hardware and OS metrics exposed by *NIX kernels, written in Go with pluggable metric collectors.
+
+{% hint style="info" %}
+The node exporter is disabled by default. You can enable it with the flags:
+
+```
+--set prometheus.server.nodeExporter.enabled=true
+--set prometheus.serviceAccounts.nodeExporter.create=true
+```
+
+{% endhint %}
 
 GitHub: [https://github.com/prometheus/node_exporter](https://github.com/prometheus/node_exporter)
 
