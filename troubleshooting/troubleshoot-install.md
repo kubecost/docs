@@ -296,7 +296,7 @@ Error: INSTALLATION FAILED: unable to build kubernetes objects from release mani
 
 To disable PSP in your deployment:
 
-1. Backup your helm values with `helm get values kubecost > kubecost-values.yaml`
+1. Backup your helm values with `helm get values -n kubecost kubecost > kubecost-values.yaml`
 2. Open `kubecost-values.yaml` and delete any references to `podSecurityPolicy` or `psp`
 3. Delete all helm secrets in the Kubecost namespace:
 
