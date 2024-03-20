@@ -18,5 +18,4 @@ helm install kubecost cost-analyzer \
    --namespace kubecost --create-namespace \
    --set kubecostProductConfigs.carbonEstimates.enabled=true
 ```
-
-Carbon costs will then begin appearing with other cost metrics on your Allocation and Assets pages.
+Please allow Kubecost approximately ten minutes to derive pricing information. Carbon costs will then begin appearing with other cost metrics on your Allocation and Assets pages.
