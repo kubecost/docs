@@ -2,6 +2,8 @@
 
 The Kubecost no longer includes a bundled [KSM deployment](https://github.com/kubernetes/kube-state-metrics). Instead, Kubecost calculates and emits all KSM metrics that it requires.
 
+To add kube-state-metrics, in addition to the metrics provided by default, see the [Adding external KSM metrics to Kubecost](#adding-external-ksm-metrics-to-kubecost) section below.
+
 ## KSM metrics emitted by Kubecost
 
 The following table shows all KSM metrics required by and implemented in Kubecost. The below metrics and labels follow conventions of KSMv1, not KSMv2.
