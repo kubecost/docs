@@ -21,7 +21,6 @@ redirects:
     enterprise: install-and-configure/install/install.md
     gcp-out-of-cluster.html: install-and-configure/install/cloud-integration/gcp-out-of-cluster/README.md
     enterprise.html: architecture/opencost-product-comparison.md
-    enterprise: architecture/opencost-product-comparison.md
     alerts.html: alerts.md
     assets: using-kubecost/navigating-the-kubecost-ui/assets.md
     troubleshoot-install: troubleshooting/troubleshoot-install.md
