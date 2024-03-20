@@ -22,6 +22,7 @@ redirects:
     gcp-out-of-cluster.html: install-and-configure/install/cloud-integration/gcp-out-of-cluster/README.md
     enterprise.html: install.md
     alerts.html: alerts.md
+    troubleshoot-install: troubleshooting/troubleshoot-install
     hc/en-us/articles/10015110616599: federated-etl.md
     hc/en-us/articles/10018767892119: user-management-oidc.md
     hc/en-us/articles/10066023188119: api-persistent-volume-right-sizing.md
