@@ -4,7 +4,7 @@ structure:
     summary: SUMMARY.md
 
 redirects:
-    kubecost-cloud/using-the-kubecost-cloud-ui: v/kubecost-cloud/using-kubecost-cloud/using-kubecost-cloud
+    kubecost-cloud/using-the-kubecost-cloud-ui: v/kubecost-cloud/using-kubecost-cloud/using-kubecost-cloud.md
     using-kubecost/getting-started/cloud-costs-explorer: using-kubecost/navigating-the-kubecost-ui/cloud-costs-explorer.md
     using-kubecost/getting-started/alerts: using-kubecost/navigating-the-kubecost-ui/alerts.md
     using-kubecost/getting-started/audits: using-kubecost/navigating-the-kubecost-ui/audits.md
