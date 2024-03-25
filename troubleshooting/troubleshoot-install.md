@@ -69,9 +69,9 @@ For example, to set the log level to `debug`, add the following flag to the Helm
 ```
 {% endcode %}
 
-You can set LOG\_LEVEL to generate two different outputs.
+You can set `LOG_LEVEL` to generate two different outputs.
 
-Setting it to JSON will generate a structured logging output: `{"level":"info","time":"2006-01-02T15:04:05.999999999Z07:00","message":"Starting cost-model (git commit \"1.91.0-rc.0\")"}`
+Setting it to `JSON` will generate a structured logging output: `{"level":"info","time":"2006-01-02T15:04:05.999999999Z07:00","message":"Starting cost-model (git commit \"1.91.0-rc.0\")"}`
 
 Setting `LOG_LEVEL` to `pretty` will generate a nice human-readable output: `2006-01-02T15:04:05.999999999Z07:00 INF Starting cost-model (git commit "1.91.0-rc.0")`
 
@@ -169,7 +169,7 @@ Example result:
 ```bash
 Annotations:   volume.beta.kubernetes.io/storage-provisioner: ebs.csi.aws.com
                volume.kubernetes.io/storage-provisioner: ebs.csi.aws.com
-                         
+
 Normal  ExternalProvisioning  69s (x82 over 21m)  persistentvolume-controller  waiting for a volume to be created, either by external provisioner "ebs.csi.aws.com" or manually created by system administrator
 ```
 {% endcode %}
@@ -296,13 +296,28 @@ Error: INSTALLATION FAILED: unable to build kubernetes objects from release mani
 
 To disable PSP in your deployment:
 
+1. Back up your Helm values with `helm get values -n kubecost kubecost > kubecost-values.yaml`
+2. Open `kubecost-values.yaml` and delete any references to `podSecurityPolicy` or `psp`
+3. Delete all Helm secrets in the Kubecost namespace:
+
+    {% code overflow="wrap" %}
+    ```bash
+    # Get the list of secrets
+    kubectl get secrets -n kubecost
+    # Backup secrets to a file
+    kubectl get secrets -n kubecost -o yaml > kubecost-secrets.yaml
+    # Delete any secret with the helm values, which look like: sh.helm.release.v1.aggregator.vX
+    kubectl delete secrets -n kubecost SECRET_NAME
+    ```
+    {% endcode %}
+
+4. Upgrade Kubecost as you normally would, be absolutely certain to pass the -f flag with your values file:
+
+{% code overflow="wrap" %}
 ```bash
-$ helm upgrade -i kubecost kubecost/cost-analyzer --namespace kubecost \
-    --set podSecurityPolicy.enabled=false \
-    --set networkCosts.podSecurityPolicy.enabled=false \
-    --set prometheus.podSecurityPolicy.enabled=false \
-    --set grafana.rbac.pspEnabled=false
+helm upgrade kubecost kubecost/cost-analyzer --namespace kubecost -f kubecost-values.yaml
 ```
+{% endcode %}
 
 ### With Kubernetes v1.25, Helm commands fail when PodSecurityPolicy CRD is missing for `kubecost-grafana` and `kubecost-cost-analyzer-psp` in existing Kubecost installs
 

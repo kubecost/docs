@@ -110,6 +110,9 @@ Add the following values to your primary cluster Helm values:
 kubecostAggregator:
   replicas: 1
   deployMethod: statefulset
+  extraEnv:
+    - name: DB_BUCKET_REFRESH_INTERVAL
+      value: 2h
 ```
 See this [example .yaml](https://github.com/kubecost/poc-common-configurations/blob/main/etl-federation-aggregator/primary-aggregator.yaml#L1-L14) for what your primary cluster configuration should look like.
 
@@ -135,7 +138,7 @@ kubecostModel:
   warmSavingsCache: false
 ```
 
-Add the following values to your primary cluster Helm values:
+Add the following values to your secondary cluster Helm values:
 
 ```
 federatedETL:
