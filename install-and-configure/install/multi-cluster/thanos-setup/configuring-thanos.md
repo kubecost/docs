@@ -54,7 +54,7 @@ prometheus:
 
 The Thanos subchart includes `thanos-bucket`, `thanos-query`, `thanos-store`, `thanos-compact`, and service discovery for `thanos-sidecar`. These components are recommended when deploying Thanos on the primary cluster.
 
-These values can be adjusted under the `thanos` block in _values-thanos.yaml_. Available options are here: [thanos/values.yaml](https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/charts/thanos/values.yaml)
+These values can be adjusted under the `thanos` block in _values-thanos.yaml_. Available options are here: [thanos/values.yaml](https://raw.githubusercontent.com/kubecost/cost-analyzer-helm-chart/v1.108/cost-analyzer/values-thanos.yaml)
 
 {% code overflow="wrap" %}
 ```shell
