@@ -1,0 +1,214 @@
+# Kubecost with AWS Managed Prometheus Agentless Monitoring
+
+## See also
+
+* [AMP Overview](/install-and-configure/advanced-configuration/eks-optimized/aws-amp-integration.md)
+* [AWS Distro for Open Telemetry](/install-and-configure/advanced-configuration/eks-optimized/kubecost-aws-distro-open-telemetry.md)
+* [AMP with remote_write](/install-and-configure/advanced-configuration/eks-optimized/amp-with-remote-write.md)
+
+## Overview
+
+{% hint style="info" %}
+Note: Using AMP allows multi-cluster Kubecost with EKS-Optimized licenses
+{% endhint %}
+
+This guide will walk you through the steps to deploy Kubecost with AWS Agentless AMP to collect metrics from your Kubernetes cluster.
+
+{% hint style="info" %}
+Keep in mind that `agentless` refers to the Prometheus scraper, not the Kubecost agent. The Kubecost agent is still required to collect metrics from the cluster.
+{% endhint %}
+
+The guide below assumes a multi-cluster setup will be used, which is supported with the EKS-Optimized license that is enabled by following the below guide.
+
+## Prerequisites
+
+Follow AWS guides to enable the AWS Managed Collector <https://docs.aws.amazon.com/prometheus/latest/userguide/AMP-collector-how-to.html>>
+
+Update all configuration files in this folder that contain `YOUR_*` with your values.
+
+This guide assumes that the Kubecost helm release name and the Kubecost namespace are equal, which allows a global find and replace on `YOUR_NAMESPACE`.
+
+## Architecture Diagram
+
+![Agentless AMP Architecture](../../../images/diagrams/AMP-agentless-multi-cluster-Prometheus-kubecost-architecture.png)
+
+## Agentless AMP Configuration
+
+### AMP setup
+
+1. Update all configuration files with your cluster name (replace all `YOUR_CLUSTER_NAME_HERE`). The examples use the key of `cluster` for the cluster name. You can use any key you want, but you will need to update the configmap and deployment files to match. A simplified version of the ADOT DS installation is below.
+
+1. Build the configuration variables:
+
+    ```sh
+    CLUSTER_NAME=YOUR_CLUSTER_NAME_HERE
+    CLUSTER_REGION=us-east-2
+    WORKSPACE_ID=ws-YOUR_WORKSPACE_ID
+    WORKSPACE_ARN=$(aws amp describe-workspace --workspace-id $WORKSPACE_ID --output json | jq -r .workspace.arn)
+    CLUSTER_JSON=$(aws eks describe-cluster --name $CLUSTER_NAME --region $CLUSTER_REGION --output json)
+    CLUSTER_ARN=$(echo $CLUSTER_JSON | jq -r .cluster.arn)
+    SECURITY_GROUP_IDS=$(echo $CLUSTER_JSON | jq -r .cluster.resourcesVpcConfig.clusterSecurityGroupId)
+    SUBNET_IDS=$(echo $CLUSTER_JSON | jq -r '.cluster.resourcesVpcConfig.subnetIds | @csv')
+    ```
+
+1. Create the Kubecost scraper
+
+    ```sh
+    KUBECOST_SCRAPER_OUTPUT=$(aws amp create-scraper --output json \
+        --alias kubecost-scraper \
+        --source eksConfiguration="{clusterArn=$CLUSTER_ARN, securityGroupIds=[$SECURITY_GROUP_IDS],subnetIds=[$SUBNET_IDS]}" \
+        --scrape-configuration configurationBlob="$(base64 scraper-kubecost-with-networking.yaml|tr -d '\n')" \
+        --destination ampConfiguration="{workspaceArn=$WORKSPACE_ARN}")
+    echo $KUBECOST_SCRAPER_OUTPUT
+    KUBECOST_SCRAPER_ID=$(echo $KUBECOST_SCRAPER_OUTPUT|jq -r .scraperId)
+    echo $KUBECOST_SCRAPER_ID
+    ```
+
+1. Get the ARN of the scraper:
+
+    ```sh
+    ARN_PART=$(aws amp describe-scraper --output json --region $CLUSTER_REGION --scraper-id $KUBECOST_SCRAPER_ID | jq -r .scraper.roleArn | cut -d'_' -f2)
+    ROLE_ARN="arn:aws:iam::AWS_ACCOUNT_ID:role/AWSServiceRoleForAmazonPrometheusScraper_$ARN_PART"
+    echo $ROLE_ARN_KUBECOST_SCRAPER
+    ```
+
+1. Add the ARN of the scraper to the kube-system/aws-auth configmap:
+
+    ```sh
+    eksctl create iamidentitymapping \
+        --cluster $CLUSTER_NAME --region $CLUSTER_REGION \
+        --arn $ROLE_ARN_KUBECOST_SCRAPER \
+        --username aps-collector-user
+    ```
+
+1. Create a scraper for cadvisor and node exporter. Node exporter is optional. Cadvisor is required, but may already be available.
+
+    ```sh
+    aws amp create-scraper --output json \
+        --alias cadvisor-scraper \
+        --source eksConfiguration="{clusterArn=$CLUSTER_ARN, securityGroupIds=[$SECURITY_GROUP_IDS],subnetIds=[$SUBNET_IDS]}" \
+        --scrape-configuration configurationBlob="$(base64 scraper-cadvisor-node-exporter.yaml|tr -d '\n')" \
+        --destination ampConfiguration="{workspaceArn=$WORKSPACE_ARN}")
+    echo $CADVSIOR_SCRAPER_OUTPUT
+    CADVSIOR_SCRAPER_ID=$(echo $CADVSIOR_SCRAPER_OUTPUT|jq -r .scraperId)
+    echo $CADVSIOR_SCRAPER_ID
+    ```
+
+1. Get the ARN of the scraper:
+
+    ```sh
+    ARN_PART=$(aws amp describe-scraper --output json --region $CLUSTER_REGION --scraper-id $CADVSIOR_SCRAPER_ID | jq -r .scraper.roleArn | cut -d'_' -f2)
+    ROLE_ARN_CADVSIOR_SCRAPER="arn:aws:iam::AWS_ACCOUNT_ID:role/AWSServiceRoleForAmazonPrometheusScraper_$ARN_PART"
+    echo $ROLE_ARN_CADVSIOR_SCRAPER
+     ```
+
+1. Add the ARN of the scraper to the kube-system/aws-auth configmap:
+
+    ```sh
+    eksctl create iamidentitymapping \
+        --cluster $CLUSTER_NAME --region $CLUSTER_REGION \
+        --arn $ROLE_ARN_CADVSIOR_SCRAPER \
+        --username aps-collector-user
+    ```
+
+1. Apply the agentless RBAC permissions:
+
+    ```sh
+    kubectl apply -f rbac.yaml
+    ```
+
+### Kubecost Primary Installation
+
+1. Create the Kubecost namespace:
+
+    ```bash
+    kubectl create ns YOUR_NAMESPACE
+    ```
+
+1. Create the AWS IAM policy to allow Kubecost to query metrics from AMP:
+
+    ```bash
+    aws iam create-policy --policy-name kubecost-read-amp-metrics --policy-document file://iam-read-amp-metrics.json
+    ```
+
+1. (Optional) Create the AWS IAM policy to allow Kubecost to find savings in the AWS Account:
+
+    ```bash
+    aws iam create-policy --policy-name DescribeResources --policy-document file://iam-describeCloudResources.json
+    ```
+
+1. (Optional) Create the AWS IAM policy to allow Kubecost to write to find account-level tags:
+
+    ```bash
+    aws iam create-policy --policy-name OrganizationListAccountTags --policy-document file://iam-listAccounts-tags.json
+    ```
+
+1. Configure the Kubecost Service Account:
+
+    * If the following fails, be sure that IRSA is enabled on your EKS cluster. <https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html>
+
+    ```bash
+    eksctl create iamserviceaccount \
+    --name kubecost-sa \
+    --namespace YOUR_NAMESPACE \
+    --cluster $CLUSTER_NAME --region $CLUSTER_REGION \
+    --attach-policy-arn arn:aws:iam::AWS_ACCOUNT_ID:policy/kubecost-read-amp-metrics \
+    --attach-policy-arn arn:aws:iam::AWS_ACCOUNT_ID:policy/OrganizationListAccountTags \
+    --attach-policy-arn arn:aws:iam::AWS_ACCOUNT_ID:policy/DescribeResources \
+    --override-existing-serviceaccounts --approve --profile admin
+    ```
+
+1. Update the place holder values such as YOUR_CLUSTER_NAME_HERE in [values-kubecost-primary.yaml](values-kubecost-primary.yaml)
+
+1. Install Kubecost Primary:
+
+    ```bash
+    aws ecr-public get-login-password --region us-east-1 | helm registry login --username AWS --password-stdin public.ecr.aws
+    helm install YOUR_NAMESPACE -n YOUR_NAMESPACE \
+        oci://public.ecr.aws/kubecost/cost-analyzer \
+        -f values-kubecost-primary.yaml \
+        -f https://raw.githubusercontent.com/kubecost/cost-analyzer-helm-chart/develop/cost-analyzer/values-eks-cost-monitoring.yaml
+    ```
+
+### Kubecost Agents Installation
+
+Follow the above `Agentless AMP Configuration` to configure the scraper(s) on each cluster.
+
+This assumes you have created the AWS IAM policies above. If using multiple AWS accounts, you will need to create the policies in each account.
+
+1. Update the place holder values such as YOUR_CLUSTER_NAME_HERE in [values-kubecost-agent.yaml](values-kubecost-agent.yaml)
+
+1. Create the Kubecost namespace:
+
+    ```bash
+    kubectl create ns YOUR_NAMESPACE
+    ```
+
+1. Configure the Kubecost Service Account:
+
+    ```bash
+    eksctl create iamserviceaccount \
+        --name kubecost-sa \
+        --namespace YOUR_NAMESPACE \
+        --cluster $CLUSTER_NAME --region $CLUSTER_REGION \
+        --attach-policy-arn arn:aws:iam::AWS_ACCOUNT_ID:policy/kubecost-read-amp-metrics \
+        --attach-policy-arn arn:aws:iam::AWS_ACCOUNT_ID:policy/OrganizationListAccountTags \
+        --attach-policy-arn arn:aws:iam::AWS_ACCOUNT_ID:policy/DescribeResources \
+        --override-existing-serviceaccounts --approve --profile admin
+    ```
+
+1. Deploy the Kubecost agent:
+
+    ```bash
+    aws ecr-public get-login-password --region us-east-1 | helm registry login --username AWS --password-stdin public.ecr.aws
+    helm install YOUR_NAMESPACE -n YOUR_NAMESPACE \
+        oci://public.ecr.aws/kubecost/cost-analyzer \
+        -f values-kubecost-agent.yaml \
+        -f https://raw.githubusercontent.com/kubecost/cost-analyzer-helm-chart/develop/cost-analyzer/values-eks-cost-monitoring.yaml
+    ```
+
+## Troubleshooting
+
+It will take a few minutes for the scrapers start.
+
+See more troubleshooting steps at the bottom of [AMP Overview](aws-amp-integration.md#troubleshooting).

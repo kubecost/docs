@@ -42,7 +42,7 @@ The multi-cluster diagnostics feature is run as an independent deployment (i.e. 
 
 The below diagram depicts these interactions. This diagram is specific to the requests required for diagnostics only. For additional diagrams, see our  [multi-cluster guide](multi-cluster.md).
 
-![Kubecost-Agent-Diagnostics](/images/daigrams/Agent-Diagnostics-Architecture.png)
+![Kubecost-Agent-Diagnostics](/images/diagrams/Agent-Diagnostics-Architecture.png)
 
 ## API usage
 
