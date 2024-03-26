@@ -423,7 +423,7 @@ You may not be allowed to update your Billing Data Export Configuration without 
 Download the following configuration files:
 
 * [_cloud-integration.json_](https://raw.githubusercontent.com/kubecost/poc-common-configurations/main/aws-attach-roles/cloud-integration.json)
-* [_kubecost-athena-policy.json_](https://github.com/kubecost/poc-common-configurations/)
+* [_iam-payer-account-cur-athena-glue-s3-access.json_](https://github.com/kubecost/poc-common-configurations/blob/main/aws-attach-roles/iam-payer-account-cur-athena-glue-s3-access.json)
 
 Update the following variables in the files you downloaded:
 
@@ -437,7 +437,7 @@ Update the following variables in the files you downloaded:
     "projectID": "<AWS_account_ID>"
 ```
 
-* In _kubecost-athena-policy.json_, replace `${AthenaCURBucket}` with your Athena S3 bucket name (configured in Step 2: Setting up Athena).
+* In _iam-payer-account-cur-athena-glue-s3-access.json_, replace `ATHENA_RESULTS_BUCKET_NAME` with your Athena S3 bucket name (configured in Step 2: Setting up Athena).
 
 **Step 2: Create policy**
 
@@ -445,7 +445,7 @@ In the same location where your downloaded configuration files are, run the foll
 
 {% code overflow="wrap" %}
 ```
-aws iam create-policy --policy-name kubecost-athena-policy --policy-document file://kubecost-athena-policy.json
+aws iam create-policy --policy-name iam-payer-account-cur-athena-glue-s3-access --policy-document file://iam-payer-account-cur-athena-glue-s3-access.json
 ```
 {% endcode %}
 
@@ -472,7 +472,7 @@ eksctl create iamserviceaccount \
     --name kubecost-serviceaccount-cur-athena-thanos \
     --namespace kubecost \
     --cluster ${YOUR_CLUSTER_NAME} --region ${AWS_REGION} \
-    --attach-policy-arn arn:aws:iam::1234567890:policy/kubecost-athena-policy \
+    --attach-policy-arn arn:aws:iam::1234567890:policy/iam-payer-account-cur-athena-glue-s3-access \
     --override-existing-serviceaccounts \
     --approve
 ```

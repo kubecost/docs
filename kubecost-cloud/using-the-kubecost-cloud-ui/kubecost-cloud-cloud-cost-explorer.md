@@ -1,7 +1,7 @@
 # Kubecost Cloud: Cloud Cost Explorer
 
 {% hint style="info" %}
-This documentation should only be consulted when using Kubecost Cloud! For information about the Cloud Cost Explorer dashboard for self-hosted Kubecost, see [here](/using-kubecost/navigating-the-kubecost-ui/cloud-costs-explorer.md).
+This documentation should only be consulted when using Kubecost Cloud! For information about the Cloud Cost Explorer dashboard for self-hosted Kubecost, see [here](/using-kubecost/navigating-the-kubecost-ui/cloud-costs-explorer/cloud-cost-metrics.md).
 {% endhint %}
 
 The Cloud Cost Explorer is a dashboard which provides visualization and filtering of your cloud spending. This dashboard includes the costs for all assets in your connected cloud accounts by pulling from those providers' Cost and Usage Reports (CURs) or other cloud billing reports.
@@ -40,7 +40,7 @@ You can filter displayed dashboard metrics by selecting _Edit_, then adding a fi
 
 **Cost Metric**
 
-The Cost Metric dropdown allows you to adjust the displayed cost data based on different calculations. Cost Metric values are based on and calculated following standard FinOps dimensions and metrics, but may be calculated differently depending on your CSP. Learn more about how these metrics are calculated by each CSP in the [Cloud Cost Metrics](/apis/apis-overview/cloud-cost-api/cloud-cost-metrics.md) doc. The five available metrics supported by the Cloud Costs Explorer are:
+The Cost Metric dropdown allows you to adjust the displayed cost data based on different calculations. Cost Metric values are based on and calculated following standard FinOps dimensions and metrics, but may be calculated differently depending on your CSP. Learn more about how these metrics are calculated by each CSP in the [Cloud Cost Metrics](/using-kubecost/navigating-the-kubecost-ui/cloud-costs-explorer/cloud-cost-metrics.md) doc. The five available metrics supported by the Cloud Costs Explorer are:
 
 <table><thead><tr><th width="201">Cost Metric</th><th>Description</th></tr></thead><tbody><tr><td>Amortized Net Cost</td><td>Net Cost with removed cash upfront fees and amortized (default)</td></tr><tr><td>Net Cost</td><td>Costs inclusive of discounts and credits. Will also include one-time and recurring charges.</td></tr><tr><td>List Cost</td><td>CSP pricing without any discounts</td></tr><tr><td>Invoiced Cost</td><td>Pricing based on usage during billing period</td></tr><tr><td>Amortized Cost</td><td>Effective/upfront cost across the billing period</td></tr></tbody></table>
 
