@@ -75,7 +75,7 @@ Remember the value of `assertionName` needs to match the claim name given in Ste
 
 ### Filtering
 
-Filters are used to give visibility to a subset of objects in Kubecost. RBAC filtering is capable can filter for any types as the [Allocation API](/apis/apis-overview/api-allocation.md). Examples of the various filters available are these files:
+Filters are used to give visibility to a subset of objects in Kubecost. RBAC filtering is capable can filter for any types as the [Allocation API](/apis/monitoring-apis/api-allocation.md). Examples of the various filters available are these files:
 
 * [filters.json](https://github.com/kubecost/poc-common-configurations/blob/main/saml-azuread/filters.json)
 * [filters-examples.json](https://github.com/kubecost/poc-common-configurations/blob/main/saml-azuread/filters-examples.json)

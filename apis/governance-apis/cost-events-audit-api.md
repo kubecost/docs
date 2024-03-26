@@ -1,8 +1,12 @@
 # Cost Events Audit API
 
-> **Note**: This feature is in a beta state. It has limitations. Please read the documentation carefully.
+{% hint style="warning" %}
+This feature is in a beta state. It has limitations. Please read the documentation carefully.
+{% endhint %}
 
-> **Note**: This feature is only officially supported on Kubecost Enterprise plans.
+{% hint style="warning" %}
+This feature is only officially supported on Kubecost Enterprise plans.
+{% endhint %}
 
 The Cost Events Audit API aims to offer improved visibility on recent changes at cluster level and their estimated cost impact.
 
@@ -97,7 +101,7 @@ The watchers are tracking change events across all namespaces within the local/p
 
 ## Estimated cost impact
 
-Cost implications of cluster events are handled by passing the Kubernetes spec inferred from the change event to the Kubecost [Predict API](/apis/apis-overview/spec-cost-prediction-api.md).
+Cost implications of cluster events are handled by passing the Kubernetes spec inferred from the change event to the Kubecost [Predict API](spec-cost-prediction-api.md).
 
 ## Current limitations
 
