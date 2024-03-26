@@ -1,4 +1,4 @@
-# Amazon Managed Service for Prometheus (AMP)
+# Amazon Managed Service for Prometheus (AMP) Overview
 
 ## Overview
 
@@ -6,18 +6,18 @@ There are three methods to use Kubecost with AMP:
 
 * [AWS Agentless AMP](/install-and-configure/advanced-configuration/eks-optimized/kubecost-agentless-amp.md)
 * [AWS Distro for Open Telemetry](/install-and-configure/advanced-configuration/eks-optimized/kubecost-aws-distro-open-telemetry.md)
-* [AMP with remote_write](/install-and-configure/advanced-configuration/eks-optimized/amp-with-remote-write.md)
+* [AMP with Kubecost Prometheus (`remote_write`)](/install-and-configure/advanced-configuration/eks-optimized/amp-with-remote-write.md)
 
 The below guide provide a high-level overview of using AMP with Kubecost. The links above provide detailed instructions for each method.
 
 {% hint style="info" %}
-Note: Using AMP allows multi-cluster Kubecost with EKS-Optimized licenses
+Using AMP allows multi-cluster Kubecost with EKS-optimized licenses.
 {% endhint %}
 
 ## Reference resources
 
-* [Amazon Managed Prometheus (AMP)](https://docs.aws.amazon.com/prometheus/latest/userguide/what-is-Amazon-Managed-Service-Prometheus.html)
-* [AMP IAM permissions and policies](https://docs.aws.amazon.com/prometheus/latest/userguide/AMP-and-IAM.html)
+* [What is Amazon Managed Service for Prometheus?](https://docs.aws.amazon.com/prometheus/latest/userguide/what-is-Amazon-Managed-Service-Prometheus.html)
+* [IAM permissions and policies](https://docs.aws.amazon.com/prometheus/latest/userguide/AMP-and-IAM.html)
 
 ## Architecture
 
@@ -25,15 +25,15 @@ Kubecost utilizes AWS SigV4 proxy to securely communicate with AMP. It enables p
 
 ### Federated architecture
 
-To support the large-scale infrastructure of over 100 clusters, Kubecost leverages a [Federated ETL architecture](/install-and-configure/install/multi-cluster/federated-etl/federated-etl.md). In addition to Amazon Prometheus Workspace, Kubecost stores its data in a streamlined format (ETL) and ships this to a central S3 bucket. Kubecost's ETL data is a computed cache based on Prometheus's metrics, from which users can perform all possible Kubecost queries. By storing the ETL data on an S3 bucket, this integration offers resiliency to your cost allocation data, improves the performance and enables high availability architecture for your Kubecost setup.
+To support the large-scale infrastructure (over 100 clusters), Kubecost leverages a [Federated ETL architecture](/install-and-configure/install/multi-cluster/federated-etl/federated-etl.md). In addition to Amazon Prometheus Workspace, Kubecost stores its data in a streamlined format (ETL) and ships this to a central S3 bucket. Kubecost's ETL data is a computed cache based on Prometheus's metrics, from which users can perform all possible Kubecost queries. By storing the ETL data on an S3 bucket, this integration offers resiliency to your cost allocation data, improves the performance and enables high availability architecture for your Kubecost setup.
 
 ## Support
 
-see the (troubleshooting section)[#trou] if you run into any errors while setting up the integration. For support from AWS, you can submit a support request through your existing [AWS support contract](https://aws.amazon.com/contact-us/).
+See the [troubleshooting section](aws-amp-integration.md#troubleshooting) if you run into any errors while setting up the integration. For support from AWS, you can submit a support request through your existing [AWS support contract](https://aws.amazon.com/contact-us/).
 
 ## Add recording rules (optional)
 
-You can add these recording rules to improve the performance. Recording rules allow you to precompute frequently needed or computationally expensive expressions and save their results as a new set of time series. Querying the precomputed result is often much faster than running the original expression every time it is needed. Follow [these instructions](https://docs.aws.amazon.com/prometheus/latest/userguide/AMP-Ruler.html) to add the following rules:
+You can add these recording rules to improve the performance. Recording rules allow you to precompute frequently needed or computationally expensive expressions and save their results as a new set of time series. Querying the precomputed result is often much faster than running the original expression every time it is needed. Follow [these AWS instructions](https://docs.aws.amazon.com/prometheus/latest/userguide/AMP-Ruler.html) to add the following rules:
 
 {% code overflow="wrap" %}
 ```yaml
@@ -71,7 +71,7 @@ You can add these recording rules to improve the performance. Recording rules al
 ```
 {% endcode %}
 
-### Troubleshooting
+## Troubleshooting
 
 The `RunDiagnostic` logs in the cost-model container will contain the most useful information.
 
@@ -133,7 +133,6 @@ Success:
 }
 ```
 -----------------------
-
 
 
 The below queries must return data for Kubecost to calculate costs correctly.

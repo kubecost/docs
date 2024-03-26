@@ -1,34 +1,28 @@
 # Kubecost with AWS Managed Prometheus Agentless Monitoring
 
-## See also
-
-* [AMP Overview](/install-and-configure/advanced-configuration/eks-optimized/aws-amp-integration.md)
-* [AWS Distro for Open Telemetry](/install-and-configure/advanced-configuration/eks-optimized/kubecost-aws-distro-open-telemetry.md)
-* [AMP with remote_write](/install-and-configure/advanced-configuration/eks-optimized/amp-with-remote-write.md)
-
 ## Overview
 
 {% hint style="info" %}
-Note: Using AMP allows multi-cluster Kubecost with EKS-Optimized licenses
+Using AMP allows multi-cluster Kubecost with EKS-Optimized licenses.
 {% endhint %}
 
 This guide will walk you through the steps to deploy Kubecost with AWS Agentless AMP to collect metrics from your Kubernetes cluster.
 
 {% hint style="info" %}
-Keep in mind that `agentless` refers to the Prometheus scraper, not the Kubecost agent. The Kubecost agent is still required to collect metrics from the cluster.
+Keep in mind that "agentless" refers to the Prometheus scraper, not the Kubecost agent. The Kubecost agent is still required to collect metrics from the cluster.
 {% endhint %}
 
 The guide below assumes a multi-cluster setup will be used, which is supported with the EKS-Optimized license that is enabled by following the below guide.
 
 ## Prerequisites
 
-Follow AWS guides to enable the AWS Managed Collector <https://docs.aws.amazon.com/prometheus/latest/userguide/AMP-collector-how-to.html>>
+Follow this [Using an AWS managed collector](https://docs.aws.amazon.com/prometheus/latest/userguide/AMP-collector-how-to.html) guide to enable the managed collector.
 
 Update all configuration files in this folder that contain `YOUR_*` with your values.
 
-This guide assumes that the Kubecost helm release name and the Kubecost namespace are equal, which allows a global find and replace on `YOUR_NAMESPACE`.
+This guide assumes that the Kubecost Helm release name and the Kubecost namespace are equal, which allows a global find-and-replace on `YOUR_NAMESPACE`.
 
-## Architecture Diagram
+## Architecture diagram
 
 ![Agentless AMP Architecture](../../../images/diagrams/AMP-agentless-multi-cluster-Prometheus-kubecost-architecture.png)
 
@@ -36,15 +30,14 @@ This guide assumes that the Kubecost helm release name and the Kubecost namespac
 
 ### AMP setup
 
-1. Clone this [poc-common-configurations](https://github.com/kubecost/poc-common-configurations)
-    repository that contains all of the configuration files you will need to deploy Kubecost with AWS Agentless AMP.
+1. Clone this [poc-common-configurations](https://github.com/kubecost/poc-common-configurations) repository that contains all of the configuration files you will need to deploy Kubecost with AWS Agentless AMP.
 
     ```sh
     git clone https://github.com/kubecost/poc-common-configurations.git
     cd poc-common-configurations/aws/amp-agentless
     ```
 
-2. Update all configuration files with your cluster name (replace all `YOUR_CLUSTER_NAME_HERE`). The examples use the key of `cluster` for the cluster name. You can use any key you want, but you will need to update the configmap and deployment files to match. A simplified version of the ADOT DS installation is below.
+2. Update all configuration files with your cluster name (replace all `YOUR_CLUSTER_NAME_HERE`). The examples use the key of `cluster` for the cluster name. You can use any key you want, but you will need to update the configMap and deployment files to match. A simplified version of the ADOT DS installation is below.
 
 3. Build the configuration variables:
 
@@ -59,7 +52,7 @@ This guide assumes that the Kubecost helm release name and the Kubecost namespac
     SUBNET_IDS=$(echo $CLUSTER_JSON | jq -r '.cluster.resourcesVpcConfig.subnetIds | @csv')
     ```
 
-4. Create the Kubecost scraper
+4. Create the Kubecost scraper:
 
     ```sh
     KUBECOST_SCRAPER_OUTPUT=$(aws amp create-scraper --output json \
@@ -80,7 +73,7 @@ This guide assumes that the Kubecost helm release name and the Kubecost namespac
     echo $ROLE_ARN_KUBECOST_SCRAPER
     ```
 
-6. Add the ARN of the scraper to the kube-system/aws-auth configmap:
+6. Add the ARN of the scraper to the `kube-system/aws-auth` configMap:
 
     ```sh
     eksctl create iamidentitymapping \
@@ -89,7 +82,7 @@ This guide assumes that the Kubecost helm release name and the Kubecost namespac
         --username aps-collector-user
     ```
 
-7. Create a scraper for cadvisor and node exporter. Node exporter is optional. Cadvisor is required, but may already be available.
+7. Create a scraper for cAdvisor and node exporter. Node exporter is optional. cAdvisor is required, but may already be available.
 
     ```sh
     aws amp create-scraper --output json \
@@ -125,7 +118,7 @@ This guide assumes that the Kubecost helm release name and the Kubecost namespac
     kubectl apply -f rbac.yaml
     ```
 
-### Kubecost Primary Installation
+### Kubecost primary cluster installation
 
 1. Create the Kubecost namespace:
 
@@ -166,9 +159,9 @@ This guide assumes that the Kubecost helm release name and the Kubecost namespac
     --override-existing-serviceaccounts --approve
     ```
 
-1. Update the place holder values such as YOUR_CLUSTER_NAME_HERE in [values-kubecost-primary.yaml](values-kubecost-primary.yaml)
+1. Update the place holder values such as `YOUR_CLUSTER_NAME_HERE` in [values-kubecost-primary.yaml](values-kubecost-primary.yaml)
 
-1. Install Kubecost Primary:
+1. Install Kubecost on your primary:
 
     ```bash
     aws ecr-public get-login-password --region us-east-1 | helm registry login --username AWS --password-stdin public.ecr.aws
@@ -178,7 +171,7 @@ This guide assumes that the Kubecost helm release name and the Kubecost namespac
         -f https://raw.githubusercontent.com/kubecost/cost-analyzer-helm-chart/develop/cost-analyzer/values-eks-cost-monitoring.yaml
     ```
 
-### Kubecost Agents Installation
+### Kubecost agents installation
 
 Follow the above `Agentless AMP Configuration` to configure the scraper(s) on each cluster.
 
@@ -219,4 +212,10 @@ This assumes you have created the AWS IAM policies above. If using multiple AWS 
 
 It will take a few minutes for the scrapers start.
 
-See more troubleshooting steps at the bottom of [AMP Overview](aws-amp-integration.md#troubleshooting).
+See more troubleshooting help in the [Amazon Managed Service for Prometheus (AMP) Overview](aws-amp-integration.md#troubleshooting) doc.
+
+## See also
+
+* [AMP Overview](/install-and-configure/advanced-configuration/eks-optimized/aws-amp-integration.md)
+* [AWS Distro for Open Telemetry](/install-and-configure/advanced-configuration/eks-optimized/kubecost-aws-distro-open-telemetry.md)
+* [AMP with remote_write](/install-and-configure/advanced-configuration/eks-optimized/amp-with-remote-write.md)

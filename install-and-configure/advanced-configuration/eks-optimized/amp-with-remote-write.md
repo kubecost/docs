@@ -1,10 +1,4 @@
-# AMP with Kubecost Prometheus (remote_write)
-
-## See also
-
-* [AMP Overview](/install-and-configure/advanced-configuration/eks-optimized/aws-amp-integration.md)
-* [AWS Agentless AMP](/install-and-configure/advanced-configuration/eks-optimized/kubecost-agentless-amp.md)
-* [AWS Distro for Open Telemetry](/install-and-configure/advanced-configuration/eks-optimized/kubecost-aws-distro-open-telemetry.md)
+# AMP with Kubecost Prometheus (`remote_write`)
 
 ## Overview
 
@@ -12,17 +6,22 @@ When the Amazon Managed Service for Prometheus integration is enabled, the bundl
 
 Kubecost has multiple methods for multi-cluster. There may be performance limits to how many clusters/nodes can be supported on a single AMP instance. Please contact Kubecost support for more information.
 
-### Quick-Start architecture
+## Quick-Start architecture
 
 The following architecture diagram illustrates what this configuration guide aims to achieve:
 
 ![Remote-write architecture](/images/aws-amp-multi-small.png)
 
-You have an existing AWS account. You have IAM credentials to create Amazon Managed Service for Prometheus and IAM roles programmatically. You have an existing [Amazon EKS cluster with OIDC enabled.](https://docs.aws.amazon.com/eks/latest/userguide/enable-iam-roles-for-service-accounts.html) Your Amazon EKS clusters have [Amazon EBS CSI](https://docs.aws.amazon.com/eks/latest/userguide/ebs-csi.html) driver installed
+It assumes the following prerequisites:
 
-### Create Amazon Managed Service for Prometheus workspace:
+* You have an existing AWS account.
+* You have IAM credentials to create Amazon Managed Service for Prometheus and IAM roles programmatically.
+* You have an existing [Amazon EKS cluster with OIDC enabled.](https://docs.aws.amazon.com/eks/latest/userguide/enable-iam-roles-for-service-accounts.html)
+* Your Amazon EKS clusters have [Amazon EBS CSI](https://docs.aws.amazon.com/eks/latest/userguide/ebs-csi.html) driver installed
 
-#### Step 1: Run the following command to get the information of your current EKS cluster:
+## Creating Amazon Managed Service for Prometheus workspace
+
+1. Run the following command to get the information of your current EKS cluster:
 
 ```bash
 kubectl config current-context
@@ -34,14 +33,16 @@ The example output should be in this format:
 arn:aws:eks:${AWS_REGION}:${YOUR_AWS_ACCOUNT_ID}:cluster/${YOUR_CLUSTER_NAME}
 ```
 
-#### Step 2: Run the following command to create new a Amazon Managed Service for Prometheus workspace
+2. Run the following command to create new a Amazon Managed Service for Prometheus workspace
 
 ```bash
 export AWS_REGION=<YOUR_AWS_REGION>
 aws amp create-workspace --alias kubecost-amp --region $AWS_REGION
 ```
 
-The Amazon Managed Service for Prometheus workspace should be created in a few seconds. Run the following command to get the workspace ID:
+The Amazon Managed Service for Prometheus workspace should be created in a few seconds.
+
+3. Run the following command to get the workspace ID:
 
 {% code overflow="wrap" %}
 ```bash
@@ -50,11 +51,9 @@ echo $AMP_WORKSPACE_ID
 ```
 {% endcode %}
 
-### Setting up the environment:
+## Setting up the environment:
 
-#### Step 1: Set environment variables for integrating Kubecost with Amazon Managed Service for Prometheus
-
-Run the following command to set environment variables for integrating Kubecost with Amazon Managed Service for Prometheus:
+1. Run the following command to set environment variables for integrating Kubecost with Amazon Managed Service for Prometheus:
 
 {% code overflow="wrap" %}
 ```bash
@@ -68,14 +67,7 @@ export QUERYURL="http://localhost:8005/workspaces/${AMP_WORKSPACE_ID}"
 ```
 {% endcode %}
 
-#### Step 2: Set up IRSA to allow Kubecost and Prometheus to read & write metrics from Amazon Managed Service for Prometheus
-
-These following commands help to automate the following tasks:
-
-* Create an IAM role with the AWS-managed IAM policy and trusted policy for the following service accounts: `kubecost-cost-analyzer-amp`, `kubecost-prometheus-server-amp`.
-* Modify current K8s service accounts with annotation to attach a new IAM role.
-
-Run the following command in your workspace:
+2. Set up IRSA to allow Kubecost and Prometheus to read & write metrics from Amazon Managed Service for Prometheus by running the following commands:
 
 {% code overflow="wrap" %}
 ```bash
@@ -100,6 +92,11 @@ eksctl create iamserviceaccount \
     --override-existing-serviceaccounts \
     --approve
 ```
+
+These commands help to automate the following tasks:
+
+* Create an IAM role with the AWS-managed IAM policy and trusted policy for the following service accounts: `kubecost-cost-analyzer-amp`, `kubecost-prometheus-server-amp`.
+* Modify current K8s service accounts with annotation to attach a new IAM role.
 
 For more information, you can check AWS documentation at [IAM roles for service accounts](https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html) and learn more about Amazon Managed Service for Prometheus managed policy at [Identity-based policy examples for Amazon Managed Service for Prometheus](https://docs.aws.amazon.com/prometheus/latest/userguide/security\_iam\_id-based-policy-examples.html)
 
@@ -151,9 +148,9 @@ oci://public.ecr.aws/kubecost/cost-analyzer --version $VERSION \
 ```
 {% endcode %}
 
-### Additional clusters
+### Secondary clusters
 
-These installation steps are similar to those for a primary cluster setup, except you do not need to follow the steps in the section "Create Amazon Managed Service for Prometheus workspace", and you need to update these environment variables below to match with your additional clusters. Please note that the `AMP_WORKSPACE_ID` and `KC_BUCKET` are the same as the primary cluster.
+These installation steps are similar to those for a primary cluster setup, except you do not need to follow the steps in the section "Create Amazon Managed Service for Prometheus workspace", and you need to update these environment variables below to match with your secondary clusters. Please note that the `AMP_WORKSPACE_ID` and `KC_BUCKET` are the same as the primary cluster.
 
 {% code overflow="wrap" %}
 ```bash
@@ -191,10 +188,16 @@ oci://public.ecr.aws/kubecost/cost-analyzer --version $VERSION \
 
 Your Kubecost setup is now writing and collecting data from AMP. Data should be ready for viewing within 15 minutes.
 
-To verify that the integration is set up, go to _Settings_ in the Kubecost UI, and check the Prometheus Status section.
+To verify that the integration is set up, select _Settings_ in the Kubecost UI, and check the 'Prometheus Status' section.
 
 ![Prometheus status screenshot](/images/aws-amp-prom-status.png)
 
-### Troubleshooting
+## Troubleshooting
 
 See more troubleshooting steps at the bottom of [AMP Overview](aws-amp-integration.md#troubleshooting).
+
+## See also
+
+* [AMP Overview](/install-and-configure/advanced-configuration/eks-optimized/aws-amp-integration.md)
+* [AWS Agentless AMP](/install-and-configure/advanced-configuration/eks-optimized/kubecost-agentless-amp.md)
+* [AWS Distro for Open Telemetry](/install-and-configure/advanced-configuration/eks-optimized/kubecost-aws-distro-open-telemetry.md)
