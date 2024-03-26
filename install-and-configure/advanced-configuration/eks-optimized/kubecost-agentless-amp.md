@@ -212,7 +212,7 @@ This assumes you have created the AWS IAM policies above. If using multiple AWS 
 
 It will take a few minutes for the scrapers start.
 
-See more troubleshooting help in the [Amazon Managed Service for Prometheus (AMP) Overview](aws-amp-integration.md#troubleshooting) doc.
+For more help troubleshooting, see our [Amazon Managed Service for Prometheus (AMP) Overview](aws-amp-integration.md#troubleshooting) doc.
 
 ## See also
 

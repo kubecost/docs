@@ -10,7 +10,11 @@
 
 This guide will walk you through the steps to deploy Kubecost with [AWS Distro for Open Telemetry (ADOT)](https://aws-otel.github.io/) to collect metrics from your Kubernetes clusters utilizing the `EKS-Optimized` license.
 
-* Note: Kubecost `EKS-Optimized` allows for 15 days of query history. Unlock unlimited history with a [Kubecost subscription](https://www.kubecost.com/pricing).
+
+{% hint style="info" %}
+Kubecost `EKS-Optimized` allows for 15 days of query history. Unlock unlimited history with a [Kubecost subscription](https://www.kubecost.com/pricing).
+{% endhint %}
+
 
 ![Architecture Diagram](/images/adot-architecture.png)
 
@@ -19,13 +23,13 @@ This guide will walk you through the steps to deploy Kubecost with [AWS Distro f
 1. An AWS Managed Prometheus Workspace is required to use ADOT
 2. AWS IAM permissions to add permissions for Kubecost to read from the workspace
 
-Before following this guide, make sure you've reviewed AWS' doc on [installing the ADOT daemonset](https://docs.aws.amazon.com/prometheus/latest/userguide/AMP-onboard-ingest-metrics-OpenTelemetry.html).
+Before following this guide, make sure you've reviewed AWS' [Set up metrics ingestion using AWS Distro for Open Telemetry on an Amazon Elastic Kubernetes Service cluster](https://docs.aws.amazon.com/prometheus/latest/userguide/AMP-onboard-ingest-metrics-OpenTelemetry.html) to enable the ADOT collector daemonSet.
 
 This guide assumes that the Kubecost Helm release name and the Kubecost namespace have the same value (usually this will be `kubecost`), which allows a global find and replace on `YOUR_NAMESPACE`.
 
 ## Configuration
 
-Clone this [repository](https://github.com/kubecost/poc-common-configurations/tree/main/aws-amp/adot) that contains all of the configuration files you will need to deploy Kubecost with ADOT.
+Clone [this repository](https://github.com/kubecost/poc-common-configurations/tree/main/aws-amp/adot) that contains all of the configuration files you will need to deploy Kubecost with ADOT.
 
 ```bash
 git clone https://github.com/kubecost/poc-common-configurations.git
@@ -44,7 +48,10 @@ kubectl apply -f example-configs/prometheus-daemonset.yaml -n adot-col
 
 Alternatively, you can add these items to your [existing ConfigMap](https://github.com/kubecost/poc-common-configurations/blob/main/aws-amp/adot/example-configs/kubecost-adot-scrape-config.yaml).
 
-**Note:** For the Kubecost `scrape_configs` job, `honor_labels: true` must be set. Without this, you will likely only see the `kube-system` or `kubecost` namespace in the UI.
+
+{% hint style="info" %}
+For the Kubecost `scrape_configs` job, `honor_labels: true` must be set. Without this, you will likely only see the `kube-system` or `kubecost` namespace in the UI.
+{% endhint %}
 
 ### Kubecost AWS IAM setup
 
@@ -130,10 +137,10 @@ This assumes you have created the IAM policies above. If using multiple AWS acco
         -f https://raw.githubusercontent.com/kubecost/cost-analyzer-helm-chart/develop/cost-analyzer/values-eks-cost-monitoring.yaml
     ```
 
-## ADOT Daemonset quick install
+## ADOT daemonSet quick install
 
 See this [example .yaml file](https://github.com/kubecost/poc-common-configurations/blob/main/aws-amp/adot/example-configs/prometheus-daemonset.yaml) for an all-in-one ADOT DS config.
 
 ## Troubleshooting
 
-See more troubleshooting steps at the bottom of [AMP Overview](aws-amp-integration.md#troubleshooting).
+For more help troubleshooting, see our [Amazon Managed Service for Prometheus (AMP) Overview](aws-amp-integration.md#troubleshooting) doc.
