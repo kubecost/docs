@@ -57,7 +57,7 @@
   * [Network Cost Configuration](install-and-configure/advanced-configuration/network-costs-configuration.md)
   * [Grafana Configuration Guide](install-and-configure/advanced-configuration/custom-grafana.md)
   * [Prometheus Configuration Guide](install-and-configure/advanced-configuration/custom-prom/custom-prom.md)
-    * [Amazon Managed Service for Prometheus](install-and-configure/advanced-configuration/custom-prom/aws-amp-integration.md)
+    * [Amazon Managed Service for Prometheus](install-and-configure/advanced-configuration/eks-optimized/aws-amp-integration.md)
     * [Amazon Managed Service for Prometheus Overview](/install-and-configure/advanced-configuration/eks-optimized/aws-amp-integration.md)
     * [AWS Agentless AMP](/install-and-configure/advanced-configuration/eks-optimized/kubecost-agentless-amp.md)
     * [AWS Distro for Open Telemetry](/install-and-configure/advanced-configuration/eks-optimized/kubecost-aws-distro-open-telemetry.md)
