@@ -42,7 +42,7 @@ Fewer data points scraped from Prometheus means less data to collect and store, 
 
 ## Keep node exporter disabled
 
-The node exporter is disabled by default, and is an optional feature. Some health alerts will be disabled if the node exporter is disabled, but savings recommendations and core cost allocation will function normally. You can enable the node-exporter with the following [Helm values](https://github.com/kubecost/cost-analyzer-helm-chart/blob/v1.93.2/cost-analyzer/values.yaml#L442):
+The Node Exporter is disabled by default, and is an optional feature. Some health alerts will be disabled if the Node Exporter is disabled, but savings recommendations and core cost allocation will function normally. You can enable the Node Exporter with the following [Helm values](https://github.com/kubecost/cost-analyzer-helm-chart/blob/v1.93.2/cost-analyzer/values.yaml#L442):
 
 ```
 --set prometheus.server.nodeExporter.enabled=true

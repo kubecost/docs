@@ -26,7 +26,7 @@ Node exporter metrics are used for the following features:
 * Showing a compute 'breakdown' on Overview's Resource Efficiency graph, i.e. system vs idle vs user. The Compute bar on this graph will appear as a single solid-colored bar when this diagnostic is failing.
 * Various Kubecost Grafana dashboards
 
-The node exporter is disabled by default. You can enable it with the flags:
+The Node Exporter is disabled by default. You can enable it with the flags:
 
 ```
 --set prometheus.server.nodeExporter.enabled=true

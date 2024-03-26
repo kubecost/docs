@@ -237,7 +237,7 @@ kubectl describe pod <pod-name> -n kubecost
 
 ### FailedScheduling kubecost-prometheus-node-exporter
 
-If there is an existing node-exporter DaemonSet, the Kubecost Helm chart may timeout due to a conflict. The node-exporter is disabled by default, but if it was enabled at any point, you can disable it by changing the flag during your `helm upgrade` command:
+If there is an existing node-exporter DaemonSet, the Kubecost Helm chart may timeout due to a conflict. The Node Exporter is disabled by default, but if it was enabled at any point, you can disable it by changing the flag during your `helm upgrade` command:
 {% code overflow="wrap" %}
 ```bash
     --set prometheus.serviceAccounts.nodeExporter.enabled=false
