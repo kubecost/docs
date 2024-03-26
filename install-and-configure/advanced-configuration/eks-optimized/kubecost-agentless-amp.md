@@ -36,9 +36,17 @@ This guide assumes that the Kubecost helm release name and the Kubecost namespac
 
 ### AMP setup
 
-1. Update all configuration files with your cluster name (replace all `YOUR_CLUSTER_NAME_HERE`). The examples use the key of `cluster` for the cluster name. You can use any key you want, but you will need to update the configmap and deployment files to match. A simplified version of the ADOT DS installation is below.
+1. Clone this [poc-common-configurations](https://github.com/kubecost/poc-common-configurations)
+    repository that contains all of the configuration files you will need to deploy Kubecost with AWS Agentless AMP.
 
-1. Build the configuration variables:
+    ```sh
+    git clone https://github.com/kubecost/poc-common-configurations.git
+    cd poc-common-configurations/aws/amp-agentless
+    ```
+
+2. Update all configuration files with your cluster name (replace all `YOUR_CLUSTER_NAME_HERE`). The examples use the key of `cluster` for the cluster name. You can use any key you want, but you will need to update the configmap and deployment files to match. A simplified version of the ADOT DS installation is below.
+
+3. Build the configuration variables:
 
     ```sh
     CLUSTER_NAME=YOUR_CLUSTER_NAME_HERE
@@ -51,7 +59,7 @@ This guide assumes that the Kubecost helm release name and the Kubecost namespac
     SUBNET_IDS=$(echo $CLUSTER_JSON | jq -r '.cluster.resourcesVpcConfig.subnetIds | @csv')
     ```
 
-1. Create the Kubecost scraper
+4. Create the Kubecost scraper
 
     ```sh
     KUBECOST_SCRAPER_OUTPUT=$(aws amp create-scraper --output json \
@@ -64,7 +72,7 @@ This guide assumes that the Kubecost helm release name and the Kubecost namespac
     echo $KUBECOST_SCRAPER_ID
     ```
 
-1. Get the ARN of the scraper:
+5. Get the ARN of the scraper:
 
     ```sh
     ARN_PART=$(aws amp describe-scraper --output json --region $CLUSTER_REGION --scraper-id $KUBECOST_SCRAPER_ID | jq -r .scraper.roleArn | cut -d'_' -f2)
@@ -72,7 +80,7 @@ This guide assumes that the Kubecost helm release name and the Kubecost namespac
     echo $ROLE_ARN_KUBECOST_SCRAPER
     ```
 
-1. Add the ARN of the scraper to the kube-system/aws-auth configmap:
+6. Add the ARN of the scraper to the kube-system/aws-auth configmap:
 
     ```sh
     eksctl create iamidentitymapping \
@@ -81,7 +89,7 @@ This guide assumes that the Kubecost helm release name and the Kubecost namespac
         --username aps-collector-user
     ```
 
-1. Create a scraper for cadvisor and node exporter. Node exporter is optional. Cadvisor is required, but may already be available.
+7. Create a scraper for cadvisor and node exporter. Node exporter is optional. Cadvisor is required, but may already be available.
 
     ```sh
     aws amp create-scraper --output json \
@@ -94,7 +102,7 @@ This guide assumes that the Kubecost helm release name and the Kubecost namespac
     echo $CADVSIOR_SCRAPER_ID
     ```
 
-1. Get the ARN of the scraper:
+8. Get the ARN of the scraper:
 
     ```sh
     ARN_PART=$(aws amp describe-scraper --output json --region $CLUSTER_REGION --scraper-id $CADVSIOR_SCRAPER_ID | jq -r .scraper.roleArn | cut -d'_' -f2)
@@ -102,7 +110,7 @@ This guide assumes that the Kubecost helm release name and the Kubecost namespac
     echo $ROLE_ARN_CADVSIOR_SCRAPER
      ```
 
-1. Add the ARN of the scraper to the kube-system/aws-auth configmap:
+9. Add the ARN of the scraper to the kube-system/aws-auth configmap:
 
     ```sh
     eksctl create iamidentitymapping \
@@ -111,7 +119,7 @@ This guide assumes that the Kubecost helm release name and the Kubecost namespac
         --username aps-collector-user
     ```
 
-1. Apply the agentless RBAC permissions:
+10. Apply the agentless RBAC permissions:
 
     ```sh
     kubectl apply -f rbac.yaml
@@ -155,7 +163,7 @@ This guide assumes that the Kubecost helm release name and the Kubecost namespac
     --attach-policy-arn arn:aws:iam::AWS_ACCOUNT_ID:policy/kubecost-read-amp-metrics \
     --attach-policy-arn arn:aws:iam::AWS_ACCOUNT_ID:policy/OrganizationListAccountTags \
     --attach-policy-arn arn:aws:iam::AWS_ACCOUNT_ID:policy/DescribeResources \
-    --override-existing-serviceaccounts --approve --profile admin
+    --override-existing-serviceaccounts --approve
     ```
 
 1. Update the place holder values such as YOUR_CLUSTER_NAME_HERE in [values-kubecost-primary.yaml](values-kubecost-primary.yaml)
@@ -194,7 +202,7 @@ This assumes you have created the AWS IAM policies above. If using multiple AWS 
         --attach-policy-arn arn:aws:iam::AWS_ACCOUNT_ID:policy/kubecost-read-amp-metrics \
         --attach-policy-arn arn:aws:iam::AWS_ACCOUNT_ID:policy/OrganizationListAccountTags \
         --attach-policy-arn arn:aws:iam::AWS_ACCOUNT_ID:policy/DescribeResources \
-        --override-existing-serviceaccounts --approve --profile admin
+        --override-existing-serviceaccounts --approve
     ```
 
 1. Deploy the Kubecost agent:
