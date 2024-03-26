@@ -138,7 +138,7 @@ kubecostModel:
   warmSavingsCache: false
 ```
 
-Add the following values to your primary cluster Helm values:
+Add the following values to your secondary cluster Helm values:
 
 ```
 federatedETL:
