@@ -4,7 +4,7 @@
 This feature is in beta. Please read the documentation carefully.
 {% endhint %}
 
-Kubecost can automatically implement its [recommendations](/apis/apis-overview/api-request-right-sizing-v2.md) for container [resource requests](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#requests-and-limits) if you have the [Cluster Controller](/install-and-configure/advanced-configuration/controller/cluster-controller.md) component enabled. Using container request right-sizing (RRS) allows you to instantly optimize resource allocation across your entire cluster. You can easily eliminate resource over-allocation in your cluster, which paves the way for vast savings via cluster right-sizing and other optimizations.
+Kubecost can automatically implement its [recommendations](/apis/savings-apis/api-request-right-sizing-v2.md) for container [resource requests](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#requests-and-limits) if you have the [Cluster Controller](/install-and-configure/advanced-configuration/controller/cluster-controller.md) component enabled. Using container request right-sizing (RRS) allows you to instantly optimize resource allocation across your entire cluster. You can easily eliminate resource over-allocation in your cluster, which paves the way for vast savings via cluster right-sizing and other optimizations.
 
 ![Container Request Right-Sizing Recommendations](/images/crss.png)
 

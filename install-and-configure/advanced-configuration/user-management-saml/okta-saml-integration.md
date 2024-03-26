@@ -71,7 +71,7 @@ The `assertionName: "kubecost_group"` value needs to match the name given in Ste
 
 ## Okta RBAC configuration (filtering)
 
-Filters are used to give visibility to a subset of objects in Kubecost. Examples of the various filters available are in [filters.json](https://github.com/kubecost/poc-common-configurations/blob/main/saml-okta/filters.json) and [filters-examples.json](https://github.com/kubecost/poc-common-configurations/blob/main/saml-okta/filters-examples.json). RBAC filtering is capable of all the same types of filtering features as that of the [Allocation API](/apis/apis-overview/api-allocation.md).
+Filters are used to give visibility to a subset of objects in Kubecost. Examples of the various filters available are in [filters.json](https://github.com/kubecost/poc-common-configurations/blob/main/saml-okta/filters.json) and [filters-examples.json](https://github.com/kubecost/poc-common-configurations/blob/main/saml-okta/filters-examples.json). RBAC filtering is capable of all the same types of filtering features as that of the [Allocation API](/apis/monitoring-apis/api-allocation.md).
 
 It's possible to combine filtering with admin/readonly rights
 
