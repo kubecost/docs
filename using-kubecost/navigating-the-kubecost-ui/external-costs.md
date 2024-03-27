@@ -6,7 +6,7 @@ External Costs is currently in beta.
 
 External Costs is a monitoring dashboard for third party service costs that are not directly from cloud providers. Currently, this includes monitoring for Datadog costs. More third party services are expected to be supported in the future.
 
-![External Costs](/images/external-costs.png)
+![External Costs](/images/externalcosts.png)
 
 ## Enabling External Costs
 
