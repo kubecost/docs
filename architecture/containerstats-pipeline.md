@@ -4,9 +4,11 @@ The ContainerStats pipeline builds statistical representations of individual con
 
 ## Helm configuration
 
+The ContainerStats pipeline is enabled by default. To disable it, set the following flag to `false`:
+
 ```yaml
 kubecostModel:
-  containerStatsEnabled: true
+  containerStatsEnabled: false
 ```
 
 Ensure you allow roughly two hours for the pipeline to run before issuing a query which leverages this pipeline.
