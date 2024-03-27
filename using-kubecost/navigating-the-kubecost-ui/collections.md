@@ -38,4 +38,11 @@ In the event there is cost overlap from conflicting Kubernetes and cloud costs, 
 
 ## Managing collections
 
-The Collections page will list all existing collections with a chart displaying cost over time and total cost. You can begin editing a collection by selecting it. Selecting the three vertical dots in the top right of the collection tile will allow you to delete it. You can also adjust your Collections display by adjusting the window of time, aggregating by item or kind, or filtering.
+The Collections page will list all existing collections with a chart displaying cost over time and total cost. You can begin editing a collection by selecting it. You can also adjust your Collections display by adjusting the window of time, aggregating by item or kind, or filtering.
+
+Selecting the three vertical dots in the top right of the collection tile will provide you with additional options:
+
+* *Delete*
+* *Export as CSV*
+* *Export as PDF*
+
