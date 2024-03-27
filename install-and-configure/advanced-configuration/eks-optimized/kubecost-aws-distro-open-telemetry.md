@@ -10,11 +10,9 @@
 
 This guide will walk you through the steps to deploy Kubecost with [AWS Distro for Open Telemetry (ADOT)](https://aws-otel.github.io/) to collect metrics from your Kubernetes clusters utilizing the `EKS-Optimized` license.
 
-
 {% hint style="info" %}
-Kubecost `EKS-Optimized` allows for 15 days of query history. Unlock unlimited history with a [Kubecost subscription](https://www.kubecost.com/pricing).
+Kubecost `EKS-Optimized` allows for 15 days of query history. Unlock unlimited history with [Kubecost Enterprise](https://www.kubecost.com/pricing).
 {% endhint %}
-
 
 ![Architecture Diagram](/images/adot-architecture.png)
 

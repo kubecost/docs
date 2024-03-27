@@ -18,9 +18,7 @@ The guide below assumes a multi-cluster setup will be used, which is supported w
 
 Follow this [Using an AWS managed collector](https://docs.aws.amazon.com/prometheus/latest/userguide/AMP-collector-how-to.html) guide to enable the managed collector.
 
-Update all configuration files in this folder that contain `YOUR_*` with your values.
-
-This guide assumes that the Kubecost Helm release name and the Kubecost namespace are equal, which allows a global find-and-replace on `YOUR_NAMESPACE`.
+This guide assumes that the Kubecost Helm release name and the Kubecost namespace are equal, which allows a global find-and-replace on `$KUBECOST_NAMESPACE`.
 
 ## Architecture diagram
 
@@ -37,14 +35,16 @@ This guide assumes that the Kubecost Helm release name and the Kubecost namespac
     cd poc-common-configurations/aws/amp-agentless
     ```
 
-2. Update all configuration files with your cluster name (replace all `YOUR_CLUSTER_NAME_HERE`). The examples use the key of `cluster` for the cluster name. You can use any key you want, but you will need to update the configMap and deployment files to match. A simplified version of the ADOT DS installation is below.
+2. Update all configuration files with your cluster name (replace all `YOUR_CLUSTER_NAME_HERE`).
 
 3. Build the configuration variables:
 
     ```sh
     CLUSTER_NAME=YOUR_CLUSTER_NAME_HERE
     CLUSTER_REGION=us-east-2
+    KUBECOST_NAMESPACE=kubecost
     WORKSPACE_ID=ws-YOUR_WORKSPACE_ID
+    AWS_ACCOUNT_ID=11111111111
     WORKSPACE_ARN=$(aws amp describe-workspace --workspace-id $WORKSPACE_ID --output json | jq -r .workspace.arn)
     CLUSTER_JSON=$(aws eks describe-cluster --name $CLUSTER_NAME --region $CLUSTER_REGION --output json)
     CLUSTER_ARN=$(echo $CLUSTER_JSON | jq -r .cluster.arn)
@@ -69,7 +69,7 @@ This guide assumes that the Kubecost Helm release name and the Kubecost namespac
 
     ```sh
     ARN_PART=$(aws amp describe-scraper --output json --region $CLUSTER_REGION --scraper-id $KUBECOST_SCRAPER_ID | jq -r .scraper.roleArn | cut -d'_' -f2)
-    ROLE_ARN_KUBECOST_SCRAPER="arn:aws:iam::AWS_ACCOUNT_ID:role/AWSServiceRoleForAmazonPrometheusScraper_$ARN_PART"
+    ROLE_ARN_KUBECOST_SCRAPER="arn:aws:iam::$AWS_ACCOUNT_ID:role/AWSServiceRoleForAmazonPrometheusScraper_$ARN_PART"
     echo $ROLE_ARN_KUBECOST_SCRAPER
     ```
 
@@ -99,7 +99,7 @@ This guide assumes that the Kubecost Helm release name and the Kubecost namespac
 
     ```sh
     ARN_PART=$(aws amp describe-scraper --output json --region $CLUSTER_REGION --scraper-id $CADVSIOR_SCRAPER_ID | jq -r .scraper.roleArn | cut -d'_' -f2)
-    ROLE_ARN_CADVSIOR_SCRAPER="arn:aws:iam::AWS_ACCOUNT_ID:role/AWSServiceRoleForAmazonPrometheusScraper_$ARN_PART"
+    ROLE_ARN_CADVSIOR_SCRAPER="arn:aws:iam::$AWS_ACCOUNT_ID:role/AWSServiceRoleForAmazonPrometheusScraper_$ARN_PART"
     echo $ROLE_ARN_CADVSIOR_SCRAPER
      ```
 
@@ -123,7 +123,7 @@ This guide assumes that the Kubecost Helm release name and the Kubecost namespac
 1. Create the Kubecost namespace:
 
     ```bash
-    kubectl create ns YOUR_NAMESPACE
+    kubectl create ns $KUBECOST_NAMESPACE
     ```
 
 1. Create the AWS IAM policy to allow Kubecost to query metrics from AMP:
@@ -151,24 +151,24 @@ This guide assumes that the Kubecost Helm release name and the Kubecost namespac
     ```bash
     eksctl create iamserviceaccount \
     --name kubecost-sa \
-    --namespace YOUR_NAMESPACE \
+    --namespace $KUBECOST_NAMESPACE \
     --cluster $CLUSTER_NAME --region $CLUSTER_REGION \
-    --attach-policy-arn arn:aws:iam::AWS_ACCOUNT_ID:policy/kubecost-read-amp-metrics \
-    --attach-policy-arn arn:aws:iam::AWS_ACCOUNT_ID:policy/OrganizationListAccountTags \
-    --attach-policy-arn arn:aws:iam::AWS_ACCOUNT_ID:policy/DescribeResources \
+    --attach-policy-arn arn:aws:iam::$AWS_ACCOUNT_ID:policy/kubecost-read-amp-metrics \
+    --attach-policy-arn arn:aws:iam::$AWS_ACCOUNT_ID:policy/OrganizationListAccountTags \
+    --attach-policy-arn arn:aws:iam::$AWS_ACCOUNT_ID:policy/DescribeResources \
     --override-existing-serviceaccounts --approve
     ```
 
-1. Update the place holder values such as `YOUR_CLUSTER_NAME_HERE` in [values-kubecost-primary.yaml](values-kubecost-primary.yaml)
+1. Update the place holder values such as `YOUR_CLUSTER_NAME_HERE` in values-kubecost-primary.yaml
 
 1. Install Kubecost on your primary:
 
     ```bash
     aws ecr-public get-login-password --region us-east-1 | helm registry login --username AWS --password-stdin public.ecr.aws
-    helm install YOUR_NAMESPACE -n YOUR_NAMESPACE \
+    helm install $KUBECOST_NAMESPACE -n $KUBECOST_NAMESPACE \
         oci://public.ecr.aws/kubecost/cost-analyzer \
-        -f values-kubecost-primary.yaml \
-        -f https://raw.githubusercontent.com/kubecost/cost-analyzer-helm-chart/develop/cost-analyzer/values-eks-cost-monitoring.yaml
+        -f https://raw.githubusercontent.com/kubecost/cost-analyzer-helm-chart/develop/cost-analyzer/values-eks-cost-monitoring.yaml \
+        -f values-kubecost-primary.yaml
     ```
 
 ### Kubecost agents installation
@@ -177,12 +177,12 @@ Follow the above `Agentless AMP Configuration` to configure the scraper(s) on ea
 
 This assumes you have created the AWS IAM policies above. If using multiple AWS accounts, you will need to create the policies in each account.
 
-1. Update the place holder values such as YOUR_CLUSTER_NAME_HERE in [values-kubecost-agent.yaml](values-kubecost-agent.yaml)
+1. Update the place holder values such as YOUR_CLUSTER_NAME_HERE in values-kubecost-agent.yaml
 
 1. Create the Kubecost namespace:
 
     ```bash
-    kubectl create ns YOUR_NAMESPACE
+    kubectl create ns $KUBECOST_NAMESPACE
     ```
 
 1. Configure the Kubecost Service Account:
@@ -190,11 +190,11 @@ This assumes you have created the AWS IAM policies above. If using multiple AWS 
     ```bash
     eksctl create iamserviceaccount \
         --name kubecost-sa \
-        --namespace YOUR_NAMESPACE \
+        --namespace $KUBECOST_NAMESPACE \
         --cluster $CLUSTER_NAME --region $CLUSTER_REGION \
-        --attach-policy-arn arn:aws:iam::AWS_ACCOUNT_ID:policy/kubecost-read-amp-metrics \
-        --attach-policy-arn arn:aws:iam::AWS_ACCOUNT_ID:policy/OrganizationListAccountTags \
-        --attach-policy-arn arn:aws:iam::AWS_ACCOUNT_ID:policy/DescribeResources \
+        --attach-policy-arn arn:aws:iam::$AWS_ACCOUNT_ID:policy/kubecost-read-amp-metrics \
+        --attach-policy-arn arn:aws:iam::$AWS_ACCOUNT_ID:policy/OrganizationListAccountTags \
+        --attach-policy-arn arn:aws:iam::$AWS_ACCOUNT_ID:policy/DescribeResources \
         --override-existing-serviceaccounts --approve
     ```
 
@@ -202,10 +202,10 @@ This assumes you have created the AWS IAM policies above. If using multiple AWS 
 
     ```bash
     aws ecr-public get-login-password --region us-east-1 | helm registry login --username AWS --password-stdin public.ecr.aws
-    helm install YOUR_NAMESPACE -n YOUR_NAMESPACE \
+    helm install $KUBECOST_NAMESPACE -n $KUBECOST_NAMESPACE \
         oci://public.ecr.aws/kubecost/cost-analyzer \
-        -f values-kubecost-agent.yaml \
-        -f https://raw.githubusercontent.com/kubecost/cost-analyzer-helm-chart/develop/cost-analyzer/values-eks-cost-monitoring.yaml
+        -f https://raw.githubusercontent.com/kubecost/cost-analyzer-helm-chart/develop/cost-analyzer/values-eks-cost-monitoring.yaml \
+        -f values-kubecost-agent.yaml
     ```
 
 ## Troubleshooting
