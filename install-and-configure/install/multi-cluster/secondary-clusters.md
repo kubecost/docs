@@ -10,16 +10,13 @@ This guide explains settings that can be tuned in order to run the minimum Kubec
 
 See the [Additional resources](/install-and-configure/install/multi-cluster/secondary-clusters.md) section below for complete examples in our GitHub repo.
 
-## Kubecost Global
+## Kubecost global
 
 Disable product caching and reduce query concurrency with the following parameters:
 
 ```
---set kubecostModel.warmCache=false
---set kubecostModel.warmSavingsCache=false
---set kubecostModel.etl=false
---set kubecostModel.etlCloudAsset=false
---set kubecostModel.maxQueryConcurrency=1
+--set federatedETL.federatedCluster=true
+--set federatedETL.agentOnly=true
 ```
 
 ## Grafana

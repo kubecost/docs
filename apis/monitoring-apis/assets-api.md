@@ -5,8 +5,8 @@
 The Assets API retrieves backing cost data broken down by individual assets in your cluster but also provides various aggregations of this data.
 {% endswagger-description %}
 
-{% swagger-parameter in="path" name="window" required="true" type="string" %}
-Dictates the applicable window for measuring historical asset cost.
+{% swagger-parameter in="path" name="window" type="string" required="true" %}
+Duration of time over which to query. Accepts multiple different formats of time (see this [Using the `window` parameter](/apis/apis-overview.md#using-the-window-parameter) section for more info).
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="aggregate" type="string" required="false" %}
@@ -27,15 +27,15 @@ When set to `csv`, will download an accumulated version of the asset results in 
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="offset" type="int" required="false" %}
-Refers to the number of pages you are searching through which will increase by integers for the amount of pages you want to skip. Starting value is `0`, representing the first page of results.
+Refers to the number of line items you are offsetting. Pairs with `limit`. See the section on [Using `offset` and `limit` parameters to parse payload results](/apis/apis-overview.md#using-offset-and-limit-parameters-to-parse-payload-results) for more info.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="limit" type="int" required="false" %}
-Refers to the number of line items per page. Pair with the `offset` parameter to filter your payload to specific sections of line items. You should also set `accumulate=true` to obtain a single list of line items, otherwise you will receive a group of line items per interval of time being sampled. Paginates by all five item types, and will provide lists for all five types.
+Refers to the number of line items per page. Pair with the `offset` parameter to filter your payload to specific pages of line items. You should also set `accumulate=true` to obtain a single list of line items, otherwise you will receive a group of line items per interval of time being sampled.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="filter" type="string" required="false" %}
-Filter your results by any category which you can aggregate by, can support multiple filterable items in the same category in a comma-separated list. For example, to filter results by clusters A and B, use `filter=cluster:clusterA,clusterB` See our [Filter Parameters](/apis/apis-overview/filters-api.md) doc for a complete explanation of how to use filters and what categories are supported.
+Filter your results by any category which you can aggregate by, can support multiple filterable items in the same category in a comma-separated list. For example, to filter results by clusters A and B, use `filter=cluster:clusterA,clusterB` See our [Filter Parameters](/apis/filters-api.md) doc for a complete explanation of how to use filters and what categories are supported.
 {% endswagger-parameter %}
 
 {% swagger-response status="200: OK" description="" %}
@@ -64,15 +64,6 @@ Filter your results by any category which you can aggregate by, can support mult
 {% endcode %}
 {% endswagger-response %}
 {% endswagger %}
-
-### Using `window` parameter:
-
-Acceptable formats for using `window` parameter include:
-
-* "15m", "24h", "7d", "48h", etc.
-* "today", "yesterday", "week", "month", "lastweek", "lastmonth"
-* "1586822400,1586908800", etc. (start and end unix timestamps)
-* "2020-04-01T00:00:00Z,2020-04-03T00:00:00Z", etc. (start and end UTC RFC3339 pairs)
 
 ## API examples
 

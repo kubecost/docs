@@ -21,7 +21,7 @@ Used to determine the peak number of monitored cores in the window.
 
 | Parameter | Default | Description |
 | --- | --- | --- |
-| `window` | `2d` | The window of data to find the peak cores of |
+| `window` | `2d` | Duration of time over which to query and find peak number of cores. Accepts multiple different formats of time (see this [Using the `window` parameter](/apis/apis-overview.md#using-the-window-parameter) section for more info). |
 
 #### `/model/diagnostic/containersPerDay`
 

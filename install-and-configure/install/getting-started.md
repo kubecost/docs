@@ -43,10 +43,6 @@ You can configure SSO and RBAC on a separate baseline deployment, which will not
 * [SAML](/install-and-configure/advanced-configuration/user-management-saml/README.md)
 * [OIDC](/install-and-configure/advanced-configuration/user-management-oidc/user-management-oidc.md)
 
-## Using an existing node exporter
-
-For teams already running node exporter on the default port, our bundled node exporter may remain in a `Pending` state. You can optionally use an existing node exporter DaemonSet by setting the `prometheus.nodeExporter.enabled` and `prometheus.serviceAccounts.nodeExporter.create` Kubecost Helm chart config options to `false`. This requires your existing node exporter endpoint to be visible from the namespace where Kubecost is installed. More configs options shown [here](https://github.com/kubecost/cost-analyzer-helm-chart).
-
 ## **Resource efficiency and idle costs**
 
 Efficiency and idle costs can teach you more about the cost-value of your Kubernetes spend by showing you how efficiently your resources are used. To learn more about pod resource efficiency and cluster idle costs, see [Efficiency and Idle](/using-kubecost/navigating-the-kubecost-ui/cost-allocation/efficiency-idle.md).
