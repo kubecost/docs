@@ -4,6 +4,7 @@ structure:
     summary: SUMMARY.md
 
 redirects:
+    kubecost-cloud/using-the-kubecost-cloud-ui: v/kubecost-cloud/using-kubecost-cloud/using-kubecost-cloud.md
     using-kubecost/getting-started/cloud-costs-explorer: using-kubecost/navigating-the-kubecost-ui/cloud-costs-explorer.md
     using-kubecost/getting-started/alerts: using-kubecost/navigating-the-kubecost-ui/alerts.md
     using-kubecost/getting-started/audits: using-kubecost/navigating-the-kubecost-ui/audits.md
@@ -20,8 +21,10 @@ redirects:
     multi-cluster: install-and-configure/install/multi-cluster/multi-cluster.md
     enterprise: install-and-configure/install/install.md
     gcp-out-of-cluster.html: install-and-configure/install/cloud-integration/gcp-out-of-cluster/README.md
-    enterprise.html: install.md
+    enterprise.html: architecture/opencost-product-comparison.md
     alerts.html: alerts.md
+    assets: using-kubecost/navigating-the-kubecost-ui/assets.md
+    troubleshoot-install: troubleshooting/troubleshoot-install.md
     hc/en-us/articles/10015110616599: federated-etl.md
     hc/en-us/articles/10018767892119: user-management-oidc.md
     hc/en-us/articles/10066023188119: api-persistent-volume-right-sizing.md

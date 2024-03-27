@@ -169,7 +169,7 @@ Example result:
 ```bash
 Annotations:   volume.beta.kubernetes.io/storage-provisioner: ebs.csi.aws.com
                volume.kubernetes.io/storage-provisioner: ebs.csi.aws.com
-                         
+
 Normal  ExternalProvisioning  69s (x82 over 21m)  persistentvolume-controller  waiting for a volume to be created, either by external provisioner "ebs.csi.aws.com" or manually created by system administrator
 ```
 {% endcode %}
@@ -237,14 +237,10 @@ kubectl describe pod <pod-name> -n kubecost
 
 ### FailedScheduling kubecost-prometheus-node-exporter
 
-If there is an existing node-exporter DaemonSet, the Kubecost Helm chart may timeout due to a conflict. You can disable the installation of node-exporter by passing the following parameters to the Helm install.
-
+If there is an existing node-exporter DaemonSet, the Kubecost Helm chart may timeout due to a conflict. The Node Exporter is disabled by default, but if it was enabled at any point, you can disable it by changing the flag during your `helm upgrade` command:
 {% code overflow="wrap" %}
 ```bash
-helm install kubecost/cost-analyzer --debug --wait --namespace kubecost --name kubecost \
-    --set kubecostToken="<INSERT_YOUR_TOKEN>" \
-    --set prometheus.nodeExporter.enabled=false \
-    --set prometheus.serviceAccounts.nodeExporter.create=false
+    --set prometheus.serviceAccounts.nodeExporter.enabled=false
 ```
 {% endcode %}
 
@@ -296,13 +292,28 @@ Error: INSTALLATION FAILED: unable to build kubernetes objects from release mani
 
 To disable PSP in your deployment:
 
+1. Back up your Helm values with `helm get values -n kubecost kubecost > kubecost-values.yaml`
+2. Open `kubecost-values.yaml` and delete any references to `podSecurityPolicy` or `psp`
+3. Delete all Helm secrets in the Kubecost namespace:
+
+    {% code overflow="wrap" %}
+    ```bash
+    # Get the list of secrets
+    kubectl get secrets -n kubecost
+    # Backup secrets to a file
+    kubectl get secrets -n kubecost -o yaml > kubecost-secrets.yaml
+    # Delete any secret with the helm values, which look like: sh.helm.release.v1.aggregator.vX
+    kubectl delete secrets -n kubecost SECRET_NAME
+    ```
+    {% endcode %}
+
+4. Upgrade Kubecost as you normally would, be absolutely certain to pass the -f flag with your values file:
+
+{% code overflow="wrap" %}
 ```bash
-$ helm upgrade -i kubecost kubecost/cost-analyzer --namespace kubecost \
-    --set podSecurityPolicy.enabled=false \
-    --set networkCosts.podSecurityPolicy.enabled=false \
-    --set prometheus.podSecurityPolicy.enabled=false \
-    --set grafana.rbac.pspEnabled=false
+helm upgrade kubecost kubecost/cost-analyzer --namespace kubecost -f kubecost-values.yaml
 ```
+{% endcode %}
 
 ### With Kubernetes v1.25, Helm commands fail when PodSecurityPolicy CRD is missing for `kubecost-grafana` and `kubecost-cost-analyzer-psp` in existing Kubecost installs
 
