@@ -69,7 +69,7 @@ This guide assumes that the Kubecost Helm release name and the Kubecost namespac
 
     ```sh
     ARN_PART=$(aws amp describe-scraper --output json --region $CLUSTER_REGION --scraper-id $KUBECOST_SCRAPER_ID | jq -r .scraper.roleArn | cut -d'_' -f2)
-    ROLE_ARN="arn:aws:iam::AWS_ACCOUNT_ID:role/AWSServiceRoleForAmazonPrometheusScraper_$ARN_PART"
+    ROLE_ARN_KUBECOST_SCRAPER="arn:aws:iam::AWS_ACCOUNT_ID:role/AWSServiceRoleForAmazonPrometheusScraper_$ARN_PART"
     echo $ROLE_ARN_KUBECOST_SCRAPER
     ```
 
@@ -85,7 +85,7 @@ This guide assumes that the Kubecost Helm release name and the Kubecost namespac
 7. Create a scraper for cAdvisor and node exporter. Node exporter is optional. cAdvisor is required, but may already be available.
 
     ```sh
-    aws amp create-scraper --output json \
+    CADVSIOR_SCRAPER_OUTPUT=$(aws amp create-scraper --output json \
         --alias cadvisor-scraper \
         --source eksConfiguration="{clusterArn=$CLUSTER_ARN, securityGroupIds=[$SECURITY_GROUP_IDS],subnetIds=[$SUBNET_IDS]}" \
         --scrape-configuration configurationBlob="$(base64 scraper-cadvisor-node-exporter.yaml|tr -d '\n')" \
