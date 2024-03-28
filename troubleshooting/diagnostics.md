@@ -1,7 +1,5 @@
 # Kubecost Diagnostics
 
-## Kubecost Diagnostics
-
 Kubecost diagnostics run a series of tests to determine if resources necessary for accurate cost reporting are available.
 
 You can access the Diagnostics page in the Kubecost UI by selecting _Settings_ from the left navigation, then selecting _View Full Diagnostics_.
