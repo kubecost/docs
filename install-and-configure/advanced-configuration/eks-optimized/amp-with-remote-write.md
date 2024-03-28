@@ -2,7 +2,7 @@
 
 ## Overview
 
-When the Amazon Managed Service for Prometheus integration is enabled, the bundled Prometheus server in the Kubecost Helm Chart is configured in the remote\_write mode. The bundled Prometheus server sends the collected metrics to Amazon Managed Service for Prometheus using the AWS SigV4 signing process. All metrics and data are stored in Amazon Managed Service for Prometheus, and Kubecost queries the metrics directly from Amazon Managed Service for Prometheus instead of the bundled Prometheus. It helps customers not worry about maintaining and scaling the local Prometheus instance.
+When the Amazon Managed Service for Prometheus integration is enabled, the bundled Prometheus server in the Kubecost Helm Chart is configured in the remote write mode. The bundled Prometheus server sends the collected metrics to Amazon Managed Service for Prometheus using the AWS SigV4 signing process. All metrics and data are stored in Amazon Managed Service for Prometheus, and Kubecost queries the metrics directly from Amazon Managed Service for Prometheus instead of the bundled Prometheus. It helps customers not worry about maintaining and scaling the local Prometheus instance.
 
 Kubecost has multiple methods for multi-cluster. There may be performance limits to how many clusters/nodes can be supported on a single AMP instance. Please contact Kubecost support for more information.
 
@@ -33,7 +33,7 @@ The example output should be in this format:
 arn:aws:eks:${AWS_REGION}:${YOUR_AWS_ACCOUNT_ID}:cluster/${YOUR_CLUSTER_NAME}
 ```
 
-2. Run the following command to create new a Amazon Managed Service for Prometheus workspace
+2. Run the following command to create new a Amazon Managed Service for Prometheus workspace:
 
 ```bash
 export AWS_REGION=<YOUR_AWS_REGION>

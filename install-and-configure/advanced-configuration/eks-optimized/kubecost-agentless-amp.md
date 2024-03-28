@@ -159,7 +159,7 @@ This guide assumes that the Kubecost Helm release name and the Kubecost namespac
     --override-existing-serviceaccounts --approve
     ```
 
-1. Update the place holder values such as `YOUR_CLUSTER_NAME_HERE` in values-kubecost-primary.yaml
+1. Update the placeholder values such as `YOUR_CLUSTER_NAME_HERE` in *values-kubecost-primary.yaml*.
 
 1. Install Kubecost on your primary:
 
@@ -177,7 +177,7 @@ Follow the above `Agentless AMP Configuration` to configure the scraper(s) on ea
 
 This assumes you have created the AWS IAM policies above. If using multiple AWS accounts, you will need to create the policies in each account.
 
-1. Update the place holder values such as YOUR_CLUSTER_NAME_HERE in values-kubecost-agent.yaml
+1. Update the placeholder values such as `YOUR_CLUSTER_NAME_HERE` in *values-kubecost-agent.yaml*.
 
 1. Create the Kubecost namespace:
 

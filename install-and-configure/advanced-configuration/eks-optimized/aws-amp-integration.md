@@ -29,7 +29,7 @@ To support the large-scale infrastructure (over 100 clusters), Kubecost leverage
 
 ## Support
 
-See the [troubleshooting section](aws-amp-integration.md#troubleshooting) if you run into any errors while setting up the integration. For support from AWS, you can submit a support request through your existing [AWS support contract](https://aws.amazon.com/contact-us/).
+See the [troubleshooting section](aws-amp-integration.md#troubleshooting) of this article if you run into any errors while setting up the integration. For support from AWS, you can submit a support request through your existing [AWS support contract](https://aws.amazon.com/contact-us/).
 
 ## Add recording rules (optional)
 
@@ -79,11 +79,19 @@ The `RunDiagnostic` logs in the cost-model container will contain the most usefu
 kubectl logs -n kubecost deployments/kubecost-cost-analyzer cost-model |grep RunDiagnostic
 ```
 
-Test to see if the Kubecost metrics are available using Grafana or exec into the Kubecost frontend to run a curl against the AMP endpoint:
+Test to see if the Kubecost metrics are available using Grafana or exec into the Kubecost frontend to run a cURL against the AMP endpoint:
 
-Grafana Query: `count({__name__=~".+"}) by (job)`
+Grafana query: 
 
-Port-forward to cost-model:9090: `kubectl port-forward -n kubecost svc/kubecost-cost-analyzer 9090:9090`
+```
+count({__name__=~".+"}) by (job)
+```
+
+Port-forward to cost-model:9090:
+
+```
+kubectl port-forward -n kubecost svc/kubecost-cost-analyzer 9090:9090
+```
 
 Direct link[localhost:9090](http://localhost:9090/grafana/explore?schemaVersion=1&panes=%7B%22muO%22%3A%7B%22datasource%22%3A%22PBFA97CFB590B2093%22%2C%22queries%22%3A%5B%7B%22refId%22%3A%22A%22%2C%22expr%22%3A%22count%28%7B__name__%3D%7E%5C%22.%2B%5C%22%7D%29+by+%28job%29%22%2C%22range%22%3Atrue%2C%22instant%22%3Atrue%2C%22datasource%22%3A%7B%22type%22%3A%22prometheus%22%2C%22uid%22%3A%22PBFA97CFB590B2093%22%7D%2C%22editorMode%22%3A%22code%22%2C%22legendFormat%22%3A%22__auto%22%7D%5D%2C%22range%22%3A%7B%22from%22%3A%22now-1h%22%2C%22to%22%3A%22now%22%7D%7D%7D&orgId=1)
 
