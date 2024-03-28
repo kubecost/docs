@@ -139,7 +139,7 @@ helm install kube-state-metrics \
  --namespace kube-state-metrics --create-namespace
 ```
 
-Add KSM to your Kubecost helm values in the extraScrapeConfigs:
+Add KSM to your Kubecost Helm values in the extraScrapeConfigs:
 
 ```yaml
 prometheus:
