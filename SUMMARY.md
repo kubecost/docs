@@ -88,7 +88,7 @@
     * [Network Traffic Cost Allocation](using-kubecost/navigating-the-kubecost-ui/cost-allocation/network-allocation.md)
   * [Assets Dashboard](using-kubecost/navigating-the-kubecost-ui/assets.md)
   * [Clusters Dashboard](using-kubecost/navigating-the-kubecost-ui/clusters-dashboard.md)
-  * [Cloud Cost Explorer](using-kubecost/navigating-the-kubecost-ui/cloud-costs-explorer/cloud-cost-metrics.md)
+  * [Cloud Cost Explorer](using-kubecost/navigating-the-kubecost-ui/cloud-costs-explorer/cloud-costs-explorer.md)
       * [Cloud Cost Metrics](using-kubecost/navigating-the-kubecost-ui/cloud-costs-explorer/cloud-cost-metrics.md)
   * [Network Monitoring](using-kubecost/navigating-the-kubecost-ui/network-monitoring.md)
   * [Collections](using-kubecost/navigating-the-kubecost-ui/collections.md)
