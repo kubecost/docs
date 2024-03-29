@@ -1,12 +1,16 @@
 # Kube-State-Metrics (KSM) Emission
 
-The Kubecost no longer includes a bundled [KSM deployment](https://github.com/kubernetes/kube-state-metrics). Instead, Kubecost calculates and emits all KSM metrics that it requires.
+Kubecost no longer includes a bundled [KSM deployment](https://github.com/kubernetes/kube-state-metrics). 
 
-To add kube-state-metrics, in addition to the metrics provided by default, see the [Adding external KSM metrics to Kubecost](#adding-external-ksm-metrics-to-kubecost) section below.
+Kubecost emits the KSM metrics that it requires and uses these when building the cost-model.
+
+To add all kube-state-metrics, in addition to the metrics provided by default, see the [Adding external KSM metrics to Kubecost](#adding-external-ksm-metrics-to-kubecost) section below.
 
 ## KSM metrics emitted by Kubecost
 
-The following table shows all KSM metrics required by and implemented in Kubecost. The below metrics and labels follow conventions of KSMv1, not KSMv2.
+The following are all KSM metrics required by and implemented in Kubecost. 
+
+The below metrics and labels follow conventions of KSMv1, not KSMv2.
 
 ### Node metrics
 
@@ -60,7 +64,7 @@ The following table shows all KSM metrics required by and implemented in Kubecos
 ## Disabling Kubecost's KSM emission
 
 {% hint style="warning" %}
-While not recommended, you can disable Kubecost cost-model's emission of KSM if you are already running your own KSM.
+If these metrics are duplicate, you can disable Kubecost's emission of KSM. Keep in mind that the format of Kubecost's KSM differ from KSM v2 metrics. Innaccurate costs and pod to controller mappings will break if these metrics are not available.
 {% endhint %}
 
 {% code overflow="wrap" %}
@@ -135,7 +139,7 @@ helm install kube-state-metrics \
  --namespace kube-state-metrics --create-namespace
 ```
 
-Add the KSM to your Kubecost values:
+Add KSM to your Kubecost Helm values in the extraScrapeConfigs:
 
 ```yaml
 prometheus:
