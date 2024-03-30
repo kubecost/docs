@@ -57,7 +57,11 @@
   * [Network Cost Configuration](install-and-configure/advanced-configuration/network-costs-configuration.md)
   * [Grafana Configuration Guide](install-and-configure/advanced-configuration/custom-grafana.md)
   * [Prometheus Configuration Guide](install-and-configure/advanced-configuration/custom-prom/custom-prom.md)
-    * [Amazon Managed Service for Prometheus](install-and-configure/advanced-configuration/custom-prom/aws-amp-integration.md)
+    * [Amazon Managed Service for Prometheus](install-and-configure/advanced-configuration/eks-optimized/aws-amp-integration.md)
+    * [Amazon Managed Service for Prometheus Overview](/install-and-configure/advanced-configuration/eks-optimized/aws-amp-integration.md)
+    * [AWS Agentless AMP](/install-and-configure/advanced-configuration/eks-optimized/kubecost-agentless-amp.md)
+    * [AWS Distro for Open Telemetry](/install-and-configure/advanced-configuration/eks-optimized/kubecost-aws-distro-open-telemetry.md)
+    * [AMP with Kubecost Prometheus (`remote_write`)](/install-and-configure/advanced-configuration/eks-optimized/amp-with-remote-write.md)
     * [Grafana Cloud Integration for Kubecost](install-and-configure/advanced-configuration/custom-prom/grafana-cloud-integration.md)
     * [Grafana Mimir Integration for Kubecost](install-and-configure/advanced-configuration/custom-prom/grafana-mimir-integration.md)
     * [Google Cloud Managed Service for Prometheus](install-and-configure/advanced-configuration/custom-prom/gcp-gmp-integration.md)
@@ -164,7 +168,6 @@
 * [Importing Kubecost Data into Microsoft Power BI](integrations/import-kubecost-data-into-microsoft-power-bi.md)
 * [Integrating Kubecost with Datadog](integrations/integrating-kubecost-with-datadog.md)
 * [Using Custom Webhook to Create a Kubecost Stage in Spinnaker](integrations/spinnaker-custom-webhook.md)
-* [Kubecost with AWS Distro for Open Telemetry](integrations/kubecost-aws-distro-open-telemetry.md)
 
 ## Troubleshooting
 
