@@ -118,6 +118,7 @@
   * [Teams](using-kubecost/navigating-the-kubecost-ui/teams.md)
   * [Service Accounts](using-kubecost/navigating-the-kubecost-ui/service-accounts.md)
 * [Forecasting](using-kubecost/forecasting.md)
+* [Carbon Costs](using-kubecost/carbon-costs.md)
 * [Contexts](using-kubecost/context-switcher.md)
 * [Kubecost Data Audit](using-kubecost/kubecost-data-audit/README.md)
   * [AWS/Kubecost Data Audit](using-kubecost/kubecost-data-audit/aws-kubecost-data-audit.md)
