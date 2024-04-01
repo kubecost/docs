@@ -1,9 +1,13 @@
-# Container Request Right Sizing Recommendation API (v2)
+# Container Request Right Sizing Recommendation API
 
 {% swagger method="get" path="savings/requestSizingV2" baseUrl="http://<kubecost-address>/model/" summary="Container Request Right Sizing Recommendation API (V2)" %}
 {% swagger-description %}
 The container request right sizing recommendation API provides recommendations for [container resource requests](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/) based on configurable parameters and estimates the savings from implementing those recommendations on a per-container, per-controller level. If the cluster-level resources stay static, then there may not be significant savings from applying Kubecost's recommendations until you reduce your cluster resources. Instead, your idle allocation will increase.
 {% endswagger-description %}
+
+{% swagger-parameter in="query" name="window" required="true" type="string" %}
+Duration of time over which to query. Accepts multiple different formats of time (see this [Using the `window` parameter](/apis/apis-overview.md#using-the-window-parameter) section for more info). It's recommended to provide a window greater than `2d` for accurate sampling.
+{% endswagger-parameter %}
 
 {% swagger-parameter in="query" name="algorithmCPU" type="string" required="false" %}
 The algorithm to be used to calculate CPU recommendations based on historical CPU usage data. Options are `max`, `quantile`, `quantileOfAverages`, and `quantileOfMaxes`. Max recommendations are based on the maximum-observed usage in `window`. Quantile recommendations are based on a quantile of observed usage in `window`. Quantile-of-aggregate recommendations calculate a quantile using only rolled-up aggregate statistics, not individual data points, and as such are not true quantiles. They are most useful when smoothing out rare spikes in the max when sizing CPU. Defaults to `max`. To use the `quantile` algorithm, the [ContainerStats Pipeline](/architecture/containerstats-pipeline.md) must be enabled.
@@ -37,14 +41,8 @@ Lower bound, in millicores, of the CPU recommendation. Defaults to 10. Be carefu
 Lower bound, in bytes, of the RAM recommendation. Defaults to 20MiB (20 \* 1024 \* 1024).
 {% endswagger-parameter %}
 
-{% swagger-parameter in="query" name="window" required="true" type="string" %}
-Required parameter. Duration of time over which to calculate usage. Supports days before the current time in the following format:
-
-`3d`. **Note**: Hourly windows are not currently supported. **Note**: It's recommended to provide a window greater than `2d`. See the [Allocation API documentation](api-allocation.md) for more a more detailed explanation of valid inputs to `window`.
-{% endswagger-parameter %}
-
 {% swagger-parameter in="query" name="filter" type="string" required="false" %}
-A filter to reduce the set of workloads for which recommendations will be calculated. See our [Filter Parameters](filters-api.md) doc for syntax. v1 filters are also supported.
+A filter to reduce the set of workloads for which recommendations will be calculated. See our [Filter Parameters](/apis/filters-api.md) doc for syntax. v1 filters are also supported.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="query" name="sortBy" type="string" required="false" %}

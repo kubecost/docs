@@ -44,7 +44,7 @@ The Multi-Cluster Diagnostics feature is a process run within the `kubecost-cost
 
 When run in each Kubecost deployment, it monitors the health of Kubecost and sends that health data to the central object store at the `/diagnostics` filepath. The below diagram depicts these interactions. This diagram is specific to the requests required for diagnostics only. For additional diagrams, see our [multi-cluster guide](multi-cluster.md).
 
-![Kubecost-Agent-Diagnostics](/images/daigrams/Agent-Diagnostics-Architecture.png)
+![Kubecost-Agent-Diagnostics](/images/diagrams/Agent-Diagnostics-Architecture.png)
 
 ## API usage
 
