@@ -10,7 +10,7 @@ Duration of time over which to query. Accepts multiple different formats of time
 {% endswagger-parameter %}
 
 {% swagger-parameter in="query" name="algorithmCPU" type="string" required="false" %}
-The algorithm to be used to calculate CPU recommendations based on historical CPU usage data. Options are `max` and `quantile`. Max recommendations are based on the maximum-observed usage in `window`. Quantile recommendations are based on a quantile of observed usage in `window` (requires the `qCPU` parameter to set the desired quantile). Defaults to `max`. To use the `quantile` algorithm, the [ContainerStats Pipeline](/architecture/containerstats-pipeline.md) must be enabled.
+The algorithm to be used to calculate CPU recommendations based on historical CPU usage data. Options are `max`, `quantile`, `quantileOfAverages`, and `quantileOfMaxes`. Max recommendations are based on the maximum-observed usage in `window`. Quantile recommendations are based on a quantile of observed usage in `window`. Quantile-of-aggregate recommendations calculate a quantile using only rolled-up aggregate statistics, not individual data points, and as such are not true quantiles. They are most useful when smoothing out rare spikes in the max when sizing CPU. Defaults to `max`. To use the `quantile` algorithm, the [ContainerStats Pipeline](/architecture/containerstats-pipeline.md) must be enabled.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="query" name="algorithmRAM" type="string" required="false" %}
@@ -18,7 +18,7 @@ Like `algorithmCPU`, but for RAM recommendations.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="query" name="qCPU" type="float in the range (0, 1]" required="false" %}
-The desired quantile to base CPU recommendations on. Only used if `algorithmCPU=quantile`. **Note**: a quantile of `0.95` is the same as a 95th percentile.
+The desired quantile to base CPU recommendations on. Only used if `algorithmCPU` is set to `quantile`, `quantileOfAverages`, or `quantileOfMaxes`. **Note**: a quantile of `0.95` is the same as a 95th percentile.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="query" name="qRAM" type="float in the range (0, 1]" required="false" %}
