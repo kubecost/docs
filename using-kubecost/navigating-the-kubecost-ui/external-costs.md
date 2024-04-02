@@ -20,49 +20,33 @@ From your Datadog account, you will need the following values:
 
 See Datadog's [API and Application Keys](https://docs.datadoghq.com/account_management/api-app-keys/) for help finding your API and application key values.
 
-Now append your *values.yaml* file with the following, replacing the example Datadog values with your own. It is also crucial the following Helm flags are set to `true`:
+At a minimum, the following values are needed:
 
-* `kubecostModel.plugins.enabled`
-* `kubecostModel.plugins.install.enabled`
-
-```
-plugins:
+```yaml
+kubecostModel:
+  plugins:
     enabled: true
-    install:
-      enabled: true
-      fullImageName: curlimages/curl:latest
-      securityContext:
-        allowPrivilegeEscalation: false
-        seccompProfile:
-          type: RuntimeDefault
-        capabilities:
-          drop:
-          - ALL
-        readOnlyRootFilesystem: true
-        runAsNonRoot: true
-        runAsUser: 1000
-    folder: /opt/opencost/plugin
-    # leave this commented to always download most recent version of plugins
-    # version: <INSERT_SPECIFIC_PLUGINS_VERSION>
-    configs:
-      # datadog: |
-      #   {
-      #   "datadog_site": "datadog_site",
-      #   "datadog_api_key": "c508d4fd3d126abbbbdc2fe96b0f6613",
-      #   "datadog_app_key": "f357b1f4efefb0870109e0d1aa0cb437b5f10ab9"
-      #   }
+    enabledPlugins:
+    - datadog
+  configs:
+    datadog: |
+      {
+      "datadog_site": "us5.datadoghq.com",
+      "datadog_api_key": "847081f247542151fc63b4dXXXX",
+      "datadog_app_key": "6515819e6a3fb23c0dc3d6032ffc84XXXXX"
+      }
 
-```
 
 Now update your Kubecost install via `helm`:
 
-```
+```sh
 $ helm install kubecost cost-analyzer \
     --repo https://kubecost.github.io/cost-analyzer/ \
     --namespace kubecost --create-namespace \
-    --values values.yaml
+    --values values-kubecost.yaml
 ```
-You should now have access to External Costs with visible cost metrics. You can also confirm by viewing pod logs to show Datadog queries going through.
+
+The external costs UI should populate within 25 minutes. You can also confirm the configuration by viewing pod logs to show Datadog queries going through.
 
 ## Configuring your query
 
@@ -88,3 +72,38 @@ Here you can aggregate your results by one or several categories. While selectin
 Kubecost supports filtering of the above aggregation categories. When a filter is applied, only resources with this matching value will be shown. Supports advanced filtering options as well.
 
 You can also view the External Costs page from the Cloud Cost Explorer, when aggregating by *Provider*. Third party services will appear on this page, and when any line item is selected, you will be taken to External Costs.
+
+### Additional configuration
+
+Additional settings are available in Helm
+
+```yaml
+kubecostModel:
+  plugins:
+    enabled: true
+    enabledPlugins:
+    - datadog
+  configs:
+    datadog: |
+      {
+      "datadog_site": "us5.datadoghq.com",
+      "datadog_api_key": "847081f247542151fc63b4dXXXX",
+      "datadog_app_key": "6515819e6a3fb23c0dc3d6032ffc84XXXXX"
+      }
+  install:
+    enabled: true
+    fullImageName: curlimages/curl:latest
+    securityContext:
+      allowPrivilegeEscalation: false
+      seccompProfile:
+        type: RuntimeDefault
+      capabilities:
+        drop:
+        - ALL
+      readOnlyRootFilesystem: true
+      runAsNonRoot: true
+      runAsUser: 1000
+  folder: /opt/opencost/plugin
+  # leave this commented to always download most recent version of plugins
+  # version: <INSERT_SPECIFIC_PLUGINS_VERSION>
+```
