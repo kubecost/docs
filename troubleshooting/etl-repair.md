@@ -2,11 +2,7 @@
 
 Kubecost's extract, transform, load (ETL) process is a computed cache built upon Prometheus metrics and cloud billing data, from which nearly all API requests made by the user and the Kubecost frontend currently rely upon.
 
-The ETL data is stored in a `PersistentVolume` mounted to the `kubecost-cost-analyzer` pod. In the event that you lose or are looking to rebuild the ETL data, the following endpoints should be used.
-
-{% hint style="info" %}
-Configuring [ETL Backups](/install-and-configure/install/etl-backup/etl-backup.md) can prevent situations where you would need to repair large amounts of missing ETL data. This is not required in [Federated ETL](/install-and-configure/install/multi-cluster/federated-etl/federated-etl.md) environments.
-{% endhint %}
+The ETL data is stored in a `PersistentVolume` mounted to the `kubecost-cost-analyzer` pod. In most [multicluster environments](/install-and-configure/install/multi-cluster/multi-cluster.md), the ETL data is pushed to object storage. In the event that you lose or are looking to rebuild the ETL data, the following endpoints should be used.
 
 ## 1. Repair Asset ETL
 
@@ -127,10 +123,40 @@ INF Federator[allocations][1d]: Successfully merged files for '1690761600-169084
 
 ## Troubleshooting
 
+### Repairing ETL by port-forwarding
+
+In this doc, we reference repairs using the `https://kubecost.your.com` URL. If that is not accessible to you, you can instead port-forward to the `kubecost-cost-analyzer` pod and use `localhost`.
+
+Method 1:
+
+{% code overflow="wrap" %}
+```bash
+# Terminal 1
+kubectl port-forward deploy/kubecost-cost-analyzer 9090:9090
+
+# Terminal 2
+curl "localhost:9090/model/etl/asset/repair?window=2023-01-01T00:00:00Z,2023-01-04T00:00:00Z"
+```
+{% endcode %}
+
+Method 2:
+
+{% code overflow="wrap" %}
+```bash
+# Terminal 1
+kubectl port-forward deploy/kubecost-cost-analyzer 9003:9003
+
+# Terminal 2
+curl "localhost:9003/etl/asset/repair?window=2023-01-01T00:00:00Z,2023-01-04T00:00:00Z"
+```
+{% endcode %}
+
+### Error messages
+
 If the ETL data looks incorrect, or you see one of the following error messages, there are several things to check:
 
 {% code overflow="wrap" %}
-```
+```bash
 [Error] ETL: CloudAsset[*****************]: Build[******]: 
 MergeRange error: boundary error: requested [2022-03-26T00:00:00+0000, 2022-04-02T00:00:00+0000); supported [2022-03-29T00:00:00+0000, 2022-04-30T00:00:00+0000): 
 ETL: Asset[1d] is 100.0% complete
@@ -138,7 +164,7 @@ ETL: Asset[1d] is 100.0% complete
 {% endcode %}
 
 {% code overflow="wrap" %}
-```
+```bash
 WRN ETL: Asset[1h]: Repair: error: cannot repair [2022-11-05T00:00:00+0000, 2022-11-06T00:00:00+0000): coverage is [2022-12-01T21:00:00+0000, 2022-12-02T23:00:00+0000)
 ```
 {% endcode %}
