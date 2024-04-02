@@ -222,13 +222,13 @@ Attach both of the following policies to the same role or user. Use a user if yo
 <summary>My CUR exists in a member account different from Kubecost or the management account</summary>
 
 
-Create an IAM User or Role in the sub-account where the Kubecost primary installation runs. This Role or User links to the Kubecost Primary k8s service account either via IAM annotation (see more below under Via Pod Annotation by EKS), or via User with an Access/Secret Key. This Role/User will assume a role in the account where the CUR and Athena are created (master payer account), allowing Kubecost in a subaccount to get data from the top-level Athena.
+Create an IAM User or Role in the sub-account where the Kubecost primary installation runs. This Role or User links to the Kubecost Primary k8s service account either via IAM annotation (see more below under Via Pod Annotation by EKS), or via User with an Access/Secret Key. This Role/User will assume a role in the account where the CUR and Athena are created (referred to as the Payer Account), allowing Kubecost running in a sub-account to get data from the top-level Athena in the Payer Account.
 
-Next, create an IAM Role in the master payer account for your Organization where you create the CUR export bucket and Athena query results bucket. Attach this policy to an IAM Role created for Kubecost. 
+Next, create an IAM Role in the Payer Account for your organization. This is where you created the CUR export bucket and Athena query results bucket in the previous step. Now that you have the Sub-account User or Role + the Payer Account Role, you will need to add policies to both.
 
 #### Attach AssumeRole Policy to IAM Role/User in Kubecost Primary Sub-Account.
 
-Add the Policy below to an IAM Role/User created in the AWS sub-account where primary Kubecost is installed. This policy allows sts:AssumeRole to the IAM Role in the Payer account you created above.
+Add the IAM Policy below to an IAM Role/User created in the AWS sub-account where primary Kubecost is installed. This policy allows the sub-account role to use sts:AssumeRole and assume the IAM Role created in the Payer account.
 
 The SpotDataAccess policy statement is optional, and only needed if the Spot data feed is configured (see “Setting up the Spot Data feed” step below).
 
@@ -270,7 +270,7 @@ The SpotDataAccess policy statement is optional, and only needed if the Spot dat
 
 #### Attach Athena/CUR S3 Access Policy to IAM Role in Payer Account.
 
-Attach the following policy to the IAM Role created in the master payer account. Replace `${AthenaCURBucket}` variable with your CUR bucket name, and check to make sure your Athena results bucket matches the format of aws-athena-query-results-*. If not, set the query result bucket in the policy to match your created bucket.
+Attach the following policy to the IAM Role created in the Payer Account. Replace `${AthenaCURBucket}` variable with your CUR bucket name, and check to make sure your Athena results bucket matches the format of aws-athena-query-results-*. If not, set the query result bucket in the policy to match your created bucket.
 
 ```
 	{
@@ -336,7 +336,7 @@ Attach the following policy to the IAM Role created in the master payer account.
 
 #### Attach Trust Statement to IAM Role in Payer Account.
 
-Then add the following trust statement to the role in the payer account (replace the `${kubecost-primary-subaccount-id}` variable with the account you want to assume the role):
+We now need to make sure the Payer Account Role trusts the sub-account User/Role.  Add the following trust statement to the Role in the Payer Account. (replace the `${kubecost-primary-subaccount-id}` variable with the account number of the sub-account running Kubecost primary):
 
 ```
 	{
