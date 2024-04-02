@@ -30,7 +30,7 @@ All of these steps should be performed on Kubecost v1.108.1 on the primary Kubec
 
 Please upgrade your primary cluster to v1.108.1 before completing any of the following steps. v1.108.1 ships with various utilities necessary to complete the upgrade to v2.0. You can upgrade to this specific version using this following command:
 
-```
+```sh
 helm upgrade --install kubecost \
   --repo https://kubecost.github.io/cost-analyzer/ cost-analyzer \
   --namespace kubecost \
@@ -92,13 +92,17 @@ Enabling ETL-Utils will create the directories `/federated/CLUSTER_ID` for every
 
 Enabling [Aggregator](/install-and-configure/install/multi-cluster/federated-etl/aggregator.md) will begin processing the ETL data from the `/federated` directory. The aggregator will then serve all Kubecost queries.
 
+{% hint style="warning" %}
+The `federatedStorageConfigSecret`, `etlBucketConfigSecret`, and `thanosSourceBucketSecret` *MUST* all point to the same bucket. Otherwise the data migration will not suceed.
+{% endhint %}
+
 ```yaml
 kubecostModel:
   federatedStorageConfigSecret: federated-store
+  etlBucketConfigSecret: <YOUR_SECRET_NAME>
 etlUtils:
   enabled: true
   thanosSourceBucketSecret: kubecost-thanos
-  fullImageName: gcr.io/kubecost1/cost-model-etl-utils:latest
   resources: {}
   env:
     LOG_LEVEL: debug # debug isn't all that verbose and is recommended
@@ -143,6 +147,7 @@ federatedETL:
   federatedCluster: true
 kubecostModel:
   federatedStorageConfigSecret: federated-store
+  etlBucketConfigSecret: "" # make sure ETL backups are disabled on secondary clusters
   etl: true
   containerStatsEnabled: true
   warmCache: false
