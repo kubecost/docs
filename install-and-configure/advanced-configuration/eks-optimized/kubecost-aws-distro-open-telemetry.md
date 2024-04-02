@@ -27,7 +27,7 @@ This guide assumes that the Kubecost Helm release name and the Kubecost namespac
 
 ## Configuration
 
-Clone [this repository](https://github.com/kubecost/poc-common-configurations/tree/main/aws-amp/adot) that contains all of the configuration files you will need to deploy Kubecost with ADOT.
+Clone [this repository](https://github.com/kubecost/poc-common-configurations/tree/main/aws/amp-with-adot) that contains all of the configuration files you will need to deploy Kubecost with ADOT.
 
 ```bash
 git clone https://github.com/kubecost/poc-common-configurations.git
@@ -44,7 +44,7 @@ There are many options for deploying the ADOT daemonSet. At a minimum, Kubecost 
 kubectl apply -f example-configs/prometheus-daemonset.yaml -n adot-col
 ```
 
-Alternatively, you can add these items to your [existing ConfigMap](https://github.com/kubecost/poc-common-configurations/blob/main/aws-amp/adot/example-configs/kubecost-adot-scrape-config.yaml).
+Alternatively, you can add these items to your [existing ConfigMap](https://github.com/kubecost/poc-common-configurations/blob/main/aws/amp-with-adot/example-configs/kubecost-adot-scrape-config.yaml).
 
 
 {% hint style="info" %}
@@ -137,7 +137,7 @@ This assumes you have created the IAM policies above. If using multiple AWS acco
 
 ## ADOT daemonSet quick install
 
-See this [example .yaml file](https://github.com/kubecost/poc-common-configurations/blob/main/aws-amp/adot/example-configs/prometheus-daemonset.yaml) for an all-in-one ADOT DS config.
+See this [example .yaml file](https://github.com/kubecost/poc-common-configurations/blob/main/aws/amp-with-adot/example-configs/prometheus-daemonset.yaml) for an all-in-one ADOT DS config.
 
 ## Troubleshooting
 
