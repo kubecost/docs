@@ -422,8 +422,8 @@ You may not be allowed to update your Billing Data Export Configuration without 
 
 Download the following configuration files:
 
-* [_cloud-integration.json_](https://raw.githubusercontent.com/kubecost/poc-common-configurations/main/aws-attach-roles/cloud-integration.json)
-* [_iam-payer-account-cur-athena-glue-s3-access.json_](https://github.com/kubecost/poc-common-configurations/blob/main/aws-attach-roles/iam-payer-account-cur-athena-glue-s3-access.json)
+* [_cloud-integration.json_](https://github.com/kubecost/poc-common-configurations/blob/main/aws/cloud-integration.json)
+* [_iam-payer-account-cur-athena-glue-s3-access.json_](https://github.com/kubecost/poc-common-configurations/blob/main/aws/iam-policies/cur/iam-payer-account-cur-athena-glue-s3-access.json)
 
 Update the following variables in the files you downloaded:
 

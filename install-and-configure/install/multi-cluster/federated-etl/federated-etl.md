@@ -16,7 +16,7 @@ As of Kubecost v2.0, a multi-cluster setup will also require running the [Aggreg
 
 This guide has specific details on how ETL Configuration works and deployment options.
 
-Alternatively, the most common configurations can be found in our [poc-common-configurations](https://github.com/kubecost/poc-common-configurations/tree/main/etl-federation) repo.
+Alternatively, the most common configurations can be found in our [poc-common-configurations](https://github.com/kubecost/poc-common-configurations/tree/main/etl-federation-aggregator) repo.
 
 ### Clusters
 
