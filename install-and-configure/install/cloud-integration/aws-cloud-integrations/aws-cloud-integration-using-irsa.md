@@ -28,7 +28,7 @@ Detail for multiple cloud provider setups is [here](/install-and-configure/insta
 
 ### Step 1: Download configuration files
 
-To begin, download the recommended configuration template files from our [poc-common-config repo](https://github.com/kubecost/poc-common-configurations/tree/main/aws-attach-roles). You will need the following files from this folder:
+To begin, download the recommended configuration template files from our [poc-common-config repo](https://github.com/kubecost/poc-common-configurations/tree/main/aws). You will need the following files from this folder:
 
 * _cloud-integration.json_
 * _iam-payer-account-cur-athena-glue-s3-access.json_
