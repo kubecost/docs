@@ -20,7 +20,7 @@ From your Datadog account, you will need the following values:
 
 See Datadog's [API and Application Keys](https://docs.datadoghq.com/account_management/api-app-keys/) for help finding your API and application key values.
 
-At a minimum, the following values are needed:
+At a minimum, the following values are required to be applied to your *values.yaml* file:
 
 ```yaml
 kubecostModel:
@@ -50,9 +50,11 @@ The external costs UI should populate within 25 minutes. You can also confirm th
 
 ## Configuring your query
 
+Once your costs have populated the External Costs page, you can additionally configure your query to view specific cost metrics.
+
 ### Date range
 
-Select the date range of the report by setting specific start and end dates, or using one of the preset options.
+Select the date range of the displayed cost data by setting specific start and end dates, or using one of the preset options.
 
 ### Aggregation
 

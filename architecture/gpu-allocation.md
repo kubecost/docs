@@ -14,4 +14,4 @@ The number of GPUs requested is parsed for each container with GPU resource requ
 
 A pod requesting virtual GPUs using the [AWS Virtual GPU device plugin](https://github.com/awslabs/aws-virtual-gpu-device-plugin) will also follow the same pattern, with the allocation being that of the `k8s.amazonaws.com/vgpu` resource. In this case, the vGPUs allocated are adjusted by a coefficient representing the vGPUs per physical GPU as defined in the [vGPU device plugin daemonset](https://github.com/awslabs/aws-virtual-gpu-device-plugin/blob/master/manifests/device-plugin.yml) to get the proportion of physical GPU being used by the container. This defaults at `10.0` vGPUs per physical GPU, meaning a container with a request of `k8s.amazonaws.com/vgpu: 5` would be using half of a physical GPU by default.
 
-More information about consuming GPU resources can be found [here](https://kubernetes.io/docs/tasks/manage-gpus/scheduling-gpus/).
+More information about consuming GPU resources can be found in Kubernetes' [Schedule GPU](https://kubernetes.io/docs/tasks/manage-gpus/scheduling-gpus/) doc.

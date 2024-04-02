@@ -1,4 +1,4 @@
-# Add Key
+# Adding a Product Key
 
 You can apply your product key at any time within the product UI or during an install or upgrade process. More details on both options are provided below.
 
