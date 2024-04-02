@@ -226,7 +226,7 @@ Create an IAM User or Role in the sub-account where the Kubecost primary install
 
 Next, create an IAM Role in the payer account for your organization. This is where you created the CUR export bucket and Athena query results bucket in the previous step. Now that you have the Sub-account User or Role plus the payer account Role, you will need to add policies to both.
 
-#### Attach AssumeRole Policy to IAM Role/User in Kubecost Primary Sub-Account.
+#### Attach AssumeRole policy to IAM Role/User in Kubecost primary sub-account
 
 Add the IAM Policy below to an IAM Role/User created in the AWS sub-account where primary Kubecost is installed. This policy allows the sub-account role to use sts:AssumeRole and assume the IAM Role created in the payer account.
 
