@@ -28,13 +28,16 @@ kubecostModel:
     enabled: true
     enabledPlugins:
     - datadog
-  configs:
-    datadog: |
-      {
-      "datadog_site": "us5.datadoghq.com",
-      "datadog_api_key": "847081f247542151fc63b4dXXXX",
-      "datadog_app_key": "6515819e6a3fb23c0dc3d6032ffc84XXXXX"
-      }
+    configs:
+      datadog: |
+        {
+        "datadog_site": "us5.datadoghq.com",
+        "datadog_api_key": "xxxx",
+        "datadog_app_key": "xxxx"
+        }
+    install:
+      enabled: true
+```
 
 
 Now update your Kubecost install via `helm`:
@@ -85,15 +88,15 @@ kubecostModel:
     enabled: true
     enabledPlugins:
     - datadog
-  configs:
-    datadog: |
-      {
-      "datadog_site": "us5.datadoghq.com",
-      "datadog_api_key": "847081f247542151fc63b4dXXXX",
-      "datadog_app_key": "6515819e6a3fb23c0dc3d6032ffc84XXXXX"
-      }
-  install:
-    enabled: true
+    configs:
+      datadog: |
+        {
+        "datadog_site": "us5.datadoghq.com",
+        "datadog_api_key": "xxxx",
+        "datadog_app_key": "xxxx"
+        }
+    install:
+      enabled: true
     fullImageName: curlimages/curl:latest
     securityContext:
       allowPrivilegeEscalation: false
@@ -104,7 +107,7 @@ kubecostModel:
         - ALL
       readOnlyRootFilesystem: true
       runAsNonRoot: true
-      runAsUser: 1000
+      runAsUser: 1001
   folder: /opt/opencost/plugin
   # leave this commented to always download most recent version of plugins
   # version: <INSERT_SPECIFIC_PLUGINS_VERSION>
