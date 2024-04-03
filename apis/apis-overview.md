@@ -36,6 +36,10 @@ The Cloud Cost Trends API compares cost usage between two windows of the same du
 
 The Budget API allows you to establish spending budget rules for your workload across clusters and namespaces to ensure you don't go over your allotted budget.
 
+#### [Forecast API](governance-apis/forecast-api.md)
+
+The Forecast API uses a predictive learning model to approximate future spend of Allocation, Assets, or Cloud Cost data.
+
 #### [Cost Events Audit API](governance-apis/cost-events-audit-api.md)
 
 The Cost Events Audit API presents recent changes at the cluster level.
