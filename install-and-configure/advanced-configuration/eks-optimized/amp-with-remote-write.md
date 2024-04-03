@@ -1,5 +1,11 @@
 # AMP with Kubecost Prometheus (`remote_write`)
 
+## See also
+
+* [Amazon Managed Service for Prometheus (AMP) Overview](/install-and-configure/advanced-configuration/eks-optimized/aws-amp-integration.md)
+* [AWS Agentless AMP](/install-and-configure/advanced-configuration/eks-optimized/kubecost-agentless-amp.md)
+* [AWS Distro for Open Telemetry](/install-and-configure/advanced-configuration/eks-optimized/kubecost-aws-distro-open-telemetry.md)
+
 ## Overview
 
 When the Amazon Managed Service for Prometheus integration is enabled, the bundled Prometheus server in the Kubecost Helm Chart is configured in the remote write mode. The bundled Prometheus server sends the collected metrics to Amazon Managed Service for Prometheus using the AWS SigV4 signing process. All metrics and data are stored in Amazon Managed Service for Prometheus, and Kubecost queries the metrics directly from Amazon Managed Service for Prometheus instead of the bundled Prometheus. It helps customers not worry about maintaining and scaling the local Prometheus instance.

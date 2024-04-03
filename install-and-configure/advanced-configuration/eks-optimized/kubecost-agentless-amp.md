@@ -1,5 +1,11 @@
 # Kubecost with AWS Managed Prometheus Agentless Monitoring
 
+## See also
+
+* [AMP Overview](/install-and-configure/advanced-configuration/eks-optimized/aws-amp-integration.md)
+* [AWS Distro for Open Telemetry](/install-and-configure/advanced-configuration/eks-optimized/kubecost-aws-distro-open-telemetry.md)
+* [AMP with Kubecost Prometheus (`remote_write`)](/install-and-configure/advanced-configuration/eks-optimized/amp-with-remote-write.md)
+
 ## Overview
 
 {% hint style="info" %}
@@ -214,8 +220,3 @@ It will take a few minutes for the scrapers start.
 
 For more help troubleshooting, see our [Amazon Managed Service for Prometheus (AMP) Overview](aws-amp-integration.md#troubleshooting) doc.
 
-## See also
-
-* [AMP Overview](/install-and-configure/advanced-configuration/eks-optimized/aws-amp-integration.md)
-* [AWS Distro for Open Telemetry](/install-and-configure/advanced-configuration/eks-optimized/kubecost-aws-distro-open-telemetry.md)
-* [AMP with remote_write](/install-and-configure/advanced-configuration/eks-optimized/amp-with-remote-write.md)
