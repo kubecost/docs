@@ -136,6 +136,7 @@
   * [Cloud Cost Trends API](apis/monitoring-apis/cloud-cost-trends-api.md)
 * [Governance APIs](apis/governance-apis/README.md)
   * [Budget API](apis/governance-apis/budget-api.md)
+  * [Forecast API](apis/governance-apis/forecast-api.md)
   * [Cost Events Audit API](apis/governance-apis/cost-events-audit-api.md)
   * [Spec Cost Prediction API](apis/governance-apis/spec-cost-prediction-api.md)
 * [Diagnostic APIs](apis/diagnostic-apis/README.md)
