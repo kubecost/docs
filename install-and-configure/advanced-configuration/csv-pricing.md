@@ -4,7 +4,7 @@
 This feature is only officially supported on Kubecost Enterprise plans.
 {% endhint %}
 
-The following steps allow Kubecost to use custom prices with a CSV pipeline. This feature allows for individual assets (e.g. nodes) to be supplied at unique prices. Common uses are for on-premise clusters, service-providers, or for external enterprise discounts.
+Kubecost allows users to apply custom prices to individual assets (e.g. nodes) via a CSV pipeline. Common uses are for on-premise clusters, service-providers, or for external enterprise discounts. This feature allows for greater resource specification than is provided by [Custom Pricing](/architecture/pricing-sources-matrix.md#custom-pricing). This doc shows how to create and configure a CSV pricing file.
 
 ## Creating a pricing file
 
