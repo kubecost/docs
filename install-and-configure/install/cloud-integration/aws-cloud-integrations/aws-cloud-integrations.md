@@ -437,6 +437,10 @@ Update the following variables in the files you downloaded:
     "projectID": "<AWS_account_ID>"
 ```
 
+{% hint style="info" %}
+In your *cloud-integration.json*, you only need to provide a value for `masterPayerARN` when Kubecost is running in an AWS account different than the payer account Kubecost is querying (otherwise this value can be omitted from the config). `masterPayerARN` is the Amazon Resource Number of the role in the management account.
+{% endhint %}
+
 * In _iam-payer-account-cur-athena-glue-s3-access.json_, replace `ATHENA_RESULTS_BUCKET_NAME` with your Athena S3 bucket name (configured in Step 2: Setting up Athena).
 
 **Step 2: Create policy**
