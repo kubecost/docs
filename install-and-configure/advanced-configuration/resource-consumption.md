@@ -14,10 +14,6 @@ Cloud cost metrics for all accounts can be pulled in on your primary cluster by 
 
 Secondary clusters can be configured strictly as metric emitters to save memory. Learn more about how to best configure them in our [Secondary Clusters Guide](/install-and-configure/install/multi-cluster/secondary-clusters.md).
 
-## Exclude provider IDs in Cloud Assets
-
-This method is only available for AWS cloud billing integrations. Kubecost is capable of tracking each individual cloud billing line item. However on certain accounts this can be quite large. If provider IDs are excluded, Kubecost won't cache granular data. Instead, Kubecost caches aggregate data and make an ad-hoc query to the AWS Cost and Usage Report to get granular data resulting in slow load times but less memory consumption.
-
 ## Lower query concurrency
 
 Lowering query concurrency for the Kubecost ETL build will mean ETL takes longer to build, but consumes less memory. The default value is: `5`. This can be adjusted with the [Helm value](https://github.com/kubecost/cost-analyzer-helm-chart/blob/v1.93.2/cost-analyzer/values.yaml#L272):
