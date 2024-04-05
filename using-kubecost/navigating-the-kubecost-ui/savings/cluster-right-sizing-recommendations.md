@@ -46,7 +46,7 @@ To receive cluster right-sizing recommendations, you must first:
 To adopt cluster right-sizing recommendations, you must:
 
 * Have a GKE/EKS/AWS Kops cluster
-* Enable the [Cluster Controller](/install-and-configure/advanced-configuration/controller/cluster-controller.md) on that cluster and perform the [provider service key setup](/install-and-configure/advanced-configuration/controller#provider-service-key-setup.md)
+* Enable the [Cluster Controller](/install-and-configure/advanced-configuration/controller/cluster-controller.md) on that cluster and perform the [provider service key setup](/install-and-configure/advanced-configuration/controller/cluster-controller.md#provider-service-key-setup)
 
 In order for Kubecost to apply a recommendation, it needs write access to your cluster. Write access to your cluster is enabled with the Cluster Controller.
 
