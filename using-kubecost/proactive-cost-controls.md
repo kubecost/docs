@@ -10,4 +10,4 @@ Using a combination of the [predictions API](/apis/governance-apis/spec-cost-pre
 Note that currently budgets for the use of proactive controlling of costs should be confined to single-cluster installations if the workload grouping is anything other than "Cluster".
 {% endhint %}
 
-For more details on this process and how to achieve proactive cost controls with a step-by-step guide using the Kyverno policy engine, please refer to the Kubecost blog post [here](https://blog.kubecost.com/blog/kyverno-and-kubecost/).
+For more details on this process and how to achieve proactive cost controls with a step-by-step guide using the Kyverno policy engine, please refer to the Kubecost blog post [here](https://blog.kubecost.com/blog/kyverno-and-kubecost/#proactive-budget-control).
