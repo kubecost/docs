@@ -231,3 +231,5 @@ The output will be broken down into three primary categories:
 Observe how `defaultNamespace` impacts the `default-deployment` workload.
 
 From that output, `costChange`notices the existing `kubecost-cost-analyzer` deployment in the `kubecost` namespace and is producing an estimated _negative_ cost difference because the request is being reduced. However, because historical usage is also factored in, there is no drastic cost reduction that might be initially expected from a `1m` CPU and `1Mi` memory request.
+
+For how to use the predictions API in a use case preventing cost overruns before they occur, see the guide [here](/using-kubecost/proactive-cost-controls.md).
