@@ -29,7 +29,7 @@ redirects:
     troubleshoot-install: troubleshooting/troubleshoot-install.md
     env: install-and-configure/install/environment.md
     install-and-configure/install/custom-prom: install-and-configure/advanced-configuration/custom-prom.md
-    install-and-configure/install/custom-prom: install-and-configure/advanced-configuration/custom-prom/gcp-gmp-integration.md
+    install-and-configure/install/custom-prom/gcp-gmp-integration: install-and-configure/advanced-configuration/custom-prom/gcp-gmp-integration.md
     using-kubecost/getting-started/assets: using-kubecost/navigating-the-kubecost-ui/assets.md
     hc/en-us/articles/10015110616599: federated-etl.md
     hc/en-us/articles/10018767892119: user-management-oidc.md
