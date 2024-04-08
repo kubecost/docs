@@ -89,7 +89,7 @@ kubecostAggregator:
     # default: 10m
     DB_BUCKET_REFRESH_INTERVAL: 1h
 
-    # How much data do ingest from the federated store bucket, and how much data
+    # How much data to ingest from the federated store bucket, and how much data
     # to keep in the DB before rolling the data off.
     # default: 91
     ETL_DAILY_STORE_DURATION_DAYS: "365"
