@@ -1,5 +1,9 @@
 # External Costs API
 
+{% hint style="info" %}
+External Costs can only be queried after you have configured at least one external service with Kubecost. You can learn how to integrate Datadog through this method in our [External Costs](/using-kubecost/navigating-the-kubecost-ui/external-costs.md#enabling-external-costs) doc.
+{% endhint %}
+
 {% swagger method="get" path="/model/customCost/timeseries" baseUrl="http://<your-kubecost-address>" summary="External Costs API summary query" %}
 {% swagger-description %}
 Samples costs of connected third party services
@@ -65,7 +69,7 @@ Filter your results by any category which you can aggregate by, can support mult
 {% endswagger-response %}
 {% endswagger %}
 
-{% swagger method="get" path="/model/customCost/total" baseUrl="http://<your-kubecost-address>" summary="External Costs API summary query" %}
+{% swagger method="get" path="/model/customCost/total" baseUrl="http://<your-kubecost-address>" summary="External Costs API total query" %}
 {% swagger-description %}
 Samples costs of connected third party services, but summarizes subwindows into singular window of total cost. Can be compared to [`/topline` endpoint of other APIs](/apis/apis-overview.md#using-the-topline-endpoint-to-summarize-costs).
 {% endswagger-description %}
@@ -122,7 +126,3 @@ Filter your results by any category which you can aggregate by, can support mult
 ```
 {% endswagger-response %}
 {% endswagger %}
-
-## Enabling the External Costs API
-
-External Costs can only be queried after you have configured at least one external service with Kubecost. You can learn how to integrate Datadog through this method in our [External Costs](/using-kubecost/navigating-the-kubecost-ui/external-costs.md#enabling-external-costs) doc.
