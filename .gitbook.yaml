@@ -27,6 +27,10 @@ redirects:
     alerts.html: alerts.md
     assets: using-kubecost/navigating-the-kubecost-ui/assets.md
     troubleshoot-install: troubleshooting/troubleshoot-install.md
+    env: install-and-configure/install/environment.md
+    install-and-configure/install/custom-prom: install-and-configure/advanced-configuration/custom-prom.md
+    install-and-configure/install/custom-prom/gcp-gmp-integration: install-and-configure/advanced-configuration/custom-prom/gcp-gmp-integration.md
+    using-kubecost/getting-started/assets: using-kubecost/navigating-the-kubecost-ui/assets.md
     hc/en-us/articles/10015110616599: federated-etl.md
     hc/en-us/articles/10018767892119: user-management-oidc.md
     hc/en-us/articles/10066023188119: api-persistent-volume-right-sizing.md
@@ -39,7 +43,7 @@ redirects:
     hc/en-us/articles/4407595918231: annotations.md
     hc/en-us/articles/4407595919895: api-request-right-sizing.md
     hc/en-us/articles/4407595921431: app-memory.md
-    hc/en-us/articles/4407595922711: architecture.md
+    hc/en-us/articles/4407595922711: architecture/architecture.md
     hc/en-us/articles/4407595924247: assets.md
     hc/en-us/articles/4407595925271: readme.md
     hc/en-us/articles/4407595926423: availability-tiers.md
@@ -96,8 +100,8 @@ redirects:
     hc/en-us/articles/4407604999447: markdown.md
     hc/en-us/articles/4407763013271: readme.md
     hc/en-us/articles/4408095797911: ksm-metrics.md
-    hc/en-us/articles/4408175613719: istio-rancher.md
-    hc/en-us/articles/4409859798679: aws-amp-integration.md
+    hc/en-us/articles/4408175613719: install-and-configure/install/provider-installations/istio-rancher.md
+    hc/en-us/articles/4409859798679: install-and-configure/advanced-configuration/custom-prom/aws-amp-integration.md
     hc/en-us/articles/4412353032599: spot-cluster-sizing.md
     hc/en-us/articles/4412369153687: cloud-integration.md
     hc/en-us/articles/4413635957271: rafay.md
@@ -106,7 +110,7 @@ redirects:
     hc/en-us/articles/4425132038167: agent.md
     hc/en-us/articles/4425134686743: user-metrics.md
     hc/en-us/articles/4442565953943: code-contribution.md
-    hc/en-us/articles/5699259004311: grafana-cloud-integration.md
+    hc/en-us/articles/5699259004311: install-and-configure/advanced-configuration/custom-prom/grafana-cloud-integration.md
     hc/en-us/articles/5748367035159: cluster-health-score.md
     hc/en-us/articles/5843799319703: api-request-recommendation-apply.md
     hc/en-us/articles/5843816284823: guide-one-click-request-sizing.md
@@ -141,7 +145,7 @@ redirects:
     hc/en-us/articles/4407595918231-Enabling-Annotation-Emission: annotations.md
     hc/en-us/articles/4407595919895-Container-Request-Right-Sizing-API: api-request-right-sizing.md
     hc/en-us/articles/4407595921431-Kubecost-Memory-Usage: app-memory.md
-    hc/en-us/articles/4407595922711-Kubecost-Core-Architecture-Overview: architecture.md
+    hc/en-us/articles/4407595922711-Kubecost-Core-Architecture-Overview: architecture/architecture.md
     hc/en-us/articles/4407595924247-Assets: assets.md
     hc/en-us/articles/4407595925271-Auditing: readme.md
     hc/en-us/articles/4407595926423-Availability-Tiers: availability-tiers.md
@@ -198,8 +202,8 @@ redirects:
     hc/en-us/articles/4407604999447-Contributing-and-Markdown-Style-Guide: markdown.md
     hc/en-us/articles/4407763013271-Kubecost-Documentation: readme.md
     hc/en-us/articles/4408095797911-Kube-State-Metrics-KSM-Emission: ksm-metrics.md
-    hc/en-us/articles/4408175613719-Installation-Kubecost-with-Istio-Rancher-: istio-rancher.md
-    hc/en-us/articles/4409859798679-Amazon-Managed-Service-for-Prometheus: aws-amp-integration.md
+    hc/en-us/articles/4408175613719-Installation-Kubecost-with-Istio-Rancher-: install-and-configure/install/provider-installations/istio-rancher.md
+    hc/en-us/articles/4409859798679-Amazon-Managed-Service-for-Prometheus: install-and-configure/advanced-configuration/custom-prom/aws-amp-integration.md
     hc/en-us/articles/4412353032599-Spot-Cluster-Sizing: spot-cluster-sizing.md
     hc/en-us/articles/4412369153687-Cloud-Integrations: cloud-integration.md
     hc/en-us/articles/4413635957271-Installing-Kubecost-with-Rafay: rafay.md
@@ -208,7 +212,7 @@ redirects:
     hc/en-us/articles/4425132038167-Installing-Agent-for-Hosted-Kubecost-Alpha-: agent.md
     hc/en-us/articles/4425134686743-User-Metrics: user-metrics.md
     hc/en-us/articles/4442565953943-Getting-Started: code-contribution.md
-    hc/en-us/articles/5699259004311-Grafana-Cloud-Integration-for-Kubecost: grafana-cloud-integration.md
+    hc/en-us/articles/5699259004311-Grafana-Cloud-Integration-for-Kubecost: install-and-configure/advanced-configuration/custom-prom/grafana-cloud-integration.md
     hc/en-us/articles/5748367035159-Cluster-Health-Score-: cluster-health-score.md
     hc/en-us/articles/5843799319703-Container-Request-Recommendation-Apply-APIs: api-request-recommendation-apply.md
     hc/en-us/articles/5843816284823-Guide-1-click-request-sizing: guide-one-click-request-sizing.md
