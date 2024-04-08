@@ -77,9 +77,9 @@ kubecostAggregator:
   env:
     # This interval defines how long the Aggregator spends ingesting ETL data
     # from the federated store bucket into SQL tables, before cancelling its job
-    # and starting over to pull newer data from the bucket. If set too low for
-    # large scale users, this may inadvertently cause the Aggregator to spend
-    # longer time ingesting data. If set too high, there will be a delay in data
+    # to enter the derivation step. If set too low for large scale users, the
+    # Aggregator may not have enough time to ingest all new data that exists in
+    # the federated store bucket. If set too high, there will be a delay in data
     # between the Kubecost Agents and the Aggregator.
     #
     # Note, that the default value is set to 10m to optimize for the
@@ -88,14 +88,21 @@ kubecostAggregator:
     #
     # default: 10m
     DB_BUCKET_REFRESH_INTERVAL: 1h
-    # governs parallelism of derivation step
-    # more threads speeds derivation, but requires significantly more
+
+    # How much data do ingest from the federated store bucket, and how much data
+    # to keep in the DB before rolling the data off.
+    # default: 91
+    ETL_DAILY_STORE_DURATION_DAYS: "365"
+    
+    # How many threads to use when ingesting Asset/Allocation/CloudCost data
+    # from the federated store bucket. In most cases the default is sufficient,
+    # but can be increased if trying to backfill historical data.
+    # default: 3
+    DB_CONCURRENT_INGESTION_COUNT: "5"
+
     # log level
     # default: info
     LOG_LEVEL: info
-    # Increases window of data ingested from federated store.
-    # default: 91
-    ETL_DAILY_STORE_DURATION_DAYS: "91"
   aggregatorDbStorage:
     # governs storage size of aggregator DB storage
     # !!NOTE!! disk performance is _critically important_ to aggregator performance
