@@ -35,7 +35,7 @@ kubecostModel:
       "datadog_api_key": "847081f247542151fc63b4dXXXX",
       "datadog_app_key": "6515819e6a3fb23c0dc3d6032ffc84XXXXX"
       }
-
+```
 
 Now update your Kubecost install via `helm`:
 
