@@ -12,6 +12,10 @@ External Costs is a monitoring dashboard for third party service costs that are 
 
 Kubecost will require the integration of a service's plugin in order to detect and display costs associated with that service.
 
+<details>
+
+<summary>Datadog</summary>
+
 From your Datadog account, you will need the following values:
 
 * `datadog_site`: ex. us5.datadoghq.com
@@ -46,7 +50,9 @@ $ helm install kubecost cost-analyzer \
     --values values-kubecost.yaml
 ```
 
-The external costs UI should populate within 25 minutes. You can also confirm the configuration by viewing pod logs to show Datadog queries going through.
+</details>
+
+The external costs UI should populate within 25 minutes. You can also confirm the configuration by viewing pod logs to show queries going through.
 
 ## Configuring your query
 

@@ -134,7 +134,7 @@
   * [Asset Diff API](apis/monitoring-apis/asset-diff.md)
   * [Cloud Cost API](apis/monitoring-apis/cloud-cost-api.md)
   * [Cloud Cost Trends API](apis/monitoring-apis/cloud-cost-trends-api.md)
-  * [External Cost API](apis/monitoring-apis/external-costs-api.md)
+  * [External Costs API](apis/monitoring-apis/external-costs-api.md)
 * [Governance APIs](apis/governance-apis/README.md)
   * [Budget API](apis/governance-apis/budget-api.md)
   * [Forecast API](apis/governance-apis/forecast-api.md)
