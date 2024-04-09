@@ -150,3 +150,6 @@ A: Set the following Helm value: `prometheus.nodeExporter.hostNetwork=false`.
 
 Q: How can I configure my displayed currency type?\
 A: Kubecost supports multiple different currency types for display purposes, but does not perform direct currency conversion. This must be configured via your *values.yaml* with the flag `kubecostProductConfigs.currencyCode`.
+
+Q: I am seeing Kubecost report excessively high cost metrics in the billions. How do I correct this?\
+A: You can correct your pricing data by ensuring you've enabled [custom pricing](/architecture/pricing-sources-matrix.md#custom-pricing] by setting the Helm flag `kubecostProductConfigs.customPricesEnabled` to `true`, or enabling custom pricing via the UI.
