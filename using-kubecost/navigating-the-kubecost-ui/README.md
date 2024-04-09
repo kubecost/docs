@@ -16,7 +16,7 @@ You can now access the UI by visiting `http://localhost:9090` in your web browse
 
 In the left navigation, you will see a section called *Monitor*, which comprises multiple key monitoring dashboards, as well as other pages to provide you with cost metrics. The following pages can be found in this section:
 
-* [Allocations](cost-allocation/README.md))
+* [Allocations](cost-allocation/README.md)
 * [Assets](assets.md)
 * [Cloud Costs](cloud-costs-explorer/cloud-costs-explorer.md)
 * [Clusters](clusters-dashboard.md)
