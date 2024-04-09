@@ -6,6 +6,8 @@ External Costs is currently in beta.
 
 External Costs is a monitoring dashboard for third party service costs that are not directly from cloud providers. Currently, this includes monitoring for Datadog costs. More third party services are expected to be supported in the future.
 
+Costs displayed through External Costs adhere to the [FinOps Open Cost and Usage Specification (FOCUS)](https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec) spec for accuracy and convenience.
+
 ![External Costs](/images/externalcosts.png)
 
 ## Enabling External Costs
@@ -115,3 +117,7 @@ kubecostModel:
   # leave this commented to always download most recent version of plugins
   # version: <INSERT_SPECIFIC_PLUGINS_VERSION>
 ```
+
+## See also
+
+For more information about External Costs and how costs are queried, see the [External Costs API](/apis/monitoring-apis/external-costs-api.md) doc.
