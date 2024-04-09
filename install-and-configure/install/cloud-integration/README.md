@@ -30,6 +30,10 @@ Visit _Settings_, then toggle on _Highlight Unreconciled Costs_, then select _Sa
 
 ![Allocations dashboard with highlighted unreconciled costs](/images/unreconciled.png)
 
+### Short-term cost estimation
+
+After Kubecost performs reconciliation, the remaining daily and hourly node costs are estimated by calculating the average node cost for the node's runtime in Kubecost data for the last 7 days from the end of midnight the day before. For this reason, Kubecost needs this amount of existing data before performing this short-term cost estimation.
+
 ### Cloud Costs
 
 Cloud Costs allow Kubecost to pull in OOC cloud spend from your CSP's billing data, including any services run by the CSP as well as compute resources. By labelling OOC costs, their value can be distributed to your Allocations data as external costs. This allows you to better understand the proportion of OOC cloud spend that your in-cluster usage depends on.
