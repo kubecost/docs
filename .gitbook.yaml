@@ -28,7 +28,7 @@ redirects:
     assets: using-kubecost/navigating-the-kubecost-ui/assets.md
     troubleshoot-install: troubleshooting/troubleshoot-install.md
     env: install-and-configure/install/environment.md
-    install-and-configure/install/custom-prom: install-and-configure/advanced-configuration/custom-prom.md
+    install-and-configure/install/custom-prom: install-and-configure/advanced-configuration/custom-prom/custom-prom.md
     install-and-configure/install/custom-prom/gcp-gmp-integration: install-and-configure/advanced-configuration/custom-prom/gcp-gmp-integration.md
     using-kubecost/getting-started/assets: using-kubecost/navigating-the-kubecost-ui/assets.md
     hc/en-us/articles/10015110616599: federated-etl.md
@@ -204,6 +204,7 @@ redirects:
     hc/en-us/articles/4408095797911-Kube-State-Metrics-KSM-Emission: ksm-metrics.md
     hc/en-us/articles/4408175613719-Installation-Kubecost-with-Istio-Rancher-: install-and-configure/install/provider-installations/istio-rancher.md
     hc/en-us/articles/4409859798679-Amazon-Managed-Service-for-Prometheus: install-and-configure/advanced-configuration/custom-prom/aws-amp-integration.md
+    hc/en-us/articles/4409859798679-amazon-managed-service-for-prometheus: install-and-configure/advanced-configuration/custom-prom/aws-amp-integration.md
     hc/en-us/articles/4412353032599-Spot-Cluster-Sizing: spot-cluster-sizing.md
     hc/en-us/articles/4412369153687-Cloud-Integrations: cloud-integration.md
     hc/en-us/articles/4413635957271-Installing-Kubecost-with-Rafay: rafay.md
