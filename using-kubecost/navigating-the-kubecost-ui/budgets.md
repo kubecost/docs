@@ -63,4 +63,4 @@ Selecting _Delete_ will open the Delete Budget window. Confirm by selecting _Del
 
 ## Use cases
 
-For how to use budgets in a use case preventing cost overruns before they occur, see the guide [here](/using-kubecost/proactive-cost-controls.md).
+[Enforce Kubecost Budgets to prevent overruns before they occur](/using-kubecost/proactive-cost-controls.md).
