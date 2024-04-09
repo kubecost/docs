@@ -96,7 +96,7 @@ federatedETL:
 If it is not the primary cluster, additionally set the following:
 
 ```yaml
-kubeCostAggregator:
+kubecostAggregator:
   deployMethod: disabled
 ```
 
