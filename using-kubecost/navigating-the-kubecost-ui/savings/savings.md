@@ -49,3 +49,13 @@ On the Savings page, as well as on certain individual Savings insights, you have
 * Production: Expects stable cluster activity, will provide some extra space for potential spikes in activity.
 * Development: Cluster can tolerate small amount of instability, will run cluster somewhat close to capacity.
 * High availability: Cluster should avoid instability at all costs, will size cluster with lots of extra space to account for unexpected spikes in activity.
+
+The different cluster profile types and their corresponding CPU/RAM utilizations are:
+
+| Cluster profile | CPU/RAM target utilization |
+|---|---|
+| High availability | 50% |
+| Production | 65& |
+| Development | 80% |
+
+Cluster profile can be configured for your *values.yaml* as well, via the flag `kubecostProductConfigs.clusterProfile`, which can be set at to any of the following values: `development`, `production` or `high-availability`.
