@@ -101,7 +101,7 @@ redirects:
     hc/en-us/articles/4407763013271: readme.md
     hc/en-us/articles/4408095797911: ksm-metrics.md
     hc/en-us/articles/4408175613719: install-and-configure/install/provider-installations/istio-rancher.md
-    hc/en-us/articles/4409859798679: install-and-configure/advanced-configuration/custom-prom/aws-amp-integration.md
+    hc/en-us/articles/4409859798679: install-and-configure/advanced-configuration/custom-prom/aws-amp-integration/.md
     hc/en-us/articles/4412353032599: spot-cluster-sizing.md
     hc/en-us/articles/4412369153687: cloud-integration.md
     hc/en-us/articles/4413635957271: rafay.md
