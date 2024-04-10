@@ -4,9 +4,9 @@
 
 There are three methods to use Kubecost with AMP:
 
-* [AWS Agentless AMP](/install-and-configure/advanced-configuration/eks-optimized/kubecost-agentless-amp.md)
-* [AWS Distro for Open Telemetry](/install-and-configure/advanced-configuration/eks-optimized/kubecost-aws-distro-open-telemetry.md)
-* [AMP with Kubecost Prometheus (`remote_write`)](/install-and-configure/advanced-configuration/eks-optimized/amp-with-remote-write.md)
+* [AWS Agentless AMP](/install-and-configure/advanced-configuration/custom-prom/kubecost-agentless-amp.md)
+* [AWS Distro for Open Telemetry](/install-and-configure/advanced-configuration/custom-prom/kubecost-aws-distro-open-telemetry.md)
+* [AMP with Kubecost Prometheus (`remote_write`)](/install-and-configure/advanced-configuration/custom-prom/amp-with-remote-write.md)
 
 The below guide provide a high-level overview of using AMP with Kubecost. The links above provide detailed instructions for each method.
 

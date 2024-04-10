@@ -2,9 +2,9 @@
 
 ## See also
 
-* [Amazon Managed Service for Prometheus (AMP) Overview](/install-and-configure/advanced-configuration/eks-optimized/aws-amp-integration.md)
-* [AWS Agentless AMP](/install-and-configure/advanced-configuration/eks-optimized/kubecost-agentless-amp.md)
-* [AWS Distro for Open Telemetry](/install-and-configure/advanced-configuration/eks-optimized/kubecost-aws-distro-open-telemetry.md)
+* [Amazon Managed Service for Prometheus (AMP) Overview](/install-and-configure/advanced-configuration/custom-prom/aws-amp-integration.md)
+* [AWS Agentless AMP](/install-and-configure/advanced-configuration/custom-prom/kubecost-agentless-amp.md)
+* [AWS Distro for Open Telemetry](/install-and-configure/advanced-configuration/custom-prom/kubecost-aws-distro-open-telemetry.md)
 
 ## Overview
 
@@ -204,6 +204,6 @@ See more troubleshooting steps at the bottom of [AMP Overview](aws-amp-integrati
 
 ## See also
 
-* [AMP Overview](/install-and-configure/advanced-configuration/eks-optimized/aws-amp-integration.md)
-* [AWS Agentless AMP](/install-and-configure/advanced-configuration/eks-optimized/kubecost-agentless-amp.md)
-* [AWS Distro for Open Telemetry](/install-and-configure/advanced-configuration/eks-optimized/kubecost-aws-distro-open-telemetry.md)
+* [AMP Overview](/install-and-configure/advanced-configuration/custom-prom/aws-amp-integration.md)
+* [AWS Agentless AMP](/install-and-configure/advanced-configuration/custom-prom/kubecost-agentless-amp.md)
+* [AWS Distro for Open Telemetry](/install-and-configure/advanced-configuration/custom-prom/kubecost-aws-distro-open-telemetry.md)

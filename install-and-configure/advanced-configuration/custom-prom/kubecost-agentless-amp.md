@@ -2,9 +2,9 @@
 
 ## See also
 
-* [AMP Overview](/install-and-configure/advanced-configuration/eks-optimized/aws-amp-integration.md)
-* [AWS Distro for Open Telemetry](/install-and-configure/advanced-configuration/eks-optimized/kubecost-aws-distro-open-telemetry.md)
-* [AMP with Kubecost Prometheus (`remote_write`)](/install-and-configure/advanced-configuration/eks-optimized/amp-with-remote-write.md)
+* [AMP Overview](/install-and-configure/advanced-configuration/custom-prom/aws-amp-integration.md)
+* [AWS Distro for Open Telemetry](/install-and-configure/advanced-configuration/custom-prom/kubecost-aws-distro-open-telemetry.md)
+* [AMP with Kubecost Prometheus (`remote_write`)](/install-and-configure/advanced-configuration/custom-prom/amp-with-remote-write.md)
 
 ## Overview
 
