@@ -242,7 +242,7 @@ The SpotDataAccess policy statement is optional, and only needed if the Spot dat
                      "Sid": "AssumeRoleInMasterPayer",
                      "Effect": "Allow",
                      "Action": "sts:AssumeRole",
-                     "Resource": "arn:aws:iam::${PayerAccountID}:role/<Kubecost IAM Role in payer accounte>
+                     "Resource": "arn:aws:iam::${PayerAccountID}:role/<Kubecost IAM Role in payer account"
                   }
                ]
 	}
