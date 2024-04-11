@@ -18,7 +18,7 @@ Users must also have the persistent volumes Helm flag enabled. This is enabled i
 
 ```yaml
 persistentVolume:
-  enabled:true
+  enabled: true
 ```
 
 If this is your first time using Teams, consult the [Getting started](teams.md#getting-started) section below. For additional team creation, see the [Adding a team](teams.md#adding-a-team) section.
