@@ -19,7 +19,7 @@ helm template kubecost --repo https://kubecost.github.io/cost-analyzer cost-anal
 ```
 
 {% hint style="info" %}
-The alpine/k8s image is not used in real deployments. It is only in the Helm chart for testing purposes.
+The alpine/K8s image is not used in real deployments. It is only in the Helm chart for testing purposes.
 {% endhint %}
 
 ### Kubecost: Required
