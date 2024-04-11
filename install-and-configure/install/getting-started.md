@@ -38,10 +38,11 @@ Establishing an ingress controller will allow for control of access for your wor
 SAML/OIDC-configured RBAC and SSO are only officially supported on Kubecost Enterprise plans. Free users may still configure SSO using third party tooling.
 {% endhint %}
 
-You can configure SSO and RBAC on a separate baseline deployment, which will not only shorten the deployment time of security features, but it will also avoid unwanted access denial. This is helpful when using only one developer deployment. See our user management guides below:
+See the below guides for configuring SSO with SAML or OIDC. Teams RBAC is currently only supported with SAML:
 
 * [SAML](/install-and-configure/advanced-configuration/user-management-saml/README.md)
 * [OIDC](/install-and-configure/advanced-configuration/user-management-oidc/user-management-oidc.md)
+* [Teams](../../using-kubecost/navigating-the-kubecost-ui/teams.md) - RBAC using Kubecost UI
 
 ## **Resource efficiency and idle costs**
 
