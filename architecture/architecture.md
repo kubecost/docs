@@ -18,6 +18,10 @@ Today, the core Kubecost product can be run with just components 1 and 2.1. See 
 
 ![Architecture Overview](/images/arch.png)
 
+{% hint style="warning" %}
+Prometheus is not intended as an optional component when setting up Kubecost. Disabling Prometheus will result in failure to retrieve most cost metrics. For more information, see Kubecost's [Prometheus Configuration Guide](/install-and-configure/advanced-configuration/custom-prom/custom-prom.md).
+{% endhint %}
+
 ## Provider Pricing Architecture Overview
 
 Kubecost interacts with provider pricing in a few different ways:
