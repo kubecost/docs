@@ -132,6 +132,10 @@ Cost allocation metrics are available for both in-cluster and OOC resources:
 | Shared                      | The cost of shared resources allocated to this tenant. This field covers shared overhead, shared namespaces, and shared labels. Can be explored further via _Inspect Shared Costs_. Idle costs are not included in Shared costs.                                                                                                                                                                                             |
 | Cost Efficiency             | The percentage of requested CPU & memory dollars utilized over the measured time window. Values range from 0 to above 100 percent. Workloads with no requests but with usage OR workloads with usage > request can report efficiency above 100%.                                                                                                                                                                             |
 
+{% hint style="warning" %}
+GPu costs are only available through Allocations through the use of a device plugin. For more, see Kubernetes docs on [using device plugins](https://kubernetes.io/docs/tasks/manage-gpus/scheduling-gpus/#using-device-plugins). Without a device plugin, GPU costs are only available through Assets when drilling down into the GPU node.
+{% endhint %}
+
 ### Cost efficiency table example
 
 ![Cost Efficiency table](../../../images/table.PNG)
