@@ -14,8 +14,8 @@ To begin viewing carbon costs, set the Helm flag `carbonEstimates` to `true` in 
 
 ```yaml
 kubecostProductConfigs:
-   carbonEstimates:
-      enabled: true
+  carbonEstimates:
+    enabled: true
 ```
 
 Please allow Kubecost approximately ten minutes to derive pricing information. Carbon costs will then begin appearing with other cost metrics on your Allocation and Assets pages.
