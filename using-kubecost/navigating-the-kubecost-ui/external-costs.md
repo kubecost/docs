@@ -6,11 +6,17 @@ External Costs is currently in beta.
 
 External Costs is a monitoring dashboard for third party service costs that are not directly from cloud providers. Currently, this includes monitoring for Datadog costs. More third party services are expected to be supported in the future.
 
+Costs displayed through External Costs adhere to the [FinOps Open Cost and Usage Specification (FOCUS)](https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec) spec for accuracy and convenience.
+
 ![External Costs](/images/externalcosts.png)
 
 ## Enabling External Costs
 
 Kubecost will require the integration of a service's plugin in order to detect and display costs associated with that service.
+
+<details>
+
+<summary>Datadog</summary>
 
 From your Datadog account, you will need the following values:
 
@@ -35,7 +41,7 @@ kubecostModel:
       "datadog_api_key": "847081f247542151fc63b4dXXXX",
       "datadog_app_key": "6515819e6a3fb23c0dc3d6032ffc84XXXXX"
       }
-
+```
 
 Now update your Kubecost install via `helm`:
 
@@ -46,7 +52,9 @@ $ helm install kubecost cost-analyzer \
     --values values-kubecost.yaml
 ```
 
-The external costs UI should populate within 25 minutes. You can also confirm the configuration by viewing pod logs to show Datadog queries going through.
+</details>
+
+The external costs UI should populate within 25 minutes. You can also confirm the configuration by viewing pod logs to show queries going through.
 
 ## Configuring your query
 
@@ -109,3 +117,7 @@ kubecostModel:
   # leave this commented to always download most recent version of plugins
   # version: <INSERT_SPECIFIC_PLUGINS_VERSION>
 ```
+
+## See also
+
+For more information about External Costs and how costs are queried, see the [External Costs API](/apis/monitoring-apis/external-costs-api.md) doc.

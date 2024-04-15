@@ -12,6 +12,7 @@ v2 filters can be used via the `filter=` parameter in supported APIs. Supported 
 
 * [Allocation API](/apis/monitoring-apis/api-allocation.md)
 * [Assets API](/apis/monitoring-apis/assets-api.md)
+* [External Costs API](/apis/monitoring-apis/external-costs-api.md)
 * [Allocation Trends API](/apis/monitoring-apis/allocation-trends-api.md)
 * [Cloud Cost Trends API](/apis/monitoring-apis/cloud-cost-trends-api.md)
 * [Request Sizing API](/apis/savings-apis/api-request-right-sizing-v2.md)
