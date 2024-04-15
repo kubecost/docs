@@ -257,7 +257,7 @@ helm install kubecost \
 ```
 {% endcode %}
 
- Add the following section to the Helm values to have Kubecost use the newly created service account:
+Add the following section to your Helm values. This will tell Kubecost to use your newly created service account, instead of creating one.
 
 ```yaml
 serviceAccount:
