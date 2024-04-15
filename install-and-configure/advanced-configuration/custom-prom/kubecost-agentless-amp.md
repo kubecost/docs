@@ -179,7 +179,7 @@ This guide assumes that the Kubecost Helm release name and the Kubecost namespac
 
 ### Kubecost agents installation
 
-Follow the above `Agentless AMP Configuration` to configure the scraper(s) on each cluster.
+Follow the above AMP setup section to configure the scraper(s) on each cluster.
 
 This assumes you have created the AWS IAM policies above. If using multiple AWS accounts, you will need to create the policies in each account.
 
