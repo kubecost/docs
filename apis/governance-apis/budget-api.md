@@ -234,6 +234,6 @@ curl --location '<your-kubecost-address>/model/budget' \
 }'
 ```
 
-## Use Cases
+## Use cases
 
 For an example use case on how to use budgets to achieve proactive cost control, see [here](/using-kubecost/proactive-cost-controls.md).
