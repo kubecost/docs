@@ -257,6 +257,14 @@ helm install kubecost \
 ```
 {% endcode %}
 
+ Add the following section to the Helm values to have Kubecost use the newly created service account:
+
+```yaml
+serviceAccount:
+  create: false
+  name: kubecost-serviceaccount
+```
+
 ## Validation
 
 It can take over an hour to process the billing data for large AWS accounts. In the short-term, follow the logs and look for a message similar to `(7.7 complete)`, which should grow gradually to `(100.0 complete)`. Some errors (ERR) are expected, as seen below.
