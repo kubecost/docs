@@ -7,7 +7,7 @@ Kubernetes deployments and their pods consume resources on the underlying nodes 
 Using a combination of the [predictions API](/apis/governance-apis/spec-cost-prediction-api.md) and [budgets](/using-kubecost/navigating-the-kubecost-ui/budgets.md), Kubecost is able to enforce budgets with the addition of a dynamic admission controller such as [Gatekeeper](https://open-policy-agent.github.io/gatekeeper/website/) or [Kyverno](https://kyverno.io). In this process, a Kubernetes admission controller is installed in the cluster along with a policy which asks Kubecost for cost predictions and verifies those against a matching budget. The decision to allow or deny then rests with the admission controller.
 
 {% hint style="info" %}
-Note: Currently budgets used for these purposes, when configured with a grouping other than "Cluster", should be confined to single-cluster Kubecost installations.
+When a budget used for these purposes is configured with a grouping other than "Cluster", it should be confined to a single-cluster Kubecost installation.
 {% endhint %}
 
 For more details on this process and how to achieve proactive cost controls with a step-by-step guide using the Kyverno policy engine, please refer to the Kubecost blog post [here](https://blog.kubecost.com/blog/kyverno-and-kubecost/#proactive-budget-control).

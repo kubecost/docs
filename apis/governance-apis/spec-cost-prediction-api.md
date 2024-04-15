@@ -234,6 +234,6 @@ From that output, `costChange`notices the existing `kubecost-cost-analyzer` depl
 
 For how to use the predictions API in a use case preventing cost overruns before they occur, see the guide [here](/using-kubecost/proactive-cost-controls.md).
 
-## Use Cases
+## Use cases
 
 For an example use case on how to use predictions to achieve proactive cost control, see [here](/using-kubecost/proactive-cost-controls.md).
