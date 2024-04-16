@@ -11,10 +11,6 @@ Samples full granularity of cloud costs from cloud billing report (ex. AWS' Cost
 Duration of time over which to query. Accepts multiple different formats of time (see this [Using the `window` parameter](/apis/apis-overview.md#using-the-window-parameter) section for more info).
 {% endswagger-parameter %}
 
-{% swagger-parameter in="path" name="costMetric" required="false" %}
-Determines which cloud cost metric type will be returned. Acceptable values are `AmortizedNetCost`, `InvoicedCost`, `ListCost`, and `NetCost`. Default is `AmortizedNetCost`.
-{% endswagger-parameter %}
-
 {% swagger-parameter in="path" name="aggregate" required="false" %}
 Field by which to aggregate the results. Accepts: `invoiceEntityID`, `accountID`, `provider`, `service`, and `label:<name>`. Supports multi-aggregation using comma-separated lists. Example: `aggregate=accountID,service`
 {% endswagger-parameter %}
