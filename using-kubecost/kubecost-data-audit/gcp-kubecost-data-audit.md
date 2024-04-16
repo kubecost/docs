@@ -1,4 +1,4 @@
-# AWS/Kubecost Data Audit
+# GCP/Kubecost Data Audit
 
 ## Performing a cluster data audit
 
