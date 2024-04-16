@@ -30,6 +30,10 @@ The Cloud Costs API retrieves cloud cost data from cloud providers by reading co
 
 The Cloud Cost Trends API compares cost usage between two windows of the same duration and presents a percentage value showing the change in cloud costs.
 
+#### [External Costs API](monitoring-apis/external-costs-api.md)
+
+The External Costs API displays costs related to third party services, currently limited to Datadog.
+
 ### Governance APIs
 
 #### [Budget API](governance-apis/budget-api.md)
@@ -70,17 +74,18 @@ Many, but not all, Kubecost APIs power different features in the Kubecost UI. Th
 
 | API Name                                          | UI Equivalent                                                                                                                                    |
 | ------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Allocation API                                    | [Allocations dashboard](/using-kubecost/navigating-the-kubecost-ui/cost-allocation/README.md)                                                |
-| Allocation/Cloud Cost Explorer Trends API         | Allocations/Cloud Cost Explorer dashboards, Total cost column percentage                                                                                              |
-| Assets API                                        | [Assets dashboard](/using-kubecost/navigating-the-kubecost-ui/assets.md)                                                              |
-| Cloud Cost API                                    | [Cloud Costs Explorer dashboard](/using-kubecost/navigating-the-kubecost-ui/cloud-costs-explorer/cloud-costs-explorer.md)                                  |
-| Budget API                                        | [Budgets dashboard](/using-kubecost/navigating-the-kubecost-ui/budgets.md)                                                            |
-| Cost Events Audit API                             | [Audits dashboard](/using-kubecost/navigating-the-kubecost-ui/audits.md)                                                              |
-| Predict API                                       | [Audits dashboard, Estimated monthly cost impact](/using-kubecost/navigating-the-kubecost-ui/audits.md#estimated-monthly-cost-impact) |
-| Savings API                                       | [Savings dashboard](/using-kubecost/navigating-the-kubecost-ui/savings/savings.md)                                                                                                                  |
-| Cluster Right Sizing Recommendation API           | [Cluster Sizing Recommendations page](/using-kubecost/navigating-the-kubecost-ui/savings/cluster-right-sizing-recommendations.md)                                                                    |
-| Container Request Right Sizing Recommendation API | [Request right sizing recommendations page](/using-kubecost/navigating-the-kubecost-ui/savings/container-request-right-sizing-recommendations.md)                                                                              |
-| Abandoned Workloads API                           | [Abandoned Workloads page](/using-kubecost/navigating-the-kubecost-ui/savings/abandoned-workloads.md)                                                                                               |
+| Allocation API                                    | [Allocations dashboard](/using-kubecost/navigating-the-kubecost-ui/cost-allocation/README.md)                                                    |
+| Allocation/Cloud Cost Explorer Trends API         | Allocations/Cloud Cost Explorer dashboards, Total cost column percentage                                                                         |
+| Assets API                                        | [Assets dashboard](/using-kubecost/navigating-the-kubecost-ui/assets.md)                                                                         |
+| Cloud Cost API                                    | [Cloud Costs Explorer dashboard](/using-kubecost/navigating-the-kubecost-ui/cloud-costs-explorer/cloud-costs-explorer.md)                        |
+| External Costs API                                | [External Costs dashboard](/using-kubecost/navigating-the-kubecost-ui/external-costs.md)                                                         |
+| Budget API                                        | [Budgets dashboard](/using-kubecost/navigating-the-kubecost-ui/budgets.md)                                                                       |
+| Cost Events Audit API                             | [Audits dashboard](/using-kubecost/navigating-the-kubecost-ui/audits.md)                                                                         |
+| Predict API                                       | [Audits dashboard, Estimated monthly cost impact](/using-kubecost/navigating-the-kubecost-ui/audits.md#estimated-monthly-cost-impact)            |
+| Savings API                                       | [Savings dashboard](/using-kubecost/navigating-the-kubecost-ui/savings/savings.md)                                                               |
+| Cluster Right Sizing Recommendation API           | [Cluster Sizing Recommendations page](/using-kubecost/navigating-the-kubecost-ui/savings/cluster-right-sizing-recommendations.md)                |
+| Container Request Right Sizing Recommendation API | [Request right sizing recommendations page](/using-kubecost/navigating-the-kubecost-ui/savings/container-request-right-sizing-recommendations.md)|
+| Abandoned Workloads API                           | [Abandoned Workloads page](/using-kubecost/navigating-the-kubecost-ui/savings/abandoned-workloads.md)                                            |
 
 ## API usage
 

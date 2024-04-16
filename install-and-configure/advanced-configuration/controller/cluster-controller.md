@@ -266,6 +266,9 @@ clusterController:
 You may also enable via `--set` when running Helm install:
 
 ```bash
+helm install kubecost cost-analyzer \
+--repo https://kubecost.github.io/cost-analyzer/ \
+--namespace kubecost --create-namespace \
 --set clusterController.enabled=true
 ```
 
