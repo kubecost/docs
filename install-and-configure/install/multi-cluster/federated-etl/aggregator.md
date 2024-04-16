@@ -76,8 +76,8 @@ The settings below are in addition to the basic configuration above.
 kubecostAggregator:
   env:
     # This interval defines how long the Aggregator spends ingesting ETL data
-    # from the federated store bucket into SQL tables, before cancelling its job
-    # to enter the derivation step. If set too low for large scale users, the
+    # from the federated store bucket into SQL tables, before exiting its job to
+    # enter the derivation step. If set too low for large scale users, the
     # Aggregator may not have enough time to ingest all new data that exists in
     # the federated store bucket. If set too high, there will be a delay in data
     # between the Kubecost Agents and the Aggregator.
@@ -91,6 +91,12 @@ kubecostAggregator:
 
     # How much data to ingest from the federated store bucket, and how much data
     # to keep in the DB before rolling the data off.
+    # 
+    # Note: If increasing this value to backfill historical data, it will take
+    # time to gradually ingest & process those historical ETL files. Consider
+    # also increasing the resources available to the aggregator as well as the
+    # refresh & concurrency env vars.
+    # 
     # default: 91
     ETL_DAILY_STORE_DURATION_DAYS: "365"
     
