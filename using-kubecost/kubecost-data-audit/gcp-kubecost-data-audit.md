@@ -6,7 +6,7 @@ First, in the Kubecost UI, [view the price of a single node for a single day](./
 
 ![Node cost details](../../images/data-auditing/gcp-kubecost-gke-asset.png)
 
-Next, compare this instance's costs with what is found in the GCP export via BigQuery. Use the providerID that's in Kubecost for that node as the resource.name:
+Next, compare this instance's costs with what is found in the GCP export via BigQuery. Use the providerID that's in Kubecost for the node as the resource.name in the following query:
 
 ```bash
 SELECT
