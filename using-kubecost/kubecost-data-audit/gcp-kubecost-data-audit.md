@@ -2,9 +2,12 @@
 
 ## Performing a cluster data audit
 
-First, in the Kubecost UI, [view the price of a single node for a single day](./).
+First, in the Kubecost UI, view the price of a single node for a single day. This can be done on the [Assets](/using-kubecost/navigating-the-kubecost-ui/assets.md) page by modifying your query with the following requests:
 
-![Node cost details](../../images/data-auditing/gcp-kubecost-gke-asset.png)
+* Select the window range picker and select *Today*
+* Select *Filter* and add the filters *Provider is "GCP"* and *Asset Type is "node"*.
+
+![Node cost details](/images/data-auditing/gcp-kubecost-gke-asset.png)
 
 Next, compare this instance's costs with what is found in the GCP export via BigQuery. Use the providerID that's in Kubecost for the node as the resource.name in the following query:
 
@@ -27,21 +30,23 @@ GROUP BY
   resource
 ```
 
-![BigQuery Output](../../images/data-auditing/dataaudit-gcp-bigquery-output.png)
+![BigQuery Output](/images/data-auditing/dataaudit-gcp-bigquery-output.png)
 
 
-
-> **Note**: The example above is auditing the GKE nodes associated with the cluster. BigQuery will return additional items such as network costs and costs associated with the node pool. The focus here is on GKE nodes only.
+{% hint style="info" %}
+The example above is auditing the GKE nodes associated with the cluster. BigQuery will return additional items such as network costs and costs associated with the node pool, however you should focus on GKE nodes only.
+{% endhint %}
 
 ## Performing an Audit against GCP resources (services)
 
 First, choose a window of 1 day greater than 48hrs in past and filter by a specific account and the GCP provider.
 
-![Aggregated by service. Filtered by Provider and Account.](../../images/data-auditing/kubecost-gcp-services.png)
-
+![Aggregated by service. Filtered by Provider and Account.](/images/data-auditing/kubecost-gcp-services.png)
 
 Next, compare the costs of services for the same account in the GCP billing console.
 
-> **Note**: Total costs won't always be precise and may have a variance of 1-2%.
+{% hint style="info" %}
+Total costs aren't always precise and may have a deviation of 1-2%.
+{% endhint %}
 
-![GCP Billing Console](../../images/data-auditing/dataaudit-gcp-console.png)
+![GCP Billing Console](/images/data-auditing/dataaudit-gcp-console.png)
