@@ -33,3 +33,5 @@ prometheus:
 ## Confirm HA mode is enabled
 
 You can check the status of HA mode in the Kubecost UI by selecting *Settings* from the left navigation, then under 'Never lose your cost visibility', ensure 'High availability mode' is enabled.
+
+![High availability mode enabled](/images/high-availability-enabled.png)
