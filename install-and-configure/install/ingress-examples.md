@@ -5,7 +5,7 @@ Enabling external access to the Kubecost UI requires exposing access to port 909
 As of Kubecost 2.2, the frontend has an option for `haMode` which changes the service name that the ingress needs to target. When using the helm ingress template, the correct service is automatically set based on this flag.
 
 {% hint style="warning" %}
-Please exercise caution when exposing Kubecost via an Ingress controller especially if there is no authentication in use. Consult your organization's internal security practices.
+Please exercise caution when exposing Kubecost via an ingress controller especially if there is no authentication in use. Consult your organization's internal security practices.
 {% endhint %}
 
 Common samples below and others can be found on our [GitHub repository](https://github.com/kubecost/poc-common-configurations/tree/main/ingress-examples).
@@ -14,7 +14,7 @@ Common samples below and others can be found on our [GitHub repository](https://
 
 This is recommended unless you have specific needs that a typical ingress template do not address. The advantage to this method is that the service name is automatically configured.
 
-An example of using the helm ingress using cert-manager:
+An example of using the Helm ingress using cert-manager:
 
 ```yaml
 ingress:
