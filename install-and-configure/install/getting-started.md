@@ -6,6 +6,10 @@ Once you have familiarized yourself with Kubecost and integrated with any cloud 
 
 The default Kubecost installation has a 32Gb persistent volume and a 15-day retention period for Prometheus metrics. This is enough space to retain data for roughly 300 pods, depending on your exact node and container count. See the Kubecost Helm chart [configuration options](https://github.com/kubecost/cost-analyzer-helm-chart) to adjust both the retention period and storage size.
 
+{% hint style="warning" %}
+Prometheus is not optional. Disabling Prometheus will result in zero costs in Kubecost. For more information, see Kubecost's [Prometheus Configuration Guide](/install-and-configure/advanced-configuration/custom-prom/custom-prom.md).
+{% endhint %}
+
 To determine the appropriate disk size, you can use this formula to approximate:
 
 {% code overflow="wrap" %}
@@ -14,7 +18,7 @@ needed_disk_space = retention_time_minutes * ingested_samples_per_minutes * byte
 ```
 {% endcode %}
 
-Where ingested samples can be measured as the average over a recent period, e.g. `sum(avg_over_time(scrape_samples_post_metric_relabeling[24h]))`. On average, Prometheus uses around 1.5-2 bytes per sample. So, ingesting 100k samples per minute and retaining them for 15 days would demand around 40 GB. It’s recommended to add another 20-30% capacity for headroom and WAL. More info on disk sizing [here](https://prometheus.io/docs/prometheus/latest/storage/#operational-aspects).
+Where ingested samples can be measured as the average over a recent period, e.g. `sum(avg_over_time(scrape_samples_post_metric_relabeling[24h]))`. On average, Prometheus uses around 1.5-2 bytes per sample. So, ingesting 100k samples per minute and retaining them for 15 days would demand around 40 GB. It’s recommended to add another 20-30% capacity for headroom and WAL. More info on disk sizing can be found in Prometheus' [Storage](https://prometheus.io/docs/prometheus/latest/storage/#operational-aspects) doc.
 
 ## Setting requests and limits
 
@@ -38,14 +42,11 @@ Establishing an ingress controller will allow for control of access for your wor
 SAML/OIDC-configured RBAC and SSO are only officially supported on Kubecost Enterprise plans. Free users may still configure SSO using third party tooling.
 {% endhint %}
 
-You can configure SSO and RBAC on a separate baseline deployment, which will not only shorten the deployment time of security features, but it will also avoid unwanted access denial. This is helpful when using only one developer deployment. See our user management guides below:
+See the below guides for configuring SSO with SAML or OIDC. Teams RBAC is currently only supported with SAML:
 
 * [SAML](/install-and-configure/advanced-configuration/user-management-saml/README.md)
 * [OIDC](/install-and-configure/advanced-configuration/user-management-oidc/user-management-oidc.md)
-
-## Using an existing node exporter
-
-For teams already running node exporter on the default port, our bundled node exporter may remain in a `Pending` state. You can optionally use an existing node exporter DaemonSet by setting the `prometheus.nodeExporter.enabled` and `prometheus.serviceAccounts.nodeExporter.create` Kubecost Helm chart config options to `false`. This requires your existing node exporter endpoint to be visible from the namespace where Kubecost is installed. More configs options shown [here](https://github.com/kubecost/cost-analyzer-helm-chart).
+* [Teams](../../using-kubecost/navigating-the-kubecost-ui/teams.md) - RBAC using Kubecost UI
 
 ## **Resource efficiency and idle costs**
 

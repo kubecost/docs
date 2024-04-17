@@ -39,4 +39,4 @@ curl -G http://localhost:9090/model/assets \
     -d 'filterProviders=AWS'
 ```
 
-For more configuration options, visit the [Assets API doc](/apis/apis-overview/assets-api.md).
+For more configuration options, visit the [Assets API doc](/apis/monitoring-apis/assets-api.md).

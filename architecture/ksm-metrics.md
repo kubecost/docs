@@ -1,10 +1,16 @@
 # Kube-State-Metrics (KSM) Emission
 
-The default Kubecost installation no longer includes a bundled [KSM deployment](https://github.com/kubernetes/kube-state-metrics). Instead, Kubecost calculates and emits all required KSM metrics.
+Kubecost no longer includes a bundled [KSM deployment](https://github.com/kubernetes/kube-state-metrics). 
+
+Kubecost emits the KSM metrics that it requires and uses these when building the cost-model.
+
+To add all kube-state-metrics, in addition to the metrics provided by default, see the [Adding external KSM metrics to Kubecost](#adding-external-ksm-metrics-to-kubecost) section below.
 
 ## KSM metrics emitted by Kubecost
 
-The following table shows all KSM metrics required by and implemented in Kubecost. The below metrics and labels follow conventions of KSMv1, not KSMv2.                          |
+The following are all KSM metrics required by and implemented in Kubecost. 
+
+The below metrics and labels follow conventions of KSMv1, not KSMv2.
 
 ### Node metrics
 
@@ -44,7 +50,7 @@ The following table shows all KSM metrics required by and implemented in Kubecos
 ### PV metrics
 
 * `kube_persistentvolume_capacity_bytes`
-* `kube_persistentvolume_status_phase`      
+* `kube_persistentvolume_status_phase`
 
 ### PVC metrics
 
@@ -55,22 +61,10 @@ The following table shows all KSM metrics required by and implemented in Kubecos
 
 * `kube_job_status_failed`
 
-## Enabling Kubecost-based KSM deployment
-
-If interested in enabling the KSM bundled in Kubecost's Helm chart, perform the below config changes. Re-enabling KSM has the added advantage of high availability. Specifically, if the `kubecost-cost-analyzer` deployment had downtime, the `kube-state-metrics` may still be available to emit metrics for Prometheus to scrape.
-
-```yaml
-prometheus:
-  kubeStateMetrics:
-    enabled: true
-  kube-state-metrics:
-    disabled: false
-```
-
 ## Disabling Kubecost's KSM emission
 
 {% hint style="warning" %}
-While not recommended, you can disable Kubecost cost-model's emission of KSM if you are already running your own KSM.
+If these metrics are duplicate, you can disable Kubecost's emission of KSM. Keep in mind that the format of Kubecost's KSM differ from KSM v2 metrics. Innaccurate costs and pod to controller mappings will break if these metrics are not available.
 {% endhint %}
 
 {% code overflow="wrap" %}
@@ -132,3 +126,55 @@ Kubecost itself is resilient to duplicate metrics, but other services or queries
     * [Pod metrics](https://github.com/kubecost/cost-model/blob/0a0793ec040013fe44c058ff37f032449a2f1191/pkg/metrics/podlabelmetrics.go#L51-L60)
       * `kube_pod_labels`
       * `kube_pod_owner`
+
+## Adding external KSM metrics to Kubecost
+
+A simple method to add kube-state-metrics to the Kubecost-bundled Prometheus Server is to install KSM with helm and add the service it creates as a scrape target.
+
+Install KSM from the [Prometheus Community Helm Charts](https://github.com/prometheus-community/helm-charts)
+
+```sh
+helm install kube-state-metrics \
+ --repo https://prometheus-community.github.io/helm-charts kube-state-metrics \
+ --namespace kube-state-metrics --create-namespace
+```
+
+Add KSM to your Kubecost Helm values in the extraScrapeConfigs:
+
+```yaml
+prometheus:
+  extraScrapeConfigs: |
+    - job_name: kubecost
+      honor_labels: true
+      scrape_interval: 1m
+      scrape_timeout: 60s
+      metrics_path: /metrics
+      scheme: http
+      dns_sd_configs:
+      - names:
+        - {{ template "cost-analyzer.serviceName" . }}
+        type: 'A'
+        port: 9003
+    - job_name: kubecost-networking
+      kubernetes_sd_configs:
+        - role: pod
+      relabel_configs:
+      # Scrape only the the targets matching the following metadata
+        - source_labels: [__meta_kubernetes_pod_label_app_kubernetes_io_instance]
+          action: keep
+          regex:  kubecost
+        - source_labels: [__meta_kubernetes_pod_label_app_kubernetes_io_name]
+          action: keep
+          regex:  network-costs
+    - job_name: kube-state-metrics
+      kubernetes_sd_configs:
+        - role: pod
+      relabel_configs:
+      # Scrape only the the targets matching the following metadata
+        - source_labels: [__meta_kubernetes_pod_label_app_kubernetes_io_instance]
+          action: keep
+          regex:  kube-state-metrics
+        - source_labels: [__meta_kubernetes_pod_label_app_kubernetes_io_name]
+          action: keep
+          regex:  kube-state-metrics
+```

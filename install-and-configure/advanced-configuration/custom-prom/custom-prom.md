@@ -1,9 +1,5 @@
 # Prometheus Configuration Guide
 
-{% hint style="danger" %}
-Multi-cluster Prometheus configurations are temporarily blocked from upgrading to Kubecost 2.0. You must set up a dedicated object store as described in Step 1 of our [Aggregator migration guide](/install-and-configure/install/multi-cluster/federated-etl/thanos-migration-guide.md#step-1-use-the-existing-thanos-object-store-or-create-a-new-dedicated-object-store).
-{% endhint %}
-
 ## Bring your own Prometheus
 
 There are several considerations when disabling the Kubecost included Prometheus deployment. Kubecost _strongly_ recommends installing Kubecost with the bundled Prometheus in most environments.
@@ -122,10 +118,10 @@ kubecostModel:
 
 ### Data retention
 
-By default, metric retention is 91 days, however the retention of data can be further increased with a configurable value for a property `etlDailyStoreDurationDays`. You can find this value [here](https://github.com/kubecost/cost-analyzer-helm-chart/blob/9f3d7974247bfd3910fbf69d0d4bd66f1335201a/cost-analyzer/values.yaml#L340).
+By default, metric retention is 91 days, however the retention of data can be further increased with a configurable value for a property `etlDailyStoreDurationDays`. You can find this value in Kubecost's [Helm chart](https://github.com/kubecost/cost-analyzer-helm-chart/blob/9f3d7974247bfd3910fbf69d0d4bd66f1335201a/cost-analyzer/values.yaml#L340).
 
 {% hint style="warning" %}
-Increasing the default `etlDailyStorageDurationDays` value will naturally result in greater memory usage. At higher values, this can cause errors when trying to display this information in the Kubecost UI. You can remedy this by increasing the [Step size](/troubleshooting/diagnostics.md) when using the Allocations dashboard.
+Increasing the default `etlDailyStorageDurationDays` value will naturally result in greater memory usage. At higher values, this can cause errors when trying to display this information in the Kubecost UI. You can remedy this by increasing the [Step size](/using-kubecost/navigating-the-kubecost-ui/cost-allocation/README.md#step-size) when using the Allocations dashboard.
 {% endhint %}
 
 ## Troubleshooting

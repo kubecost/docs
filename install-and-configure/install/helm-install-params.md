@@ -37,6 +37,6 @@ $ helm install kubecost cost-analyzer \
     --values values.yaml
 ```
 
-## Method 3: Use [_values.yaml_](https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/values.yaml) from the Kubecost Helm chart repository.
+## Method 3: Use [_values.yaml_](https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/values.yaml) from the Kubecost cost-analyzer repository
 
 This file contains the default Helm values that come with your Kubecost install. Taking this approach means you may need to sync with the repo to use the latest release. Be careful when applying certain Helm values related to your UI configuration to your secondary clusters. For more information, see this section in our Multi-Cluster doc about [primary and secondary clusters](/install-and-configure/install/multi-cluster/multi-cluster.md#primary-and-secondary-clusters).

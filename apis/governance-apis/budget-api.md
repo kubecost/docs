@@ -1,8 +1,8 @@
-# Budget API (v2)
+# Budget API
 
 The Budget API allows you to create, update, and delete recurring budget rules to control your Kubernetes spending. Weekly and monthly budgets can be established on namespaces, clusters, and labels to set limits on cost spend, with the option to configure alerts for reaching specified budget thresholds via email, Slack, or Microsoft Teams.
 
-{% swagger method="post" path="/model/budget" baseUrl="http://<your-kubecost-address>" summary="Set recurring budget rule or update existing rule" %}
+{% swagger method="post" path="/model/budget" baseUrl="http://<your-kubecost-address>" summary="Budget API" %}
 {% swagger-description %}
 Creates a recurring budget rule or updates a recurring budget rule when provided the ID of the existing rule.
 {% endswagger-description %}
@@ -173,10 +173,11 @@ When providing values for `actions`, `percentage` refers to the percentage of `s
 
 Kubecost supports configuration of the following currency types: USD, AUD, BRL, CAD, CHF, CNY, DKK, EUR, GBP, IDR, INR, JPY, NOK, PLN, and SEK. Kubecost does *not* perform any currency conversion when switching currency types; it is for display purposes, therefore you should ideally match your currency type to the type in your original cloud bill(s).
 
-Currency type can only be changed via a [`helm` upgrade to your *values.yaml*](/install-and-configure/install/helm-install-params.md), using the flag `.Values.kubecostProductConfigs.currencyCode`. For example, if you needed to convert your currency type to EUR, you would add the following to your `helm` command:
+Currency type can only be changed via a [`helm` upgrade to your *values.yaml*](/install-and-configure/install/helm-install-params.md), using the flag `.Values.kubecostProductConfigs.currencyCode`. For example, if you needed to convert your currency type to EUR, you would modify the helm flag as:
 
-```
---set kubecostProductConfigs.currencyCode=EUR
+```yaml
+kubecostProductConfigs:
+    currencyCode: EUR
 ```
 
 ## Examples

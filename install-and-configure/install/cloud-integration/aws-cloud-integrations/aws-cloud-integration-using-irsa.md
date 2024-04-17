@@ -28,12 +28,14 @@ Detail for multiple cloud provider setups is [here](/install-and-configure/insta
 
 ### Step 1: Download configuration files
 
-To begin, download the recommended configuration template files from our [poc-common-config repo](https://github.com/kubecost/poc-common-configurations/tree/main/aws-attach-roles). You will need the following files from this folder:
+To begin, download the recommended configuration template files from our [poc-common-config repo](https://github.com/kubecost/poc-common-configurations/tree/main/aws). You will need the following files from this folder:
 
 * _cloud-integration.json_
 * _iam-payer-account-cur-athena-glue-s3-access.json_
 * _iam-payer-account-trust-primary-account.json_
 * _iam-access-cur-in-payer-account.json_
+
+The bottom three files are found in [/aws/iam-policies-cur](https://github.com/kubecost/poc-common-configurations/tree/main/aws/iam-policies/cur).
 
 Begin by opening *cloud_integration.json*, which should look like this:
 
@@ -199,7 +201,28 @@ eksctl utils associate-iam-oidc-provider \
     --approve
 ```
 
-Create the Kubernetes service account, attaching the assumeRole policy. Replace `SUB_ACCOUNT_222222222` with the AWS account number where the primary Kubecost cluster will run.
+**Linking default Kubecost Service Account to an IAM Role**
+
+Kubecost's default service account `kubecost-cost-analyzer` is automatically created in the `kubecost` namespace upon installation. This service account can be linked to an IAM Role via Annotation + IAM Trust Policy. 
+
+In the Helm values for your deployment, add the following section:
+
+```yaml
+serviceAccount:
+  create: true
+  annotations:
+    eks.amazonaws.com/role-arn: arn:aws:iam::<accountNumber>:role/<kubecost-role>
+```
+
+Go to the IAM Role and attach the proper IAM trust policy. [Use the sample trust policy here](https://github.com/kubecost/poc-common-configurations/blob/main/aws/iam-policies/irsa-iam-role-trust-policy-for-default-service-account). Verify you have replaced the example OIDC URL with your cluster OIDC URL.
+
+**Alternative method: Create a new dedicated service account for Kubecost using `eksctl`**
+
+{% hint style="info" %}
+This method creates a new service account via eksctl command line tools, instead of using the default service account. Eksctl automatically creates the trust policy and IAM Role that are linked to the new dedicated Kubernetes service account.
+{% endhint %}
+
+Replace `SUB_ACCOUNT_222222222` with the AWS account number where the primary Kubecost cluster will run.
 
 {% code overflow="wrap" %}
 ```sh
@@ -234,6 +257,13 @@ helm install kubecost \
 ```
 {% endcode %}
 
+Add the following section to your Helm values. This will tell Kubecost to use your newly created service account, instead of creating one.
+
+```yaml
+serviceAccount:
+  create: false
+  name: kubecost-serviceaccount
+```
 
 ## Validation
 

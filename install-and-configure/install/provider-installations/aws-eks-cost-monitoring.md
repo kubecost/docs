@@ -219,7 +219,7 @@ Deploying Kubecost on EKS Anywhere via Helm is not the officially recommended me
 [Amazon EKS Anywhere](https://aws.amazon.com/eks/eks-anywhere/) (EKS-A) is an alternate deployment of EKS which allows you to create and configure on-premises clusters, including on your own virtual machines. It is possible to deploy Kubecost on EKS-A clusters to monitor spend data.
 
 {% hint style="info" %}
-Deploying Kubecost on an EKS-A cluster should function similarly at the cluster level, such as when retrieving Allocations or Assets data. However, because on-prem servers wouldn't be visible in a CUR (as the billing source is managed outside AWS), certain features like the [Cloud Cost Explorer](/using-kubecost/navigating-the-kubecost-ui/cloud-costs-explorer.md) will not be accessible.&#x20;
+Deploying Kubecost on an EKS-A cluster should function similarly at the cluster level, such as when retrieving Allocations or Assets data. However, because on-prem servers wouldn't be visible in a CUR (as the billing source is managed outside AWS), certain features like the [Cloud Cost Explorer](/using-kubecost/navigating-the-kubecost-ui/cloud-costs-explorer/cloud-costs-explorer.md) will not be accessible.&#x20;
 {% endhint %}
 
 ### Prerequisites:

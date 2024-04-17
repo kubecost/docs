@@ -51,4 +51,4 @@ Make sure to replace `<your-bucket-name>` with the name of your newly-created S3
     ![Successful user creation](/images/key-created.png)
 
 If you don’t want to use a service account, IAM credentials retrieved from an instance profile are also supported.
-You must get both access key and secret key from the same method (i.e. both from service or instance profile). More info on retrieving credentials [here](https://thanos.io/tip/thanos/storage.md/).
+You must get both access key and secret key from the same method (i.e. both from service or instance profile). More info on retrieving credentials in Thanos' [Object Storage & Data Format](https://thanos.io/tip/thanos/storage.md/) doc.

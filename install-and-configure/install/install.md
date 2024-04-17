@@ -34,7 +34,7 @@ kubectl apply -f https://raw.githubusercontent.com/kubecost/cost-analyzer-helm-c
 ```
 {% endcode %}
 
-4. Lastly, you can deploy the open-source OpenCost project directly as a Pod. This install path provides a subset of free functionality and is available [here](https://www.opencost.io/docs/installation/install). Specifically, this install path deploys the underlying cost allocation model without the same UI or access to enterprise functionality: cloud provider billing integration, RBAC/SAML support, and scale improvements in Kubecost.
+4. Lastly, you can deploy the open-source OpenCost project directly as a Pod. This install path provides a subset of free functionality and is available through its [install guide](https://www.opencost.io/docs/installation/install). Specifically, this install path deploys the underlying cost allocation model without the same UI or access to enterprise functionality: cloud provider billing integration, RBAC/SAML support, and scale improvements in Kubecost.
 
 ### Configuring Kubecost at install
 

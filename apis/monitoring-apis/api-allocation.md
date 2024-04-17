@@ -11,7 +11,7 @@ The Allocation API is the preferred way to query for costs and resources allocat
 {% endswagger-description %}
 
 {% swagger-parameter in="path" name="window" type="string" required="true" %}
-Duration of time over which to query. Accepts words like `today`, `week`, `month`, `yesterday`, `lastweek`, `lastmonth`; durations like `30m`, `12h`, `7d`; comma-separated RFC3339 date pairs like `2021-01-02T15:04:05Z,2021-02-02T15:04:05Z`; comma-separated Unix timestamp (seconds) pairs like `1578002645,1580681045`.
+Duration of time over which to query. Accepts multiple different formats of time (see this [Using the `window` parameter](/apis/apis-overview.md#using-the-window-parameter) section for more info).
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="aggregate" type="string" required="false" %}
@@ -31,15 +31,15 @@ If `true`, include [external, or out-of-cluster costs](/install-and-configure/in
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="offset" type="int" required="false" %}
-Refers to the number of pages you are searching through which will increase by integers for the amount of pages you want to skip. Starting value is `0`, representing the first page of results.
+Refers to the number of line items you are offsetting. Pairs with `limit`. See the section on [Using `offset` and `limit` parameters to parse payload results](/apis/apis-overview.md#using-offset-and-limit-parameters-to-parse-payload-results) for more info.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="limit" type="int" required="false" %}
-Refers to the number of line items per page. Pair with the `offset` parameter to filter your payload to specific sections of line items. You should also set `accumulate=true` to obtain a single list of line items, otherwise you will receive a group of line items per interval of time being sampled.
+Refers to the number of line items per page. Pair with the `offset` parameter to filter your payload to specific pages of line items. You should also set `accumulate=true` to obtain a single list of line items, otherwise you will receive a group of line items per interval of time being sampled.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="filter" type="string" required="false" %}
-Filter your results by any category which you can aggregate by, can support multiple filterable items in the same category in a comma-separated list. For example, to filter results by clusters A and B, use `filter=cluster:clusterA,clusterB` See our [Filter Parameters](/apis/apis-overview/filters-api.md) doc for a complete explanation of how to use filters and what categories are supported.
+Filter your results by any category which you can aggregate by, can support multiple filterable items in the same category in a comma-separated list. For example, to filter results by clusters A and B, use `filter=cluster:clusterA,clusterB` See our [Filter Parameters](/apis/filters-api.md) doc for a complete explanation of how to use filters and what categories are supported.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="format" type="string" required="false" %}
@@ -55,11 +55,11 @@ If `true`, idle cost is allocated proportionally across all non-idle allocations
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="splitIdle" type="boolean" required="false" %}
-If `true`, and `shareIdle == false`, Idle Allocations are created on a per cluster or per node basis rather than being aggregated into a single "_idle_" allocation. Default is `false`.
+If `true`, and `shareIdle == false`, idle allocations are created on a per cluster or per node basis rather than being aggregated into a single "_idle_" allocation. Default is `false`.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="idleByNode" type="boolean" required="false" %}
-If `true`, idle allocations are created on a per node basis. Which will result in different values when shared and more idle allocations when split. Default is `false`.
+If `true`, idle allocations are created on a per node basis. Which will result in different values when shared and more idle allocations when split. `splitIdle` should only be configured to `true` when `aggregate` is configured to `node` or `cluster`. Default is `false`.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="includeSharedCostBreakdown" type="boolean" required="false" %}

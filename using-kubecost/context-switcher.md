@@ -1,6 +1,6 @@
 # Contexts
 
-Kubecost supports the ability to monitor multiple **contexts** of clusters. A context refers to either a single monitored cluster, or a set of clusters that leverage [durable storage](/install-and-configure/install/multi-cluster/long-term-storage-configuration/README.md).
+Kubecost supports the ability to monitor multiple contexts of clusters. A context refers to either a single monitored cluster, or a set of clusters that leverage [durable storage](/install-and-configure/install/multi-cluster/long-term-storage-configuration/README.md).
 
 ## Add from frontend
 
@@ -20,7 +20,7 @@ In the Context Name text box, you can rename your current context. Remember to c
 
 ## Add at install-time
 
-After following Steps 1 and 2 above, provide a list of context names/endpoints under `kubecostProductConfigs.clusters` in [values.yaml](https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/values.yaml) during Helm install or upgrade. Here's an example values block:
+After following Steps 1 and 2 above, provide a list of context names/endpoints under `kubecostProductConfigs.clusters` in your [*values.yaml*](https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/values.yaml) during Helm install or upgrade. Here's an example values block:
 
 ```yaml
  kubecostProductConfigs:

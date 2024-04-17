@@ -4,7 +4,7 @@
 This feature is in currently in alpha. Please read the documentation carefully.
 {% endhint %}
 
-Kubecost's Kubescaler implements continuous request right-sizing: the automatic application of Kubecost's high-fidelity [recommendations](/apis/apis-overview/api-request-right-sizing-v2.md) to your containers' resource requests. This provides an easy way to automatically improve your allocation of cluster resources by improving efficiency.
+Kubecost's Kubescaler implements continuous request right-sizing: the automatic application of Kubecost's high-fidelity [recommendations](/apis/savings-apis/api-request-right-sizing-v2.md) to your containers' resource requests. This provides an easy way to automatically improve your allocation of cluster resources by improving efficiency.
 
 Kubescaler can be enabled and configured on a per-workload basis so that only the workloads you want edited will be edited.
 
@@ -41,7 +41,7 @@ Kubescaler supports:
 
 Kubescaler cannot support:
 
-* "Uncontrolled" Pods. Learn more [here](https://github.com/kubernetes/kubernetes/issues/24913).
+* "Uncontrolled" Pods. Learn more in [this GitHub issue]](https://github.com/kubernetes/kubernetes/issues/24913).
 
 ### Example
 
