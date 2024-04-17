@@ -70,6 +70,8 @@ Edit the `kubecost-network-costs` daemonSet by adding the lines below:
           value: info
 ```
 
+For more information about configuring log levels for any Kubecost resource, see our [Troubleshooting](/troubleshooting/troubleshoot-install.md#configuring-log-levels) documentation.
+
 ## Cloud Provider Service Tagging
 
 Service tagging allows Kubecost to identify network activity between the pods and various cloud services (e.g. AWS S3, EC2, RDS, Azure Storage, Google Cloud Storage).
