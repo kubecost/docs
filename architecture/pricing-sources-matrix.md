@@ -60,8 +60,6 @@ kubecostProductConfigs:
     internetNetworkEgress: 0.12 # per GB per month cost
 ```
 
-Setting `customPricesEnabled` to `true` or enabling custom pricing through the UI has been shown to fix an error where Kubecost reported absurdly high cost metrics.
-
 ### Cloud Provider-Billing Integrated
 
 See the following Kubecost documentation for assistance with configuring your cloud provider services:
