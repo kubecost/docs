@@ -1,18 +1,16 @@
 # High Availability
 
-Kubecost 2.2 introduces a new flag `haMode` for the frontend service.
+{% hint style="info" %}
+High availability (HA) mode is only officially supported on Kubecost Enterprise plans.
+{% endhint %}
 
-This is the first step in enabling high availability for Kubecost. Future versions will expand the HA configuration to include the backend services.
+Kubecost v2.2 introduces a new flag `haMode` for the frontend service. This flag changes the service name that the ingress needs to target.
 
-> This flag changes the service name that the ingress needs to target.
+This is the first step in enabling high availability for Kubecost. Future versions will expand the HA configuration to include backend services.
 
-With the Frontend HA Mode, the frontend will now be a dedicated deployment with two replicas. This allows for the ability to do rolling upgrades of the frontend pods during upgrades and configuration changes.
+With frontend HA, the frontend will now be a dedicated deployment with two replicas. This allows for the ability to do rolling upgrades of the frontend pods during upgrades and configuration changes.
 
-The primary benefit to this design is that the Kubecost UI is always available and diagnostics are available even if the backend services are not healthy.
-
-## Prerequisites
-
-HA Mode is only officially supported in Kubecost Enterprise.
+The primary benefit to this mode is that the Kubecost UI is always available and diagnostics are available even if the backend services are not healthy.
 
 ## Configuration
 
@@ -31,3 +29,7 @@ prometheus:
       external_labels:
         cluster_id: [PRIMARY_CLUSTER_ID]
 ```
+
+## Confirm HA mode is enabled
+
+You can check the status of HA mode in the Kubecost UI by selecting *Settings* from the left navigation, then under 'Never lose your cost visibility', ensure 'High availability mode' is enabled.
