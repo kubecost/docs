@@ -55,11 +55,11 @@ If `true`, idle cost is allocated proportionally across all non-idle allocations
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="splitIdle" type="boolean" required="false" %}
-If `true`, and `shareIdle == false`, Idle Allocations are created on a per cluster or per node basis rather than being aggregated into a single "_idle_" allocation. Default is `false`.
+If `true`, and `shareIdle == false`, idle allocations are created on a per cluster or per node basis rather than being aggregated into a single "_idle_" allocation. Default is `false`.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="idleByNode" type="boolean" required="false" %}
-If `true`, idle allocations are created on a per node basis. Which will result in different values when shared and more idle allocations when split. Default is `false`.
+If `true`, idle allocations are created on a per node basis. Which will result in different values when shared and more idle allocations when split. `splitIdle` should only be configured to `true` when `aggregate` is configured to `node` or `cluster`. Default is `false`.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="includeSharedCostBreakdown" type="boolean" required="false" %}

@@ -2,9 +2,9 @@
 
 ## See also
 
-* [Amazon Managed Service for Prometheus (AMP) Overview](/install-and-configure/advanced-configuration/eks-optimized/aws-amp-integration.md)
-* [AWS Agentless AMP](/install-and-configure/advanced-configuration/eks-optimized/kubecost-agentless-amp.md)
-* [AMP with Kubecost Prometheus (`remote_write`)](/install-and-configure/advanced-configuration/eks-optimized/amp-with-remote-write.md)
+* [Amazon Managed Service for Prometheus (AMP) Overview](/install-and-configure/advanced-configuration/custom-prom/aws-amp-integration.md)
+* [AWS Agentless AMP](/install-and-configure/advanced-configuration/custom-prom/kubecost-agentless-amp.md)
+* [AMP with Kubecost Prometheus (`remote_write`)](/install-and-configure/advanced-configuration/custom-prom/amp-with-remote-write.md)
 
 ## Overview
 

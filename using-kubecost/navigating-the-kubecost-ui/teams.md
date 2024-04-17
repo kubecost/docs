@@ -4,21 +4,21 @@
 RBAC is only officially supported on Kubecost Enterprise plans.
 {% endhint %}
 
-Teams is a page which allows for RBAC configuration using Kubecost's UI. 
+Teams allows basic RBAC functionality using Kubecost's UI.
 
 ## Prerequisites
 
-Before using the Teams page, make sure you have configured [SAML RBAC](/install-and-configure/advanced-configuration/user-management-saml/README.md) with a provider of your choice. Kubecost provides tutorials for configuring SAML RBAC with [Okta](/install-and-configure/advanced-configuration/user-management-saml/okta-saml-integration.md) and [Microsoft Entra](/install-and-configure/advanced-configuration/user-management-saml/microsoft-entra-id-saml-integration-for-kubecost.md).
+Before using the Teams page, make sure you have configured [SAML](/install-and-configure/advanced-configuration/user-management-saml/README.md) with a provider of your choice. Kubecost provides tutorials for configuring SAML RBAC with [Okta](/install-and-configure/advanced-configuration/user-management-saml/okta-saml-integration.md) and [Microsoft Entra](/install-and-configure/advanced-configuration/user-management-saml/microsoft-entra-id-saml-integration-for-kubecost.md).
 
 {% hint style="warning" %}
-Teams is currently *not* compatible with [OIDC RBAC](/install-and-configure/advanced-configuration/user-management-oidc/user-management-oidc.md).
+Teams is currently *not* compatible with [OIDC](/install-and-configure/advanced-configuration/user-management-oidc/user-management-oidc.md).
 {% endhint %}
 
-Users must also have the persistent volumes Helm flag enabled. This will be enabled in Kubecost by default, and so no action is needed unless you have previously disabled it. To renable PVs, use the following command:
+Users must also have the persistent volumes Helm flag enabled. This is enabled in Kubecost by default, and no action is needed unless you have previously disabled it. PV is enabled via:
 
-```
-helm upgrade -i kubecost kubecost/cost-analyzer \
-    --set persistentVolume.enabled = true
+```yaml
+persistentVolume:
+  enabled: true
 ```
 
 If this is your first time using Teams, consult the [Getting started](teams.md#getting-started) section below. For additional team creation, see the [Adding a team](teams.md#adding-a-team) section.
@@ -31,53 +31,43 @@ To manage teams via the Kubecost UI, you must take special measures while creati
 
 You will need to disable your existing SAML configuration temporarily through this tutorial. You will need to turn off SAML authentication Helm flag before creating your team, then turning it back on.
 
-```
-helm upgrade -i kubecost kubecost/cost-analyzer \
-    --set saml.enabled = false
+```yaml
+saml:
+  enabled: false
 ```
 
 Now, access the Teams page, and create your initial admin team. See the [Adding a team](teams.md#adding-a-team) section below for specific instructions for using the UI. Once your admin team has been created, reenable SAML authentication:
 
-```
-helm upgrade -i kubecost kubecost/cost-analyzer \
-    --set saml.enabled = true
+```yaml
+saml:
+  enabled: true
+  rbac:
+    enabled: false
 ```
 
 The members of your team are now able to add new members, or create new teams.
 
 ### Method 2: Disable SAML RBAC while leaving SAML enabled
 
-This method leaves additional authentication in place while SAML RBAC is disabled. 
+This method leaves additional authentication in place while SAML RBAC is disabled.
 
-```
-helm upgrade -i kubecost kubecost/cost-analyzer \
-    --set saml.rbac.enabled = false
+```yaml
+saml:
+  enabled: true
+  rbac:
+    enabled: false
 ```
 
 Now, access the Teams page, and create your initial admin team. See the [Adding a team](teams.md#adding-a-team) section below for specific instructions for using the UI. Once your admin team has been created, reenable SAML RBAC authentication:
 
-```
-helm upgrade -i kubecost kubecost/cost-analyzer \
-    --set saml.rbac.enabled = true
+```yaml
+saml:
+  enabled: true
+  rbac:
+    enabled: true
 ```
 
 The members of your team are now able to add new members, or create new teams.
-
-### Method 3: Implement SAML RBAC through *values.yaml*
-
-In the *values.yaml* where your SAML RBAC is configured, modify your values to include your admin group, where `assertionValues` matches the group configured with your SAML provider. Do not modify the `assertionName` value.
-```
-rbac:
-    enabled: true
-    groups:
-      - name: admin
-        enabled: true
-        assertionName: "kubecost_group"
-        assertionValues:
-          - "kubecost_admin"
-```
-
-Now access the Teams page and reconfigure your admin team by selecting it from the table. See below for editing teams. Then, delete the admin group from your *values.yaml* and delete/detach the group from your SAML provider. The members of your team are now able to add new members, or create new teams.
 
 ## Adding a team
 
