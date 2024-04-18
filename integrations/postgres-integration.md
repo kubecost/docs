@@ -17,10 +17,11 @@ Often times, users prefer to gather all their data and metrics in a single data 
 Prerequisites:
 
 - A running Postgres instance that is reachable by Kubecost.
+- Credentials for a Postgres user which has `CREATE`, `INSERT`, and `UPDATE` permissions on the database.
 
 ### Step 1: Configure Helm values
 
-The YAML provided below is an example of how to configure the Postgres integration in your Helm values file. Notice that there are four different cronjobs being created (2 allocation queries, 1 asset query, 1 cloudCost query). Each cronjob is configured to run every `12h` and write to their respective tables in the Postgres database.
+The below YAML is an example of how to configure the Postgres integration in your Helm values file. Notice that there are four different cronjobs being created (2 allocation queries, 1 asset query, 1 cloudCost query). Each cronjob is configured to run every `12h` and write to their respective tables in the Postgres database.
 
 ```yaml
 global:
@@ -106,7 +107,7 @@ stringData:
 
 ### Step 2: Apply and validate your changes
 
-If deploying changes via Helm, you will be able to run something like this:
+If deploying changes via Helm, you will be able to run a command similar to:
 
 ```sh
 helm upgrade -i kubecost cost-analyzer \
