@@ -26,7 +26,7 @@ Selecting a namespace or adding `/network` to your Kubecost address will open th
 
 ### Grafana dashboard
 
-A Grafana dashboard is included with the Kubecost installation, but you can also find it in our [cost-analyzer-helm-chart repository](https://github.com/kubecost/cost-analyzer-helm-chart/blob/develop/cost-analyzer/grafana-templates/multi-cluster-network-transfer-data.json).
+There are Grafana dashboards that are included with the Kubecost installation, but you can also find them in our [cost-analyzer-helm-chart repository](https://github.com/kubecost/cost-analyzer-helm-chart/blob/develop/cost-analyzer/grafana-dashboards/grafana-templates/).
 
 ## Enabling network costs
 
