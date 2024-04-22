@@ -79,7 +79,7 @@ kubecostProductConfigs:
     key: "my-enterprise-key-here"
 ```
 
-Note, that multiple inserts into the database per day will not create duplicate data. All queries to the database are keyed on a unique `name`, `windowStart`, and `windowEnd`. If a key already exists in the database, we update the entry with the new data.
+Multiple inserts into the database per day will not create duplicate data. All queries to the database are keyed on a unique `name`, `windowStart`, and `windowEnd`. If a key already exists in the database, we update the entry with the new data.
 
 You can also specify a Kubernetes secret containing the database credentials via `databaseSecretName`. Below is an example of what the secret should look like.
 
