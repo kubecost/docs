@@ -21,7 +21,7 @@ Prerequisites:
 
 ### Step 1: Configure Helm values
 
-The below YAML is an example of how to configure the Postgres integration in your Helm values file. Notice that there are four different cronjobs being created (2 allocation queries, 1 asset query, 1 cloudCost query). Each cronjob is configured to run every `12h` and write to their respective tables in the Postgres database.
+The below YAML is an example of how to configure the Postgres integration in your Helm values file. Notice that there are four different queries being created (2 allocation queries, 1 asset query, 1 cloudCost query). Each query is configured to run every `12h` and write to their respective tables in the Postgres database.
 
 ```yaml
 global:
