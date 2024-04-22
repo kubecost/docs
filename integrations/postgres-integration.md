@@ -84,7 +84,7 @@ Note, that multiple inserts into the database per day will not create duplicate 
 You can also specify a Kubernetes secret containing the database credentials via `databaseSecretName`. Below is an example of what the secret should look like.
 
 <details>
-<summary> Example k8s secret </summary>
+<summary> Example Kubernetes secret </summary>
 
 ```yaml
 apiVersion: v1
