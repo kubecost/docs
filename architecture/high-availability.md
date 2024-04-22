@@ -22,7 +22,7 @@ kubecostFrontend:
 kubecostModel:
   federatedStorageConfigSecret: federated-store
 kubecostProductConfigs:
-  clusterName: [PRIMARY_CLUSTER]
+  cluster_id: [PRIMARY_CLUSTER_ID]
 prometheus:
   server:
     global:
