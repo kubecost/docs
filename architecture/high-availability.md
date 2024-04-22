@@ -22,12 +22,12 @@ kubecostFrontend:
 kubecostModel:
   federatedStorageConfigSecret: federated-store
 kubecostProductConfigs:
-  clusterName: [PRIMARY_CLUSTER]
+  clusterName: [CLUSTER_ID]
 prometheus:
   server:
     global:
       external_labels:
-        cluster_id: [PRIMARY_CLUSTER_ID]
+        cluster_id: [CLUSTER_ID]
 ```
 
 ## Confirm HA mode is enabled
