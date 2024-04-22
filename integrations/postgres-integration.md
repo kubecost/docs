@@ -81,7 +81,7 @@ kubecostProductConfigs:
 
 Note, that multiple inserts into the database per day will not create duplicate data. All queries to the database are keyed on a unique `name`, `windowStart`, and `windowEnd`. If a key already exists in the database, we update the entry with the new data.
 
-You can also specify a k8s secret containing the database credentials via `databaseSecretName`. Below is an example of what the k8s secret should look like.
+You can also specify a Kubernetes secret containing the database credentials via `databaseSecretName`. Below is an example of what the secret should look like.
 
 <details>
 <summary> Example k8s secret </summary>
