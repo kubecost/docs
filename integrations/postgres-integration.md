@@ -41,15 +41,15 @@ global:
           - databaseTable: "kubecost_allocation_data"
             window: "7d"
             aggregate: "namespace"
-            idle: true
-            shareIdle: true
+            idle: "true"
+            shareIdle: "true"
             shareNamespaces: "kubecost,kube-system"
             shareLabels: ""
           - databaseTable: "kubecost_allocation_data_by_cluster"
             window: "10d"
             aggregate: "cluster"
-            idle: true
-            shareIdle: false
+            idle: "true"
+            shareIdle: "false"
             shareNamespaces: ""
             shareLabels: ""
         assets:
