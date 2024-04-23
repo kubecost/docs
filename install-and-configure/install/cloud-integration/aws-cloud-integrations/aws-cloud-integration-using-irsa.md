@@ -24,6 +24,10 @@ Kubecost supports multiple AWS payer accounts as well as multiple cloud provider
 
 Detail for multiple cloud provider setups is [here](/install-and-configure/install/cloud-integration/multi-cloud.md#aws).
 
+{% hint style="info" %}
+Kubecost also supports [EKS Pod Identity](https://aws.amazon.com/about-aws/whats-new/2023/11/amazon-eks-pod-identity/) as an alternative to IRSA. To set up EKS Pod Identities, complete steps 1-4 of the below tutorial, then follow the [alternative Step 5](aws-cloud-integration-using-irsa.md#step-5-alternative-setting-up-eks-pod-identity) below.
+{% endhint %}
+
 ## Configuration
 
 ### Step 1: Download configuration files
@@ -264,6 +268,28 @@ serviceAccount:
   create: false
   name: kubecost-serviceaccount
 ```
+
+### Step 5 (alternative): Setting up EKS Pod Identity
+
+To configure EKS Pod Identity, first follow AWS' guides on setting up EKS Pod Identity and configuring a Kubernetes service account:
+
+1. [Set up the Amazon EKS Pod Identity Agent](https://docs.aws.amazon.com/eks/latest/userguide/pod-id-agent-setup.html)
+2. [Configure a Kubernetes service account to assume an IAM role with EKS Pod Identity](https://docs.aws.amazon.com/eks/latest/userguide/pod-id-association.html)
+
+After performing these steps, you will need to update your *values.yaml* file. Make sure you have the following values:
+
+* `eks.amazonaws.com/role-arn: arn:aws:iam::123456789012:role/S3Access`: The name of your payer account.
+* `KUBERNETES_SERVICE_ACCOUNT`: The name of the Kubernetes service account used during your EKS Pod Identity configuration.
+
+Then update your *values.yaml* file:
+
+```
+serviceAccount:
+  create: true
+  annotations:
+    eks.amazonaws.com/role-arn: arn:aws:iam::123456789012:role/S3Access
+  name: KUBERNETES_SERVICE_ACCOUNT
+  ```
 
 ## Validation
 
