@@ -59,11 +59,11 @@ Update `athenaWorkgroup` to `primary`, then save the file and close it. The rema
 
 ### Step 2: Create a CUR Export (and wait 24 hours)
 
-Follow the [AWS documentation](https://docs.aws.amazon.com/cur/latest/userguide/cur-create.html) to create a CUR export using the settings below.
+Follow the [AWS documentation](https://docs.aws.amazon.com/cur/latest/userguide/cur-create.html) to create a CUR export using the settings below. Remember the name of the corresponding S3 Bucket that is created during this process, as it will be needed for later steps. Also configure your CUR in the following ways:
 
 * For time granularity, select _Daily_.
-* Select the checkbox to enable _Resource IDs_ in the report.
-* Select the checkbox to enable _Athena integration_ with the report.
+* Select the checkbox _Include resource IDs_.
+* Select the checkbox to enable _Amazon Athena_ with the report data integration.
 * Select the checkbox to enable the JSON IAM policy to be applied to your bucket.
 
 <details>
@@ -84,8 +84,8 @@ AWS may take up to 24 hours to publish data. Wait until this is complete before 
 
 While you wait, update the following configuration files:
 
-* Update your *cloud-integration.json* file by providing a `projectID` value, which will be the AWS payer account number where the CUR is located and where the Kubecost primary cluster is running.
-* Update your *iam-payer-account-cur-athena-glue-s2-access.json* file by replacing all instances of `CUR_BUCKET_NAME` to the name of the bucket you created for CUR data.
+* Update your *cloud-integration.json* file by providing a `projectID` value, which will be the Account ID number of the account where the CUR is located and where the Kubecost primary cluster is running (you can find your Account ID by selecting your account name in the top right of the AWS console).
+* Update your *iam-payer-account-cur-athena-glue-s3-access.json* file by replacing all instances of `CUR_BUCKET_NAME` to the name of the S3 bucket you created for CUR data in this step.
 
 ### Step 3: Setting up Athena
 
