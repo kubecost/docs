@@ -91,12 +91,12 @@ Each `CostMetric` also has a `kubernetesPercent` value. Unaggregated, this value
 
 ## Examples
 
-### Query for cloud net costs within the past two days, aggregated by accounts, filtered only for Amazon EC2 costs
+#### Query for cloud net costs within the past two days, aggregated by accounts, filtered only for Amazon EC2 costs
 
 {% tabs %}
 {% tab title="Request" %}
 ```
-http:/<your-kubecost-address>/model/cloudCost?window=2d&filterServices=AmazonEC2&aggregate=invoiceEntityID
+http:/<your-kubecost-address>/model/cloudCost?window=2d&aggregate=invoiceEntityID&filter=service:"AmazonEC2"
 ```
 {% endtab %}
 
@@ -106,36 +106,64 @@ http:/<your-kubecost-address>/model/cloudCost?window=2d&filterServices=AmazonEC2
 {
     "code": 200,
     "data": {
-        "graphData": [
+        "sets": [
             {
-                "start": "2023-05-01T00:00:00Z",
-                "end": "2023-05-02T00:00:00Z",
-                "items": [
-                    {
-                        "name": "297945954695",
-                        "value": 309.4241635897003
+                "cloudCosts": {
+                    "297945954695": {
+                        "properties": {
+                            "invoiceEntityID": "297945954695"
+                        },
+                        "window": {
+                            "start": "2024-04-23T00:00:00Z",
+                            "end": "2024-04-24T00:00:00Z"
+                        },
+                        "listCost": {
+                            "cost": 523.9306541567001,
+                            "kubernetesPercent": 0.9678930844926895
+                        },
+                        "netCost": {
+                            "cost": 523.9306541567001,
+                            "kubernetesPercent": 0.9678930844926895
+                        },
+                        "amortizedNetCost": {
+                            "cost": 523.9306541567001,
+                            "kubernetesPercent": 0.9678930844926895
+                        },
+                        "invoicedCost": {
+                            "cost": 523.9306541567001,
+                            "kubernetesPercent": 0.9678930844926895
+                        },
+                        "amortizedCost": {
+                            "cost": 523.9306541567001,
+                            "kubernetesPercent": 0.9678930844926895
+                        }
                     }
+                },
+                "window": {
+                    "start": "2024-04-23T00:00:00Z",
+                    "end": "2024-04-24T00:00:00Z"
+                },
+                "aggregationProperties": [
+                    "invoiceEntityID"
                 ]
             },
             {
-                "start": "2023-05-02T00:00:00Z",
-                "end": "2023-05-03T00:00:00Z",
-                "items": []
+                "cloudCosts": null,
+                "window": {
+                    "start": "2024-04-24T00:00:00Z",
+                    "end": "2024-04-25T00:00:00Z"
+                },
+                "aggregationProperties": [
+                    "invoiceEntityID"
+                ]
             }
         ],
-        "tableTotal": {
-            "name": "Totals",
-            "kubernetesPercent": 0.6593596481215193,
-            "cost": 309.4241635897003
-        },
-        "tableRows": [
-            {
-                "name": "297945954695",
-                "kubernetesPercent": 0.6593596481215193,
-                "cost": 309.4241635897003
-            }
-        ]
+        "window": {
+            "start": "null",
+            "end": "null"
+        }
     }
+}
 ```
 ````
 {% endtab %}
