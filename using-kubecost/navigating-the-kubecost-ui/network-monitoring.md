@@ -12,7 +12,7 @@ The Network Monitoring page is a web of draggable icons which represent your net
 
 ## Getting started
 
-Before accessing Network Monitoring, make sure you've [enabled the network costs daemonset](/install-and-configure/advanced-configuration/network-costs-configuration.md#enabling-network-costs) for accurate cost metrics.
+Network Monitoring is powered by the network costs daemonset, which must be manually enabled before Network Monitoring can be utilized. See our [Network Cost Configuration](/using-kubecost/navigating-the-kubecost-ui/cost-allocation/network-allocation.md) doc for an overview on enabling the daemonset, as well as how to make additional configurations to your network costs in Kubecost.
 
 ## Adjusting your display
 
