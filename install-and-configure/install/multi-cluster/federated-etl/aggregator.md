@@ -184,32 +184,32 @@ kubecostAggregator:
 
 ### Checking the database for node metadata
 
-Confirming whether node metadata exists in your database can be useful when troubleshooting missing data.
+Confirming whether node metadata exists in your database can be useful when troubleshooting missing data. Run the following command which will open a shell into the Aggregator pod:
 
 ```
 kubectl exec -it KUBECOST-AGGREGATOR-POD-NAME sh
 ```
 
-1. Point to the path where your database exists
+Point to the path where your database exists
 
 ```
 cd /var/configs/waterfowl/duckdb/v0_9_2
 ls -lah
 ```
 
-2. Copy the database to a new file for testing to avoid modifications to the original data
+Copy the database to a new file for testing to avoid modifications to the original data
 
 ```
 cp kubecost-example.duckdb.read kubecost-example.duckdb.read.kubecost.copy
 ```
 
-3. Open a DuckDB REPL pointed at the copied database
+Open a DuckDB REPL pointed at the copied database
 
 ```
 duckdb kubecost-example.duckdb.read.kubecost.copy
 ```
 
-4. Run the following debugging queries to check if node data is available:
+Run the following debugging queries to check if node data is available:
 
 ```
 show tables;
