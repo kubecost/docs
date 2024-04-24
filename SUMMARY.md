@@ -122,6 +122,7 @@
   * [GCP/Kubecost Data Audit](using-kubecost/kubecost-data-audit/gcp-kubecost-data-audit.md)
  * [Admission Controller](using-kubecost/admission-controller.md)
  * [Accessibility](using-kubecost/accessibility.md)
+* [Proactive Cost Controls](using-kubecost/proactive-cost-controls.md)
 
 ## APIs
 
