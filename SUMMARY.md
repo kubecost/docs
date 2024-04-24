@@ -75,7 +75,6 @@
   * [Cluster Controller](install-and-configure/advanced-configuration/controller/cluster-controller.md)
     * [Cluster Turndown](install-and-configure/advanced-configuration/controller/cluster-turndown.md)
     * [Kubescaler](install-and-configure/advanced-configuration/controller/kubescaler.md)
-  * [High Availability Kubecost](install-and-configure/advanced-configuration/high-availability.md)
   * [Availability Tiers](install-and-configure/advanced-configuration/availability-tiers.md)
   * [CSV Pricing](install-and-configure/advanced-configuration/csv-pricing.md)
   * [Windows Node Support](install-and-configure/advanced-configuration/windows-node-support.md)
@@ -120,6 +119,7 @@
 * [Kubecost Data Audit](using-kubecost/kubecost-data-audit/README.md)
   * [AWS/Kubecost Data Audit](using-kubecost/kubecost-data-audit/aws-kubecost-data-audit.md)
   * [Azure/Kubecost Data Audit](using-kubecost/kubecost-data-audit/azure-kubecost-data-audit.md)
+  * [GCP/Kubecost Data Audit](using-kubecost/kubecost-data-audit/gcp-kubecost-data-audit.md)
  * [Admission Controller](using-kubecost/admission-controller.md)
  * [Accessibility](using-kubecost/accessibility.md)
 
@@ -157,6 +157,7 @@
 * [Kubecost Metrics](architecture/user-metrics.md)
 * [Kube-State-Metrics (KSM) Emission](architecture/ksm-metrics.md)
 * [ContainerStats Pipeline](architecture/containerstats-pipeline.md)
+* [High Availability Mode](architecture/high-availability.md)
 * [GPU Allocation](architecture/gpu-allocation.md)
 * [Kubecost Cluster Roles](architecture/kubecost-cluster-roles.md)
 * [Pricing Sources Matrix](architecture/pricing-sources-matrix.md)
