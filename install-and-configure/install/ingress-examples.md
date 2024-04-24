@@ -2,15 +2,40 @@
 
 Enabling external access to the Kubecost UI requires exposing access to port 9090 on the `kubecost-cost-analyzer` service. There are multiple ways to do this, including Ingress or port-forwarding.
 
+As of Kubecost 2.2, the frontend has an option for `haMode` which changes the service name that the ingress needs to target. When using the helm ingress template, the correct service is automatically set based on this flag.
+
 {% hint style="warning" %}
-Please exercise caution when exposing Kubecost via an Ingress controller especially if there is no authentication in use. Consult your organization's internal security practices.
+Please exercise caution when exposing Kubecost via an ingress controller especially if there is no authentication in use. Consult your organization's internal security practices.
 {% endhint %}
 
 Common samples below and others can be found on our [GitHub repository](https://github.com/kubecost/poc-common-configurations/tree/main/ingress-examples).
 
+## Helm ingress template
+
+This is recommended unless you have specific needs that a typical ingress template do not address. The advantage to this method is that the service name is automatically configured.
+
+An example of using the Helm ingress using cert-manager:
+
+```yaml
+ingress:
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-http
+  className: nginx
+  enabled: true
+  hosts:
+  - kubecost.your.com
+  tls:
+  - hosts:
+    - kubecost.your.com
+    # letsencrypt automatically creates the secret, just need to give it a name:
+    secretName: kubecost-tls
+```
+
+## NGINX Ingress Controller examples
+
 The following example definitions use the NGINX [Ingress Controller](https://kubernetes.io/docs/concepts/services-networking/ingress-controllers/).
 
-## Basic auth example
+### Basic auth example
 
 {% code overflow="wrap" %}
 ```yaml
@@ -58,7 +83,7 @@ spec:
 
 Here is a [second basic auth example](https://kubernetes.github.io/ingress-nginx/examples/auth/basic/) that uses a Kubernetes Secret.
 
-## Non-root path example
+### Non-root path example
 
 When deploying Grafana on a non-root URL, you also need to update your _grafana.ini_ to reflect this. More info can be found in [_values.yaml_](https://github.com/kubecost/cost-analyzer-helm-chart/blob/cae42c28e12ecf8f1ad13ee17be8ce6633380b96/cost-analyzer/values.yaml#L335-L339).
 
@@ -92,7 +117,7 @@ spec:
 ```
 {% endcode %}
 
-## ALB Example
+### ALB Example
 
 Once an AWS Load Balancer (ALB) Controller is installed, you can use the following Ingress resource manifest pointed at the Kubecost cost-analyzer service:
 
