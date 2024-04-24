@@ -422,17 +422,6 @@ kubecostProductConfigs:
 
 <details>
 
-<summary>Attach via Service Key in Kubecost UI</summary>
-
-1. In the [AWS IAM Console](https://console.aws.amazon.com/iam), select _Access Management_ > _Users_. Find the Kubecost user and select _Security credentials_ > _Create access key_. Note the Access Key ID and Secret Access Key.
-2. To add the Access Key ID and Secret Access Key in the Kubecost UI, select _Settings_ from the left navigation, then scroll to Cloud Cost Settings. Select _Update_ next to External Cloud Cost Configuration (AWS). Fill in the Service key name and Service key secret fields respectively, then select _Update_.
-
-You may not be allowed to update your Billing Data Export Configuration without filling out all fields first. For explanations of your Athena/AWS-related fields, see Step 5 below.
-
-</details>
-
-<details>
-
 <summary>Attach via pod annotation with eksctl</summary>
 
 **Prerequisites:**
@@ -526,23 +515,7 @@ helm upgrade --install kubecost --repo https://kubecost.github.io/cost-analyzer/
 
 ### Step 5: Provide CUR config values to Kubecost
 
-These values can either be set from the Kubecost UI or via `.Values.kubecostProductConfigs` in the Helm chart. Values for all fields must be provided.
-
-#### Option 1: Add config values via UI
-
-To add values in the Kubecost UI, select _Settings_ from the left navigation, then scroll to Cloud Cost Settings. Select _Update_ next to External Cloud Cost Configuration (AWS). The Billing Data Export Configuration window opens. Fill in all the below fields:
-
-| Field                | Description                                                                                           |
-| -------------------- | ----------------------------------------------------------------------------------------------------- |
-| Athena Region        | The AWS region Athena is running in                                                                   |
-| Athena Database      | The name of the database created by the Athena setup                                                  |
-| Athena Tablename     | The name of the table created by the Athena setup                                                     |
-| Athena Result Bucket | An S3 bucket to store Athena query results that you’ve created that Kubecost has permission to access |
-| AWS account ID       | The AWS account ID where the Athena CUR is, likely your management account.                           |
-
-When you are done, select _Update_ to confirm.
-
-#### Option 2: Add config values via Helm
+These values must be set via `.Values.kubecostProductConfigs` in the Helm chart. Values for all fields must be provided.
 
 {% hint style="warning" %}
 If you set any `kubecostProductConfigs` from the Helm chart, all changes via the front end will be overridden on pod restart.
@@ -563,7 +536,7 @@ If you set any `kubecostProductConfigs` from the Helm chart, all changes via the
 Make sure to use only underscore as a delimiter if needed for tables and views. Using a hyphen/dash will not work even though you might be able to create it. See the [AWS docs](https://docs.aws.amazon.com/athena/latest/ug/tables-databases-columns-names.html) for more info.
 {% endhint %}
 
-* If you are using a multi-account setup, you will also need to set `.Values.kubecostProductConfigs.masterPayerARN` to the Amazon Resource Number (ARN) of the role in the management account, e.g. `arn:aws:iam::530337586275:role/KubecostRole`.
+If you are using a multi-account setup, you will also need to set `.Values.kubecostProductConfigs.masterPayerARN` to the Amazon Resource Number (ARN) of the role in the management account, e.g. `arn:aws:iam::530337586275:role/KubecostRole`.
 
 ## Troubleshooting
 

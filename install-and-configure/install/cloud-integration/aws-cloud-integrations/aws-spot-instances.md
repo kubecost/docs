@@ -14,7 +14,7 @@ First, to enable the AWS Spot data feed, follow AWS' [Spot Instance data feed](h
 
 While configuring, note the settings used as these values will be needed for the Kubecost configuration.
 
-There are multiple options: this can either be set from the Kubecost UI or via `.Values.kubecostProductConfigs` in the Helm chart. If you set any `kubecostProductConfigs` from the Helm chart, all changes via the front end will be deleted on pod restart.
+These values must be set via `.Values.kubecostProductConfigs` in the Helm chart. If you set any `kubecostProductConfigs` from the Helm chart, all changes via the front end will be deleted on pod restart.
 
 * `projectID` the Account ID of the AWS Account on which the Spot nodes are running.
 * `awsSpotDataRegion` region of your Spot data bucket
@@ -22,8 +22,6 @@ There are multiple options: this can either be set from the Kubecost UI or via `
 * `awsSpotDataPrefix` optional configured prefix for your Spot data feed bucket
 * `spotLabel` optional Kubernetes node label name designating whether a node is a Spot node. Used to provide pricing estimates until exact Spot data becomes available from the CUR
 * `spotLabelValue` optional Kubernetes node label value designating a Spot node. Used to provide pricing estimates until exact Spot data becomes available from the CUR. For example, if your Spot nodes carry a label `lifecycle:spot`, then the `spotLabel` would be `lifecycle` and the `spotLabelValue` would be `spot`
-
-In the UI, you can access these fields via the _Settings_ page, then scroll to Cloud Cost Settings. Next to Spot Instance Configuration, select _Update,_ then fill out all fields.
 
 Spot data feeds are an account level setting, not a payer level. Every AWS Account will have its own Spot data feed. Spot data feed is not currently available in AWS GovCloud.
 
