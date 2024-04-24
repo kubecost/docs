@@ -153,3 +153,9 @@ spec:
 ```
 
 After creating the virtual service, Kubecost should be accessible at the URL `http(s)://${gateway}/kubecost/`.
+
+## Troubleshooting
+
+### Kubecost is displaying excessively high cost metrics in the billions
+
+Setting the Helm flag `customPricesEnabled` to `true`, or enabling [Custom Pricing](/architecture/pricing-sources-matrix.md#custom-pricing) through the UI has been shown to fix an error where Rancher clusters displayed absurdly high cost metrics.
