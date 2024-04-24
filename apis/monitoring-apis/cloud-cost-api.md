@@ -27,32 +27,8 @@ Refers to the number of line items you are offsetting. Pairs with `limit`. See t
 Refers to the number of line items per page. Pair with the `offset` parameter to filter your payload to specific pages of line items. You should also set `accumulate=true` to obtain a single list of line items, otherwise you will receive a group of line items per interval of time being sampled.
 {% endswagger-parameter %}
 
-{% swagger-parameter in="path" name="filterInvoiceEntityIDs" required="false" %}
-Filter for account
-{% endswagger-parameter %}
-
-{% swagger-parameter in="path" name="filterAccountIDs" required="false" %}
-GCP only, filter for projectID
-{% endswagger-parameter %}
-
-{% swagger-parameter in="path" name="filterProviders" required="false" %}
-Filter for cloud service provider
-{% endswagger-parameter %}
-
-{% swagger-parameter in="path" name="filterProvidersID" required="false" %}
-Filter for resource-level ID given by CSP
-{% endswagger-parameter %}
-
-{% swagger-parameter in="path" name="filterServices" required="false" %}
-Filter for cloud service
-{% endswagger-parameter %}
-
-{% swagger-parameter in="path" name="filterCategories" required="false" %}
-Filter based on object type
-{% endswagger-parameter %}
-
-{% swagger-parameter in="path" name="filterLabels" required="false" %}
-Filter for a specific label. Does not support filtering for multiple labels at once.
+{% swagger-parameter in="path" name="filter" type="string" required="false" %}
+Filter your results by any category which you can aggregate by, can support multiple filterable items in the same category in a comma-separated list. For example, to filter results by clusters A and B, use `filter=cluster:clusterA,clusterB` See our [Filter Parameters](/apis/filters-api.md) doc for a complete explanation of how to use filters and what categories are supported.
 {% endswagger-parameter %}
 
 {% swagger-response status="200: OK" description="" %}
@@ -60,39 +36,54 @@ Filter for a specific label. Does not support filtering for multiple labels at o
 {
     "code": 200,
     "data": {
-        "graphData": [
+        "sets": [
             {
-                "start": "",
-                "end": "",
-                "items": []
+                "cloudCosts": {
+                    "": {
+                        "properties": {
+                            "provider": ""
+                        },
+                        "window": {
+                            "start": "",
+                            "end": ""
+                        },
+                        "listCost": {
+                            "cost": ,
+                            "kubernetesPercent": 
+                        },
+                        "netCost": {
+                            "cost": ,
+                            "kubernetesPercent": 
+                        },
+                        "amortizedNetCost": {
+                            "cost": ,
+                            "kubernetesPercent":
+                        },
+                        "invoicedCost": {
+                            "cost": ,
+                            "kubernetesPercent": 
+                        },
+                        "amortizedCost": {
+                            "cost": ,
+                            "kubernetesPercent": 
+                        }
+                    },
+                },
+                "window": {
+                    "start": "",
+                    "end": ""
+                },
             }
         ],
-        "tableTotal": {
-            "name": "",
-            "kubernetesPercent": 0,
-            "cost": 0
-        },
-        "tableRows": []
+        "window": {
+            "start": "",
+            "end": ""
+        }
     }
 }
 ```
 {% endswagger-response %}
 {% endswagger %}
-
-## Using the `CostMetric` parameter
-
-`CostMetric` values are based on and calculated following standard FinOps dimensions and metrics. The four available metrics supported by the Cloud Cost API are:
-
-| CostMetric value | Description                                                                                 |
-| ---------------- | ------------------------------------------------------------------------------------------- |
-| NetCost          | Costs inclusive of discounts and credits. Will also include one-time and recurring charges. |
-| AmortizedNetCost | `NetCost` with removed cash upfront fees and amortized                                      |
-| ListCost         | CSP pricing without any discounts                                                           |
-| InvoicedCost     | Pricing based on usage during billing period                                                |
-
-Providing a value for `CostMetric` is optional, but it will default to `AmortizedNetCost` if not otherwise provided.
-
-See our [Cloud Cost Metrics](/using-kubecost/navigating-the-kubecost-ui/cloud-costs-explorer/cloud-cost-metrics.md) doc to learn more about these cost metric types and how they are calculated.
 
 ## Understanding `kubernetesPercent`
 
