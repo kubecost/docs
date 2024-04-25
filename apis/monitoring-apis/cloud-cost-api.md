@@ -85,9 +85,25 @@ Filter your results by any category which you can aggregate by, can support mult
 {% endswagger-response %}
 {% endswagger %}
 
-## Understanding `kubernetesPercent`
+## Schema overview
 
-Each `CostMetric` also has a `kubernetesPercent` value. Unaggregated, this value will be 0 or 1. When you aggregate, `kubernetesPercent` is determined by multiplying the `costMetric` cost by its `kubernetesPercent` and aggregating that value as `kubernetesCost` for that `costMetric`. That `kubernetesCost` is then divided by the aggregated total costs to determine the new `kubernetesPercent`. Since this process results in unique values for each `costMetric`, this value is included as part of the cost metric.
+### Cloud cost metrics
+
+Cloud cost metric types values are based on and calculated following standard FinOps dimensions and metrics. The five types of cloud cost metrics provided by the Cloud Cost API are:
+
+| Cost Metric        | Description                                                                                 |
+| ------------------ | ------------------------------------------------------------------------------------------- |
+| Amortized Net Cost | `netCost` with removed cash upfront fees and amortized (default)                             |
+| Net Cost           | Costs inclusive of discounts and credits. Will also include one-time and recurring charges. |
+| List Cost          | CSP pricing without any discounts                                                           |
+| Invoiced Cost      | Pricing based on usage during billing period                                                |
+| Amortized Cost     | Effective/upfront cost across the billing period                                            |
+
+See our [Cloud Cost Metrics](/using-kubecost/navigating-the-kubecost-ui/cloud-costs-explorer/cloud-cost-metrics.md) doc to learn more about these cost metric types and how they are calculated.
+
+### `kubernetesPercent`
+
+Each cost metric also has a `kubernetesPercent` value. Unaggregated, this value will be 0 or 1. When you aggregate, `kubernetesPercent` is determined by multiplying the cost metric cost by its `kubernetesPercent` and aggregating that value as `kubernetesCost` for that cost metric. That `kubernetesCost` is then divided by the aggregated total costs to determine the new `kubernetesPercent`. Since this process results in unique values for each cost metric, this value is included as part of the cost metric.
 
 ## Examples
 
