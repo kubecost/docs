@@ -10,26 +10,33 @@ Monitoring of multiple clusters is only supported in [Kubecost Enterprise](https
 
 ![Clusters dashboard](/.gitbook/assets/clusters.png)
 
-## Enabling Clusters dashboard
+## Getting started
 
-To enable the Clusters dashboard, you must perform these two steps:
+Before you can begin using the Clusters page, you will need to perform [cloud billing integrations](/install-and-configure/install/cloud-integration/README.md) for any and all cloud service providers you wish to view clusters with. 
 
-1. Enable [cloud integration](/install-and-configure/install/cloud-integration/README.md) for any and all cloud service providers you wish to view clusters with
-2. Enable Cloud Costs
+You should also confirm that the `kubecostAggregator.cloudCost.readinessProbe.enabled` flag is set to `true`. This flag will be enabled by default:
 
-Enabling Cloud Costs through Helm can be done using the following parameters:
-
-```yaml
-kubecostModel:
-  cloudCost:
-     enabled: true
-     labelList:
-       IsIncludeList: false
-       # format labels as comma separated string (ex. "label1,label2,label3")
-       labels: ""
-     topNItems: 1000
 ```
-
+kubecostAggregator:
+ cloudCost:
+    # The cloudCost component of Aggregator depends on
+    # kubecostAggregator.deployMethod:
+    # kA.dM = "singlepod" -> cloudCost is run as container inside cost-analyzer
+    # kA.dM = "statefulset" -> cloudCost is run as single-replica Deployment
+    resources: {}
+      # requests:
+      #   cpu: 1000m
+      #   memory: 1Gi
+    # refreshRateHours:
+    # queryWindowDays:
+    # runWindowDays:
+    # serviceAccountName:
+    readinessProbe:
+      enabled: true
+      initialDelaySeconds: 10
+      periodSeconds: 10
+      failureThreshold: 200
+```
 ## Usage
 
 Clusters are primarily distinguished into three categories:
