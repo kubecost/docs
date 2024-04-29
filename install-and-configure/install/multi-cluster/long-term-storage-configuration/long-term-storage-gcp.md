@@ -1,13 +1,17 @@
-# GCP Long Term Storage
+# GCP Multi-Cluster Storage Configuration
 
-Start by [creating a new Google Cloud Storage bucket](https://cloud.google.com/storage/docs/creating-buckets). The following example uses a bucket named `thanos-bucket`. Next, download a service account JSON file from Google's service account manager ([steps](/install-and-configure/install/cloud-integration/gcp-out-of-cluster/google-service-account-thanos.md)).
+{% hint style="info" %}
+Usage of a Federated Storage Bucket is only supported for Kubecost Enterprise plans.
+{% endhint %}
 
-Now create a YAML file named `object-store.yaml` in the following format, using your bucket name and service account details:
+Start by [creating a new Google Cloud Storage bucket](https://cloud.google.com/storage/docs/creating-buckets). The following example uses a bucket named `kubecost-federated-storage-bucket`. Next, download a service account JSON file from Google's service account manager ([steps](/install-and-configure/install/cloud-integration/gcp-out-of-cluster/google-service-account-thanos.md)).
+
+Now create a YAML file named `federated-store.yaml` in the following format, using your bucket name and service account details:
 
 ```yaml
 type: GCS
 config:
-  bucket: "thanos-bucket"
+  bucket: "kubecost-federated-storage-bucket"
   service_account: |-
     {
       "type": "service_account",
@@ -22,10 +26,3 @@ config:
       "client_x509_cert_url": ""
     }
 ```
-{% hint style="info" %}
-Because this is a YAML file, it requires this specific indention.
-{% endhint %}
-
-{% hint style="warning" %}
-Do not apply a retention policy to your Thanos bucket, as it will prevent Thanos compaction from completing.
-{% endhint %}
