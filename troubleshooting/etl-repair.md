@@ -6,7 +6,7 @@ The ETL data is stored in a `PersistentVolume` mounted to the `kubecost-cost-ana
 
 ## 1. Repair Asset ETL
 
-The Asset ETL builds upon the Prometheus metrics listed [here](/architecture/user-metrics.md). It's important to ensure that you are able to [query for Prometheus or Thanos](prometheus.md) data for the specified `window` you use. Otherwise, an absence of metrics will result in an empty ETL.
+The Asset ETL builds upon the Prometheus metrics listed [here](/architecture/user-metrics.md). It's important to ensure that you are able to [query for Prometheus](prometheus.md) data for the specified `window` you use. Otherwise, an absence of metrics will result in an empty ETL.
 
 {% hint style="info" %}
 If the `window` parameter is within `.Values.kubecostModel.etlHourlyStoreDurationHours`, this endpoint will repair both the daily `[1d]` and hourly `[1h]` Asset ETL.
@@ -56,70 +56,25 @@ The CloudCost ETL pulls information from your cloud billing integration. Ensure 
 
 {% code overflow="wrap" %}
 ```bash
+# Port-forward to the cloudcost service
+$ kubectl port-forward svc/kubecost-cloud-cost 9005:9005
+
 # Repair: /model/cloudCost/repair?window=
-$ curl "https://kubecost.your.com/model/cloudCost/repair?window=2023-01-01T00:00:00Z,2023-01-04T00:00:00Z"
+$ curl "http://localhost:9005/cloudCost/repair?window=2023-01-01T00:00:00Z,2023-01-04T00:00:00Z"
 {"code":200,"data":"Rebuilding Cloud Usage For All Providers"}
 
 # Check logs to watch this job run until completion
 $ kubectl logs deploy/kubecost-cost-analyzer | grep CloudCost
+# or
+$ kubectl logs deploy/kubecost-cloud-cost
 ```
 {% endcode %}
 
-By default, CloudUsage ETL is disabled (`.Values.kubecostModel.etlCloudUsage`, `.Values.kubecostModel.etlCloudAsset`). If you are using CloudUsage ETL, use the commands below:
+## Repairs in multi-cluster environments
 
-{% code overflow="wrap" %}
-```bash
-# Repair: /model/etl/cloudUsage/repair?window=
-$ curl "https://kubecost.your.com/model/etl/cloudUsage/repair?window=2023-01-01T00:00:00Z,2023-01-04T00:00:00Z"
-{"code":200,"data":"Cloud Usage Repair process has begun for [2023-01-01T00:00:00+0000, 2023-01-04T00:00:00+0000) for all providers"}
+In an enterprise multi-cluster environment, each individual Kubecost deployment builds its own ETL data before pushing it to the bucket. Therefore to repair data from an affected cluster, you must port-forward to that cluster's Kubecost deployment then run the repair command.
 
-# Check logs to watch this job run until completion
-$ kubectl logs deploy/kubecost-cost-analyzer | grep CloudUsage
-```
-{% endcode %}
-
-## 4. Run Reconciliation Pipeline
-
-The Reconciliation Pipeline reconciles the existing ETL with the newly gathered data in the CloudUsage ETL, further ensuring parity between Kubecost and your cloud bill.
-
-{% hint style="info" %}
-Reconciliation repairs should be automatically triggered after a CloudCost repair.
-{% endhint %}
-
-{% code overflow="wrap" %}
-```bash
-# Repair: /model/etl/asset/reconciliation/repair?window=
-$ curl "https://kubecost.your.com/model/etl/asset/reconciliation/repair?window=2023-01-01T00:00:00Z,2023-01-04T00:00:00Z"
-{"code":200,"data":"Reconciliation Repair process has begun for [2023-01-01T00:00:00+0000, 2023-01-04T00:00:00+0000) for all providers"}
-
-# Check logs to watch this job run until completion
-$ kubectl logs deploy/kubecost-cost-analyzer | grep Reconciliation
-```
-{% endcode %}
-
-## Repairs in Federated ETL environments
-
-In a Federated ETL environment, each individual Kubecost deployment builds its own ETL data before pushing it to the bucket. Therefore the repair commands above must be run on each affected cluster.
-
-After a repair has been completed on any cluster in your environment, the Kubecost Federator will detect the new data, re-federate the ETL data, then place the merged data into the `/federated/combined` directory in the bucket. The Federator runs 5 minutes after startup, and every 30 minutes afterwards.
-
-{% code overflow="wrap" %}
-```bash
-$ kubectl logs deploy/kubecost-federator | grep '\[assets\]\[1d\]' 
-INF Federator[assets][1d]: Running Federator on 2 clusters: [kubecost-fedetl-agent kubecost-fedetl-primary]
-INF Federator[assets][1d]: Checking for modified files for cluster 'kubecost-fedetl-agent'...
-INF Federator[assets][1d]: Checking for modified files for cluster 'kubecost-fedetl-primary'...
-INF Federator[assets][1d]: Successfully merged files for '1690761600-1690848000' from federated clusters
-
-$ kubectl logs deploy/kubecost-federator | grep '\[allocations\]\[1d\]'
-INF Federator[allocations][1d]: Running Federator on 2 clusters: [kubecost-fedetl-agent kubecost-fedetl-primary]
-INF Federator[allocations][1d]: Checking for modified files for cluster 'kubecost-fedetl-agent'...
-INF Federator[allocations][1d]: Checking for modified files for cluster 'kubecost-fedetl-primary'...
-INF Federator[allocations][1d]: loading file '1690761600-1690848000' for cluster kubecost-fedetl-agent
-INF Federator[allocations][1d]: loading file '1690761600-1690848000' for cluster kubecost-fedetl-primary
-INF Federator[allocations][1d]: Successfully merged files for '1690761600-1690848000' from federated clusters
-```
-{% endcode %}
+After a repair has been completed on any cluster in your environment, the Kubecost Aggregator will detect that the ETL file has been recently modified, and ingest the new data into its database.
 
 ## Troubleshooting
 
@@ -170,4 +125,4 @@ WRN ETL: Asset[1h]: Repair: error: cannot repair [2022-11-05T00:00:00+0000, 2022
 {% endcode %}
 
 * Verify that Prometheus metrics exist consistently during the time window you wish to repair
-* For installs using Prometheus verify retention is long enough to meet the requested repair window. By default `.Values.prometheus.server.retention` is set to 15 days.
+* For installs using Prometheus verify retention is long enough to meet the requested repair window. `.Values.prometheus.server.retention`.

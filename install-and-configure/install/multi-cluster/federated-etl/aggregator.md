@@ -194,3 +194,41 @@ kubecostAggregator:
   env:
     DB_BUCKET_REFRESH_INTERVAL: 1h
 ```
+
+### Checking the database for node metadata
+
+Confirming whether node metadata exists in your database can be useful when troubleshooting missing data. Run the following command which will open a shell into the Aggregator pod:
+
+```
+kubectl exec -it KUBECOST-AGGREGATOR-POD-NAME sh
+```
+
+Point to the path where your database exists
+
+```
+cd /var/configs/waterfowl/duckdb/v0_9_2
+ls -lah
+```
+
+Copy the database to a new file for testing to avoid modifications to the original data
+
+```
+cp kubecost-example.duckdb.read kubecost-example.duckdb.read.kubecost.copy
+```
+
+Open a DuckDB REPL pointed at the copied database
+
+```
+duckdb kubecost-example.duckdb.read.kubecost.copy
+```
+
+Run the following debugging queries to check if node data is available:
+
+```
+show tables;
+describe node_1h;
+select * from node_1h;
+select providerid,windowstart,windowend,* from node_1h;
+
+.maxrows 100;
+```

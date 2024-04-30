@@ -60,3 +60,7 @@ Selecting _Edit_ in the row of a specific budget will open a window allowing you
 ### Deleting a budget
 
 Selecting _Delete_ will open the Delete Budget window. Confirm by selecting _Delete_.
+
+## Use cases
+
+[Enforce Kubecost Budgets to prevent overruns before they occur](/using-kubecost/proactive-cost-controls.md).

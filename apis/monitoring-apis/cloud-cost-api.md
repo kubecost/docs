@@ -11,10 +11,6 @@ Samples full granularity of cloud costs from cloud billing report (ex. AWS' Cost
 Duration of time over which to query. Accepts multiple different formats of time (see this [Using the `window` parameter](/apis/apis-overview.md#using-the-window-parameter) section for more info).
 {% endswagger-parameter %}
 
-{% swagger-parameter in="path" name="costMetric" required="false" %}
-Determines which cloud cost metric type will be returned. Acceptable values are `AmortizedNetCost`, `InvoicedCost`, `ListCost`, and `NetCost`. Default is `AmortizedNetCost`.
-{% endswagger-parameter %}
-
 {% swagger-parameter in="path" name="aggregate" required="false" %}
 Field by which to aggregate the results. Accepts: `invoiceEntityID`, `accountID`, `provider`, `service`, and `label:<name>`. Supports multi-aggregation using comma-separated lists. Example: `aggregate=accountID,service`
 {% endswagger-parameter %}
@@ -31,32 +27,8 @@ Refers to the number of line items you are offsetting. Pairs with `limit`. See t
 Refers to the number of line items per page. Pair with the `offset` parameter to filter your payload to specific pages of line items. You should also set `accumulate=true` to obtain a single list of line items, otherwise you will receive a group of line items per interval of time being sampled.
 {% endswagger-parameter %}
 
-{% swagger-parameter in="path" name="filterInvoiceEntityIDs" required="false" %}
-Filter for account
-{% endswagger-parameter %}
-
-{% swagger-parameter in="path" name="filterAccountIDs" required="false" %}
-GCP only, filter for projectID
-{% endswagger-parameter %}
-
-{% swagger-parameter in="path" name="filterProviders" required="false" %}
-Filter for cloud service provider
-{% endswagger-parameter %}
-
-{% swagger-parameter in="path" name="filterProvidersID" required="false" %}
-Filter for resource-level ID given by CSP
-{% endswagger-parameter %}
-
-{% swagger-parameter in="path" name="filterServices" required="false" %}
-Filter for cloud service
-{% endswagger-parameter %}
-
-{% swagger-parameter in="path" name="filterCategories" required="false" %}
-Filter based on object type
-{% endswagger-parameter %}
-
-{% swagger-parameter in="path" name="filterLabels" required="false" %}
-Filter for a specific label. Does not support filtering for multiple labels at once.
+{% swagger-parameter in="path" name="filter" type="string" required="false" %}
+Filter your results by any category which you can aggregate by, can support multiple filterable items in the same category in a comma-separated list. For example, to filter results by providers A and B, use `filter=provider:providerA,providerB`. See our [Filter Parameters](/apis/filters-api.md) doc for a complete explanation of how to use filters and what categories are supported.
 {% endswagger-parameter %}
 
 {% swagger-response status="200: OK" description="" %}
@@ -64,52 +36,83 @@ Filter for a specific label. Does not support filtering for multiple labels at o
 {
     "code": 200,
     "data": {
-        "graphData": [
+        "sets": [
             {
-                "start": "",
-                "end": "",
-                "items": []
+                "cloudCosts": {
+                    "": {
+                        "properties": {
+                            "provider": ""
+                        },
+                        "window": {
+                            "start": "",
+                            "end": ""
+                        },
+                        "listCost": {
+                            "cost": ,
+                            "kubernetesPercent": 
+                        },
+                        "netCost": {
+                            "cost": ,
+                            "kubernetesPercent": 
+                        },
+                        "amortizedNetCost": {
+                            "cost": ,
+                            "kubernetesPercent":
+                        },
+                        "invoicedCost": {
+                            "cost": ,
+                            "kubernetesPercent": 
+                        },
+                        "amortizedCost": {
+                            "cost": ,
+                            "kubernetesPercent": 
+                        }
+                    },
+                },
+                "window": {
+                    "start": "",
+                    "end": ""
+                },
             }
         ],
-        "tableTotal": {
-            "name": "",
-            "kubernetesPercent": 0,
-            "cost": 0
-        },
-        "tableRows": []
+        "window": {
+            "start": "",
+            "end": ""
+        }
     }
 }
 ```
 {% endswagger-response %}
 {% endswagger %}
 
-## Using the `CostMetric` parameter
+## Schema overview
 
-`CostMetric` values are based on and calculated following standard FinOps dimensions and metrics. The four available metrics supported by the Cloud Cost API are:
+### Cloud cost metrics
 
-| CostMetric value | Description                                                                                 |
-| ---------------- | ------------------------------------------------------------------------------------------- |
-| NetCost          | Costs inclusive of discounts and credits. Will also include one-time and recurring charges. |
-| AmortizedNetCost | `NetCost` with removed cash upfront fees and amortized                                      |
-| ListCost         | CSP pricing without any discounts                                                           |
-| InvoicedCost     | Pricing based on usage during billing period                                                |
+Cloud cost metric types values are based on and calculated following standard FinOps dimensions and metrics. The five types of cloud cost metrics provided by the Cloud Cost API are:
 
-Providing a value for `CostMetric` is optional, but it will default to `AmortizedNetCost` if not otherwise provided.
+| Cost Metric        | Description                                                                                 |
+| ------------------ | ------------------------------------------------------------------------------------------- |
+| Amortized Net Cost | `netCost` with removed cash upfront fees and amortized (default)                             |
+| Net Cost           | Costs inclusive of discounts and credits. Will also include one-time and recurring charges. |
+| List Cost          | CSP pricing without any discounts                                                           |
+| Invoiced Cost      | Pricing based on usage during billing period                                                |
+| Amortized Cost     | Effective/upfront cost across the billing period                                            |
 
 See our [Cloud Cost Metrics](/using-kubecost/navigating-the-kubecost-ui/cloud-costs-explorer/cloud-cost-metrics.md) doc to learn more about these cost metric types and how they are calculated.
 
-## Understanding `kubernetesPercent`
+### `kubernetesPercent`
 
-Each `CostMetric` also has a `kubernetesPercent` value. Unaggregated, this value will be 0 or 1. When you aggregate, `kubernetesPercent` is determined by multiplying the `costMetric` cost by its `kubernetesPercent` and aggregating that value as `kubernetesCost` for that `costMetric`. That `kubernetesCost` is then divided by the aggregated total costs to determine the new `kubernetesPercent`. Since this process results in unique values for each `costMetric`, this value is included as part of the cost metric.
+Each cost metric also has a `kubernetesPercent` value. Unaggregated, this value will be 0 or 1. When you aggregate, `kubernetesPercent` is determined by multiplying the cost metric cost by its `kubernetesPercent` and aggregating that value as `kubernetesCost` for that cost metric. That `kubernetesCost` is then divided by the aggregated total costs to determine the new `kubernetesPercent`. Since this process results in unique values for each cost metric, this value is included as part of the cost metric.
 
 ## Examples
 
-### Query for cloud net costs within the past two days, aggregated by accounts, filtered only for Amazon EC2 costs
+#### Query for cloud net costs within the past two days, aggregated by accounts, filtered only for Amazon EC2 costs
 
 {% tabs %}
 {% tab title="Request" %}
 ```
-http:/<your-kubecost-address>/model/cloudCost?window=2d&filterServices=AmazonEC2&aggregate=invoiceEntityID
+http:/<your-kubecost-address>/model/cloudCost?window=2d&aggregate=invoiceEntityID&filter=service:"AmazonEC2"
 ```
 {% endtab %}
 
@@ -119,36 +122,64 @@ http:/<your-kubecost-address>/model/cloudCost?window=2d&filterServices=AmazonEC2
 {
     "code": 200,
     "data": {
-        "graphData": [
+        "sets": [
             {
-                "start": "2023-05-01T00:00:00Z",
-                "end": "2023-05-02T00:00:00Z",
-                "items": [
-                    {
-                        "name": "297945954695",
-                        "value": 309.4241635897003
+                "cloudCosts": {
+                    "297945954695": {
+                        "properties": {
+                            "invoiceEntityID": "297945954695"
+                        },
+                        "window": {
+                            "start": "2024-04-23T00:00:00Z",
+                            "end": "2024-04-24T00:00:00Z"
+                        },
+                        "listCost": {
+                            "cost": 523.9306541567001,
+                            "kubernetesPercent": 0.9678930844926895
+                        },
+                        "netCost": {
+                            "cost": 523.9306541567001,
+                            "kubernetesPercent": 0.9678930844926895
+                        },
+                        "amortizedNetCost": {
+                            "cost": 523.9306541567001,
+                            "kubernetesPercent": 0.9678930844926895
+                        },
+                        "invoicedCost": {
+                            "cost": 523.9306541567001,
+                            "kubernetesPercent": 0.9678930844926895
+                        },
+                        "amortizedCost": {
+                            "cost": 523.9306541567001,
+                            "kubernetesPercent": 0.9678930844926895
+                        }
                     }
+                },
+                "window": {
+                    "start": "2024-04-23T00:00:00Z",
+                    "end": "2024-04-24T00:00:00Z"
+                },
+                "aggregationProperties": [
+                    "invoiceEntityID"
                 ]
             },
             {
-                "start": "2023-05-02T00:00:00Z",
-                "end": "2023-05-03T00:00:00Z",
-                "items": []
+                "cloudCosts": null,
+                "window": {
+                    "start": "2024-04-24T00:00:00Z",
+                    "end": "2024-04-25T00:00:00Z"
+                },
+                "aggregationProperties": [
+                    "invoiceEntityID"
+                ]
             }
         ],
-        "tableTotal": {
-            "name": "Totals",
-            "kubernetesPercent": 0.6593596481215193,
-            "cost": 309.4241635897003
-        },
-        "tableRows": [
-            {
-                "name": "297945954695",
-                "kubernetesPercent": 0.6593596481215193,
-                "cost": 309.4241635897003
-            }
-        ]
+        "window": {
+            "start": "null",
+            "end": "null"
+        }
     }
+}
 ```
 ````
 {% endtab %}

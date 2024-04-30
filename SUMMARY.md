@@ -75,7 +75,6 @@
   * [Cluster Controller](install-and-configure/advanced-configuration/controller/cluster-controller.md)
     * [Cluster Turndown](install-and-configure/advanced-configuration/controller/cluster-turndown.md)
     * [Kubescaler](install-and-configure/advanced-configuration/controller/kubescaler.md)
-  * [High Availability Kubecost](install-and-configure/advanced-configuration/high-availability.md)
   * [Availability Tiers](install-and-configure/advanced-configuration/availability-tiers.md)
   * [CSV Pricing](install-and-configure/advanced-configuration/csv-pricing.md)
   * [Windows Node Support](install-and-configure/advanced-configuration/windows-node-support.md)
@@ -123,6 +122,7 @@
   * [GCP/Kubecost Data Audit](using-kubecost/kubecost-data-audit/gcp-kubecost-data-audit.md)
  * [Admission Controller](using-kubecost/admission-controller.md)
  * [Accessibility](using-kubecost/accessibility.md)
+* [Proactive Cost Controls](using-kubecost/proactive-cost-controls.md)
 
 ## APIs
 
