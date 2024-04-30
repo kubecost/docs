@@ -175,7 +175,7 @@
 
 ## Troubleshooting
 
-* [Frequently Asked Questions](troubleshooting/frequently-asked-questions.md)
+* [Frequently Asked Questions (FAQ)](troubleshooting/frequently-asked-questions.md)
 * [Kubecost Glossary](troubleshooting/kubecost-glossary.md)
 * [Troubleshoot Install](troubleshooting/troubleshoot-install.md)
 * [HTTP Error Troubleshooting](troubleshooting/http-troubleshooting.md)
