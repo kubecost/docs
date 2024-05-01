@@ -105,7 +105,7 @@ Once Athena is set up with the CUR, you will need to create a *new* S3 bucket fo
 
 1. Navigate to the [S3 Management Console](https://console.aws.amazon.com/s3/home?region=us-east-2).
 2. Select _Create bucket._ The Create Bucket page opens.
-3. Provide a name for your bucket. This is the value for `athenaBucketName` in your *cloud-integration.json* file. Use the same region used for the CUR bucket. 
+3. Provide a name for your bucket. This is the value for `athenaBucketName` in your *cloud-integration.json* file. Use the same region used for the CUR bucket.
 4. Select _Create bucket_ at the bottom of the page.
 5. Navigate to the [Amazon Athena](https://console.aws.amazon.com/athena) dashboard.
 6. Select _Settings_, then select _Manage._ The Manage settings window opens.
@@ -197,6 +197,8 @@ export CLUSTER_NAME=YOUR_CLUSTER
 export AWS_REGION=YOUR_REGION
 ```
 
+> If using EKS Pod Identity (simpler config), skip to ### Step 5 (alternative): Setting up EKS Pod Identity below
+
 Enable the OIDC-Provider:
 
 ```sh
@@ -207,7 +209,7 @@ eksctl utils associate-iam-oidc-provider \
 
 **Linking default Kubecost Service Account to an IAM Role**
 
-Kubecost's default service account `kubecost-cost-analyzer` is automatically created in the `kubecost` namespace upon installation. This service account can be linked to an IAM Role via Annotation + IAM Trust Policy. 
+Kubecost's default service account `kubecost-cost-analyzer` is automatically created in the `kubecost` namespace upon installation. This service account can be linked to an IAM Role via Annotation + IAM Trust Policy.
 
 In the Helm values for your deployment, add the following section:
 
@@ -271,25 +273,26 @@ serviceAccount:
 
 ### Step 5 (alternative): Setting up EKS Pod Identity
 
-To configure EKS Pod Identity, first follow AWS' guides on setting up EKS Pod Identity and configuring a Kubernetes service account:
+> Prerequisite: Your cluster must support [EKS Pod Identities](https://docs.aws.amazon.com/eks/latest/userguide/pod-id-agent-setup.html) to use the method below.
 
-1. [Set up the Amazon EKS Pod Identity Agent](https://docs.aws.amazon.com/eks/latest/userguide/pod-id-agent-setup.html)
-2. [Configure a Kubernetes service account to assume an IAM role with EKS Pod Identity](https://docs.aws.amazon.com/eks/latest/userguide/pod-id-association.html)
+Create your pod identity association:
 
-After performing these steps, you will need to update your *values.yaml* file. Make sure you have the following values:
-
-* `eks.amazonaws.com/role-arn: arn:aws:iam::123456789012:role/S3Access`: The name of your payer account.
-* `KUBERNETES_SERVICE_ACCOUNT`: The name of the Kubernetes service account used during your EKS Pod Identity configuration.
+```sh
+eksctl create podidentityassociation \
+--cluster $CLUSTER_NAME --region $AWS_REGION \
+--namespace kubecost \
+--service-account-name kubecost-serviceaccount \
+--role-name kubecost-serviceaccount \
+--permission-policy-arns arn:aws:iam::SUB_ACCOUNT_222222222:policy/kubecost-access-cur-in-payer-account
+```
 
 Then update your *values.yaml* file:
 
-```
+```yaml
 serviceAccount:
   create: true
-  annotations:
-    eks.amazonaws.com/role-arn: arn:aws:iam::123456789012:role/S3Access
-  name: KUBERNETES_SERVICE_ACCOUNT
-  ```
+    name: kubecost-serviceaccount
+```
 
 ## Validation
 
