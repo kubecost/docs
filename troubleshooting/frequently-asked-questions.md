@@ -161,3 +161,10 @@ global:
       enabled: true
 ```
 Keep in mind that any config change to Kubecost that does not include new images will require steps to ensure the new configuration is used.
+
+Q: Is it possible to use a CI/CD tool to install and maintain Kubecost?\
+A: Yes! Many do. There are a number of examples on our [poc-common-configurations repo](https://github.com/kubecost/poc-common-configurations). Keep in mind that support for 3rd party tools is limited without an Kubecost Enterprise subscription. We thank our community for some significant contributions here:
+  - [ArgoCD](https://github.com/kubecost/poc-common-configurations/tree/main/argocd)
+  - [Flux](https://github.com/kubecost/poc-common-configurations/tree/main/fluxcd)
+  - [Terraform](https://github.com/kubecost/poc-common-configurations/tree/main/terraform)
+
