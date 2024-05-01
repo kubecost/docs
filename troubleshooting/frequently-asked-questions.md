@@ -1,4 +1,4 @@
-# Frequently Asked Questions
+# Frequently Asked Questions (FAQ)
 
 Q: How can I reduce CPU or Memory resource consumption by Kubecost?\
 A: Please review our [Tuning Resource Consumption guide](/install-and-configure/advanced-configuration/resource-consumption.md).
