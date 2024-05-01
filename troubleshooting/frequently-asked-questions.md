@@ -152,7 +152,7 @@ Q: How can I configure my displayed currency type?\
 A: Kubecost supports multiple different currency types for display purposes, but does not perform direct currency conversion. This must be configured via your *values.yaml* with the flag `kubecostProductConfigs.currencyCode`.
 
 Q: What is the `helm-rollout-restarter` and how can I disable it?\
-A: When configMaps and secrets are modified, Kubecost's pods need to be restarted for the changes to take effect. By changing a label in the pod, this is done automatically. If this is causing issues with your deployment tools, the `helm-rollout-restarter` can be disabled by setting:
+A: When configMaps and secrets are modified, Kubecost's pods need to be restarted for the changes to take effect. By changing a this label in the pod whenever a helm upgrade is run, this is done automatically. If this is causing issues with your deployment tools, the `helm-rollout-restarter` can be disabled by setting:
 
 ```yaml
 global:
