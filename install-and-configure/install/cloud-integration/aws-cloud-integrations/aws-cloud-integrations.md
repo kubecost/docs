@@ -544,7 +544,7 @@ If you are using a multi-account setup, you will also need to set `.Values.kubec
 
 Once you've integrated with the CUR, you can visit _Settings_ > _Cloud Integrations_ in the UI to view if your integration was successful (indicated by a green checkmark). For more information, you can select *View Additional Details* to be taken to the Cloud Integrations page.
 
-You can visit _Settings_ > _View Full Diagnostics_ to determine if Kubecost has been successfully integrated with your CUR. If any problems are detected, you will see a yellow warning sign under the cloud provider permissions status header. You can check pod logs for authentication errors by running: `kubectl get pods -n <namespace>` `kubectl logs <kubecost-pod-name> -n <namespace> -c cost-model`
+You can check pod logs for authentication errors by running: `kubectl get pods -n <namespace>` `kubectl logs <kubecost-pod-name> -n <namespace> -c cost-model`
 
 If you do not see any authentication errors, log in to your AWS console and visit the Athena dashboard. Find your CUR and ensure that the database with the CUR matches the `athenaTable` entered in Step 5. It likely has a prefix with `athenacurcfn_` :
 
