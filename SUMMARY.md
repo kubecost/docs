@@ -42,7 +42,6 @@
       * [Federated ETL Backups and Alerting](install-and-configure/install/multi-cluster/federated-etl/federated-etl-backups-alerting.md)
     * [Long-Term Storage Configuration](install-and-configure/install/multi-cluster/long-term-storage-configuration/README.md)
       * [AWS Multi-Cluster Storage Configuration](install-and-configure/install/multi-cluster/long-term-storage-configuration/long-term-storage-aws.md)
-      * [AWS Thanos IAM Policy](install-and-configure/install/multi-cluster/long-term-storage-configuration/aws-service-account-thanos.md)
       * [Azure Long-Term Storage](install-and-configure/install/multi-cluster/long-term-storage-configuration/long-term-storage-azure.md)
       * [GCP Long-Term Storage](install-and-configure/install/multi-cluster/long-term-storage-configuration/long-term-storage-gcp.md)
     * [Secondary Clusters Guide](install-and-configure/install/multi-cluster/secondary-clusters.md)
