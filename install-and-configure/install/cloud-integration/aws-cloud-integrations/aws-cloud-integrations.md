@@ -49,7 +49,7 @@ If you believe you have the correct permissions, but cannot access the Billing a
 
 ### Step 2: Setting up Athena
 
-As part of the CUR creation process, Amazon also creates a CloudFormation template that is used to create the Athena integration. It is created in the CUR S3 bucket, listed in the *Objects* tab in the path `s3-path-prefix/cur-name` and typically has the filename `crawler-cfn.yml`. This .yml is your necessary CloudFormation template. You will need it in order to complete the CUR Athena integration. For more information, see the AWS doc [Setting up Athena using AWS CloudFormation templates](https://docs.aws.amazon.com/cur/latest/userguide/use-athena-cf.html).
+As part of the CUR creation process, Amazon also creates a CloudFormation template that is used to create the Athena integration. It is created in the CUR S3 bucket, listed in the *Objects* tab in the path `s3-path-prefix/cur-name` and typically has the filename `crawler-cfn.yml`. This .yml is your necessary CloudFormation template. You will need it in order to complete the CUR Athena integration. See the AWS doc [Setting up Athena using AWS CloudFormation templates](https://docs.aws.amazon.com/cur/latest/userguide/use-athena-cf.html) to complete your Athena setup.
 
 {% hint style="info" %}
 Your S3 path prefix can be found by going to your AWS Cost and Usage Reports dashboard and selecting your newly-created CUR. In the 'Report details' tab, you will find the S3 path prefix.
