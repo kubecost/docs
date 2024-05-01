@@ -1,12 +1,16 @@
-# AWS Cloud Integration Using IAM Roles for Service Accounts (IRSA)
+# AWS Cloud Integration Using IRSA/EKS Pod Identities
 
 There are many ways to integrate your AWS Cost and Usage Report (CUR) with Kubecost. This tutorial is intended as the best-practice method for users whose environments meet the following assumptions:
 
 1. Kubecost will run in a different account than the AWS Payer Account
-1. The IAM permissions will utilize AWS [IRSA](https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html) to avoid shared secrets
+1. The IAM permissions will utilize AWS [IAM Roles for Service Accounts (IRSA)](https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html) to avoid shared secrets
 1. The configuration of Kubecost will be done using a *cloud-integration.json* file, and not via Kubecost UI (following infrastructure as code practices)
 
 If this is not an accurate description of your environment, see our [AWS Cloud Integration](aws-cloud-integrations.md) doc for more options.
+
+{% hint style="info" %}
+Kubecost also supports [EKS Pod Identity](https://aws.amazon.com/about-aws/whats-new/2023/11/amazon-eks-pod-identity/) as an alternative to IRSA. To set up EKS Pod Identities, complete steps 1-4 of the below tutorial fully, then follow Step 5 until you are prompted to move to the [optional Step 6](aws-cloud-integration-using-irsa.md#step-6-optional-setting-up-eks-pod-identity) below.
+{% endhint %}
 
 ## Overview of Kubecost CUR integration
 
@@ -23,10 +27,6 @@ This guide is a one-time setup per AWS payer account and is typically one per or
 Kubecost supports multiple AWS payer accounts as well as multiple cloud providers from a single Kubecost primary cluster. For multiple payer accounts, create additional entries inside the array below.
 
 Detail for multiple cloud provider setups is [here](/install-and-configure/install/cloud-integration/multi-cloud.md#aws).
-
-{% hint style="info" %}
-Kubecost also supports [EKS Pod Identity](https://aws.amazon.com/about-aws/whats-new/2023/11/amazon-eks-pod-identity/) as an alternative to IRSA. To set up EKS Pod Identities, complete steps 1-4 of the below tutorial, then follow the [alternative Step 5](aws-cloud-integration-using-irsa.md#step-5-alternative-setting-up-eks-pod-identity) below.
-{% endhint %}
 
 ## Configuration
 
@@ -197,7 +197,9 @@ export CLUSTER_NAME=YOUR_CLUSTER
 export AWS_REGION=YOUR_REGION
 ```
 
-> If using EKS Pod Identity (simpler config), skip to ### Step 5 (alternative): Setting up EKS Pod Identity below
+{% hint style="warning" %}
+If you are using EKS Pod Identity, skip the rest of Step 5 and continue to [Step 6](aws-cloud-integration-using-irsa.md#step-6-optional-setting-up-eks-pod-identity).
+{% endhint %}
 
 Enable the OIDC-Provider:
 
@@ -271,9 +273,11 @@ serviceAccount:
   name: kubecost-serviceaccount
 ```
 
-### Step 5 (alternative): Setting up EKS Pod Identity
+### Step 6 (optional): Setting up EKS Pod Identity
 
-> Prerequisite: Your cluster must support [EKS Pod Identities](https://docs.aws.amazon.com/eks/latest/userguide/pod-id-agent-setup.html) to use the method below.
+{% hint style="warning" %}
+Your cluster must support [EKS Pod Identities](https://docs.aws.amazon.com/eks/latest/userguide/pod-id-agent-setup.html) to use the method below.
+{% endhint %}
 
 Create your pod identity association:
 
