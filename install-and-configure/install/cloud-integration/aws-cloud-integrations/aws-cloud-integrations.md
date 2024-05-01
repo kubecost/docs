@@ -540,11 +540,13 @@ If you are using a multi-account setup, you will also need to set `.Values.kubec
 
 ## Troubleshooting
 
-Once you've integrated with the CUR, you can visit _Settings_ > _View Full Diagnostics_ in the UI to determine if Kubecost has been successfully integrated with your CUR. If any problems are detected, you will see a yellow warning sign under the cloud provider permissions status header
+### Diagnostics through Kubecost UI
 
-You can check pod logs for authentication errors by running: `kubectl get pods -n <namespace>` `kubectl logs <kubecost-pod-name> -n <namespace> -c cost-model`
+Once you've integrated with the CUR, you can visit _Settings_ > _Cloud Integrations_ in the UI to view if your integration was successful (indicated by a green checkmark). For more information, you can select *View Additional Details* to be taken to the Cloud Integrations page.
 
-If you do not see any authentication errors, log in to your AWS console and visit the Athena dashboard. You should be able to find the CUR. Ensure that the database with the CUR matches the athenaTable entered in Step 5. It likely has a prefix with `athenacurcfn_` :
+You can visit _Settings_ > _View Full Diagnostics_ to determine if Kubecost has been successfully integrated with your CUR. If any problems are detected, you will see a yellow warning sign under the cloud provider permissions status header. You can check pod logs for authentication errors by running: `kubectl get pods -n <namespace>` `kubectl logs <kubecost-pod-name> -n <namespace> -c cost-model`
+
+If you do not see any authentication errors, log in to your AWS console and visit the Athena dashboard. Find your CUR and ensure that the database with the CUR matches the `athenaTable` entered in Step 5. It likely has a prefix with `athenacurcfn_` :
 
 ![Athena query editor](/images/athena-query-1.png)
 
@@ -666,6 +668,12 @@ QueryAthenaPaginated: start query error: operation error Athena: StartQueryExecu
 {% endcode %}
 
 * **Resolution:** Verify that `s3://` was included in the bucket name when setting the `.Values.kubecostProductConfigs.athenaBucketName` Helm value.
+
+### Failure when running the CloudFormation template in my AWS account due to low Lambda concurrent execution values
+
+For AWS Lambda users, you may experience errors running the CloudFormation template created in Step 3 of this guide. This is likely due to your applied account-level quota value. To correct this, in the AWS console, visit the AWS Lambda page. If your value is set to 10 (the default value), it may be too low to run the template. Increase the value as needed.
+
+![AWS Lambda](/images/aws-lambda.png)
 
 ## Summary and pricing
 
