@@ -110,7 +110,8 @@ The Cost column plus the sum of all credit amounts.
 
 **Amortized Net Cost**
 
-Kubecost uses Net Cost.
+Amortized Net Cost is Cost with all credits and amortized CUD payments
+`amortizedNetCost := cost + creditAmount + cudCreditAmount + flexibleCUDCreditAmount + flexibleCUDNetPayedAmount`
 
 **Invoiced Cost**
 
@@ -118,7 +119,8 @@ Kubecost uses Net Cost.
 
 **Amortized Cost**
 
-Kubecost uses Net Cost.
+Amortized Cost is Cost plus CUD credits and amortized CUD payments
+`amortizedCost := cost + cudCreditAmount + flexibleCUDCreditAmount + flexibleCUDPayedAmount`
 
 </details>
 
