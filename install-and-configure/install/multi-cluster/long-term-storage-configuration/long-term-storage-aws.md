@@ -1,28 +1,24 @@
 # AWS Multi-Cluster Storage Configuration
 
-## AWS/S3 Federation
+{% hint style="info" %}
+Usage of a Federated Storage Bucket is only supported for Kubecost Enterprise plans.
+{% endhint %}
 
-Kubecost uses a shared storage bucket to store metrics from clusters, known as durable storage, in order to provide a single-pane-of-glass for viewing cost across many clusters. Multi-cluster is an enterprise feature of Kubecost.
+In order to provide a single-pane-of-glass view across many clusters, Kubecost uses a shared storage bucket which all clusters push to. There are multiple methods to provide Kubecost access to an S3 bucket. This guide has two examples:
 
-There are multiple methods to provide Kubecost access to an S3 bucket. This guide has two examples:
+1. Using a user or role's access keys
+2. Attaching an AWS Identity and Access Management (IAM) role to the service account used by Kubecost
 
-1. Using a Kubernetes secret
-2. Attaching an AWS Identity and Access Management (IAM) role to the service account used by Prometheus
+Both methods require an S3 bucket. Our example bucket is named `kubecost-federated-storage-bucket`. This is a simple S3 bucket with all public access blocked. No other bucket configuration changes should be required.
 
-Both methods require an S3 bucket. Our example bucket is named `kc-thanos-store`.
+## Method 1: Using access keys
 
-This is a simple S3 bucket with all public access blocked. No other bucket configuration changes should be required.
-
-Once created, add an IAM policy to access this bucket. See our [AWS Thanos IAM Policy](aws-service-account-thanos.md) doc for instructions.
-
-## Method 1: Kubernetes Secret Method
-
-To use the Kubernetes secret method for allowing access, create a YAML file named `object-store.yaml` with contents similar to the following example. See region to endpoint mappings [here](https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region).
+Create a file named `federated-store.yaml` with contents similar to the following example. See region to endpoint mappings [here](https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region).
 
 ```yaml
 type: S3
 config:
-  bucket: "kc-thanos-store"
+  bucket: "kubecost-federated-storage-bucket"
   endpoint: "s3.amazonaws.com"
   region: "us-east-1"
   access_key: "<your-access-key>"
@@ -40,16 +36,14 @@ config:
   part_size: 134217728
 ```
 
-## Method 2: Attach IAM role to Service Account Method
+## Method 2: Attach IAM role to Service Account
 
-Instead of using a secret key in a file, many will want to use this method.
-
-Attach the policy to the Thanos pods service accounts. Your `object-store.yaml` should follow the format below when using this option, which does not contain the secret_key and access_key fields.
+Create a file named `federated-store.yaml` with contents similar to the following example. Note, that it does not contain the `access_key` and `secret_key` fields.
 
 ```yaml
 type: S3
 config:
-  bucket: "kc-thanos-store"
+  bucket: "kubecost-federated-storage-bucket"
   endpoint: "s3.amazonaws.com"
   region: "us-east-1"
   insecure: false
@@ -65,28 +59,48 @@ config:
   part_size: 134217728
 ```
 
-Then, follow [this AWS guide](https://docs.aws.amazon.com/eks/latest/userguide/enable-iam-roles-for-service-accounts.html) to enable attaching IAM roles to pods.
-
-You can define the IAM role to associate with a service account in your cluster by creating a service account in the same namespace as Kubecost and adding an annotation to it of the form `eks.amazonaws.com/role-arn: arn:aws:iam::<AWS_ACCOUNT_ID>:role/<IAM_ROLE_NAME>`
-as described [here](https://docs.aws.amazon.com/eks/latest/userguide/associate-service-account-role.html).
-
-Once that annotation has been created, configure the following:
+Then, follow [this AWS guide](https://docs.aws.amazon.com/eks/latest/userguide/associate-service-account-role.html) to enable attaching IAM roles to pods. Once the role & policy have been created, configure your Helm `values.yaml` to include the following annotation:
 
 ```yaml
-.Values.prometheus.serviceAccounts.server.create: false
-.Values.prometheus.serviceAccounts.server.name: serviceAccount # to the name of your created service account
-.Values.thanos.compact.serviceAccount: serviceAccount
-.Values.thanos.store.serviceAccount: serviceAccount
+serviceAccount:
+  annotations:
+    eks.amazonaws.com/role-arn: arn:aws:iam::<AWS_ACCOUNT_ID>:role/<IAM_ROLE_NAME>
 ```
 
-## Thanos Encryption With S3 and KMS
+## AWS IAM Policy details
 
-You can encrypt the S3 bucket where Kubecost data is stored in AWS via S3 and KMS. However, because Thanos can store potentially millions of objects, it is suggested that you use bucket-level encryption instead of object-level encryption. More details available in these external docs:
+The user or role which has access to Kubecost's federated storage bucket should have the permissions defined in this policy at a minimum.
 
-* [Thanos S3 storage doc](https://thanos.io/tip/thanos/storage.md/#s3)
-* [Reducing the cost of SSE-KMS with Amazon S3 Bucket Keys](https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucket-key.html)
-* [Configuring an S3 Bucket Key at the Object Level](https://docs.aws.amazon.com/AmazonS3/latest/userguide/configuring-bucket-key-object.html)
+```json
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "Statement",
+            "Effect": "Allow",
+            "Action": [
+                "s3:ListBucket",
+                "s3:GetObject",
+                "s3:DeleteObject",
+                "s3:PutObject",
+                "s3:PutObjectAcl"
+            ],
+            "Resource": [
+                "arn:aws:s3:::<your-bucket-name>/*",
+                "arn:aws:s3:::<your-bucket-name>"
+            ]
+        }
+    ]
+}
+```
 
 ## Troubleshooting
 
-Visit the [Configuring Thanos](/install-and-configure/install/multi-cluster/thanos-setup/configuring-thanos.md#troubleshooting) doc for troubleshooting help.
+### "operation error STS: AssumeRole"
+
+```txt
+(2024-04-08T00:00:00+0000): GetCloudCost: error getting Athena columns: QueryAthenaPaginated: start query error: operation error Athena: StartQueryExecution, get identity: get credentials: failed to refresh cached credentials, operation error STS: AssumeRole, https response error StatusCode: 403, RequestID: 0459fd9b-451d-4bd0-8289-aaf90f146f37, api error AccessDenied: User: arn:aws:sts::YOUR_ACCOUNT_ID:assumed-role/aws-prod-eks-node-group/i-05c1fa9d0eb168e35 is not authorized to perform: sts:AssumeRole on resource: arn:aws:iam::YOUR_PRIMARY_ACCOUNT_ID:role/KubecostRole-YOUR_ACCOUNT_ID
+(2024-04-04T00:00:00+0000): GetCloudCost: error getting Athena columns: QueryAthenaPaginated: start query error: operation error Athena: StartQueryExecution, get identity: get credentials: failed to refresh cached credentials, operation error STS: AssumeRole, https response error StatusCode: 403, RequestID: 6494b54b-1a9e-47ea-941d-e316cb0bc778, api error AccessDenied: User: arn:aws:sts::YOUR_ACCOUNT_ID:assumed-role/aws-prod-eks-node-group/i-05c1fa9d0eb168e35 is not authorized to perform: sts:AssumeRole on resource: arn:aws:iam::YOUR_PRIMARY_ACCOUNT_ID:role/KubecostRole-YOUR_ACCOUNT_ID
+```
+
+If running into an error similar to the one above, please refer to [this AWS doc](https://docs.aws.amazon.com/IAM/latest/UserGuide/troubleshoot_roles.html) to troubleshoot assuming IAM roles.

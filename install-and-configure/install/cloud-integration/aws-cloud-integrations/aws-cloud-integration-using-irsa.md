@@ -1,12 +1,16 @@
-# AWS Cloud Integration Using IAM Roles for Service Accounts (IRSA)
+# AWS Cloud Integration Using IRSA/EKS Pod Identities
 
 There are many ways to integrate your AWS Cost and Usage Report (CUR) with Kubecost. This tutorial is intended as the best-practice method for users whose environments meet the following assumptions:
 
 1. Kubecost will run in a different account than the AWS Payer Account
-1. The IAM permissions will utilize AWS [IRSA](https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html) to avoid shared secrets
+1. The IAM permissions will utilize AWS [IAM Roles for Service Accounts (IRSA)](https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html) to avoid shared secrets
 1. The configuration of Kubecost will be done using a *cloud-integration.json* file, and not via Kubecost UI (following infrastructure as code practices)
 
 If this is not an accurate description of your environment, see our [AWS Cloud Integration](aws-cloud-integrations.md) doc for more options.
+
+{% hint style="info" %}
+Kubecost also supports [EKS Pod Identity](https://aws.amazon.com/about-aws/whats-new/2023/11/amazon-eks-pod-identity/) as an alternative to IRSA. To set up EKS Pod Identities, complete steps 1-4 of the below tutorial fully, then follow Step 5 until you are prompted to move to the [optional Step 6](aws-cloud-integration-using-irsa.md#step-6-optional-setting-up-eks-pod-identity) below.
+{% endhint %}
 
 ## Overview of Kubecost CUR integration
 
@@ -101,7 +105,7 @@ Once Athena is set up with the CUR, you will need to create a *new* S3 bucket fo
 
 1. Navigate to the [S3 Management Console](https://console.aws.amazon.com/s3/home?region=us-east-2).
 2. Select _Create bucket._ The Create Bucket page opens.
-3. Provide a name for your bucket. This is the value for `athenaBucketName` in your *cloud-integration.json* file. Use the same region used for the CUR bucket. 
+3. Provide a name for your bucket. This is the value for `athenaBucketName` in your *cloud-integration.json* file. Use the same region used for the CUR bucket.
 4. Select _Create bucket_ at the bottom of the page.
 5. Navigate to the [Amazon Athena](https://console.aws.amazon.com/athena) dashboard.
 6. Select _Settings_, then select _Manage._ The Manage settings window opens.
@@ -193,6 +197,10 @@ export CLUSTER_NAME=YOUR_CLUSTER
 export AWS_REGION=YOUR_REGION
 ```
 
+{% hint style="warning" %}
+If you are using EKS Pod Identity, skip the rest of Step 5 and continue to [Step 6](aws-cloud-integration-using-irsa.md#step-6-optional-setting-up-eks-pod-identity).
+{% endhint %}
+
 Enable the OIDC-Provider:
 
 ```sh
@@ -203,7 +211,7 @@ eksctl utils associate-iam-oidc-provider \
 
 **Linking default Kubecost Service Account to an IAM Role**
 
-Kubecost's default service account `kubecost-cost-analyzer` is automatically created in the `kubecost` namespace upon installation. This service account can be linked to an IAM Role via Annotation + IAM Trust Policy. 
+Kubecost's default service account `kubecost-cost-analyzer` is automatically created in the `kubecost` namespace upon installation. This service account can be linked to an IAM Role via Annotation + IAM Trust Policy.
 
 In the Helm values for your deployment, add the following section:
 
@@ -263,6 +271,31 @@ Add the following section to your Helm values. This will tell Kubecost to use yo
 serviceAccount:
   create: false
   name: kubecost-serviceaccount
+```
+
+### Step 6 (optional): Setting up EKS Pod Identity
+
+{% hint style="warning" %}
+Your cluster must support [EKS Pod Identities](https://docs.aws.amazon.com/eks/latest/userguide/pod-id-agent-setup.html) to use the method below.
+{% endhint %}
+
+Create your pod identity association:
+
+```sh
+eksctl create podidentityassociation \
+--cluster $CLUSTER_NAME --region $AWS_REGION \
+--namespace kubecost \
+--service-account-name kubecost-serviceaccount \
+--role-name kubecost-serviceaccount \
+--permission-policy-arns arn:aws:iam::SUB_ACCOUNT_222222222:policy/kubecost-access-cur-in-payer-account
+```
+
+Then update your *values.yaml* file:
+
+```yaml
+serviceAccount:
+  create: true
+    name: kubecost-serviceaccount
 ```
 
 ## Validation

@@ -24,7 +24,7 @@ The day the budget will reset. When `interval=weekly`, `intervalDay` is the day 
 {% endswagger-parameter %}
 
 {% swagger-parameter in="body" name="spendLimit" type="int" required="true" %}
-The budget limit value. Currency can be configured in _Settings >_ Cloud Cost Settings > Currency dropdown.
+The budget limit value.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="body" name="id" type="string" %}

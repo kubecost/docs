@@ -67,7 +67,7 @@ prometheus:
 
 ### Step 1: Storage configuration
 
-For all monitored clusters (federated or primary), create a file *federated-store.yaml* with the same format used for Thanos/S3 backup:
+For all monitored clusters (federated or primary), create a file *federated-store.yaml*. Refer to the following documentation for setup:
 
 * [AWS](/install-and-configure/install/multi-cluster/long-term-storage-configuration/long-term-storage-aws.md)
 * [Azure](/install-and-configure/install/multi-cluster/long-term-storage-configuration/long-term-storage-azure.md)

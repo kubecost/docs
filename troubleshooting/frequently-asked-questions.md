@@ -149,4 +149,22 @@ Q: How can I configure node-exporter to use an internal cluster IP instead of th
 A: Set the following Helm value: `prometheus.nodeExporter.hostNetwork=false`.
 
 Q: How can I configure my displayed currency type?\
-A: Kubecost supports multiple different currency types for display purposes, but does not perform direct currency conversion. This must be configured via your *values.yaml* with the flag `kubecostProductConfigs.currencyCode`.
+A: Kubecost supports multiple different currency types for display purposes, but does not perform direct currency conversion. This must be configured [via your *values.yaml* with the flag `kubecostProductConfigs.currencyCode`](/install-and-configure/install/first-time-user-guide.md#currency-types).
+
+Q: What is the `helm-rollout-restarter` and how can I disable it?\
+A: When configMaps and secrets are modified, Kubecost's pods need to be restarted for the changes to take effect. To trigger pod restarts, the `helm-rollout-restarter` label generates a new random string every time a `helm template` or `helm upgrade` is run. If this is causing issues with your deployment tools, the `helm-rollout-restarter` can be disabled by setting:
+
+```yaml
+global:
+  platforms:
+    cicd:
+      enabled: true
+```
+Keep in mind that any config change to Kubecost that does not include new images will require steps to ensure the new configuration is used.
+
+Q: Is it possible to use a CI/CD tool to install and maintain Kubecost?\
+A: Yes! Many do. There are a number of examples on our [poc-common-configurations repo](https://github.com/kubecost/poc-common-configurations). Keep in mind that support for 3rd party tools is limited without an Kubecost Enterprise subscription. We thank our community for some significant contributions here:
+  - [ArgoCD](https://github.com/kubecost/poc-common-configurations/tree/main/argocd)
+  - [Flux](https://github.com/kubecost/poc-common-configurations/tree/main/fluxcd)
+  - [Terraform](https://github.com/kubecost/poc-common-configurations/tree/main/terraform)
+
