@@ -61,7 +61,7 @@ Defines spend budgets and alerts on budget overruns.
 | `window`      | `<N>d` or `<M>h`      | The date range over which to query items. Configurable where 1 ≤ N ≤ 7, or 1 ≤ M ≤ 24.                                             |
 | `aggregation` | `<agg-parameter>`     | Configurable, accepts all aggregations supported by the [Allocation API](/apis/monitoring-apis/api-allocation.md).                 |
 | `filter`      | `<value>,<value2>...` | Optional. Configurable, accepts any 1 or more values of aggregate type as comma-separated values.                                  |
-| `threshold`   | `<amount>`            | Cost threshold in [configured currency units](/apis/governance-apis/budget-api.md#configuring-currency).                           |
+| `threshold`   | `<amount>`            | Cost threshold in [configured currency units](/install-and-configure/install/first-time-user-guide.md#currency-types).             |
 
 Example Helm _values.yaml_:
 
