@@ -149,7 +149,7 @@ Q: How can I configure node-exporter to use an internal cluster IP instead of th
 A: Set the following Helm value: `prometheus.nodeExporter.hostNetwork=false`.
 
 Q: How can I configure my displayed currency type?\
-A: Kubecost supports multiple different currency types for display purposes, but does not perform direct currency conversion. This must be configured via your *values.yaml* with the flag `kubecostProductConfigs.currencyCode`.
+A: Kubecost supports multiple different currency types for display purposes, but does not perform direct currency conversion. This must be configured [via your *values.yaml* with the flag `kubecostProductConfigs.currencyCode`](/install-and-configure/install/first-time-user-guide.md#currency-types).
 
 Q: What is the `helm-rollout-restarter` and how can I disable it?\
 A: When configMaps and secrets are modified, Kubecost's pods need to be restarted for the changes to take effect. To trigger pod restarts, the `helm-rollout-restarter` label generates a new random string every time a `helm template` or `helm upgrade` is run. If this is causing issues with your deployment tools, the `helm-rollout-restarter` can be disabled by setting:
