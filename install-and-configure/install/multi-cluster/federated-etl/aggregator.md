@@ -27,6 +27,10 @@ If you are upgrading to Kubecost v2.0 from the following environments, see our s
 
 ### Basic configuration
 
+{% hint style="info" %}
+This configuration is estimated to be sufficient for environments monitoring < 20k unique containers per day. You can check this metric on the `/diagnostics` page.
+{% endhint %}
+
 ```yaml
 kubecostAggregator:
   replicas: 1
@@ -59,18 +63,17 @@ serviceAccount:
 
 ### Aggregator Optimizations
 
-For larger deployments of Kubecost, Aggregator can be tuned.
+For larger deployments of Kubecost, Aggregator can be tuned. The settings below are in addition to the basic configuration above.
+
+{% hint style="info" %}
+This configuration is estimated to be sufficient for environments monitoring < 60k unique containers per day. You can check this metric on the `/diagnostics` page.
+{% endhint %}
 
 {% hint style="warning" %}
 Aggregator is a memory and disk-intensive process. Ensure that your cluster has enough resources to support the configuration below.
 
 Because the Aggregator PV is relatively small, the least expensive performance gain will be to move the storage class to a faster SSD. The storageClass name varies by provider, the terms used are gp3/extreme/premium/etc.
 {% endhint %}
-
-{% hint style="warning" %}
-{% endhint %}
-
-The settings below are in addition to the basic configuration above.
 
 ```yaml
 kubecostAggregator:
@@ -82,12 +85,12 @@ kubecostAggregator:
     # the federated store bucket. If set too high, there will be a delay in data
     # between the Kubecost Agents and the Aggregator.
     #
-    # Note, that the default value is set to 10m to optimize for the
+    # Note, that the default value is set to 60m to optimize for the
     # first-install experience of Kubecost (i.e. it prioritizes small data
     # becoming available more quickly).
     #
-    # default: 10m
-    DB_BUCKET_REFRESH_INTERVAL: 1h
+    # default: 60m
+    DB_BUCKET_REFRESH_INTERVAL: 2h
 
     # How much data to ingest from the federated store bucket, and how much data
     # to keep in the DB before rolling the data off.
@@ -106,6 +109,26 @@ kubecostAggregator:
     # default: 3
     DB_CONCURRENT_INGESTION_COUNT: "5"
 
+    # Memory limit applied to read database connections.
+    # default: n/a
+    DB_MEMORY_LIMIT: 8GB
+
+    # Memory limit applied to write database connections.
+    # default: n/a
+    DB_WRITE_MEMORY_LMIT: 8GB
+
+    # How many threads the read database is configured with (i.e. Kubecost API /
+    # UI queries). If increasing this value, it is recommended to increase the
+    # aggregator's memory requests & limits.
+    # default: 1
+    DB_READ_THREADS: 3
+
+    # How many threads the write database is configured with (i.e. ingestion of
+    # new data from S3). If increasing this value, it is recommended to increase
+    # the aggregator's memory requests & limits.
+    # default: 1
+    DB_WRITE_THREADS: 3
+
     # log level
     # default: info
     LOG_LEVEL: info
@@ -117,14 +140,12 @@ kubecostAggregator:
     storageRequest: 512Gi
   resources:
     requests:
-      cpu: 1000m
-      memory: 1Gi
+      cpu: 4
+      memory: 12Gi
     limits:
-      # cpu: 2000m
+      cpu: 6
       memory: 16Gi
 ```
-
-There is no baseline for what is considered a larger deployment, which will be dependent on load times in your Kubecost environment.
 
 ### Running the upgrade
 
@@ -187,48 +208,48 @@ INF asset worker context cancelled: context canceled
 INF allocation worker context cancelled: context canceled
 ```
 
-To fix, try continuously increasing the environment variable's value, until the errors no longer appear. We recommend starting with `1h`. More details about the environment variable described above.
+To fix, try continuously increasing the environment variable's value, until the errors no longer appear. We recommend starting with `2h`. More details about the environment variable described above.
 
 ```yaml
 kubecostAggregator:
   env:
-    DB_BUCKET_REFRESH_INTERVAL: 1h
+    DB_BUCKET_REFRESH_INTERVAL: 2h
 ```
 
 ### Checking the database for node metadata
 
 Confirming whether node metadata exists in your database can be useful when troubleshooting missing data. Run the following command which will open a shell into the Aggregator pod:
 
-```
+```sh
 kubectl exec -it KUBECOST-AGGREGATOR-POD-NAME sh
 ```
 
 Point to the path where your database exists
 
-```
+```sh
 cd /var/configs/waterfowl/duckdb/v0_9_2
 ls -lah
 ```
 
 Copy the database to a new file for testing to avoid modifications to the original data
 
-```
+```sh
 cp kubecost-example.duckdb.read kubecost-example.duckdb.read.kubecost.copy
 ```
 
 Open a DuckDB REPL pointed at the copied database
 
-```
+```sh
 duckdb kubecost-example.duckdb.read.kubecost.copy
 ```
 
 Run the following debugging queries to check if node data is available:
 
-```
+```sql
 show tables;
-describe node_1h;
-select * from node_1h;
-select providerid,windowstart,windowend,* from node_1h;
+describe node_1d;
+select * from node_1d;
+select providerid,windowstart,windowend,* from node_1d;
 
 .maxrows 100;
 ```
