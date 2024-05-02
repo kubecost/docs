@@ -27,6 +27,10 @@ If you are upgrading to Kubecost v2.0 from the following environments, see our s
 
 ### Basic configuration
 
+{% hint style="info" %}
+This configuration is estimated to be sufficient for environments monitoring < 20k unique containers per day. You can check this metric on the `/diagnostics` page.
+{% endhint %}
+
 ```yaml
 kubecostAggregator:
   replicas: 1
@@ -59,18 +63,17 @@ serviceAccount:
 
 ### Aggregator Optimizations
 
-For larger deployments of Kubecost, Aggregator can be tuned.
+For larger deployments of Kubecost, Aggregator can be tuned. The settings below are in addition to the basic configuration above.
+
+{% hint style="info" %}
+This configuration is estimated to be sufficient for environments monitoring < 60k unique containers per day. You can check this metric on the `/diagnostics` page.
+{% endhint %}
 
 {% hint style="warning" %}
 Aggregator is a memory and disk-intensive process. Ensure that your cluster has enough resources to support the configuration below.
 
 Because the Aggregator PV is relatively small, the least expensive performance gain will be to move the storage class to a faster SSD. The storageClass name varies by provider, the terms used are gp3/extreme/premium/etc.
 {% endhint %}
-
-{% hint style="warning" %}
-{% endhint %}
-
-The settings below are in addition to the basic configuration above.
 
 ```yaml
 kubecostAggregator:
@@ -143,8 +146,6 @@ kubecostAggregator:
       cpu: 6
       memory: 16Gi
 ```
-
-There is no baseline for what is considered a larger deployment, which will be dependent on load times in your Kubecost environment.
 
 ### Running the upgrade
 
