@@ -209,9 +209,42 @@ eksctl utils associate-iam-oidc-provider \
     --approve
 ```
 
-**Linking default Kubecost Service Account to an IAM Role**
+**Use IAM Role with the Kubecost Service Account**
 
-Kubecost's default service account `kubecost-cost-analyzer` is automatically created in the `kubecost` namespace upon installation. This service account can be linked to an IAM Role via Annotation + IAM Trust Policy.
+Kubecost's default service account `kubecost-cost-analyzer` is automatically created in the namespace that it is installed to. This service account needs to use the IAM Role created earlier.
+
+There are 3 ways to use the IAM Role with the Kubecost Service Account:
+
+1. EKS Pod Identity - likely the easiest and is recommended (6a)
+2. Create a new dedicated service account for Kubecost (6b)
+3. Use an existing service account for Kubecost (6c)
+
+
+### Step 6a: EKS Pod Identity
+
+{% hint style="warning" %}
+Your cluster must support [EKS Pod Identities](https://docs.aws.amazon.com/eks/latest/userguide/pod-id-agent-setup.html) to use the method below.
+This is supported as of Kubecost 2.2.2
+{% endhint %}
+
+Create your pod identity association:
+
+```sh
+eksctl create podidentityassociation \
+  --cluster $CLUSTER_NAME --region $AWS_REGION \
+  --namespace kubecost \
+  --service-account-name kubecost-serviceaccount \
+  --role-name kubecost-serviceaccount \
+  --permission-policy-arns arn:aws:iam::SUB_ACCOUNT_222222222:policy/kubecost-access-cur-in-payer-account
+```
+
+Then update your *values.yaml* file:
+
+```yaml
+serviceAccount:
+  create: true
+    name: kubecost-serviceaccount
+```
 
 In the Helm values for your deployment, add the following section:
 
@@ -273,30 +306,6 @@ serviceAccount:
   name: kubecost-serviceaccount
 ```
 
-### Step 6 (optional): Setting up EKS Pod Identity
-
-{% hint style="warning" %}
-Your cluster must support [EKS Pod Identities](https://docs.aws.amazon.com/eks/latest/userguide/pod-id-agent-setup.html) to use the method below.
-{% endhint %}
-
-Create your pod identity association:
-
-```sh
-eksctl create podidentityassociation \
---cluster $CLUSTER_NAME --region $AWS_REGION \
---namespace kubecost \
---service-account-name kubecost-serviceaccount \
---role-name kubecost-serviceaccount \
---permission-policy-arns arn:aws:iam::SUB_ACCOUNT_222222222:policy/kubecost-access-cur-in-payer-account
-```
-
-Then update your *values.yaml* file:
-
-```yaml
-serviceAccount:
-  create: true
-    name: kubecost-serviceaccount
-```
 
 ## Validation
 
