@@ -4,7 +4,7 @@ structure:
     summary: SUMMARY.md
 
 redirects:
-    install: install-and-configure/install.md
+    install: install-and-configure/install/install.md
     apis/apis-overview/cost-events-audit-api: apis/governance-apis/cost-events-audit-api.md
     getting-started: install-and-configure/install/getting-started.md
     kubecost-cloud/using-the-kubecost-cloud-ui: v/kubecost-cloud/using-kubecost-cloud/using-kubecost-cloud.md
