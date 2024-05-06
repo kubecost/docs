@@ -87,7 +87,7 @@ If you’re new to provisioning IAM roles, we suggest downloading our templates 
 * Select _Create Stack_, then select _With new resources (standard)_ from the dropdown.
 * On the 'Create stack' page, under 'Prerequisite - Prepare Template', make sure *Template is ready* has been preselected. Under 'Specify Template', select *Upload a template file*. Select *Choose file*, then select your downloaded .yaml file from your file explorer. Select *Next*.
 * On the 'Specify stack details' page, enter a name for your stack, then provide the following parameters:
-  * AthenaCURBucket: The name of the Athena CUR bucket you created in Step 2.
+  * AthenaCURBucket: The bucket where the CUR is set from Step 1
   * SpotDataFeedBucketName: (Optional, skip if you have not configured Spot data) The bucket where the Spot data feed is sent
 * Select _Next_.
 * On the 'Configure stack options' page opens, configure any additional options as needed. Select _Next_.
