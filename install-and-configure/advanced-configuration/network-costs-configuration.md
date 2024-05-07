@@ -30,7 +30,7 @@ There are Grafana dashboards that are included with the Kubecost installation, b
 
 ## Enabling network costs
 
-To enable this feature, set the following parameters in your values file following the [Helm installation](https://kubecost.com/install) guide.
+To enable this feature, set the following parameters in your values file following the [Helm installation](https://kubecost.com/install) guide:
 
 ```yaml
 networkCosts:
