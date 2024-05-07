@@ -87,7 +87,7 @@ If you’re new to provisioning IAM roles, we suggest downloading our templates 
 * Select _Create Stack_, then select _With new resources (standard)_ from the dropdown.
 * On the 'Create stack' page, under 'Prerequisite - Prepare Template', make sure *Template is ready* has been preselected. Under 'Specify Template', select *Upload a template file*. Select *Choose file*, then select your downloaded .yaml file from your file explorer. Select *Next*.
 * On the 'Specify stack details' page, enter a name for your stack, then provide the following parameters:
-  * AthenaCURBucket: The bucket where the CUR is set from Step 1
+  * S3CURBucket: The bucket where the CUR is set from Step 1
   * SpotDataFeedBucketName: (Optional, skip if you have not configured Spot data) The bucket where the Spot data feed is sent
 * Select _Next_.
 * On the 'Configure stack options' page opens, configure any additional options as needed. Select _Next_.
@@ -120,7 +120,7 @@ If you’re new to provisioning IAM roles, we suggest downloading our templates 
 **On the management account:**
 
 * Follow the same steps to create a CloudFormation stack as above, but using [this .yaml file](https://raw.githubusercontent.com/kubecost/cloudformation/master/kubecost-masterpayer-account-permissions.yaml) instead, and with these parameters:
-  * AthenaCURBucket: The bucket where the CUR is set from Step 1
+  * S3CURBucket: The bucket where the CUR is set from Step 1
   * KubecostClusterID: An account that Kubecost is running on that requires access to the Athena CUR.
 
 </details>
@@ -278,7 +278,7 @@ The SpotDataAccess policy statement is optional, and only needed if the Spot dat
 
 #### Attach Athena/CUR S3 Access Policy to IAM Role in payer account
 
-Attach the following policy to the IAM Role created in the payer account. Replace `${AthenaCURBucket}` variable with your CUR bucket name, and check to make sure your Athena results bucket matches the format of aws-athena-query-results-*. If not, set the query result bucket in the policy to match your created bucket.
+Attach the following policy to the IAM Role created in the payer account. Replace `${S3CURBucket}` variable with your CUR bucket name, and check to make sure your Athena results bucket matches the format of aws-athena-query-results-*. If not, set the query result bucket in the policy to match your created bucket.
 
 ```
 	{
