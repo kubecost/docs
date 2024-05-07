@@ -107,7 +107,7 @@ aws eks describe-addon --addon-name kubecost_kubecost --cluster-name $YOUR_CLUST
 The Kubecost add-on should be available in a few minutes. Run the following command to enable port-forwarding to expose the Kubecost dashboard:
 
 ```bash
-kubectl port-forward --namespace kubecost deployment/kubecost-cost-analyzer 9090
+kubectl port-forward --namespace kubecost deployment/cost-analyzer 9090
 ```
 
 ### Disable Kubecost add-on
@@ -200,7 +200,7 @@ By default, the installation will include certain prerequisite software includin
 Run the following command to enable port-forwarding to expose the Kubecost dashboard:
 
 ```bash
-kubectl port-forward --namespace kubecost deployment/kubecost-cost-analyzer 9090
+kubectl port-forward --namespace kubecost deployment/cost-analyzer 9090
 ```
 
 ### Step 3: Access Monitoring dashboards
