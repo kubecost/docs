@@ -26,7 +26,7 @@ This should be enabled by default. If not, run this command:
 gcloud beta container node-pools update default-pool --cluster=<YOUR-KUBECOST-CLUSTER> --workload-metadata-from-node=GKE_METADATA_SERVER --zone=<YOUR-CLUSTER-ZONE>
 ```
 
-### Step 2: Creating a Kubecost GCP service account:
+### Step 2: Creating a GCP service account:
 
 In the GCP account in which your Kubecost cluster exists, create a GCP service account to bind to the Kubecost cloud-cost container pod using Workload Identity:
 
@@ -80,3 +80,53 @@ From your AWS management account:
 5. In the 'Audience' box, select the unique service account ID for the `kubecost-aws-cur-role`, then select *Next*.
 6. Add [CUR access permissions](https://github.com/kubecost/poc-common-configurations/blob/53b553d40f57976419c1dbe276790913644406e9/aws/iam-policies/cur/iam-payer-account-cur-athena-glue-s3-access.json), then select *Next*.
 7. Review the details for your role for accuracy, then select *Create role*.
+
+Make sure to remember the values you 
+
+### Step 5: Integrate AWS with Kubecost
+
+Create a `cloud-integration.json` file and provide the following values (see below for explanations of these values):
+
+
+```
+{
+  "aws": {
+    "athena": [
+      {
+        "bucket": "<s3://ATHENA_RESULTS_BUCKET_NAME>",
+        "region": "<ATHENA_REGION>",
+        "database": "<ATHENA_DATABASE>",
+        "table": "<ATHENA_TABLE>",
+        "workgroup": "<ATHENA_WORKGROUP>",
+        "account": "<ACCOUNT_NUMBER>",
+        "authorizer": {
+          "authorizerType": "AWSWebIdentity",
+          "identityProvider": "Google",
+          "roleARN": "<PAYER_ACCOUNT_IAM_ROLE_ARN>",
+          "tokenRetriever": {
+            "aud": "<GCP_SERVICE_ACCOUNT_ID>"
+          }
+        }
+      }
+    ]
+  }
+}
+```
+
+{% hint style="info" %}
+The `aud` parameter should match the value for 'Audience' you probided in Step 4.5 (the unique service account ID for the `kubecost-aws-cur-role`). `roleARN` should be the ARN of the role created with that audience in Step 4.
+{% endhint %}
+
+Next, create a secret from your `cloud-integration.json`:
+
+```
+kubectl create secret generic cloud-integration -n kubecost --from-file=cloud-integration.json
+```
+
+### Step 6: Install/upgrade Kubecost with service account and integration config
+
+Run the following command with the appropriate service account and integration values:
+
+```
+helm upgrade --install kubecost --repo https://kubecost.github.io/cost-analyzer/ cost-analyzer --namespace kubecost --set serviceAccount.name=kubecost-sa --set serviceAccount.create=false --set kubecostProductConfigs.cloudIntegrationSecret=cloud-integration
+```
