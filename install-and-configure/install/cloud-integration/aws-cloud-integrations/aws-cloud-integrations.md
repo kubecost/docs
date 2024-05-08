@@ -119,7 +119,7 @@ If you’re new to provisioning IAM roles, we suggest downloading our templates 
 
 **On the management account:**
 
-* Follow the same steps to create a CloudFormation stack as above, but using [this .yaml file](https://raw.githubusercontent.com/kubecost/cloudformation/master/kubecost-masterpayer-account-permissions.yaml) instead, and with these parameters:
+* Follow the same steps to create a CloudFormation stack as above, but using [this .yaml file](https://raw.githubusercontent.com/kubecost/cloudformation/master/kubecost-management-account-permissions.yaml) instead, and with these parameters:
   * S3CURBucket: The bucket where the CUR is set from Step 1
   * KubecostClusterID: An account that Kubecost is running on that requires access to the Athena CUR.
 
