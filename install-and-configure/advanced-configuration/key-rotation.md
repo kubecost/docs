@@ -1,6 +1,6 @@
 # Service Key Rotation
 
-Cloud provider service keys can be used in various aspects of the Kubecost installation. This includes configuring [integrating your cloud provider billing data with Kubecost](/install-and-configure/install/cloud-integration/README.md), [setting up multi-cluster environments](/install-and-configure/install/multi-cluster/multi-cluster.md), and [backing up ETL data](/install-and-configure/install/etl-backup/etl-backup.md). While automated IAM authentication via a Kubernetes service account like AWS IRSA is recommended, there are some scenarios where key-based authentication is preferred. When this method is used, rotating the keys at a pre-defined interval is a security best practice. Combinations of these features can be used, and therefore you may need to follow one or more of the below steps.
+Cloud provider service keys can be used in various aspects of the Kubecost installation. This includes configuring [integrating your cloud provider billing data with Kubecost](/install-and-configure/install/cloud-integration/README.md), [setting up multi-cluster environments](/install-and-configure/install/multi-cluster/multi-cluster.md), and [backing up data](/install-and-configure/install/multi-cluster/federated-etl/federated-etl-backups-alerting.md). While automated IAM authentication via a Kubernetes service account like AWS IRSA is recommended, there are some scenarios where key-based authentication is preferred. When this method is used, rotating the keys at a pre-defined interval is a security best practice. Combinations of these features can be used, and therefore you may need to follow one or more of the below steps.
 
 ## Adding cloud provider keys
 
@@ -47,7 +47,7 @@ Thanos federation makes use of the `kubecost-thanos` Kubernetes secret as descri
 
 ## ETL backup keys
 
-ETL backups rely on the secret defined by the Helm value `.Values.kubecostModel.etlBucketConfigSecret`. More details can be found on the [ETL backup page](/install-and-configure/install/etl-backup/etl-backup.md).
+ETL backups rely on the secret defined by the Helm value `.Values.kubecostModel.etlBucketConfigSecret`. More details can be found in the [Federated ETL Backups and Alerting](/install-and-configure/install/etl-backup/etl-backup.md) doc.
 
 1. Modify the appropriate Kubernetes secret.
 2. Restart the Kubecost `cost-analyzer` pod.
