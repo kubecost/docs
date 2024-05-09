@@ -168,3 +168,10 @@ A: Yes! Many do. There are a number of examples on our [poc-common-configuration
   - [Flux](https://github.com/kubecost/poc-common-configurations/tree/main/fluxcd)
   - [Terraform](https://github.com/kubecost/poc-common-configurations/tree/main/terraform)
 
+Q: How do I change the default retention of data in Kubecost?\
+A: The default retention for data in Kubecost is 731 days. However, you can modify this by adjusting the following Helm flag in your *values.yaml*:
+
+```
+kubecostModel:
+  etlDailyStoreDurationDays: 731
+```
