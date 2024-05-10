@@ -118,7 +118,7 @@ kubecostModel:
 
 ### Data retention
 
-By default, metric retention is 731 days, however the retention of data can be modifying the value of the Helm flag `etlDailyStoreDurationDays`. You can find this flag in Kubecost's [Helm chart](https://github.com/kubecost/cost-analyzer-helm-chart/blob/9f3d7974247bfd3910fbf69d0d4bd66f1335201a/cost-analyzer/values.yaml#L340).
+By default, metric retention is 731 days, however this can be modified through the value of the Helm flag `kubecostModel.etlDailyStoreDurationDays`. You can find this flag in Kubecost's [Helm chart](https://github.com/kubecost/cost-analyzer-helm-chart/blob/9f3d7974247bfd3910fbf69d0d4bd66f1335201a/cost-analyzer/values.yaml#L340).
 
 {% hint style="warning" %}
 Increasing the default `etlDailyStorageDurationDays` value will naturally result in greater memory usage. At higher values, this can cause errors when trying to display this information in the Kubecost UI. You can remedy this by increasing the [Step size](/using-kubecost/navigating-the-kubecost-ui/cost-allocation/README.md#step-size) when using the Allocations dashboard.
