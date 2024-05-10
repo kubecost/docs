@@ -73,4 +73,4 @@ It's recommended to target idle in the following ranges:
 * Memory: 45%-60%
 * Storage: 65%-80%
 
-Target figures are highly dependent on the predictability and distribution of your resource usage (e.g. P99 vs median), the impact of high utilization on your core product/business metrics, and more. While too low resource utilization is wasteful, too high utilization can lead to latency increases, reliability issues, and other negative behavior.
+Target figures are highly dependent on the predictability and distribution of your resource usage (e.g. P99 vs median), the impact of high utilization on your core product/business metrics, and more. While too low resource utilization is wasteful, too high utilization can lead to latency increases, reliability issues, and other negative behavior. To view efficiency metrics for clusters in your environment, see our [Efficiency Report](/using-kubecost/navigating-the-kubecost-ui/efficiency.md) doc.

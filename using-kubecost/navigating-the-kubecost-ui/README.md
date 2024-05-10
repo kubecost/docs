@@ -21,6 +21,7 @@ In the left navigation, you will see a section called *Monitor*, which comprises
 * [Cloud Costs](cloud-costs-explorer/cloud-costs-explorer.md)
 * [Clusters](clusters-dashboard.md)
 * [External Costs](external-costs.md)
+* [Efficiency](efficiency.md)
 * [Network](network-monitoring.md)
 
 ## Collections
