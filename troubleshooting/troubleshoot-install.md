@@ -332,7 +332,7 @@ ensure CRDs are installed first
 
 To prevent this Helm error state please upgrade Kubecost to at least v1.99 prior to upgrading Kubernetes to v1.25. Additionally please follow the [above](troubleshoot-install.md#issue-podsecuritypolicy-crd-is-missing-for-kubecost-grafana-and-kubecost-cost-analyzer-psp) instructions for disabling PSP.
 
-If Kubecost PSP is not disabled prior to Kubernetes v1.25 upgrades, you may need to manually delete the Kubecost install. Prior to doing this please ensure you have [ETL backups enabled](/install-and-configure/install/multi-cluster/federated-etl/federated-etl-backups-alerting.md) as well as Helm values, and Prometheus/Thanos data backed up. Manual removal can be done by deleting the Kubecost namespace.
+If Kubecost PSP is not disabled prior to Kubernetes v1.25 upgrades, you may need to manually delete the Kubecost install. Prior to doing this please ensure you have [ETL backups enabled](https://docs.kubecost.com/v/1.0x/install-and-configure/install/etl-backup) as well as Helm values, and Prometheus/Thanos data backed up. Manual removal can be done by deleting the Kubecost namespace.
 
 ### The `kube-state-metrics` pod fails to start, `Failed to list *v1beta1.Ingress` and or `Failed to list *v1beta1.CertificateSigningRequest`
 

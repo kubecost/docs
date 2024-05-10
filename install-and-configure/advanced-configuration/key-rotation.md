@@ -28,7 +28,7 @@ Depending on which method you are using, the key rotation process differs.
 
 ### Federated-ETL
 
-With Federated ETL objects, storage keys can be provided in two ways. The preferred method is using the secret defined by the Helm value `.Values.kubecostModel.federatedStorageConfigSecret`. The alternate method is to re-use the ETL backup secret defined with the `.Values.kubecostModel.etlBucketConfigSecret` Helm value.
+With Federated ETL objects, storage keys can be provided in two ways. The preferred method is using the secret defined by the Helm value `.Values.kubecostModel.federatedStorageConfigSecret`.
 
 1. Update the appropriate Kubernetes secret with the new key on each cluster.
 2. Restart the Kubecost `cost-analyzer` pod.
@@ -44,11 +44,3 @@ Thanos federation makes use of the `kubecost-thanos` Kubernetes secret as descri
 3. On the primary Kubecost cluster, restart the `thanos-store` pod.
 4. Verify the new key is working correctly by checking the `thanos-sidecar` logs in the `prometheus` server pods for authentication errors to ensure they are able to write new block data to the object storage.
 5. Verify the new key is working correctly by checking `thanos-store` pod logs on the primary cluster for authentication errors to ensure it is able to read block data from the object storage.
-
-## ETL backup keys
-
-ETL backups rely on the secret defined by the Helm value `.Values.kubecostModel.etlBucketConfigSecret`. More details can be found in the [Federated ETL Backups and Alerting](/install-and-configure/install/etl-backup/etl-backup.md) doc.
-
-1. Modify the appropriate Kubernetes secret.
-2. Restart the Kubecost `cost-analyzer` pod.
-3. Verify the backups are still being written to the object storage.
