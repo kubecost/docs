@@ -51,7 +51,7 @@ If this is your first time setting up an object store, refer to these docs:
 
 ### Step 2: Enable ETL backups on the *primary cluster only*
 
-Enabling [ETL backups](/install-and-configure/install/etl-backup/etl-backup.md) ensures Kubecost persists historical data in durable storage (outside of Thanos) and stores the data in a format consumable by the ETL Utils container. The ETL Utils container transforms that data and writes it to a separate location in the object store for consumption by Aggregator.
+Enabling [ETL backups](https://docs.kubecost.com/v/1.0x/install-and-configure/install/etl-backup) ensures Kubecost persists historical data in durable storage (outside of Thanos) and stores the data in a format consumable by the ETL Utils container. The ETL Utils container transforms that data and writes it to a separate location in the object store for consumption by Aggregator.
 
 ```yaml
 kubecostModel:
