@@ -41,5 +41,5 @@ One of the most important tools for configuring your query is the idle dropdown.
 * *Resource idle by workload*: Categorizes your total workload idle cost across CPU/RAM/storage and hides infra idle cost
 * *Resource idle by cluster*: Categorizes your total infra idle cost across CPU/RAM and hides workload idle cost
 
-For blanket workload and infra idle costs, you can leave the default * Idle by type* selected. However, if you need a break down of idle costs by resource type (CPU/RAM/storage), select one of the other options from the dropdown.
+For blanket workload and infra idle costs, you can leave the default *Idle by type* selected. However, if you need a break down of idle costs by resource type (CPU/RAM/storage), select one of the other options from the dropdown.
 
