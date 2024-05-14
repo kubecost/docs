@@ -81,8 +81,6 @@ From your AWS management account:
 6. Add [CUR access permissions](https://github.com/kubecost/poc-common-configurations/blob/53b553d40f57976419c1dbe276790913644406e9/aws/iam-policies/cur/iam-payer-account-cur-athena-glue-s3-access.json), then select *Next*.
 7. Review the details for your role for accuracy, then select *Create role*.
 
-Make sure to remember the values you 
-
 ### Step 5: Integrate AWS with Kubecost
 
 Create a `cloud-integration.json` file and provide the following values (see below for explanations of these values):
