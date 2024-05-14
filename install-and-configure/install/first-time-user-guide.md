@@ -16,7 +16,7 @@ For an overview of cloud integrations and getting started, see our [Cloud Billin
 
 Due to the frequency of billing updates from providers, it can take anywhere from 24 to 48 hours to see adjusted costs.
 
-## Currency Types
+## Currency types
 
 Kubecost uses USD by default, though you can also configure your currency display type. Kubecost supports the following currency types: USD, AUD, BRL, CAD, CHF, CNY, DKK, EUR, GBP, IDR, INR, JPY, NOK, PLN, and SEK. Kubecost does *not* perform any currency conversion when switching currency types; it is for display purposes, therefore you should ideally match your currency type to your cloud billing.
 
@@ -27,7 +27,7 @@ kubecostProductConfigs:
     currencyCode: EUR
 ```
 
-## Data Protection
+## Data protection
 
 By default, Kubecost stores its data in a native file format called `ETL` and it is stored in a Kubernetes `PersistentVolume`. While it is possible to rebuild this ETL from data that may be in Prometheus, it is recommended to back up this data. For more information on backing up your ETL, see our [ETL Backup](/install-and-configure/install/etl-backup/etl-backup.md) doc.
 
@@ -39,7 +39,7 @@ By default, Kubecost stores its data in a native file format called `ETL` and it
 
 #### Anomaly Detection
 
-[Anomaly Detection](/using-kubecost/navigating-the-kubecost-ui/anomaly-detection.md) can detect when spending for any integrated cloud services begins deviating outside an expected range. Detected anomalies will be reported and can be investigated to determine causes of excessive spend.
+[Anomaly Detection](/using-kubecost/navigating-the-kubecost-ui/anomaly-detection.md) can detect when spending for any Allocation or Cloud Cost items deviate outside an expected range. Detected anomalies will be reported and can be investigated to determine causes of excessive spend.
 
 ## Multi-cluster and federated setups
 
