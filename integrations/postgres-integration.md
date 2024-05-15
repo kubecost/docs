@@ -1,10 +1,10 @@
-# Kubecost / Postgres Integration
+# Kubecost Postgres Integration
 
 {% hint style="info" %}
 This feature is only supported for Kubecost Enterprise.
 {% endhint %}
 
-Often times, users prefer to gather all their data and metrics in a single data warehouse. From there, they can run queries and generate reports to analyze the data across multiple sources. The Postgres Integration feature enables users to periodically query and export their Kubecost data to a central Postgres database.
+The Postgres Integration feature enables users to periodically query and export their Kubecost data to a central Postgres database.
 
 ## Example use cases
 
