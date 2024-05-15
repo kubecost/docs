@@ -10,6 +10,8 @@ Anomaly Detection is a governance tool which detects when an item in your Alloca
 Anomaly Detection requires at least one cloud provider integration in order to detect anomalies in service spend. See our [Cloud Billing Integrations](/install-and-configure/install/cloud-integration/README.md) doc to get started.
 {% endhint %}
 
+Anomaly Detection can be accessed in the Kubecost UI by selecting *Govern* > *Anomalies* in the left navigation.
+
 ![Anomaly detection](/images/anomaly-detection.png)
 
 An anomaly is an increase/decrease in cost greater than the established threshold of acceptable spend, where both the threshold and the window of date used to establish that treshold can be [configured by the user](anomaly-detection.md#edit).
@@ -37,7 +39,7 @@ Allocations supports the following categories to aggregate by:
 * Cluster
 * Container
 * Controller
-* Ctrl King
+* Ctrl Kind
 * Namespace (default)
 * Node
 * Pod
