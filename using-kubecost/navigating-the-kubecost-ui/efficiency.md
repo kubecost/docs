@@ -44,6 +44,6 @@ One of the most important tools for configuring your query is the idle dropdown.
 
 * *Idle by type*: Will display table columns for both workload idle and infra idle, and provides cluster efficiency percentage
 * *Resource idle by workload*: Categorizes your total workload idle cost across CPU/RAM/storage and breaks these costs down by workload
-* *Resource idle by cluster*: Categorizes your total infra idle cost across CPU/RAM and breaks these costs down by cluster.
+* *Resource idle by cluster*: Categorizes your total infra idle cost across CPU/RAM and breaks these costs down by cluster
 
 For blanket workload and infra idle costs, you can leave the default *Idle by type* selected. However, if you need a breakdown of idle costs by resource type (CPU/RAM/storage), select one of the other options from the dropdown.
