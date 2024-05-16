@@ -2,7 +2,7 @@
 
 This tutorial is intended to help our users migrate from an existing federated ETL setup to Kubecost v2.0's Aggregator. There are a few requirements in order to successfully migrate to Kubecost v2.0. This new version of Kubecost includes a new backend Aggregator which handles the ETL data built from source metrics more efficiently. Kubecost v2.0 provides new features, optimizes UI performance, and enhances the user experience. This tutorial is meant to be performed before the user upgrades from an older version of Kubecost to v2.0.
 
-![Aggregator Architecture](/images/aggregator-architecture.png)
+![Aggregator Architecture](/images/diagrams/aggregator-architecture.png)
 
 Important notes for the migration process:
 
