@@ -42,7 +42,7 @@ Filter your results at the cluster or node level, where only matching resources 
 
 One of the most important tools for configuring your query is the idle dropdown. Here, you can choose which idle costs to display, but this will also affect the reported cost metrics in the Efficiency Report table:
 
-* *Idle by type*: Will display table columns for both workload idle and infra idle, and provides workload efficiency percentage
+* *Idle by type*: Will display table columns for both workload idle and infra idle, and provides cluster efficiency percentage
 * *Resource idle by workload*: Categorizes your total workload idle cost across CPU/RAM/storage and hides infra idle cost
 * *Resource idle by cluster*: Categorizes your total infra idle cost across CPU/RAM and hides workload idle cost
 
