@@ -27,7 +27,12 @@ Select the date range of the report by setting specific start and end dates, or 
 
 ### Aggregate By
 
-Here you can aggregate your cost metrics by either *Cluster* or *Node*. Hovering your cursor over indiviudal graph items will display a legend breaking down each color with the cost of the resource associated with it. The sum of all cost metrics in your window will equal the Total Cost metric displayed in the below table.
+Here you can aggregate your results by categories determined by your selected [idle](efficiency.md#idle).
+
+* When *Idle by Type* or *Resource idle by cluster* is selected, your options are *Cluster* or *Node*.
+* When *Resource idle by workload* is selected, your options include all available [Allocations](/using-kubecost/navigating-the-kubecost-ui/cost-allocation/README.md#aggregate-by) aggregate options, including Single and Multi Aggregation.
+
+Hovering your cursor over indiviudal graph items will display a legend breaking down each color with the cost of the resource associated with it. The sum of all cost metrics in your window will equal the Total Cost metric displayed in the below table.
 
 ### Filters
 
