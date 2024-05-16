@@ -6,12 +6,12 @@ Efficiency Report supports clusters by all major cloud service providers, and on
 
 ![Efficiency Report](/images/efficiency.png)
 
-## Understanding effiency and idle cost metrics
+## Understanding efficiency and idle cost metrics
 
 Efficiency Report breaks down idle costs into two distinct categories:
 
-* *Workload idle* refers to hardware resources (CPU/GPU/RAM) that are requested by the workloads, but are not consumed on average.
-* *Infra idle* refers to purchased hardware resources that are neither requested nor consumed.
+* *Workload idle* refers to the cost associated with hardware resources (CPU/GPU/RAM) that are requested by the workloads, but are not consumed on average.
+* *Infra idle* refers to the cost associated with purchased hardware resources that are neither requested nor consumed.
 
 These metrics, when compared to total spend, are necessary when calculating efficiency. Workload efficiency can be calculated as:
 
@@ -32,7 +32,7 @@ Here you can aggregate your results by categories determined by your selected [i
 * When *Idle by Type* or *Resource idle by cluster* is selected, your options are *Cluster* or *Node*.
 * When *Resource idle by workload* is selected, your options include all available [Allocations](/using-kubecost/navigating-the-kubecost-ui/cost-allocation/README.md#aggregate-by) aggregate options, including Single and Multi Aggregation.
 
-Hovering your cursor over indiviudal graph items will display a legend breaking down each color with the cost of the resource associated with it. The sum of all cost metrics in your window will equal the Total Cost metric displayed in the below table.
+Hovering your cursor over individual graph items will display a legend breaking down each color with the cost of the resource associated with it. The sum of all cost metrics in your window will equal the Total Cost metric displayed in the below table.
 
 ### Filters
 
@@ -43,8 +43,7 @@ Filter your results at the cluster or node level, where only matching resources 
 One of the most important tools for configuring your query is the idle dropdown. Here, you can choose which idle costs to display, but this will also affect the reported cost metrics in the Efficiency Report table:
 
 * *Idle by type*: Will display table columns for both workload idle and infra idle, and provides cluster efficiency percentage
-* *Resource idle by workload*: Categorizes your total workload idle cost across CPU/RAM/storage and hides infra idle cost
-* *Resource idle by cluster*: Categorizes your total infra idle cost across CPU/RAM and hides workload idle cost
+* *Resource idle by workload*: Categorizes your total workload idle cost across CPU/RAM/storage and breaks these costs down by workload
+* *Resource idle by cluster*: Categorizes your total infra idle cost across CPU/RAM and breaks these costs down by cluster.
 
-For blanket workload and infra idle costs, you can leave the default *Idle by type* selected. However, if you need a break down of idle costs by resource type (CPU/RAM/storage), select one of the other options from the dropdown.
-
+For blanket workload and infra idle costs, you can leave the default *Idle by type* selected. However, if you need a breakdown of idle costs by resource type (CPU/RAM/storage), select one of the other options from the dropdown.
