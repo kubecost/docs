@@ -71,7 +71,11 @@ The number of preceding days to consider when computing the mean. This is the ti
 
 ## Managing anomalies
 
-Selecting an anomaly will open the corresponding monitoring dashboard associated with that item, including any any Aggregate/Filter configurations, allowing you to observe more cost metrics for that item and drill down into it. The lookback window will also be visualized.
+Selecting an anomaly will open the corresponding monitoring dashboard associated with that item, including any any Aggregate/Filter configurations, allowing you to observe more cost metrics for that item and drill down into it.
+
+The Lookback Window will be visualized, with the step interval directly after being highlighted as the detected anomalous spend source. Kubecost is using the configured Lookback Window to calculate an average spend in that duration, then determines if the spend directly proceeding it varies enough from that average to be considered anomalous.
+
+![Detected anomaly](/images/anomaly-drilldown.png)
 
 The Forecasting Container can be disabled by setting the Helm flag (this will stop Anomaly Detection from working!):
 
