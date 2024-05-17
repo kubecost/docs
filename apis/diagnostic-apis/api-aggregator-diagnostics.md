@@ -2,14 +2,64 @@
 
 Below are APIs exposed by Kubecost Aggregator for troubleshooting without inspecting the PV directly.
 
+## Debug endpoints
+
 #### `/model/debug/orchestrator`
 
-Returns current state of the Orchestrator, which governs what state Aggregator is currently in.
+This endpoint provides a live report of metrics of the write database. This endpoint can return valuable information including duration of current ingestion, and  hours required to complete ingestion.
+
+Output for this endpoint looks like:
+
+```
+
+```
+
+#### `model/debug/ingestionSummary`
+
+This endpoint provides a summary of all ingestion records organized by cluster/cloud integration, modelType (ex: Allocations, Assets), and windowResolution (1d or 1h). Uses data exclusively from the write database. No supported parameters.
+
+#### `model/debug/ingestionRecords`
+
+This endpoint returns all of the individual ingestion records stored in the write database.
+
+| Parameter | Default | Description |
+| --- | --- | --- |
+| `cluster` |  |  |
+| `modelType` |  | Filter by model type |
+| `onlyShowErrors` |  |  |
+| `status` |  | Filter by status |
+| `window` |  | Window of time for which you wish to query records. Accepts all standard formatting for [Kubecost `window` parameters](/apis/apis-overview.md#using-the-window-parameter-to-query-data-rnage) |
+| `lastModifiedWindow` |  |  |
+| `ingestionWindow` |  |  |
+| `resolution` |  | Resolution of data points. Supports `daily` and `hourly`, or `nh` and `nd` where `n` is an integer (ex: `resolution=3d`) |
+| `filename` |  | Query by specific filename |
+| `filesize` |  | 100 - filter by file size in byters (supports < and >) |
+
+#### `model/debug/derivationRecords`
+
+This endpoint returns all of the individual derivation records stored in the write database. There is one record for every `filename`, `window`, and `resolution`. If the status is completed, there will be start and end times for the derivation.
+
+| Parameter | Default | Description |
+| --- | --- | --- |
+| `checksum` |  | Filter by checksum |
+| `filename` |  | Query by specific filename |
+| `onlyShowErrors` |  | Filter by records where error has been detected |
+| `status` |  | Filter by status |
+| `window` |  | Window of time for which you wish to query records. Accepts all standard formatting for [Kubecost `window` parameters](/apis/apis-overview.md#using-the-window-parameter-to-query-data-rnage) |
+| `derivationWindow` |  |  |
+| `resolution` |  | Resolution of data points. Supports `daily` and `hourly`, or `nh` and `nd` where `n` is an integer (ex: `resolution=3d`) |
+| `filename` |  | Query by specific filename |
+| `filesize` |  | 100 - filter by file size in byters (supports < and >) |
+
+#### `model/debug/databaseDirectory`
+
+Lists files of the directory the database is in. Tool for troubleshooting with Kubecost support.
+
+## Diagnostic endpoints
 
 #### `/model/diagnostic/tableWindowCount`
 
-Used to determine the number of unique WindowStart/WindowEnd pairs exist in the
-table.
+Used to determine the number of unique WindowStart/WindowEnd pairs exist in the table.
 
 | Parameter | Default | Description |
 | --- | --- | --- |
