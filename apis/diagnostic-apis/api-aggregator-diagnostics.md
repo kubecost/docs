@@ -45,7 +45,7 @@ This endpoint returns all of the individual derivation records stored in the wri
 | `filename` |  | Query by specific filename |
 | `onlyShowErrors` |  | Filter by records where error has been detected |
 | `status` |  | Filter by status |
-| `window` |  | Window of time for which you wish to query records. Accepts all standard formatting for [Kubecost `window` parameters](/apis/apis-overview.md#using-the-window-parameter-to-query-data-rnage) |
+| `window` |  | Window of time for which you wish to query records. Accepts all standard formatting for [Kubecost `window` parameters](/apis/apis-overview.md#using-the-window-parameter-to-query-data-range) |
 | `derivationWindow` |  |  |
 | `resolution` |  | Resolution of data points. Supports `daily` and `hourly`, or `nh` and `nd` where `n` is an integer (ex: `resolution=3d`) |
 | `filename` |  | Query by specific filename |
@@ -71,7 +71,7 @@ Used to determine the peak number of monitored cores in the window.
 
 | Parameter | Default | Description |
 | --- | --- | --- |
-| `window` | `2d` | Duration of time over which to query and find peak number of cores. Accepts multiple different formats of time (see this [Using the `window` parameter](/apis/apis-overview.md#using-the-window-parameter) section for more info). |
+| `window` | `2d` | Duration of time over which to query and find peak number of cores. Accepts multiple different formats of time (see this [Using the `window` parameter](/apis/apis-overview.md#using-the-window-parameter-to-query-data-range) section for more info). |
 
 #### `/model/diagnostic/containersPerDay`
 
