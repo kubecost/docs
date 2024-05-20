@@ -22,7 +22,7 @@ Important notes for the migration process:
 
 ## Aggregator architecture
 
-![Aggregator diagram](/images/aggregator/aggregator-diagram.png)
+![Aggregator diagram](/images/diagrams/aggregator-diagrams.png)
 
 ## Migration process
 
