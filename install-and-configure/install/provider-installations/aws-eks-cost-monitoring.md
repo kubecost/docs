@@ -18,6 +18,10 @@ Amazon EKS cost monitoring with Kubecost architecture:
 
 ![User experience](/images/AWS-EKS-cost-monitoring-architecture.png)
 
+Amazon EKS optimized diagram:
+
+![EKS flowchart](/images/eks-flowchart.png)
+
 ## Deploying Kubecost on an Amazon EKS cluster using Amazon EKS add-on
 
 ### Prerequisites
