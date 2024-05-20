@@ -168,7 +168,7 @@ In your environment, run the following command from your terminal to install Kub
 helm upgrade -i kubecost \
 oci://public.ecr.aws/kubecost/cost-analyzer --version <$VERSION> \
 --namespace kubecost --create-namespace \
--f https://raw.githubusercontent.com/kubecost/cost-analyzer-helm-chart/eks-v2.2/cost-analyzer/values-eks-cost-monitoring.yaml
+-f https://raw.githubusercontent.com/kubecost/cost-analyzer-helm-chart/<$VERSION>/cost-analyzer/values-eks-cost-monitoring.yaml
 ```
 {% endcode %}
 
@@ -179,7 +179,7 @@ To install Kubecost on Amazon EKS cluster on AWS Graviton2 (ARM-based processor)
 helm upgrade -i kubecost \
 oci://public.ecr.aws/kubecost/cost-analyzer --version <$VERSION> \
 --namespace kubecost --create-namespace \
--f https://raw.githubusercontent.com/kubecost/cost-analyzer-helm-chart/eks-v2.2/cost-analyzer/values-eks-cost-monitoring.yaml \
+-f https://raw.githubusercontent.com/kubecost/cost-analyzer-helm-chart/<$VERSION>/cost-analyzer/values-eks-cost-monitoring.yaml \
 ```
 {% endcode %}
 
@@ -234,7 +234,7 @@ In your environment, run the following command from your terminal to install Kub
 helm upgrade -i kubecost \
 oci://public.ecr.aws/kubecost/cost-analyzer --version <$VERSION> \
 --namespace kubecost --create-namespace \
--f https://raw.githubusercontent.com/kubecost/cost-analyzer-helm-chart/eks-v2.2/cost-analyzer/values-eks-cost-monitoring.yaml
+-f https://raw.githubusercontent.com/kubecost/cost-analyzer-helm-chart/<$VERSION>/cost-analyzer/values-eks-cost-monitoring.yaml
 ```
 {% endcode %}
 
@@ -245,7 +245,7 @@ To install Kubecost on an EKS-A cluster on AWS Graviton2 (ARM-based processor), 
 helm upgrade -i kubecost \
 oci://public.ecr.aws/kubecost/cost-analyzer --version <$VERSION> \
 --namespace kubecost --create-namespace \
--f https://raw.githubusercontent.com/kubecost/cost-analyzer-helm-chart/eks-v2.2/cost-analyzer/values-eks-cost-monitoring.yaml \
+-f https://raw.githubusercontent.com/kubecost/cost-analyzer-helm-chart/<$VERSION>/cost-analyzer/values-eks-cost-monitoring.yaml \
 ```
 {% endcode %}
 
