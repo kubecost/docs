@@ -27,9 +27,9 @@ kubecostProductConfigs:
     currencyCode: EUR
 ```
 
-## Data Protection
+## Data protection
 
-By default, Kubecost stores its data in a native file format called `ETL` and it is stored in a Kubernetes `PersistentVolume`. While it is possible to rebuild this ETL from data that may be in Prometheus, it is recommended to back up this data. For more information on backing up your ETL, see our [ETL Backup](/install-and-configure/install/etl-backup/etl-backup.md) doc.
+By default, Kubecost stores its data in a native file format called `ETL` and it is stored in a Kubernetes PersistentVolume. While it is possible to rebuild this ETL from data that may be in Prometheus, it is recommended to back up this data. For more information on backing up your ETL, see our [Backups and Alerting](/install-and-configure/install/multi-cluster/federated-etl/federated-etl-backups-alerting.md) doc.
 
 ### Monitor and budget to better control your spend
 
