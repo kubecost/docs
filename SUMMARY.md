@@ -76,6 +76,7 @@
   * [Windows Node Support](install-and-configure/advanced-configuration/windows-node-support.md)
   * [Kubecost Data Status Metrics](install-and-configure/advanced-configuration/data-status-metrics.md)
   * [Service Key Rotation](install-and-configure/advanced-configuration/key-rotation.md)
+  * [Custom SMTP Configuration](install-and-configure/advanced-configuration/smtp.md)
 
 ## Using Kubecost
 
