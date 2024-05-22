@@ -31,17 +31,17 @@ These cluster designations can overlap, in that some clusters may be several typ
 The Storages referred to here are an S3 (or GCP/Azure equivalent) storage bucket which acts as remote storage for the Federated ETL Pipeline.
 
 * **Federated Storage**: A set of folders on paths `<bucket>/federated/<cluster id>` which are essentially ETL backup data, holding a “copy” of federated cluster data. Federated clusters push this data to Federated Storage to be combined by the Aggregator. Federated clusters write this data, and the Aggregator reads this data.
-* **Federated ETL**: The pipeline containing the above components.
 * **Aggregator**: The component running on the primary cluster which serves queries based on data in Federated Storage.
+* **Federated ETL**: The pipeline containing the above components.
 
 ## Federated ETL architecture
 
 This diagram shows an example setup of the Federated ETL with:
 
-* Three pure federated clusters (not classified as any other cluster type): Cluster 1, Cluster 2, and Cluster 3
-* One primary cluster that is also a federated cluster: Cluster 0
+* One primary cluster that is also federated. Aggregator is running on this cluster.
+* Three secondary federated clusters 
 
-The result is four clusters federated together.
+The result is four clusters federated together. All clusters push their local cost data to the federated storage, but only the primary cluster via Aggregator interacts with the federated data for querying.
 
 ![Federated ETL diagram](/images/diagrams/fed-etl-agg-arch.png)
 
