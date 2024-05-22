@@ -38,10 +38,10 @@ The Storages referred to here are an S3 (or GCP/Azure equivalent) storage bucket
 
 This diagram shows an example setup of the Federated ETL with:
 
-* One primary cluster that is also federated. Aggregator is running on this cluster.
+* One primary cluster that is also federated. Aggregator is running on this cluster, and is what allows the user to query all multi-cluster Kubecost data.
 * Three secondary federated clusters 
 
-The result is four clusters federated together. All clusters push their local cost data to the Federated Storage, but only the primary cluster via Aggregator interacts with the total Federated data for querying.
+The result is four clusters federated together. All clusters push their local cost data to the Federated Storage, but only the primary cluster via Aggregator interacts with the total Federated data for querying. This includes querying via API or through the Kubecost UI.
 
 ![Federated ETL diagram](/images/diagrams/fed-etl-agg-arch.png)
 
