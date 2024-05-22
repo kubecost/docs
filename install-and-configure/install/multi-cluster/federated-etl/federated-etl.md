@@ -41,7 +41,7 @@ This diagram shows an example setup of the Federated ETL with:
 * One primary cluster that is also federated. Aggregator is running on this cluster.
 * Three secondary federated clusters 
 
-The result is four clusters federated together. All clusters push their local cost data to the federated storage, but only the primary cluster via Aggregator interacts with the federated data for querying.
+The result is four clusters federated together. All clusters push their local cost data to the Federated Storage, but only the primary cluster via Aggregator interacts with the total Federated data for querying.
 
 ![Federated ETL diagram](/images/diagrams/fed-etl-agg-arch.png)
 
