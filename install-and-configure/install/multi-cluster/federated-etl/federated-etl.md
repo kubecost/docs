@@ -8,10 +8,6 @@ Federated extract, transform, load (ETL) is Kubecost's method to aggregate all c
 
 As of Kubecost v2.0, a multi-cluster setup will also require running the [Aggregator](/install-and-configure/install/multi-cluster/federated-etl/aggregator.md) on the primary cluster.
 
-## Kubecost ETL Federation diagram
-
-![ETL Federation Overview](/images/kubecost-ETL-Federated-Architecture.png)
-
 ## Sample configurations
 
 This guide has specific details on how ETL Configuration works and deployment options.
@@ -47,7 +43,7 @@ This diagram shows an example setup of the Federated ETL with:
 
 The result is four clusters federated together.
 
-![Federated ETL diagram](/images/kubecost-ETL-Federated-diagram.png)
+![Federated ETL diagram](/images/diagrams/fed-etl-agg-arch.png)
 
 ## Setup
 
