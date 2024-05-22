@@ -10,7 +10,7 @@ Kubecost can run on clusters with thousands of nodes when resource consumption i
 
 Cloud cost metrics for all accounts can be pulled in on your primary cluster by pointing Kubecost to one or more management accounts. Therefore, you can disable CloudCost on secondary clusters by setting the following Helm value:
 
-`-- cloudCost.enabled=false`
+`--set cloudCost.enabled=false`
 
 Secondary clusters can be configured strictly as metric emitters to save memory. Learn more about how to best configure them in our [Secondary Clusters Guide](/install-and-configure/install/multi-cluster/secondary-clusters.md).
 
