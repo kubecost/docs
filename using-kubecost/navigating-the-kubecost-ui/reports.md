@@ -84,13 +84,9 @@ The following fields apply to each map item under the `reports` key:
 * `sharedOverhead` -- an integer representing overhead costs to share.
 * `sharedLabels` -- a list of labels to share costs for, requires the following format: `label:<label_name>`
 * `filters` -- a list of maps consisting of a property and value
-  * `property` -- supports `cluster`, `node`, `namespace`, and `label`
-  * `value` -- property value(s) to filter on, supports wildcard filtering with a `*` suffix
-    * Special case `label` `value` examples: `app:cost-analyzer`, `app:cost*`
-      * Wildcard filters only apply for the label value. e.g., `ap*:cost-analyzer` is not valid
-  * _Note: multiple filter properties evaluate as ANDs, multiple filter values evaluate as ORs_
-    * _e.g., (namespace=foo,bar), (node=fizz) evaluates as (namespace == foo || namespace == bar) && node=fizz_
-  * **Important:** If no filters used, supply an empty list `[]`
+  * `key` -- supports `cluster`, `node`, `namespace`, and others. Refer [filter v2 documentation](/apis/filters-api.md).
+  * `operator` -- supports operator such as `:`,`!:`,`~:`,`!~:` and others. Refer [filter v2 documentation](/apis/filters-api.md) for full list of operators.
+  * `value` -- property value(s) to filter on. Refer [filter v2 documentation](/apis/filters-api.md).
 
 ## Example Helm _values.yaml_ Saved Reports section
 
@@ -112,9 +108,14 @@ The following fields apply to each map item under the `reports` key:
           - monitoring
           - kube-system
         filters:
-          - property: "cluster"
-            value: "cluster-one,cluster*" # supports wildcard filtering and multiple comma separated values
-          - property: "namespace"
+          - key: "cluster"
+            operator: ":"
+            value: "cluster-one"
+          - key: "cluster"
+            operator: "<~:"
+            value: "cluster"
+          - key: "namespace"
+            operator: ":"
             value: "kubecost"
       - title: "Example Saved Report 1"
         window: "month"
@@ -124,9 +125,14 @@ The following fields apply to each map item under the `reports` key:
         rate: "monthly"
         accumulate: false
         filters:
-          - property: "label"
-            value: "app:cost*,environment:kube*"
-          - property: "namespace"
+          - key: "label[app]"
+            operator: "<~:"
+            value: "cost"
+          - key: "label[environment]"
+            operator: "<~:"
+            value: "kube"
+          - key: "namespace"
+            operator: ":"
             value: "kubecost"
       - title: "Example Saved Report 2"
         window: "2020-11-11T00:00:00Z,2020-12-09T23:59:59Z"
@@ -136,6 +142,20 @@ The following fields apply to each map item under the `reports` key:
         rate: "daily"
         accumulate: true # entire window resolution
         filters: [] # if no filters, specify empty array
+      - title: "Example Saved Report 3"
+        window: "today"
+        aggregateBy: "namespace"
+        chartDisplay: "category"
+        idle: "separate"
+        rate: "cumulative"
+        accumulate: false # daily resolution
+        sharedNamespaces:
+          - monitoring
+          - kube-system
+        filters:
+          - key: "namespace"
+            operator: "<~:"
+            value: "al,ni"
 ```
 {% endcode %}
 
