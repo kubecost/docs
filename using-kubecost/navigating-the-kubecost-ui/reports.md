@@ -84,9 +84,9 @@ The following fields apply to each map item under the `reports` key:
 * `sharedOverhead` -- an integer representing overhead costs to share.
 * `sharedLabels` -- a list of labels to share costs for, requires the following format: `label:<label_name>`
 * `filters` -- a list of maps consisting of a property and value
-  * `key` -- supports `cluster`, `node`, `namespace`, and others. Refer [filter v2 documentation](/apis/filters-api.md).
-  * `operator` -- supports operator such as `:`,`!:`,`~:`,`!~:` and others. Refer [filter v2 documentation](/apis/filters-api.md) for full list of operators.
-  * `value` -- property value(s) to filter on. Refer [filter v2 documentation](/apis/filters-api.md).
+  * `key` -- supports `cluster`, `node`, `namespace`, and others. Refer to the [v2 Filters Documentation](/apis/filters-api.md) for the complete list of supported keys.
+  * `operator` -- supports operator such as `:`,`!:`,`~:`,`!~:` and others. Refer to the [v2 Filters Documentation](/apis/filters-api.md) for the complete list of operators.
+  * `value` -- property value(s) to filter on. Some examples shown below.
 
 ## Example Helm _values.yaml_ Saved Reports section
 
