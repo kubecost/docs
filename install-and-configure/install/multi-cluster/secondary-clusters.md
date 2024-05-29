@@ -15,8 +15,8 @@ See the [Additional resources](/install-and-configure/install/multi-cluster/seco
 Disable unnecessary containers/pods on secondary clusters.
 
 ```
---set federatedETL.agentOnly=true
 --set federatedETL.federatedCluster=true
+--set federatedETL.agentOnly=true
 ```
 
 ## Grafana
