@@ -57,7 +57,7 @@ echo $AMP_WORKSPACE_ID
 ```
 {% endcode %}
 
-## Setting up the environment:
+## Setting up the environment
 
 1. Run the following command to set environment variables for integrating Kubecost with Amazon Managed Service for Prometheus:
 
@@ -108,13 +108,11 @@ For more information, you can check AWS documentation at [IAM roles for service 
 
 ## Integrating Kubecost with Amazon Managed Service for Prometheus
 
-### Preparing the configuration file
-
-Run the following command to create a file called _config-values.yaml_, which contains the defaults that Kubecost will use for connecting to your Amazon Managed Service for Prometheus workspace.
+### Helm values
 
 {% code overflow="wrap" %}
-```bash
-cat << EOF > config-values.yaml
+```yaml
+# values.yaml
 global:
   amp:
     enabled: true
@@ -122,83 +120,46 @@ global:
     remoteWriteService: https://aps-workspaces.${AWS_REGION}.amazonaws.com/workspaces/${AMP_WORKSPACE_ID}/api/v1/remote_write
     sigv4:
       region: ${AWS_REGION}
-
 sigV4Proxy:
   region: ${AWS_REGION}
   host: aps-workspaces.${AWS_REGION}.amazonaws.com
-EOF
+prometheus:
+  server:
+    global:
+      external_labels:
+        cluster_id: ${YOUR_CLUSTER_NAME}
+  serviceAccounts:
+    server:
+      create: false
+      name: kubecost-prometheus-server-amp
+kubecostProductConfigs:
+  clusterName: ${YOUR_CLUSTER_NAME}
+  projectID: ${AWS_ACCOUNT_ID}
+serviceAccount:
+  create: false
+  name: kubecost-cost-analyzer-amp
+federatedETL:
+  useMultiClusterDB: true
 ```
 {% endcode %}
 
-### Primary cluster
+### Deploying Kubecost
 
-Run this command to install Kubecost and integrate it with the Amazon Managed Service for Prometheus workspace as the primary:
+Run this command to install Kubecost and integrate it with the Amazon Managed Service for Prometheus workspace. Remember to change `${YOUR_CLUSTER_NAME}` for each cluster you deploy to.
 
-{% code overflow="wrap" %}
 ```bash
 helm upgrade -i ${RELEASE} \
-oci://public.ecr.aws/kubecost/cost-analyzer --version $VERSION \
---namespace ${RELEASE} --create-namespace \
--f https://tinyurl.com/kubecost-amazon-eks \
--f config-values.yaml \
---set global.amp.prometheusServerEndpoint=${QUERYURL} \
---set global.amp.remoteWriteService=${REMOTEWRITEURL} \
---set kubecostProductConfigs.clusterName=${YOUR_CLUSTER_NAME} \
---set kubecostProductConfigs.projectID=${AWS_ACCOUNT_ID} \
---set prometheus.server.global.external_labels.cluster_id=${YOUR_CLUSTER_NAME} \
---set serviceAccount.create=false \
---set prometheus.serviceAccounts.server.create=false \
---set serviceAccount.name=kubecost-cost-analyzer-amp \
---set prometheus.serviceAccounts.server.name=kubecost-prometheus-server-amp \
---set federatedETL.federator.useMultiClusterDB=false
+  oci://public.ecr.aws/kubecost/cost-analyzer \
+  --namespace ${RELEASE} --create-namespace \
+  -f https://raw.githubusercontent.com/kubecost/cost-analyzer-helm-chart/develop/cost-analyzer/values-eks-cost-monitoring.yaml \
+  -f values.yaml
 ```
-{% endcode %}
 
-### Secondary clusters
-
-These installation steps are similar to those for a primary cluster setup, except you do not need to follow the steps in the section "Create Amazon Managed Service for Prometheus workspace", and you need to update these environment variables below to match with your secondary clusters. Please note that the `AMP_WORKSPACE_ID` and `KC_BUCKET` are the same as the primary cluster.
-
-{% code overflow="wrap" %}
-```bash
-export RELEASE="kubecost"
-export YOUR_CLUSTER_NAME=<YOUR_EKS_CLUSTER_NAME>
-export AWS_REGION="<YOUR_AWS_REGION>"
-export VERSION="1.103.4"
-export AWS_ACCOUNT_ID=$(aws sts get-caller-identity --query Account --output text)
-export REMOTEWRITEURL="https://aps-workspaces.${AWS_REGION}.amazonaws.com/workspaces/${AMP_WORKSPACE_ID}/api/v1/remote_write"
-export QUERYURL="http://localhost:8005/workspaces/${AMP_WORKSPACE_ID}"
-```
-{% endcode %}
-
-Run this command to install Kubecost and integrate it with the Amazon Managed Service for Prometheus workspace as the additional cluster:
-
-{% code overflow="wrap" %}
-```bash
-helm upgrade -i ${RELEASE} \
-oci://public.ecr.aws/kubecost/cost-analyzer --version $VERSION \
---namespace ${RELEASE}  --create-namespace \
--f https://tinyurl.com/kubecost-amazon-eks \
--f config-values.yaml \
---set global.amp.prometheusServerEndpoint=${QUERYURL} \
---set global.amp.remoteWriteService=${REMOTEWRITEURL} \
---set kubecostProductConfigs.clusterName=${YOUR_CLUSTER_NAME} \
---set kubecostProductConfigs.projectID=${AWS_ACCOUNT_ID} \
---set prometheus.server.global.external_labels.cluster_id=${YOUR_CLUSTER_NAME} \
---set serviceAccount.create=false \
---set prometheus.serviceAccounts.server.create=false \
---set serviceAccount.name=kubecost-cost-analyzer-amp \
---set prometheus.serviceAccounts.server.name=kubecost-prometheus-server-amp \
---set federatedETL.useMultiClusterDB=true
-```
-{% endcode %}
-
-Your Kubecost setup is now writing and collecting data from AMP. Data should be ready for viewing within 15 minutes.
+## Troubleshooting
 
 To verify that the integration is set up, select _Settings_ in the Kubecost UI, and check the 'Prometheus Status' section.
 
 ![Prometheus status screenshot](/images/aws-amp-prom-status.png)
-
-## Troubleshooting
 
 See more troubleshooting steps at the bottom of [AMP Overview](aws-amp-integration.md#troubleshooting).
 
