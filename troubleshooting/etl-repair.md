@@ -4,6 +4,10 @@ Kubecost's extract, transform, load (ETL) process is a computed cache built upon
 
 The ETL data is stored in a `PersistentVolume` mounted to the `kubecost-cost-analyzer` pod. In most [multicluster environments](/install-and-configure/install/multi-cluster/multi-cluster.md), the ETL data is pushed to object storage. In the event that you lose or are looking to rebuild the ETL data, the following endpoints should be used.
 
+{% hint style="warning" %}
+Only perform ETL repairs once you have confirmed that your Prometheus still has retention of metrics for the dates you want to repair. `.Values.prometheus.server.retention`.
+{% endhint %}
+
 ## 1. Repair Asset ETL
 
 The Asset ETL builds upon the Prometheus metrics listed [here](/architecture/user-metrics.md). It's important to ensure that you are able to [query for Prometheus](prometheus.md) data for the specified `window` you use. Otherwise, an absence of metrics will result in an empty ETL.
