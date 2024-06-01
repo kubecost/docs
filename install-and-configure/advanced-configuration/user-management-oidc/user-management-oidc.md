@@ -1,7 +1,7 @@
 # User Management (SSO/OIDC)
 
 {% hint style="info" %}
-OIDC is only officially supported on Kubecost Enterprise plans.
+OIDC is only officially supported on Kubecost Enterprise plans. At this time OIDC does not support RBAC.
 {% endhint %}
 
 ## Overview of features
@@ -21,20 +21,6 @@ oidc:
   loginRedirectURL: "http://my.kubecost.url/model/oidc/authorize"
   discoveryURL: "https://my.auth.server/.well-known/openid-configuration"
   skipOnlineTokenValidation: false # Set to 'true' to skip online token validation and attempt to locally validate JWT claims
-  rbac:
-    enabled: false
-    groups:
-      - name: admin
-        enabled: false
-        claimName: "roles"
-        claimValues:
-          - "admin"
-          - "superusers"
-      - name: readonly
-        enabled: false
-        claimName:  "roles"
-        claimValues:
-          - "readonly"
 ```
 
 {% hint style="info" %}
