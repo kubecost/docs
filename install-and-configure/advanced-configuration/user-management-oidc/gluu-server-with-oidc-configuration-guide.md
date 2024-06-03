@@ -1,4 +1,7 @@
 # Gluu Server with OIDC Configuration Guide
+{% hint style="info" %}
+OIDC is only officially supported on Kubecost Enterprise plans. At this time OIDC does not support RBAC.
+{% endhint %}
 
 Gluu is an open-source Identity and Access Management (IAM) platform that can be used to authenticate and authorize users for applications and services. It can be configured to use the OpenID Connect (OIDC) protocol, which is an authentication layer built on top of OAuth 2.0 that allows applications to verify the identity of users and obtain basic profile information about them.
 
