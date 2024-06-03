@@ -1,7 +1,7 @@
 # Configure Keycloak Identity Provider for Kubecost
 
 {% hint style="info" %}
-OIDC is only officially supported on Kubecost Enterprise plans.
+OIDC is only officially supported on Kubecost Enterprise plans. At this time OIDC does not support RBAC.
 {% endhint %}
 
 1. Create a new [Keycloak Realm](https://www.keycloak.org/getting-started/getting-started-kube#\_create\_a\_realm).

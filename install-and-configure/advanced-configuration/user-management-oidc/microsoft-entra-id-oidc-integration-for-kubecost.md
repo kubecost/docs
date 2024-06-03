@@ -1,10 +1,10 @@
 # Microsoft Entra ID OIDC Integration for Kubecost
 
 {% hint style="info" %}
-OIDC is only officially supported on Kubecost Enterprise plans.
+OIDC is only officially supported on Kubecost Enterprise plans. At this time OIDC does not support RBAC.
 {% endhint %}
 
-This guide will take you through configuring OIDC for Kubecost using a Microsoft Entra ID (formerly Azure AD) integration for SSO and RBAC.
+This guide will take you through configuring OIDC for Kubecost using a Microsoft Entra ID (formerly Azure AD) integration for SSO.
 
 ## Prerequisites
 
@@ -52,51 +52,6 @@ If you are using one Entra ID app to authenticate multiple Kubecost endpoints, y
 
 ```
   authURL: "https://login.microsoftonline.com/{YOUR_TENANT_ID}/oauth2/v2.0/authorize?client_id={YOUR_CLIENT_ID}&response_type=code&scope=openid&nonce=123456&redirect_uri=https%3A%2F%2F{YOUR_KUBECOST_DOMAIN}/model/oidc/authorize"
-```
-
-### Step 3 (optional): Configuring RBAC
-
-First, you need to configure an admin role for your app. For more information on this step, see [Microsoft's documentation](https://learn.microsoft.com/en-us/entra/identity-platform/howto-add-app-roles-in-apps).
-
-1. Return to the Overview page for the application you created in Step 1.
-2. Select _App roles_ > _Create app role_. Provide the following values:
-  * Display name: _admin_
-  * Allowed member types: _Users/Groups_
-  * Value: _admin_
-  * Description: _Admins have read/write permissions via the Kubecost frontend_ (or provide a custom description as needed)
-  * Do you want to enable this app role?: Select the checkbox
-3. Select _Apply_.
-
-Then, you need to attach the role you just created to users and groups.
-
-1. In the Azure AD left navigation, select _Applications_ > _Enterprise applications_. Select the application you created in Step 1.
-2. Select _Users & groups_.
-3. Select _Add user/group_. Select the desired group. Select the _admin_ role you created, or another relevant role. Then, select _Assign_ to finalize changes.
-4. Update your existing _values.yaml_ with this template:
-
-```
-oidc:
-  enabled: true
-  # THIS IS REQUIRED FOR AZURE. Azure communicates roles via the id_token instead of the access_token.
-  useIDToken: true
-  rbac:
-    enabled: true
-    groups:
-      - name: admin
-        # If admin is disabled, all authenticated users will be able to make configuration changes to the kubecost frontend
-        enabled: true
-        # SET THIS EXACT VALUE FOR ENTRA ID. This is the string Entra ID uses in its OIDC tokens.
-        claimName: "roles"
-        # These strings need to exactly match with the app roles created in Entra ID
-        claimValues:
-          - "admins"
-          - "superusers"
-      - name: readonly
-        # If readonly is disabled, all authenticated users will default to readonly
-        enabled: true
-        claimName: "roles"
-        claimValues:
-          - "readonly"
 ```
 
 ## Troubleshooting

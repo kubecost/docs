@@ -11,7 +11,7 @@ Begin by selecting the _New Budget_ button in the top right corner of the dashbo
 Provide the following fields:
 
 * _Budget name_: The name of your budget
-* Budget cap: The allotted amount of your budget per interval
+* _Budget cap_: The allotted amount of your budget per interval
 
 {% hint style="info" %}
 The currency of your budget is unchangeable in the Budgets dashboard. To change currency type, go to _Settings >_ Currency. Then, select _Save_ at the bottom of the Settings page to apply changes. Changing currency type will affect cost displays across all of your Kubecost, not just the Budgets dashboard. Kubecost does **not** convert spending costs to other currency types; it will only change the symbol displayed next to cost. For best results, configure your currency to what matches your spend.
