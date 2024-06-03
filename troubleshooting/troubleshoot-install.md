@@ -401,7 +401,7 @@ gcpprovider.go Error loading metadata cluster-name: Get "http://169.254.169.254/
 
 ### Local disks showing costs in Assets
 
-Some cloud providers do not charge you for local disks physically attached to the node (i.e. ephemeral storage). By default, Kubecost monitors your local disk usage/capacity and applies an associated cost. To disable this feature use the following config:
+Some cloud providers do not charge you for local disks physically attached to the node (e.g. ephemeral storage). By default, Kubecost monitors your local disk usage/capacity and applies an associated cost. To disable this feature use the following config:
 
 ```yaml
 kubecostModel:
