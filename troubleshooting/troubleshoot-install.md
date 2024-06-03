@@ -383,7 +383,7 @@ aws ecr-public get-login-password --region us-east-1 | helm registry login --use
 3. Change both entries to localhost:9001 and localhost:9003
 4. Restart the kubecost-cost-analyzer pod in the kubecost namespace
 
-### What is the difference between `kubecostToken` and `productKey`?
+### What is the difference between `kubecostToken` and `productKey`
 
 `.Values.kubecostToken` is primarily used to manage trial access and is provided to you when visiting [http://kubecost.com/install](http://kubecost.com/install).
 
