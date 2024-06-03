@@ -10,7 +10,7 @@ This guide explains settings that can be tuned in order to run the minimum Kubec
 
 See the [Additional resources](/install-and-configure/install/multi-cluster/secondary-clusters.md) section below for complete examples in our GitHub repo.
 
-## Kubecost global
+## Kubecost
 
 Disable unnecessary containers/pods on secondary clusters.
 
