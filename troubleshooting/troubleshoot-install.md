@@ -387,7 +387,7 @@ aws ecr-public get-login-password --region us-east-1 | helm registry login --use
 
 `.Values.kubecostToken` is primarily used to manage trial access and is provided to you when visiting [http://kubecost.com/install](http://kubecost.com/install).
 
-`.Values.kubecostProductConfigs.productKey` is used to apply a Enterprise license. More info in our [Adding a Product Key](/install-and-configure/advanced-configuration/add-key.md) doc.
+`kubecostProductConfigs.productKey` is used to apply an Enterprise license. More information can be found in the [Adding a Product Key](/install-and-configure/advanced-configuration/add-key.md) section.
 
 ### Error loading metadata
 
