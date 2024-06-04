@@ -13,7 +13,7 @@ There are numerous reasons why you may need to repair ETL data. Please reach out
 In an enterprise multi-cluster environment, each individual Kubecost deployment builds its own ETL data before pushing it to the bucket. Therefore to repair data from an affected cluster, you must port-forward to that cluster's Kubecost deployment then run the repair command. After a repair has been completed on any cluster in your environment, the Kubecost Aggregator will detect that the ETL file has been recently modified, and ingest the new data into its database.
 
 {% hint style="warning" %}
-Remember that ETL files are computed based on Prometheus metrics. Before repairing ETL files, please confirm that your Prometheus server is still retaining metrics for the dates you are aiming to repair. `.Values.prometheus.server.retention`.
+Remember that ETL files are computed based on Prometheus metrics. Before repairing ETL files, please confirm that your Prometheus server is still retaining metrics for the dates you are aiming to repair. Prometheus rentention is controlled by the Helm value `prometheus.server.retention`.
 {% endhint %}
 
 ## 1. Repair Asset ETL
