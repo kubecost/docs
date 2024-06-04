@@ -10,9 +10,9 @@ This guide explains settings that can be tuned in order to run the minimum Kubec
 
 See the [Additional resources](/install-and-configure/install/multi-cluster/secondary-clusters.md) section below for complete examples in our GitHub repo.
 
-## Kubecost global
+## Kubecost
 
-Disable product caching and reduce query concurrency with the following parameters:
+Disable unnecessary containers/pods on secondary clusters.
 
 ```
 --set federatedETL.federatedCluster=true
@@ -32,15 +32,9 @@ Grafana is not needed on secondary clusters.
 
 Kubecost and its accompanying Prometheus collect a reduced set of metrics that allow for lower resource/storage usage than a standard Prometheus deployment.
 
-The following configuration options further reduce resource consumption when not using the Kubecost frontend:
-
 ```
 --set prometheus.server.retention=2d
 ```
-
-Potentially reducing retention even further, metrics are sent to the storage-bucket every 2 hours.
-
-You can tune `prometheus.server.persistentVolume.size` depending on scale, or outright disable persistent storage.
 
 ## Node-Exporter
 
@@ -49,51 +43,6 @@ Node-exporter is disabled by default. You should keep it this way if cluster/nod
 {% hint style="info" %}
 Node-exporter must remain disabled if there is an existing DaemonSet. More info [here](/troubleshooting/troubleshoot-install.md#failedscheduling-kubecost-prometheus-node-exporter).
 {% endhint %}
-
-## Helm values
-
-For reference, this `secondary-clusters.yaml` snippet is a list of the most common settings for efficient secondary clusters:
-
-{% code overflow="wrap" %}
-```yaml
-kubecostProductConfigs:
-  clusterName: kubecostProductConfigs_clusterName
-  # productKey not needed on secondary clusters
-kubecostModel:
-  warmCache: false
-  warmSavingsCache: false
-  etl: false
-  etlCloudAsset: false
-  maxQueryConcurrency: 1
-global:
-  grafana:
-    enabled: false
-    proxy: false
-prometheus:
-  server:
-    global:
-      external_labels:
-        # cluster_id should be unique for all clusters and the same value as .kubecostProductConfigs.clusterName
-        cluster_id: kubecostProductConfigs_clusterName
-    retention: 2d
-  # nodeExporter:
-  #   enabled: false
-  # serviceAccounts:
-  #   nodeExporter:
-  #     create: false
-thanos:
-  compact:
-    enabled: false
-  bucket:
-    enabled: false
-  query:
-    enabled: false
-  queryFrontend:
-    enabled: false
-  store:
-    enabled: false
-```
-{% endcode %}
 
 ## Additional resources
 
