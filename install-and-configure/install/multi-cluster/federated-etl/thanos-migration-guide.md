@@ -91,7 +91,7 @@ kubectl create secret generic federated-store --from-file=federated-store.yaml -
 ### Step 5: Enable FederatedETL, ETL-Utils, and Aggregator on the primary cluster
 
 
-Enabling FederatedETL will begin pushing your primary cluster's ETL data to the directory `/federated/CLUSTER_ID`. This setting will remain on once disabling Thanos at a later step.
+Enabling FederatedETL will begin pushing your primary cluster's ETL data to the directory `/federated/CLUSTER_ID`. This setting will be enabled when upgrading to v2.x.
 
 Enabling ETL-Utils will create the directories `/federated/CLUSTER_ID` for every primary/secondary cluster based on the full set of data in the `/etl` directory.
 
