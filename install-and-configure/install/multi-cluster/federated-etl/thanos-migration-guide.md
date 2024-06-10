@@ -25,7 +25,7 @@ Important notes for the migration process:
 
 ## Migration process
 
-All of these steps should be performed prior to upgrading to Kubecost 2.x.x. The goal of this doc is to gradually migrate off Thanos, which is no longer supported in the Kubecost v2.0+ Helm chart. If user wants to continue running thanos, the helm chart must be installed from a third party prior to executing the upgrade. Thanos will be removed from the primary instance once the upgrade to 2.x.x is executed.
+All of these steps should be performed prior to upgrading to Kubecost 2.x.x. The goal of this doc is to gradually migrate off Thanos, which is no longer supported in the Kubecost v2.0+ Helm chart. If you want to continue running Thanos, the Helm chart must be installed from a third party prior to executing the upgrade.
 
 
 ### Step 1: Use the existing Thanos object store or create a new dedicated object store
