@@ -40,7 +40,17 @@ If this is your first time setting up an object store, refer to these docs:
 * [Azure](/install-and-configure/install/multi-cluster/long-term-storage-configuration/long-term-storage-azure.md)
 * [GCP](/install-and-configure/install/multi-cluster/long-term-storage-configuration/long-term-storage-gcp.md)
 
-#### If data older than 90 days is required, perform the action below prior to Step 2.
+
+### Step 2: Enable ETL backups on the *primary cluster only*
+
+Enabling [ETL backups](https://docs.kubecost.com/v/1.0x/install-and-configure/install/etl-backup) ensures Kubecost persists historical data in durable storage (outside of Thanos) and stores the data in a format consumable by the ETL Utils container. The ETL Utils container transforms that data and writes it to a separate location in the object store for consumption by Aggregator.
+
+```yaml
+kubecostModel:
+  etlBucketConfigSecret: <YOUR_SECRET_NAME>
+```
+
+### Step 3: If data older than 90 days is required, perform this step. If 90 days worth of historical data meets the requirement, skip to step 3.
 
 `maxSourceResolution` MUST be set to 1d and `etlDailyStoreDurationDays` must be set to the number of days of historical data needed. Below is an example of what needs to be set on the primary to get 365 days of daily ETL data.
 
@@ -53,22 +63,12 @@ kubecostModel:
   etlBucketConfigSecret: kubecost-thanos
   etlDailyStoreDurationDays: 365
 ```
-Validate this process has completed by port-forwarding to the thanos-query pod and executing the following query for the window of historical data set above in the prometheus interface: `node_cpu_hourly_cost`
+Validate this process completed by confirming the object store has ~365 worth of non-empty ETL files in the `/etl` directory that was created in step 2. Empty file sizes are 86B. The name of the etl files are the epoch timestamps for the ETLs. Use the [Epoch Time Converter](https://www.epochconverter.com/) to validate data goes back a year.
 
 After confirming data older than 90 days is available, revert the changes above to reduce RAM consumption. 
-
-### Step 2: Enable ETL backups on the *primary cluster only*
-
-Enabling [ETL backups](https://docs.kubecost.com/v/1.0x/install-and-configure/install/etl-backup) ensures Kubecost persists historical data in durable storage (outside of Thanos) and stores the data in a format consumable by the ETL Utils container. The ETL Utils container transforms that data and writes it to a separate location in the object store for consumption by Aggregator.
-
-```yaml
-kubecostModel:
-  etlBucketConfigSecret: <YOUR_SECRET_NAME>
-```
-
 Once configured, you will see the ETL backup data begin to populate in the Thanos object store. 
 
-### Step 3: Validate that an `/etl` directory is present in the object store
+### Step 4: Validate that an `/etl` directory is present in the object store
 
 There should be ETL data present in the following directories. CloudCosts will only have ETL data if at least one cloud integration is enabled.
 
@@ -76,19 +76,18 @@ There should be ETL data present in the following directories. CloudCosts will o
 * `/etl/bingen/assets/`
 * `/cloudcosts/`
 
-### Step 4: Create a new federated-store secret on the primary cluster
+### Step 5: Create a new federated-store secret on the primary cluster
 
 This will point to the existing Thanos object store or the new object store created in Step 1. The secret should be identical to your *object-store.yaml*, with the exception that this new secret *must* be named *federated-store.yaml*.
 
-{% hint style="warning" %}
 The name of the .yaml file used to create the secret *must* be named *federated-store.yaml* or Aggregator will not start.
-{% endhint %}
+
 
 ```sh
 kubectl create secret generic federated-store --from-file=federated-store.yaml -n kubecost
 ```
 
-### Step 5: Enable FederatedETL, ETL-Utils, and Aggregator on the primary cluster
+### Step 6: Enable FederatedETL, ETL-Utils, and Aggregator on the primary cluster
 
 
 Enabling FederatedETL will begin pushing your primary cluster's ETL data to the directory `/federated/CLUSTER_ID`. This setting will be enabled when upgrading to v2.x.
@@ -120,7 +119,7 @@ kubecostAggregator:
       value: 2h
 ```
 
-### Step 6: Apply the changes and wait for data to populate in the UI of the primary cluster
+### Step 7: Apply the changes and wait for data to populate in the UI of the primary cluster
 
 Ensure all pods and containers are running:
 
@@ -136,7 +135,7 @@ This step can take some time depending on how much data the Aggregator must proc
 
 Ensure all data loads into the Kubecost UI before moving onto Step 7.
 
-### Step 7: Upgrade your secondary clusters to build and push ETL data
+### Step 8: Upgrade your secondary clusters to build and push ETL data
 
 For this step, the secondary clusters **don't** need to be upgraded to v2.x. However, you must be running a version of Kubecost that supports Federated ETL (greater than v1.99.0).
 
@@ -162,7 +161,7 @@ kubecostModel:
 
 Optionally, you can remove the [Thanos sidecar](https://raw.githubusercontent.com/kubecost/cost-analyzer-helm-chart/v1.108.1/cost-analyzer/values-thanos.yaml) running on this secondary cluster. If left on, this secondary cluster will continue to push Prometheus metrics to the object store which can be used as a backup.
 
-### Step 8: Upgrade primary cluster to v2.x (2.3+ recommended)
+### Step 9: Upgrade primary cluster to v2.x (2.3+ recommended)
 
 You can now upgrade the primary Kubecost cluster to v2.0 using your standard upgrade process. If upgrading via Helm, your upgrade command will look like:
 
@@ -172,7 +171,7 @@ helm upgrade kubecost cost-analyzer --repo https://kubecost.github.io/cost-analy
   -f values.yaml
 ```
 
-### Step 9 (optional): Upgrade secondary clusters to Kubecost 2.0
+### Step 10 (optional): Upgrade secondary clusters to Kubecost 2.0
 
 {% hint style="info" %}
 While not absolutely necessary to upgrade secondary clusters to 2.x immediately, we recommend doing so as soon as possible.
