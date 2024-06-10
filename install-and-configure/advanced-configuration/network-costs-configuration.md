@@ -35,42 +35,18 @@ To enable this feature, set the following parameters in your values file followi
 ```yaml
 networkCosts:
   enabled: true
-  config:
-    services:
-      # google-cloud-services: when set to true, enables labeling traffic metrics with google cloud
-      # service endpoints
-      google-cloud-services: false
-      # amazon-web-services: when set to true, enables labeling traffic metrics with amazon web service
-      # endpoints.
-      amazon-web-services: false
-      # azure-cloud-services: when set to true, enables labeling traffic metrics with azure cloud service
-      # endpoints
-      azure-cloud-services: false
+  logLevel: info  # error, warn, info, debug, trace
 ```
 
 ## Additional configuration
 
-You can view a list of common config options in this [_values.yaml_](https://github.com/kubecost/cost-analyzer-helm-chart/blob/700cfa306c8e78bc9a1039b584769b9a0e0757d0/cost-analyzer/values.yaml#L573) template.
+You can view a list of common config options in this [_values.yaml_](https://github.com/kubecost/cost-analyzer-helm-chart/blob/8f0a12126330bcdfed467c2cf90fcd5c4834edae/cost-analyzer/values.yaml#L2237) template.
 
 ### Prometheus
 
 * If using Kubecost-bundled Prometheus instance, the scrape is automatically configured.
 * If you are integrating with an existing Prometheus, you can set `networkCosts.prometheusScrape=true` and the network costs service should be auto-discovered.
 * Alternatively, a serviceMonitor is also [available](https://github.com/kubecost/cost-analyzer-helm-chart/blob/700cfa306c8e78bc9a1039b584769b9a0e0757d0/cost-analyzer/values.yaml#L716).
-
-### Log Level
-
-`LOG_LEVEL` is the environmental variable for setting log level. Valid inputs are `error`, `warn`, `info`, `debug`, and `trace`.
-
-Edit the `kubecost-network-costs` daemonSet by adding the lines below:
-
-```
-- env:
-        - name: LOG_LEVEL
-          value: info
-```
-
-For more information about configuring log levels for any Kubecost resource, see our [Troubleshooting](/troubleshooting/troubleshoot-install.md#configuring-log-levels) documentation.
 
 ## Cloud Provider Service Tagging
 

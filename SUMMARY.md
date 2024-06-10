@@ -166,6 +166,7 @@
 
 ## Integrations
 
+* [Kubecost Postgres Integration](integrations/postgres-integration.md)
 * [Importing Kubecost Data into Microsoft Power BI](integrations/import-kubecost-data-into-microsoft-power-bi.md)
 * [Integrating Kubecost with Datadog](integrations/integrating-kubecost-with-datadog.md)
 * [Using Custom Webhook to Create a Kubecost Stage in Spinnaker](integrations/spinnaker-custom-webhook.md)
