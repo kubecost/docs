@@ -50,7 +50,7 @@ kubecostModel:
   etlBucketConfigSecret: <YOUR_SECRET_NAME>
 ```
 
-### Step 3: If data older than 90 days is required, perform this step. If 90 days worth of historical data meets the requirement, skip to step 3.
+### Step 3: If data older than 90 days is required, perform this step. If 90 days worth of historical data meets the requirement, skip to step 4.
 
 `maxSourceResolution` MUST be set to 1d and `etlDailyStoreDurationDays` must be set to the number of days of historical data needed. Below is an example of what needs to be set on the primary to get 365 days of daily ETL data.
 
