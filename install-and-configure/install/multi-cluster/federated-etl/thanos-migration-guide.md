@@ -161,7 +161,7 @@ kubecostModel:
 
 Optionally, you can remove the [Thanos sidecar](https://raw.githubusercontent.com/kubecost/cost-analyzer-helm-chart/v1.108.1/cost-analyzer/values-thanos.yaml) running on this secondary cluster. If left on, this secondary cluster will continue to push Prometheus metrics to the object store which can be used as a backup.
 
-### Step 9: Upgrade primary cluster to v2.x (2.3+ recommended)
+### Step 9: Upgrade primary cluster to v2.x
 
 You can now upgrade the primary Kubecost cluster to v2.0 using your standard upgrade process. If upgrading via Helm, your upgrade command will look like:
 
