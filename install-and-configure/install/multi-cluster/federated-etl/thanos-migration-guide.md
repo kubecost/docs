@@ -54,7 +54,7 @@ kubecostModel:
 
 `maxSourceResolution` MUST be set to 1d and `etlDailyStoreDurationDays` must be set to the number of days of historical data needed. Below is an example of what needs to be set on the primary to get 365 days of daily ETL data.
 
-#### Important Note: Setting the following configuration will increase RAM utilization significantly on the cost-model container. It is recommended to use a dedicated node group/node for this process.
+**Important Note**: Setting the following configuration will increase RAM utilization significantly on the cost-model container. It is recommended to use a dedicated node group/node for this process.
 
 ```yaml
 kubecostModel:
