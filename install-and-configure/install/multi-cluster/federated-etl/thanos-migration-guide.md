@@ -66,7 +66,6 @@ kubecostModel:
 Validate this process completed by confirming the object store has ~365 worth of non-empty ETL files in the `/etl` directory that was created in step 2. Empty file sizes are 86B. The name of the etl files are the epoch timestamps for the ETLs. Use the [Epoch Time Converter](https://www.epochconverter.com/) to validate data goes back a year.
 
 After confirming data older than 90 days is available, revert the changes above to reduce RAM consumption. 
-Once configured, you will see the ETL backup data begin to populate in the Thanos object store. 
 
 ### Step 4: Validate that an `/etl` directory is present in the object store
 
