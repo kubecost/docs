@@ -34,7 +34,7 @@ In the line for the report you want to share, select the three horizontal dots i
 
 * Interval: Interval that recurring reports will be sent out. Supports _Daily_, _Weekly_, and _Monthly_. Weekly reports default to going out Sunday at midnight. Monthly reports default to midnight on the first of the month. When selecting _Monthly_ and resetting on a day of the month not found in every month, the report will reset at the latest available day of that month. For example, if you choose to reset on the 31st, it will reset on the 30th for months with only 30 days.
 * Format: Supports _PDF_ or _CSV_.
-* Add email: Email(s) to distribute the report to.
+* Add email: Email(s) to distribute the report to. If a custom SMTP configuration has been created, all outbound report emails will be sent through it.
 
 Select _Apply_ to finalize. When you have created a schedule for your report, the selected interval will be displayed in the Interval column of your Reports page.
 
