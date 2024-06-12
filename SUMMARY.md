@@ -88,6 +88,7 @@
   * [Cloud Cost Explorer](using-kubecost/navigating-the-kubecost-ui/cloud-costs-explorer/cloud-costs-explorer.md)
       * [Cloud Cost Metrics](using-kubecost/navigating-the-kubecost-ui/cloud-costs-explorer/cloud-cost-metrics.md)
   * [Clusters Dashboard](using-kubecost/navigating-the-kubecost-ui/clusters-dashboard.md)
+  * [Efficiency Dashboard](using-kubecost/navigating-the-kubecost-ui/efficiency-dashboard.md)
   * [External Costs](using-kubecost/navigating-the-kubecost-ui/external-costs.md)
   * [Network Monitoring](using-kubecost/navigating-the-kubecost-ui/network-monitoring.md)
   * [Collections](using-kubecost/navigating-the-kubecost-ui/collections.md)
