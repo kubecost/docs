@@ -16,13 +16,13 @@ Let’s establish some definitions and then explore each of these views.
 - _**Workload Idle**_- Workload Idle is defined as the cost of resources which are requested, but not used, by Kubernetes workloads.
 For example, in a pod with a single container which requests 2 Gi of memory but only uses 1 Gi, there is 1 Gi of workload idle which is assigned a cost. **This is a new definition of ‘idle’ for Kubecost.**
 - _**Infra Idle**_ - Infra Idle (Infrastructure Idle) is defined as the difference between the cost of allocated resources and the cost of the hardware on which they run. Allocation is defined as the max of usage and request.
-For example, a Kubernetes node which has 32 Gi of usable memory runs two pods each with one container. The first pod requests 2 Gi of memory but only uses 1 Gi. The second pod specifies no requests but uses 3 Gi. There is 27 Gi of Infra Idle which is assigned a cost. This is the same definition of ‘idle’ as used in the Kubecost Allocations page (see more details [here](https://docs.kubecost.com/using-kubecost/navigating-the-kubecost-ui/cost-allocation/efficiency-idle#idle)).
+For example, a Kubernetes node which has 32 Gi of usable memory runs two pods each with one container. The first pod requests 2 Gi of memory but only uses 1 Gi. The second pod specifies no requests but uses 3 Gi. There is 27 Gi of Infra Idle which is assigned a cost. This is the same definition of ‘idle’ as used in the Kubecost Allocations page (see more details [here](/using-kubecost/navigating-the-kubecost-ui/cost-allocation/efficiency-idle.md)).
 - _**Total Idle**_ - The sum of Infra Idle and Workload Idle. 
 - _**Cluster Efficiency**_ - The ratio of the cost of used resources to the total cost of all resources. (cost of resources used) / (total cost of resources). This is the efficiency metric presented in the upper right-hand corner of the Overview page.
 
 ![Cluster Efficiency on Overview](/images/cluster-efficiency-on-overview.png)
 
-- _**Workload Efficiency**_ - The cost-weighted ratio of resources used to resources requested. Workload Efficiency is used in the Allocations Dashboard as well (see more details [here](https://docs.kubecost.com/using-kubecost/navigating-the-kubecost-ui/cost-allocation)).
+- _**Workload Efficiency**_ - The cost-weighted ratio of resources used to resources requested. Workload Efficiency is used in the Allocations Dashboard as well (see more details [here](/using-kubecost/navigating-the-kubecost-ui/cost-allocation/README.md)).
 
 ![Efficiency Explanation Visual](/images/Efficiency-explanation-visual.jpg)
 ![Efficiency Explanation Visual 2](/images/efficiency-explanation-visual-2.jpg)
@@ -51,9 +51,9 @@ It is important to remember that workload idle is defined as the cost of resourc
 
 **How can I reduce my workload idle costs?**
 Kubecost is full of insights and automation to help you reduce your wasted workload idle cost! 
-Specifically, the [*right-size container requests*](https://docs.kubecost.com/using-kubecost/navigating-the-kubecost-ui/savings/container-request-right-sizing-recommendations) page can help drive significant reductions in workload idle. 
-Additionally, the [*request sizing Kubecost Action*](https://docs.kubecost.com/using-kubecost/navigating-the-kubecost-ui/savings/savings-actions#automated-request-sizing) can help you automatically resize your container requests to significantly reduce workload idle. 
-Finally, we recommend reviewing our [*abandoned workloads*](https://docs.kubecost.com/using-kubecost/navigating-the-kubecost-ui/savings/abandoned-workloads) page and cleaning up workloads that are no longer needed to reduce workload idle waste. 
+Specifically, the [right-size container requests](/using-kubecost/navigating-the-kubecost-ui/savings/container-request-right-sizing-recommendations.md) page can help drive significant reductions in workload idle. 
+Additionally, the [request sizing Kubecost Action](/using-kubecost/navigating-the-kubecost-ui/savings/savings-actions.md) can help you automatically resize your container requests to significantly reduce workload idle. 
+Finally, we recommend reviewing our [abandoned workloads](/using-kubecost/navigating-the-kubecost-ui/savings/abandoned-workloads.md) page and cleaning up workloads that are no longer needed to reduce workload idle waste. 
 
 ## Resource Idle by Cluster
 ![Resource Idle by Cluster](/images/efficiency-infraidle-view.png)
@@ -61,4 +61,4 @@ Finally, we recommend reviewing our [*abandoned workloads*](https://docs.kubecos
 This gives you easy visibility into which nodes/clusters have the most spare resources and how much those idle resources are costing you.
 
 **How can I reduce my infra idle costs?**
-Kubecost provides some recommendations on  more cost-efficient node configurations on the [*right-size cluster nodes*](https://docs.kubecost.com/using-kubecost/navigating-the-kubecost-ui/savings/cluster-right-sizing-recommendations) page. We also recommend enabling autoscalers like [*Karpenter*](https://karpenter.sh/) to ensure you are not paying for extra infra idle on an on-going basis. 
+Kubecost provides some recommendations on  more cost-efficient node configurations on the [right-size cluster nodes](/using-kubecost/navigating-the-kubecost-ui/savings/cluster-right-sizing-recommendations.md) page. We also recommend enabling autoscalers like [Karpenter](https://karpenter.sh/) to ensure you are not paying for extra infra idle on an on-going basis. 
