@@ -1,6 +1,6 @@
 # Efficiency Dashboard
 
-![Efficiency Dashboard](/images/Efficiency-dashboard.png)
+![Efficiency Dashboard](/images/efficiency-dashboard.png)
 
 The Kubernetes Efficiency Dashboard  introduced in Kubecost 2.3 is designed to give Kubecost users a powerful tool for identifying the wasted spend coming from the clusters, nodes, and workloads in your Kubernetes environment. 
 These Efficiency Reports provides you with a single-pane of glass to understand your waste across all of your Kubernetes clusters. Particularly valuable is its ability to help  you understand and see the cost of idle resources on a per-cluster basis in a multi-cluster federation. 
@@ -24,7 +24,7 @@ For example, a Kubernetes node which has 32 Gi of usable memory runs two pods ea
 
 - _**Workload Efficiency**_ - The cost-weighted ratio of resources used to resources requested. Workload Efficiency is used in the Allocations Dashboard as well (see more details [here](/using-kubecost/navigating-the-kubecost-ui/cost-allocation/README.md)).
 
-![Efficiency Explanation Visual](/images/Efficiency-explanation-visual.jpg)
+![Efficiency Explanation Visual](/images/efficiency-explanation-visual.jpg)
 ![Efficiency Explanation Visual 2](/images/efficiency-explanation-visual-2.jpg)
 
 The above visualization can be very helpful in understanding the definition of Infra Idle and Workload Idle and how these idle costs, along with actual usage costs, make up your total Kubernetes spend. 
@@ -38,7 +38,7 @@ We can also observe that the workload efficiency in this example would be $50 (c
 If we spent the same amount on both CPU and RAM, our workload efficiency would be 30%, but if we spent twice as much on CPU than RAM, our workload efficiency would be 25%.
 
 ## Idle by Type
-![Idle by Type](/images/Efficiency-dashboard.png)
+![Idle by Type](/images/efficiency-dashboard.png)
 **This is where idle analysis begins.** From this view, we can see the Total Idle, Infra idle, Workload idle, and Cluster Efficiency for every cluster. 
 We can also see how each cluster’s total idle cost has trended over time. You leverage this page to start reducing waste and saving money by digging into the clusters with the highest Total Idle (or total waste). 
 You can determine if this waste is being driven by inefficiencies in your workload requests (high workload idle) or if the waste is being driven by unnecessarily large nodes (high infra idle).  
