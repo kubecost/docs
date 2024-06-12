@@ -18,6 +18,10 @@ Amazon EKS cost monitoring with Kubecost architecture:
 
 ![User experience](/images/AWS-EKS-cost-monitoring-architecture.png)
 
+Amazon EKS optimized diagram:
+
+![EKS flowchart](/images/eks-flowchart.png)
+
 ## Deploying Kubecost on an Amazon EKS cluster using Amazon EKS add-on
 
 ### Prerequisites
@@ -107,7 +111,7 @@ aws eks describe-addon --addon-name kubecost_kubecost --cluster-name $YOUR_CLUST
 The Kubecost add-on should be available in a few minutes. Run the following command to enable port-forwarding to expose the Kubecost dashboard:
 
 ```bash
-kubectl port-forward --namespace kubecost deployment/kubecost-cost-analyzer 9090
+kubectl port-forward --namespace kubecost deployment/cost-analyzer 9090
 ```
 
 ### Disable Kubecost add-on
@@ -168,7 +172,7 @@ In your environment, run the following command from your terminal to install Kub
 helm upgrade -i kubecost \
 oci://public.ecr.aws/kubecost/cost-analyzer --version <$VERSION> \
 --namespace kubecost --create-namespace \
--f https://raw.githubusercontent.com/kubecost/cost-analyzer-helm-chart/develop/cost-analyzer/values-eks-cost-monitoring.yaml
+-f https://raw.githubusercontent.com/kubecost/cost-analyzer-helm-chart/<$VERSION>/cost-analyzer/values-eks-cost-monitoring.yaml
 ```
 {% endcode %}
 
@@ -179,9 +183,7 @@ To install Kubecost on Amazon EKS cluster on AWS Graviton2 (ARM-based processor)
 helm upgrade -i kubecost \
 oci://public.ecr.aws/kubecost/cost-analyzer --version <$VERSION> \
 --namespace kubecost --create-namespace \
--f https://raw.githubusercontent.com/kubecost/cost-analyzer-helm-chart/develop/cost-analyzer/values-eks-cost-monitoring.yaml \
---set prometheus.configmapReload.prometheus.image.repository=jimmidyson/configmap-reload \
---set prometheus.configmapReload.prometheus.image.tag=v0.7.1
+-f https://raw.githubusercontent.com/kubecost/cost-analyzer-helm-chart/<$VERSION>/cost-analyzer/values-eks-cost-monitoring.yaml \
 ```
 {% endcode %}
 
@@ -200,7 +202,7 @@ By default, the installation will include certain prerequisite software includin
 Run the following command to enable port-forwarding to expose the Kubecost dashboard:
 
 ```bash
-kubectl port-forward --namespace kubecost deployment/kubecost-cost-analyzer 9090
+kubectl port-forward --namespace kubecost deployment/cost-analyzer 9090
 ```
 
 ### Step 3: Access Monitoring dashboards
@@ -236,7 +238,7 @@ In your environment, run the following command from your terminal to install Kub
 helm upgrade -i kubecost \
 oci://public.ecr.aws/kubecost/cost-analyzer --version <$VERSION> \
 --namespace kubecost --create-namespace \
--f https://raw.githubusercontent.com/kubecost/cost-analyzer-helm-chart/develop/cost-analyzer/values-eks-cost-monitoring.yaml
+-f https://raw.githubusercontent.com/kubecost/cost-analyzer-helm-chart/<$VERSION>/cost-analyzer/values-eks-cost-monitoring.yaml
 ```
 {% endcode %}
 
@@ -247,9 +249,7 @@ To install Kubecost on an EKS-A cluster on AWS Graviton2 (ARM-based processor), 
 helm upgrade -i kubecost \
 oci://public.ecr.aws/kubecost/cost-analyzer --version <$VERSION> \
 --namespace kubecost --create-namespace \
--f https://raw.githubusercontent.com/kubecost/cost-analyzer-helm-chart/develop/cost-analyzer/values-eks-cost-monitoring.yaml \
---set prometheus.configmapReload.prometheus.image.repository=jimmidyson/configmap-reload \
---set prometheus.configmapReload.prometheus.image.tag=v0.7.1
+-f https://raw.githubusercontent.com/kubecost/cost-analyzer-helm-chart/<$VERSION>/cost-analyzer/values-eks-cost-monitoring.yaml \
 ```
 {% endcode %}
 
@@ -268,7 +268,7 @@ By default, the installation will include certain prerequisite software includin
 Run the following command to enable port-forwarding to expose the Kubecost dashboard:
 
 ```bash
-kubectl port-forward --namespace kubecost deployment/kubecost-cost-analyzer 9090
+kubectl port-forward --namespace kubecost deployment/cost-analyzer 9090
 ```
 
 ### Step 3: Access Monitoring dashboards
