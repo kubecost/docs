@@ -46,9 +46,6 @@
       * [GCP Long-Term Storage](install-and-configure/install/multi-cluster/long-term-storage-configuration/long-term-storage-gcp.md)
     * [Secondary Clusters Guide](install-and-configure/install/multi-cluster/secondary-clusters.md)
     * [Multi-Cluster Diagnostics](install-and-configure/install/multi-cluster/multi-cluster-diagnostics.md)
-  * [ETL Backup](install-and-configure/install/etl-backup/etl-backup.md)
-    * [Sharing ETL Backups](install-and-configure/install/etl-backup/sharing-etl-backups.md)
-    * [Query Service Replicas](install-and-configure/install/etl-backup/query-service-replicas.md)
 * [Additional Configuration](install-and-configure/advanced-configuration/README.md)
   * [Adding a Product Key](install-and-configure/advanced-configuration/add-key.md)
   * [Enabling Annotation Emission](install-and-configure/advanced-configuration/annotations.md)
@@ -79,6 +76,7 @@
   * [Windows Node Support](install-and-configure/advanced-configuration/windows-node-support.md)
   * [Kubecost Data Status Metrics](install-and-configure/advanced-configuration/data-status-metrics.md)
   * [Service Key Rotation](install-and-configure/advanced-configuration/key-rotation.md)
+  * [Custom SMTP Configuration](install-and-configure/advanced-configuration/smtp.md)
 
 ## Using Kubecost
 
