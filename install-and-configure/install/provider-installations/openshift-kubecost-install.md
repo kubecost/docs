@@ -21,7 +21,7 @@ Kubecost is installed with Cost Analyzer and Prometheus as a time-series databas
 
 The standard deployment is illustrated in the following diagram.
 
-![Standard deployment](/images/ocp-standard.png)
+![Standard deployment](/images/diagrams/openshift-cluster.png)
 
 ### Prerequisites
 
