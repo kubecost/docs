@@ -10,7 +10,8 @@ The Anomaly Detection Dashboard (under the ‘Govern’ menu) in Kubecost highli
 
 If you aren’t interested in the Anomaly Detection or Forecasting features, the Forecasting container can be disabled by setting the Helm flag:
 
-```
+```yaml
+
 forecasting:
   enabled: false
 ```
