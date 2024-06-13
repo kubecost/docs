@@ -83,13 +83,34 @@ You're almost done. Now it's time to configure Kubecost to finalize your connect
 
 ### Option 4.1: Configuring using values.yaml (recommended)
 
-It is recommended to provide the GCP details in your [_values.yaml_](https://github.com/kubecost/cost-analyzer-helm-chart/blob/c10e9475b51612d36da8f04618174a98cc62f8fd/cost-analyzer/values.yaml#L572-L574) to ensure they are retained during an upgrade or redeploy. First, set the following configs:
+It is recommended to provide the GCP details in your Helm values file. The necessary values may be provided in one of two ways. In the first method, you define the values in-line to your values file. The second method, for users who wish to store the values separately, you pre-create a Kubernetes Secret with the same contents and then reference that Secret in your values file. An example of the in-line method is shown below.
 
 ```yaml
 kubecostProductConfigs:
-  projectID: "$PROJECT_ID"
-  bigQueryBillingDataDataset: "YOUR_DATASET.YOUR_TABLE_NAME"
+  cloudIntegrationJSON: |-
+    {
+      "gcp": [
+        {
+          "projectID": "my-project-id",
+          "billingDataDataset": "detailedbilling.my-billing-dataset",
+          "key": {
+            "type": "service_account",
+            "project_id": "my-project-id",
+            "private_key_id": "my-private-key-id",
+            "private_key": "my-pem-encoded-private-key",
+            "client_email": "my-service-account-name@my-project-id.iam.gserviceaccount.com",
+            "client_id": "my-client-id",
+            "auth_uri": "auth-uri",
+            "token_uri": "token-uri",
+            "auth_provider_x509_cert_url": "my-x509-provider-cert",
+            "client_x509_cert_url": "my-x509-cert-url"
+          }
+        }
+      ]
+    }
 ```
+
+When choosing to pre-create the Secret instead and reference it in the values file, follow the directions provided in the [Helm values file comments](https://github.com/kubecost/cost-analyzer-helm-chart/blob/v2.3/cost-analyzer/values.yaml#L3327-L3330).
 
 If you've connected using Workload Identity Federation, add these configs:
 
