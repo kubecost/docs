@@ -187,6 +187,6 @@
 
 ## Other Resources
 
-* [Contact Us](contactus.md)
+* [Contact Us](CONTACT.md)
 * [Kubecost Blog](https://blog.kubecost.com/)
 * [Kubecost Release Notes](https://github.com/kubecost/cost-analyzer-helm-chart/releases)
