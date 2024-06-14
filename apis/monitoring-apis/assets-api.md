@@ -494,9 +494,9 @@ http://localhost:9090/model/assets?window=5d&aggregate=type&filterProviders=GCP
 
 ## Querying with `/topline` endpoint to view cost totals across query
 
-`/topline` is an optional API endpoint which can be added to your Assets query via `.../model/assets/topline?window=...` to provide a condensed overview of your total cost metrics including all line items sampled. You will receive a single list which sums the values per all items queried (`totalCost`), where `numResults` displays the total number of items sampled. 
+`/topline` is an optional API endpoint which can be added to your Assets query via `.../model/assets/topline?window=...` to provide a condensed overview of your total cost metrics including all line items sampled. You will receive a single list which sums the values per all items queried (`totalCost`), where `numResults` displays the total number of items sampled.
 
-```
+```json
     "code": 200,
     "data": {
         "totalCost": ,
@@ -508,10 +508,11 @@ http://localhost:9090/model/assets?window=5d&aggregate=type&filterProviders=GCP
 
 ## Enable CPU and RAM cost breakdown
 
-Prometheus queries for CPU and RAM mode breakdown are disabled by default. To receive these metrics, you must manually enable them by setting the Helm flag:
+Prometheus queries for CPU and RAM mode breakdown are disabled by default. To receive these metrics, you must manually enable them.
 
-```
-.Values.kubecostModel.assetModeBreakdownEnabled = true
+```yaml
+kubecostModel:
+  assetModeBreakdownEnabled: true
 ```
 
 This will enable fields `ramBreakdown`, `cpuBreakdown`, and `breakdown` in the output of all future Assets queries.

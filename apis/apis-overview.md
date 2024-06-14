@@ -89,7 +89,7 @@ Many, but not all, Kubecost APIs power different features in the Kubecost UI. Th
 
 ## API usage
 
-### Using the `window` parameter to query data rnage
+### Using the `window` parameter
 
 Several Kubecost APIs use the `window` parameter to establish the duration of time Kubecost should sample to provide cost metrics, right-sizing recommendations, or other savings information. The following APIs accept `window` as parameter:
 

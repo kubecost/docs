@@ -215,7 +215,7 @@ You can now access Kubecost's UI by visiting `http://localhost:9090` in your loc
 ## Deploying Kubecost on an EKS Anywhere cluster using Helm
 
 {% hint style="warning" %}
-Deploying Kubecost on EKS Anywhere via Helm is not the officially recommended method by Kubecost or AWS. The recommended method is via EKS add-on ([see above](/install-and-configure/install/provider-installations/aws-eks-cost-monitoring.md#deploying-kubecost-on-amazon-eks-cluster-using-amazon-eks-add-on)).
+Deploying Kubecost on EKS Anywhere via Helm is not the officially recommended method by Kubecost or AWS. The recommended method is via EKS add-on ([see above](#deploying-kubecost-on-an-amazon-eks-cluster-using-amazon-eks-add-on)).
 {% endhint %}
 
 [Amazon EKS Anywhere](https://aws.amazon.com/eks/eks-anywhere/) (EKS-A) is an alternate deployment of EKS which allows you to create and configure on-premises clusters, including on your own virtual machines. It is possible to deploy Kubecost on EKS-A clusters to monitor spend data.
