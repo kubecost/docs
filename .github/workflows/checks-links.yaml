@@ -23,7 +23,7 @@ jobs:
         with:
           fail: true
           debug: false
-          args: --verbose --no-progress --base . -E './**/*.md' './**/*.html'
+          args: --verbose --include-fragments --no-progress --base . -E './**/*.md' './**/*.html'
 
       # - name: Create Issue From File
       #   if: steps.lychee.outputs.exit_code != 0
