@@ -59,7 +59,8 @@ gcloud iam service-accounts add-iam-policy-binding kubecost-aws-cur-access@$PROJ
 
 Use the following manifest:
 
-```
+```yaml
+
 apiVersion: v1
 kind: ServiceAccount
 metadata:
