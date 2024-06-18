@@ -128,11 +128,14 @@ aws eks delete-addon --addon-name kubecost_kubecost --cluster-name $YOUR_CLUSTER
 
 To get started, you can follow these steps to deploy Kubecost into your Amazon EKS cluster in a few minutes using Helm.
 
-### Prerequisites:
+### Prerequisites
 
 * Install the following tools: [Helm 3.9+](https://helm.sh/docs/intro/install/), [kubectl](https://kubernetes.io/docs/tasks/tools/), and optionally [eksctl](https://eksctl.io/) and [AWS CLI](https://aws.amazon.com/cli/).
 * You have access to an [Amazon EKS cluster](https://aws.amazon.com/eks/).
-* If your cluster is version 1.23 or later, you must have the [Amazon EBS CSI driver](https://docs.aws.amazon.com/eks/latest/userguide/ebs-csi.html) installed on your cluster. You can also follow these instructions to install Amazon EBS CSI driver:
+* If your cluster is version 1.23 or later, you must have the [Amazon EBS CSI driver](https://docs.aws.amazon.com/eks/latest/userguide/ebs-csi.html) installed on your cluster. You can also follow the instructions below to install the Amazon EBS CSI driver.
+* If your cluster is version 1.30 or later, there is by default no longer a default StorageClass assigned. See the [EKS 1.30 release notes](https://docs.aws.amazon.com/eks/latest/userguide/kubernetes-versions-standard.html#kubernetes-1.30) for one of several alternatives.
+
+#### Install AWS EBS CSI Driver
 
 1. Run the following command to create an IAM service account with the policies needed to use the Amazon EBS CSI Driver.
 
