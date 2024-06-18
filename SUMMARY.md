@@ -11,6 +11,7 @@
   * [Helm Parameters](install-and-configure/install/helm-install-params.md)
   * [Ingress Examples](install-and-configure/install/ingress-examples.md)
   * [Kubecost v2.0 Install/Upgrade](install-and-configure/install/kubecostv2.md)
+  * [Parallel Install for Upgrading](install-and-configure/install/parallel.md)
   * [Provider Installations](install-and-configure/install/provider-installations/README.md)
     * [Amazon EKS Integration](install-and-configure/install/provider-installations/aws-eks-cost-monitoring.md)
     * [AWS Marketplace Install](install-and-configure/install/provider-installations/aws-marketplace-install.md)
