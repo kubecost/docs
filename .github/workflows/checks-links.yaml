@@ -17,13 +17,13 @@ jobs:
 
       - name: Link Checker
         id: lychee
-        uses: lycheeverse/lychee-action@v1.8.0
+        uses: lycheeverse/lychee-action@v1
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
         with:
           fail: true
           debug: false
-          args: --verbose --no-progress --base . -E './**/*.md' './**/*.html'
+          args: --verbose --include-fragments --no-progress --base . -E './**/*.md' './**/*.html'
 
       # - name: Create Issue From File
       #   if: steps.lychee.outputs.exit_code != 0

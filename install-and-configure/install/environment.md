@@ -27,4 +27,4 @@ Kubecost requires a Kubernetes cluster to be deployed.
   * All regions supported, as shown in [opencost/pkg/cloud/azureprovider.go](https://github.com/opencost/opencost/blob/0c2f063052723a65ca62a4c75be23392806b6fac/pkg/cloud/azureprovider.go#L82)
   * x86
 
-**This list is certainly not exhaustive!** This is simply a list of observations as to where our users run Kubecost based on their questions and feedback. Please [contact us](/contactus.md) with any questions!
+**This list is certainly not exhaustive!** This is simply a list of observations as to where our users run Kubecost based on their questions and feedback. Please [contact us](/CONTACT.md) with any questions!
