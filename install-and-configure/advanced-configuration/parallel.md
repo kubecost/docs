@@ -1,5 +1,7 @@
 # Parallel Installation
 
+The below guide is optional, as there is low risk to data loss in Kubecost as all metrics are stored in cloud object-storage. The primary benefit to a parallel installation is to reduce the amount of time the Kubecost UI is unavailable/incomplete during an upgrade.
+
 It is possible to run multiple Kubecost Primaries on the same cluster in parallel. This is useful if you are upgrading to a new version and want to validate the new version before removing the current one.
 
 The primary concern is to ensure that two Kubecost cost-analyzer pods on a single cluster are not writing to the same bucket at the same time.
