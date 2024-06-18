@@ -95,7 +95,7 @@ Enabling ETL-Utils will create the directories `/federated/CLUSTER_ID` for every
 
 Enabling [Aggregator](/install-and-configure/install/multi-cluster/federated-etl/aggregator.md) will begin processing the ETL data from the `/federated` directory. The aggregator will then serve all Kubecost queries. Be sure to look at the [Aggregator Optimizations Doc](/install-and-configure/install/multi-cluster/federated-etl/aggregator.md) if Kubecost is ingesting data for ~20,000+ containers. It is difficult to recommend the amount of resources needed due to the uniqueness of each environment and several other variables.
 
-The `federatedStorageConfigSecret`, `etlBucketConfigSecret`, and `thanosSourceBucketSecret` *MUST* all point to the same bucket. Otherwise the data migration will not suceed. Additionally, the cloud-integration *MUST* be configured and referenced following [this method](/install-and-configure/install/cloud-integration/multi-cloud#step-2-create-cloud-integration-secret) or the cloud integration will fail.
+The `federatedStorageConfigSecret`, `etlBucketConfigSecret`, and `thanosSourceBucketSecret` *MUST* all point to the same bucket. Otherwise the data migration will not suceed. Additionally, the cloud-integration *MUST* be configured and referenced following [this method](/install-and-configure/install/cloud-integration/multi-cloud.md#step-2-create-cloud-integration-secret) or the cloud integration will fail.
 
 
 ```yaml

@@ -45,7 +45,7 @@ Consider the following Thanos recommendations for secondaries:
 `cluster_id` can be replaced with another label (e.g. `cluster`) by modifying .Values.kubecostModel.promClusterIDLabel.
 {% endhint %}
 
-4. Follow the same verification steps available [here](/install-and-configure/install/multi-cluster/thanos-setup/configuring-thanos.md#verify-thanos).
+4. Follow the same verification steps available [here](/install-and-configure/install/multi-cluster/thanos-setup/configuring-thanos.md).
 
 Sample configurations for each cloud provider can be found [here](https://github.com/kubecost/poc-common-configurations/).
 

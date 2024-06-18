@@ -68,7 +68,6 @@
     * [Configure Keycloak Identity Provider for Kubecost](install-and-configure/advanced-configuration/user-management-oidc/user-management-oidc-keycloak.md)
     * [Gluu Server with OIDC Configuration Guide](install-and-configure/advanced-configuration/user-management-oidc/gluu-server-with-oidc-configuration-guide.md)
   * [Tuning Resource Consumption](install-and-configure/advanced-configuration/resource-consumption.md)
-  * [Deploying Kubecost Staging Builds](install-and-configure/advanced-configuration/staging.md)
   * [Cluster Controller](install-and-configure/advanced-configuration/controller/cluster-controller.md)
     * [Cluster Turndown](install-and-configure/advanced-configuration/controller/cluster-turndown.md)
     * [Kubescaler](install-and-configure/advanced-configuration/controller/kubescaler.md)
@@ -191,6 +190,6 @@
 
 ## Other Resources
 
-* [Contact Us](contactus.md)
+* [Contact Us](CONTACT.md)
 * [Kubecost Blog](https://blog.kubecost.com/)
 * [Kubecost Release Notes](https://github.com/kubecost/cost-analyzer-helm-chart/releases)

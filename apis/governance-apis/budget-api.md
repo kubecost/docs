@@ -28,10 +28,10 @@ The budget limit value.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="body" name="id" type="string" %}
-Only should be used when updating a budget rule; ID of the budget rule being modified. For more info, see the [Using the `id` parameter](budget-api.md#using-the-ip-parameter) section below.
+Only should be used when updating a budget rule; ID of the budget rule being modified. For more info, see the [Using the `id` parameter](#using-the-id-parameter) section below.
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="action" type="string" required="false" %} Optional configurations for providing visibility when your budget exceeds a specified percentage threshold. This parameter can generate emails, and Slack or Microsoft Teams messages to suit your work environment. For more information, see the [Using Budget Actions](budget-api.md#using-budget-actions) section below.
+{% swagger-parameter in="body" name="action" type="string" required="false" %} Optional configurations for providing visibility when your budget exceeds a specified percentage threshold. This parameter can generate emails, and Slack or Microsoft Teams messages to suit your work environment. For more information, see the [Using Budget Actions](#using-budget-actions) section below.
 {% endswagger-parameter %}
 
 {% swagger-response status="200: OK" description="" %}

@@ -518,7 +518,7 @@ Querying on-demand with high resolution for long windows can cause serious Prome
 
 Computing allocation data on-demand allows for greater flexibility with respect to step size and accuracy-versus-performance. (See `resolution` and [error bounds](api-allocation.md#theoretical-error-bounds) for details.) Unlike the standard endpoint, which can only serve results from precomputed sets with predefined step sizes (e.g. 24h aligned to the UTC time zone), asking for a "7d" query will almost certainly result in 8 sets, including "today" and the final set, which might span 6.5d-7.5d ago. With this endpoint, however, you will be computing everything on-demand, so "7d" will return exactly seven days of data, starting at the moment the query is received. (You can still use window keywords like "today" and "lastweek", of course, which should align perfectly with the same queries of the standard ETL-driven endpoint.)
 
-Additionally, unlike the standard endpoint, querying on-demand will not use [reconciled asset costs](/install-and-configure/install/cloud-integration/README.md#Reconciliation). Therefore, the results returned will show all adjustments (e.g. CPU, GPU, RAM) to be 0.
+Additionally, unlike the standard endpoint, querying on-demand will not use [reconciled asset costs](/install-and-configure/install/cloud-integration/README.md#reconciliation). Therefore, the results returned will show all adjustments (e.g. CPU, GPU, RAM) to be 0.
 
 {% swagger method="get" path="/allocation/compute" baseUrl="http://<kubecost>/model" summary="Allocation On-Demand API" %}
 {% swagger-description %}

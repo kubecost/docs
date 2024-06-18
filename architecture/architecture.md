@@ -16,7 +16,7 @@ Below are the major components deployed with the [Kubecost Helm chart](/install-
 
 Today, the core Kubecost product can be run with just components 1 and 2.1. See an overview of core components in this diagram:
 
-![Architecture Overview](/images/arch.png)
+![Architecture Overview](/images/diagrams/kube-architecture.png)
 
 {% hint style="warning" %}
 Prometheus is not optional. Disabling Prometheus will result in zero costs in Kubecost. For more information, see Kubecost's [Prometheus Configuration Guide](/install-and-configure/advanced-configuration/custom-prom/custom-prom.md).
