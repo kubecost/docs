@@ -33,15 +33,9 @@ Notable Helm values:
 
 ### Supported workload types
 
-Kubescaler supports:
+Kubescaler supports apps/v1 Deployments.
 
-* apps/v1 Deployments
-* apps/v1 DaemonSets
-* batch/v1 CronJobs (K8s v1.21+). No attempt will be made to autoscale a CronJob until it has run at least once.
-
-Kubescaler cannot support:
-
-* "Uncontrolled" Pods. Learn more in [this GitHub issue]](https://github.com/kubernetes/kubernetes/issues/24913).
+Kubescaler does not support "bare" pods. Learn more in [this GitHub issue](https://github.com/kubernetes/kubernetes/issues/24913).
 
 ### Example
 
