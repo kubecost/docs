@@ -86,7 +86,7 @@ From your AWS management account:
 Create a `cloud-integration.json` file and provide the following values (see below for explanations of these values):
 
 
-```
+```json
 {
   "aws": {
     "athena": [
