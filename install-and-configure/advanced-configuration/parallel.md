@@ -13,20 +13,20 @@ federatedETL:
   readOnlyPrimary: true
 ```
 
-All other core settings should be the same as the existingprimary installation.
+All other core settings should be the same as the existing [primary](../../architecture/architecture.md) installation.
 
 You MUST install the parallel installation in a different namespace than the primary installation, with a different release name.
 
 For example, if the current install was done with
 
 ```sh
-helm install kubecost -n kubecost ...
+helm install kubecost --namespace kubecost ...
 ```
 
 The parallel installation MUST be installed with a different release name, such as:
 
 ```sh
-helm install kubecost2 -n kubecost2 ...
+helm install kubecost2 --namespace kubecost2 ...
 ```
 
 ## Cutover
