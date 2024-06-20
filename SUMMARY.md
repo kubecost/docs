@@ -52,6 +52,7 @@
   * [Enabling Annotation Emission](install-and-configure/advanced-configuration/annotations.md)
   * [Network Cost Configuration](install-and-configure/advanced-configuration/network-costs-configuration.md)
   * [Grafana Configuration Guide](install-and-configure/advanced-configuration/custom-grafana.md)
+  * [Parallel Install for Upgrading](install-and-configure/advanced-configuration/parallel.md)
   * [Prometheus Configuration Guide](install-and-configure/advanced-configuration/custom-prom/custom-prom.md)
     * [Amazon Managed Service for Prometheus](install-and-configure/advanced-configuration/custom-prom/aws-amp-integration.md)
     * [AWS Agentless AMP](install-and-configure/advanced-configuration/custom-prom/kubecost-agentless-amp.md)
