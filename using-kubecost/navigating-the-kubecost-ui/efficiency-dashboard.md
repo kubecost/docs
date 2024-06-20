@@ -3,7 +3,7 @@
 ![Efficiency Dashboard](/images/efficiency-dashboard-1.png)
 
 The Kubernetes Efficiency Dashboard introduced in Kubecost 2.3 is designed to give Kubecost users a powerful tool for identifying the wasted spend coming from the clusters, nodes, and workloads in their Kubernetes environment.
-These Efficiency Reports provides you with a single-pane of glass to understand your waste across all of your Kubernetes clusters. Particularly valuable is its ability to help  you understand and see the cost of idle resources on a per-cluster basis in a multi-cluster federation.
+These Efficiency Reports provide users with a single pane of glass to understand waste across all of their Kubernetes clusters. Particularly valuable is its ability to help  users understand and see the cost of idle resources on a per-cluster basis in a multi-cluster federation.
 This functionality is available in all tiers of Kubecost beginning with 2.3 and can be accessed under the ‘Monitor’ menu.
 
 The report provides three views for examining the efficiency of your infrastructure:
