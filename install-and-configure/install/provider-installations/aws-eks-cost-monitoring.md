@@ -128,11 +128,14 @@ aws eks delete-addon --addon-name kubecost_kubecost --cluster-name $YOUR_CLUSTER
 
 To get started, you can follow these steps to deploy Kubecost into your Amazon EKS cluster in a few minutes using Helm.
 
-### Prerequisites:
+### Prerequisites
 
 * Install the following tools: [Helm 3.9+](https://helm.sh/docs/intro/install/), [kubectl](https://kubernetes.io/docs/tasks/tools/), and optionally [eksctl](https://eksctl.io/) and [AWS CLI](https://aws.amazon.com/cli/).
 * You have access to an [Amazon EKS cluster](https://aws.amazon.com/eks/).
-* If your cluster is version 1.23 or later, you must have the [Amazon EBS CSI driver](https://docs.aws.amazon.com/eks/latest/userguide/ebs-csi.html) installed on your cluster. You can also follow these instructions to install Amazon EBS CSI driver:
+* If your cluster is version 1.23 or later, you must have the [Amazon EBS CSI driver](https://docs.aws.amazon.com/eks/latest/userguide/ebs-csi.html) installed on your cluster. You can also follow the instructions below to install the Amazon EBS CSI driver.
+* If your cluster is version 1.30 or later, there is by default no longer a default StorageClass assigned. See the [EKS 1.30 release notes](https://docs.aws.amazon.com/eks/latest/userguide/kubernetes-versions-standard.html#kubernetes-1.30) for one of several alternatives.
+
+#### Install AWS EBS CSI Driver
 
 1. Run the following command to create an IAM service account with the policies needed to use the Amazon EBS CSI Driver.
 
@@ -215,7 +218,7 @@ You can now access Kubecost's UI by visiting `http://localhost:9090` in your loc
 ## Deploying Kubecost on an EKS Anywhere cluster using Helm
 
 {% hint style="warning" %}
-Deploying Kubecost on EKS Anywhere via Helm is not the officially recommended method by Kubecost or AWS. The recommended method is via EKS add-on ([see above](/install-and-configure/install/provider-installations/aws-eks-cost-monitoring.md#deploying-kubecost-on-amazon-eks-cluster-using-amazon-eks-add-on)).
+Deploying Kubecost on EKS Anywhere via Helm is not the officially recommended method by Kubecost or AWS. The recommended method is via EKS add-on ([see above](#deploying-kubecost-on-an-amazon-eks-cluster-using-amazon-eks-add-on)).
 {% endhint %}
 
 [Amazon EKS Anywhere](https://aws.amazon.com/eks/eks-anywhere/) (EKS-A) is an alternate deployment of EKS which allows you to create and configure on-premises clusters, including on your own virtual machines. It is possible to deploy Kubecost on EKS-A clusters to monitor spend data.

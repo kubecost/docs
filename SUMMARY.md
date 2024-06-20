@@ -34,6 +34,7 @@
     * [GCP Cloud Billing Integration](install-and-configure/install/cloud-integration/gcp-out-of-cluster/README.md)
       * [Creating a Google Service Account](install-and-configure/install/cloud-integration/gcp-out-of-cluster/google-service-account-thanos.md)
       * [Accessing Kubecost with GCP Workload Identity](install-and-configure/install/cloud-integration/gcp-out-of-cluster/accessing-kubecost-with-gcp-workload-identity.md)
+      * [Accessing AWS CUR Data with Google Workload Identity Federation](install-and-configure/install/cloud-integration/gcp-out-of-cluster/accessing-aws-cur-data-with-gcp-workplace-identity.md)
   * [Multi-Cluster](install-and-configure/install/multi-cluster/multi-cluster.md)
     * [ETL Federation](install-and-configure/install/multi-cluster/federated-etl/federated-etl.md)
       * [Kubecost Aggregator](install-and-configure/install/multi-cluster/federated-etl/aggregator.md)
@@ -68,7 +69,6 @@
     * [Configure Keycloak Identity Provider for Kubecost](install-and-configure/advanced-configuration/user-management-oidc/user-management-oidc-keycloak.md)
     * [Gluu Server with OIDC Configuration Guide](install-and-configure/advanced-configuration/user-management-oidc/gluu-server-with-oidc-configuration-guide.md)
   * [Tuning Resource Consumption](install-and-configure/advanced-configuration/resource-consumption.md)
-  * [Deploying Kubecost Staging Builds](install-and-configure/advanced-configuration/staging.md)
   * [Cluster Controller](install-and-configure/advanced-configuration/controller/cluster-controller.md)
     * [Cluster Turndown](install-and-configure/advanced-configuration/controller/cluster-turndown.md)
     * [Kubescaler](install-and-configure/advanced-configuration/controller/kubescaler.md)
@@ -77,6 +77,7 @@
   * [Windows Node Support](install-and-configure/advanced-configuration/windows-node-support.md)
   * [Kubecost Data Status Metrics](install-and-configure/advanced-configuration/data-status-metrics.md)
   * [Service Key Rotation](install-and-configure/advanced-configuration/key-rotation.md)
+  * [Custom SMTP Configuration](install-and-configure/advanced-configuration/smtp.md)
 
 ## Using Kubecost
 
@@ -88,6 +89,7 @@
   * [Cloud Cost Explorer](using-kubecost/navigating-the-kubecost-ui/cloud-costs-explorer/cloud-costs-explorer.md)
     * [Cloud Cost Metrics](using-kubecost/navigating-the-kubecost-ui/cloud-costs-explorer/cloud-cost-metrics.md)
   * [Clusters Dashboard](using-kubecost/navigating-the-kubecost-ui/clusters-dashboard.md)
+  * [Efficiency Dashboard](using-kubecost/navigating-the-kubecost-ui/efficiency-dashboard.md)
   * [External Costs](using-kubecost/navigating-the-kubecost-ui/external-costs.md)
   * [Network Monitoring](using-kubecost/navigating-the-kubecost-ui/network-monitoring.md)
   * [Collections](using-kubecost/navigating-the-kubecost-ui/collections.md)
@@ -166,6 +168,7 @@
 
 ## Integrations
 
+* [Kubecost Postgres Integration](integrations/postgres-integration.md)
 * [Importing Kubecost Data into Microsoft Power BI](integrations/import-kubecost-data-into-microsoft-power-bi.md)
 * [Integrating Kubecost with Datadog](integrations/integrating-kubecost-with-datadog.md)
 * [Using Custom Webhook to Create a Kubecost Stage in Spinnaker](integrations/spinnaker-custom-webhook.md)

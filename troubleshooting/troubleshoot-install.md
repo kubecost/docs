@@ -330,7 +330,7 @@ ensure CRDs are installed first
 ```
 {% endcode %}
 
-To prevent this Helm error state please upgrade Kubecost to at least v1.99 prior to upgrading Kubernetes to v1.25. Additionally please follow the [above](troubleshoot-install.md#issue-podsecuritypolicy-crd-is-missing-for-kubecost-grafana-and-kubecost-cost-analyzer-psp) instructions for disabling PSP.
+To prevent this Helm error state please upgrade Kubecost to at least v1.99 prior to upgrading Kubernetes to v1.25. Additionally please follow the [above](#podsecuritypolicy-crd-is-missing-for-kubecost-grafana-and-kubecost-cost-analyzer-psp) instructions for disabling PSP.
 
 If Kubecost PSP is not disabled prior to Kubernetes v1.25 upgrades, you may need to manually delete the Kubecost install. Prior to doing this please ensure you have [ETL backups enabled](https://docs.kubecost.com/v/1.0x/install-and-configure/install/etl-backup) as well as Helm values, and Prometheus/Thanos data backed up. Manual removal can be done by deleting the Kubecost namespace.
 
@@ -383,11 +383,11 @@ aws ecr-public get-login-password --region us-east-1 | helm registry login --use
 3. Change both entries to localhost:9001 and localhost:9003
 4. Restart the kubecost-cost-analyzer pod in the kubecost namespace
 
-### What is the difference between `.Values.kubecostToken` and `Values.kubecostProductConfigs.productKey`?
+### What is the difference between `kubecostToken` and `productKey`
 
 `.Values.kubecostToken` is primarily used to manage trial access and is provided to you when visiting [http://kubecost.com/install](http://kubecost.com/install).
 
-`.Values.kubecostProductConfigs.productKey` is used to apply a Enterprise license. More info in our [Adding a Product Key](/install-and-configure/advanced-configuration/add-key.md).
+`kubecostProductConfigs.productKey` is used to apply an Enterprise license. More information can be found in the [Adding a Product Key](/install-and-configure/advanced-configuration/add-key.md) section.
 
 ### Error loading metadata
 
@@ -398,5 +398,20 @@ Kubecost makes use of cloud provider metadata servers to access instance and clu
 gcpprovider.go Error loading metadata cluster-name: Get "http://169.254.169.254/computeMetadata/v1/instance/attributes/cluster-name": dial tcp 169.254.169.254:80: i/o timeout
 ```
 {% endcode %}
+
+### Local disks showing costs in Assets
+
+Some cloud providers do not charge you for local disks physically attached to the node (e.g. ephemeral storage). By default, Kubecost monitors your local disk usage/capacity and applies an associated cost. To disable this feature use the following config:
+
+```yaml
+kubecostModel:
+  extraEnv:
+    - name: "ASSET_INCLUDE_LOCAL_DISK_COST"
+      value: "false"
+```
+
+This configuration will need to be applied to any cluster on which you do not want to charge for local disks and only takes effect on data moving forward. To fix historical data, you will need to [repair Asset & Allocation ETL](/troubleshooting/etl-repair.md) for each affected cluster, then wait for Kubecost's Aggregator to reingest the updated ETL data.
+
+## Additional support
 
 Do you have a question not answered on this page? Email us at [support@kubecost.com](mailto:support@kubecost.com) or [join the Kubecost Slack community](https://kubecost.com/join-slack)!

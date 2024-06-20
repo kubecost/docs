@@ -6,7 +6,7 @@ Kubecost can run on clusters with thousands of nodes when resource consumption i
 
 ## Disable Cloud Costs on secondary clusters
 
-[Cloud Costs](/install-and-configure/install/cloud-integration/README.md#cloudcost) allow Kubecost to pull in spend data from your integrated cloud service providers.
+[Cloud Costs](/install-and-configure/install/cloud-integration/README.md#cloud-costs) allow Kubecost to pull in spend data from your integrated cloud service providers.
 
 Cloud cost metrics for all accounts can be pulled in on your primary cluster by pointing Kubecost to one or more management accounts. Therefore, you can disable CloudCost on secondary clusters by setting the following Helm value:
 
@@ -34,11 +34,11 @@ Lowering query resolution will reduce memory consumption but will cause short ru
 
 ## Lengthen scrape interval
 
-Fewer data points scraped from Prometheus means less data to collect and store, at the cost of Kubecost making estimations that possibly miss spikes of usage or short running pods. The default value is: `60s`. This can be tuned in our [Helm values](https://github.com/kubecost/cost-analyzer-helm-chart/blob/v1.93.2/cost-analyzer/values.yaml#L389) for the Prometheus scrape job.
+Fewer data points scraped from Prometheus means less data to collect and store, at the cost of Kubecost making estimations that possibly miss spikes of usage or short running pods. The default value is: `60s`. This can be tuned in the Helm values for the Prometheus scrape job.
 
 ## Keep node exporter disabled
 
-The Node Exporter is disabled by default, and is an optional feature. Some health alerts will be disabled if the Node Exporter is disabled, but savings recommendations and core cost allocation will function normally. You can enable the Node Exporter with the following [Helm values](https://github.com/kubecost/cost-analyzer-helm-chart/blob/v1.93.2/cost-analyzer/values.yaml#L442):
+The Node Exporter is disabled by default, and is an optional feature. Some health alerts will be disabled if the Node Exporter is disabled, but savings recommendations and core cost allocation will function normally. You can enable the Node Exporter with the following Helm values:
 
 ```
 --set prometheus.server.nodeExporter.enabled=true

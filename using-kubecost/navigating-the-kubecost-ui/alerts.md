@@ -336,7 +336,7 @@ The fields for each alert type should resemble their corresponding Helm values i
 
 Alerts can also be edited, removed, and tested from the table. Editing opens a dialog similar to the alert creation dialog, for editing the chosen alert.
 
-When creating an alert, you can have these alerts sent through email, Slack, or Microsoft Teams. You can customize the subject field for an email, and attach multiple recipients. Alerts sent via email will contain a PDF of your report which shows the Kubecost UI for your Allocation/Asset page(s). This can be helpful for distributing visual information to those without immediate access to Kubecost.
+When creating an alert, you can have these alerts sent through email, Slack, or Microsoft Teams. You can customize the subject field for an email, and attach multiple recipients. Alerts sent via email will contain a PDF of your report which shows the Kubecost UI for your Allocation/Asset page(s). This can be helpful for distributing visual information to those without immediate access to Kubecost. If a custom SMTP configuration has been created, all outbound alert emails will be sent through it.
 
 ### Testing alerts
 
