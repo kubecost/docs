@@ -69,25 +69,55 @@ Because the Aggregator PV is relatively small, the least expensive performance g
 
 ```yaml
 kubecostAggregator:
-  # deployMethod determines how Aggregator is deployed. Current options are
-  # "singlepod" (within cost-analyzer Pod) "statefulset" (separate
-  # StatefulSet), and "disabled". Only use "disabled" if this is a secondary
-  # Federated ETL cluster which does not need to answer queries.
-  deployMethod: singlepod
+  logLevel: info
 
-  # fullImageName overrides the default image construction logic. The exact
-  # image provided (registry, image, tag) will be used for aggregator.
-  # fullImageName:
-  imagePullPolicy: IfNotPresent
+  # How much data to ingest from the federated store bucket, and how much data
+  # to keep in the DB before rolling the data off.
+  # 
+  # Note: If increasing this value to backfill historical data, it will take
+  # time to gradually ingest & process those historical ETL files. Consider
+  # also increasing the resources available to the aggregator as well as the
+  # dbConcurrentIngestionCount.
+  # 
+  # default: 91
+  etlDailyStoreDurationDays: 375
 
-  # For legacy configuration support, `enabled: true` overrides deployMethod
-  # and causes `deployMethod: "statefulset"`
-  enabled: false
+  # How many threads the read database is configured with (i.e. Kubecost API /
+  # UI queries). If increasing this value, it is recommended to increase the
+  # aggregator's memory requests & limits.
+  # default: 1
+  dbReadThreads: 1
 
-  # Replicas sets the number of Aggregator replicas. It only has an effect if
-  # `deployMethod: "statefulset"`
-  replicas: 1
+  # How many threads the write database is configured with (i.e. ingestion of
+  # new data from S3). If increasing this value, it is recommended to increase
+  # the aggregator's memory requests & limits.
+  # default: 1
+  dbWriteThreads: 1
 
+  # How many threads to use when ingesting Asset/Allocation/CloudCost data
+  # from the federated store bucket. In most cases the default is sufficient,
+  # but can be increased if trying to backfill historical data.
+  # default: 1
+  dbConcurrentIngestionCount: 1
+
+  # Memory limit applied to read database connections.
+  # default: 0Gi is no limit
+  dbMemoryLimit: 0Gi
+
+  # Memory limit applied to write database connections.
+  # default: 0Gi is no limit
+  dbWriteMemoryLimit: 0Gi
+
+  # If "true" can improve the time it takes to copy the write DB, at the expense
+  # of additional memory usage.
+  # default: "false"
+  dbCopyFull: "false"
+
+  # The number of partitions the datastore is split into for copying. The higher
+  # this number, the lower the RAM usage but the longer it takes for new data to
+  # show in the Kubecost UI.
+  # default: 1
+  numDBCopyPartitions: 1
 
   # stagingEmptyDirSizeLimit changes how large the "staging"
   # /var/configs/waterfowl emptyDir is. It only takes effect in StatefulSet
@@ -99,58 +129,9 @@ kubecostAggregator:
   # 2400Mi. In most environments, the default should suffice.
   stagingEmptyDirSizeLimit: 2Gi
 
-  # this is the number of partitions the datastore is split into for copying
-  # the higher this number, the lower the ram usage but the longer it takes for
-  # new data to show in the kubecost UI
-  # set to 0 for max partitioning (minimum possible ram usage, but the slowest)
-  # the default of 25 is sufficient for 95%+ of users. This should only be modified
-  # after consulting with Kubecost's support team
-  numDBCopyPartitions: 1
-  logLevel: info
-
-  # env: has been removed to avoid unknown issues that would be caused by
-  # customizations that were required to run aggregator in previous versions
-  # extraEnv: can be used to add new environment variables to the aggregator pod
-
-  # the below settings should only be modified with support from Kubecost staff
-
-  # How many threads the read database is configured with (i.e. Kubecost API /
-  # UI queries). If increasing this value, it is recommended to increase the
-  # aggregator's memory requests & limits.
-  # default: 1
-  dbReadThreads: 1
-  # How many threads the write database is configured with (i.e. ingestion of
-  # new data from S3). If increasing this value, it is recommended to increase
-  # the aggregator's memory requests & limits.
-  # default: 1
-  dbWriteThreads: 1
-  # How many threads to use when ingesting Asset/Allocation/CloudCost data
-  # from the federated store bucket. In most cases the default is sufficient,
-  # but can be increased if trying to backfill historical data.
-  # default: 1
-  dbConcurrentIngestionCount: 1
-  # dbCopyFull: "true" can improve the time it takes to copy the write DB, 
-  # at the expense of additional memory usages.
-  dbCopyFull: "false"
-  # Memory limit applied to read database connections.
-  # default: 0Gi is no limit
-  dbMemoryLimit: 0Gi
-  # Memory limit applied to write database connections.
-  # default: 0Gi is no limit
-  dbWriteMemoryLimit: 0Gi
-  # How much data to ingest from the federated store bucket, and how much data
-  # to keep in the DB before rolling the data off.
-  # 
-  # Note: If increasing this value to backfill historical data, it will take
-  # time to gradually ingest & process those historical ETL files. Consider
-  # also increasing the resources available to the aggregator as well as the
-  # refresh & concurrency env vars.
-  # 
-  # default: 91
-  etlDayStoreDurationDays: 91
+  # Governs storage size of aggregator DB storage. Disk performance is important
+  # to aggregator performance. Consider high IOPS for best performance.
   aggregatorDbStorage:
-    # governs storage size of aggregator DB storage
-    # Disk performance is important to aggregator performance. Consider high IOPS for best performance
     storageClass: ""  # use default storage class
     storageRequest: 128Gi
   resources:
