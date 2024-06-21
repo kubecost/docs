@@ -28,21 +28,17 @@ If you are upgrading to Kubecost v2.0 from the following environments, see our s
 ### Basic configuration
 
 {% hint style="info" %}
-This configuration is estimated to be sufficient for environments monitoring < 20k unique containers per day. You can check this metric on the `/diagnostics` page.
+This configuration is estimated to be sufficient for environments monitoring < 20k unique containers or $50k cloud spend per day. You can check this metric on the `/diagnostics` page.
 {% endhint %}
 
 ```yaml
 kubecostAggregator:
-  replicas: 1
   deployMethod: statefulset
   cloudCost:
     enabled: true
 federatedETL:
   federatedCluster: true
 kubecostModel:
-  containerStatsEnabled: true
-  cloudCost:
-    enabled: false
   federatedStorageConfigSecret: federated-store
 kubecostProductConfigs:
   clusterName: YOUR_CLUSTER_NAME
@@ -55,10 +51,6 @@ prometheus:
     global:
       external_labels:
         cluster_id: YOUR_CLUSTER_NAME
-# when using managed identity/irsa, set the service account accordingly:
-serviceAccount:
-  create: false
-  name: kubecost-irsa-sa
 ```
 
 ### Aggregator Optimizations
@@ -77,74 +69,65 @@ Because the Aggregator PV is relatively small, the least expensive performance g
 
 ```yaml
 kubecostAggregator:
-  env:
-    # This interval defines how long the Aggregator spends ingesting ETL data
-    # from the federated store bucket into SQL tables, before exiting its job to
-    # enter the derivation step. If set too low for large scale users, the
-    # Aggregator may not have enough time to ingest all new data that exists in
-    # the federated store bucket. If set too high, there will be a delay in data
-    # between the Kubecost Agents and the Aggregator.
-    #
-    # Note, that the default value is set to 60m to optimize for the
-    # first-install experience of Kubecost (i.e. it prioritizes small data
-    # becoming available more quickly).
-    #
-    # default: 60m
-    DB_BUCKET_REFRESH_INTERVAL: 2h
+  # deployMethod determines how Aggregator is deployed. Current options are
+  # "singlepod" (within cost-analyzer Pod) "statefulset" (separate
+  # StatefulSet), and "disabled". Only use "disabled" if this is a secondary
+  # Federated ETL cluster which does not need to answer queries.
+  deployMethod: singlepod
 
-    # How much data to ingest from the federated store bucket, and how much data
-    # to keep in the DB before rolling the data off.
-    # 
-    # Note: If increasing this value to backfill historical data, it will take
-    # time to gradually ingest & process those historical ETL files. Consider
-    # also increasing the resources available to the aggregator as well as the
-    # refresh & concurrency env vars.
-    # 
-    # default: 91
-    ETL_DAILY_STORE_DURATION_DAYS: "365"
-    
-    # How many threads to use when ingesting Asset/Allocation/CloudCost data
-    # from the federated store bucket. In most cases the default is sufficient,
-    # but can be increased if trying to backfill historical data.
-    # default: 3
-    DB_CONCURRENT_INGESTION_COUNT: "5"
+  # fullImageName overrides the default image construction logic. The exact
+  # image provided (registry, image, tag) will be used for aggregator.
+  # fullImageName:
+  imagePullPolicy: IfNotPresent
 
-    # Memory limit applied to read database connections.
-    # default: n/a
-    DB_MEMORY_LIMIT: 8GB
+  # For legacy configuration support, `enabled: true` overrides deployMethod
+  # and causes `deployMethod: "statefulset"`
+  enabled: false
 
-    # Memory limit applied to write database connections.
-    # default: n/a
-    DB_WRITE_MEMORY_LMIT: 8GB
+  # Replicas sets the number of Aggregator replicas. It only has an effect if
+  # `deployMethod: "statefulset"`
+  replicas: 1
 
-    # How many threads the read database is configured with (i.e. Kubecost API /
-    # UI queries). If increasing this value, it is recommended to increase the
-    # aggregator's memory requests & limits.
-    # default: 1
-    DB_READ_THREADS: 3
+  # stagingEmptyDirSizeLimit changes how large the "staging"
+  # /var/configs/waterfowl emptyDir is. It only takes effect in StatefulSet
+  # configurations of Aggregator, other configurations are unaffected.
+  #
+  # It should be set to approximately 8x the size of the largest bingen file in
+  # object storage. For example, if your largest bingen file is a daily
+  # Allocation file with size 300MiB, this value should be set to approximately
+  # 2400Mi. In most environments, the default should suffice.
+  stagingEmptyDirSizeLimit: 2Gi
 
-    # How many threads the write database is configured with (i.e. ingestion of
-    # new data from S3). If increasing this value, it is recommended to increase
-    # the aggregator's memory requests & limits.
-    # default: 1
-    DB_WRITE_THREADS: 3
+  # this is the number of partitions the datastore is split into for copying
+  # the higher this number, the lower the ram usage but the longer it takes for
+  # new data to show in the kubecost UI
+  # set to 0 for max partitioning (minimum possible ram usage, but the slowest)
+  # the default of 25 is sufficient for 95%+ of users. This should only be modified
+  # after consulting with Kubecost's support team
+  numDBCopyPartitions: 1
+  logLevel: info
 
-    # log level
-    # default: info
-    LOG_LEVEL: info
+  # env: has been removed to avoid unknown issues that would be caused by
+  # customizations that were required to run aggregator in previous versions
+  # extraEnv: can be used to add new environment variables to the aggregator pod
+
+  # the below settings should only be modified with support from Kubecost staff
+  dbReadThreads: 1
+  dbWriteThreads: 1
+  dbConcurrentIngestionCount: 1
+  dbCopyFull: false
   aggregatorDbStorage:
     # governs storage size of aggregator DB storage
-    # !!NOTE!! disk performance is _critically important_ to aggregator performance
-    # ensure disk is specd high enough, and check for bottlenecks
-    # default: 128Gi
-    storageRequest: 512Gi
+    # Disk performance is important to aggregator performance. Consider high IOPS for best performance
+    storageClass: ""  # use default storage class
+    storageRequest: 128Gi
   resources:
     requests:
       cpu: 4
       memory: 12Gi
     limits:
       cpu: 6
-      memory: 16Gi
+      memory: 16Gi # It is recommended to first establish a baseline over several days to determine a memory limit appropriate for your environment.
 ```
 
 ### Running the upgrade
