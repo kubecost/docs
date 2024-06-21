@@ -1,0 +1,5 @@
+# Welcome
+
+Welcome to the Kubecost documentation. Choose from one of the cards available or browse the full documentation from the sidebar.
+
+<table data-view="cards"><thead><tr><th></th><th></th><th data-hidden data-card-target data-type="content-ref"></th><th data-hidden data-card-cover data-type="files"></th></tr></thead><tbody><tr><td><strong>Install and Configure</strong></td><td>Learn how to install and configure Kubecost.</td><td><a href="install-and-configure/install/install.md">install-and-configure/install/install.md</a></td><td><a href=".gitbook/assets/card-example1.png">card-example1.png</a></td></tr><tr><td><strong>Using Kubecost</strong></td><td>Learn how to use all of Kubecost's functionality.</td><td><a href="using-kubecost/navigating-the-kubecost-ui/README.md">using-kubecost/navigating-the-kubecost-ui/README.md</a></td><td><a href=".gitbook/assets/card-example2.png">card-example2.png</a></td></tr><tr><td><strong>APIs</strong></td><td>Inspect and learn how to use Kubecost's APIs.</td><td><a href="apis/apis-overview.md">apis/apis-overview.md</a></td><td><a href=".gitbook/assets/card-example3.png">card-example3.png</a></td></tr></tbody></table>
