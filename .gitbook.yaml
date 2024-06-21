@@ -1,6 +1,7 @@
 root: ./
 
 structure:
+    readme: LANDING.md
     summary: SUMMARY.md
 
 redirects:
