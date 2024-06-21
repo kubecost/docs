@@ -194,3 +194,25 @@ helm upgrade kubecost cost-analyzer --repo https://kubecost.github.io/cost-analy
 ## Troubeshooting
 
 To help diagnose problems with Aggregator, check the Aggregator container logs for query failures or SQL table failures. If you have additional questions, contact Kubecost support at [support@kubecost.com](mailto:support@kubecost.com).
+
+Additionally, reference the below additional information.
+
+### ETL Utils OutOfMemory error
+
+If you see an `OutOfMemory` error on the ETL Utils Deployment, try adjusting the following configurations:
+
+```yaml
+etlUtils:
+  resources:
+    # Ensure ETLUtils has enough resources available on the node. It will need
+    # to process all files in the `/etl` directory of your bucket.
+    requests:
+      memory: 10Gi
+  # Use the most recent version of the Kubecost image. For example:
+  # "gcr.io/kubecost1/cost-model:prod-2.3.0"
+  fullImageName: gcr.io/kubecost1/cost-model:prod-x.x.x
+  env:
+    LOG_LEVEL: debug
+    # Set to 1 to use less memory. Default is 2.
+    ETL_UTIL_THREADS: 1
+```
