@@ -195,7 +195,7 @@ helm upgrade kubecost cost-analyzer --repo https://kubecost.github.io/cost-analy
 
 To help diagnose problems with Aggregator, check the Aggregator container logs for query failures or SQL table failures. If you have additional questions, contact Kubecost support at [support@kubecost.com](mailto:support@kubecost.com).
 
-Additionally, reference the below additional information.
+See additional troubleshooting procedures below.
 
 ### ETL Utils OutOfMemory error
 
