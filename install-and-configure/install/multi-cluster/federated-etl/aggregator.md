@@ -105,7 +105,7 @@ kubecostAggregator:
   dbMemoryLimit: 0GB
 
   # Memory limit applied to write database connections.
-  # default: 0Gi is no limit
+  # default: 0GB is no limit
   dbWriteMemoryLimit: 0Gi
 
   # If "true" can improve the time it takes to copy the write DB, at the expense
