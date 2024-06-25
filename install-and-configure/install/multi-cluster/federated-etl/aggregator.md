@@ -101,7 +101,7 @@ kubecostAggregator:
   dbConcurrentIngestionCount: 1
 
   # Memory limit applied to read database connections.
-  # default: 0Gi is no limit
+  # default: 0GB is no limit
   dbMemoryLimit: 0Gi
 
   # Memory limit applied to write database connections.
