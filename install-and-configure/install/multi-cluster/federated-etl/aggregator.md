@@ -102,7 +102,7 @@ kubecostAggregator:
 
   # Memory limit applied to read database connections.
   # default: 0GB is no limit
-  dbMemoryLimit: 0Gi
+  dbMemoryLimit: 0GB
 
   # Memory limit applied to write database connections.
   # default: 0Gi is no limit
