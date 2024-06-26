@@ -24,7 +24,7 @@ Expand one of the rows to see more details on the workload and the recommendatio
 
 By clicking a row instead of expanding it, the Workload Savings screen opens to that container. In this view, more details are provided on the container and requests along with an ability to view all associated labels and a link to view the observed utilization metrics for yourself in Grafana (if deployed).
 
-![Detailed view of a container where Kubecost has a recommendation](/images/crss-workload-savings.png)
+![Workload Savings page of a container](/images/crss-workload-savings.png)
 
 ## Prerequisites
 
@@ -37,7 +37,7 @@ Select _Customize_ to modify the right-sizing settings. Your customization setti
 * Window: Duration of deployment activity Kubecost will observe.
 * Profile: Select from _Development_, _Production_, or High Availability, which come with predefined values for CPU/RAM target utilization fields. Selecting _Custom_ will allow you to manually configure these fields.
 * CPU/RAM recommendation algorithm: Set to _Max_ when any non-custom profile is in use. Additional algorithms include percentile of average and percentile of max.
-* CPU/RAM target utilization: Used along with the recommendation algorithm to determine the final value used for the new requests. For example, when the recommendation algorithm is configured for _Max_, a target utilization of 0.8 and a maximum CPU usage of 1.2 CPUs will result in a recommendation of 1.5 CPUs (1,500m). This is because 1.2 CPUs (the maximum) is 80% of 1.5 CPUs (the recommendation). Mathematically, this can be expressed as the formula `0.8(x) = 1.2`.
+* CPU/RAM target utilization: Used along with the recommendation algorithm to determine the final value used for the new requests. For example, when the recommendation algorithm is configured for _Max_, a target utilization of 0.8 and a maximum CPU usage of 1.2 CPUs will result in a recommendation of 1.5 CPUs (1,500m). This is because 1.2 CPUs (the maximum) is 80% of 1.5 CPUs (the recommendation). Mathematically, this can be expressed as `0.8(x) = 1.2`.
 * Add Filters: Optional configurations to limit the returned request right-sizing results. Multiple filters are supported.
 
 When finished, select _Save_.
