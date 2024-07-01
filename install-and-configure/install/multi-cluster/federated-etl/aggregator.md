@@ -80,7 +80,7 @@ kubecostAggregator:
   # dbConcurrentIngestionCount.
   # 
   # default: 91
-  etlDailyStoreDurationDays: 365
+  etlDailyStoreDurationDays: 91
 
   # How many threads the read database is configured with (i.e. Kubecost API /
   # UI queries). If increasing this value, it is recommended to increase the
