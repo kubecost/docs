@@ -87,20 +87,6 @@ You can verify a successful configuration by checking the following in the Kubec
 If there are no in-cluster costs for a particular day, then there will not be out-of-cluster costs either
 {% endhint %}
 
-## Step 3: Tagging Azure resources
-
-Kubecost utilizes Azure tagging to allocate the costs of Azure resources outside of the Kubernetes cluster to specific Kubernetes concepts, such as namespaces, pods, etc. These costs are then shown in a unified dashboard within the Kubecost interface.
-
-To allocate external Azure resources to a Kubernetes concept, use the following tag naming scheme:
-
-<table><thead><tr><th width="227.33333333333331">Kubernetes Concept</th><th>Azure Tag Key</th><th>Azure Tag Value</th></tr></thead><tbody><tr><td>Cluster</td><td><code>kubernetes_cluster</code></td><td><code>cluster-name</code></td></tr><tr><td>Namespace</td><td><code>kubernetes_namespace</code></td><td><code>namespace-name</code></td></tr><tr><td>Deployment</td><td><code>kubernetes_deployment</code></td><td><code>deployment-name</code></td></tr><tr><td>Label</td><td><code>kubernetes_label_NAME*</code></td><td><code>label-value</code></td></tr><tr><td>DaemonSet</td><td><code>kubernetes_daemonset</code></td><td><code>daemonset-name</code></td></tr><tr><td>Pod</td><td><code>kubernetes_pod</code></td><td><code>pod-name</code></td></tr><tr><td>Container</td><td><code>kubernetes_container</code></td><td><code>container-name</code></td></tr></tbody></table>
-
-In the `kubernetes_label_NAME` tag key, the NAME portion should appear exactly as the tag appears inside of Kubernetes. For example, for the tag `app.kubernetes.io/name`, this tag key would appear as `kubernetes_label_app.kubernetes.io/name.`
-
-To use an alternative or existing Azure tag schema, you may supply these in your values.yaml under the `kubecostProductConfigs.labelMappingConfigs.<aggregation>_external_label` . Also be sure to set `kubecostProductConfigs.labelMappingConfigs.enabled = true`
-
-For more details on what Azure resources support tagging, along with what resource type tags are available in cost reports, please review the official Microsoft documentation [here](https://docs.microsoft.com/en-us/azure/azure-resource-manager/management/tag-support).
-
 ## Troubleshooting and debugging
 
 To troubleshoot a configuration that is not yet working:
