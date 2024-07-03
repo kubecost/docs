@@ -68,15 +68,12 @@ The CloudCost ETL pulls information from your cloud billing integration. Ensure 
 
 {% code overflow="wrap" %}
 ```bash
-# Port-forward to the cloudcost service
-$ kubectl port-forward svc/kubecost-cloud-cost 9005:9005
-
 # Repair: /model/cloudCost/repair?window=
-$ curl "http://localhost:9005/cloudCost/repair?window=2023-01-01T00:00:00Z,2023-01-04T00:00:00Z"
+$ curl "https://kubecost.your.com/model/cloudCost/repair?window=2023-01-01T00:00:00Z,2023-01-04T00:00:00Z"
 {"code":200,"data":"Rebuilding Cloud Usage For All Providers"}
 
 # Check logs to watch this job run until completion
-$ kubectl logs deploy/kubecost-cost-analyzer | grep CloudCost
+$ kubectl logs deploy/kubecost-cloud-analyzer | grep CloudCost
 # or
 $ kubectl logs deploy/kubecost-cloud-cost
 ```
