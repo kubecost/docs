@@ -73,7 +73,7 @@ $ curl "https://kubecost.your.com/model/cloudCost/repair?window=2023-01-01T00:00
 {"code":200,"data":"Rebuilding Cloud Usage For All Providers"}
 
 # Check logs to watch this job run until completion
-$ kubectl logs deploy/kubecost-cloud-analyzer | grep CloudCost
+$ kubectl logs deploy/kubecost-cost-analyzer | grep CloudCost
 # or
 $ kubectl logs deploy/kubecost-cloud-cost
 ```
