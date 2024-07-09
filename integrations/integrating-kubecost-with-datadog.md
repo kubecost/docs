@@ -28,7 +28,7 @@ Finally, install the Datadog agent with your API key using the following command
 ```sh
 helm repo add datadog https://helm.datadoghq.com
 helm upgrade -i datadog-agent datadog/datadog \
---set --set datadog.site='us5.datadoghq.com' \
+--set datadog.site='us5.datadoghq.com' \
 --set datadog.apiKey=$<DATADOG_KEY_ID> \
 --set datadog.prometheusScrape.enabled=‘true’ \
 --set datadog.prometheusScrape.serviceEndpoints=‘true’
