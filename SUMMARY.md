@@ -25,7 +25,6 @@
     * [Multi-Cloud Integrations](install-and-configure/install/cloud-integration/multi-cloud.md)
     * [AWS Cloud Billing Integration](install-and-configure/install/cloud-integration/aws-cloud-integrations/aws-cloud-integrations.md)
       * [AWS Cloud Integration using IRSA/EKS Pod Identities](install-and-configure/install/cloud-integration/aws-cloud-integrations/aws-cloud-integration-using-irsa.md)
-      * [AWS Out of Cluster](install-and-configure/install/cloud-integration/aws-cloud-integrations/aws-out-of-cluster.md)
       * [AWS Spot Instances](install-and-configure/install/cloud-integration/aws-cloud-integrations/aws-spot-instances.md)
       * [AWS Node Price Reconciliation Methodology](install-and-configure/install/cloud-integration/aws-cloud-integrations/aws-node-price-reconcilitation-methodology.md)
     * [Azure Cloud Billing Integration](install-and-configure/install/cloud-integration/azure-out-of-cluster/azure-out-of-cluster.md)
