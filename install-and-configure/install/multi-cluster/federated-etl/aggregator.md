@@ -100,12 +100,13 @@ kubecostAggregator:
   # default: 1
   dbConcurrentIngestionCount: 1
 
-  # Memory limit applied to read database connections.
+  # Memory limit applied to read database and write database connections. The
+  # default of "no limit" is appropriate when first establishing a baseline of
+  # resource usage required. It is eventually recommended to set these values
+  # such that dbMemoryLimit + dbWriteMemoryLimit < the total memory available
+  # to the aggregator pod.
   # default: 0GB is no limit
   dbMemoryLimit: 0GB
-
-  # Memory limit applied to write database connections.
-  # default: 0GB is no limit
   dbWriteMemoryLimit: 0GB
 
   # If "true" can improve the time it takes to copy the write DB, at the expense
@@ -138,9 +139,11 @@ kubecostAggregator:
     requests:
       cpu: 4
       memory: 12Gi
+    # It is recommended to first establish a baseline over several days to
+    # determine a memory limit appropriate for your environment.
     limits:
       cpu: 6
-      memory: 16Gi # It is recommended to first establish a baseline over several days to determine a memory limit appropriate for your environment.
+      memory: 16Gi
 ```
 
 ### Running the upgrade
@@ -184,6 +187,19 @@ data to be ingested.
 
 ## Troubleshooting Aggregator
 
+### Understanding the state of the Aggregator
+
+```txt
+https://kubecost.myorganization.com/model/debug/orchestrator
+```
+
+This is a common endpoint for debugging the state of the Aggregator. It returns a JSON response with details such as:
+
+* What is Aggregator's current state? If ingesting, it is downloading & processing ETL files into the DB. If deriving it is pre-computing commonly used queries into saved tables.
+* What is the ingestion progress for each of the data types? (e.g. asset, allocation, cloud cost, etc.)
+* How fresh is my read database? An epoch timestamp can be found in the `readDBPath`.
+* How frequently is my newly ingested data being promoted into the read database? Reference `currentBucketRefreshInterval`.
+
 ### Resetting Aggregator StatefulSet data
 
 When deploying the Aggregator as a StatefulSet, it is possible to perform a reset of the Aggregator data. The Aggregator itself doesn't store any data, and relies on object storage. As such, a reset involves removing that Aggregator's local storage, and allowing it to re-ingest data from the object store. The procedure is as follows:
@@ -192,25 +208,6 @@ When deploying the Aggregator as a StatefulSet, it is possible to perform a rese
 2. When the Aggregator pod is gone, delete the `aggregator-db-storage-xxx-0` PVC
 3. Scale the Aggregator StatefulSet back to 1. This will re-create the PVC, empty.
 4. Wait for Kubecost to re-ingest data from the object store. This could take from several minutes to several hours, depending on your data size and retention settings.
-
-### Aggregator not displaying any data to frontend after several hours
-
-One reason you may not see data in the frontend yet is because the Aggregator is processing all your ETL files in the federated store bucket into SQL tables.
-
-If you are seeing a lot of the following logs, it could be an indicator that your `.Values.kubecostAggregator.env.DB_BUCKET_REFRESH_INTERVAL` may be set too low, causing the Aggregator to continuously restart its data ingestion process:
-
-```txt
-INF asset worker context cancelled: context canceled
-INF allocation worker context cancelled: context canceled
-```
-
-To fix, try continuously increasing the environment variable's value, until the errors no longer appear. We recommend starting with `2h`. More details about the environment variable described above.
-
-```yaml
-kubecostAggregator:
-  env:
-    DB_BUCKET_REFRESH_INTERVAL: 2h
-```
 
 ### Checking the database for node metadata
 
