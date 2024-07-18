@@ -27,7 +27,6 @@ Important notes for the migration process:
 
 All of these steps should be performed prior to upgrading to Kubecost 2.x.x. The goal of this doc is to gradually migrate off Thanos, which is no longer supported in the Kubecost v2.0+ Helm chart. If you want to continue running Thanos, the Helm chart must be installed from a third party prior to executing the upgrade.
 
-
 ### Step 1: Use the existing Thanos object store or create a new dedicated object store
 
 If you have an existing object store where you are storing Thanos data, you have the option to use the same object store for the new Federated ETL data, or you can create a new object store for the new Federated ETL data for Kubecost v2.0
@@ -39,7 +38,6 @@ If this is your first time setting up an object store, refer to these docs:
 * [AWS](/install-and-configure/install/multi-cluster/long-term-storage-configuration/long-term-storage-aws.md)
 * [Azure](/install-and-configure/install/multi-cluster/long-term-storage-configuration/long-term-storage-azure.md)
 * [GCP](/install-and-configure/install/multi-cluster/long-term-storage-configuration/long-term-storage-gcp.md)
-
 
 ### Step 2: Enable ETL backups on the *primary cluster only*
 
@@ -63,6 +61,7 @@ kubecostModel:
   etlBucketConfigSecret: kubecost-thanos
   etlDailyStoreDurationDays: 365
 ```
+
 Validate this process completed by confirming the object store has ~365 worth of non-empty ETL files in the `/etl` directory that was created in step 2. Empty file sizes are 86B. The name of the etl files are the epoch timestamps for the ETLs. Use the [Epoch Time Converter](https://www.epochconverter.com/) to validate data goes back a year.
 
 After confirming data older than 90 days is available, revert the changes above to reduce RAM consumption. 
@@ -81,13 +80,11 @@ This will point to the existing Thanos object store or the new object store crea
 
 The name of the .yaml file used to create the secret *must* be named *federated-store.yaml* or Aggregator will not start.
 
-
 ```sh
 kubectl create secret generic federated-store --from-file=federated-store.yaml -n kubecost
 ```
 
 ### Step 6: Enable FederatedETL, ETL-Utils, and Aggregator on the primary cluster
-
 
 Enabling FederatedETL will begin pushing your primary cluster's ETL data to the directory `/federated/CLUSTER_ID`. This setting will be enabled when upgrading to v2.x.
 
@@ -96,7 +93,6 @@ Enabling ETL-Utils will create the directories `/federated/CLUSTER_ID` for every
 Enabling [Aggregator](/install-and-configure/install/multi-cluster/federated-etl/aggregator.md) will begin processing the ETL data from the `/federated` directory. The aggregator will then serve all Kubecost queries. Be sure to look at the [Aggregator Optimizations Doc](/install-and-configure/install/multi-cluster/federated-etl/aggregator.md) if Kubecost is ingesting data for ~20,000+ containers. It is difficult to recommend the amount of resources needed due to the uniqueness of each environment and several other variables.
 
 The `federatedStorageConfigSecret`, `etlBucketConfigSecret`, and `thanosSourceBucketSecret` *MUST* all point to the same bucket. Otherwise the data migration will not suceed. Additionally, the cloud-integration *MUST* be configured and referenced following [this method](/install-and-configure/install/cloud-integration/multi-cloud.md#step-2-create-cloud-integration-secret) or the cloud integration will fail.
-
 
 ```yaml
 kubecostProductConfigs:
@@ -109,7 +105,10 @@ etlUtils:
   thanosSourceBucketSecret: kubecost-thanos
   resources: {}
   env:
-    LOG_LEVEL: debug # debug isn't all that verbose and is recommended
+    # "debug" is not all that verbose and is recommended
+    LOG_LEVEL: debug
+    # How many days worth of ETL files to translate from `/etl` to `/federated`
+    ETL_DAILY_STORE_DURATION_DAYS: 365
 kubecostAggregator:
   enabled: true
   replicas: 1

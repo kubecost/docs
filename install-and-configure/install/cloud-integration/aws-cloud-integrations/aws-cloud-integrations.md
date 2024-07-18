@@ -631,6 +631,16 @@ For AWS Lambda users, you may experience errors running the CloudFormation templ
 
 ![AWS Lambda](/images/aws-lambda.png)
 
+## Viewing account-level tags
+
+Account-level tags are applied (as labels) to all the Assets built from resources defined under a given AWS account. You can filter AWS resources in the Kubecost Assets View (or API) by account-level tags by adding them ('tag:value') in the Label/Tag filter.
+
+If a resource has a label with the same name as an account-level tag, the resource label value will take precedence.
+
+Modifications incurred on account-level tags may take several hours to update on Kubecost.
+
+Your AWS account will need to support the `organizations:ListAccounts` and `organizations:ListTagsForResource` policies to benefit from this feature.
+
 ## Summary and pricing
 
 AWS services used here are:
