@@ -90,6 +90,8 @@ Ensure the DCGM Exporter Pods are in a running state and only on the nodes with 
 kubectl -n dcgm-exporter get pods
 ```
 
+For additional information on installing DCGM Exporter in Google Cloud, see [here](https://cloud.google.com/stackdriver/docs/managed-prometheus/exporters/nvidia-dcgm).
+
 ### General
 
 These instructions are useful for installing DCGM Exporter on any Kubernetes cluster regardless of whether run by a cloud provider or self-managed, on-premises. They leverage the [Kubernetes Node Feature Discovery (NFD)](https://kubernetes-sigs.github.io/node-feature-discovery/stable/get-started/index.html) component which involves installation of an additional infrastructure component.
