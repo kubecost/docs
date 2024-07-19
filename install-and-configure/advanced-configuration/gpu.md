@@ -41,6 +41,7 @@ These values have been verified on GKE 1.27 and DCGM Exporter 3.3.6-3.4.2. Ensur
 ```yaml
 serviceMonitor:
   enabled: false
+
 affinity:
   nodeAffinity:
     requiredDuringSchedulingIgnoredDuringExecution:
@@ -48,15 +49,19 @@ affinity:
         - matchExpressions:
             - key: cloud.google.com/gke-accelerator
               operator: Exists
+
 tolerations:
   - operator: Exists
+
 securityContext:
   privileged: true
+
 extraHostVolumes:
   - name: vulkan-icd-mount
     hostPath: /home/kubernetes/bin/nvidia/vulkan/icd.d
   - name: nvidia-install-dir-host
     hostPath: /home/kubernetes/bin/nvidia
+
 extraConfigMapVolumes:
   - name: exporter-metrics-volume
     configMap:
@@ -64,6 +69,7 @@ extraConfigMapVolumes:
       items:
       - key: metrics
         path: dcp-metrics-included.csv
+
 extraVolumeMounts:
   - name: nvidia-install-dir-host
     mountPath: /usr/local/nvidia
@@ -74,6 +80,7 @@ extraVolumeMounts:
   - name: exporter-metrics-volume
     mountPath: /etc/dcgm-exporter/dcp-metrics-included.csv
     subPath: dcp-metrics-included.csv
+
 extraEnv:
 - name: DCGM_EXPORTER_KUBERNETES_GPU_ID_TYPE
   value: device-name
@@ -169,6 +176,9 @@ With NFD having successfully discovered NVIDIA PCI devices and assigned the `fea
 <summary>values-dcgm.yaml</summary>
 
 ```yaml
+serviceMonitor:
+  enabled: false
+
 affinity:
   nodeAffinity:
     requiredDuringSchedulingIgnoredDuringExecution:
@@ -178,8 +188,20 @@ affinity:
           operator: In
           values:
           - "true"
-serviceMonitor:
-  enabled: false
+
+extraConfigMapVolumes:
+  - name: exporter-metrics-volume
+    configMap:
+      name: exporter-metrics-config-map
+      items:
+      - key: metrics
+        path: dcp-metrics-included.csv
+
+extraVolumeMounts:
+  - name: exporter-metrics-volume
+    mountPath: /etc/dcgm-exporter/dcp-metrics-included.csv
+    readOnly: true
+    subPath: dcp-metrics-included.csv
 ```
 
 </details>
