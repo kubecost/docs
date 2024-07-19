@@ -57,6 +57,17 @@ v2 filter support for `/model/assets`:
 * `service`
 * `label`
 
+### Cloud Costs API
+
+v2 filter support for `/model/cloudCost`:
+
+* `accountID`
+* `invoiceEntityID`
+* `provider`
+* `providerID`
+* `service`
+* `label`
+
 ## Filter operators
 
 The supported filter operators are:
