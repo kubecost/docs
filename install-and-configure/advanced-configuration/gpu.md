@@ -20,7 +20,7 @@ In addition to the label requirement, there may be additional values required fo
 
 - [General](#general): Start here if not on GKE.
 - [GKE](#gke): For GKE users only.
-- [Node Feature Discovery)](#node-feature-discovery): For any Kubernetes environment where preexisting GPU node labels are not an option.
+- [Node Feature Discovery](#node-feature-discovery): For any Kubernetes environment where preexisting GPU node labels are not an option.
 
 {% hint style="info" %}
 DCGM Exporter may also be deployed via the NVIDIA [GPU operator](https://docs.nvidia.com/datacenter/cloud-native/gpu-operator/latest/index.html), however the operator is a more complex component with specialized requirements and, as such, is outside the current scope of this documentation.
