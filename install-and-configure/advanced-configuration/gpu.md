@@ -2,24 +2,25 @@
 
 ## Monitoring GPU utilization
 
-In order for Kubecost to understand a container's GPU utilization percentage, Kubecost depends on metrics being available from NVIDIA [DCGM Exporter](https://github.com/NVIDIA/dcgm-exporter). Although Kubecost ships by default with GPU metrics being enabled, since DCGM Exporter is the provider of those metrics is a required component when GPU monitoring is used with Kubecost and must be installed if it is not already. In many cases, DCGM Exporter may already be installed in your cluster, for example if you currently monitor NVIDIA GPUs with other software. Follow the below instructions to install and configure DCGM Exporter on each of your GPU-enabled clusters if it is not installed.
+In order for Kubecost to understand GPU utilization, Kubecost depends on metrics being available from NVIDIA [DCGM Exporter](https://github.com/NVIDIA/dcgm-exporter). Although Kubecost ships by default with GPU metrics being enabled, since DCGM Exporter is the provider of those metrics it is a required component when GPU monitoring is used with Kubecost and must be installed if it is not already. In many cases, DCGM Exporter may already be installed in your cluster, for example if you currently monitor NVIDIA GPUs with other software. But if not, follow the below instructions to install and configure DCGM Exporter on each of your GPU-enabled clusters.
 
 ## Install DCGM Exporter
 
 DCGM Exporter is an implementation of NVIDIA [Data Center GPU Manager (DCGM)](https://developer.nvidia.com/dcgm) for Kubernetes which exports metrics in [Prometheus](https://prometheus.io/) format. DCGM Exporter allows for running the DCGM software under Kubernetes on nodes which contain NVIDIA devices and takes care of the task of making DCGM metrics available to external tools such as Kubecost.
 
-DCGM Exporter runs as a DaemonSet and its Pods are intended to run only on nodes with one or more NVIDIA GPUs. Because Kubernetes clusters commonly have a mixture of nodes with GPUs and those without GPUs, you use label(s) to affine the DCGM Exporter Pods to only those nodes containing NVIDIA GPUs. If DCGM Exporter Pods run on nodes without NVIDIA GPUs, they enter a `CrashLoopBackoff` state. The label(s) you use may vary by Kubernetes cloud provider, platform, or more. There are multiple approaches to selecting the appropriate label(s) used to attract the DCGM Exporter Pods to applicable nodes.
+DCGM Exporter runs as a DaemonSet and its pods are intended to run only on nodes with one or more NVIDIA GPUs. Because Kubernetes clusters commonly have a mixture of nodes with GPUs and those without GPUs, you use label(s) to affine the DCGM Exporter pods to only those nodes containing NVIDIA GPUs. If DCGM Exporter pods run on nodes without NVIDIA GPUs, they enter a `CrashLoopBackoff` state. The label(s) you use may vary by Kubernetes cloud provider, platform, or more. There are multiple approaches to selecting the appropriate label(s) used to attract the DCGM Exporter pods to applicable nodes.
 
 1. Use a pre-provided label by your cloud provider (if applicable, varies by cloud provider).
 2. Use a custom label you define on your GPU nodes. For example, by defining a custom label at the node pool level in your cloud provider.
 3. Use a label assigned automatically by Kubernetes Node Feature Discovery (NFD).
 
-The first two options require no additional cluster components be installed while the third requires the [Kubernetes Node Feature Discovery (NFD)](https://kubernetes-sigs.github.io/node-feature-discovery/stable/get-started/index.html) component.
+The first two options require no additional cluster components be installed while the third requires the [Kubernetes Node Feature Discovery (NFD)](https://kubernetes-sigs.github.io/node-feature-discovery/stable/get-started/index.html) component. Kubecost recommends using an existing label assigned to your GPU nodes (provided by the cloud provider or yourself), if possible, as this is a simpler installation path.
 
 In addition to the label requirement, there may be additional values required for a successful installation of DCGM Exporter which may vary by cloud provider and worker node operating system. This guide includes the following installation instructions.
 
-- [GKE](#gke)
-- [General (Using NFD)](#general)
+- [General](#general): Start here if not on GKE.
+- [GKE](#gke): For GKE users only.
+- [Node Feature Discovery)](#node-feature-discovery): For any Kubernetes environment where preexisting GPU node labels are not an option.
 
 {% hint style="info" %}
 DCGM Exporter may also be deployed via the NVIDIA [GPU operator](https://docs.nvidia.com/datacenter/cloud-native/gpu-operator/latest/index.html), however the operator is a more complex component with specialized requirements and, as such, is outside the current scope of this documentation.
@@ -27,9 +28,64 @@ DCGM Exporter may also be deployed via the NVIDIA [GPU operator](https://docs.nv
 
 These instructions have been verified on version 3.3.6-3.4.2 of DCGM Exporter but prior versions of v3 should work as well.
 
+### General
+
+DCGM Exporter can be installed on most Kubernetes clusters with only a few values provided that a preexisting label can be used to identify GPU-only nodes. This label may be provided by a cloud vendor or yourself. Follow these steps to get started with DCGM Exporter.
+
+In the below values, you provide your own label key and value in place of `mylabel` and `myvalue`. This label combination should be unique to NVIDIA GPU nodes.
+
+<details>
+<summary>values-dcgm.yaml</summary>
+
+```yaml
+serviceMonitor:
+  enabled: false
+
+affinity:
+  nodeAffinity:
+    requiredDuringSchedulingIgnoredDuringExecution:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: mylabel
+          operator: In
+          values:
+          - "myvalue"
+
+extraConfigMapVolumes:
+  - name: exporter-metrics-volume
+    configMap:
+      name: exporter-metrics-config-map
+      items:
+      - key: metrics
+        path: dcp-metrics-included.csv
+
+extraVolumeMounts:
+  - name: exporter-metrics-volume
+    mountPath: /etc/dcgm-exporter/dcp-metrics-included.csv
+    readOnly: true
+    subPath: dcp-metrics-included.csv
+```
+
+</details>
+
+Install DCGM Exporter using the values defined.
+
+```sh
+helm upgrade -i dcgm dcgm-exporter \
+  --repo https://nvidia.github.io/dcgm-exporter/helm-charts \
+  -n dcgm-exporter --create-namespace \
+  -f values-dcgm.yaml
+```
+
+Ensure the DCGM Exporter pods are in a running state and only on the nodes with NVIDIA GPUs.
+
+```sh
+kubectl -n dcgm-exporter get pods
+```
+
 ### GKE
 
-To install DCGM Exporter on a GKE autopilot cluster where the worker nodes use the default [Container Optimized OS (COS)](https://cloud.google.com/container-optimized-os/docs), use the following values. The GKE-provided label `cloud.google.com/gke-accelerator` is used to attract DCGM Exporter Pods to nodes with NVIDIA GPUs.
+To install DCGM Exporter on a GKE autopilot cluster where the worker nodes use the default [Container Optimized OS (COS)](https://cloud.google.com/container-optimized-os/docs), use the following values. The GKE-provided label `cloud.google.com/gke-accelerator` is used to attract DCGM Exporter pods to nodes with NVIDIA GPUs.
 
 {% hint style="info" %}
 These values have been verified on GKE 1.27 and DCGM Exporter 3.3.6-3.4.2. Ensure you check and follow the current values structure of the target version of [DCGM Exporter](https://github.com/NVIDIA/dcgm-exporter) to be installed if different.
@@ -97,7 +153,7 @@ helm upgrade -i dcgm dcgm-exporter \
   -f values-dcgm.yaml
 ```
 
-Ensure the DCGM Exporter Pods are in a running state and only on the nodes with NVIDIA GPUs.
+Ensure the DCGM Exporter pods are in a running state and only on the nodes with NVIDIA GPUs.
 
 ```sh
 kubectl -n dcgm-exporter get pods
@@ -105,9 +161,9 @@ kubectl -n dcgm-exporter get pods
 
 For additional information on installing DCGM Exporter in Google Cloud, see [here](https://cloud.google.com/stackdriver/docs/managed-prometheus/exporters/nvidia-dcgm).
 
-### General
+### Node Feature Discovery
 
-These instructions are useful for installing DCGM Exporter on any Kubernetes cluster regardless of whether run by a cloud provider or self-managed, on-premises. They leverage the [Kubernetes Node Feature Discovery (NFD)](https://kubernetes-sigs.github.io/node-feature-discovery/stable/get-started/index.html) component which involves installation of an additional infrastructure component.
+These instructions are useful for installing DCGM Exporter on any Kubernetes cluster regardless of whether run by a cloud provider or self-managed, on-premises. They leverage the [Kubernetes Node Feature Discovery (NFD)](https://kubernetes-sigs.github.io/node-feature-discovery/stable/get-started/index.html) component which involves installation of an additional infrastructure component. Following these steps are recommended when you are not on GKE or do not have a preexisting label which identifies NVIDIA GPU nodes.
 
 {% hint style="info" %}
 When following these instructions on a cloud provider, there may be additional values or steps required depending on the component installed.
@@ -130,10 +186,10 @@ When run on a node with an NVIDIA GPU, NFD will apply the label `feature.node.ku
 10DE is the vendor ID assigned to the NVIDIA corporation.
 {% endhint %}
 
-NFD may be installed either standalone or as a component of the [NVIDIA device plugin for Kubernetes](https://github.com/NVIDIA/k8s-device-plugin). When installing NFD via the device plugin, you enable the GPU Feature Discovery (GFD) component at the same time. GFD uses the labels written by NFD to write NVIDIA-specific information about discovered GPUs to the node.
+NFD may be installed either standalone or as a component of the [NVIDIA device plugin for Kubernetes](https://github.com/NVIDIA/k8s-device-plugin). When installing NFD via the device plugin, you enable the GPU Feature Discovery (GFD) component at the same time. GFD uses the labels written by NFD to locate NVIDIA GPU nodes and write NVIDIA-specific information about the discovered GPUs to the node.
 
 {% hint style="warning" %}
-Cloud providers often install the device plugin on GPU nodes automatically. Therefore, in order to deploy GFD and NFD you may require an upgrade or uninstallation/reinstallation of the device plugin, which is a more advanced procedure. See instructions from your cloud provider first and refer to the [NVIDIA device plugin for Kubernetes](https://github.com/NVIDIA/k8s-device-plugin) repository for further details.
+Cloud providers often install the device plugin on GPU nodes automatically. Therefore, in order to deploy GFD and NFD you may be required to upgrade or uninstall/reinstall the device plugin, which is a more advanced procedure. See instructions from your cloud provider first and refer to the [NVIDIA device plugin for Kubernetes](https://github.com/NVIDIA/k8s-device-plugin) repository for further details.
 {% endhint %}
 
 To install NFD as a standalone component, follow the deployment guide [here](https://kubernetes-sigs.github.io/node-feature-discovery/stable/deployment/). A quick start command is also shown below. In some cases, you may have taints applied to GPU nodes which must be tolerated by the NFD DaemonSet. It is recommended to use the Helm installation guide to define tolerations if so.
@@ -215,7 +271,7 @@ helm upgrade -i dcgm dcgm-exporter \
   -f values-dcgm.yaml
 ```
 
-Ensure the DCGM Exporter Pods are in a running state and only on the nodes with NVIDIA GPUs.
+Ensure the DCGM Exporter pods are in a running state and only on the nodes with NVIDIA GPUs.
 
 ```sh
 kubectl -n dcgm-exporter get pods
