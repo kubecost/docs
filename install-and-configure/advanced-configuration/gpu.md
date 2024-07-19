@@ -18,7 +18,7 @@ The first two options require no additional cluster components be installed whil
 
 In addition to the label requirement, there may be additional values required for a successful installation of DCGM Exporter which may vary by cloud provider and worker node operating system. This guide includes the following installation instructions.
 
-- [General](#general): Start here if not on GKE.
+- [General Quickstart](#general-quickstart): Start here if not on GKE.
 - [GKE](#gke): For GKE users only.
 - [Node Feature Discovery](#node-feature-discovery): For any Kubernetes environment where preexisting GPU node labels are not an option.
 
@@ -28,7 +28,7 @@ DCGM Exporter may also be deployed via the NVIDIA [GPU operator](https://docs.nv
 
 These instructions have been verified on version 3.3.6-3.4.2 of DCGM Exporter but prior versions of v3 should work as well.
 
-### General
+### General Quickstart
 
 DCGM Exporter can be installed on most Kubernetes clusters with only a few values provided that a preexisting label can be used to identify GPU-only nodes. This label may be provided by a cloud vendor or yourself. Follow these steps to get started with DCGM Exporter.
 
