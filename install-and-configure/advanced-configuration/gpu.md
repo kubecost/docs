@@ -104,7 +104,7 @@ These instructions are useful for installing DCGM Exporter on any Kubernetes clu
 When following these instructions on a cloud provider, there may be additional values or steps required depending on the component installed.
 {% endhint %}
 
-Node Feature Discovery (NFD) is a Kubernetes utility which automatically discovers information and capabilities about your worker nodes and applies numerous labels to them. For example, NFD will discover the CPU details, OS, and the PCI cards installed in a worker node on which the NFD Pod is run. These labels can be useful in a number of scenarios beyond installation of DCGM Exporter. An example of some of the labels are shown below.
+[Node Feature Discovery (NFD)](https://github.com/kubernetes-sigs/node-feature-discovery) is a Kubernetes utility which automatically discovers information and capabilities about your worker nodes and saves this information in the form of labels applied to the node. For example, NFD will discover the CPU details, OS, and the PCI cards installed in a worker node on which the NFD pod is run. These labels can be useful in a number of scenarios beyond installation of DCGM Exporter. An example of some of the labels are shown below.
 
 ```yaml
 <snip>
@@ -115,25 +115,27 @@ feature.node.kubernetes.io/cpu-cpuid.AVX2: "true"
 <snip>
 ```
 
-When run on a node with an NVIDIA GPU, NFD will apply the label `feature.node.kubernetes.io/pci-10de.present="true"`. This label can then be used to attract DCGM Exporter Pods to NVIDIA GPU nodes automatically.
+When run on a node with an NVIDIA GPU, NFD will apply the label `feature.node.kubernetes.io/pci-10de.present="true"`. This label can then be used to attract DCGM Exporter pods to NVIDIA GPU nodes automatically.
 
 {% hint style="info" %}
-10DE is vendor ID assigned to the NVIDIA corporation.
+10DE is the vendor ID assigned to the NVIDIA corporation.
 {% endhint %}
 
-NFD may be installed either standalone or as a component of the [NVIDIA device plugin for Kubernetes](https://github.com/NVIDIA/k8s-device-plugin). When installing NFD via the device plugin, you enable the GPU Feature Discovery (GFD) component at the same time.
+NFD may be installed either standalone or as a component of the [NVIDIA device plugin for Kubernetes](https://github.com/NVIDIA/k8s-device-plugin). When installing NFD via the device plugin, you enable the GPU Feature Discovery (GFD) component at the same time. GFD uses the labels written by NFD to write NVIDIA-specific information about discovered GPUs to the node.
 
 {% hint style="warning" %}
-Cloud providers often install the device plugin on GPU nodes automatically. Therefore, in order to deploy GFD and NFD may require an upgrade or uninstallation/reinstallation of the device plugin, which is a more advanced procedure. See instructions from your cloud provider first.
+Cloud providers often install the device plugin on GPU nodes automatically. Therefore, in order to deploy GFD and NFD you may require an upgrade or uninstallation/reinstallation of the device plugin, which is a more advanced procedure. See instructions from your cloud provider first and refer to the [NVIDIA device plugin for Kubernetes](https://github.com/NVIDIA/k8s-device-plugin) repository for further details.
 {% endhint %}
 
-To install NFD as a standalone component, follow the deployment guide [here](https://kubernetes-sigs.github.io/node-feature-discovery/stable/deployment/). A quick start command is shown below. In some cases, you may have taints applied to GPU nodes which must be tolerated by the NFD DaemonSet. It is recommended to use the Helm installation guide to define tolerations if so.
+To install NFD as a standalone component, follow the deployment guide [here](https://kubernetes-sigs.github.io/node-feature-discovery/stable/deployment/). A quick start command is also shown below. In some cases, you may have taints applied to GPU nodes which must be tolerated by the NFD DaemonSet. It is recommended to use the Helm installation guide to define tolerations if so.
 
 ```sh
+# This command uses Kustomize to deploy Kubernetes resources from a specific version.
+# Refer to the NFD releases to choose the latest, or most applicable, version.
 kubectl apply -k https://github.com/kubernetes-sigs/node-feature-discovery/deployment/overlays/default?ref=v0.16.3
 ```
 
-Once NFD is installed, ensure one Pod is running on your node(s) with NVIDIA GPUs.
+Once NFD is installed, ensure one pod is running on your node(s) with NVIDIA GPUs.
 
 ```sh
 kubectl -n node-feature-discovery get pods
@@ -145,7 +147,7 @@ After a few moments, check the labels of one such node to ensure the `feature.no
 kubectl get no <my_node_name> -o yaml | yq .metadata.labels
 ```
 
-An abridged output of an EKS node is shown below.
+An abridged output of the labels written to an EKS node is shown below.
 
 ```yaml
 <snip>
@@ -159,7 +161,7 @@ feature.node.kubernetes.io/storage-nonrotationaldisk: "true"
 <snip>
 ```
 
-With NFD having successfully discovered NVIDIA PCI devices and applying a label, install DCGM Exporter using this label to attract Pods to GPU nodes. If following this process on GKE, additional values will be required to successfully run DCGM Exporter. See the [GKE section](#gke) for more details.
+With NFD having successfully discovered NVIDIA PCI devices and assigned the `feature.node.kubernetes.io/pci-10de.present="true"` label, install DCGM Exporter using this label to attract pods to GPU nodes. When following this process on GKE, additional values may be required to successfully run DCGM Exporter. See the [GKE section](#gke) for more details.
 
 <details>
 <summary>values-dcgm.yaml</summary>
@@ -180,6 +182,8 @@ serviceMonitor:
 
 </details>
 
+Install DCGM Exporter using the values defined.
+
 ```sh
 helm upgrade -i dcgm dcgm-exporter \
   --repo https://nvidia.github.io/dcgm-exporter/helm-charts \
@@ -187,7 +191,13 @@ helm upgrade -i dcgm dcgm-exporter \
   -f values-dcgm.yaml
 ```
 
-### Validation
+Ensure the DCGM Exporter Pods are in a running state and only on the nodes with NVIDIA GPUs.
+
+```sh
+kubectl -n dcgm-exporter get pods
+```
+
+## Validation
 
 To validate your DCGM Exporter configuration, port-forward into the DCGM Exporter service and ensure first that metrics are being exposed.
 
@@ -195,7 +205,7 @@ To validate your DCGM Exporter configuration, port-forward into the DCGM Exporte
 kubectl -n dcgm-exporter port-forward svc/dcgm-dcgm-exporter 9400:9400
 ```
 
-Use `cURL` to perform a `GET` requests against the service and verify that multiple metrics and their values are shown.
+Use `cURL` to perform a `GET` request against the service and verify that multiple metrics and their values are shown.
 
 ```sh
 curl localhost:9400/metrics
