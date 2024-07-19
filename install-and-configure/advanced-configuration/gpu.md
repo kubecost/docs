@@ -219,6 +219,6 @@ If Kubecost has already been installed, next check the bundled Prometheus instan
 kubectl -n kubecost port-forward svc/kubecost-prometheus-server 8080:80
 ```
 
-Open the Prometheus web interface in your browser by navigating to `localhost:8080`. In the search box, begin typing the prefix for a metric, for example `DCGM_FI_DEV_POWER_USAGE`. Click Execute to view the returned query and verify that there is data present. An example is shown below.
+Open the Prometheus web interface in your browser by navigating to `http://localhost:8080`. In the search box, begin typing the prefix for a metric, for example `DCGM_FI_DEV_POWER_USAGE`. Click Execute to view the returned query and verify that there is data present. An example is shown below.
 
 ![Prometheus query showing DCGM Exporter metric](/images/gpu-prometheus-query.png)
