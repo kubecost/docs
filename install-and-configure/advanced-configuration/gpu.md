@@ -25,6 +25,8 @@ In addition to the label requirement, there may be additional values required fo
 DCGM Exporter may also be deployed via the NVIDIA [GPU operator](https://docs.nvidia.com/datacenter/cloud-native/gpu-operator/latest/index.html), however the operator is a more complex component with specialized requirements and, as such, is outside the current scope of this documentation.
 {% endhint %}
 
+These instructions have been verified on version 3.3.6-3.4.2 of DCGM Exporter but prior versions of v3 should work as well.
+
 ### GKE
 
 To install DCGM Exporter on a GKE autopilot cluster where the worker nodes use the default [Container Optimized OS (COS)](https://cloud.google.com/container-optimized-os/docs), use the following values. The GKE-provided label `cloud.google.com/gke-accelerator` is used to attract DCGM Exporter Pods to nodes with NVIDIA GPUs.
