@@ -83,6 +83,8 @@ Ensure the DCGM Exporter pods are in a running state and only on the nodes with 
 kubectl -n dcgm-exporter get pods
 ```
 
+Finally, perform a validation step to ensure that metrics are working as expected. See the [Validation](#validation) section for details.
+
 ### GKE
 
 To install DCGM Exporter on a GKE autopilot cluster where the worker nodes use the default [Container Optimized OS (COS)](https://cloud.google.com/container-optimized-os/docs), use the following values. The GKE-provided label `cloud.google.com/gke-accelerator` is used to attract DCGM Exporter pods to nodes with NVIDIA GPUs.
@@ -160,6 +162,8 @@ kubectl -n dcgm-exporter get pods
 ```
 
 For additional information on installing DCGM Exporter in Google Cloud, see [here](https://cloud.google.com/stackdriver/docs/managed-prometheus/exporters/nvidia-dcgm).
+
+Finally, perform a validation step to ensure that metrics are working as expected. See the [Validation](#validation) section for details.
 
 ### Node Feature Discovery
 
@@ -276,6 +280,64 @@ Ensure the DCGM Exporter pods are in a running state and only on the nodes with 
 ```sh
 kubectl -n dcgm-exporter get pods
 ```
+
+Finally, perform a validation step to ensure that metrics are working as expected. See the [Validation](#validation) section for details.
+
+## Customizing Metrics
+
+DCGM Exporter presents a number of useful metrics by default. However, there are many [more metrics available from DCGM](https://docs.nvidia.com/datacenter/dcgm/latest/dcgm-api/dcgm-api-field-ids.html) which are not enabled by default. Kubecost may collect additional metrics about NVIDIA GPUs if they are emitted by DCGM Exporter. Configuring DCGM Exporter to emit additional metrics requires modification of the metrics configuration ConfigMap. Follow the procedure below to configure DCGM Exporter to emit additional metrics. Please be aware that emission of additional DCGM Exporter metrics does not necessarily mean Kubecost will collect and make use of them. This procedure should only be followed at the explicit advice of Kubecost support.
+
+{% hint style="info" %}
+This procedure assumes you have installed DCGM Exporter according to one of the processes outlined in the [Install DCGM Exporter](#install-dcgm-exporter) section. Specifically, it assumes you have used the provided Helm values to mount the ConfigMap included with DCGM Exporter. If that is not the case or you had DCGM Exporter already installed, you may need to modify your deployment accordingly.
+{% endhint %}
+
+### Modify the metrics ConfigMap
+
+In this step, you update the ConfigMap used by DCGM Exporter to include additional metrics. Because this ConfigMap takes comma-separated values (CSV), you must append the new metrics to the ConfigMap in the same format. Rather than modify the ConfigMap directly by using an imperative command such as `kubectl edit configmap`, it is preferable and more reliable to dump the ConfigMap first, edit the values, and re-apply it. If using a GitOps approach, check with your cluster administrator as you may need to make modifications in git rather than in the cluster directly, otherwise changes may be reverted.
+
+Export the metrics ConfigMap to your local system.
+
+```sh
+kubectl -n dcgm-exporter get cm exporter-metrics-config-map -o yaml > exporter-metrics-config-map.yaml
+```
+
+Open the `exporter-metrics-config-map.yaml` YAML file in your editor of choice.
+
+Under the `metrics` key, scroll to the bottom and insert as new lines the additional metrics you wish DCGM Exporter to emit. You must provide these metrics in CSV format which is `<metric>, <type>, <description>`. The `<type>` is especially important as the wrong type will render DCGM Exporter unable to start because the metric configuration will be invalid.
+
+As an example, provide the following new entries at the bottom of the `metrics` key. Take care to ensure the lines are indented similar to other lines. Lines beginning with the `#` character indicate comments.
+
+```
+# Kubecost custom metrics
+DCGM_FI_PROF_SM_ACTIVE,          gauge, The ratio of cycles an SM has at least 1 warp assigned (in %).
+DCGM_FI_PROF_SM_OCCUPANCY,       gauge, The ratio of number of warps resident on an SM (in %).
+DCGM_FI_DEV_MEM_MAX_OP_TEMP,     gauge, Maximum operating temperature for the memory of this GPU.
+DCGM_FI_DEV_GPU_MAX_OP_TEMP,     gauge, Maximum operating temperature for this GPU.
+DCGM_FI_DEV_POWER_MGMT_LIMIT,    gauge, Current Power limit for the device.
+```
+
+Save the changes to the `exporter-metrics-config-map.yaml` YAML file and apply it back to the cluster using `kubectl apply`.
+
+```sh
+kubectl -n dcgm-exporter apply -f exporter-metrics-config-map.yaml
+```
+
+The following output may be displayed. Disregard the warning if present.
+
+```
+Warning: resource configmaps/exporter-metrics-config-map is missing the kubectl.kubernetes.io/last-applied-configuration annotation which is required by kubectl apply. kubectl apply should only be used on resources created declaratively by either kubectl create --save-config or kubectl apply. The missing annotation will be patched automatically.
+configmap/exporter-metrics-config-map configured
+```
+
+### Restart DCGM Exporter
+
+After the changes are applied, you must restart the DCGM Exporter DaemonSet which will cause the new pods to read the modified ConfigMap.
+
+```sh
+kubectl -n dcgm-exporter rollout restart daemonset dcgm-dcgm-exporter
+```
+
+After a few moments, check the DCGM Exporter pods to ensure that all are in a running state. If any are found to be in a `CrashLoopBackoff` there may be errors introduced in the ConfigMap you edited in the previous step. Inspect and rectify any errors and try again.
 
 ## Validation
 
