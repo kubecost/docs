@@ -126,7 +126,7 @@ The Cloud cost reports are saved under `global.cloudCostReports`, it accept two 
 * `enabled` determines whether Kubecost will read saved Cloud Cost reports configured via _values.yaml_; default value is `false`
 * `reports` is a list of Cloud Cost reports
 
-The following fields apply to each map item under the `reports` key of global.cloudCostReports`:
+The following fields apply to each map item under the `reports` key of `global.cloudCostReports`:
 * `title` the title/name of your custom report; any non-empty string is accepted
 * `window` the time window the asset report covers, the following values are supported:
   * keywords: `today`, `week` (week-to-date), `month` (month-to-date), `yesterday`, `lastweek`, `lastmonth`
