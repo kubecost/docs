@@ -89,7 +89,7 @@ The following fields apply to each map item under the `reports` key:
   * `value` -- property value(s) to filter on. Some examples shown below.
 
 ## Managing Asset reports via _values.yaml_
-The Asset reports are saved under `global.cloudCostReports`, it accept two parameters:
+The Asset reports are saved under `global.assetReports`, it accept two parameters:
 
 * `enabled` determines whether Kubecost will read saved asset reports configured via _values.yaml_; default value is `false`
 * `reports` is a list of asset reports
