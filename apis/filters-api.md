@@ -62,6 +62,7 @@ v2 filter support for `/model/assets`:
 v2 filter support for `/model/cloudCost`:
 
 * `accountID`
+* `category`
 * `invoiceEntityID`
 * `provider`
 * `providerID`
