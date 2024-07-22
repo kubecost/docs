@@ -1,19 +1,5 @@
 # Tuning Resource Consumption
 
-Kubecost can run on clusters with thousands of nodes when resource consumption is properly tuned. Here's a chart with some of the steps you can take to tune Kubecost, along with descriptions of each.
-
-![Memory Reduction Steps](/images/resource-consumption.png)
-
-## Disable Cloud Costs on secondary clusters
-
-[Cloud Costs](/install-and-configure/install/cloud-integration/README.md#cloud-costs) allow Kubecost to pull in spend data from your integrated cloud service providers.
-
-Cloud cost metrics for all accounts can be pulled in on your primary cluster by pointing Kubecost to one or more management accounts. Therefore, you can disable CloudCost on secondary clusters by setting the following Helm value:
-
-`--set cloudCost.enabled=false`
-
-Secondary clusters can be configured strictly as metric emitters to save memory. Learn more about how to best configure them in our [Secondary Clusters Guide](/install-and-configure/install/multi-cluster/secondary-clusters.md).
-
 ## Lower query concurrency
 
 Lowering query concurrency for the Kubecost ETL build will mean ETL takes longer to build, but consumes less memory. The default value is: `5`. This can be adjusted with the [Helm value](https://github.com/kubecost/cost-analyzer-helm-chart/blob/v1.93.2/cost-analyzer/values.yaml#L272):

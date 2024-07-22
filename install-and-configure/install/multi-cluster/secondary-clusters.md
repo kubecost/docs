@@ -14,26 +14,34 @@ See the [Additional resources](/install-and-configure/install/multi-cluster/seco
 
 Disable unnecessary containers/pods on secondary clusters.
 
-```
---set federatedETL.federatedCluster=true
---set federatedETL.agentOnly=true
+```yaml
+federatedETL:
+  federatedCluster: true
+  agentOnly: true
+kubecostAggregator:
+  cloudCost:
+    enabled: false
 ```
 
 ## Grafana
 
 Grafana is not needed on secondary clusters.
 
-```
---set global.grafana.enabled=false
---set global.grafana.proxy=false
+```yaml
+global:
+  grafana:
+    enabled: false
+    proxy: false
 ```
 
 ## Prometheus
 
 Kubecost and its accompanying Prometheus collect a reduced set of metrics that allow for lower resource/storage usage than a standard Prometheus deployment.
 
-```
---set prometheus.server.retention=2d
+```yaml
+prometheus:
+  server:
+    retention: 2d
 ```
 
 ## Node-Exporter
