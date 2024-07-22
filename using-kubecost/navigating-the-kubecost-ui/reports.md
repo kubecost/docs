@@ -140,6 +140,7 @@ The following fields apply to each map item under the `reports` key of `global.c
     * e.g. `2021-01-01T15:04:05Z,2021-01-02T20:21:22Z` will return the two full days of 1 January 2021 and 2 January 2021
 * `aggregateBy` the desired aggregation parameter -- equivalent to _Breakdown_ in the Kubecost Cloud Cost UI. Supports:
   * `accountID`
+  * `label` requires the following format: `label:<label_name>`
   * `provider`
   * `providerID`
   * `invoiceEntityID`
