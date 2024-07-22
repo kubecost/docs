@@ -109,6 +109,7 @@ The following fields apply to each map item under the `reports` key of `global.a
 * `aggregateBy` the desired aggregation parameter -- equivalent to _Breakdown_ in the Kubecost Asset UI. Supports:
   * `account`
   * `cluster`
+  * `label` requires the following format: `label:<label_name>`
   * `project`
   * `providerID`
   * `provider`
