@@ -94,7 +94,7 @@ The Asset reports are saved under `global.assetReports`, it accept two parameter
 * `enabled` determines whether Kubecost will read saved asset reports configured via _values.yaml_; default value is `false`
 * `reports` is a list of asset reports
 
-The following fields apply to each map item under the `reports` key of global.assetReports`:
+The following fields apply to each map item under the `reports` key of `global.assetReports`:
 
 * `title` the title/name of your custom asset report; any non-empty string is accepted
 * `window` the time window the asset report covers, the following values are supported:
