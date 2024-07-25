@@ -14,6 +14,20 @@ kubecostModel:
   etlHourlyStoreDurationHours: 0
 ```
 
+**Disable features which are default-enabled.** Features such as [Container Stats](/architecture/containerstats-pipeline.md) and [Network Monitoring](/using-kubecost/navigating-the-kubecost-ui/network-monitoring.md) are enabled by default. If not using these features, disabling them can reduce Prometheus queries, and also reduce memory consumption of cost-model and Prometheus.
+
+```yaml
+kubecostModel:
+  containerStatsEnabled: false
+networkCosts:
+  config:
+    services:
+      # These are typically enabled by default if the networkcost daemonset is also enabled
+      google-cloud-services: false
+      amazon-web-services: false
+      azure-cloud-services: false
+```
+
 **Lower query concurrency**. Lowering query concurrency for the Kubecost ETL build will mean ETL takes longer to build, but consumes less memory. The default value is: `5`. This can be adjusted with the [Helm value](https://github.com/kubecost/cost-analyzer-helm-chart/blob/v1.93.2/cost-analyzer/values.yaml#L272):
 
 ```yaml
