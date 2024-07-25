@@ -2,25 +2,14 @@
 
 Secondary clusters use a minimal Kubecost deployment to send their metrics to a central storage-bucket (aka durable storage) that is accessed by the primary cluster to provide a **single-pane-of-glass** view into all aggregated cluster costs globally. This aggregated cluster view is exclusive to Kubecost Enterprise.
 
-{% hint style="warning" %}
-Kubecost's UI will appear broken when set to a secondary cluster. It should only be used for troubleshooting.
-{% endhint %}
-
-This guide explains settings that can be tuned in order to run the minimum Kubecost components to run Kubecost more efficiently.
-
-See the [Additional resources](/install-and-configure/install/multi-cluster/secondary-clusters.md) section below for complete examples in our GitHub repo.
-
 ## Kubecost
 
-Disable unnecessary containers/pods on secondary clusters.
+Disable unnecessary containers/pods on secondary clusters. Note, that setting `agentOnly` will disable the Kubecost UI on secondary clusters.
 
 ```yaml
 federatedETL:
   federatedCluster: true
   agentOnly: true
-kubecostAggregator:
-  cloudCost:
-    enabled: false
 ```
 
 ## Grafana
