@@ -44,7 +44,7 @@ kubecostModel:
 
 ## Aggregator
 
-Please refer to the [Aggregator docs](/install-and-configure/install/multi-cluster/federated-etl/aggregator.md) for more detaild configuration and troubleshooting information.
+Please refer to the [Aggregator docs](/install-and-configure/install/multi-cluster/federated-etl/aggregator.md) for more detailed configuration and troubleshooting information.
 
 **Lower retention period.** How much data to ingest from the federated store bucket, and how much data to keep in the DB before rolling the data off. Reducing these numbers will reduce load on aggregator. By default these are set to `91` and `49` respectively.
 
