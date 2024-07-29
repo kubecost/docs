@@ -356,9 +356,6 @@ curl localhost:9400/metrics
 An output similar to below should be shown.
 
 ```
-# HELP DCGM_FI_DEV_NAME Name of the GPU device.
-# TYPE DCGM_FI_DEV_NAME gauge
-DCGM_FI_DEV_NAME{gpu="0",UUID="GPU-93ef0036-98de-4946-648a-eca7040afbeb",device="nvidia0",modelName="Tesla T4",Hostname="myhost1.compute.internal"} Tesla T4
 # HELP DCGM_FI_DEV_SM_CLOCK SM clock frequency (in MHz).
 # TYPE DCGM_FI_DEV_SM_CLOCK gauge
 DCGM_FI_DEV_SM_CLOCK{gpu="0",UUID="GPU-93ef0036-98de-4946-648a-eca7040afbeb",device="nvidia0",modelName="Tesla T4",Hostname="myhost1.compute.internal"} 300
