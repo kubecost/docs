@@ -128,7 +128,7 @@ Q: When cloud integration is not yet enabled, does Kubecost's usage of public pr
 A: Yes. This can be verified by reviewing the code at [opencost/pkg/cloud](https://github.com/opencost/opencost/tree/1795bcddb1d91d3e60772030528274c4dff29185/pkg/cloud). Specifically, if you start at [GetNodeCost()](https://github.com/opencost/opencost/blob/1795bcddb1d91d3e60772030528274c4dff29185/pkg/costmodel/costmodel.go#L933) you can follow the chain of function calls. It's slightly different for each cloud provider, but it should look roughly like this: `pkg/costmodel/GetNodeCost() → pkg/cloud/NodePricing() → pkg/cloud/DownloadPricingData() → pkg/cloud/getRegionPricing()`
 
 Q: If I don't enable the node-exporter, will it affect the metrics emitted by Kubecost?\
-A: Node-exporter is disabled by default. It will not have an effect on Kubecost's metrics. Read about the effects of disabling the node exporter [here](/install-and-configure/advanced-configuration/resource-consumption.md#keep-node-exporter-disabled).
+A: Node-exporter is disabled by default. It will not have an effect on Kubecost's metrics.
 
 Q: Why am I receiving a “No Athena Bucket Configured” error on my Diagnostics page?\
 A: Verify that the the AWS IAM Policy has been correctly configured ([Step 3](/install-and-configure/install/cloud-integration/aws-cloud-integrations/aws-cloud-integrations.md#step-3-setting-up-iam-permissions)). Verify that the IAM role has been given to Kubecost ([Step 4](/install-and-configure/install/cloud-integration/aws-cloud-integrations/aws-cloud-integrations.md#step-4-attaching-iam-permissions-to-kubecost)).
