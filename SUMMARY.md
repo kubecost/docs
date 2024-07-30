@@ -200,6 +200,7 @@
 * [Capture a Bug Report](troubleshooting/bug-report.md)
 * [Bug Bounty Program](troubleshooting/bug-bounty-program.md)
 * [Capture a HAR File](troubleshooting/capture-a-har-file.md)
+* [Guidelines for a Successful Enterprise Support Engagement](troubleshooting/successful-enterprise-support-engagement-guidelines.md)
 
 ## Other Resources
 
