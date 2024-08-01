@@ -1,6 +1,6 @@
 # Table of contents
 
-* [Welcome to the Docs!](README.md)
+* [Kubecost Documentation](LANDING.md)
 
 ## Install and Configure
 
