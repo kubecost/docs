@@ -31,10 +31,6 @@ Follow [these steps](https://docs.aws.amazon.com/cur/latest/userguide/cur-create
 * Under 'Additional content', select the _Enable resource IDs_ checkbox.
 * Under 'Report data integration' select the _Amazon Athena_ checkbox.
 
-{% hint style="info" %}
-For CUR data written to an S3 bucket only accessed by Kubecost, it is safe to expire or delete the objects after seven days of retention.
-{% endhint %}
-
 Remember the name of the bucket you create for CUR data. This will be used in Step 2.
 
 {% hint style="warning" %}
