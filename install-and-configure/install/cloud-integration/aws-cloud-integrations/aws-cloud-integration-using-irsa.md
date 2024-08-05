@@ -39,7 +39,7 @@ To begin, download the recommended configuration template files from our [poc-co
 * _iam-payer-account-trust-primary-account.json_
 * _iam-access-cur-in-payer-account.json_
 
-The bottom three files are found in [/aws/iam-policies-cur](https://github.com/kubecost/poc-common-configurations/tree/main/aws/iam-policies/cur).
+The bottom three files are found in [/aws/iam-policies/cur](https://github.com/kubecost/poc-common-configurations/tree/main/aws/iam-policies/cur).
 
 Begin by opening *cloud_integration.json*, which should look like this:
 
