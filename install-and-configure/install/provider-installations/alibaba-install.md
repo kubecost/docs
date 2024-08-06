@@ -24,7 +24,7 @@ The `alibaba-service-key` can be created using the following command:
 
 {% code overflow="wrap" %}
 ```
-kubectl create secret generic alibaba-service-key -n kubecost –from-file=./example_path
+kubectl create secret generic alibaba-service-key -n kubecost –from-file=your_path/service-key.json
 ```
 {% endcode %}
 
