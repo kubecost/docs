@@ -33,7 +33,7 @@ Before following this guide, ensure that:
 5. Obtain the value created with your secret.
 6. Add the three saved values, as well as any other values required relating to your Kubecost/Microsoft account details, into the following _values.yaml_ template:
 
-```
+```yaml
 # values.yaml
 oidc:
   enabled: true
@@ -62,7 +62,7 @@ First, you need to configure an admin role for your app. For more information on
 2. Select _App roles_ > _Create app role_. Provide the following values:
   * Display name: _admin_
   * Allowed member types: _Users/Groups_
-  * Value: _admin_
+  * Value: _admins_
   * Description: _Admins have read/write permissions via the Kubecost frontend_ (or provide a custom description as needed)
   * Do you want to enable this app role?: Select the checkbox
 3. Select _Apply_.
@@ -74,7 +74,7 @@ Then, you need to attach the role you just created to users and groups.
 3. Select _Add user/group_. Select the desired group. Select the _admin_ role you created, or another relevant role. Then, select _Assign_ to finalize changes.
 4. Update your existing _values.yaml_ with this template:
 
-```
+```yaml
 oidc:
   enabled: true
   # THIS IS REQUIRED FOR AZURE. Azure communicates roles via the id_token instead of the access_token.
@@ -109,7 +109,7 @@ Use your browser's [devtools](https://developer.chrome.com/docs/devtools/network
 
 Run the following command:
 
-```
+```sh
 kubectl logs deploy/kubecost-cost-analyzer
 ```
 
@@ -118,7 +118,8 @@ Search for `oidc` in your logs to follow events. Pay attention to any WRN relate
 ### Option 3: Enable debug logs for more granularity on what is failing
 
 You can find more details on these flags in Kubecost's [cost-analyzer-helm-chart repo README](https://github.com/kubecost/cost-analyzer-helm-chart/blob/v1.103/README.md?plain=1#L63-L75).
-```
+
+```yaml
 kubecostModel:
   extraEnv:
     - name: LOG_LEVEL
