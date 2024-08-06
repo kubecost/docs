@@ -24,7 +24,7 @@ The `alibaba-service-key` can be created using the following command:
 
 {% code overflow="wrap" %}
 ```
-kubectl create secret generic alibaba-service-key -n kubecost –from-file=your_path/service-key.json
+kubectl create secret generic alibaba-service-key -n kubecost –from-file=./example_path
 ```
 {% endcode %}
 
@@ -32,14 +32,12 @@ Your path needs a file having Alibaba Cloud secrets. Alibaba secrets can be pass
 
 ```
 {
-     "alibaba_access_key_id": "XXX",
-     "alibaba_secret_access_key": "XXX"
+     "alibaba_access_key_id": “XXX”
+     "alibaba_secret_access_key": “XXX"
 }
 ```
 
 These two can be generated in the Alibaba Cloud portal. Hover over your user account icon, then select _AccessKey Management_. A new window opens. Select _Create AccessKey_ to generate a unique access token that will be used for all activities related to Kubecost.
-
-In the access key's policy, add the DescribePrice and DescribeDisks permission to get accurate pricing information.
 
 ## Alibaba Cloud integration
 

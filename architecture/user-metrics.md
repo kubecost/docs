@@ -134,9 +134,7 @@ Prometheus emits metrics which are used by Kubecost for diagnostic purposes:
 
 ## NVIDIA K8s Device Plugin (GPU)
 
-NVIDIA GPU monitoring support can be explained in more detail on the [Kubecost Blog: Monitoring NVIDIA GPU Usage in Kubernetes with Prometheus](https://blog.kubecost.com/blog/nvidia-gpu-usage/). The following metrics are consumed:
-
-GitHub: [https://github.com/NVIDIA/k8s-device-plugin](https://github.com/NVIDIA/k8s-device-plugin)
+NVIDIA GPU monitoring support can be explained in more detail in the [Kubecost Docs: NVIDIA GPU Monitoring Configurations](/install-and-configure/advanced-configuration/gpu.md) and on the [Kubecost Blog: Monitoring NVIDIA GPU Usage in Kubernetes with Prometheus](https://blog.kubecost.com/blog/nvidia-gpu-usage/). The following metrics are consumed:
 
 | Metric                          | Description              |
 | ------------------------------- | ------------------------ |
