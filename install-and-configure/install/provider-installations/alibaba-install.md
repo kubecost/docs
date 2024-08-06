@@ -39,6 +39,8 @@ Your path needs a file having Alibaba Cloud secrets. Alibaba secrets can be pass
 
 These two can be generated in the Alibaba Cloud portal. Hover over your user account icon, then select _AccessKey Management_. A new window opens. Select _Create AccessKey_ to generate a unique access token that will be used for all activities related to Kubecost.
 
+In the access key's policy, add the DescribePrice and DescribeDisks permission to get accurate pricing information.
+
 ## Alibaba Cloud integration
 
 Currently, Kubecost does not support complete integration of your Alibaba billing data like for other major cloud providers. Instead, Kubecost will only support public pricing integration, which will provide proper list prices for all cloud-based resources. Features like reconciliation and savings insights are not available for Alibaba. For more information on setting up a public pricing integration, see our [Multi-Cloud Integrations](/install-and-configure/install/cloud-integration/multi-cloud.md) doc.
