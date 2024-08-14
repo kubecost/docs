@@ -39,7 +39,7 @@ Your path needs a file having Alibaba Cloud secrets. Alibaba secrets can be pass
 
 These two can be generated in the Alibaba Cloud portal. Hover over your user account icon, then select _AccessKey Management_. A new window opens. Select _Create AccessKey_ to generate a unique access token that will be used for all activities related to Kubecost.
 
-In the access key's policy, add the DescribePrice add DescribeDisks permission to get accurate pricing information.
+In the access key's policy, add the DescribePrice and DescribeDisks permission to get accurate pricing information.
 
 ## Alibaba Cloud integration
 
