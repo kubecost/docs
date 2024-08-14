@@ -154,6 +154,7 @@
 * [Diagnostic APIs](apis/diagnostic-apis/README.md)
   * [Events API](apis/diagnostic-apis/api-events.md)
   * [Aggregator Diagnostic APIs](apis/diagnostic-apis/api-aggregator-diagnostics.md)
+  * [Cost-model Cache API](apis/diagnostic-apis/api-costmodel-cache.md)
 * [Savings APIs](apis/savings-apis/README.md)
   * [Cluster Right-Sizing Recommendation API](apis/savings-apis/cluster-right-sizing-recommendation-api.md)
   * [Container Request Right Sizing Recommendation API (V2)](apis/savings-apis/api-request-right-sizing-v2.md)
