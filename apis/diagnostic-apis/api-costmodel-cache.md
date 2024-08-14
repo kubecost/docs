@@ -1,6 +1,6 @@
 # Cost-model Cache API
 
-The Kubecost cost-model container queries the k8s api-server to understand the resources which exist on the cluster. It then caches this information in memory. This API provides a way to view the current state of the cache.
+The Kubecost cost-model container queries the k8s api-server to understand the resources which exist on the cluster. It then caches this information in memory. The following APIs are served by the cost-model container on each cluster, and provide a way to inspect the current state of the cache.
 
 {% swagger method="get" path="/allNodes" baseUrl="http://<your-kubecost-address>/model/" summary="allNodes API" %}
 {% swagger-description %}
