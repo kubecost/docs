@@ -40,7 +40,7 @@ List of all DaemonSets on the cluster.
 
 {% swagger method="get" path="/allPods" baseUrl="http://<your-kubecost-address>/model" summary="allPods API" %}
 {% swagger-description %}
-List of all Pods on the cluster.
+List of all Pods on the cluster. Warning, this can be a very large response.
 {% endswagger-description %}
 {% endswagger %}
 
