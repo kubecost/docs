@@ -294,7 +294,7 @@ data:
 
 Navigate to your Reports page in the Kubecost UI and ensure that the configured report parameters have been set by selecting the Report name.
 
-### Saved reports not appearing in Kubecost UI after upgrading to v2.0+
+### Saved reports not appearing in Kubecost UI after upgrading to v2
 
 After upgrading Kubecost to v2.0+, saved reports may not properly display in the Kubecost UI. To properly transfer over saved reports, download this [`copy-reports.sh` file](https://github.com/kubecost/kubecost-utilities/blob/main/copy-reports/copy-reports.sh), then run the following command:
 
