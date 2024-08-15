@@ -1,6 +1,6 @@
-# Migration Guide from Thanos to Kubecost 2.0 (Aggregator)
+# Migration Guide from Thanos to Kubecost 2.0+ (Aggregator)
 
-This tutorial is intended to help our users migrate from the legacy Thanos federation architecture to [Kubecost v2.0's Aggregator](aggregator.md). There are a few requirements in order to successfully migrate to Kubecost v2.0. This new version of Kubecost includes a new backend Aggregator which handles the ETL data built from source metrics more efficiently. Kubecost v2.0 provides new features, optimizes UI performance, and enhances the user experience. This tutorial is meant to be performed before the user upgrades from an older version of Kubecost to v2.0.
+This tutorial is intended to help our users migrate from the legacy Thanos federation architecture to [Kubecost v2.0+'s Aggregator](aggregator.md). There are a few requirements in order to successfully migrate to Kubecost v2.0+. This new version of Kubecost includes a new backend Aggregator which handles the ETL data built from source metrics more efficiently. Kubecost v2.0+ provides new features, optimizes UI performance, and enhances the user experience. This tutorial is meant to be performed before the user upgrades from an older version of Kubecost to v2.0+.
 
 Important notes for the migration process:
 
@@ -25,11 +25,11 @@ Important notes for the migration process:
 
 ## Migration process
 
-All of these steps should be performed prior to upgrading to Kubecost 2.x.x. The goal of this doc is to gradually migrate off Thanos, which is no longer supported in the Kubecost v2.0+ Helm chart. If you want to continue running Thanos, the Helm chart must be installed from a third party prior to executing the upgrade.
+All of these steps should be performed prior to upgrading to Kubecost 2.0+. The goal of this doc is to gradually migrate off Thanos, which is no longer supported in the Kubecost v2.0+ Helm chart. If you want to continue running Thanos, the Helm chart must be installed from a third party prior to executing the upgrade.
 
 ### Step 1: Use the existing Thanos object store or create a new dedicated object store
 
-If you have an existing object store where you are storing Thanos data, you have the option to use the same object store for the new Federated ETL data, or you can create a new object store for the new Federated ETL data for Kubecost v2.0
+If you have an existing object store where you are storing Thanos data, you have the option to use the same object store for the new Federated ETL data, or you can create a new object store for the new Federated ETL data for Kubecost v2.0+
 
 The object store in question will be where the ETL backups are pushed to from the primary cluster's cost-model. If you are using a metric Federation tool which does not require an object store (such as AMP, GMP, etc.), or otherwise do not want to use an existing Thanos object store, you will have to create a new one.
 
@@ -86,7 +86,7 @@ kubectl create secret generic federated-store --from-file=federated-store.yaml -
 
 ### Step 6: Enable FederatedETL, ETL-Utils, and Aggregator on the primary cluster
 
-Enabling FederatedETL will begin pushing your primary cluster's ETL data to the directory `/federated/CLUSTER_ID`. This setting will be enabled when upgrading to v2.x.
+Enabling FederatedETL will begin pushing your primary cluster's ETL data to the directory `/federated/CLUSTER_ID`. This setting will be enabled when upgrading to v2.0+.
 
 Enabling ETL-Utils will create the directories `/federated/CLUSTER_ID` for every primary/secondary cluster based on the full set of data in the `/etl` directory.
 
@@ -135,9 +135,9 @@ Ensure all data loads into the Kubecost UI before moving onto Step 7.
 
 ### Step 8: Upgrade your secondary clusters to build and push ETL data
 
-For this step, the secondary clusters **don't** need to be upgraded to v2.x. However, you must be running a version of Kubecost that supports Federated ETL (greater than v1.99.0).
+For this step, the secondary clusters **don't** need to be upgraded to v2.0+. However, you must be running a version of Kubecost that supports Federated ETL (greater than v1.99.0).
 
-If you are not on a Federated ETL supported version, please upgrade to a supported version on your secondaries before completing this step.  We recommend v2.2.x+ or v1.108.1, (see the command to upgrade to a specific version of Kubecost above).
+If you are not on a Federated ETL supported version, please upgrade to a supported version on your secondaries before completing this step.  We recommend v2.0+ or v1.108.1, (see the command to upgrade to a specific version of Kubecost above).
 
 Using the same *federated-store.yaml* created in Step 4, create this secret and add it to the *values.yaml* file for all secondary clusters:
 
@@ -159,9 +159,9 @@ kubecostModel:
 
 Optionally, you can remove the [Thanos sidecar](https://raw.githubusercontent.com/kubecost/cost-analyzer-helm-chart/v1.108.1/cost-analyzer/values-thanos.yaml) running on this secondary cluster. If left on, this secondary cluster will continue to push Prometheus metrics to the object store which can be used as a backup.
 
-### Step 9: Upgrade primary cluster to v2.x
+### Step 9: Upgrade primary cluster to v2.0+
 
-You can now upgrade the primary Kubecost cluster to v2.0 using your standard upgrade process. If upgrading via Helm, your upgrade command will look like:
+You can now upgrade the primary Kubecost cluster to v2.0+ using your standard upgrade process. If upgrading via Helm, your upgrade command will look like:
 
 ```sh
 helm upgrade kubecost cost-analyzer --repo https://kubecost.github.io/cost-analyzer/ \
@@ -169,13 +169,13 @@ helm upgrade kubecost cost-analyzer --repo https://kubecost.github.io/cost-analy
   -f values.yaml
 ```
 
-### Step 10 (optional): Upgrade secondary clusters to Kubecost 2.0
+### Step 10 (optional): Upgrade secondary clusters to Kubecost 2.0+
 
 {% hint style="info" %}
-While not absolutely necessary to upgrade secondary clusters to 2.x immediately, we recommend doing so as soon as possible.
+While not absolutely necessary to upgrade secondary clusters to 2.0+ immediately, we recommend doing so as soon as possible.
 {% endhint %}
 
-You can upgrade the Secondary Kubecost clusters to Kubecost 2.x using your standard upgrade process. Prior to upgrading set value below in your values.yaml if using helm.
+You can upgrade the Secondary Kubecost clusters to Kubecost 2.0+ using your standard upgrade process. Prior to upgrading set value below in your values.yaml if using helm.
 
 ```yaml
 federatedETL:

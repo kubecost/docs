@@ -18,9 +18,9 @@ Existing documentation for Kubecost APIs will use endpoints for non-Aggregator e
 * Multi-cluster Aggregator can only be configured in a Federated ETL environment
 * All clusters in your Federated ETL environment must be configured to build & push ETL files to the object store via `.Values.federatedETL.federatedCluster` and `.Values.kubecostModel.federatedStorageConfigSecret`. See our [Federated ETL](federated-etl.md) doc for more details.
 * If you've enabled Cloud Integration, it _must_ be configured via the cloud integration secret. Other methods are now deprecated. See our [Multi-Cloud Integrations](/install-and-configure/install/cloud-integration/multi-cloud.md) doc for more details.
-* This documentation is for Kubecost v2.0 and higher.
+* This documentation is for Kubecost v2.0+ and higher.
 
-If you are upgrading to Kubecost v2.0 from the following environments, see our specialized migration guides instead:
+If you are upgrading to Kubecost v2.0+ from the following environments, see our specialized migration guides instead:
 
 * [Federated ETL](/install-and-configure/install/multi-cluster/federated-etl/federated-etl-migration-guide.md)
 * [Thanos](/install-and-configure/install/multi-cluster/federated-etl/thanos-migration-guide.md)

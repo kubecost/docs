@@ -2,7 +2,7 @@ Thanos Upgrade (Deprecated)
 ==============
 
 {% hint style="warning" %}
-As of Kubecost v2.0, support for Thanos is deprecated. Consider [transitioning to our Aggregator architecture](/install-and-configure/install/multi-cluster/federated-etl/thanos-migration-guide.md) if you plan to upgrade.
+As of Kubecost v2.0+, support for Thanos is deprecated. Consider [transitioning to our Aggregator architecture](/install-and-configure/install/multi-cluster/federated-etl/thanos-migration-guide.md) if you plan to upgrade.
 {% endhint %}
 
 Kubecost v1.67.0+ uses Thanos 0.15.0. If you're upgrading to Kubecost v1.67.0+ from an older version and using Thanos, with AWS S3 as your backing storage for Thanos, you'll need to make a small change to your Thanos Secret in order to bump the Thanos version to 0.15.0 before you upgrade Kubecost. Thanos 0.15.0 has over 10x performance improvements, so this is recommended.
