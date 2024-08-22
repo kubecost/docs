@@ -1,6 +1,6 @@
-# Collections APIs: category total costs
+# Query category total costs
 
-[Collections APIs](README.md#table-of-contents) / Querying by category / Query the total costs of a category
+[Collections APIs](./#table-of-contents) / Querying by category / Query the total costs of a category
 
 ## Query total costs of a category
 
@@ -9,13 +9,13 @@ Use the following request to query the total costs of a category, which includes
 ### Request
 
 ```
-GET /collections/query/total?category=<string>&window=<string>(&collections=<true>)
+GET /model/collections/query/total?category=<string>&window=<string>(&collections=<true>)
 ```
 
 ### Examples
 
 ```
-GET /collections/query/total?category=Team&window=30d
+GET /model/collections/query/total?category=Team&window=30d
 ```
 
 ```json
@@ -58,7 +58,7 @@ GET /collections/query/total?category=Team&window=30d
 ```
 
 ```
-GET /collections/query/total?category=Team&window=30d&collections=true
+GET /model/collections/query/total?category=Team&window=30d&collections=true
 ```
 
 ```json

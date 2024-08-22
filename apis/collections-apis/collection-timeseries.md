@@ -1,6 +1,6 @@
-# Collections APIs: collection time series costs
+# Query collection time series costs
 
-[Collections APIs](README.md#table-of-contents) / Querying by collection / Query time series costs of a collection
+[Collections APIs](./#table-of-contents) / Querying by collection / Query time series costs of a collection
 
 ## Query time series costs of a collection
 
@@ -9,13 +9,13 @@ Use the following request to query the time series costs of a collection, which 
 ### Request
 
 ```
-GET /collection/query/timeseries?id=<string>&window=<string>(&groups=<true>)
+GET /model/collection/query/timeseries?id=<string>&window=<string>(&groups=<true>)
 ```
 
 ### Examples
 
 ```
-GET /collection/query/timeseries?id=8a939ba1-ff15-4600-b711-2cb109114914&window=30d
+GET /model/collection/query/timeseries?id=8a939ba1-ff15-4600-b711-2cb109114914&window=30d
 ```
 
 ```json
@@ -93,7 +93,7 @@ GET /collection/query/timeseries?id=8a939ba1-ff15-4600-b711-2cb109114914&window=
 ```
 
 ```
-GET /collection/query/timeseries?id=8a939ba1-ff15-4600-b711-2cb109114914&window=30d&groups=true
+GET /model/collection/query/timeseries?id=8a939ba1-ff15-4600-b711-2cb109114914&window=30d&groups=true
 ```
 
 ```json

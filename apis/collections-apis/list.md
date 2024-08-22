@@ -1,19 +1,19 @@
-# Collections APIs: list collections
+# List collections
 
-[Collections APIs](README.md#table-of-contents) / Managing collections / List collections
+[Collections APIs](./#table-of-contents) / Managing collections / List collections
 
 Use the following request to list all collections. Optionally, provide a category to list only those collections belonging to the given category.
 
 ### Request
 
 ```
-GET /collections?(category=<string>)
+GET /model/collections?(category=<string>)
 ```
 
 ### Examples
 
 ```
-GET /collections
+GET /model/collections
 ```
 
 ```json
@@ -100,7 +100,7 @@ GET /collections
 ```
 
 ```
-GET /collections?kind=Team
+GET /model/collections?kind=Team
 ```
 
 ```json
