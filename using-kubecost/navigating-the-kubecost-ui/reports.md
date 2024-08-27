@@ -13,7 +13,7 @@ Reports can be managed via [_values.yaml_](https://github.com/kubecost/cost-anal
 Begin by selecting _Create a report_. There are five report types available. Three of these correspond to Kubecost's different monitoring dashboards.
 
 {% hint style="warning" %}
-As of Kubecost v2.0+, Advanced Reports and Cloud Cost Reports have been removed and replaced with [Collections](/using-kubecost/navigating-the-kubecost-ui/collections.md). See the documentation for more info.
+As of Kubecost v2, Advanced Reports and Cloud Cost Reports have been removed and replaced with [Collections](/using-kubecost/navigating-the-kubecost-ui/collections.md). See the documentation for more info.
 {% endhint %}
 
 * Allocation Report
@@ -296,7 +296,7 @@ Navigate to your Reports page in the Kubecost UI and ensure that the configured 
 
 ### Saved reports not appearing in Kubecost UI after upgrading to v2
 
-After upgrading Kubecost to v2.0+, saved reports may not properly display in the Kubecost UI. To properly transfer over saved reports, download this [`copy-reports.sh` file](https://github.com/kubecost/kubecost-utilities/blob/main/copy-reports/copy-reports.sh), then run the following command:
+After upgrading Kubecost to v2, saved reports may not properly display in the Kubecost UI. To properly transfer over saved reports, download this [`copy-reports.sh` file](https://github.com/kubecost/kubecost-utilities/blob/main/copy-reports/copy-reports.sh), then run the following command:
 
 ```
 bash copy-reports.sh

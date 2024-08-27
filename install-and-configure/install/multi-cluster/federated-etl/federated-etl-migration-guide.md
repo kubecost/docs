@@ -1,6 +1,6 @@
-# Migration Guide from Federated ETL to Kubecost v2.0+ (Aggregator)
+# Migration Guide from Federated ETL to Kubecost v2 (Aggregator)
 
-This tutorial is intended to help our users migrate from an existing federated ETL setup to Kubecost v2.0+'s Aggregator. There are a few requirements in order to successfully migrate to Kubecost v2.0+. This new version of Kubecost includes a new backend Aggregator which handles the ETL data built from source metrics more efficiently. Kubecost v2.0+ provides new features, optimizes UI performance, and enhances the user experience. This tutorial is meant to be performed before the user upgrades from an older version of Kubecost to v2.0+.
+This tutorial is intended to help our users migrate from an existing federated ETL setup to Kubecost v2's Aggregator. There are a few requirements in order to successfully migrate to Kubecost v2. This new version of Kubecost includes a new backend Aggregator which handles the ETL data built from source metrics more efficiently. Kubecost v2 provides new features, optimizes UI performance, and enhances the user experience. This tutorial is meant to be performed before the user upgrades from an older version of Kubecost to v2.
 
 ![Aggregator Architecture](/images/diagrams/aggregator-diagrams.png)
 
@@ -19,12 +19,12 @@ This guide involves upgrading both the primary Kubecost cluster and all secondar
 ### Step 1: Create a cloud integration secret
 
 {% hint style="warning" %}
-Prior to Kubecost v2.0+, there were two acceptable methods integrating your multi-cloud accounts to Kubecost:
+Prior to Kubecost v2, there were two acceptable methods integrating your multi-cloud accounts to Kubecost:
 
 1. Populating cloud integration values directly in your values.yaml.
 2. Using cloud integration secrets.
 
-With Kubecost v2.0+, Kubecost now only supports using the cloud integration secret method documented in our [Multi-Cloud Integrations](/install-and-configure/install/cloud-integration/multi-cloud.md) doc. If you are not using this method currently, please follow instructions below to create the correct cloud integration secret and apply it to your *values.yaml* via Helm.
+With Kubecost v2, Kubecost now only supports using the cloud integration secret method documented in our [Multi-Cloud Integrations](/install-and-configure/install/cloud-integration/multi-cloud.md) doc. If you are not using this method currently, please follow instructions below to create the correct cloud integration secret and apply it to your *values.yaml* via Helm.
 {% endhint %}
 
 After successfully creating your cloud integration secret, run the following command. Make sure the name of your file containing your secret is *cloud-integration.json*.

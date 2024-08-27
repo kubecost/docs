@@ -1,9 +1,9 @@
-# Kubecost v2.0+ Install/Upgrade
+# Kubecost v2 Install/Upgrade
 
-Kubecost v2.0+ introduced massive functionality changes including changes to the backend architecture. This may require additional changes be made to your environment before upgrading from an older version of Kubecost to 2.0+. This article reviews several different common configurations and explains any necessary steps to take.
+Kubecost v2 introduced massive functionality changes including changes to the backend architecture. This may require additional changes be made to your environment before upgrading from an older version of Kubecost to 2.0+. This article reviews several different common configurations and explains any necessary steps to take.
 
 {% hint style="danger" %}
-After upgrading to v2.0+, it's possible saved reports may not properly display in the Kubecost UI. Follow [this solution](/using-kubecost/navigating-the-kubecost-ui/reports.md#saved-reports-not-appearing-in-kubecost-ui-after-upgrading-to-v2) if you experience this problem.
+After upgrading to v2, it's possible saved reports may not properly display in the Kubecost UI. Follow [this solution](/using-kubecost/navigating-the-kubecost-ui/reports.md#saved-reports-not-appearing-in-kubecost-ui-after-upgrading-to-v2) if you experience this problem.
 {% endhint %}
 
 ## Single cluster users
@@ -36,13 +36,13 @@ As a federated ETL user, there should be minimal changes. Be aware that Kubecost
 Ensure you have set the Helm flag `.Values.federatedETL.federatedCluster=true` in all your deployments. Each cluster is still responsible for building & pushing ETL files to the object store.
 {% endhint %}
 
-When upgrading to Kubecost v2.0+, the Aggregator should be automatically deployed. It is recommended to upgrade your primary cluster first, then secondary clusters. This is documented in our [Federated ETL migration guide](/install-and-configure/install/multi-cluster/federated-etl/federated-etl-migration-guide.md) when upgrading.
+When upgrading to Kubecost v2, the Aggregator should be automatically deployed. It is recommended to upgrade your primary cluster first, then secondary clusters. This is documented in our [Federated ETL migration guide](/install-and-configure/install/multi-cluster/federated-etl/federated-etl-migration-guide.md) when upgrading.
 
 ## Enterprise Thanos users
 
 This section applies to all users who use a multi-cluster Prometheus deployment. This includes architectures such as Thanos, Amazon Managed Prometheus, and Google Managed Prometheus.
 
-As of Kubecost v2.0+, Kubecost requires a central object store which all Kubecost instances can write to.
+As of Kubecost v2, Kubecost requires a central object store which all Kubecost instances can write to.
 
 {% hint style="warning" %}
 A future release will add support for multi-cluster Prometheus without requiring external object-storage.
@@ -73,10 +73,10 @@ An existing Aggregator StatefulSet was found in your namespace.
 Before upgrading to Kubecost 2.0+, please `kubectl delete` this Statefulset.
 ```
 
-If you were running the Aggregator in v1.107 or v1.108, you will need to manually run `kubectl delete sts/kubecost-aggregator` before upgrading to v2.0+. This is due to a breaking change in the StatefulSet template, specifically a removal of one of the Aggregator's PVs, which Helm does not allow an upgrade.
+If you were running the Aggregator in v1.107 or v1.108, you will need to manually run `kubectl delete sts/kubecost-aggregator` before upgrading to v2. This is due to a breaking change in the StatefulSet template, specifically a removal of one of the Aggregator's PVs, which Helm does not allow an upgrade.
 
 ### Cloud integration working in v1, but not in v2
 
-First, ensure you have upgraded Kubecost to the latest version of v2.0+. Patches have been released to fix miscellaneous cloud integration issues. You can learn more about what's been fixed in our [release notes](https://github.com/kubecost/cost-analyzer-helm-chart/releases).
+First, ensure you have upgraded Kubecost to the latest version of v2. Patches have been released to fix miscellaneous cloud integration issues. You can learn more about what's been fixed in our [release notes](https://github.com/kubecost/cost-analyzer-helm-chart/releases).
 
 Next, ensure that you are configuring the cloud integration via the `cloud-integration` secret and `.Values.kubecostProductConfigs.cloudIntegrationSecret` Helm value. This is now the only supported way of configuring your cloud integration

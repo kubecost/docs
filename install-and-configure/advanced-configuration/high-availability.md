@@ -1,7 +1,7 @@
 # High Availability Kubecost
 
 {% hint style="warning" %}
-High availability mode is no longer supported as of Kubecost v2.0+.
+High availability mode is no longer supported as of Kubecost v2+.
 {% endhint %}
 
 {% hint style="info" %}

@@ -1,7 +1,7 @@
 # Configuring Thanos (Deprecated)
 
 {% hint style="warning" %}
-As of Kubecost v2.0+, support for Thanos is deprecated. Consider [transitioning to our Aggregator architecture](/install-and-configure/install/multi-cluster/federated-etl/thanos-migration-guide.md) if you plan to upgrade.
+As of Kubecost v2, support for Thanos is deprecated. Consider [transitioning to our Aggregator architecture](/install-and-configure/install/multi-cluster/federated-etl/thanos-migration-guide.md) if you plan to upgrade.
 {% endhint %}
 
 {% hint style="info" %}

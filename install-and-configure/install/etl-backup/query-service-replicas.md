@@ -1,7 +1,7 @@
 # Query Service Replicas
 
 {% hint style="warning" %}
-Query service replicas are no longer supported as of Kubecost v2.0+.
+Query service replicas are no longer supported as of Kubecost v2.
 {% endhint %}
 
 {% hint style="info" %}
