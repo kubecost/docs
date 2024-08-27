@@ -1,4 +1,4 @@
-# Migration Guide from Thanos to Kubecost 2.0+ (Aggregator)
+# Migration Guide from Thanos to Kubecost v2 (Aggregator)
 
 This tutorial is intended to help our users migrate from the legacy Thanos federation architecture to [Kubecost v2's Aggregator](aggregator.md). There are a few requirements in order to successfully migrate to Kubecost v2. This new version of Kubecost includes a new backend Aggregator which handles the ETL data built from source metrics more efficiently. Kubecost v2 provides new features, optimizes UI performance, and enhances the user experience. This tutorial is meant to be performed before the user upgrades from an older version of Kubecost to v2.
 
