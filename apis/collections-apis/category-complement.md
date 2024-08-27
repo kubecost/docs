@@ -1,21 +1,21 @@
-# Collections APIs: category complement costs
+# Query category complement costs
 
-[Collections APIs](README.md#table-of-contents) / Querying by category / Query complement costs of a category
+[Collections APIs](./#table-of-contents) / Querying by category / Query complement costs of a category
 
 ## Query complement costs of a category
 
-Use the following request to query the complement costs of a category, which includes all domain costs not included in any of the collections in the category. 
+Use the following request to query the complement costs of a category, which includes all domain costs not included in any of the collections in the category.
 
 ### Request
 
 ```
-GET /collections/query/complement?category=<string>&window=<string>
+GET /model/collections/query/complement?category=<string>&window=<string>
 ```
 
 ### Examples
 
 ```
-GET /collections/query/complement?category=Team&window=30d
+GET /model/collections/query/complement?category=Team&window=30d
 ```
 
 ```json
@@ -49,13 +49,13 @@ Use the following request to query the complement cloud costs of a category, whi
 ### Request
 
 ```
-GET /collections/query/complement/cloud?category=<string>&window=<string>(&aggregate=<string>&filter=<string>&limit=<number>&offset=<number>)
+GET /model/collections/query/complement/cloud?category=<string>&window=<string>(&aggregate=<string>&filter=<string>&limit=<number>&offset=<number>)
 ```
 
 ### Examples
 
 ```
-GET /collections/query/complement/cloud?category=Team&window=30d
+GET /model/collections/query/complement/cloud?category=Team&window=30d
 ```
 
 ```json
@@ -78,7 +78,7 @@ GET /collections/query/complement/cloud?category=Team&window=30d
 ```
 
 ```
-GET /collections/query/complement/cloud?category=Team&window=30d&aggregate=service
+GET /model/collections/query/complement/cloud?category=Team&window=30d&aggregate=service
 ```
 
 ```json
@@ -117,7 +117,7 @@ GET /collections/query/complement/cloud?category=Team&window=30d&aggregate=servi
 ```
 
 ```
-GET /collections/query/complement/cloud?category=Team&window=30d&aggregate=providerID&filter=service:"AmazonEC2"
+GET /model/collections/query/complement/cloud?category=Team&window=30d&aggregate=providerID&filter=service:"AmazonEC2"
 ```
 
 ```json
@@ -150,7 +150,6 @@ GET /collections/query/complement/cloud?category=Team&window=30d&aggregate=provi
 }
 ```
 
-
 ## Query complement Kubernetes costs for a category
 
 Use the following request to query the complement Kubernetes costs of a category, which includes only the Kubernetes not included in any of the collections in the category. Optional pagination and filtering parameters are provided for navigating the data, similar to the Allocation API.
@@ -158,13 +157,13 @@ Use the following request to query the complement Kubernetes costs of a category
 ### Request
 
 ```
-GET /collections/query/complement/kubernetes?category=<string>&window=<string>(&aggregate=<string>&filter=<string>&limit=<number>&offset=<number>)
+GET /model/collections/query/complement/kubernetes?category=<string>&window=<string>(&aggregate=<string>&filter=<string>&limit=<number>&offset=<number>)
 ```
 
 ### Examples
 
 ```
-GET /collection/query/complement/kubernetes?category=Team&window=30d
+GET /model/collection/query/complement/kubernetes?category=Team&window=30d
 ```
 
 ```json
@@ -189,7 +188,7 @@ GET /collection/query/complement/kubernetes?category=Team&window=30d
 ```
 
 ```
-GET /collections/query/complement/kubernetes?category=Team&window=30d&aggregate=namespace
+GET /model/collections/query/complement/kubernetes?category=Team&window=30d&aggregate=namespace
 ```
 
 ```json
@@ -230,7 +229,7 @@ GET /collections/query/complement/kubernetes?category=Team&window=30d&aggregate=
 ```
 
 ```
-GET /collections/query/complement/kubernetes?category=Team&window=30d&aggregate=controller&filter=namespace:"kubecost"
+GET /model/collections/query/complement/kubernetes?category=Team&window=30d&aggregate=controller&filter=namespace:"kubecost"
 ```
 
 ```json
