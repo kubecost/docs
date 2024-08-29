@@ -8,9 +8,11 @@ A GitHub repository with sample files used in below instructions can be found [h
 
 ## Step 1: Export Azure cost report
 
-Follow Azure's [Create and Manage Exported Data](https://learn.microsoft.com/en-us/azure/cost-management-billing/costs/tutorial-export-acm-data?tabs=azure-portal) tutorial to export cost reports. For Metric, make sure you select _Amortized cost (Usage and Purchases)._ For Export type, make sure you select _Daily export of month-to-date costs._ Do not select _File Partitioning_. Also, take note of the Account name and Container specified when choosing where to export the data to. Note that a successful cost export will require [`Microsoft.CostManagementExports`](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/azure-services-resource-providers) to be registered in your subscription.
+{% hint style="warning" %}
+Azure Cost Management is not available for all offer types. Review the Azure documentation, [Understand Cost Management data](https://learn.microsoft.com/en-us/azure/cost-management-billing/costs/understand-cost-mgt-data#supported-microsoft-azure-offers), to learn more.
+{% endhint %}
 
-Alternatively, you can follow this [Kubecost guide](https://github.com/kubecost/azure-hackfest-lab/tree/a51fad1b9640b5991e5d567941f5086eb626a83f/0\_create-azure-cost-export).
+Follow Azure's [Create and Manage Exported Data](https://learn.microsoft.com/en-us/azure/cost-management-billing/costs/tutorial-export-acm-data?tabs=azure-portal) tutorial to export cost reports. For Metric, make sure you select _Amortized cost (Usage and Purchases)._ For Export type, make sure you select _Daily export of month-to-date costs._ Do not select _File Partitioning_. Also, take note of the Account name and Container specified when choosing where to export the data to. Note that a successful cost export will require [`Microsoft.CostManagementExports`](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/azure-services-resource-providers) to be registered in your subscription.
 
 It will take a few hours to generate the first report, after which Kubecost can use the Azure Storage API to pull that data.
 

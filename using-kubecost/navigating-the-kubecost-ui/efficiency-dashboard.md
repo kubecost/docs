@@ -25,7 +25,7 @@ For example, a Kubernetes node which has 32 Gi of usable memory runs two pods ea
 
 ![Cluster Efficiency on Overview](/images/efficiency-cluster-efficiency-on-overview.png)
 
-- _**Workload Efficiency**_ - The cost-weighted ratio of resources used to resources requested. Workload Efficiency is used in the Allocations Dashboard as well (see more details [here](/using-kubecost/navigating-the-kubecost-ui/cost-allocation/README.md)).
+- _**Workload Efficiency**_ - The cost-weighted ratio of resources used to resources requested. Workload Efficiency is used in the Allocations Dashboard as well (see more details [here](/using-kubecost/navigating-the-kubecost-ui/cost-allocation/efficiency-idle.md)).
 
 ## Example
 
