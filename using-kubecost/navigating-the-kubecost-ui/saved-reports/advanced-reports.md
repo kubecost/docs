@@ -1,7 +1,7 @@
 # Advanced Reporting
 
 {% hint style="warning" %}
-As of Kubecost v2.0, Advanced Reports have been removed and replaced with [Collections](/using-kubecost/navigating-the-kubecost-ui/collections.md). See the documentation for more info.
+As of Kubecost v2, Advanced Reports have been removed and replaced with [Collections](/using-kubecost/navigating-the-kubecost-ui/collections.md). See the documentation for more info.
 {% endhint %}
 
 Advanced Reporting allows teams to sculpt and tailor custom reports to easily view the information they care about. Providing an intersection between Kubernetes allocation and cloud assets data, this tool provides insight into important cost considerations for both workload and external infrastructure costs.
