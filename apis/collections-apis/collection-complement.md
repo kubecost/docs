@@ -1,21 +1,21 @@
-# Collections APIs: collection complement costs
+# Query collection complement costs
 
-[Collections APIs](README.md#table-of-contents) / Querying by collection / Query complement costs of a collection
+[Collections APIs](./#table-of-contents) / Querying by collection / Query complement costs of a collection
 
 ## Query complement costs of a collection
 
-Use the following request to query the complement costs of a collection, which includes all domain costs not included in the collection. 
+Use the following request to query the complement costs of a collection, which includes all domain costs not included in the collection.
 
 ### Request
 
 ```
-GET /collections/query/complement?id=<string>&window=<string>
+GET /model/collections/query/complement?id=<string>&window=<string>
 ```
 
 ### Examples
 
 ```
-GET /collections/query/complement?id=8a939ba1-ff15-4600-b711-2cb109114914&window=30d
+GET /model/collections/query/complement?id=8a939ba1-ff15-4600-b711-2cb109114914&window=30d
 ```
 
 ```json
@@ -49,13 +49,13 @@ Use the following request to query the complement cloud costs of a collection, w
 ### Request
 
 ```
-GET /collection/query/complement/cloud?id=<string>&window=<string>(&aggregate=<string>&filter=<string>&limit=<number>&offset=<number>)
+GET /model/collection/query/complement/cloud?id=<string>&window=<string>(&aggregate=<string>&filter=<string>&limit=<number>&offset=<number>)
 ```
 
 ### Examples
 
 ```
-GET /collection/query/complement/cloud?id=8a939ba1-ff15-4600-b711-2cb109114914&window=30d
+GET /model/collection/query/complement/cloud?id=8a939ba1-ff15-4600-b711-2cb109114914&window=30d
 ```
 
 ```json
@@ -78,7 +78,7 @@ GET /collection/query/complement/cloud?id=8a939ba1-ff15-4600-b711-2cb109114914&w
 ```
 
 ```
-GET /collection/query/complement/cloud?id=8a939ba1-ff15-4600-b711-2cb109114914&window=30d&aggregate=service
+GET /model/collection/query/complement/cloud?id=8a939ba1-ff15-4600-b711-2cb109114914&window=30d&aggregate=service
 ```
 
 ```json
@@ -116,7 +116,7 @@ GET /collection/query/complement/cloud?id=8a939ba1-ff15-4600-b711-2cb109114914&w
 ```
 
 ```
-GET /collection/query/complement/cloud?id=8a939ba1-ff15-4600-b711-2cb109114914&window=30d&aggregate=providerID&filter=service:"AmazonEC2"
+GET /model/collection/query/complement/cloud?id=8a939ba1-ff15-4600-b711-2cb109114914&window=30d&aggregate=providerID&filter=service:"AmazonEC2"
 ```
 
 ```json
@@ -155,13 +155,13 @@ Use the following request to query the complement Kubernetes costs of a collecti
 ### Request
 
 ```
-GET /collection/query/complement/kubernetes?id=<string>&window=<string>(&aggregate=<string>&filter=<string>&limit=<number>&offset=<number>)
+GET /model/collection/query/complement/kubernetes?id=<string>&window=<string>(&aggregate=<string>&filter=<string>&limit=<number>&offset=<number>)
 ```
 
 ### Examples
 
 ```
-GET /collection/query/complement/kubernetes?id=8a939ba1-ff15-4600-b711-2cb109114914&window=30d
+GET /model/collection/query/complement/kubernetes?id=8a939ba1-ff15-4600-b711-2cb109114914&window=30d
 ```
 
 ```json
@@ -186,7 +186,7 @@ GET /collection/query/complement/kubernetes?id=8a939ba1-ff15-4600-b711-2cb109114
 ```
 
 ```
-GET /collection/query/complement/kubernetes?id=8a939ba1-ff15-4600-b711-2cb109114914&window=30d&aggregate=namespace
+GET /model/collection/query/complement/kubernetes?id=8a939ba1-ff15-4600-b711-2cb109114914&window=30d&aggregate=namespace
 ```
 
 ```json
@@ -226,7 +226,7 @@ GET /collection/query/complement/kubernetes?id=8a939ba1-ff15-4600-b711-2cb109114
 ```
 
 ```
-GET /collection/query/complement/kubernetes?id=8a939ba1-ff15-4600-b711-2cb109114914&window=30d&aggregate=controller&filter=namespace:"kubecost"
+GET /model/collection/query/complement/kubernetes?id=8a939ba1-ff15-4600-b711-2cb109114914&window=30d&aggregate=controller&filter=namespace:"kubecost"
 ```
 
 ```json

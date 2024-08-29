@@ -1,19 +1,19 @@
-# Collections APIs: update a collection
+# Update an existing collection
 
-[Collections APIs](README.md#table-of-contents) / Managing collections / Update a collection
+[Collections APIs](./#table-of-contents) / Managing collections / Update a collection
 
 Use the following request to update an existing collection by providing the collection ID and a new collection specification, in JSON, as the request body. To see a list of all collections, in order to find a collection ID and specification, reference the [List API](list.md).
 
 ### Request
 
 ```
-PUT /collection?id=<string>
+PUT /model/collection?id=<string>
 ```
 
 ### Example
 
 ```
-PUT /collection?id=8a939ba1-ff15-4600-b711-2cb109114914
+PUT /model/collection?id=8a939ba1-ff15-4600-b711-2cb109114914
 ```
 
 ```json

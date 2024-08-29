@@ -1,6 +1,6 @@
-# Collections APIs: collection total costs
+# Query collection total costs
 
-[Collections APIs](README.md#table-of-contents) / Querying by collection / Query total costs of a collection
+[Collections APIs](./#table-of-contents) / Querying by collection / Query total costs of a collection
 
 ## Query total costs of collection
 
@@ -9,13 +9,13 @@ Use the following request to query the total costs of a collection, which includ
 ### Request
 
 ```
-GET /collection/query/total?id=<string>&window=<string>(&groups=<true>)
+GET /model/collection/query/total?id=<string>&window=<string>(&groups=<true>)
 ```
 
 ### Examples
 
 ```
-GET /collection/query/total?id=8a939ba1-ff15-4600-b711-2cb109114914&window=30d
+GET /model/collection/query/total?id=8a939ba1-ff15-4600-b711-2cb109114914&window=30d
 ```
 
 ```json
@@ -46,7 +46,7 @@ GET /collection/query/total?id=8a939ba1-ff15-4600-b711-2cb109114914&window=30d
 ```
 
 ```
-GET /collection/query/total?id=8a939ba1-ff15-4600-b711-2cb109114914&window=30d&groups=true
+GET /model/collection/query/total?id=8a939ba1-ff15-4600-b711-2cb109114914&window=30d&groups=true
 ```
 
 ```json

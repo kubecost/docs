@@ -49,7 +49,7 @@ Q: Does the Abandoned Workloads savings report rely on the Network Traffic daemo
 A: No, it uses cAdvisor metrics.
 
 Q: Does Kubecost's cost efficiency calculation take GPU into consideration?\
-A: No, the reason is that we get GPU efficiency from integration with the Nvidia DCGM, which is a third-party integration that needs to be set up manually with Kubecost.
+A: Yes, beginning in Kubecost 2.4, GPU efficiency is calculated for NVIDIA GPUs when DCGM Exporter is detected in the cluster where GPUs are present. For more details, see the documentation [here](/install-and-configure/advanced-configuration/gpu.md).
 
 Q: Should I use amortized prices when setting up my CUR or billing export?\
 A: Yes, amortized allows upfront costs of the resources to appear in Kubecost. [More info here](/install-and-configure/install/cloud-integration/README.md#cloud-integration-configurations).
