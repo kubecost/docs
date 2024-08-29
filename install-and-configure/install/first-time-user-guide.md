@@ -59,7 +59,7 @@ To learn more about multi-cluster/Federated configurations, see our [Multi-Clust
 
 Kubecost has a UI that is not exposed by default. Before exposing the UI, consider securing it using traditional Kubernetes ingress methods. Here are a few [Ingress Examples](ingress-examples.md).
 
-For testing Kubecost, we recommend port-forwarding. This can be done with `kubectl port-forward --namespace svc/kubecost-cost-analyzer 9090`, then accessing `http://localhost:9090` in your web browser to see Kubecost's UI.
+For testing Kubecost, we recommend port-forwarding. This can be done with `kubectl port-forward -n kubecost svc/kubecost-cost-analyzer 9090`, then accessing `http://localhost:9090` in your web browser to see Kubecost's UI.
 
 See our [Navigating the Kubecost UI](../../using-kubecost/navigating-the-kubecost-ui/) section for a complete overview of the various monitoring, savings, and governance tools, each with dedicated documentation.
 

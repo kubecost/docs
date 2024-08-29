@@ -132,10 +132,10 @@ Prometheus emits metrics which are used by Kubecost for diagnostic purposes:
 | `up` | Scrape target status |
 | `prometheus_target_interval_length_seconds` | Amount of time between target scrapes |
 
-## NVIDIA K8s Device Plugin (GPU)
+## NVIDIA GPUs
 
-NVIDIA GPU monitoring support can be explained in more detail in the [Kubecost Docs: NVIDIA GPU Monitoring Configurations](/install-and-configure/advanced-configuration/gpu.md) and on the [Kubecost Blog: Monitoring NVIDIA GPU Usage in Kubernetes with Prometheus](https://blog.kubecost.com/blog/nvidia-gpu-usage/). The following metrics are consumed:
+NVIDIA GPU monitoring support can be explained in more detail in the [Kubecost Docs: NVIDIA GPU Monitoring Configurations](/install-and-configure/advanced-configuration/gpu.md) and on the [Kubecost Blog: Monitoring NVIDIA GPU Usage in Kubernetes with Prometheus](https://blog.kubecost.com/blog/nvidia-gpu-usage/). Monitoring of NVIDIA GPUs requires DCGM Exporter. While all metrics exposed by DCGM Exporter are collected, the following metrics are the ones currently used by Kubecost:
 
 | Metric                          | Description              |
 | ------------------------------- | ------------------------ |
-| `DCGM_FI_DEV_GPU_UTIL` | GPU utilization | 
+| `DCGM_FI_PROF_GR_ENGINE_ACTIVE` | GPU utilization          |
