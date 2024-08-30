@@ -2,17 +2,13 @@
 
 You can apply your product key at any time within the product UI or during an install or upgrade process. More details on both options are provided below.
 
-If you have a [multi-cluster setup](/install-and-configure/install/multi-cluster/multi-cluster.md), you only need to apply your product key on the Kubecost primary cluster, and not on any of the Kubecost secondary clusters.
+If you have a [multi-cluster setup](/install-and-configure/install/multi-cluster/multi-cluster.md), you only need to apply your product key on the Kubecost primary cluster. In the event that you are viewing/repairing data on a secondary cluster, you will need to apply your product key on that cluster as well.
 
 {% hint style="info" %}
 `kubecostToken` is a different concept from your product key and is used for managing trial access.
 {% endhint %}
 
-## Option 1: Apply your product key at install
-
-Many Kubecost product configuration options can be specified at install-time, including your product key.
-
-### Option 1: Storing product key in a secret
+## Option 1: Storing product key in a secret
 
 To create a secret you will need to create a JSON file called _productkey.json_ with the following format. Be sure to replace `<YOUR_PRODUCT_KEY>` with your Kubecost product key.
 
@@ -30,20 +26,25 @@ $ kubectl create secret generic <SECRET_NAME> -n kubecost --from-file=productkey
 ```
 {% endcode %}
 
-Update your [_values.yaml_](https://github.com/kubecost/cost-analyzer-helm-chart/blob/5eedab0433445a5b8e134113beb95f4598cd5e2d/cost-analyzer/values.yaml#L714-L717) to enable the product key and specify the secret name:
+Update your [_values.yaml_](https://github.com/kubecost/cost-analyzer-helm-chart/blob/d5144c1c5354e2978b56194f10d3a87cd545a100/cost-analyzer/values.yaml#L3420-L3424) to enable the product key and specify the secret name, then run a `helm upgrade`:
 
-* `kubecostProductConfigs.productKey.enabled=true`
-* `kubecostProductConfigs.productKey.secretname=<SECRET_NAME>`
+```yaml
+kubecostProductConfigs:
+  productKey:
+    enabled: true
+    secretName: <SECRET_NAME>
+```
 
-Run a `helm upgrade` command to start using your product key.
+## Option 2: Apply your product key to _values.yaml_ and upgrade Kubecost
 
-### Option 2: Apply your product key to _values.yaml_ and upgrade Kubecost
+You can also place your product key directly in your [_values.yaml_](https://github.com/kubecost/cost-analyzer-helm-chart/blob/d5144c1c5354e2978b56194f10d3a87cd545a100/cost-analyzer/values.yaml#L3420-L3424), then run a `helm upgrade`.
 
-This specific parameter can be configured under `kubecostProductConfigs.productKey.key` in your [_values.yaml_](https://github.com/kubecost/cost-analyzer-helm-chart/blob/84dfbe4addedfee55b50af6ca44c1f62966d4457/cost-analyzer/values.yaml#L426).
-
-{% hint style="info" %}
-You must also set the `kubecostProductConfigs.productKey.enabled=true` when using this option. That this will leave your secrets unencrypted in _values.yaml_. Use a Kubernetes secret as in the previous method to avoid this.
-{% endhint %}
+```yaml
+kubecostProductConfigs:
+  productKey:
+    enabled: true
+    key: "<YOUR_PRODUCT_KEY>"
+```
 
 ## Option 3: Apply your product key in the Kubecost UI
 
