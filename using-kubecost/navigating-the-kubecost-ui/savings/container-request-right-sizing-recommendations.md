@@ -19,7 +19,7 @@ Recommendations from Kubecost can including both increasing, decreasing, as well
 The request sizing algorithm calculates monthly CPU and RAM savings by comparing current costs with projected costs for the recommended resource allocation. Here's how it works:
 
 1. The algorithm calculates the cost per CPU core and RAM Byte based on your current resource allocation during the analysis period.
-2.The algorithm then gets the difference between your average CPU and RAM usage to the recommended amounts.
+2. The algorithm then gets the difference between your average CPU and RAM usage to the recommended amounts.
 3. Finally, the algorithm multiplies the difference in resource usage by the calculated costs to estimate your monthly savings.
 
 This approach allows Kubecost to provide accurate savings estimates tailored to your specific resource usage and costs. The overall monthly savings for all your containers are represented in the container request right-sizing recommendation page under estimated available savings.  
