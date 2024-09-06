@@ -16,6 +16,14 @@ The container request right-sizing recommendations page shows a tabular view of 
 
 Recommendations from Kubecost can including both increasing, decreasing, as well as establishing net new resource requests. When Kubecost recommends a decrease in resource requests, this results in savings opportunities. The _EST. SAVINGS_ field (Estimated Savings) shows the estimated amount of monthly savings which can be achieved by adopting the recommendations. The amount of estimated savings depends on the Profile and other [configuration options](#configuring-request-right-sizing-recommendations) which are explained below. The container request right-sizing recommendations table is sorted by default in descending order according to the estimated savings available.
 
+The request sizing algorithm calculates monthly CPU and RAM savings by comparing current costs with projected costs for the recommended resource allocation. Here's how it works:
+
+1. The algorithm calculates the cost per CPU core and RAM Byte based on your current resource allocation during the analysis period.
+2.The algorithm then gets the difference between your average CPU and RAM usage to the recommended amounts.
+3. Finally, the algorithm multiplies the difference in resource usage by the calculated costs to estimate your monthly savings.
+
+This approach allows Kubecost to provide accurate savings estimates tailored to your specific resource usage and costs. The overall monthly savings for all your containers are represented in the container request right-sizing recommendation page under estimated available savings.  
+
 The _CURRENT EFFICIENCY_ field shows the efficiency of the container as a result of its current usage-to-request ratio factoring in both CPU and memory. Efficiencies at or above 100% usually indicate the container is undersized in one or both resources and Kubecost recommends increasing requests.
 
 Expand one of the rows to see more details on the workload and the recommendations offered by Kubecost. This view shows more information about the workload, including details such as the namespace and container name, along with the current request values and Kubecost's recommendations. The recommendations displayed in this view are also a result of the [configuration options](#configuring-request-right-sizing-recommendations) explained below.
