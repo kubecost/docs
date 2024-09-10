@@ -94,7 +94,7 @@ Kubecost also supports limiting the instance types that the cluster-sizing algor
 
 ### Configuration
 You can supply your desired list of node types in an allow list. Kubecost will only consider the specified instance types when generating recommendations. We support allow lists for AWS, GCP and Azure instance types.
-Each of the allow lists can be configured by setting the related [Helm chart parameters](https://github.com/kubecost/cost-analyzer-helm-chart/blob/develop/cost-analyzer/values.yaml#L3451-3454). For example:
+Each of the allow lists can be configured by setting the related [Helm chart parameters](https://github.com/kubecost/cost-analyzer-helm-chart/blob/e98d38e7e99a329719e6c814560b71ee83cc7b82/cost-analyzer/values.yaml#L3451-L3454). For example:
 
 ```yaml
 kubecostProductConfigs:
@@ -119,5 +119,8 @@ kubecostProductConfigs:
 
 ### Supported instance types
 
-The complete lists of supported instance types currently available for each of the supported cloud service providers (AWS, GCP, Azure) can be found in the [Helm chart](https://github.com/kubecost/cost-analyzer-helm-chart/blob/develop/docs/resources/savings-recommendations-allow-lists).
+The complete lists of supported instance types currently available for each of the supported cloud service providers (AWS, GCP, Azure) can be found in the Helm chart:
+- [AWS](https://github.com/kubecost/cost-analyzer-helm-chart/blob/develop/cost-analyzer/savings-recommendations-allow-lists-aws.yaml)
+- [Azure](https://github.com/kubecost/cost-analyzer-helm-chart/blob/develop/cost-analyzer/savings-recommendations-allow-lists-azure.yaml)
+- [GCP](https://github.com/kubecost/cost-analyzer-helm-chart/blob/develop/cost-analyzer/savings-recommendations-allow-lists-gcp.yaml)
 
