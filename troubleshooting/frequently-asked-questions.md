@@ -168,3 +168,5 @@ A: Yes! Many do. There are a number of examples on our [poc-common-configuration
   - [Flux](https://github.com/kubecost/poc-common-configurations/tree/main/fluxcd)
   - [Terraform](https://github.com/kubecost/poc-common-configurations/tree/main/terraform)
 
+Q: Why are all my costs in the Kubecost namespace? Or: Why are all my costs in a single namespace?\
+A: Be sure that the Prometheus scrape_config includes the "honor_labels: true" flag. This health check script may be useful: [/kubecost-prometheus-healthcheck.sh](https://github.com/kubecost/poc-common-configurations/blob/main/metric-diagnostics/kubecost-prometheus-healthcheck.sh).
