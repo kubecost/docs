@@ -87,6 +87,10 @@ serviceMonitor:
     enabled: true
     # additionalLabels:
     #   label-key: label-value
+  aggregatorMetrics:
+    enabled: false # aggregatorMetrics are entirely optional and are used entirely for troubleshooting
+    # additionalLabels:
+    #   label-key: label-value
 prometheusRule:
   enabled: true
   # additionalLabels:
@@ -129,6 +133,8 @@ Increasing the default `etlDailyStorageDurationDays` value will naturally result
 The Diagnostics page (_Settings > View Full Diagnostics_) provides diagnostic info on your integration. Scroll down to Prometheus Status to verify that your configuration is successful.
 
 ![Prometheus status diagnostic](/images/prom-status.png)
+
+For clusters that do not have a Kubecost frontend, this health check script may be useful: [kubecost-prometheus-healthcheck.sh](https://github.com/kubecost/poc-common-configurations/blob/main/metric-diagnostics/kubecost-prometheus-healthcheck.sh)
 
 Below you can find solutions to common Prometheus configuration problems. View the [Kubecost Diagnostics](/troubleshooting/diagnostics.md) doc for more information.
 
