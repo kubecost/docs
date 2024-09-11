@@ -88,7 +88,7 @@ serviceMonitor:
     # additionalLabels:
     #   label-key: label-value
   aggregatorMetrics:
-    enabled: false # aggregatorMetrics are entirely optional and are used entirely for troubleshooting
+    enabled: false # aggregatorMetrics are optional and are used exclusively for troubleshooting
     # additionalLabels:
     #   label-key: label-value
 prometheusRule:
