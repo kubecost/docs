@@ -23,40 +23,7 @@ Determine the length of your budget and reset date using the two dropdowns under
 ### Workloads
 
 You can configure one or more workload(s) to be targeted by the budget. From the first dropdown, select the desired workload category. Once the workload category has been selected, the dropdown menu should display all possible values for that category. Select 'Add Filter' to persist your choice. You can repeat for as many workload categories as you need to. 
-The workload properties available will change depending on the selected budget type:
-
-#### Allocations
-- Cluster 
-- Namespace 
-- Label
-
-#### Assets
-
-- Name 
-- Asset Type 
-- Cluster 
-- Provider 
-- ProviderID 
-- Account 
-- Label
-
-#### Cloud
-
-- Account ID
-- Account Name
-- Availability Zone
-- Provider
-- ProviderID
-- Region
-- Invoice Entity Name
-- Invoice Entity ID
-- Category
-- Service
-- Label
-
-#### Collection
-
-For Collection budgets, you can select one collection from the dropdown displaying all available collections. At the moment, Kubecost can only track spend for a single collection per budget.
+There are multiple workload properties available for the Allocation, Asset and Cloud budgets. For Collection budgets, you can select one collection from the dropdown displaying all available collections. At the moment, Kubecost can only track spend for a single collection per budget.
 
 {% hint style="info" %}
 Labels need to be provided in a `key:value` format that describes the object that the budget applies to.
