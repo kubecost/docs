@@ -4,7 +4,7 @@ This document describes how to integrate Kubecost with the Oracle Usage API to b
 
 ### Before Starting
 
-To begin with check ensure that you have the oracle cli installed and configured for your account, documentation on this can be found (here)[https://docs.oracle.com/en-us/iaas/Content/API/SDKDocs/cliinstall.htm#InstallingCLI__macos_homebrew]
+Ensure that you have the oracle cli installed and configured for your account. Documentation on this can be found (here)[https://docs.oracle.com/en-us/iaas/Content/API/SDKDocs/cliinstall.htm].
 
 You will also need the tenancy id and region of the tenancy that your clusters are running in. This can be found in the Oracle Cloud console by selecting "Tenancy: <TENANCY-NAME>" from the profile drop down in the top right corner. Under "Tenancy information" the tenancy id is labeled "OCID" and the region is marked "Home region". The region name listed here will need to be changed to a region identify found (here)[https://docs.oracle.com/en-us/iaas/Content/General/Concepts/regions.htm] 
 
