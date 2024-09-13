@@ -91,7 +91,7 @@ To create the configuration you will need the following values.
 
 create a JSON file name "cloud-integration.json" using the above values
 
-```
+```json
 {
   "oci": {
     "usageApi": [
