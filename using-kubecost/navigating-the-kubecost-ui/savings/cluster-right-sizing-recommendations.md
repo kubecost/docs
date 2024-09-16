@@ -6,7 +6,7 @@ Kubecost is also able to implement cluster sizing recommendations on a user-sche
 
 ## Viewing cluster right-sizing recommendations
 
-You can access cluster right-sizing by selecting _Savings_ in the left navigation, then select the _Right-size your cluster nodes_ panel. 
+You can access cluster right-sizing by selecting _Savings_ in the left navigation, then select the _Right-size your cluster nodes_ panel.
 
 You can choose to view recommendations for the cluster as a whole, or for each individual node group in the cluster.
 
