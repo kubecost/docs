@@ -21,7 +21,7 @@ For example, in a pod with a single container which requests 2 Gi of memory but 
 - _**Infra Idle**_ - Infra Idle (Infrastructure Idle) is defined as the difference between the cost of allocated resources and the cost of the hardware on which they run. Allocation is defined as the max of usage and request.
 For example, a Kubernetes node which has 32 Gi of usable memory runs two pods each with one container. The first pod requests 2 Gi of memory but only uses 1 Gi. The second pod specifies no requests but uses 3 Gi. There is 27 Gi of Infra Idle which is assigned a cost. This is the same definition of ‘idle’ as used in the Kubecost Allocations page (see more details [here](/using-kubecost/navigating-the-kubecost-ui/cost-allocation/efficiency-idle.md)).
 - _**Total Idle**_ - The sum of Infra Idle and Workload Idle.
-- _**Cluster Efficiency**_ - The ratio of the cost of used resources to the total cost of all resources. (cost of resources used) / (total cost of resources). This is the efficiency metric presented in the upper right-hand corner of the Overview page. **Note:** Today, 'Cluster Efficiency' only considers CPU and RAM in its calculations. GPU and Storage metrics will be factored into the efficiency calculation in a future release.
+- _**Cluster Efficiency**_ - The ratio of the cost of used resources to the total cost of all resources. (cost of resources used) / (total cost of resources). This is the efficiency metric presented in the upper right-hand corner of the Overview page. **Note:** Today, 'Cluster Efficiency' considers CPU, GPU, and RAM in its calculations. Storage metrics may be factored into the efficiency calculation in a future release.
 
 ![Cluster Efficiency on Overview](/images/efficiency-cluster-efficiency-on-overview.png)
 
@@ -55,7 +55,7 @@ Once we’ve identified clusters of interest, you can click on the workload idle
 
 ![Resource Idle by Workload](/images/efficiency-workload-view.png)
 
-**This is where you can analyze your workload idle costs.** Workload idle is broken down by resource (CPU, RAM, etc.) for each workload (namespace, controller, etc.).
+**This is where you can analyze your workload idle costs.** Workload idle is broken down by resource (CPU, RAM, and GPU) for each workload (namespace, controller, etc.).
 It is important to remember that workload idle is defined as the cost of resources which are requested but not used. There may be cases where a given workload’s usage exceeds its request – for these cases, the workload idle costs will be $0.00.
 
 **How can I reduce my workload idle costs?**
