@@ -120,6 +120,6 @@ kubectl create secret generic cloud-integration \
 --from-file=cloud-integration.json
 ```
 
-Update the helm values to mount the secret with the configuration
+Update the Helm values to mount the secret with the configuration.
 `.Values.kubecostProductConfigs.cloudIntegrationSecret=cloud-integration`
 
