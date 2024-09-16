@@ -96,6 +96,7 @@ Kubecost also supports limiting the instance types that the cluster-sizing algor
 ### Configuration
 
 You can supply your desired list of node types in an allow list. Kubecost will only consider the specified instance types when generating recommendations. We support allow lists for AWS, GCP and Azure instance types.
+
 Each of the allow lists can be configured by setting the related [Helm chart parameters](https://github.com/kubecost/cost-analyzer-helm-chart/blob/e98d38e7e99a329719e6c814560b71ee83cc7b82/cost-analyzer/values.yaml#L3451-L3454). For example:
 
 ```yaml
