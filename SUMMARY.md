@@ -34,6 +34,7 @@
       * [Creating a Google Service Account](install-and-configure/install/cloud-integration/gcp-out-of-cluster/google-service-account-thanos.md)
       * [Accessing Kubecost with GCP Workload Identity](install-and-configure/install/cloud-integration/gcp-out-of-cluster/accessing-kubecost-with-gcp-workload-identity.md)
       * [Accessing AWS CUR Data with Google Workload Identity Federation](install-and-configure/install/cloud-integration/gcp-out-of-cluster/accessing-aws-cur-data-with-gcp-workplace-identity.md)
+    * [Oracle Cloud Billing Integration](install-and-configure/install/cloud-integration/oracle/usage-api-cloud-cost-integration.md)
   * [Multi-Cluster](install-and-configure/install/multi-cluster/multi-cluster.md)
     * [ETL Federation](install-and-configure/install/multi-cluster/federated-etl/federated-etl.md)
       * [Kubecost Aggregator](install-and-configure/install/multi-cluster/federated-etl/aggregator.md)
