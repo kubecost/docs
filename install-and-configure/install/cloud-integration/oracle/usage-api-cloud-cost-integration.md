@@ -6,7 +6,7 @@ This document describes how to integrate Kubecost with the Oracle Usage API to b
 
 Ensure that you have the oracle CLI installed and configured for your account. Documentation on this can be found [here](https://docs.oracle.com/en-us/iaas/Content/API/SDKDocs/cliinstall.htm).
 
-You will also need the tenancy ID and region of the tenancy in which your clusters are running. This can be found in the Oracle Cloud console by selecting "Tenancy: <TENANCY-NAME>" from the profile drop down in the top right corner. Under "Tenancy information" the tenancy ID is labeled "OCID" and the region is marked "Home region". The region name listed here will need to be changed to a region identify found [here](https://docs.oracle.com/en-us/iaas/Content/General/Concepts/regions.htm).
+You will also need the tenancy ID and region of the tenancy in which your clusters are running. This can be found in the Oracle Cloud console by selecting "Tenancy: _TENANCY-NAME_" from the profile drop down in the top right corner. Under "Tenancy information" the tenancy ID is labeled "OCID" and the region is marked "Home region". The region name listed here will need to be changed to a region identify found [here](https://docs.oracle.com/en-us/iaas/Content/General/Concepts/regions.htm).
 
 ## Authentication and Authorization
 
@@ -75,7 +75,7 @@ oci iam user api-key upload \
 
 To create the configuration you will need the following values.
 
-* "<TENANCY-ID>": The ID of the tenancy of the clusters that Kubernetes is running on
+* "_TENANCY-ID_": The ID of the tenancy of the clusters that Kubernetes is running on
 * "REGION": the region identifier of the tenancy
 * "USER-ID": the ID for the user created above
 * "FINGERPRINT": the finger print for the RSA key attached to the user, obtained when attaching the public key to the users
