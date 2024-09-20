@@ -10,7 +10,7 @@
   * [Environment](install-and-configure/install/environment.md)
   * [Helm Parameters](install-and-configure/install/helm-install-params.md)
   * [Ingress Examples](install-and-configure/install/ingress-examples.md)
-  * [Kubecost v2.0 Install/Upgrade](install-and-configure/install/kubecostv2.md)
+  * [Kubecost v2 Install/Upgrade](install-and-configure/install/kubecostv2.md)
   * [Provider Installations](install-and-configure/install/provider-installations/README.md)
     * [Amazon EKS Integration](install-and-configure/install/provider-installations/aws-eks-cost-monitoring.md)
     * [AWS Marketplace Install](install-and-configure/install/provider-installations/aws-marketplace-install.md)
@@ -34,11 +34,12 @@
       * [Creating a Google Service Account](install-and-configure/install/cloud-integration/gcp-out-of-cluster/google-service-account-thanos.md)
       * [Accessing Kubecost with GCP Workload Identity](install-and-configure/install/cloud-integration/gcp-out-of-cluster/accessing-kubecost-with-gcp-workload-identity.md)
       * [Accessing AWS CUR Data with Google Workload Identity Federation](install-and-configure/install/cloud-integration/gcp-out-of-cluster/accessing-aws-cur-data-with-gcp-workplace-identity.md)
+    * [Oracle Cloud Billing Integration](install-and-configure/install/cloud-integration/oracle/usage-api-cloud-cost-integration.md)
   * [Multi-Cluster](install-and-configure/install/multi-cluster/multi-cluster.md)
     * [ETL Federation](install-and-configure/install/multi-cluster/federated-etl/federated-etl.md)
       * [Kubecost Aggregator](install-and-configure/install/multi-cluster/federated-etl/aggregator.md)
-      * [Migration Guide from Thanos to Kubecost v2.0 (Aggregator)](install-and-configure/install/multi-cluster/federated-etl/thanos-migration-guide.md)
-      * [Migration Guide from Federated ETL to Kubecost v2.0 (Aggregator)](install-and-configure/install/multi-cluster/federated-etl/federated-etl-migration-guide.md)
+      * [Migration Guide from Thanos to Kubecost v2 (Aggregator)](install-and-configure/install/multi-cluster/federated-etl/thanos-migration-guide.md)
+      * [Migration Guide from Federated ETL to Kubecost v2 (Aggregator)](install-and-configure/install/multi-cluster/federated-etl/federated-etl-migration-guide.md)
       * [Federated ETL Backups and Alerting](install-and-configure/install/multi-cluster/federated-etl/federated-etl-backups-alerting.md)
     * [Long-Term Storage Configuration](install-and-configure/install/multi-cluster/long-term-storage-configuration/README.md)
       * [AWS Multi-Cluster Storage Configuration](install-and-configure/install/multi-cluster/long-term-storage-configuration/long-term-storage-aws.md)
@@ -154,6 +155,7 @@
 * [Diagnostic APIs](apis/diagnostic-apis/README.md)
   * [Events API](apis/diagnostic-apis/api-events.md)
   * [Aggregator Diagnostic APIs](apis/diagnostic-apis/api-aggregator-diagnostics.md)
+  * [Cost-model Cache API](apis/diagnostic-apis/api-costmodel-cache.md)
 * [Savings APIs](apis/savings-apis/README.md)
   * [Cluster Right-Sizing Recommendation API](apis/savings-apis/cluster-right-sizing-recommendation-api.md)
   * [Container Request Right Sizing Recommendation API (V2)](apis/savings-apis/api-request-right-sizing-v2.md)
@@ -202,6 +204,7 @@
 * [Capture a HAR File](troubleshooting/capture-a-har-file.md)
 * [Guidelines for a Successful Enterprise Support Engagement](troubleshooting/successful-enterprise-support-engagement-guidelines.md)
 * [Kubecost Severity Level Definitions](troubleshooting/kubecost-severity-definitions.md)
+
 
 ## Other Resources
 

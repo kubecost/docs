@@ -6,4 +6,4 @@ To create a custom SMTP server configuration, navigate to _Settings_ and then fi
 
 ![SMTP configuration dialog](/images/smtp.png)
 
-An SMTP configuration must define, minimally, a sender email, host, and port. Authentication via TLS is supported using username and password. Custom certificates are not currently supported but will be available in a future version. You can test the connection after providing inputs to ensure it is successful. Once successful, save the configuration. Kubecost will now direct all outbound emails over this new SMTP configuration.
+An SMTP configuration must define, minimally, a sender email, host, and port. Authentication via TLS is supported using username and password. Custom CA certificates are supported in PEM-encoded format. You can test the connection after providing inputs to ensure it is successful. Once successful, save the configuration. Kubecost will now direct all outbound emails over this new SMTP configuration.

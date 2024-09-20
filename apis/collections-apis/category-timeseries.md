@@ -1,6 +1,6 @@
-# Collections APIs: category time series costs
+# Query category time series costs
 
-[Collections APIs](README.md#table-of-contents) / Querying by category / Query time series costs of a category
+[Collections APIs](./#table-of-contents) / Querying by category / Query time series costs of a category
 
 ## Query time series costs of a category
 
@@ -9,13 +9,13 @@ Use the following request to query the time series costs of a category, which in
 ### Request
 
 ```
-GET /collections/query/timeseries?category=<string>&window=<string>(&collections=<true>)
+GET /model/collections/query/timeseries?category=<string>&window=<string>(&collections=<true>)
 ```
 
 ### Examples
 
 ```
-GET /collections/query/timeseries?category=Team&window=30d
+GET /model/collections/query/timeseries?category=Team&window=30d
 ```
 
 ```json
@@ -106,7 +106,7 @@ GET /collections/query/timeseries?category=Team&window=30d
 ```
 
 ```
-GET /collections/query/timeseries?category=Team&window=30d&collections=true
+GET /model/collections/query/timeseries?category=Team&window=30d&collections=true
 ```
 
 ```json

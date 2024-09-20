@@ -1,19 +1,19 @@
-# Collections APIs: create a new collection
+# Create a new collection
 
-[Collections APIs](README.md#table-of-contents) / Managing collections / Create a new collection
+[Collections APIs](./#table-of-contents) / Managing collections / Create a new collection
 
 Use the following request to create a new collection by providing a collection specification, in JSON, as the request body.
 
 ### Request
 
 ```
-POST /collections
+POST /model/collections
 ```
 
 ### Example
 
 ```
-POST /collections
+POST /model/collections
 ```
 
 ```json
