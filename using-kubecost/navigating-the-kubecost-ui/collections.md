@@ -46,3 +46,11 @@ Selecting the three vertical dots in the top right of the collection tile will p
 * *Export as CSV*
 * *Export as PDF*
 
+## Viewing idle costs
+
+Costs in the Kubernetes domain have a corresponding idle component. For any Kubernetes costs part of a Collection, the idle cost can be optionally configured to be _included_ in the total cost displayed. The idle cost can be shared by cluster or by node. This can be configured on the Settings page under Idle in Collections. By default, idle costs are hidden. 
+
+If enabled, the 'Idle' column on the _Costs in Collection_ view will display the corresponding idle cost under each item.
+
+To learn more about sharing idle costs, see [here](/using-kubecost/navigating-the-kubecost-ui/cost-allocation/efficiency-idle.md#sharing-idle).
+
