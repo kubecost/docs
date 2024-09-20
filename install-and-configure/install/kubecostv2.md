@@ -2,10 +2,6 @@
 
 Kubecost v2 introduced massive functionality changes including changes to the backend architecture. This may require additional changes be made to your environment before upgrading from an older version of Kubecost to 2.0+. This article reviews several different common configurations and explains any necessary steps to take.
 
-{% hint style="danger" %}
-After upgrading to v2, it's possible saved reports may not properly display in the Kubecost UI. Follow [this solution](/using-kubecost/navigating-the-kubecost-ui/reports.md#saved-reports-not-appearing-in-kubecost-ui-after-upgrading-to-v2) if you experience this problem.
-{% endhint %}
-
 ## Single cluster users
 
 If you have a single cluster installation of Kubecost (i.e. one primary Kubecost instance on each cluster), then you can follow the standard upgrade process for Kubecost 2.0+.
