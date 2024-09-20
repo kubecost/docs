@@ -61,7 +61,7 @@ oci iam policy create \
 
 Start by generating a set of RSA PEM files.
 
-> If following this guide, be sure to change the name of the PEM files you are creating. Failing to do can cause the CLI to stop working. See Oracle documentation [here](https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm#apisigningkey_topic_How_to_Generate_an_API_Signing_Key_Mac_Linux) for more details.
+> If following this guide, be sure to change the name of the PEM files you are creating. Failing to do so can cause the CLI to stop working. See Oracle documentation [here](https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm#apisigningkey_topic_How_to_Generate_an_API_Signing_Key_Mac_Linux) for more details.
 
 Upload the public key to the user you created in the last step.
 
@@ -81,7 +81,7 @@ To create the configuration you will need the following values.
 * "FINGERPRINT": the finger print for the RSA key attached to the user, obtained when attaching the public key to the users
 * "PRIVATE-KEY": the text value of the private .pem file. This string should contain "\n" character at the new lines
 
-Create a JSON file name "cloud-integration.json" using the above values.
+Create a JSON file name `cloud-integration.json` using the above values.
 
 ```json
 {
