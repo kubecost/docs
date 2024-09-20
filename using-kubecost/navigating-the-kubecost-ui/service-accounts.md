@@ -27,5 +27,5 @@ To use the generated key, you must send a `X-API-KEY` header with every request 
 ### Example with cURL
 
 ```shell
-curl -H "X-API-KEY:exampleAPIKey" "https:/kubecost.example.com/model/allocation?window=1d"
+curl -H "X-API-KEY:exampleAPIKey" "https://kubecost.example.com/model/allocation?window=1d"
 ```
