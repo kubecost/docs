@@ -1,6 +1,6 @@
 # Savings
 
-The Savings page provides miscellaneous functionality to help you use resources more effectively and assess wasteful spending. In the center of the page, you will see your estimated monthly savings available. The savings value is calculated from all enabled Savings features, across your clusters and the designated cluster profile via dropdowns in the top right of the page. The total estimated monthly savings shown is ~60% of the sum of all cards to avoid overlap. In some cases, savings totals in cards such as Right-size container requests can be higher than the total estimated monthly savings due to how total estimated monthly savings is calculated.
+The Savings page provides functionality to help you use resources more effectively and assess wasteful spending. In the center of the page, you will see your estimated monthly savings available. The savings value is calculated from all enabled Savings features, across your clusters and the designated cluster profile via dropdowns in the top right of the page. In our experience, teams are only able to achieve about 60% of the total savings available across all Savings features. Thus, the total estimated monthly savings shown is 60% of the sum of all cards. It's worth noting that this could lead to cases where savings shown for an individual Savings feature (such as Right-size container requests) are higher than the total estimated monthly savings.
 
 ![The Savings page](/images/savings.png)
 
