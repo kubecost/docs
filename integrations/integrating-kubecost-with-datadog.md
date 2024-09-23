@@ -6,8 +6,7 @@ Datadog is a monitoring and security platform which teams use for cloud applicat
 
 Before you get started, you will need the following:
 
-* Install [kubectl](https://kubernetes.io/docs/tasks/tools/), [Helm](https://helm.sh/docs/intro/install/), and [GNU Wget](https://www.gnu.org/software/wget/)
-* Datadog account with API key and account permissions to create dashboards
+* Install [kubectl](https://kubernetes.io/docs/tasks/tools/), [Helm](https://helm.sh/docs/intro/install/), and GNU Wget]
 * Kubernetes cluster with permission to access and deploy new workloads
 
 ## Step 1: Install Datadog agent
