@@ -4,9 +4,9 @@ For teams interested in reducing their Kubernetes costs, it's beneficial to firs
 
 ![The Allocations view aggregated by namespace, which shows efficiency & idle](/images/efficiency-idle.png)
 
-## Efficiency
+## Workload Efficiency
 
-Pod resource efficiency is defined as the resource utilization versus the resource request over a given time window. It is cost-weighted and can be expressed as follows:
+Workload efficiency is defined as the resource utilization versus the resource request over a given time window. It is cost-weighted and can be expressed as follows:
 
 > _(((CPU Usage / CPU Requested) \* CPU Cost) + ((RAM Usage / RAM Requested) \* RAM Cost)) / (RAM Cost + CPU Cost)_
 >

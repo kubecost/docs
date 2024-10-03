@@ -155,26 +155,6 @@ In Kubecost, select _Settings_ from the left navigation, and under Cloud Integra
 Be careful when handling your service key! Ensure you have entered it correctly into Kubecost. Don't lose it or let it become publicly available.
 {% endhint %}
 
-## Step 5: Label cloud assets
-
-You can now label assets with the following schema to allocate costs back to their appropriate Kubernetes owner. Learn more [here](https://cloud.google.com/compute/docs/labeling-resources#adding\_or\_updating\_labels\_to\_existing\_resources) on updating GCP asset labels.
-
-```
-Cluster:    "kubernetes_cluster" :   <clusterID>
-Namespace:  "kubernetes_namespace" : <namespace>
-Deployment: "kubernetes_deployment": <deployment>
-Label:      "kubernetes_label_NAME": <label>
-Pod:        "kubernetes_pod":        <pod>
-Daemonset:  "kubernetes_daemonset":  <daemonset>
-Container:  "kubernetes_container":  <container>
-```
-
-To use an alternative or existing label schema for GCP cloud assets, you may supply these in your [_values.yaml_](https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/values.yaml) under the `kubecostProductConfigs.labelMappingConfigs.<aggregation>_external_label`.
-
-{% hint style="info" %}
-Google generates special labels for GKE resources (e.g. "goog-gke-node", "goog-gke-volume"). Values with these labels are excluded from OOC costs because Kubecost already includes them as in-cluster assets. Thus, to make sure all cloud assets are included, we recommend installing Kubecost on each cluster where insights into costs are required.
-{% endhint %}
-
 ### Viewing project-level labels
 
 Project-level labels are applied to all the Assets built from resources defined under a given GCP project. You can filter GCP resources in the [Cloud Costs Explorer](/using-kubecost/navigating-the-kubecost-ui/cloud-costs-explorer/cloud-costs-explorer.md) dashboard (or [API](/apis/monitoring-apis/cloud-cost-api.md)).

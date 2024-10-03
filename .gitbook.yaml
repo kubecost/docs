@@ -7,7 +7,7 @@ structure:
 redirects:
     install-and-configure/install/etl-backup/etl-backup: install-and-configure/install/multi-cluster/federated-etl/federated-etl-backups-alerting.md
     hc/en-us: README.md
-    aws-out-of-cluster.html: install-and-configure/install/cloud-integration/aws-cloud-integrations/aws-out-of-cluster.md
+    aws-out-of-cluster.html: install-and-configure/install/cloud-integration/aws-cloud-integrations/aws-cloud-integrations.md
     custom-prom: install-and-configure/advanced-configuration/custom-prom/custom-prom.md
     custom-prom.html: install-and-configure/advanced-configuration/custom-prom/custom-prom.md
     install: install-and-configure/install/install.md

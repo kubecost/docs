@@ -6,7 +6,7 @@ Federated ETL is only supported for Kubecost Enterprise plans.
 
 Federated extract, transform, load (ETL) is Kubecost's method to aggregate all cluster information back to a single display described in our [Multi-Cluster](/install-and-configure/install/multi-cluster/multi-cluster.md#enterprise-federation) doc. Federated ETL gives teams the benefit of combining multiple Kubecost installations into one view.
 
-As of Kubecost v2.0, a multi-cluster setup will also require running the [Aggregator](/install-and-configure/install/multi-cluster/federated-etl/aggregator.md) on the primary cluster.
+As of Kubecost v2, a multi-cluster setup will also require running the [Aggregator](/install-and-configure/install/multi-cluster/federated-etl/aggregator.md) on the primary cluster.
 
 ## Sample configurations
 

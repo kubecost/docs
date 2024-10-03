@@ -38,7 +38,7 @@ The External Costs API displays costs related to third party services, currently
 
 #### [Budget API](governance-apis/budget-api.md)
 
-The Budget API allows you to establish spending budget rules for your workload across clusters and namespaces to ensure you don't go over your allotted budget.
+The Budget API allows you to establish spending budget rules for your workloads to ensure you don't go over your allotted budget.
 
 #### [Forecast API](governance-apis/forecast-api.md)
 

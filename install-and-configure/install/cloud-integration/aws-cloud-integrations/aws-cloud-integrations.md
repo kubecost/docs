@@ -31,10 +31,6 @@ Follow [these steps](https://docs.aws.amazon.com/cur/latest/userguide/cur-create
 * Under 'Additional content', select the _Enable resource IDs_ checkbox.
 * Under 'Report data integration' select the _Amazon Athena_ checkbox.
 
-{% hint style="info" %}
-For CUR data written to an S3 bucket only accessed by Kubecost, it is safe to expire or delete the objects after seven days of retention.
-{% endhint %}
-
 Remember the name of the bucket you create for CUR data. This will be used in Step 2.
 
 {% hint style="warning" %}
@@ -630,6 +626,16 @@ QueryAthenaPaginated: start query error: operation error Athena: StartQueryExecu
 For AWS Lambda users, you may experience errors running the CloudFormation template created in Step 3 of this guide. This is likely due to your applied account-level quota value. To correct this, in the AWS console, visit the AWS Lambda page. If your value is set to 10 (the default value), it may be too low to run the template. Increase the value as needed.
 
 ![AWS Lambda](/images/aws-lambda.png)
+
+## Viewing account-level tags
+
+Account-level tags are applied (as labels) to all the Assets built from resources defined under a given AWS account. You can filter AWS resources in the Kubecost Assets View (or API) by account-level tags by adding them ('tag:value') in the Label/Tag filter.
+
+If a resource has a label with the same name as an account-level tag, the resource label value will take precedence.
+
+Modifications incurred on account-level tags may take several hours to update on Kubecost.
+
+Your AWS account will need to support the `organizations:ListAccounts` and `organizations:ListTagsForResource` policies to benefit from this feature.
 
 ## Summary and pricing
 
