@@ -68,9 +68,11 @@ As an example, if your cluster is only 25% utilized, as measured by the max of r
 The idle costs dropdown allows you to choose how you wish your idle costs to be displayed:
 
 * Hide: Hide idle costs completely.
-* Separate: Idle costs appear as their own cost, visualized as a gray-colored bar in your display table.
-* Share By Cluster: Idle costs are grouped by the cluster they belong to.
-* Share By Node: Idle costs are grouped by the node they belong to.
+* Separate: Idle costs appear as their own cost, visualized as a gray-colored bar in your graph.
+* Share By Cluster: Idle costs are attributed to workloads, and grouped by the cluster they belong to.
+* Share By Node: Idle costs are attributed to workloads, and grouped by the node they belong to.
+* Separate By Cluster: Idle costs appear as their own cost, visualized as a gray-colored bar in your graph. The idle costs item in the table can be expanded to show the idle costs for each cluster.
+* Separate By Node: Idle costs appear as their own cost, visualized as a gray-colored bar in your graph. The idle costs item in the table can be expanded to show the idle costs for each node.
 
 To learn more about sharing idle costs, see [here](/using-kubecost/navigating-the-kubecost-ui/cost-allocation/efficiency-idle.md#sharing-idle).
 

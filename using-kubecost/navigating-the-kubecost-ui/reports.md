@@ -43,7 +43,7 @@ Select _Apply_ to finalize. When you have created a schedule for your report, th
 The Allocation reports are saved under `global.savedReports`, accept two parameters:
 
 * `enabled` determines whether Kubecost will read saved reports configured via _values.yaml_; default value is `false`
-* `reports` is a list of allocation reports 
+* `reports` is a list of allocation reports
 
 The following fields apply to each map item under the `reports` key:
 
@@ -148,7 +148,7 @@ The following fields apply to each map item under the `reports` key of `global.c
   * `service`
   * `item`
 * `accumulate` in cloud cost reports differ from asset and allocation report as it supports a string equal to `quarter`, `month`, `week`,`day`, `hour` and `true`. This is equal to the step size selection in Cloud Cost Kubecost UI. With `true` signifying entire window duration.
-* `costMetric` depicts the cloud cost metrics for the reports and takes value `listCost`, `netCost`, `amortizedNetCost`,`invoicedCost`, `amortizedCost`. This is equal to the cost metric size selection in Cloud Cost Kubecost UI. 
+* `costMetric` depicts the cloud cost metrics for the reports and takes value `listCost`, `netCost`, `amortizedNetCost`,`invoicedCost`, `amortizedCost`. This is equal to the cost metric size selection in Cloud Cost Kubecost UI.
 * `filters` -- a list of maps consisting of a key, operator and value
   * `key` -- supports `accountID`, `invoiceEntityID`, `provider`, and others. Refer to the [v2 Filters Documentation](/apis/filters-api.md) for the complete list of supported keys.
   * `operator` -- supports operator such as `:`,`!:`,`~:`,`!~:` and others. Refer to the [v2 Filters Documentation](/apis/filters-api.md) for the complete list of operators.
@@ -296,10 +296,4 @@ Navigate to your Reports page in the Kubecost UI and ensure that the configured 
 
 ### Saved reports not appearing in Kubecost UI after upgrading to v2
 
-After upgrading Kubecost to v2, saved reports may not properly display in the Kubecost UI. To properly transfer over saved reports, download this [`copy-reports.sh` file](https://github.com/kubecost/kubecost-utilities/blob/main/copy-reports/copy-reports.sh), then run the following command:
-
-```
-bash copy-reports.sh
-```
-
-Saved reports should then populate in your upgraded Kubecost version.
+After upgrading Kubecost to v2, saved reports may not properly display in the Kubecost UI. See the scripts available to migrate various settings in the [kubecost-utilities repo ](https://github.com/kubecost/kubecost-utilities/tree/main/settings-migration).

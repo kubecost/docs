@@ -128,7 +128,7 @@ This step can take some time depending on how much data the Aggregator must proc
 * The ETL Utils image is building the directory structure in the object store needed by Aggregator to pull the ETL data.
 * SQL tables are building.
 
-Ensure all data loads into the Kubecost UI before moving onto Step 7.
+Ensure all data loads into the Kubecost UI before moving onto Step 8.
 
 ### Step 8: Upgrade your secondary clusters to build and push ETL data
 
