@@ -6,7 +6,7 @@ First, in the Kubecost UI, [view the price of a single node for a single day](./
 
 ![Node cost details](/images/data-auditing/dataaudit-step4.png)
 
-Next, compare this instance's costs with what is found in AWS Cost Explorer (Amortized). The most accessible way of doing so is _Group by_ -> _Resource_, and _Filters -> Resource -> i-033b92ecd18376946._
+Next, compare this instance's costs with what is found in AWS Cost Explorer (Net Amortized). The most accessible way of doing so is _Group by_ -> _Resource_, and _Filters -> Resource -> i-033b92ecd18376946._
 
 ![A node cost for one day in AWS Cost Explorer](/images/data-auditing/dataaudit-aws-costexplorer1.png)
 
