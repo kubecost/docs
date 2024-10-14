@@ -32,7 +32,7 @@ Update your [_values.yaml_](https://github.com/kubecost/cost-analyzer-helm-chart
 kubecostProductConfigs:
   productKey:
     enabled: true
-    secretName: <SECRET_NAME>
+    secretname: <SECRET_NAME>
 ```
 
 ## Option 2: Apply your product key to _values.yaml_ and upgrade Kubecost
