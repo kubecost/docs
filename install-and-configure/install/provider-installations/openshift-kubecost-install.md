@@ -42,7 +42,7 @@ Install Kubecost using OpenShift specific values. Note that the below command fe
 
 ```sh
 helm upgrade --install kubecost kubecost/cost-analyzer -n kubecost --create-namespace \
--f https://raw.githubusercontent.com/kubecost/cost-analyzer-helm-chart/develop/cost-analyzer/values-openshift.yaml
+-f https://raw.githubusercontent.com/kubecost/cost-analyzer-helm-chart/<$VERSION>/cost-analyzer/values-openshift.yaml
 ```
 
 Because OpenShift disallows defining certain fields in a pod's `securityContext` configuration, values specific to OpenShift must be used. The necessary values have already been defined in the OpenShift values file but may be customized to your specific needs.
@@ -74,7 +74,7 @@ oc label namespace kubecost openshift.io/cluster-monitoring=true
 
 ```sh
 helm upgrade --install kubecost kubecost/cost-analyzer -n kubecost --create-namespace \
--f https://raw.githubusercontent.com/kubecost/cost-analyzer-helm-chart/develop/cost-analyzer/values-openshift.yaml \
+-f https://raw.githubusercontent.com/kubecost/cost-analyzer-helm-chart/<$VERSION>/cost-analyzer/values-openshift.yaml \
 --set global.prometheus.enabled=false \
 --set global.prometheus.kubeRBACProxy=true \
 --set global.platforms.openshift.createMonitoringClusterRoleBinding=true \
