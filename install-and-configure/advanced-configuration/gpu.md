@@ -308,3 +308,34 @@ kubectl -n kubecost port-forward svc/kubecost-prometheus-server 8080:80
 Open the Prometheus web interface in your browser by navigating to `http://localhost:8080`. In the search box, begin typing the prefix for a metric, for example `DCGM_FI_DEV_POWER_USAGE`. Click Execute to view the returned query and verify that there is data present. An example is shown below.
 
 ![Prometheus query showing DCGM Exporter metric](/images/gpu-prometheus-query.png)
+
+## Shared GPU Support
+
+Kubecost supports NVIDIA GPU sharing using either the CUDA [time-slicing](https://docs.nvidia.com/datacenter/cloud-native/gpu-operator/latest/gpu-sharing.html) or [Multi-Process Service (MPS)](https://docs.nvidia.com/deploy/mps/index.html) methods. MIG is currently unsupported but is being evaluated for a future release. When employing either time-slicing or MPS, you must use the `renameByDefault=true` option in the [NVIDIA device plugin's](https://github.com/NVIDIA/k8s-device-plugin) configuration stanza. This parameter instructs the device plugin to advertise the resource `nvidia.com/gpu.shared` on nodes where GPU sharing is enabled. Without this configuration option, the device plugin will instead advertise `nvidia.com/gpu` which will mean Kubecost is unable to disambiguate an "exclusive" GPU access request from a shared GPU access request. As a result, Kubecost's cost information will be inaccurate.
+
+For example, the following is an example of a time-slicing configuration which sets the `renameByDefault` parameter as required by Kubecost.
+
+```yaml
+version: v1
+sharing:
+  timeSlicing:
+    renameByDefault: true
+    failRequestsGreaterThanOne: true
+    resources:
+    - name: nvidia.com/gpu
+      replicas: 4
+```
+
+With this configuration saved and applied to nodes, they will begin to advertise the `nvidia.com/gpu.shared` device with a quantity equal to the replica count, defined in the configuration, multiplied by the number of physical GPUs inside the node. For example, a node with four (4) physical NVIDIA GPUs which uses this configuration will advertise sixteen (16) shared GPU devices.
+
+```sh
+$ kubectl describe node mynodename
+...
+Capacity:
+  nvidia.com/gpu.shared: 16
+...
+```
+
+### Limitations
+
+There are limitations of which to be aware when using NVIDIA GPU sharing with either time-slicing or MPS. Because [NVIDIA does not support](https://docs.nvidia.com/datacenter/cloud-native/gpu-operator/latest/gpu-sharing.html#limitations) providing utilization metrics via DCGM Exporter for containers using shared GPUs, Kubecost will display a GPU cost of zero for these workloads. However, the GPU Savings Optimization card (Kubecost Enterprise) will be able to indicate in the utilization table which containers are configured for GPU sharing providing some visibility.
