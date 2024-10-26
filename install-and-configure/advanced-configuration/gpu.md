@@ -78,7 +78,7 @@ Finally, perform a validation step to ensure that metrics are working as expecte
 ### GKE
 
 {% hint style="note" %}
-Managed DCGM offerings such as Google Cloud's managed DCGM are currently not supported. DCGM Exporter must be self-installed and managed in target clusters.
+Managed DCGM offerings such as Google Cloud's [managed DCGM](https://cloud.google.com/kubernetes-engine/docs/how-to/dcgm-metrics) are currently not supported. DCGM Exporter must be self-installed and managed in target clusters.
 {% endhint %}
 
 To install DCGM Exporter on a GKE cluster where the worker nodes use the default [Container Optimized OS (COS)](https://cloud.google.com/container-optimized-os/docs), use the following values. The GKE-provided label `cloud.google.com/gke-accelerator` is used to attract DCGM Exporter pods to nodes with NVIDIA GPUs.
