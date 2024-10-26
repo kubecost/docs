@@ -124,6 +124,6 @@ kubecostProductConfigs:
 
 The complete lists of supported instance types currently available for each of the supported cloud service providers (AWS, GCP, Azure) can be found in the Helm chart.
 
-* [AWS](https://github.com/kubecost/cost-analyzer-helm-chart/blob/develop/cost-analyzer/savings-rec-allow-lists-aws.yaml)
-* [Azure](https://github.com/kubecost/cost-analyzer-helm-chart/blob/develop/cost-analyzer/savings-rec-allow-lists-azure.yaml)
-* [GCP](https://github.com/kubecost/cost-analyzer-helm-chart/blob/develop/cost-analyzer/savings-rec-allow-lists-gcp.yaml)
+* [AWS](https://github.com/kubecost/cost-analyzer-helm-chart/blob/develop/cost-analyzer/values-savings-rec-allowlist-aws.yaml)
+* [Azure](https://github.com/kubecost/cost-analyzer-helm-chart/blob/develop/cost-analyzer/values-savings-rec-allowlist-azure.yaml)
+* [GCP](https://github.com/kubecost/cost-analyzer-helm-chart/blob/develop/cost-analyzer/values-savings-rec-allowlist-gcp.yaml)
