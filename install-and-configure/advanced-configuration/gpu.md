@@ -144,6 +144,26 @@ Ensure the DCGM Exporter pods are in a running state and only on the nodes with 
 kubectl -n dcgm-exporter get pods
 ```
 
+If necessary, create a ResourceQuota allowing DCGM Exporter pods to be scheduled.
+
+```yaml
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: dcgm-exporter-quota
+  namespace: dcgm-exporter
+spec:
+  hard:
+    pods: 100
+  scopeSelector:
+    matchExpressions:
+    - operator: In
+      scopeName: PriorityClass
+      values:
+        - system-node-critical
+        - system-cluster-critical
+```
+
 For additional information on installing DCGM Exporter in Google Cloud, see [here](https://cloud.google.com/stackdriver/docs/managed-prometheus/exporters/nvidia-dcgm).
 
 Finally, perform a validation step to ensure that metrics are working as expected. See the [Validation](#validation) section for details.
