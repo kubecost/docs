@@ -50,9 +50,13 @@ kubectl logs deployment/kubecost-cost-analyzer -c cost-model
 
 Alternatively, Lens is a great tool for diagnosing many issues in a single view. See our blog post on [using Lens with Kubecost](https://blog.kubecost.com/blog/lens-kubecost-extension/) to learn more.
 
-## Configuring log levels
+## Configuring Log Levels
 
-The log output can be adjusted while deploying through Helm by using the `LOG_LEVEL` and/or `LOG_FORMAT` environment variables. These variables include:
+You can adjust the log output while deploying through Helm by using the `logLevel` property and/or the `LOG_FORMAT` environment variable.
+
+### Log Level Values
+
+The `logLevel` property accepts the following values:
 
 * `trace`
 * `debug`
@@ -65,15 +69,23 @@ For example, to set the log level to `debug`, add the following flag to the Helm
 
 {% code overflow="wrap" %}
 ```bash
---set 'kubecostModel.extraEnv[0].name=LOG_LEVEL,kubecostModel.extraEnv[0].value=debug'
+--set 'kubecostModel.logLevel=debug'
 ```
 {% endcode %}
 
-You can set `LOG_LEVEL` to generate two different outputs.
+### Log Format
 
-Setting it to `JSON` will generate a structured logging output: `{"level":"info","time":"2006-01-02T15:04:05.999999999Z07:00","message":"Starting cost-model (git commit \"1.91.0-rc.0\")"}`
+You can set the `LOG_FORMAT` environment variable to generate different types of log outputs:
 
-Setting `LOG_LEVEL` to `pretty` will generate a nice human-readable output: `2006-01-02T15:04:05.999999999Z07:00 INF Starting cost-model (git commit "1.91.0-rc.0")`
+* Setting `LOG_FORMAT` to `JSON` will generate structured logging output:
+  ```json
+  {"level":"info","time":"2006-01-02T15:04:05.999999999Z07:00","message":"Starting cost-model (git commit \"1.91.0-rc.0\")"}
+  ```
+
+* Setting `LOG_FORMAT` to `pretty` will generate a human-readable output:
+  ```
+  2006-01-02T15:04:05.999999999Z07:00 INF Starting cost-model (git commit "1.91.0-rc.0")
+  ```
 
 ### Temporarily set log level
 
