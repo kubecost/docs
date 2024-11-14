@@ -2,11 +2,23 @@
 
 ## Monitoring GPU utilization
 
-Kubecost supports monitoring of NVIDIA GPU utilization starting with the Volta architecture (2017). In order for Kubecost to understand GPU utilization, Kubecost depends on metrics being available from NVIDIA [DCGM Exporter](https://github.com/NVIDIA/dcgm-exporter). Kubecost will search for GPU metrics by default, but since DCGM Exporter is the provider of those metrics it is a required component when GPU monitoring is used with Kubecost and must be installed if it is not already. In many cases, DCGM Exporter may already be installed in your cluster, for example if you currently monitor NVIDIA GPUs with other software. But if not, follow the below instructions to install and configure DCGM Exporter on each of your GPU-enabled clusters.
+Kubecost supports monitoring of NVIDIA GPU utilization starting with the Volta architecture (2017). In order for Kubecost to understand GPU utilization, Kubecost depends on metrics being available from NVIDIA [DCGM Exporter](https://github.com/NVIDIA/dcgm-exporter). Kubecost will search for GPU metrics by default, but since DCGM Exporter is the provider of those metrics it is a required component when GPU monitoring is used with Kubecost and must be installed if it is not already. In many cases, DCGM Exporter may already be installed in your cluster, for example if you currently monitor NVIDIA GPUs with other software. See the [Pre-Installed DCGM Exporter](#pre-installed-dcgm-exporter) section for important considerations. But if not, follow the instructions in the [Install DCGM Exporter](#install-dcgm-exporter) section to install and configure DCGM Exporter on each of your GPU-enabled clusters.
 
 {% hint style="note" %}
 Managed DCGM offerings such as Google Cloud's managed DCGM are currently not supported. DCGM Exporter must be self-installed and managed in target clusters.
 {% endhint %}
+
+## Pre-Installed DCGM Exporter
+
+In cases where you have already installed DCGM Exporter in your cluster, Kubecost can leverage this installation as the source of its GPU metrics. However, in order for Kubecost's bundled Prometheus to find this installation the following requirements must be met.
+
+- DCGM Exporter has been installed with a matching Kubernetes [Service](https://kubernetes.io/docs/concepts/services-networking/service/). Installations consisting of only the DaemonSet are not supported. Helm-based installations of either the [DCGM Exporter](https://github.com/NVIDIA/dcgm-exporter) or the [GPU operator](https://github.com/NVIDIA/gpu-operator) charts include a Service by default.
+- The Service must have active [Endpoints](https://kubernetes.io/docs/concepts/services-networking/service/#endpoints) which list the available DCGM Exporter pods.
+- The Service and Endpoints must have at least one of a few possible labels assigned in order for Prometheus to locate them. The currently-supported label keys are shown below. Assigning a compatible label solely to pods or the parent DaemonSet is not supported.
+  - `app`
+  - `app.kubernetes.io/component`
+  - `app.kubernetes.io/name`
+- The value of one of these labels must contain the string `dcgm-exporter`.
 
 ## Install DCGM Exporter
 
