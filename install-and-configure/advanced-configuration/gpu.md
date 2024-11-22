@@ -313,7 +313,7 @@ Open the Prometheus web interface in your browser by navigating to `http://local
 
 Kubecost supports NVIDIA GPU sharing using either the CUDA [time-slicing](https://docs.nvidia.com/datacenter/cloud-native/gpu-operator/latest/gpu-sharing.html) or [Multi-Process Service (MPS)](https://docs.nvidia.com/deploy/mps/index.html) methods. MIG is currently unsupported but is being evaluated for a future release. When employing either time-slicing or MPS, you must use the `renameByDefault=true` option in the [NVIDIA device plugin's](https://github.com/NVIDIA/k8s-device-plugin?tab=readme-ov-file#shared-access-to-gpus) configuration stanza. This parameter instructs the device plugin to advertise the resource `nvidia.com/gpu.shared` on nodes where GPU sharing is enabled. Without this configuration option, the device plugin will instead advertise `nvidia.com/gpu` which will mean Kubecost is unable to disambiguate an "exclusive" GPU access request from a shared GPU access request. As a result, Kubecost's cost information will be inaccurate.
 
-For example, the following is an example of a time-slicing configuration which sets the `renameByDefault` parameter as required by Kubecost.
+The following is an example of a time-slicing configuration which sets the `renameByDefault` parameter.
 
 ```yaml
 version: v1
