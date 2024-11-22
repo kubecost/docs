@@ -1,6 +1,6 @@
 # Creating a Kubecost Support Ticket in Slack
 
-The Kubecost support team offers several channels for creating support tickets. This document will show how to create a new support ticket using Slack, which can be used in the public #support channel, or a private channel created for your orginization. Kubecost's Slack is publicly available and can be joined by following [this link](https://kubecost.com/join-slack).
+The Kubecost support team offers several channels for creating support tickets. This document will show how to create a new support ticket using Slack, which can be used in the public #support channel, or a private channel created for your organization. Kubecost's Slack is publicly available and can be joined by following [this link](https://kubecost.com/join-slack).
 
 1. Create a new Slack message thread in the Slack channel.
 
