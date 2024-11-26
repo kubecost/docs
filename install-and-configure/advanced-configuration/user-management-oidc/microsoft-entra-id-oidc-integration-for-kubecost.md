@@ -23,6 +23,7 @@ Before following this guide, ensure that:
 3. Select an appropriate name, and provide supported account types for your app.
 4. To configure `Redirect URI`, select _Web_ from the dropdown, then provide the URI as _https://{your-kubecost-address}/model/oidc/authorize_.
 5. Select _Register_ at the bottom of the page to finalize your changes.
+6. Do not add any Optional claims.
 
 ### Step 2: Configuring _values.yaml_
 
@@ -39,7 +40,7 @@ oidc:
   enabled: true
   useIDToken: true
   clientID: "{APPLICATION_CLIENT_ID}"
-  clientSecret: "{CLIENT_CREDENTIALS} > {SECRET_VALUE}"
+  clientSecret: "{CLIENT_SECRET_VALUE}"
   secretName: "kubecost-oidc-secret"
   authURL: "https://login.microsoftonline.com/{YOUR_TENANT_ID}/oauth2/v2.0/authorize?client_id={YOUR_CLIENT_ID}&response_type=code&scope=openid&nonce=123456"
   loginRedirectURL: "https://{YOUR_KUBECOST_DOMAIN}/model/oidc/authorize"
