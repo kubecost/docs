@@ -23,7 +23,6 @@ Before following this guide, ensure that:
 3. Select an appropriate name, and provide supported account types for your app.
 4. To configure `Redirect URI`, select _Web_ from the dropdown, then provide the URI as _https://{your-kubecost-address}/model/oidc/authorize_.
 5. Select _Register_ at the bottom of the page to finalize your changes.
-6. Do not add any Optional claims.
 
 ### Step 2: Configuring _values.yaml_
 
@@ -121,3 +120,5 @@ kubecostModel:
     - name: LOG_LEVEL
       value: debug
 ```
+
+### Option 4: Make sure there are no optional claims in Enrata App Manage-->Token configuration page
