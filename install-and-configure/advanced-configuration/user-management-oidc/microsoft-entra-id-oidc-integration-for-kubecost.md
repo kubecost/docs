@@ -121,4 +121,19 @@ kubecostModel:
       value: debug
 ```
 
-### Option 4: Make sure there are no optional claims in Enrata App Manage-->Token configuration page
+### Option 4: Verify There Are No Optional or Groups Claims Added to the Entra App
+To ensure that no optional claims are configured for your Microsoft Entra application, follow these steps:
+o ensure that no optional claims are configured for your Microsoft Entra application, follow these steps:
+1. Navigate to the App Registrations Page:
+   * Log in to the Microsoft Entra admin center.
+   * Go to App registrations and select the application for which you want to verify the optional claims.
+2. Access Token Configuration:
+   * Under the Manage section, select Token configuration.
+3. Check for Optional Claims:
+   * In the Token configuration page, look for any entries under Optional claims.
+   * Ensure that there are no optional claims added.
+4. Check for Group Claims:
+   * Also, verify that there are no group claims configured by checking the Add groups claim section.
+
+By following these steps, you can confirm that no optional or groups claims are added to your Entra application.
+<img width="680" alt="Screenshot 2024-11-27 at 10 35 28 AM" src="https://github.com/user-attachments/assets/c22cef60-0ae4-4260-9cc9-ed282bef5d38">
