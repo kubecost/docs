@@ -136,5 +136,4 @@ To ensure that no Optional Claims are configured for your Microsoft Entra applic
 4. Check for Group Claims:
    * Also, verify that there are no group claims configured by checking the Add groups claim section.
 
-By following these steps, you can confirm that no optional or groups claims are added to your Entra application.
 <img width="680" alt="Screenshot 2024-11-27 at 10 35 28 AM" src="https://github.com/user-attachments/assets/c22cef60-0ae4-4260-9cc9-ed282bef5d38">
