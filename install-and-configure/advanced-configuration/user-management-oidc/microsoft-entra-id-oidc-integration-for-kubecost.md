@@ -39,7 +39,7 @@ oidc:
   enabled: true
   useIDToken: true
   clientID: "{APPLICATION_CLIENT_ID}"
-  clientSecret: "{CLIENT_CREDENTIALS} > {SECRET_VALUE}"
+  clientSecret: "{CLIENT_SECRET_VALUE}"
   secretName: "kubecost-oidc-secret"
   authURL: "https://login.microsoftonline.com/{YOUR_TENANT_ID}/oauth2/v2.0/authorize?client_id={YOUR_CLIENT_ID}&response_type=code&scope=openid&nonce=123456"
   loginRedirectURL: "https://{YOUR_KUBECOST_DOMAIN}/model/oidc/authorize"
@@ -120,3 +120,20 @@ kubecostModel:
     - name: LOG_LEVEL
       value: debug
 ```
+
+### Option 4: Verify There Are No Optional or Groups Claims Added to the Entra App
+
+To ensure that no Optional Claims are configured for your Microsoft Entra application, follow these steps:
+
+1. Navigate to the App Registrations Page:
+   * Log in to the Microsoft Entra admin center.
+   * Go to App registrations and select the application for which you want to verify the optional claims.
+2. Access Token Configuration:
+   * Under the Manage section, select Token configuration.
+3. Check for Optional Claims:
+   * In the Token configuration page, look for any entries under Optional claims.
+   * Ensure that there are no optional claims added.
+4. Check for Group Claims:
+   * Also, verify that there are no group claims configured by checking the Add groups claim section.
+
+<img width="680" alt="Screenshot 2024-11-27 at 10 35 28 AM" src="https://github.com/user-attachments/assets/c22cef60-0ae4-4260-9cc9-ed282bef5d38">
