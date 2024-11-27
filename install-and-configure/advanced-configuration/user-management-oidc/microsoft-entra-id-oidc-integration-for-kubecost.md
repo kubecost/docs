@@ -122,8 +122,9 @@ kubecostModel:
 ```
 
 ### Option 4: Verify There Are No Optional or Groups Claims Added to the Entra App
-To ensure that no optional claims are configured for your Microsoft Entra application, follow these steps:
-o ensure that no optional claims are configured for your Microsoft Entra application, follow these steps:
+
+To ensure that no Optional Claims are configured for your Microsoft Entra application, follow these steps:
+
 1. Navigate to the App Registrations Page:
    * Log in to the Microsoft Entra admin center.
    * Go to App registrations and select the application for which you want to verify the optional claims.
