@@ -194,17 +194,6 @@ data:
               action: replace
               target_label: kubernetes_node
 
-        - job_name: 'prometheus-pushgateway'
-          honor_labels: true
-
-          kubernetes_sd_configs:
-            - role: service
-
-          relabel_configs:
-            - source_labels: [__meta_kubernetes_service_annotation_prometheus_io_probe]
-              action: keep
-              regex: pushgateway
-
         - job_name: 'kubernetes-services'
 
           metrics_path: /probe

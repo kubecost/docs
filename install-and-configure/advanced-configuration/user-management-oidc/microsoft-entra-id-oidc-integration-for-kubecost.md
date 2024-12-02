@@ -39,7 +39,7 @@ oidc:
   enabled: true
   useIDToken: true
   clientID: "{APPLICATION_CLIENT_ID}"
-  clientSecret: "{CLIENT_CREDENTIALS} > {SECRET_VALUE}"
+  clientSecret: "{CLIENT_SECRET_VALUE}"
   secretName: "kubecost-oidc-secret"
   authURL: "https://login.microsoftonline.com/{YOUR_TENANT_ID}/oauth2/v2.0/authorize?client_id={YOUR_CLIENT_ID}&response_type=code&scope=openid&nonce=123456"
   loginRedirectURL: "https://{YOUR_KUBECOST_DOMAIN}/model/oidc/authorize"
@@ -60,12 +60,13 @@ First, you need to configure an admin role for your app. For more information on
 
 1. Return to the Overview page for the application you created in Step 1.
 2. Select _App roles_ > _Create app role_. Provide the following values:
-  * Display name: _admin_
-  * Allowed member types: _Users/Groups_
-  * Value: _admins_
-  * Description: _Admins have read/write permissions via the Kubecost frontend_ (or provide a custom description as needed)
-  * Do you want to enable this app role?: Select the checkbox
+    * Display name: "admin"
+    * Allowed member types: "Users/Groups"
+    * Value: "admins"
+    * Description: "Admins have read/write permissions via the Kubecost frontend" (or provide a custom description as needed)
+    * Do you want to enable this app role?: Select the checkbox
 3. Select _Apply_.
+4. Optionally, repeat the above steps to create a "readonly" role.
 
 Then, you need to attach the role you just created to users and groups.
 
@@ -77,22 +78,16 @@ Then, you need to attach the role you just created to users and groups.
 ```yaml
 oidc:
   enabled: true
-  # THIS IS REQUIRED FOR AZURE. Azure communicates roles via the id_token instead of the access_token.
-  useIDToken: true
+  useIDToken: true  # REQUIRED. EntraID communicates roles via id_token.
   rbac:
     enabled: true
     groups:
       - name: admin
-        # If admin is disabled, all authenticated users will be able to make configuration changes to the kubecost frontend
         enabled: true
-        # SET THIS EXACT VALUE FOR ENTRA ID. This is the string Entra ID uses in its OIDC tokens.
-        claimName: "roles"
-        # These strings need to exactly match with the app roles created in Entra ID
-        claimValues:
+        claimName: "roles"  # REQUIRED. Set this exact string value.
+        claimValues:  # The strings below need to exactly match the "App roles" in Entra ID.
           - "admins"
-          - "superusers"
       - name: readonly
-        # If readonly is disabled, all authenticated users will default to readonly
         enabled: true
         claimName: "roles"
         claimValues:
@@ -125,3 +120,20 @@ kubecostModel:
     - name: LOG_LEVEL
       value: debug
 ```
+
+### Option 4: Verify There Are No Optional or Groups Claims Added to the Entra App
+
+To ensure that no Optional Claims are configured for your Microsoft Entra application, follow these steps:
+
+1. Navigate to the App Registrations Page:
+   * Log in to the Microsoft Entra admin center.
+   * Go to App registrations and select the application for which you want to verify the optional claims.
+2. Access Token Configuration:
+   * Under the Manage section, select Token configuration.
+3. Check for Optional Claims:
+   * In the Token configuration page, look for any entries under Optional claims.
+   * Ensure that there are no optional claims added.
+4. Check for Group Claims:
+   * Also, verify that there are no group claims configured by checking the Add groups claim section.
+
+<img width="680" alt="Screenshot 2024-11-27 at 10 35 28 AM" src="https://github.com/user-attachments/assets/c22cef60-0ae4-4260-9cc9-ed282bef5d38">
