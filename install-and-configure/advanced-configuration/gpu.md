@@ -4,6 +4,11 @@
 
 Kubecost supports monitoring of NVIDIA GPU utilization starting with the Volta architecture (2017). In order for Kubecost to understand GPU utilization, Kubecost depends on metrics being available from NVIDIA [DCGM Exporter](https://github.com/NVIDIA/dcgm-exporter). Kubecost will search for GPU metrics by default, but since DCGM Exporter is the provider of those metrics it is a required component when GPU monitoring is used with Kubecost and must be installed if it is not already. In many cases, DCGM Exporter may already be installed in your cluster, for example if you currently monitor NVIDIA GPUs with other software. But if not, follow the below instructions to install and configure DCGM Exporter on each of your GPU-enabled clusters.
 
+
+*** DCGM-Exporter needs to be running on all clusters running GPU nodes in order to see GPU metrics in Kubecost.
+
+*** Kubecost must be measuring some amount of GPU usage before it will show GPU Efficiency features.
+
 ## Install DCGM Exporter
 
 DCGM Exporter is an implementation of NVIDIA [Data Center GPU Manager (DCGM)](https://developer.nvidia.com/dcgm) for Kubernetes which exports metrics in [Prometheus](https://prometheus.io/) format. DCGM Exporter allows for running the DCGM software under Kubernetes on nodes which contain NVIDIA devices and takes care of the task of making DCGM metrics available to external tools such as Kubecost.
