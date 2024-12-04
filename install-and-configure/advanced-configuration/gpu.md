@@ -21,9 +21,8 @@ In cases where you have already installed DCGM Exporter in your cluster, Kubecos
 - The value of one of these labels must contain the string `dcgm-exporter`.
 
 
-* DCGM-Exporter needs to be running on all clusters running GPU nodes in order to see GPU metrics in Kubecost.
+**In order for Kubecost to provide gpuUsageAverage, gpuRequestAverage and gpuCostIdle, the DCGM exporter must be running locally on the cluster with GPU nodes.**
 
-* Kubecost must be measuring some amount of GPU usage before it will show GPU Efficiency features.
 
 ## Install DCGM Exporter
 

@@ -58,6 +58,8 @@ Once we’ve identified clusters of interest, you can click on the workload idle
 **This is where you can analyze your workload idle costs.** Workload idle is broken down by resource (CPU, RAM, and GPU) for each workload (namespace, controller, etc.).
 It is important to remember that workload idle is defined as the cost of resources which are requested but not used. There may be cases where a given workload’s usage exceeds its request – for these cases, the workload idle costs will be $0.00.
 
+**Important Note: Kubecost must be measuring some amount of GPU usage before it will show GPU Efficiency features.**
+
 **How can I reduce my workload idle costs?**
 Kubecost is full of insights and automation to help you reduce your wasted workload idle cost!
 Specifically, the [right-size container requests](/using-kubecost/navigating-the-kubecost-ui/savings/container-request-right-sizing-recommendations.md) page can help drive significant reductions in workload idle.
