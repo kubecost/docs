@@ -108,6 +108,7 @@
     * [Spot Checklist](using-kubecost/navigating-the-kubecost-ui/savings/spot-checklist.md)
     * [Spot Commander](using-kubecost/navigating-the-kubecost-ui/savings/spot-commander.md)
     * [Persistent Volume Right-Sizing Recommendations](using-kubecost/navigating-the-kubecost-ui/savings/pv-right-sizing-rec.md)
+    * [GPU Optimization](using-kubecost/navigating-the-kubecost-ui/savings/gpu-optimization.md)
   * [Budgets](using-kubecost/navigating-the-kubecost-ui/budgets.md)
   * [Audits](using-kubecost/navigating-the-kubecost-ui/audits.md)
   * [Anomaly Detection](using-kubecost/navigating-the-kubecost-ui/anomaly-detection.md)
