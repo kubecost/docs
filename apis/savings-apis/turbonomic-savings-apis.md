@@ -7,7 +7,7 @@ This feature is in beta. Please read the documentation carefully.
 The [IBM Turbonomic Action Center](https://www.ibm.com/docs/en/tarm/8.14.3?topic=reference-turbonomic-actions) offers multiple types of actions destined to improve the overall performance of your cluster(s). The integration between Kubecost and Turbonomic allows you to view the estimated savings incurred by executing these actions.
 
 ## Prerequisites
-To use the Turbonomic Savings APIs, you must first enable the [Turbonomic Integration](integrations/turbonomic-integration.md). This is required for Kubecost to be able to pull action data from your Turbonomic client. 
+To use the Turbonomic Savings APIs, you must first enable the [Turbonomic Integration](../../integrations/turbonomic-integration.md). This is required for Kubecost to be able to pull action data from your Turbonomic client. 
 
 ## APIs
 There exist several Kubecost Savings APIs, each of them being in direct correspondence to actions in the Turbonomic Action Center. 
@@ -19,7 +19,7 @@ There exist several Kubecost Savings APIs, each of them being in direct correspo
 {% swagger-description %}
 
 This API provides the estimated cost impact of resizing the CPU and memory request(s) for a given workload, as recommended by Turbonomic.
-The Current and Predicted cost columns are calculated using the [Spec Cost Prediction API](apis/governance-apis/spec-cost-prediction-api.md).
+The Current and Predicted cost columns are calculated using the [Spec Cost Prediction API](../governance-apis/spec-cost-prediction-api.md).
 
 ### Suspend Container Pods
 {% swagger method="get" path="/turbonomic/suspendContainerPods" baseUrl="http://<your-kubecost-address>/model/savings" summary="Turbonomic Actions: Suspend Container Pods" %}
