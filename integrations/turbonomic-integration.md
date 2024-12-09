@@ -4,7 +4,7 @@
 This integration is currently in beta. Please read the documentation carefully.
 {% endhint %}
 
-The Turbonomic Integration feature enables users to obtain supplemental cost information on actions recommended by Turbonomic. This integration is required for the [Turbonomic Savings APIs](apis/savings-apis/turbonomic-savings-apis.md).  
+The Turbonomic Integration feature enables users to obtain supplemental cost information on actions recommended by Turbonomic. This integration is required for the [Turbonomic Savings APIs](../apis/savings-apis/turbonomic-savings-apis.md).  
 
 ## Usage
 
