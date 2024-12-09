@@ -2,6 +2,10 @@
 
 The GPU optimization page, a Kubecost Enterprise feature, shows you details on your workloads (containers and their relatives) which are using GPUs and proactively identifies ways in which you can save money on them. Kubecost collects and processes [GPU utilization metrics](/install-and-configure/advanced-configuration/gpu.md) to power the contents of this page. The page is broken down into two main sections: a workload utilization table and recommendation cards.
 
+{% hint style="info" %}
+If the GPU Optimization savings card appears to be greyed out, click the meatballs menu in the upper right and select "Unarchive".
+{% endhint %}
+
 ## Utilization Table
 
 The utilization table displays the GPU-related workloads in your Kubecost environment and provides many details which can be helpful to understand what is going on. Unlike other pages in Kubecost which display all workloads, the utilization table on this page is constrained to only workloads which are requesting some amount of GPU. It is not an extraction of the Allocation page, for example. Aggregations which do not feature a GPU in some way will be intentionally absent from this table. For example, your Kubecost estate has three (3) clusters but only one (1) of them has GPUs. Only the cluster with GPUs will display content on this table.
