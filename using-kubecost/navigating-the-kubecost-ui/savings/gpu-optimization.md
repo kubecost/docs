@@ -29,3 +29,16 @@ Kubecost provides proactive recommendations on how to save money on GPU workload
 Clicking on each recommendation tile displays a window with further details on the recommendation designed to help you identify exactly which workload Kubecost has flagged and more information on why the recommendation was made all with the goal of helping you gain confidence in the accuracy of the recommendation. The window contains a utilization graph over the selected time window, details on the container and its location in the cluster, and an explanation with more details on the recommendation.
 
 ![GPU Optimization savings modal](/images/gpu-savings-optimize-modal.png)
+
+## Known Limitations
+
+In the first version of the GPU Optimization Savings Insights card there are a few limitations of which to be aware.
+
+- Multiple containers with the same name and running on the same cluster, node, and namespace combination (i.e., "identical" containers) might result in the following effects:
+  - The savings number provided on Optimize and Remove cards may be an implicit sum of the total cost these containers.
+  - Recommendations will only be provided for one of them.
+  - The utilization table may not show these identical containers.
+- GPU nodes must be running or have run at least one container utilizing a GPU for it to be represented on the utilization table in either the Cluster aggregation’s GPU nodes column or on the Node aggregation.
+- Optimize may be as accurate as possible in certain cases since Kubecost currently infers utilization about all GPUs from a single averaged utilization number.
+- For upgrades from prior versions to 2.5.0, there may be cases where Max. GPU Utilization could be a smaller percentage than Avg. GPU Utilization. This will self correct once the chosen window size is smaller than the time the 2.5.0 instance has been collecting the new max. GPU util. metric.
+- The GPU Optimization card on the Savings Insights screen may initially appear greyed out. Click the meatballs icon in the upper right and choose "Unarchive" to make the card appear as the others.
