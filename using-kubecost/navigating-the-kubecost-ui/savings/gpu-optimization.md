@@ -6,6 +6,8 @@ The GPU optimization page, a Kubecost Enterprise feature, shows you details on y
 If the GPU Optimization savings card appears to be greyed out, click the meatballs menu in the upper right and select "Unarchive".
 {% endhint %}
 
+![GPU Optimization dashboard](/images/gpu-savings-optimize-dashboard.png)
+
 ## Utilization Table
 
 The utilization table displays the GPU-related workloads in your Kubecost environment and provides many details which can be helpful to understand what is going on. Unlike other pages in Kubecost which display all workloads, the utilization table on this page is constrained to only workloads which are requesting some amount of GPU. It is not an extraction of the Allocation page, for example. Aggregations which do not feature a GPU in some way will be intentionally absent from this table. For example, your Kubecost estate has three (3) clusters but only one (1) of them has GPUs. Only the cluster with GPUs will display content on this table.
@@ -25,3 +27,5 @@ Kubecost provides proactive recommendations on how to save money on GPU workload
 - **Share**: Containers which request a single GPU but are using somewhere between zero and 100% are identified as candidates for GPU sharing. In this card, Kubecost shows the container which is not fully utilizing a GPU and can potentially request access to a shared GPU instead. GPU sharing is a technique whereby multiple containers, each which need some GPU resources, all execute concurrently on a single GPU thereby potentially reducing costs by requiring fewer total GPUs. See the section on GPU sharing [here](/install-and-configure/advanced-configuration/gpu.md#shared-gpu-support) for more details on how or if this is right for you. Because reconfiguring a workload to request access to a shared GPU is highly variable and depends on many factors, Kubecost does not show a possible savings number associated with this recommendation type. This does not mean, however, that no savings are likely to result in configuring your cluster and appropriate workloads for GPU sharing.
 
 Clicking on each recommendation tile displays a window with further details on the recommendation designed to help you identify exactly which workload Kubecost has flagged and more information on why the recommendation was made all with the goal of helping you gain confidence in the accuracy of the recommendation. The window contains a utilization graph over the selected time window, details on the container and its location in the cluster, and an explanation with more details on the recommendation.
+
+![GPU Optimization savings modal](/images/gpu-savings-optimize-modal.png)
