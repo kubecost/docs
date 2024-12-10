@@ -163,6 +163,7 @@
   * [Container Request Right Sizing Recommendation API (V2)](apis/savings-apis/api-request-right-sizing-v2.md)
   * [Container Request Recommendation Apply/Plan APIs](apis/savings-apis/api-request-recommendation-apply.md)
   * [Abandoned Workloads API](apis/savings-apis/api-abandoned-workloads.md)
+  * [Turbonomic Actions APIs](apis/savings-apis/api-turbonomic-actions.md)
 * [Filter Parameters (v2)](apis/filters-api.md)
 
 ## Architecture
