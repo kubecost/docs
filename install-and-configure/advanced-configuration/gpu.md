@@ -349,7 +349,7 @@ Open the Prometheus web interface in your browser by navigating to `http://local
 
 ![Prometheus query showing DCGM Exporter metric](/images/gpu-prometheus-query.png)
 
-Additionally, check the `DCGM_FI_PROF_GR_ENGINE_ACTIVE` metric. This is the metric Kubecost uses to determine GPU utilization. GPU efficiency features in the UI are only enabled when there are nonzero values for this metric.
+Additionally, check the `DCGM_FI_PROF_GR_ENGINE_ACTIVE` metric. This is the metric Kubecost currently uses to determine GPU utilization. GPU efficiency features in the UI are only enabled when there are non-zero values for this metric.
 
 ![Prometheus query showing DCGM Exporter metric](/images/gpu-prometheus-query-gr-engine-active.png)
 
