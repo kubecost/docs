@@ -2,7 +2,23 @@
 
 ## Monitoring GPU utilization
 
-Kubecost supports monitoring of NVIDIA GPU utilization starting with the Volta architecture (2017). In order for Kubecost to understand GPU utilization, Kubecost depends on metrics being available from NVIDIA [DCGM Exporter](https://github.com/NVIDIA/dcgm-exporter). Kubecost will search for GPU metrics by default, but since DCGM Exporter is the provider of those metrics it is a required component when GPU monitoring is used with Kubecost and must be installed if it is not already. In many cases, DCGM Exporter may already be installed in your cluster, for example if you currently monitor NVIDIA GPUs with other software. But if not, follow the below instructions to install and configure DCGM Exporter on each of your GPU-enabled clusters.
+Kubecost supports monitoring of NVIDIA GPU utilization starting with the Volta architecture (2017). In order for Kubecost to understand GPU utilization, Kubecost depends on metrics being available from NVIDIA [DCGM Exporter](https://github.com/NVIDIA/dcgm-exporter). Kubecost will search for GPU metrics by default, but since DCGM Exporter is the provider of those metrics it is a required component when GPU monitoring is used with Kubecost and must be installed if it is not already. In many cases, DCGM Exporter may already be installed in your cluster, for example if you currently monitor NVIDIA GPUs with other software. See the [Pre-Installed DCGM Exporter](#pre-installed-dcgm-exporter) section for important considerations. But if not, follow the instructions in the [Install DCGM Exporter](#install-dcgm-exporter) section to install and configure DCGM Exporter on each of your GPU-enabled clusters.
+
+{% hint style="note" %}
+Managed DCGM offerings such as Google Cloud's managed DCGM are currently not supported. DCGM Exporter must be self-installed and managed in target clusters.
+{% endhint %}
+
+## Pre-Installed DCGM Exporter
+
+In cases where you have already installed DCGM Exporter in your cluster, Kubecost can leverage this installation as the source of its GPU metrics. However, in order for Kubecost's bundled Prometheus to find this installation the following requirements must be met.
+
+- DCGM Exporter has been installed with a matching Kubernetes [Service](https://kubernetes.io/docs/concepts/services-networking/service/). Installations consisting of only the DaemonSet are not supported. Helm-based installations of either the [DCGM Exporter](https://github.com/NVIDIA/dcgm-exporter) or the [GPU operator](https://github.com/NVIDIA/gpu-operator) charts include a Service by default.
+- The Service must have active [Endpoints](https://kubernetes.io/docs/concepts/services-networking/service/#endpoints) which list the available DCGM Exporter pods.
+- The Service and Endpoints must have at least one of a few possible labels assigned in order for Prometheus to locate them. The currently-supported label keys are shown below. Assigning a compatible label solely to pods or the parent DaemonSet is not supported.
+  - `app`
+  - `app.kubernetes.io/component`
+  - `app.kubernetes.io/name`
+- The value of one of these labels must contain the string `dcgm-exporter`.
 
 ## Install DCGM Exporter
 
@@ -73,6 +89,10 @@ Finally, perform a validation step to ensure that metrics are working as expecte
 
 ### GKE
 
+{% hint style="note" %}
+Managed DCGM offerings such as Google Cloud's [managed DCGM](https://cloud.google.com/kubernetes-engine/docs/how-to/dcgm-metrics) are currently not supported. DCGM Exporter must be self-installed and managed in target clusters.
+{% endhint %}
+
 To install DCGM Exporter on a GKE cluster where the worker nodes use the default [Container Optimized OS (COS)](https://cloud.google.com/container-optimized-os/docs), use the following values. The GKE-provided label `cloud.google.com/gke-accelerator` is used to attract DCGM Exporter pods to nodes with NVIDIA GPUs.
 
 {% hint style="info" %}
@@ -134,6 +154,26 @@ Ensure the DCGM Exporter pods are in a running state and only on the nodes with 
 
 ```sh
 kubectl -n dcgm-exporter get pods
+```
+
+If necessary, create a ResourceQuota allowing DCGM Exporter pods to be scheduled.
+
+```yaml
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: dcgm-exporter-quota
+  namespace: dcgm-exporter
+spec:
+  hard:
+    pods: 100
+  scopeSelector:
+    matchExpressions:
+    - operator: In
+      scopeName: PriorityClass
+      values:
+        - system-node-critical
+        - system-cluster-critical
 ```
 
 For additional information on installing DCGM Exporter in Google Cloud, see [here](https://cloud.google.com/stackdriver/docs/managed-prometheus/exporters/nvidia-dcgm).
