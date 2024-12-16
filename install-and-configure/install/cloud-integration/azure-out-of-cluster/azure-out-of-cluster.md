@@ -97,9 +97,3 @@ To troubleshoot a configuration that is not yet working:
 * `$ helm get values kubecost` to verify you've properly set `.Values.kubecostProductConfigs.cloudIntegrationSecret`
 * Verify that a non-empty CSV file has been created at this path in your Azure Portal Storage Account: `<STORAGE_ACCOUNT>/<CONTAINER_NAME>/<OPTIONAL_CONTAINER_PATH>/<COST_EXPORT_NAME>/<DATE_RANGE>/<CSV_FILE>`. Ensure new CSVs are being generated every day.
 * When opening a cost report CSV, ensure that there are rows in the file that do not have a MeterCategory of “Virtual Machines” or “Storage” as these items are ignored because they are in cluster costs. Additionally, make sure that there are items with a UsageDateTime that matches the date you are interested in.
-
-When reviewing logs:
-
-*   The following error is reflective of Kubecost's previous Azure Cloud Integration method and can be safely disregarded.
-
-    `ERR Error, Failed to locate azure storage config file: /var/azure-storage-config/azure-storage-config.json`

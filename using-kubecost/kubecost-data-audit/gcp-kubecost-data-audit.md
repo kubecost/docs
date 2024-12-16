@@ -11,14 +11,16 @@ First, in the Kubecost UI, view the price of a single node for a single day. Thi
 
 Next, compare this instance's costs with what is found in the GCP export via BigQuery. Use the providerID that's in Kubecost for the node as the `resource.name` in the following query:
 
-```bash
+```sql
 SELECT
   TIMESTAMP_TRUNC(usage_start_time, day) as usage_date, 
   service.description as service,
   resource.name as resource,
   SUM(cost) as cost,
   SUM(cost_at_list) as list_cost,
-  ARRAY_CONCAT_AGG(credits) as credits
+  ARRAY_CONCAT_AGG(credits) as credits,
+  -- OPTIONAL: Use the below line to SUM the credits associated with each resource
+  SUM((SELECT SUM(credit.amount) FROM UNNEST(credits) credit)) as total_credits
 FROM detailedbilling.gcp_billing_export_resource_v1_0121AC_C6F51B_690771
 WHERE 
   usage_start_time >= "2024-03-24" 
@@ -31,7 +33,6 @@ GROUP BY
 ```
 
 ![BigQuery Output](/images/data-auditing/dataaudit-gcp-bigquery-output.png)
-
 
 {% hint style="info" %}
 The example above is auditing the GKE nodes associated with the cluster. BigQuery will return additional items such as network costs and costs associated with the node pool, however you should focus on GKE nodes only.
