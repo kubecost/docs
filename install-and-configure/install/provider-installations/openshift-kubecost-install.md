@@ -74,13 +74,7 @@ oc label namespace kubecost openshift.io/cluster-monitoring=true
 
 ```sh
 helm upgrade --install kubecost kubecost/cost-analyzer -n kubecost --create-namespace \
--f https://raw.githubusercontent.com/kubecost/cost-analyzer-helm-chart/<$VERSION>/cost-analyzer/values-openshift.yaml \
---set global.prometheus.enabled=false \
---set global.prometheus.kubeRBACProxy=true \
---set global.platforms.openshift.createMonitoringClusterRoleBinding=true \
---set global.platforms.openshift.createMonitoringResourceReaderRoleBinding=true \
---set global.platforms.openshift.monitoringServiceAccountName=prometheus-k8s \
---set serviceMonitor.enabled=true
+-f https://raw.githubusercontent.com/kubecost/cost-analyzer-helm-chart/<$VERSION>/cost-analyzer/values-openshift-cluster-prometheus.yaml \
 ```
 
 
