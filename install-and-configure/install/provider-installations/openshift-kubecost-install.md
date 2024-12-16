@@ -62,7 +62,7 @@ After installation, wait for all pods to be ready. Kubecost will begin collectin
 
 ### Using in-cluster Prometheus
 
-Kubecost can now be installed without the bundled Prometheus and using the in-cluster Prometheus of OpenShift. This method requires some additional setup steps but allows for better integration with existing OpenShift monitoring infrastructure without the need to create an additional prometheus instance.
+Kubecost can be installed without the bundled Prometheus and using the in-cluster Prometheus of OpenShift. This method requires some additional setup steps but allows for better integration with existing OpenShift monitoring infrastructure without the need to create an additional prometheus instance.
 
 1. First, add the following label to the namespace where Kubecost will be deployed:
 
@@ -74,7 +74,7 @@ oc label namespace kubecost openshift.io/cluster-monitoring=true
 
 ```sh
 helm upgrade --install kubecost kubecost/cost-analyzer -n kubecost --create-namespace \
--f https://raw.githubusercontent.com/kubecost/cost-analyzer-helm-chart/<$VERSION>/cost-analyzer/values-openshift-cluster-prometheus.yaml \
+-f https://raw.githubusercontent.com/kubecost/cost-analyzer-helm-chart/<$VERSION>/cost-analyzer/values-openshift-cluster-prometheus.yaml
 ```
 
 After installation, wait for all pods to be ready. Kubecost will begin collecting data and may take up to 15 minutes for the UI to reflect the resources in the local cluster.
