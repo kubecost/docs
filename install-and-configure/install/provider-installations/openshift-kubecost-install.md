@@ -17,7 +17,7 @@ More details and instructions on both deployment options are covered in the sect
 
 A standard deployment of Kubecost to OpenShift is no different from deployments to other platforms with the exception of additional settings which may be required to successfully deploy to OpenShift.
 
-Kubecost is installed with Cost Analyzer and Prometheus as a time-series database. Data is gathered by the Prometheus instance bundled with Kubecost. Kubecost then pushes and queries metrics to and from Prometheus.
+Kubecost is installed with Cost Analyzer and Prometheus as a time-series database. Data is gathered by the Prometheus instance. Kubecost then pushes and queries metrics to and from Prometheus.
 
 The standard deployment is illustrated in the following diagram.
 
@@ -42,7 +42,7 @@ Install Kubecost using OpenShift specific values. Note that the below command fe
 
 ```sh
 helm upgrade --install kubecost kubecost/cost-analyzer -n kubecost --create-namespace \
--f https://raw.githubusercontent.com/kubecost/cost-analyzer-helm-chart/develop/cost-analyzer/values-openshift.yaml
+-f https://raw.githubusercontent.com/kubecost/cost-analyzer-helm-chart/<$VERSION>/cost-analyzer/values-openshift.yaml
 ```
 
 Because OpenShift disallows defining certain fields in a pod's `securityContext` configuration, values specific to OpenShift must be used. The necessary values have already been defined in the OpenShift values file but may be customized to your specific needs.
@@ -59,6 +59,26 @@ Other OpenShift-specific values include the ability to deploy a Route and Securi
 If you have not opted to do so during installation, it may be necessary to create a Route to the service `kubecost-cost-analyzer` on port `9090` of the `kubecost` project (if using default values). For more information on Routes, see the OpenShift documentation [here](https://docs.openshift.com/container-platform/4.13/networking/routes/route-configuration.html).
 
 After installation, wait for all pods to be ready. Kubecost will begin collecting data and may take up to 15 minutes for the UI to reflect the resources in the local cluster.
+
+### Using in-cluster Prometheus
+
+Kubecost can be installed without the bundled Prometheus and using the in-cluster Prometheus of OpenShift. This method requires some additional setup steps but allows for better integration with existing OpenShift monitoring infrastructure without the need to create an additional prometheus instance.
+
+1. First, add the following label to the namespace where Kubecost will be deployed:
+
+```sh
+oc label namespace kubecost openshift.io/cluster-monitoring=true
+```
+
+2. Install Kubecost with the following command:
+
+```sh
+helm upgrade --install kubecost kubecost/cost-analyzer -n kubecost --create-namespace \
+-f https://raw.githubusercontent.com/kubecost/cost-analyzer-helm-chart/<$VERSION>/cost-analyzer/values-openshift-cluster-prometheus.yaml
+```
+
+After installation, wait for all pods to be ready. Kubecost will begin collecting data and may take up to 15 minutes for the UI to reflect the resources in the local cluster.
+
 
 ## Community operator deployment guide
 
