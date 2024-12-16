@@ -77,15 +77,6 @@ helm upgrade --install kubecost kubecost/cost-analyzer -n kubecost --create-name
 -f https://raw.githubusercontent.com/kubecost/cost-analyzer-helm-chart/<$VERSION>/cost-analyzer/values-openshift-cluster-prometheus.yaml \
 ```
 
-
-#### Configuration details
-
-- `serviceMonitor.enabled=true`: Creates a ServiceMonitor for the Kubecost cost-analyzer service's `/metrics` endpoint in the in-cluster Prometheus.
-- `platforms.openshift.createMonitoringClusterRoleBinding=true`: Attaches the `operator-monitoring-view` cluster role to the Kubecost service account, granting necessary permissions to query Prometheus.
-- `prometheus.kubeRBACProxy=true`: Enables Kubecost to use the service account token and `service-ca.crt` when querying in-cluster Prometheus.
-- `platforms.openshift.createMonitoringResourceReaderRoleBinding=true`: Creates the required role and role binding for the in-cluster Prometheus to have the necessary permissions to scrape Kubecost metrics.
-- `platforms.openshift.monitoringServiceAccountName=prometheus-k8s`: Specifies the service account used by the in-cluster Prometheus that needs the specific permissions to scrape Kubecost metrics.
-
 After installation, wait for all pods to be ready. Kubecost will begin collecting data and may take up to 15 minutes for the UI to reflect the resources in the local cluster.
 
 
