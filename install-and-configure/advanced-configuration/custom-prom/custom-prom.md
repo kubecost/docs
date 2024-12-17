@@ -130,7 +130,7 @@ Evidenced by the following pod error message `No valid prometheus config file at
 
 ```
 kubectl exec -i -t --namespace kubecost \
-  deployment/kubecost-cost-analyzer -c cost-analyzer-frontend -- \
+  deployment/kubecost-cost-analyzer -c cost-model -- \
   curl http://<your_prometheus_url>/api/v1/status/config
 ```
 
@@ -148,7 +148,7 @@ When successful, this command should return all of the metrics that Kubecost use
 
 ```
 kubectl exec -i -t --namespace kubecost \
-  deployment/kubecost-cost-analyzer -c cost-analyzer-frontend -- \
+  deployment/kubecost-cost-analyzer -c cost-model -- \
   curl "http://<your_prometheus_url>/metrics"
 ```
 
@@ -178,7 +178,7 @@ Ensure results are not null for both queries below.
 
 ```
 kubectl exec -i -t --namespace kubecost \
-  deployment/kubecost-cost-analyzer -c cost-analyzer-frontend -- \
+  deployment/kubecost-cost-analyzer -c cost-model -- \
   curl "http://localhost:9003/prometheusQuery?query=node_total_hourly_cost"
 ```
 
@@ -186,7 +186,7 @@ kubectl exec -i -t --namespace kubecost \
 
 ```
 kubectl exec -i -t --namespace kubecost \
-  deployment/kubecost-cost-analyzer -c cost-analyzer-frontend -- \
+  deployment/kubecost-cost-analyzer -c cost-model -- \
   curl "http://localhost:9003/prometheusQuery?query=kube_node_status_capacity"
 ```
 
@@ -213,7 +213,7 @@ Ensure that all clusters and nodes have values- output should be similar to the 
 {% code overflow="wrap" %}
 ```
 kubectl exec -i -t --namespace kubecost \
-  deployment/kubecost-cost-analyzer -c cost-analyzer-frontend -- \
+  deployment/kubecost-cost-analyzer -c cost-model -- \
   curl -G http://localhost:9003/thanosQuery \
   -d time=`date -d '1 day ago' "+%Y-%m-%dT%H:%M:%SZ"` \
   --data-urlencode "query=avg (sum_over_time(node_total_hourly_cost[1d])) by (cluster_id, node)" \
@@ -230,7 +230,7 @@ On macOS, change `date -d '1 day ago'` to `date -v '-1d'`
 {% code overflow="wrap" %}
 ```
 kubectl exec -i -t --namespace kubecost \
-  deployment/kubecost-cost-analyzer -c cost-analyzer-frontend -- \
+  deployment/kubecost-cost-analyzer -c cost-model -- \
   curl -G http://localhost:9003/thanosQuery \
   -d time=`date -d '1 day ago' "+%Y-%m-%dT%H:%M:%SZ"` \
   --data-urlencode "query=avg (sum_over_time(kube_node_status_capacity[1d])) by (cluster_id, node)" \
