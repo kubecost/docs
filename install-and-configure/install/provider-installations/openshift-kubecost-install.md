@@ -62,7 +62,11 @@ After installation, wait for all pods to be ready. Kubecost will begin collectin
 
 ### Using in-cluster Prometheus
 
-Kubecost can be installed without the bundled Prometheus and using the in-cluster Prometheus of OpenShift. This method requires some additional setup steps but allows for better integration with existing OpenShift monitoring infrastructure without the need to create an additional prometheus instance.
+{% hint style="warning" %} 
+This installation method is available, but not generally recommended. Please review the following documentation before proceeding. [Documentation](/install-and-configure/advanced-configuration/custom-prom).
+{% endhint %}
+
+If required Kubecost can leverage an existing Prometheus that exists on your cluster, as opposed to installing Kubecost's bundled Prometheus.
 
 1. First, add the following label to the namespace where Kubecost will be deployed:
 
