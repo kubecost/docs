@@ -45,6 +45,8 @@
       * [AWS Multi-Cluster Storage Configuration](install-and-configure/install/multi-cluster/long-term-storage-configuration/long-term-storage-aws.md)
       * [Azure Long-Term Storage](install-and-configure/install/multi-cluster/long-term-storage-configuration/long-term-storage-azure.md)
       * [GCP Long-Term Storage](install-and-configure/install/multi-cluster/long-term-storage-configuration/long-term-storage-gcp.md)
+      * [Hitachi Content Platform (HCP) Storage Configuration](install-and-configure/install/multi-cluster/long-term-storage-configuration/long-term-storage-hitachi.md)
+      * [Storj Storage Configuration](install-and-configure/install/multi-cluster/long-term-storage-configuration/long-term-storage-storj.md)
     * [Secondary Clusters Guide](install-and-configure/install/multi-cluster/secondary-clusters.md)
     * [Multi-Cluster Diagnostics](install-and-configure/install/multi-cluster/multi-cluster-diagnostics.md)
 * [Additional Configuration](install-and-configure/advanced-configuration/README.md)
