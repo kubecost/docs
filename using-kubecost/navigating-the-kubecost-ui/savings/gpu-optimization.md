@@ -39,6 +39,6 @@ In the first version of the GPU Optimization Savings Insights card there are a f
   - Recommendations will only be provided for one of them.
   - The utilization table may not show these identical containers.
 - GPU nodes must be running or have run at least one container utilizing a GPU for it to be represented on the utilization table in either the Cluster aggregation’s GPU nodes column or on the Node aggregation.
-- Optimize may be as accurate as possible in certain cases since Kubecost currently infers utilization about all GPUs from a single averaged utilization number.
+- The Optimize recommendation may not be as accurate as possible in certain cases since Kubecost currently infers utilization about all GPUs from a single averaged utilization number.
 - For upgrades from prior versions to 2.5.0, there may be cases where Max. GPU Utilization could be a smaller percentage than Avg. GPU Utilization. This will self correct once the chosen window size is smaller than the time the 2.5.0 instance has been collecting the new max. GPU util. metric.
 - The GPU Optimization card on the Savings Insights screen may initially appear greyed out. Click the meatballs icon in the upper right and choose "Unarchive" to make the card appear as the others.
