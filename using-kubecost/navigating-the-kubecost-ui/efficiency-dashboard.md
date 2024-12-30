@@ -15,7 +15,7 @@ The report provides three views for examining the efficiency of your infrastruct
 Let’s establish some definitions and then explore each of these views.
 
 {% hint style="note" %}
-In order for the GPU column to be visible on the Efficiency dashboard, Kubecost must be collecting GPU metrics and observing a container actively using a GPU. See the [NVIDIA GPU Monitoring Configurations](install-and-configure/advanced-configuration/gpu.md) page for more details on how to set up GPU monitoring for NVIDIA GPUs.
+In order for the GPU column to be visible on the Efficiency dashboard, Kubecost must be collecting GPU metrics and observing a container actively using a GPU. See the [NVIDIA GPU Monitoring Configurations](/install-and-configure/advanced-configuration/gpu.md) page for more details on how to set up GPU monitoring for NVIDIA GPUs.
 {% endhint %}
 
 ## Definitions
