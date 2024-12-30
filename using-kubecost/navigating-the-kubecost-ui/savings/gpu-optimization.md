@@ -32,7 +32,7 @@ Clicking on each recommendation tile displays a window with further details on t
 
 ## Known Limitations
 
-In the first version of the GPU Optimization Savings Insights card there are a few limitations of which to be aware.
+In the first version of the GPU Optimization Savings Insights card there are a few known limitations.
 
 - Multiple containers with the same name and running on the same cluster, node, and namespace combination (i.e., "identical" containers) might result in the following effects:
   - The savings number provided on Optimize and Remove cards may be an implicit sum of the total cost these containers.
