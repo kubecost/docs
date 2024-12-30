@@ -20,10 +20,6 @@ In cases where you have already installed DCGM Exporter in your cluster, Kubecos
   - `app.kubernetes.io/name`
 - The value of one of these labels must contain the string `dcgm-exporter`.
 
-
-**In order for Kubecost to provide gpuUsageAverage, gpuRequestAverage and gpuCostIdle, the DCGM exporter must be running locally on the cluster with GPU nodes.**
-
-
 ## Install DCGM Exporter
 
 DCGM Exporter is an implementation of NVIDIA [Data Center GPU Manager (DCGM)](https://developer.nvidia.com/dcgm) for Kubernetes which exports metrics in [Prometheus](https://prometheus.io/) format. DCGM Exporter allows for running the DCGM software under Kubernetes on nodes which contain NVIDIA devices and takes care of the task of making DCGM metrics available to external tools such as Kubecost.
