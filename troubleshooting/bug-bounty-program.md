@@ -1,3 +1,2 @@
 # Bug Bounty Program
-
-We pay $250 USD for unique, not previously disclosed publicly available CVEs, and accepted security bug reports submitted to [vulnerability-report@kubecost.com](mailto:vulnerability-report@kubecost.com).
+Kubecost no longer offers its own bounty program and instead invites you to participate in the [IBM Vulnerability  Disclosure Program](https://www.ibm.com/support/pages/ibm-security-vulnerability-management)
