@@ -18,7 +18,7 @@ oidc:
   clientSecret: ""
   secretName: "kubecost-oidc-secret"
   authURL: "https://my.auth.server/authorize"
-  loginRedirectURL: "http://my.kubecost.url/model/oidc/authorize"
+  loginRedirectURL: "http://my.kubecost.url/oidc/authorize"
   discoveryURL: "https://my.auth.server/.well-known/openid-configuration"
   skipOnlineTokenValidation: false # Set to 'true' to skip online token validation and attempt to locally validate JWT claims
   rbac:
