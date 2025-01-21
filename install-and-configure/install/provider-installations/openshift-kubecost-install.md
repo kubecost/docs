@@ -42,7 +42,7 @@ Install Kubecost using OpenShift specific values. Note that the below command fe
 
 ```sh
 helm upgrade --install kubecost kubecost/cost-analyzer -n kubecost --create-namespace \
--f https://raw.githubusercontent.com/kubecost/cost-analyzer-helm-chart/<$VERSION>/cost-analyzer/values-openshift.yaml
+-f https://raw.githubusercontent.com/kubecost/cost-analyzer-helm-chart/v2.5/cost-analyzer/values-openshift.yaml
 ```
 
 Because OpenShift disallows defining certain fields in a pod's `securityContext` configuration, values specific to OpenShift must be used. The necessary values have already been defined in the OpenShift values file but may be customized to your specific needs.
@@ -78,7 +78,7 @@ oc label namespace kubecost openshift.io/cluster-monitoring=true
 
 ```sh
 helm upgrade --install kubecost kubecost/cost-analyzer -n kubecost --create-namespace \
--f https://raw.githubusercontent.com/kubecost/cost-analyzer-helm-chart/<$VERSION>/cost-analyzer/values-openshift-cluster-prometheus.yaml
+-f https://raw.githubusercontent.com/kubecost/cost-analyzer-helm-chart/v2.5/cost-analyzer/values-openshift-cluster-prometheus.yaml
 ```
 
 After installation, wait for all pods to be ready. Kubecost will begin collecting data and may take up to 15 minutes for the UI to reflect the resources in the local cluster.
