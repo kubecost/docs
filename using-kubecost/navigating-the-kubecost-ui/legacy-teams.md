@@ -1,7 +1,7 @@
 # Legacy Teams
 
 {% hint style="info" %}
-As of v1.6, legacy Teams and this document have been replaced with an [enhanced version of Teams](teams.md) with different configuration and additional capabilities.
+As of v2.6, legacy Teams and this document have been replaced with an [enhanced version of Teams](teams.md) with different configuration and additional capabilities. Please only reference this document if you are using Teams before version v2.6.
 {% endhint %}
 
 Teams allows basic RBAC functionality using Kubecost's UI.
