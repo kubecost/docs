@@ -125,10 +125,6 @@ metadata:
   name: <your-configmap-name>
   namespace: <your-kc-namespace>
 
-For more information about teams and roles, see the [Adding a team](teams.md#adding-a-team) section below.
-
-## Claims
-
 Claims are part of the Identity Provider (IdP) response that provide information about the authenticated user. For SAML, these are relayed as part of the SAML response. For OIDC, these are returned as part of the access or ID tokens.
 
 Kubecost Teams uses these claims to map users to teams. As long as a group or attribute defined in your IdP is returned as part of the authorization process in the SAML response/OIDC token(s), it can be used in teams.
