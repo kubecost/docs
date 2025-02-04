@@ -4,14 +4,16 @@
 RBAC is only officially supported on Kubecost Enterprise plans.
 {% endhint %}
 
+Teams enables Role-Based Access Control (RBAC) in Kubecost's UI, allowing you to define a granular set of permissions for your users. These permissions include enabling or disabling pages within Kubecost as well as scoping those pages down to even finer levels with filters.
 
-Teams allows RBAC functionality while using Kubecost's UI.
 
 ## Prerequisites
 
-Before using the Teams page, make sure you have configured [SAML](/install-and-configure/advanced-configuration/user-management-saml/README.md) or [OIDC](/install-and-configure/advanced-configuration/user-management-oidc/user-management-oidc.md) with a provider of your choice. 
+Before using the Teams page, make sure you have configured [SAML](/install-and-configure/advanced-configuration/user-management-saml/README.md) or [OIDC](/install-and-configure/advanced-configuration/user-management-oidc/user-management-oidc.md) with a provider of your choice. Teams cannot work independent of one of these two IAM protocols.
 
-Users must also have the persistent volumes Helm flag enabled. This is enabled in Kubecost by default, and no action is needed unless you have previously disabled it. PV is enabled via:
+
+In order to use teams, you must have the Kubecost PersistentVolume enabled in your Helm values. This is enabled by default and no action is needed unless you have previously disabled it. PersistentVolume is enabled via:
+
 
 ```yaml
 persistentVolume:
@@ -20,15 +22,16 @@ persistentVolume:
 
 If this is your first time using Teams, consult the [Getting started](teams.md#getting-started) section below. For additional team creation, see the [Adding a team](teams.md#adding-a-team) section.
 
-If you previously had Teams enabled and are upgrading from a pre-v2.6 version of Kubecost to v2.6+, see the [Upgrading](teams.md#upgrading-and-legacy-teams) section below.
+If you previously had teams enabled and are upgrading from a version of Kubecost prior to 2.6, see the [Upgrading](teams.md#upgrading-and-legacy-teams) section below.
+
 
 ## Getting started
 
-To manage teams via the Kubecost UI, you must either have admin-level access to Kubecost and create teams through the UI, or configure via helm. There are three available methods for getting started:
+To manage teams via the Kubecost UI, you must either have admin-level access to Kubecost and create teams through the UI, or configure via Helm. There are three available methods for getting started.
 
 ### Method 1: Enable Teams and login in
 
-In order to enable Teams, set rbac enabled but do not define any values under `.Values.saml.rbac.groups` or `.Values.oidc.rbac.groups`. This indicates that RBAC Teams will be enabled. If groups are defined, this will default your install to [simple RBAC](teams.md#rbac-teams-versus-simple-rbac).
+In order to enable teams, enable RBAC for your desired IAM protocol (SAML or OIDC) but do not define any values under the respective `groups[]` list. If groups are defined, this will default the installation to the earlier [simple RBAC](teams.md#rbac-teams-versus-simple-rbac) and not the newer teams RBAC. An example of how to enable the new teams RBAC in Helm when using OIDC is shown below.
 
 ```yaml
 saml/oidc:
@@ -61,14 +64,14 @@ saml/oidc:
 
 The members of your team are now able to add new members, or create new teams.
 
-### Method 3: Configure teams through helm values
+### Method 3: Configure teams through Helm values
 
 {% hint style="warning" %}
-Configuring teams through helm will disable configuration of teams through the UI.
+Configuring teams through Helm will disable configuration of teams through the UI.
 {% endhint %}
 
 
-Kubecost allows teams to be pre-configured in `Values.yaml`.
+Kubecost allows teams to be defined in Helm values obviating the need to create them in the UI. An example values snippet is shown below.
 
 ```yaml
  teams:
@@ -79,7 +82,7 @@ Kubecost allows teams to be pre-configured in `Values.yaml`.
        roles:
        - id: ''
          name: helm-role
-         description: helm configrured role
+         description: helm configured role
          pages:
            showOverview: true
            showAllocation: true
@@ -109,31 +112,31 @@ Kubecost allows teams to be pre-configured in `Values.yaml`.
          NameID: email@domain.com
 ```
 
-Configure at least one team under `teamsConfig` with an associated role under the team's `roles`. This team will exist on pod restart.
+Configure at least one team under `teamsConfig` with an associated role under the team's `roles`.
 
-Alternatively, a configmap can be created manually, with `teamsConfigMapName` set to this configmap's name:
+Alternatively, a ConfigMap can be created manually, with `teamsConfigMapName` set to this ConfigMap's name.
+
 ```yaml
 apiVersion: v1
 data:
   rbac-teams-configs.json: '[json teams data]'
 kind: ConfigMap
 metadata:
-  name: <your-configma-name>
+  name: <your-configmap-name>
   namespace: <your-kc-namespace>
 
-```
-
-Note that setting a manually-configured configmap name will override `teamsConfig`.
+Note that setting a manually-configured ConfigMap name will override `teamsConfig`.
 
 For more information about teams and roles, see the [Adding a team](teams.md#adding-a-team) section below.
 
 ## Claims
 
-Claims are part of the IdP response that provide information about the authenticated user. For SAML, these are relayed as part of the SAML response. For OIDC, these are returned as part of the access or ID tokens.
+Claims are part of the Identity Provider (IdP) response that provide information about the authenticated user. For SAML, these are relayed as part of the SAML response. For OIDC, these are returned as part of the access or ID tokens.
 
-Kubecost Teams uses these claims to map users to teams. As long a group or attribute defined in your IdP is  returned as part of the authorization process in the SAML response/OIDC token(s), it can be used in Teams.
+Kubecost Teams uses these claims to map users to teams. As long as a group or attribute defined in your IdP is returned as part of the authorization process in the SAML response/OIDC token(s), it can be used in teams.
 
-For example, in OIDC, an ID token may contain a certain number of claims:
+For example, in OIDC, an ID token may contain a certain number of claims.
+
 ```json
 {
   "sub": "11111111",
@@ -164,7 +167,7 @@ Therefore, to have permissions when using Teams, each prospective user must have
 
 ### Adding a role through the Kubecost UI
 
-Each team requires one or more roles, which act as sets of user mermissions. If you have already created a role or want to use an existing one, go on to the next step.
+Each team requires one or more roles, which act as sets of user permissions. If you have already created a role or want to use an existing one, go on to the next step.
 
 ![Adding a Role](/images/rbac-teams-role-creation-example.png)
 
@@ -214,7 +217,7 @@ The user will gain a combined filter of `((cluster = cluster-1 OR cluster = clus
 
 ### Permissions level
 
-Permissions level will respect only the highest level out of all roles for all teams assigned to a user. The order of presedence is `Admin` > `Editor` > `Read Only`.
+Permissions level will respect only the highest level out of all roles for all teams assigned to a user. The order of precedence is `Admin` > `Editor` > `Read Only`.
 
 ### Pages
 
@@ -247,9 +250,9 @@ For each existing legacy team, a role and associated team will be created. The A
 
 ## RBAC Teams versus simple RBAC
 
-Kubecost allows configuration of a simple version of RBAC in the helm chart (for example, see the config for [Entra ID](/install-and-configure/advanced-configuration/user-management-saml/microsoft-entra-id-saml-integration-for-kubecost.md#entra-id-rbac-configuration)). This is mutually exclusive with Teams.
+Kubecost allows configuration of a simple version of RBAC in the Helm chart (for example, see the config for [Entra ID](/install-and-configure/advanced-configuration/user-management-saml/microsoft-entra-id-saml-integration-for-kubecost.md#entra-id-rbac-configuration)). This is mutually exclusive with Teams.
 
-If any configuration is specified under `.Values.saml.rbac.groups` or `.Values.oidc.rbac.groups`, this will enabled simple RBAC, ignoring any configured teams.
+If any configuration is specified under `saml.rbac.groups` or `oidc.rbac.groups`, this will enabled simple RBAC, ignoring any configured teams.
 
 ## Troubleshooting
 
