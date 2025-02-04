@@ -10,13 +10,13 @@ This guide will show you how to configure Kubecost integrations for SSO and RBAC
 
 To enable SSO for Kubecost, this tutorial will show you how to create an application in Okta.
 
-1. Go to the Okta admin dashboard (https://[your-subdomain]okta.com/admin/dashboard) and select _Applications_ from the left navigation. On the Applications page, select _Create App Integration_ > _SAML 2.0_ > _Next_.
-2. On the 'Create SAML Integration' page, provide a name for your app. Feel free to also use this [official Kubecost logo](https://github.com/kubecost/poc-common-configurations/blob/main/saml-okta/images/kubecost-logo.png) for the App logo field. Then, select _Next_.
-3. Your SSO URL should be your application root URL followed by '/saml/acs', like: https://[your-kubecost-address].com/saml/acs
-4. Your Audience URI (SP Entity ID) should be set to your application root without a trailing slash: https://[your-kubecost-address.com
-5. (Optional) If you intend to use RBAC: under Group Attribute Statements, enter a name (ex: _kubecost_group_) and a filter based on your group naming standards (example _Starts with kubecost__). Then, select _Next_.
+1. Go to the Okta admin dashboard (https://{YOUR-SUBDOMAIN}.okta.com/admin/dashboard) and select _Applications_ from the left navigation. On the Applications page, select _Create App Integration_ > _SAML 2.0_ > _Next_.
+2. On the 'Create SAML Integration' page, provide a name for your app. You can use this [official Kubecost logo](https://github.com/kubecost/poc-common-configurations/blob/main/saml-okta/images/kubecost-logo.png) for the App logo field. Select _Next_.
+3. Set your SSO URL to your application root URL followed by '/saml/acs': https://{YOUR-KUBECOST-DOMAIN}.com/saml/acs
+4. Set your Audience URI (SP Entity ID) to your application root without a trailing slash: https://{YOUR-KUBECOST-DOMAIN}.com
+5. (Optional) For RBAC configuration: Under Group Attribute Statements, enter a name (ex: _kubecost_group_) and a filter based on your group naming standards (example _Starts with kubecost__). Select _Next_.
 6. Provide any feedback as needed, then select _Finish_.
-7. Return to the Applications page, select your newly-created app, then select the _Sign On_ tab. Copy the URL for _Identity Provider metadata_, and add that value to `.Values.saml.idMetadataURL` in this [_values-saml.yaml_](https://github.com/kubecost/poc-common-configurations/blob/main/saml-okta/values-saml.yaml) file.
+7. Return to the Applications page, select your newly-created app, then select the _Sign On_ tab. Copy the URL for _Identity Provider metadata_ and add that value to `.Values.saml.idpMetadataURL` in this [_values-saml.yaml_](https://github.com/kubecost/poc-common-configurations/blob/main/saml-okta/values-saml.yaml) file.
 
 ![Okta screenshot](/images/okta-saml-1.png)
 
@@ -73,7 +73,7 @@ The `assertionName: "kubecost_group"` value needs to match the name given in Ste
 
 Filters are used to give visibility to a subset of objects in Kubecost. Examples of the various filters available are in [filters.json](https://github.com/kubecost/poc-common-configurations/blob/main/saml-okta/filters.json) and [filters-examples.json](https://github.com/kubecost/poc-common-configurations/blob/main/saml-okta/filters-examples.json). RBAC filtering is capable of all the same types of filtering features as that of the [Allocation API](/apis/monitoring-apis/api-allocation.md).
 
-It's possible to combine filtering with admin/readonly rights
+It's possible to combine filtering with admin/readonly rights.
 
 These filters can be configured using groups or user attributes in your Okta directory. It is also possible to assign filters to specific users. The example below is using groups.
 
@@ -121,7 +121,7 @@ As an example, we will configure the following:
 * Kubecost users, by default, will not have visibility to any namespace and will be `readonly`. If a group doesn't have access to any resources, the Kubecost UI may appear to be broken
 * The dev-namespaces group will have read only access to the Kubecost UI and only have visibility to namespaces that are prefixed with `dev-` or are exactly `nginx-ingress`
 
-1. Go to the Okta admin dashboard (https://[your-subdomain]okta.com/admin/dashboard) and select _Directory_ > _Groups_ from the left navigation. On the Groups page, select _Add group_.
+1. Go to the Okta admin dashboard (https://{YOUR-SUBDOMAIN}.okta.com/admin/dashboard) and select _Directory_ > _Groups_ from the left navigation. On the Groups page, select _Add group_.
 
 2. Create groups for *kubecost_users*, *kubecost_admin* and *kubecost_dev-namespaces* by providing each value as the name with an optional description, then select _Save_. You will need to perform this step three times, one for each group.
 
@@ -147,46 +147,44 @@ kubectl delete configmap -n kubecost group-filters && kubectl create configmap -
 
 1. Generate an X509 certificate and private key. Below is an example using OpenSSL:
 
-`openssl genpkey -algorithm RSA -out saml-encryption-key.pem -pkeyopt rsa_keygen_bits:2048`
+   `openssl genpkey -algorithm RSA -out saml-encryption-key.pem -pkeyopt rsa_keygen_bits:2048`
 
 2. Generate a certificate signing request (CSR)
 
-`openssl req -new -key saml-encryption-key.pem -out request.csr`
+   `openssl req -new -key saml-encryption-key.pem -out request.csr`
 
 3. Request your organization's domain owner to sign the certificate, or generate a self-signed certificate:
 
-`openssl x509 -req -days 365 -in request.csr -signkey saml-encryption-key.pem -out saml-encryption-cert.cer`
+   `openssl x509 -req -days 365 -in request.csr -signkey saml-encryption-key.pem -out saml-encryption-cert.cer`
 
 4. Go to your application, then under the _General_ tab, edit the following SAML Settings:
 
-* Assertion Encryption: _Encrypted_
-* In the Encryption Algorithm box that appears, select _AES256-CBC_.
-* Select _Browse Files_ in the Encryption Certificate field and upload an image file of your certifcate.
+   * Assertion Encryption: _Encrypted_
+   * In the Encryption Algorithm box that appears, select _AES256-CBC_.
+   * Select _Browse Files_ in the Encryption Certificate field and upload an image file of your certifcate.
 
 5. Create a secret with the certificate. The file name **must** be *saml-encryption-cert.cer*.
 
-`kubectl create secret generic kubecost-saml-cert --from-file saml-encryption-cert.cer --namespace kubecost`
+   `kubectl create secret generic kubecost-saml-cert --from-file saml-encryption-cert.cer --namespace kubecost`
 
 6. Create a secret with the private key. The file name **must** be *saml-encryption-key.pem*.
 
-`kubectl create secret generic kubecost-saml-decryption-key --from-file saml-encryption-key.pem --namespace kubecost`
+   `kubectl create secret generic kubecost-saml-decryption-key --from-file saml-encryption-key.pem --namespace kubecost`
 
 7. Pass the following values via Helm into your *values.yaml*:
 
-```yaml
-saml:
-   encryptionCertSecret: "kubecost-saml-cert"
-   decryptionKeySecret: "kubecost-saml-decryption-key"
-```
+   ```yaml
+   saml:
+      encryptionCertSecret: "kubecost-saml-cert"
+      decryptionKeySecret: "kubecost-saml-decryption-key"
+   ```
 
 ## Troubleshooting
 
 You can look at the logs on the aggregator and cost-model containers. In this example, the assumption is that the prefix for Kubecost groups is `kubecost_`. This script is currently a work in progress.
 
-`kubectl logs deployment/kubecost-cost-analyzer -c cost-model --follow |grep -v -E 'resourceGroup|prometheus-server'|grep -i -E 'group|xmlname|saml|login|audience|kubecost_'`
-
 {% code overflow="wrap" %}
-```
+```sh
 kubectl logs deployment/kubecost-cost-analyzer -c cost-model --follow |grep -v -E 'resourceGroup|prometheus-server'|grep -i -E 'group|xmlname|saml|login|audience|kubecost_'
 ```
 {% endcode %}
@@ -194,7 +192,7 @@ kubectl logs deployment/kubecost-cost-analyzer -c cost-model --follow |grep -v -
 If `kubecostAggregator.enabled` is `true` or unspecified in _values.yaml_:
 
 {% code overflow="wrap" %}
-```
+```sh
 kubectl logs statefulsets/kubecost-aggregator --follow |grep -v -E 'resourceGroup|prometheus-server'|grep -i -E 'group|xmlname|saml|login|audience|kubecost_'
 ```
 {% endcode %}
@@ -202,29 +200,37 @@ kubectl logs statefulsets/kubecost-aggregator --follow |grep -v -E 'resourceGrou
 If `kubecostAggregator.enabled` is `false` in _values.yaml_:
 
 {% code overflow="wrap" %}
-```
+```sh
 kubectl logs services/kubecost-aggregator --follow |grep -v -E 'resourceGroup|prometheus-server'|grep -i -E 'group|xmlname|saml|login|audience|kubecost_'
 ```
 {% endcode %}
 
 When the group has been matched, you will see:
 
-```
+{% code overflow="wrap" %}
+```sh
 auth.go:167] AUDIENCE: [readonly group:readonly@kubecost.com]
 auth.go:167] AUDIENCE: [admin group:admin@kubecost.com]
 ```
+{% endcode %}
 
-```
+
+{% code overflow="wrap" %}
+```sh
 configwatchers.go:69] ERROR UPDATING group-filters CONFIG: []map[string]string: ReadMapCB: expect }, but found l, error found in #10 byte of ...|el": "{ "label": "ap|..., bigger context ...|nFilters": [
          {
+
             "label": "{ "label": "app", "value": "nginx" }"
          }
      |...
 ```
+{% endcode %}
 
 This is what you should expect to see:
 
-```
+{% code overflow="wrap" %}
+```sh
+
 I0330 14:48:20.556725       1 costmodel.go:3421]   kubecost_user_type: {XMLName:{Space:urn:oasis:names:tc:SAML:2.0:assertion Local:Attribute} FriendlyName: Name:kubecost_user_type NameFormat:urn:oasis:names:tc:SAML:2.0:attrname-format:basic Values:[{XMLName:{Space:urn:oasis:names:tc:SAML:2.0:assertion Local:AttributeValue} Type: Value:}]}
 I0330 14:48:20.556767       1 costmodel.go:3421]   firstname: {XMLName:{Space:urn:oasis:names:tc:SAML:2.0:assertion Local:Attribute} FriendlyName: Name:firstname NameFormat:urn:oasis:names:tc:SAML:2.0:attrname-format:basic Values:[{XMLName:{Space:urn:oasis:names:tc:SAML:2.0:assertion Local:AttributeValue} Type: Value:cost_admin}]}
 I0330 14:48:20.556776       1 costmodel.go:3421]   kubecost_group: {XMLName:{Space:urn:oasis:names:tc:SAML:2.0:assertion Local:Attribute} FriendlyName: Name:kubecost_group NameFormat:urn:oasis:names:tc:SAML:2.0:attrname-format:basic Values:[{XMLName:{Space:urn:oasis:names:tc:SAML:2.0:assertion Local:AttributeValue} Type: Value:kubecost_admin}]}
@@ -238,3 +244,5 @@ I0330 14:48:20.702229       1 costmodel.go:813] Authenticated saml
 ...
 I0330 14:48:21.011787       1 auth.go:167] AUDIENCE: [admin group:admin@kubecost.com]
 ```
+{% endcode %}
+
