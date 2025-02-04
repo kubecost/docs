@@ -125,8 +125,6 @@ metadata:
   name: <your-configmap-name>
   namespace: <your-kc-namespace>
 
-Note that setting a manually-configured ConfigMap name will override `teamsConfig`.
-
 For more information about teams and roles, see the [Adding a team](teams.md#adding-a-team) section below.
 
 ## Claims
