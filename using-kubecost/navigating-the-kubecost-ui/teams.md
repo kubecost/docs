@@ -34,7 +34,7 @@ To manage teams via the Kubecost UI, you must either have admin-level access to 
 In order to enable teams, enable RBAC for your desired IAM protocol (SAML or OIDC) but do not define any values under the respective `groups[]` list. If groups are defined, this will default the installation to the earlier [simple RBAC](teams.md#rbac-teams-versus-simple-rbac) and not the newer teams RBAC. An example of how to enable the new teams RBAC in Helm when using OIDC is shown below.
 
 ```yaml
-saml/oidc:
+oidc:
   enabled: true
   rbac:
     enabled: true
@@ -47,7 +47,7 @@ The first person to log in will be added to a default team with admin-level acce
 This method leaves additional authentication in place while RBAC is disabled.
 
 ```yaml
-saml/oidc:
+oidc:
   enabled: true
   rbac:
     enabled: false
@@ -56,7 +56,7 @@ saml/oidc:
 Now, access the Teams page, and create your initial admin team. See the [Adding a team](teams.md#adding-a-team) section below for specific instructions for using the UI. Once your admin team has been created, reenable RBAC authentication:
 
 ```yaml
-saml/oidc:
+oidc:
   enabled: true
   rbac:
     enabled: true
@@ -212,8 +212,6 @@ namespace IS kubecost
 Role 2:
 cluster IS cluster-3
 namespace IS dev
-```
-The user will gain a combined filter of `((cluster = cluster-1 OR cluster = cluster-2) AND namespace = kubecost) OR (cluster = cluster-3 AND namespace = dev)`.
 
 ### Permissions level
 
@@ -260,12 +258,7 @@ The Kubecost aggregator container handles all operations relating to Teams. View
 
 If a state where invalid or incorrect teams are causing access issues in Kubecost, teams config can be deleted by running:
 
-```
+```sh
 kubectl exec $POD -- sh -c 'rm -rf /var/configs/rbac_teams.json'
-```
-and
-```
-kubectl exec $POD -- sh -c 'rm -rf /var/configs/roles.json'
-```
 
 After this, on pod restart, Teams should recreate these stores as empty stores.
