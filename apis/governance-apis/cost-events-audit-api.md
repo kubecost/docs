@@ -5,7 +5,7 @@ This feature is in a beta state. It has limitations. Please read the documentati
 {% endhint %}
 
 {% hint style="warning" %}
-This feature is only officially supported on Kubecost Enterprise plans.
+Cost Events Audit API is a Kubecost Enterprise only feature.
 {% endhint %}
 
 The Cost Events Audit API aims to offer improved visibility on recent changes at cluster level and their estimated cost impact.

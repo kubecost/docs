@@ -1,7 +1,7 @@
 # High Availability
 
 {% hint style="info" %}
-High availability (HA) mode is only officially supported on Kubecost Enterprise plans.
+High availability (HA) mode is a Kubecost Enterprise only feature.
 {% endhint %}
 
 Kubecost v2.2 introduces a new flag `haMode` for the frontend service. This flag changes the service name that the ingress needs to target.

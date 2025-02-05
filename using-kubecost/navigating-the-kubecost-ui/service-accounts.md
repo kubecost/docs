@@ -1,7 +1,7 @@
 # Service Accounts
 
 {% hint style="info" %}
-Service Accounts are only officially supported on Kubecost Enterprise plans.
+Service Accounts are a Kubecost Enterprise only feature.
 {% endhint %}
 
 Service Accounts are a way to allow programmatic access to the Kubecost API while having SAML or OIDC enabled. All service account keys have administrator level access. Not all API endpoints are available with a service account key; only the endpoints of the [Aggregator](/install-and-configure/install/multi-cluster/federated-etl/aggregator.md) service are available.
