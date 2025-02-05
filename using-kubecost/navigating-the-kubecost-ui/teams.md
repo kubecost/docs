@@ -42,28 +42,6 @@ oidc:
 
 The first person to log in will be added to a default team with admin-level access. They will then be able to configure teams through the UI on the Teams page.
 
-### Method 2: Enable SAML/OIDC without Teams, create teams, then enable Teams
-
-This method leaves additional authentication in place while RBAC is disabled.
-
-```yaml
-oidc:
-  enabled: true
-  rbac:
-    enabled: false
-```
-
-Now, access the Teams page, and create your initial admin team. See the [Adding a team](teams.md#adding-a-team) section below for specific instructions for using the UI. Once your admin team has been created, reenable RBAC authentication:
-
-```yaml
-oidc:
-  enabled: true
-  rbac:
-    enabled: true
-```
-
-The members of your team are now able to add new members, or create new teams.
-
 ### Enable Teams and Define in Helm
 
 {% hint style="warning" %}
@@ -71,7 +49,9 @@ Configuring teams through Helm will disable configuration of teams through the U
 {% endhint %}
 
 
-Kubecost allows teams to be defined in Helm values obviating the need to create them in the UI. An example values snippet is shown below.
+Kubecost allows teams to be defined in Helm values obviating the need to create them in the UI. Note that Teams must still be enabled using Helm regardless of if configuration is done in the UI or via Helm by enabling RBAC within your desired protocol config, as [above](teams.md#enable-teams-and-define-in-ui).
+
+An example values snippet is shown below for the creation of a team in Helm.
 
 ```yaml
  teams:
@@ -111,6 +91,8 @@ Kubecost allows teams to be defined in Helm values obviating the need to create 
        claims:
          NameID: email@domain.com
 ```
+
+
 
 Configure at least one team under `teamsConfig` with an associated role under the team's `roles`.
 
@@ -160,7 +142,7 @@ After initial configuration, more teams and roles can be added through the Teams
 
 ### Teams and roles
 
-A team matches user claims from your configured IdP to a set of roles. Each role is essentially a set of permissions, such as over access level (admin/readonly/editor), page enablement states, filters, and so on.
+A team matches user claims from your configured IdP to a set of roles. Each role is essentially a set of permissions, including access level (admin/read-only/editor), page enablement states, filters, and so on.
 
 Each team can have several roles, and each user may map to several teams. A team without a role has no permissions.
 
@@ -172,7 +154,7 @@ Each team requires one or more roles, which act as sets of user permissions. If 
 
 ![Adding a Role](/images/rbac-teams-role-creation-example.png)
 
-To add a role follow the below steps.
+To add a role follow the steps below.
 
 1. Click the New Role button on the roles page.
 2. Add a role name. Note that this must be unique, and multiple roles cannot share the same name.
@@ -184,7 +166,7 @@ To add a role follow the below steps.
 
 ![Adding a Team](/images/rbac-teams-team-creation-example.png)
 
-To add a team follow the below steps.
+To add a team follow the steps below.
 
 1. Click the New Team button on the teams page.
 2. Add a team name. Note that this must be unique, and multiple teams cannot share the same name.
@@ -223,7 +205,7 @@ Permissions level will respect only the highest level out of all roles for all t
 
 ### Pages
 
-Disabled/enabled pages will enable any page marked as such in any one of a user's roles. Otherwise, the page is designated as disabled. Essentially, if any of the user's roles has a page enabled, that page will be enabled for the user. Only if none of the user's roles have a page enabled is it disabled.
+Combined page view permissions will enable any page marked as such in any one of a user's roles. Otherwise, the page is designated as disabled. Essentially, if any of the user's roles has a page enabled, that page will be enabled in the user's combined permissions set. Only if none of the user's roles have a page enabled is it disabled for them.
 
 ## Upgrading and legacy teams
 
@@ -231,13 +213,13 @@ Disabled/enabled pages will enable any page marked as such in any one of a user'
 
 Prior to Kubecost 2.6, Teams existed with more limited functionality. This is refered to as [legacy Teams](legacy-teams.md). 
 
-Legacy teams provided:
+Legacy teams provided a limited set of access control capabilities.
 
 - Functionality for SAML environments
 - Allocation filtering
 - Ability to assign a team a permissions level (under legacy teams previously referred to as a "Role") of Admin, Read Only, or Editor
 
-Post-v2.6 Teams, in addition to all the functionality provided by legacy Teams, provides:
+Post-2.6 Teams, in addition to all the functionality provided by legacy Teams, supports additional capabilities.
 
 - Support for OIDC and SAML authentication
 - Asset and Cloud Cost filters along with existing Allocation filters
