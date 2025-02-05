@@ -248,11 +248,11 @@ Duration of time over which to query. Accepts words like `today`, `week`, `month
 The API response includes several health checks that validate different aspects of your Kubecost deployment:
 
 | Health Check | Description |
-|-------------|-------------|
-| `kubecostEmittingMetric` | Validates that Kubecost is collecting and emitting metrics for container allocations, network egress, labels, and more ([docs](/architecture/user-metrics#kubecost-cost-model)) |
+|--------------|-------------|
+| `kubecostEmittingMetric` | Validates that Kubecost is collecting and emitting metrics for container allocations, network egress, labels, and more ([docs](/architecture/user-metrics.md#kubecost-cost-model)) |
 | `prometheusHasKubecostMetric` | Validates that Prometheus has scraped and stored Kubecost metrics |
-| `prometheusHasCadvisorMetric` | Validates that Prometheus has scraped cAdvisor for metrics regarding container resource usage ([docs](/architecture/user-metrics#cadvisor)) |
-| `prometheusHasKSMMetric` | Validates that Prometheus has scraped metrics for metrics regarding resource requests, node capacity, labels, and more ([docs](/architecture/user-metrics#kube-state-metrics-ksm)) |
+| `prometheusHasCadvisorMetric` | Validates that Prometheus has scraped cAdvisor for metrics regarding container resource usage ([docs](/architecture/user-metrics.md#cadvisor)) |
+| `prometheusHasKSMMetric` | Validates that Prometheus has scraped metrics for metrics regarding resource requests, node capacity, labels, and more ([docs](/architecture/user-metrics.md#kube-state-metrics-ksm)) |
 | `dailyAllocationEtlHealthy` | Validates that Kubecost has successfully built Allocation ETL files. These ETL files consist of Allocations data for the cluster. |
 | `dailyAssetEtlHealthy` | Validates that Kubecost has successfully built Assets ETL files. These ETL files consist of Assets data for the cluster. |
 | `kubecostPodsNotOOMKilled` | Validates that no pods in the namespace Kubecost is deployed to have OutOfMemoryKilled errors |
