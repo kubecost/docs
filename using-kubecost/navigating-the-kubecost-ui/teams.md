@@ -27,9 +27,9 @@ If you previously had teams enabled and are upgrading from a version of Kubecost
 
 ## Getting started
 
-To manage teams via the Kubecost UI, you must either have admin-level access to Kubecost and create teams through the UI, or configure via Helm. There are three available methods for getting started.
+Using the teams feature involves two parts: enabling the feature via Helm and creating teams. While teams may be created via either Helm values or the UI, which are mutually exclusive, it must always be enabled via Helm. The two methods of creating teams is shown below.
 
-### Method 1: Enable Teams and login in
+### Enable Teams and Define in UI
 
 In order to enable teams, enable RBAC for your desired IAM protocol (SAML or OIDC) but do not define any values under the respective `groups[]` list. If groups are defined, this will default the installation to the earlier [simple RBAC](teams.md#rbac-teams-versus-simple-rbac) and not the newer teams RBAC. An example of how to enable the new teams RBAC in Helm when using OIDC is shown below.
 
@@ -64,7 +64,7 @@ oidc:
 
 The members of your team are now able to add new members, or create new teams.
 
-### Method 3: Configure teams through Helm values
+### Enable Teams and Define in Helm
 
 {% hint style="warning" %}
 Configuring teams through Helm will disable configuration of teams through the UI.
@@ -156,7 +156,7 @@ While some of these claims (e.g. `iss`, `iat`, `exp`) are set automatically by t
 
 ## Adding a team
 
-After initial configuration, more teams and roles can be added through the Teams page in the UI.
+After initial configuration, more teams and roles can be added through the Teams page in the UI provided they have not been defined via Helm.
 
 ### Teams and roles
 
@@ -172,21 +172,21 @@ Each team requires one or more roles, which act as sets of user permissions. If 
 
 ![Adding a Role](/images/rbac-teams-role-creation-example.png)
 
-To add a role:
+To add a role follow the below steps.
 
-1. Click the `New Role` button on the roles page.
+1. Click the New Role button on the roles page.
 2. Add a role name. Note that this must be unique, and multiple roles cannot share the same name.
 3. Add a description of the role.
-4. Choose the role's access level. This can be `Admin`, `Read Only`, or `Editor`.
-5. Define which pages can be viewed by users with the role. If any `Monitoring` pages are shown, you may additionally define a filter that will apply to the contents of this page.
+4. Choose the role's access level. This can be Admin, Read Only, or Editor.
+5. Define which pages can be viewed by users with the role. If any Monitoring pages are shown, you may additionally define a filter that will apply to the contents of this page.
 
 ### Adding a team through the Kubecost UI
 
 ![Adding a Team](/images/rbac-teams-team-creation-example.png)
 
-To add a team:
+To add a team follow the below steps.
 
-1. Click the `New Team` button on the teams page.
+1. Click the New Team button on the teams page.
 2. Add a team name. Note that this must be unique, and multiple teams cannot share the same name.
 3. Define user claims. For more information on what a claim is, see the [Claims](teams.md#claims) section above. __Note that any overlap between a user's claim data from the IdP and a team's claims will assign the user to the team, even if there are other claims specified in the Team.__
 4. Add one or more roles.
@@ -219,7 +219,7 @@ The user will gain a combined filter of `((cluster = cluster-1 OR cluster = clus
 
 ### Permissions level
 
-Permissions level will respect only the highest level out of all roles for all teams assigned to a user. The order of precedence is `Admin` > `Editor` > `Read Only`.
+Permissions level will respect only the highest level out of all roles for all teams assigned to a user. The order of precedence is Admin > Editor > Read Only.
 
 ### Pages
 
@@ -229,13 +229,13 @@ Disabled/enabled pages will enable any page marked as such in any one of a user'
 
 ### Legacy Teams
 
-Prior to Kubecost v2.6, Teams existed with more limited functionality. This is refered to as [legacy Teams](legacy-teams.md). 
+Prior to Kubecost 2.6, Teams existed with more limited functionality. This is refered to as [legacy Teams](legacy-teams.md). 
 
 Legacy teams provided:
 
 - Functionality for SAML environments
 - Allocation filtering
-- Ability to assign a team a permissions level (under legacy teams previously refered to as a "Role") of `Admin`, `Read Only`, or `Editor`
+- Ability to assign a team a permissions level (under legacy teams previously referred to as a "Role") of Admin, Read Only, or Editor
 
 Post-v2.6 Teams, in addition to all the functionality provided by legacy Teams, provides:
 
@@ -246,7 +246,7 @@ Post-v2.6 Teams, in addition to all the functionality provided by legacy Teams, 
 
 ### Upgrading with existing legacy teams
 
-If upgrading to v2.6+ with existing teams, no config changes are required. Kubecost will attempt to automatically migrate existing legacy Teams teams on pod startup. 
+If upgrading to 2.6+ with existing teams, no config changes are required. Kubecost will attempt to automatically migrate existing legacy Teams teams on pod startup. 
 
 For each existing legacy team, a role and associated team will be created. The Allocation filter and permissions level will be migrated into the new role, with the SAML email claim being added to the team.
 
@@ -260,7 +260,7 @@ If any configuration is specified under `saml.rbac.groups` or `oidc.rbac.groups`
 
 The Kubecost aggregator container handles all operations relating to Teams. Viewing the logs may allow you to troubleshoot any issues.
 
-If a state where invalid or incorrect teams are causing access issues in Kubecost, teams config can be deleted by running:
+If a state where invalid or incorrect teams are causing access issues in Kubecost, teams config can be deleted by running the below commands.
 
 ```sh
 kubectl exec $POD -- sh -c 'rm -rf /var/configs/rbac_teams.json'
@@ -268,7 +268,7 @@ kubectl exec $POD -- sh -c 'rm -rf /var/configs/rbac_teams.json'
 
 and
 
-```
+```sh
 kubectl exec $POD -- sh -c 'rm -rf /var/configs/roles.json'
 ```
 
