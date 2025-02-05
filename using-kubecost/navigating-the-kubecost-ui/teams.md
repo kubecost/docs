@@ -1,7 +1,7 @@
 # Teams
 
 {% hint style="info" %}
-RBAC is only officially supported on Kubecost Enterprise plans.
+RBAC is a Kubecost Enterprise only feature.
 {% endhint %}
 
 Teams enables Role-Based Access Control (RBAC) in Kubecost's UI, allowing you to define a granular set of permissions for your users. These permissions include enabling or disabling pages within Kubecost as well as scoping those pages down to even finer levels with filters.
