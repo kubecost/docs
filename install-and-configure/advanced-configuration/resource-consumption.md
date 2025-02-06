@@ -72,7 +72,7 @@ kubecostAggregator:
   etlHourlyStoreDurationHours: 0
 ```
 
-**Lower concurrency.** By default these should all be set to `1`.
+**Lower concurrency.** Set values to `1`.
 
 ```yaml
 kubecostAggregator:
