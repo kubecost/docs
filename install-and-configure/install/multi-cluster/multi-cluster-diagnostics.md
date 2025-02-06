@@ -46,6 +46,22 @@ When run in each Kubecost deployment, it monitors the health of Kubecost and sen
 
 ![Kubecost-Agent-Diagnostics](/images/diagrams/Agent-Diagnostics-Architecture.png)
 
+## Health Check Definitions
+
+The API response includes several health checks that validate different aspects of your Kubecost deployment. If you see repeated failures for any health check, there is potential for data loss. Please refer to the table below to resolve the issue.
+
+| Health Check | Description |
+|--------------|-------------|
+| `kubecostEmittingMetric` | Validates that Kubecost is collecting and emitting metrics for container allocations, network egress, labels, and more ([docs](/architecture/user-metrics.md#kubecost-cost-model)). If failing, try restarting the `kubecost-cost-analyzer` pod. Try port-forwarding to the pod and hitting `http://localhost:9003/metrics` to verify that metrics are being emitted. Reach out to Kubecost support for additional assistance. |
+| `prometheusHasKubecostMetric` | Validates that Prometheus has scraped and stored Kubecost metrics. If failing, refer to the [Prometheus Troubleshooting Guide](/troubleshooting/prometheus.md) and try querying for the `node_total_hourly_cost` metric. Reach out to Kubecost support for additional assistance. |
+| `prometheusHasCadvisorMetric` | Validates that Prometheus has scraped cAdvisor for metrics regarding container resource usage ([docs](/architecture/user-metrics.md#cadvisor)). If failing, refer to the [Prometheus Troubleshooting Guide](/troubleshooting/prometheus.md) and try querying for the `container_memory_working_set_bytes` metric. Reach out to Kubecost support for additional assistance. |
+| `prometheusHasKSMMetric` | Validates that Prometheus has scraped metrics for metrics regarding resource requests, node capacity, labels, and more ([docs](/architecture/user-metrics.md#kube-state-metrics-ksm)). If failing, refer to the [Prometheus Troubleshooting Guide](/troubleshooting/prometheus.md) and try querying for the `kube_pod_container_resource_requests` metric. Reach out to Kubecost support for additional assistance. |
+| `dailyAllocationEtlHealthy` | Validates that Kubecost has successfully built Allocation ETL files. These ETL files consist of Allocations data for the cluster, and are built by querying Prometheus metrics. If failing, refer to the [ETL Repair Guide](/troubleshooting/etl-repair.md) and try repairing the ETL files for the specific cluster. Reach out to Kubecost support for additional assistance. |
+| `dailyAssetEtlHealthy` | Validates that Kubecost has successfully built Assets ETL files. These ETL files consist of Assets data for the cluster, and are built by querying Prometheus metrics. If failing, refer to the [ETL Repair Guide](/troubleshooting/etl-repair.md) and try repairing the ETL files for the specific cluster. Reach out to Kubecost support for additional assistance. |
+| `kubecostPodsNotOOMKilled` | Validates that no pods in the namespace Kubecost is deployed to have OutOfMemoryKilled errors. If failing, check all pods in the namespace Kubecost is deployed to. Review logs of the failing pod. Reach out to Kubecost support for additional assistance. |
+| `kubecostPodsNotPending` | Validates that no pods in the namespace Kubecost is deployed to are in a Pending state. If failing, check all pods in the namespace Kubecost is deployed to. Run a `kubectl describe` on all Deployments and StatefulSets to understand the controller events. Reach out to Kubecost support for additional assistance. |
+| `costModelStorageStats` | Validates that PersistentVolume utilization is below 80%. If failing, increase the `PersistentVolume` size. |
+
 ## API Usage
 
 The diagnostics API can be accessed on the `primary` via `/model/diagnostics/multicluster?window=1d`.
@@ -242,19 +258,3 @@ Duration of time over which to query. Accepts words like `today`, `week`, `month
 ```
 {% endswagger-response %}
 {% endswagger %}
-
-## Health Check Definitions
-
-The API response includes several health checks that validate different aspects of your Kubecost deployment:
-
-| Health Check | Description |
-|--------------|-------------|
-| `kubecostEmittingMetric` | Validates that Kubecost is collecting and emitting metrics for container allocations, network egress, labels, and more ([docs](/architecture/user-metrics.md#kubecost-cost-model)) |
-| `prometheusHasKubecostMetric` | Validates that Prometheus has scraped and stored Kubecost metrics |
-| `prometheusHasCadvisorMetric` | Validates that Prometheus has scraped cAdvisor for metrics regarding container resource usage ([docs](/architecture/user-metrics.md#cadvisor)) |
-| `prometheusHasKSMMetric` | Validates that Prometheus has scraped metrics for metrics regarding resource requests, node capacity, labels, and more ([docs](/architecture/user-metrics.md#kube-state-metrics-ksm)) |
-| `dailyAllocationEtlHealthy` | Validates that Kubecost has successfully built Allocation ETL files. These ETL files consist of Allocations data for the cluster. |
-| `dailyAssetEtlHealthy` | Validates that Kubecost has successfully built Assets ETL files. These ETL files consist of Assets data for the cluster. |
-| `kubecostPodsNotOOMKilled` | Validates that no pods in the namespace Kubecost is deployed to have OutOfMemoryKilled errors |
-| `kubecostPodsNotPending` | Validates that no pods in the namespace Kubecost is deployed to are in a Pending state |
-| `costModelStorageStats` | Validates that PersistentVolume utilization is below 80% |
