@@ -243,7 +243,7 @@ Duration of time over which to query. Accepts words like `today`, `week`, `month
 {% endswagger-response %}
 {% endswagger %}
 
-## API Response Health Checks
+## Health Check Definitions
 
 The API response includes several health checks that validate different aspects of your Kubecost deployment:
 
