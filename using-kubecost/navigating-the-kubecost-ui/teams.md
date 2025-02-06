@@ -27,7 +27,7 @@ If you previously had teams enabled and are upgrading from a version of Kubecost
 
 ## Getting started
 
-Using the teams feature involves two parts: enabling the feature via Helm and creating teams. While teams may be created via either Helm values or the UI, which are mutually exclusive, it must always be enabled via Helm. The two methods of creating teams is shown below.
+Using the teams feature involves two parts: enabling the feature via Helm and creating teams. While teams may be created via either Helm values or the UI, which are mutually exclusive, it must always be enabled via Helm. The two methods of creating teams are shown below.
 
 ### Enable Teams and Define in UI
 
