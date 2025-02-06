@@ -101,7 +101,51 @@ Alternatively, a ConfigMap can be created manually, with `teamsConfigMapName` se
 ```yaml
 apiVersion: v1
 data:
-  rbac-teams-configs.json: '[json teams data]'
+  rbac-teams-configs.json: '[
+    {
+      "claims": {
+        "NameID": "email@domain.com"
+      },
+      "id": "",
+      "name": "helm-team",
+      "roles": [
+        {
+          "allocationFilters": [
+            {
+              "key": "cluster",
+              "operator": ":",
+              "value": "cluster-one"
+            }
+          ],
+          "assetFilters": [],
+          "cloudCostFilters": [],
+          "description": "helm configrured role",
+          "id": "",
+          "name": "helm-role",
+          "pages": {
+            "showActions": true,
+            "showAlerts": true,
+            "showAllocation": true,
+            "showAnomalies": true,
+            "showAsset": true,
+            "showBudgets": true,
+            "showCloudCost": true,
+            "showClusters": true,
+            "showCollections": true,
+            "showEfficiency": true,
+            "showExternalCosts": true,
+            "showInsights": true,
+            "showNetwork": true,
+            "showOverview": true,
+            "showReports": true,
+            "showSettings": true
+          },
+          "permissions": "admin",
+          "routes": []
+        }
+      ]
+    }
+  ]'
 kind: ConfigMap
 metadata:
   name: <your-configmap-name>
@@ -125,10 +169,10 @@ For example, in OIDC, an ID token may contain a certain number of claims.
   "sub": "11111111",
   "name": "John Example",
   "email": "john.example@company.com",
-  "iss": "https:/authserver.com",
-  "groups": {
+  "iss": "https://authserver.com",
+  "groups": [
     "kubecost_admins",
-  }
+  ],
   "iat": 1735722061,
   "exp": 1735722062,
 }
