@@ -83,7 +83,7 @@ kubecostAggregator:
   etlDailyStoreDurationDays: 91
 
   # How many threads the read database is configured with (i.e. Kubecost API /
-  # UI queries). If value is 0, the number of threads is bound by the
+  # UI queries). If value is 0, the number of threads is bounded by the
   # number of cores
   # default: 0 is no limit
   dbReadThreads: 0
