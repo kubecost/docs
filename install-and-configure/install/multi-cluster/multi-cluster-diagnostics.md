@@ -90,7 +90,8 @@ Duration of time over which to query. Accepts words like `today`, `week`, `month
             "dailyAllocationEtlHealthyDiagnosticPassed": true,
             "dailyAssetEtlHealthyDiagnosticPassed": true,
             "kubecostPodsNotOOMKilledDiagnosticPassed": true,
-            "kubecostPodsNotPendingDiagnosticPassed": false
+            "kubecostPodsNotPendingDiagnosticPassed": false,
+            "costModelStorageStatsDiagnosticPassed": true
         },
         "clusters": [
             {
@@ -203,6 +204,12 @@ Duration of time over which to query. Accepts words like `today`, `week`, `month
                     "numFailures": 52,
                     "firstFailureDate": "2024-03-01T18:25:09Z",
                     "diagnosticOutput": "RunDiagnostic: checkKubecostPodsNotPending: queryPrometheusCheckResultEmpty: the following query returned a non-empty result sum(kube_pod_status_phase{namespace='kubecost-etl-fed', phase='Pending'}) by (pod,namespace) > 0"
+                },
+                "costModelStorageStats": {
+                    "diagnosticPassed": true,
+                    "numFailures": 0,
+                    "firstFailureDate": "",
+                    "diagnosticOutput": "CostAnalyzer PV utilization lower than 80%. Total=31949.77MiB. Used=13.68MiB"
                 }
             },
             {
@@ -256,6 +263,12 @@ Duration of time over which to query. Accepts words like `today`, `week`, `month
                     "numFailures": 52,
                     "firstFailureDate": "2024-03-01T18:24:42Z",
                     "diagnosticOutput": "RunDiagnostic: checkKubecostPodsNotPending: queryPrometheusCheckResultEmpty: the following query returned a non-empty result sum(kube_pod_status_phase{namespace='kubecost-etl-fed', phase='Pending'}) by (pod,namespace) > 0"
+                },
+                "costModelStorageStats": {
+                    "diagnosticPassed": true,
+                    "numFailures": 0,
+                    "firstFailureDate": "",
+                    "diagnosticOutput": "CostAnalyzer PV utilization lower than 80%. Total=31949.77MiB. Used=13.68MiB"
                 }
             }
         ]
