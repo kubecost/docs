@@ -83,10 +83,10 @@ kubecostAggregator:
   etlDailyStoreDurationDays: 91
 
   # How many threads the read database is configured with (i.e. Kubecost API /
-  # UI queries). If increasing this value, it is recommended to increase the
-  # aggregator's memory requests & limits.
-  # default: 1
-  dbReadThreads: 1
+  # UI queries). If value is 0, the number of threads is bound by the
+  # number of cores
+  # default: 0 is no limit
+  dbReadThreads: 0
 
   # How many threads the write database is configured with (i.e. ingestion of
   # new data from S3). If increasing this value, it is recommended to increase

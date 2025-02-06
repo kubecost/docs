@@ -81,6 +81,8 @@ kubecostAggregator:
   dbConcurrentIngestionCount: 1
 ```
 
+Note that by default, `dbReadThreads` is set to `0` which means that the number of threads that can be used by the read database is bound by the number of cores on the host node.
+
 **Set rough memory limits.** By default these are set to `0GB` which means no limit. Once a baseline memory usage is established, it can be helpful to set these limits such that `dbMemoryLimit + dbWriteMemoryLimit <= memoryAvailableToAggregatorPod`.
 
 {% hint style="warning" %}
