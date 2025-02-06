@@ -96,101 +96,107 @@ Duration of time over which to query. Accepts words like `today`, `week`, `month
             {
                 "clusterId": "cluster_one",
                 "latestRun": "2024-03-01T22:42:32Z",
-                "kubecostVersion": "v2.1",
+                "kubecostVersion": "prod-2.6.0",
                 "kubecostEmittingMetric": {
                     "diagnosticPassed": true,
                     "numFailures": 0,
                     "firstFailureDate": "",
-                    "diagnosticOutput": ""
+                    "diagnosticOutput": "successful query to http://localhost:9003/metrics"
                 },
                 "prometheusHasKubecostMetric": {
                     "diagnosticPassed": true,
                     "numFailures": 0,
                     "firstFailureDate": "",
-                    "diagnosticOutput": ""
+                    "diagnosticOutput": "kubecost metric exists: absent_over_time(node_total_hourly_cost[5m])"
                 },
                 "prometheusHasCadvisorMetric": {
                     "diagnosticPassed": true,
                     "numFailures": 0,
                     "firstFailureDate": "",
-                    "diagnosticOutput": ""
+                    "diagnosticOutput": "cAdvisor metric exists: absent_over_time(container_memory_working_set_bytes{container='cost-model', container!='POD', instance!=''}[5m])"
                 },
                 "prometheusHasKSMMetric": {
                     "diagnosticPassed": true,
                     "numFailures": 0,
                     "firstFailureDate": "",
-                    "diagnosticOutput": ""
+                    "diagnosticOutput": "ksm metric exists: absent_over_time(kube_pod_container_resource_requests{resource='memory', unit='byte'}[5m])"
                 },
                 "dailyAllocationEtlHealthy": {
                     "diagnosticPassed": true,
                     "numFailures": 0,
                     "firstFailureDate": "",
-                    "diagnosticOutput": ""
+                    "diagnosticOutput": "all daily allocation ETL are healthy: kubecost_allocation_data_status{resolution='daily', status='error'} \u003e 0"
                 },
                 "dailyAssetEtlHealthy": {
                     "diagnosticPassed": true,
                     "numFailures": 0,
                     "firstFailureDate": "",
-                    "diagnosticOutput": ""
+                    "diagnosticOutput": "all asset ETL are healthy: kubecost_asset_data_status{resolution='daily', status='error'} \u003e 0"
                 },
                 "kubecostPodsNotOOMKilled": {
                     "diagnosticPassed": true,
                     "numFailures": 0,
                     "firstFailureDate": "",
-                    "diagnosticOutput": ""
+                    "diagnosticOutput": "all pods in kubecost namespace sufficient memory"
                 },
                 "kubecostPodsNotPending": {
                     "diagnosticPassed": true,
                     "numFailures": 0,
                     "firstFailureDate": "",
-                    "diagnosticOutput": ""
+                    "diagnosticOutput": "all pods in kubecost namespace running"
+                },
+                "costModelStorageStats": {
+                    "diagnosticPassed": true,
+                    "numFailures": 0,
+                    "firstFailureDate": "",
+                    "diagnosticOutput": "CostAnalyzer PV utilization lower than 80%. Total=31949.77MiB. Used=13.68MiB"
                 }
             },
             {
                 "clusterId": "cluster_two",
                 "latestRun": "2024-03-01T22:40:17Z",
-                "kubecostVersion": "v2.1",
+                "kubecostVersion": "prod-2.6.0",
                 "kubecostEmittingMetric": {
                     "diagnosticPassed": true,
                     "numFailures": 0,
                     "firstFailureDate": "",
-                    "diagnosticOutput": ""
+                    "diagnosticOutput": "successful query to http://localhost:9003/metrics"
                 },
                 "prometheusHasKubecostMetric": {
                     "diagnosticPassed": true,
                     "numFailures": 0,
                     "firstFailureDate": "",
-                    "diagnosticOutput": ""
+                    "diagnosticOutput": "kubecost metric exists: absent_over_time(node_total_hourly_cost[5m])"
                 },
                 "prometheusHasCadvisorMetric": {
                     "diagnosticPassed": true,
                     "numFailures": 0,
                     "firstFailureDate": "",
-                    "diagnosticOutput": ""
+                    "diagnosticOutput": "cAdvisor metric exists: absent_over_time(container_memory_working_set_bytes{container='cost-model', container!='POD', instance!=''}[5m])"
                 },
                 "prometheusHasKSMMetric": {
                     "diagnosticPassed": true,
                     "numFailures": 0,
                     "firstFailureDate": "",
-                    "diagnosticOutput": ""
+                    "diagnosticOutput": "ksm metric exists: absent_over_time(kube_pod_container_resource_requests{resource='memory', unit='byte'}[5m])"
                 },
                 "dailyAllocationEtlHealthy": {
                     "diagnosticPassed": true,
                     "numFailures": 0,
                     "firstFailureDate": "",
-                    "diagnosticOutput": ""
+                    "diagnosticOutput": "all daily allocation ETL are healthy: kubecost_allocation_data_status{resolution='daily', status='error'} \u003e 0"
                 },
                 "dailyAssetEtlHealthy": {
                     "diagnosticPassed": true,
                     "numFailures": 0,
                     "firstFailureDate": "",
-                    "diagnosticOutput": ""
+                    "diagnosticOutput": "all asset ETL are healthy: kubecost_asset_data_status{resolution='daily', status='error'} \u003e 0"
                 },
                 "kubecostPodsNotOOMKilled": {
                     "diagnosticPassed": true,
                     "numFailures": 0,
                     "firstFailureDate": "",
-                    "diagnosticOutput": ""
+                    "diagnosticOutput": "all pods in kubecost namespace sufficient memory"
                 },
                 "kubecostPodsNotPending": {
                     "diagnosticPassed": false,
@@ -202,48 +208,48 @@ Duration of time over which to query. Accepts words like `today`, `week`, `month
             {
                 "clusterId": "cluster_three",
                 "latestRun": "2024-03-01T22:42:32Z",
-                "kubecostVersion": "v2.1",
+                "kubecostVersion": "prod-2.6.0",
                 "kubecostEmittingMetric": {
                     "diagnosticPassed": true,
                     "numFailures": 0,
                     "firstFailureDate": "",
-                    "diagnosticOutput": ""
+                    "diagnosticOutput": "successful query to http://localhost:9003/metrics"
                 },
                 "prometheusHasKubecostMetric": {
                     "diagnosticPassed": true,
                     "numFailures": 0,
                     "firstFailureDate": "",
-                    "diagnosticOutput": ""
+                    "diagnosticOutput": "kubecost metric exists: absent_over_time(node_total_hourly_cost[5m])"
                 },
                 "prometheusHasCadvisorMetric": {
                     "diagnosticPassed": true,
                     "numFailures": 0,
                     "firstFailureDate": "",
-                    "diagnosticOutput": ""
+                    "diagnosticOutput": "cAdvisor metric exists: absent_over_time(container_memory_working_set_bytes{container='cost-model', container!='POD', instance!=''}[5m])"
                 },
                 "prometheusHasKSMMetric": {
                     "diagnosticPassed": true,
                     "numFailures": 0,
                     "firstFailureDate": "",
-                    "diagnosticOutput": ""
+                    "diagnosticOutput": "ksm metric exists: absent_over_time(kube_pod_container_resource_requests{resource='memory', unit='byte'}[5m])"
                 },
                 "dailyAllocationEtlHealthy": {
                     "diagnosticPassed": true,
                     "numFailures": 0,
                     "firstFailureDate": "",
-                    "diagnosticOutput": ""
+                    "diagnosticOutput": "all daily allocation ETL are healthy: kubecost_allocation_data_status{resolution='daily', status='error'} \u003e 0"
                 },
                 "dailyAssetEtlHealthy": {
                     "diagnosticPassed": true,
                     "numFailures": 0,
                     "firstFailureDate": "",
-                    "diagnosticOutput": ""
+                    "diagnosticOutput": "all asset ETL are healthy: kubecost_asset_data_status{resolution='daily', status='error'} \u003e 0"
                 },
                 "kubecostPodsNotOOMKilled": {
                     "diagnosticPassed": true,
                     "numFailures": 0,
                     "firstFailureDate": "",
-                    "diagnosticOutput": ""
+                    "diagnosticOutput": "all pods in kubecost namespace sufficient memory"
                 },
                 "kubecostPodsNotPending": {
                     "diagnosticPassed": false,
