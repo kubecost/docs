@@ -1,5 +1,9 @@
 # Configure Keycloak Identity Provider for Kubecost
 
+{% hint style="info" %}
+OIDC is a Kubecost Enterprise only feature.
+{% endhint %}
+
 1. Create a new [Keycloak Realm](https://www.keycloak.org/getting-started/getting-started-kube#\_create\_a\_realm).
 2. Navigate to _Realm Settings_ > _General_ > _Endpoints_ > _OpenID Endpoint Configuration_ > _Clients_.
 3. Select _Create_ to add Kubecost to the list of clients. Define a `clientID`. Ensure the Client Protocol is set to `openid-connect`.

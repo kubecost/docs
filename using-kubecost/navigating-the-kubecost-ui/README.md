@@ -62,7 +62,7 @@ The Govern section contains multiple pages which can provide proactive means of 
 ## Teams
 
 {% hint style="info" %}
-Features in the Teams section are only officially supported on Kubecost Enterprise plans.
+Features in the Teams section are Kubecost Enterprise only features.
 {% endhint %}
 
 The Teams section allows for configuration of user roles and service accounts in your environment:

@@ -5,7 +5,7 @@ Kubecost requires a Kubernetes cluster to be deployed.
 ## Supported Kubernetes versions
 
 * Users should be running Kubernetes 1.21+.
-* Kubernetes 1.29 is officially supported as of v2.0
+* Kubernetes 1.31 is officially supported as of v2.
 * Versions outside of the stated compatibility range may work, depending on individual configurations, but are untested.
 
 ## Supported cluster types
@@ -27,4 +27,4 @@ Kubecost requires a Kubernetes cluster to be deployed.
   * All regions supported, as shown in [opencost/pkg/cloud/azureprovider.go](https://github.com/opencost/opencost/blob/0c2f063052723a65ca62a4c75be23392806b6fac/pkg/cloud/azureprovider.go#L82)
   * x86
 
-**This list is certainly not exhaustive!** This is simply a list of observations as to where our users run Kubecost based on their questions and feedback. Please [contact us](/contactus.md) with any questions!
+**This list is certainly not exhaustive!** This is simply a list of observations as to where our users run Kubecost based on their questions and feedback. Please [contact us](/CONTACT.md) with any questions!

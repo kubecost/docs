@@ -31,10 +31,6 @@ Follow [these steps](https://docs.aws.amazon.com/cur/latest/userguide/cur-create
 * Under 'Additional content', select the _Enable resource IDs_ checkbox.
 * Under 'Report data integration' select the _Amazon Athena_ checkbox.
 
-{% hint style="info" %}
-For CUR data written to an S3 bucket only accessed by Kubecost, it is safe to expire or delete the objects after seven days of retention.
-{% endhint %}
-
 Remember the name of the bucket you create for CUR data. This will be used in Step 2.
 
 {% hint style="warning" %}
@@ -87,7 +83,7 @@ If you’re new to provisioning IAM roles, we suggest downloading our templates 
 * Select _Create Stack_, then select _With new resources (standard)_ from the dropdown.
 * On the 'Create stack' page, under 'Prerequisite - Prepare Template', make sure *Template is ready* has been preselected. Under 'Specify Template', select *Upload a template file*. Select *Choose file*, then select your downloaded .yaml file from your file explorer. Select *Next*.
 * On the 'Specify stack details' page, enter a name for your stack, then provide the following parameters:
-  * AthenaCURBucket: The name of the Athena CUR bucket you created in Step 2.
+  * S3CURBucket: The bucket where the CUR is set from Step 1
   * SpotDataFeedBucketName: (Optional, skip if you have not configured Spot data) The bucket where the Spot data feed is sent
 * Select _Next_.
 * On the 'Configure stack options' page opens, configure any additional options as needed. Select _Next_.
@@ -119,8 +115,8 @@ If you’re new to provisioning IAM roles, we suggest downloading our templates 
 
 **On the management account:**
 
-* Follow the same steps to create a CloudFormation stack as above, but using [this .yaml file](https://raw.githubusercontent.com/kubecost/cloudformation/master/kubecost-masterpayer-account-permissions.yaml) instead, and with these parameters:
-  * AthenaCURBucket: The bucket where the CUR is set from Step 1
+* Follow the same steps to create a CloudFormation stack as above, but using [this .yaml file](https://raw.githubusercontent.com/kubecost/cloudformation/master/kubecost-management-account-permissions.yaml) instead, and with these parameters:
+  * S3CURBucket: The bucket where the CUR is set from Step 1
   * KubecostClusterID: An account that Kubecost is running on that requires access to the Athena CUR.
 
 </details>
@@ -131,88 +127,70 @@ If you’re new to provisioning IAM roles, we suggest downloading our templates 
 
 <summary>My CUR exists in the same account as Kubecost or the management account</summary>
 
-Attach both of the following policies to the same role or user. Use a user if you intend to integrate via ServiceKey, and a role if via IAM annotation (see more below under Via Pod Annotation by EKS). The SpotDataAccess policy statement is optional if the Spot data feed is configured (see “Setting up the Spot Data feed” step below).
+Attach the following policy to the same role or user. Use a user if you intend to integrate via ServiceKey, and a role if via IAM annotation (see more below under Via Pod Annotation by EKS). The SpotDataAccess policy statement is optional if the Spot data feed is configured (see “Setting up the Spot Data feed” step below).
 
-```
-        {
-           "Version": "2012-10-17",
-           "Statement": [
-              {
-                 "Sid": "AthenaAccess",
-                 "Effect": "Allow",
-                 "Action": [
-                    "athena:*"
-                 ],
-                 "Resource": [
-                    "*"
-                 ]
-              },
-              {
-                 "Sid": "ReadAccessToAthenaCurDataViaGlue",
-                 "Effect": "Allow",
-                 "Action": [
-                    "glue:GetDatabase*",
-                    "glue:GetTable*",
-                    "glue:GetPartition*",
-                    "glue:GetUserDefinedFunction",
-                    "glue:BatchGetPartition"
-                 ],
-                 "Resource": [
-                    "arn:aws:glue:*:*:catalog",
-                    "arn:aws:glue:*:*:database/athenacurcfn*",
-                    "arn:aws:glue:*:*:table/athenacurcfn*/*"
-                 ]
-              },
-              {
-                 "Sid": "AthenaQueryResultsOutput",
-                 "Effect": "Allow",
-                 "Action": [
-                    "s3:GetBucketLocation",
-                    "s3:GetObject",
-                    "s3:ListBucket",
-                    "s3:ListBucketMultipartUploads",
-                    "s3:ListMultipartUploadParts",
-                    "s3:AbortMultipartUpload",
-                    "s3:CreateBucket",
-                    "s3:PutObject"
-                 ],
-                 "Resource": [
-                    "arn:aws:s3:::aws-athena-query-results-*"
-                 ]
-              },
-
-
-              {
-                 "Sid": "S3ReadAccessToAwsBillingData",
-                 "Effect": "Allow",
-                 "Action": [
-                    "s3:Get*",
-                    "s3:List*"
-                 ],
-                 "Resource": [
-                    "arn:aws:s3:::${AthenaCURBucket}*"
-                 ]
-              }
-           ]
-        }
-	{
-           "Version": "2012-10-17",
-           "Statement": [
-              {
-                 "Sid": "SpotDataAccess",
-                 "Effect": "Allow",
-                 "Action": [
-                    "s3:ListAllMyBuckets",
-                    "s3:ListBucket",
-                    "s3:HeadBucket",
-                    "s3:HeadObject",
-                    "s3:List*",
-                    "s3:Get*"
-                 ],
-                 "Resource": "arn:aws:s3:::${SpotDataFeedBucketName}*"
-              }
-           ]
-        }
+```json
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "AthenaAccess",
+      "Effect": "Allow",
+      "Action": ["athena:*"],
+      "Resource": ["*"]
+    },
+    {
+      "Sid": "ReadAccessToAthenaCurDataViaGlue",
+      "Effect": "Allow",
+      "Action": [
+        "glue:GetDatabase*",
+        "glue:GetTable*",
+        "glue:GetPartition*",
+        "glue:GetUserDefinedFunction",
+        "glue:BatchGetPartition"
+      ],
+      "Resource": [
+        "arn:aws:glue:*:*:catalog",
+        "arn:aws:glue:*:*:database/athenacurcfn*",
+        "arn:aws:glue:*:*:table/athenacurcfn*/*"
+      ]
+    },
+    {
+      "Sid": "AthenaQueryResultsOutput",
+      "Effect": "Allow",
+      "Action": [
+        "s3:GetBucketLocation",
+        "s3:GetObject",
+        "s3:ListBucket",
+        "s3:ListBucketMultipartUploads",
+        "s3:ListMultipartUploadParts",
+        "s3:AbortMultipartUpload",
+        "s3:CreateBucket",
+        "s3:PutObject"
+      ],
+      "Resource": ["arn:aws:s3:::aws-athena-query-results-*"]
+    },
+    {
+      "Sid": "S3ReadAccessToAwsBillingData",
+      "Effect": "Allow",
+      "Action": ["s3:Get*", "s3:List*"],
+      "Resource": ["arn:aws:s3:::${AthenaCURBucket}*"]
+    },
+    {
+      "Sid": "SpotDataAccess",
+      "Effect": "Allow",
+      "Action": [
+        "s3:ListAllMyBuckets",
+        "s3:ListBucket",
+        "s3:HeadBucket",
+        "s3:HeadObject",
+        "s3:List*",
+        "s3:Get*"
+      ],
+      "Resource": "arn:aws:s3:::${SpotDataFeedBucketName}*"
+    }
+  ]
+}
 ```
 
 </details>
@@ -221,7 +199,6 @@ Attach both of the following policies to the same role or user. Use a user if yo
 
 <summary>My CUR exists in a member account different from Kubecost or the management account</summary>
 
- 
 **In the AWS account where Kubecost primary installation runs:**
 
 * Create an IAM User or Role in the AWS account where your primary Kubecost is running.
@@ -240,127 +217,107 @@ Add the IAM Policy below to the IAM Role/User in the AWS sub-account with Kubeco
 
 The SpotDataAccess policy statement is optional, and only needed if the Spot data feed is configured (see “Setting up the Spot Data feed” step below).
 
-
 {% code overflow="wrap" %}
-```
-	{
-               "Version": "2012-10-17",
-               "Statement": [
-                  {
-                     "Sid": "AssumeRoleInMasterPayer",
-                     "Effect": "Allow",
-                     "Action": "sts:AssumeRole",
-                     "Resource": "arn:aws:iam::${PayerAccountID}:role/<Kubecost IAM Role in payer account>"
-                  }
-               ]
-	}
-
-	{
-               "Version": "2012-10-17",
-               "Statement": [
-                  {
-                     "Sid": "SpotDataAccess",
-                     "Effect": "Allow",
-                     "Action": [
-                        "s3:ListAllMyBuckets",
-                        "s3:ListBucket",
-                        "s3:HeadBucket",
-                        "s3:HeadObject",
-                        "s3:List*",
-                        "s3:Get*"
-                     ],
-                     "Resource": "arn:aws:s3:::${SpotDataFeedBucketName}*"
-                  }
-               ]
-	}
+```json
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "AssumeRoleInMasterPayer",
+      "Effect": "Allow",
+      "Action": "sts:AssumeRole",
+      "Resource": "arn:aws:iam::${PayerAccountID}:role/<Kubecost IAM Role in payer account>"
+    },
+    {
+      "Sid": "SpotDataAccess",
+      "Effect": "Allow",
+      "Action": [
+        "s3:ListAllMyBuckets",
+        "s3:ListBucket",
+        "s3:HeadBucket",
+        "s3:HeadObject",
+        "s3:List*",
+        "s3:Get*"
+      ],
+      "Resource": "arn:aws:s3:::${SpotDataFeedBucketName}*"
+    }
+  ]
+}
 ```
 {% endcode %}
 
 #### Attach Athena/CUR S3 Access Policy to IAM Role in payer account
 
-Attach the following policy to the IAM Role created in the payer account. Replace `${AthenaCURBucket}` variable with your CUR bucket name, and check to make sure your Athena results bucket matches the format of aws-athena-query-results-*. If not, set the query result bucket in the policy to match your created bucket.
+Attach the following policy to the IAM Role created in the payer account. Replace `${S3CURBucket}` variable with your CUR bucket name, and check to make sure your Athena results bucket matches the format of aws-athena-query-results-*. If not, set the query result bucket in the policy to match your created bucket.
 
-```
-	{
-               "Version": "2012-10-17",
-               "Statement": [
-                  {
-                     "Sid": "AthenaAccess",
-                     "Effect": "Allow",
-                     "Action": [
-                        "athena:*"
-                     ],
-                     "Resource": [
-                        "*"
-                     ]
-	},
-	{
-                     "Sid": "ReadAccessToAthenaCurDataViaGlue",
-                     "Effect": "Allow",
-                     "Action": [
-                        "glue:GetDatabase*",
-                        "glue:GetTable*",
-                        "glue:GetPartition*",
-                        "glue:GetUserDefinedFunction",
-                        "glue:BatchGetPartition"
-                     ],
-                     "Resource": [
-                        "arn:aws:glue:*:*:catalog",
-                        "arn:aws:glue:*:*:database/athenacurcfn*",
-                        "arn:aws:glue:*:*:table/athenacurcfn*/*"
-                     ]
-                  },
-                  {
-                     "Sid": "AthenaQueryResultsOutput",
-                     "Effect": "Allow",
-                     "Action": [
-                        "s3:GetBucketLocation",
-                        "s3:GetObject",
-                        "s3:ListBucket",
-                        "s3:ListBucketMultipartUploads",
-                        "s3:ListMultipartUploadParts",
-                        "s3:AbortMultipartUpload",
-                        "s3:CreateBucket",
-                        "s3:PutObject"
-                     ],
-                     "Resource": [
-                        "arn:aws:s3:::aws-athena-query-results-*"
-                     ]
-                  },
-                  {
-                     "Sid": "S3ReadAccessToAwsBillingData",
-                     "Effect": "Allow",
-                     "Action": [
-                        "s3:Get*",
-                        "s3:List*"
-                     ],
-                     "Resource": [
-                        "arn:aws:s3:::${AthenaCURBucket}*"
-                     ]
-                  }
-               ]
-	}
+```json
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "AthenaAccess",
+      "Effect": "Allow",
+      "Action": ["athena:*"],
+      "Resource": ["*"]
+    },
+    {
+      "Sid": "ReadAccessToAthenaCurDataViaGlue",
+      "Effect": "Allow",
+      "Action": [
+        "glue:GetDatabase*",
+        "glue:GetTable*",
+        "glue:GetPartition*",
+        "glue:GetUserDefinedFunction",
+        "glue:BatchGetPartition"
+      ],
+      "Resource": [
+        "arn:aws:glue:*:*:catalog",
+        "arn:aws:glue:*:*:database/athenacurcfn*",
+        "arn:aws:glue:*:*:table/athenacurcfn*/*"
+      ]
+    },
+    {
+      "Sid": "AthenaQueryResultsOutput",
+      "Effect": "Allow",
+      "Action": [
+        "s3:GetBucketLocation",
+        "s3:GetObject",
+        "s3:ListBucket",
+        "s3:ListBucketMultipartUploads",
+        "s3:ListMultipartUploadParts",
+        "s3:AbortMultipartUpload",
+        "s3:CreateBucket",
+        "s3:PutObject"
+      ],
+      "Resource": ["arn:aws:s3:::aws-athena-query-results-*"]
+    },
+    {
+      "Sid": "S3ReadAccessToAwsBillingData",
+      "Effect": "Allow",
+      "Action": ["s3:Get*", "s3:List*"],
+      "Resource": ["arn:aws:s3:::${AthenaCURBucket}*"]
+    }
+  ]
+}
 ```
 
 #### Attach trust statement to IAM Role in payer account
 
 We now need to make sure the payer account role trusts the sub-account User/Role.  Add the following trust statement to the Role in the payer account. (replace the `${kubecost-primary-subaccount-id}` variable with the account number of the sub-account running Kubecost primary):
 
-```
-	{
-               "Version": "2012-10-17",
-               "Statement": [
-                  {
-                     "Effect": "Allow",
-                     "Principal": {
-                        "AWS": "arn:aws:iam::${kubecost-primary-subaccount-id}:root"
-                     },
-                     "Action": [
-                        "sts:AssumeRole"
-                     ]
-                  }
-               ]
-            }
+```json
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Principal": {
+        "AWS": "arn:aws:iam::${kubecost-primary-subaccount-id}:root"
+      },
+      "Action": ["sts:AssumeRole"]
+    }
+  ]
+}
 ```
 
 </details>
@@ -398,8 +355,8 @@ This may be the preferred method if your Helm values are in version control and 
 
 ```json
 {
-    "aws_access_key_id": "<ACCESS_KEY_ID>",
-    "aws_secret_access_key": "<SECRET_ACCESS_KEY>"
+  "aws_access_key_id": "<ACCESS_KEY_ID>",
+  "aws_secret_access_key": "<SECRET_ACCESS_KEY>"
 }
 ```
 
@@ -438,7 +395,7 @@ Download the following configuration files:
 
 Update the following variables in the files you downloaded:
 
-* In _cloud-integration.json_, update the following values with the information in Step 2: Setting up Athena:
+* In _cloud-integration.json_, update the following values with the information in [Step 2: Setting up Athena](#step-2-setting-up-athena):
 
 ```json
     "athenaBucketName": "s3://<AWS_cloud_integration_athenaBucketName>",
@@ -527,7 +484,7 @@ If you set any `kubecostProductConfigs` from the Helm chart, all changes via the
   * The bucket can have a Canned ACL of `Private` or other permissions as you see fit.
 * `athenaRegion`: The AWS region Athena is running in
 * `athenaDatabase`: The name of the database created by the Athena setup
-  * The athena database name is available as the value (physical id) of `AWSCURDatabase` in the CloudFormation stack created above (in [Step 2: Setting up Athena](aws-cloud-integrations.md#Step-2:-Setting-up-Athena))
+  * The athena database name is available as the value (physical id) of `AWSCURDatabase` in the CloudFormation stack created above (in [Step 2: Setting up Athena](#step-2-setting-up-athena))
 * `athenaTable`: the name of the table created by the Athena setup
   * The table name is typically the database name with the leading `athenacurcfn_` removed (but is not available as a CloudFormation stack resource). Confirm the table name by visiting the Athena dashboard.
 * `athenaWorkgroup`: The workgroup assigned to be used with Athena. If not specified, defaults to `Primary`
@@ -589,18 +546,13 @@ This query ran against the "athenacurcfn_test" database, unless qualified by the
 This error can also occur when the management account cross-account permissions are incorrect, however, the solution may differ.
 {% endhint %}
 
-```
-        {
-        "Action": [
-            "s3:Get*",
-            "s3:List*"
-        ],
-        "Resource": [
-            "arn:aws:s3:::<AWS CUR BUCKET>*"
-        ],
-        "Effect": "Allow",
-        "Sid": "S3ReadAccessToAwsBillingData"
-    }
+```json
+{
+  "Action": ["s3:Get*", "s3:List*"],
+  "Resource": ["arn:aws:s3:::<AWS CUR BUCKET>*"],
+  "Effect": "Allow",
+  "Sid": "S3ReadAccessToAwsBillingData"
+}
 ```
 
 #### outputLocation is not a valid S3 path
@@ -674,6 +626,16 @@ QueryAthenaPaginated: start query error: operation error Athena: StartQueryExecu
 For AWS Lambda users, you may experience errors running the CloudFormation template created in Step 3 of this guide. This is likely due to your applied account-level quota value. To correct this, in the AWS console, visit the AWS Lambda page. If your value is set to 10 (the default value), it may be too low to run the template. Increase the value as needed.
 
 ![AWS Lambda](/images/aws-lambda.png)
+
+## Viewing account-level tags
+
+Account-level tags are applied (as labels) to all the Assets built from resources defined under a given AWS account. You can filter AWS resources in the Kubecost Assets View (or API) by account-level tags by adding them ('tag:value') in the Label/Tag filter.
+
+If a resource has a label with the same name as an account-level tag, the resource label value will take precedence.
+
+Modifications incurred on account-level tags may take several hours to update on Kubecost.
+
+Your AWS account will need to support the `organizations:ListAccounts` and `organizations:ListTagsForResource` policies to benefit from this feature.
 
 ## Summary and pricing
 

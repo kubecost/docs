@@ -9,14 +9,13 @@ Below are the major components deployed with the [Kubecost Helm chart](/install-
    1. Prometheus server: Time-series data store for cost and health metrics
    2. Kube-state-metrics (optional): Provides Kubernetes API metrics, e.g. resource requests
    3. Node-exporter (optional): Provides metrics for reserved instance recommendations, various Kubecost Grafana dashboards, and cluster health alerts
-   4. Pushgateway (optional): Provides the ability for users to push new metrics to Prometheus
-   5. Alertmanager (optional): Used for custom alerts
+   4. Alertmanager (optional): Used for custom alerts
 3. Network costs (optional): used for determining network egress costs. See our [Network Traffic Cost Allocation](/using-kubecost/navigating-the-kubecost-ui/cost-allocation/network-allocation.md) doc for more information.
 4. Grafana (optional): Provides supporting dashboards for Kubecost product
 
 Today, the core Kubecost product can be run with just components 1 and 2.1. See an overview of core components in this diagram:
 
-![Architecture Overview](/images/arch.png)
+![Architecture Overview](/images/diagrams/kube-architecture.png)
 
 {% hint style="warning" %}
 Prometheus is not optional. Disabling Prometheus will result in zero costs in Kubecost. For more information, see Kubecost's [Prometheus Configuration Guide](/install-and-configure/advanced-configuration/custom-prom/custom-prom.md).

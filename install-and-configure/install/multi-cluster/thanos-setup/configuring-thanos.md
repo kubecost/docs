@@ -1,7 +1,7 @@
 # Configuring Thanos (Deprecated)
 
 {% hint style="warning" %}
-As of Kubecost v2.0, support for Thanos is deprecated. Consider [transitioning to our Aggregator architecture](/install-and-configure/install/multi-cluster/federated-etl/thanos-migration-guide.md) if you plan to upgrade.
+As of Kubecost v2, support for Thanos is deprecated. Consider [transitioning to our Aggregator architecture](/install-and-configure/install/multi-cluster/federated-etl/thanos-migration-guide.md) if you plan to upgrade.
 {% endhint %}
 
 {% hint style="info" %}
@@ -12,7 +12,7 @@ Kubecost leverages Thanos and durable storage for three different purposes:
 
 1. Centralize metric data for a global multi-cluster view into Kubernetes costs via a Prometheus sidecar
 2. Allow for unlimited data retention
-3. Backup Kubecost [ETL data](/install-and-configure/install/etl-backup/etl-backup.md)
+3. Backup Kubecost ETL data
 
 To enable Thanos, follow these steps:
 

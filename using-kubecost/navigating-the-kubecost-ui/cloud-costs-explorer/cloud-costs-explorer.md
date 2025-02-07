@@ -20,10 +20,14 @@ You can adjust your displayed metrics by aggregating your cost by category. Supp
 
 |   Aggregation  | Description                                                                                                                                                |
 | :------------: | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|     Account    | The ID of the billing account your cloud provider bill comes from. (ex: AWS Management/Payer Account ID, GCP Billing Account ID, Azure Billing Account ID) |
+| Invoice Entity | The ID of the billing account your cloud provider bill comes from. (ex: AWS Management/Payer Account ID, GCP Billing Account ID, Azure Billing Account ID) |
+| Invoice Entity Name | Non-unique name associated with the above ID |
 |    Provider    | Cloud service provider (ex: AWS, Azure, GCP)                                                                                                               |
 |    Provider ID | ID of a cloud service provider account                                                                                                                     |
-| Invoice Entity | Cloud provider account (ex: AWS Account, Azure Subscription, GCP Project)                                                                                  |
+|    Account     | unique identifier for cloud provider account (ex: AWS Account, Azure Subscription, GCP Project)                                                          |
+|  Account Name  | non-unique name for cloud provider account (ex: AWS Account, Azure Subscription, GCP Project)                                                          |
+|     Region     | The region code for your cloud resource.                                                                           |
+| Availability Zone | The availability zone code for your cloud resource.                                                                           |
 |     Service    | Cloud provider services (ex: S3, microsoft.compute, BigQuery)                                                                                              |
 |      Item      | Individual items from your cloud billing report(s)                                                                                                         |
 |     Labels     | Labels/tags on your cloud resources (ex: AWS tags, Azure tags, GCP labels)                                                                                 |

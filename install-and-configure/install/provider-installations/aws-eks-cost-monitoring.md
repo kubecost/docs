@@ -18,6 +18,10 @@ Amazon EKS cost monitoring with Kubecost architecture:
 
 ![User experience](/images/AWS-EKS-cost-monitoring-architecture.png)
 
+Amazon EKS optimized diagram:
+
+![EKS flowchart](/images/eks-flowchart.png)
+
 ## Deploying Kubecost on an Amazon EKS cluster using Amazon EKS add-on
 
 ### Prerequisites
@@ -107,7 +111,7 @@ aws eks describe-addon --addon-name kubecost_kubecost --cluster-name $YOUR_CLUST
 The Kubecost add-on should be available in a few minutes. Run the following command to enable port-forwarding to expose the Kubecost dashboard:
 
 ```bash
-kubectl port-forward --namespace kubecost deployment/kubecost-cost-analyzer 9090
+kubectl port-forward --namespace kubecost deployment/cost-analyzer 9090
 ```
 
 ### Disable Kubecost add-on
@@ -124,11 +128,14 @@ aws eks delete-addon --addon-name kubecost_kubecost --cluster-name $YOUR_CLUSTER
 
 To get started, you can follow these steps to deploy Kubecost into your Amazon EKS cluster in a few minutes using Helm.
 
-### Prerequisites:
+### Prerequisites
 
 * Install the following tools: [Helm 3.9+](https://helm.sh/docs/intro/install/), [kubectl](https://kubernetes.io/docs/tasks/tools/), and optionally [eksctl](https://eksctl.io/) and [AWS CLI](https://aws.amazon.com/cli/).
 * You have access to an [Amazon EKS cluster](https://aws.amazon.com/eks/).
-* If your cluster is version 1.23 or later, you must have the [Amazon EBS CSI driver](https://docs.aws.amazon.com/eks/latest/userguide/ebs-csi.html) installed on your cluster. You can also follow these instructions to install Amazon EBS CSI driver:
+* If your cluster is version 1.23 or later, you must have the [Amazon EBS CSI driver](https://docs.aws.amazon.com/eks/latest/userguide/ebs-csi.html) installed on your cluster. You can also follow the instructions below to install the Amazon EBS CSI driver.
+* If your cluster is version 1.30 or later, there is by default no longer a default StorageClass assigned. See the [EKS 1.30 release notes](https://docs.aws.amazon.com/eks/latest/userguide/kubernetes-versions-standard.html#kubernetes-1.30) for one of several alternatives.
+
+#### Install AWS EBS CSI Driver
 
 1. Run the following command to create an IAM service account with the policies needed to use the Amazon EBS CSI Driver.
 
@@ -168,7 +175,7 @@ In your environment, run the following command from your terminal to install Kub
 helm upgrade -i kubecost \
 oci://public.ecr.aws/kubecost/cost-analyzer --version <$VERSION> \
 --namespace kubecost --create-namespace \
--f https://raw.githubusercontent.com/kubecost/cost-analyzer-helm-chart/develop/cost-analyzer/values-eks-cost-monitoring.yaml
+-f https://raw.githubusercontent.com/kubecost/cost-analyzer-helm-chart/<$VERSION>/cost-analyzer/values-eks-cost-monitoring.yaml
 ```
 {% endcode %}
 
@@ -179,9 +186,7 @@ To install Kubecost on Amazon EKS cluster on AWS Graviton2 (ARM-based processor)
 helm upgrade -i kubecost \
 oci://public.ecr.aws/kubecost/cost-analyzer --version <$VERSION> \
 --namespace kubecost --create-namespace \
--f https://raw.githubusercontent.com/kubecost/cost-analyzer-helm-chart/develop/cost-analyzer/values-eks-cost-monitoring.yaml \
---set prometheus.configmapReload.prometheus.image.repository=jimmidyson/configmap-reload \
---set prometheus.configmapReload.prometheus.image.tag=v0.7.1
+-f https://raw.githubusercontent.com/kubecost/cost-analyzer-helm-chart/<$VERSION>/cost-analyzer/values-eks-cost-monitoring.yaml \
 ```
 {% endcode %}
 
@@ -200,7 +205,7 @@ By default, the installation will include certain prerequisite software includin
 Run the following command to enable port-forwarding to expose the Kubecost dashboard:
 
 ```bash
-kubectl port-forward --namespace kubecost deployment/kubecost-cost-analyzer 9090
+kubectl port-forward --namespace kubecost deployment/cost-analyzer 9090
 ```
 
 ### Step 3: Access Monitoring dashboards
@@ -213,7 +218,7 @@ You can now access Kubecost's UI by visiting `http://localhost:9090` in your loc
 ## Deploying Kubecost on an EKS Anywhere cluster using Helm
 
 {% hint style="warning" %}
-Deploying Kubecost on EKS Anywhere via Helm is not the officially recommended method by Kubecost or AWS. The recommended method is via EKS add-on ([see above](/install-and-configure/install/provider-installations/aws-eks-cost-monitoring.md#deploying-kubecost-on-amazon-eks-cluster-using-amazon-eks-add-on)).
+Deploying Kubecost on EKS Anywhere via Helm is not the officially recommended method by Kubecost or AWS. The recommended method is via EKS add-on ([see above](#deploying-kubecost-on-an-amazon-eks-cluster-using-amazon-eks-add-on)).
 {% endhint %}
 
 [Amazon EKS Anywhere](https://aws.amazon.com/eks/eks-anywhere/) (EKS-A) is an alternate deployment of EKS which allows you to create and configure on-premises clusters, including on your own virtual machines. It is possible to deploy Kubecost on EKS-A clusters to monitor spend data.
@@ -236,7 +241,7 @@ In your environment, run the following command from your terminal to install Kub
 helm upgrade -i kubecost \
 oci://public.ecr.aws/kubecost/cost-analyzer --version <$VERSION> \
 --namespace kubecost --create-namespace \
--f https://raw.githubusercontent.com/kubecost/cost-analyzer-helm-chart/develop/cost-analyzer/values-eks-cost-monitoring.yaml
+-f https://raw.githubusercontent.com/kubecost/cost-analyzer-helm-chart/<$VERSION>/cost-analyzer/values-eks-cost-monitoring.yaml
 ```
 {% endcode %}
 
@@ -247,9 +252,7 @@ To install Kubecost on an EKS-A cluster on AWS Graviton2 (ARM-based processor), 
 helm upgrade -i kubecost \
 oci://public.ecr.aws/kubecost/cost-analyzer --version <$VERSION> \
 --namespace kubecost --create-namespace \
--f https://raw.githubusercontent.com/kubecost/cost-analyzer-helm-chart/develop/cost-analyzer/values-eks-cost-monitoring.yaml \
---set prometheus.configmapReload.prometheus.image.repository=jimmidyson/configmap-reload \
---set prometheus.configmapReload.prometheus.image.tag=v0.7.1
+-f https://raw.githubusercontent.com/kubecost/cost-analyzer-helm-chart/<$VERSION>/cost-analyzer/values-eks-cost-monitoring.yaml \
 ```
 {% endcode %}
 
@@ -268,7 +271,7 @@ By default, the installation will include certain prerequisite software includin
 Run the following command to enable port-forwarding to expose the Kubecost dashboard:
 
 ```bash
-kubectl port-forward --namespace kubecost deployment/kubecost-cost-analyzer 9090
+kubectl port-forward --namespace kubecost deployment/cost-analyzer 9090
 ```
 
 ### Step 3: Access Monitoring dashboards

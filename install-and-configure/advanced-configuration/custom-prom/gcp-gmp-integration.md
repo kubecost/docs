@@ -26,31 +26,37 @@ This integration is currently in beta.
 
 ### Installation
 
-You can use the following command to install Kubecost on your GKE cluster and integrate with GMP:
-
-```bash
-export GCP_PROJECT_ID="YOUR_GCP_PROJECT_ID"
-export CLUSTER_NAME="YOUR_GKE_CLUSTER_NAME"
-helm upgrade -i kubecost cost-analyzer/ \
---namespace kubecost --create-namespace \
---set prometheus.server.image.repository="gke.gcr.io/prometheus-engine/prometheus" \
---set prometheus.server.image.tag="v2.35.0-gmp.2-gke.0" \
---set global.gmp.enabled="true" \
---set global.gmp.gmpProxy.projectId="${GCP_PROJECT_ID}" \
---set prometheus.server.global.external_labels.cluster_id="${CLUSTER_NAME}" \
---set kubecostProductConfigs.clusterName="${CLUSTER_NAME}" \
---set federatedETL.useMultiClusterDB=true
+```yaml
+# values.yaml
+global:
+  gmp:
+    enabled: true
+    gmpProxy:
+      projectId: ${GCP_PROJECT_ID}
+prometheus:
+  server:
+    # Replaces standard Prometheus image with GMP specific image
+    image:
+      repository: "gke.gcr.io/prometheus-engine/prometheus"
+      tag: "v2.35.0-gmp.2-gke.0"
+    global:
+      external_labels:
+        cluster_id: ${CLUSTER_NAME}
+kubecostProductConfigs:
+  clusterName: ${CLUSTER_NAME}
+federatedETL:
+  useMultiClusterDB: true
 ```
 
-In this installation command, these additional flags are added to have Kubecost work with GMP:
+Once you've configured your `values.yaml` file, you can run the following command to install Kubecost on your GKE cluster and integrate with GMP:
 
-* `prometheus.server.image.repository` and `prometheus.server.image.tag` replace the standard Prometheus image with GMP specific image.
-* `global.gmp.enabled` and `global.gmp.gmpProxy.projectId` are for enabling the GMP integration.
-* `prometheus.server.global.external_labels.cluster_id` and `kubecostProductConfigs.clusterName` helps to set the name for your Kubecost setup.
+```bash
+helm upgrade -i kubecost cost-analyzer/ \
+  --namespace kubecost --create-namespace \
+  -f values.yaml
+```
 
-You can find additional configurations at our main [*values.yaml*](https://github.com/kubecost/cost-analyzer-helm-chart/blob/develop/cost-analyzer/values.yaml) file.
-
-Your Kubecost setup now writes and collects data from GMP. Data should be ready for viewing within 15 minutes.
+You can find additional configuration options in our main [*values.yaml*](https://github.com/kubecost/cost-analyzer-helm-chart/blob/develop/cost-analyzer/values.yaml) file.
 
 ### Verification
 
@@ -64,7 +70,7 @@ To verify that the integration is set up, go to _Settings_ in the Kubecost UI, a
 
 From your [GCP Monitoring - Metrics explorer console](https://console.cloud.google.com/monitoring/metrics-explorer), You can run the following query to verify if Kubecost metrics are collected:
 
-```
+```txt
 avg(node_cpu_hourly_cost) by (cluster_id)
 ```
 

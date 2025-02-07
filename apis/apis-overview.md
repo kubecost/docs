@@ -38,7 +38,7 @@ The External Costs API displays costs related to third party services, currently
 
 #### [Budget API](governance-apis/budget-api.md)
 
-The Budget API allows you to establish spending budget rules for your workload across clusters and namespaces to ensure you don't go over your allotted budget.
+The Budget API allows you to establish spending budget rules for your workloads to ensure you don't go over your allotted budget.
 
 #### [Forecast API](governance-apis/forecast-api.md)
 
@@ -89,7 +89,7 @@ Many, but not all, Kubecost APIs power different features in the Kubecost UI. Th
 
 ## API usage
 
-### Using the `window` parameter to query data rnage
+### Using the `window` parameter
 
 Several Kubecost APIs use the `window` parameter to establish the duration of time Kubecost should sample to provide cost metrics, right-sizing recommendations, or other savings information. The following APIs accept `window` as parameter:
 

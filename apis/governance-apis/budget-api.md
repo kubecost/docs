@@ -1,6 +1,6 @@
 # Budget API
 
-The Budget API allows you to create, update, and delete recurring budget rules to control your Kubernetes spending. Weekly and monthly budgets can be established on namespaces, clusters, and labels to set limits on cost spend, with the option to configure alerts for reaching specified budget thresholds via email, Slack, or Microsoft Teams.
+The Budget API allows you to create, update, and delete recurring budget rules to control your Kubernetes spending. Weekly and monthly budgets can be established on workloads to set limits on cost spend, with the option to configure alerts for reaching specified budget thresholds via email, Slack, or Microsoft Teams.
 
 {% swagger method="post" path="/model/budget" baseUrl="http://<your-kubecost-address>" summary="Budget API" %}
 {% swagger-description %}
@@ -11,8 +11,12 @@ Creates a recurring budget rule or updates a recurring budget rule when provided
 Name of the budget rule
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="values" type="string" required="true" %}
-Used for specifying the group and name where the budget rule is applied to in the form of a key-value pair. Accepts `namespace`, `cluster`, or `label` for the first value, followed by the corresponding item. For example, when applying a budget rule to a namespace named `kubecost`, this parameter is configured as `values=namespace:kubecost`.
+{% swagger-parameter in="body" name="type" type="string" required="true" %}
+Budget type. Accepts `allocations`, `asset`, `cloud` or `collections`
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="values" type="map" required="true" %}
+Used for specifying the workload category and name(s) for which the budget rule is applied, in the form of a key-value pair. The keys represent the workload category, while each value is a list containing one or more names.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="body" name="interval" type="string" required="true" %}
@@ -20,7 +24,7 @@ The interval that the budget will reset with (either `weekly` or `monthly`).
 {% endswagger-parameter %}
 
 {% swagger-parameter in="body" name="intervalDay" type="int" %}
-The day the budget will reset. When `interval=weekly`, `intervalDay` is the day of the week, with `intervalDay=0` for Sunday, `intervalDay=1` for Monday, etc. When `interval=monthly`, `intervalDay` corresponds with the day of the month.
+The day the budget will reset. When `interval=weekly`, `intervalDay` is the day of the week, with `intervalDay=0` for Sunday, `intervalDay=1` for Monday, etc. When `interval=monthly`, `intervalDay` corresponds to the day of the month.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="body" name="spendLimit" type="int" required="true" %}
@@ -28,10 +32,10 @@ The budget limit value.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="body" name="id" type="string" %}
-Only should be used when updating a budget rule; ID of the budget rule being modified. For more info, see the [Using the `id` parameter](budget-api.md#using-the-ip-parameter) section below.
+Only should be used when updating a budget rule; ID of the budget rule being modified. For more info, see the [Using the `id` parameter](#using-the-id-parameter) section below.
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="action" type="string" required="false" %} Optional configurations for providing visibility when your budget exceeds a specified percentage threshold. This parameter can generate emails, and Slack or Microsoft Teams messages to suit your work environment. For more information, see the [Using Budget Actions](budget-api.md#using-budget-actions) section below.
+{% swagger-parameter in="body" name="action" type="string" required="false" %} Optional configurations for providing visibility when your budget exceeds a specified percentage threshold. This parameter can generate emails, and Slack or Microsoft Teams messages to suit your work environment. For more information, see the [Using Budget Actions](#using-budget-actions) section below.
 {% endswagger-parameter %}
 
 {% swagger-response status="200: OK" description="" %}
@@ -41,10 +45,11 @@ Only should be used when updating a budget rule; ID of the budget rule being mod
     "data": [
         {
             "name": "<budget name>",
+            "type": "<budget type>",
             "id": "<budget id>",
             "values": {
-                "<namespace or cluster>": [
-                    "<name of namespace of cluster>"
+                "<category1>": [
+                    "<name1>"
                 ]
             },
             "kind": "",
@@ -84,16 +89,17 @@ Lists all existing recurring budget rules
     "data": [
         {
             "name": "<budget name>",
+            "type": "<budget type>",
             "id": "<budget id>",
             "values": {
-                "<namespace or cluster>": [
-                    "<name of namespace of cluster>"
+                "<category1>": [
+                    "<name1>"
                 ]
             },
             "kind": "",
             "interval": "",
-            "intervalDay": ,
-            "spendLimit": ,
+            "intervalDay": "",
+            "spendLimit": "",
             "actions": [
                 {
                     "percentage": 1,
@@ -107,7 +113,7 @@ Lists all existing recurring budget rules
                 "start": "",
                 "end": ""
             },
-            "currentSpend":
+            "currentSpend": 0.0
         }
 }
 ```
@@ -189,6 +195,7 @@ curl --location '<your-kubecost-address>/model/budget' \
 --header 'Content-Type: application/json' \
 --data-raw '{
         "name": "budget-rule",
+        "type": "allocations",
         "values": {
             "cluster":["test"]
         },
@@ -214,6 +221,7 @@ curl --location '<your-kubecost-address>/model/budget' \
 --header 'Content-Type: application/json' \
 --data-raw '{
         "name": "budget-rule-2",
+        "type": "allocations",
         "values": {
             "namespace":["kubecost"]
         },

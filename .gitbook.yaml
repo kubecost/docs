@@ -4,6 +4,12 @@ structure:
     summary: SUMMARY.md
 
 redirects:
+    install-and-configure/install/etl-backup/etl-backup: install-and-configure/install/multi-cluster/federated-etl/federated-etl-backups-alerting.md
+    hc/en-us: README.md
+    aws-out-of-cluster.html: install-and-configure/install/cloud-integration/aws-cloud-integrations/aws-cloud-integrations.md
+    custom-prom: install-and-configure/advanced-configuration/custom-prom/custom-prom.md
+    custom-prom.html: install-and-configure/advanced-configuration/custom-prom/custom-prom.md
+    install: install-and-configure/install/install.md
     apis/apis-overview/cost-events-audit-api: apis/governance-apis/cost-events-audit-api.md
     getting-started: install-and-configure/install/getting-started.md
     kubecost-cloud/using-the-kubecost-cloud-ui: v/kubecost-cloud/using-kubecost-cloud/using-kubecost-cloud.md

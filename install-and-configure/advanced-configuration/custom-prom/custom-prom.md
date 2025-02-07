@@ -116,14 +116,6 @@ kubecostModel:
   promClusterIDLabel: cluster_id
 ```
 
-### Data retention
-
-By default, metric retention is 91 days, however the retention of data can be further increased with a configurable value for a property `etlDailyStoreDurationDays`. You can find this value in Kubecost's [Helm chart](https://github.com/kubecost/cost-analyzer-helm-chart/blob/9f3d7974247bfd3910fbf69d0d4bd66f1335201a/cost-analyzer/values.yaml#L340).
-
-{% hint style="warning" %}
-Increasing the default `etlDailyStorageDurationDays` value will naturally result in greater memory usage. At higher values, this can cause errors when trying to display this information in the Kubecost UI. You can remedy this by increasing the [Step size](/using-kubecost/navigating-the-kubecost-ui/cost-allocation/README.md#step-size) when using the Allocations dashboard.
-{% endhint %}
-
 ## Troubleshooting
 
 The Diagnostics page (_Settings > View Full Diagnostics_) provides diagnostic info on your integration. Scroll down to Prometheus Status to verify that your configuration is successful.
@@ -138,7 +130,7 @@ Evidenced by the following pod error message `No valid prometheus config file at
 
 ```
 kubectl exec -i -t --namespace kubecost \
-  deployment/kubecost-cost-analyzer -c cost-analyzer-frontend -- \
+  deployment/kubecost-cost-analyzer -c cost-model -- \
   curl http://<your_prometheus_url>/api/v1/status/config
 ```
 
@@ -156,7 +148,7 @@ When successful, this command should return all of the metrics that Kubecost use
 
 ```
 kubectl exec -i -t --namespace kubecost \
-  deployment/kubecost-cost-analyzer -c cost-analyzer-frontend -- \
+  deployment/kubecost-cost-analyzer -c cost-model -- \
   curl "http://<your_prometheus_url>/metrics"
 ```
 
@@ -186,7 +178,7 @@ Ensure results are not null for both queries below.
 
 ```
 kubectl exec -i -t --namespace kubecost \
-  deployment/kubecost-cost-analyzer -c cost-analyzer-frontend -- \
+  deployment/kubecost-cost-analyzer -c cost-model -- \
   curl "http://localhost:9003/prometheusQuery?query=node_total_hourly_cost"
 ```
 
@@ -194,7 +186,7 @@ kubectl exec -i -t --namespace kubecost \
 
 ```
 kubectl exec -i -t --namespace kubecost \
-  deployment/kubecost-cost-analyzer -c cost-analyzer-frontend -- \
+  deployment/kubecost-cost-analyzer -c cost-model -- \
   curl "http://localhost:9003/prometheusQuery?query=kube_node_status_capacity"
 ```
 
@@ -221,7 +213,7 @@ Ensure that all clusters and nodes have values- output should be similar to the 
 {% code overflow="wrap" %}
 ```
 kubectl exec -i -t --namespace kubecost \
-  deployment/kubecost-cost-analyzer -c cost-analyzer-frontend -- \
+  deployment/kubecost-cost-analyzer -c cost-model -- \
   curl -G http://localhost:9003/thanosQuery \
   -d time=`date -d '1 day ago' "+%Y-%m-%dT%H:%M:%SZ"` \
   --data-urlencode "query=avg (sum_over_time(node_total_hourly_cost[1d])) by (cluster_id, node)" \
@@ -238,7 +230,7 @@ On macOS, change `date -d '1 day ago'` to `date -v '-1d'`
 {% code overflow="wrap" %}
 ```
 kubectl exec -i -t --namespace kubecost \
-  deployment/kubecost-cost-analyzer -c cost-analyzer-frontend -- \
+  deployment/kubecost-cost-analyzer -c cost-model -- \
   curl -G http://localhost:9003/thanosQuery \
   -d time=`date -d '1 day ago' "+%Y-%m-%dT%H:%M:%SZ"` \
   --data-urlencode "query=avg (sum_over_time(kube_node_status_capacity[1d])) by (cluster_id, node)" \

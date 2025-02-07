@@ -50,9 +50,12 @@ kubectl logs deployment/kubecost-cost-analyzer -c cost-model
 
 Alternatively, Lens is a great tool for diagnosing many issues in a single view. See our blog post on [using Lens with Kubecost](https://blog.kubecost.com/blog/lens-kubecost-extension/) to learn more.
 
-## Configuring log levels
+## Configuring Log Levels
 
-The log output can be adjusted while deploying through Helm by using the `LOG_LEVEL` and/or `LOG_FORMAT` environment variables. These variables include:
+You can adjust the log output while deploying through Helm by using the `logLevel` property and/or the `LOG_FORMAT` environment variable.
+
+### Adjusting Log Level
+Adjusting the log level increases or decreases the level of verbosity written to the logs. The `logLevel` property accepts the following values:
 
 * `trace`
 * `debug`
@@ -65,15 +68,18 @@ For example, to set the log level to `debug`, add the following flag to the Helm
 
 {% code overflow="wrap" %}
 ```bash
---set 'kubecostModel.extraEnv[0].name=LOG_LEVEL,kubecostModel.extraEnv[0].value=debug'
+--set 'kubecostModel.logLevel=debug'
 ```
 {% endcode %}
 
-You can set `LOG_LEVEL` to generate two different outputs.
+### Adjusting Log Format
 
-Setting it to `JSON` will generate a structured logging output: `{"level":"info","time":"2006-01-02T15:04:05.999999999Z07:00","message":"Starting cost-model (git commit \"1.91.0-rc.0\")"}`
+Adjusting the log format changes the format in which the logs are output making it easier for log aggregators to parse and display logged messages. The `LOG_FORMAT` environment variable accepts the values `JSON`, for a structured output, and `pretty` for a nice, human-readable output.
 
-Setting `LOG_LEVEL` to `pretty` will generate a nice human-readable output: `2006-01-02T15:04:05.999999999Z07:00 INF Starting cost-model (git commit "1.91.0-rc.0")`
+| Value  | Output                                                                                                                     |
+|--------|----------------------------------------------------------------------------------------------------------------------------|
+| `JSON`   | `{"level":"info","time":"2006-01-02T15:04:05.999999999Z07:00","message":"Starting cost-model (git commit \"1.91.0-rc.0\")"}` |
+| `pretty` | `2006-01-02T15:04:05.999999999Z07:00 INF Starting cost-model (git commit "1.91.0-rc.0")`                                     |
 
 ### Temporarily set log level
 
@@ -330,9 +336,9 @@ ensure CRDs are installed first
 ```
 {% endcode %}
 
-To prevent this Helm error state please upgrade Kubecost to at least v1.99 prior to upgrading Kubernetes to v1.25. Additionally please follow the [above](troubleshoot-install.md#issue-podsecuritypolicy-crd-is-missing-for-kubecost-grafana-and-kubecost-cost-analyzer-psp) instructions for disabling PSP.
+To prevent this Helm error state please upgrade Kubecost to at least v1.99 prior to upgrading Kubernetes to v1.25. Additionally please follow the [above](#podsecuritypolicy-crd-is-missing-for-kubecost-grafana-and-kubecost-cost-analyzer-psp) instructions for disabling PSP.
 
-If Kubecost PSP is not disabled prior to Kubernetes v1.25 upgrades, you may need to manually delete the Kubecost install. Prior to doing this please ensure you have [ETL backups enabled](/install-and-configure/install/etl-backup/etl-backup.md) as well as Helm values, and Prometheus/Thanos data backed up. Manual removal can be done by deleting the Kubecost namespace.
+If Kubecost PSP is not disabled prior to Kubernetes v1.25 upgrades, you may need to manually delete the Kubecost install. Prior to doing this please ensure you have [ETL backups enabled](https://docs.kubecost.com/v/1.0x/install-and-configure/install/etl-backup) as well as Helm values, and Prometheus/Thanos data backed up. Manual removal can be done by deleting the Kubecost namespace.
 
 ### The `kube-state-metrics` pod fails to start, `Failed to list *v1beta1.Ingress` and or `Failed to list *v1beta1.CertificateSigningRequest`
 
@@ -383,11 +389,11 @@ aws ecr-public get-login-password --region us-east-1 | helm registry login --use
 3. Change both entries to localhost:9001 and localhost:9003
 4. Restart the kubecost-cost-analyzer pod in the kubecost namespace
 
-### What is the difference between `.Values.kubecostToken` and `Values.kubecostProductConfigs.productKey`?
+### What is the difference between `kubecostToken` and `productKey`
 
 `.Values.kubecostToken` is primarily used to manage trial access and is provided to you when visiting [http://kubecost.com/install](http://kubecost.com/install).
 
-`.Values.kubecostProductConfigs.productKey` is used to apply a Enterprise license. More info in our [Adding a Product Key](/install-and-configure/advanced-configuration/add-key.md).
+`kubecostProductConfigs.productKey` is used to apply an Enterprise license. More information can be found in the [Adding a Product Key](/install-and-configure/advanced-configuration/add-key.md) section.
 
 ### Error loading metadata
 
@@ -398,5 +404,20 @@ Kubecost makes use of cloud provider metadata servers to access instance and clu
 gcpprovider.go Error loading metadata cluster-name: Get "http://169.254.169.254/computeMetadata/v1/instance/attributes/cluster-name": dial tcp 169.254.169.254:80: i/o timeout
 ```
 {% endcode %}
+
+### Local disks showing costs in Assets
+
+Some cloud providers do not charge you for local disks physically attached to the node (e.g. ephemeral storage). By default, Kubecost monitors your local disk usage/capacity and applies an associated cost. To disable this feature use the following config:
+
+```yaml
+kubecostModel:
+  extraEnv:
+    - name: "ASSET_INCLUDE_LOCAL_DISK_COST"
+      value: "false"
+```
+
+This configuration will need to be applied to any cluster on which you do not want to charge for local disks and only takes effect on data moving forward. To fix historical data, you will need to [repair Asset & Allocation ETL](/troubleshooting/etl-repair.md) for each affected cluster, then wait for Kubecost's Aggregator to reingest the updated ETL data.
+
+## Additional support
 
 Do you have a question not answered on this page? Email us at [support@kubecost.com](mailto:support@kubecost.com) or [join the Kubecost Slack community](https://kubecost.com/join-slack)!

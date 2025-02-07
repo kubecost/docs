@@ -83,13 +83,34 @@ You're almost done. Now it's time to configure Kubecost to finalize your connect
 
 ### Option 4.1: Configuring using values.yaml (recommended)
 
-It is recommended to provide the GCP details in your [_values.yaml_](https://github.com/kubecost/cost-analyzer-helm-chart/blob/c10e9475b51612d36da8f04618174a98cc62f8fd/cost-analyzer/values.yaml#L572-L574) to ensure they are retained during an upgrade or redeploy. First, set the following configs:
+It is recommended to provide the GCP details in your Helm values file. The necessary values may be provided in one of two ways. In the first method, you define the values in-line to your values file. The second method, for users who wish to store the values separately, you pre-create a Kubernetes Secret with the same contents and then reference that Secret in your values file. An example of the in-line method is shown below.
 
 ```yaml
 kubecostProductConfigs:
-  projectID: "$PROJECT_ID"
-  bigQueryBillingDataDataset: "YOUR_DATASET.YOUR_TABLE_NAME"
+  cloudIntegrationJSON: |-
+    {
+      "gcp": [
+        {
+          "projectID": "my-project-id",
+          "billingDataDataset": "detailedbilling.my-billing-dataset",
+          "key": {
+            "type": "service_account",
+            "project_id": "my-project-id",
+            "private_key_id": "my-private-key-id",
+            "private_key": "my-pem-encoded-private-key",
+            "client_email": "my-service-account-name@my-project-id.iam.gserviceaccount.com",
+            "client_id": "my-client-id",
+            "auth_uri": "auth-uri",
+            "token_uri": "token-uri",
+            "auth_provider_x509_cert_url": "my-x509-provider-cert",
+            "client_x509_cert_url": "my-x509-cert-url"
+          }
+        }
+      ]
+    }
 ```
+
+When choosing to pre-create the Secret instead and reference it in the values file, follow the directions provided in the [Helm values file comments](https://github.com/kubecost/cost-analyzer-helm-chart/blob/v2.3/cost-analyzer/values.yaml#L3327-L3330).
 
 If you've connected using Workload Identity Federation, add these configs:
 
@@ -132,26 +153,6 @@ In Kubecost, select _Settings_ from the left navigation, and under Cloud Integra
 
 {% hint style="warning" %}
 Be careful when handling your service key! Ensure you have entered it correctly into Kubecost. Don't lose it or let it become publicly available.
-{% endhint %}
-
-## Step 5: Label cloud assets
-
-You can now label assets with the following schema to allocate costs back to their appropriate Kubernetes owner. Learn more [here](https://cloud.google.com/compute/docs/labeling-resources#adding\_or\_updating\_labels\_to\_existing\_resources) on updating GCP asset labels.
-
-```
-Cluster:    "kubernetes_cluster" :   <clusterID>
-Namespace:  "kubernetes_namespace" : <namespace>
-Deployment: "kubernetes_deployment": <deployment>
-Label:      "kubernetes_label_NAME": <label>
-Pod:        "kubernetes_pod":        <pod>
-Daemonset:  "kubernetes_daemonset":  <daemonset>
-Container:  "kubernetes_container":  <container>
-```
-
-To use an alternative or existing label schema for GCP cloud assets, you may supply these in your [_values.yaml_](https://github.com/kubecost/cost-analyzer-helm-chart/blob/master/cost-analyzer/values.yaml) under the `kubecostProductConfigs.labelMappingConfigs.<aggregation>_external_label`.
-
-{% hint style="info" %}
-Google generates special labels for GKE resources (e.g. "goog-gke-node", "goog-gke-volume"). Values with these labels are excluded from OOC costs because Kubecost already includes them as in-cluster assets. Thus, to make sure all cloud assets are included, we recommend installing Kubecost on each cluster where insights into costs are required.
 {% endhint %}
 
 ### Viewing project-level labels

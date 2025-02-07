@@ -18,9 +18,9 @@ Existing documentation for Kubecost APIs will use endpoints for non-Aggregator e
 * Multi-cluster Aggregator can only be configured in a Federated ETL environment
 * All clusters in your Federated ETL environment must be configured to build & push ETL files to the object store via `.Values.federatedETL.federatedCluster` and `.Values.kubecostModel.federatedStorageConfigSecret`. See our [Federated ETL](federated-etl.md) doc for more details.
 * If you've enabled Cloud Integration, it _must_ be configured via the cloud integration secret. Other methods are now deprecated. See our [Multi-Cloud Integrations](/install-and-configure/install/cloud-integration/multi-cloud.md) doc for more details.
-* This documentation is for Kubecost v2.0 and higher.
+* This documentation is for Kubecost v2 and higher.
 
-If you are upgrading to Kubecost v2.0 from the following environments, see our specialized migration guides instead:
+If you are upgrading to Kubecost v2 from the following environments, see our specialized migration guides instead:
 
 * [Federated ETL](/install-and-configure/install/multi-cluster/federated-etl/federated-etl-migration-guide.md)
 * [Thanos](/install-and-configure/install/multi-cluster/federated-etl/thanos-migration-guide.md)
@@ -28,21 +28,17 @@ If you are upgrading to Kubecost v2.0 from the following environments, see our s
 ### Basic configuration
 
 {% hint style="info" %}
-This configuration is estimated to be sufficient for environments monitoring < 20k unique containers per day. You can check this metric on the `/diagnostics` page.
+This configuration is estimated to be sufficient for environments monitoring < 20k unique containers or $50k cloud spend per day. You can check this metric on the `/diagnostics` page.
 {% endhint %}
 
 ```yaml
 kubecostAggregator:
-  replicas: 1
   deployMethod: statefulset
   cloudCost:
     enabled: true
 federatedETL:
   federatedCluster: true
 kubecostModel:
-  containerStatsEnabled: true
-  cloudCost:
-    enabled: false
   federatedStorageConfigSecret: federated-store
 kubecostProductConfigs:
   clusterName: YOUR_CLUSTER_NAME
@@ -55,10 +51,6 @@ prometheus:
     global:
       external_labels:
         cluster_id: YOUR_CLUSTER_NAME
-# when using managed identity/irsa, set the service account accordingly:
-serviceAccount:
-  create: false
-  name: kubecost-irsa-sa
 ```
 
 ### Aggregator Optimizations
@@ -77,71 +69,78 @@ Because the Aggregator PV is relatively small, the least expensive performance g
 
 ```yaml
 kubecostAggregator:
-  env:
-    # This interval defines how long the Aggregator spends ingesting ETL data
-    # from the federated store bucket into SQL tables, before exiting its job to
-    # enter the derivation step. If set too low for large scale users, the
-    # Aggregator may not have enough time to ingest all new data that exists in
-    # the federated store bucket. If set too high, there will be a delay in data
-    # between the Kubecost Agents and the Aggregator.
-    #
-    # Note, that the default value is set to 60m to optimize for the
-    # first-install experience of Kubecost (i.e. it prioritizes small data
-    # becoming available more quickly).
-    #
-    # default: 60m
-    DB_BUCKET_REFRESH_INTERVAL: 2h
+  logLevel: info
 
-    # How much data to ingest from the federated store bucket, and how much data
-    # to keep in the DB before rolling the data off.
-    # 
-    # Note: If increasing this value to backfill historical data, it will take
-    # time to gradually ingest & process those historical ETL files. Consider
-    # also increasing the resources available to the aggregator as well as the
-    # refresh & concurrency env vars.
-    # 
-    # default: 91
-    ETL_DAILY_STORE_DURATION_DAYS: "365"
-    
-    # How many threads to use when ingesting Asset/Allocation/CloudCost data
-    # from the federated store bucket. In most cases the default is sufficient,
-    # but can be increased if trying to backfill historical data.
-    # default: 3
-    DB_CONCURRENT_INGESTION_COUNT: "5"
+  # How much data to ingest from the federated store bucket, and how much data
+  # to keep in the DB before rolling the data off.
+  # 
+  # Note: If increasing this value to backfill historical data, it will take
+  # time to gradually ingest & process those historical ETL files. Consider
+  # also increasing the resources available to the aggregator as well as the
+  # dbConcurrentIngestionCount.
+  # 
+  # default: 91
+  etlDailyStoreDurationDays: 91
 
-    # Memory limit applied to read database connections.
-    # default: n/a
-    DB_MEMORY_LIMIT: 8GB
+  # How many threads the read database is configured with (i.e. Kubecost API /
+  # UI queries). If increasing this value, it is recommended to increase the
+  # aggregator's memory requests & limits.
+  # default: 1
+  dbReadThreads: 1
 
-    # Memory limit applied to write database connections.
-    # default: n/a
-    DB_WRITE_MEMORY_LMIT: 8GB
+  # How many threads the write database is configured with (i.e. ingestion of
+  # new data from S3). If increasing this value, it is recommended to increase
+  # the aggregator's memory requests & limits.
+  # default: 1
+  dbWriteThreads: 1
 
-    # How many threads the read database is configured with (i.e. Kubecost API /
-    # UI queries). If increasing this value, it is recommended to increase the
-    # aggregator's memory requests & limits.
-    # default: 1
-    DB_READ_THREADS: 3
+  # How many threads to use when ingesting Asset/Allocation/CloudCost data
+  # from the federated store bucket. In most cases the default is sufficient,
+  # but can be increased if trying to backfill historical data.
+  # default: 1
+  dbConcurrentIngestionCount: 1
 
-    # How many threads the write database is configured with (i.e. ingestion of
-    # new data from S3). If increasing this value, it is recommended to increase
-    # the aggregator's memory requests & limits.
-    # default: 1
-    DB_WRITE_THREADS: 3
+  # Memory limit applied to read database and write database connections. The
+  # default of "no limit" is appropriate when first establishing a baseline of
+  # resource usage required. It is eventually recommended to set these values
+  # such that dbMemoryLimit + dbWriteMemoryLimit < the total memory available
+  # to the aggregator pod.
+  # default: 0GB is no limit
+  dbMemoryLimit: 0GB
+  dbWriteMemoryLimit: 0GB
 
-    # log level
-    # default: info
-    LOG_LEVEL: info
+  # If "true" can improve the time it takes to copy the write DB, at the expense
+  # of additional memory usage.
+  # default: "false"
+  dbCopyFull: "false"
+
+  # The number of partitions the datastore is split into for copying. The higher
+  # this number, the lower the RAM usage but the longer it takes for new data to
+  # show in the Kubecost UI.
+  # default: 1
+  numDBCopyPartitions: 1
+
+  # stagingEmptyDirSizeLimit changes how large the "staging"
+  # /var/configs/waterfowl emptyDir is. It only takes effect in StatefulSet
+  # configurations of Aggregator, other configurations are unaffected.
+  #
+  # It should be set to approximately 8x the size of the largest bingen file in
+  # object storage. For example, if your largest bingen file is a daily
+  # Allocation file with size 300MiB, this value should be set to approximately
+  # 2400Mi. In most environments, the default should suffice.
+  stagingEmptyDirSizeLimit: 2Gi
+
+  # Governs storage size of aggregator DB storage. Disk performance is important
+  # to aggregator performance. Consider high IOPS for best performance.
   aggregatorDbStorage:
-    # governs storage size of aggregator DB storage
-    # !!NOTE!! disk performance is _critically important_ to aggregator performance
-    # ensure disk is specd high enough, and check for bottlenecks
-    # default: 128Gi
-    storageRequest: 512Gi
+    storageClass: ""  # use default storage class
+    storageRequest: 128Gi
   resources:
     requests:
       cpu: 4
       memory: 12Gi
+    # It is recommended to first establish a baseline over several days to
+    # determine a memory limit appropriate for your environment.
     limits:
       cpu: 6
       memory: 16Gi
@@ -188,6 +187,19 @@ data to be ingested.
 
 ## Troubleshooting Aggregator
 
+### Understanding the state of the Aggregator
+
+```txt
+https://kubecost.myorganization.com/model/debug/orchestrator
+```
+
+This is a common endpoint for debugging the state of the Aggregator. It returns a JSON response with details such as:
+
+* What is Aggregator's current state? If ingesting, it is downloading & processing ETL files into the DB. If deriving it is pre-computing commonly used queries into saved tables.
+* What is the ingestion progress for each of the data types? (e.g. asset, allocation, cloud cost, etc.)
+* How fresh is my read database? An epoch timestamp can be found in the `readDBPath`.
+* How frequently is my newly ingested data being promoted into the read database? Reference `currentBucketRefreshInterval`.
+
 ### Resetting Aggregator StatefulSet data
 
 When deploying the Aggregator as a StatefulSet, it is possible to perform a reset of the Aggregator data. The Aggregator itself doesn't store any data, and relies on object storage. As such, a reset involves removing that Aggregator's local storage, and allowing it to re-ingest data from the object store. The procedure is as follows:
@@ -196,25 +208,6 @@ When deploying the Aggregator as a StatefulSet, it is possible to perform a rese
 2. When the Aggregator pod is gone, delete the `aggregator-db-storage-xxx-0` PVC
 3. Scale the Aggregator StatefulSet back to 1. This will re-create the PVC, empty.
 4. Wait for Kubecost to re-ingest data from the object store. This could take from several minutes to several hours, depending on your data size and retention settings.
-
-### Aggregator not displaying any data to frontend after several hours
-
-One reason you may not see data in the frontend yet is because the Aggregator is processing all your ETL files in the federated store bucket into SQL tables.
-
-If you are seeing a lot of the following logs, it could be an indicator that your `.Values.kubecostAggregator.env.DB_BUCKET_REFRESH_INTERVAL` may be set too low, causing the Aggregator to continuously restart its data ingestion process:
-
-```txt
-INF asset worker context cancelled: context canceled
-INF allocation worker context cancelled: context canceled
-```
-
-To fix, try continuously increasing the environment variable's value, until the errors no longer appear. We recommend starting with `2h`. More details about the environment variable described above.
-
-```yaml
-kubecostAggregator:
-  env:
-    DB_BUCKET_REFRESH_INTERVAL: 2h
-```
 
 ### Checking the database for node metadata
 

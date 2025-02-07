@@ -1,7 +1,7 @@
 # User Management (SAML)
 
 {% hint style="info" %}
-SSO and RBAC are only officially supported on Kubecost Enterprise plans.
+SSO and RBAC are Kubecost Enterprise only features.
 {% endhint %}
 
 Kubecost supports single sign-on (SSO) and role-based access control (RBAC) with SAML 2.0. Kubecost works with most identity providers including Okta, Auth0, Microsoft Entra ID ([formerly Azure AD](https://learn.microsoft.com/en-us/azure/active-directory/fundamentals/new-name)), PingID, and KeyCloak.
@@ -58,8 +58,9 @@ All SAML 2.0 providers also work. The above guides can be used as templates for 
 ## Using the Kubecost API
 
 When SAML SSO is enabled in Kubecost, the following ports will require authentication:
-- `service/kubecost-cost-analzyer`: ports 9003 and 9090
-- `statefulset/kubecost-aggregator` or `service/kubecost-aggregator`: port 9004
+
+* `service/kubecost-cost-analzyer`: ports 9003 and 9090
+* `service/kubecost-aggregator`: port 9004
 
 {% code overflow="wrap" %}
 ```sh
@@ -73,25 +74,35 @@ For admins, Kubecost additionally exposes unauthenticated APIs:
 `service/kubecost-cost-analyzer`: port 9007
 ```sh
 kubectl port-forward service/kubecost-cost-analyzer 9007:9007
-curl -L 'localhost:9007/allocation?window=1d'
+curl -L 'localhost:9007/allocation?window=1d&aggregate=namespace'
 ```
 
 `service/kubecost-aggregator`: port 9008
 ```sh
 kubectl port-forward service/kubecost-aggregator 9008:9008
-curl -L 'localhost:9008/allocation?window=1d'
+curl -L 'localhost:9008/allocation?window=1d&aggregate=namespace'
 ```
 
 ## View your SAML Group
 
 You will be able to view your current SAML Group in the Kubecost UI by selecting _Settings_ from the left navigation, then scrolling to 'SAML Group'. Your access level will be displayed in the 'Current SAML Group' box.
 
-## SAML troubleshooting guide
+## Read-only mode
+
+Kubecost's SAML supports read-only mode. This leverages SAML for authentication, then assigns all authenticated users as read-only users. Note, that this overrides any existing RBAC configurations.
+
+```yaml
+saml:
+  enabled: true
+readonly: true
+```
+
+## Troubleshooting
 
 1. Disable SAML and confirm the `cost-analyzer` pod starts. If `kubecostAggregator.enabled` is unspecified or `true` in the _values.yaml_ file, confirm that the `aggregator` pod starts.
-2.  If Step 1 is successful, but the pod is crashing or never enters the ready state when SAML is added, it is likely there is panic when loading or parsing SAML data.
-    - If `kubecostAggregator.enabled` is `true` or unspecified in _values.yaml_, run `kubectl logs statefulsets/kubecost-aggregator` and `kubectl logs deploy/kubecost-cost-analyzer`
-    - If `kubecostAggregator.enabled` is `false` in _values.yaml_, run `kubectl logs services/kubecost-aggregator` and `kubectl logs deploy/kubecost-cost-analyzer`
+2. If Step 1 is successful, but the pod is crashing or never enters the ready state when SAML is added, it is likely there is panic when loading or parsing SAML data.
+    * If `kubecostAggregator.enabled` is `true` or unspecified in _values.yaml_, run `kubectl logs statefulsets/kubecost-aggregator` and `kubectl logs deploy/kubecost-cost-analyzer`
+    * If `kubecostAggregator.enabled` is `false` in _values.yaml_, run `kubectl logs services/kubecost-aggregator` and `kubectl logs deploy/kubecost-cost-analyzer`
 
 If you’re supplying the SAML from the address of an Identity Provider Server, `curl` the SAML metadata endpoint from within the `kubecost` pod and ensure that a valid XML EntityDescriptor is being returned and downloaded. The response should be in this format:
 

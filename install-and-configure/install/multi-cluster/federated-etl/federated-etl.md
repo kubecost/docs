@@ -6,11 +6,7 @@ Federated ETL is only supported for Kubecost Enterprise plans.
 
 Federated extract, transform, load (ETL) is Kubecost's method to aggregate all cluster information back to a single display described in our [Multi-Cluster](/install-and-configure/install/multi-cluster/multi-cluster.md#enterprise-federation) doc. Federated ETL gives teams the benefit of combining multiple Kubecost installations into one view.
 
-As of Kubecost v2.0, a multi-cluster setup will also require running the [Aggregator](/install-and-configure/install/multi-cluster/federated-etl/aggregator.md) on the primary cluster.
-
-## Kubecost ETL Federation diagram
-
-![ETL Federation Overview](/images/kubecost-ETL-Federated-Architecture.png)
+As of Kubecost v2, a multi-cluster setup will also require running the [Aggregator](/install-and-configure/install/multi-cluster/federated-etl/aggregator.md) on the primary cluster.
 
 ## Sample configurations
 
@@ -35,19 +31,19 @@ These cluster designations can overlap, in that some clusters may be several typ
 The Storages referred to here are an S3 (or GCP/Azure equivalent) storage bucket which acts as remote storage for the Federated ETL Pipeline.
 
 * **Federated Storage**: A set of folders on paths `<bucket>/federated/<cluster id>` which are essentially ETL backup data, holding a “copy” of federated cluster data. Federated clusters push this data to Federated Storage to be combined by the Aggregator. Federated clusters write this data, and the Aggregator reads this data.
-* **Federated ETL**: The pipeline containing the above components.
 * **Aggregator**: The component running on the primary cluster which serves queries based on data in Federated Storage.
+* **Federated ETL**: The pipeline containing the above components.
 
 ## Federated ETL architecture
 
 This diagram shows an example setup of the Federated ETL with:
 
-* Three pure federated clusters (not classified as any other cluster type): Cluster 1, Cluster 2, and Cluster 3
-* One primary cluster that is also a federated cluster: Cluster 0
+* One primary cluster that is also federated. Aggregator is running on this cluster, and is what allows the user to query all multi-cluster Kubecost data.
+* Three secondary federated clusters 
 
-The result is four clusters federated together.
+The result is four clusters federated together. All clusters push their local cost data to the Federated Storage, but only the primary cluster via Aggregator interacts with the total Federated data for querying. This includes querying via API or through the Kubecost UI.
 
-![Federated ETL diagram](/images/kubecost-ETL-Federated-diagram.png)
+![Federated ETL diagram](/images/diagrams/fed-etl-agg-arch.png)
 
 ## Setup
 

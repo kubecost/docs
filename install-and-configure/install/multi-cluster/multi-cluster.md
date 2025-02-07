@@ -31,12 +31,12 @@ The below diagrams highlight the two architectures:
 
 **Kubecost ETL Federation (Preferred)**
 
-![ETL Federation Overview](/images/kubecost-ETL-Federated-Architecture.png)
+![ETL Federation Overview](/images/diagrams/etl-federation.png)
 
 **Kubecost Thanos Federation**
 
 {% hint style="warning" %}
-As of Kubecost v2.0, support for Thanos is deprecated. Consider [transitioning to our Aggregator architecture](/install-and-configure/install/multi-cluster/federated-etl/thanos-migration-guide.md) if you plan to upgrade.
+As of Kubecost v2, support for Thanos is deprecated. Consider [transitioning to our Aggregator architecture](/install-and-configure/install/multi-cluster/federated-etl/thanos-migration-guide.md) if you plan to upgrade.
 {% endhint %}
 
 ![Thanos Overview](/images/thanos-architecture.png)

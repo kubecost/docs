@@ -12,7 +12,7 @@ Returns AuditSets for given window saved in the AuditStore
 {% endswagger-description %}
 
 {% swagger-parameter in="path" name="window" type="string" %}
-Duration of time over which to query. Accepts all standard Kubecost window formats (See our docs on using [the `window` parameter](/apis/monitoring-apis/assets-api.md#using-window-parameter)). Excluding this argument returns all audits in range.
+Duration of time over which to query. Accepts all standard Kubecost window formats (See our docs on using [the `window` parameter](/apis/apis-overview.md#using-the-window-parameter)). Excluding this argument returns all audits in range.
 {% endswagger-parameter %}
 
 {% swagger-response status="200: OK" description="" %}
@@ -100,7 +100,7 @@ Runs audits defined by parameters
 {% endswagger-description %}
 
 {% swagger-parameter in="path" name="window" type="string" %}
-Duration of time over which to query. Accepts all standard Kubecost window formats (See our docs on using [the `window` parameter](/apis/monitoring-apis/assets-api.md#using-window-parameter)). Excluding this argument returns all audits in range.
+Duration of time over which to query. Accepts all standard Kubecost window formats (See our docs on using [the `window` parameter](/apis/apis-overview.md#using-the-window-parameter)). Excluding this argument returns all audits in range.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="commit" type="boolean" %}

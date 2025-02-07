@@ -13,7 +13,7 @@ Reports can be managed via [_values.yaml_](https://github.com/kubecost/cost-anal
 Begin by selecting _Create a report_. There are five report types available. Three of these correspond to Kubecost's different monitoring dashboards.
 
 {% hint style="warning" %}
-As of Kubecost v2.0, Advanced Reports and Cloud Cost Reports have been removed and replaced with [Collections](/using-kubecost/navigating-the-kubecost-ui/collections.md). See the documentation for more info.
+As of Kubecost v2, Advanced Reports and Cloud Cost Reports have been removed and replaced with [Collections](/using-kubecost/navigating-the-kubecost-ui/collections.md). See the documentation for more info.
 {% endhint %}
 
 * Allocation Report
@@ -34,16 +34,16 @@ In the line for the report you want to share, select the three horizontal dots i
 
 * Interval: Interval that recurring reports will be sent out. Supports _Daily_, _Weekly_, and _Monthly_. Weekly reports default to going out Sunday at midnight. Monthly reports default to midnight on the first of the month. When selecting _Monthly_ and resetting on a day of the month not found in every month, the report will reset at the latest available day of that month. For example, if you choose to reset on the 31st, it will reset on the 30th for months with only 30 days.
 * Format: Supports _PDF_ or _CSV_.
-* Add email: Email(s) to distribute the report to.
+* Add email: Email(s) to distribute the report to. If a custom SMTP configuration has been created, all outbound report emails will be sent through it.
 
 Select _Apply_ to finalize. When you have created a schedule for your report, the selected interval will be displayed in the Interval column of your Reports page.
 
-## Managing reports via _values.yaml_
+## Managing Allocation reports via _values.yaml_
 
-The saved report settings, under `global.savedReports`, accept two parameters:
+The Allocation reports are saved under `global.savedReports`, accept two parameters:
 
 * `enabled` determines whether Kubecost will read saved reports configured via _values.yaml_; default value is `false`
-* `reports` is a list of report parameter maps
+* `reports` is a list of allocation reports
 
 The following fields apply to each map item under the `reports` key:
 
@@ -57,7 +57,7 @@ The following fields apply to each map item under the `reports` key:
     * e.g. `1609459200,1609545600` for the single day of 1 January 2021
   * _Note: for all window options, if a window is requested that spans "partial" days, the window will be rounded up to include the nearest full date(s)._
     * e.g. `2021-01-01T15:04:05Z,2021-01-02T20:21:22Z` will return the two full days of 1 January 2021 and 2 January 2021
-* `aggregateBy` the desired aggregation parameter -- equivalent to _Breakdown_ in the Kubecost UI. Supports:
+* `aggregateBy` the desired aggregation parameter -- equivalent to _Breakdown_ in the Allocation Kubecost UI. Supports:
   * `cluster`
   * `container`
   * `controller`
@@ -83,14 +83,76 @@ The following fields apply to each map item under the `reports` key:
 * `sharedNamespaces` -- a list containing namespaces to share costs for.
 * `sharedOverhead` -- an integer representing overhead costs to share.
 * `sharedLabels` -- a list of labels to share costs for, requires the following format: `label:<label_name>`
-* `filters` -- a list of maps consisting of a property and value
-  * `property` -- supports `cluster`, `node`, `namespace`, and `label`
-  * `value` -- property value(s) to filter on, supports wildcard filtering with a `*` suffix
-    * Special case `label` `value` examples: `app:cost-analyzer`, `app:cost*`
-      * Wildcard filters only apply for the label value. e.g., `ap*:cost-analyzer` is not valid
-  * _Note: multiple filter properties evaluate as ANDs, multiple filter values evaluate as ORs_
-    * _e.g., (namespace=foo,bar), (node=fizz) evaluates as (namespace == foo || namespace == bar) && node=fizz_
-  * **Important:** If no filters used, supply an empty list `[]`
+* `filters` -- a list of maps consisting of a key, operator and value
+  * `key` -- supports `cluster`, `node`, `namespace`, and others. Refer to the [v2 Filters Documentation](/apis/filters-api.md) for the complete list of supported keys.
+  * `operator` -- supports operator such as `:`,`!:`,`~:`,`!~:` and others. Refer to the [v2 Filters Documentation](/apis/filters-api.md) for the complete list of operators.
+  * `value` -- property value(s) to filter on. Some examples shown below.
+
+## Managing Asset reports via _values.yaml_
+The Asset reports are saved under `global.assetReports`, it accept two parameters:
+
+* `enabled` determines whether Kubecost will read saved asset reports configured via _values.yaml_; default value is `false`
+* `reports` is a list of asset reports
+
+The following fields apply to each map item under the `reports` key of `global.assetReports`:
+
+* `title` the title/name of your custom asset report; any non-empty string is accepted
+* `window` the time window the asset report covers, the following values are supported:
+  * keywords: `today`, `week` (week-to-date), `month` (month-to-date), `yesterday`, `lastweek`, `lastmonth`
+  * number of days: `{N}d` (last N days)
+    * e.g. `30d` for the last 30 days
+  * date range: `{start},{end}` (comma-separated RFC-3339 date strings or Unix timestamps)
+    * e.g. `2021-01-01T00:00:00Z,2021-01-02T00:00:00Z` for the single day of 1 January 2021
+    * e.g. `1609459200,1609545600` for the single day of 1 January 2021
+  * _Note: for all window options, if a window is requested that spans "partial" days, the window will be rounded up to include the nearest full date(s)._
+    * e.g. `2021-01-01T15:04:05Z,2021-01-02T20:21:22Z` will return the two full days of 1 January 2021 and 2 January 2021
+* `aggregateBy` the desired aggregation parameter -- equivalent to _Breakdown_ in the Kubecost Asset UI. Supports:
+  * `account`
+  * `cluster`
+  * `label` requires the following format: `label:<label_name>`
+  * `project`
+  * `providerID`
+  * `provider`
+  * `type`
+  * `unaggregated`
+* `accumulate` determines whether or not to sum Asset costs across the entire window -- equivalent to _Resolution_ in the UI, supports `true` (Entire window resolution) and `false` (Daily resolution)
+* `filters` -- a list of maps consisting of a key, operator and value
+  * `key` -- supports `cluster`, `name`, `provider`, and others. Refer to the [v2 Filters Documentation](/apis/filters-api.md) for the complete list of supported keys.
+  * `operator` -- supports operator such as `:`,`!:`,`~:`,`!~:` and others. Refer to the [v2 Filters Documentation](/apis/filters-api.md) for the complete list of operators.
+  * `value` -- property value(s) to filter on. Some examples shown below.
+
+## Managing Cloud Cost reports via _values.yaml_
+The Cloud cost reports are saved under `global.cloudCostReports`, it accept two parameters:
+
+* `enabled` determines whether Kubecost will read saved Cloud Cost reports configured via _values.yaml_; default value is `false`
+* `reports` is a list of Cloud Cost reports
+
+The following fields apply to each map item under the `reports` key of `global.cloudCostReports`:
+* `title` the title/name of your custom report; any non-empty string is accepted
+* `window` the time window the asset report covers, the following values are supported:
+  * keywords: `today`, `week` (week-to-date), `month` (month-to-date), `yesterday`, `lastweek`, `lastmonth`
+  * number of days: `{N}d` (last N days)
+    * e.g. `30d` for the last 30 days
+  * date range: `{start},{end}` (comma-separated RFC-3339 date strings or Unix timestamps)
+    * e.g. `2021-01-01T00:00:00Z,2021-01-02T00:00:00Z` for the single day of 1 January 2021
+    * e.g. `1609459200,1609545600` for the single day of 1 January 2021
+  * _Note: for all window options, if a window is requested that spans "partial" days, the window will be rounded up to include the nearest full date(s)._
+    * e.g. `2021-01-01T15:04:05Z,2021-01-02T20:21:22Z` will return the two full days of 1 January 2021 and 2 January 2021
+* `aggregateBy` the desired aggregation parameter -- equivalent to _Breakdown_ in the Kubecost Cloud Cost UI. Supports:
+  * `accountID`
+  * `category`
+  * `label` requires the following format: `label:<label_name>`
+  * `provider`
+  * `providerID`
+  * `invoiceEntityID`
+  * `service`
+  * `item`
+* `accumulate` in cloud cost reports differ from asset and allocation report as it supports a string equal to `quarter`, `month`, `week`,`day`, `hour` and `true`. This is equal to the step size selection in Cloud Cost Kubecost UI. With `true` signifying entire window duration.
+* `costMetric` depicts the cloud cost metrics for the reports and takes value `listCost`, `netCost`, `amortizedNetCost`,`invoicedCost`, `amortizedCost`. This is equal to the cost metric size selection in Cloud Cost Kubecost UI.
+* `filters` -- a list of maps consisting of a key, operator and value
+  * `key` -- supports `accountID`, `invoiceEntityID`, `provider`, and others. Refer to the [v2 Filters Documentation](/apis/filters-api.md) for the complete list of supported keys.
+  * `operator` -- supports operator such as `:`,`!:`,`~:`,`!~:` and others. Refer to the [v2 Filters Documentation](/apis/filters-api.md) for the complete list of operators.
+  * `value` -- property value(s) to filter on. Some examples shown below.
 
 ## Example Helm _values.yaml_ Saved Reports section
 
@@ -112,9 +174,14 @@ The following fields apply to each map item under the `reports` key:
           - monitoring
           - kube-system
         filters:
-          - property: "cluster"
-            value: "cluster-one,cluster*" # supports wildcard filtering and multiple comma separated values
-          - property: "namespace"
+          - key: "cluster"
+            operator: ":"
+            value: "cluster-one"
+          - key: "cluster"
+            operator: "<~:"
+            value: "cluster"
+          - key: "namespace"
+            operator: ":"
             value: "kubecost"
       - title: "Example Saved Report 1"
         window: "month"
@@ -124,9 +191,14 @@ The following fields apply to each map item under the `reports` key:
         rate: "monthly"
         accumulate: false
         filters:
-          - property: "label"
-            value: "app:cost*,environment:kube*"
-          - property: "namespace"
+          - key: "label[app]"
+            operator: "<~:"
+            value: "cost"
+          - key: "label[environment]"
+            operator: "<~:"
+            value: "kube"
+          - key: "namespace"
+            operator: ":"
             value: "kubecost"
       - title: "Example Saved Report 2"
         window: "2020-11-11T00:00:00Z,2020-12-09T23:59:59Z"
@@ -136,6 +208,43 @@ The following fields apply to each map item under the `reports` key:
         rate: "daily"
         accumulate: true # entire window resolution
         filters: [] # if no filters, specify empty array
+      - title: "Example Saved Report 3"
+        window: "today"
+        aggregateBy: "namespace"
+        chartDisplay: "category"
+        idle: "separate"
+        rate: "cumulative"
+        accumulate: false # daily resolution
+        sharedNamespaces:
+          - monitoring
+          - kube-system
+        filters:
+          - key: "namespace"
+            operator: "<~:"
+            value: "al,ni"
+  cloudCostReports:
+    enabled: true
+    reports:
+      - title: "Example Cloud cost reports"
+        window: "month"
+        aggregateBy: "accountID"
+        accumulate: "false"
+        costMetric: "listCost"
+        filters:
+          - key: "provider"
+            operator: ":"
+            value: "AWS"
+  assetReports:
+    enabled: true
+    reports:
+      - title: "Example asset reports"
+        window: "month"
+        aggregateBy: "account"
+        accumulate: true
+        filters:
+          - key: "provider"
+            operator: ":"
+            value: "AWS"
 ```
 {% endcode %}
 
@@ -185,12 +294,6 @@ data:
 
 Navigate to your Reports page in the Kubecost UI and ensure that the configured report parameters have been set by selecting the Report name.
 
-### Saved reports not appearing in Kubecost UI after upgrading to v2.x
+### Saved reports not appearing in Kubecost UI after upgrading to v2
 
-After upgrading Kubecost to v2.0+, saved reports may not properly display in the Kubecost UI. To properly transfer over saved reports, download this [`copy-reports.sh` file](https://github.com/kubecost/kubecost-utilities/blob/main/copy-reports/copy-reports.sh), then run the following command:
-
-```
-bash copy-reports.sh
-```
-
-Saved reports should then populate in your upgraded Kubecost version.
+After upgrading Kubecost to v2, saved reports may not properly display in the Kubecost UI. See the scripts available to migrate various settings in the [kubecost-utilities repo ](https://github.com/kubecost/kubecost-utilities/tree/main/settings-migration).
