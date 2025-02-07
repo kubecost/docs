@@ -1,7 +1,7 @@
 # User Management (SSO/OIDC)
 
 {% hint style="info" %}
-OIDC is only officially supported on Kubecost Enterprise plans.
+OIDC is a Kubecost Enterprise only feature.
 {% endhint %}
 
 ## Overview of features
