@@ -60,7 +60,7 @@ The API response includes several health checks that validate different aspects 
 | `dailyAssetEtlHealthy` | Validates that Kubecost has successfully built Assets ETL files. These ETL files consist of Assets data for the cluster, and are built by querying Prometheus metrics. If failing, refer to the [ETL Repair Guide](/troubleshooting/etl-repair.md) and try repairing the ETL files for the specific cluster. Reach out to Kubecost support for additional assistance. |
 | `kubecostPodsNotOOMKilled` | Validates that no pods in the namespace Kubecost is deployed to have OutOfMemoryKilled errors. If failing, check all pods in the namespace Kubecost is deployed to. Review logs of the failing pod. Reach out to Kubecost support for additional assistance. |
 | `kubecostPodsNotPending` | Validates that no pods in the namespace Kubecost is deployed to are in a Pending state. If failing, check all pods in the namespace Kubecost is deployed to. Run a `kubectl describe` on all Deployments and StatefulSets to understand the controller events. Reach out to Kubecost support for additional assistance. |
-| `costModelStorageStats` | Validates that PersistentVolume utilization is below 80%. If failing, increase the `PersistentVolume` size. |
+| `costModelStorageStats` | Validates that PersistentVolume utilization is below 80%. If failing, increase the PersistentVolume size. |
 
 ## API Usage
 
