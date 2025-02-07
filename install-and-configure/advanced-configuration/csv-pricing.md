@@ -1,7 +1,7 @@
 # CSV Pricing
 
 {% hint style="info" %}
-This feature is only officially supported on Kubecost Enterprise plans.
+CSV pricing is a Kubecost Enterprise only feature.
 {% endhint %}
 
 Kubecost allows users to apply custom prices to individual assets (e.g. nodes) via a CSV pipeline. Common uses are for on-premise clusters, service-providers, or for external enterprise discounts. This feature allows for greater resource specification than is provided by [Custom Pricing](/architecture/pricing-sources-matrix.md#custom-pricing). This doc shows how to create and configure a CSV pricing file.

@@ -1,7 +1,7 @@
 # Teams
 
 {% hint style="info" %}
-RBAC is only officially supported on Kubecost Enterprise plans.
+RBAC is a Kubecost Enterprise only feature.
 {% endhint %}
 
 Teams allows basic RBAC functionality using Kubecost's UI.
