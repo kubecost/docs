@@ -204,7 +204,7 @@ When using ETL Federation, there are several methods to recover Kubecost data in
 
 In the event of missing or inaccurate data, you may need to rebuild your ETL pipelines. See the [Repair Kubecost ETLs](/troubleshooting/etl-repair.md) doc for information and troubleshooting steps.
 
-## Setup with Azure workload Identites
+## Setup with Azure workload Identities
 
 For an environment using Azure Workload Identities, the following configuration must be included in the Kubecost Deployment in the Helm values file on both the primary and secondary clusters:
 

@@ -3,7 +3,7 @@ Installing Kubecost with Plural
 
 [Plural](https://www.plural.sh/) is a free, open-source tool that enables you to deploy Kubecost on Kubernetes with the cloud provider of your choice. Plural is an open-source DevOps platform for self-hosting applications on Kubernetes without the management overhead. With baked-in SSO, automated upgrades, and secret encryption, you get all the benefits of a managed service with none of the lock-in or cost.
 
-Kubecost is available as direct install with Plural, and it synergizes very well with the ecosystem, providing cost monitoring out of the box to users that deploy their Kubernetes clusters with Plural.
+Kubecost is available as direct install with Plural, and it interoperates very well with the ecosystem, providing cost monitoring out of the box to users that deploy their Kubernetes clusters with Plural.
 
 ## Getting started
 

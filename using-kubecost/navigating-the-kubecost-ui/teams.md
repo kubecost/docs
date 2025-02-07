@@ -256,7 +256,7 @@ Combined page view permissions will enable any page marked as such in any one of
 
 ### Legacy Teams
 
-Prior to Kubecost 2.6, Teams existed with more limited functionality. This is refered to as [legacy Teams](legacy-teams.md). 
+Prior to Kubecost 2.6, Teams existed with more limited functionality. This is referred to as [legacy Teams](legacy-teams.md). 
 
 Legacy teams provided a limited set of access control capabilities.
 
@@ -269,11 +269,11 @@ Post-2.6 Teams, in addition to all the functionality provided by legacy Teams, s
 - Support for OIDC and SAML authentication
 - Asset and Cloud Cost filters along with existing Allocation filters
 - Individual page enable/disable functionality
-- Ability to assign teams based on OIDC ID/Acccess token claims or claims returned in SAML response
+- Ability to assign teams based on OIDC ID/Access token claims or claims returned in SAML response
 
 ### Upgrading with existing legacy teams
 
-If upgrading to 2.6+ with existing teams, no config changes are required. Kubecost will attempt to automatically migrate existing legacy Teams teams on pod startup. 
+If upgrading to 2.6+ with existing teams, no config changes are required. Kubecost will attempt to automatically migrate existing legacy Teams teams on pod startup.
 
 For each existing legacy team, a role and associated team will be created. The Allocation filter and permissions level will be migrated into the new role, with the SAML email claim being added to the team.
 

@@ -76,7 +76,7 @@ avg(node_cpu_hourly_cost) by (cluster_id)
 
 ## Troubleshooting
 
-### Cluster efficiency displaying as 0%, or efficieny only displaying for most recent cluster
+### Cluster efficiency displaying as 0%, or efficiency only displaying for most recent cluster
 
 The below queries must return data for Kubecost to calculate costs correctly. For the queries to work, set the environment variables:
 

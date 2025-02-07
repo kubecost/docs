@@ -20,7 +20,7 @@ Kubecost supports the following pricing sources:
 | [Azure Rate Card](../install-and-configure/install/cloud-integration/azure-out-of-cluster/azure-config.md) | Kubecost pulls Azure Rate Card API. | More accurate Azure costs in the short-term (48 hours). | Limited value if billing-integration is configured. Requires additional setup with Azure. | Free |
 | [Alibaba](../install-and-configure/install/provider-installations/alibaba-install.md) | Kubecost pulls Alibaba Rate Card API. | Currently the only method to retrieve Alibaba resource pricing. | More accurate costs. Requires additional setup with Alibaba. | Free |
 | [AWS Spot Data Feed](/install-and-configure/install/cloud-integration/aws-cloud-integrations/aws-spot-instances.md) | Kubecost pulls spot prices from a custom feed. | More accurate costs in the short-term (48 hours) for Spot nodes.| Limited value if billing-integration is configured. Requires additional setup with AWS. | Free |
-| [CSV Pricing](/install-and-configure/advanced-configuration/csv-pricing.md) | Reads a user-provided CSV to generater granular resource prices. | Does not require CSP access. Works for on-prem clusters. Completely air-gapped for highly-secure environments. | Mapping labels in the CSV can be tedious. | Enterprise |
+| [CSV Pricing](/install-and-configure/advanced-configuration/csv-pricing.md) | Reads a user-provided CSV to generate granular resource prices. | Does not require CSP access. Works for on-prem clusters. Completely air-gapped for highly-secure environments. | Mapping labels in the CSV can be tedious. | Enterprise |
 
 ## Diagram
 

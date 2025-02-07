@@ -262,7 +262,7 @@ Example Helm _values.yaml_:
 
 ### Monitor Kubecost Health
 
-Enabling diagnostic alerts in Kubecost occursthe when an event impacts product uptime. This feature can be enabled in seconds from a values file. The following events are grouped into distinct categories that each result in a separate alert notification:
+Enabling diagnostic alerts in Kubecost occurs when an event impacts product uptime. This feature can be enabled in seconds from a values file. The following events are grouped into distinct categories that each result in a separate alert notification:
 
 * Prometheus is unreachable
 * Kubecost Metrics Availability:

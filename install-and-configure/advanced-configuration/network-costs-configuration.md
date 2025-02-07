@@ -191,7 +191,7 @@ networkCosts:
 
 The network costs DaemonSet requires a privileged [`spec.containers[*].securityContext`](https://kubernetes.io/docs/concepts/security/pod-security-standards/) and `hostNetwork: true` in order to leverage an underlying kernel module to capture network data.
 
-Additionally, the network costs DaemonSet mounts to the following directories on the host filesytem. It needs both read & write access. The network costs DaemonSet will only write to the filesystem to enable `conntrack` ([docs ref](https://www.kernel.org/doc/Documentation/networking/nf_conntrack-sysctl.txt))
+Additionally, the network costs DaemonSet mounts to the following directories on the host filesystem. It needs both read & write access. The network costs DaemonSet will only write to the filesystem to enable `conntrack` ([docs ref](https://www.kernel.org/doc/Documentation/networking/nf_conntrack-sysctl.txt))
 
 * `/proc/net/`
 * `/proc/sys/net/netfilter`
