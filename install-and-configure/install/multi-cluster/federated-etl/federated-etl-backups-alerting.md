@@ -1,7 +1,7 @@
 # Federated ETL Backups and Alerting
 
 {% hint style="info" %}
-Federated ETL Architecture is only officially supported on Kubecost Enterprise plans.
+Federated ETL Architecture is a Kubecost Enterprise only feature.
 {% endhint %}
 
 This doc provides recommendations to improve the stability and recoverability of your Kubecost data when deploying in a Federated ETL architecture.

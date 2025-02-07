@@ -1,7 +1,7 @@
 # Multi-Cloud Integrations
 
 {% hint style="info" %}
-Multi-cloud integrations are only officially supported on Kubecost Enteprise plans.
+Multi-cloud integrations are Kubecost Enterprise only features.
 {% endhint %}
 
 This document outlines how to set up cloud integration for accounts on multiple cloud service providers (CSPs), or multiple accounts on the same cloud provider. This configuration can be used independently of, or in addition, to other cloud integration configurations provided by Kubecost. Once configured, Kubecost will display cloud assets for all configured accounts and perform reconciliation for all [federated clusters](/install-and-configure/install/multi-cluster/federated-etl/federated-etl.md) that have their respective accounts configured.
