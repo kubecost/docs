@@ -116,6 +116,7 @@
   * [Audits](using-kubecost/navigating-the-kubecost-ui/audits.md)
   * [Anomaly Detection](using-kubecost/navigating-the-kubecost-ui/anomaly-detection.md)
   * [Teams](using-kubecost/navigating-the-kubecost-ui/teams.md)
+  * [Legacy Teams](using-kubecost/navigating-the-kubecost-ui/legacy-teams.md)
   * [Service Accounts](using-kubecost/navigating-the-kubecost-ui/service-accounts.md)
 * [Forecasting](using-kubecost/forecasting.md)
 * [Carbon Costs](using-kubecost/carbon-costs.md)
