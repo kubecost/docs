@@ -20,11 +20,17 @@ The monthly savings values on this page are precomputed every hour for performan
 * [Manage underutilized nodes](underutilized-nodes.md)
 * [Right-size your persistent volumes](pv-right-sizing-rec.md)
 
-### Cloud insights:
+### Cloud insights
 
 * Reserve instances
 * [Manage orphaned resources](orphaned-resources.md)
 * [Spot Instances](spot-checklist.md)
+
+### Turbonomic Actions insights
+* [Resize Workload Controllers](turbonomic-actions.md)
+* [Suspend Container Pods](turbonomic-actions.md)
+* [Suspend Virtual Machines](turbonomic-actions.md)
+* [Move Container Pods](turbonomic-actions.md)
 
 ## Archiving Savings insights
 

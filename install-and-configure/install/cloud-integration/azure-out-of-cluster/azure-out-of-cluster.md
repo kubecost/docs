@@ -2,7 +2,7 @@
 
 Connecting your Azure account to Kubecost allows you to view Kubernetes metrics side-by-side with out-of-cluster (OOC) costs (e.g. Azure Database Services). Additionally, it allows Kubecost to reconcile measured Kubernetes spend with your actual Azure bill. This gives teams running Kubernetes a complete and accurate picture of costs. For more information, read [Cloud Billing Integrations](/install-and-configure/install/cloud-integration/README.md) and this [blog post](https://blog.kubecost.com/blog/complete-picture-when-monitoring-kubernetes-costs/).
 
-To configure Kubecost's Azure Cloud Integration, you will need to set up daily exports of cost reports to Azure storage. Kubecost will then access your cost reports through the Azure Storage API to display your OOC cost data alongside your in-cluster costs.
+To configure Kubecost's Azure Cloud Integration, you will need to set up daily exports of cost reports to Azure storage. Kubecost will then access your cost reports through the Azure Storage API to reconcile Kubernetes costs and display your cloud cost data.
 
 A GitHub repository with sample files used in below instructions can be found [here](https://github.com/kubecost/poc-common-configurations/tree/main/azure).
 
@@ -12,7 +12,14 @@ A GitHub repository with sample files used in below instructions can be found [h
 Azure Cost Management is not available for all offer types. Review the Azure documentation, [Understand Cost Management data](https://learn.microsoft.com/en-us/azure/cost-management-billing/costs/understand-cost-mgt-data#supported-microsoft-azure-offers), to learn more.
 {% endhint %}
 
-Follow Azure's [Create and Manage Exported Data](https://learn.microsoft.com/en-us/azure/cost-management-billing/costs/tutorial-export-acm-data?tabs=azure-portal) tutorial to export cost reports. For Metric, make sure you select _Amortized cost (Usage and Purchases)._ For Export type, make sure you select _Daily export of month-to-date costs._ Do not select _File Partitioning_. Also, take note of the Account name and Container specified when choosing where to export the data to. Note that a successful cost export will require [`Microsoft.CostManagementExports`](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/azure-services-resource-providers) to be registered in your subscription.
+Follow Azure's [Create and Manage Exported Data](https://learn.microsoft.com/en-us/azure/cost-management-billing/costs/tutorial-export-acm-data?tabs=azure-portal) tutorial to export cost reports and use the following configuration:
+
+* For 'Type of data' select `Cost and usage details (amortized)`
+* Provide a meaningful name for the 'Export name'
+* For 'Dataset version' select `2021-10-01`
+* For 'Frequency' select `Daily export of month-to-date costs`
+
+Take note of the Storage Account name and Container specified when choosing where to export the data to. Note that a successful cost export will require [`Microsoft.CostManagementExports`](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/azure-services-resource-providers) to be registered in your subscription.
 
 It will take a few hours to generate the first report, after which Kubecost can use the Azure Storage API to pull that data.
 
@@ -97,9 +104,3 @@ To troubleshoot a configuration that is not yet working:
 * `$ helm get values kubecost` to verify you've properly set `.Values.kubecostProductConfigs.cloudIntegrationSecret`
 * Verify that a non-empty CSV file has been created at this path in your Azure Portal Storage Account: `<STORAGE_ACCOUNT>/<CONTAINER_NAME>/<OPTIONAL_CONTAINER_PATH>/<COST_EXPORT_NAME>/<DATE_RANGE>/<CSV_FILE>`. Ensure new CSVs are being generated every day.
 * When opening a cost report CSV, ensure that there are rows in the file that do not have a MeterCategory of “Virtual Machines” or “Storage” as these items are ignored because they are in cluster costs. Additionally, make sure that there are items with a UsageDateTime that matches the date you are interested in.
-
-When reviewing logs:
-
-*   The following error is reflective of Kubecost's previous Azure Cloud Integration method and can be safely disregarded.
-
-    `ERR Error, Failed to locate azure storage config file: /var/azure-storage-config/azure-storage-config.json`

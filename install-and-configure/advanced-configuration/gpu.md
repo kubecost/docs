@@ -2,7 +2,23 @@
 
 ## Monitoring GPU utilization
 
-Kubecost supports monitoring of NVIDIA GPU utilization starting with the Volta architecture (2017). In order for Kubecost to understand GPU utilization, Kubecost depends on metrics being available from NVIDIA [DCGM Exporter](https://github.com/NVIDIA/dcgm-exporter). Kubecost will search for GPU metrics by default, but since DCGM Exporter is the provider of those metrics it is a required component when GPU monitoring is used with Kubecost and must be installed if it is not already. In many cases, DCGM Exporter may already be installed in your cluster, for example if you currently monitor NVIDIA GPUs with other software. But if not, follow the below instructions to install and configure DCGM Exporter on each of your GPU-enabled clusters.
+Kubecost supports monitoring of NVIDIA GPU utilization starting with the Volta architecture (2017). In order for Kubecost to understand GPU utilization, Kubecost depends on metrics being available from NVIDIA [DCGM Exporter](https://github.com/NVIDIA/dcgm-exporter). Kubecost will search for GPU metrics by default, but since DCGM Exporter is the provider of those metrics it is a required component when GPU monitoring is used with Kubecost and must be installed if it is not already. In many cases, DCGM Exporter may already be installed in your cluster, for example if you currently monitor NVIDIA GPUs with other software. See the [Pre-Installed DCGM Exporter](#pre-installed-dcgm-exporter) section for important considerations. But if not, follow the instructions in the [Install DCGM Exporter](#install-dcgm-exporter) section to install and configure DCGM Exporter on each of your GPU-enabled clusters.
+
+{% hint style="note" %}
+Managed DCGM offerings such as Google Cloud's managed DCGM are currently not supported. DCGM Exporter must be self-installed and managed in target clusters.
+{% endhint %}
+
+## Pre-Installed DCGM Exporter
+
+In cases where you have already installed DCGM Exporter in your cluster, Kubecost can leverage this installation as the source of its GPU metrics. However, in order for Kubecost's bundled Prometheus to find this installation the following requirements must be met.
+
+- DCGM Exporter has been installed with a matching Kubernetes [Service](https://kubernetes.io/docs/concepts/services-networking/service/). Installations consisting of only the DaemonSet are not supported. Helm-based installations of either the [DCGM Exporter](https://github.com/NVIDIA/dcgm-exporter) or the [GPU operator](https://github.com/NVIDIA/gpu-operator) charts include a Service by default.
+- The Service must have active [Endpoints](https://kubernetes.io/docs/concepts/services-networking/service/#endpoints) which list the available DCGM Exporter pods.
+- The Service and Endpoints must have at least one of a few possible labels assigned in order for Prometheus to locate them. The currently-supported label keys are shown below. Assigning a compatible label solely to pods or the parent DaemonSet is not supported.
+  - `app`
+  - `app.kubernetes.io/component`
+  - `app.kubernetes.io/name`
+- The value of one of these labels must contain the string `dcgm-exporter`.
 
 ## Install DCGM Exporter
 
@@ -73,6 +89,10 @@ Finally, perform a validation step to ensure that metrics are working as expecte
 
 ### GKE
 
+{% hint style="note" %}
+Managed DCGM offerings such as Google Cloud's [managed DCGM](https://cloud.google.com/kubernetes-engine/docs/how-to/dcgm-metrics) are currently not supported. DCGM Exporter must be self-installed and managed in target clusters.
+{% endhint %}
+
 To install DCGM Exporter on a GKE cluster where the worker nodes use the default [Container Optimized OS (COS)](https://cloud.google.com/container-optimized-os/docs), use the following values. The GKE-provided label `cloud.google.com/gke-accelerator` is used to attract DCGM Exporter pods to nodes with NVIDIA GPUs.
 
 {% hint style="info" %}
@@ -134,6 +154,26 @@ Ensure the DCGM Exporter pods are in a running state and only on the nodes with 
 
 ```sh
 kubectl -n dcgm-exporter get pods
+```
+
+If necessary, create a ResourceQuota allowing DCGM Exporter pods to be scheduled.
+
+```yaml
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: dcgm-exporter-quota
+  namespace: dcgm-exporter
+spec:
+  hard:
+    pods: 100
+  scopeSelector:
+    matchExpressions:
+    - operator: In
+      scopeName: PriorityClass
+      values:
+        - system-node-critical
+        - system-cluster-critical
 ```
 
 For additional information on installing DCGM Exporter in Google Cloud, see [here](https://cloud.google.com/stackdriver/docs/managed-prometheus/exporters/nvidia-dcgm).
@@ -308,3 +348,42 @@ kubectl -n kubecost port-forward svc/kubecost-prometheus-server 8080:80
 Open the Prometheus web interface in your browser by navigating to `http://localhost:8080`. In the search box, begin typing the prefix for a metric, for example `DCGM_FI_DEV_POWER_USAGE`. Click Execute to view the returned query and verify that there is data present. An example is shown below.
 
 ![Prometheus query showing DCGM Exporter metric](/images/gpu-prometheus-query.png)
+
+Additionally, check the `DCGM_FI_PROF_GR_ENGINE_ACTIVE` metric. This is the metric Kubecost currently uses to determine GPU utilization. GPU efficiency features in the UI are only enabled when there are non-zero values for this metric.
+
+![Prometheus query showing DCGM Exporter metric](/images/gpu-prometheus-query-gr-engine-active.png)
+
+## Shared GPU Support
+
+Kubecost supports NVIDIA GPU sharing using either the CUDA [time-slicing](https://docs.nvidia.com/datacenter/cloud-native/gpu-operator/latest/gpu-sharing.html) or [Multi-Process Service (MPS)](https://docs.nvidia.com/deploy/mps/index.html) methods. MIG is currently unsupported but is being evaluated for a future release. When employing either time-slicing or MPS, you must use the `renameByDefault=true` option in the [NVIDIA device plugin's](https://github.com/NVIDIA/k8s-device-plugin?tab=readme-ov-file#shared-access-to-gpus) configuration stanza. This parameter instructs the device plugin to advertise the resource `nvidia.com/gpu.shared` on nodes where GPU sharing is enabled. Without this configuration option, the device plugin will instead advertise `nvidia.com/gpu` which will mean Kubecost is unable to disambiguate an "exclusive" GPU access request from a shared GPU access request. As a result, Kubecost's cost information will be inaccurate.
+
+{% hint style="warning" %}
+Prior to enabling GPU sharing in your cluster, view the [Limitations](#limitations) section to determine if this is right for you.
+{% endhint %}
+
+The following is an example of a time-slicing configuration which sets the `renameByDefault` parameter.
+
+```yaml
+version: v1
+sharing:
+  timeSlicing:
+    renameByDefault: true
+    failRequestsGreaterThanOne: true
+    resources:
+    - name: nvidia.com/gpu
+      replicas: 4
+```
+
+With this configuration saved and applied to nodes, they will begin to advertise the `nvidia.com/gpu.shared` device with a quantity equal to the replica count, defined in the configuration, multiplied by the number of physical GPUs inside the node. For example, a node with four (4) physical NVIDIA GPUs which uses this configuration will advertise sixteen (16) shared GPU devices.
+
+```sh
+$ kubectl describe node mynodename
+...
+Capacity:
+  nvidia.com/gpu.shared: 16
+...
+```
+
+### Limitations
+
+There are limitations of which to be aware when using NVIDIA GPU sharing with either time-slicing or MPS. Because [NVIDIA does not support](https://docs.nvidia.com/datacenter/cloud-native/gpu-operator/latest/gpu-sharing.html#limitations) providing utilization metrics via DCGM Exporter for containers using shared GPUs, Kubecost will display a GPU cost of zero for these workloads. However, the [GPU Savings Optimization](/using-kubecost/navigating-the-kubecost-ui/savings/gpu-optimization.md) card (Kubecost Enterprise) will be able to indicate in the utilization table which containers are configured for GPU sharing providing some visibility.

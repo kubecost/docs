@@ -45,6 +45,8 @@
       * [AWS Multi-Cluster Storage Configuration](install-and-configure/install/multi-cluster/long-term-storage-configuration/long-term-storage-aws.md)
       * [Azure Long-Term Storage](install-and-configure/install/multi-cluster/long-term-storage-configuration/long-term-storage-azure.md)
       * [GCP Long-Term Storage](install-and-configure/install/multi-cluster/long-term-storage-configuration/long-term-storage-gcp.md)
+      * [Hitachi Content Platform (HCP) Storage Configuration](install-and-configure/install/multi-cluster/long-term-storage-configuration/long-term-storage-hitachi.md)
+      * [Storj Storage Configuration](install-and-configure/install/multi-cluster/long-term-storage-configuration/long-term-storage-storj.md)
     * [Secondary Clusters Guide](install-and-configure/install/multi-cluster/secondary-clusters.md)
     * [Multi-Cluster Diagnostics](install-and-configure/install/multi-cluster/multi-cluster-diagnostics.md)
 * [Additional Configuration](install-and-configure/advanced-configuration/README.md)
@@ -108,6 +110,8 @@
     * [Spot Checklist](using-kubecost/navigating-the-kubecost-ui/savings/spot-checklist.md)
     * [Spot Commander](using-kubecost/navigating-the-kubecost-ui/savings/spot-commander.md)
     * [Persistent Volume Right-Sizing Recommendations](using-kubecost/navigating-the-kubecost-ui/savings/pv-right-sizing-rec.md)
+    * [GPU Optimization](using-kubecost/navigating-the-kubecost-ui/savings/gpu-optimization.md)
+    * [Turbonomic Actions](using-kubecost/navigating-the-kubecost-ui/savings/turbonomic-actions.md)
   * [Budgets](using-kubecost/navigating-the-kubecost-ui/budgets.md)
   * [Audits](using-kubecost/navigating-the-kubecost-ui/audits.md)
   * [Anomaly Detection](using-kubecost/navigating-the-kubecost-ui/anomaly-detection.md)
@@ -161,6 +165,7 @@
   * [Container Request Right Sizing Recommendation API (V2)](apis/savings-apis/api-request-right-sizing-v2.md)
   * [Container Request Recommendation Apply/Plan APIs](apis/savings-apis/api-request-recommendation-apply.md)
   * [Abandoned Workloads API](apis/savings-apis/api-abandoned-workloads.md)
+  * [Turbonomic Actions APIs](apis/savings-apis/api-turbonomic-actions.md)
 * [Filter Parameters (v2)](apis/filters-api.md)
 
 ## Architecture
@@ -186,6 +191,7 @@
 * [Importing Kubecost Data into Microsoft Power BI](integrations/import-kubecost-data-into-microsoft-power-bi.md)
 * [Integrating Kubecost with Datadog](integrations/integrating-kubecost-with-datadog.md)
 * [Using Custom Webhook to Create a Kubecost Stage in Spinnaker](integrations/spinnaker-custom-webhook.md)
+* [Kubecost Turbonomic Integration](integrations/turbonomic-integration.md)
 
 ## Troubleshooting
 
