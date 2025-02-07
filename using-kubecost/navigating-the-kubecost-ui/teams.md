@@ -119,7 +119,8 @@ data:
           ],
           "assetFilters": [],
           "cloudCostFilters": [],
-          "description": "helm configrured role",
+          "description": "helm configured role",
+
           "id": "",
           "name": "helm-role",
           "pages": {
