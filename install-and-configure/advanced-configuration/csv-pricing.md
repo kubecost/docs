@@ -8,7 +8,7 @@ Kubecost allows users to apply custom prices to individual assets (e.g. nodes) v
 
 ## Creating a pricing file
 
-1.  Create a CSV file in this [format](https://github.com/kubecost/cost-analyzer-helm-chart/blob/develop/cost-analyzer/custom-pricing.csv) (also in the below table). CSV changes are picked up hourly by default.
+1.  Create a CSV file in this [format](https://github.com/kubecost/cost-analyzer-helm-chart/blob/v2.6/cost-analyzer/custom-pricing.csv) (also in the below table). CSV changes are picked up hourly by default.
 
     1. `EndTimeStamp`: currently unused
     2. `InstanceID`: identifier used to match asset
@@ -40,7 +40,7 @@ This section is only required for nodes with GPUs.
 
 ## Kubecost configuration
 
-Provide a file path for your CSV pricing data in your [*values.yaml*](https://github.com/kubecost/cost-analyzer-helm-chart/blob/develop/cost-analyzer/values-custom-pricing.yaml). This path can reference a local PV or an S3 bucket.
+Provide a file path for your CSV pricing data in your [*values.yaml*](https://github.com/kubecost/cost-analyzer-helm-chart/blob/v2.6/cost-analyzer/values-custom-pricing.yaml). This path can reference a local PV or an S3 bucket.
 
 ```yaml
 pricingCsv:

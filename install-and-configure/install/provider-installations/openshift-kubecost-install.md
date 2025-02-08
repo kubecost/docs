@@ -54,7 +54,7 @@ If you want to install Kubecost with your desired cluster name, provide the foll
 --set prometheus.server.global.external_labels.cluster_id=my-ocp-cluster
 ```
 
-Other OpenShift-specific values include the ability to deploy a Route and SecurityContextConstraints for optional components requiring more privileges such as Kubecost network costs and Prometheus node exporter. To view all the latest OpenShift-specific values and their use, please see the [OpenShift values file](https://github.com/kubecost/cost-analyzer-helm-chart/blob/develop/cost-analyzer/values-openshift.yaml).
+Other OpenShift-specific values include the ability to deploy a Route and SecurityContextConstraints for optional components requiring more privileges such as Kubecost network costs and Prometheus node exporter. To view all the latest OpenShift-specific values and their use, please see the [OpenShift values file](https://github.com/kubecost/cost-analyzer-helm-chart/blob/v2.6/cost-analyzer/values-openshift.yaml).
 
 If you have not opted to do so during installation, it may be necessary to create a Route to the service `kubecost-cost-analyzer` on port `9090` of the `kubecost` project (if using default values). For more information on Routes, see the OpenShift documentation [here](https://docs.openshift.com/container-platform/4.13/networking/routes/route-configuration.html).
 

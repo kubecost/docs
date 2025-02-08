@@ -56,7 +56,7 @@ helm upgrade -i kubecost cost-analyzer/ \
   -f values.yaml
 ```
 
-You can find additional configuration options in our main [*values.yaml*](https://github.com/kubecost/cost-analyzer-helm-chart/blob/develop/cost-analyzer/values.yaml) file.
+You can find additional configuration options in our main [*values.yaml*](https://github.com/kubecost/cost-analyzer-helm-chart/blob/v2.6/cost-analyzer/values.yaml) file.
 
 ### Verification
 

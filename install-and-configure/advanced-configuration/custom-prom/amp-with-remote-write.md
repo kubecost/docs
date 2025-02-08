@@ -151,7 +151,7 @@ Run this command to install Kubecost and integrate it with the Amazon Managed Se
 helm upgrade -i ${RELEASE} \
   oci://public.ecr.aws/kubecost/cost-analyzer \
   --namespace ${RELEASE} --create-namespace \
-  -f https://raw.githubusercontent.com/kubecost/cost-analyzer-helm-chart/develop/cost-analyzer/values-eks-cost-monitoring.yaml \
+  -f https://raw.githubusercontent.com/kubecost/cost-analyzer-helm-chart/v2.6/cost-analyzer/values-eks-cost-monitoring.yaml \
   -f values.yaml
 ```
 
