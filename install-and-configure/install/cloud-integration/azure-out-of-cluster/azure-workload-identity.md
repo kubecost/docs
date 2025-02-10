@@ -13,7 +13,7 @@ $ export AKS_OIDC_ISSUER="$(az aks show -n $CLUSTER_NAME -g "${RESOURCE_GROUP}" 
 https://westus.oic.<redacted>.azure.com/<redacted>
 ```
 
-2. Assign the Storage Blob Data Contibutor Role to the Managed Identity and scope it to the storage blob container resource that has the cost export. See this example:
+2. Assign the Storage Blob Data Contributor Role to the Managed Identity and scope it to the storage blob container resource that has the cost export. See this example:
 
 ```bash
 az role assignment create --assignee "55555555-5555-5555-5555-555555555555" --role "Storage Blob Data Contributor" --scope "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/Example-Storage-rg/providers/Microsoft.Storage/storageAccounts/storage12345"

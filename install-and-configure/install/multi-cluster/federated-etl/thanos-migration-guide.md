@@ -6,7 +6,7 @@ Important notes for the migration process:
 
 * Once Aggregator is enabled, all queries hit the Aggregator container and *not* cost-model via the reverse proxy.
 * The ETL-Utils container only creates additional files in the object store. It does not delete any data/metrics.
-* For larger environments, the StorageClass must have 1GBPS throughput.
+* For larger environments, the StorageClass must have 1 GBPS throughput.
 * Having enough storage is critically important and will vary based on environment. Bias towards a larger value for `aggregatorDBStorage.storageRequest` at the beginning and cut it down if persistent low utilization is observed.
 
 ## Key changes
@@ -92,7 +92,7 @@ Enabling ETL-Utils will create the directories `/federated/CLUSTER_ID` for every
 
 Enabling [Aggregator](/install-and-configure/install/multi-cluster/federated-etl/aggregator.md) will begin processing the ETL data from the `/federated` directory. The aggregator will then serve all Kubecost queries. Be sure to look at the [Aggregator Optimizations Doc](/install-and-configure/install/multi-cluster/federated-etl/aggregator.md) if Kubecost is ingesting data for ~20,000+ containers. It is difficult to recommend the amount of resources needed due to the uniqueness of each environment and several other variables.
 
-The `federatedStorageConfigSecret`, `etlBucketConfigSecret`, and `thanosSourceBucketSecret` *MUST* all point to the same bucket. Otherwise the data migration will not suceed. Additionally, the cloud-integration *MUST* be configured and referenced following [this method](/install-and-configure/install/cloud-integration/multi-cloud.md#step-2-create-cloud-integration-secret) or the cloud integration will fail.
+The `federatedStorageConfigSecret`, `etlBucketConfigSecret`, and `thanosSourceBucketSecret` *MUST* all point to the same bucket. Otherwise the data migration will not succeed. Additionally, the cloud-integration *MUST* be configured and referenced following [this method](/install-and-configure/install/cloud-integration/multi-cloud.md#step-2-create-cloud-integration-secret) or the cloud integration will fail.
 
 ```yaml
 kubecostProductConfigs:
@@ -123,7 +123,7 @@ kubecost-cost-analyzer-685fd8f677-k652h        4/4     Running   0          3h2m
 kubecost-etl-utils-6cdd489596-5dl75            1/1     Running   0          6d20h
 ```
 
-This step can take some time depending on how much data the Aggregator must process. A couple importants steps are happening in the background:
+This step can take some time depending on how much data the Aggregator must process. A couple important steps are happening in the background:
 
 * The ETL Utils image is building the directory structure in the object store needed by Aggregator to pull the ETL data.
 * SQL tables are building.
@@ -187,7 +187,7 @@ helm upgrade kubecost cost-analyzer --repo https://kubecost.github.io/cost-analy
   -f values.yaml
 ```
 
-## Troubeshooting
+## Troubleshooting
 
 To help diagnose problems with Aggregator, check the Aggregator container logs for query failures or SQL table failures. If you have additional questions, contact Kubecost support at [support@kubecost.com](mailto:support@kubecost.com).
 

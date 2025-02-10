@@ -83,7 +83,7 @@ Admins can edit existing teams by selecting them from the Teams page. Teams can 
 
 ## Notes about user roles
 
-User roles can always be optionally configured using the UI or by adjusting the Helm flags in your *values.yaml*. There is no reequirement to choose one or the other.
+User roles can always be optionally configured using the UI or by adjusting the Helm flags in your *values.yaml*. There is no requirement to choose one or the other.
 
 Kubecost RBAC follows the principle of most privilege. If a user is added to multiple teams with different roles, they will assume the role with the highest authority unless Allocation Filters are used to limit role functions.
 

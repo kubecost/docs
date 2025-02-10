@@ -11,7 +11,7 @@ When using a Helm install, this can be done simply with:
 helm install kubecost \
 --repo https://kubecost.github.io/cost-analyzer/ cost-analyzer \
 --namespace kubecost --create-namespace \
--f https://raw.githubusercontent.com/kubecost/cost-analyzer-helm-chart/develop/cost-analyzer/values-windows-node-affinity.yaml
+-f https://raw.githubusercontent.com/kubecost/cost-analyzer-helm-chart/v2.6/cost-analyzer/values-windows-node-affinity.yaml
 ```
 {% endcode %}
 
@@ -41,7 +41,7 @@ For DaemonSets, set the affinity to only allow scheduling on Windows nodes:
                 - linux
     ```
 
-See the list of all deployments and DaemonSets in this [*values-windows-node-affinity.yaml*](https://github.com/kubecost/cost-analyzer-helm-chart/blob/develop/cost-analyzer/values-windows-node-affinity.yaml) file:
+See the list of all deployments and DaemonSets in this [*values-windows-node-affinity.yaml*](https://github.com/kubecost/cost-analyzer-helm-chart/blob/v2.6/cost-analyzer/values-windows-node-affinity.yaml) file:
 
 ```
 nodeSelector:

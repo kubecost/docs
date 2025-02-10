@@ -14,11 +14,11 @@ Here's an example address:
 
 You should pass a POST variable in this format:
 
-```
+```json
 namespaces: {
   kubecost: {
-    ownerLabel: "Ajay Tripathy", 
-    email: "ajay@kubecost.com", 
+    ownerLabel: "John Doe", 
+    email: "jdoe@corp.com", 
     sendAlert: "true"
   }
 }

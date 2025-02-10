@@ -198,7 +198,7 @@ On the Amazon EKS cluster with mixed processor architecture worker nodes (AMD64,
 Remember to replace $VERSION with the actual version number. You can find all available versions via the Amazon ECR public gallery [here](https://gallery.ecr.aws/kubecost/cost-analyzer).
 {% endhint %}
 
-By default, the installation will include certain prerequisite software including Prometheus and kube-state-metrics. To customize your deployment, such as skipping these prerequisites if you already have them running in your cluster, you can configure any of the [available values](https://github.com/kubecost/cost-analyzer-helm-chart/blob/develop/cost-analyzer/values-eks-cost-monitoring.yaml) to modify storage, network configuration, and more.
+By default, the installation will include certain prerequisite software including Prometheus and kube-state-metrics. To customize your deployment, such as skipping these prerequisites if you already have them running in your cluster, you can configure any of the [available values](https://github.com/kubecost/cost-analyzer-helm-chart/blob/v2.6/cost-analyzer/values-eks-cost-monitoring.yaml) to modify storage, network configuration, and more.
 
 ### Step 2: Generate Kubecost dashboard endpoint
 
@@ -264,7 +264,7 @@ On the Amazon EKS cluster with mixed processor architecture worker nodes (AMD64,
 Remember to replace $VERSION with the actual version number. You can find all available versions via the Amazon ECR public gallery [here](https://gallery.ecr.aws/kubecost/cost-analyzer).
 {% endhint %}
 
-By default, the installation will include certain prerequisite software including Prometheus and kube-state-metrics. To customize your deployment, such as skipping these prerequisites if you already have them running in your cluster, you can configure any of the [available values](https://github.com/kubecost/cost-analyzer-helm-chart/blob/develop/cost-analyzer/values-eks-cost-monitoring.yaml) to modify storage, network configuration, and more.
+By default, the installation will include certain prerequisite software including Prometheus and kube-state-metrics. To customize your deployment, such as skipping these prerequisites if you already have them running in your cluster, you can configure any of the [available values](https://github.com/kubecost/cost-analyzer-helm-chart/blob/v2.6/cost-analyzer/values-eks-cost-monitoring.yaml) to modify storage, network configuration, and more.
 
 ### Step 2: Generate Kubecost dashboard endpoint
 

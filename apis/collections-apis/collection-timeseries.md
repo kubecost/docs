@@ -138,7 +138,7 @@ GET /model/collection/query/timeseries?id=8a939ba1-ff15-4600-b711-2cb109114914&w
                             "totalCost": 10.0,
                             "idleCost": 3.0,
                             "domainCosts": {
-                                "kuberneteCost": {
+                                "kubernetesCost": {
                                     "totalCost": 10.0,
                                     "idleCost": 3.0
                                 }
@@ -209,7 +209,7 @@ GET /model/collection/query/timeseries?id=8a939ba1-ff15-4600-b711-2cb109114914&w
                             "totalCost": 10.0,
                             "idleCost": 3.0,
                             "domainCosts": {
-                                "kuberneteCost": {
+                                "kubernetesCost": {
                                     "totalCost": 10.0,
                                     "idleCost": 3.0
                                 }
@@ -281,7 +281,7 @@ GET /model/collection/query/timeseries?id=8a939ba1-ff15-4600-b711-2cb109114914&w
                             "totalCost": 10.0,
                             "idleCost": 3.0,
                             "domainCosts": {
-                                "kuberneteCost": {
+                                "kubernetesCost": {
                                     "totalCost": 10.0,
                                     "idleCost": 3.0
                                 }

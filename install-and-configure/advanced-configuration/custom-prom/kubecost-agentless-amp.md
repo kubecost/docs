@@ -173,7 +173,7 @@ This guide assumes that the Kubecost Helm release name and the Kubecost namespac
     aws ecr-public get-login-password --region us-east-1 | helm registry login --username AWS --password-stdin public.ecr.aws
     helm install $KUBECOST_NAMESPACE -n $KUBECOST_NAMESPACE \
         oci://public.ecr.aws/kubecost/cost-analyzer \
-        -f https://raw.githubusercontent.com/kubecost/cost-analyzer-helm-chart/develop/cost-analyzer/values-eks-cost-monitoring.yaml \
+        -f https://raw.githubusercontent.com/kubecost/cost-analyzer-helm-chart/v2.6/cost-analyzer/values-eks-cost-monitoring.yaml \
         -f values-kubecost-primary.yaml
     ```
 
@@ -210,7 +210,7 @@ This assumes you have created the AWS IAM policies above. If using multiple AWS 
     aws ecr-public get-login-password --region us-east-1 | helm registry login --username AWS --password-stdin public.ecr.aws
     helm install $KUBECOST_NAMESPACE -n $KUBECOST_NAMESPACE \
         oci://public.ecr.aws/kubecost/cost-analyzer \
-        -f https://raw.githubusercontent.com/kubecost/cost-analyzer-helm-chart/develop/cost-analyzer/values-eks-cost-monitoring.yaml \
+        -f https://raw.githubusercontent.com/kubecost/cost-analyzer-helm-chart/v2.6/cost-analyzer/values-eks-cost-monitoring.yaml \
         -f values-kubecost-agent.yaml
     ```
 

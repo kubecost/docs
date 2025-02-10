@@ -1,6 +1,6 @@
 # AWS Node Price Reconciliation Methodology
 
-Kubecost is capable of aggregating the costs of EC2 compute resources over a given timeframe with a specified duration step size. To achieve this, Kubecost uses Athena queries to gather usage data points with differing price models. The result of this process is a list of resources with their cost by timeframe.
+Kubecost is capable of aggregating the costs of EC2 compute resources over a given time frame with a specified duration step size. To achieve this, Kubecost uses Athena queries to gather usage data points with differing price models. The result of this process is a list of resources with their cost by time frame.
 
 ## Athena queries
 
@@ -30,7 +30,7 @@ This query is grouped by six columns:
 5. `line_item_usage_type`
 6. `line_item_product_code`
 
-The columns `line_item_unblended_cost` and `savings_plan_savings_plan_effective_cost` are summed on this grouping. Finally, the query filters out rows that are not within a given date range, have a missing `line_item_resource_id`, and have a `line_item_product_code` not equal to "AmazonEC2". The grouping has three important aspects, the timeframe of the line items, the resource as defined by the resource id, and the usage type, which is later used to determine the proper cost of the resources as it was used. This means that line items are grouped according to the resource, the time frame of the usage, and the rate at which the usage was charged.
+The columns `line_item_unblended_cost` and `savings_plan_savings_plan_effective_cost` are summed on this grouping. Finally, the query filters out rows that are not within a given date range, have a missing `line_item_resource_id`, and have a `line_item_product_code` not equal to "AmazonEC2". The grouping has three important aspects, the time frame of the line items, the resource as defined by the resource id, and the usage type, which is later used to determine the proper cost of the resources as it was used. This means that line items are grouped according to the resource, the time frame of the usage, and the rate at which the usage was charged.
 
 ### Reservation query
 
@@ -42,7 +42,7 @@ The reservation query is grouped on five columns:
 4. `line_item_resource_id`
 5. `line_item_product_code`
 
-The query is summed on the `reservation_effective_cost` and filtered by the date window, for missing `reservation_reservation_a_r_n` values and also removes line items with `line_item_product_code` not equal to "AmazonEC2". This grouping is on resource id by timeframe removing all non-reservation line items.
+The query is summed on the `reservation_effective_cost` and filtered by the date window, for missing `reservation_reservation_a_r_n` values and also removes line items with `line_item_product_code` not equal to "AmazonEC2". This grouping is on resource id by time frame removing all non-reservation line items.
 
 ## Processing query results
 

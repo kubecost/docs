@@ -64,7 +64,7 @@ The below metrics and labels follow conventions of KSMv1, not KSMv2.
 ## Disabling Kubecost's KSM emission
 
 {% hint style="warning" %}
-If these metrics are duplicate, you can disable Kubecost's emission of KSM. Keep in mind that the format of Kubecost's KSM differ from KSM v2 metrics. Innaccurate costs and pod to controller mappings will break if these metrics are not available.
+If these metrics are duplicate, you can disable Kubecost's emission of KSM. Keep in mind that the format of Kubecost's KSM differ from KSM v2 metrics. Inaccurate costs and pod to controller mappings will break if these metrics are not available.
 {% endhint %}
 
 {% code overflow="wrap" %}

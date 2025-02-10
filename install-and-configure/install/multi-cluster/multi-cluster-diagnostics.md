@@ -36,7 +36,7 @@ kubecostModel:
   federatedStorageConfigSecret: federated-store
 ```
 
-Additional configuration options can found in the [*values.yaml*](https://github.com/kubecost/cost-analyzer-helm-chart/blob/develop/cost-analyzer/values.yaml) under `diagnostics:`.
+Additional configuration options can found in the [*values.yaml*](https://github.com/kubecost/cost-analyzer-helm-chart/blob/v2.6/cost-analyzer/values.yaml) under `diagnostics:`.
 
 ## Architecture
 

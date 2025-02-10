@@ -89,7 +89,7 @@ While cloud adjustments typically lag by roughly a day, there are certain adjust
 
 ## Node costs breakdown
 
-The Assets page allows you to view a dedicated breakdown of node costs. To do so, you must first filter for AssetType=Node, which will unnaggregate the page and display all nodes with associated costs. Selecting an indivudal line item will open a window containing cost metrics including hours running, hourly cost rate, overhead cost, and total cost. You can even view these costs broken down by CPU, GPU, and RAM:
+The Assets page allows you to view a dedicated breakdown of node costs. To do so, you must first filter for AssetType=Node, which will unaggregate the page and display all nodes with associated costs. Selecting an individual line item will open a window containing cost metrics including hours running, hourly cost rate, overhead cost, and total cost. You can even view these costs broken down by CPU, GPU, and RAM:
 
 ![Node Costs](/images/nodecosts.png)
 

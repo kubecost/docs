@@ -56,7 +56,7 @@ helm upgrade -i kubecost cost-analyzer/ \
   -f values.yaml
 ```
 
-You can find additional configuration options in our main [*values.yaml*](https://github.com/kubecost/cost-analyzer-helm-chart/blob/develop/cost-analyzer/values.yaml) file.
+You can find additional configuration options in our main [*values.yaml*](https://github.com/kubecost/cost-analyzer-helm-chart/blob/v2.6/cost-analyzer/values.yaml) file.
 
 ### Verification
 
@@ -76,7 +76,7 @@ avg(node_cpu_hourly_cost) by (cluster_id)
 
 ## Troubleshooting
 
-### Cluster efficiency displaying as 0%, or efficieny only displaying for most recent cluster
+### Cluster efficiency displaying as 0%, or efficiency only displaying for most recent cluster
 
 The below queries must return data for Kubecost to calculate costs correctly. For the queries to work, set the environment variables:
 

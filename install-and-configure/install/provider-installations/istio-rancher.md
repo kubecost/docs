@@ -9,12 +9,12 @@ The following requirements are given:
 ## Activation of Istio
 
 1. Istio is activated by editing the namespace. To do this, execute the command `kubectl edit namespace kubecost` and insert the label `istio-injection: enabled`
-2. After Istio has been activated, some adjustments must be made to the deployment with `kubectl -n kubecost edit deployment kubecost-cost-analyzer` to allow communication within the namespace. For example, the healtch-check is completed successfully. When editing the deployment, the two annotations must be added:
+2. After Istio has been activated, some adjustments must be made to the deployment with `kubectl -n kubecost edit deployment kubecost-cost-analyzer` to allow communication within the namespace. For example, the health-check is completed successfully. When editing the deployment, the two annotations must be added:
 
-```
+```yaml
 annotations:
-	traffic.sidecar.istio.io/excludeOutboundIPRanges: "10.43.0.1/32"
-	sidecar.istio.io/rewriteAppHTTPProbers: "true"
+  traffic.sidecar.istio.io/excludeOutboundIPRanges: "10.43.0.1/32"
+  sidecar.istio.io/rewriteAppHTTPProbers: "true"
 ```
 
 ## Authorization polices
@@ -23,7 +23,7 @@ An authorization policy governs access restrictions in namespaces and specifies 
 
 ### ap-ingress: communication with Istio
 
-```
+```yaml
 apiVersion: security.istio.io/v1beta1
 kind: AuthorizationPolicy
 metadata:
@@ -39,7 +39,7 @@ spec:
 
 ### ap-intern: communication with Kubecost
 
-```
+```yaml
 apiVersion: security.istio.io/v1beta1
 kind: AuthorizationPolicy
 metadata:
@@ -55,7 +55,7 @@ spec:
 
 ### ap-extern: as a port share (9003) for communication from Prometheus (namespace "cattle-monitoring-system") to Kubecost (namespace "kubecost")
 
-```
+```yaml
 apiVersion: security.istio.io/v1beta1
 kind: AuthorizationPolicy
 metadata:
@@ -75,7 +75,7 @@ Peer authentication is used to set how traffic is tunneled to the Istio sidecar.
 
 ### pa-default.yaml
 
-```
+```yaml
 apiVersion: security.istio.io/v1beta1
 kind: PeerAuthentication
 metadata:
@@ -92,7 +92,7 @@ A destination rule is used to specify how traffic should be handled after routin
 
 ### dr-prometheus.yaml
 
-```
+```yaml
 apiVersion: networking.istio.io/v1alpha3
 kind: DestinationRule
 metadata:
@@ -107,7 +107,7 @@ spec:
 
 ### dr-grafana.yaml
 
-```
+```yaml
 apiVersion: networking.istio.io/v1alpha3
 kind: DestinationRule
 metadata:
@@ -126,7 +126,7 @@ A virtual service is used to direct data traffic specifically to individual serv
 
 ### vs-kubecost.yaml
 
-```
+```yaml
 apiVersion: networking.istio.io/v1beta1
 kind: VirtualService
 metadata:

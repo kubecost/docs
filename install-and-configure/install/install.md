@@ -30,7 +30,7 @@ kubectl apply -f kubecost.yaml
 
 {% code overflow="wrap" %}
 ```bash
-kubectl apply -f https://raw.githubusercontent.com/kubecost/cost-analyzer-helm-chart/develop/kubecost.yaml
+kubectl apply -f https://raw.githubusercontent.com/kubecost/cost-analyzer-helm-chart/v2.6/kubecost.yaml
 ```
 {% endcode %}
 
