@@ -45,7 +45,7 @@ Selecting [*Savings*](savings/savings.md) > *Insights* will open the Savings pag
 * [Spot Commander](savings/spot-commander.md)
 * [Right-size your persistent volumes](savings/pv-right-sizing-rec.md)
 
-Selecting *Savings* > *Actions* will open the [Actions](savings/savings-actions.md) page, which utilizes multiple Insights in a streamlined, and reoccurring way to ensure your environment is regular being maintained to prevent excesive spend.
+Selecting *Savings* > *Actions* will open the [Actions](savings/savings-actions.md) page, which utilizes multiple Insights in a streamlined, and reoccurring way to ensure your environment is regular being maintained to prevent excessive spend.
 
 ## Alerts
 

@@ -262,7 +262,7 @@ Example Helm _values.yaml_:
 
 ### Monitor Kubecost Health
 
-Enabling diagnostic alerts in Kubecost occursthe when an event impacts product uptime. This feature can be enabled in seconds from a values file. The following events are grouped into distinct categories that each result in a separate alert notification:
+Enabling diagnostic alerts in Kubecost occurs when an event impacts product uptime. This feature can be enabled in seconds from a values file. The following events are grouped into distinct categories that each result in a separate alert notification:
 
 * Prometheus is unreachable
 * Kubecost Metrics Availability:
@@ -271,7 +271,6 @@ Enabling diagnostic alerts in Kubecost occursthe when an event impacts product u
   * cAdvisor exported metrics missing expected labels in the last 5 minutes
   * Kubestate Metrics (KSM) exported metrics missing over last 5 minutes
   * Kubestate Metrics (KSM) unexpected version
-  * Node Exporter metrics are missing over last 5 minutes.
   * Scrape Interval prometheus self-scraped metrics missing over last 5 minutes
   * CPU Throttling detected on cost-model in the last 10 minutes
 * Clusters Added/Removed (Enterprise Multicluster Support Only)
@@ -301,7 +300,6 @@ Example Helm _values.yaml_:
     cAdvisor: true
     ksm: true
     kubecost: true 
-    nodeExporter: true
     scrapeInterval: true
     cpuThrottling: true
     clusterJoinLeave: true

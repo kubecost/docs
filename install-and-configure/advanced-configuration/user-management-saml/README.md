@@ -59,7 +59,7 @@ All SAML 2.0 providers also work. The above guides can be used as templates for 
 
 When SAML SSO is enabled in Kubecost, the following ports will require authentication:
 
-* `service/kubecost-cost-analzyer`: ports 9003 and 9090
+* `service/kubecost-cost-analyzer`: ports 9003 and 9090
 * `service/kubecost-aggregator`: port 9004
 
 {% code overflow="wrap" %}

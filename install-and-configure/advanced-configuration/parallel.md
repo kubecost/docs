@@ -29,9 +29,8 @@ The parallel installation MUST be installed with a different release name, such 
 helm install kubecost2 --namespace kubecost2 ...
 ```
 
-## Cutover
+## Cut-over
 
-Once the parallel installation is validated, you can cutover to it. This involves deleting the old primary and removing the `readOnly: true` from the new install and running a helm upgrade with the updated values.yaml file. 
+Once the parallel installation is validated, you can cut-over to it. This involves deleting the old primary and removing the `readOnly: true` from the new install and running a helm upgrade with the updated values.yaml file.
 
 Keep in mind that the old primary will retain the aggregator PVC, which can be removed manually.
-

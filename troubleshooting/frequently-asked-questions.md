@@ -16,7 +16,7 @@ Q: How often does reconciliation run?\
 A: The Cloud Usage process runs every 3 hours, however the Cost and Usage Reports (CUR) are updated by cloud providers less frequently.
 
 Q: How are short-lived jobs accounted for?\
-A: If the Prometheus [scrape interval](https://github.com/kubecost/cost-analyzer-helm-chart/blob/develop/cost-analyzer/values.yaml#L440) is 1m, then a job that ran for 5s, 30s, or 100s, but only registered one data point, all costs the same to us: 1m \* $/m. The scrape interval can be configured to be faster, but there are consequences (More resource usage due to additional metrics).
+A: If the Prometheus [scrape interval](https://github.com/kubecost/cost-analyzer-helm-chart/blob/v2.6/cost-analyzer/values.yaml#L440) is 1m, then a job that ran for 5s, 30s, or 100s, but only registered one data point, all costs the same to us: 1m \* $/m. The scrape interval can be configured to be faster, but there are consequences (More resource usage due to additional metrics).
 
 Q: How often are AWS Spot prices updated?\
 A: If enabled, Kubecost will refresh Spot instances every 15 minutes. Note, that the Spot data feed may be updated hourly. [Review the AWS docs for more conclusive info.](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-data-feeds.html)

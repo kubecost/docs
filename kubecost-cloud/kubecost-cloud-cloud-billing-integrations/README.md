@@ -36,4 +36,4 @@ Here, you can view your existing integrations. For non-successful integrations, 
 
 Select an individual integration to view a side panel that contains details about that integration. You will be able to select _Edit_ to adjust any details about your integration that were configured during the original setup.
 
-Cloud integrations that have _not_ gathered any data can be deleted from the side panel by selecting the trash can icon next to the integration name. At the moment, integrations that have gathered data can only be deleted by the Kubecost Cloud team. For help with this, contact [cloud@kubecost.com](mailto:cloud@kubecost.com).
+Cloud integrations that have _not_ gathered any data can be deleted from the side panel by selecting the trash can icon next to the integration name. At the moment, integrations that have gathered data can only be deleted by the Kubecost Cloud team. For help with this, contact [cloud-kubecost@wwpdl.vnet.ibm.com](mailto:cloud-kubecost@wwpdl.vnet.ibm.com).

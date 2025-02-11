@@ -17,7 +17,7 @@ On the [Product details page for Kubecost](https://console.cloud.google.com/mark
 
 ![Order Summary page](/images/order-summary.png)
 
-Under "1. Select Plan", the default plan should be Cloud Pro, and the default usage fee should be USD 0.167 per node per day. You can use the Pricing Calculator in the right sidebar to determine estimated costs by providing estimated timeframe of usage from 1 day to 1 year, and total node count.
+Under "1. Select Plan", the default plan should be Cloud Pro, and the default usage fee should be USD 0.167 per node per day. You can use the Pricing Calculator in the right sidebar to determine estimated costs by providing estimated time frame of usage from 1 day to 1 year, and total node count.
 
 ![Pricing Calculator](/images/pricing-calculator.png)
 

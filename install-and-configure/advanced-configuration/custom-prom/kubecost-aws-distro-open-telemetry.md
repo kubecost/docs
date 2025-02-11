@@ -99,7 +99,7 @@ For the Kubecost `scrape_configs` job, `honor_labels: true` must be set. Without
     helm install YOUR_NAMESPACE \
         oci://public.ecr.aws/kubecost/cost-analyzer \
         -f values-kubecost-primary.yaml
-        -f https://raw.githubusercontent.com/kubecost/cost-analyzer-helm-chart/develop/cost-analyzer/values-eks-cost-monitoring.yaml
+        -f https://raw.githubusercontent.com/kubecost/cost-analyzer-helm-chart/v2.6/cost-analyzer/values-eks-cost-monitoring.yaml
     ```
 
 ### Kubecost agent installation
@@ -132,7 +132,7 @@ This assumes you have created the IAM policies above. If using multiple AWS acco
     helm install YOUR_NAMESPACE \
         oci://public.ecr.aws/kubecost/cost-analyzer \
         -f values-kubecost-agent.yaml
-        -f https://raw.githubusercontent.com/kubecost/cost-analyzer-helm-chart/develop/cost-analyzer/values-eks-cost-monitoring.yaml
+        -f https://raw.githubusercontent.com/kubecost/cost-analyzer-helm-chart/v2.6/cost-analyzer/values-eks-cost-monitoring.yaml
     ```
 
 ## ADOT daemonSet quick install

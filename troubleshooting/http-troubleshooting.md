@@ -10,7 +10,7 @@ This is most likely due to a user authenticating to Kubecost or performing an ac
 
 * Review the Helm values used to determine if SAML, OIDC, and RBAC are being used which could lead to the 403 error.
 * Verify if the 403 error occurs when port forwarding to the cost-analyzer frontend. This will allow you to determine if the error is being introduced by an external service.
-* Ensure that [`readonly` has not been set to `true`](https://github.com/kubecost/cost-analyzer-helm-chart/blob/develop/cost-analyzer/values.yaml) in your *values.yaml* file:
+* Ensure that [`readonly` has not been set to `true`](https://github.com/kubecost/cost-analyzer-helm-chart/blob/v2.6/cost-analyzer/values.yaml) in your *values.yaml* file:
 
 ```
 ## Disable updates to kubecost from the frontend UI and via POST request
