@@ -112,12 +112,12 @@ Create a `cloud-integration.json` file and provide the following values (see bel
 ```
 
 {% hint style="info" %}
-The `aud` parameter should match the value for 'Audience' you probided in Step 4.5 (the unique service account ID for the `kubecost-aws-cur-role`). `roleARN` should be the ARN of the role created with that audience in Step 4.
+The `aud` parameter should match the value for 'Audience' you provided in Step 4.5 (the unique service account ID for the `kubecost-aws-cur-role`). `roleARN` should be the ARN of the role created with that audience in Step 4.
 {% endhint %}
 
 Next, create a secret from your `cloud-integration.json`:
 
-```
+```sh
 kubectl create secret generic cloud-integration -n kubecost --from-file=cloud-integration.json
 ```
 

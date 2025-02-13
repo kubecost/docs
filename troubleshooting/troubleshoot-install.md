@@ -416,7 +416,7 @@ kubecostModel:
       value: "false"
 ```
 
-This configuration will need to be applied to any cluster on which you do not want to charge for local disks and only takes effect on data moving forward. To fix historical data, you will need to [repair Asset & Allocation ETL](/troubleshooting/etl-repair.md) for each affected cluster, then wait for Kubecost's Aggregator to reingest the updated ETL data.
+This configuration will need to be applied to any cluster on which you do not want to charge for local disks and only takes effect on data moving forward. To fix historical data, you will need to [repair Asset & Allocation ETL](/troubleshooting/etl-repair.md) for each affected cluster, then wait for Kubecost's Aggregator to re-ingest the updated ETL data.
 
 ## Additional support
 

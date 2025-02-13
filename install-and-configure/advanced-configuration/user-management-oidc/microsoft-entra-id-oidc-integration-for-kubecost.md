@@ -21,7 +21,7 @@ Before following this guide, ensure that:
 1. In the [Microsoft Entra admin center](https://entra.microsoft.com/#home), select _Microsoft Entra ID (Azure AD)_.
 2. In the left navigation, select _Applications_ > _App registrations_. Then, on the App registrations page, select _New registration_.
 3. Select an appropriate name, and provide supported account types for your app.
-4. To configure `Redirect URI`, select _Web_ from the dropdown, then provide the URI as _https://{your-kubecost-address}/model/oidc/authorize_.
+4. To configure `Redirect URI`, select _Web_ from the dropdown, then provide the URI as _https://{your-kubecost-address}/oidc/authorize_.
 5. Select _Register_ at the bottom of the page to finalize your changes.
 
 ### Step 2: Configuring _values.yaml_
@@ -42,7 +42,7 @@ oidc:
   clientSecret: "{CLIENT_SECRET_VALUE}"
   secretName: "kubecost-oidc-secret"
   authURL: "https://login.microsoftonline.com/{YOUR_TENANT_ID}/oauth2/v2.0/authorize?client_id={YOUR_CLIENT_ID}&response_type=code&scope=openid&nonce=123456"
-  loginRedirectURL: "https://{YOUR_KUBECOST_DOMAIN}/model/oidc/authorize"
+  loginRedirectURL: "https://{YOUR_KUBECOST_DOMAIN}/oidc/authorize"
   discoveryURL: "https://login.microsoftonline.com/{YOUR_TENANT_ID}/v2.0/.well-known/openid-configuration"
 ```
 
@@ -51,7 +51,7 @@ If you are using one Entra ID app to authenticate multiple Kubecost endpoints, y
 {% endhint %}
 
 ```
-  authURL: "https://login.microsoftonline.com/{YOUR_TENANT_ID}/oauth2/v2.0/authorize?client_id={YOUR_CLIENT_ID}&response_type=code&scope=openid&nonce=123456&redirect_uri=https%3A%2F%2F{YOUR_KUBECOST_DOMAIN}/model/oidc/authorize"
+  authURL: "https://login.microsoftonline.com/{YOUR_TENANT_ID}/oauth2/v2.0/authorize?client_id={YOUR_CLIENT_ID}&response_type=code&scope=openid&nonce=123456&redirect_uri=https%3A%2F%2F{YOUR_KUBECOST_DOMAIN}/oidc/authorize"
 ```
 
 ### Step 3 (optional): Configuring RBAC

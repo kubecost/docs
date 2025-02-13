@@ -5,7 +5,7 @@ As of Kubecost v2, support for Thanos is deprecated. Consider [transitioning to 
 {% endhint %}
 
 {% hint style="info" %}
-This feature is only offically available on [Kubecost Enterprise plans](https://www.kubecost.com/pricing/).
+This feature is only officially available on [Kubecost Enterprise plans](https://www.kubecost.com/pricing/).
 {% endhint %}
 
 Kubecost leverages Thanos and durable storage for three different purposes:

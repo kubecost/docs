@@ -18,6 +18,8 @@ Follow Azure's [Create and Manage Exported Data](https://learn.microsoft.com/en-
 * Provide a meaningful name for the 'Export name'
 * For 'Dataset version' select `2021-10-01`
 * For 'Frequency' select `Daily export of month-to-date costs`
+* For 'Format' select `CSV`
+* For 'Compression' select `None`
 
 Take note of the Storage Account name and Container specified when choosing where to export the data to. Note that a successful cost export will require [`Microsoft.CostManagementExports`](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/azure-services-resource-providers) to be registered in your subscription.
 
@@ -55,7 +57,7 @@ Next, create a JSON file which **must** be named _cloud-integration.json_ with t
             "azureStorageAccessKey": "AZ_cloud_integration_azureStorageAccessKey",
             "azureStorageContainer": "AZ_cloud_integration_azureStorageContainer",
             "azureContainerPath": "",
-            "azureCloud": "public/gov"
+            "azureCloud": "public"
         }
     ]
 }

@@ -143,7 +143,7 @@ Three kinds of costs associated with collections can be queried over a given win
 1. All of the costs included in a collection, presented over time, i.e., the time series costs
 1. All of the costs NOT included in a collection, i.e., the complement costs
 
-Furthermore, each of these kinds of costs can be queried for a category, incluing each collection in the category, as opposed to a single collection. (For instance, if you want to see all of the costs NOT included in ANY of the "Team" collections, you can query the complement costs of the "Team" category.)
+Furthermore, each of these kinds of costs can be queried for a category, including each collection in the category, as opposed to a single collection. (For instance, if you want to see all of the costs NOT included in ANY of the "Team" collections, you can query the complement costs of the "Team" category.)
 
 A brief query example will illustrate the power of collections.
 

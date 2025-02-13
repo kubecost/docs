@@ -4,11 +4,11 @@
 CSV pricing is a Kubecost Enterprise only feature.
 {% endhint %}
 
-Kubecost allows users to apply custom prices to individual assets (e.g. nodes) via a CSV pipeline. Common uses are for on-premise clusters, service-providers, or for external enterprise discounts. This feature allows for greater resource specification than is provided by [Custom Pricing](/architecture/pricing-sources-matrix.md#custom-pricing). This doc shows how to create and configure a CSV pricing file.
+Kubecost allows users to apply custom prices to individual assets (e.g. nodes) via a CSV pipeline. Common uses are for on-premises clusters, service-providers, or for external enterprise discounts. This feature allows for greater resource specification than is provided by [Custom Pricing](/architecture/pricing-sources-matrix.md#custom-pricing). This doc shows how to create and configure a CSV pricing file.
 
 ## Creating a pricing file
 
-1.  Create a CSV file in this [format](https://github.com/kubecost/cost-analyzer-helm-chart/blob/develop/cost-analyzer/custom-pricing.csv) (also in the below table). CSV changes are picked up hourly by default.
+1.  Create a CSV file in this [format](https://github.com/kubecost/cost-analyzer-helm-chart/blob/v2.6/cost-analyzer/custom-pricing.csv) (also in the below table). CSV changes are picked up hourly by default.
 
     1. `EndTimeStamp`: currently unused
     2. `InstanceID`: identifier used to match asset
@@ -40,7 +40,7 @@ This section is only required for nodes with GPUs.
 
 ## Kubecost configuration
 
-Provide a file path for your CSV pricing data in your [*values.yaml*](https://github.com/kubecost/cost-analyzer-helm-chart/blob/develop/cost-analyzer/values-custom-pricing.yaml). This path can reference a local PV or an S3 bucket.
+Provide a file path for your CSV pricing data in your [*values.yaml*](https://github.com/kubecost/cost-analyzer-helm-chart/blob/v2.6/cost-analyzer/values-custom-pricing.yaml). This path can reference a local PV or an S3 bucket.
 
 ```yaml
 pricingCsv:
@@ -54,7 +54,7 @@ pricingCsv:
 
 Alternatively, mount a ConfigMap with the CSV:
 
-```
+```sh
 kubectl create configmap csv-pricing --from-file custom-pricing.csv
 ```
 
@@ -119,7 +119,7 @@ The following logic is used to match node prices accurately:
 
 You can check a summary of the number of nodes that have matched with the CSV by visiting /model/pricingSourceCounts. The response is a JSON object of the form:
 
-```
+```json
 {
     "code": 200,
     "status": "success",

@@ -130,7 +130,7 @@ Allocation outputs should be interpreted as:
 * `AllocationSetComputeError` describes an error in computation
 * `AllocationSetReconcileError` describes an error in reconciliation
 
-Assets outputs should be interepreted as:
+Assets outputs should be interpreted as:
 
 * `AssetSetSaved` describes a saved AssetSet
 * `AssetSetLoaded` describes a loaded AssetSet
