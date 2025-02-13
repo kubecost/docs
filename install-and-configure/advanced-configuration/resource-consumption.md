@@ -72,7 +72,7 @@ kubecostAggregator:
   etlHourlyStoreDurationHours: 0
 ```
 
-**Lower concurrency.** By default these should all be set to `1`.
+**Lower concurrency.** Set values to `1`.
 
 ```yaml
 kubecostAggregator:
@@ -80,6 +80,8 @@ kubecostAggregator:
   dbWriteThreads: 1
   dbConcurrentIngestionCount: 1
 ```
+
+Note that by default, `dbReadThreads` is set to `0` which means that the number of threads that can be used by the read database is bounded by the number of cores on the host node.
 
 **Set rough memory limits.** By default these are set to `0GB` which means no limit. Once a baseline memory usage is established, it can be helpful to set these limits such that `dbMemoryLimit + dbWriteMemoryLimit <= memoryAvailableToAggregatorPod`.
 
