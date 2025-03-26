@@ -10,7 +10,7 @@ Cloud costs, also referred to as out-of-cluster or external costs, refer to spen
 ## Creating a new collection
 
 To begin, select _Add a new Collection_ in the top right. If you have not created any collections yet, you should see a _Add a Collection_ icon in the middle of your screen. You can select this instead. The ‘New Collection’ page opens.
-The headline for your page should be an auto-generated title. This will be the name of your collection, which you can change by selecting the pencil icon. You can provide a name and a category for your collection. Categories are custom labels you can add to multiple collections to allow for filtering of that category, if multiple collections are intended for the same team or function. Name and category can always be edited later.
+The headline for your page should be an auto-generated title. This will be the name of your collection, which you can change by selecting the pencil icon. You can provide a name and a category for your collection. Categories are custom labels you can add to multiple collections to allow for filtering of that category, if multiple collections are intended for the same team or function. A collection can have at most one category. Name and category can always be edited later.
 
 Once you are satisfied with the name of your collection, you can add Kubernetes and cloud costs.
 
@@ -40,7 +40,7 @@ In the event there is cost overlap from conflicting Kubernetes and cloud costs, 
 
 The Collections page will list all existing collections with a chart displaying cost over time and total cost. You can begin editing a collection by selecting it. You can also adjust your Collections display by adjusting the window of time, aggregating by item or kind, or filtering.
 
-Selecting the three vertical dots in the top right of the collection tile will provide you with additional options:
+Selecting the three horizontal dots in the top right of the collection tile will provide you with additional options:
 
 * *Delete*
 * *Export as CSV*
@@ -53,4 +53,60 @@ Costs in the Kubernetes domain have a corresponding idle component. For any Kube
 If enabled, the 'Idle' column on the _Costs in Collection_ view will display the corresponding idle cost under each item.
 
 To learn more about sharing idle costs, see [here](/using-kubecost/navigating-the-kubecost-ui/cost-allocation/efficiency-idle.md#sharing-idle).
+
+# Categories and Chargeback
+
+Starting in v2.7, the Category view can be used for chargeback reporting. Each Collection in the Category will be represented as a chargeback line item. 
+
+<!--- (image_1) Category view for the Owner category, with three Collections: Engineering, Finance and Operations --->
+
+The new costs table will display the following columns: 
+- Cost: "Complete" Collection cost independent of the Category, prior to any overlap deductions
+- Overlap: deduction applied to the Collection line item in the case when (part of) its cost has already been accounted for in another Collection within the same Category
+- Shared Cost: Total shared cost attributable to Collection
+- Chargeback cost: Final chargeback cost for Collection
+
+## Cost sharing
+
+You can share the costs of one or more existing Collections across a Category. The costs of the Shared Collections will be distributed across all the Collections in the Category. 
+
+<!--- (image_2) Shared Collections table --->
+
+Start typing a Collection name in the 'Find a Collection' textbox. The dropdown will be populated with Collections as you type. 
+
+<!--- (image_3) Shared Collections table: Adding a Shared Collection --->
+
+The costs can be shared in one of two strategies:
+- Weighted: as a proportion of the (complete) Collection cost
+- Even: equal proportions for each Collection in the Category
+
+<!--- (image_4) Shared Collections table: Sharing Strategy options --->
+
+The shared cost attributable to each Collection in the Category will be added to the Collection cost (after any overlap deductions are applied) to render the final Chargeback cost for the Collection.
+
+<!--- (image_5) Costs table with shared collection costs applied --->
+
+You can add, modify or remove Collections from the list of shared Collections by clicking _Edit_ in the upper right corner.
+
+## Handling overlapping costs in Collections
+
+Given their configuration, there may exist overlap between the Collections in the same Category. For example, if the Engineering collection covers the costs where the label "team" has value "engineering" and the Finance collection covers the costs for namespace "application", overlap would be represented by the cost of all resources in namespace "application" that are _also_ tagged with label "team":"engineering". 
+Chargeback costs are calculated for each Collection within the context of the Category. If there is overlap between Collections, the overlapping costs are allocated in order of priority, where the Collection with superior priority incurs the overlapping costs, while the one with inferior priority will have a deduction in the Overlap column. This is to avoid double-counting costs. 
+
+By default, Collections within a Category are assigned priorities based on their Cost, where most expensive Collections are first. Collections can also be prioritized in alphabetical order by modifying the setting in the dropdown to "Order by Name".
+
+<!--- (image_6) Collection priority dropdown --->
+
+If any Shared Collections are set, their costs are automatically prioritized respective to the Collections that are part of the Category. If there is overlap between the Shared Collections themselves, it will be handled in the same manner as described above. The priority can be modified by reordering the shared Collections using the arrows on the right side of each line item. 
+
+<!--- (image_7) Reorder Shared Collections by priority --->
+
+## Managing categories
+
+The Category page will list all the collections in the category with a chart displaying cost over time and total cost. You can begin editing a collection by selecting it. You can also adjust your Category display by adjusting the window of time.
+
+Selecting the three horizontal dots next to the priority dropdown will provide you with additional options:
+
+* *Export as CSV*
+* *Export as PDF*
 
