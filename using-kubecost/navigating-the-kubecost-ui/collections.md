@@ -48,7 +48,9 @@ Selecting the three vertical dots in the top right of the collection tile will p
 
 ## Viewing idle costs
 
-Costs in the Kubernetes domain have a corresponding idle component. For any Kubernetes costs part of a Collection, the idle cost can be optionally configured to be _included_ in the total cost displayed. The idle cost can be shared by cluster or by node. This can be configured on the Settings page under Idle in Collections. By default, idle costs are hidden. 
+Costs in the Kubernetes domain have a corresponding idle component. For any Kubernetes costs part of a collection, the idle cost can be optionally configured to be _included_ in the total cost displayed. This can be done from the Settings page under Idle in Collections.
+
+The idle cost can be shared by cluster or by node. We do not recommend sharing idle by cluster as that may lead to cost inconsistencies when deduplicating the Kubernetes costs against the cloud costs for the same resource. By default, idle costs are hidden. 
 
 If enabled, the 'Idle' column on the _Costs in Collection_ view will display the corresponding idle cost under each item.
 
