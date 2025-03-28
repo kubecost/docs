@@ -56,50 +56,49 @@ To learn more about sharing idle costs, see [here](/using-kubecost/navigating-th
 
 # Categories and Chargeback
 
-Starting in v2.7, the Category view can be used for chargeback reporting. Each Collection in the Category will be represented as a chargeback line item. 
+Starting in v2.7, the Category view can be used for chargeback reporting. Each collection in the category will be represented as a chargeback line item.
 
-<!--- (image_1) Category view for the Owner category, with three Collections: Engineering, Finance and Operations --->
+<!--- (image_1) Category view for the Owner category, with three collections: Engineering, Finance and Operations --->
 
 The new costs table will display the following columns: 
-- Cost: "Complete" Collection cost independent of the Category, prior to any overlap deductions
-- Overlap: deduction applied to the Collection line item in the case when (part of) its cost has already been accounted for in another Collection within the same Category
-- Shared Cost: Total shared cost attributable to Collection
-- Chargeback cost: Final chargeback cost for Collection
+- Cost: "Complete" collection cost independent of the Category, prior to any overlap deductions
+- Overlap: deduction applied to the collection line item in the case when (part of) its cost has already been accounted for in another collection within the same category. See Allocating overlap in collections for more information
+- Shared Cost: Total shared cost attributable to collection
+- Chargeback cost: Final chargeback cost for collection
 
 ## Cost sharing
 
-You can share the costs of one or more existing Collections across a Category. The costs of the Shared Collections will be distributed across all the Collections in the Category. 
+You can share the costs of one or more existing collections across a category. The costs of the shared collections will be distributed across all the collections in the category. 
 
-<!--- (image_2) Shared Collections table --->
+<!--- (image_2) Shared collections table --->
 
-Start typing a Collection name in the 'Find a Collection' textbox. The dropdown will be populated with Collections as you type. 
+Start typing a collection name in the 'Find a collection' textbox. The dropdown will be populated with collections as you type. 
 
-<!--- (image_3) Shared Collections table: Adding a Shared Collection --->
+<!--- (image_3) Shared collections table: Adding a shared collection --->
 
 The costs can be shared in one of two strategies:
-- Weighted: as a proportion of the (complete) Collection cost
-- Even: equal proportions for each Collection in the Category
+- Weighted: costs are distributed proportionally based on the collection's (original) cost
+- Even: costs are distributed in equal proportions for each collection in the category
 
-<!--- (image_4) Shared Collections table: Sharing Strategy options --->
+<!--- (image_4) Shared collections table: Sharing Strategy options --->
 
-The shared cost attributable to each Collection in the Category will be added to the Collection cost (after any overlap deductions are applied) to render the final Chargeback cost for the Collection.
+The shared cost attributable to each collection in the category will be added to the collection cost (after any overlap deductions are applied) to render the final Chargeback cost for the collection.
 
 <!--- (image_5) Costs table with shared collection costs applied --->
 
-You can add, modify or remove Collections from the list of shared Collections by clicking _Edit_ in the upper right corner.
+You can add, modify or remove collections from the list of shared collections by clicking _Edit_ in the upper right corner.
 
-## Handling overlapping costs in Collections
+## Allocating overlap in collections
 
-Given their configuration, there may exist overlap between the Collections in the same Category. For example, if the Engineering collection covers the costs where the label "team" has value "engineering" and the Finance collection covers the costs for namespace "application", overlap would be represented by the cost of all resources in namespace "application" that are _also_ tagged with label "team":"engineering". 
-Chargeback costs are calculated for each Collection within the context of the Category. If there is overlap between Collections, the overlapping costs are allocated in order of priority, where the Collection with superior priority incurs the overlapping costs, while the one with inferior priority will have a deduction in the Overlap column. This is to avoid double-counting costs. 
-
-By default, Collections within a Category are assigned priorities based on their Cost, where most expensive Collections are first. Collections can also be prioritized in alphabetical order by modifying the setting in the dropdown to "Order by Name".
+Given their configuration, there may exist overlap between the collections in the same category. For example, if the Engineering collection covers the costs where the label "team" has value "engineering" and the Finance collection covers the costs for namespace "application", overlap would be represented by the cost of all resources in namespace "application" that are _also_ tagged with label "team":"engineering". 
+Chargeback costs are calculated for each collection within the context of the category. If there is overlap between collections, the overlapping costs are allocated in order of priority, where the collection with superior priority maintains its full cost, while the one with inferior priority will have a deduction in the Overlap column.   
+The collections are prioritized in line with the order they appear in on the costs table. By default, collections are prioritized by their Cost (most expensive collections are first). Collections can also be prioritized in alphabetical order by modifying the setting in the dropdown to "Order by Name".
 
 <!--- (image_6) Collection priority dropdown --->
 
-If any Shared Collections are set, their costs are automatically prioritized respective to the Collections that are part of the Category. If there is overlap between the Shared Collections themselves, it will be handled in the same manner as described above. The priority can be modified by reordering the shared Collections using the arrows on the right side of each line item. 
+If any shared collections are set, their costs are automatically prioritized respective to the collections that are part of the Category. If there is overlap between the shared collections themselves, it will be handled in the same manner as described above. The priority can be modified by reordering the shared collections using the arrows on the right side of each line item. 
 
-<!--- (image_7) Reorder Shared Collections by priority --->
+<!--- (image_7) Reorder shared collections by priority --->
 
 ## Managing categories
 
