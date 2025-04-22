@@ -14,11 +14,9 @@ kubecostModel:
   etlHourlyStoreDurationHours: 0
 ```
 
-**Disable features which are default-enabled.** Features such as [Container Stats](/architecture/containerstats-pipeline.md) and [Network Monitoring](/using-kubecost/navigating-the-kubecost-ui/network-monitoring.md) are enabled by default. If not using these features, disabling them can reduce Prometheus queries, and also reduce memory consumption of cost-model and Prometheus.
+**Disable features which are default-enabled.** Features such as [Network Monitoring](/using-kubecost/navigating-the-kubecost-ui/network-monitoring.md) are enabled by default. If not using these features, disabling them can reduce Prometheus queries, and also reduce memory consumption of cost-model and Prometheus.
 
 ```yaml
-kubecostModel:
-  containerStatsEnabled: false
 networkCosts:
   config:
     services:

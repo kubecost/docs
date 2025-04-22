@@ -1,5 +1,8 @@
 # ContainerStats Pipeline
 
+> [!CAUTION]
+> The ContainerStats pipeline is deprecated. This page should no longer be consulted. Kubecost APIs no longer use this pipeline's data.
+
 The ContainerStats pipeline builds statistical representations of individual containers' resource usage over time. The pipeline is part of the `cost-model` container.
 
 ## Helm configuration

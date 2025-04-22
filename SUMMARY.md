@@ -175,7 +175,6 @@
 * [Open Source](architecture/open-source-deps.md)
 * [Kubecost Metrics](architecture/user-metrics.md)
 * [Kube-State-Metrics (KSM) Emission](architecture/ksm-metrics.md)
-* [ContainerStats Pipeline](architecture/containerstats-pipeline.md)
 * [High Availability Mode](architecture/high-availability.md)
 * [GPU Allocation](architecture/gpu-allocation.md)
 * [Kubecost Cluster Roles](architecture/kubecost-cluster-roles.md)
