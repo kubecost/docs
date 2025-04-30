@@ -35,7 +35,7 @@ Percentage spends refers to the total Kubernetes/Cloud cost within the collectio
 {% endhint %}
 
 In the event there is cost overlap from conflicting Kubernetes and cloud costs, they will be reflected in a special Overlap category. Kubecost automatically subtracts the overlapping costs so that the totals seen for the collection are accurate and do not contain duplicate costs. Currently, overlap is not considered for shared costs and Load Balancer costs coming from workloads running on Azure and GCP clusters.
-Overlap may also not be accurate if the Kubernetes costs tracked in the collection have not been reconciled. We recommend adjusting the query window to point to reconciled data only; typically, this means excluding the last 48 hours. See more on reconciliation [here](REF-TO-CLOUD-BILLING-INTEGRATIONS: https://www.ibm.com/docs/en/kubecost/self-hosted/2.x?topic=installation-cloud-billing-integrations#ariaid-title3).  
+Overlap may change as costs in Collections are reconciled. We recommend adjusting the query window to point to reconciled data only; typically, this means excluding the last 48 hours. See more on reconciliation [here](REF-TO-CLOUD-BILLING-INTEGRATIONS: https://www.ibm.com/docs/en/kubecost/self-hosted/2.x?topic=installation-cloud-billing-integrations#ariaid-title3).  
 
 ## Managing collections
 
