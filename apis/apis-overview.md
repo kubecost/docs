@@ -18,10 +18,6 @@ The Allocation Trends API compares cost usage between two windows of the same du
 
 The Assets API retrieves the backing cost data broken down by individual Kubernetes assets (e.g. node, disk, etc.), and provides various aggregations of this data. Optionally provides the ability to integrate with external cloud assets.
 
-#### [Asset Diff API](monitoring-apis/asset-diff.md)
-
-The Asset Diff API compares two asset sets between two windows of the same duration and accumulates the results.
-
 #### [Cloud Costs API](monitoring-apis/cloud-cost-api.md)
 
 The Cloud Costs API retrieves cloud cost data from cloud providers by reading cost and usage reports.
