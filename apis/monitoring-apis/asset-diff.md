@@ -1,5 +1,9 @@
 # Asset Diff API
 
+{% hint style="danger" %}
+The Asset Diff API has been removed. This doc should no longer be consulted.
+{% endhint %}
+
 {% swagger method="get" path="assets/diff" baseUrl="http://{kubecost-addresss}/model/" summary="Asset Diff API" %}
 {% swagger-description %}
 The Asset Diff API provides a diff of two windows that returns all the added, removed, or cost changed assets from the later window (before parameter) to the earlier window (after parameter). This endpoint does a comparison of two asset sets in the given windows and accumulates the results.
