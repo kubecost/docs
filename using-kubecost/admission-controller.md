@@ -27,7 +27,7 @@ $ ./scripts/create-admission-controller-tls.sh kubecost
 2. This command will update your existing Kubecost application by enabling the Admission Controller.
 ```
 $ helm upgrade --install kubecost \
-  --repo https://kubecost.github.io/cost-analyzer/ cost-analyzer \
+  --repo https://kubecost.github.io/cost-analyzer/ kubecost \
   --namespace kubecost \
   --set kubecostAdmissionController.enabled=true \
   -f values.yaml

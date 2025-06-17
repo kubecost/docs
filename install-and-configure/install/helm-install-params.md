@@ -7,7 +7,7 @@ Often while using and configuring Kubecost, our documentation may ask you to pas
 For example, you can only pass a product key if that is all you need to configure.
 
 ```sh
-helm install kubecost cost-analyzer \
+helm install kubecost kubecost \
     --repo https://kubecost.github.io/cost-analyzer/ \
     --namespace kubecost --create-namespace \
     --set kubecostProductConfigs.productKey.key="123" \
@@ -30,7 +30,7 @@ kubecostProductConfigs:
 Then run your install command:
 
 ```sh
-helm install kubecost cost-analyzer \
+helm install kubecost kubecost \
     --repo https://kubecost.github.io/cost-analyzer/ \
     --namespace kubecost --create-namespace \
     --values my_values_file.yaml

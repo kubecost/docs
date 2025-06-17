@@ -22,7 +22,7 @@ Assume kubecost is the namespace where you want to install Kubecost.
 ## Step 2: Install Kubecost using HELM
 ```
 helm upgrade --install kubecost \
-    --repo https://kubecost.github.io/cost-analyzer/ cost-analyzer  \
+    --repo https://kubecost.github.io/cost-analyzer/ kubecost  \
     --namespace kubecost \
     --set global.prometheus.fqdn=https://<tenant>.chronosphere.io/data/metrics/ \
     --set global.prometheus.enabled=false \

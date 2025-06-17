@@ -12,7 +12,7 @@ This installation method is available for free and leverages the Kubecost Helm C
 
 ```bash
 helm upgrade --install kubecost \
-  --repo https://kubecost.github.io/cost-analyzer/ cost-analyzer \
+  --repo https://kubecost.github.io/cost-analyzer/ kubecos \
   --namespace kubecost --create-namespace
 ```
 
@@ -20,7 +20,7 @@ helm upgrade --install kubecost \
 
 ```bash
 helm template kubecost \
-  --repo https://kubecost.github.io/cost-analyzer/ cost-analyzer \
+  --repo https://kubecost.github.io/cost-analyzer/ kubecost \
   --namespace kubecost --create-namespace \
   -f your-custom-values.yaml > kubecost.yaml
 kubectl apply -f kubecost.yaml

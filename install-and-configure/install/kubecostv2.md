@@ -13,7 +13,7 @@ If you have a single cluster installation of Kubecost (i.e. one primary Kubecost
 If you are using Helm, it may look something like this:
 
 ```sh
-$ helm upgrade kubecost --repo https://kubecost.github.io/cost-analyzer/ cost-analyzer \
+$ helm upgrade kubecost --repo https://kubecost.github.io/cost-analyzer/ kubecost \
     --namespace kubecost \
     -f values.yaml
 ```

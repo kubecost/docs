@@ -9,7 +9,7 @@ When using a Helm install, this can be done simply with:
 {% code overflow="wrap" %}
 ```
 helm install kubecost \
---repo https://kubecost.github.io/cost-analyzer/ cost-analyzer \
+--repo https://kubecost.github.io/cost-analyzer/ kubecost \
 --namespace kubecost --create-namespace \
 -f https://raw.githubusercontent.com/kubecost/cost-analyzer-helm-chart/v2.6/cost-analyzer/values-windows-node-affinity.yaml
 ```

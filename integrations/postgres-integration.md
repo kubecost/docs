@@ -110,7 +110,7 @@ stringData:
 If deploying changes via Helm, you will be able to run a command similar to:
 
 ```sh
-helm upgrade -i kubecost cost-analyzer \
+helm upgrade -i kubecost kubecost \
   --repo https://kubecost.github.io/cost-analyzer/ \
   --namespace kubecost \
   -f values.yaml

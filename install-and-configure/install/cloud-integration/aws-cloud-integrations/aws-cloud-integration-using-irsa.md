@@ -257,7 +257,7 @@ Install Kubecost using the service account and cloud-integration secret:
 {% code overflow="wrap" %}
 ```sh
 helm install kubecost \
-  --repo https://kubecost.github.io/cost-analyzer/ cost-analyzer \
+  --repo https://kubecost.github.io/cost-analyzer/ kubecost \
   --namespace kubecost \
   --set serviceAccount.name=kubecost-serviceaccount \
   --set serviceAccount.create=false \
