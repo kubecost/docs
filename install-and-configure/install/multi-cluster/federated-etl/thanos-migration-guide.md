@@ -161,7 +161,7 @@ Optionally, you can remove the [Thanos sidecar](https://raw.githubusercontent.co
 You can now upgrade the primary Kubecost cluster to v2 using your standard upgrade process. If upgrading via Helm, your upgrade command will look like:
 
 ```sh
-helm upgrade kubecost cost-analyzer --repo https://kubecost.github.io/cost-analyzer/ \
+helm upgrade kubecost kubecost --repo https://kubecost.github.io/cost-analyzer/ \
   --namespace kubecost \
   -f values.yaml
 ```
@@ -182,7 +182,7 @@ federatedETL:
 If upgrading via Helm, your upgrade command will look like:
 
 ```sh
-helm upgrade kubecost cost-analyzer --repo https://kubecost.github.io/cost-analyzer/ \
+helm upgrade kubecost kubecost --repo https://kubecost.github.io/cost-analyzer/ \
   --namespace kubecost \
   -f values.yaml
 ```

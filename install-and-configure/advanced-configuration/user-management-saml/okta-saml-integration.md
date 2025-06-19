@@ -37,7 +37,7 @@ For configuring single app logout, read [Okta's documentation](https://help.okta
 
 ```shell
 helm upgrade --install kubecost \
-  --repo https://kubecost.github.io/cost-analyzer/ cost-analyzer \
+  --repo https://kubecost.github.io/cost-analyzer/ kubecost \
   --namespace kubecost --create-namespace \
   -f values-saml.yaml
 ```

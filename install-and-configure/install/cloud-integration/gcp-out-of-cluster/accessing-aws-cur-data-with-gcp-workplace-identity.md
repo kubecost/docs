@@ -126,5 +126,5 @@ kubectl create secret generic cloud-integration -n kubecost --from-file=cloud-in
 Run the following command with the appropriate service account and integration values:
 
 ```
-helm upgrade --install kubecost --repo https://kubecost.github.io/cost-analyzer/ cost-analyzer --namespace kubecost --set serviceAccount.name=kubecost-sa --set serviceAccount.create=false --set kubecostProductConfigs.cloudIntegrationSecret=cloud-integration
+helm upgrade --install kubecost --repo https://kubecost.github.io/cost-analyzer/ kubecost --namespace kubecost --set serviceAccount.name=kubecost-sa --set serviceAccount.create=false --set kubecostProductConfigs.cloudIntegrationSecret=cloud-integration
 ```
