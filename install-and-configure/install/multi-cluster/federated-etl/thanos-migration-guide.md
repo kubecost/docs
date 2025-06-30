@@ -149,7 +149,6 @@ kubecostModel:
   federatedStorageConfigSecret: federated-store
   etlBucketConfigSecret: "" # make sure ETL backups are disabled on secondary clusters
   etl: true
-  containerStatsEnabled: true
   warmCache: false
   warmSavingsCache: false
 ```
