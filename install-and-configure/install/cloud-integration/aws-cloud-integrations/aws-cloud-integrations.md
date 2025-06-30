@@ -462,7 +462,7 @@ kubectl create secret generic cloud-integration -n kubecost --from-file=cloud-in
 
 {% code overflow="wrap" %}
 ```
-helm upgrade --install kubecost --repo https://kubecost.github.io/cost-analyzer/ cost-analyzer \
+helm upgrade --install kubecost --repo https://kubecost.github.io/cost-analyzer/ kubecost \
 --namespace kubecost \
 -f https://raw.githubusercontent.com/kubecost/poc-common-configurations/main/aws/values-amazon-primary.yaml
 ```

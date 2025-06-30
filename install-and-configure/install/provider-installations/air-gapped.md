@@ -11,7 +11,7 @@ Please substitute the appropriate version for prod-x.xx.x. [Latest releases can 
 To find the exact images used for each Kubecost release, a command such as this can be used:
 
 ```sh
-helm template kubecost --repo https://kubecost.github.io/cost-analyzer cost-analyzer \
+helm template kubecost --repo https://kubecost.github.io/cost-analyzer kubecost \
   --namespace kubecost \
   --set networkCosts.enabled=true \
   --set clusterController.enabled=true \

@@ -32,7 +32,7 @@ This process is not recommended. Before continuing, review the [Bring your own P
     {% code overflow="wrap" %}
     ```
     helm upgrade --install kubecost \
-      --repo https://kubecost.github.io/cost-analyzer/ cost-analyzer \
+      --repo https://kubecost.github.io/cost-analyzer/ kubecost \
       --namespace kubecost --create-namespace \
       --set global.prometheus.fqdn=http://<prometheus-server-service-name>.<prometheus-server-namespace>.svc:<port> \
       --set global.prometheus.enabled=false

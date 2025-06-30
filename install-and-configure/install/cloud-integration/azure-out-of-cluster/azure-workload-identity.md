@@ -66,5 +66,5 @@ serviceAccount:
 ```
 
 ```bash
-helm upgrade --install kubecost --repo https://kubecost.github.io/cost-analyzer cost-analyzer --namespace kubecost -f values.yaml
+helm upgrade --install kubecost --repo https://kubecost.github.io/cost-analyzer kubecost --namespace kubecost -f values.yaml
 ```

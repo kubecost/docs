@@ -117,7 +117,7 @@ See this [example .yaml](https://github.com/kubecost/poc-common-configurations/b
 Upgrade Kubecost on the primary cluster via Helm:
 
 ```
-helm upgrade --install "kubecost" --repo https://kubecost.github.io/cost-analyzer/ cost-analyzer --namespace kubecost -f values.yaml
+helm upgrade --install "kubecost" --repo https://kubecost.github.io/cost-analyzer/ kubecost --namespace kubecost -f values.yaml
 ```
 
 Once the Helm upgrade is complete, Aggregator will start processing data. This process can take as long as 24 hours depending on the size of the ETL dataset being processed. As the data is processed, it will generate in the Kubecost UI.
@@ -147,5 +147,5 @@ See this [example .yaml](https://github.com/kubecost/poc-common-configurations/b
 Finally, upgrade Kubecost on the secondary cluster(s) via Helm:
 
 ```
-helm upgrade --install "kubecost" --repo https://kubecost.github.io/cost-analyzer/ cost-analyzer --namespace kubecost -f values.yaml
+helm upgrade --install "kubecost" --repo https://kubecost.github.io/cost-analyzer/ kubecost --namespace kubecost -f values.yaml
 ```

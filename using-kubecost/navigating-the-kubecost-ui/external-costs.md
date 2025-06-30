@@ -46,7 +46,7 @@ kubecostModel:
 Now update your Kubecost install via `helm`:
 
 ```sh
-$ helm install kubecost cost-analyzer \
+$ helm install kubecost kubecost \
     --repo https://kubecost.github.io/cost-analyzer/ \
     --namespace kubecost --create-namespace \
     --values values-kubecost.yaml
