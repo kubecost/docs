@@ -6,13 +6,13 @@ Use the following request to update an existing collection by providing the coll
 
 ### Request
 
-```
+```http
 PUT /model/collection?id=<string>
 ```
 
 ### Example
 
-```
+```http
 PUT /model/collection?id=8a939ba1-ff15-4600-b711-2cb109114914
 ```
 

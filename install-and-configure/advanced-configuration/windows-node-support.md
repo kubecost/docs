@@ -7,12 +7,14 @@ Kubecost can run on clusters with mixed Linux and Windows nodes. The Kubecost po
 When using a Helm install, this can be done simply with:
 
 {% code overflow="wrap" %}
-```
+
+```bash
 helm install kubecost \
---repo https://kubecost.github.io/cost-analyzer/ cost-analyzer \
---namespace kubecost --create-namespace \
--f https://raw.githubusercontent.com/kubecost/cost-analyzer-helm-chart/v2.6/cost-analyzer/values-windows-node-affinity.yaml
+  --repo https://kubecost.github.io/cost-analyzer/ cost-analyzer \
+  --namespace kubecost --create-namespace \
+  -f https://raw.githubusercontent.com/kubecost/cost-analyzer-helm-chart/v2.6/cost-analyzer/values-windows-node-affinity.yaml
 ```
+
 {% endcode %}
 
 ## Detail
@@ -21,7 +23,7 @@ The cluster must have at least one Linux node for the Kubecost pods to run on:
 
 Use a nodeSelector for all Kubecost deployments:
 
-    ```
+    ```yaml
     spec:
       nodeSelector:
         kubernetes.io/os: linux
@@ -29,7 +31,7 @@ Use a nodeSelector for all Kubecost deployments:
     ```
 For DaemonSets, set the affinity to only allow scheduling on Windows nodes:
 
-    ```
+    ```yaml
       affinity:
         nodeAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
@@ -43,7 +45,7 @@ For DaemonSets, set the affinity to only allow scheduling on Windows nodes:
 
 See the list of all deployments and DaemonSets in this [*values-windows-node-affinity.yaml*](https://github.com/kubecost/cost-analyzer-helm-chart/blob/v2.6/cost-analyzer/values-windows-node-affinity.yaml) file:
 
-```
+```yaml
 nodeSelector:
   kubernetes.io/os: linux
 

@@ -32,5 +32,3 @@ You should now have access to the Kubecost Cloud dashboard.
 ## Next steps
 
 After having licensed Kubecost Cloud, you are able to install the Kubecost Cloud Agent onto all clusters you want to receive cost metrics for. See our existing [Kubecost Cloud Installation and Onboarding](/kubecost-cloud/cloud-installation-and-onboarding.md) guide for help getting started.
-
-

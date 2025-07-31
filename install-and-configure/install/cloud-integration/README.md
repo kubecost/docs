@@ -79,7 +79,7 @@ The Kubecost Helm chart provides values that can enable or disable each cloud pr
 
 Often an integrated cloud account name may be a series of random letter and numbers which do not reflect the account's owner, team, or function. Kubecost allows you to rename cloud accounts to create more readable cloud metrics in your Kubecost UI. After you have successfully integrated your cloud account (see above), you need to manually edit your *values.yaml* and provide the original account name and your intended rename:
 
-```
+```yaml
 kubecostProductConfigs:
   cloudAccountMapping:
     ACCOUNT_ID: "ACCOUNT_NAME"

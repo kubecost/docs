@@ -5,7 +5,7 @@ Running a Query in Kubecost-Bundled Prometheus
 
 Here is an example command to connect if you've installed Kubecost in the kubecost namespace:
 
-```
+```bash
 kubectl port-forward -n kubecost service/kubecost-prometheus-server 9003:80
 ```
 

@@ -89,6 +89,7 @@ The following fields apply to each map item under the `reports` key:
   * `value` -- property value(s) to filter on. Some examples shown below.
 
 ## Managing Asset reports via _values.yaml_
+
 The Asset reports are saved under `global.assetReports`, it accept two parameters:
 
 * `enabled` determines whether Kubecost will read saved asset reports configured via _values.yaml_; default value is `false`
@@ -122,12 +123,14 @@ The following fields apply to each map item under the `reports` key of `global.a
   * `value` -- property value(s) to filter on. Some examples shown below.
 
 ## Managing Cloud Cost reports via _values.yaml_
+
 The Cloud cost reports are saved under `global.cloudCostReports`, it accept two parameters:
 
 * `enabled` determines whether Kubecost will read saved Cloud Cost reports configured via _values.yaml_; default value is `false`
 * `reports` is a list of Cloud Cost reports
 
 The following fields apply to each map item under the `reports` key of `global.cloudCostReports`:
+
 * `title` the title/name of your custom report; any non-empty string is accepted
 * `window` the time window the asset report covers, the following values are supported:
   * keywords: `today`, `week` (week-to-date), `month` (month-to-date), `yesterday`, `lastweek`, `lastmonth`
@@ -157,7 +160,8 @@ The following fields apply to each map item under the `reports` key of `global.c
 ## Example Helm _values.yaml_ Saved Reports section
 
 {% code overflow="wrap" %}
-```
+
+```yaml
    # Set saved report(s) accessible in reports.html
    # View configured saved reports in <front-end-url>/model/reports
   savedReports:
@@ -246,6 +250,7 @@ The following fields apply to each map item under the `reports` key of `global.c
             operator: ":"
             value: "AWS"
 ```
+
 {% endcode %}
 
 ## Combining UI report management with _values.yaml_
@@ -270,8 +275,9 @@ Review these steps to verify that saved reports are being passed to the Kubecost
    * Ensure that the Helm values are successfully read into the ConfigMap under the `data` field. Example below.
 
 {% code overflow="wrap" %}
+
 ````
-```
+```yaml
 # Source: cost-analyzer/templates/cost-analyzer-saved-reports-configmap.yaml
 apiVersion: v1
 kind: ConfigMap
@@ -288,6 +294,7 @@ data:
   saved-reports.json: '[{"accumulate":false,"aggregateBy":"namespace","filters":[{"property":"cluster","value":"cluster-one,cluster*"},{"property":"namespace","value":"kubecost"}],"idle":"separate","title":"Example Saved Report 0","window":"today"},{"accumulate":false,"aggregateBy":"controllerKind","filters":[{"property":"label","value":"app:cost*,environment:kube*"},{"property":"namespace","value":"kubecost"}],"idle":"shareByNode","title":"Example Saved Report 1","window":"month"},{"accumulate":true,"aggregateBy":"service","filters":[],"idle":"hide","title":"Example Saved Report 2","window":"2020-11-11T00:00:00Z,2020-12-09T23:59:59Z"}]'# Source: cost-analyzer/templates/cost-analyzer-alerts-configmap.yaml
 ```
 ````
+
 {% endcode %}
 
 3\. Ensure that the JSON string is successfully mapped to the appropriate configs
@@ -296,4 +303,4 @@ Navigate to your Reports page in the Kubecost UI and ensure that the configured 
 
 ### Saved reports not appearing in Kubecost UI after upgrading to v2
 
-After upgrading Kubecost to v2, saved reports may not properly display in the Kubecost UI. See the scripts available to migrate various settings in the [kubecost-utilities repo ](https://github.com/kubecost/kubecost-utilities/tree/main/settings-migration).
+After upgrading Kubecost to v2, saved reports may not properly display in the Kubecost UI. See the scripts available to migrate various settings in the [kubecost-utilities repo](https://github.com/kubecost/kubecost-utilities/tree/main/settings-migration).

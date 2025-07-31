@@ -99,7 +99,7 @@ Prometheus exporter for hardware and OS metrics exposed by *NIX kernels, written
 {% hint style="info" %}
 The Node Exporter is disabled by default. You can enable it with the flags:
 
-```
+```bash
 --set prometheus.server.nodeExporter.enabled=true
 --set prometheus.serviceAccounts.nodeExporter.create=true
 ```

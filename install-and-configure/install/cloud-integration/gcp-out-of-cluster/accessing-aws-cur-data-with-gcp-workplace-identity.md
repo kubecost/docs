@@ -22,26 +22,26 @@ You will also need Kubecost installed on at least one GCP cluster. You will be r
 
 This should be enabled by default. If not, run this command:
 
-```
+```bash
 gcloud beta container node-pools update default-pool --cluster=<YOUR-KUBECOST-CLUSTER> --workload-metadata-from-node=GKE_METADATA_SERVER --zone=<YOUR-CLUSTER-ZONE>
 ```
 
-### Step 2: Creating a GCP service account:
+### Step 2: Creating a GCP service account
 
 In the GCP account in which your Kubecost cluster exists, create a GCP service account to bind to the Kubecost cloud-cost container pod using Workload Identity:
 
-```
+```bash
 gcloud iam service-accounts create kubecost-aws-cur-access --display-name "AWS cross-provider CUR access For Kubecost" --format json
 
 ```
 
 Add the permissions required for Workload Identity Federation:
 
-```
+```bash
 export PROJECT_ID=$(gcloud config get-value project)
 ```
 
-```
+```bash
 gcloud iam service-accounts add-iam-policy-binding kubecost-aws-cur-access@$PROJECT_ID.iam.gserviceaccount.com --role roles/iam.workloadIdentityUser --member "serviceAccount:$PROJECT_ID.svc.id.goog[kubecost/kubecost-sa]"
 ```
 
@@ -51,7 +51,7 @@ gcloud iam service-accounts add-iam-policy-binding kubecost-aws-cur-access@$PROJ
 
 Allow the service account to generate OIDC ID tokens for authentication with AWS:
 
-```
+```bash
 gcloud iam service-accounts add-iam-policy-binding kubecost-aws-cur-access@$PROJECT_ID.iam.gserviceaccount.com --role roles/iam.serviceAccountOpenIdTokenCreator --member "kubecost-aws-cur-access@$PROJECT_ID.iam.gserviceaccount.com"
 ```
 
@@ -85,7 +85,6 @@ From your AWS management account:
 
 Create a `cloud-integration.json` file and provide the following values (see below for explanations of these values):
 
-
 ```json
 {
   "aws": {
@@ -117,7 +116,7 @@ The `aud` parameter should match the value for 'Audience' you provided in Step 4
 
 Next, create a secret from your `cloud-integration.json`:
 
-```sh
+```bash
 kubectl create secret generic cloud-integration -n kubecost --from-file=cloud-integration.json
 ```
 
@@ -125,6 +124,6 @@ kubectl create secret generic cloud-integration -n kubecost --from-file=cloud-in
 
 Run the following command with the appropriate service account and integration values:
 
-```
+```bash
 helm upgrade --install kubecost --repo https://kubecost.github.io/cost-analyzer/ cost-analyzer --namespace kubecost --set serviceAccount.name=kubecost-sa --set serviceAccount.create=false --set kubecostProductConfigs.cloudIntegrationSecret=cloud-integration
 ```

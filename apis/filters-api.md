@@ -111,17 +111,19 @@ Here are some example filters to see how the filtering language works:
 For example, in an Allocation query:
 
 {% code overflow="wrap" %}
-```
+
+```http
 http://localhost:9090/model/allocation?window=1d&accumulate=true&aggregate=namespace&filter=cluster!:%22cluster-one%22
 ```
+
 {% endcode %}
 
 The format is essentially: `<filter field> <filter op> <filter value>`
 
-```sh
+```bash
 curl -G 'localhost:9090/model/assets' \
-    -d 'window=3d' \
-    --data-urlencode 'filter=assetType:"disk"'
+  -d 'window=3d' \
+  -data-urlencode 'filter=assetType:"disk"'
 ```
 
 ## Formal grammar and implementation

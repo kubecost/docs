@@ -14,7 +14,8 @@ Does not ever support `job`, `daemonSet`, or `statefulSet`. Does not affect pred
 {% endswagger-parameter %}
 
 {% swagger-response status="200: OK" description="" %}
-```
+
+```json
 {
     "code": 200,
     "data": {
@@ -45,6 +46,7 @@ Does not ever support `job`, `daemonSet`, or `statefulSet`. Does not affect pred
     }
 }
 ```
+
 {% endswagger-response %}
 {% endswagger %}
 
@@ -60,10 +62,9 @@ The Forecast Container powers multiple cost prediction features in Kubecost incl
 
 The Forecasting Container can be disabled by setting the Helm flag:
 
-```
+```yaml
 forecasting:
   enabled: false
-
 ```
 
 ## Configuring `monitoringEndpoint`
@@ -80,7 +81,6 @@ The Forecast API requires a configurable endpoint which establishes from which m
 
 Forecast future cloud cost spend for the next 60 days:
 
-```
+```http
 http://<your-kubecost-address>/forecasting/forecast/cloudcost?predictionWindow=60d
 ```
-

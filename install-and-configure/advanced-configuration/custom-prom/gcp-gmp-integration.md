@@ -66,11 +66,11 @@ Run the following command to enable port-forwarding to expose the Kubecost dashb
 kubectl port-forward --namespace kubecost deployment/kubecost-cost-analyzer 9090
 ```
 
-To verify that the integration is set up, go to _Settings_ in the Kubecost UI, and check the Prometheus Status section.
+To verify that the integration is set up, go to *Settings* in the Kubecost UI, and check the Prometheus Status section.
 
 From your [GCP Monitoring - Metrics explorer console](https://console.cloud.google.com/monitoring/metrics-explorer), You can run the following query to verify if Kubecost metrics are collected:
 
-```txt
+```text
 avg(node_cpu_hourly_cost) by (cluster_id)
 ```
 
@@ -139,6 +139,7 @@ If `id` returns as a blank value, you can set the following Helm value to force 
 kubecostModel:
   promClusterIDLabel: cluster
 ```
+
 {% endhint %}
 
 If the above queries fail, check the following:
@@ -153,7 +154,7 @@ In a working `sigv4proxy`, there will be very few logs.
 
 Correctly working log output:
 
-```log
+```console
 time="2023-09-21T17:40:15Z" level=info msg="Stripping headers []" StripHeaders="[]"
 time="2023-09-21T17:40:15Z" level=info msg="Listening on :8005" port=":8005"
 ```
@@ -166,7 +167,7 @@ kubectl logs deployments/$KUBECOST_DEPLOYMENT -c cost-model --tail -1 | grep -i 
 
 Example errors:
 
-```log
+```console
 ERR CostModel.ComputeAllocation: pod query 1 try 2 failed: avg(kube_pod_container_status_running...
 Prometheus communication error: 502 (Bad Gateway) ...
 ```

@@ -19,19 +19,19 @@ When installing your Datadog agent, you need to enable the following flags to al
 
 To do this, start by setting up your Datadog API key as an environment variable. You can get the API key after logging into your Datadog account by selecting your account > _Organization Settings_ > _API Keys_. The value of `DATADOG_API_KEY` below can be found by selecting the line item and copying your API key (do not use the value in the Key ID column).
 
-```sh
+```bash
 export DATADOG_API_KEY="<DATADOG_KEY_ID>"
 ```
 
 Finally, install the Datadog agent with your API key using the following command:
 
-```sh
+```bash
 helm repo add datadog https://helm.datadoghq.com
 helm upgrade -i datadog-agent datadog/datadog \
---set datadog.site='us5.datadoghq.com' \
---set datadog.apiKey=$<DATADOG_KEY_ID> \
---set datadog.prometheusScrape.enabled=‘true’ \
---set datadog.prometheusScrape.serviceEndpoints=‘true’
+  --set datadog.site='us5.datadoghq.com' \
+  --set datadog.apiKey=$<DATADOG_KEY_ID> \
+  --set datadog.prometheusScrape.enabled=‘true’ \
+  --set datadog.prometheusScrape.serviceEndpoints=‘true’
 ```
 
 ## Step 2: Install Kubecost
@@ -39,17 +39,19 @@ helm upgrade -i datadog-agent datadog/datadog \
 Install Kubecost using the following command to allow the Datadog agent to collect the metrics:
 
 {% code overflow="wrap" %}
-```sh
+
+```bash
 helm upgrade --install kubecost --namespace kubecost --create-namespace \
   --repo https://kubecost.github.io/cost-analyzer/ cost-analyzer \
   -f https://raw.githubusercontent.com/kubecost/poc-common-configurations/main/datadog/datadog-values.yaml \
   --set kubecostToken="aGVsbUBrdWJlY29zdC5jb20=xm343yadf98"
 ```
+
 {% endcode %}
 
 Allow 3-5 minutes to have the Kubecost installation completed, at which point the metrics are pushed into your Datadog account. Run the following command to enable port-forwarding and expose the Kubecost dashboard:
 
-```
+```bash
 kubectl port-forward --namespace kubecost deployment/kubecost-cost-analyzer 9090
 ```
 
@@ -62,9 +64,11 @@ First, verify if your Kubecost metrics are available in your Datadog account by 
 Once you have verified that Kubecost metrics are pushed into your Datadog account, you can download our example Datadog dashboard `Kubecostdashboard.json` and import it into your Datadog account to visualize the Kubecost cost allocation data. Use the following command:
 
 {% code overflow="wrap" %}
-```
+
+```bash
 wget https://raw.githubusercontent.com/kubecost/poc-common-configurations/main/datadog/Kubecostdashboard.json
 ```
+
 {% endcode %}
 
 In Datadog, select _Dashboards_ in the left navigation, then select _New Dashboard_ in the top right corner of the Dashboards page. The Create a Dashboard window opens. Create a name for your dashboard and add any relevant teams if applicable. Then, select _New Dashboard_.

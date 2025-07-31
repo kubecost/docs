@@ -73,12 +73,12 @@ kubecostAggregator:
 
   # How much data to ingest from the federated store bucket, and how much data
   # to keep in the DB before rolling the data off.
-  # 
+  #
   # Note: If increasing this value to backfill historical data, it will take
   # time to gradually ingest & process those historical ETL files. Consider
   # also increasing the resources available to the aggregator as well as the
   # dbConcurrentIngestionCount.
-  # 
+  #
   # default: 91
   etlDailyStoreDurationDays: 91
 
@@ -151,15 +151,19 @@ kubecostAggregator:
 If you have not already, create the required Kubernetes secrets. Refer to the [Federated ETL doc](/install-and-configure/install/multi-cluster/federated-etl/federated-etl.md) and [Cloud Integration doc](/install-and-configure/install/cloud-integration/multi-cloud.md) for more details.
 
 {% code overflow="wrap" %}
-```sh
+
+```bash
 kubectl create secret generic federated-store -n kubecost --from-file=federated-store.yaml
 ```
+
 {% endcode %}
 
 {% code overflow="wrap" %}
-```sh
+
+```bash
 kubectl create secret generic cloud-integration -n kubecost --from-file=cloud-integration.json
 ```
+
 {% endcode %}
 
 Finally, upgrade your existing Kubecost installation. This command will install Kubecost if it does not already exist.
@@ -168,7 +172,7 @@ Finally, upgrade your existing Kubecost installation. This command will install 
 If you are upgrading from an existing installation, make sure to append your existing `values.yaml` configurations to the ones described above.
 {% endhint %}
 
-```sh
+```bash
 helm upgrade --install "kubecost" \
   --repo https://kubecost.github.io/cost-analyzer/ cost-analyzer \
   --namespace kubecost \
@@ -189,7 +193,7 @@ data to be ingested.
 
 ### Understanding the state of the Aggregator
 
-```txt
+```http
 https://kubecost.myorganization.com/model/debug/orchestrator
 ```
 
@@ -213,26 +217,26 @@ When deploying the Aggregator as a StatefulSet, it is possible to perform a rese
 
 Confirming whether node metadata exists in your database can be useful when troubleshooting missing data. Run the following command which will open a shell into the Aggregator pod:
 
-```sh
+```bash
 kubectl exec -it KUBECOST-AGGREGATOR-POD-NAME sh
 ```
 
 Point to the path where your database exists
 
-```sh
+```bash
 cd /var/configs/waterfowl/duckdb/v0_9_2
 ls -lah
 ```
 
 Copy the database to a new file for testing to avoid modifications to the original data
 
-```sh
+```bash
 cp kubecost-example.duckdb.read kubecost-example.duckdb.read.kubecost.copy
 ```
 
 Open a DuckDB REPL pointed at the copied database
 
-```sh
+```bash
 duckdb kubecost-example.duckdb.read.kubecost.copy
 ```
 

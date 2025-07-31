@@ -32,6 +32,7 @@ Filter your results by any category which you can aggregate by, can support mult
 {% endswagger-parameter %}
 
 {% swagger-response status="200: OK" description="" %}
+
 ```json
 {
     "code": 200,
@@ -49,11 +50,11 @@ Filter your results by any category which you can aggregate by, can support mult
                         },
                         "listCost": {
                             "cost": ,
-                            "kubernetesPercent": 
+                            "kubernetesPercent":
                         },
                         "netCost": {
                             "cost": ,
-                            "kubernetesPercent": 
+                            "kubernetesPercent":
                         },
                         "amortizedNetCost": {
                             "cost": ,
@@ -61,11 +62,11 @@ Filter your results by any category which you can aggregate by, can support mult
                         },
                         "invoicedCost": {
                             "cost": ,
-                            "kubernetesPercent": 
+                            "kubernetesPercent":
                         },
                         "amortizedCost": {
                             "cost": ,
-                            "kubernetesPercent": 
+                            "kubernetesPercent":
                         }
                     },
                 },
@@ -82,6 +83,7 @@ Filter your results by any category which you can aggregate by, can support mult
     }
 }
 ```
+
 {% endswagger-response %}
 {% endswagger %}
 
@@ -111,12 +113,15 @@ Each cost metric also has a `kubernetesPercent` value. Unaggregated, this value 
 
 {% tabs %}
 {% tab title="Request" %}
-```
+
+```http
 http:/<your-kubecost-address>/model/cloudCost?window=2d&aggregate=invoiceEntityID&filter=service:"AmazonEC2"
 ```
+
 {% endtab %}
 
 {% tab title="Response" %}
+
 ````
 ```json
 {
@@ -182,5 +187,6 @@ http:/<your-kubecost-address>/model/cloudCost?window=2d&aggregate=invoiceEntityI
 }
 ```
 ````
+
 {% endtab %}
 {% endtabs %}

@@ -8,7 +8,7 @@ Kubecost allows users to apply custom prices to individual assets (e.g. nodes) v
 
 ## Creating a pricing file
 
-1.  Create a CSV file in this [format](https://github.com/kubecost/cost-analyzer-helm-chart/blob/v2.6/cost-analyzer/custom-pricing.csv) (also in the below table). CSV changes are picked up hourly by default.
+1. Create a CSV file in this [format](https://github.com/kubecost/cost-analyzer-helm-chart/blob/v2.6/cost-analyzer/custom-pricing.csv) (also in the below table). CSV changes are picked up hourly by default.
 
     1. `EndTimeStamp`: currently unused
     2. `InstanceID`: identifier used to match asset
@@ -54,7 +54,7 @@ pricingCsv:
 
 Alternatively, mount a ConfigMap with the CSV:
 
-```sh
+```bash
 kubectl create configmap csv-pricing --from-file custom-pricing.csv
 ```
 
@@ -102,7 +102,7 @@ There are two options for adding the credentials to the Kubecost pod:
 
 1. Service key: Create an S3 service key with the permissions above, then add its ID and access key as a K8s secret:
    1. `kubectl create secret generic pricing-schema-access-secret -n kubecost --from-literal=AWS_ACCESS_KEY_ID=id --from-literal=AWS_SECRET_ACCESS_KEY=key`
-   2. The name of this secret should be the same as `csvAccessCredentials` in _values.yaml_ above
+   2. The name of this secret should be the same as `csvAccessCredentials` in *values.yaml* above
 2. AWS IAM (IRSA) [service account annotation](https://docs.aws.amazon.com/eks/latest/userguide/adot-iam.html)
 
 ## Pricing discounts

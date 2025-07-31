@@ -33,9 +33,11 @@ Use the appropriate guide for your cloud provider:
 Create a secret with the .yaml file generated in the previous step:
 
 {% code overflow="wrap" %}
-```shell
+
+```bash
 kubectl create secret generic kubecost-thanos -n kubecost --from-file=./object-store.yaml
 ```
+
 {% endcode %}
 
 ## Step 3: Unique Cluster ID
@@ -61,13 +63,15 @@ The Thanos subchart includes `thanos-bucket`, `thanos-query`, `thanos-store`, `t
 These values can be adjusted under the `thanos` block in _values-thanos.yaml_.
 
 {% code overflow="wrap" %}
-```shell
+
+```bash
 helm upgrade kubecost kubecost/cost-analyzer \
-    --install \
-    --namespace kubecost \
-    -f https://raw.githubusercontent.com/kubecost/cost-analyzer-helm-chart/master/cost-analyzer/values-thanos.yaml \
-    -f values-clusterName.yaml
+  --install \
+  --namespace kubecost \
+  -f https://raw.githubusercontent.com/kubecost/cost-analyzer-helm-chart/master/cost-analyzer/values-thanos.yaml \
+  -f values-clusterName.yaml
 ```
+
 {% endcode %}
 
 {% hint style="info" %}
@@ -83,25 +87,31 @@ Thanos sends data to the bucket every 2 hours. Once 2 hours have passed, logs sh
 You can monitor the logs with:
 
 {% code overflow="wrap" %}
+
 ```bash
 kubectl logs --namespace kubecost -l app=prometheus -l component=server --prefix=true --container thanos-sidecar --tail=-1 | grep uploaded
 ```
+
 {% endcode %}
 
 Monitoring logs this way should return results like this:
 
 {% code overflow="wrap" %}
-```log
+
+```console
 [pod/kubecost-prometheus-server-xxx/thanos-sidecar] level=debug ts=2022-06-09T13:00:10.084904136Z caller=objstore.go:206 msg="uploaded file" from=/data/thanos/upload/BUCKETID/chunks/000001 dst=BUCKETID/chunks/000001 bucket="tracing: kc-thanos-store"
 ```
+
 {% endcode %}
 
 As an aside, you can validate the Prometheus metrics are all configured with correct cluster names with:
 
 {% code overflow="wrap" %}
+
 ```bash
 kubectl logs --namespace kubecost -l app=prometheus -l component=server --prefix=true --container thanos-sidecar --tail=-1 | grep external_labels
 ```
+
 {% endcode %}
 
 To troubleshoot the IAM Role Attached to the serviceaccount, you can create a Pod using the same service account used by the thanos-sidecar (default is `kubecost-prometheus-server`):
@@ -134,16 +144,18 @@ This should return a list of objects (or at least not give a permission error).
 
 If a cluster is not successfully writing data to the bucket, review `thanos-sidecar` logs with the following command:
 
-```shell
+```bash
 kubectl logs kubecost-prometheus-server-<your-pod-id> -n kubecost -c thanos-sidecar
 ```
 
 Logs in the following format are evidence of a successful bucket write:
 
 {% code overflow="wrap" %}
-```
+
+```console
 level=debug ts=2019-12-20T20:38:32.288251067Z caller=objstore.go:91 msg="uploaded file" from=/data/thanos/upload/BUCKET-ID/meta.json dst=debug/metas/BUCKET-ID.json bucket=kc-thanos
 ```
+
 {% endcode %}
 
 ### Stores not listed at the `/stores` endpoint
@@ -160,7 +172,7 @@ to the container args. This will cause a query restart and you can visit `/store
 
 If it has, you'll want to use these addresses instead of DNS more permanently by setting .Values.thanos.query.stores in _values-thanos.yaml_.
 
-```
+```yaml
 ...
 thanos:
   store:
@@ -196,14 +208,16 @@ thanos:
 A common error is as follows, which means you do not have the correct access to the supplied bucket:
 
 {% code overflow="wrap" %}
-```
+
+```console
 thanos-svc-account@project-227514.iam.gserviceaccount.com does not have storage.objects.list access to thanos-bucket., forbidden"
 ```
+
 {% endcode %}
 
 Assuming pods are running, use port forwarding to connect to the `thanos-query-http` endpoint:
 
-```shell
+```bash
 kubectl port-forward svc/kubecost-thanos-query-http 8080:10902 --namespace kubecost
 ```
 

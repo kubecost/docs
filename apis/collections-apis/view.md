@@ -6,13 +6,13 @@ Use the following request to view a collection by providing the collection ID. T
 
 ### Request
 
-```
+```http
 GET /model/collection?id=<string>
 ```
 
 ### Example
 
-```
+```http
 GET /model/collection?id=8a939ba1-ff15-4600-b711-2cb109114914
 ```
 

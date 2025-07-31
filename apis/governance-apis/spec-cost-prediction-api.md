@@ -22,7 +22,7 @@ Set to `true` to ignore historical usage data (if it exists) when making the pre
 {% endswagger-parameter %}
 
 {% swagger-response status="200: OK" description="" %}
-```javascript
+```json
 {
     "code": 200,
     "data": [
@@ -76,7 +76,7 @@ Currently supported workload types:
 
 Write some Kubernetes specs to a file called `/tmp/testspecs.yaml`:
 
-```
+```bash
 read -r -d '' WL << EndOfMessage
 apiVersion: apps/v1
 kind: Deployment
@@ -151,7 +151,7 @@ Call the endpoint with cURL, passing the file in the request body:
 {% endtab %}
 
 {% tab title="Response" %}
-```
+```json
 [
   {
     "namespace": "kubecost",

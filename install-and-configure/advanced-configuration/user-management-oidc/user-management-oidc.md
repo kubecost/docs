@@ -117,20 +117,22 @@ Use [your browser's devtools](https://developer.chrome.com/docs/devtools/network
 ### Option 2: Review logs, and decode your JWT tokens
 
 If `kubecostAggregator.enabled` is `true` or unspecified in `values.yaml`:
-```sh
+
+```bash
 kubectl logs statefulsets/kubecost-aggregator
 kubectl logs deploy/kubecost-cost-analyzer
 ```
 
 If `kubecostAggregator.enabled` is `false` in `values.yaml`:
-```sh
+
+```bash
 kubectl logs services/kubecost-aggregator
 kubectl logs deploy/kubecost-cost-analyzer
 ```
 
 * Search for `oidc` in your logs to follow events
 * Pay attention to any `WRN` related to OIDC
-* Search for `Token Response`, and try decoding both the `access_token` and `id_token` to ensure they are well formed (https://jwt.io/)
+* Search for `Token Response`, and try decoding both the `access_token` and `id_token` to ensure they are well formed (<https://jwt.io/>)
 
 ### Option 3: Enable debug logs for more granularity on what is failing
 
@@ -147,4 +149,4 @@ kubecostAggregator:
       value: debug
 ```
 
-For further assistance, reach out to support@kubecost.com and provide both logs and a [HAR file](https://support.google.com/admanager/answer/10358597?hl=en).
+For further assistance, reach out to <support@kubecost.com> and provide both logs and a [HAR file](https://support.google.com/admanager/answer/10358597?hl=en).

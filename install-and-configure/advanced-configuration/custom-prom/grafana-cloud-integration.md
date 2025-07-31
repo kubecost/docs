@@ -20,7 +20,7 @@ Install the Grafana Agent for Kubernetes on your cluster. On the existing K8s cl
 * `REPLACE-WITH-YOUR-CLUSTER-NAME`
 
 {% code overflow="wrap" %}
-```
+```bash
 cat <<'EOF' |
 
 kind: ConfigMap
@@ -62,7 +62,7 @@ data:
             - source_labels: [__meta_kubernetes_pod_label_app]
               action: keep
               regex:  'kubecost-network-costs'
-  
+
 EOF
 (export NAMESPACE=kubecost && kubectl apply -n $NAMESPACE -f -)
 
@@ -72,7 +72,7 @@ MANIFEST_URL=https://raw.githubusercontent.com/grafana/agent/v0.24.2/production/
 
 You can also verify if `grafana-agent` is scraping data with the following command  (optional):
 
-```
+```bash
 kubectl -n kubecost logs grafana-agent-0
 ```
 
@@ -82,7 +82,7 @@ To learn more about how to install and config Grafana agent as well as additiona
 
 Create two files in your working directory, called `USERNAME` and `PASSWORD` respectively
 
-```
+```bash
 export PASSWORD=<REPLACE-WITH-GRAFANA-PROM-REMOTE-WRITE-API-KEY>
 export USERNAME=<REPLACE-WITH-GRAFANA-PROM-REMOTE-WRITE-USERNAME>
 printf "${PASSWORD}" > PASSWORD
@@ -92,14 +92,14 @@ printf "${USERNAME}" > USERNAME
 Verify that you can run queries against your Grafana Cloud Prometheus query endpoint (optional):
 
 {% code overflow="wrap" %}
-```
+```bash
 cred="$( echo $NAME:$PASSWORD | base64 )"; curl -H "Authorization: Basic $cred" https://<REPLACE-WITH-GRAFANA-PROM-QUERY-ENDPOINT>/api/v1/query?query=up
 ```
 {% endcode %}
 
 Create K8s secret name `dbsecret`:
 
-```
+```bash
 kubectl create secret generic dbsecret \
     --namespace kubecost \
     --from-file=USERNAME \
@@ -108,7 +108,7 @@ kubectl create secret generic dbsecret \
 
 Verify if the credentials appear correctly (optional):
 
-```
+```bash
 kubectl -n kubecost get secret dbsecret -o json | jq '.data | map_values(@base64d)'
 ```
 
@@ -119,7 +119,7 @@ To set up recording rules in Grafana Cloud, download the [Cortextool CLI utility
 After installing the tool, create a file called _kubecost\_rules.yaml_ with the following command:
 
 {% code overflow="wrap" %}
-```yaml
+```bash
 cat << EOF > kubecost-rules.yaml
 namespace: "kubecost"
 groups:
@@ -159,7 +159,7 @@ EOF
 
 Then, make sure you are in the same directory as your `_kubecost\_rules.yaml_`, and load the rules using Cortextool. Replace the address with your Grafana Cloud’s Prometheus endpoint (Remember to omit the /api/prom path from the endpoint URL).
 
-```
+```bash
 cortextool rules load \
 --address=<REPLACE-WITH-GRAFANA-PROM-ENDPOINT> \
 --id=<REPLACE-WITH-GRAFANA-PROM-REMOTE-WRITE-USERNAME> \
@@ -169,7 +169,7 @@ kubecost_rules.yaml
 
 Print out the rules to verify that they’ve been loaded correctly:
 
-```
+```bash
 cortextool rules print \
 --address=<REPLACE-WITH-GRAFANA-PROM-ENDPOINT> \
 --id=<REPLACE-WITH-GRAFANA-PROM-REMOTE-WRITE-USERNAME> \
@@ -180,7 +180,7 @@ cortextool rules print \
 
 Install Kubecost on your K8s cluster with Grafana Cloud Prometheus query endpoint and `dbsecret` you created in Step 2.
 
-```
+```bash
 helm upgrade -i -n kubecost kubecost kubecost/cost-analyzer \
     --namespace kubecost \
     --set global.prometheus.fqdn=https://<REPLACE-WITH-GRAFANA-PROM-QUERY-ENDPOINT> \

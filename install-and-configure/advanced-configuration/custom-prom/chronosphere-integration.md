@@ -20,22 +20,24 @@ This document will show you how to integrate the Chronosphere Observability Plat
 Assume kubecost is the namespace where you want to install Kubecost.
 
 ## Step 2: Install Kubecost using HELM
-```
+
+```bash
 helm upgrade --install kubecost \
-    --repo https://kubecost.github.io/cost-analyzer/ cost-analyzer  \
-    --namespace kubecost \
-    --set global.prometheus.fqdn=https://<tenant>.chronosphere.io/data/metrics/ \
-    --set global.prometheus.enabled=false \
-    --set global.grafana.enabled=false \
-    --set global.grafana.proxy=false \
-    --set global.prometheus.queryServiceBearerTokenSecretName=chronosphere-secret
+  --repo https://kubecost.github.io/cost-analyzer/ cost-analyzer  \
+  --namespace kubecost \
+  --set global.prometheus.fqdn=https://<tenant>.chronosphere.io/data/metrics/ \
+  --set global.prometheus.enabled=false \
+  --set global.grafana.enabled=false \
+  --set global.grafana.proxy=false \
+  --set global.prometheus.queryServiceBearerTokenSecretName=chronosphere-secret
 ```
 
-Replace \<tenant\> with the actual tenant name of your Chronosphere Observability Platform account. chronosphere-secret is the name of the Secret created in Step 1. 
+Replace \<tenant\> with the actual tenant name of your Chronosphere Observability Platform account. chronosphere-secret is the name of the Secret created in Step 1.
 
 ## Step 3: Add configuration to OpenTelemetry's Prometheus Receiver to scrape metrics from kubecost
 
 Add two scape jobs to Prometheus receiver configuration like below assuming Kubecost is installed in namespace, kubecost:
+
 ```yaml
   receivers:
     prometheus:
@@ -64,9 +66,11 @@ Add two scape jobs to Prometheus receiver configuration like below assuming Kube
 
 When pods are ready, you can enable port-forwarding with the following command:
 
-    kubectl port-forward --namespace kubecost deployment/kubecost-cost-analyzer 9090
+```bash
+kubectl port-forward --namespace kubecost deployment/kubecost-cost-analyzer 9090
+```
 
-Then, navigate to http://localhost:9090 in a web browser.
+Then, navigate to <http://localhost:9090> in a web browser.
 
 Please allow 25 minutes for Kubecost to gather metrics. A progress indicator will appear at the top of the UI.
 
@@ -75,6 +79,7 @@ Please allow 25 minutes for Kubecost to gather metrics. A progress indicator wil
 Create a file called _kubecost\_rules.yaml_ with the following command:
 
 {% code overflow="wrap" %}
+
 ```yaml
 cat << EOF > kubecost-rules.yaml
 api_version: v1/config
@@ -180,11 +185,12 @@ spec:
       daemonset: "true"
 EOF
 ```
+
 {% endcode %}
 
 Then, use [chronoctl](https://docs.chronosphere.io/chronoctl/install) (Chronosphere's CLI tool) to create rules on the platform with the following command:
 
-```sh
+```bash
 # Read the file and split based on '---', process each rule
 awk '
   BEGIN { rule = "" }

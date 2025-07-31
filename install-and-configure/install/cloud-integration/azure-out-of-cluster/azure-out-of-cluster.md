@@ -50,16 +50,16 @@ Next, create a JSON file which **must** be named _cloud-integration.json_ with t
 
 ```json
 {
-    "azure": [
-        {
-            "azureSubscriptionID": "AZ_cloud_integration_subscriptionId",
-            "azureStorageAccount": "AZ_cloud_integration_azureStorageAccount",
-            "azureStorageAccessKey": "AZ_cloud_integration_azureStorageAccessKey",
-            "azureStorageContainer": "AZ_cloud_integration_azureStorageContainer",
-            "azureContainerPath": "",
-            "azureCloud": "public"
-        }
-    ]
+  "azure": [
+    {
+      "azureSubscriptionID": "AZ_cloud_integration_subscriptionId",
+      "azureStorageAccount": "AZ_cloud_integration_azureStorageAccount",
+      "azureStorageAccessKey": "AZ_cloud_integration_azureStorageAccessKey",
+      "azureStorageContainer": "AZ_cloud_integration_azureStorageContainer",
+      "azureContainerPath": "",
+      "azureCloud": "public"
+    }
+  ]
 }
 ```
 
@@ -70,9 +70,11 @@ Additional details about the `cloud-integration.json` file can be found in our [
 Next, create the Secret:
 
 {% code overflow="wrap" %}
+
 ```bash
-$ kubectl create secret generic <SECRET_NAME> --from-file=cloud-integration.json -n kubecost
+kubectl create secret generic <SECRET_NAME> --from-file=cloud-integration.json -n kubecost
 ```
+
 {% endcode %}
 
 Next, ensure the following are set in your Helm values:
@@ -85,7 +87,7 @@ kubecostProductConfigs:
 Next, upgrade Kubecost via Helm:
 
 ```bash
-$ helm upgrade kubecost kubecost/cost-analyzer -n kubecost -f values.yaml
+helm upgrade kubecost kubecost/cost-analyzer -n kubecost -f values.yaml
 ```
 
 You can verify a successful configuration by checking the following in the Kubecost UI:

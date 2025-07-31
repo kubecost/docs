@@ -34,10 +34,10 @@ Detail for multiple cloud provider setups is [here](/install-and-configure/insta
 
 To begin, download the recommended configuration template files from our [poc-common-config repo](https://github.com/kubecost/poc-common-configurations/tree/main/aws). You will need the following files from this folder:
 
-* _cloud-integration.json_
-* _iam-payer-account-cur-athena-glue-s3-access.json_
-* _iam-payer-account-trust-primary-account.json_
-* _iam-access-cur-in-payer-account.json_
+* *cloud-integration.json*
+* *iam-payer-account-cur-athena-glue-s3-access.json*
+* *iam-payer-account-trust-primary-account.json*
+* *iam-access-cur-in-payer-account.json*
 
 The bottom three files are found in [/aws/iam-policies/cur](https://github.com/kubecost/poc-common-configurations/tree/main/aws/iam-policies/cur).
 
@@ -65,9 +65,9 @@ Update `athenaWorkgroup` to `primary`, then save the file and close it. The rema
 
 Follow the [AWS documentation](https://docs.aws.amazon.com/cur/latest/userguide/cur-create.html) to create a CUR export using the settings below.
 
-* For time granularity, select _Daily_.
-* Select the checkbox to enable _Resource IDs_ in the report.
-* Select the checkbox to enable _Athena integration_ with the report.
+* For time granularity, select *Daily*.
+* Select the checkbox to enable *Resource IDs* in the report.
+* Select the checkbox to enable *Athena integration* with the report.
 * Select the checkbox to enable the JSON IAM policy to be applied to your bucket.
 
 <details>
@@ -104,12 +104,12 @@ Your S3 path prefix can be found by going to your AWS Cost and Usage Reports das
 Once Athena is set up with the CUR, you will need to create a *new* S3 bucket for Athena query results. The bucket used for the CUR cannot be used for the Athena output.
 
 1. Navigate to the [S3 Management Console](https://console.aws.amazon.com/s3/home?region=us-east-2).
-2. Select _Create bucket._ The Create Bucket page opens.
+2. Select *Create bucket.* The Create Bucket page opens.
 3. Provide a name for your bucket. This is the value for `athenaBucketName` in your *cloud-integration.json* file. Use the same region used for the CUR bucket.
-4. Select _Create bucket_ at the bottom of the page.
+4. Select *Create bucket* at the bottom of the page.
 5. Navigate to the [Amazon Athena](https://console.aws.amazon.com/athena) dashboard.
-6. Select _Settings_, then select _Manage._ The Manage settings window opens.
-7. Set _Location of query result_ to the S3 bucket you just created, then select _Save._
+6. Select *Settings*, then select *Manage.* The Manage settings window opens.
+7. Set *Location of query result* to the S3 bucket you just created, then select *Save.*
 
 Navigate to Athena in the AWS Console. Be sure the region matches the one used in the steps above. Update your *cloud-integration.json* file with the following values. Use the screenshots below for help.
 
@@ -128,14 +128,15 @@ For Athena query results written to an S3 bucket only accessed by Kubecost, it i
 
 **From the AWS payer account**
 
-In _iam-payer-account-cur-athena-glue-s3-access.json_, replace all `ATHENA_RESULTS_BUCKET_NAME` instances with your Athena S3 bucket name (the default will look like `aws-athena-query-results-xxxx`).
+In *iam-payer-account-cur-athena-glue-s3-access.json*, replace all `ATHENA_RESULTS_BUCKET_NAME` instances with your Athena S3 bucket name (the default will look like `aws-athena-query-results-xxxx`).
 
 In *iam-payer-account-trust-primary-account.json*, replace `SUB_ACCOUNT_222222222` with the account number of the account where the Kubecost primary cluster will run.
 
 In the same location as your downloaded configuration files, run the following command to create the appropriate policy (`jq` is not required):
 
 {% code overflow="wrap" %}
-```sh
+
+```bash
 aws iam create-role --role-name kubecost-cur-access \
   --assume-role-policy-document file://iam-payer-account-trust-primary-account.json \
   --output json | jq -r .Role.Arn
@@ -143,13 +144,13 @@ aws iam create-role --role-name kubecost-cur-access \
 
 The output is the value for the `PAYER_ACCOUNT_ROLE_ARN`:
 
-```
+```console
 arn:aws:iam::PAYER_ACCOUNT_11111111111:role/kubecost-cur-access
 ```
 
 Update the placeholders (everything with a `_` ex. `ATHENA_DATABASE`) in *iam-payer-account-cur-athena-glue-s3-access.json* and attach the required policies to the new role:
 
-```sh
+```bash
 aws iam put-role-policy --role-name kubecost-cur-access \
   --policy-name kubecost-payer-account-cur-athena-glue-s3-access \
   --policy-document file://iam-payer-account-cur-athena-glue-s3-access.json
@@ -157,11 +158,12 @@ aws iam put-role-policy --role-name kubecost-cur-access \
 
 Then allow Kubecost to read account tags:
 
-```sh
+```bash
 aws iam put-role-policy --role-name kubecost-cur-access \
   --policy-name kubecost-payer-account-list-tags-policy \
   --policy-document file://iam-payer-account-list-tags-policy.json
 ```
+
 {% endcode %}
 
 Now we can obtain the last value `masterPayerARN` for *cloud-integration.json* as the ARN associated with the newly-created IAM role, as seen below in the AWS console:
@@ -178,20 +180,21 @@ By arriving at this step, you should have been able to provide all values to you
 
 In *iam-access-cur-in-payer-account.json*, update `PAYER_ACCOUNT_11111111111` with the AWS account number of the payer account and create a policy allowing Kubecost to assumeRole in the payer account:
 
-```sh
+```bash
 aws iam create-policy --policy-name kubecost-access-cur-in-payer-account \
   --policy-document file://iam-access-cur-in-payer-account.json \
   --output json |jq -r .Policy.Arn
 ```
 
 Note the output ARN (used in the `iamserviceaccount --attach-policy-arn` below):
-```
+
+```console
 arn:aws:iam::SUB_ACCOUNT_222222222:policy/kubecost-access-cur-in-payer-account
 ```
 
 Create a namespace and set environment variables:
 
-```sh
+```bash
 kubectl create ns kubecost
 export CLUSTER_NAME=YOUR_CLUSTER
 export AWS_REGION=YOUR_REGION
@@ -203,10 +206,10 @@ If you are using EKS Pod Identity, skip the rest of Step 5 and continue to [Step
 
 Enable the OIDC-Provider:
 
-```sh
+```bash
 eksctl utils associate-iam-oidc-provider \
-    --cluster $CLUSTER_NAME --region $AWS_REGION \
-    --approve
+  --cluster $CLUSTER_NAME --region $AWS_REGION \
+  --approve
 ```
 
 **Linking default Kubecost Service Account to an IAM Role**
@@ -233,29 +236,34 @@ This method creates a new service account via eksctl command line tools, instead
 Replace `SUB_ACCOUNT_222222222` with the AWS account number where the primary Kubecost cluster will run.
 
 {% code overflow="wrap" %}
-```sh
+
+```bash
 eksctl create iamserviceaccount \
-    --name kubecost-serviceaccount \
-    --namespace kubecost \
-    --cluster $CLUSTER_NAME --region $AWS_REGION \
-    --attach-policy-arn arn:aws:iam::SUB_ACCOUNT_222222222:policy/kubecost-access-cur-in-payer-account \
-    --override-existing-serviceaccounts \
-    --approve
+  --name kubecost-serviceaccount \
+  --namespace kubecost \
+  --cluster $CLUSTER_NAME --region $AWS_REGION \
+  --attach-policy-arn arn:aws:iam::SUB_ACCOUNT_222222222:policy/kubecost-access-cur-in-payer-account \
+  --override-existing-serviceaccounts \
+  --approve
 ```
+
 {% endcode %}
 
 Create the secret (in this setup, there are no actual secrets in this file):
 
 {% code overflow="wrap" %}
-```
+
+```bash
 kubectl create secret generic cloud-integration -n kubecost --from-file=cloud-integration.json
 ```
+
 {% endcode %}
 
 Install Kubecost using the service account and cloud-integration secret:
 
 {% code overflow="wrap" %}
-```sh
+
+```bash
 helm install kubecost \
   --repo https://kubecost.github.io/cost-analyzer/ cost-analyzer \
   --namespace kubecost \
@@ -263,6 +271,7 @@ helm install kubecost \
   --set serviceAccount.create=false \
   --set kubecostProductConfigs.cloudIntegrationSecret=cloud-integration
 ```
+
 {% endcode %}
 
 Add the following section to your Helm values. This will tell Kubecost to use your newly created service account, instead of creating one.
@@ -281,7 +290,7 @@ Your cluster must support [EKS Pod Identities](https://docs.aws.amazon.com/eks/l
 
 Create your pod identity association:
 
-```sh
+```bash
 eksctl create podidentityassociation \
 --cluster $CLUSTER_NAME --region $AWS_REGION \
 --namespace kubecost \
@@ -302,8 +311,11 @@ serviceAccount:
 
 It can take over an hour to process the billing data for large AWS accounts. In the short-term, follow the logs and look for a message similar to `(7.7 complete)`, which should grow gradually to `(100.0 complete)`. Some errors (ERR) are expected, as seen below.
 
-```
+```bash
 kubectl logs -l app=cost-analyzer --tail -1 --follow |grep -i athena
+```
+
+```console
 ------------------
 Defaulted container "cost-model" out of: cost-model, cost-analyzer-frontend
 2023-05-24T19:41:31.63093249Z ERR Failed to lookup reserved instance data: no reservation data available in Athena

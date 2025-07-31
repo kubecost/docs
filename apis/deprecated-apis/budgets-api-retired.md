@@ -36,33 +36,7 @@ Only should be used when updating a budget rule, ID of the budget rule being mod
 {% endswagger-parameter %}
 
 {% swagger-response status="200: OK" description="" %}
-```javascript
-{
-    "code": 200,
-    "data": [
-        {
-            "name": "",
-            "id": "",
-            "property": "",
-            "values": [
-                ""
-            ],
-            "kind": "soft",
-            "interval": "weekly",
-            "intervalDay": 0,
-            "amount": 0
-        }
-}
-```
-{% endswagger-response %}
-{% endswagger %}
 
-{% swagger method="get" path="/model/budget/recurring/list" baseUrl="http://<your-kubecost-address>" summary="Get recurring budget rule(s)" %}
-{% swagger-description %}
-Lists all existing recurring budget rules
-{% endswagger-description %}
-
-{% swagger-response status="200: OK" description="" %}
 ```json
 {
     "code": 200,
@@ -81,6 +55,36 @@ Lists all existing recurring budget rules
         }
 }
 ```
+
+{% endswagger-response %}
+{% endswagger %}
+
+{% swagger method="get" path="/model/budget/recurring/list" baseUrl="http://<your-kubecost-address>" summary="Get recurring budget rule(s)" %}
+{% swagger-description %}
+Lists all existing recurring budget rules
+{% endswagger-description %}
+
+{% swagger-response status="200: OK" description="" %}
+
+```json
+{
+    "code": 200,
+    "data": [
+        {
+            "name": "",
+            "id": "",
+            "property": "",
+            "values": [
+                ""
+            ],
+            "kind": "soft",
+            "interval": "weekly",
+            "intervalDay": 0,
+            "amount": 0
+        }
+}
+```
+
 {% endswagger-response %}
 {% endswagger %}
 
@@ -94,12 +98,14 @@ ID of the recurring budget rule to be deleted
 {% endswagger-parameter %}
 
 {% swagger-response status="200: OK" description="" %}
-```javascript
+
+```json
 {
     "code": 200,
     "data": []
 }
 ```
+
 {% endswagger-response %}
 {% endswagger %}
 
@@ -123,11 +129,12 @@ Kubecost does **not** convert spending costs to other currency types; it will on
 
 ## Examples
 
-#### Create a soft recurring budget rule for my test cluster which resets every Wednesday, with a budget of $100.00 USD.
+#### Create a soft recurring budget rule for my test cluster which resets every Wednesday, with a budget of $100.00 USD
 
 {% tabs %}
 {% tab title="Request" %}
-```
+
+```json
 {
   "name": "example-test",
   "property": "cluster",
@@ -140,9 +147,11 @@ Kubecost does **not** convert spending costs to other currency types; it will on
   "amount": 100
 }
 ```
+
 {% endtab %}
 
 {% tab title="Response" %}
+
 ```json
 {
     "code": 200,
@@ -161,6 +170,7 @@ Kubecost does **not** convert spending costs to other currency types; it will on
         }
 }
 ```
+
 {% endtab %}
 {% endtabs %}
 
@@ -168,12 +178,15 @@ Kubecost does **not** convert spending costs to other currency types; it will on
 
 {% tabs %}
 {% tab title="Request" %}
-```
+
+```http
 http://<your-kubecost-address>/model/getRecurringBudgetRules
 ```
+
 {% endtab %}
 
 {% tab title="Response" %}
+
 ```json
 {
     "code": 200,
@@ -199,5 +212,6 @@ http://<your-kubecost-address>/model/getRecurringBudgetRules
     ]
 }
 ```
+
 {% endtab %}
 {% endtabs %}

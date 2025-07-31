@@ -19,13 +19,13 @@ You MUST install the parallel installation in a different namespace than the pri
 
 For example, if the current install was done with
 
-```sh
+```bash
 helm install kubecost --namespace kubecost ...
 ```
 
 The parallel installation MUST be installed with a different release name, such as:
 
-```sh
+```bash
 helm install kubecost2 --namespace kubecost2 ...
 ```
 

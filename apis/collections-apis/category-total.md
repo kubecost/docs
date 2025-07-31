@@ -8,13 +8,13 @@ Use the following request to query the total costs of a category, which includes
 
 ### Request
 
-```
+```http
 GET /model/collections/query/total?category=<string>&window=<string>(&collections=<true>)
 ```
 
 ### Examples
 
-```
+```http
 GET /model/collections/query/total?category=Team&window=30d
 ```
 
@@ -57,7 +57,7 @@ GET /model/collections/query/total?category=Team&window=30d
 }
 ```
 
-```
+```http
 GET /model/collections/query/total?category=Team&window=30d&collections=true
 ```
 

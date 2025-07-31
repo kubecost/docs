@@ -3,7 +3,7 @@
 Adding the example webhook below to Spinnaker will enable a custom stage to query Kubecost for recommendations on a container. More info on [Spinnaker custom webhooks](https://spinnaker.io/guides/operator/custom-webhook-stages/#creating-a-custom-webhook-stage).
 
 {% code overflow="wrap" %}
-```
+```yaml
 webhook:
   preconfigured:
   - label: "Kubecost: Get Sizing"

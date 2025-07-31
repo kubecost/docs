@@ -6,7 +6,7 @@ Often while using and configuring Kubecost, our documentation may ask you to pas
 
 For example, you can only pass a product key if that is all you need to configure.
 
-```sh
+```bash
 helm install kubecost cost-analyzer \
     --repo https://kubecost.github.io/cost-analyzer/ \
     --namespace kubecost --create-namespace \
@@ -29,7 +29,7 @@ kubecostProductConfigs:
 
 Then run your install command:
 
-```sh
+```bash
 helm install kubecost cost-analyzer \
     --repo https://kubecost.github.io/cost-analyzer/ \
     --namespace kubecost --create-namespace \

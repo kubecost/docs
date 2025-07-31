@@ -65,7 +65,7 @@ Defines spend budgets and alerts on budget overruns.
 
 Example Helm _values.yaml_:
 
-```
+```yaml
 # Daily namespace budget alert on namespace `kubecost`
 - type: budget
   threshold: 50
@@ -89,7 +89,7 @@ Alerts when Kubernetes tenants, e.g. namespaces or label sets, are running below
 The example below sends a Slack alert when any namespace spending is running below 40% cost efficiency and has spent more than $100 during the last day.
 
 {% code overflow="wrap" %}
-```
+```yaml
 - type: efficiency
   efficiencyThreshold: 0.4
   spendThreshold: 100
@@ -124,7 +124,7 @@ Sends a recurring alert with a summary report of cost and efficiency metrics.
 This example sends a recurring alert for allocation data for all namespaces every seven days:
 
 {% code overflow="wrap" %}
-```
+```yaml
 # Recurring weekly namespace update on all namespaces
 - type: recurringUpdate
   window: weekly
@@ -151,7 +151,7 @@ Detects unexpected spend increases/decreases relative to historical moving avera
 Example Helm _values.yaml_:
 
 {% code overflow="wrap" %}
-```
+```yaml
 # Daily spend change alert 
 - type: spendChange
   relativeThreshold: 0.20   # change relative to baseline average cost. Must be greater than -1 (can be negative).
@@ -170,7 +170,7 @@ Defines asset budgets and alerts when Kubernetes assets overrun the threshold se
 
 Example Helm _values.yaml_:
 
-```
+```yaml
 # Daily namespace budget alert on type `Node,Loadbalancer`
 - type: assetBudget
   threshold: 50
@@ -210,7 +210,7 @@ Sends a recurring alert with a Kubernetes assets summary report.
 Two example alerts, one which provides weekly summaries of Kubernetes asset spend data aggregated by cluster, and one which provides weekly summaries of asset spend data for one specific cluster:
 
 {% code overflow="wrap" %}
-```
+```yaml
 # Recurring weekly cloud update on all cluster
 - type: cloudReport
   window: weekly  # or 7d
@@ -248,7 +248,7 @@ Cluster health alerts occur when the cluster health score changes by a specific 
 Example Helm _values.yaml_:
 
 {% code overflow="wrap" %}
-```
+```yaml
 # Health Score Alert 
 - type: health              # Alerts when health score changes by a threshold
   window: 10m
@@ -287,7 +287,7 @@ _Optional parameters:_
 Example Helm _values.yaml_:
 
 {% code overflow="wrap" %}
-```
+```yaml
 # Kubecost Health Diagnostic
 - type: diagnostic
   window: 10m
@@ -378,7 +378,7 @@ If using Helm:
 * Ensure that the Helm values are successfully read into the ConfigMap under _alerts.json_ under the `data` field. See below:
 
 {% code overflow="wrap" %}
-```
+```json
 {
     "apiVersion": "v1",
     "data": {

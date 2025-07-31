@@ -8,13 +8,13 @@ Use the following request to query the complement costs of a category, which inc
 
 ### Request
 
-```
+```http
 GET /model/collections/query/complement?category=<string>&window=<string>
 ```
 
 ### Examples
 
-```
+```http
 GET /model/collections/query/complement?category=Team&window=30d
 ```
 
@@ -48,13 +48,13 @@ Use the following request to query the complement cloud costs of a category, whi
 
 ### Request
 
-```
+```http
 GET /model/collections/query/complement/cloud?category=<string>&window=<string>(&aggregate=<string>&filter=<string>&limit=<number>&offset=<number>)
 ```
 
 ### Examples
 
-```
+```http
 GET /model/collections/query/complement/cloud?category=Team&window=30d
 ```
 
@@ -77,7 +77,7 @@ GET /model/collections/query/complement/cloud?category=Team&window=30d
 }
 ```
 
-```
+```http
 GET /model/collections/query/complement/cloud?category=Team&window=30d&aggregate=service
 ```
 
@@ -116,7 +116,7 @@ GET /model/collections/query/complement/cloud?category=Team&window=30d&aggregate
 }
 ```
 
-```
+```http
 GET /model/collections/query/complement/cloud?category=Team&window=30d&aggregate=providerID&filter=service:"AmazonEC2"
 ```
 
@@ -156,13 +156,13 @@ Use the following request to query the complement Kubernetes costs of a category
 
 ### Request
 
-```
+```http
 GET /model/collections/query/complement/kubernetes?category=<string>&window=<string>(&aggregate=<string>&filter=<string>&limit=<number>&offset=<number>)
 ```
 
 ### Examples
 
-```
+```http
 GET /model/collection/query/complement/kubernetes?category=Team&window=30d
 ```
 
@@ -187,7 +187,7 @@ GET /model/collection/query/complement/kubernetes?category=Team&window=30d
 }
 ```
 
-```
+```http
 GET /model/collections/query/complement/kubernetes?category=Team&window=30d&aggregate=namespace
 ```
 
@@ -228,7 +228,7 @@ GET /model/collections/query/complement/kubernetes?category=Team&window=30d&aggr
 }
 ```
 
-```
+```http
 GET /model/collections/query/complement/kubernetes?category=Team&window=30d&aggregate=controller&filter=namespace:"kubecost"
 ```
 

@@ -58,7 +58,8 @@ Displays all labels and annotations associated with each container request when 
 {% endswagger-parameter %}
 
 {% swagger-response status="200: OK" description="" %}
-```javascript
+
+```json
 [
     {
         "clusterID": "...",
@@ -86,6 +87,7 @@ Displays all labels and annotations associated with each container request when 
     }
 ]
 ```
+
 {% endswagger-response %}
 {% endswagger %}
 
@@ -109,7 +111,7 @@ curl -G \
 
 `/topline` is an optional API endpoint which can be added to your right-sizing query via `.../savings/RequestSizingV2/topline...` to provide a condensed overview of all items sampled. `TotalMonthlySavings` is the total estimated savings value from adopting right-sizing recommendations. `Count` refers to the number of items sampled. `Recommendations` should return `null`, as it is unable to provide a universal right-sizing recommendation.
 
-```
+```json
 {
     "TotalMonthlySavings": ,
     "Count": ,

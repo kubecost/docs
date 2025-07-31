@@ -6,13 +6,13 @@ Use the following request to create a new collection by providing a collection s
 
 ### Request
 
-```
+```http
 POST /model/collections
 ```
 
 ### Example
 
-```
+```http
 POST /model/collections
 ```
 

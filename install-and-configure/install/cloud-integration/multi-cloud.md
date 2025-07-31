@@ -113,7 +113,7 @@ Set these values into the following object and add it to the GCP array:
 
 Many of these values in this config can be generated using the following command:
 
-```
+```bash
 gcloud iam service-accounts keys create ./compute-viewer-kubecost-key.json --iam-account compute-viewer-kubecost@$PROJECT_ID.iam.gserviceaccount.com
 ```
 
@@ -162,7 +162,7 @@ Kubecost does not support complete integrations with Alibaba, but you will still
 
 Set these values into the following object and add them to the Alibaba array in your _cloud-integration.json_:
 
-```
+```json
 "alibaba" : [
     {
       "clusterRegion": "",

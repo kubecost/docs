@@ -50,7 +50,7 @@ oidc:
 If you are using one Entra ID app to authenticate multiple Kubecost endpoints, you must to pass an additional `redirect_uri` parameter in your `authURL`, which will include the URI you configured in Step 1.4. Otherwise, Entra ID may redirect to an incorrect endpoint. You can read more about this in Microsoft Entra ID's [troubleshooting docs](https://learn.microsoft.com/en-us/troubleshoot/azure/active-directory/reply-url-redirected-to-localhost). View the example below to see how you should format your URI:
 {% endhint %}
 
-```
+```text
   authURL: "https://login.microsoftonline.com/{YOUR_TENANT_ID}/oauth2/v2.0/authorize?client_id={YOUR_CLIENT_ID}&response_type=code&scope=openid&nonce=123456&redirect_uri=https%3A%2F%2F{YOUR_KUBECOST_DOMAIN}/oidc/authorize"
 ```
 
@@ -104,7 +104,7 @@ Use your browser's [devtools](https://developer.chrome.com/docs/devtools/network
 
 Run the following command:
 
-```sh
+```bash
 kubectl logs deploy/kubecost-cost-analyzer
 ```
 

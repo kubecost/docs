@@ -91,6 +91,7 @@ Determines how to split shared costs among non-idle, unshared allocations. By de
 {% endswagger-parameter %}
 
 {% swagger-response status="200: OK" description="" %}
+
 ```json
 {
     "code": 200,
@@ -177,6 +178,7 @@ Determines how to split shared costs among non-idle, unshared allocations. By de
     ]
 }
 ```
+
 {% endswagger-response %}
 {% endswagger %}
 
@@ -190,18 +192,21 @@ Request allocation data for each 24-hour period in the last three days, aggregat
 
 {% tabs %}
 {% tab title="Request" %}
-```
-$ curl http://localhost:9090/model/allocation \
+
+```bash
+curl http://localhost:9090/model/allocation \
   -d window=3d \
   -d aggregate=namespace \
   -d accumulate=false \
   -d shareIdle=false \
   -G
 ```
+
 {% endtab %}
 
 {% tab title="Response" %}
-```
+
+```json
 {
   "code": 200,
   "data": [
@@ -232,6 +237,7 @@ $ curl http://localhost:9090/model/allocation \
   ]
 }
 ```
+
 {% endtab %}
 {% endtabs %}
 
@@ -254,15 +260,18 @@ Allocation data for today unaggregated:
 
 {% tabs %}
 {% tab title="Request" %}
-```
-$ curl http://localhost:9090/model/allocation \
+
+```bash
+curl http://localhost:9090/model/allocation \
 -d window=today \
 -G
 ```
+
 {% endtab %}
 
 {% tab title="Response" %}
-```
+
+```json
 {
   "code": 200,
   "data": [
@@ -275,6 +284,7 @@ $ curl http://localhost:9090/model/allocation \
   ]
 }
 ```
+
 {% endtab %}
 {% endtabs %}
 
@@ -282,16 +292,19 @@ Allocation data for last week, per day, aggregated by cluster:
 
 {% tabs %}
 {% tab title="Request" %}
-```
-$ curl http://localhost:9090/model/allocation \
+
+```bash
+curl http://localhost:9090/model/allocation \
   -d window=lastweek \
   -d aggregate=cluster \
   -G
 ```
+
 {% endtab %}
 
 {% tab title="Response" %}
-```
+
+```json
 {
   "code": 200,
   "data": [
@@ -333,6 +346,7 @@ $ curl http://localhost:9090/model/allocation \
   ]
 }
 ```
+
 {% endtab %}
 {% endtabs %}
 
@@ -340,8 +354,9 @@ Allocation data for the last 30 days, aggregated by the "app" label, sharing idl
 
 {% tabs %}
 {% tab title="Request" %}
-```
-$ curl http://localhost:9090/model/allocation \
+
+```bash
+curl http://localhost:9090/model/allocation \
   -d window=30d \
   -d aggregate=label:app \
   -d accumulate=true \
@@ -350,10 +365,12 @@ $ curl http://localhost:9090/model/allocation \
   -d shareCost=100 \
   -G
 ```
+
 {% endtab %}
 
 {% tab title="Response" %}
-```
+
+```json
 {
   "code": 200,
   "data": [
@@ -369,6 +386,7 @@ $ curl http://localhost:9090/model/allocation \
   ]
 }
 ```
+
 {% endtab %}
 {% endtabs %}
 
@@ -376,18 +394,21 @@ Allocation data for 2021-03-10T00:00:00 to 2021-03-11T00:00:00 (i.e. 24h), multi
 
 {% tabs %}
 {% tab title="Request" %}
-```
-$ curl http://localhost:9090/model/allocation \
+
+```bash
+curl http://localhost:9090/model/allocation \
   -d window=2021-03-10T00:00:00Z,2021-03-11T00:00:00Z \
   -d aggregate=namespace,label:app \
   -d accumulate=true \
   -d filterClusters=cluster-one \
   -G
 ```
+
 {% endtab %}
 
 {% tab title="Response" %}
-```
+
+```json
 {
   "code": 200,
   "data": [
@@ -402,6 +423,7 @@ $ curl http://localhost:9090/model/allocation \
   ]
 }
 ```
+
 {% endtab %}
 {% endtabs %}
 
@@ -409,16 +431,19 @@ Allocation data for today, aggregated by annotation. See [Enabling Annotation Em
 
 {% tabs %}
 {% tab title="Request" %}
-```
-$ curl http://localhost:9090/model/allocation \
+
+```bash
+curl http://localhost:9090/model/allocation \
   -d window=today \
   -d aggregate=annotation:my_annotation \
   -G
 ```
+
 {% endtab %}
 
 {% tab title="Response" %}
-```
+
+```json
 {
   "code": 200,
   "data": [
@@ -430,6 +455,7 @@ $ curl http://localhost:9090/model/allocation \
   ]
 }
 ```
+
 {% endtab %}
 {% endtabs %}
 
@@ -437,7 +463,7 @@ $ curl http://localhost:9090/model/allocation \
 
 `/summary` is an optional API endpoint which can be added to your Allocation query via `.../model/allocation/summary?window=...` to provide a condensed list of your cost metrics per line item. Instead of returning the full list of schema values listed above, your query will return something like:
 
-```
+```json
 "allocation-line-item": {
                         "name": "allocation-line-tem",
                         "start": "",
@@ -463,7 +489,7 @@ $ curl http://localhost:9090/model/allocation \
 
 `/topline` is an optional API endpoint which can be added to your `/summary` Allocation query via `.../model/allocation/summary/topline?window=...` to provide a condensed overview of your total cost metrics including all line items sampled. You will receive a single list which sums the values per all items queried, formatted similar to a regular `/summary` query, where `numResults` displays the total number of items sampled. Idle costs still need to be configured separately.
 
-```
+```json
 {
     "code": 200,
     "data": {
@@ -556,7 +582,8 @@ If `true`, sum the entire range of sets into a single set. Default value is `fal
 {% endswagger-parameter %}
 
 {% swagger-response status="200: OK" description="" %}
-```javascript
+
+```json
 {
                 "name": "cluster-one//integration/integration-unmounted-pvcs/__unmounted__",
                 "properties": {
@@ -615,6 +642,7 @@ If `true`, sum the entire range of sets into a single set. Default value is `fal
                 "rawAllocationOnly": null
 }
 ```
+
 {% endswagger-response %}
 {% endswagger %}
 
@@ -624,8 +652,9 @@ Allocation data for the last 60m, in steps of 10m, with resolution 1m, aggregate
 
 {% tabs %}
 {% tab title="Request" %}
-```
-$ curl http://localhost:9090/model/allocation/compute \
+
+```bash
+curl http://localhost:9090/model/allocation/compute \
   -d window=60m \
   -d step=10m \
   -d resolution=1m \
@@ -633,10 +662,12 @@ $ curl http://localhost:9090/model/allocation/compute \
   -d accumulate=false \
   -G
 ```
+
 {% endtab %}
 
 {% tab title="Response" %}
-```
+
+```json
 {
   "code": 200,
   "data": [
@@ -655,6 +686,7 @@ $ curl http://localhost:9090/model/allocation/compute \
   ]
 }
 ```
+
 {% endtab %}
 {% endtabs %}
 
@@ -662,8 +694,9 @@ Allocation data for the last 9d, in steps of 3d, with a 10m resolution, aggregat
 
 {% tabs %}
 {% tab title="Request" %}
-```
-$ curl http://localhost:9090/model/allocation/compute \
+
+```bash
+curl http://localhost:9090/model/allocation/compute \
   -d window=9d \
   -d step=3d \
   -d resolution=10m
@@ -671,10 +704,12 @@ $ curl http://localhost:9090/model/allocation/compute \
   -d accumulate=false \
   -G
 ```
+
 {% endtab %}
 
 {% tab title="Response" %}
-```
+
+```json
 {
   "code": 200,
   "data": [
@@ -696,6 +731,7 @@ $ curl http://localhost:9090/model/allocation/compute \
   ]
 }
 ```
+
 {% endtab %}
 {% endtabs %}
 

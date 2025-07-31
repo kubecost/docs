@@ -128,7 +128,7 @@ Below you can find solutions to common Prometheus configuration problems. View t
 
 Evidenced by the following pod error message `No valid prometheus config file at ...` and the init pods hanging. We recommend running `curl <your_prometheus_url>/api/v1/status/config` from a pod in the cluster to confirm that your [Prometheus config](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#configuration-file) is returned. Here is an example, but this needs to be updated based on your pod name and Prometheus address:
 
-```
+```bash
 kubectl exec -i -t --namespace kubecost \
   deployment/kubecost-cost-analyzer -c cost-model -- \
   curl http://<your_prometheus_url>/api/v1/status/config
@@ -146,7 +146,7 @@ Network policies, Mesh networks, or other security related tooling can block net
 
 When successful, this command should return all of the metrics that Kubecost uses. Failures may be indicative of the network traffic being blocked.
 
-```
+```bash
 kubectl exec -i -t --namespace kubecost \
   deployment/kubecost-cost-analyzer -c cost-model -- \
   curl "http://<your_prometheus_url>/metrics"
@@ -176,7 +176,7 @@ Ensure results are not null for both queries below.
 
 1. Make sure Prometheus is scraping Kubecost search metrics for: `node_total_hourly_cost`
 
-```
+```bash
 kubectl exec -i -t --namespace kubecost \
   deployment/kubecost-cost-analyzer -c cost-model -- \
   curl "http://localhost:9003/prometheusQuery?query=node_total_hourly_cost"
@@ -184,7 +184,7 @@ kubectl exec -i -t --namespace kubecost \
 
 2. Ensure kube-state-metrics are available: `kube_node_status_capacity`
 
-```
+```bash
 kubectl exec -i -t --namespace kubecost \
   deployment/kubecost-cost-analyzer -c cost-model -- \
   curl "http://localhost:9003/prometheusQuery?query=kube_node_status_capacity"
@@ -211,7 +211,7 @@ Ensure that all clusters and nodes have values- output should be similar to the 
 1. Make sure Prometheus is scraping Kubecost search metrics for: `node_total_hourly_cost`
 
 {% code overflow="wrap" %}
-```
+```bash
 kubectl exec -i -t --namespace kubecost \
   deployment/kubecost-cost-analyzer -c cost-model -- \
   curl -G http://localhost:9003/thanosQuery \
@@ -228,7 +228,7 @@ On macOS, change `date -d '1 day ago'` to `date -v '-1d'`
 2. Ensure kube-state-metrics are available: `kube_node_status_capacity`
 
 {% code overflow="wrap" %}
-```
+```bash
 kubectl exec -i -t --namespace kubecost \
   deployment/kubecost-cost-analyzer -c cost-model -- \
   curl -G http://localhost:9003/thanosQuery \

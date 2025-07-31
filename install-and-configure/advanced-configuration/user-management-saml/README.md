@@ -66,7 +66,7 @@ When SAML SSO is enabled in Kubecost, the following ports will require authentic
 
 {% code overflow="wrap" %}
 
-```sh
+```bash
 curl -L 'http://kubecost.mycompany.com/model/allocation?window=1d' \
   -H 'Cookie: token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsiYWRtaW4iLCJncm91cDprdWJlY29zdF9hZG1pbiIsImdyb3VwOmFkbWluQG15Y29tcGFueS5jb20iXSwiZXhwIjoxNjkwMzA2MjYwLjk0OTYyMX0.iLbUuMo0eYhNg0hzv_EEHLIX5Z0du4woPevX3wEnAh8'
 ```
@@ -77,14 +77,14 @@ For admins, Kubecost additionally exposes unauthenticated APIs:
 
 `service/kubecost-cost-analyzer`: port 9007
 
-```sh
+```bash
 kubectl port-forward service/kubecost-cost-analyzer 9007:9007
 curl -L 'localhost:9007/allocation?window=1d&aggregate=namespace'
 ```
 
 `service/kubecost-aggregator`: port 9008
 
-```sh
+```bash
 kubectl port-forward service/kubecost-aggregator 9008:9008
 curl -L 'localhost:9008/allocation?window=1d&aggregate=namespace'
 ```

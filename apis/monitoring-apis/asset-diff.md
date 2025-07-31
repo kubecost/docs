@@ -62,7 +62,8 @@ Comma-separated list of containers to match; e.g. `container-one,container-two` 
 {% endswagger-parameter %}
 
 {% swagger-response status="200: OK" description="" %}
-```javascript
+
+```json
 {
     ...
     "__undefined__/__undefined__/__undefined__/Storage/__undefined__/Disk/Kubernetes/gke-nick-dev-default-pool-d26dab9e-55qb/gke-nick-dev-default-pool-d26dab9e-55qb":
@@ -87,6 +88,7 @@ Comma-separated list of containers to match; e.g. `container-one,container-two` 
     ...
 }
 ```
+
 {% endswagger-response %}
 {% endswagger %}
 

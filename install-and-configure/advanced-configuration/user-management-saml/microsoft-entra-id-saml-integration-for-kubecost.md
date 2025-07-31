@@ -20,7 +20,7 @@ This guide will show you how to configure Kubecost integrations for SAML and RBA
 1. Return to the Enterprise applications page from Step 1.2. Find and select your Enterprise application from the table.
 2. Select _Properties_ in the left navigation under Manage to begin editing the application. Start by updating the logo, then select _Save_. Feel free to use an [official Kubecost logo](https://github.com/kubecost/poc-common-configurations/blob/main/saml-azuread/images/kubecost-logo.png).
 3. Select _Users and groups_ in the left navigation. Assign any users or groups you want to have access to Kubecost, then select _Assign._
-4. Select _Single sign-on_ from the left navigation. In the 'Basic SAML Configuration' box, select _Edit_. Populate both the Identifier and Reply URL with the URL of your Kubecost environment _without a trailing slash_ (ex: http://localhost:9090), then select _Save_. If your application is using OpenId Connect and OAuth, most of the SSO configuration will have already been completed.
+4. Select _Single sign-on_ from the left navigation. In the 'Basic SAML Configuration' box, select _Edit_. Populate both the Identifier and Reply URL with the URL of your Kubecost environment _without a trailing slash_ (ex: <http://localhost:9090>), then select _Save_. If your application is using OpenId Connect and OAuth, most of the SSO configuration will have already been completed.
 
 <figure><img src="/.gitbook/assets/okta-saml-1.png" alt=""><figcaption></figcaption></figure>
 
@@ -33,9 +33,11 @@ This guide will show you how to configure Kubecost integrations for SAML and RBA
 8. Create a secret using the cert with the following command:
 
 {% code overflow="wrap" %}
-```
+
+```bash
 kubectl create secret generic kubecost-azuread --from-file myservice.cert --namespace kubecost
 ```
+
 {% endcode %}
 
 9. With your existing Helm install command, append `-f values-saml.yaml` to the end.
@@ -51,7 +53,8 @@ The simplest form of RBAC in Kubecost is to have two groups: admin and read only
 The [values-saml.yaml](https://github.com/kubecost/poc-common-configurations/blob/main/saml-azuread/values-saml.yaml) file contains the `admin` and `readonly` groups in the RBAC section:
 
 {% code overflow="wrap" %}
-```
+
+```yaml
   rbac:
     enabled: true
     groups:
@@ -69,6 +72,7 @@ The [values-saml.yaml](https://github.com/kubecost/poc-common-configurations/blo
     customGroups: # not needed for simple admin/readonly RBAC
       - assertionName: "http://schemas.microsoft.com/ws/2008/06/identity/claims/groups"
 ```
+
 {% endcode %}
 
 Remember the value of `assertionName` needs to match the claim name given in Step 2.5 above.
@@ -87,15 +91,17 @@ You can combine filtering with admin/read only rights, and it can be configured 
 The _values-saml.yaml_ file contains this `customGroups` section for filtering:
 
 {% code overflow="wrap" %}
-```
+
+```yaml
     customGroups: # not needed for simple admin/readonly RBAC
       - assertionName: "http://schemas.microsoft.com/ws/2008/06/identity/claims/groups"
 ```
+
 {% endcode %}
 
 The array of groups obtained during the authentication request will be matched to the subject key in the _filters.yaml._ See this example _filters.json_ (linked above) to understand how your created groups will be formatted:
 
-```
+```json
 {
    "{group-object-id-a}":{
       "allocationFilters":[
@@ -138,18 +144,20 @@ As an example, we will configure the following:
    1. Replace `{group-object-id-a}` with the Object Id for `kubecost_admin`
    2. Replace `{group-object-id-b}` with the Object Id for `kubecost_users`
    3. Replace `{group-object-id-c}` with the Object Id for `kubecost_dev-namespaces`
-6.  Create the ConfigMap:
+6. Create the ConfigMap:
 
-    ```
+    ```bash
     kubectl create configmap group-filters --from-file filters.json -n kubecost
     ```
 
 You can modify the ConfigMap without restarting any pods.
 
 {% code overflow="wrap" %}
-```
+
+```bash
 kubectl delete configmap -n kubecost group-filters && kubectl create configmap -n kubecost group-filters --from-file filters.json
 ```
+
 {% endcode %}
 
 ## Troubleshooting
@@ -159,40 +167,47 @@ You can look at the logs on the aggregator and cost-model containers. This scrip
 If `kubecostAggregator.enabled` is `true` or unspecified in _values.yaml_:
 
 {% code overflow="wrap" %}
-```
+
+```bash
 kubectl logs deployment/kubecost-cost-analyzer -c cost-model --follow |grep -v -E 'resourceGroup|prometheus-server'|grep -i -E 'group|xmlname|saml|login|audience'
 ```
+
 {% endcode %}
 
 If `kubecostAggregator.enabled` is `false` in _values.yaml_:
 
 {% code overflow="wrap" %}
-```
+
+```bash
 kubectl logs services/kubecost-aggregator --follow |grep -v -E 'resourceGroup|prometheus-server'|grep -i -E 'group|xmlname|saml|login|audience'
 ```
+
 {% endcode %}
 
 When the group has been matched, you will see:
 
-```
+```console
 2022-08-27T05:32:03.657455982Z INF AUDIENCE: [readonly group:readonly@kubecost.com]
 2022-08-27T05:51:02.681813711Z INF AUDIENCE: [admin group:admin@kubecost.com]
 ```
 
 {% code overflow="wrap" %}
-```
+
+```console
 configwatchers.go:69] ERROR UPDATING group-filters CONFIG: []map[string]string: ReadMapCB: expect }, but found l, error found in #10 byte of ...|el": "{ "label": "ap|..., bigger context ...|nFilters": [
          {
             "label": "{ "label": "app", "value": "nginx" }"
          }
      |...
 ```
+
 {% endcode %}
 
 This is what a normal output looks like:
 
 {% code overflow="wrap" %}
-```
+
+```console
 2022-09-01T03:47:28.556977486Z INF   http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name: {XMLName:{Space:urn:oasis:names:tc:SAML:2.0:assertion Local:Attribute} FriendlyName: Name:http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name NameFormat: Values:[{XMLName:{Space:urn:oasis:names:tc:SAML:2.0:assertion Local:AttributeValue} Type: Value:admin@kubecost.com}]}
 2022-09-01T03:47:28.55700579Z INF   http://schemas.microsoft.com/identity/claims/tenantid: {XMLName:{Space:urn:oasis:names:tc:SAML:2.0:assertion Local:Attribute} FriendlyName: Name:http://schemas.microsoft.com/identity/claims/tenantid NameFormat: Values:[{XMLName:{Space:urn:oasis:names:tc:SAML:2.0:assertion Local:AttributeValue} Type: Value:<TENANT_ID_GUID>}}]}
 2022-09-01T03:47:28.557019809Z INF   http://schemas.microsoft.com/identity/claims/objectidentifier: {XMLName:{Space:urn:oasis:names:tc:SAML:2.0:assertion Local:Attribute} FriendlyName: Name:http://schemas.microsoft.com/identity/claims/objectidentifier NameFormat: Values:[{XMLName:{Space:urn:oasis:names:tc:SAML:2.0:assertion Local:AttributeValue} Type: Value:<OBJECT_ID_GUID>}]}
@@ -206,4 +221,5 @@ This is what a normal output looks like:
 ...
 2022-09-01T03:47:29.11007143Z INF AUDIENCE: [admin group:seanp@teamkubecost.onmicrosoft.com]
 ```
+
 {% endcode %}

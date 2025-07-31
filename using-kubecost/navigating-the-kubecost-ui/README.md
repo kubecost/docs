@@ -6,7 +6,7 @@ This grouping of docs explains how to navigate the Kubecost UI. The UI is compos
 
 To obtain access to the Kubecost UI following a successful installation, enable port-forwarding with the following command:
 
-```
+```bash
 kubectl port-forward --namespace kubecost deployment/kubecost-cost-analyzer 9090
 ```
 

@@ -39,7 +39,8 @@ Only should be used when updating a budget rule; ID of the budget rule being mod
 {% endswagger-parameter %}
 
 {% swagger-response status="200: OK" description="" %}
-```
+
+```json
 {
     "code": 200,
     "data": [
@@ -74,6 +75,7 @@ Only should be used when updating a budget rule; ID of the budget rule being mod
         }
 }
 ```
+
 {% endswagger-response %}
 {% endswagger %}
 
@@ -83,6 +85,7 @@ Lists all existing recurring budget rules
 {% endswagger-description %}
 
 {% swagger-response status="200: OK" description="" %}
+
 ```json
 {
     "code": 200,
@@ -117,6 +120,7 @@ Lists all existing recurring budget rules
         }
 }
 ```
+
 {% endswagger-response %}
 {% endswagger %}
 
@@ -130,12 +134,14 @@ ID of the recurring budget rule to be deleted
 {% endswagger-parameter %}
 
 {% swagger-response status="200: OK" description="" %}
-```javascript
+
+```json
 {
     "code": 200,
     "data": []
 }
 ```
+
 {% endswagger-response %}
 {% endswagger %}
 
@@ -157,7 +163,7 @@ You can configure greater visibility towards tracking your budgets using the `ac
 
 When providing values for `actions`, `percentage` refers to the percentage of `spendLimit` which will result in an alert. For example, if `"spendLimit": 2000` is configured for a weekly budget rule and `"percentage": 50` is configured, an alert will be sent to all listed emails/webhooks if spending surpasses $1000 USD for the week.
 
-```
+```json
 "actions" : [
             {
                 "percentage": 100,
@@ -190,7 +196,7 @@ kubecostProductConfigs:
 
 **Create a recurring budget rule for my test cluster which resets every Wednesday with a budget of $100.00 USD, and will send an alert via email when spending has exceeded 75% of the spend limit.**
 
-```
+```bash
 curl --location '<your-kubecost-address>/model/budget' \
 --header 'Content-Type: application/json' \
 --data-raw '{
@@ -216,7 +222,7 @@ curl --location '<your-kubecost-address>/model/budget' \
 
 **Create a recurring budget rule for my `kubecost` namespace which resets on the 1st of every month with a budget of $400.00 USD, and will send an alert via Slack and Microsoft Teams when spending has exceeded $100.00 of the spend limit.**
 
-```
+```bash
 curl --location '<your-kubecost-address>/model/budget' \
 --header 'Content-Type: application/json' \
 --data-raw '{

@@ -36,7 +36,7 @@ This guide assumes that the Kubecost Helm release name and the Kubecost namespac
 
 1. Clone this [poc-common-configurations](https://github.com/kubecost/poc-common-configurations) repository that contains all of the configuration files you will need to deploy Kubecost with AWS Agentless AMP.
 
-    ```sh
+    ```bash
     git clone https://github.com/kubecost/poc-common-configurations.git
     cd poc-common-configurations/aws/amp-agentless
     ```
@@ -45,7 +45,7 @@ This guide assumes that the Kubecost Helm release name and the Kubecost namespac
 
 3. Build the configuration variables:
 
-    ```sh
+    ```bash
     CLUSTER_NAME=YOUR_CLUSTER_NAME_HERE
     CLUSTER_REGION=us-east-2
     KUBECOST_NAMESPACE=kubecost
@@ -60,7 +60,7 @@ This guide assumes that the Kubecost Helm release name and the Kubecost namespac
 
 4. Create the Kubecost scraper:
 
-    ```sh
+    ```bash
     KUBECOST_SCRAPER_OUTPUT=$(aws amp create-scraper --output json \
         --alias kubecost-scraper \
         --source eksConfiguration="{clusterArn=$CLUSTER_ARN, securityGroupIds=[$SECURITY_GROUP_IDS],subnetIds=[$SUBNET_IDS]}" \
@@ -73,7 +73,7 @@ This guide assumes that the Kubecost Helm release name and the Kubecost namespac
 
 5. Get the ARN of the scraper:
 
-    ```sh
+    ```bash
     ARN_PART=$(aws amp describe-scraper --output json --region $CLUSTER_REGION --scraper-id $KUBECOST_SCRAPER_ID | jq -r .scraper.roleArn | cut -d'_' -f2)
     ROLE_ARN_KUBECOST_SCRAPER="arn:aws:iam::$AWS_ACCOUNT_ID:role/AWSServiceRoleForAmazonPrometheusScraper_$ARN_PART"
     echo $ROLE_ARN_KUBECOST_SCRAPER
@@ -81,7 +81,7 @@ This guide assumes that the Kubecost Helm release name and the Kubecost namespac
 
 6. Add the ARN of the scraper to the `kube-system/aws-auth` configMap:
 
-    ```sh
+    ```bash
     eksctl create iamidentitymapping \
         --cluster $CLUSTER_NAME --region $CLUSTER_REGION \
         --arn $ROLE_ARN_KUBECOST_SCRAPER \
@@ -90,7 +90,7 @@ This guide assumes that the Kubecost Helm release name and the Kubecost namespac
 
 7. Create a scraper for cAdvisor and node exporter. Node exporter is optional. cAdvisor is required, but may already be available.
 
-    ```sh
+    ```bash
     CADVSIOR_SCRAPER_OUTPUT=$(aws amp create-scraper --output json \
         --alias cadvisor-scraper \
         --source eksConfiguration="{clusterArn=$CLUSTER_ARN, securityGroupIds=[$SECURITY_GROUP_IDS],subnetIds=[$SUBNET_IDS]}" \
@@ -103,7 +103,7 @@ This guide assumes that the Kubecost Helm release name and the Kubecost namespac
 
 8. Get the ARN of the scraper:
 
-    ```sh
+    ```bash
     ARN_PART=$(aws amp describe-scraper --output json --region $CLUSTER_REGION --scraper-id $CADVSIOR_SCRAPER_ID | jq -r .scraper.roleArn | cut -d'_' -f2)
     ROLE_ARN_CADVSIOR_SCRAPER="arn:aws:iam::$AWS_ACCOUNT_ID:role/AWSServiceRoleForAmazonPrometheusScraper_$ARN_PART"
     echo $ROLE_ARN_CADVSIOR_SCRAPER
@@ -111,7 +111,7 @@ This guide assumes that the Kubecost Helm release name and the Kubecost namespac
 
 9. Add the ARN of the scraper to the kube-system/aws-auth configmap:
 
-    ```sh
+    ```bash
     eksctl create iamidentitymapping \
         --cluster $CLUSTER_NAME --region $CLUSTER_REGION \
         --arn $ROLE_ARN_CADVSIOR_SCRAPER \
@@ -120,7 +120,7 @@ This guide assumes that the Kubecost Helm release name and the Kubecost namespac
 
 10. Apply the agentless RBAC permissions:
 
-    ```sh
+    ```bash
     kubectl apply -f rbac.yaml
     ```
 
@@ -219,4 +219,3 @@ This assumes you have created the AWS IAM policies above. If using multiple AWS 
 It will take a few minutes for the scrapers start.
 
 For more help troubleshooting, see our [Amazon Managed Service for Prometheus (AMP) Overview](aws-amp-integration.md#troubleshooting) doc.
-

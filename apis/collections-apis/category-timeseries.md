@@ -8,13 +8,13 @@ Use the following request to query the time series costs of a category, which in
 
 ### Request
 
-```
+```http
 GET /model/collections/query/timeseries?category=<string>&window=<string>(&collections=<true>)
 ```
 
 ### Examples
 
-```
+```http
 GET /model/collections/query/timeseries?category=Team&window=30d
 ```
 
@@ -105,7 +105,7 @@ GET /model/collections/query/timeseries?category=Team&window=30d
 
 ```
 
-```
+```http
 GET /model/collections/query/timeseries?category=Team&window=30d&collections=true
 ```
 

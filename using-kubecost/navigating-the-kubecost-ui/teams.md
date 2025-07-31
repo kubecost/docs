@@ -6,14 +6,11 @@ Teams is a Kubecost Enterprise only feature.
 
 Teams enables Role-Based Access Control (RBAC) in Kubecost's UI, allowing you to define a granular set of permissions for your users. These permissions include enabling or disabling pages within Kubecost as well as scoping those pages down to even finer levels with filters.
 
-
 ## Prerequisites
 
 Before using the Teams page, make sure you have configured [SAML](/install-and-configure/advanced-configuration/user-management-saml/README.md) or [OIDC](/install-and-configure/advanced-configuration/user-management-oidc/user-management-oidc.md) with a provider of your choice. Teams cannot work independent of one of these two IAM protocols.
 
-
 In order to use teams, you must have the Kubecost PersistentVolume enabled in your Helm values. This is enabled by default and no action is needed unless you have previously disabled it. PersistentVolume is enabled via:
-
 
 ```yaml
 persistentVolume:
@@ -23,7 +20,6 @@ persistentVolume:
 If this is your first time using Teams, consult the [Getting started](teams.md#getting-started) section below. For additional team creation, see the [Adding a team](teams.md#adding-a-team) section.
 
 If you previously had teams enabled and are upgrading from a version of Kubecost prior to 2.6, see the [Upgrading](teams.md#upgrading-and-legacy-teams) section below.
-
 
 ## Getting started
 
@@ -47,7 +43,6 @@ The first person to log in will be added to a default team with admin-level acce
 {% hint style="warning" %}
 Configuring teams through Helm will disable configuration of teams through the UI.
 {% endhint %}
-
 
 Kubecost allows teams to be defined in Helm values obviating the need to create them in the UI. Note that Teams must still be enabled using Helm regardless of if configuration is done in the UI or via Helm by enabling RBAC within your desired protocol config, as [above](teams.md#enable-teams-and-define-in-ui).
 
@@ -91,8 +86,6 @@ An example values snippet is shown below for the creation of a team in Helm.
        claims:
          NameID: email@domain.com
 ```
-
-
 
 Configure at least one team under `teamsConfig` with an associated role under the team's `roles`.
 
@@ -232,7 +225,7 @@ Asset, Allocation, and Cloud Cost filters are ANDed together within a role, and 
 
 For example, if a user is assigned both roles `Role 1` and `Role 2` with the following Allocation filters:
 
-```
+```text
 Role 1:
 cluster IS cluster-1, cluster-2
 namespace IS kubecost
@@ -256,7 +249,7 @@ Combined page view permissions will enable any page marked as such in any one of
 
 ### Legacy Teams
 
-Prior to Kubecost 2.6, Teams existed with more limited functionality. This is referred to as [legacy Teams](legacy-teams.md). 
+Prior to Kubecost 2.6, Teams existed with more limited functionality. This is referred to as [legacy Teams](legacy-teams.md).
 
 Legacy teams provided a limited set of access control capabilities.
 
@@ -289,13 +282,13 @@ The Kubecost aggregator container handles all operations relating to Teams. View
 
 If a state where invalid or incorrect teams are causing access issues in Kubecost, teams config can be deleted by running the below commands.
 
-```sh
+```bash
 kubectl exec $POD -- sh -c 'rm -rf /var/configs/rbac_teams.json'
 ```
 
 and
 
-```sh
+```bash
 kubectl exec $POD -- sh -c 'rm -rf /var/configs/roles.json'
 ```
 

@@ -26,7 +26,7 @@ If your Big Query dataset is in a different project than the one where Kubecost 
 
 Add a service account key to allocate OOC resources (e.g. storage buckets and managed databases) back to their Kubernetes owners. The service account needs the following:
 
-```
+```text
 roles/bigquery.user
 roles/compute.viewer
 roles/bigquery.dataViewer
@@ -36,7 +36,8 @@ roles/bigquery.jobUser
 If you don't already have a GCP service account with the appropriate rights, you can run the following commands in your command line to generate and export one. Make sure your GCP project is where your external costs are being run.
 
 {% code overflow="wrap" %}
-```
+
+```bash
 export PROJECT_ID=$(gcloud config get-value project)
 gcloud iam service-accounts create compute-viewer-kubecost --display-name "Compute Read Only Account Created For Kubecost" --format json
 gcloud projects add-iam-policy-binding $PROJECT_ID --member serviceAccount:compute-viewer-kubecost@$PROJECT_ID.iam.gserviceaccount.com --role roles/compute.viewer
@@ -44,6 +45,7 @@ gcloud projects add-iam-policy-binding $PROJECT_ID --member serviceAccount:compu
 gcloud projects add-iam-policy-binding $PROJECT_ID --member serviceAccount:compute-viewer-kubecost@$PROJECT_ID.iam.gserviceaccount.com --role roles/bigquery.dataViewer
 gcloud projects add-iam-policy-binding $PROJECT_ID --member serviceAccount:compute-viewer-kubecost@$PROJECT_ID.iam.gserviceaccount.com --role roles/bigquery.jobUser
 ```
+
 {% endcode %}
 
 ## Step 3: Connecting GCP service account to Kubecost
@@ -58,9 +60,11 @@ You can set up an [IAM policy binding](https://cloud.google.com/kubernetes-engin
 * `KSA_NAME` is the name of the service account attributed to the Kubecost deployment
 
 {% code overflow="wrap" %}
-```
+
+```bash
 gcloud iam service-accounts add-iam-policy-binding compute-viewer-kubecost@$PROJECT_ID.iam.gserviceaccount.com --role roles/iam.workloadIdentityUser --member "serviceAccount:$PROJECT_ID.svc.id.goog[NAMESPACE/KSA_NAME]"
 ```
+
 {% endcode %}
 
 You will also need to enable the [IAM Service Account Credentials API](https://cloud.google.com/iam/docs/reference/credentials/rest) in the GCP project.
@@ -70,9 +74,11 @@ You will also need to enable the [IAM Service Account Credentials API](https://c
 Create a service account key:
 
 {% code overflow="wrap" %}
+
+```bash
+gcloud iam service-accounts keys create ./compute-viewer-kubecost-key.json --iam-account compute-viewer-kubecost@PROJECT_ID.iam.gserviceaccount.com
 ```
-gcloud iam service-accounts keys create ./compute-viewer-kubecost-key.json --iam-account compute-viewer-kubecost@$PROJECT_ID.iam.gserviceaccount.com
-```
+
 {% endcode %}
 
 Once the GCP service account has been connected, set up the remaining configuration parameters.
@@ -115,6 +121,7 @@ When choosing to pre-create the Secret instead and reference it in the values fi
 If you've connected using Workload Identity Federation, add these configs:
 
 {% code overflow="wrap" %}
+
 ```yaml
 # Ensure Kubecost deployment runs on nodes that use Workload Identity
 nodeSelector:
@@ -124,14 +131,17 @@ serviceAccount:
   annotations:
     iam.gke.io/gcp-service-account: "compute-viewer-kubecost@$PROJECT_ID.iam.gserviceaccount.com"
 ```
+
 {% endcode %}
 
 Otherwise, if you've connected using a service account key, create a secret for the GCP service account key you've created and add the following configs:
 
 {% code overflow="wrap" %}
-```sh
+
+```bash
 kubectl create secret generic gcp-secret -n kubecost --from-file=./compute-viewer-kubecost-key.json
 ```
+
 {% endcode %}
 
 ```yaml
@@ -167,7 +177,7 @@ Modifications incurred on project-level labels may take several hours to update 
 
 Due to organizational constraints, it is common that Kubecost must be run in a separate project from the project containing the billing data Big Query dataset, which is needed for Cloud Integration. Configuring Kubecost in this scenario is still possible, but some of the values in the above script will need to be changed. First, you will need the project id of the projects where Kubecost is installed, and the Big Query dataset is located. Additionally, you will need a GCP user with the permissions `iam.serviceAccounts.setIamPolicy` for the Kubecost project and the ability to manage the roles listed above for the Big Query Project. With these, fill in the following script to set the relevant variables:
 
-```
+```bash
 export KUBECOST_PROJECT_ID=<Project ID where kubecost is installed>
 export BIG_QUERY_PROJECT_ID=<Project ID where bigquery data is stored>
 export SERVICE_ACCOUNT_NAME=<Unique name for your service account>
@@ -176,7 +186,8 @@ export SERVICE_ACCOUNT_NAME=<Unique name for your service account>
 Once these values have been set, this script can be run and will create the service account needed for this configuration.
 
 {% code overflow="wrap" %}
-```
+
+```bash
 gcloud config set project $KUBECOST_PROJECT_ID
 gcloud iam service-accounts create $SERVICE_ACCOUNT_NAME --display-name "Cross Project CUR" --format json
 gcloud projects add-iam-policy-binding $BIG_QUERY_PROJECT_ID --member serviceAccount:$SERVICE_ACCOUNT_NAME@$KUBECOST_PROJECT_ID.iam.gserviceaccount.com --role roles/compute.viewer
@@ -184,6 +195,7 @@ gcloud projects add-iam-policy-binding $BIG_QUERY_PROJECT_ID --member serviceAcc
 gcloud projects add-iam-policy-binding $BIG_QUERY_PROJECT_ID --member serviceAccount:$SERVICE_ACCOUNT_NAME@$KUBECOST_PROJECT_ID.iam.gserviceaccount.com --role roles/bigquery.dataViewer
 gcloud projects add-iam-policy-binding $BIG_QUERY_PROJECT_ID --member serviceAccount:$SERVICE_ACCOUNT_NAME@$KUBECOST_PROJECT_ID.iam.gserviceaccount.com --role roles/bigquery.jobUser
 ```
+
 {% endcode %}
 
 Now that your service account is created follow the normal configuration instructions.

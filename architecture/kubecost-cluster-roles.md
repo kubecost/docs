@@ -8,7 +8,7 @@ Kubecost requires `get`, `list`, and `watch` permissions over many common Kubern
 
 The source of these rules can be found in Kubecost's ClusterRole template:
 
-```
+```yaml
 {{- if not .Values.kubecostModel.etlReadOnlyMode -}}
 {{- if and .Values.reporting .Values.reporting.logCollection -}}
 apiVersion: rbac.authorization.k8s.io/v1

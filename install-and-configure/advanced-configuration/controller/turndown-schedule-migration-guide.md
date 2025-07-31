@@ -12,13 +12,13 @@ In this situation, you've deployed Kubecost's Cluster Controller at some point u
 
 That means that this command should return one line:
 
-```
+```bash
 kubectl get crd turndownschedules.kubecost.k8s.io
 ```
 
 And this command should return no resources:
 
-```
+```bash
 kubectl get turndownschedules.kubecost.k8s.io
 ```
 
@@ -32,46 +32,48 @@ In this situation, you've deployed Kubecost's Cluster Controller at some point u
 
 That means that this command should return one line:
 
-```
+```bash
 kubectl get crd turndownschedules.kubecost.k8s.io
 ```
 
 And this command should return at least one resource:
 
-```
+```bash
 kubectl get turndownschedules.kubecost.k8s.io
 ```
 
 We have a few steps to perform if you want Cluster Controller's turndown functionality to continue to behave according to your already-defined turndown schedules.
 
 1. Upgrade Kubecost to v1.94 or higher with `--set clusterController.enabled=true`
-2.  Make sure the new CRD has been defined after your Kubecost upgrade
+2. Make sure the new CRD has been defined after your Kubecost upgrade
 
     This command should return a line:
 
-    ```
+    ```bash
     kubectl get crd turndownschedules.kubecost.com
     ```
-3.  Copy your existing `turndownschedules.kubecost.k8s.io` resources into the new CRD
 
-    ```
+3. Copy your existing `turndownschedules.kubecost.k8s.io` resources into the new CRD
+
+    ```bash
     kubectl get turndownschedules.kubecost.k8s.io -o yaml \
-        | sed 's|kubecost.k8s.io|kubecost.com|' \
-        | kubectl apply -f -
+      | sed 's|kubecost.k8s.io|kubecost.com|' \
+      | kubectl apply -f -
     ```
-4.  (optional) Delete the old `turndownschedules.kubecost.k8s.io` CRD
+
+4. (optional) Delete the old `turndownschedules.kubecost.k8s.io` CRD
 
     Because the CRDs have a finalizer on them, we have to follow [this workaround](https://github.com/kubernetes/kubernetes/issues/60538#issuecomment-369099998) to remove the finalizer from our old resources. This lets us clean up without locking up.
 
-    ```
+    ```bash
     kubectl patch \
-        crd/turndownschedules.kubecost.k8s.io \
-        -p '{"metadata":{"finalizers":[]}}' \
-        --type=merge
+      crd/turndownschedules.kubecost.k8s.io \
+      -p '{"metadata":{"finalizers":[]}}' \
+      --type=merge
     ```
 
     > **Note**: The following command may be unnecessary because Helm should automatically remove the `turndownschedules.kubecost.k8s.io` resource during the upgrade. The removal will remain in a pending state until the finalizer patch above is implemented.
 
-    ```
+    ```bash
     kubectl delete crd turndownschedules.kubecost.k8s.io
     ```

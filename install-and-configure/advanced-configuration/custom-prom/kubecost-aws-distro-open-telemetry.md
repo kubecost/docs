@@ -46,7 +46,6 @@ kubectl apply -f example-configs/prometheus-daemonset.yaml -n adot-col
 
 Alternatively, you can add these items to your [existing ConfigMap](https://github.com/kubecost/poc-common-configurations/blob/main/aws/amp-with-adot/example-configs/kubecost-adot-scrape-config.yaml).
 
-
 {% hint style="info" %}
 For the Kubecost `scrape_configs` job, `honor_labels: true` must be set. Without this, you will likely only see the `kube-system` or `kubecost` namespace in the UI.
 {% endhint %}

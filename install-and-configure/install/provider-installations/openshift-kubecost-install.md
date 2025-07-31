@@ -33,23 +33,23 @@ The standard deployment is illustrated in the following diagram.
 
 Add the Kubecost Helm chart repository and scan for new charts.
 
-```sh
+```bash
 helm repo add kubecost https://kubecost.github.io/cost-analyzer/
 helm repo update
 ```
 
 Install Kubecost using OpenShift specific values. Note that the below command fetches the OpenShift values from the development branch which may not reflect the state of the release which was just installed. We recommend using the corresponding values file from the chart release.
 
-```sh
+```bash
 helm upgrade --install kubecost kubecost/cost-analyzer -n kubecost --create-namespace \
--f https://raw.githubusercontent.com/kubecost/cost-analyzer-helm-chart/v2.5/cost-analyzer/values-openshift.yaml
+  -f https://raw.githubusercontent.com/kubecost/cost-analyzer-helm-chart/v2.5/cost-analyzer/values-openshift.yaml
 ```
 
 Because OpenShift disallows defining certain fields in a pod's `securityContext` configuration, values specific to OpenShift must be used. The necessary values have already been defined in the OpenShift values file but may be customized to your specific needs.
 
 If you want to install Kubecost with your desired cluster name, provide the following values to either your values override file or via the `--set` command. Remember to replace the cluster name/id with the value you wish to use for this installation.
 
-```sh
+```bash
 --set kubecostProductConfigs.clusterName=my-ocp-cluster
 --set prometheus.server.global.external_labels.cluster_id=my-ocp-cluster
 ```
@@ -62,7 +62,7 @@ After installation, wait for all pods to be ready. Kubecost will begin collectin
 
 ### Using in-cluster Prometheus
 
-{% hint style="warning" %} 
+{% hint style="warning" %}
 This installation method is available, but not generally recommended. Please review the following documentation before proceeding. [Documentation](/install-and-configure/advanced-configuration/custom-prom).
 {% endhint %}
 
@@ -70,19 +70,18 @@ If required Kubecost can leverage an existing Prometheus that exists on your clu
 
 1. First, add the following label to the namespace where Kubecost will be deployed:
 
-```sh
+```bash
 oc label namespace kubecost openshift.io/cluster-monitoring=true
 ```
 
 2. Install Kubecost with the following command:
 
-```sh
+```bash
 helm upgrade --install kubecost kubecost/cost-analyzer -n kubecost --create-namespace \
--f https://raw.githubusercontent.com/kubecost/cost-analyzer-helm-chart/v2.5/cost-analyzer/values-openshift-cluster-prometheus.yaml
+  -f https://raw.githubusercontent.com/kubecost/cost-analyzer-helm-chart/v2.5/cost-analyzer/values-openshift-cluster-prometheus.yaml
 ```
 
 After installation, wait for all pods to be ready. Kubecost will begin collecting data and may take up to 15 minutes for the UI to reflect the resources in the local cluster.
-
 
 ## Community operator deployment guide
 
@@ -111,7 +110,7 @@ Once the operator has been installed, create a namespace in which to deploy a Ku
 
 ![Installation step 1b](/images/ocp-operator-installation-step-1b.png)
 
-```sh
+```bash
 oc create ns kubecost
 ```
 

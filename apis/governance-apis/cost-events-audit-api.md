@@ -40,7 +40,8 @@ Floating-point value representing the upper bound for the total event cost.
 {% endswagger-parameter %}
 
 {% swagger-response status="200: OK" description="" %}
-```javascript
+
+```json
 {
     "code": 200,
     "data": [
@@ -73,6 +74,7 @@ Floating-point value representing the upper bound for the total event cost.
     ]
 }
 ```
+
 {% endswagger-response %}
 {% endswagger %}
 
@@ -80,7 +82,7 @@ Floating-point value representing the upper bound for the total event cost.
 
 This API is disabled by default. It needs to be manually enabled first through Helm, using the following parameters:
 
-```
+```bash
 .Values.costEventsAudit.enabled = true
 ```
 
