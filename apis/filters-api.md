@@ -123,7 +123,7 @@ The format is essentially: `<filter field> <filter op> <filter value>`
 ```bash
 curl -G 'localhost:9090/model/assets' \
   -d 'window=3d' \
-  -data-urlencode 'filter=assetType:"disk"'
+  --data-urlencode 'filter=assetType:"disk"'
 ```
 
 ## Formal grammar and implementation
