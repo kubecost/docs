@@ -46,7 +46,7 @@ Kubernetes annotations can also be used for cost allocation purposes, but this r
 
 To find what pods are not part of the relevant label set, you can either apply an `__unallocated__` label filter in this allocation view or explore variations of the following kubectl commands:
 
-```
+```bash
 kubectl get pods -l 'app notin (prometheus, cost-analyzer, ...)' --all-namespaces
 kubectl get pods --show-labels -n <TARGET_NAMESPACE>
 ```

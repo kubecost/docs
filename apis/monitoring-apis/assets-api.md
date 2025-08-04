@@ -40,7 +40,8 @@ Filter your results by any category which you can aggregate by, can support mult
 
 {% swagger-response status="200: OK" description="" %}
 {% code overflow="wrap" %}
-```javascript
+
+```json
   {
     cluster: "..."  // parent cluster for asset
     cpuCores: 1  // number of CPUs, given this is a node asset type
@@ -61,6 +62,7 @@ Filter your results by any category which you can aggregate by, can support mult
     type: "node" // e.g. node, disk, cluster management fee, etc
 }
 ```
+
 {% endcode %}
 {% endswagger-response %}
 {% endswagger %}
@@ -71,13 +73,16 @@ Retrieve assets cost data for the past week, aggregated by type, and as cumulati
 
 {% tabs %}
 {% tab title="Request" %}
-```
+
+```http
 http://localhost:9090/model/assets?window=1w&aggregate=type&accumulate=true
 ```
+
 {% endtab %}
 
 {% tab title="Response" %}
 {% code overflow="wrap" %}
+
 ```json
 {
     "code": 200,
@@ -275,6 +280,7 @@ http://localhost:9090/model/assets?window=1w&aggregate=type&accumulate=true
     ]
 }
 ```
+
 {% endcode %}
 {% endtab %}
 {% endtabs %}
@@ -283,14 +289,18 @@ Retrieve all GCP costs, aggregated by asset type, in the past five days:
 
 {% tabs %}
 {% tab title="Request" %}
-```
+
+```http
 http://localhost:9090/model/assets?window=5d&aggregate=type&filterProviders=GCP
 ```
+
 {% endtab %}
 
 {% tab title="Response" %}
 {% code overflow="wrap" %}
-````json
+
+````
+```json
 {
     "code": 200,
     "data": [
@@ -488,6 +498,7 @@ http://localhost:9090/model/assets?window=5d&aggregate=type&filterProviders=GCP
         },
 ```              
 ````
+
 {% endcode %}
 {% endtab %}
 {% endtabs %}

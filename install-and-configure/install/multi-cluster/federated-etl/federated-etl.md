@@ -39,7 +39,7 @@ The Storages referred to here are an S3 (or GCP/Azure equivalent) storage bucket
 This diagram shows an example setup of the Federated ETL with:
 
 * One primary cluster that is also federated. Aggregator is running on this cluster, and is what allows the user to query all multi-cluster Kubecost data.
-* Three secondary federated clusters 
+* Three secondary federated clusters
 
 The result is four clusters federated together. All clusters push their local cost data to the Federated Storage, but only the primary cluster via Aggregator interacts with the total Federated data for querying. This includes querying via API or through the Kubecost UI.
 
@@ -69,9 +69,9 @@ For all monitored clusters (federated or primary), create a file *federated-stor
 * [Azure](/install-and-configure/install/multi-cluster/long-term-storage-configuration/long-term-storage-azure.md)
 * [GCP](/install-and-configure/install/multi-cluster/long-term-storage-configuration/long-term-storage-gcp.md)
 
-The file _must_ be named named *federated-store.yaml*. then set the following configs:
+The file *must* be named named *federated-store.yaml*. then set the following configs:
 
-```sh
+```bash
 kubectl create secret generic federated-store -n kubecost --from-file=federated-store.yaml
 ```
 
@@ -115,7 +115,7 @@ After some time, you should see multi-cluster data in your bucket and in your Ku
 
 If you are using an internal certificate authority (CA), follow this tutorial instead of the above Setup section.
 
-Begin by creating a ConfigMap with the certificate provided by the CA on every agent and name the file _kubecost-federator-certs.yaml_.
+Begin by creating a ConfigMap with the certificate provided by the CA on every agent and name the file *kubecost-federator-certs.yaml*.
 
 ```yaml
 apiVersion: v1
@@ -144,7 +144,7 @@ Now run the following command, making sure you specify the location for the Conf
 
 `kubectl create cm kubecost-federator-certs --from-file=/path/to/kubecost-federator-certs.yaml`
 
-Mount the certification on the any federated clusters by passing these Helm flags to your _values.yaml_/manifest:
+Mount the certification on the any federated clusters by passing these Helm flags to your *values.yaml*/manifest:
 
 ```yaml
 extraVolumes:
@@ -157,7 +157,7 @@ extraVolumeMounts:
     subPath: ca-certificates.crt
 ```
 
-Create a file _federated-store.yaml_, which will go on all clusters:
+Create a file *federated-store.yaml*, which will go on all clusters:
 
 ```yaml
 type: S3
@@ -187,7 +187,7 @@ config:
 
 Now run the following command (omit `kubectl create namespace kubecost` if your `kubecost` namespace already exists, or this command will fail):
 
-```sh
+```bash
 kubectl create namespace kubecost
 kubectl create secret generic \
   kubecost-object-store -n kubecost \

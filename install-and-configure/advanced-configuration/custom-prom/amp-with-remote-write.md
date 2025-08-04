@@ -51,10 +51,12 @@ The Amazon Managed Service for Prometheus workspace should be created in a few s
 3. Run the following command to get the workspace ID:
 
 {% code overflow="wrap" %}
+
 ```bash
 export AMP_WORKSPACE_ID=$(aws amp list-workspaces --region ${AWS_REGION} --output json --query 'workspaces[?alias==`kubecost-amp`].workspaceId | [0]' | cut -d'"' -f 2)
 echo $AMP_WORKSPACE_ID
 ```
+
 {% endcode %}
 
 ## Setting up the environment
@@ -62,6 +64,7 @@ echo $AMP_WORKSPACE_ID
 1. Run the following command to set environment variables for integrating Kubecost with Amazon Managed Service for Prometheus:
 
 {% code overflow="wrap" %}
+
 ```bash
 export RELEASE="kubecost"
 export YOUR_CLUSTER_NAME=<YOUR_EKS_CLUSTER_NAME>
@@ -71,11 +74,13 @@ export AWS_ACCOUNT_ID=$(aws sts get-caller-identity --query Account --output tex
 export REMOTEWRITEURL="https://aps-workspaces.${AWS_REGION}.amazonaws.com/workspaces/${AMP_WORKSPACE_ID}/api/v1/remote_write"
 export QUERYURL="http://localhost:8005/workspaces/${AMP_WORKSPACE_ID}"
 ```
+
 {% endcode %}
 
 2. Set up IRSA to allow Kubecost and Prometheus to read & write metrics from Amazon Managed Service for Prometheus by running the following commands:
 
 {% code overflow="wrap" %}
+
 ```bash
 eksctl create iamserviceaccount \
     --name kubecost-cost-analyzer-amp \
@@ -86,6 +91,7 @@ eksctl create iamserviceaccount \
     --override-existing-serviceaccounts \
     --approve
 ```
+
 {% endcode %}
 
 ```bash
@@ -111,6 +117,7 @@ For more information, you can check AWS documentation at [IAM roles for service 
 ### Helm values
 
 {% code overflow="wrap" %}
+
 ```yaml
 # values.yaml
 global:
@@ -141,6 +148,7 @@ serviceAccount:
 federatedETL:
   useMultiClusterDB: true
 ```
+
 {% endcode %}
 
 ### Deploying Kubecost

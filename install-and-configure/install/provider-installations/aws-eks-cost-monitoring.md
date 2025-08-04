@@ -45,7 +45,7 @@ You need to replace `$YOUR_CLUSTER_NAME` and `$AWS_REGION` accordingly with your
 {% tabs %}
 {% tab title="Command" %}
 {% code overflow="wrap" %}
-```
+```bash
 aws eks create-addon --addon-name kubecost_kubecost --cluster-name $YOUR_CLUSTER_NAME --region $AWS_REGION
 ```
 {% endcode %}
@@ -53,7 +53,7 @@ aws eks create-addon --addon-name kubecost_kubecost --cluster-name $YOUR_CLUSTER
 
 {% tab title="Example output" %}
 {% code overflow="wrap" %}
-```
+```json
 {
     "addon": {
         "addonName": "kubecost_kubecost",
@@ -79,7 +79,7 @@ To monitor the installation status, you can run the following command:
 {% tabs %}
 {% tab title="Command" %}
 {% code overflow="wrap" %}
-```
+```bash
 aws eks describe-addon --addon-name kubecost_kubecost --cluster-name $YOUR_CLUSTER_NAME --region $AWS_REGION
 ```
 {% endcode %}
@@ -87,7 +87,7 @@ aws eks describe-addon --addon-name kubecost_kubecost --cluster-name $YOUR_CLUST
 
 {% tab title="Example output" %}
 {% code overflow="wrap" %}
-```
+```json
 {
     "addon": {
         "addonName": "kubecost_kubecost",
@@ -159,7 +159,7 @@ export SERVICE_ACCOUNT_ROLE_ARN=$(aws iam get-role --role-name AmazonEKS_EBS_CSI
 
 2. Install the Amazon EBS CSI add-on for EKS using the AmazonEKS\_EBS\_CSI\_DriverRole by issuing the following command:
 
-```
+```bash
 eksctl create addon --name aws-ebs-csi-driver --cluster $CLUSTER_NAME \
     --service-account-role-arn $SERVICE_ACCOUNT_ROLE_ARN --force
 ```

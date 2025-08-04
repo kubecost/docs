@@ -16,7 +16,7 @@ Before you can begin using the Clusters page, you will need to perform [cloud bi
 
 You should also confirm that the `kubecostAggregator.cloudCost.readinessProbe.enabled` flag is set to `true`. This flag will be enabled by default:
 
-```
+```yaml
 kubecostAggregator:
  cloudCost:
     # The cloudCost component of Aggregator depends on

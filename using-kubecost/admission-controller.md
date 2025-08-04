@@ -17,16 +17,18 @@ Before installing the Admission Controller, make sure you have [`kubectl`](https
 ### Installation
 
 1. This command sets up the TLS key and certificate for the Admission Controller.
-```
-$ git clone https://github.com/kubecost/cost-analyzer-helm-chart.git
-$ cd cost-analyzer-helm-chart/cost-analyzer
-$ kubectl create namespace kubecost
-$ ./scripts/create-admission-controller-tls.sh kubecost
+
+```bash
+git clone https://github.com/kubecost/cost-analyzer-helm-chart.git
+cd cost-analyzer-helm-chart/cost-analyzer
+kubectl create namespace kubecost
+./scripts/create-admission-controller-tls.sh kubecost
 ```
 
 2. This command will update your existing Kubecost application by enabling the Admission Controller.
-```
-$ helm upgrade --install kubecost \
+
+```bash
+helm upgrade --install kubecost \
   --repo https://kubecost.github.io/cost-analyzer/ cost-analyzer \
   --namespace kubecost \
   --set kubecostAdmissionController.enabled=true \

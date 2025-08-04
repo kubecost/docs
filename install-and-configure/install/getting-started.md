@@ -13,7 +13,7 @@ Prometheus is not optional. Disabling Prometheus will result in zero costs in Ku
 To determine the appropriate disk size, you can use this formula to approximate:
 
 {% code overflow="wrap" %}
-```
+```text
 needed_disk_space = retention_time_minutes * ingested_samples_per_minutes * bytes_per_sample
 ```
 {% endcode %}

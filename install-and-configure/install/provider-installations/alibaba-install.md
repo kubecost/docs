@@ -8,7 +8,7 @@ Installing Kubecost on an Alibaba cluster is the same as other cloud providers w
 
 Your _values.yaml_ files must contain the below parameters:
 
-```
+```yaml
 prometheus:
   server:
     global:
@@ -23,14 +23,14 @@ kubecostProductConfigs:
 The `alibaba-service-key` can be created using the following command:
 
 {% code overflow="wrap" %}
-```
+```bash
 kubectl create secret generic alibaba-service-key -n kubecost –from-file=your_path/service-key.json
 ```
 {% endcode %}
 
 Your path needs a file having Alibaba Cloud secrets. Alibaba secrets can be passed in a JSON file with the file in the format:
 
-```
+```json
 {
      "alibaba_access_key_id": "XXX",
      "alibaba_secret_access_key": "XXX"
@@ -54,7 +54,7 @@ While getting all the available Storage Classes that the Alibaba K8s cluster com
 To fix this issue, make any of the Storage Classes in the Alibaba K8s cluster as Default using the below command:
 
 {% code overflow="wrap" %}
-```
+```bash
  kubectl patch storageclass alicloud-disk-available -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}' 
 ```
 {% endcode %}

@@ -124,7 +124,7 @@ The primary source of network metrics is a DaemonSet Pod hosted on each of the n
 
 These classifications are important because they correlate with network costing models for most cloud providers. To see more detail on these metric classifications, you can view pod logs with the following command:
 
-```
+```bash
 kubectl logs kubecost-network-costs-<pod-identifier> -n kubecost
 ```
 

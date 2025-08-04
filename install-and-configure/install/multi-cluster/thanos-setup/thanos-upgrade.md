@@ -18,7 +18,7 @@ For the Thanos Secret you're using, the `encrypt-sse` line needs to be removed. 
 
 For example, view this sample config:
 
-```
+```yaml
 type: S3
 config:
   bucket: ${bucket_name}

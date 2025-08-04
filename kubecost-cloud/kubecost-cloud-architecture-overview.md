@@ -25,14 +25,14 @@ The network costs DaemonSet will be installed to your Kubecost Cloud by default,
 Remember to provide your correct agent key and cluster ID in the below example code block.
 {% endhint %}
 
-```sh
+```bash
 helm upgrade --install kubecost-cloud \
---repo https://kubecost.github.io/kubecost-cloud-agent/ kubecost-cloud-agent \
---namespace kubecost-cloud --create-namespace \
--f https://raw.githubusercontent.com/kubecost/kubecost-cloud-agent/main/values-cloud-agent.yaml \
---set imageVersion="lunar-sandwich.v0.1.2" \
---set cloudAgentKey="AGENTKEY" \
---set cloudAgentClusterId="cluster-1" \
---set cloudReportingServer="collector.app.kubecost.com:31357" \
---set networkCosts.enabled=false
+  --repo https://kubecost.github.io/kubecost-cloud-agent/ kubecost-cloud-agent \
+  --namespace kubecost-cloud --create-namespace \
+  -f https://raw.githubusercontent.com/kubecost/kubecost-cloud-agent/main/values-cloud-agent.yaml \
+  --set imageVersion="lunar-sandwich.v0.1.2" \
+  --set cloudAgentKey="AGENTKEY" \
+  --set cloudAgentClusterId="cluster-1" \
+  --set cloudReportingServer="collector.app.kubecost.com:31357" \
+  --set networkCosts.enabled=false
 ```

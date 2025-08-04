@@ -14,6 +14,7 @@ The threshold of total traffic (bytes in/out per second) at which a workload is 
 {% endswagger-parameter %}
 
 {% swagger-response status="200: OK" description="" %}
+
 ```json
 {
         "pod": "...",
@@ -44,5 +45,6 @@ The threshold of total traffic (bytes in/out per second) at which a workload is 
         "monthlySavings": 0.00
     },
 ```
+
 {% endswagger-response %}
 {% endswagger %}

@@ -102,7 +102,7 @@ Then, run the following to create the secret:
 
 {% code overflow="wrap" %}
 ```bash
-$ kubectl create secret generic cluster-controller-service-key -n <NAMESPACE> --from-file=service-key.json
+kubectl create secret generic cluster-controller-service-key -n <NAMESPACE> --from-file=service-key.json
 ```
 {% endcode %}
 
@@ -230,8 +230,6 @@ Create a new user or IAM role with `AutoScalingFullAccess` permissions. JSON def
         }
     ]
 }
-
-
 ```
 {% endcode %}
 
@@ -247,8 +245,8 @@ Create a new file, _service-key.json_, and use the access key ID and secret acce
 Then run the following to create the secret:
 
 {% code overflow="wrap" %}
-```
-$ kubectl create secret generic cluster-controller-service-key -n <NAMESPACE> --from-file=service-key.json
+```bash
+kubectl create secret generic cluster-controller-service-key -n <NAMESPACE> --from-file=service-key.json
 ```
 {% endcode %}
 
@@ -267,16 +265,16 @@ You may also enable via `--set` when running Helm install:
 
 ```bash
 helm install kubecost cost-analyzer \
---repo https://kubecost.github.io/cost-analyzer/ \
---namespace kubecost --create-namespace \
---set clusterController.enabled=true
+  --repo https://kubecost.github.io/cost-analyzer/ \
+  --namespace kubecost --create-namespace \
+  --set clusterController.enabled=true
 ```
 
 ## Verify the Cluster Controller is running
 
 You can verify that the Cluster Controller is running by issuing the following:
 
-```
+```bash
 kubectl get pods -n kubecost -l app=kubecost-cluster-controller
 ```
 

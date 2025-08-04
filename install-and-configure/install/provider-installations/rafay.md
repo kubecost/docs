@@ -50,7 +50,7 @@ kubecostToken: 'token_string'
 * Select the _kubectl_ button on the cluster to open a virtual terminal.
 * Verify that the `kubecost` namespace has been created by running the following command:
 
-```
+```bash
 $ kubectl get ns kubecost
 
 NAME            STATUS   AGE
@@ -115,7 +115,7 @@ You can optionally verify whether the correct resources have been created on the
 
 Then, verify the pods in the `kubecost` namespace. Run `kubectl get pod -n kubecost`, and check that the output is similar to the example below.
 
-```
+```bash
 $ kubectl get pod -n kubecost
 
 NAME                                          READY   STATUS    RESTARTS   AGE
@@ -131,7 +131,7 @@ kubecost-prometheus-server-5cc6745978-z98f8   2/2     Running   0          6m23s
 
 In order to access the Kubecost UI, you'll need to enable access to the frontend application using [port-forward](https://kubernetes.io/docs/tasks/access-application-cluster/port-forward-access-application-cluster/). To do this, download and use the `Kubeconfig` with the KubeCTL CLI (`../../accessproxy/kubectl_cli/`).
 
-```
+```bash
 kubectl port-forward --namespace kubecost deployment/kubecost-cost-analyzer 9090
 
 Forwarding from 127.0.0.1:9090 -> 9090

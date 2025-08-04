@@ -137,7 +137,7 @@ Q: What time zone is shown by Kubecost?\
 A: All APIs and metrics will be based on and accept UTC zones. When viewing the data from your web browser, the graphs displayed will convert this UTC time to your local machine's time zone.
 
 Q: When using the `aggregate` parameter with the Allocation API (`/model/allocation`), the returned line items don't always list the full set of "properties".\
-A: This happens when the values of these "properties" collide upon performing the aggregation. For example if performing the aggregation by `aggregate=label:app`, the line item `app=hello-world` may belong to multiple namespaces and Kubecost would therefore omit "properties.namespace" altogether. The most effective workaround is to perform a multi-aggregation (`aggregate=namespace,label:app`) to ensure all the properties you want will exist in the result. More discussion in this GitHub[ issue](https://github.com/kubecost/cost-analyzer-helm-chart/issues/1839).
+A: This happens when the values of these "properties" collide upon performing the aggregation. For example if performing the aggregation by `aggregate=label:app`, the line item `app=hello-world` may belong to multiple namespaces and Kubecost would therefore omit "properties.namespace" altogether. The most effective workaround is to perform a multi-aggregation (`aggregate=namespace,label:app`) to ensure all the properties you want will exist in the result. More discussion in this GitHub[issue](https://github.com/kubecost/cost-analyzer-helm-chart/issues/1839).
 
 Q: What is the difference between `.Values.kubecostToken` and `Values.kubecostProductConfigs.productKey`?\
 A: `.Values.kubecostToken` is primarily used to manage trial access and is provided to you when visiting [http://kubecost.com/install](http://kubecost.com/install). `.Values.kubecostProductConfigs.productKey` is used to apply an Enterprise license. More info in this [doc](/install-and-configure/advanced-configuration/add-key.md).
@@ -160,11 +160,12 @@ global:
     cicd:
       enabled: true
 ```
+
 Keep in mind that any config change to Kubecost that does not include new images will require steps to ensure the new configuration is used.
 
 Q: Is it possible to use a CI/CD tool to install and maintain Kubecost?\
 A: Yes! Many do. There are a number of examples on our [poc-common-configurations repo](https://github.com/kubecost/poc-common-configurations). Keep in mind that support for 3rd party tools is limited without an Kubecost Enterprise subscription. We thank our community for some significant contributions here:
-  - [ArgoCD](https://github.com/kubecost/poc-common-configurations/tree/main/argocd)
-  - [Flux](https://github.com/kubecost/poc-common-configurations/tree/main/fluxcd)
-  - [Terraform](https://github.com/kubecost/poc-common-configurations/tree/main/terraform)
 
+- [ArgoCD](https://github.com/kubecost/poc-common-configurations/tree/main/argocd)
+- [Flux](https://github.com/kubecost/poc-common-configurations/tree/main/fluxcd)
+- [Terraform](https://github.com/kubecost/poc-common-configurations/tree/main/terraform)

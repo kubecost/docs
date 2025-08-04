@@ -8,7 +8,7 @@ The container request right-sizing recommendation API provides recommendations f
 
 The endpoint is available at
 
-```
+```http
 http://<kubecost-address>/model/savings/requestSizing
 ```
 
@@ -16,7 +16,7 @@ http://<kubecost-address>/model/savings/requestSizing
 
 | Name                    | Type                     | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
 | ----------------------- | ------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `targetCPUUtilization`  | float in the range (0,1] | An amount of headroom to enforce with the new request, based on the calculated (real) usage. If the calculated usage is, for example, 100 mCPU and this parameter is `0.8`, the recommended CPU request will be `100 / 0.8 = 125` mCPU. Inputs that fail to parse (see https://pkg.go.dev/strconv#ParseFloat) or are greater than 1 will not error; they will instead default to your savings profile's default value. If you have not changed the profile, this is `0.65`. |
+| `targetCPUUtilization`  | float in the range (0,1] | An amount of headroom to enforce with the new request, based on the calculated (real) usage. If the calculated usage is, for example, 100 mCPU and this parameter is `0.8`, the recommended CPU request will be `100 / 0.8 = 125` mCPU. Inputs that fail to parse (see <https://pkg.go.dev/strconv#ParseFloat>) or are greater than 1 will not error; they will instead default to your savings profile's default value. If you have not changed the profile, this is `0.65`. |
 | `targetRAMUtilization`  | float in the range (0,1] | Calculated like CPU.                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
 | `window`                | string                   | Duration of time over which to calculate usage. Supports hours or days before the current time in the following format: `2h` or `3d`.                                                                                        |
 | `filterClusters`        | string                   | Comma-separated list of clusters to match; e.g. `cluster-one,cluster-two` will return results from only those two clusters.                                                                                                                                                                                                                                                                                                                                                 |
@@ -46,7 +46,7 @@ Pod 1 ran for 15 minutes \[t=15min, t=30min], allocated 3 cores, and used an avg
 
 Pod 2 ran for 20 minutes \[t=45min, t=60min], allocated 3 cores, and used an avg and max of 2 cores.
 
-```
+```console
 |   ---      | Pod 1 exists
 |         ---| Pod 2 exists
 |____________|
@@ -92,7 +92,7 @@ That's a total savings for the controller of: $1.75 \* 2 = $3.50
 
 ## API Examples
 
-```
+```bash
 KUBECOST_ADDRESS=http://localhost:9090
 
 curl -G \

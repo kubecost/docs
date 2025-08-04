@@ -20,20 +20,20 @@ Not all features released in an edge release are guaranteed to make a production
 
 A Helm chart release is created every night with the latest images. These images should be considered "bleeding edge" and may be unstable. You can get this Helm repo with the following:
 
-```
+```bash
 helm repo add kubecost-nightly https://kubecost.github.io/nightly-helm-chart
 ```
 
 You can then update your existing installation to the latest nightly:
 
-```
+```bash
 helm repo update
 helm upgrade kubecost -n kubecost kubecost-nightly/cost-analyzer
 ```
 
 If you want to change your installation back to a production release, run the following (only if you have a Helm repo called `kubecost` tracking the production release):
 
-```
+```bash
 helm upgrade kubecost kubecost/cost-analyzer -n kubecost
 ```
 

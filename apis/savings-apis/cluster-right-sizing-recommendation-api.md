@@ -29,6 +29,7 @@ Accepts `x86` or `ARM`. Currently, `ARM` is only supported on AWS clusters.
 
 {% swagger-response status="200: OK" description="" %}
 {% code overflow="wrap" %}
+
 ````
 ```json
 {
@@ -168,6 +169,7 @@ Accepts `x86` or `ARM`. Currently, `ARM` is only supported on AWS clusters.
 }
 ```
 ````
+
 {% endcode %}
 {% endswagger-response %}
 {% endswagger %}
@@ -177,17 +179,21 @@ Accepts `x86` or `ARM`. Currently, `ARM` is only supported on AWS clusters.
 Receive right-sizing recommendations taking into account cluster activity for the past two weeks, and ideal CPU and RAM utilization for a high availability environment.
 
 {% code overflow="wrap" %}
-```
+
+```http
 http://<your-kubecost-address>/savings/clusterSizingETL?range=2w&targetUtilization=.5&minNodeCount=3&allowSharedCore=false&architecture=x86
 ```
+
 {% endcode %}
 
 Receive recommendations taking into account AWS cluster activity for the past five days, ideal CPU and RAM utilization for a production environment, and allowing shared cores.
 
 {% code overflow="wrap" %}
-```
+
+```http
 http://<your-kubecost-address>/savings/clusterSizingETL?range=5d&targetUtilization=.65&minNodeCount=2&allowSharedCore=true&architecture=ARM
 ```
+
 {% endcode %}
 
 ## Adopting cluster right-sizing recommendations

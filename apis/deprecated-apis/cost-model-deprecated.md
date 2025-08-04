@@ -23,7 +23,7 @@ API parameters include the following:
 
 This API returns a set of JSON elements in this format:
 
-```
+```json
 {
   cpuallocated: [{timestamp: 1567531940, value: 0.01}]
   cpureq: [{timestamp: 1567531940, value: 0.01}]
@@ -95,7 +95,7 @@ Optional filter parameters include the following:
 
 This API returns a set of JSON objects in this format:
 
-```
+```json
 {
   aggregation: "namespace"        // value of aggregation type parameter
   cpuAllocationAverage: 0.01      // average number of cores allocated over time window, max(request,usage)

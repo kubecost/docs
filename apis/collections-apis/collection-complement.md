@@ -8,13 +8,13 @@ Use the following request to query the complement costs of a collection, which i
 
 ### Request
 
-```
+```http
 GET /model/collections/query/complement?id=<string>&window=<string>
 ```
 
 ### Examples
 
-```
+```http
 GET /model/collections/query/complement?id=8a939ba1-ff15-4600-b711-2cb109114914&window=30d
 ```
 
@@ -48,13 +48,13 @@ Use the following request to query the complement cloud costs of a collection, w
 
 ### Request
 
-```
+```http
 GET /model/collection/query/complement/cloud?id=<string>&window=<string>(&aggregate=<string>&filter=<string>&limit=<number>&offset=<number>)
 ```
 
 ### Examples
 
-```
+```http
 GET /model/collection/query/complement/cloud?id=8a939ba1-ff15-4600-b711-2cb109114914&window=30d
 ```
 
@@ -77,7 +77,7 @@ GET /model/collection/query/complement/cloud?id=8a939ba1-ff15-4600-b711-2cb10911
 }
 ```
 
-```
+```http
 GET /model/collection/query/complement/cloud?id=8a939ba1-ff15-4600-b711-2cb109114914&window=30d&aggregate=service
 ```
 
@@ -115,7 +115,7 @@ GET /model/collection/query/complement/cloud?id=8a939ba1-ff15-4600-b711-2cb10911
 }
 ```
 
-```
+```http
 GET /model/collection/query/complement/cloud?id=8a939ba1-ff15-4600-b711-2cb109114914&window=30d&aggregate=providerID&filter=service:"AmazonEC2"
 ```
 
@@ -154,13 +154,13 @@ Use the following request to query the complement Kubernetes costs of a collecti
 
 ### Request
 
-```
+```http
 GET /model/collection/query/complement/kubernetes?id=<string>&window=<string>(&aggregate=<string>&filter=<string>&limit=<number>&offset=<number>)
 ```
 
 ### Examples
 
-```
+```http
 GET /model/collection/query/complement/kubernetes?id=8a939ba1-ff15-4600-b711-2cb109114914&window=30d
 ```
 
@@ -185,7 +185,7 @@ GET /model/collection/query/complement/kubernetes?id=8a939ba1-ff15-4600-b711-2cb
 }
 ```
 
-```
+```http
 GET /model/collection/query/complement/kubernetes?id=8a939ba1-ff15-4600-b711-2cb109114914&window=30d&aggregate=namespace
 ```
 
@@ -225,7 +225,7 @@ GET /model/collection/query/complement/kubernetes?id=8a939ba1-ff15-4600-b711-2cb
 }
 ```
 
-```
+```http
 GET /model/collection/query/complement/kubernetes?id=8a939ba1-ff15-4600-b711-2cb109114914&window=30d&aggregate=controller&filter=namespace:"kubecost"
 ```
 

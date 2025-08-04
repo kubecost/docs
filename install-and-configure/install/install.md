@@ -50,13 +50,13 @@ Kubecost releases are scheduled on a near-monthly basis. You can keep up to date
 
 After installing Kubecost, you will be able to update Kubecost with the following command, which will upgrade you to the most recent version:
 
-```
+```bash
 helm repo update && helm upgrade kubecost kubecost/cost-analyzer -n kubecost
 ```
 
 You can upgrade or downgrade to a specific version of Kubecost with the following command:
 
-```
+```bash
 helm upgrade kubecost --repo... --version 1.XXX.X
 ```
 
@@ -64,7 +64,7 @@ helm upgrade kubecost --repo... --version 1.XXX.X
 
 To uninstall Kubecost and its dependencies, run the following command:
 
-```
+```bash
 helm uninstall kubecost -n kubecost
 ```
 

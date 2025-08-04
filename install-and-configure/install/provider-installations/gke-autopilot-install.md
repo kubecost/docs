@@ -8,7 +8,7 @@ Installing Kubecost on a GKE Autopilot cluster is similar to other cloud provide
 
 Your _values.yaml_ files must contain the below parameters. Resources are specified for each section of the Kubecost deployment, and Pod Security Policies are disabled.
 
-```
+```yaml
 kubecostProductConfigs:
   clusterName: "<clusterName>" # used for display in Kubecost UI
 
@@ -85,13 +85,13 @@ grafana:
 
 Open the OperatorConfig on your Autopilot Cluster resource for editing:
 
-```
+```bash
 kubectl -n gmp-public edit operatorconfig config
 ```
 
 Add the following collection section to the resource:
 
-```
+```yaml
 apiVersion: monitoring.googleapis.com/v1
 kind: OperatorConfig
 metadata:

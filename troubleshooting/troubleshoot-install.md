@@ -9,14 +9,17 @@ These Kubernetes commands can be helpful when finding issues with deployments.
 This command will find all events that aren't normal, with the most recent listed last. Use this if pods are not even starting:
 
 {% code overflow="wrap" %}
+
 ```bash
 kubectl get events --sort-by=.metadata.creationTimestamp --field-selector type!=Normal
 ```
+
 {% endcode %}
 
 Another option is to check for a describe command of the specific pod in question. This command will give a list of the Events specific to this pod.
 
 {% code overflow="wrap" %}
+
 ```bash
 > kubectl -n kubecost get pods
 NAME                                          READY   STATUS              RESTARTS   AGE
@@ -40,6 +43,7 @@ Events:
     <RELEVANT ERROR MESSAGES HERE>
     <RELEVANT ERROR MESSAGES HERE>
 ```
+
 {% endcode %}
 
 If a pod is in CrashLoopBackOff, check its logs. Commonly it will be a misconfiguration in Helm. If the cost-analyzer pod is the issue, check the logs with:
@@ -55,6 +59,7 @@ Alternatively, Lens is a great tool for diagnosing many issues in a single view.
 You can adjust the log output while deploying through Helm by using the `logLevel` property and/or the `LOG_FORMAT` environment variable.
 
 ### Adjusting Log Level
+
 Adjusting the log level increases or decreases the level of verbosity written to the logs. The `logLevel` property accepts the following values:
 
 * `trace`
@@ -67,9 +72,11 @@ Adjusting the log level increases or decreases the level of verbosity written to
 For example, to set the log level to `debug`, add the following flag to the Helm command:
 
 {% code overflow="wrap" %}
+
 ```bash
 --set 'kubecostModel.logLevel=debug'
 ```
+
 {% endcode %}
 
 ### Adjusting Log Format
@@ -85,7 +92,7 @@ Adjusting the log format changes the format in which the logs are output making 
 
 To temporarily set the log level without restarting the pod, you can send a POST request to `/logs/level` with one of the valid log levels. This does not persist between pod restarts, Helm deployments, etc. Here's an example:
 
-```sh
+```bash
 curl -X POST \
     'http://localhost:9090/model/logs/level' \
     -d '{"level": "debug"}'
@@ -104,20 +111,22 @@ If your Kubecost installation fails and you are unable to download the cost-anal
 Some AKS users have reported that the cost-model container in the kubecost-cost-analyzer pod will panic with the following message when using the [Azure Files Container Storage Interface (CSI) driver](https://learn.microsoft.com/en-us/azure/aks/azure-files-csi):
 
 {% code overflow="wrap" %}
-```
+
+```console
 goroutine 32660 [running]:
 runtime.throw({0x347c9c7?, 0x30?})
-	/usr/local/go/src/runtime/panic.go:1047 +0x5d fp=0xc01421cb70 sp=0xc01421cb40 pc=0x43919d
+ /usr/local/go/src/runtime/panic.go:1047 +0x5d fp=0xc01421cb70 sp=0xc01421cb40 pc=0x43919d
 runtime.sigpanic()
-	/usr/local/go/src/runtime/signal_unix.go:834 +0x125 fp=0xc01421cbd0 sp=0xc01421cb70 pc=0x44fb85
+ /usr/local/go/src/runtime/signal_unix.go:834 +0x125 fp=0xc01421cbd0 sp=0xc01421cb70 pc=0x44fb85
 github.com/opencost/opencost/pkg/kubecost.isBinaryTag(...)
-	/app/opencost/pkg/kubecost/kubecost_codecs.go:103
+ /app/opencost/pkg/kubecost/kubecost_codecs.go:103
 github.com/opencost/opencost/pkg/kubecost.(*AllocationSet).UnmarshalBinary(0x40dd8a?, {0x7fa5669b5000, 0xb621c, 0xb621c})
-	/app/opencost/pkg/kubecost/kubecost_codecs.go:1932 +0x9d fp=0xc01421cc48 sp=0xc01421cbd0 pc=0xd1a5dd
+ /app/opencost/pkg/kubecost/kubecost_codecs.go:1932 +0x9d fp=0xc01421cc48 sp=0xc01421cbd0 pc=0xd1a5dd
 github.com/kubecost/kubecost-cost-model/pkg/core/store.(*FileStorageStrategy[...]).Load.func1()
-	/app/kubecost-cost-model/pkg/core/store/filestrategy.go:230 +0x3f fp=0xc01421cc78 sp=0xc01421cc48 pc=0x28f00df
+ /app/kubecost-cost-model/pkg/core/store/filestrategy.go:230 +0x3f fp=0xc01421cc78 sp=0xc01421cc48 pc=0x28f00df
 github.com/kubecost/kubecost-cost-model/pkg/core/sys.(*RWPageFile).Read(0xc01520b830, 0xc01421cda0)
 ```
+
 {% endcode %}
 
 To resolve this issue, please use an alternate storage class for the Kubecost `cost-analyzer` PV. For example the [Azure Disk Container Storage Interface (CSI)](https://learn.microsoft.com/en-us/azure/aks/azure-disk-csi).
@@ -132,7 +141,7 @@ kubectl get storageclass
 
 You should see a StorageCase name with `(default)` next to it. See:
 
-```
+```console
 NAME                PROVISIONER           AGE
 standard (default)  kubernetes.io/gce-pd  10d
 ```
@@ -149,10 +158,10 @@ Alternatively, you can deploy Kubecost without persistent storage to store by fo
 This setup is only for experimental purpose. The metric data is reset when Kubecost's pod is rescheduled.
 {% endhint %}
 
-1.  In your terminal, run this command to add the Kubecost Helm repository:
+1. In your terminal, run this command to add the Kubecost Helm repository:
 
     `helm repo add kubecost https://kubecost.github.io/cost-analyzer/`
-2.  Next, run this command to deploy Kubecost without persistent storage:
+2. Next, run this command to deploy Kubecost without persistent storage:
 
     ```bash
     helm upgrade -install kubecost kubecost/cost-analyzer \
@@ -172,12 +181,14 @@ kubectl describe pvc cost-analyzer -n kubecost | grep "ebs.csi.aws.com"
 Example result:
 
 {% code overflow="wrap" %}
-```bash
+
+```console
 Annotations:   volume.beta.kubernetes.io/storage-provisioner: ebs.csi.aws.com
                volume.kubernetes.io/storage-provisioner: ebs.csi.aws.com
 
 Normal  ExternalProvisioning  69s (x82 over 21m)  persistentvolume-controller  waiting for a volume to be created, either by external provisioner "ebs.csi.aws.com" or manually created by system administrator
 ```
+
 {% endcode %}
 
 YTo fix this, you need to install the [AWS EBS CSI driver](https://docs.aws.amazon.com/eks/latest/userguide/ebs-csi.html). This may be because the Amazon EKS cluster version 1.23+ uses the "ebs.csi.aws.com" provisioner, and the AWS EBS CSI driver has not been installed yet.
@@ -197,21 +208,25 @@ Forwarding from `127.0.0.1` indicates Kubecost should be reachable via a browser
 In some cases it may be necessary for kubectl to bind to all interfaces. This can be done with the addition of the flag `--address 0.0.0.0`.
 
 {% code overflow="wrap" %}
+
 ```bash
 $ kubectl port-forward --address 0.0.0.0 --namespace kubecost deployment/kubecost-cost-analyzer 9090
 Forwarding from 0.0.0.0:9090 -> 9090
 ```
+
 {% endcode %}
 
 Navigating to Kubecost while port-forwarding should result in "Handling connection" output in the terminal:
 
 {% code overflow="wrap" %}
+
 ```bash
 kubectl port-forward --address 0.0.0.0 --namespace kubecost deployment/kubecost-cost-analyzer 9090
 Forwarding from 0.0.0.0:9090 -> 9090
 Handling connection for 9090
 Handling connection for 9090
 ```
+
 {% endcode %}
 
 To troubleshoot further, check the status of pods in the Kubecost namespace:
@@ -223,7 +238,8 @@ kubectl get pods -n kubecost`
 All `kubecost-*` pods should have `Running` or `Completed` status.
 
 {% code overflow="wrap" %}
-```
+
+```console
 NAME                                                     READY   STATUS    RESTARTS   AGE
 kubecost-cost-analyzer-599bf995d4-rq8g8                  2/2     Running   0          5m
 kubecost-grafana-5cdd75755b-5s9j9                        1/1     Running   0          5m
@@ -231,13 +247,14 @@ kubecost-prometheus-kube-state-metrics-bd985f98b-bl8xd   1/1     Running   0    
 kubecost-prometheus-node-exporter-24b8x                  1/1     Running   0          5m
 kubecost-prometheus-server-6fb8f99bb7-4tjwn              2/2     Running   0          5m
 ```
+
 {% endcode %}
 
 If the cost-analyzer or prometheus-server pods are missing, we recommend reinstalling with Helm using `--debug` which enables verbose output.
 
 If any pod is not Running other than cost-analyzer-checks, you can use the following command to find errors in the recent event log:
 
-```
+```bash
 kubectl describe pod <pod-name> -n kubecost
 ```
 
@@ -245,9 +262,11 @@ kubectl describe pod <pod-name> -n kubecost
 
 If there is an existing node-exporter DaemonSet, the Kubecost Helm chart may timeout due to a conflict. The Node Exporter is disabled by default, but if it was enabled at any point, you can disable it by changing the flag during your `helm upgrade` command:
 {% code overflow="wrap" %}
+
 ```bash
     --set prometheus.serviceAccounts.nodeExporter.enabled=false
 ```
+
 {% endcode %}
 
 ### Unable to connect to a cluster
@@ -287,6 +306,7 @@ If this is true, you are likely to be hitting a CoreDNS routing issue. We recomm
 PodSecurityPolicy (PSP) has been [removed from Kubernetes v1.25](https://kubernetes.io/docs/concepts/security/pod-security-policy/). This will result in the following error during install.
 
 {% code overflow="wrap" %}
+
 ```bash
 $ helm install kubecost kubecost/cost-analyzer
 Error: INSTALLATION FAILED: unable to build kubernetes objects from release manifest: [
@@ -294,6 +314,7 @@ Error: INSTALLATION FAILED: unable to build kubernetes objects from release mani
     resource mapping not found for name: "kubecost-cost-analyzer-psp" namespace: "" from "": no matches for kind "PodSecurityPolicy" in version "policy/v1beta1" ensure CRDs are installed first
 ]
 ```
+
 {% endcode %}
 
 To disable PSP in your deployment:
@@ -303,6 +324,7 @@ To disable PSP in your deployment:
 3. Delete all Helm secrets in the Kubecost namespace:
 
     {% code overflow="wrap" %}
+
     ```bash
     # Get the list of secrets
     kubectl get secrets -n kubecost
@@ -311,14 +333,17 @@ To disable PSP in your deployment:
     # Delete any secret with the helm values, which look like: sh.helm.release.v1.aggregator.vX
     kubectl delete secrets -n kubecost SECRET_NAME
     ```
+
     {% endcode %}
 
 4. Upgrade Kubecost as you normally would, be absolutely certain to pass the -f flag with your values file:
 
 {% code overflow="wrap" %}
+
 ```bash
 helm upgrade kubecost kubecost/cost-analyzer --namespace kubecost -f kubecost-values.yaml
 ```
+
 {% endcode %}
 
 ### With Kubernetes v1.25, Helm commands fail when PodSecurityPolicy CRD is missing for `kubecost-grafana` and `kubecost-cost-analyzer-psp` in existing Kubecost installs
@@ -326,6 +351,7 @@ helm upgrade kubecost kubecost/cost-analyzer --namespace kubecost -f kubecost-va
 Since PodSecurityPolicy (PSP) has been [removed from Kubernetes v1.25](https://kubernetes.io/docs/concepts/security/pod-security-policy/), it's possible to encounter a state where all Kubecost-related Helm commands fail after Kubernetes has been upgraded to v1.25.
 
 {% code overflow="wrap" %}
+
 ```bash
 $ helm upgrade kubecost kubecost/cost-analyzer
 Error: UPGRADE FAILED: unable to build kubernetes objects from current release manifest: [
@@ -334,6 +360,7 @@ ensure CRDs are installed first, resource mapping not found for name: "kubecost-
 ensure CRDs are installed first
 ]
 ```
+
 {% endcode %}
 
 To prevent this Helm error state please upgrade Kubecost to at least v1.99 prior to upgrading Kubernetes to v1.25. Additionally please follow the [above](#podsecuritypolicy-crd-is-missing-for-kubecost-grafana-and-kubecost-cost-analyzer-psp) instructions for disabling PSP.
@@ -345,10 +372,12 @@ If Kubecost PSP is not disabled prior to Kubernetes v1.25 upgrades, you may need
 This error found in the `kube-state-metrics` logs occurs when API's are not present in Kubernetes. This will cause the KSM pod startup to fail. The full error is as follows.
 
 {% code overflow="wrap" %}
-```
+
+```console
 E0215 13:33:44.225827 1 reflector.go:156] pkg/mod/k8s.io/client-go@v0.0.0-20191109102209-3c0d1af94be5/tools/cache/reflector.go:108: Failed to list *v1beta1.Ingress: the server could not find the requested resource (get ingresses.extensions)
 E0215 13:33:44.225870 1 reflector.go:156] pkg/mod/k8s.io/client-go@v0.0.0-20191109102209-3c0d1af94be5/tools/cache/reflector.go:108: Failed to list *v1beta1.CertificateSigningRequest: the server could not find the requested resource
 ```
+
 {% endcode %}
 
 To resolve this error you can disable the corresponding KSM metrics collectors by setting the following Helm values to `false`.
@@ -358,7 +387,7 @@ To resolve this error you can disable the corresponding KSM metrics collectors b
 
 You can verify the changes are in place by describing the KSM deployment, the collectors should no longer be present in the Container Arguments list.
 
-```
+```bash
 kubectl get deployment -n kubecost kubecost-kube-state-metrics -o yaml
 ```
 
@@ -368,18 +397,20 @@ This error appears when you install Kubecost using AWS optimized version on your
 
 #### A. The Kubecost version that you tried to install is not available yet
 
-Check our ECR public gallery for the latest available version at https://gallery.ecr.aws/kubecost/cost-analyzer
+Check our ECR public gallery for the latest available version at <https://gallery.ecr.aws/kubecost/cost-analyzer>
 
 #### B. Your docker authentication token for Amazon ECR public gallery is expired
 
 Try to login to the Amazon ECR public gallery again to refresh the authentication token with the following commands:
 
 {% code overflow="wrap" %}
+
 ```bash
 aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws
 export HELM_EXPERIMENTAL_OCI=1
 aws ecr-public get-login-password --region us-east-1 | helm registry login --username AWS --password-stdin public.ecr.aws
 ```
+
 {% endcode %}
 
 ### How can I run on Minikube?
@@ -400,9 +431,11 @@ aws ecr-public get-login-password --region us-east-1 | helm registry login --use
 Kubecost makes use of cloud provider metadata servers to access instance and cluster metadata. If a restrictive network policy is place this may need to be modified to allow connections from the kubecost pod or namespace. Example:
 
 {% code overflow="wrap" %}
-```
+
+```console
 gcpprovider.go Error loading metadata cluster-name: Get "http://169.254.169.254/computeMetadata/v1/instance/attributes/cluster-name": dial tcp 169.254.169.254:80: i/o timeout
 ```
+
 {% endcode %}
 
 ### Local disks showing costs in Assets

@@ -4,18 +4,20 @@ Persistent Volume Right Sizing API
 The Persistent Volume (PV) Right Sizing API displays data of all PVs in all clusters and makes a recommendation of optimal storage size for each PV.
 
 The endpoint is available at
-```
+
+```http
 http://<kubecost-address>/model/savings/persistentVolumeSizing
 ```
 
 ## Parameters
+
 | Name | Type | Description |
 |------|------|-------------|
 | `headroomPct` | int | Percent of additional headroom to add to recommended capacity based on max usage of the PV. Defaults to 10% |
 
 ## API examples
 
-```
+```text
 // See all PVs; make recommendations with 25% additional headroom 
 http://localhost:9090/model/savings/persistentVolumeSizing?headroomPct=25
 
@@ -25,7 +27,7 @@ http://localhost:9090/model/savings/persistentVolumeSizing?headroomPct=40
 
 ## Example API response
 
-```
+```console
 recommendations:
     0:
         "volumeName": "pvc-5482dfcc-7a9e-46d7-5be3-503a689e8798",

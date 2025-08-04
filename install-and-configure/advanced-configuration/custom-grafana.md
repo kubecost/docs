@@ -1,7 +1,5 @@
 # Grafana Configuration Guide
 
-
-
 Using an existing Grafana deployment can be accomplished through one of two options:
 
 1. Linking to an external Grafana directly
@@ -45,7 +43,7 @@ The Kubecost UI cannot link to the Grafana dashboards unless `kubecostProductCon
 When using Kubecost on a custom ingress path, you must add this path to the Grafana `root_url`:
 
 {% code overflow="wrap" %}
-```
+```text
 --set grafana.grafana.ini.server.root_url: "%(protocol)s://%(domain)s:%(http_port)s/kubecost/grafana"
 ```
 {% endcode %}
@@ -54,7 +52,7 @@ When using Kubecost on a custom ingress path, you must add this path to the Graf
 
 If you choose to disable Grafana, set the following Helm values to ensure successful pod startup:
 
-```
+```text
 --set global.grafana.enabled=false
 --set global.grafana.proxy=false
 ```

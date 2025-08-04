@@ -38,15 +38,15 @@ Kubecost requires read access to the Spot data feed bucket. The following IAM po
   "Version": "2012-10-17",
   "Statement": [
     {
-        "Sid": "SpotDataFeed",
-        "Effect": "Allow",
-        "Action": [
-          "s3:ListAllMyBuckets",
-          "s3:ListBucket",
-          "s3:List*",
-          "s3:Get*"
-        ],
-        "Resource": "arn:aws:s3:::${SpotDataFeedBucketName}*"
+      "Sid": "SpotDataFeed",
+      "Effect": "Allow",
+      "Action": [
+        "s3:ListAllMyBuckets",
+        "s3:ListBucket",
+        "s3:List*",
+        "s3:Get*"
+      ],
+      "Resource": "arn:aws:s3:::${SpotDataFeedBucketName}*"
     }
   ]
 }
@@ -62,12 +62,12 @@ If your `serviceaccount/kubecost-cost-analyzer` already has IRSA annotations att
 
 ```bash
 eksctl create iamserviceaccount \
-    --name kubecost-cost-analyzer \
-    --namespace kubecost \
-    --cluster $CLUSTER_NAME --region $REGION_NAME \
-    --attach-policy-arn arn:aws:iam::$ACCOUNT_NUMBER:policy/SpotDataFeed \
-    --override-existing-serviceaccounts \
-    --approve
+  --name kubecost-cost-analyzer \
+  --namespace kubecost \
+  --cluster $CLUSTER_NAME --region $REGION_NAME \
+  --attach-policy-arn arn:aws:iam::$ACCOUNT_NUMBER:policy/SpotDataFeed \
+  --override-existing-serviceaccounts \
+  --approve
 ```
 
 ### Option 2: Service Keys
@@ -76,15 +76,15 @@ Create a _service-key.json_ as shown:
 
 ```json
 {
-    "aws_access_key_id": "AWS_service_key_aws_access_key_id",
-    "aws_secret_access_key": "AWS_service_key_aws_secret_access_key"
+  "aws_access_key_id": "AWS_service_key_aws_access_key_id",
+  "aws_secret_access_key": "AWS_service_key_aws_secret_access_key"
 }
 ```
 
 Create a K8s secret:
 
 ```bash
-$ kubectl create secret generic cloud-service-key --from-file=service-key.json
+kubectl create secret generic cloud-service-key --from-file=service-key.json
 ```
 
 Set the following Helm config:
@@ -108,6 +108,6 @@ Verify the below points:
   * "1" means Spot data instance configuration is correct.
   * "0" means not configured properly.
 * Is there a prefix? If so, is it configured in Kubecost?
-* Make sure the IAM permissions are aligned with https://github.com/kubecost/cloudformation/blob/7feace26637aa2ece1481fda394927ef8e1e3cad/kubecost-single-account-permissions.yaml#L36
+* Make sure the IAM permissions are aligned with <https://github.com/kubecost/cloudformation/blob/7feace26637aa2ece1481fda394927ef8e1e3cad/kubecost-single-account-permissions.yaml#L36>
 * Make sure the Spot data feed bucket has all permissions to access by Kubecost
 * The Spot Instance in the Spot data feed bucket should match the instance in the cluster where the Spot data feed is configured. `awsSpotDataBucket` has to be present in the right cluster.

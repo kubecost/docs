@@ -57,15 +57,15 @@ You will receive full turndown functionality once the Cluster Controller is enab
 
 You can verify that the `cluster-turndown` pod is running with the following command:
 
-```
-$ kubectl get pods -l app=cluster-turndown -n turndown
+```bash
+kubectl get pods -l app=cluster-turndown -n turndown
 ```
 
 ## Setting a turndown schedule
 
 Turndown uses a Kubernetes Custom Resource Definition to create schedules. Here is an example resource located at _artifacts/example-schedule.yaml_:
 
-```
+```yaml
 apiVersion: kubecost.com/v1alpha1
 kind: TurndownSchedule
 metadata:
@@ -86,14 +86,14 @@ This definition will create a schedule that starts by turning down at the design
 
 To create this schedule, you may modify _example-schedule.yaml_ to your desired schedule and run:
 
-```
-$ kubectl apply -f artifacts/example-schedule.yaml
+```bash
+kubectl apply -f artifacts/example-schedule.yaml
 ```
 
 Currently, updating a resource is not supported, so if the scheduling of the _example-schedule.yaml_ fails, you will need to delete the resource via:
 
-```
-$ kubectl delete tds example-schedule
+```bash
+kubectl delete tds example-schedule
 ```
 
 Then make the modifications to the schedule and re-apply.
@@ -102,24 +102,25 @@ Then make the modifications to the schedule and re-apply.
 
 The `turndownschedule` resource can be listed via `kubectl` as well:
 
-```
-$ kubectl get turndownschedules
+```bash
+kubectl get turndownschedules
 ```
 
 or using the shorthand:
 
-```
-$ kubectl get tds
+```bash
+kubectl get tds
 ```
 
 Details regarding the status of the turndown schedule can be found by outputting as a JSON or YAML:
 
-```
-$ kubectl get tds example-schedule -o yaml
+```bash
+kubectl get tds example-schedule -o yaml
 ```
 
 {% code overflow="wrap" %}
-```
+
+```yaml
 apiVersion: kubecost.com/v1alpha1
 kind: TurndownSchedule
 metadata:
@@ -153,6 +154,7 @@ status:
     type: scaleup
   state: ScheduleSuccess
 ```
+
 {% endcode %}
 
 The `status` field displays the current status of the schedule including next schedule times, specific schedule identifiers, and the overall state of schedule.
@@ -174,8 +176,8 @@ The `status` field displays the current status of the schedule including next sc
 
 A turndown can be canceled before turndown actually happens or after. This is performed by deleting the resource:
 
-```
-$ kubectl delete tds example-schedule
+```bash
+kubectl delete tds example-schedule
 ```
 
 Canceling while turndown is currently scaling down or scaling up will result in a delayed cancellation, as the schedule must complete its operation before processing the deletion/cancellation.

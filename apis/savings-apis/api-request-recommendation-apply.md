@@ -34,7 +34,8 @@ Examine the cURL example below. The API response can be inspected to see what Ku
 {% tabs %}
 {% tab title="Request" %}
 {% code overflow="wrap" %}
-```
+
+```bash
 # Make to `kubectl port-forward -n kubecost service/kubecost-cost-analyzer 9090` or replace 'localhost:9090' with your Kubecost address
 
 curl -XGET 'http://localhost:9090/model/savings/requestSizing' \
@@ -45,11 +46,13 @@ curl -XGET 'http://localhost:9090/model/savings/requestSizing' \
         --data-binary @- \
         'http://localhost:9090/cluster/requestsizer/plan'
 ```
+
 {% endcode %}
 {% endtab %}
 
 {% tab title="Response" %}
-```
+
+```json
 {
   "cluster-name": {
     "namespace-name": [
@@ -71,12 +74,13 @@ curl -XGET 'http://localhost:9090/model/savings/requestSizing' \
   ...
 }
 ```
+
 {% endtab %}
 {% endtabs %}
 
 ### Apply API
 
-{% swagger method="get" path="/cluster/requestsizer/apply" baseUrl="http://kubecost.example.com" summary="Apply API" %}
+{% swagger method="get" path="/cluster/requestsizer/apply" baseUrl="<http://kubecost.example.com>" summary="Apply API" %}
 {% swagger-description %}
 It expects a request with a body that is identical to a response from the Plan API.
 {% endswagger-description %}
@@ -91,7 +95,8 @@ In the cURL example below, the API response includes the original plan, plus som
 {% tabs %}
 {% tab title="Request" %}
 {% code overflow="wrap" %}
-```
+
+```bash
 # Make to `kubectl port-forward -n kubecost service/kubecost-cost-analyzer 9090`
 # or replace 'localhost:9090' with 'kubecost.example.com'
 
@@ -108,11 +113,13 @@ curl -XGET 'http://localhost:9090/model/savings/requestSizing' \
         --data-binary @- \
         'http://localhost:9090/cluster/requestsizer/apply'
 ```
+
 {% endcode %}
 {% endtab %}
 
 {% tab title="Response" %}
-```
+
+```json
 {
   "TimeInitiated": "",
   "TimeFinished": "",
@@ -122,6 +129,7 @@ curl -XGET 'http://localhost:9090/model/savings/requestSizing' \
   "FromPlan": <the plan passed as argument>
 }
 ```
+
 {% endtab %}
 {% endtabs %}
 

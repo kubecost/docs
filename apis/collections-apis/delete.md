@@ -6,12 +6,12 @@ Use the following request to delete a collection by providing the collection ID.
 
 ### Request
 
-```
+```http
 DELETE /model/collection?id=<string>
 ```
 
 ### Example
 
-```
+```http
 DELETE /model/collection?id=8a939ba1-ff15-4600-b711-2cb109114914
 ```

@@ -109,7 +109,7 @@ stringData:
 
 If deploying changes via Helm, you will be able to run a command similar to:
 
-```sh
+```bash
 helm upgrade -i kubecost cost-analyzer \
   --repo https://kubecost.github.io/cost-analyzer/ \
   --namespace kubecost \
@@ -118,7 +118,7 @@ helm upgrade -i kubecost cost-analyzer \
 
 Once you've applied your changes, validate that the integration is successful by checking the Aggregator pod logs. You should see logs similar to the following:
 
-```sh
+```bash
 kubectl logs statefulset/kubecost-aggregator -n kubecost | grep -i "Integrations"
 ```
 

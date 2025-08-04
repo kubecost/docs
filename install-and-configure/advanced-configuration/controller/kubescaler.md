@@ -39,7 +39,7 @@ Kubescaler does not support "bare" pods. Learn more in [this GitHub issue](https
 
 ### Example
 
-```sh
+```bash
 export NS="kubecost"
 export DEP="kubecost-cost-analyzer"
 export AN_ENABLE="request.autoscaling.kubecost.com/enabled=true"
@@ -60,7 +60,7 @@ Kubescaler will take care of the rest. It will apply the best-available recommen
 To check current requests for your Deployments, use the following command:
 
 {% code overflow="wrap" %}
-```sh
+```bash
 kubectl get deployment -n "kubecost" -o=jsonpath="{range .items[*]}"deployment/"{.metadata.name}{'\n'}{range .spec.template.spec.containers[*]}{.name}{'\t'}{.resources.requests}{'\n'}{end}{'\n'}{end}"
 ```
 {% endcode %}

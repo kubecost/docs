@@ -16,11 +16,11 @@ Access to the Usage API is defined in a policy that applies to a group. Using cr
 
 Run the following command to create a user. You will need to provide an email address for this user which does not have to be unique among users. Be sure to save the values mentioned below.
 
-```sh
+```bash
 oci iam user create \
---name kubecostUser \
---description="Access point for kubecost" \
---email <REQUIRED_EMAIL>
+  --name kubecostUser \
+  --description="Access point for kubecost" \
+  --email <REQUIRED_EMAIL>
 ```
 
 Save the user ID which can be found in the "id" property of the output.
@@ -31,30 +31,30 @@ Save the compartment ID found in the "compartment-id" property of the output.
 
 Next create a group which will have the policy attached to it.
 
-```sh
+```bash
 oci iam group create \
---name=kubecost \
---description="group for kubecost"
+  --name=kubecost \
+  --description="group for kubecost"
 ```
 
 Save the group ID found in the "id" property of the output.
 
 Add user to the new group.
 
-```sh
+```bash
 oci iam group add-user \
---group-id $OCI_GROUP_ID \
---user-id $OCI_USER_ID
+  --group-id $OCI_GROUP_ID \
+  --user-id $OCI_USER_ID
 ```
 
 Create a policy for group.
 
-```sh
+```bash
 oci iam policy create \
---compartment-id $OCI_COMPARTMENT_ID \
---name kubecostUserPolicy \
---description="policy for kubecost" \
---statements='["ALLOW GROUP kubecost to read all-resources IN TENANCY"]'
+  --compartment-id $OCI_COMPARTMENT_ID \
+  --name kubecostUserPolicy \
+  --description="policy for kubecost" \
+  --statements='["ALLOW GROUP kubecost to read all-resources IN TENANCY"]'
 ```
 
 ### Create and add an API key for the User
@@ -65,10 +65,10 @@ Start by generating a set of RSA PEM files.
 
 Upload the public key to the user you created in the last step.
 
-```sh
+```bash
 oci iam user api-key upload \
---user-id $OCI_USER_ID \
---key-file="/path/to/key_public.pem"
+  --user-id $OCI_USER_ID \
+  --key-file="/path/to/key_public.pem"
 ```
 
 ## Create Configuration
@@ -106,10 +106,10 @@ Create a JSON file name `cloud-integration.json` using the above values.
 
 Create a Kubernetes secret in the same namespace as your Kubecost deployment with this JSON file.
 
-```sh
+```bash
 kubectl create secret generic cloud-integration \
--n kubecost \
---from-file=cloud-integration.json
+  -n kubecost \
+  --from-file=cloud-integration.json
 ```
 
 Update the Helm values to mount the secret with the configuration.

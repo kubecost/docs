@@ -54,7 +54,7 @@ The following roles need to be added to your IAM service account:
 Use this command to add each role individually to the GSA:
 
 {% code overflow="wrap" %}
-```
+```bash
 gcloud projects add-iam-policy-binding --member=serviceAccount:<your-iam-service-account-email>@<your-project>.iam.gserviceaccount.com --role=<role/foo.bar>
 ```
 {% endcode %}

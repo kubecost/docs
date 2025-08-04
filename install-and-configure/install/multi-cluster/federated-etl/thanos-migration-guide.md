@@ -48,7 +48,7 @@ kubecostModel:
   etlBucketConfigSecret: <YOUR_SECRET_NAME>
 ```
 
-### Step 3: If data older than 90 days is required, perform this step. If 90 days worth of historical data meets the requirement, skip to step 4.
+### Step 3: If data older than 90 days is required, perform this step. If 90 days worth of historical data meets the requirement, skip to step 4
 
 `maxSourceResolution` MUST be set to 1d and `etlDailyStoreDurationDays` must be set to the number of days of historical data needed. Below is an example of what needs to be set on the primary to get 365 days of daily ETL data.
 
@@ -64,7 +64,7 @@ kubecostModel:
 
 Validate this process completed by confirming the object store has ~365 worth of non-empty ETL files in the `/etl` directory that was created in step 2. Empty file sizes are 86B. The name of the etl files are the epoch timestamps for the ETLs. Use the [Epoch Time Converter](https://www.epochconverter.com/) to validate data goes back a year.
 
-After confirming data older than 90 days is available, revert the changes above to reduce RAM consumption. 
+After confirming data older than 90 days is available, revert the changes above to reduce RAM consumption.
 
 ### Step 4: Validate that an `/etl` directory is present in the object store
 
@@ -80,7 +80,7 @@ This will point to the existing Thanos object store or the new object store crea
 
 The name of the .yaml file used to create the secret *must* be named *federated-store.yaml* or Aggregator will not start.
 
-```sh
+```bash
 kubectl create secret generic federated-store --from-file=federated-store.yaml -n kubecost
 ```
 
@@ -118,7 +118,7 @@ kubecostAggregator:
 
 Ensure all pods and containers are running:
 
-```txt
+```console
 kubecost-cost-analyzer-685fd8f677-k652h        4/4     Running   0          3h2m
 kubecost-etl-utils-6cdd489596-5dl75            1/1     Running   0          6d20h
 ```
@@ -138,7 +138,7 @@ If you are not on a Federated ETL supported version, please upgrade to a support
 
 Using the same *federated-store.yaml* created in Step 4, create this secret and add it to the *values.yaml* file for all secondary clusters:
 
-```sh
+```bash
 kubectl create secret generic federated-store --from-file=federated-store.yaml -n kubecost
 ```
 
@@ -159,7 +159,7 @@ Optionally, you can remove the [Thanos sidecar](https://raw.githubusercontent.co
 
 You can now upgrade the primary Kubecost cluster to v2 using your standard upgrade process. If upgrading via Helm, your upgrade command will look like:
 
-```sh
+```bash
 helm upgrade kubecost cost-analyzer --repo https://kubecost.github.io/cost-analyzer/ \
   --namespace kubecost \
   -f values.yaml
@@ -180,7 +180,7 @@ federatedETL:
 
 If upgrading via Helm, your upgrade command will look like:
 
-```sh
+```bash
 helm upgrade kubecost cost-analyzer --repo https://kubecost.github.io/cost-analyzer/ \
   --namespace kubecost \
   -f values.yaml

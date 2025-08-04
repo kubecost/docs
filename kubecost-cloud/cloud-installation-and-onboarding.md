@@ -50,7 +50,8 @@ Execute the following command to install the Kubecost Cloud agent to your cluste
 {% hint style="info" %} Using an existing Prometheus deployment is not currently supported. {% endhint %}
 
 {% code overflow="wrap" %}
-```
+
+```bash
 helm upgrade --install kubecost-cloud \
 --repo https://kubecost.github.io/kubecost-cloud-agent/ kubecost-cloud-agent \
 --namespace kubecost-cloud --create-namespace \
@@ -61,6 +62,7 @@ helm upgrade --install kubecost-cloud \
 --set cloudReportingServer="collector.app.kubecost.com:31357" \
 --set networkCosts.enabled=true
 ```
+
 {% endcode %}
 
 After 5-10 minutes, you should see your cluster connected. Data should automatically begin appearing in your Allocations and Assets dashboards.
@@ -73,7 +75,7 @@ Remove the agent from the cluster to stop reporting new metrics to Kubecost Clou
 
 Example based on default Helm install command:
 
-```
+```bash
 export release=kubecost-cloud
 export namespace=kubecost-cloud
 helm uninstall ${release} --namespace ${namespace}
@@ -90,16 +92,18 @@ After five minutes of no longer receiving data, the cluster will disappear from 
 When attempting to install the Kubecost Cloud agent on a [GKE Autopilot](https://cloud.google.com/kubernetes-engine/docs/concepts/autopilot-overview) cluster, you may receive an error related to the network costs daemonSet:
 
 {% code overflow="wrap" %}
-```
+
+```console
 Error: admission webhook "
 gkepolicy.common-webhooks.networking.gke.io
 " denied the request: GKE Warden rejected the request because it violates one or more constraints.
 ```
+
 {% endcode %}
 
 To work around this problem, modify your install command to disable the network costs daemonSet. That setting change will look like this:
 
-```
+```text
 --set networkCosts.enabled=false
 ```
 

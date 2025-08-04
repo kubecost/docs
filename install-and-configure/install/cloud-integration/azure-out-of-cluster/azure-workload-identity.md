@@ -9,7 +9,7 @@ For this tutorial, you will need the cluster name, resource group, federated ide
 1. Validate that OIDC is enabled on the Azure cluster.
 
 ```bash
-$ export AKS_OIDC_ISSUER="$(az aks show -n $CLUSTER_NAME -g "${RESOURCE_GROUP}" --query "oidcIssuerProfile.issuerUrl" -otsv)"
+export AKS_OIDC_ISSUER="$(az aks show -n $CLUSTER_NAME -g "${RESOURCE_GROUP}" --query "oidcIssuerProfile.issuerUrl" -otsv)"
 https://westus.oic.<redacted>.azure.com/<redacted>
 ```
 
@@ -49,10 +49,10 @@ az identity federated-credential create --name ${FEDERATED_IDENTITY_CREDENTIAL_N
 5. Create the secret.
 
 ```bash
-$ kubectl create secret generic <SECRET_NAME> --from-file=cloud-integration.json -n kubecost
+kubectl create secret generic <SECRET_NAME> --from-file=cloud-integration.json -n kubecost
 ```
 
-6. Update the Helm *values.yaml* with the following and apply changes:
+6. Update the Helm _values.yaml_ with the following and apply changes:
 
 ```yaml
 kubecostProductConfigs:

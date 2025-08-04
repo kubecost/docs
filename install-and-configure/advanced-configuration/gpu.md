@@ -72,7 +72,7 @@ affinity:
 
 Install DCGM Exporter using the values defined.
 
-```sh
+```bash
 helm upgrade -i dcgm dcgm-exporter \
   --repo https://nvidia.github.io/dcgm-exporter/helm-charts \
   -n dcgm-exporter --create-namespace \
@@ -81,7 +81,7 @@ helm upgrade -i dcgm dcgm-exporter \
 
 Ensure the DCGM Exporter pods are in a running state and only on the nodes with NVIDIA GPUs.
 
-```sh
+```bash
 kubectl -n dcgm-exporter get pods
 ```
 
@@ -143,7 +143,7 @@ extraEnv:
 
 Install DCGM Exporter from the available Helm chart while supplying the values defined above.
 
-```sh
+```bash
 helm upgrade -i dcgm dcgm-exporter \
   --repo https://nvidia.github.io/dcgm-exporter/helm-charts \
   -n dcgm-exporter --create-namespace \
@@ -152,7 +152,7 @@ helm upgrade -i dcgm dcgm-exporter \
 
 Ensure the DCGM Exporter pods are in a running state and only on the nodes with NVIDIA GPUs.
 
-```sh
+```bash
 kubectl -n dcgm-exporter get pods
 ```
 
@@ -213,7 +213,7 @@ Cloud providers often install the device plugin on GPU nodes automatically. Ther
 
 To install NFD as a standalone component, follow the deployment guide [here](https://kubernetes-sigs.github.io/node-feature-discovery/stable/deployment/). A quick start command is also shown below. In some cases, you may have taints applied to GPU nodes which must be tolerated by the NFD DaemonSet. It is recommended to use the Helm installation guide to define tolerations if so.
 
-```sh
+```bash
 # This command uses Kustomize to deploy Kubernetes resources from a specific version.
 # Refer to the NFD releases to choose the latest, or most applicable, version.
 kubectl apply -k https://github.com/kubernetes-sigs/node-feature-discovery/deployment/overlays/default?ref=v0.16.3
@@ -221,13 +221,13 @@ kubectl apply -k https://github.com/kubernetes-sigs/node-feature-discovery/deplo
 
 Once NFD is installed, ensure one pod is running on your node(s) with NVIDIA GPUs.
 
-```sh
+```bash
 kubectl -n node-feature-discovery get pods
 ```
 
 After a few moments, check the labels of one such node to ensure the `feature.node.kubernetes.io/pci-10de.present="true"` label has been applied.
 
-```sh
+```bash
 kubectl get no <my_node_name> -o yaml | yq .metadata.labels
 ```
 
@@ -269,7 +269,7 @@ affinity:
 
 Install DCGM Exporter using the values defined.
 
-```sh
+```bash
 helm upgrade -i dcgm dcgm-exporter \
   --repo https://nvidia.github.io/dcgm-exporter/helm-charts \
   -n dcgm-exporter --create-namespace \
@@ -278,7 +278,7 @@ helm upgrade -i dcgm dcgm-exporter \
 
 Ensure the DCGM Exporter pods are in a running state and only on the nodes with NVIDIA GPUs.
 
-```sh
+```bash
 kubectl -n dcgm-exporter get pods
 ```
 
@@ -305,7 +305,7 @@ customMetrics: |-
 
 Perform an upgrade of the Helm release using your modified values so the custom metrics are applied in the form of a ConfigMap mounted by the DCGM Exporter DaemonSet.
 
-```sh
+```bash
 helm upgrade dcgm dcgm-exporter \
   --repo https://nvidia.github.io/dcgm-exporter/helm-charts \
   -n dcgm-exporter \
@@ -320,19 +320,19 @@ For more information on DCM Exporter and its available Helm values and settings,
 
 To validate your DCGM Exporter configuration, port-forward into the DCGM Exporter service and ensure first that metrics are being exposed.
 
-```sh
+```bash
 kubectl -n dcgm-exporter port-forward svc/dcgm-dcgm-exporter 9400:9400
 ```
 
 Use `cURL` to perform a `GET` request against the service and verify that multiple metrics and their values are shown.
 
-```sh
+```bash
 curl localhost:9400/metrics
 ```
 
 An output similar to below should be shown.
 
-```
+```console
 # HELP DCGM_FI_DEV_SM_CLOCK SM clock frequency (in MHz).
 # TYPE DCGM_FI_DEV_SM_CLOCK gauge
 DCGM_FI_DEV_SM_CLOCK{gpu="0",UUID="GPU-93ef0036-98de-4946-648a-eca7040afbeb",device="nvidia0",modelName="Tesla T4",Hostname="myhost1.compute.internal"} 300
@@ -341,7 +341,7 @@ DCGM_FI_DEV_SM_CLOCK{gpu="0",UUID="GPU-93ef0036-98de-4946-648a-eca7040afbeb",dev
 
 If Kubecost has already been installed, next check the bundled Prometheus instance to ensure that the metrics from DCGM Exporter have been collected and are visible. This command exposes the Prometheus web interface on local port `8080`
 
-```sh
+```bash
 kubectl -n kubecost port-forward svc/kubecost-prometheus-server 8080:80
 ```
 
@@ -376,7 +376,7 @@ sharing:
 
 With this configuration saved and applied to nodes, they will begin to advertise the `nvidia.com/gpu.shared` device with a quantity equal to the replica count, defined in the configuration, multiplied by the number of physical GPUs inside the node. For example, a node with four (4) physical NVIDIA GPUs which uses this configuration will advertise sixteen (16) shared GPU devices.
 
-```sh
+```bash
 $ kubectl describe node mynodename
 ...
 Capacity:

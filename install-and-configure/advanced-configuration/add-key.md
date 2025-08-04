@@ -21,9 +21,11 @@ To create a secret you will need to create a JSON file called _productkey.json_ 
 Run the following command to create the secret. Replace `<SECRET_NAME>` with a name for the secret (example: `productkeysecret`):
 
 {% code overflow="wrap" %}
-```shell
-$ kubectl create secret generic <SECRET_NAME> -n kubecost --from-file=productkey.json
+
+```bash
+kubectl create secret generic <SECRET_NAME> -n kubecost --from-file=productkey.json
 ```
+
 {% endcode %}
 
 Update your [_values.yaml_](https://github.com/kubecost/cost-analyzer-helm-chart/blob/d5144c1c5354e2978b56194f10d3a87cd545a100/cost-analyzer/values.yaml#L3420-L3424) to enable the product key and specify the secret name, then run a `helm upgrade`:

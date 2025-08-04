@@ -6,13 +6,13 @@ Use the following request to list all collections. Optionally, provide a categor
 
 ### Request
 
-```
+```http
 GET /model/collections?(category=<string>)
 ```
 
 ### Examples
 
-```
+```http
 GET /model/collections
 ```
 
@@ -99,7 +99,7 @@ GET /model/collections
 }
 ```
 
-```
+```http
 GET /model/collections?kind=Team
 ```
 

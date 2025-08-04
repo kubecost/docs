@@ -10,7 +10,7 @@ Please substitute the appropriate version for prod-x.xx.x. [Latest releases can 
 
 To find the exact images used for each Kubecost release, a command such as this can be used:
 
-```sh
+```bash
 helm template kubecost --repo https://kubecost.github.io/cost-analyzer cost-analyzer \
   --namespace kubecost \
   --set networkCosts.enabled=true \

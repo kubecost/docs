@@ -35,7 +35,7 @@ For configuring single app logout, read [Okta's documentation](https://help.okta
 10. Use this [Okta document](https://help.okta.com/en-us/content/topics/apps/apps-manage-assignments.htm) to assign individuals or groups access to your Kubecost application.
 11. Finally, add `-f values-saml.yaml` to your Kubecost Helm upgrade command:
 
-```shell
+```bash
 helm upgrade --install kubecost \
   --repo https://kubecost.github.io/cost-analyzer/ cost-analyzer \
   --namespace kubecost --create-namespace \
@@ -84,7 +84,7 @@ Filtering is configured very similarly to the admin/readonly above. The same gro
       - assertionName: "kubecost_group"
 ```
 
-The array of groups obtained during the authorization request will be matched to the subject key in the *filters.json*:
+The array of groups obtained during the authorization request will be matched to the subject key in the _filters.json_:
 
 ```json
 {
@@ -123,23 +123,23 @@ As an example, we will configure the following:
 
 1. Go to the Okta admin dashboard (https://{YOUR-SUBDOMAIN}.okta.com/admin/dashboard) and select _Directory_ > _Groups_ from the left navigation. On the Groups page, select _Add group_.
 
-2. Create groups for *kubecost_users*, *kubecost_admin* and *kubecost_dev-namespaces* by providing each value as the name with an optional description, then select _Save_. You will need to perform this step three times, one for each group.
+2. Create groups for _kubecost_users_, _kubecost_admin_ and _kubecost_dev-namespaces_ by providing each value as the name with an optional description, then select _Save_. You will need to perform this step three times, one for each group.
 
-3. Select each group, then select *Assign people* and add the appropriate users for testing. Select _Done_ to confirm edits to a group. Kubecost admins will be part of both the read only *kubecost_users* and *kubecost_admin groups*. Kubecost will assign the most rights if there are conflicts.
+3. Select each group, then select _Assign people_ and add the appropriate users for testing. Select _Done_ to confirm edits to a group. Kubecost admins will be part of both the read only _kubecost_users_ and _kubecost_admin groups_. Kubecost will assign the most rights if there are conflicts.
 
-4. Return to the Groups page. Select *kubecost_users*, then in the _Applications_ tab, assign the Kubecost application. You do not need to assign the other *kubecost_* groups to the Kubecost application because all users already have access in the *kubecost_users* group.
+4. Return to the Groups page. Select _kubecost_users_, then in the _Applications_ tab, assign the Kubecost application. You do not need to assign the other _kubecost__ groups to the Kubecost application because all users already have access in the _kubecost_users_ group.
 
 5. Modify filters.json as depicted above.
 
 6. Create the ConfigMap using the following command:
 
-```shell
+```bash
 kubectl create configmap group-filters --from-file filters.json -n kubecost
 ```
 
 You can modify the ConfigMap without restarting any pods.
 
-```shell
+```bash
 kubectl delete configmap -n kubecost group-filters && kubectl create configmap -n kubecost group-filters --from-file filters.json
 ```
 
@@ -163,15 +163,15 @@ kubectl delete configmap -n kubecost group-filters && kubectl create configmap -
    * In the Encryption Algorithm box that appears, select _AES256-CBC_.
    * Select _Browse Files_ in the Encryption Certificate field and upload an image file of your certifcate.
 
-5. Create a secret with the certificate. The file name **must** be *saml-encryption-cert.cer*.
+5. Create a secret with the certificate. The file name **must** be _saml-encryption-cert.cer_.
 
    `kubectl create secret generic kubecost-saml-cert --from-file saml-encryption-cert.cer --namespace kubecost`
 
-6. Create a secret with the private key. The file name **must** be *saml-encryption-key.pem*.
+6. Create a secret with the private key. The file name **must** be _saml-encryption-key.pem_.
 
    `kubectl create secret generic kubecost-saml-decryption-key --from-file saml-encryption-key.pem --namespace kubecost`
 
-7. Pass the following values via Helm into your *values.yaml*:
+7. Pass the following values via Helm into your _values.yaml_:
 
    ```yaml
    saml:
@@ -184,39 +184,47 @@ kubectl delete configmap -n kubecost group-filters && kubectl create configmap -
 You can look at the logs on the aggregator and cost-model containers. In this example, the assumption is that the prefix for Kubecost groups is `kubecost_`. This script is currently a work in progress.
 
 {% code overflow="wrap" %}
-```sh
+
+```bash
 kubectl logs deployment/kubecost-cost-analyzer -c cost-model --follow |grep -v -E 'resourceGroup|prometheus-server'|grep -i -E 'group|xmlname|saml|login|audience|kubecost_'
 ```
+
 {% endcode %}
 
 If `kubecostAggregator.enabled` is `true` or unspecified in _values.yaml_:
 
 {% code overflow="wrap" %}
-```sh
+
+```bash
 kubectl logs statefulsets/kubecost-aggregator --follow |grep -v -E 'resourceGroup|prometheus-server'|grep -i -E 'group|xmlname|saml|login|audience|kubecost_'
 ```
+
 {% endcode %}
 
 If `kubecostAggregator.enabled` is `false` in _values.yaml_:
 
 {% code overflow="wrap" %}
-```sh
+
+```bash
 kubectl logs services/kubecost-aggregator --follow |grep -v -E 'resourceGroup|prometheus-server'|grep -i -E 'group|xmlname|saml|login|audience|kubecost_'
 ```
+
 {% endcode %}
 
 When the group has been matched, you will see:
 
 {% code overflow="wrap" %}
-```sh
+
+```console
 auth.go:167] AUDIENCE: [readonly group:readonly@kubecost.com]
 auth.go:167] AUDIENCE: [admin group:admin@kubecost.com]
 ```
+
 {% endcode %}
 
-
 {% code overflow="wrap" %}
-```sh
+
+```console
 configwatchers.go:69] ERROR UPDATING group-filters CONFIG: []map[string]string: ReadMapCB: expect }, but found l, error found in #10 byte of ...|el": "{ "label": "ap|..., bigger context ...|nFilters": [
          {
 
@@ -224,12 +232,14 @@ configwatchers.go:69] ERROR UPDATING group-filters CONFIG: []map[string]string: 
          }
      |...
 ```
+
 {% endcode %}
 
 This is what you should expect to see:
 
 {% code overflow="wrap" %}
-```sh
+
+```console
 
 I0330 14:48:20.556725       1 costmodel.go:3421]   kubecost_user_type: {XMLName:{Space:urn:oasis:names:tc:SAML:2.0:assertion Local:Attribute} FriendlyName: Name:kubecost_user_type NameFormat:urn:oasis:names:tc:SAML:2.0:attrname-format:basic Values:[{XMLName:{Space:urn:oasis:names:tc:SAML:2.0:assertion Local:AttributeValue} Type: Value:}]}
 I0330 14:48:20.556767       1 costmodel.go:3421]   firstname: {XMLName:{Space:urn:oasis:names:tc:SAML:2.0:assertion Local:Attribute} FriendlyName: Name:firstname NameFormat:urn:oasis:names:tc:SAML:2.0:attrname-format:basic Values:[{XMLName:{Space:urn:oasis:names:tc:SAML:2.0:assertion Local:AttributeValue} Type: Value:cost_admin}]}
@@ -244,5 +254,5 @@ I0330 14:48:20.702229       1 costmodel.go:813] Authenticated saml
 ...
 I0330 14:48:21.011787       1 auth.go:167] AUDIENCE: [admin group:admin@kubecost.com]
 ```
-{% endcode %}
 
+{% endcode %}

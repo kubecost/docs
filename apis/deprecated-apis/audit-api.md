@@ -16,6 +16,7 @@ Duration of time over which to query. Accepts all standard Kubecost window forma
 {% endswagger-parameter %}
 
 {% swagger-response status="200: OK" description="" %}
+
 ```json
 {
     "code": 200,
@@ -91,6 +92,7 @@ Duration of time over which to query. Accepts all standard Kubecost window forma
         }
 }
 ```
+
 {% endswagger-response %}
 {% endswagger %}
 
@@ -112,12 +114,14 @@ Must be a valid audit type (See the Audit types section below). Excluding this a
 {% endswagger-parameter %}
 
 {% swagger-response status="200: OK" description="" %}
+
 ```json
 {
     "code": 200,
     "data": "Running audit over window: [2023-01-16T20:23:08+0000, 2023-01-19T20:23:08+0000) for all audit types"
 }
 ```
+
 {% endswagger-response %}
 {% endswagger %}
 
@@ -125,7 +129,7 @@ Must be a valid audit type (See the Audit types section below). Excluding this a
 
 Audit types are optional parameters to filter your requests to audit select parts of your workload or perform additional actions. The endpoint for using an audit type will look like:
 
-```
+```http
 https://<your-kubecost-address>/model/etl/audit?commit=true&type=<auditType>
 ```
 

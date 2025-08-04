@@ -98,7 +98,7 @@ The user or role which has access to Kubecost's federated storage bucket should 
 
 ### "operation error STS: AssumeRole"
 
-```txt
+```console
 (2024-04-08T00:00:00+0000): GetCloudCost: error getting Athena columns: QueryAthenaPaginated: start query error: operation error Athena: StartQueryExecution, get identity: get credentials: failed to refresh cached credentials, operation error STS: AssumeRole, https response error StatusCode: 403, RequestID: 0459fd9b-451d-4bd0-8289-aaf90f146f37, api error AccessDenied: User: arn:aws:sts::YOUR_ACCOUNT_ID:assumed-role/aws-prod-eks-node-group/i-05c1fa9d0eb168e35 is not authorized to perform: sts:AssumeRole on resource: arn:aws:iam::YOUR_PRIMARY_ACCOUNT_ID:role/KubecostRole-YOUR_ACCOUNT_ID
 (2024-04-04T00:00:00+0000): GetCloudCost: error getting Athena columns: QueryAthenaPaginated: start query error: operation error Athena: StartQueryExecution, get identity: get credentials: failed to refresh cached credentials, operation error STS: AssumeRole, https response error StatusCode: 403, RequestID: 6494b54b-1a9e-47ea-941d-e316cb0bc778, api error AccessDenied: User: arn:aws:sts::YOUR_ACCOUNT_ID:assumed-role/aws-prod-eks-node-group/i-05c1fa9d0eb168e35 is not authorized to perform: sts:AssumeRole on resource: arn:aws:iam::YOUR_PRIMARY_ACCOUNT_ID:role/KubecostRole-YOUR_ACCOUNT_ID
 ```

@@ -36,6 +36,7 @@ See the [troubleshooting section](aws-amp-integration.md#troubleshooting) of thi
 You can add these recording rules to improve the performance. Recording rules allow you to precompute frequently needed or computationally expensive expressions and save their results as a new set of time series. Querying the precomputed result is often much faster than running the original expression every time it is needed. Follow [these AWS instructions](https://docs.aws.amazon.com/prometheus/latest/userguide/AMP-Ruler.html) to add the following rules:
 
 {% code overflow="wrap" %}
+
 ```yaml
     groups:
       - name: CPU
@@ -69,27 +70,28 @@ You can add these recording rules to improve the performance. Recording rules al
             labels:
               daemonset: "true"
 ```
+
 {% endcode %}
 
 ## Troubleshooting
 
 The `RunDiagnostic` logs in the cost-model container will contain the most useful information.
 
-```sh
+```bash
 kubectl logs -n kubecost deployments/kubecost-cost-analyzer cost-model |grep RunDiagnostic
 ```
 
 Test to see if the Kubecost metrics are available using Grafana or exec into the Kubecost frontend to run a cURL against the AMP endpoint:
 
-Grafana query: 
+Grafana query:
 
-```
+```text
 count({__name__=~".+"}) by (job)
 ```
 
 Port-forward to cost-model:9090:
 
-```
+```bash
 kubectl port-forward -n kubecost svc/kubecost-cost-analyzer 9090:9090
 ```
 
@@ -97,7 +99,7 @@ Direct link[localhost:9090](http://localhost:9090/grafana/explore?schemaVersion=
 
 Or exec command:
 
-```sh
+```bash
 kubectl exec -i -t \
   deployments/kubecost-cost-analyzer \
   -c cost-analyzer-frontend -- \
@@ -140,8 +142,8 @@ Success:
   }
 }
 ```
------------------------
 
+-----------------------
 
 The below queries must return data for Kubecost to calculate costs correctly.
 
@@ -247,7 +249,7 @@ In a working `sigv4proxy`, there will be very few logs.
 
 Correctly working log output:
 
-```log
+```console
 time="2023-09-21T17:40:15Z" level=info msg="Stripping headers []" StripHeaders="[]"
 time="2023-09-21T17:40:15Z" level=info msg="Listening on :8005" port=":8005"
 ```
@@ -260,7 +262,7 @@ kubectl logs deployments/$KUBECOST_DEPLOYMENT -c cost-model --tail -1 |grep -i e
 
 Example errors:
 
-```log
+```console
 ERR CostModel.ComputeAllocation: pod query 1 try 2 failed: avg(kube_pod_container_status_running...
 Prometheus communication error: 502 (Bad Gateway) ...
 ```

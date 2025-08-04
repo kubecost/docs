@@ -16,7 +16,8 @@ Filter query by event kind (see below).
 {% endswagger-parameter %}
 
 {% swagger-response status="200: OK" description="" %}
-```javascript
+
+```json
 {
   "code": 200,
   "data": {
@@ -103,6 +104,7 @@ Filter query by event kind (see below).
   }
 }
 ```
+
 {% endswagger-response %}
 {% endswagger %}
 
@@ -110,13 +112,13 @@ Filter query by event kind (see below).
 
 All event kinds below will appear in the body of the output by default. You can filter for specific event kinds using the `kind` parameter. For example, to see only `AllocationSetSaved` in the output, your endpoint will look like:
 
-```
+```http
 http://<your-kubecost-address>/model/etl/log?kind=AllocationSetSaved
 ```
 
 You can also view all substrings between Allocations or Assets. For example, the following endpoint will retrieve all event kinds beginning with `AssetSet`:
 
-```
+```http
 http://<your-kubecost-address>/model/etl/log?kind=AssetSet
 ```
 
@@ -141,8 +143,8 @@ Assets outputs should be interpreted as:
 * `AssetSetReconcileError` describes an error in reconciliation
 
 Underneath each event `kind`, you should see `size` and/or `window` returned, which are:
- 
-  * `size`: number of records in the set
-  * `window`: window of the set
+
+* `size`: number of records in the set
+* `window`: window of the set
 
 This log will additionally be appended to bug reports.

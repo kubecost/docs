@@ -10,7 +10,7 @@ When ingesting billing data from cloud service providers (CSP), Kubecost records
 
 Each cost metric includes a `Cost` and a `KubernetesPercent` field. An unaggregated CloudCost query should have a `1` or a `0` in the `KubernetesPercent` field of all of its cost metrics. When it becomes aggregated, this value can become a percentage. It is necessary to keep track of these separately because differences in cost metrics will cause this value to diverge. For example, aggregating a Cloud Cost representing a Kubernetes node that has a reserved instance applied to it, and a non-Kubernetes node of the same type but with no reserved instance discount. See below:
 
-```
+```text
 Node1 {
     ListCost: {
         Cost: 2,

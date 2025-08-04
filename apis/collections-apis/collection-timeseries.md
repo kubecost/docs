@@ -8,21 +8,21 @@ Use the following request to query the time series costs of a collection, which 
 
 ### Request
 
-```
+```http
 GET /model/collection/query/timeseries?id=<string>&window=<string>(&groups=<true>)
 ```
 
 ### Examples
 
-```
+```http
 GET /model/collection/query/timeseries?id=8a939ba1-ff15-4600-b711-2cb109114914&window=30d
 ```
 
 ```json
 {
     "id": "8a939ba1-ff15-4600-b711-2cb109114914",
-    "name": "Infrastructure",   
-    "category": "Team", 
+    "name": "Infrastructure",
+    "category": "Team",
     "window": {
         "start": "2023-01-01T00:00:00Z",
         "end": "2023-02-01T00:00:00Z"
@@ -92,7 +92,7 @@ GET /model/collection/query/timeseries?id=8a939ba1-ff15-4600-b711-2cb109114914&w
 }
 ```
 
-```
+```http
 GET /model/collection/query/timeseries?id=8a939ba1-ff15-4600-b711-2cb109114914&window=30d&groups=true
 ```
 
@@ -100,7 +100,7 @@ GET /model/collection/query/timeseries?id=8a939ba1-ff15-4600-b711-2cb109114914&w
 {
     "id": "8a939ba1-ff15-4600-b711-2cb109114914",
     "name": "Infrastructure",
-    "category": "Team", 
+    "category": "Team",
     "window": {
         "start": "2023-01-01T00:00:00Z",
         "end": "2023-02-01T00:00:00Z"

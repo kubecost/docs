@@ -14,7 +14,7 @@ This document will show you how to integrate the Grafana Mimir with Kubecost for
 Install the Grafana Agent for Kubernetes on your cluster. On the existing K8s cluster that you intend to install Kubecost, run the following commands to install the Grafana Agent to scrape the metrics from Kubecost `/metrics` endpoint. The script below installs the Grafana Agent with the necessary scraping configuration for Kubecost, you may want to add additional scrape configuration for your setup.
 
 {% code overflow="wrap" %}
-```
+```bash
 export CLUSTER_NAME="YOUR_CLUSTER_NAME"
 export MIMIR_ENDPOINT="http://example-mimir.com/api/v1/push"
 
@@ -113,7 +113,7 @@ data:
 
           metric_relabel_configs:
             - source_labels: [ __name__ ]
-              regex: (kubelet_volume_stats_used_bytes) # this metric is in alpha 
+              regex: (kubelet_volume_stats_used_bytes) # this metric is in alpha
               action: keep
 
         - job_name: 'kubernetes-service-endpoints'
@@ -219,7 +219,7 @@ data:
               target_label: kubernetes_namespace
             - source_labels: [__meta_kubernetes_service_name]
               target_label: kubernetes_name
-  
+
 EOF
 (export NAMESPACE=kubecost && kubectl apply -n $NAMESPACE -f -)
 
@@ -229,7 +229,7 @@ MANIFEST_URL=https://raw.githubusercontent.com/grafana/agent/v0.24.2/production/
 
 You can also verify if `grafana-agent` is scraping data with the following command (optional):
 
-```
+```bash
 kubectl -n kubecost logs grafana-agent-0
 ```
 
@@ -240,7 +240,7 @@ To learn more about how to install and configure the Grafana agent, as well as a
 Run the following command to deploy Kubecost. Please remember to update the environment variables values with your Mimir setup information.
 
 {% code overflow="wrap" %}
-```
+```bash
 export MIMIR_ENDPOINT="http://example-mimir.com/"
 export MIMIR_ORG_ID="YOUR_MIMIR_ORG_ID"
 helm upgrade -i kubecost cost-analyzer/ -n kubecost --create-namespace \

@@ -26,6 +26,7 @@ Filter your results by any category which you can aggregate by, can support mult
 {% endswagger-parameter %}
 
 {% swagger-response status="200: OK" description="" %}
+
 ```json
 {
     "code": 200,
@@ -66,6 +67,7 @@ Filter your results by any category which you can aggregate by, can support mult
         ],
     }
 ```
+
 {% endswagger-response %}
 {% endswagger %}
 
@@ -91,6 +93,7 @@ Filter your results by any category which you can aggregate by, can support mult
 {% endswagger-parameter %}
 
 {% swagger-response status="200: OK" description="" %}
+
 ```json
 {
     "code": 200,
@@ -124,5 +127,6 @@ Filter your results by any category which you can aggregate by, can support mult
     }
 }
 ```
+
 {% endswagger-response %}
 {% endswagger %}

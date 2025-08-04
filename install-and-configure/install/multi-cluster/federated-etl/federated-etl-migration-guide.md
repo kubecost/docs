@@ -29,13 +29,13 @@ With Kubecost v2, Kubecost now only supports using the cloud integration secret 
 
 After successfully creating your cloud integration secret, run the following command. Make sure the name of your file containing your secret is *cloud-integration.json*.
 
-```
+```bash
 kubectl create secret generic cloud-integration -n kubecost --from-file=cloud-integration.json
 ```
 
 Next, apply the cloud integration secret to your *values.yaml*, replacing `CLOUD_INTEGRATION_SECRET` with the value of the secret:
 
-```
+```yaml
 kubecostProductConfigs:
     cloudIntegrationSecret: CLOUD_INTEGRATION_SECRET
 ```
@@ -46,7 +46,7 @@ Finally, make sure to remove cloud integration values from your *values.yaml* if
 
 <summary>AWS</summary>
 
-```
+```yaml
 athenaProjectID: "530337586277" # The AWS AccountID where the Athena CUR is. Generally your management account
 athenaBucketName: "s3://aws-athena-query-results-530337586277-us-east-1"
 athenaRegion: us-east-1
@@ -63,7 +63,7 @@ projectID: "123456789"  # Also known as AccountID on AWS -- the current account/
 
 <summary>GCP</summary>
 
-```
+```yaml
 projectID: "123456789"
 gcpSecretName: gcp-secret # Name of a secret representing the GCP service key
 gcpSecretKeyName: compute-viewer-kubecost-key.json # Name of the secret's key containing the gcp service key
@@ -76,7 +76,7 @@ bigQueryBillingDataDataset: billing_data.gcp_billing_export_v1_01AC9F_74CF1D_556
 
 <summary>Azure</summary>
 
-```
+```yaml
 azureBillingRegion: US # Represents 2-letter region code, e.g. West Europe = NL, Canada = CA. ref: https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes
 azureSubscriptionID: 0bd50fdf-c923-4e1e-850c-196dd3dcc5d3
 azureClientID: f2ef6f7d-71fb-47c8-b766-8d63a19db017
@@ -88,10 +88,9 @@ azureClientPassword: fake key # Only use if your values.yaml are stored encrypte
 
 ### Step 2: Update the primary cluster
 
-
 Delete the following values from your primary cluster Helm values:
 
-```
+```yaml
 federatedETL:
   useExistingS3Config: false
   primaryCluster: true
@@ -106,17 +105,17 @@ kubecostModel:
 
 Add the following values to your primary cluster Helm values:
 
-```
+```yaml
 kubecostAggregator:
   replicas: 1
   deployMethod: statefulset
 ```
-See this [example .yaml](https://github.com/kubecost/poc-common-configurations/blob/main/etl-federation-aggregator/primary-aggregator.yaml#L1-L14) for what your primary cluster configuration should look like.
 
+See this [example .yaml](https://github.com/kubecost/poc-common-configurations/blob/main/etl-federation-aggregator/primary-aggregator.yaml#L1-L14) for what your primary cluster configuration should look like.
 
 Upgrade Kubecost on the primary cluster via Helm:
 
-```
+```bash
 helm upgrade --install "kubecost" --repo https://kubecost.github.io/cost-analyzer/ cost-analyzer --namespace kubecost -f values.yaml
 ```
 
@@ -126,7 +125,7 @@ Once the Helm upgrade is complete, Aggregator will start processing data. This p
 
 Delete the following values from your secondary cluster Helm values:
 
-```
+```yaml
 federatedETL:
   useExistingS3Config: false
   primaryCluster: false
@@ -137,7 +136,7 @@ kubecostModel:
 
 Add the following values to your secondary cluster Helm values:
 
-```
+```yaml
 federatedETL:
   agentOnly: true
 ```
@@ -146,6 +145,6 @@ See this [example .yaml](https://github.com/kubecost/poc-common-configurations/b
 
 Finally, upgrade Kubecost on the secondary cluster(s) via Helm:
 
-```
+```bash
 helm upgrade --install "kubecost" --repo https://kubecost.github.io/cost-analyzer/ cost-analyzer --namespace kubecost -f values.yaml
 ```

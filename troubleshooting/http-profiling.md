@@ -9,21 +9,23 @@ Once the profile is complete, it can be downloaded by visiting the `/model/httpp
 Here's a full example, including some extra metadata from `curl` to aid debugging.
 
 {% code overflow="wrap" %}
-```
+
+```bash
 curl -G 'localhost:9090/model/savings/requestSizingV2' \
-    -H 'X-Kubecost-CPU-Profile: true' \
-    -w "Connect: %{time_connect} TTFB: %{time_starttransfer} Total time: %{time_total} \n"
+  -H 'X-Kubecost-CPU-Profile: true' \
+  -w "Connect: %{time_connect} TTFB: %{time_starttransfer} Total time: %{time_total} \n"
 ```
+
 {% endcode %}
 
-```
+```bash
 curl -G 'localhost:9090/model/httpprofile/cpu' \
-    -o '/tmp/profile.cpu.out'
+  -o '/tmp/profile.cpu.out'
 ```
 
 And to view the profile, standard Go tools work:
 
-```
+```bash
 go tool pprof -http 127.0.0.1:9367 /tmp/profile.cpu.out
 ```
 

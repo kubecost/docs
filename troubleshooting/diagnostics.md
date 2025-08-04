@@ -43,17 +43,21 @@ The file on `Nov 20, 2020` in the above image appears in red. This is because th
 The ETL pipelines provide a way to repair a specific day in the pipeline using the following URL:
 
 {% code overflow="wrap" %}
-```
+
+```http
 http://<kubecost-url>:<port>/model/etl/[allocation|asset]/repair?window=<RFC3339-start>,<RFC3339-end>
 ```
+
 {% endcode %}
 
 In order to repair the file for the problematic date above (Note it's for _Allocation_), navigate to the following in a browser:
 
 {% code overflow="wrap" %}
-```
+
+```http
 http://<kubecost-url>:<port>/model/etl/allocation/repair?window=2020-11-20T00:00:00Z,2020-11-21T00:00:00Z
 ```
+
 {% endcode %}
 
 ### Kubecost ETL pipeline cloud metrics
@@ -76,7 +80,7 @@ For more information about Cloud Integration and related APIs, read the [cloud-i
 
 Below are the minimum required versions:
 
-```
+```text
 kube-state-metrics - v1.6.0 (May 19)
 cAdvisor - kubelet v1.11.0 (May 18)
 ```
@@ -97,7 +101,7 @@ If the necessary scrape target is not added to your Prometheus, then refer to [t
 
 You can see information on recent Prometheus scrape errors directly on the Kubecost Diagnostics page when present or by visiting your Prometheus console and then _Status_ > _Targets_ in the top navigation bar.
 
-Contact support@kubecost.com or send a message in our Slack workspace if you encounter an error that you do not recognize.
+Contact <support@kubecost.com> or send a message in our Slack workspace if you encounter an error that you do not recognize.
 
 ### Step 5: Metrics not being dropped with Prometheus relabel rules
 

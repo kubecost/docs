@@ -10,17 +10,18 @@ The Turbonomic Integration feature enables users to obtain supplemental cost inf
 
 Prerequisites:
 
-- A running Turbonomic client 
+- A running Turbonomic client
 
 Kubecost will require network access to your Turbonomic installation via an OAuth 2.0 Client. We require the following settings on the OAuth client:
+
 - Role: `ADVISOR`
 - ClientAuthenticationMethods: `client_secret_post`
 
-Please see the [IBM Turbonomic documentation](https://www.ibm.com/docs/en/tarm/8.14.3?topic=cookbook-authenticating-oauth-20-clients-api#cookbook_administration_oauth_authentication__title__4) on more instructions on how to create an OAuth 2.0 client. 
+Please see the [IBM Turbonomic documentation](https://www.ibm.com/docs/en/tarm/8.14.3?topic=cookbook-authenticating-oauth-20-clients-api#cookbook_administration_oauth_authentication__title__4) on more instructions on how to create an OAuth 2.0 client.
 
-### Step 1: Configure Helm values 
+### Step 1: Configure Helm values
 
-The below YAML is an example of how to configure the Turbonomic integration in your Helm values file. 
+The below YAML is an example of how to configure the Turbonomic integration in your Helm values file.
 
 ```yaml
 global:
@@ -38,7 +39,7 @@ global:
 
 If deploying changes via Helm, you will be able to run a command similar to:
 
-```sh
+```bash
 helm upgrade -i kubecost cost-analyzer \
   --repo https://kubecost.github.io/cost-analyzer/ \
   --namespace kubecost \
@@ -47,10 +48,10 @@ helm upgrade -i kubecost cost-analyzer \
 
 Once you've applied your changes, validate that the integration is successful by checking the Aggregator pod logs. You should see logs similar to the following:
 
-```sh
+```bash
 kubectl logs statefulset/kubecost-aggregator -n kubecost | grep -i "Turbonomic"
 ```
 
-```txt
+```console
 DBG Turbonomic: Ingestor: completed run with 32 turbonomic actions ingested
 ```
