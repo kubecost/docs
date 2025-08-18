@@ -250,7 +250,7 @@ Querying for `window=3d` should return a range of four sets because the queried 
 
 ## Special types of allocation
 
-* `__idle__` refers to resources on a cluster that were not dedicated to a Kubernetes object (e.g. unused CPU core-hours on a node). An idle resource can be shared (proportionally or evenly) with the other allocations from the same cluster. (See the argument `shareIdle`.)
+* `__idle__` refers to resources on a cluster that were not dedicated to a Kubernetes object (e.g. unused CPU core-hours on a node). An idle resource can be shared (proportionally or evenly) with the other allocations from the same cluster. (See the argument `shareIdle`). If using `reconcile=true` the `__idle__` line item will not show any costAdjustments. This is normal, because idle is computed _after_ the cost of the node is adjusted and the cost of the node's container workloads are adjusted. For more information, reference the documentation on [Efficiency and Idle](/using-kubecost/navigating-the-kubecost-ui/cost-allocation/efficiency-idle.md)
 * `__unallocated__` refers to aggregated allocations without the selected `aggregate` field; e.g. aggregating by `label:app` might produce an `__unallocated__` allocation composed of allocations without the `app` label.
 * `__unmounted__` (or "Unmounted PVs") refers to the resources used by PersistentVolumes that aren't mounted to a pod using a PVC, and thus cannot be allocated to a pod.
 
@@ -746,9 +746,3 @@ Here, we provide theoretical error bounds for different resolution values given 
 * \-1.00, 10.00 means that the result could be as high as 1000% error (e.g. 30s pod being counted for 5m) or the pod could be missed altogether, i.e. -100% error.
 
 <table><thead><tr><th width="129" align="right">resolution</th><th align="center">30s pod</th><th align="center">5m pod</th><th align="center">1h pod</th><th align="center">1d pod</th><th align="center">7d pod</th></tr></thead><tbody><tr><td align="right">1m</td><td align="center">-1.00, 2.00</td><td align="center">0.80, 1.00</td><td align="center">0.98, 1.00</td><td align="center">1.00, 1.00</td><td align="center">1.00, 1.00</td></tr><tr><td align="right">2m</td><td align="center">-1.00, 4.00</td><td align="center">0.80, 1.20</td><td align="center">0.97, 1.00</td><td align="center">1.00, 1.00</td><td align="center">1.00, 1.00</td></tr><tr><td align="right">5m</td><td align="center">-1.00, 10.00</td><td align="center">-1.00, 1.00</td><td align="center">0.92, 1.00</td><td align="center">1.00, 1.00</td><td align="center">1.00, 1.00</td></tr><tr><td align="right">10m</td><td align="center">-1.00, 20.00</td><td align="center">-1.00, 2.00</td><td align="center">0.83, 1.00</td><td align="center">0.99, 1.00</td><td align="center">1.00, 1.00</td></tr><tr><td align="right">30m</td><td align="center">-1.00, 60.00</td><td align="center">-1.00, 6.00</td><td align="center">0.50, 1.00</td><td align="center">0.98, 1.00</td><td align="center">1.00, 1.00</td></tr><tr><td align="right">60m</td><td align="center">-1.00, 120.00</td><td align="center">-1.00, 12.00</td><td align="center">-1.00, 1.00</td><td align="center">0.96, 1.00</td><td align="center">0.99, 1.00</td></tr></tbody></table>
-
-## Troubleshooting
-
-### Incomplete cost data for short window queries when using Thanos
-
-While using Thanos, data can delayed from 1 to 3 hours, which may result in allocation queries retrieving inaccurate or incomplete data when using short `window` intervals. Avoid using values for `window` smaller than `5h` as a best practice.

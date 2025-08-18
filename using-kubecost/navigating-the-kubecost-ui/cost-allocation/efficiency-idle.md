@@ -34,6 +34,8 @@ Node idle cost can be expressed as:
 
 So, idle costs can also be thought of as the cost of the space that the Kubernetes scheduler could schedule pods, without disrupting any existing workloads, but it is not currently.
 
+Kubecost continuously recalculates idle costs whenever underlying Assets & Allocations data changes. For example when cloud billing integration is enabled and Kubecost reconciles with your cloud bill, the process follows a specific sequence: first node costs are adjusted, then container workload costs on those nodes are updated, and finally idle costs are fully recalculated. As a result, when querying the Allocations API, the `__idle__` line item will not show any "adjustments" entries.
+
 ### Sharing idle
 
 Idle can be charged back to pods on a cost-weighted basis or viewed as a separate line item. As an example, consider the following representations:
