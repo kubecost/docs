@@ -136,7 +136,6 @@
   * [Allocation API](apis/monitoring-apis/api-allocation.md)
   * [Allocation Trends API](apis/monitoring-apis/allocation-trends-api.md)
   * [Assets API](apis/monitoring-apis/assets-api.md)
-  * [Asset Diff API](apis/monitoring-apis/asset-diff.md)
   * [Cloud Cost API](apis/monitoring-apis/cloud-cost-api.md)
   * [Cloud Cost Trends API](apis/monitoring-apis/cloud-cost-trends-api.md)
   * [External Costs API](apis/monitoring-apis/external-costs-api.md)
