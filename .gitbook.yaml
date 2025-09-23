@@ -136,7 +136,6 @@ redirects:
     hc/en-us/articles/8554606459671: assets-api.md
     hc/en-us/articles/9038721747223: high-availability.md
     hc/en-us/articles/9176161195799: api-request-right-sizing-v2.md
-    hc/en-us/articles/9177037361175: context-switcher.md
     hc/en-us/articles/9505088647319: events.md
     hc/en-us/articles/9530812762135: gpu-allocation.md
     hc/en-us/articles/10015110616599-Federated-ETL: federated-etl.md
@@ -239,6 +238,5 @@ redirects:
     hc/en-us/articles/8554606459671-Assets-API: assets-api.md
     hc/en-us/articles/9038721747223-High-Availability-Kubecost: high-availability.md
     hc/en-us/articles/9176161195799-Container-Request-Right-Sizing-Recommendation-API-v2-: api-request-right-sizing-v2.md
-    hc/en-us/articles/9177037361175-Contexts: context-switcher.md
     hc/en-us/articles/9505088647319-Events-API: events.md
     hc/en-us/articles/9530812762135--GPU-Allocation: gpu-allocation.md
