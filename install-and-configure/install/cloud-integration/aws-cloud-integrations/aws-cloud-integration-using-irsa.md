@@ -155,12 +155,12 @@ aws iam put-role-policy --role-name kubecost-cur-access \
   --policy-document file://iam-payer-account-cur-athena-glue-s3-access.json
 ```
 
-Then allow Kubecost to read account tags:
+Optional: allow Kubecost to read account tags:
 
 ```bash
 aws iam put-role-policy --role-name kubecost-cur-access \
   --policy-name kubecost-payer-account-list-tags-policy \
-  --policy-document file://iam-payer-account-list-tags-policy.json
+  --policy-document file://iam-listAccounts-tags.json
 ```
 
 
