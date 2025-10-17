@@ -8,9 +8,9 @@ There are many ways to integrate your AWS Cost and Usage Report (CUR) with Kubec
 
 If this is not an accurate description of your environment, see our [AWS Cloud Integration](aws-cloud-integrations.md) doc for more options.
 
-{% hint style="info" %}
-Kubecost also supports [EKS Pod Identity](https://aws.amazon.com/about-aws/whats-new/2023/11/amazon-eks-pod-identity/) as an alternative to IRSA. To set up EKS Pod Identities, complete steps 1-4 of the below tutorial fully, then follow Step 5 until you are prompted to move to the [optional Step 6](aws-cloud-integration-using-irsa.md#step-6-optional-setting-up-eks-pod-identity) below.
-{% endhint %}
+> [!NOTE] 
+>Kubecost also supports [EKS Pod Identity](https://aws.amazon.com/about-aws/whats-new/2023/11/amazon-eks-pod-identity/) as an alternative to IRSA. To set up EKS Pod Identities, complete steps 1-4 of the below tutorial fully, then follow Step 5 until you are prompted to move to the [optional Step 6](aws-cloud-integration-using-irsa.md#step-6-optional-setting-up-eks-pod-identity) below.
+
 
 ## Overview of Kubecost CUR integration
 
@@ -80,9 +80,9 @@ Follow the [AWS documentation](https://docs.aws.amazon.com/cur/latest/userguide/
 ![delivery-options](/images/aws-cur/4-delivery-options.png)
 </details>
 
-{% hint style="info" %}
-If this CUR data is only used by Kubecost, it is safe to expire or delete the objects after seven days of retention.
-{% endhint %}
+> [!NOTE] 
+>If this CUR data is only used by Kubecost, it is safe to expire or delete the objects after seven days of retention.
+
 
 AWS may take up to 24 hours to publish data. Wait until this is complete before continuing to the next step.
 
@@ -97,9 +97,9 @@ As part of the CUR creation process, Amazon creates a CloudFormation template th
 
 ![athena-output-bucket](/images/aws-cur/8-upload-cfn-template.png)
 
-{% hint style="info" %}
-Your S3 path prefix can be found by going to your AWS Cost and Usage Reports dashboard and selecting your bucket's report. In the Report details tab, you will find the S3 path prefix.
-{% endhint %}
+> [!NOTE] 
+>Your S3 path prefix can be found by going to your AWS Cost and Usage Reports dashboard and selecting your bucket's report. In the Report details tab, you will find the S3 path prefix.
+
 
 Once Athena is set up with the CUR, you will need to create a *new* S3 bucket for Athena query results. The bucket used for the CUR cannot be used for the Athena output.
 
@@ -120,9 +120,9 @@ Navigate to Athena in the AWS Console. Be sure the region matches the one used i
 * `athenaRegion`: the AWS region value where your Athena query is configured
 * `athenaTable`: the partitioned value found in the Table list
 
-{% hint style="info" %}
-For Athena query results written to an S3 bucket only accessed by Kubecost, it is safe to expire or delete the objects after one day of retention.
-{% endhint %}
+> [!NOTE] 
+>For Athena query results written to an S3 bucket only accessed by Kubecost, it is safe to expire or delete the objects after one day of retention.
+
 
 ### Step 4: Setting up payer account IAM permissions
 
@@ -134,7 +134,6 @@ In *iam-payer-account-trust-primary-account.json*, replace `SUB_ACCOUNT_22222222
 
 In the same location as your downloaded configuration files, run the following command to create the appropriate policy (`jq` is not required):
 
-{% code overflow="wrap" %}
 
 ```bash
 aws iam create-role --role-name kubecost-cur-access \
@@ -156,15 +155,14 @@ aws iam put-role-policy --role-name kubecost-cur-access \
   --policy-document file://iam-payer-account-cur-athena-glue-s3-access.json
 ```
 
-Then allow Kubecost to read account tags:
+Optional: allow Kubecost to read account tags:
 
 ```bash
 aws iam put-role-policy --role-name kubecost-cur-access \
   --policy-name kubecost-payer-account-list-tags-policy \
-  --policy-document file://iam-payer-account-list-tags-policy.json
+  --policy-document file://iam-listAccounts-tags.json
 ```
 
-{% endcode %}
 
 Now we can obtain the last value `masterPayerARN` for *cloud-integration.json* as the ARN associated with the newly-created IAM role, as seen below in the AWS console:
 
@@ -172,9 +170,9 @@ Now we can obtain the last value `masterPayerARN` for *cloud-integration.json* a
 
 ### Step 5: Setting up IAM permissions for the primary cluster
 
-{% hint style="warning" %}
-By arriving at this step, you should have been able to provide all values to your *cloud-integration.json* file. If any values are missing, reread the tutorial and follow any steps needed to obtain those values.
-{% endhint %}
+> [!NOTE] 
+>By arriving at this step, you should have been able to provide all values to your *cloud-integration.json* file. If any values are missing, reread the tutorial and follow any steps needed to obtain those values.
+
 
 **From the AWS Account where the Kubecost primary cluster will run**
 
@@ -200,9 +198,14 @@ export CLUSTER_NAME=YOUR_CLUSTER
 export AWS_REGION=YOUR_REGION
 ```
 
-{% hint style="warning" %}
-If you are using EKS Pod Identity, skip the rest of Step 5 and continue to [Step 6](aws-cloud-integration-using-irsa.md#step-6-optional-setting-up-eks-pod-identity).
-{% endhint %}
+Create the secret (in this setup, there are no actual secrets in this file):
+
+```bash
+kubectl create secret generic cloud-integration -n kubecost --from-file=cloud-integration.json
+```
+
+> [!IMPORTANT] 
+>If you are using EKS Pod Identity, skip the rest of Step 5 and continue to [Step 6](aws-cloud-integration-using-irsa.md#step-6-optional-setting-up-eks-pod-identity).
 
 Enable the OIDC-Provider:
 
@@ -229,13 +232,11 @@ Go to the IAM Role and attach the proper IAM trust policy. [Use the sample trust
 
 **Alternative method: Create a new dedicated service account for Kubecost using `eksctl`**
 
-{% hint style="info" %}
-This method creates a new service account via eksctl command line tools, instead of using the default service account. Eksctl automatically creates the trust policy and IAM Role that are linked to the new dedicated Kubernetes service account.
-{% endhint %}
+> [!NOTE] 
+>This method creates a new service account via eksctl command line tools, instead of using the default service account. Eksctl automatically creates the trust policy and IAM Role that are linked to the new dedicated Kubernetes service account.
 
 Replace `SUB_ACCOUNT_222222222` with the AWS account number where the primary Kubecost cluster will run.
 
-{% code overflow="wrap" %}
 
 ```bash
 eksctl create iamserviceaccount \
@@ -247,21 +248,8 @@ eksctl create iamserviceaccount \
   --approve
 ```
 
-{% endcode %}
-
-Create the secret (in this setup, there are no actual secrets in this file):
-
-{% code overflow="wrap" %}
-
-```bash
-kubectl create secret generic cloud-integration -n kubecost --from-file=cloud-integration.json
-```
-
-{% endcode %}
-
 Install Kubecost using the service account and cloud-integration secret:
 
-{% code overflow="wrap" %}
 
 ```bash
 helm install kubecost \
@@ -272,7 +260,6 @@ helm install kubecost \
   --set kubecostProductConfigs.cloudIntegrationSecret=cloud-integration
 ```
 
-{% endcode %}
 
 Add the following section to your Helm values. This will tell Kubecost to use your newly created service account, instead of creating one.
 
@@ -284,9 +271,9 @@ serviceAccount:
 
 ### Step 6 (optional): Setting up EKS Pod Identity
 
-{% hint style="warning" %}
-Your cluster must support [EKS Pod Identities](https://docs.aws.amazon.com/eks/latest/userguide/pod-id-agent-setup.html) to use the method below.
-{% endhint %}
+> [!IMPORTANT] 
+>Your cluster must support [EKS Pod Identities](https://docs.aws.amazon.com/eks/latest/userguide/pod-id-agent-setup.html) to use the method below.
+
 
 Create your pod identity association:
 
@@ -335,3 +322,4 @@ Defaulted container "cost-model" out of: cost-model, cost-analyzer-frontend
 ## Troubleshooting
 
 For help with troubleshooting, see the section in our original [AWS integration guide](/install-and-configure/install/cloud-integration/aws-cloud-integrations/aws-cloud-integrations.md#troubleshooting).
+
