@@ -1,2 +1,0 @@
-# Long-Term Storage Configuration
-
